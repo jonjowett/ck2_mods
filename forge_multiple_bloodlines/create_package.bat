@@ -2,7 +2,7 @@
 
 ::Constants
 set zip_loc=.\..\_utilities\7z_CmdLine\7z.exe
-set mod_name=all_enigmatic_clean
+set mod_name=forge_multiple_bloodlines
 set modfiles_folder=.\mod_files\
 
 ::Set locations of files
