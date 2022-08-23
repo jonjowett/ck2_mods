@@ -1,0 +1,82 @@
+expd_t_from_is_not_in_any_tributary_war = {
+	FROM = {
+		NOR = {
+			any_war = {
+				using_cb = tributary_cb
+			}
+			any_war = {
+				using_cb = tributary_permanent_cb
+			}
+			any_war = {
+				using_cb = tributary_nomad_cb
+			}
+			any_war = {
+				using_cb = free_tributary_cb
+			}
+			any_war = {
+				using_cb = expd_t_chainable_extort_tributary_cb
+			}
+			any_war = {
+				using_cb = expd_t_chainable_permanent_tributary_cb
+			}
+			any_war = {
+				using_cb = expd_t_free_tributary_cb
+			}
+		}
+	}
+}
+
+expd_t_from_borders_root_or_roots_tributaries = {
+	# Border condition for validity of enforcing tributary status
+	# The attacker (or one of their normal/modded tributaries) needs a border, or be at most two sea zones away from one of the target's counties
+	FROM = {
+		any_realm_province = {
+			any_neighbor_province = {
+				OR = {
+					AND = {
+						has_owner = yes
+						owner = {
+							OR = {
+								character = ROOT
+								is_liege_or_above = ROOT
+								expd_t_top_liege_is_normal_or_modded_tributary_of_root = yes
+							}
+						}
+						NOT = { has_global_flag = expd_t_chainable_tributary_cbs_disallow_land_borders }
+					}
+					AND = {
+						is_land = no
+						any_neighbor_province = {
+							OR = {
+								AND = {
+									has_owner = yes
+									owner = {
+										OR = {
+											character = ROOT
+											is_liege_or_above = ROOT
+											expd_t_top_liege_is_normal_or_modded_tributary_of_root = yes
+										}
+									}
+									NOT = { has_global_flag = expd_t_chainable_tributary_cbs_disallow_sea_borders }
+								}
+								AND = {
+									is_land = no
+									any_neighbor_province = {
+										owner = {
+											OR = {
+												character = ROOT
+												is_liege_or_above = ROOT
+												expd_t_top_liege_is_normal_or_modded_tributary_of_root = yes
+											}
+										}
+									}
+									NOT = { has_global_flag = expd_t_chainable_tributary_cbs_disallow_sea_border_chaining }
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

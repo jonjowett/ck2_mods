@@ -1,0 +1,186 @@
+targetted_decisions = {
+	
+	expd_preg_enable_decisions = {
+		filter = self
+		ai = no
+		only_playable = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			has_character_flag = expd_preg_decisions_blocked
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { clr_character_flag = expd_preg_decisions_blocked }
+		}
+	}
+	
+	expd_preg_disable_decisions = {
+		filter = self
+		ai = no
+		only_playable = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			NOT = { has_character_flag = expd_preg_decisions_blocked }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				set_character_flag = expd_preg_decisions_blocked
+				clr_global_flag = expd_preg_debug_mode
+				clr_global_flag = expd_preg_debug_mode_instant
+			}
+		}
+	}
+	
+	expd_preg_enable_debug_mode = {
+		filter = self
+		ai = no
+		only_playable = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			NOT = { has_global_flag = expd_preg_debug_mode }
+			NOT = { has_character_flag = expd_preg_decisions_blocked }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { set_global_flag = expd_preg_debug_mode }
+		}
+	}
+	
+	expd_preg_disable_debug_mode = {
+		filter = self
+		ai = no
+		only_playable = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			has_global_flag = expd_preg_debug_mode
+			NOT = { has_character_flag = expd_preg_decisions_blocked }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				clr_global_flag = expd_preg_debug_mode
+				clr_global_flag = expd_preg_debug_mode_instant
+			}
+		}
+	}
+	
+	expd_preg_debug_mode_enable_instant_pregnancy = {
+		filter = self
+		ai = no
+		only_playable = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			has_global_flag = expd_preg_debug_mode
+			NOT = { has_global_flag = expd_preg_debug_mode_instant }
+			NOT = { has_character_flag = expd_preg_decisions_blocked }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { set_global_flag = expd_preg_debug_mode_instant }
+		}
+	}
+	
+	expd_preg_debug_mode_disable_instant_pregnancy = {
+		filter = self
+		ai = no
+		only_playable = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			has_global_flag = expd_preg_debug_mode
+			has_global_flag = expd_preg_debug_mode_instant
+			NOT = { has_character_flag = expd_preg_decisions_blocked }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { clr_global_flag = expd_preg_debug_mode_instant }
+		}
+	}
+	
+	expd_preg_debug_mode_clear_triggered_pregnancy = {
+		filter = all_including_me
+		ai = no
+		only_playable = yes
+		from_potential = {
+			ai = no
+			NOT = { has_character_flag = expd_preg_decisions_blocked }
+		}
+		potential = {
+			has_global_flag = expd_preg_debug_mode
+			has_character_flag = expd_preg_triggered_pregnancy_in_progress
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				clr_character_flag = expd_preg_triggered_pregnancy_in_progress
+				clear_event_target = expd_preg_triggered_pregnancy_father
+				clear_event_target = expd_preg_triggered_pregnancy_triggerer
+			}
+		}	
+	}
+	
+	expd_preg_trigger_pregnancy_in_target = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		only_playable = yes
+		ai = no
+		ai_target_filter = none
+		ai_check_interval = 9999
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			expd_preg_this_is_valid_target_for_rootfrom_to_trigger_pregnancy = yes
+		}
+		third_party_potential = {
+			FROMFROM = {
+				expd_preg_this_is_valid_father_for_rootfrom_to_trigger_pregnancy_on_root = yes
+			}
+		}
+		allow = {
+			custom_tooltip = {
+				text = EXPD_PREG_TOOLTIP_HAS_NOT_BLOCKED_TRIGGERED_PREGNANCY_VIA_DECISION
+				FROM = { NOT = { has_character_flag = expd_preg_decisions_blocked } }
+			}
+			# Disallow (but keep visible) if you have already encouraged pregnancy
+			custom_tooltip = {
+				text = EXPD_PREG_TOOLTIP_HAS_NOT_ALREADY_GOT_TRIGGERED_PREGNANCY
+				NOT = { has_character_flag = expd_preg_triggered_pregnancy_in_progress }
+			}
+			is_pregnant = no
+		}
+		effect = {
+			expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+}

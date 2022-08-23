@@ -1,0 +1,280 @@
+targetted_decisions = {
+	
+	########################################################
+	# Player/AI decisions to set default prisoner location #
+	########################################################
+	
+	expd_pris_default_send_all_prisoners_to_house_arrest = {
+		filter = self
+		only_rulers = yes
+		ai_target_filter = self
+		ai_check_interval = 60
+		potential = {
+			expd_pris_default_prisoner_location_policy_is_not_on_cooldown = yes
+		}
+		allow = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_NOT_ALREADY_SENDING_ALL_PRISONERS_TO_HOUSE_ARREST_BY_DEFAULT
+				NOT = { has_character_flag = expd_pris_all_prisoners_sent_to_house_arrest }
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_ALL_NEW_PRISONERS_SENT_TO_HOUSE_ARREST_BY_DEFAULT
+				set_character_flag = expd_pris_all_prisoners_sent_to_house_arrest
+				clr_character_flag = expd_pris_all_prisoners_sent_to_dungeon
+				clr_character_flag = expd_pris_all_prisoners_sent_to_oubliette
+			}
+			if = {
+				limit = { ai = yes }
+				custom_tooltip = {
+					text = EXPD_PRIS_TOOLTIP_ALL_CURRENT_PRISONERS_MOVED_TO_HOUSE_ARREST
+					expd_pris_send_all_prisoners_to_house_arrest_effect = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.25
+			# House arrest is preferred by kindly/trusting AI
+			modifier = {
+				factor = 2
+				trait = kind
+			}
+			modifier = {
+				factor = 0.1
+				trait = cruel
+			}
+			modifier = {
+				factor = 2
+				trait = trusting
+			}
+			modifier = {
+				factor = 0.25
+				trait = paranoid
+			}
+			# Arbitrary AI will tend to change their policy frequently for no good reason
+			modifier = {
+				factor = 6
+				trait = arbitrary
+			}
+		}
+	}
+	
+	expd_pris_default_send_all_prisoners_to_dungeon = {
+		filter = self
+		only_rulers = yes
+		ai_target_filter = self
+		ai_check_interval = 60
+		potential = {
+			expd_pris_default_prisoner_location_policy_is_not_on_cooldown = yes
+		}
+		allow = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_NOT_ALREADY_SENDING_ALL_PRISONERS_TO_DUNGEON_BY_DEFAULT
+				NOT = { has_character_flag = expd_pris_all_prisoners_sent_to_dungeon }
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_ALL_NEW_PRISONERS_SENT_TO_DUNGEON_BY_DEFAULT
+				clr_character_flag = expd_pris_all_prisoners_sent_to_house_arrest
+				set_character_flag = expd_pris_all_prisoners_sent_to_dungeon
+				clr_character_flag = expd_pris_all_prisoners_sent_to_oubliette
+			}
+			if = {
+				limit = { ai = yes }
+				custom_tooltip = {
+					text = EXPD_PRIS_TOOLTIP_ALL_CURRENT_PRISONERS_MOVED_TO_DUNGEON
+					expd_pris_send_all_prisoners_to_dungeon_effect = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.25
+			# AI with relevant traits prefer to go with one of the two extremes
+			modifier = {
+				factor = 0.5
+				trait = kind
+			}
+			modifier = {
+				factor = 0.5
+				trait = cruel
+			}
+			modifier = {
+				factor = 0.5
+				trait = trusting
+			}
+			modifier = {
+				factor = 0.5
+				trait = paranoid
+			}
+			# AI are more likely to choose this if they want to keep their prisoners alive for "other" purposes... but only for a while
+			modifier = {
+				factor = 2
+				trait = cannibal_trait
+			}
+			modifier = {
+				factor = 2
+				trait = impaler
+			}
+			modifier = {
+				factor = 2
+				trait = schemer
+			}
+			# Arbitrary AI will tend to change their policy frequently for no good reason
+			modifier = {
+				factor = 6
+				trait = arbitrary
+			}
+		}
+	}
+	
+	expd_pris_default_send_all_prisoners_to_oubliette = {
+		filter = self
+		only_rulers = yes
+		ai_target_filter = self
+		ai_check_interval = 60
+		potential = {
+			expd_pris_default_prisoner_location_policy_is_not_on_cooldown = yes
+		}
+		allow = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_NOT_ALREADY_SENDING_ALL_PRISONERS_TO_OUBLIETTE_BY_DEFAULT
+				NOT = { has_character_flag = expd_pris_all_prisoners_sent_to_oubliette }
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_ALL_NEW_PRISONERS_SENT_TO_OUBLIETTE_BY_DEFAULT
+				clr_character_flag = expd_pris_all_prisoners_sent_to_house_arrest
+				clr_character_flag = expd_pris_all_prisoners_sent_to_dungeon
+				set_character_flag = expd_pris_all_prisoners_sent_to_oubliette
+			}
+			if = {
+				limit = { ai = yes }
+				custom_tooltip = {
+					text = EXPD_PRIS_TOOLTIP_ALL_CURRENT_PRISONERS_MOVED_TO_OUBLIETTE
+					expd_pris_send_all_prisoners_to_oubliette_effect = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.25
+			# Oubliette is preferred by cruel/paranoid AI
+			modifier = {
+				factor = 0.1
+				trait = kind
+			}
+			modifier = {
+				factor = 2
+				trait = cruel
+			}
+			modifier = {
+				factor = 0.25
+				trait = trusting
+			}
+			modifier = {
+				factor = 2
+				trait = paranoid
+			}
+			# Arbitrary AI will tend to change their policy frequently for no good reason
+			modifier = {
+				factor = 6
+				trait = arbitrary
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	###############################################
+	# Player decisions to mass-relocate prisoners #
+	###############################################
+	
+	expd_pris_send_all_prisoners_to_house_arrest = {
+		filter = self
+		only_rulers = yes
+		ai = no
+		potential = {
+			ai = no
+		}
+		allow = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_HAS_AT_LEAST_ONE_PRISONER_NOT_IN_HOUSE_ARREST
+				any_courtier = {
+					prisoner = yes
+					host = { character = ROOT }
+					OR = {
+						has_character_modifier = the_dungeon
+						has_character_modifier = the_oubliette
+					}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_ALL_CURRENT_PRISONERS_MOVED_TO_HOUSE_ARREST
+				expd_pris_send_all_prisoners_to_house_arrest_effect = yes
+			}
+		}
+	}
+	
+	expd_pris_send_all_prisoners_to_dungeon = {
+		filter = self
+		only_rulers = yes
+		ai = no
+		potential = {
+			ai = no
+		}
+		allow = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_HAS_AT_LEAST_ONE_PRISONER_NOT_IN_DUNGEON
+				any_courtier = {
+					prisoner = yes
+					host = { character = ROOT }
+					OR = {
+						has_character_modifier = house_arrest
+						has_character_modifier = the_oubliette
+					}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_ALL_CURRENT_PRISONERS_MOVED_TO_DUNGEON
+				expd_pris_send_all_prisoners_to_dungeon_effect = yes
+			}
+		}
+	}
+	
+	expd_pris_send_all_prisoners_to_oubliette = {
+		filter = self
+		only_rulers = yes
+		ai = no
+		potential = {
+			ai = no
+		}
+		allow = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_HAS_AT_LEAST_ONE_PRISONER_NOT_IN_OUBLIETTE
+				any_courtier = {
+					prisoner = yes
+					host = { character = ROOT }
+					OR = {
+						has_character_modifier = house_arrest
+						has_character_modifier = the_dungeon
+					}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = EXPD_PRIS_TOOLTIP_ALL_CURRENT_PRISONERS_MOVED_TO_OUBLIETTE
+				expd_pris_send_all_prisoners_to_oubliette_effect = yes
+			}
+		}
+	}
+	
+}

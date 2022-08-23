@@ -1,0 +1,106 @@
+targetted_decisions = {
+	
+	expd_pb_propagate_bloodlines = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		
+		from_potential = {
+			ai = no
+		}
+		
+		potential = {
+			# Allow any character who has a bloodline to be targeted
+			any_owned_bloodline = {
+				ROOT = {
+					is_bloodline_member_of = PREV
+				}
+			}
+		}
+		
+		allow = {
+			custom_tooltip = {
+				text = EXPD_PB_TOOLTIP_BLOODLINE_PROPAGATION_NOT_BLOCKED_ON_FROM
+				FROM = { NOT = { has_character_flag = expd_pb_bloodline_propagation_blocked } }
+			}
+		}
+		
+		effect = {
+			
+			custom_tooltip = {
+				text = EXPD_PB_TOOLTIP_MULTIPLE_BLOODLINE_FOUNDER_INHERITANCE_CONSISTENCY
+				# For every bloodline owned by this character, locate the founder, and make sure that all of the bloodlines they founded with identical inheritance conditions have identical membership
+				# Eg: If you've inherited one patrilineal-matritransfer-nobastards bloodline from the founder, you should have inherited all of them!
+				any_owned_bloodline = {
+					save_event_target_as = expd_pb_reference_bloodline
+					founder = {
+						any_owned_bloodline = {
+							save_event_target_as = expd_pb_updating_bloodline
+							if = {
+								limit = {
+									founder = { character = PREVPREV }
+									NOT = { ROOT = { is_bloodline_member_of = event_target:expd_pb_updating_bloodline } }
+									expd_pb_reference_and_updating_bloodlines_have_same_inheritance_rules = yes
+								}
+								event_target:expd_pb_updating_bloodline = { add_bloodline_member = ROOT }
+							}
+							clear_event_target = expd_pb_updating_bloodline
+						}
+					}
+					clear_event_target = expd_pb_reference_bloodline
+				}
+			}
+			
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_BLANK_LINE }
+			
+			custom_tooltip = {
+				text = EXPD_PB_TOOLTIP_PROPAGATE_BLOODLINES_FROM_ALL_MEMBERS
+				# For every bloodline owned by this character, propagate all of his/her bloodlines for 10 generations from the character, then from the founder, then from every bloodline member.
+				#  --- Propagating all bloodlines owned by the founder is useful if they had multiple bloodlines
+				#  --- Propagating from every bloodline member is needed in case someone is added to a bloodline without being a descendant of the founder, eg. Vushmgir/Mardavij.
+				#  --- This methodology also allows propagation of bloodlines for far more than 10 generations if needed, by taking the decision multiple times.
+				#       --- Eg: If the only bloodline member in history founded a bloodline in 1AD and has descendants in 1450 then you're going to have to take the decision about 8 times (assuming an average of 20 years per generation).
+				expd_pb_propagate_all_bloodlines_from_this_character_10_generations = yes
+				any_owned_bloodline = {
+					founder = {
+						expd_pb_propagate_all_bloodlines_from_this_character_10_generations = yes
+					}
+					any_bloodline_member_including_dead = {
+						expd_pb_propagate_all_bloodlines_from_this_character_10_generations = yes
+					}
+				}
+			}
+		}
+	}
+	
+	expd_pb_propagate_all_bloodlines = {
+		only_playable = yes
+		filter = self
+		ai = no
+		
+		from_potential = {
+			ai = no
+			NOT = { has_character_flag = expd_pb_bloodline_propagation_blocked }
+		}
+		
+		potential = {
+			always = yes
+		}
+		
+		allow = {
+			always = yes
+		}
+		
+		effect = {
+			custom_tooltip = {
+				text = EXPD_PB_TOOLTIP_PROPAGATE_ALL_BLOODLINES
+				any_bloodline = {
+					any_bloodline_member_including_dead = {
+						expd_pb_propagate_all_bloodlines_from_this_character_10_generations = yes
+					}
+				}
+			}
+		}
+	}
+	
+}

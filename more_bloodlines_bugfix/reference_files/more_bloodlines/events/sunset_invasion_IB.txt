@@ -1,0 +1,42 @@
+# Aztecs Thrown Back Into the Sea
+narrative_event = {
+	id = SSI.105
+	title = EVTNAME_SSI_105
+	desc = EVTDESC_SSI_105
+	
+	picture = GFX_evt_aztec_arrival
+	border = GFX_event_narrative_frame_war
+	
+	major = yes
+	
+	has_global_flag = aztec_arrival_2
+	only_playable = yes
+	
+	trigger = {
+		NOT = { has_global_flag = aztecs_defeated }
+		has_landed_title = e_mexikha
+		has_regiments = no
+		is_landed = no
+	}
+	
+	major_trigger = {
+		ai = no
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		activate_title = { title = e_mexikha status = no }
+		set_global_flag = aztecs_defeated
+	}
+	
+	option = {
+		name = EVTOPTA_SSI_105
+		prestige = 500
+		create_bloodline = {
+                    type = IB_shield_bloodline
+        }
+	}
+}

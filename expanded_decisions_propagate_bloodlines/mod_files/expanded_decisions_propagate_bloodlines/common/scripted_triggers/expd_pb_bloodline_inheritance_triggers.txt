@@ -1,0 +1,273 @@
+# Any trigger whose name includes "target_bloodline" assumes that event_target:expd_pb_target_bloodline_for_query has been set up beforehand
+# Usage: event_target:parent = { event_target:child = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes } }
+
+# This line allows for certain Validator errors to be disabled:
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+##################
+# Main interface #
+##################
+
+expd_pb_this_child_should_inherit_target_bloodline_from_prev = {
+	
+	# This child is not a bastard, or bastards can inherit the bloodline
+	OR = {
+		AND = {
+			OR = {
+				trait = bastard
+				trait = legit_bastard
+			}
+			event_target:expd_pb_target_bloodline_for_query = { expd_pb_this_bloodline_allows_bastards = yes }
+		}
+		NOR = {
+			trait = bastard
+			trait = legit_bastard
+		}
+	}
+	
+	# This child is a valid descendant of prev (for inheritance of this bloodline)
+	OR = {
+		event_target:expd_pb_target_bloodline_for_query = { expd_pb_this_bloodline_is_all_descendants = yes }
+		AND = {
+			event_target:expd_pb_target_bloodline_for_query = { expd_pb_this_bloodline_is_patrilineal = yes }
+			expd_pb_this_child_is_patrilineal_descendant_of_prev_for_target_bloodline = yes
+		}
+		AND = {
+			event_target:expd_pb_target_bloodline_for_query = { expd_pb_this_bloodline_is_matrilineal = yes }
+			expd_pb_this_child_is_matrilineal_descendant_of_prev_for_target_bloodline = yes
+		}
+	}
+	
+}
+
+expd_pb_reference_and_updating_bloodlines_have_same_inheritance_rules = {
+	OR = {
+		AND = {
+			event_target:expd_pb_reference_bloodline = { expd_pb_this_bloodline_allows_bastards = no }
+			event_target:expd_pb_updating_bloodline  = { expd_pb_this_bloodline_allows_bastards = no }
+		}
+		AND = {
+			event_target:expd_pb_reference_bloodline = { expd_pb_this_bloodline_allows_bastards = yes }
+			event_target:expd_pb_updating_bloodline  = { expd_pb_this_bloodline_allows_bastards = yes }
+		}
+	}
+	OR = {
+		AND = {
+			event_target:expd_pb_reference_bloodline = { expd_pb_this_bloodline_has_matrilineal_transfer = no }
+			event_target:expd_pb_updating_bloodline  = { expd_pb_this_bloodline_has_matrilineal_transfer = no }
+		}
+		AND = {
+			event_target:expd_pb_reference_bloodline = { expd_pb_this_bloodline_has_matrilineal_transfer = yes }
+			event_target:expd_pb_updating_bloodline  = { expd_pb_this_bloodline_has_matrilineal_transfer = yes }
+		}
+	}
+	OR = {
+		AND = {
+			event_target:expd_pb_reference_bloodline = { expd_pb_this_bloodline_is_patrilineal = yes }
+			event_target:expd_pb_updating_bloodline  = { expd_pb_this_bloodline_is_patrilineal = yes }
+		}
+		AND = {
+			event_target:expd_pb_reference_bloodline = { expd_pb_this_bloodline_is_matrilineal = yes }
+			event_target:expd_pb_updating_bloodline  = { expd_pb_this_bloodline_is_matrilineal = yes }
+		}
+		AND = {
+			event_target:expd_pb_reference_bloodline = { expd_pb_this_bloodline_is_all_descendants = yes }
+			event_target:expd_pb_updating_bloodline  = { expd_pb_this_bloodline_is_all_descendants = yes }
+		}
+	}
+}
+
+
+
+
+
+################################################
+# Child is Matrilineal/Patrilineal descendant? #
+################################################
+
+expd_pb_this_child_is_patrilineal_descendant_of_prev_for_target_bloodline = {
+	OR = {
+		father_even_if_dead = { character = PREVPREV }
+		AND = {
+			mother_even_if_dead = { character = PREVPREV }
+			event_target:expd_pb_target_bloodline_for_query = { expd_pb_this_bloodline_has_matrilineal_transfer = yes }
+			expd_pb_this_child_should_receive_patrilineal_bloodline_from_mother_via_transfer = yes
+		}
+	}
+}
+
+expd_pb_this_child_is_matrilineal_descendant_of_prev_for_target_bloodline = {
+	OR = {
+		mother_even_if_dead = { character = PREVPREV }
+		AND = {
+			father_even_if_dead = { character = PREVPREV }
+			event_target:expd_pb_target_bloodline_for_query = { expd_pb_this_bloodline_has_matrilineal_transfer = yes }
+			expd_pb_this_child_should_receive_matrilineal_bloodline_from_father_via_transfer = yes
+		}
+	}
+}
+
+expd_pb_this_child_should_receive_patrilineal_bloodline_from_mother_via_transfer = {
+	# Children of male consorts, children whose parents were matri-married, and bastards with unknown fathers
+	OR = {
+		trait = child_of_consort_male
+		expd_pb_this_childs_parents_were_matri_married_at_birth = yes
+		expd_pb_this_child_has_unknown_father = yes
+	}
+}
+
+expd_pb_this_child_should_receive_matrilineal_bloodline_from_father_via_transfer = {
+	# Children can only ever receive matrilineal bloodlines from their father if he was matri-married to their mother at their birth
+	
+	# Ignore the warning about unnecessary AND, because it's actually necessary
+	# Audax Validator "." Ignore_1001
+	AND = {
+		expd_pb_this_childs_parents_were_matri_married_at_birth = yes
+		expd_pb_this_child_has_unknown_father = no
+	}
+	
+}
+
+expd_pb_this_childs_parents_were_matri_married_at_birth = {
+	
+	# Ignore the warning about unnecessary AND, because it's actually necessary
+	# Audax Validator "." Ignore_1001
+	AND = {
+		
+		# If the child is flagged as a bastard or child of consort/concubine then their parents DEFINITELY weren't married at the time of the child's birth
+		NOR = {
+			trait = bastard
+			trait = legit_bastard
+			trait = child_of_consort
+			trait = child_of_consort_male
+			expd_pb_this_child_has_unknown_father = yes
+		}
+		
+		# Otherwise, there are a few possible ways to detect a matri-marriage
+		OR = {
+			
+			# Mother and father are recorded in-game as being matri-married (but this often breaks after death, and there's also divorce / holy orders / vows / etc)
+			# Require the child to NOT be flagged as a bastard or child of concubine, in case they got married after the child was born.
+			mother_even_if_dead = {
+				is_married_matrilineally = yes
+				PREV = {
+					father_even_if_dead = { # This child's father...
+						any_spouse_even_if_dead = { character = PREVPREVPREV } #...is/was matri-married to this child's mother
+					}
+				}
+			}
+			
+			# Same dynasty as mother and different dynasty to father DEFINITELY indicates matrilineal marriage (or fathered by a consort)
+			AND = {
+				mother_even_if_dead = { dynasty = PREV }
+				father_even_if_dead = { NOT = { dynasty = PREV } }
+			}
+			
+			# Same dynasty as mother AND father sometimes means patri-marriage (especially if arranged by AI), but can also mean matri-marriage (if arranged by a player, or by AI for a possible heir)
+			# To make things simpler, we'll assume that there was a broken matri-marriage if either one or both is dead, or if both are alive but not married to each other (eg. divorce / holy orders / vows)
+			AND = {
+				mother_even_if_dead = { dynasty = PREV }
+				father_even_if_dead = { dynasty = PREV }
+				OR = {
+					mother_even_if_dead = { is_alive = no }
+					father_even_if_dead = { is_alive = no }
+					AND = {
+						mother_even_if_dead = { is_alive = yes }
+						father_even_if_dead = { is_alive = yes }
+						OR = {
+							mother_even_if_dead = { is_married = no }
+							father_even_if_dead = {
+								PREV = {
+									mother_even_if_dead = { # This child's mother...
+										NOT = {             # ...is not married to this child's father
+											any_spouse_even_if_dead = { 
+												character = PREVPREVPREV
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		
+		}
+	}
+}
+
+expd_pb_this_child_has_unknown_father = {
+	# This is VERY dependent on exact wording, and required SIGNIFICANT trial-and-error to get it working correctly.
+	# Don't change it without a VERY good reason. If you do change it, be sure to test it thoroughly.
+	NOT = { father_even_if_dead = { always = yes } }
+}
+
+
+
+
+
+###############################
+# Bloodline inheritance rules #
+###############################
+
+expd_pb_this_bloodline_allows_bastards = {
+	OR = {
+		expd_pb_this_bloodline_definitely_allows_bastards = yes
+		AND = {
+			expd_pb_this_bloodline_definitely_allows_bastards    = no
+			expd_pb_this_bloodline_definitely_disallows_bastards = no
+		}
+	}
+}
+
+expd_pb_this_bloodline_has_matrilineal_transfer = {
+	OR = {
+		expd_pb_this_bloodline_definitely_has_matrilineal_transfer = yes
+		AND = {
+			expd_pb_this_bloodline_definitely_has_matrilineal_transfer           = no
+			expd_pb_this_bloodline_definitely_does_not_have_matrilineal_transfer = no
+		}
+	}
+}
+
+expd_pb_this_bloodline_is_patrilineal = {
+	# Either the bloodline is hardcoded as patrilineal, or it's not hardcoded as anything and the founder is male
+	OR = {
+		expd_pb_this_bloodline_is_definitely_patrilineal = yes
+		AND = {
+			expd_pb_this_bloodline_is_definitely_patrilineal     = no
+			expd_pb_this_bloodline_is_definitely_matrilineal     = no
+			expd_pb_this_bloodline_is_definitely_all_descendants = no
+			expd_pb_this_bloodline_is_definitely_no_descendants  = no
+			founder = { is_female = no }
+		}
+	}
+}
+
+expd_pb_this_bloodline_is_matrilineal = {
+	# Either the bloodline is hardcoded as matrilineal, or it's not hardcoded as anything and the founder is female
+	OR = {
+		expd_pb_this_bloodline_is_definitely_matrilineal = yes
+		AND = {
+			expd_pb_this_bloodline_is_definitely_patrilineal     = no
+			expd_pb_this_bloodline_is_definitely_matrilineal     = no
+			expd_pb_this_bloodline_is_definitely_all_descendants = no
+			expd_pb_this_bloodline_is_definitely_no_descendants  = no
+			founder = { is_female = yes }
+		}
+	}
+}
+
+expd_pb_this_bloodline_is_all_descendants = {
+	# Only if the bloodline is hardcoded as all_descendants
+	expd_pb_this_bloodline_is_definitely_all_descendants = yes
+}
+
+expd_pb_this_bloodline_is_no_descendants = {
+	# Only if the bloodline is hardcoded as no_descendants
+	expd_pb_this_bloodline_is_definitely_no_descendants = yes
+}

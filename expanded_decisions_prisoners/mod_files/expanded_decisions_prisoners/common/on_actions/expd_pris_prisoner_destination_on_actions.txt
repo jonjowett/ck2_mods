@@ -1,0 +1,6 @@
+#character. Triggers when someone gets imprisoned for any reason. - ROOT is prisoner, FROM is imprisoner
+on_become_imprisoned_any_reason = {
+	events = {
+		EXPDPrisoner.1000 # Change prisoner destination according to imprisoner's preferences (ie. character flags)
+	}
+}

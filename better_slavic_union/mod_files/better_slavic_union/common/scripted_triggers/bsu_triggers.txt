@@ -1,0 +1,337 @@
+bsu_is_accepted_religion = {
+	OR = {
+		
+		# Quick resolution if the final decision has been taken: All pagan religions (and Judaism) are accepted
+		AND = {
+			OR = {
+				bsu_is_religion_nearby_pagan = yes
+				bsu_is_religion_jewish = yes
+			}
+			has_global_flag = bsu_all_decisions_have_been_taken
+		}
+		
+		# Slavic paganism is always accepted in the Slavic Union
+		bsu_is_religion_slavic = yes
+		
+		# Baltic paganism is accepted if Lithuanians have been welcomed
+		# Additionally, reformed Baltic paganism is accepted if the head of the Baltic Church is a vassal of the Slavic Union emperor
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_lithuanians
+			bsu_is_religion_lithuanian = yes
+		}
+		AND = {
+			religion = baltic_pagan_reformed
+			e_lechczechrus = {
+				holder_scope = {
+					d_baltic_pagan_reformed = {
+						holder_scope = {
+							is_vassal_or_below_of = PREVPREV
+						}
+					}
+				}
+			}
+		}
+		
+		# Finnish paganism is accepted if ALL Finns have been welcomed
+		# Additionally, reformed Finnish paganism is accepted if the head of the Finnish Church is a vassal of the Slavic Union emperor
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_all_finns
+			bsu_is_religion_finnish = yes
+		}
+		AND = {
+			religion = finnish_pagan_reformed
+			e_lechczechrus = {
+				holder_scope = {
+					d_finnish_pagan_reformed = {
+						holder_scope = {
+							is_vassal_or_below_of = PREVPREV
+						}
+					}
+				}
+			}
+		}
+		
+		# Tengri paganism is accepted if all "nearby nomads" have been welcomed
+		# Additionally, reformed Tengri paganism is accepted if the head of the Tengri Church is a vassal of the Slavic Union emperor
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_all_nearby_nomads
+			bsu_is_religion_tengri = yes
+		}
+		AND = {
+			religion = tengri_pagan_reformed
+			e_lechczechrus = {
+				holder_scope = {
+					d_tengri_pagan_reformed = {
+						holder_scope = {
+							is_vassal_or_below_of = PREVPREV
+						}
+					}
+				}
+			}
+		}
+		
+		# Norse paganism is accepted if the Scandinavians have been welcomed
+		# Additionally, reformed Norse paganism is accepted if the head of the Norse Church is a vassal of the Slavic Union emperor
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_scandinavians
+			bsu_is_religion_norse = yes
+		}
+		AND = {
+			religion = norse_pagan_reformed
+			e_lechczechrus = {
+				holder_scope = {
+					d_norse_pagan_reformed = {
+						holder_scope = {
+							is_vassal_or_below_of = PREVPREV
+						}
+					}
+				}
+			}
+		}
+		
+		# Judaism is accepted if the Khazars have been welcomed
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_khazars
+			bsu_is_religion_jewish = yes
+		}
+		
+	}
+}
+
+bsu_is_accepted_culture = {
+	OR = {
+		
+		# East & West Slavic are always accepted
+		bsu_is_culture_east_west_slavic = yes
+		
+		# Quick resolution for large culture groups with multiple decisions
+		AND = {
+			OR = {
+				has_global_flag = bsu_lcr_has_welcomed_all_southern_slavs
+				has_global_flag = bsu_lcr_has_welcomed_everyone
+			}
+			bsu_is_culture_south_slavic = yes
+		}
+		AND = {
+			OR = {
+				has_global_flag	= bsu_lcr_has_welcomed_all_finns
+				has_global_flag = bsu_lcr_has_welcomed_everyone
+			}
+			bsu_is_culture_finnish = yes
+		}
+		AND = {
+			OR = {
+				has_global_flag = bsu_lcr_has_welcomed_all_nearby_nomads
+				has_global_flag = bsu_lcr_has_welcomed_everyone
+			}
+			bsu_is_culture_nearby_nomadic = yes
+		}
+		
+		# Quick resolution for cultures/groups with only one decision
+		AND = {
+			OR = {
+				has_global_flag = bsu_lcr_has_welcomed_lithuanians
+				has_global_flag = bsu_lcr_has_welcomed_everyone
+			}
+			bsu_is_culture_lithuanian = yes
+		}
+		AND = {
+			OR = {
+				has_global_flag = bsu_lcr_has_welcomed_hungarians
+				has_global_flag = bsu_lcr_has_welcomed_everyone
+			}
+			bsu_is_culture_hungarian = yes
+		}
+		AND = {
+			OR = {
+				has_global_flag = bsu_lcr_has_welcomed_scandinavians
+				has_global_flag = bsu_lcr_has_welcomed_everyone
+			}
+			bsu_is_culture_scandinavian = yes
+		}
+		
+		# Slow resolution for cultures/groups with multiple decisions, where the user may not have taken all of the decisions in the group (ie. South Slavs, Finns & "nearby nomads").
+		# NB: If all decisions in the group have been taken then one of the tests above should evaluate to true and the tests below should not be needed.
+		
+		#South Slavs
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_south_west_slavs
+			bsu_is_culture_south_west_slav = yes
+		}
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_south_east_slavs
+			bsu_is_culture_south_east_slav = yes
+		}
+		
+		#Finns
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_western_finns
+			bsu_is_culture_western_finn = yes
+		}
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_northern_finns
+			bsu_is_culture_northern_finn = yes
+		}
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_siberians
+			bsu_is_culture_siberian = yes
+		}
+		
+		#Nearby Nomads
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_bolghars
+			bsu_is_culture_bolghar = yes
+		}
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_khazars
+			bsu_is_culture_khazar = yes
+		}
+		AND = {
+			has_global_flag = bsu_lcr_has_welcomed_alans
+			bsu_is_culture_alan = yes
+		}
+		
+	}
+}
+
+bsu_is_religion_slavic = {
+	OR = {
+		religion = slavic_pagan
+		religion = slavic_pagan_reformed
+	}
+}
+
+bsu_is_religion_lithuanian = {
+	OR = {
+		religion = baltic_pagan
+		religion = baltic_pagan_reformed
+	}
+}
+
+bsu_is_religion_finnish = {
+	OR = {
+		religion = finnish_pagan
+		religion = finnish_pagan_reformed
+	}
+}
+
+bsu_is_religion_norse = {
+	OR = {
+		religion = norse_pagan
+		religion = norse_pagan_reformed
+	}
+}
+
+bsu_is_religion_tengri = {
+	OR = {
+		religion = tengri_pagan
+		religion = tengri_pagan_reformed
+	}
+}
+
+bsu_is_religion_jewish = {
+	religion_group = jewish_group
+}
+
+bsu_is_religion_nearby_pagan = {
+	OR = {
+		bsu_is_religion_slavic     = yes
+		bsu_is_religion_lithuanian = yes
+		bsu_is_religion_finnish    = yes
+		bsu_is_religion_tengri     = yes
+		bsu_is_religion_norse      = yes
+	}
+}
+
+bsu_is_culture_east_west_slavic = {
+	OR = {
+		culture_group = west_slavic
+		culture_group = east_slavic
+	}
+}
+
+bsu_is_culture_south_slavic = {
+	culture_group = south_slavic
+}
+
+bsu_is_culture_finnish = {
+	culture_group = finno_ugric
+}
+
+bsu_is_culture_nearby_nomadic = {
+	OR = {
+		bsu_is_culture_bolghar = yes
+		bsu_is_culture_khazar = yes
+		bsu_is_culture_alan = yes
+	}
+}
+
+bsu_is_culture_lithuanian = {
+	culture_group = baltic
+}
+
+bsu_is_culture_hungarian = {
+	OR = {
+		culture_group = magyar
+		culture = avar
+	}
+}
+
+bsu_is_culture_scandinavian = {
+	OR = {
+		culture_group = north_germanic
+		culture = saxon
+	}
+}
+
+bsu_is_culture_south_west_slav = {
+	OR = {
+		culture = croatian
+		culture = serbian
+		culture = bosnian
+		culture = carantanian
+	}
+}
+
+bsu_is_culture_south_east_slav = {
+	OR = {
+		culture = bulgarian
+		culture = romanian
+	}
+}
+
+bsu_is_culture_western_finn = {
+	OR = {
+		culture = finnish
+		culture = lappish
+		culture = ugricbaltic
+	}
+}
+
+bsu_is_culture_northern_finn = {
+	OR = {
+		culture = komi
+		culture = samoyed
+		culture = mordvin
+		culture = meshchera
+	}
+}
+
+bsu_is_culture_siberian = {
+	culture = khanty
+}
+
+bsu_is_culture_bolghar = {
+	culture = bolghar
+}
+
+bsu_is_culture_khazar = {
+	OR = {
+		culture = khazar
+		culture = pecheneg
+	}
+}
+
+bsu_is_culture_alan = {
+	culture = alan
+}

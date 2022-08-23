@@ -1,0 +1,30 @@
+decisions = {
+	block_creation_of_cadet_branches = {
+		is_high_prio = yes
+		ai = no
+		only_playable = yes
+		potential = {
+			NOT = { has_character_flag = block_create_cadet_branch }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			set_character_flag = block_create_cadet_branch
+		}
+	}
+	enable_creation_of_cadet_branches = {
+		is_high_prio = yes
+		ai = no
+		only_playable = yes
+		potential = {
+			has_character_flag = block_create_cadet_branch
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			clr_character_flag = block_create_cadet_branch
+		}
+	}
+}

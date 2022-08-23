@@ -1,0 +1,80 @@
+expd_pris_send_single_prisoner_to_house_arrest_effect = {
+	custom_tooltip = {
+		text = EXPR_PRIS_TOOLTIP_SEND_SINGLE_PRISONER_TO_HOUSE_ARREST
+		remove_character_modifier = house_arrest
+		remove_character_modifier = the_dungeon
+		remove_character_modifier = the_oubliette
+		add_character_modifier = { 
+			name = house_arrest
+			duration = -1
+		}
+	}
+}
+
+expd_pris_send_single_prisoner_to_dungeon_effect = {
+	custom_tooltip = {
+		text = EXPR_PRIS_TOOLTIP_SEND_SINGLE_PRISONER_TO_DUNGEON
+		remove_character_modifier = house_arrest
+		remove_character_modifier = the_dungeon
+		remove_character_modifier = the_oubliette
+		add_character_modifier = { 
+			name = the_dungeon
+			duration = -1
+		}
+	}
+}
+
+expd_pris_send_single_prisoner_to_oubliette_effect = {
+	custom_tooltip = {
+		text = EXPR_PRIS_TOOLTIP_SEND_SINGLE_PRISONER_TO_OUBLIETTE
+		remove_character_modifier = house_arrest
+		remove_character_modifier = the_dungeon
+		remove_character_modifier = the_oubliette
+		add_character_modifier = { 
+			name = the_oubliette
+			duration = -1
+		}
+	}
+}
+
+expd_pris_send_all_prisoners_to_house_arrest_effect = {
+	any_courtier = {
+		limit = {
+			prisoner = yes
+			host = { character = ROOT }
+			OR = {
+				has_character_modifier = the_dungeon
+				has_character_modifier = the_oubliette
+			}
+		}
+		expd_pris_send_single_prisoner_to_house_arrest_effect = yes
+	}
+}
+
+expd_pris_send_all_prisoners_to_dungeon_effect = {
+	any_courtier = {
+		limit = {
+			prisoner = yes
+			host = { character = ROOT }
+			OR = {
+				has_character_modifier = house_arrest
+				has_character_modifier = the_oubliette
+			}
+		}
+		expd_pris_send_single_prisoner_to_dungeon_effect = yes
+	}
+}
+
+expd_pris_send_all_prisoners_to_oubliette_effect = {
+	any_courtier = {
+		limit = {
+			prisoner = yes
+			host = { character = ROOT }
+			OR = {
+				has_character_modifier = house_arrest
+				has_character_modifier = the_dungeon
+			}
+		}
+		expd_pris_send_single_prisoner_to_oubliette_effect = yes
+	}
+}

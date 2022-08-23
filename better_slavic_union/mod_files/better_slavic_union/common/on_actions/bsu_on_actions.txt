@@ -1,0 +1,24 @@
+#Check and update provincial modifiers in the Slavic Union every year
+on_yearly_pulse = {
+	events = {
+		BSU.1000
+		BSU.1001
+	}
+}
+
+#Check and update provincial modifiers when rulers change
+on_new_holder = {
+	events = {
+		BSU.2000
+	}
+}
+on_new_holder_inheritance = {
+	events = {
+		BSU.2000
+	}
+}
+on_new_holder_usurpation = {
+	events = {
+		BSU.2000
+	}
+}

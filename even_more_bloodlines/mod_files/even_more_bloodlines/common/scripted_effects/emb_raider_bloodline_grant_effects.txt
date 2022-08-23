@@ -1,0 +1,578 @@
+#######################################################
+# Select bloodline & nickname, and store in char flag #
+#######################################################
+
+emb_raider_select_raider_bloodline_for_this_character = {
+	hidden_tooltip = {
+		
+		# Top priority: If you don't already have a viking bloodline and aren't already sea king/queen, grant the modded Ragnarr bloodline and sea king/queen, so you and your descendants can get the flavour events from the viking traits
+		if = {
+			limit = {
+				NOT = { any_owned_bloodline = { has_bloodline_flag = bloodline_viking } }
+				NOR = {
+					trait = seaking
+					trait = sea_queen
+				}
+			}
+			set_character_flag = emb_raider_selected_bloodline_viking
+		}
+				
+		# Otherwise, select and grant another raider bloodline, based on the character's traits and existing owned bloodlines
+		# Duplicating an existing owned bloodline is disabled unless you already have all of them
+		else = {
+			random_list = {
+				
+				# Viking (again)
+				10 = {
+					trigger = {
+						OR = {
+							NOT = { any_owned_bloodline = { has_bloodline_flag = bloodline_viking } } # Use the vanilla flag here, because it's the duplicate FEATURE we care about
+							emb_raider_this_character_owns_all_possible_raider_bloodline_types = yes
+						}
+					}
+					mult_modifier = { # Strongly preferred if you aren't already a sea king/queen (which shouldn't happen, because you have a viking bloodline, but you never know...)
+						factor = 10
+						NOR = {
+							trait = seaking
+							trait = sea_queen
+						}
+					}
+					mult_modifier = { # Wroth/cruel/patient/kind seem like impactful traits for basic vikings
+						factor = 2
+						trait = wroth
+					}
+					mult_modifier = {
+						factor = 2
+						trait = cruel
+					}
+					mult_modifier = {
+						factor = 0.5
+						trait = patient
+					}
+					mult_modifier = {
+						factor = 0.5
+						trait = kind
+					}
+					set_character_flag = emb_raider_selected_bloodline_viking
+				}
+				
+				# Reaver
+				10 = {
+					trigger = {
+						OR = {
+							NOT = { any_owned_bloodline = { has_bloodline_flag = emb_raider_reaver } }
+							emb_raider_this_character_owns_all_possible_raider_bloodline_types = yes
+						}
+					}
+					mult_modifier = { # MANY artifacts means you are more likely to pick this bloodline (potentially significantly more likely)
+						any_artifact = { count > 10 }
+						factor = 2
+					}
+					mult_modifier = { 
+						any_artifact = { count > 20 }
+						factor = 2
+					}
+					mult_modifier = {
+						any_artifact = { count > 30 }
+						factor = 2
+					}
+					mult_modifier = {
+						any_artifact = { count > 40 }
+						factor = 2
+					}
+					mult_modifier = {
+						any_artifact = { count > 50 }
+						factor = 2
+					}
+					mult_modifier = { # Greedy/charitable prefer/dislike the ability to gain more artifacts
+						factor = 2
+						trait = greedy
+					}
+					mult_modifier = {
+						factor = 0.5
+						trait = charitable
+					}
+					set_character_flag = emb_raider_selected_bloodline_reaver
+				}
+				
+				# More raiders from marshal action (tribal only, or you have a bloodline that causes raiders to spawn)
+				10 = {
+					trigger = {
+						OR = {
+							is_tribal = yes
+							any_owned_bloodline = { has_bloodline_flag = emb_effect_spawn_raiders }
+						}
+						OR = {
+							NOT = { any_owned_bloodline = { has_bloodline_flag = more_raiders_bloodline } } # Use the vanilla flag here, because it's the duplicate FEATURE we care about
+							emb_raider_this_character_owns_all_possible_raider_bloodline_types = yes
+						}
+					}
+					mult_modifier = { # Strongly preferred for characters who can make use of the bloodline feature
+						factor = 10
+						OR = {
+							is_tribal = yes
+							any_owned_bloodline = {
+								has_bloodline_flag = emb_effect_spawn_raiders
+								bloodline_is_active_for = PREV
+							}
+						}
+					}
+					mult_modifier = { # Wroth/proud/patient/humble seem like impactful traits for attracting more raiders
+						factor = 2
+						trait = wroth
+					}
+					mult_modifier = {
+						factor = 2
+						trait = proud
+					}
+					mult_modifier = {
+						factor = 0.5
+						trait = humble
+					}
+					mult_modifier = {
+						factor = 0.5
+						trait = patient
+					}
+					set_character_flag = emb_raider_selected_bloodline_more
+				}
+				
+				# Raiding spawns raiders
+				10 = {
+					trigger = {
+						OR = {
+							NOT = { any_owned_bloodline = { has_bloodline_flag = emb_raider_spawn } }
+							emb_raider_this_character_owns_all_possible_raider_bloodline_types = yes
+						}
+					}
+					mult_modifier = { # Gregarious/shy prefer/dislike attracting random raiders for raid parties
+						factor = 2
+						trait = gregarious
+					}
+					mult_modifier = {
+						factor = 0.5
+						trait = shy
+					}
+					set_character_flag = emb_raider_selected_bloodline_spawn
+				}
+				
+				# Create raiding adventurers
+				10 = {
+					trigger = {
+						always = no #Not implemented yet!
+						OR = {
+							NOT = { any_owned_bloodline = { has_bloodline_flag = emb_raider_adventurer } }
+							emb_raider_this_character_owns_all_possible_raider_bloodline_types = yes
+						}
+					}
+					mult_modifier = { # Strongly preferred for adventurers
+						factor = 10
+						trait = adventurer
+					}
+					mult_modifier = { # Ambitious/content strongly prefer/dislike creating adventurers
+						factor = 5
+						trait = ambitious
+					}
+					mult_modifier = {
+						factor = 0.2
+						trait = content
+					}
+					set_character_flag = emb_raider_selected_bloodline_adventurer
+				}
+				
+				fallback = {
+					set_character_flag = emb_raider_selected_bloodline_reaver
+				}
+			}
+		}
+	}
+}
+
+emb_raider_select_raider_nickname_for_this_character = {
+	# Criteria for giving the nickname is as per vanilla HF.23212, but dynamic weighting has been added:
+	#  - You are unlikely to be offered a nickname that some other bloodline founder has obtained
+	#  - You are extremely unlikely to be offered a nickname that was previously given to the founder of a bloodline you own
+	#  - You will never be re-offered your own nickname (because you have the choice to accept or reject the nickname)
+	hidden_tooltip = {
+		random_list = {
+			20 = {
+				trigger = {
+					age = 50
+					NOT = { has_nickname = nick_the_white_raven }
+				}
+				mult_modifier = {
+					factor = 0.1
+					any_owned_bloodline = { founder = { has_nickname = nick_the_white_raven } }
+				}
+				mult_modifier = {
+					factor = 0.5
+					any_bloodline = {
+						NOT = { any_bloodline_member = { character = PREVPREV } }
+						founder = { has_nickname = nick_the_white_raven }
+					}
+				}
+				mult_modifier = { # Preferred for older characters
+					factor = 2
+					age = 60
+				}
+				mult_modifier = {
+					factor = 2
+					age = 70
+				}
+				mult_modifier = {
+					factor = 2
+					age = 80
+				}
+				set_character_flag = emb_raider_selected_nick_the_white_raven
+			}
+			20 = {
+				trigger = {
+					is_female = no
+					NOT = { has_nickname = nick_the_salt_snake }
+				}
+				mult_modifier = {
+					factor = 0.1
+					any_owned_bloodline = { founder = { has_nickname = nick_the_salt_snake } }
+				}
+				mult_modifier = {
+					factor = 0.5
+					any_bloodline = {
+						NOT = { any_bloodline_member = { character = PREVPREV } }
+						founder = { has_nickname = nick_the_salt_snake }
+					}
+				}
+				set_character_flag = emb_raider_selected_nick_the_salt_snake 
+			}
+			20 = {
+				trigger = {
+					is_female = yes
+					NOT = { has_nickname = nick_the_salt_viper }
+				}
+				mult_modifier = {
+					factor = 0.1
+					any_owned_bloodline = { founder = { has_nickname = nick_the_salt_viper } }
+				}
+				mult_modifier = {
+					factor = 0.5
+					any_bloodline = {
+						NOT = { any_bloodline_member = { character = PREVPREV } }
+						founder = { has_nickname = nick_the_salt_viper }
+					}
+				}
+				set_character_flag = emb_raider_selected_nick_the_salt_viper 
+			}
+			20 = {
+				trigger = {
+					is_female = yes
+					is_attractive_trigger = yes
+					NOT = { has_nickname = nick_the_siren }
+				}
+				mult_modifier = {
+					factor = 0.1
+					any_owned_bloodline = { founder = { has_nickname = nick_the_siren } }
+				}
+				mult_modifier = {
+					factor = 0.5
+					any_bloodline = {
+						NOT = { any_bloodline_member = { character = PREVPREV } }
+						founder = { has_nickname = nick_the_siren }
+					}
+				}
+				mult_modifier = { # Preferred for younger characters
+					factor = 2
+					age <= 20
+				}
+				mult_modifier = {
+					factor = 2
+					age <= 30
+				}
+				mult_modifier = {
+					factor = 2
+					age <= 40
+				}
+				set_character_flag = emb_raider_selected_nick_the_siren 
+			}
+			20 = {
+				trigger = {
+					is_female = no
+					NOT = { has_nickname = nick_the_wyrm }
+				}
+				mult_modifier = {
+					factor = 0.1
+					any_owned_bloodline = { founder = { has_nickname = nick_the_wyrm } }
+				}
+				mult_modifier = {
+					factor = 0.5
+					any_bloodline = {
+						NOT = { any_bloodline_member = { character = PREVPREV } }
+						founder = { has_nickname = nick_the_wyrm }
+					}
+				}
+				set_character_flag = emb_raider_selected_nick_the_wyrm 
+			}
+			20 = {
+				trigger = {
+					is_female = yes
+					is_unattractive_trigger = yes
+					NOT = { has_nickname = nick_the_fury }
+				}
+				mult_modifier = {
+					factor = 0.1
+					any_owned_bloodline = { founder = { has_nickname = nick_the_fury } }
+				}
+				mult_modifier = {
+					factor = 0.5
+					any_bloodline = {
+						NOT = { any_bloodline_member = { character = PREVPREV } }
+						founder = { has_nickname = nick_the_fury }
+					}
+				}
+				set_character_flag = emb_raider_selected_nick_the_fury 
+			}
+			20 = {
+				trigger = {
+					is_female = no
+					NOT = { has_nickname = nick_the_sea_devil }
+				}
+				mult_modifier = {
+					factor = 0.1
+					any_owned_bloodline = { founder = { has_nickname = nick_the_sea_devil } }
+				}
+				mult_modifier = {
+					factor = 0.5
+					any_bloodline = {
+						NOT = { any_bloodline_member = { character = PREVPREV } }
+						founder = { has_nickname = nick_the_sea_devil }
+					}
+				}
+				set_character_flag = emb_raider_selected_nick_the_sea_devil 
+			}
+			10 = {
+				trigger = {
+					NOT = { has_nickname = nick_the_stormforged }
+				}
+				mult_modifier = {
+					factor = 0.1
+					any_owned_bloodline = {
+						has_bloodline_flag = emb_raider
+						founder = { has_nickname = nick_the_stormforged }
+					}
+				}
+				mult_modifier = {
+					factor = 0.5
+					any_bloodline = {
+						NOT = { any_bloodline_member = { character = PREVPREV } }
+						has_bloodline_flag = emb_raider
+						founder = { has_nickname = nick_the_stormforged }
+					}
+				}
+				set_character_flag = emb_raider_selected_nick_the_stormforged 
+			}
+			1 = { # The Tempest of X is a bit lame IMO, so deprioritise it
+				trigger = {
+					NOT = { has_nickname = nick_the_tempest_of_capital }
+				}
+				mult_modifier = {
+					factor = 0.1
+					any_owned_bloodline = {
+						has_bloodline_flag = emb_raider
+						founder = { has_nickname = nick_the_tempest_of_capital }
+					}
+				}
+				mult_modifier = {
+					factor = 0.5
+					any_bloodline = {
+						NOT = { any_bloodline_member = { character = PREVPREV } }
+						has_bloodline_flag = emb_raider
+						founder = { has_nickname = nick_the_tempest_of_capital }
+					}
+				}
+				set_character_flag = emb_raider_selected_nick_the_tempest_of_capital
+			}
+			fallback = {
+				set_character_flag = emb_raider_selected_nick_the_tempest_of_capital
+			}
+		}
+	}
+}
+
+
+
+
+
+#######################################
+# Grant nickname / bloodline / tattoo #
+#######################################
+
+emb_raider_give_selected_raider_bloodline_to_this_character = {
+	if = {
+		limit = { has_character_flag = emb_raider_selected_bloodline_viking }
+		if = { 
+			limit = { is_female = no }
+			add_trait = seaking
+			create_bloodline = { type = emb_raider_viking_bloodline_m }
+		}
+		else = {
+			add_trait = sea_queen
+			create_bloodline = { type = emb_raider_viking_bloodline_f }
+		}
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_bloodline_reaver }
+		if = { 
+			limit = { is_female = no }
+			create_bloodline = { type = emb_raider_reaver_bloodline_m }
+		}
+		else = {
+			create_bloodline = { type = emb_raider_reaver_bloodline_f }
+		}
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_bloodline_more }
+		if = { 
+			limit = { is_female = no }
+			create_bloodline = { type = emb_raider_more_bloodline_m }
+		}
+		else = {
+			create_bloodline = { type = emb_raider_more_bloodline_f }
+		}
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_bloodline_spawn }
+		if = { 
+			limit = { is_female = no }
+			create_bloodline = { type = emb_raider_spawn_bloodline_m }
+		}
+		else = {
+			create_bloodline = { type = emb_raider_spawn_bloodline_f }
+		}
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_bloodline_adventurer }
+		if = { 
+			limit = { is_female = no }
+			create_bloodline = { type = emb_raider_adventurer_bloodline_m }
+		}
+		else = {
+			create_bloodline = { type = emb_raider_adventurer_bloodline_f }
+		}
+	}
+	else = { # Fallback: Grant reaver bloodline
+		if = { 
+			limit = { is_female = no }
+			create_bloodline = { type = emb_raider_reaver_bloodline_m }
+		}
+		else = {
+			create_bloodline = { type = emb_raider_reaver_bloodline_f }
+		}
+	}
+	new_bloodline = {
+		set_description = "bloodline_desc_seaking_bloodline_pirate"
+		random_list = { 
+			20 = { set_name = bloodline_seaking_pirate_random_a }
+			20 = { set_name = bloodline_seaking_pirate_random_b }
+			20 = { set_name = bloodline_seaking_pirate_random_c }
+			20 = { set_name = bloodline_seaking_pirate_random_d } 
+		}
+	}
+}
+
+emb_raider_give_selected_raider_nickname_to_this_character = {
+	if = {
+		limit = { has_character_flag = emb_raider_selected_nick_the_white_raven }
+		give_nickname = nick_the_white_raven
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_nick_the_salt_snake }
+		give_nickname = nick_the_salt_snake
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_nick_the_salt_viper }
+		give_nickname = nick_the_salt_viper
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_nick_the_siren }
+		give_nickname = nick_the_siren
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_nick_the_wyrm }
+		give_nickname = nick_the_wyrm
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_nick_the_fury }
+		give_nickname = nick_the_fury
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_nick_the_sea_devil }
+		give_nickname = nick_the_sea_devil
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_nick_the_stormforged }
+		give_nickname = nick_the_stormforged
+	}
+	else_if = {
+		limit = { has_character_flag = emb_raider_selected_nick_the_tempest_of_capital }
+		give_nickname = nick_the_tempest_of_capital
+	}
+	else = { # Fallback: nick_the_tempest_of_capital
+		give_nickname = nick_the_tempest_of_capital
+	}
+}
+
+emb_raider_give_raider_face_tattoo_to_this_character = {
+	hidden_tooltip = { 
+		if = { 
+			limit = { 
+				NOR = { 
+					trait = african_tattoo_1
+					trait = african_tattoo_2
+					trait = african_tattoo_3
+					trait = african_tattoo_4
+					trait = african_tattoo_5
+					trait = african_tattoo_6
+					trait = african_tattoo_7
+					trait = african_tattoo_8
+					trait = slavic_tattoo_1
+					trait = slavic_tattoo_2
+					trait = slavic_tattoo_3
+					trait = slavic_tattoo_4
+					trait = slavic_tattoo_5
+					trait = slavic_tattoo_6
+					trait = norse_tattoo_1
+					trait = norse_tattoo_2
+					trait = norse_tattoo_3
+					trait = norse_tattoo_4
+					trait = norse_tattoo_5
+					trait = norse_tattoo_6
+				} 
+			}
+			add_trait = norse_tattoo_4		
+		}
+	}
+}
+
+
+
+
+
+###########################
+# Cleanup character flags #
+###########################
+
+emb_raider_cleanup_character_flags = {
+	hidden_tooltip = {
+		clr_character_flag = emb_raider_selected_bloodline_viking
+		clr_character_flag = emb_raider_selected_bloodline_reaver
+		clr_character_flag = emb_raider_selected_bloodline_more
+		clr_character_flag = emb_raider_selected_bloodline_spawn
+		clr_character_flag = emb_raider_selected_bloodline_adventurer
+		clr_character_flag = emb_raider_selected_nick_the_white_raven
+		clr_character_flag = emb_raider_selected_nick_the_salt_snake
+		clr_character_flag = emb_raider_selected_nick_the_salt_viper
+		clr_character_flag = emb_raider_selected_nick_the_siren
+		clr_character_flag = emb_raider_selected_nick_the_wyrm
+		clr_character_flag = emb_raider_selected_nick_the_fury
+		clr_character_flag = emb_raider_selected_nick_the_sea_devil
+		clr_character_flag = emb_raider_selected_nick_the_stormforged
+		clr_character_flag = emb_raider_selected_nick_the_tempest_of_capital
+	}
+}

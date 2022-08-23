@@ -1,0 +1,50 @@
+targeted_decisions = {
+	expd_pill_block_decisions = {
+		filter = self
+		is_high_prio = yes
+		ai = no
+		only_playable = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			NOT = { has_character_flag = expd_pill_decisions_blocked }
+			OR = {
+				is_tribal = yes
+				is_nomadic = yes
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				set_character_flag = expd_pill_decisions_blocked
+			}
+		}
+	}
+	expd_pill_enable_decisions = {
+		filter = self
+		is_high_prio = yes
+		ai = no
+		only_playable = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			has_character_flag = expd_pill_decisions_blocked
+			OR = {
+				is_tribal = yes
+				is_nomadic = yes
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				clr_character_flag = expd_pill_decisions_blocked
+			}
+		}
+	}
+}

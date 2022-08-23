@@ -1,0 +1,437 @@
+# NB: In all of these triggers, FROM is expected to be the society that the character is trying to join
+
+expd_sj_character_can_see_warrior_lodge_trigger = {
+	conditional_tooltip = {
+		trigger = { always = yes }  # Hack to avoid unnecessary nested AND clauses, while retaining the requirement for an AND in case this trigger is used in some other context
+		NOT = { trait = zealous }
+		OR = {
+			expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = yes
+			expd_sj_character_has_bloodline_ties_to_warrior_lodge_trigger = yes
+		}
+	}
+}
+
+expd_sj_character_can_join_warrior_lodge_trigger = {
+	conditional_tooltip = {
+		trigger = { always = yes }  # Hack to avoid unnecessary nested AND clauses, while retaining the requirement for an AND in case this trigger is used in some other context
+		NOT = { trait = zealous }
+		piety >= 250
+		prestige >= 500
+		OR = {
+			expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = yes
+			expd_sj_character_has_bloodline_ties_to_warrior_lodge_trigger = yes
+		}
+	}
+}
+
+expd_sj_character_has_bloodline_ties_to_warrior_lodge_trigger = {
+	OR = {
+		expd_sj_character_has_historic_bloodline_ties_to_warrior_lodge_trigger = yes
+		expd_sj_character_has_respected_bloodline_ties_to_warrior_lodge_trigger = yes
+		expd_sj_character_has_legendary_bloodline_ties_to_warrior_lodge_trigger = yes
+	}
+}
+
+expd_sj_character_has_historic_bloodline_ties_to_warrior_lodge_trigger = {
+	custom_tooltip = {
+		text = expd_sj_character_has_historic_bloodline_ties_to_warrior_lodge_tt
+		hidden_trigger = {
+			any_owned_bloodline = {
+				has_bloodline_flag = historical_bloodline
+				bloodline_is_active_for = PREV
+				OR = {
+					AND = {
+						FROM = { is_society = warrior_lodge_norse }
+						OR = {
+							founder = { character = 163109 } # Ragnarr Lothbrok
+							founder = { character = 144000 } # Harald
+						}
+					}
+					AND = {
+						FROM = { is_society = warrior_lodge_tengri }
+						OR = {
+							founder = { character = 159136 } # Arpad
+							founder = { character = 159117 } # Kubrat (Attila bloodline)
+							founder = { character = 74000  } # Muhan Ashina
+							founder = { character = 125501 } # Genghis Khan
+						}
+					}
+					AND = {
+						FROM = { is_society = warrior_lodge_west_african }
+						founder = { character = 251187 } # Magajiva
+					}
+					AND = {
+						FROM = { is_society = warrior_lodge_slavic }
+						OR = {
+							founder = { character = 40605 } # Rurik
+							founder = { character = 6811  } # Dyre
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+expd_sj_character_has_respected_bloodline_ties_to_warrior_lodge_trigger = {
+	custom_tooltip = {
+		text = expd_sj_character_has_respected_bloodline_ties_to_warrior_lodge_tt
+		hidden_trigger = {
+			any_owned_bloodline = {
+				
+				# Bloodline must be active! And not historical!
+				OR = {
+					NOT = { has_bloodline_flag = historical_bloodline }
+					has_bloodline_flag = genghis_khan_line # The Great Khan bloodline has the historical flag even if it's founded by decision
+				}
+				bloodline_is_active_for = PREV
+				
+				OR = {
+					
+					#############################
+					# Vanilla earned bloodlines #
+					#############################
+					
+					# Norse warrior lodge respects Vikings
+					AND = {
+						FROM = { is_society = warrior_lodge_norse }
+						OR = {
+							has_bloodline_flag = more_raiders_bloodline
+							has_bloodline_flag = bloodline_viking # Cannot be earned in vanilla, but is an obvious candidate for inclusion in modded bloodlines
+						}
+					}
+					
+					# Slavic warrior lodge respects Teuta's achievements
+					AND = {
+						FROM = { is_society = warrior_lodge_slavic }
+						has_bloodline_flag = teuta_bloodline
+					}
+					
+					# Tengri warrior lodge respects the Great Khan
+					AND = {
+						FROM = { is_society = warrior_lodge_tengri }
+						has_bloodline_flag = genghis_khan_line
+						NOT = { founder = { character = 125501 } } # Not founded by historical Genghis Khan
+					}
+					
+					# Hellenic warrior lodge respects the (purported) descendant of Alexander
+					AND = {
+						FROM = { is_society = warrior_lodge_hellenic }
+						has_bloodline_flag = bloodline_alexander
+					}
+					
+					# Hellenic warrior lodge respects the restorer of the Roman empire, if s/he was Hellenic or a member
+					AND = {
+						FROM = { is_society = warrior_lodge_hellenic }
+						has_bloodline_flag = bloodline_faster_roman # The only unique flag on this bloodline; hopefully it won't be reused in some other mod...
+						OR = {
+							expd_sj_bloodline_founder_religion_matches_society = yes
+							expd_sj_bloodline_founder_commander_trait_matches_society = yes
+						}
+					}
+					
+					# All warrior lodges respect Children of Destiny, if they were co-religionists or members
+					AND = {
+						has_bloodline_flag = founder_invasions # The only unique flag on this bloodline; hopefully it won't be reused in some other mod...
+						OR = {
+							expd_sj_bloodline_founder_religion_matches_society = yes
+							expd_sj_bloodline_founder_commander_trait_matches_society = yes
+						}
+					}
+					
+					# All warrior lodges respect members of bloodlines with the "great warriors will join" feature
+					# (Where do you think the warriors come from...?!)
+					AND = {
+						has_bloodline_flag = bloodline_heroes
+						OR = {
+							expd_sj_bloodline_founder_religion_matches_society = yes
+							expd_sj_bloodline_founder_commander_trait_matches_society = yes
+						}
+					}
+					
+					#######################################
+					# "More bloodlines" mod compatibility #
+					#######################################
+					
+					# Saxon bloodline (defeating Charlemagne as king of Saxony) is respected by the Norse warrior lodge
+					AND = {
+						FROM = { is_society = warrior_lodge_norse }
+						has_bloodline_flag = IB_saxony_bloodline
+					}
+					
+					# Amazing historical victories are respected if the founder was a co-religionist or member
+					AND = {
+						OR = {
+							has_bloodline_flag = IB_china_bloodline            # Successful Chinese invasion
+							has_bloodline_flag = IB_crusade_repelled_bloodline # Successful Crusade defence
+							has_bloodline_flag = IB_shield_bloodline           # Successful Aztec defence
+							has_bloodline_flag = IB_artofwar_bloodline         # Successful war against a 10x bigger opponent (by realm size)
+						}
+						OR = {
+							expd_sj_bloodline_founder_religion_matches_society = yes
+							expd_sj_bloodline_founder_commander_trait_matches_society = yes
+						}
+					}
+					
+				}
+			}
+		}
+	}
+}
+
+expd_sj_character_has_legendary_bloodline_ties_to_warrior_lodge_trigger = {
+	custom_tooltip = {
+		text = expd_sj_character_has_legendary_bloodline_ties_to_warrior_lodge_tt
+		hidden_trigger = {
+			any_owned_bloodline = {
+				
+				#Must be an ACTIVE legendary warrior lodge bloodline
+				has_bloodline_flag = legendary_warrior_lodge_bloodline
+				bloodline_is_active_for = PREV
+				
+				OR = {
+					
+					#Special case: The legendary pet eagle bloodline is ONLY available to the Tengri warrior lodge, and it has a unique flag, so we can detect this one for sure
+					AND = {
+						FROM = { is_society = warrior_lodge_tengri }
+						has_bloodline_flag = bloodline_pet_eagle
+					}
+					
+					# For every other legendary bloodline, we have to do a workaround:
+					# --- Assume that the bloodline founder will EITHER be of the society's religion OR will have the commander trait associated with the society. (Or both.)
+					# --- This should suffice for AI characters (who usually take the trait and usually stay with the "correct" religion)
+					expd_sj_bloodline_founder_religion_matches_society = yes
+					expd_sj_bloodline_founder_commander_trait_matches_society = yes
+					
+				}
+			}
+		}
+	}
+}
+
+expd_sj_bloodline_founder_religion_matches_society = {
+	OR = {
+		AND = {
+			FROM = { is_society = warrior_lodge_norse }
+			founder = { religion_openly_norse_or_reformed_trigger = yes }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_tengri }
+			founder = { religion_openly_tengri_or_reformed_trigger = yes }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_baltic }
+			founder = { religion_openly_baltic_or_reformed_trigger = yes }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_finnish }
+			founder = { religion_openly_finnish_or_reformed_trigger = yes }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_slavic }
+			founder = { religion_openly_slavic_or_reformed_trigger = yes }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_west_african }
+			founder = { religion_openly_west_african_or_reformed_trigger = yes }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_zun }
+			founder = { religion_openly_zun_or_reformed_trigger = yes }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_bon }
+			founder = { religion_openly_bon_or_reformed_trigger = yes }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_hellenic }
+			founder = { religion_openly_hellenic_or_reformed_trigger = yes }
+		}
+	}
+}
+
+expd_sj_bloodline_founder_commander_trait_matches_society = {
+	OR = {
+		AND = {
+			FROM = { is_society = warrior_lodge_norse }
+			founder = { trait = norse_leader }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_tengri }
+			founder = { trait = tengri_leader }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_baltic }
+			founder = { trait = baltic_leader }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_finnish }
+			founder = { trait = finnish_leader }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_slavic }
+			founder = { trait = slavic_leader }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_west_african }
+			founder = { trait = west_african_leader }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_zun }
+			founder = { trait = zun_leader }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_bon }
+			founder = { trait = bon_leader }
+		}
+		AND = {
+			FROM = { is_society = warrior_lodge_hellenic }
+			founder = { trait = hellenic_leader }
+		}
+	}
+}
+
+expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = {
+	custom_tooltip = {
+		text = expd_sj_character_has_religious_ties_to_warrior_lodge_tt
+		hidden_trigger = {
+			OR = {
+				AND = {
+					FROM = {
+						is_society = warrior_lodge_norse
+					}
+					OR = {
+						secret_religion = norse_pagan
+						secret_religion = norse_pagan_reformed
+						any_friend = { religion_openly_norse_or_reformed_trigger = yes }
+						any_spouse = { religion_openly_norse_or_reformed_trigger = yes }
+						any_consort = { religion_openly_norse_or_reformed_trigger = yes }
+						any_lover = { religion_openly_norse_or_reformed_trigger = yes }
+						any_demesne_title = { is_holy_site = norse_pagan }
+						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = norse_pagan } }
+					}
+				}
+				AND = {
+					FROM = {
+						is_society = warrior_lodge_tengri
+					}
+					OR = {
+						secret_religion = tengri_pagan
+						secret_religion = tengri_pagan_reformed
+						any_friend = { religion_openly_tengri_or_reformed_trigger = yes }
+						any_spouse = { religion_openly_tengri_or_reformed_trigger = yes }
+						any_consort = { religion_openly_tengri_or_reformed_trigger = yes }
+						any_lover = { religion_openly_tengri_or_reformed_trigger = yes }
+						any_demesne_title = { is_holy_site = tengri_pagan }
+						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = tengri_pagan } }
+					}
+				}
+				AND = {
+					FROM = {
+						is_society = warrior_lodge_baltic
+					}
+					OR = {
+						secret_religion = baltic_pagan
+						secret_religion = baltic_pagan_reformed
+						any_friend = { religion_openly_baltic_or_reformed_trigger = yes }
+						any_spouse = { religion_openly_baltic_or_reformed_trigger = yes }
+						any_consort = { religion_openly_baltic_or_reformed_trigger = yes }
+						any_lover = { religion_openly_baltic_or_reformed_trigger = yes }
+						any_demesne_title = { is_holy_site = baltic_pagan }
+						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = baltic_pagan } }
+					}
+				}
+				AND = {
+					FROM = {
+						is_society = warrior_lodge_finnish
+					}
+					OR = {
+						secret_religion = finnish_pagan
+						secret_religion = finnish_pagan_reformed
+						any_friend = { religion_openly_finnish_or_reformed_trigger = yes }
+						any_spouse = { religion_openly_finnish_or_reformed_trigger = yes }
+						any_consort = { religion_openly_finnish_or_reformed_trigger = yes }
+						any_lover = { religion_openly_finnish_or_reformed_trigger = yes }
+						any_demesne_title = { is_holy_site = finnish_pagan }
+						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = finnish_pagan } }
+					}
+				}
+				AND = {
+					FROM = {
+						is_society = warrior_lodge_slavic
+					}
+					OR = {
+						secret_religion = slavic_pagan
+						secret_religion = slavic_pagan_reformed
+						any_friend = { religion_openly_slavic_or_reformed_trigger = yes }
+						any_spouse = { religion_openly_slavic_or_reformed_trigger = yes }
+						any_consort = { religion_openly_slavic_or_reformed_trigger = yes }
+						any_lover = { religion_openly_slavic_or_reformed_trigger = yes }
+						any_demesne_title = { is_holy_site = slavic_pagan }
+						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = slavic_pagan } }
+					}
+				}
+				AND = {
+					FROM = {
+						is_society = warrior_lodge_west_african
+					}
+					OR = {
+						secret_religion = west_african_pagan
+						secret_religion = west_african_pagan_reformed
+						any_friend = { religion_openly_west_african_or_reformed_trigger = yes }
+						any_spouse = { religion_openly_west_african_or_reformed_trigger = yes }
+						any_consort = { religion_openly_west_african_or_reformed_trigger = yes }
+						any_lover = { religion_openly_west_african_or_reformed_trigger = yes }
+						any_demesne_title = { is_holy_site = west_african_pagan }
+						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = west_african_pagan } }
+					}
+				}
+				AND = {
+					FROM = {
+						is_society = warrior_lodge_zun
+					}
+					OR = {
+						secret_religion = zun_pagan
+						secret_religion = zun_pagan_reformed
+						any_friend = { religion_openly_zun_or_reformed_trigger = yes }
+						any_spouse = { religion_openly_zun_or_reformed_trigger = yes }
+						any_consort = { religion_openly_zun_or_reformed_trigger = yes }
+						any_lover = { religion_openly_zun_or_reformed_trigger = yes }
+						any_demesne_title = { is_holy_site = zun_pagan }
+						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = zun_pagan } }
+					}
+				}
+				AND = {
+					FROM = {
+						is_society = warrior_lodge_bon
+					}
+					OR = {
+						secret_religion = bon
+						secret_religion = bon_reformed
+						any_friend = { religion_openly_bon_or_reformed_trigger = yes }
+						any_spouse = { religion_openly_bon_or_reformed_trigger = yes }
+						any_consort = { religion_openly_bon_or_reformed_trigger = yes }
+						any_lover = { religion_openly_bon_or_reformed_trigger = yes }
+						any_demesne_title = { is_holy_site = bon }
+						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = bon } }
+					}
+				}
+				AND = {
+					FROM = {
+						is_society = warrior_lodge_hellenic
+					}
+					OR = {
+						secret_religion = hellenic_pagan
+						secret_religion = hellenic_pagan_reformed
+						any_friend = { religion_openly_hellenic_or_reformed_trigger = yes }
+						any_spouse = { religion_openly_hellenic_or_reformed_trigger = yes }
+						any_consort = { religion_openly_hellenic_or_reformed_trigger = yes }
+						any_lover = { religion_openly_hellenic_or_reformed_trigger = yes }
+						any_demesne_title = { is_holy_site = hellenic_pagan }
+						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = hellenic_pagan } }
+					}
+				}
+			}
+		}
+	}
+}

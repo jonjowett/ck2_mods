@@ -1,0 +1,793 @@
+targetted_decisions = {
+	
+	expd_t_force_protectorate = {
+		# This decision is intended for situations where a new independent ruler has been set up, eg. by pressing a claim, and the person who set it up wants to protect them.
+		
+		only_independent = yes
+		filter = independent_rulers
+		ai_target_filter = independent_rulers
+		ai_check_interval = 6
+		
+		from_potential = {
+			independent = yes
+		}
+		
+		potential = {
+			independent  = yes
+			is_tributary = no
+		}
+		
+		allow = {
+			
+			# Debug mode bypasses all allow block requirements (if you're a player) (so you can force-protectorise independent rulers)
+			trigger_if = {
+				limit = {
+					FROM = { ai = no }
+					has_global_flag = expd_t_debug_mode
+				}
+				custom_tooltip = {
+					text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
+					always = yes
+				}
+			}
+			
+			# Normal mode:
+			trigger_else = {
+				#The main conditions are split out into a trigger so that the "Offer Protectorate" decision below can be disabled if this one is available
+				expd_t_from_can_instantly_force_root_to_be_protectorate = yes
+				
+			}
+		}
+		
+		effect = {
+			FROM = {
+				make_tributary = {
+					who = ROOT
+					percentage = 0.2
+					tributary_type = expd_t_protectorate
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+	}
+	
+	expd_t_offer_protectorate = {
+		# This decision is intended for situations where a strong independent ruler might want to prop up a weak independent ruler, for some reason.
+		# The weak ruler can obviously reject the offer.
+		# FROM = potential suzerain; ROOT = potential tributary
+		
+		only_independent = yes
+		filter = independent_rulers
+		
+		# AI code should be good enough to allow them to offer this
+		ai_target_filter = independent_rulers
+		ai_check_interval = 24
+		
+		from_potential = {
+			independent = yes
+			ai = no
+		}
+		
+		potential = {
+			independent  = yes
+			is_tributary = no
+		}
+		
+		allow = {
+			
+			# Debug mode bypasses all allow block requirements (so you can evaluate AI acceptance)
+			trigger_if = {
+				limit = {
+					FROM = { ai = no }
+					has_global_flag = expd_t_debug_mode
+				}
+				custom_tooltip = {
+					text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
+					always = yes
+				}
+			}
+			
+			# Normal mode:
+			trigger_else = {
+				
+				# If the "Force Protectorate" interaction is available, you should use that instead.
+				conditional_tooltip = {
+					trigger = { expd_t_from_can_instantly_force_root_to_be_protectorate = yes }
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_USE_FORCED_PROTECTORATE_INSTEAD
+						always = no
+					}
+				}
+				
+				expd_t_root_meets_basic_requirements_to_become_tributary_of_from_by_decision = yes
+				
+				# Cannot offer protection to someone who hates you (either rival or crime)
+				NOT = { is_foe = FROM }
+				
+				# The potential suzerain must be either a lot stronger or a lot more prestigious than the potential tributary
+				
+				OR = {
+					
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_FROM_HAS_SIGNIFICANTLY_BIGGER_ARMY
+						FROM = {
+							relative_power = {
+								who = ROOT
+								power >= 2
+							}
+						}
+					}
+					
+					# Unfortunately, there's no prestige diff condition, hence this hacky workaround
+					conditional_tooltip = {
+						trigger = {
+							prestige <= 1000
+						}
+						FROM = { prestige >= 5000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  1000
+							prestige <= 2000
+						}
+						FROM = { prestige >= 10000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  2000
+							prestige <= 3000
+						}
+						FROM = { prestige >= 15000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  3000
+							prestige <= 4000
+						}
+						FROM = { prestige >= 20000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  4000
+							prestige <= 5000
+						}
+						FROM = { prestige >= 25000 }
+					}
+					#This will always evaluate to false, but it ensures that the player always sees that there is a prestige option here
+					conditional_tooltip = {
+						trigger = {
+							prestige > 5000
+						}
+						prestige <= 5000
+					}
+					
+				}
+				
+				OR = {
+					
+					# Propping up independent rulers of your dynasty is a time-honoured tradition
+					dynasty = FROM
+					
+					# Propping up rulers whose heirs are of your dynasty is also good business
+					current_heir = { dynasty = FROM }
+					
+					# Propping up friends and lovers makes sense
+					is_friend = FROM
+					is_lover  = FROM
+					
+					# Zealots can prop up co-religionists who border large nations (ie. kingdoms and empires) following other religions
+					AND = {
+						FROM = {
+							trait = zealous
+							has_secret_religion = no
+							religion = ROOT
+						}
+						custom_tooltip = {
+							text = EXPD_T_TOOLTIP_TARGET_HAS_POWERFUL_NEIGHBOUR_OF_DIFF_RELIGION
+							any_neighbor_independent_ruler = {
+								higher_real_tier_than = DUKE
+								expd_t_is_religious_enemy_of_from = yes
+								relative_power_including_allies_attacker = {
+									who = ROOT
+									power >= 2
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				make_tributary = {
+					who = ROOT
+					percentage = 0.2
+					tributary_type = expd_t_protectorate
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.2
+			
+			modifier = {
+				factor = 2
+				FROM = { higher_real_tier_than = ROOT }
+			}
+			
+			modifier = {
+				factor = 2
+				FROM = { trait = brave }
+			}
+			modifier = {
+				factor = 2
+				FROM = { trait = ambitious }
+			}
+			modifier = {
+				factor = 2
+				FROM = { trait = proud }
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { trait = craven }
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { trait = content }
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { trait = humble }
+			}
+
+			modifier = {
+				factor = 4
+				FROM = {
+					trait = zealous
+					has_secret_religion = no
+					religion = ROOT
+				}
+				any_neighbor_independent_ruler = {
+					higher_real_tier_than = DUKE
+					expd_t_is_religious_enemy_of_from = yes
+					relative_power_including_allies_attacker = {
+						who = ROOT
+						power >= 2
+					}
+				}
+			}
+			
+			# AI is less likely to set up protectorates if the potential attackers have a larger army than the potential protector
+			modifier = {
+				factor = 0.5
+				any_neighbor_independent_ruler = {
+					has_cb = ROOT
+					relative_power_including_allies_attacker = {
+						who = FROM
+						power >= 2
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				any_neighbor_independent_ruler = {
+					has_cb = ROOT
+					relative_power_including_allies_attacker = {
+						who = FROM
+						power >= 5
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				any_neighbor_independent_ruler = {
+					has_cb = ROOT
+					relative_power_including_allies_attacker = {
+						who = FROM
+						power >= 10
+					}
+				}
+			}
+			
+			#AI is more likely to set up protectorates if they are very wealthy (IE: can hire mercs)
+			modifier = {
+				factor = 2
+				FROM = { wealth = 2000 }
+			}
+			modifier = {
+				factor = 2
+				FROM = { wealth = 5000 }
+			}
+			modifier = {
+				factor = 2
+				FROM = { wealth = 10000 }
+			}
+				
+		}
+		
+		ai_acceptance = {
+			show_maybe_for_human = yes
+			
+			factor = 10         # Starting score
+			yes_threshold = 50  # AI will accept for score >= this
+			
+			# I like being supported by my dynasty, and especially by my parents/grandparents
+			additive_modifier = {
+				value = 20
+				dynasty = FROM
+			}
+			additive_modifier = {
+				value = 20
+				is_child_of = FROM
+			}
+			additive_modifier = {
+				value = 20
+				is_grandchild_of = FROM
+			}
+			
+			# There's a powerful member of my dynasty who could support me!
+			additive_modifier = {
+				value = -200
+				any_dynasty_member = {
+					is_landed = yes
+					independent = yes
+					NOT = { character = FROM }
+					max_realm_levy_diff = {
+						who = FROM
+						value >= 1000
+					}
+				}
+			}
+			
+			# You're only propping me up so the heir of your dynasty inherits...
+			additive_modifier = {
+				value = -50
+				NOT = { dynasty = FROM }
+				current_heir = { dynasty = FROM }
+			}
+			
+			# I REALLY like being propped-up by friends and/or lovers
+			additive_modifier = {
+				value = 50
+				is_friend = FROM
+			}
+			additive_modifier = {
+				value = 50
+				is_lover = FROM
+			}
+			
+			# Effect of tier difference
+			additive_modifier = {
+				value = 20
+				lower_real_tier_than = FROM
+			}
+			additive_modifier = {
+				value = -20
+				higher_real_tier_than = FROM
+			}
+			
+			# Effect of opinion
+			additive_modifier = {
+				value = 20
+				opinion = {
+					who = FROM
+					value >= 25
+				}
+			}
+			additive_modifier = {
+				value = 20
+				opinion = {
+					who = FROM
+					value >= 50
+				}
+			}
+			additive_modifier = {
+				value = 20
+				opinion = {
+					who = FROM
+					value >= 75
+				}
+			}
+			additive_modifier = {
+				value = 20
+				opinion = {
+					who = FROM
+					value >= 100
+				}
+			}
+			
+			# Effect of traits
+			additive_modifier = {
+				value = 20
+				trait = content
+			}
+			additive_modifier = {
+				value = 20
+				trait = humble
+			}
+			additive_modifier = {
+				value = 20
+				trait = craven
+			}
+			additive_modifier = {
+				value = -20
+				trait = ambitious
+			}
+			additive_modifier = {
+				value = -20
+				trait = proud
+			}
+			additive_modifier = {
+				value = -20
+				trait = brave
+			}
+			
+			# Bordered by a larger realm of different religion (who might attack me!)
+			additive_modifier = {
+				value = 50
+				custom_tooltip = {
+					text = EXPD_T_REASON_POWERFUL_NEIGHBOUR_OF_DIFF_RELIGION
+					any_neighbor_independent_ruler = {
+						expd_t_is_religious_enemy_of_from = yes
+						relative_power_including_allies_attacker = {
+							who = ROOT
+							power >= 2
+						}
+						relative_power_including_allies_attacker = {
+							who = ROOT
+							power < 4
+						}
+					}
+				}
+			}
+			additive_modifier = {
+				value = 100
+				custom_tooltip = {
+					text = EXPD_T_REASON_V_POWERFUL_NEIGHBOUR_OF_DIFF_RELIGION
+					any_neighbor_independent_ruler = {
+						expd_t_is_religious_enemy_of_from = yes
+						relative_power_including_allies_attacker = {
+							who = ROOT
+							power >= 4
+						}
+						relative_power_including_allies_attacker = {
+							who = ROOT
+							power < 10
+						}
+					}
+				}
+			}
+			additive_modifier = {
+				value = 200
+				custom_tooltip = {
+					text = EXPD_T_REASON_VV_POWERFUL_NEIGHBOUR_OF_DIFF_RELIGION
+					any_neighbor_independent_ruler = {
+						expd_t_is_religious_enemy_of_from = yes
+						relative_power_including_allies_attacker = {
+							who = ROOT
+							power >= 10
+						}
+					}
+				}
+			}
+			
+			# Effect of my power (if I'm strong or wealthy, I don't need protection!)
+			additive_modifier = {
+				value = -50
+				realm_levies >= 5000
+			}
+			additive_modifier = {
+				value = -50
+				realm_levies >= 10000
+			}
+			additive_modifier = {
+				value = -50
+				realm_levies >= 15000
+			}
+			additive_modifier = {
+				value = -50
+				realm_levies >= 20000
+			}
+			additive_modifier = {
+				value = -50
+				wealth >= 1000
+			}
+			additive_modifier = {
+				value = -50
+				wealth >= 2000
+			}
+			additive_modifier = {
+				value = -50
+				wealth >= 5000
+			}
+			
+			# Effect of being primary defender in a losing war
+			additive_modifier = {
+				value = 100
+				custom_tooltip = {
+					text = EXPD_T_REASON_LOSING_WAR
+					any_war = {
+						defender = { character = ROOT }
+						war_score >= 20
+						war_score <  50
+					}
+				}
+			}
+			additive_modifier = {
+				value = 200
+				custom_tooltip = {
+					text = EXPD_T_REASON_LOSING_WAR_BADLY
+					any_war = {
+						defender = { character = ROOT }
+						war_score >= 50
+					}
+				}
+			}
+			additive_modifier = {
+				value = 50
+				custom_tooltip = {
+					text = EXPD_T_REASON_DEFENDING_AGAINST_LARGER_AGGRESSOR
+					any_war = {
+						defender = { character = ROOT }
+						war_score <= -20 #This reason is invalid if you're winning!
+						attacker = {
+							relative_power_including_allies_defender = {
+								who = PREV
+								power < 0.5
+							}
+						}
+					}
+				}
+			}
+			additive_modifier = {
+				value = 50
+				custom_tooltip = {
+					text = EXPD_T_REASON_DEFENDING_AGAINST_MUCH_LARGER_AGGRESSOR
+					any_war = {
+						defender = { character = ROOT }
+						war_score <= -20 #This reason is invalid if you're winning!
+						attacker = {
+							relative_power_including_allies_defender = {
+								who = PREV
+								power < 0.25
+							}
+						}
+					}
+				}
+			}
+			
+			# Debug mode!
+			additive_modifier = {
+				value = 1000
+				custom_tooltip = {
+					text = EXPD_T_REASON_DEBUG_MODE_ENABLED
+					FROM = { ai = no }
+					has_global_flag = expd_t_debug_mode
+				}
+			}
+			
+		}
+	}
+}
+	
+decisions = {
+	expd_t_protectorate_independence_normal = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 6
+
+		potential = {
+			is_tributary = {
+				type = expd_t_protectorate
+			}
+		}
+		
+		allow = {
+			
+			war = no
+			
+			# You can only freely release yourself in fairly extreme circumstances
+			# NB: This is the main difference compared with permanent tributaries - realm size is not checked.
+			OR = {
+				
+				# If you're not independent, you don't need a protector (because you have a feudal lord)
+				# (This should probably have been cleaned up by however you became a vassal... but just in case...)
+				independent = no
+				
+				# Suzerain is not independent, or has negative prestige while you have positive prestige.
+				suzerain = { independent = no }
+				AND = {
+					suzerain = { prestige < 0 }
+					prestige > 0
+				}
+				
+				# Suzerain has fewer troops than you and less prestige than you
+				# (Because you become the suzerain by having more troops or significantly more prestige.)
+				AND = {
+					suzerain = {
+						relative_power = {
+							who = ROOT
+							power < 0.8
+						}
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  0
+							prestige <= 1000
+						}
+						suzerain = { prestige <= 0 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  1000
+							prestige <= 2000
+						}
+						suzerain = { prestige <= 1000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  2000
+							prestige <= 3000
+						}
+						suzerain = { prestige <= 2000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  3000
+							prestige <= 4000
+						}
+						suzerain = { prestige <= 3000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  4000
+							prestige <= 5000
+						}
+						suzerain = { prestige <= 4000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  5000
+							prestige <= 10000
+						}
+						suzerain = { prestige <= 5000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  10000
+							prestige <= 15000
+						}
+						suzerain = { prestige <= 10000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  15000
+							prestige <= 20000
+						}
+						suzerain = { prestige <= 15000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  20000
+							prestige <= 30000
+						}
+						suzerain = { prestige <= 20000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  30000
+							prestige <= 40000
+						}
+						suzerain = { prestige <= 30000 }
+					}
+					conditional_tooltip = {
+						trigger = {
+							prestige >  40000
+							prestige <= 50000
+						}
+						suzerain = { prestige <= 40000 }
+					}
+				}
+				
+				# Debug mode! Player can bypass the other checks (but AI can't, to prevent them from instantly leaving).
+				trigger_if = {
+					limit = {
+						ai = no
+						has_global_flag = expd_t_debug_mode
+					}
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
+						always = yes
+					}
+				}
+			}
+		}
+		effect = {
+			any_suzerain = {
+				character_event = { id = JD.2200 }
+				remove_tributary = ROOT
+			}
+		}
+		ai_will_do = {
+			
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				suzerain = { lower_real_tier_than = ROOT }
+			}
+			
+			modifier = {
+				factor = 2
+				trait = ambitious
+			}
+			modifier = {
+				factor = 2
+				trait = proud
+			}
+			modifier = {
+				factor = 2
+				trait = brave
+			}
+			modifier = {
+				factor = 0.25
+				trait = content
+			}
+			modifier = {
+				factor = 0.25
+				trait = humble
+			}
+			modifier = {
+				factor = 0.25
+				trait = craven
+			}
+			
+			# Bordered by a larger realm of different religion (who might attack me!)
+			modifier = {
+				factor = 0.1
+				any_neighbor_independent_ruler = {
+					expd_t_is_religious_enemy_of_root = yes
+					relative_power_including_allies_attacker = {
+						who = ROOT
+						power >= 2
+					}
+					relative_power_including_allies_attacker = {
+						who = ROOT
+						power < 4
+					}
+				}
+			}
+			modifier = {
+				factor = 0.1
+				any_neighbor_independent_ruler = {
+					expd_t_is_religious_enemy_of_root = yes
+					relative_power_including_allies_attacker = {
+						who = ROOT
+						power >= 4
+					}
+					relative_power_including_allies_attacker = {
+						who = ROOT
+						power < 10
+					}
+				}
+			}
+			modifier = {
+				factor = 0.1
+				any_neighbor_independent_ruler = {
+					expd_t_is_religious_enemy_of_root = yes
+					relative_power_including_allies_attacker = {
+						who = ROOT
+						power >= 10
+					}
+				}
+			}
+			
+		}
+	}
+	
+}

@@ -1,0 +1,121 @@
+targetted_decisions = {
+	form_cadettool_branch = {
+		is_high_prio = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			NOT = { has_character_flag = created_cadet_branch }
+			NOT = {
+				dynasty_head = {
+					character = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				is_heir = yes
+			}
+			prisoner = no
+			NOT = { trait = bastard }
+			NOT = { FROM = { has_character_flag = block_create_cadet_branch } }
+		}
+		effect = {
+			set_character_flag = created_cadet_branch
+			dynasty_head = {
+				ROOT = {
+					dynasty = father_bastard
+					
+					any_child_even_if_dead = {
+						if = {
+							limit = { dynasty = PREVPREV }
+							dynasty = ROOT
+							
+							any_child_even_if_dead = {
+								if = {
+									limit = { dynasty = PREVPREVPREV }
+									dynasty = ROOT
+									
+									any_child_even_if_dead = {
+										if = {
+											limit = { dynasty = PREVPREVPREVPREV }
+											dynasty = ROOT
+											
+											any_child_even_if_dead = {
+												if = {
+													limit = { dynasty = PREVPREVPREVPREVPREV }
+													dynasty = ROOT
+												}
+											}
+										}
+									}
+								}
+							}							
+						}
+					}
+				}
+			}
+		}
+	}
+	form_cadettool_branch_fromfather = {
+		is_high_prio = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			NOT = { has_character_flag = created_cadet_branch }
+			NOT = {
+				dynasty_head = {
+					character = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				is_heir = yes
+			}
+			prisoner = no
+			NOT = { trait = bastard }
+			NOT = { FROM = { has_character_flag = block_create_cadet_branch } }
+		}
+		effect = {
+			dynasty_head = {
+				ROOT = {
+					father_even_if_dead = {
+						dynasty = father_bastard
+						
+						any_child_even_if_dead = {
+							if = {
+								limit = { dynasty = FROM }
+								set_character_flag = created_cadet_branch
+								dynasty = PREV
+								
+								any_child_even_if_dead = {
+									if = {
+										limit_even_if_dead = { dynasty = FROM }
+										dynasty = PREVPREV
+										
+										any_child_even_if_dead = {
+											if = {
+												limit = { dynasty = FROM }
+												dynasty = PREVPREVPREV
+												
+												any_child_even_if_dead = {
+													if = {
+														limit = { dynasty = FROM }
+														dynasty = PREVPREVPREVPREV
+													}
+												}
+											}
+										}
+									}
+								}							
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

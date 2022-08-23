@@ -1,0 +1,179 @@
+expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
+	
+	# Set the character flag - this is an important gate on the eventual trigger-pregnancy event
+	hidden_tooltip = {
+		set_character_flag = expd_preg_triggered_pregnancy_in_progress
+		FROMFROM = { save_event_target_as = expd_preg_triggered_pregnancy_father    }
+		FROM     = { save_event_target_as = expd_preg_triggered_pregnancy_triggerer }
+	}
+	
+	hidden_tooltip = {
+		# Calculate the "score" for this couple's fertility (higher is better, ie. pregnancy will occur sooner)
+		# score = womans_fertility * mans_fertility * iif(they_are_lovers,2,1)
+		export_to_variable = { # Initialise the score variable with the woman's fertility
+			which = expd_preg_trigger_pregnancy_score
+			value = fertility
+		}
+		event_target:expd_preg_triggered_pregnancy_father = { # Put the man's fertility in a temporary global variable
+			export_to_variable = {
+				which = global_expd_preg_trigger_pregnancy_mans_fertility
+				value = fertility
+			}
+		}
+		multiply_variable = { # Multiply the score by the man's fertility
+			which = expd_preg_trigger_pregnancy_score
+			which = global_expd_preg_trigger_pregnancy_mans_fertility
+		}
+		if = {
+			limit = { is_lover = event_target:expd_preg_triggered_pregnancy_father }
+			multiply_variable = {
+				which = expd_preg_trigger_pregnancy_score
+				value = 2
+			}
+		}
+	}
+		
+	# Auto-generated code
+	#  --- days = 180/score
+	#  --- random = 90/score
+	# NB: Default fertility for a character is 50%, so an average couple will have a score of 0.25, ie. 720 +/- 360 days
+	
+	if = {
+		limit = {
+			has_global_flag = expd_preg_debug_mode
+			has_global_flag = expd_preg_debug_mode_instant
+		}
+		custom_tooltip = {
+			text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY
+			character_event = { id = EXPDPregnancy.3000 }
+		}
+	}
+	else = {
+		custom_tooltip = {
+			text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY
+			if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 2 } }
+				character_event = { id = EXPDPregnancy.3000 days = 90 random = 45 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 1.8 } }
+				character_event = { id = EXPDPregnancy.3000 days = 100 random = 50 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 1.6 } }
+				character_event = { id = EXPDPregnancy.3000 days = 113 random = 56 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 1.4 } }
+				character_event = { id = EXPDPregnancy.3000 days = 129 random = 64 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 1.2 } }
+				character_event = { id = EXPDPregnancy.3000 days = 150 random = 75 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 1 } }
+				character_event = { id = EXPDPregnancy.3000 days = 180 random = 90 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.9 } }
+				character_event = { id = EXPDPregnancy.3000 days = 200 random = 100 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.8 } }
+				character_event = { id = EXPDPregnancy.3000 days = 225 random = 113 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.7 } }
+				character_event = { id = EXPDPregnancy.3000 days = 257 random = 129 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.6 } }
+				character_event = { id = EXPDPregnancy.3000 days = 300 random = 150 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.5 } }
+				character_event = { id = EXPDPregnancy.3000 days = 360 random = 180 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.45 } }
+				character_event = { id = EXPDPregnancy.3000 days = 400 random = 200 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.4 } }
+				character_event = { id = EXPDPregnancy.3000 days = 450 random = 225 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.35 } }
+				character_event = { id = EXPDPregnancy.3000 days = 514 random = 257 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.3 } }
+				character_event = { id = EXPDPregnancy.3000 days = 600 random = 300 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.25 } }
+				character_event = { id = EXPDPregnancy.3000 days = 720 random = 360 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.2 } }
+				character_event = { id = EXPDPregnancy.3000 days = 900 random = 450 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.15 } }
+				character_event = { id = EXPDPregnancy.3000 days = 1200 random = 600 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.1 } }
+				character_event = { id = EXPDPregnancy.3000 days = 1800 random = 900 }
+			}
+			else = {
+				character_event = { id = EXPDPregnancy.3000 days = 3600 random = 1800 }
+			}
+		}
+	}
+	
+	# Cleanup
+	hidden_tooltip = {
+		if = {
+			limit = { has_global_flag = expd_preg_debug_mode }
+			# If in debug mode, add some more info to the character, in the form of additional variables
+			set_variable = {
+				which = expd_preg_trigger_pregnancy_avg_days_approx
+				value = 180
+			}
+			divide_variable = {
+				which = expd_preg_trigger_pregnancy_avg_days_approx
+				which = expd_preg_trigger_pregnancy_score
+			}
+			set_variable = {
+				which = expd_preg_trigger_pregnancy_plusminus_days_approx
+				value = 90
+			}
+			divide_variable = {
+				which = expd_preg_trigger_pregnancy_plusminus_days_approx
+				which = expd_preg_trigger_pregnancy_score
+			}
+		}
+		else = {
+			# If not in debug mode, ensure all character variables are wiped
+			set_variable = {
+				which = expd_preg_trigger_pregnancy_score
+				value = 0
+			}
+			set_variable = {
+				which = expd_preg_trigger_pregnancy_avg_days_approx
+				value = 0
+			}
+			set_variable = {
+				which = expd_preg_trigger_pregnancy_plusminus_days_approx
+				value = 0
+			}
+		}
+		# Always wipe the global variable
+		set_variable = {
+			which = global_expd_preg_trigger_pregnancy_mans_fertility
+			value = 0
+		}
+	}
+}

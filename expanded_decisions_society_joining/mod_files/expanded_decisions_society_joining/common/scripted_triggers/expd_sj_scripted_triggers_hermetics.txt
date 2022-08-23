@@ -1,0 +1,146 @@
+expd_sj_character_can_see_hermetics_trigger = {
+	conditional_tooltip = {
+		trigger = { always = yes }  # Hack to avoid unnecessary nested AND clauses, while retaining the requirement for an AND in case this trigger is used in some other context
+		NOT = { trait = zealous }
+		expd_sj_character_has_religious_ties_to_hermetics_trigger = yes
+	}
+}
+
+expd_sj_character_can_join_hermetics_trigger = {
+	conditional_tooltip = {
+		trigger = { always = yes }  # Hack to avoid unnecessary nested AND clauses, while retaining the requirement for an AND in case this trigger is used in some other context
+		NOT = { trait = zealous }
+		piety >= 250
+		prestige >= 500
+		expd_sj_character_has_religious_ties_to_hermetics_trigger = yes
+	}
+}
+
+expd_sj_character_has_religious_ties_to_hermetics_trigger = {
+	custom_tooltip = {
+		text = expd_sj_character_has_religious_ties_to_hermetics_tt
+		hidden_trigger = {
+			OR = {
+				any_friend = { expd_sj_religion_supports_hermetics_trigger = yes }
+				any_spouse = { expd_sj_religion_supports_hermetics_trigger = yes }
+				any_consort = { expd_sj_religion_supports_hermetics_trigger = yes }
+				any_lover = { expd_sj_religion_supports_hermetics_trigger = yes }
+				any_demesne_title = { expd_sj_is_holy_site_of_religion_supporting_hermetics = yes }
+			}
+		}
+	}
+}
+
+expd_sj_religion_supports_hermetics_trigger = {
+	OR = {
+		
+		# All Christians, Muslims, Mazdans and Jews
+		religion_group = christian
+		religion_group = muslim
+		religion_group = zoroastrian_group
+		religion_group = jewish_group
+		
+		# Taoists (but no other Eastern religions)
+		religion = taoist
+		
+		# Zun and Hellenic pagans, always
+		religion = zun_pagan
+		religion = zun_pagan_reformed
+		religion = hellenic_pagan
+		religion = hellenic_pagan_reformed
+		
+		# Reformed pagans with astrology
+		has_religion_feature = religion_astrology
+		
+	}
+}
+
+expd_sj_is_holy_site_of_religion_supporting_hermetics = {
+	
+	OR = {
+		
+		# Unfortunately, there doesn't seem to be any way to do this by religious group (instead of individual religion).
+		# So, just list them all...
+		
+		# Entire Christian group
+		is_holy_site = catholic
+		is_holy_site = cathar
+		is_holy_site = fraticelli
+		is_holy_site = waldensian
+		is_holy_site = lollard
+		is_holy_site = orthodox
+		is_holy_site = miaphysite
+		is_holy_site = monophysite
+		is_holy_site = bogomilist
+		is_holy_site = monothelite
+		is_holy_site = iconoclast
+		is_holy_site = paulician
+		is_holy_site = nestorian
+		is_holy_site = messalian
+		
+		# Entire Muslim group
+		is_holy_site = sunni
+		is_holy_site = zikri
+		is_holy_site = yazidi
+		is_holy_site = ibadi
+		is_holy_site = kharijite
+		is_holy_site = shiite
+		is_holy_site = druze
+		is_holy_site = hurufi
+		is_holy_site = qarmatian
+		
+		# Entire Mazdan group
+		is_holy_site = zoroastrian
+		is_holy_site = mazdaki
+		is_holy_site = manichean
+		is_holy_site = khurmazta
+		
+		# Entire Jewish group
+		is_holy_site = jewish
+		is_holy_site = samaritan
+		is_holy_site = karaite
+		
+		# Taoists (but no other Eastern religions)
+		is_holy_site = taoist
+		
+		# Zun and Hellenic pagans, always
+		is_holy_site = zun_pagan
+		is_holy_site = zun_pagan_reformed
+		is_holy_site = hellenic_pagan
+		is_holy_site = hellenic_pagan_reformed
+		
+		# Reformed pagans with astrology
+		AND = {
+			is_holy_site = norse_pagan_reformed
+			norse_pagan_reformed = { has_religion_feature = religion_astrology }
+		}
+		AND = {
+			is_holy_site = tengri_pagan_reformed
+			tengri_pagan_reformed = { has_religion_feature = religion_astrology }
+		}
+		AND = {
+			is_holy_site = baltic_pagan_reformed
+			baltic_pagan_reformed = { has_religion_feature = religion_astrology }
+		}
+		AND = {
+			is_holy_site = finnish_pagan_reformed
+			finnish_pagan_reformed = { has_religion_feature = religion_astrology }
+		}
+		AND = {
+			is_holy_site = slavic_pagan_reformed
+			slavic_pagan_reformed = { has_religion_feature = religion_astrology }
+		}
+		AND = {
+			is_holy_site = west_african_pagan_reformed
+			west_african_pagan_reformed = { has_religion_feature = religion_astrology }
+		}
+		AND = {
+			is_holy_site = bon_reformed
+			bon_reformed = { has_religion_feature = religion_astrology }
+		}
+		AND = {
+			is_holy_site = aztec_reformed
+			aztec_reformed = { has_religion_feature = religion_astrology }
+		}
+	}
+}

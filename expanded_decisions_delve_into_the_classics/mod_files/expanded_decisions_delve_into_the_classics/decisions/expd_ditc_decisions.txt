@@ -1,0 +1,116 @@
+decisions = {
+	
+	expd_ditc_delve_into_classics_decision = {
+		
+		# Almost entirely copied from delve_into_classics_decision in HF_religious_decisions.txt
+		# The only change is the slight widening of the culture requirement
+		
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 400 #check only once every 400 months.
+		potential = {
+			has_game_rule = {
+				name = hellenism_rule
+				value = on
+			}
+			has_dlc = "Holy Fury"
+			is_adult = yes
+			religion_group = christian #Must be Christian.
+			is_heretic = no #Must belong to a dominant denomination of the faith.
+			
+			
+			
+			################# Changes ################
+			
+			# Must not belong to a culture which activates the vanilla decision
+			NOR = {
+				culture = greek
+				culture = italian
+				culture = roman
+				culture = sardinian
+			}
+			
+			# Must belong to a slightly wider group of interested cultures
+			OR = {
+				# The Latin, Byzantine and Iberian culture groups are fairly obviously post-Roman
+				culture_group = latin
+				AND = {
+					culture_group = byzantine
+					NOR = {
+						culture = alan     # Nomads
+						culture = assyrian # Pre-Roman
+					}
+				}
+				AND = {
+					culture_group = iberian
+					NOT = { culture = basque } # Pre-Roman
+				}
+				# Some Germanic cultures had significant latin/Roman influences
+				culture = english
+				culture = saxon   # Actually Anglo-Saxon, "Saxon" in-game is "old_saxon"
+				culture = dutch
+			}
+			
+			############# End of changes #############
+			
+			
+			
+			OR = { #Must be eccentric or crazy.
+				trait = lunatic 
+				trait = possessed
+				trait = scholar
+				trait = mystic
+				has_focus = focus_scholarship
+			} 
+			OR = { #Must control an hellenic Holy Site.
+				completely_controls = c_thessalonike
+				completely_controls = c_atheniai
+				completely_controls = c_siracusa
+				completely_controls = c_roma
+				completely_controls = c_alexandria
+			} 
+			NOR = { #Must not have used this decision or be an hellen already.
+				is_theocracy = yes
+				religion = hellenic_pagan
+				religion = hellenic_pagan_reformed
+				secret_religion = hellenic_pagan
+				secret_religion = hellenic_pagan_reformed
+				has_character_modifier = caesars_insight
+				has_character_modifier = ciceros_insight
+				has_character_modifier = justinians_insight
+				has_character_flag = flag_delving_into_classics
+				has_global_flag = hellenic_reformation #No point in secrecy, there are other ways to convert.
+			}
+			capital_scope = { #Court must also be localized in Italy or Greece.
+				OR = { 
+					region = world_europe_south_italy
+					region = world_europe_south_east 
+				} 
+			}
+		}
+		
+		allow = {
+			prisoner = no
+			NOT = { trait = incapable }
+			learning = 6
+		}
+		
+		effect = {
+			custom_tooltip = {
+				text = tooltip_delve_into_classics
+			}
+			hidden_tooltip = {
+				set_character_flag = flag_delving_into_classics
+				character_event = { id = HF.23026 }
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				trait = zealous
+			}
+		}
+	}
+}

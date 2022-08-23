@@ -1,0 +1,19 @@
+k_krete_expd_kf = {
+	color={ 205 110 35 }
+	color2={ 255 255 20 }
+	hellenic_pagan_reformed = 500 # Crusade target weight
+	
+	capital = 480 # Chandax
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				k_krete_expd_kf = {
+					is_titular = yes
+				}
+			}
+			k_krete_expd_kf = {
+				is_titular = no
+			}
+		}
+	}
+}

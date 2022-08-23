@@ -1,0 +1,37 @@
+Hunting dog/eagle bloodline gives chance per year to gain a dog/eagle
+ --- Chance:
+      --- Zero if no hunting focus or trait or bloodline
+	  --- Zero if you already have both an eagle and a dog
+	  --- Zero chance of eagle unless you have the bloodline, or are nomadic, or are un/reformed tengri, or are in the tengri warrior lodge
+	  --- Each of these add a small chance to gain a new hunting animal: hunter trait, hunting focus, relevant hunter bloodline (dog/eagle)
+	  --- Further increased chance (of eagle only) with falconer trait if you have falconer
+	  --- Allow all characters to get these events, so the AI can have fun too!
+ --- For dogs, trigger an altered replacement of HF.12401 (dog) followed by the WoL event chain (starting from a slightly-altered version of WoL.5203, removing the hunting focus requirement)
+ --- Be sure to properly set up the dog's death, and possible dog/cat interaction, as per WoL.5202:
+		hidden_tooltip = { character_event = { id = WoL.5290 days = 3500 random = 2000 } } # Dog dies
+		hidden_tooltip = { character_event = { id = 77861 days = 30 random = 100 } } # Cat & dog 
+ --- For eagles, trigger an altered replacement of HF.12400 (eagle) (don't bother with the warrior lodge event chain, as it's got very little flavour)
+
+Replace send_new_eagle_event_effect & send_new_dog_event_effect:
+ --- Add "More Bloodlines" compatibility by allowing new dogs if you have IB_hunter_bloodline
+ 
+Remove flag training_dog at some point, to allow training of 2nd/3rd/etc dogs?
+
+Add a chance for people with eagle pets to get the falconer trait
+ --- Should be a fairly high chance if you have high martial skill and/or hunter trait
+
+Overwrite "More bloodlines" event IB.70 (grants permanent hunting dog)
+
+Ability for non-Tengri members of the Tengri Warrior Lodge to gain eagles
+ --- HF.25620 & HF.25621 - gain eagle after killing legendary beast (be sure to block this option if you already have an eagle)
+ --- Maybe also allow it for flag_hunting_eagle_slavic & flag_hunting_eagle_bon?
+ --- Make sure HF.12008 is very likely to fire during legendary journey preparation (if relevant) (for Friend of Eagles)
+ --- Update conditions in found_a_legendary_bloodline_effect
+      --- Eagle bloodline doesn't require Tengri religion; instead requires membership in relevant warrior lodge
+	  --- Add weightings for choice of legendary bloodline:
+	       --- Cool bloodlines (eg. eagle) are significantly more likely to be chosen if you don't already have one of that type
+		   --- Battle bard is significantly weighted by poet trait and diplo skill
+		   --- Raider bloodline is weighted by viking/pirate traits and raid counters
+           --- Smith bloodline is weighted by having low- or mid-tier armor/weapon equipped (or none at all!)
+           --- Resilient bloodline is weighted by scarring and permanent injury traits 		   
+	  

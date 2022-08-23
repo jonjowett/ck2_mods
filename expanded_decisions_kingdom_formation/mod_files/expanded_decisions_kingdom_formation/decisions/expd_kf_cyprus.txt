@@ -1,0 +1,44 @@
+decisions = {
+	expd_kf_create_cyprus = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+
+		potential = {
+			d_cyprus = {
+				k_cyprus = {
+					expd_kf_root_can_see_decision_to_create_this_kingdom_from_prev_single_duchy = yes
+				}
+			}
+			
+			# If you can take the vanilla decision, this one should be hidden
+			NAND = {
+				religion = catholic
+				NOT = { higher_tier_than = DUKE }
+			}
+		}
+
+		allow = {
+			d_cyprus = {
+				show_scope_change = no
+				k_cyprus = {
+					show_scope_change = no
+					expd_kf_root_can_take_decision_to_create_this_kingdom_from_prev_single_duchy = yes
+				}
+			}
+		}
+
+		effect = {
+			d_cyprus = {
+				show_scope_change = no
+				k_cyprus = {
+					show_scope_change = no
+					expd_kf_create_this_kingdom_from_prev_single_duchy_and_grant_to_root = yes
+				}
+			}
+			
+			# Show the vanilla narrative event for forming the kingdom of Cyprus
+			narrative_event = { id = HFP.40014 }
+		}
+	}
+}

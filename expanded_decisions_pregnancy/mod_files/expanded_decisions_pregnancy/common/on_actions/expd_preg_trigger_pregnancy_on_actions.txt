@@ -1,0 +1,6 @@
+#character. Triggers when at 2 months of pregnancy. ROOT is the pregnant woman.
+on_pregnancy = {
+	events = {
+		EXPDPregnancy.1000 # Clear any character flag set by this mod, as pregnancy has been achieved (even if it wasn't caused by the mod)
+	}
+}

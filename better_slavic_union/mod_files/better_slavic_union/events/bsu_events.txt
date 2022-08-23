@@ -1,0 +1,289 @@
+namespace = BSU
+
+# Update provincial modifiers for the emperor of the Slavic Union
+# This is designed to be called whenever necessary - yearly pulse, debugging, major decisions, etc
+character_event = {
+	id = BSU.1000
+	
+	is_triggered_only = yes
+	hide_window = yes
+	only_playable = yes
+	
+	trigger = {
+		#Event is only valid on the emperor of the Slavic Union
+		e_lechczechrus = { holder = ROOT }
+	}
+	
+	immediate = {
+		
+		any_realm_province = {
+			province_event = { id = BSU.3000 } #Update provincial modifiers
+		}
+		
+	}
+	
+}
+
+#Cleanup event, in case the Slavic Union was created and then later destroyed
+character_event = {
+	id = BSU.1001
+	
+	is_triggered_only = yes
+	hide_window = yes
+	only_playable = yes
+	ai = no
+	
+	trigger = {
+		e_lechczechrus = { has_holder = no }
+		OR = {
+			
+			has_global_flag = bsu_lcr_has_welcomed_south_west_slavs
+			has_global_flag = bsu_lcr_has_welcomed_south_east_slavs
+			has_global_flag = bsu_lcr_has_welcomed_all_southern_slavs
+			
+			has_global_flag = bsu_lcr_has_welcomed_lithuanians
+			
+			has_global_flag = bsu_lcr_has_welcomed_hungarians
+			
+			has_global_flag = bsu_lcr_has_welcomed_western_finns
+			has_global_flag = bsu_lcr_has_welcomed_northern_finns
+			has_global_flag = bsu_lcr_has_welcomed_siberians
+			has_global_flag = bsu_lcr_has_welcomed_all_finns
+			
+			has_global_flag = bsu_lcr_has_welcomed_bolghars
+			
+			has_global_flag = bsu_lcr_has_welcomed_khazars
+			
+		}
+	}
+	
+	immediate = {
+		
+		clr_global_flag = bsu_lcr_has_welcomed_south_west_slavs
+		clr_global_flag = bsu_lcr_has_welcomed_south_east_slavs
+		clr_global_flag = bsu_lcr_has_welcomed_all_southern_slavs
+		
+		clr_global_flag = bsu_lcr_has_welcomed_lithuanians
+		
+		clr_global_flag = bsu_lcr_has_welcomed_hungarians
+		
+		clr_global_flag = bsu_lcr_has_welcomed_western_finns
+		clr_global_flag = bsu_lcr_has_welcomed_northern_finns
+		clr_global_flag = bsu_lcr_has_welcomed_siberians
+		clr_global_flag = bsu_lcr_has_welcomed_all_finns
+		
+		clr_global_flag = bsu_lcr_has_welcomed_bolghars
+		
+		clr_global_flag = bsu_lcr_has_welcomed_khazars
+		
+		any_province = { #CPU heavy, but probably no other way to do this
+			province_event = { id = BSU.3100 } #Remove provincial modifiers
+		}
+		
+	}
+}
+
+#Update provincial modifiers when title holders change
+#Expected to be called from one of: on_new_holder, on_new_holder_inheritance, on_new_holder_usurpation
+#This means ROOT is the character and FROM is the title
+character_event = {
+	id = BSU.2000
+	
+	is_triggered_only = yes
+	hide_window = yes
+	only_playable = yes
+	
+	trigger = {
+		FROM = { higher_real_tier_than = BARON }
+		e_lechczechrus = { has_holder = yes }
+	}
+	
+	immediate = {
+		
+		#Rulers inside the Slavic Union: Update province modifiers
+		if = {
+			limit = {
+				e_lechczechrus = {
+					holder_scope = { is_liege_or_above_of = ROOT }
+				}
+			}
+			FROM = {
+				any_realm_province = {
+					province_event = { id = BSU.3000 } #Update provincial modifiers
+				}
+			}
+		}
+		
+		#Rulers outside the Slavic Union: Always remove province modifiers
+		else = {
+			FROM = {
+				any_realm_province = {
+					province_event = { id = BSU.3100 } #Remove provincial modifiers
+				}
+			}
+		}
+		
+	}
+	
+}
+
+#Update Slavic Union provincial modifiers
+#Assume that this will only ever be called on provinces in the Slavic Union (don't want to write another test in here!)
+province_event = {
+	id = BSU.3000
+	
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		
+		#Cultural (dis)unity provincial modifiers
+		remove_province_modifier = bsu_modifier_cultural_unity
+		remove_province_modifier = bsu_modifier_cultural_disunity_province
+		remove_province_modifier = bsu_modifier_cultural_disunity_ruler
+		if = {
+			limit = {
+				e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				owner = { bsu_is_accepted_culture = yes }
+			}
+			if = {
+				limit = { bsu_is_accepted_culture = yes }
+				if = {
+					limit = { NOT = { owner = { culture = PREV } } }
+					#Province owner culture does not match province culture but both are accepted: Add cultural unity modifier
+					add_province_modifier = {
+						name = bsu_modifier_cultural_unity
+						duration = -1
+					}
+				}
+				else = {
+					#Province owner culture matches province culture and both are accepted: No modifier
+				}
+			}
+			else = {
+				#Province culture is not accepted: Add the "province" cultural disunity modifier
+				add_province_modifier = {
+					name = bsu_modifier_cultural_disunity_province
+					duration = -1
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { bsu_is_accepted_culture = yes }
+				#Province culture is accepted but ruler culture is not: Add the "ruler" cultural disunity modifier
+				add_province_modifier = {
+					name = bsu_modifier_cultural_disunity_ruler
+					duration = -1
+				}
+			}
+			else = {
+				if = {
+					limit = { owner = { culture = PREV } }
+					#Province and ruler culture are both not accepted, but they are the same as each other: No modifier
+				}
+				else = {
+					#Province and ruler culture are not the same and are both not accepted: Add both cultural disunity modifiers
+					add_province_modifier = {
+						name = bsu_modifier_cultural_disunity_province
+						duration = -1
+					}
+					add_province_modifier = {
+						name = bsu_modifier_cultural_disunity_ruler
+						duration = -1
+					}
+				}
+			}
+		}
+		
+		#Religious (dis)unity provincial modifiers
+		remove_province_modifier = bsu_modifier_religious_unity
+		remove_province_modifier = bsu_modifier_religious_disunity_province
+		remove_province_modifier = bsu_modifier_religious_disunity_ruler
+		if = {
+			limit = {
+				e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+				owner = { bsu_is_accepted_religion = yes }
+			}
+			if = {
+				limit = { bsu_is_accepted_religion = yes }
+				if = {
+					limit = { NOT = { owner = { religion = PREV } } }
+					#Province owner religion does not match province religion but both are accepted: Add religious unity modifier
+					add_province_modifier = {
+						name = bsu_modifier_religious_unity
+						duration = -1
+					}
+				}
+				else = {
+					#Province owner religion matches province religion and both are accepted: No modifier
+				}
+			}
+			else = {
+				#Province religion is not accepted: Add the "province" religious disunity modifier
+				add_province_modifier = {
+					name = bsu_modifier_religious_disunity_province
+					duration = -1
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { bsu_is_accepted_religion = yes }
+				#Province religion is accepted but ruler religion is not: Add the "ruler" religious disunity modifier
+				add_province_modifier = {
+					name = bsu_modifier_religious_disunity_ruler
+					duration = -1
+				}
+			}
+			else = {
+				if = {
+					limit = { owner = { religion = PREV } }
+					#Province and ruler religion are both not accepted, but they are the same as each other: No modifier
+				}
+				else = {
+					#Province and ruler religion are not the same and are both not accepted: Add both religious disunity modifiers
+					add_province_modifier = {
+						name = bsu_modifier_religious_disunity_province
+						duration = -1
+					}
+					add_province_modifier = {
+						name = bsu_modifier_religious_disunity_ruler
+						duration = -1
+					}
+				}
+			}
+		}
+		
+	}
+}
+
+#Remove Slavic Union provincial modifiers from province
+#Assume that this will only ever be called on provinces where all mod-added modifiers should definitely be removed
+province_event = {
+	id = BSU.3100
+	
+	is_triggered_only = yes
+	hide_window = yes
+	
+	trigger = {
+		OR = {
+			has_province_modifier = bsu_modifier_cultural_unity
+			has_province_modifier = bsu_modifier_cultural_disunity_province
+			has_province_modifier = bsu_modifier_cultural_disunity_ruler
+			has_province_modifier = bsu_modifier_religious_unity
+			has_province_modifier = bsu_modifier_religious_disunity_province
+			has_province_modifier = bsu_modifier_religious_disunity_ruler
+		}
+	}
+	
+	immediate = {
+		remove_province_modifier = bsu_modifier_cultural_unity
+		remove_province_modifier = bsu_modifier_cultural_disunity_province
+		remove_province_modifier = bsu_modifier_cultural_disunity_ruler
+		remove_province_modifier = bsu_modifier_religious_unity
+		remove_province_modifier = bsu_modifier_religious_disunity_province
+		remove_province_modifier = bsu_modifier_religious_disunity_ruler
+	}
+	
+}

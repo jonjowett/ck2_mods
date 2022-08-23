@@ -1,0 +1,135 @@
+namespace = EXPDPregnancy
+
+# On becoming pregnant, clear the character flag set by the mod
+# This is in case the woman becomes preganant normally while waiting for the forced-pregnancy event to fire
+character_event = {
+	id = EXPDPregnancy.1000
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = { has_global_flag = expd_preg_debug_mode }
+			event_target:expd_preg_triggered_pregnancy_triggerer = { letter_event = { id = EXPDPregnancy.3003 } }
+		}
+	}
+	after = {
+		if = {
+			limit = { NOT = { has_global_flag = expd_preg_debug_mode } }
+			clr_character_flag = expd_preg_triggered_pregnancy_in_progress
+			clear_event_target = expd_preg_triggered_pregnancy_father
+			clear_event_target = expd_preg_triggered_pregnancy_triggerer
+		}
+	}
+}
+
+# Force ROOT to be impregnated by FROM
+# Triggered by decision, with a potentially-very-long delay
+# Intended calling structure is event_target:decision_taker = { event_target:husband = { event_target:wife = { character_event = { ... } } } }
+character_event = {
+	id = EXPDPregnancy.3000
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		event_target:expd_preg_triggered_pregnancy_father = {
+			expd_preg_this_is_fertile_male = yes # Must still be able to father a child
+		}
+		ROOT = {
+			is_pregnant = no # Must not already be pregnant
+			expd_preg_this_is_fertile_female = yes # Must still be eligible to become pregnant
+			has_character_flag = expd_preg_triggered_pregnancy_in_progress # Event has no effect unless the flag has been set and not previously cleared
+		}
+	}
+	
+	immediate = {
+		
+		# Impregnate the woman (normal impregnation if it's from a spouse/consort; cuckoo if it's a non-spouse/non-consort lover)
+		if = {
+			limit = {
+				OR = {
+					any_spouse  = { character = event_target:expd_preg_triggered_pregnancy_father }
+					any_consort = { character = event_target:expd_preg_triggered_pregnancy_father }
+				}
+			}
+			ROOT = { impregnate        = event_target:expd_preg_triggered_pregnancy_father }
+		}
+		else = {
+			ROOT = { impregnate_cuckoo = event_target:expd_preg_triggered_pregnancy_father }
+		}
+		
+		# Optionally (ie. probably debug only), let the decision-taker know that the pregnancy has occurred
+		if = {
+			limit = { has_global_flag = expd_preg_debug_mode }
+			event_target:expd_preg_triggered_pregnancy_triggerer = { letter_event = { id = EXPDPregnancy.3001 } }
+		}
+		
+	}
+	
+	fail_trigger_effect = {
+		# Optionally (ie. probably debug only), let the decision-taker know that the pregnancy has NOT occurred
+		if = {
+			limit = { has_global_flag = expd_preg_debug_mode }
+			event_target:expd_preg_triggered_pregnancy_triggerer = { letter_event = { id = EXPDPregnancy.3002 } }
+		}
+	}
+	
+	after = {
+		if = {
+			limit = { NOT = { has_global_flag = expd_preg_debug_mode } }
+			clr_character_flag = expd_preg_triggered_pregnancy_in_progress
+			clear_event_target = expd_preg_triggered_pregnancy_father
+			clear_event_target = expd_preg_triggered_pregnancy_triggerer
+		}
+	}
+}
+
+# Notification event, telling the sender that the target of the decision has become pregnant because of their decision
+letter_event = {
+	id = EXPDPregnancy.3001
+	is_triggered_only = yes
+	desc = EVTDESC_EXPDPregnancy_3001
+	option = {
+		name = EVTOPT_ExptPregnancy_OK
+	}
+	after = {
+		FROM = {
+			clr_character_flag = expd_preg_triggered_pregnancy_in_progress
+			clear_event_target = expd_preg_triggered_pregnancy_father
+			clear_event_target = expd_preg_triggered_pregnancy_triggerer
+		}
+	}
+}
+
+# Notification event, telling the sender that the target of the decision DID NOT become pregnant, for some reason
+letter_event = {
+	id = EXPDPregnancy.3002
+	is_triggered_only = yes
+	desc = EVTDESC_EXPDPregnancy_3002
+	option = {
+		name = EVTOPT_ExptPregnancy_OK
+	}
+	after = {
+		FROM = {
+			clr_character_flag = expd_preg_triggered_pregnancy_in_progress
+			clear_event_target = expd_preg_triggered_pregnancy_father
+			clear_event_target = expd_preg_triggered_pregnancy_triggerer
+		}
+	}
+}
+
+# Notification event, telling the sender that the target of the decision has become pregnant for some other reason
+letter_event = {
+	id = EXPDPregnancy.3003
+	is_triggered_only = yes
+	desc = EVTDESC_EXPDPregnancy_3003
+	option = {
+		name = EVTOPT_ExptPregnancy_OK
+	}
+	after = {
+		FROM = {
+			clr_character_flag = expd_preg_triggered_pregnancy_in_progress
+			clear_event_target = expd_preg_triggered_pregnancy_father
+			clear_event_target = expd_preg_triggered_pregnancy_triggerer
+		}
+	}
+}
+	

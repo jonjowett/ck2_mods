@@ -1,0 +1,1274 @@
+# Supported types: character
+#
+# Note: if 'chance' evaluates to 0, an AI character will also abandon the focus
+#
+
+
+###############
+# FOCUSES
+###############
+
+focus_rulership = {
+	type = character
+	
+	modifier_name = "RULERSHIP_FOCUS"
+	
+	potential = {
+		is_playable = yes
+	}
+	
+	allow = {
+		is_adult = yes
+		NOT = { trait = incapable }
+		prisoner = no
+		NOT = { trait = arbitrary }
+        NOT = { trait = decadent }
+	}
+	
+    # AI Pick chance - based on personality, not needs!
+    chance = {
+        factor = 100
+        modifier = {
+            factor = 4.0
+            OR = {
+                trait = indulgent_wastrel
+                trait = thrifty_clerk
+                trait = fortune_builder
+                trait = midas_touched
+            }
+        }
+		modifier = {
+            factor = 0.75
+            NOR = {
+                trait = indulgent_wastrel
+                trait = thrifty_clerk
+                trait = fortune_builder
+                trait = midas_touched
+            }
+        }
+        modifier = {
+            factor = 0.2
+            trait = stressed
+        }
+        modifier = {
+            factor = 0.2
+            trait = depressed
+        }
+        modifier = {
+            factor = 0.1
+            OR = {
+                is_republic = yes
+                is_patrician = yes
+            }
+        }
+        modifier = {
+            factor = 0.25
+            trait = wroth
+        }
+        modifier = {
+            factor = 0.25
+            trait = deceitful
+        }
+        modifier = {
+            factor = 0.5
+            trait = trusting
+        }
+        modifier = {
+            factor = 0.5
+            trait = envious
+        }
+		modifier = {
+            factor = 1.5
+            trait = honest
+        }
+        modifier = {
+            factor = 1.5
+            trait = patient
+        }
+        modifier = {
+            factor = 1.5
+            trait = content
+        }
+		modifier = {
+            factor = 1.5
+            trait = kind
+        }
+		modifier = {
+            factor = 1.5
+            is_feudal = yes
+        }
+		 modifier = {
+            factor = 1.5
+			AND = {
+				religion_group = christian
+				is_feudal = yes
+			}
+        }
+		modifier = {
+            factor = 2.0
+            religion = taoist
+        }
+        modifier = {
+            factor = 2.0
+            trait = just
+        }
+    }
+	
+	# Focuses have no success conditions
+	success = {
+		always = no
+	}
+	
+	abort = {
+		OR = {
+			prisoner = yes
+			trait = incapable
+			is_playable = no
+			trait = arbitrary
+			trait = decadent
+		}
+	}
+	
+	abort_effect = {
+	}
+	
+	# MODIFIERS
+	stewardship = 3
+	liege_opinion = 10
+	vassal_opinion = 10
+}
+
+focus_business = {
+	type = character
+	
+	modifier_name = "BUSINESS_FOCUS"
+	
+	potential = {
+		is_playable = yes
+	}
+	
+	allow = {
+		is_adult = yes
+		NOT = { trait = incapable }
+		prisoner = no
+		NOT = { trait = decadent }
+	}
+	
+    # AI Pick chance
+    chance = {
+        factor = 100
+
+        modifier = {
+            factor = 4.0
+            OR = {
+                trait = indulgent_wastrel
+                trait = thrifty_clerk
+                trait = fortune_builder
+                trait = midas_touched
+            }
+        }
+		modifier = {
+            factor = 0.75
+            NOR = {
+                trait = indulgent_wastrel
+                trait = thrifty_clerk
+                trait = fortune_builder
+                trait = midas_touched
+            }
+        }
+        modifier = {
+            factor = 3.0
+            religion_group = jewish
+        }
+        modifier = {
+            factor = 0.5
+            trait = stressed
+        }
+        modifier = {
+            factor = 0.5
+            trait = depressed
+        }
+        modifier = {
+            factor = 0.5
+            trait = charitable
+        }
+        modifier = {
+            factor = 3.0
+            trait = envious
+        }
+        modifier = {
+            factor = 2.0
+            trait = diligent
+        }
+        modifier = {
+            factor = 6.0
+            trait = greedy
+        }
+        modifier = {
+            factor = 3.0
+            OR = {
+                is_republic = yes
+                is_patrician = yes
+            }
+        }
+    }
+	
+	# Focuses have no success conditions
+	success = {
+		always = no
+	}
+	
+	abort = {
+		OR = {
+			prisoner = yes
+			trait = incapable
+			is_playable = no
+			trait = decadent
+		}
+	}
+	
+	abort_effect = {
+	}
+	
+	# MODIFIERS
+	stewardship = 2
+	town_opinion = 20
+}
+
+focus_seduction = {
+	type = character
+	
+	modifier_name = "SEDUCTION_FOCUS"
+	
+	potential = {
+		is_playable = yes
+	}
+	
+	allow = {
+		is_adult = yes
+		NOT = { trait = incapable }
+		NOT = { trait = celibate }
+        NOT = { trait = monk }
+        NOT = { trait = nun }
+		NOT = { is_ascetic_trigger = yes }
+        NOT = { trait = chaste }
+        NOT = { trait = content }
+        NOT = { trait = blinded }
+        NOT = { trait = maimed }
+        NOT = { trait = eunuch }
+        NOT = { trait = drunkard }
+        NOT = { trait = leper }
+        NOT = { trait = depressed }
+            OR = {
+                    AND = {
+                        Not = { age = 40
+                        is_female = no }
+                    }
+
+                    AND = {
+                        NOT = { age = 50
+                        is_female = yes }
+                    }
+                }
+		
+		custom_tooltip = {
+			text = is_not_ascetic
+			hidden_tooltip = {
+				NOT = { has_character_modifier = hindu_ascetic }
+				NOT = { has_character_modifier = buddhist_ascetic }
+				NOT = { has_character_modifier = jain_naked_ascetic }
+			}
+		}
+	}
+	
+    # AI Pick chance
+    chance = {
+        factor = 100
+     
+        modifier = {
+            factor = 0
+            trait = chaste
+        }
+
+        modifier = {
+            factor = 0.01 # Faithful spouse/consort
+            is_married = yes
+            any_spouse = {
+                is_lover = ROOT
+            }
+        } 
+        modifier = {
+            factor = 0.75
+            OR = {
+                is_republic = yes
+                is_patrician = yes
+            }
+        }
+		modifier = {
+            factor = 1.5
+            is_female = yes
+        }
+		modifier = {
+            factor = 1.5
+            trait = homosexual
+        }
+        modifier = {
+            factor = 0.2
+            trait = content
+        }
+        modifier = {
+            factor = 0.2
+            trait = humble
+        }
+        modifier = {
+            factor = 0.2
+            trait = just
+        }
+        modifier = {
+            factor = 0.2
+            trait = temperate
+        }
+        modifier = {
+            factor = 0.2
+            trait = kind
+        }
+        modifier = {
+            factor = 0.1
+            trait = ugly
+        }
+        modifier = {
+            factor = 0.1
+            trait = stutter
+        }
+        modifier = {
+            factor = 0.1
+            trait = lisp
+        }
+        modifier = {
+            factor = 0.2
+            trait = trusting
+        }
+        modifier = {
+            factor = 0.1
+            trait = shy
+        }
+        modifier = {
+            factor = 0.1
+            trait = honest
+        }
+        modifier = {
+            factor = 2.0
+            trait = gregarious
+        }
+        modifier = {
+            factor = 2.0
+            trait = deceitful
+        }
+		 modifier = {
+            factor = 1.5
+            trait = proud
+        }
+        modifier = {
+            factor = 2.0
+            trait = hedonist
+        }
+        modifier = {
+            factor = 2.0
+            trait = envious
+        }
+        modifier = {
+            factor = 2.0
+            trait = fair
+        }
+        modifier = {
+            factor = 3.0
+            trait = lustful
+        }
+        modifier = {
+            factor = 4.0
+            trait = decadent
+        }
+        modifier = {
+            factor = 3.0
+            OR = {
+                AND = {
+                    OR = {
+                        is_female = yes
+                        AND = {
+                            has_polygamy = no
+                            has_concubinage = no
+                        }
+                    }
+                    any_spouse = {
+                        trait = homosexual
+                    }
+                }
+                AND = {
+                    OR = {
+                        is_married = yes
+                        is_consort = yes
+                    }
+                    trait = homosexual
+                }
+            }
+        }
+    }
+	
+	# Focuses have no success conditions
+	success = {
+		always = no
+	}
+	
+	abort = {
+		OR = {		
+			trait = incapable
+            trait = chaste
+            trait = content
+            trait = blinded
+            trait = maimed
+            trait = eunuch
+            trait = drunkard
+            trait = leper
+            trait = depressed
+         
+            AND = { age = 50
+            is_female = no }
+                 
+            AND = { age = 40
+            is_female = yes }
+			
+			is_playable = no
+		}
+	}
+	
+	abort_effect = {
+	}
+	
+	# MODIFIERS
+	intrigue = 2
+	fertility = 0.25
+	sex_appeal_opinion = 10
+	health = 1
+}
+
+focus_intrigue = {
+	type = character
+	
+	modifier_name = "INTRIGUE_FOCUS"
+	
+	potential = {
+		is_playable = yes
+	}
+	
+	allow = {
+		is_adult = yes
+		NOT = { trait = incapable }
+		NOT = { trait = trusting }
+		prisoner = no
+	}
+	
+    # AI Pick chance
+    chance = {
+        factor = 100
+        modifier = {
+            factor = 0
+            trait = honest
+        }
+        modifier = {
+            factor = 0.1
+            NOR = {
+                trait = amateurish_plotter
+                trait = flamboyant_schemer
+                trait = intricate_webweaver
+                trait = elusive_shadow
+            }
+        }
+        modifier = {
+            factor = 4.0
+            OR = {
+                trait = amateurish_plotter
+                trait = flamboyant_schemer
+                trait = intricate_webweaver
+                trait = elusive_shadow
+            }
+        }
+        modifier = {
+            factor = 0.2
+            trait = kind
+        }
+        modifier = {
+            factor = 0.2
+            trait = trusting
+        }
+        modifier = {
+            factor = 0.2
+            trait = content
+        }
+        modifier = {
+            factor = 0.5
+            trait = wroth
+        }
+		modifier = {
+            factor = 1.5
+            is_female = yes
+        }
+        modifier = {
+            factor = 1.5
+            trait = envious
+        }
+        modifier = {
+            factor = 1.5
+            trait = patient
+        }
+        modifier = {
+            factor = 1.5
+            trait = ambitious
+        }
+        modifier = {
+            factor = 2.0
+            trait = cruel
+        }
+        modifier = {
+            factor = 2.0
+            trait = arbitrary
+        }
+        modifier = {
+            factor = 4.0
+            trait = paranoid
+        }
+        modifier = {
+            factor = 3.0
+            trait = deceitful
+        }
+    }
+	
+	# Focuses have no success conditions
+	success = {
+		always = no
+	}
+	
+	abort = {
+		OR = {
+			prisoner = yes
+			trait = incapable
+			trait = trusting
+			is_playable = no
+		}
+	}
+	
+	abort_effect = {
+	}
+	
+	# MODIFIERS
+	intrigue = 3
+	sex_appeal_opinion = 5
+}
+
+focus_hunting = {
+	type = character
+	
+	modifier_name = "HUNTING_FOCUS"
+	
+	potential = {
+		is_playable = yes
+	}
+	
+	allow = {
+		is_adult = yes
+		NOT = { trait = incapable }
+		NOT = { religion = jain }
+		prisoner = no
+		NOT = { trait = decadent }
+	}
+	
+    # AI Pick chance
+    chance = {
+        factor = 100
+
+        modifier = {
+            factor = 5.0
+            OR = {
+                trait = misguided_warrior
+                trait = tough_soldier
+                trait = skilled_tactician
+                trait = brilliant_strategist
+            }
+        }
+     
+        modifier = {
+            factor = 0
+            trait = infirm
+        }
+        modifier = {
+            factor = 0.1
+            OR = {
+                is_republic = yes
+                is_patrician = yes
+            }
+        }
+			modifier = {
+			factor = 2.0
+			is_nomadic = yes
+		}
+	        modifier = {
+            factor = 1.5
+            is_tribal = yes
+        }
+		modifier = {
+            factor = 1.5
+            is_feudal = yes
+        }
+        modifier = {
+            factor = 0.2
+            is_female = yes
+        }
+        modifier = {
+            factor = 0.5
+            trait = craven
+        }
+        modifier = {
+            factor = 2.0
+            trait = brave
+        }
+        modifier = {
+            factor = 5.0
+            trait = hunter
+        }
+        modifier = {
+            factor = 3.0
+            trait = falconer
+        }
+    }
+	
+	# Focuses have no success conditions
+	success = {
+		always = no
+	}
+	
+	abort = {
+		OR = {
+			prisoner = yes
+			trait = incapable
+			is_playable = no
+			trait = decadent
+		}
+	}
+	
+	abort_effect = {
+	}
+	
+	# MODIFIERS
+	martial = 2
+	health = 1
+	sex_appeal_opinion = 5
+}
+
+focus_war = {
+	type = character
+	
+	modifier_name = "WAR_FOCUS"
+	
+	potential = {
+		is_playable = yes
+	}
+	
+	allow = {
+		prisoner = no
+		is_adult = yes
+		NOT = { trait = craven }
+        NOT = { trait = decadent }
+		NOT = { trait = incapable }
+	}
+	
+    # AI Pick chance
+    chance = {
+        factor = 100
+     
+        modifier = {
+            factor = 0.1
+            is_female = yes
+        }
+     
+        modifier = {
+            factor = 0.1
+            trait = craven
+        }
+     
+        modifier = {
+            factor = 0.5
+            NOT = {
+                OR = {
+                    trait = misguided_warrior
+                    trait = tough_soldier
+                    trait = skilled_tactician
+                    trait = brilliant_strategist
+                }
+            }
+        }
+        modifier = {
+            factor = 4.0
+            OR = {
+                trait = misguided_warrior
+                trait = tough_soldier
+                trait = skilled_tactician
+                trait = brilliant_strategist
+            }
+        }
+        modifier = {
+            factor = 0.5
+            trait = kind
+        }
+        modifier = {
+            factor = 2.0
+            trait = viking
+        }
+        modifier = {
+            factor = 2.0
+            trait = brave
+        }
+        modifier = {
+            factor = 2.0
+            trait = cruel
+        }
+        modifier = {
+            factor = 1.5
+            is_feudal = yes
+        }
+        modifier = {
+            factor = 2.0
+            is_tribal = yes
+        }
+        modifier = {
+            factor = 2.0
+            religion_group = pagan
+        } 
+		modifier = {
+		factor = 2.0
+		is_nomadic = yes
+	}
+        modifier = {
+            factor = 2.0
+            trait = wroth
+        }
+        modifier = {
+            factor = 3.0
+            trait = duelist
+        }
+    }
+	
+	# Focuses have no success conditions
+	success = {
+		always = no
+	}
+	
+	abort = {
+		OR = {
+			prisoner = yes
+			trait = incapable
+			trait = craven
+            trait = decadent
+			is_playable = no
+		}
+	}
+	
+	abort_effect = {
+	}
+	
+	# MODIFIERS
+	martial = 3
+	sex_appeal_opinion = 5
+}
+
+focus_carousing = {
+	type = character
+	
+	modifier_name = "CAROUSING_FOCUS"
+	
+	potential = {
+		is_playable = yes
+	}
+	
+	allow = {
+		is_adult = yes
+		NOT = { trait = incapable }
+		prisoner = no
+		OR = {
+			NOT = { religion_group = muslim }
+			trait = decadent
+			trait = hedonist
+			trait = drunkard
+		}
+		custom_tooltip = {
+			text = is_not_ascetic
+			hidden_tooltip = {
+				NOT = { has_character_modifier = hindu_ascetic }
+				NOT = { has_character_modifier = buddhist_ascetic }
+				NOT = { has_character_modifier = jain_naked_ascetic }
+			}
+		}
+	}
+	
+    # AI Pick chance
+    chance = {
+        factor = 100
+        modifier = {
+            factor = 4.0
+            OR = {
+                trait = naive_appeaser
+                trait = underhanded_rogue
+                trait = charismatic_negotiator
+                trait = grey_eminence
+            }
+        }
+		modifier = {
+            factor = 0.75
+            NOR = {
+                trait = naive_appeaser
+                trait = underhanded_rogue
+                trait = charismatic_negotiator
+                trait = grey_eminence
+            }
+        }
+        modifier = {
+            factor = 0.1
+            OR = {
+                is_republic = yes
+                is_patrician = yes
+            }
+        }
+        modifier = {
+            factor = 0.2
+            trait = shy
+        }
+        modifier = {
+            factor = 0.2
+            trait = temperate
+        }
+        modifier = {
+            factor = 0.5
+            trait = diligent
+        }
+        modifier = {
+            factor = 0.2
+            trait = ambitious
+        }
+        modifier = {
+            factor = 2.0
+            trait = slothful
+        }
+        modifier = {
+            factor = 2.0
+            trait = gluttonous
+        }
+        modifier = {
+            factor = 2.0
+            trait = hedonist
+        }
+        modifier = {
+            factor = 3.0
+            trait = gregarious
+        }
+        modifier = {
+            factor = 4.0
+            trait = drunkard
+        }
+        modifier = {
+            factor = 2.0
+            trait = decadent
+        }
+    }
+	
+	# Focuses have no success conditions
+	success = {
+		always = no
+	}
+	
+	abort = {
+		OR = {
+			prisoner = yes
+			trait = incapable
+			is_playable = no
+		AND = {
+			religion_group = muslim
+			NOT = { trait = decadent }
+    }
+		}
+	}
+	
+	abort_effect = {
+	}
+	
+	# MODIFIERS
+	diplomacy = 3
+}
+
+focus_family = {
+	type = character
+	
+	modifier_name = "FAMILY_FOCUS"
+	
+	potential = {
+		is_playable = yes
+	}
+	
+	allow = {
+		is_adult = yes
+		NOT = { trait = incapable }
+		NOT = { trait = cruel }
+        NOT = { trait = decadent }
+		prisoner = no
+	}
+	
+    # AI Pick chance
+    chance = {
+        factor = 100
+        modifier = {
+            factor = 0.1
+            NOT = {
+                any_sibling = {
+                    always = yes
+                }
+            }
+            NOT = {
+                any_child = {
+                    always = yes
+                }
+            }
+        }
+        modifier = {
+            factor = 2.0
+            OR = {
+                trait = naive_appeaser
+                trait = underhanded_rogue
+                trait = charismatic_negotiator
+                trait = grey_eminence
+            }
+        }
+        modifier = {
+            factor = 0.1
+            trait = ambitious
+        }
+        modifier = {
+            factor = 0.75
+            NOT = { age = 25 }
+        }
+        modifier = {
+            factor = 0.5
+            is_female = no
+        }
+        modifier = {
+            factor = 0.75
+            trait = gregarious
+        }
+        modifier = {
+            factor = 0.75
+            trait = proud
+        }
+        modifier = {
+            factor = 1.25
+            trait = humble
+        }
+        modifier = {
+            factor = 1.5
+            trait = gardener
+        }
+        modifier = {
+            factor = 1.5
+            trait = craven
+        }
+        modifier = {
+            factor = 1.5
+            trait = shy
+        }
+        modifier = {
+            factor = 3.0
+            trait = content
+        }
+        modifier = {
+            factor = 3.0
+            trait = infirm
+        }
+        modifier = {
+            factor = 1.2
+            trait = kind
+        }
+        modifier = {
+            factor = 3.0
+            is_female = yes
+        }
+    }
+	
+	# Focuses have no success conditions
+	success = {
+		always = no
+	}
+	
+	abort = {
+		OR = {
+			prisoner = yes
+			trait = incapable
+			trait = cruel
+            trait = decadent
+			is_playable = no
+		}
+	}
+	
+	abort_effect = {
+	}
+	
+	# MODIFIERS
+	diplomacy = 2
+	health = 1
+	same_dynasty_opinion = 5
+	fertility = 0.25
+}
+
+focus_scholarship = {
+	type = character
+	
+	modifier_name = "SCHOLARSHIP_FOCUS"
+	
+	potential = {
+		is_playable = yes
+	}
+	
+	allow = {
+		is_adult = yes
+		NOT = { trait = incapable }
+		NOT = { trait = decadent }
+		OR = {
+			society_member_of = hermetics
+			NOR = {
+				is_tribal = yes
+				is_nomadic = yes
+			}
+		}
+	}
+	
+    # AI Pick chance
+    chance = {
+        factor = 100
+        modifier = {
+            factor = 0
+            trait = imbecile
+        }
+        modifier = {
+            factor = 0.1
+            OR = {
+                is_republic = yes
+                is_patrician = yes
+            }
+        }
+        modifier = {
+            factor = 0
+            trait = inbred
+        }
+        modifier = {
+            factor = 0.25
+            trait = wroth
+        }
+        modifier = {
+            factor = 0.5
+            trait = ambitious
+        }
+        modifier = {
+            factor = 0.5
+            trait = brave
+        }
+        modifier = {
+            factor = 0.25
+            is_tribal = yes
+        }
+        modifier = {
+            factor = 1.5
+            trait = craven
+        }
+        modifier = {
+            factor = 1.5
+            trait = content
+        }
+        modifier = {
+            factor = 2.0
+            trait = patient
+        }
+        modifier = {
+            factor = 3.0
+            trait = genius
+        }
+        modifier = {
+            factor = 2.0
+            trait = quick
+        } 
+        modifier = {
+            factor = 4.0
+            trait = cynical
+            OR = {
+                trait = detached_priest
+                trait = martial_cleric
+                trait = scholarly_theologian
+                trait = mastermind_theologian
+            }
+        }
+		 modifier = {
+            factor = 0.75
+            NOR = {
+                trait = detached_priest
+                trait = martial_cleric
+                trait = scholarly_theologian
+                trait = mastermind_theologian
+            }
+        }
+        modifier = {
+            factor = 3.0
+            trait = scholar
+        }
+        modifier = {
+            factor = 2.0
+            is_theocracy = yes
+        }
+    }
+	
+	# Focuses have no success conditions
+	success = {
+		always = no
+	}
+	
+	abort = {
+		OR = {
+			trait = incapable
+			is_playable = no
+			trait = decadent
+		}
+	}
+	
+	abort_effect = {
+	}
+	
+	# MODIFIERS
+	learning = 3
+}
+
+focus_theology = {
+	type = character
+	
+	modifier_name = "THEOLOGY_FOCUS"
+	
+	potential = {
+		is_playable = yes
+	}
+	
+	allow = {
+		is_adult = yes
+		NOT = { trait = incapable }
+		NOT = { trait = cynical }
+        NOT = { trait = decadent }
+	}
+	
+    # AI Pick chance
+    chance = {
+        factor = 100
+     
+        modifier = {
+            factor = 0
+            trait = imbecile
+        }
+        modifier = {
+            factor = 0
+            trait = inbred
+        }
+        modifier = {
+            factor = 0
+            trait = cynical
+        }
+        modifier = {
+            factor = 0.1
+            OR = {
+                is_republic = yes
+                is_patrician = yes
+            }
+        }
+        modifier = {
+            factor = 0.25
+            trait = wroth
+        }
+        modifier = {
+            factor = 0.25
+            trait = ambitious
+        }
+        modifier = {
+            factor = 0.5
+            trait = brave
+        }
+        modifier = {
+            factor = 1.5
+            trait = craven
+        }
+        modifier = {
+            factor = 1.5
+            trait = content
+        }
+        modifier = {
+            factor = 1.5
+            trait = patient
+        }
+        modifier = {
+            factor = 5.0
+            OR = {
+                trait = detached_priest
+                trait = martial_cleric
+                trait = scholarly_theologian
+                trait = mastermind_theologian
+            }
+        }
+		modifier = {
+            factor = 0.75
+            NOR = {
+                trait = detached_priest
+                trait = martial_cleric
+                trait = scholarly_theologian
+                trait = mastermind_theologian
+            }
+        }
+        modifier = {
+            factor = 2.0
+            trait = mystic
+        }
+        modifier = {
+            factor = 3.0
+            trait = zealous
+        }
+        modifier = {
+            factor = 3.0
+            is_theocracy = yes
+        }
+    }
+	
+	# Focuses have no success conditions
+	success = {
+		always = no
+	}
+	creation_effect = {
+		if = {
+			limit = { has_quest = quest_monastic_order_theology_focus }
+			character_event = { id = MNM.4016 }
+		}
+	}
+	
+	abort = {
+		OR = {
+			trait = incapable
+			trait = decadent
+            trait = cynical
+			is_playable = no
+		}
+	}
+	
+	abort_effect = {
+	}
+	
+	# MODIFIERS
+	learning = 2
+	church_opinion = 20
+	same_religion_opinion = 5
+	health = 1.0
+}

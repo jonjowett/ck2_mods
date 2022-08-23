@@ -1,0 +1,971 @@
+
+###############
+# Mass Ransom #
+###############
+
+expd_pris_ransom_as_many_of_roots_courtiers_imprisoned_by_from_as_possible = {
+	
+	# First, ransom everyone who can pay their own ransom
+	ROOT_FROM = {
+		show_scope_change = no
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = yes
+			}
+			expd_pris_this_unlanded_prisoner_ransoms_themself_out_of_froms_prison = yes
+		}
+	}
+	
+	# Then, ransom the targeted (landed) character
+	ROOT = {
+		if = {
+			limit = {
+				host = { character = FROM }
+				prisoner = yes
+			}
+			expd_pris_this_landed_prisoner_ransoms_themself_out_of_froms_prison = yes
+		}
+	}
+	
+	# Then all of the targeted character's imprisoned courtiers, in order of priority
+	# NB: It's not possible to show the player exactly what will happen, because ROOT's wealth will gradually decrease, and they may run out of money
+	ROOT_FROM = {
+		show_scope_change = no
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_8th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_9th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_10th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_11th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_12th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_13th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_14th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+	}
+	
+	custom_tooltip = { text = EXPD_PRIS_TOOLTIP_NO_OTHER_PRISONERS_CAN_BE_RANSOMED }
+	
+}
+
+expd_pris_ransom_as_many_of_roots_courtiers_house_arrested_by_from_as_possible = {
+# Copy of expd_pris_ransom_as_many_of_roots_courtiers_imprisoned_by_from_as_possible, with very minor changes
+	
+	# First, ransom everyone who can pay their own ransom
+	ROOT_FROM = {
+		show_scope_change = no
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_ransoms_themself_out_of_froms_prison = yes
+		}
+	}
+	
+	# Then, ransom the targeted (landed) character
+	ROOT = {
+		if = {
+			limit = {
+				host = { character = FROM }
+				prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_landed_prisoner_ransoms_themself_out_of_froms_prison = yes
+		}
+	}
+	
+	# Then all of the targeted character's imprisoned courtiers, in order of priority
+	# NB: It's not possible to show the player exactly what will happen, because ROOT's wealth will gradually decrease, and they may run out of money
+	ROOT_FROM = {
+		show_scope_change = no
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_8th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_9th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_10th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_11th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_12th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_13th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_14th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = house_arrest
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+	}
+	
+	custom_tooltip = { text = EXPD_PRIS_TOOLTIP_NO_OTHER_PRISONERS_CAN_BE_RANSOMED }
+	
+}
+
+expd_pris_ransom_as_many_of_roots_courtiers_dungeoned_by_from_as_possible = {
+# Copy of expd_pris_ransom_as_many_of_roots_courtiers_imprisoned_by_from_as_possible, with very minor changes
+	
+	# First, ransom everyone who can pay their own ransom
+	ROOT_FROM = {
+		show_scope_change = no
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_ransoms_themself_out_of_froms_prison = yes
+		}
+	}
+	
+	# Then, ransom the targeted (landed) character
+	ROOT = {
+		if = {
+			limit = {
+				host = { character = FROM }
+				prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_landed_prisoner_ransoms_themself_out_of_froms_prison = yes
+		}
+	}
+	
+	# Then all of the targeted character's imprisoned courtiers, in order of priority
+	# NB: It's not possible to show the player exactly what will happen, because ROOT's wealth will gradually decrease, and they may run out of money
+	ROOT_FROM = {
+		show_scope_change = no
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_8th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_9th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_10th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_11th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_12th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_13th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_14th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_dungeon
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+	}
+	
+	custom_tooltip = { text = EXPD_PRIS_TOOLTIP_NO_OTHER_PRISONERS_CAN_BE_RANSOMED }
+	
+}
+
+expd_pris_ransom_as_many_of_roots_courtiers_oublietted_by_from_as_possible = {
+# Copy of expd_pris_ransom_as_many_of_roots_courtiers_imprisoned_by_from_as_possible, with very minor changes
+	
+	# First, ransom everyone who can pay their own ransom
+	ROOT_FROM = {
+		show_scope_change = no
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_ransoms_themself_out_of_froms_prison = yes
+		}
+	}
+	
+	# Then, ransom the targeted (landed) character
+	ROOT = {
+		if = {
+			limit = {
+				host = { character = FROM }
+				prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_landed_prisoner_ransoms_themself_out_of_froms_prison = yes
+		}
+	}
+	
+	# Then all of the targeted character's imprisoned courtiers, in order of priority
+	# NB: It's not possible to show the player exactly what will happen, because ROOT's wealth will gradually decrease, and they may run out of money
+	ROOT_FROM = {
+		show_scope_change = no
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_8th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_9th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_10th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_11th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_12th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_13th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+		any_courtier = {
+			limit = {
+				expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+				expd_pris_this_unlanded_prisoner_is_14th_priority_for_root_to_ransom = yes
+				expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = no
+				expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = yes
+				has_character_modifier = the_oubliette
+			}
+			expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = yes
+		}
+	}
+	
+	custom_tooltip = { text = EXPD_PRIS_TOOLTIP_NO_OTHER_PRISONERS_CAN_BE_RANSOMED }
+	
+}
+
+
+
+
+
+###################################################
+# Single prisoner ransom (as part of mass ransom) #
+###################################################
+
+expd_pris_this_unlanded_prisoner_ransoms_themself_out_of_froms_prison = {
+	if = {
+		limit = {
+			expd_pris_this_unlanded_prisoner_is_child_of_living_emperor = yes
+			expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = yes
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_RANSOMS_THEMSELF_CHILD_OF_EMPEROR
+			wealth = -110
+			ROOT_FROM = { wealth = 110 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			expd_pris_this_unlanded_prisoner_is_child_of_living_king = yes
+			expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = yes
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_RANSOMS_THEMSELF_CHILD_OF_KING
+			wealth = -74
+			ROOT_FROM = { wealth = 74 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			expd_pris_this_unlanded_prisoner_is_child_of_living_duke = yes
+			expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = yes
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_RANSOMS_THEMSELF_CHILD_OF_DUKE
+			wealth = -46
+			ROOT_FROM = { wealth = 46 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			expd_pris_this_unlanded_prisoner_is_child_of_living_count = yes
+			expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = yes
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_RANSOMS_THEMSELF_CHILD_OF_COUNT
+			wealth = -26
+			ROOT_FROM = { wealth = 26 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			expd_pris_this_unlanded_prisoner_is_child_of_living_baron = yes
+			expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = yes
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_RANSOMS_THEMSELF_CHILD_OF_BARON
+			wealth = -14
+			ROOT_FROM = { wealth = 14 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			expd_pris_this_unlanded_prisoner_is_child_of_living_baron = no
+			expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = yes
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_RANSOMS_THEMSELF_UNIMPORTANT
+			wealth = -10
+			ROOT_FROM = { wealth = 10 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else = {
+		# Do nothing - This should never happen, unless there's some kind of logic error
+	}
+}
+
+expd_pris_this_landed_prisoner_ransoms_themself_out_of_froms_prison = {
+	if = {
+		limit = {
+			tier = EMPEROR
+			wealth >= 385
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_LANDED_PRISONER_RANSOMS_THEMSELF_EMPEROR
+			wealth = -385
+			ROOT_FROM = { wealth = 385 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			tier = KING
+			wealth >= 250
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_LANDED_PRISONER_RANSOMS_THEMSELF_KING
+			wealth = -250
+			ROOT_FROM = { wealth = 250 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			tier = DUKE
+			wealth >= 145
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_LANDED_PRISONER_RANSOMS_THEMSELF_DUKE
+			wealth = -145
+			ROOT_FROM = { wealth = 145 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			tier = COUNT
+			wealth >= 70
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_LANDED_PRISONER_RANSOMS_THEMSELF_COUNT
+			wealth = -70
+			ROOT_FROM = { wealth = 70 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			tier = BARON
+			wealth >= 25
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_LANDED_PRISONER_RANSOMS_THEMSELF_BARON
+			wealth = -25
+			ROOT_FROM = { wealth = 25 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else = {
+		# Do nothing - This landed character can't afford to ransom themself
+	}
+}
+
+expd_pris_this_unlanded_prisoner_is_possibly_ransomed_out_of_froms_prison_by_root = {
+	if = {
+		limit = {
+			ROOT = { wealth >= 110 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_emperor = yes
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_POSSIBLY_RANSOMED_BY_ROOT_CHILD_OF_EMPEROR
+			ROOT = { wealth = -110 }
+			ROOT_FROM = { wealth = 110 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			ROOT = { wealth >= 74 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_king = yes
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_POSSIBLY_RANSOMED_BY_ROOT_CHILD_OF_KING
+			ROOT = { wealth = -74 }
+			ROOT_FROM = { wealth = 74 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			ROOT = { wealth >= 46 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_duke = yes
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_POSSIBLY_RANSOMED_BY_ROOT_CHILD_OF_DUKE
+			ROOT = { wealth = -46 }
+			ROOT_FROM = { wealth = 46 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			ROOT = { wealth >= 26 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_count = yes
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_POSSIBLY_RANSOMED_BY_ROOT_CHILD_OF_COUNT
+			ROOT = { wealth = -26 }
+			ROOT_FROM = { wealth = 26 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			ROOT = { wealth >= 14 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_baron = yes
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_POSSIBLY_RANSOMED_BY_ROOT_CHILD_OF_BARON
+			ROOT = { wealth = -14 }
+			ROOT_FROM = { wealth = 14 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else_if = {
+		limit = {
+			ROOT = { wealth >= 10 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_baron = no
+			prisoner = yes
+			host = { character = ROOT_FROM }
+		}
+		custom_tooltip = {
+			text = EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_POSSIBLY_RANSOMED_BY_ROOT_UNIMPORTANT
+			ROOT = { wealth = -10 }
+			ROOT_FROM = { wealth = 10 }
+			expd_pris_release_this_prisoner_due_to_ransom = yes
+		}
+	}
+	else = {
+		# Do nothing: ROOT can't afford to pay the ransom
+	}
+}
+
+expd_pris_release_this_prisoner_due_to_ransom = {
+	# Split out into a separate effect in case we want to add opinion modifiers or something
+	imprison = no
+	remove_character_modifier = house_arrest
+	remove_character_modifier = the_dungeon
+	remove_character_modifier = the_oubliette
+}

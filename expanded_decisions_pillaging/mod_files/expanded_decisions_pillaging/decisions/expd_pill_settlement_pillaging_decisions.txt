@@ -1,0 +1,664 @@
+# Settlement decisions are possible vs _all_ settlements and are shown in the Settlement Diplomacy View, not the Intrigue View. The taker is in the FROM scope.
+#
+# filter = [capital/owned/vassal_owned/sub_realm_owned/realm_owned/dynasty_owned/all]
+# ai_target_filter = [capital/owned/vassal_owned/sub_realm_owned/realm_owned/dynasty_owned/all] (which settlements for which the AI evaluates the decision.)
+#	owned: all settlements owned by the AI
+#	vassal_owned: all settlements owned by direct vassal rulers of the AI's employer
+#	sub_realm_owned: all settlements below the AI's employer
+#	realm_owned: all settlements in the same top realm as the AI
+#	dynasty_owned: all settlements owned by members of the same dynasty
+#	all: all settlements (Avoid if possible. VERY CPU-HEAVY!)
+#	
+
+settlement_decisions = {
+
+	expd_pill_instant_full_pillage_settlement = {
+		#This is a shortcut for the exploit where you pause then repeatedly:
+		# --- Pillage
+		# --- Hire a holy man and leave the dialog on-screen
+		# --- Grant the holy man all the pillaged land (which resets the pillaging flags)
+		# --- Kill the holy man via the dialog, inheriting his land
+		#This costs 25 per loop, but that is excessively harsh for the purpose of this decision because you can give multiple holdings to the same holy man before autokilling him.
+		# --- Therefore, costs have been discounted to 5 per loop.
+		# --- A future development might be to do some maths (with character/province variables and events) to calculate the correct piety cost:
+		#           max(0, ((25 * {number of holdings in settlement} / 2) - {total piety taken due to instant pillaging in the last N days} )
+		
+		#Currently disabled for the AI by the pre-filter and the ai_will_do section. Could potentially be enabled, if we could be sure the AI would be sensible about it.
+		
+		only_independent = yes
+		ai = no
+		
+		filter = owned
+		ai_target_filter = owned
+		is_high_prio = yes
+		ai_check_interval = 3
+		
+		from_potential = {
+			is_playable = yes
+			OR = {
+				is_tribal = yes
+				is_nomadic = yes
+			}
+			has_dlc = "Horse Lords"
+		}
+		
+		potential = {
+			
+			#Pillaging nomadic holdings is not permitted (should be impossible, but you never know...)
+			NOT = { holding_type = nomad }
+			
+			OR = {
+				#Pillaging a non-tribal holding is always permitted
+				NOT = { holding_type = tribal }
+				
+				#Pillaging tribal holdings is only permitted if you are nomadic; or if you are the player and the province is of a different culture group
+				#(There are valid reasons to pillage owned tribal holdings, but the AI is not capable of making that kind of decision.)
+				AND = {
+					holding_type = tribal
+					OR = {
+						FROM = { is_nomadic = yes }
+						AND = {
+							FROM = { ai = no }
+							NOT = { location = { culture_group = FROM } }
+						}
+					}
+				}
+			}
+			
+			#Can only pillage holdings you own personally
+			owner = { character = FROM }
+		}
+		
+		allow = {
+			
+			custom_tooltip = {
+				text = EXPD_PILL_TOOLTIP_PILLAGING_BLOCKED_BY_DECISION
+				NOT = { FROM = { has_character_flag = expd_pill_decisions_blocked } }
+			}
+			
+			owner = { independent = yes }
+			has_siege = no
+			
+			#Must have enough piety
+			OR = {
+				num_of_buildings <= 2
+				AND = {
+					num_of_buildings <= 4
+					FROM = { piety = 5 }
+				}
+				AND = {
+					num_of_buildings <= 6
+					FROM = { piety = 10 }
+				}
+				AND = {
+					num_of_buildings <= 8
+					FROM = { piety = 15 }
+				}
+				AND = {
+					num_of_buildings <= 10
+					FROM = { piety = 20 }
+				}
+				AND = {
+					num_of_buildings <= 12
+					FROM = { piety = 25 }
+				}
+				AND = {
+					num_of_buildings <= 14
+					FROM = { piety = 30 }
+				}
+				AND = {
+					num_of_buildings <= 16
+					FROM = { piety = 35 }
+				}
+				AND = {
+					num_of_buildings <= 18
+					FROM = { piety = 40 }
+				}
+				AND = {
+					num_of_buildings <= 20
+					FROM = { piety = 45 }
+				}
+				FROM = { piety = 50 }
+			}
+		}
+		
+		effect = {
+			
+			#Nickname grant is slightly modified from vanilla so the Validator doesn't complain
+			hidden_tooltip = {
+				location = { save_event_target_as = expd_pill_nickname_target }
+				if = {
+					limit = {
+						owner = { 
+							has_nickname = no
+							is_adult = yes
+							NOT = { trait = incapable }
+						}
+					}
+					random_list = {
+						5 = {
+							owner = { give_nickname = nick_the_destroyer }
+						}
+						5 = {
+							owner = { give_nickname = nick_the_scourge_of_god }
+							modifier = {
+								factor = 0
+								event_target:expd_pill_nickname_target = { religion = FROM }
+							}
+						}
+						5 = {
+							owner = { give_nickname = nick_the_slayer_of_culture }
+							modifier = {
+								factor = 0
+								event_target:expd_pill_nickname_target = { culture = FROM }
+							}
+						}
+						5 = {
+							owner = { give_nickname = nick_the_terror_of_provincename }
+						}
+						5 = {
+							owner = { give_nickname = nick_the_culture_marauder }
+							modifier = {
+								factor = 0
+								event_target:expd_pill_nickname_target = { culture = FROM }
+							}
+						}
+						75 = {}
+					}
+				}
+			}
+			
+			######################################################################
+			# Grant tech & gold in exchange for piety and settlement destruction #
+			######################################################################
+			
+			if = {
+				limit = { num_of_buildings <= 2 }
+				if = {
+					limit = { NOT = { holding_type = tribal } }
+					FROM = { wealth = 50 }
+					custom_tooltip = {
+						text = gain_tech_custom_tooltip
+						hidden_tooltip = {
+							FROM = {
+								random_list = {
+									10 = { military_techpoints = 5 }
+									10 = { economy_techpoints = 5 }
+									10 = { culture_techpoints = 5 }
+								}
+							}
+						}
+					}
+				}
+				else = {
+					FROM = { wealth = 25 }
+					if = {
+						limit = { is_nomadic = yes}
+						FROM = { population = 150 }
+					}
+				}
+			}
+			
+			else_if = {
+				limit = { num_of_buildings <= 4 }
+				FROM = { piety = -5 }
+				if = {
+					limit = { NOT = { holding_type = tribal } }
+					FROM = { wealth = 100 }
+					FROM = {
+						random_list = {
+							10 = { military_techpoints = 10 }
+							10 = { economy_techpoints = 10 }
+							10 = { culture_techpoints = 10 }
+						}
+					}
+				}
+				else = {
+					FROM = { wealth = 50 }
+					if = {
+						limit = { is_nomadic = yes}
+						FROM = { population = 300 }
+					}
+				}
+			}
+			
+			else_if = {
+				limit = { num_of_buildings <= 6 }
+				FROM = { piety = -10 }
+				if = {
+					limit = { NOT = { holding_type = tribal } }
+					FROM = { wealth = 150 }
+					FROM = {
+						military_techpoints = 5
+						economy_techpoints = 5
+						culture_techpoints = 5
+					}
+				}
+				else = {
+					FROM = { wealth = 75 }
+					if = {
+						limit = { is_nomadic = yes}
+						FROM = { population = 450 }
+					}
+				}
+			}
+			
+			else_if = {
+				limit = { num_of_buildings <= 8 }
+				FROM = { piety = -15 }
+				if = {
+					limit = { NOT = { holding_type = tribal } }
+					FROM = { wealth = 200 }
+					FROM = {
+						military_techpoints = 7
+						economy_techpoints = 7
+						culture_techpoints = 7
+					}
+				}
+				else = {
+					FROM = { wealth = 100 }
+					if = {
+						limit = { is_nomadic = yes}
+						FROM = { population = 600 }
+					}
+				}
+			}
+			
+			else_if = {
+				limit = { num_of_buildings <= 10 }
+				FROM = { piety = -20 }
+				if = {
+					limit = { NOT = { holding_type = tribal } }
+					FROM = { wealth = 250 }
+					FROM = {
+						military_techpoints = 8
+						economy_techpoints = 8
+						culture_techpoints = 8
+					}
+				}
+				else = {
+					FROM = { wealth = 100 }
+					if = {
+						limit = { is_nomadic = yes}
+						FROM = { population = 600 }
+					}
+				}
+			}
+			
+			else_if = {
+				limit = { num_of_buildings <= 12 }
+				FROM = { piety = -25 }
+				if = {
+					limit = { NOT = { holding_type = tribal } }
+					FROM = { wealth = 300 }
+					FROM = {
+						military_techpoints = 10
+						economy_techpoints = 10
+						culture_techpoints = 10
+					}
+				}
+				else = {
+					FROM = { wealth = 150 }
+					if = {
+						limit = { is_nomadic = yes}
+						FROM = { population = 750 }
+					}
+				}
+			}
+			
+			else_if = {
+				limit = { num_of_buildings <= 14 }
+				FROM = { piety = -30 }
+				if = {
+					limit = { NOT = { holding_type = tribal } }
+					FROM = { wealth = 350 }
+					FROM = {
+						military_techpoints = 12
+						economy_techpoints = 12
+						culture_techpoints = 12
+					}
+				}
+				else = {
+					FROM = { wealth = 175 }
+					if = {
+						limit = { is_nomadic = yes}
+						FROM = { population = 900 }
+					}
+				}
+			}
+			
+			else_if = {
+				limit = { num_of_buildings <= 16 }
+				FROM = { piety = -35 }
+				if = {
+					limit = { NOT = { holding_type = tribal } }
+					FROM = { wealth = 400 }
+					FROM = {
+						military_techpoints = 13
+						economy_techpoints = 13
+						culture_techpoints = 13
+					}
+				}
+				else = {
+					FROM = { wealth = 200 }
+					if = {
+						limit = { is_nomadic = yes}
+						FROM = { population = 1050 }
+					}
+				}
+			}
+			
+			else_if = {
+				limit = { num_of_buildings <= 18 }
+				FROM = { piety = -40 }
+				if = {
+					limit = { NOT = { holding_type = tribal } }
+					FROM = { wealth = 450 }
+					FROM = {
+						military_techpoints = 15
+						economy_techpoints = 15
+						culture_techpoints = 15
+					}
+				}
+				else = {
+					FROM = { wealth = 225 }
+					if = {
+						limit = { is_nomadic = yes}
+						FROM = { population = 1200 }
+					}
+				}
+			}
+			
+			else_if = {
+				limit = { num_of_buildings <= 20 }
+				FROM = { piety = -45 }
+				if = {
+					limit = { NOT = { holding_type = tribal } }
+					FROM = { wealth = 500 }
+					FROM = {
+						military_techpoints = 17
+						economy_techpoints = 17
+						culture_techpoints = 17
+					}
+				}
+				else = {
+					FROM = { wealth = 250 }
+					if = {
+						limit = { is_nomadic = yes}
+						FROM = { population = 1350 }
+					}
+				}
+			}
+			
+			else = {
+				FROM = { piety = -50 }
+				if = {
+					limit = { NOT = { holding_type = tribal } }
+					FROM = { wealth = 600 }
+					FROM = {
+						military_techpoints = 20
+						economy_techpoints = 20
+						culture_techpoints = 20
+					}
+				}
+				else = {
+					FROM = { wealth = 300 }
+					if = {
+						limit = { is_nomadic = yes}
+						FROM = { population = 1650 }
+					}
+				}
+			}
+			
+			#Add the relevant province modifiers
+			#NB: rampaging_nomads will be deleted by HL.4810 if all holdings in the province have been destroyed
+			hidden_tooltip = {
+				location = {
+					add_province_modifier = {
+						modifier = rampaging_nomads
+						years = 10
+					}
+				}
+				location = {
+					add_province_modifier = {
+						modifier = burnt_the_land
+						years = 10
+					}
+				}
+			}
+			
+			#Clean up province modifiers and destroy the settlement
+			hidden_tooltip = {
+				#Fix the event code so HL.4814 triggers properly and/or so that the Validator doesn't complain
+				location = {
+					province_event = { id = HL.4810 days = 1 }
+					save_event_target_as = target_location
+					FROM = { character_event = { id = HL.4814 days = 2 random = 2 } }
+				}
+			}
+			destroy_settlement = THIS
+			
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	expd_pill_tribal_pillage_settlement = {
+		#Allows tribal characters to pillage non-tribal holdings when there's only one in the province
+		#Also allows tribal characters to pillage tribal holdings of other cultures (if they are a human player)
+		
+		#Currently disabled for the AI by the pre-filter and the ai_will_do section. Could potentially be enabled, if we could be sure the AI would be sensible about it. (Eg: Not give it away to a vassal mid-pillage.)
+		
+		only_independent = yes
+		ai = no
+		
+		filter = owned
+		is_high_prio = yes
+		ai_target_filter = owned
+		ai_check_interval = 3
+		
+		from_potential = {
+			is_playable = yes
+			is_tribal = yes
+			has_dlc = "Horse Lords"
+		}
+		
+		potential = {
+			
+			#Pillaging nomadic holdings is not permitted (should be impossible, but you never know...)
+			NOT = { holding_type = nomad }
+			
+			
+			OR = {
+				#Pillaging a non-tribal holding is always permitted, as long as there are no other holdings in the county
+				#(If there are other holdings then the vanilla decision is available)
+				AND = {
+					NOT = { holding_type = tribal }
+					location = { num_of_settlements < 2 }
+				}
+				
+				#Pillaging tribal holdings is only permitted if you are the player and the province is of a different culture group
+				#(There are valid reasons to pillage owned tribal holdings, but the AI is not capable of making that kind of decision.)
+				AND = {
+					holding_type = tribal
+					NOT = { location = { culture_group = FROM } }
+					FROM = { ai = no }
+				}
+			}
+			
+			#Can only pillage holdings you own personally
+			owner = { character = FROM }
+		}
+		
+		allow = {
+			custom_tooltip = {
+				text = EXPD_PILL_TOOLTIP_PILLAGING_BLOCKED_BY_DECISION
+				NOT = { FROM = { has_character_flag = expd_pill_decisions_blocked } }
+			}
+			NOT = { has_holding_modifier = recently_burnt_the_land }
+			owner = { independent = yes }
+			has_siege = no
+			custom_tooltip = {
+				text = stop_pillaging_custom_tooltip
+				hidden_tooltip = {
+					NOT = { has_holding_modifier = stop_burning_land }
+				}
+			}
+		}
+		
+		effect = {
+			
+			#Nickname grant is slightly modified from vanilla so the Validator doesn't complain
+			hidden_tooltip = {
+				location = { save_event_target_as = expd_pill_nickname_target }
+				if = {
+					limit = {
+						owner = { 
+							has_nickname = no
+							is_adult = yes
+							NOT = { trait = incapable }
+						}
+					}
+					random_list = {
+						5 = {
+							owner = { give_nickname = nick_the_destroyer }
+						}
+						5 = {
+							owner = { give_nickname = nick_the_scourge_of_god }
+							modifier = {
+								factor = 0
+								event_target:expd_pill_nickname_target = { religion = FROM }
+							}
+						}
+						5 = {
+							owner = { give_nickname = nick_the_slayer_of_culture }
+							modifier = {
+								factor = 0
+								event_target:expd_pill_nickname_target = { culture = FROM }
+							}
+						}
+						5 = {
+							owner = { give_nickname = nick_the_terror_of_provincename }
+						}
+						5 = {
+							owner = { give_nickname = nick_the_culture_marauder }
+							modifier = {
+								factor = 0
+								event_target:expd_pill_nickname_target = { culture = FROM }
+							}
+						}
+						75 = {}
+					}
+				}
+			}
+			
+			if = {
+				limit = { NOT = { holding_type = tribal } }
+				FROM = {
+					wealth = 50
+				}
+				custom_tooltip = {
+					text = gain_tech_custom_tooltip
+					hidden_tooltip = {
+						FROM = {
+							random_list = {
+								10 = { military_techpoints = 5 }
+								10 = { economy_techpoints = 5 }
+								10 = { culture_techpoints = 5 }
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = { holding_type = tribal }
+				FROM = { wealth = 25 }
+				if = {
+					limit = { is_nomadic = yes}
+					FROM = { population = 150 }
+				}
+			}
+			
+			custom_tooltip = {
+				text = "PILLAGE_DESTROY_BUILDINGS"
+				hidden_tooltip = {
+					destroy_random_building = THIS
+					destroy_random_building = THIS
+					add_holding_modifier = {
+						modifier = recently_burnt_the_land
+						months = 7
+					}
+				}
+			}
+			
+			hidden_tooltip = {
+			
+				location = {
+					add_province_modifier = {
+						modifier = rampaging_nomads
+						years = 10
+					}
+				}
+
+				location = {
+					add_province_modifier = {
+						modifier = burnt_the_land
+						years = 10
+					}
+				}
+			
+				if = {
+					limit = {
+						OR = {
+							FROM = { 
+								NOT = { has_character_modifier = pillage_cooldown } 
+							}
+							FROM = {
+								NOT = {
+									any_realm_province = {
+										any_province_holding = {
+											owner = { character = FROM }
+											has_holding_modifier = recently_burnt_the_land
+											NOT = { has_holding_modifier = stop_burning_land }
+										}
+									}
+								}
+							}
+						}
+					}
+					FROM = { character_event = { id = HL.4800 days = 180 } }
+					FROM = {
+						add_character_modifier = {
+							modifier = pillage_cooldown
+							hidden = yes
+							months = 6
+						}
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					NOT = { has_any_building = yes }
+					owner = {
+						character = FROM
+					}
+				}
+				hidden_tooltip = {
+					#Fix the event code so HL.4814 triggers properly and/or so that the Validator doesn't complain
+					location = {
+						province_event = { id = HL.4810 days = 1 }
+						save_event_target_as = target_location
+						FROM = { character_event = { id = HL.4814 days = 2 random = 2 } }
+					}
+				}
+				destroy_settlement = THIS
+			}
+			
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

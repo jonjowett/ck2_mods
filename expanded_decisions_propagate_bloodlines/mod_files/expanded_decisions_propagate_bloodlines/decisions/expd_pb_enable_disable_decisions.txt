@@ -1,0 +1,44 @@
+targetted_decisions = {
+	
+	expd_pb_enable_propagate_bloodlines = {
+		only_playable = yes
+		filter = self
+		ai = no
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			has_character_flag = expd_pb_bloodline_propagation_blocked
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				clr_character_flag = expd_pb_bloodline_propagation_blocked
+			}
+		}
+	}
+	
+	expd_pb_disable_propagate_bloodlines = {
+		only_playable = yes
+		filter = self
+		ai = no
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			NOT = { has_character_flag = expd_pb_bloodline_propagation_blocked }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				set_character_flag = expd_pb_bloodline_propagation_blocked
+				clr_global_flag = expd_pb_debug_mode
+			}
+		}
+	}
+	
+}

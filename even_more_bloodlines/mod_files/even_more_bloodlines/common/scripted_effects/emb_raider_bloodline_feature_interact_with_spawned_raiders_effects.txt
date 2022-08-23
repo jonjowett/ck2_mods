@@ -1,0 +1,220 @@
+emb_raider_disband_this_characters_nonraiding_spawned_raiders = {
+	if = {
+		limit = {
+			has_earmarked_regiments = emb_spawned_raiders_1
+			has_earmarked_regiments_not_raiding = emb_spawned_raiders_1
+		}
+		disband_event_forces = emb_spawned_raiders_1
+	}
+	if = {
+		limit = {
+			has_earmarked_regiments = emb_spawned_raiders_2
+			has_earmarked_regiments_not_raiding = emb_spawned_raiders_2
+		}
+		disband_event_forces = emb_spawned_raiders_2
+	}
+	if = {
+		limit = {
+			has_earmarked_regiments = emb_spawned_raiders_3
+			has_earmarked_regiments_not_raiding = emb_spawned_raiders_3
+		}
+		disband_event_forces = emb_spawned_raiders_3
+	}
+	if = {
+		limit = {
+			has_earmarked_regiments = emb_spawned_raiders_4
+			has_earmarked_regiments_not_raiding = emb_spawned_raiders_4
+		}
+		disband_event_forces = emb_spawned_raiders_4
+	}
+	if = {
+		limit = {
+			has_earmarked_regiments = emb_spawned_raiders_5
+			has_earmarked_regiments_not_raiding = emb_spawned_raiders_5
+		}
+		disband_event_forces = emb_spawned_raiders_5
+	}
+}
+
+emb_raider_cleanup_this_characters_spawned_raider_persuasion_modifiers = {
+	if = {
+		limit = { has_character_modifier = emb_persuaded_spawned_raiders_viking }
+		remove_character_modifier = emb_persuaded_spawned_raiders_viking
+	}
+	if = {
+		limit = { has_character_modifier = emb_persuaded_spawned_raiders_ravager }
+		remove_character_modifier = emb_persuaded_spawned_raiders_ravager
+	}
+	if = {
+		limit = { has_character_modifier = emb_persuaded_spawned_raiders_seaking }
+		remove_character_modifier = emb_persuaded_spawned_raiders_seaking
+	}
+	if = {
+		limit = { has_character_modifier = emb_persuaded_spawned_raiders_martial }
+		remove_character_modifier = emb_persuaded_spawned_raiders_martial
+	}
+	if = {
+		limit = { has_character_modifier = emb_persuaded_spawned_raiders_diplomacy }
+		remove_character_modifier = emb_persuaded_spawned_raiders_diplomacy
+	}
+	if = {
+		limit = { has_character_modifier = emb_persuaded_spawned_raiders_intrigue }
+		remove_character_modifier = emb_persuaded_spawned_raiders_intrigue
+	}
+	if = {
+		limit = { has_character_modifier = emb_persuaded_spawned_raiders_bribe }
+		remove_character_modifier = emb_persuaded_spawned_raiders_bribe
+	}
+	if = {
+		limit = { has_character_modifier = emb_persuaded_spawned_raiders_second_bribe }
+		remove_character_modifier = emb_persuaded_spawned_raiders_second_bribe
+	}
+	if = {
+		limit = { has_character_modifier = emb_persuaded_spawned_raiders_third_bribe }
+		remove_character_modifier = emb_persuaded_spawned_raiders_third_bribe
+	}
+}
+
+emb_raider_deduct_prestige_and_wealth_for_dismissing_spawned_raiders = {
+	
+	if = {
+		limit = { tier = EMPEROR }
+		prestige = -200
+	}
+	else_if = {
+		limit = { tier = KING }
+		prestige = -100
+	}
+	else_if = {
+		limit = { tier = DUKE }
+		prestige = -50
+	}
+	else = {
+		prestige = -25
+	}
+	
+	if = {
+		limit = {
+			tier = EMPEROR
+			is_tribal = no
+			ai = no
+		}
+		wealth = -100
+	}
+	else_if = {
+		limit = {
+			tier = EMPEROR
+			is_tribal = yes
+			ai = no
+		}
+		wealth = -50
+	}
+	else_if = {
+		limit = {
+			tier = KING
+			is_tribal = no
+			ai = no
+		}
+		wealth = -50
+	}
+	else_if = {
+		limit = {
+			tier = KING
+			is_tribal = yes
+			ai = no
+		}
+		wealth = -25
+	}
+	else_if = {
+		limit = {
+			tier = DUKE
+			is_tribal = no
+			ai = no
+		}
+		wealth = -25
+	}
+	else_if = {
+		limit = {
+			tier = DUKE
+			is_tribal = yes
+			ai = no
+		}
+		wealth = -10
+	}
+	else = {
+		wealth = -10
+	}
+	
+}
+
+emb_raider_deduct_prestige_and_wealth_to_bribe_spawned_raiders = {
+	
+	if = {
+		limit = { tier = EMPEROR }
+		prestige = -100
+	}
+	else_if = {
+		limit = { tier = KING }
+		prestige = -50
+	}
+	else_if = {
+		limit = { tier = DUKE }
+		prestige = -25
+	}
+	else = {
+		prestige = -10
+	}
+	
+	if = {
+		limit = {
+			tier = EMPEROR
+			is_tribal = no
+			ai = no
+		}
+		wealth = -50
+	}
+	else_if = {
+		limit = {
+			tier = EMPEROR
+			is_tribal = yes
+			ai = no
+		}
+		wealth = -25
+	}
+	else_if = {
+		limit = {
+			tier = KING
+			is_tribal = no
+			ai = no
+		}
+		wealth = -25
+	}
+	else_if = {
+		limit = {
+			tier = KING
+			is_tribal = yes
+			ai = no
+		}
+		wealth = -10
+	}
+	else_if = {
+		limit = {
+			tier = DUKE
+			is_tribal = no
+			ai = no
+		}
+		wealth = -10
+	}
+	else_if = {
+		limit = {
+			tier = DUKE
+			is_tribal = yes
+			ai = no
+		}
+		wealth = -5
+	}
+	else = {
+		wealth = -5
+	}
+	
+}

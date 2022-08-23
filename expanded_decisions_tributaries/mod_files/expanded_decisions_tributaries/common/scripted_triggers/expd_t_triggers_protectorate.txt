@@ -1,0 +1,111 @@
+expd_t_root_meets_basic_requirements_to_become_tributary_of_from_by_decision = {
+	
+	ROOT = {
+		
+		# Prettification
+		show_scope_change = no
+		
+		# Must be independent non-tributary
+		independent  = yes
+		is_tributary = no
+		
+		# ROOT must not be at war, or must be primary defender in a war (in the latter case, they can call you instantly after becoming a tributary)
+		OR = {
+			war = no
+			is_primary_war_defender = yes
+		}
+		
+		# The target must vaguely like the decision taker
+		opinion = {
+			who = FROM
+			value >= 0
+		}
+	
+	}
+	
+}
+
+expd_t_from_can_instantly_force_root_to_be_protectorate = {
+	
+	#Basic requirements must be met
+	expd_t_root_meets_basic_requirements_to_become_tributary_of_from_by_decision = yes
+	
+	# FROM must have somehow obtained ROOT's primary title for them
+	ROOT = {
+		
+		# Prettification
+		show_scope_change = no
+		
+		OR = {
+			
+			# Debug mode!
+			conditional_tooltip = {
+				trigger = {
+					FROM = { is_ai = no }
+					has_global_flag = expd_t_debug_mode
+				}
+				custom_tooltip = {
+					text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
+					always = yes
+				}
+			}
+			
+			# Pressed their claim
+			has_opinion_modifier = {
+				who = FROM
+				name = pressed_my_claim
+			}
+			
+			# Crusade beneficiary
+			has_opinion_modifier = {
+				who = FROM
+				name = opinion_beneficiary
+			}
+			has_opinion_modifier = {
+				who = FROM
+				name = opinion_granted_crusader_kingdom
+			}
+			
+			# Granted the target their primary title (which either gave them de facto independence, or the decision taker granted independence manually)
+			AND = {
+				real_tier = DUKE
+				OR = {
+					has_opinion_modifier = {
+						who = FROM
+						name = opinion_granted_duchy
+					}
+					has_opinion_modifier = {
+						who = FROM
+						name = opinion_granted_duchy_vice_royalty
+					}
+				}
+			}
+			AND = {
+				real_tier = KING
+				OR = {
+					has_opinion_modifier = {
+						who = FROM
+						name = opinion_granted_kingdom
+					}
+					has_opinion_modifier = {
+						who = FROM
+						name = opinion_granted_kingdom_vice_royalty
+					}
+				}
+			}
+			AND = {
+				real_tier = EMPEROR
+				OR = {
+					has_opinion_modifier = {
+						who = FROM
+						name = opinion_granted_empire
+					}
+					has_opinion_modifier = {
+						who = FROM
+						name = opinion_granted_empire_vice_royalty
+					}
+				}
+			}
+		}
+	}
+}

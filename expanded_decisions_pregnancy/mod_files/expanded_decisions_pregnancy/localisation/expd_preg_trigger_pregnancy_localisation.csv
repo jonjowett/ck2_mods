@@ -1,0 +1,26 @@
+# Main
+expd_preg_enable_decisions;§PED-EP: Enable Encourage Pregnancy§!;;;;;;;;;x
+expd_preg_enable_decisions_desc;The "§MED-EP: Encourage Pregnancy§!" decision will be enabled on all targets;;;;;;;;;x
+expd_preg_disable_decisions;§PED-EP: Disable Encourage Pregnancy§!;;;;;;;;;x
+expd_preg_disable_decisions_desc;The "§MED-EP: Encourage Pregnancy§!" decision will be disabled (until re-enabled by taking the "§PED-EP: Enable Encourage Pregnancy§!" decision);;;;;;;;;x
+expd_preg_trigger_pregnancy_in_target;§MED-EP: Encourage Pregnancy§!;;;;;;;;;x
+expd_preg_trigger_pregnancy_in_target_desc;Encourage §Y[Root.GetBestName]§! to become pregnant;;;;;;;;;x
+EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY;§Y[Root.GetBestName]§! will attempt to become pregnant by §Y[FromFrom.GetBestName]§! at a random time in the future (depending on their current fertility).;;;;;;;;;x
+EXPD_PREG_TOOLTIP_HAS_NOT_ALREADY_GOT_TRIGGERED_PREGNANCY;§Y[Root.GetBestName]§! has NOT already been encouraged to become pregnant;;;;;;;;;x
+EXPD_PREG_TOOLTIP_HAS_NOT_BLOCKED_TRIGGERED_PREGNANCY_VIA_DECISION;"§MED-EP: Encourage Pregnancy§!" has NOT been temporarily blocked for §Y[From.GetTitledFirstName]§! (by self-targeted decision);;;;;;;;;x
+# Debug mode
+expd_preg_enable_debug_mode;§RED-EP: Enable Debug Mode§!;;;;;;;;;x
+expd_preg_disable_debug_mode;§RED-EP: Disable Debug Mode§!;;;;;;;;;x
+expd_preg_enable_debug_mode_desc;Enable debug mode for the "§MED-EP: Encourage Pregnancy§!" targeted decision.\n-\nNotable features:\n-\nYou will receive events when the event that MIGHT trigger the pregnancy eventually occurs\n-\nexpd_trigger_pregnancy_score will not be cleared, and will be visible if you enable CK2's debug_mode.;;;;;;;;;x
+expd_preg_disable_debug_mode_desc;Disable debug mode for the "§MED-EP: Encourage Pregnancy§!" targeted decision.;;;;;;;;x
+expd_preg_debug_mode_enable_instant_pregnancy;§RED-EP: Enable Instant Pregnancy§!;;;;;;;;;x
+expd_preg_debug_mode_disable_instant_pregnancy;§RED-EP: Disable Instant Pregnancy§!;;;;;;;;;x
+expd_preg_debug_mode_enable_instant_pregnancy_desc;§RDEBUG MODE:§! The "§MED-EP: Encourage Pregnancy§!" targeted decision will now attempt to trigger pregnancy instantly.;;;;;;;;;x
+expd_preg_debug_mode_disable_instant_pregnancy_desc;§RDEBUG MODE:§! The "§MED-EP: Encourage Pregnancy§!" targeted decision will now attempt trigger pregnancy after the usual delay.;;;;;;;;x
+expd_preg_debug_mode_clear_triggered_pregnancy;§RED-EP: Cancel Encouragement§!;;;;;;;;;x
+expd_preg_debug_mode_clear_triggered_pregnancy_desc;§RDEBUG MODE:§! The encouraged pregnancy between §Y[Root.GetBestName]§! and §Y[Root.expd_preg_triggered_pregnancy_father.GetBestName]§! that was encouraged by §Y[Root.expd_preg_triggered_pregnancy_triggerer.GetBestName]§! will be cancelled.;;;;;;;;x
+EVTDESC_EXPDPregnancy_3001;I have become pregnant with the child of [From.expd_preg_triggered_pregnancy_father.GetBestName], thanks to your encouragement.;;;;;;;;;x
+EVTDESC_EXPDPregnancy_3002;Despite your encouragement, I was not able to become pregnant with [From.expd_preg_triggered_pregnancy_father.GetBestName]'s child.;;;;;;;;;x
+EVTDESC_EXPDPregnancy_3003;Thank you for encouraging me to become pregnant with [From.expd_preg_triggered_pregnancy_father.GetBestName]'s child. However, as it turns out, I did not need that encouragement - I have become pregnant on my own.;;;;;;;;;x
+EVTOPT_ExptPregnancy_OK;OK;;;;;;;;;x
+EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY;§RDEBUG MODE:§! §Y[Root.GetBestName]§! will attempt to become pregnant by §Y[FromFrom.GetBestName]§! IMMEDIATELY (via the custom event);;;;;;;;;x

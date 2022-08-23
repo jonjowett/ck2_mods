@@ -1,0 +1,15 @@
+# Enable/disable modded decisions
+expd_pb_enable_propagate_bloodlines;§PED-PB: Enable Propagate Bloodlines§!;;;;;;;;;x
+expd_pb_enable_propagate_bloodlines_desc;All "§MED-PB: Propagate Bloodlines§!" decisions will be enabled;;;;;;;;;x
+expd_pb_disable_propagate_bloodlines;§PED-PB: Disable Propagate Bloodlines§!;;;;;;;;;x
+expd_pb_disable_propagate_bloodlines_desc;All "§MED-PB: Propagate Bloodlines§!" decisions will be disabled (until re-enabled by taking the "§PED-PB: Enable Propagate Bloodlines§!" decision);;;;;;;;;x
+EXPD_PB_TOOLTIP_BLOODLINE_PROPAGATION_NOT_BLOCKED_ON_FROM;"§YPropagate Bloodlines§!" decisions have NOT been temporarily blocked for [From.GetTitledFirstName] (by self-targeted decision);;;;;;;;;x
+# Modded decisions
+expd_pb_propagate_bloodlines;§MED-PB: Propagate Bloodlines§!;;;;;;;;;x
+expd_pb_propagate_bloodlines_desc;Propagate all bloodlines owned by §Y[Root.GetBestName]§!, fixing issues like: matrilineal marriages where one party has died, posthumous births, etc.\n§RWARNING: Cannot be undone!§!\n§RWARNING: May be CPU-intensive!§!;;;;;;;;;x
+expd_pb_propagate_all_bloodlines;§MED-PB: Propagate All Bloodlines§!;;;;;;;;;x
+expd_pb_propagate_all_bloodlines_desc;Propagate all bloodlines §Yin the world§!, fixing issues like: matrilineal marriages where one party has died, posthumous births, etc.\n§RWARNING: Cannot be undone!§!\n§RWARNING: May be CPU-intensive!§!;;;;;;;;;x
+EXPD_PB_TOOLTIP_MULTIPLE_BLOODLINE_FOUNDER_INHERITANCE_CONSISTENCY;If §Y[Root.GetTitledFirstName]§! owns any bloodlines whose §Yfounder§! founded §Ymultiple§! bloodlines with §Yidentical inheritance conditions§!, then those bloodlines will be forced to have §Yidentical membership§!.;;;;;;;;;x
+EXPD_PB_TOOLTIP_BLANK_LINE;---;;;;;;;;;x
+EXPD_PB_TOOLTIP_PROPAGATE_BLOODLINES_FROM_ALL_MEMBERS;For §Yall bloodlines owned by [Root.GetTitledFirstName]§!, membership will be propagated from every current member for 10 generations, using a best-guess of the inheritance rules.;;;;;;;;;x
+EXPD_PB_TOOLTIP_PROPAGATE_ALL_BLOODLINES;For §Yall bloodlines in the world§!, membership will be propagated from every current member (living or dead) for 10 generations, using a best-guess of the inheritance rules.;;;;;;;;;x

@@ -1,0 +1,39 @@
+targetted_decisions = {
+	
+	expd_t_enable_debug_mode = {
+		only_playable = yes
+		filter = self
+		ai = no
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			NOT = { has_global_flag = expd_t_debug_mode }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { set_global_flag = expd_t_debug_mode }
+		}
+	}
+	
+	expd_t_disable_debug_mode = {
+		only_playable = yes
+		filter = self
+		ai = no
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			has_global_flag = expd_t_debug_mode
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { clr_global_flag = expd_t_debug_mode }
+		}
+	}
+	
+}

@@ -1,0 +1,42 @@
+targeted_decisions = {
+	expd_bl_block_legitimization = {
+		ai = no
+		only_playable = yes
+		filter = self
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			NOT = { has_character_flag = expd_bl_legitimization_blocked }
+		}
+		allow = {
+			any_child = { trait = bastard }
+		}
+		effect = {
+			custom_tooltip = {
+				text = EXPD_BL_TOOLTIP_LEGITIMIZATION_BLOCKED
+				set_character_flag = expd_bl_legitimization_blocked
+			}
+		}
+	}
+	expd_bl_enable_legitimization = {
+		ai = no
+		only_playable = yes
+		filter = self
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			has_character_flag = expd_bl_legitimization_blocked
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = EXPD_BL_TOOLTIP_LEGITIMIZATION_ALLOWED
+				clr_character_flag = expd_bl_legitimization_blocked
+			}
+		}
+	}
+}

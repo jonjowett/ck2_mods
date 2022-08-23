@@ -1,0 +1,103 @@
+emb_raider_this_character_can_spawn_raiders = {
+	
+	# Can only spawn raiders if you have land. (Otherwise, for example, capital_scope has no meaning.)
+	is_landed = yes
+	
+	# Can only spawn raiders if you're normally allowed to loot. It shouldn't be possible to get here if you can't... but included the condition just in case
+	is_allowed_to_loot = yes
+	
+	# Must have a relevant bloodline, and it must be active
+	any_owned_bloodline = {
+		has_bloodline_flag = emb_effect_spawn_raiders
+		bloodline_is_active_for = PREV
+	}
+	
+	# Can't trigger more than once per 90 days
+	had_character_flag = {
+		flag = emb_raider_spawn_occurred
+		days >= 90
+	}
+	
+	# Can't trigger if a spawn was recently rejected
+	OR = {
+		NOT = { has_character_flag = emb_raider_spawn_rejected }
+		had_character_flag = {
+			flag = emb_raider_spawn_rejected
+			years > 3
+		}
+	}
+	
+	# Can't have more than 5 active at once
+	NAND = {
+		has_earmarked_regiments = emb_spawned_raiders_1
+		has_earmarked_regiments = emb_spawned_raiders_2
+		has_earmarked_regiments = emb_spawned_raiders_3
+		has_earmarked_regiments = emb_spawned_raiders_4
+		has_earmarked_regiments = emb_spawned_raiders_5
+	}
+	
+	# Can't spawn raiders if you've got any existing spawned raiders and any outstanding promises
+	NAND = {
+		emb_raider_this_character_has_spawned_raiders = yes
+		emb_raider_this_character_has_any_spawned_raider_persuasion_modifier = yes
+	}
+	
+}
+
+emb_raider_this_character_can_spawn_more_raiders_than_normal = {
+	# Character has at least one active bloodlines with the "more raiders" feature
+	any_owned_bloodline = {
+		has_bloodline_flag = more_raiders_bloodline
+		bloodline_is_active_for = PREV
+	}
+}
+
+emb_raider_this_character_can_spawn_many_more_raiders_than_normal = {
+	# Character has at least two active bloodlines with the "more raiders" feature
+	any_owned_bloodline = {
+		has_bloodline_flag = more_raiders_bloodline
+		bloodline_is_active_for = PREV
+		PREV = {
+			any_owned_bloodline = {
+				has_bloodline_flag = more_raiders_bloodline
+				bloodline_is_active_for = PREV
+				NOT = { bloodline = PREVPREV }
+			}
+		}
+	}
+}
+
+emb_raider_this_character_has_spawned_raiders = {
+	OR = {
+		has_earmarked_regiments = emb_spawned_raiders_1
+		has_earmarked_regiments = emb_spawned_raiders_2
+		has_earmarked_regiments = emb_spawned_raiders_3
+		has_earmarked_regiments = emb_spawned_raiders_4
+		has_earmarked_regiments = emb_spawned_raiders_5
+	}
+}
+
+emb_raider_this_character_has_spawned_raiders_not_raiding = {
+	OR = {
+		AND = {
+			has_earmarked_regiments = emb_spawned_raiders_1
+			has_earmarked_regiments_not_raiding = emb_spawned_raiders_1
+		}
+		AND = {
+			has_earmarked_regiments = emb_spawned_raiders_2
+			has_earmarked_regiments_not_raiding = emb_spawned_raiders_2
+		}
+		AND = {
+			has_earmarked_regiments = emb_spawned_raiders_3
+			has_earmarked_regiments_not_raiding = emb_spawned_raiders_3
+		}
+		AND = {
+			has_earmarked_regiments = emb_spawned_raiders_4
+			has_earmarked_regiments_not_raiding = emb_spawned_raiders_4
+		}
+		AND = {
+			has_earmarked_regiments = emb_spawned_raiders_5
+			has_earmarked_regiments_not_raiding = emb_spawned_raiders_5
+		}
+	}
+}

@@ -1,0 +1,158 @@
+#############
+# Utilities #
+#############
+
+expd_kf_root_is_not_dejure_liege_or_above_of_this_title = {
+	custom_tooltip = {
+		text = expd_kf_root_is_not_dejure_liege_or_above_of_this_title_tt
+		NOT = {
+			any_de_jure_liege_title = {
+				holder_scope = { character = ROOT }
+			}
+		}
+	}
+}
+
+expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duchy = {
+	
+	# ROOT (or one of his vassals) does not have another duchy title in the same kingdom...
+	custom_tooltip = {
+		text = expd_kf_root_does_not_own_another_duchy_title_in_the_same_de_jure_kingdom_as_this_duchy_tt
+		NOT = {
+			any_de_jure_liege_title = {
+				tier = KING
+				ROOT = {
+					any_realm_title = {
+						tier = DUKE
+						de_jure_liege = PREVPREV
+						NOT = { title = PREVPREVPREV }
+					}
+				}
+			}
+		}
+	}
+	
+	# ...And ROOT does not completely control another duchy in the same kingdom
+	custom_tooltip = {
+		text = expd_kf_root_does_not_completely_control_another_duchy_in_the_same_de_jure_kingdom_as_this_duchy_tt
+		NOT = {
+			any_de_jure_liege_title = {
+				tier = KING
+				any_de_jure_vassal_title = {
+					tier = DUKE
+					NOT = { title = PREVPREV }
+					is_titular = no # Just in case titular duchies that are de jure part of a kingdom (eg. Amalfi) return "true" for "completely_controls"
+					ROOT = { completely_controls = PREV }
+				}
+			}
+		}
+	}
+}
+
+#########################################
+# Kingdom formation from a single duchy #
+#########################################
+
+expd_kf_root_can_see_decision_to_create_this_kingdom_from_prev_single_duchy = {
+	# Expected to be called in this format:
+	#		d_cyprus = {
+	#			k_cyprus = {
+	#				expd_kf_root_can_see_decision_to_create_this_kingdom_from_prev_single_duchy = yes
+	#			}
+	#		}
+	
+	# ROOT must own or control a province in the duchy
+	PREV = { # The source duchy
+		tier = DUKE # Just to make it VERY clear that this is referring to a duchy
+		any_de_jure_vassal_title = { # Any county in the duchy
+			tier = COUNT
+			holder_scope = {
+				OR = {
+					character = ROOT
+					is_vassal_or_below_of = ROOT
+				}
+			}
+		}
+	}
+	
+	# ROOT must not be de jure liege of the source duchy
+	# ROOT must not own or control any other duchies in the same de jure kingdom
+	PREV = { # The source duchy
+		tier = DUKE # Just to make it VERY clear that this is referring to a duchy
+		expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
+		expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duchy = yes
+	}
+	
+	# The new kingdom must be titular and have no holder
+	has_holder = no
+	is_titular = yes
+	
+	# Copy various alternate start settings which are included in similar vanilla decisions
+	NOR = {
+		has_alternate_start_setting = {
+			setting = dejure
+			option = random
+		}
+		has_alternate_start_setting = {
+			setting = title_names
+			option = random
+		}
+		has_alternate_start_setting = {
+			setting = title_names
+			option = random_including_duchies
+		}
+	}
+	
+}
+
+expd_kf_root_can_take_decision_to_create_this_kingdom_from_prev_single_duchy = {
+	# Expected to be called in this format:
+	#		d_cyprus = {
+	#			show_scope_change = no
+	#			k_cyprus = {
+	#				show_scope_change = no
+	#				expd_kf_root_can_take_decision_to_create_this_kingdom_from_prev_single_duchy = yes
+	#			}
+	#		}
+	# (The "show_scope_change = no" bits are required, otherwise the tooltips will probably be very confusing.)
+	
+	ROOT = {
+		show_scope_change = no
+		
+		# Standard vanilla conditions
+		is_adult = yes
+		independent = yes
+		war = no
+		NOT = { trait = incapable }
+		
+		# Must completely control the duchy
+		completely_controls = PREVPREV
+		
+		PREVPREV = { # The source duchy
+			
+			tier = DUKE
+			
+			# Duplicate these conditions from the "potential" block, so the player knows not to break them
+			expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
+			expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duchy = yes
+			
+			# Must personally hold the duchy title, or have a vassal hold it
+			has_holder = yes
+			holder_scope = {
+				OR = {
+					character = ROOT
+					is_vassal_or_below_of = ROOT
+				}
+			}
+			
+		}
+		
+		# Prestige & wealth
+		conditional_tooltip = {
+			trigger = { ai = no }
+			prestige = 1000
+		}
+		wealth = 100
+	}
+	
+}

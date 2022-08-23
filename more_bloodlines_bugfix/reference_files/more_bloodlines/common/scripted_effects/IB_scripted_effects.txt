@@ -1,0 +1,1094 @@
+IB_popely_bloodline_effect = {
+	if = {
+		limit = {
+			check_variable = { which = global_IB_popely_bloodline_var value = 5 }
+			NOT = { has_global_flag = IB_popely_bloodline }
+			}
+		set_global_flag = IB_popely_bloodline
+		any_player = { character_event = { id = IB.101 } }
+	}
+}
+
+IB_popely_bloodline_effect2 = {
+	if = {
+		limit = {
+			check_variable = { which = global_IB_popely_bloodline_var value = 10 }
+			NOT = { has_global_flag = IB_popely2_bloodline }
+			}
+		set_global_flag = IB_popely2_bloodline
+		any_player = { character_event = { id = IB.102 } }
+	}
+}
+
+IB_popely_bloodline_effect3 = {
+	if = {
+		limit = {
+			check_variable = { which = global_IB_popely_bloodline_var value = 15 }
+			NOT = { has_global_flag = IB_popely3_bloodline }
+			}
+		set_global_flag = IB_popely3_bloodline	
+		any_player = { character_event = { id = IB.103 } }
+	}
+}
+
+IB_popely_bloodline_effect4 = {
+	if = {
+		limit = {
+			check_variable = { which = global_IB_popely_bloodline_var value = 20 }
+			NOT = { has_global_flag = IB_popely4_bloodline }
+			}
+		set_global_flag = IB_popely4_bloodline
+		any_player = { character_event = { id = IB.104 } }
+	}
+}
+
+IB_popely_bloodline_effect5 = {
+	if = {
+		limit = {
+			check_variable = { which = global_IB_popely_bloodline_var value = 25 }
+			NOT = { has_global_flag = IB_popely5_bloodline }
+			}
+		set_global_flag = IB_popely5_bloodline
+		any_player = { character_event = { id = IB.105 } }
+	}
+}
+
+popely_bloodline_zealous_effect = {
+	random_list = {
+		15 = {
+			modifier = {
+				factor = 2
+				learning = 10
+			}
+			modifier = {
+				factor = -8
+				learning = 15
+			}
+			modifier = {
+				factor = 0
+				trait = zealous
+			}
+		add_trait = zealous
+		}
+		1 = {
+			modifier = {
+				factor = 30
+				trait = zealous
+			}
+		change_learning = 2
+		}
+		84 = {
+			prestige = 1
+		}
+	}
+}
+
+IB_wonderly_bloodline_effect = {
+	if = {
+		limit = {
+			AND = {
+				check_variable = { which = IB_wonderly_bloodline_1 value = 4 } 
+				NOT = {
+					ROOT = { has_character_flag = IB_holy_wonder }
+				}
+			}
+		}
+		ROOT = { character_event = { id = IB.21 } }
+	}
+}
+
+
+IB_wonderly_bloodline_effect_temple = {
+	if = {
+		limit = {
+			AND = {
+				check_variable = { which = IB_wonderly_bloodline_1 value = 4 } 
+				ROOT = { has_character_flag = IB_holy_wonder }
+				}
+			}
+		ROOT = { character_event = { id = IB.22 } }
+		}
+}
+
+IB_family_bloodline_effect = {
+	if = {
+		limit = {
+			check_variable = { which = global_IB_family_bloodline_var value = 20 }
+			NOT = { has_global_flag = IB_family_bloodline }
+			}
+		set_global_flag = IB_family_bloodline	
+		random_player = { character_event = { id = IB.51 } }
+		}
+}
+
+
+family_bloodline_harelip_effect = {
+	random_list = {
+		30 = {
+			modifier = {
+				factor = 2
+				OR = {
+					mother_even_if_dead = { is_ancestor_of = real_father_even_if_dead }
+					mother_even_if_dead = { is_descendant_of = real_father_even_if_dead }
+					mother_even_if_dead = { sibling = real_father_even_if_dead }
+					mother_even_if_dead = { is_cousin_of = real_father_even_if_dead }
+					mother_even_if_dead = { is_aunt_uncle_of  = real_father_even_if_dead }
+					mother_even_if_dead = { is_nibling_of = real_father_even_if_dead }			
+				}				
+			}
+			modifier = {
+				factor = 0
+				trait = harelip
+			}
+		add_trait = harelip
+		}
+		70 = {
+			prestige = -1
+		}
+	}
+}
+
+IB_china_bloodline_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_global_flag = IB_china_bloodline 
+			}
+		}
+		set_global_flag = IB_china_bloodline
+		any_player = { character_event = { id = IB.61} }
+	}
+}
+
+
+IB_tyrantly_bloodline_effect_temple = {
+	if = {
+		limit = {
+				check_variable = { which = IB_tyrant value = 30 } 
+			}
+		ROOT = { character_event = { id = IB.71 } }
+		}
+}
+
+
+hunter_bloodline_dog_effect = {
+	random_list = {
+		10 = {
+			modifier = {
+				factor = 1.4
+				martial = 10
+			}
+			modifier = {
+				factor = 1.4
+				martial = 15
+			}
+			modifier = {
+				factor = 1.3
+				martial = 20
+			}
+			modifier = {
+				factor = 4
+				trait = hunter
+			}
+			add_character_modifier = {
+				modifier = pet_hunting_dog
+				duration = -1
+			}
+			set_character_flag = had_hunting_dog
+		}
+		90 = {
+			prestige = 1
+		}
+	}
+}
+
+prolific_bloodline_effect = {
+	if = {
+		limit = {
+			OR = {
+				mother_even_if_dead = { has_character_modifier = adulteress }
+				mother_even_if_dead = { has_character_modifier = incestuous_adulteress }
+				}
+			}
+		mother_even_if_dead = { set_character_flag = adulterer_IB }
+		}
+		
+	if = {
+		limit = {
+			mother = { num_of_children = 20 }
+			mother= {set_character_flag = IB_motherprof }
+			}
+		mother = { character_event = { id = IB.91 } }
+	}
+		
+	if = {
+		limit = {
+			NOT = { mother = { has_character_flag = IB_motherprof }  }
+			mother_even_if_dead = { num_of_children = 20 }
+			}
+		mother_even_if_dead = { character_event = { id = IB.91 } }
+	}
+	
+	if = {
+		limit = {
+			father_even_if_dead = { num_of_children = 30 }
+			}
+		father_even_if_dead = { character_event = { id = IB.92 } }
+	}
+}
+
+godslayer_bloodline_lunatic_effect = {
+	random_list = {
+		3 = {
+			modifier = {
+				factor = 0
+				trait = lunatic
+			}
+		add_trait = lunatic
+		}
+		1 = {
+			modifier = {
+				factor = 30
+				trait = lunatic
+			}
+		change_martial = 2
+		}
+		96 = {
+			prestige = 1
+		}
+	}
+}
+
+arthur_bloodline_effect = {
+	if = {
+		limit = {
+			ROOT = { has_character_flag = arthur_created_britannia }
+			ROOT = { has_character_flag = arthur_defended_britannia }
+		}
+		set_global_flag = IB_arthur_bloodline
+		ROOT = { character_event = { id = IB.122} }
+	}
+}
+
+blot_bloodline_effect = {
+	if = {
+		limit = {
+			ROOT = { has_character_flag = sacrificed_pope } 
+			ROOT = { has_character_flag = sacrificed_caliph }
+			ROOT = { has_character_flag = sacrificed_patriarch }
+			}
+			
+		ROOT = { character_event = { id = IB.130 } }
+		clr_character_flag = sacrificed_pope
+		clr_character_flag = sacrificed_caliph
+		clr_character_flag = sacrificed_patriarch
+	}
+	else = {
+		if = {
+			limit = {
+				ROOT = { has_character_flag = sacrificed_pope }
+			}
+			clr_character_flag = sacrificed_pope
+			set_character_flag = sacrificed2_pope
+		}
+		if = {
+			limit = {
+				ROOT = { has_character_flag = sacrificed_caliph }
+			}
+			clr_character_flag = sacrificed_caliph
+			set_character_flag = sacrificed2_caliph
+		}
+		if = {
+			limit = {
+				ROOT = { has_character_flag = sacrificed_patriarch }
+			}
+			clr_character_flag = sacrificed_patriarch
+			set_character_flag = sacrificed2_patriarch
+		}
+		if = {
+			limit = {
+				ROOT = { has_character_flag = sacrificed2_pope }
+				ROOT = { has_character_flag = sacrificed2_caliph }
+				ROOT = { has_character_flag = sacrificed2_patriarch }
+			}
+			ROOT = { character_event = { id = IB.131 } }
+		}
+	
+	}
+}
+
+IB_seventh_bloodline_effect = {
+	if = {
+		limit = {
+			ROOT = { has_character_flag = sevens_son }
+			ROOT = { has_character_flag = seventh_son }
+			NOT = {
+				any_owned_bloodline = { has_bloodline_flag = IB_sevenly_bloodline }
+			}
+		}
+		
+		ROOT = { character_event = { id = IB.141 } }
+	}
+}
+
+
+sevenly_bloodline_genius_effect = {
+	random_list = {
+		1 = {
+			modifier = {
+				factor = 2
+				trait = fair
+			}
+			modifier = {
+				factor = 2
+				trait = strong
+			}
+			modifier = {
+				factor = 0
+				trait = genius
+			}
+			add_trait = genius
+		}
+		1 = {
+			modifier = {
+				factor = 2
+				trait = genius
+			}
+			modifier = {
+				factor = 2
+				trait = strong
+			}
+			modifier = {
+				factor = 0
+				trait = fair
+			}
+			add_trait = fair
+		}
+		1 = {
+			modifier = {
+				factor = 2
+				trait = fair
+			}
+			modifier = {
+				factor = 2
+				trait = genius
+			}
+			modifier = {
+				factor = 0
+				trait = strong
+			}
+			add_trait = strong
+		}
+		97 = {
+			prestige = 50
+		}
+	}
+}
+
+
+IB_hannibal_bloodline_effect = {
+	if = {
+		limit = {
+			killer = { check_variable = { which = IB_hannibal_bloodline value = 10 } }
+		}
+		killer = { character_event = { id = IB.151 } }
+	}
+}
+
+IB_hannibal_healing_effect = {
+	
+	if = {
+		limit = {
+			killer = { any_owned_bloodline = { has_bloodline_flag = IB_hannibal_bloodline } }
+			OR = {
+					killer = { trait = wounded }
+					killer = { trait = eunuch }
+					killer = { trait = blinded }
+					killer = { trait = infection }
+					killer = { trait = one_eyed }
+					killer = { trait = one_handed }
+					killer = { trait = one_legged }
+					killer = { trait = disfigured }
+					killer = { 	trait = mangled }
+					killer = { trait = severely_injured }
+					killer = { trait = lovers_pox }
+					killer = { trait = infirm }
+					killer = { trait = incapable }
+					killer = { trait = has_aztec_disease }
+					killer = { trait = has_typhus }
+					killer = { trait = cancer }
+					killer = { trait = has_tuberculosis }
+					killer = { trait = dancing_plague }
+					killer = { trait = dysentery }
+					killer = { trait = flu }
+					killer = { trait = food_poisoning }
+					killer = { trait = gout }
+					killer = { trait = syphilitic }
+					killer = { trait = has_typhoid_fever }
+					killer = { trait = ill }
+					killer = { trait = leper }
+					killer = { trait = has_measles }
+					killer = { trait = pneumonic }
+					killer = { trait = rabies }
+					killer = { trait = has_small_pox }
+					killer = { trait = has_bubonic_plague }
+			}
+		}
+		random_list = {
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = wounded }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = wounded } }
+				}
+			killer = { remove_trait = wounded }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = eunuch  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = eunuch  } }
+				}
+			killer = { remove_trait = eunuch  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = blinded  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = blinded  } }
+				}
+			killer = { remove_trait = blinded  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = infection  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = infection  } }
+				}
+			killer = { remove_trait = infection  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = one_eyed  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = one_eyed  } }
+				}
+			killer = { remove_trait = one_eyed  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = one_handed  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = one_handed  } }
+				}
+			killer = { remove_trait = one_handed  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = one_legged  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = one_legged  } }
+				}
+			killer = { remove_trait = one_legged  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = disfigured  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = disfigured  } }
+				}
+			killer = { remove_trait = disfigured  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = mangled  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = mangled  } }
+				}
+			killer = { remove_trait = mangled  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = severely_injured  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = severely_injured  } }
+				}
+			killer = { remove_trait = severely_injured  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = lovers_pox  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = lovers_pox  } }
+				}
+			killer = { remove_trait = lovers_pox  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = infirm  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = infirm  } }
+				}
+			killer = { remove_trait = infirm  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = incapable  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = incapable  } }
+				}
+			killer = { remove_trait = incapable  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = has_aztec_disease  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = has_aztec_disease  } }
+				}
+			killer = { remove_trait = has_aztec_disease  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = has_typhus  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = has_typhus  } }
+				}
+			killer = { remove_trait = has_typhus  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = cancer  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = cancer  } }
+				}
+			killer = { remove_trait = cancer  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = has_tuberculosis  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = has_tuberculosis  } }
+				}
+			killer = { remove_trait = has_tuberculosis  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = dancing_plague  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = dancing_plague  } }
+				}
+			killer = { remove_trait = dancing_plague  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = dysentery  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = dysentery  } }
+				}
+			killer = { remove_trait = dysentery  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = flu  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = flu  } }
+				}
+			killer = { remove_trait = flu  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = food_poisoning  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = food_poisoning  } }
+				}
+			killer = { remove_trait = food_poisoning  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = gout  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = gout  } }
+				}
+			killer = { remove_trait = gout  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = syphilitic  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = syphilitic  } }
+				}
+			killer = { remove_trait = syphilitic  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = has_typhoid_fever  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = has_typhoid_fever  } }
+				}
+			killer = { remove_trait = has_typhoid_fever  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = ill  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = ill  } }
+				}
+			killer = { remove_trait = ill  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = leper  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = leper  } }
+				}
+			killer = { remove_trait = leper  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = has_measles  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = has_measles  } }
+				}
+			killer = { remove_trait = has_measles  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = pneumonic  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = pneumonic  } }
+				}
+			killer = { remove_trait = pneumonic  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = rabies  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = rabies  } }
+				}
+			killer = { remove_trait = rabies  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = has_small_pox  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = has_small_pox  } }
+				}
+			killer = { remove_trait = has_small_pox  }
+			}
+			1 = {
+				modifier = {
+					factor = 10
+					killer = { trait = has_bubonic_plague  }
+				}
+				modifier = {
+					factor = 0
+					killer = { NOT = { trait = has_bubonic_plague  } }
+				}
+			killer = { remove_trait = has_bubonic_plague  }
+			}
+			180 = {
+				prestige = 10
+			}
+		}
+	}
+}
+
+death_chess_bloodline_effect = {
+	trigger = {
+			NOT = { any_owned_bloodline = { has_bloodline_flag = IB_chess_bloodline } }
+	}
+	
+	if = {
+		limit = {
+			has_character_flag = dueled_chess_ib
+			NOT = { any_owned_bloodline = { has_bloodline_flag = IB_chess_bloodline } }
+		}
+		create_bloodline = {
+			type = IB_dueldeath_bloodline
+        }
+		clr_character_flag = dueled_chess_ib
+		clr_character_flag = max_score_chess_ib
+		clr_character_flag = sacrificed_loved_ib
+		clr_character_flag = gamer_death_ib
+		clr_character_flag = genius_death_ib
+		clr_character_flag = drunk_death_ib
+		clr_character_flag = seduced_death_ib
+		clr_character_flag = scared_death_ib
+	}
+	if = {
+		limit = {
+			has_character_flag = sacrificed_loved_ib
+			NOT = { any_owned_bloodline = { has_bloodline_flag = IB_chess_bloodline } }
+		}
+		set_character_flag = IB_sacrificechess_bloodline
+	}
+	if = {
+		limit = {
+			has_character_flag = max_score_chess_ib
+			NOT = { any_owned_bloodline = { has_bloodline_flag = IB_chess_bloodline } }
+		}
+		set_character_flag = IB_grandmaster_bloodline
+	}
+	if = {
+		limit = {
+			has_character_flag = genius_death_ib
+			has_character_flag = seduced_death_ib
+			NOT = { any_owned_bloodline = { has_bloodline_flag = IB_chess_bloodline } }
+		}
+		
+		set_character_flag = IB_spychess_bloodline
+	}
+	if = {
+		limit = {
+			has_character_flag = gamer_death_ib
+			NOT = { any_owned_bloodline = { has_bloodline_flag = IB_chess_bloodline } }
+		}
+		set_character_flag = IB_intmaster_bloodline
+	}
+	if = {
+		limit = {
+			has_character_flag = scared_death_ib
+			NOT = { any_owned_bloodline = { has_bloodline_flag = IB_chess_bloodline } }
+		}
+		set_character_flag = IB_intimidatedeath_bloodline
+		
+	}
+	if = {
+		limit = {
+			has_character_flag = drunk_death_ib
+			NOT = { any_owned_bloodline = { has_bloodline_flag = IB_chess_bloodline } }
+		}
+		set_character_flag = IB_drunkchess_bloodline
+	}
+	ROOT = { character_event = { id = IB.180 } }
+	clr_character_flag = dueled_chess_ib
+	clr_character_flag = max_score_chess_ib
+	clr_character_flag = sacrificed_loved_ib
+	clr_character_flag = gamer_death_ib
+	clr_character_flag = genius_death_ib
+	clr_character_flag = drunk_death_ib
+	clr_character_flag = seduced_death_ib
+	clr_character_flag = scared_death_ib
+}
+
+
+chessmaster_bloodline_effect = {
+	random_list = {
+		1 = {
+			modifier = {
+				factor = 4
+				any_owned_bloodline = {	has_bloodline_flag = IB_chess_magnus	}
+			}
+			modifier = {
+				factor = 2
+				any_owned_bloodline = {	has_bloodline_flag = IB_chess_internat	}
+			}
+			modifier = {
+				factor = 0
+				trait = genius
+			}
+			add_trait = genius
+		}
+		1 = {
+			modifier = {
+				factor = 100
+				trait = genius
+			}
+			change_learning = 2
+		}
+		1 = {
+			modifier = {
+				factor = 0
+				trait = genius
+			}
+			modifier = {
+				factor = 96
+				any_owned_bloodline = {	has_bloodline_flag = IB_chess_magnus	}
+			}
+			modifier = {
+				factor = 98
+				any_owned_bloodline = {	has_bloodline_flag = IB_chess_internat	}
+			}
+			prestige = 10
+		}
+	}
+}
+
+ib_female_warrior_effect = {
+	if = {
+		limit = {
+			check_variable = { which = IB_female_warrior value = 100 }
+			OR = {
+				check_variable = { which = IB_female_warrior_duel value = 5 }
+				check_variable = { which = duel_experience_level value = 50 }
+			}
+			NOT = {	any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }	}
+		}
+		character_event = { id = IB.201 }
+	}
+}
+
+femwar_bloodline_create_effect = {
+	trigger = {
+			NOT = { any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline } }
+	}
+	if = {
+		limit = {
+			culture = norse
+		}
+		ROOT = { character_event = { id = IB.2001 } }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				religion = hellenic_pagan
+				religion = hellenic_pagan_reformed
+			}
+		}
+		ROOT = { character_event = { id = IB.2002 } }
+	}
+	else_if = {
+		limit = {
+			culture = greek
+		}
+		ROOT = { character_event = { id = IB.2003 } }
+	}
+	else_if = {
+		limit = {
+			capital_scope = {
+				region = world_persia
+			}
+			OR = {
+				culture_group = iranian
+				culture = greek
+			}
+		}
+		ROOT = { character_event = { id = IB.2004 } }
+	}
+	else_if = {
+		limit = {
+		OR = {
+					culture_group = arabic
+				culture_group = israelite
+			}
+			capital_scope = {
+				de_jure_liege_or_above = k_syria
+			}
+		}
+		ROOT = { character_event = { id = IB.2005 } }
+	}
+	else_if = {
+		limit = {
+			religion_group = muslim 
+		}
+		ROOT = { character_event = { id = IB.2006 } }
+	}
+	else_if = {
+		limit = {
+			capital_scope = {
+				region = world_africa
+			}
+		}
+		ROOT = { character_event = { id = IB.2007 } }
+	}
+	else_if = {
+		limit = {
+			culture_group = celtic
+		}
+		ROOT = { character_event = { id = IB.2008 } }
+	}
+	else_if = {
+		limit = {
+			religion = catholic
+		}
+		ROOT = { character_event = { id = IB.2009 } }
+	}
+	else_if = {
+		limit = {
+			culture = han
+		}
+		ROOT = { character_event = { id = IB.2010 } }
+	}
+	else_if = {
+		limit = {
+			capital_scope = {
+				region = world_steppe_west
+			}
+		}
+		ROOT = { character_event = { id = IB.2011 } }
+	}
+	else_if = {
+		limit = {
+			capital_scope = {
+				region = world_steppe
+			}
+		}
+		ROOT = { character_event = { id = IB.2012 } }
+	}
+	else = {
+		ROOT = { character_event = { id = IB.2013 } }
+	}
+}
+
+ib_barca_bloodline_effect = {
+	if = {
+		limit = {
+			FROM = { title = c_roma }
+			ROOT = {
+				culture = maghreb_arabic
+				is_republic = yes
+			}
+		}
+		ROOT = { character_event = { id = IB.211 } }
+	}
+}
+
+IB_author_bloodline_effect = {
+	if = {
+		limit = {
+			OR = {
+				check_variable = { which = IB_bookquality_4 value = 3 }
+				AND = {
+					check_variable = { which = IB_bookquality_4 value = 2 }
+					check_variable = { which = IB_bookquality_3 value = 1 }
+				}
+				AND = {
+					check_variable = { which = IB_bookquality_3 value = 3 }
+					check_variable = { which = IB_bookquality_4 value = 1 }
+				}
+			}
+		}
+		ROOT = { character_event = { id = IB.220 } }
+	}
+
+}
+
+IB_saxony_bloodline_effect = {
+	if = {
+		limit = {
+			ROOT = { has_character_flag = saxony_created_empire }
+			ROOT = { has_character_flag = saxony_win }
+		}
+		ROOT = { character_event = { id = IB.244} }
+	}
+}
+
+IB_saxony_bloodline_effect_FROM = {
+	if = {
+		limit = {
+			FROM = { has_character_flag = saxony_created_empire }
+			FROM = { has_character_flag = saxony_win }
+		}
+		FROM = { character_event = { id = IB.244} }
+	}
+}
+
+IB_black_widow_bloodline_effect = {
+	if = {
+		limit = {
+			check_variable = { which = IB_black_widow value = 5 }
+			}
+		ROOT = { character_event = { id = IB.252 } }
+	}
+}
+
+IB_jewmessiah_effect = {
+	if = {
+		limit = {
+			has_character_flag = IB_israel_founded
+			has_character_flag = IB_third_temple
+			has_character_flag = IB_jew_priesthood_restored
+			}
+		ROOT = { character_event = { id = IB.290 } }
+	}
+}

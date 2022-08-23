@@ -1,0 +1,67 @@
+expd_preg_is_dynasty_closerel_or_descendant_of_rootfrom = {
+	OR = {
+		dynasty = ROOT_FROM
+		is_close_relative = ROOT_FROM
+		is_descendant_of = ROOT_FROM
+	}
+}
+
+expd_preg_this_is_fertile_female = {
+	is_female = yes
+	is_adult = yes
+	is_alive = yes
+	prisoner = no
+	fertility > 0
+	OR = {
+		age <= 45
+		immortal_age <= 45
+	}
+}
+
+expd_preg_this_is_fertile_male = {
+	is_female = no
+	is_adult = yes
+	is_alive = yes
+	prisoner = no
+	fertility > 0
+}
+
+expd_preg_this_is_valid_target_for_rootfrom_to_trigger_pregnancy = {
+	expd_preg_this_is_fertile_female = yes
+	OR = {
+		# Only valid on self (if female), female unlanded courtiers, female dynasts, and spouses/consorts/lovers of male dynasts
+		character = ROOT_FROM
+		AND = {
+			host = { character = ROOT_FROM }
+			is_landed = no
+		}
+		expd_preg_is_dynasty_closerel_or_descendant_of_rootfrom = yes
+		any_spouse  = { expd_preg_is_dynasty_closerel_or_descendant_of_rootfrom = yes }
+		any_consort = { expd_preg_is_dynasty_closerel_or_descendant_of_rootfrom = yes }
+		any_lover   = { expd_preg_is_dynasty_closerel_or_descendant_of_rootfrom = yes }
+	}
+	OR = {
+		is_married = yes
+		is_consort = yes
+		has_lover = yes
+	}
+}
+
+expd_preg_this_is_valid_father_for_rootfrom_to_trigger_pregnancy_on_root = {
+	expd_preg_this_is_fertile_male = yes
+	# Must be married/consort/lover of ROOT
+	OR = {
+		any_spouse  = { character = ROOT }
+		any_consort = { character = ROOT }
+		any_lover   = { character = ROOT }
+	}
+	# Must match all of the same conditions imposed on the woman
+	OR = {
+		expd_preg_is_dynasty_closerel_or_descendant_of_rootfrom = yes
+		ROOT = { expd_preg_is_dynasty_closerel_or_descendant_of_rootfrom = yes }
+		AND = {
+			ROOT = { host = { character = ROOT_FROM } }
+			ROOT = { is_landed = no }
+		}
+	}
+}
