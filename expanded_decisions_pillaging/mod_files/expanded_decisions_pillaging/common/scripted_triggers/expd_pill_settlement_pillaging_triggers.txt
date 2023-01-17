@@ -1,0 +1,120 @@
+expd_pill_this_holding_is_potentially_pillageable_by_prev_character = {
+	# Expected to be called as follows:
+	#		[scope of pillager] = {
+	#			[scope of holding to be pillaged] = {
+	#				expd_pill_this_holding_is_potentially_pillageable_by_prev_character = yes
+	#			}
+	#		}
+	
+	# If pillaging is blocked globally then pillaging is never possible
+	NOT = { has_global_flag = expd_pill_blocked_global }
+	
+	# Pillaging is only available if the pillager personally owns the holding
+	owner = { character = PREV }
+	
+	# Pillaging is only available to tribes and nomads
+	PREV = {
+		OR = {
+			is_tribal = yes
+			is_nomadic = yes
+		}
+	}
+	
+	# Pillaging can only occur on baronies & county capitals
+	OR = {
+		tier = BARON
+		tier = COUNT
+	}
+	
+	# Only certain types of holdings can be pillaged
+	NOT = { holding_type = nomad }
+	OR = {
+		# Pillaging a non-tribal holding is always permitted (given that we've restricted 
+		NOT = { holding_type = tribal }
+		
+		# Pillaging tribal holdings is only potentially permitted for: nomads, provinces of different culture, and provinces of different religion
+		# NB: The actual requirements for different culture and religion are significantly stricter, but we want to show these to the user in the tooltip, so they are in the "allow" section.
+		AND = {
+			holding_type = tribal
+			OR = {
+				PREV = { is_nomadic = yes }
+				location = { NOT = { culture = PREVPREV } }
+				location = { NOT = { religion = PREVPREV } }
+			}
+		}
+	}
+	
+}
+
+expd_pill_this_holding_is_allowed_to_be_pillaged_by_prev_character = {
+	# Expected to be called as follows:
+	#		[scope of pillager] = {
+	#			show_scope_change = no
+	#			[scope of holding to be pillaged] = {
+	#				show_scope_change = no
+	#				expd_pill_this_holding_is_allowed_to_be_pillaged_by_prev_character = yes
+	#			}
+	#		}
+	
+	conditional_tooltip = {
+		trigger = { NOT = { PREVPREV = { has_character_flag = expd_pill_blocked_char } } } # For some reason, PREVPREV is required here by the Validator, even though that makes no sense. TODO: Check whether it's actually required
+		custom_tooltip = { text = EXPD_PILL_TOOLTIP_PILLAGING_BLOCKED_BY_DECISION }
+	}
+	
+	# AI can only fast pillage if they personally own every holding in the province
+	# TODO: Transform this into a conditional_tooltip once the logic has been verified
+	OR = {
+		PREV = { ai = no }
+		county = {
+			NOT = {
+				any_de_jure_vassal_title = {
+					holder_scope = {
+						NOT = { character = PREVPREVPREVPREV }
+					}
+				}
+			}
+		}
+	}
+	
+	# AI nomads should NOT take this decision (because they should probably settle instead)
+	# TODO: Transform this into a conditional_tooltip once the logic has been verified
+	OR = {
+		PREV = { ai = no }
+		PREV = { is_nomadic = no }
+	}
+	
+	# Provinces that are under siege can't be pillaged until the siege has been lifted
+	has_siege = no
+	
+	# Only certain types of holding can be pillaged
+	OR = {
+		
+		# Pillaging a non-tribal non-nomadic holding is always allowed (because only tribes and nomads have access to pillaging)
+		AND = {
+			NOT = { holding_type = tribal }
+			NOT = { holding_type = nomad }
+		}
+		
+		# Pillaging tribal holdings is only allowed for: nomads, provinces of different culture group, and provinces of different religion in some very particular circumstances.
+		AND = {
+			holding_type = tribal
+			OR = {
+				PREV = { is_nomadic = yes }
+				NOT = { location = { culture_group = PREVPREV } }                        # Location's culture GROUP is different to that of the pillager
+				AND = {
+					NOT = { location = { religion = PREVPREV } }                         # Location's religion is different to that of the pillager, and:
+					NOT = { location = { culture = PREVPREV } }                          # Location's culture is different to that of the pillager, and:
+					OR = {                                                               # It will be difficult for the pillager to convert the religion, IE. one of the following is true:
+						NOT = { location = { religion_group = PREVPREV } }               #  --- Location's religion group is different to that of the pillager; or
+						location = { is_hard_to_convert = yes }                          #  --- Location's religion is hard to convert; or
+						PREV = {                                                         #  --- Pillager's religion is unreformed pagan (IE: bad at converting)
+							is_reformed_religion = no
+							religion_group = pagan_group
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}
