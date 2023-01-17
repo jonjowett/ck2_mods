@@ -91,7 +91,7 @@ character_event = {
 }
 
 # Visible event granting the bloodline
-# NEVER call this event directly - ALWAYS go through EMBRaider.2000
+# NEVER call this event directly - ALWAYS go through EMBRaider.1101
 # Based on HF.23212
 narrative_event = {
 	id = EMBRaider.1101
@@ -181,9 +181,56 @@ narrative_event = {
 					NOT = { character = ROOT }
 					is_within_diplo_range = ROOT
 				}
-				narrative_event = { id = HF.23213 } 
+				narrative_event = { id = EMBRaider.1102 } 
 			}
 		}
+	}
+}
+
+# Notify other players of the earned bloodline
+# Based on HF.23213
+# TODO: Proper localisation & description
+narrative_event = {
+	id = EMBRaider.1102
+	title = EVTTITLE23213
+	desc = EVTDESCHF23213
+	picture = { 
+		trigger = { FROM = { is_female = no } } 
+		picture = GFX_evt_vikings_arriving_oldgods
+	}
+	picture = { 
+		trigger = { FROM = { is_female = yes } } 
+		picture = GFX_evt_norse_tempest
+	}
+	border = GFX_event_narrative_frame_war
+	
+	is_triggered_only = yes
+
+	option = {
+		name = EVTOPTAHF23213
+		trigger = { 
+			OR = { 
+				religion = norse_pagan 
+				religion = norse_pagan_reformed
+				AND = { 
+					has_religion_feature = religion_adventuring 
+					has_religion_feature = religion_seafaring
+				}
+			} 
+		} 
+	}
+	option = {
+		name = EVTOPTBHF23213
+		trigger = { 
+			NOR = { 
+				religion = norse_pagan 
+				religion = norse_pagan_reformed
+				AND = { 
+					has_religion_feature = religion_adventuring 
+					has_religion_feature = religion_seafaring
+				}
+			} 
+		} 
 	}
 }
 
@@ -195,11 +242,10 @@ narrative_event = {
 # Grant ultimate raider bloodline #
 ###################################
 
-# TODO: Proper event text and localisation 
 narrative_event = {
 	id = EMBRaider.1200
-	title = EMBRaider_2100_EVTTITLE
-	desc = EMBRaider_2100_EVTDESC
+	title = EMBRaider_1200_EVTTITLE
+	desc = EMBRaider_1200_EVTDESC
 	picture = {
 		trigger = { is_female = no } 
 		picture = GFX_evt_vikings_arriving_oldgods
@@ -215,15 +261,13 @@ narrative_event = {
 	is_triggered_only = yes
 	
 	trigger = {
-		check_variable = {
-			which = emb_raider_loot_count
-			value >= 400
-		}
+		check_variable = { which = emb_raider_loot_count value >= 400 }
+		NOT = { any_owned_bloodline = { has_bloodline_flag = emb_raider_ultimate } }
 	}
 	
 	# Give ultimate bloodline
 	option = {
-		name = EMBRaider_2100_EVTOPT_A
+		name = EMBRaider_1200_EVTOPT_A
 		add_blood_splatter_effect = yes
 		emb_raider_give_raider_face_tattoo_to_this_character = yes
 		if = { 
@@ -232,6 +276,10 @@ narrative_event = {
 		}
 		else = {
 			create_bloodline = { type = emb_raider_ultimate_bloodline_f }
+		}
+		new_bloodline = {
+			set_name = emb_raider_ultimate_bloodline_name
+			set_description = "emb_raider_ultimate_bloodline_desc"
 		}
 	}
 	
@@ -243,8 +291,55 @@ narrative_event = {
 					NOT = { character = ROOT }
 					is_within_diplo_range = ROOT
 				}
-				narrative_event = { id = HF.23213 } 
+				narrative_event = { id = EMBRaider.1201 } 
 			}
 		}
+	}
+}
+
+# Notify other players of the earned bloodline
+# Based on HF.23213
+# TODO: Proper localisation & description
+narrative_event = {
+	id = EMBRaider.1201
+	title = EVTTITLE23213
+	desc = EVTDESCHF23213
+	picture = { 
+		trigger = { FROM = { is_female = no } } 
+		picture = GFX_evt_vikings_arriving_oldgods
+	}
+	picture = { 
+		trigger = { FROM = { is_female = yes } } 
+		picture = GFX_evt_norse_tempest
+	}
+	border = GFX_event_narrative_frame_war
+	
+	is_triggered_only = yes
+
+	option = {
+		name = EVTOPTAHF23213
+		trigger = { 
+			OR = { 
+				religion = norse_pagan 
+				religion = norse_pagan_reformed
+				AND = { 
+					has_religion_feature = religion_adventuring 
+					has_religion_feature = religion_seafaring
+				}
+			} 
+		} 
+	}
+	option = {
+		name = EVTOPTBHF23213
+		trigger = { 
+			NOR = { 
+				religion = norse_pagan 
+				religion = norse_pagan_reformed
+				AND = { 
+					has_religion_feature = religion_adventuring 
+					has_religion_feature = religion_seafaring
+				}
+			} 
+		} 
 	}
 }

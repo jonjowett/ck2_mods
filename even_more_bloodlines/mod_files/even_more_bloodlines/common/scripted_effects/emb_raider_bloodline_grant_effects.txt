@@ -22,13 +22,10 @@ emb_raider_select_raider_bloodline_for_this_character = {
 		else = {
 			random_list = {
 				
-				# Viking (again)
+				# Viking (again, but only if all other bloodlines have already been awarded)
 				10 = {
 					trigger = {
-						OR = {
-							NOT = { any_owned_bloodline = { has_bloodline_flag = bloodline_viking } } # Use the vanilla flag here, because it's the duplicate FEATURE we care about
-							emb_raider_this_character_owns_all_possible_raider_bloodline_types = yes
-						}
+						emb_raider_this_character_owns_all_possible_raider_bloodline_types = yes
 					}
 					mult_modifier = { # Strongly preferred if you aren't already a sea king/queen (which shouldn't happen, because you have a viking bloodline, but you never know...)
 						factor = 10
