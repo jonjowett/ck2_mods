@@ -1,0 +1,35 @@
+decisions = {
+	expd_dm_rhodos = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+		
+		potential = {
+			k_cyprus = {
+				d_rhodos_expd_df = {
+					expd_dm_root_can_see_decision_to_merge_this_duchy_into_prev_kingdom = yes
+				}
+			}
+		}
+		
+		allow = {
+			k_cyprus = {
+				show_scope_change = no
+				d_rhodos_expd_df = {
+					show_scope_change = no
+					expd_dm_root_can_take_decision_to_merge_this_duchy_into_prev_kingdom = yes
+				}
+			}
+		}
+		
+		effect = {
+			k_cyprus = {
+				show_scope_change = no
+				d_rhodos_expd_df = {
+					show_scope_change = no
+					expd_dm_merge_this_duchy_into_prev_kingdom = yes
+				}
+			}
+		}
+	}
+}

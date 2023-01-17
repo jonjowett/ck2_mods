@@ -1,0 +1,36 @@
+decisions = {
+	expd_kf_create_iceland = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+
+		potential = {
+			d_iceland = {
+				k_iceland_expd_kf = {
+					expd_kf_root_can_see_decision_to_create_this_kingdom_from_prev_single_duchy = yes
+				}
+			}
+		}
+
+		allow = {
+			d_iceland = {
+				show_scope_change = no
+				k_iceland_expd_kf = {
+					show_scope_change = no
+					expd_kf_root_can_take_decision_to_create_this_kingdom_from_prev_single_duchy = yes
+				}
+			}
+		}
+
+		effect = {
+			d_iceland = {
+				show_scope_change = no
+				k_iceland_expd_kf = {
+					show_scope_change = no
+					expd_kf_create_this_kingdom_from_prev_single_duchy_and_grant_to_root = yes
+				}
+			}
+		}
+		
+	}
+}

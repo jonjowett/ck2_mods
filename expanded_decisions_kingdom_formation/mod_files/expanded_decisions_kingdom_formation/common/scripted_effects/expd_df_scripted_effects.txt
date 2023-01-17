@@ -1,0 +1,71 @@
+expd_df_create_this_duchy_from_prev_single_county_and_grant_to_root = {
+	# Expected to be called in this format:
+	#		c_rhodos = {
+	#			show_scope_change = no
+	#			d_rhodos_expd_df = {
+	#				show_scope_change = no
+	#				expd_df_create_this_duchy_from_prev_single_county_and_grant_to_root = yes
+	#			}
+	#		}
+	# (The "show_scope_change = no" bits are required, otherwise the tooltips will probably be very confusing.)
+	
+	# Set up some event_targets, to avoid spaghetti code
+	hidden_tooltip = {
+		ROOT = { primary_title = { save_event_target_as = expd_df_roots_primary_title } }
+		save_event_target_as = expd_df_new_duchy
+		PREV = { save_event_target_as = expd_df_source_county }
+		event_target:expd_df_source_county = {
+			if = {
+				limit = { any_dejure_liege = { tier = KING } }
+				set_title_flag = expd_df_can_assign_new_duchy_to_source_kingdom
+				any_dejure_liege = {
+					limit = { tier = KING }
+					save_event_target_as = expd_df_source_county_dejure_liege_kingdom
+				}
+			}
+		}
+	}
+	
+	# Standard cost of 150 gold & 100 piety (IE: duchy formation @ 500 piety (=150gold) + 100 piety for the de jure reassignment or a county)
+	ROOT = {
+		show_scope_change = no
+		wealth = -150
+		piety = -100
+	}
+	
+	# Grant the duchy to ROOT, and copy all laws from ROOT's primary title
+	custom_tooltip = {
+		text = expd_df_root_gains_this_duchy_tt
+		event_target:expd_df_new_duchy = {
+			show_scope_change = no
+			grant_title = ROOT
+			copy_title_laws = event_target:expd_df_roots_primary_title
+		}
+	}
+	
+	# Move the county into the duchy
+	custom_tooltip = {
+		text = expd_df_prev_county_becomes_de_jure_part_of_this_duchy_tt
+		event_target:expd_df_source_county = {
+			show_scope_change = no
+			de_jure_liege = event_target:expd_df_new_duchy
+		}
+	}
+	
+	# Move the new duchy into the same de jure kingdom as the source county
+	hidden_tooltip = {
+		if = {
+			limit = { event_target:expd_df_source_county = { has_title_flag = expd_df_can_assign_new_duchy_to_source_kingdom } }
+			event_target:expd_df_new_duchy = {
+				show_scope_change = no
+				de_jure_liege = event_target:expd_df_source_county_dejure_liege_kingdom
+			}
+		}
+	}
+	
+	# Cleanup
+	hidden_tooltip = {
+		event_target:expd_df_source_county = { clr_title_flag = expd_df_can_assign_new_duchy_to_source_kingdom }
+	}
+	
+}

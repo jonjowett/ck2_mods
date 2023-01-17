@@ -1,0 +1,308 @@
+decisions = {
+	expd_ef_merge = {
+		
+		only_playable = yes
+		only_independent = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+
+		potential = {
+			
+			# Is a king with at least two kingdoms
+			tier = KING
+			NOT = { tier = EMPEROR }
+			any_demesne_title = {
+				count >= 2
+				tier = KING
+			}
+			
+			# Realm size mustn't be too large
+			expd_ef_roots_realm_size_is_not_too_large = yes
+			
+			# Misc conditions copied from form_new_empire in realm_decisions.txt
+			OR = {
+				has_dlc = "Charlemagne"
+				AND = {
+					is_alternate_start = yes
+					OR = {
+						has_alternate_start_parameter = {
+							key = dejure_kingdoms
+							value = none
+						}
+						has_alternate_start_parameter = {
+							key = dejure_empires
+							value = none
+						}
+					}
+				}
+			}
+			OR = {
+				ai = no
+				AND = {
+					trait = proud
+					prestige = 40000
+				}
+				AND = {
+					trait = ambitious
+					prestige = 40000
+				}
+				prestige = 120000
+				AND = {
+					is_alternate_start = yes
+					OR = {
+						has_alternate_start_parameter = {
+							key = dejure_kingdoms
+							value = none
+						}
+						has_alternate_start_parameter = {
+							key = dejure_empires
+							value = none
+						}
+					}
+				}
+			}
+			holy_order = no
+			NOT = {
+				has_game_rule = {
+					name = dynamic_realms
+					value = off
+				}
+			}
+		}
+		
+		allow = {
+		
+			# Is an independent adult capable king with at least 3 fully-controlled kingdoms
+			
+			is_adult = yes
+			prisoner = no
+			independent = yes
+			war = no
+			NOT = { trait = incapable }
+			
+			tier = KING
+			NOT = { tier = EMPEROR }
+			primary_title = { expd_ef_root_controls_this_kingdom = yes }
+			
+			custom_tooltip = {
+				text = expd_ef_root_completely_controls_at_least_3_kingdoms_tt
+				any_demesne_title = {
+					count >= 3
+					expd_ef_root_controls_this_kingdom = yes
+				}
+			}
+			
+			# Realm size mustn't be too large
+			expd_ef_roots_realm_size_is_not_too_large = yes
+			
+			# Wealth and piety will be deducted (prestige will not)
+			prestige = 10000
+			wealth = 1000
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_demesne_title = {
+							count = 4
+							expd_ef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = 500
+			}
+			trigger_else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 4
+						expd_ef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 5
+							expd_ef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = 600
+			}
+			trigger_else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 5
+						expd_ef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 6
+							expd_ef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = 700
+			}
+			trigger_else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 6
+						expd_ef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 7
+							expd_ef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = 800
+			}
+			trigger_else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 7
+						expd_ef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 8
+							expd_ef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = 900
+			}
+			trigger_else = {
+				piety = 1000
+			}
+			
+		}
+		
+		effect = {
+			
+			# Deduct wealth & piety first (so that the deduction is calculated correctly)
+			wealth = -1000
+			if = {
+				limit = {
+					NOT = {
+						any_demesne_title = {
+							count = 4
+							expd_ef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = -500
+			}
+			else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 4
+						expd_ef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 5
+							expd_ef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = -600
+			}
+			else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 5
+						expd_ef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 6
+							expd_ef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = -700
+			}
+			else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 6
+						expd_ef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 7
+							expd_ef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = -800
+			}
+			else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 7
+						expd_ef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 8
+							expd_ef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = -900
+			}
+			else = {
+				piety = -1000
+			}
+			
+			# Create custom empire & every completely-controlled kingdom is made de jure vassal of the new empire & is then destroyed
+			# (Copied with modifications from form_new_empire in realm_decisions.txt)
+			
+			# First, some tooltips to explain what will happen (including a list of affected kingdoms)
+			custom_tooltip = { text = expd_ef_root_forms_new_empire_by_merging_completely_controlled_kingdoms_tt }
+			custom_tooltip = { text = expd_ef_the_new_empire_is_based_on_roots_primary_title_tt }
+			any_demesne_title = {
+				limit = { expd_ef_root_controls_this_kingdom = yes }
+				custom_tooltip = { text = expd_ef_this_kingdom_becomes_part_of_the_new_empire_and_is_destroyed_tt }
+			}
+			capital_scope = {
+				show_scope_change = no # capital_scope is just "Capital:" in the tooltips, which doesn't look good. Include the province name in the localisation string below instead.
+				save_event_target_as = expd_ef_new_empire_capital
+				custom_tooltip = { text = expd_ef_this_province_becomes_the_traditional_capital_of_the_empire_tt }
+			}
+			
+			# Then, inside a hidden_tooltip, perform the actions
+			hidden_tooltip = {
+				primary_title = {
+					create_title = {
+						tier = EMPEROR
+						landless = no
+						temporary = no
+						custom_created = yes
+						culture = ROOT
+						holder = ROOT
+						base_title = THIS
+						copy_title_laws = yes
+					}
+					new_title = {
+						copy_title_history = PREV
+						set_preferred_capital = event_target:expd_ef_new_empire_capital
+					}
+				}
+				ROOT = {
+					any_demesne_title = {
+						limit = { expd_ef_root_controls_this_kingdom = yes }
+						de_jure_liege = PREVPREV
+						destroy_landed_title = THIS
+					}
+				}
+
+			}
+			
+			# Put something in the chronicle (because why not?!)
+			chronicle = {
+				entry = CHRONICLE_FOUNDED_NEW_KINGDOM_OR_EMPIRE
+				portrait = [Root.GetID]
+			}
+		}
+	}
+}

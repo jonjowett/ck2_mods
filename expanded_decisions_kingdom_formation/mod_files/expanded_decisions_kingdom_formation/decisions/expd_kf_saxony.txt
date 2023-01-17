@@ -1,0 +1,19 @@
+decisions = {
+	expd_kf_create_saxony = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+
+		potential = {
+			expd_kf_root_can_see_decision_to_create_saxony = yes
+		}
+
+		allow = {
+			expd_kf_root_can_take_decision_to_create_saxony = yes
+		}
+
+		effect = {
+			expd_kf_create_saxony_and_grant_to_root = yes
+		}
+	}
+}

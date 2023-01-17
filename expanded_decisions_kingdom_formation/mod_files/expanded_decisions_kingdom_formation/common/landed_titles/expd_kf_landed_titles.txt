@@ -2,7 +2,6 @@ k_krete_expd_kf = {
 	color={ 205 110 35 }
 	color2={ 255 255 20 }
 	hellenic_pagan_reformed = 500 # Crusade target weight
-	
 	capital = 480 # Chandax
 	allow = {
 		conditional_tooltip = {
@@ -12,6 +11,90 @@ k_krete_expd_kf = {
 				}
 			}
 			k_krete_expd_kf = {
+				is_titular = no
+			}
+		}
+	}
+}
+
+k_mann_expd_kf = {
+	color={ 25 65 243 }
+	color2={ 255 255 255 }
+	capital = 54 # Isle of Man
+	welsh = "Manaw"
+	norwegian = "Mann"
+	danish = "Mann"
+	swedish = "Mann"
+	norse = "Mann"
+	pictish = "Manu"
+	irish = "Mhannin"
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				k_mann_expd_kf = {
+					is_titular = yes
+				}
+			}
+			k_mann_expd_kf = {
+				is_titular = no
+			}
+		}
+	}
+}
+
+k_gotland_expd_kf = {
+	color = { 170 25 25 }
+	color2={ 255 255 255 }
+	capital = 301 # Gotland
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				k_gotland_expd_kf = {
+					is_titular = yes
+				}
+			}
+			k_gotland_expd_kf = {
+				is_titular = no
+			}
+		}
+	}
+}
+
+k_mallorca_expd_kf = {
+	color = { 68 126 72 }
+	color2={ 255 255 255 }
+	capital = 827 # Mallorca
+	short_name = yes #Localised as the Balearic Kingdom
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				k_mallorca_expd_kf = {
+					is_titular = yes
+				}
+			}
+			k_mallorca_expd_kf = {
+				is_titular = no
+			}
+		}
+	}
+}
+
+k_iceland_expd_kf = {
+	color={ 195 190 255 }
+	color2={ 220 220 220 }
+	capital = 1 # Vestisland
+	norse = Island
+	danish = Island
+	swedish = Island
+	norwegian = Island
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				k_iceland_expd_kf = {
+					is_titular = yes
+				}
+			}
+			k_iceland_expd_kf = {
 				is_titular = no
 			}
 		}

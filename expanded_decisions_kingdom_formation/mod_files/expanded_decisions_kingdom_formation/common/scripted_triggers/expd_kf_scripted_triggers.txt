@@ -49,6 +49,18 @@ expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duch
 	}
 }
 
+expd_kf_root_controls_a_province_in_this_duchy = {
+	any_de_jure_vassal_title = { # Any county in the duchy
+		tier = COUNT
+		holder_scope = {
+			OR = {
+				character = ROOT
+				is_vassal_or_below_of = ROOT
+			}
+		}
+	}
+}
+
 #########################################
 # Kingdom formation from a single duchy #
 #########################################
@@ -64,15 +76,7 @@ expd_kf_root_can_see_decision_to_create_this_kingdom_from_prev_single_duchy = {
 	# ROOT must own or control a province in the duchy
 	PREV = { # The source duchy
 		tier = DUKE # Just to make it VERY clear that this is referring to a duchy
-		any_de_jure_vassal_title = { # Any county in the duchy
-			tier = COUNT
-			holder_scope = {
-				OR = {
-					character = ROOT
-					is_vassal_or_below_of = ROOT
-				}
-			}
-		}
+		expd_kf_root_controls_a_province_in_this_duchy = yes
 	}
 	
 	# ROOT must not be de jure liege of the source duchy
@@ -122,6 +126,7 @@ expd_kf_root_can_take_decision_to_create_this_kingdom_from_prev_single_duchy = {
 		# Standard vanilla conditions
 		is_adult = yes
 		independent = yes
+		prisoner = no
 		war = no
 		NOT = { trait = incapable }
 		
@@ -147,12 +152,136 @@ expd_kf_root_can_take_decision_to_create_this_kingdom_from_prev_single_duchy = {
 			
 		}
 		
-		# Prestige & wealth
-		conditional_tooltip = {
-			trigger = { ai = no }
+		# Prestige & wealth & piety (wealth & piety will be deducted if you take the decision)
+		trigger_if = {
+			limit = {
+				ai = no
+				higher_real_tier_than = DUKE
+			}
 			prestige = 1000
 		}
-		wealth = 100
+		trigger_else = {
+			prestige = 2000
+		}
+		wealth = 300
+		piety = 400
+		
 	}
 	
+}
+
+##########
+# Saxony #
+##########
+
+expd_kf_root_can_see_decision_to_create_saxony = {
+	# NB: This code does not use PREV, so it doesn't need any special calling structure
+	
+	ROOT = {
+		show_scope_change = no
+	
+		# ROOT must own or control a province in one of the duchies that will eventually form saxony
+		OR = {
+			d_saxony          = { expd_kf_root_controls_a_province_in_this_duchy = yes }
+			d_brunswick       = { expd_kf_root_controls_a_province_in_this_duchy = yes }
+			d_munster_germany = { expd_kf_root_controls_a_province_in_this_duchy = yes }
+			d_angria          = { expd_kf_root_controls_a_province_in_this_duchy = yes }
+			d_bremen          = { expd_kf_root_controls_a_province_in_this_duchy = yes }
+		}
+		
+		# ROOT must not be de jure liege of any of the source duchies
+		d_saxony          = { expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes }
+		d_brunswick       = { expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes }
+		d_munster_germany = { expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes }
+		d_angria          = { expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes }
+		d_bremen          = { expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes }
+		
+		
+		# The new kingdom must be titular and have no holder
+		k_saxony = { # Kingdom of Saxony
+			has_holder = no
+			is_titular = yes
+		}
+		
+		# Copy various alternate start settings which are included in similar vanilla decisions
+		NOR = {
+			has_alternate_start_setting = {
+				setting = dejure
+				option = random
+			}
+			has_alternate_start_setting = {
+				setting = title_names
+				option = random
+			}
+			has_alternate_start_setting = {
+				setting = title_names
+				option = random_including_duchies
+			}
+		}
+		
+	}
+	
+}
+
+expd_kf_root_can_take_decision_to_create_saxony = {
+	# NB: This code does not use PREV, so it doesn't need any special calling structure
+	
+	ROOT = {
+		show_scope_change = no
+	
+		# Standard vanilla conditions
+		is_adult = yes
+		independent = yes
+		prisoner = no
+		war = no
+		NOT = { trait = incapable }
+		
+		# Prestige & wealth & piety (wealth & piety will be deducted if you take the decision)
+		trigger_if = {
+			limit = {
+				ai = no
+				higher_real_tier_than = DUKE
+			}
+			prestige = 1000
+		}
+		trigger_else = {
+			prestige = 2000
+		}
+		wealth = 300
+		piety = 400
+		
+		# Must completely control all duchies, and must not be the de jure liege or above of ANY of the duchies (eg. as Germany/HRE/Grand Duchy)
+		d_saxony          = { show_scope_change = no    expd_kf_root_fully_controls_this_saxon_duchy = yes }
+		d_brunswick       = { show_scope_change = no    expd_kf_root_fully_controls_this_saxon_duchy = yes }
+		d_munster_germany = { show_scope_change = no    expd_kf_root_fully_controls_this_saxon_duchy = yes }
+		d_angria          = { show_scope_change = no    expd_kf_root_fully_controls_this_saxon_duchy = yes }
+		d_bremen          = { show_scope_change = no    expd_kf_root_fully_controls_this_saxon_duchy = yes }
+		
+	}
+}
+
+expd_kf_root_fully_controls_this_saxon_duchy = {
+	conditional_tooltip = {
+		trigger = { is_titular = no } # Hidden & not checked if the duchy is titular
+		custom_tooltip = {
+			text = expd_kf_this_saxon_duchy_is_completely_controlled_by_root_tt
+			ROOT = { completely_controls = PREV }
+		}
+		expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
+		custom_tooltip = {
+			text = expd_kf_this_saxon_duchy_has_no_other_holder_tt
+			OR = {
+				has_holder = no
+				AND = {
+					has_holder = yes
+					holder_scope = {
+						OR = {
+							character = ROOT
+							is_vassal_or_below_of = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
 }

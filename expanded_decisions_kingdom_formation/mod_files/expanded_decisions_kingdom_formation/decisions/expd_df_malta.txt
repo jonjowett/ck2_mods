@@ -1,0 +1,35 @@
+decisions = {
+	expd_df_create_malta = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+
+		potential = {
+			c_malta = {
+				d_malta_expd_df = {
+					expd_df_root_can_see_decision_to_create_this_duchy_from_prev_single_county = yes
+				}
+			}
+		}
+
+		allow = {
+			c_malta = {
+				show_scope_change = no
+				d_malta_expd_df = {
+					show_scope_change = no
+					expd_df_root_can_take_decision_to_create_this_duchy_from_prev_single_county = yes
+				}
+			}
+		}
+
+		effect = {
+			c_malta = {
+				show_scope_change = no
+				d_malta_expd_df = {
+					show_scope_change = no
+					expd_df_create_this_duchy_from_prev_single_county_and_grant_to_root = yes
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,146 @@
+#############
+# Utilities #
+#############
+
+expd_df_root_is_not_dejure_liege_or_above_of_this_title = {
+	custom_tooltip = {
+		text = expd_df_root_is_not_dejure_liege_or_above_of_this_title_tt
+		NOT = {
+			any_de_jure_liege_title = {
+				holder_scope = { character = ROOT }
+			}
+		}
+	}
+}
+
+expd_df_root_does_not_own_other_counties_in_the_same_de_jure_duchy_as_this_county = {
+	# ROOT (or one of his vassals) does not have another county title in the same duchy
+	custom_tooltip = {
+		text = expd_df_root_does_not_own_other_counties_in_the_same_de_jure_duchy_as_this_county_tt
+		NOT = {
+			any_de_jure_liege_title = {
+				tier = DUKE
+				ROOT = {
+					any_realm_title = {
+						tier = COUNT
+						de_jure_liege = PREVPREV
+						NOT = { title = PREVPREVPREV }
+					}
+				}
+			}
+		}
+	}
+}
+
+########################################
+# Duchy formation from a single county #
+########################################
+
+expd_df_root_can_see_decision_to_create_this_duchy_from_prev_single_county = {
+	# Expected to be called in this format:
+	#		c_rhodos = {
+	#			d_rhodos_expd_df = {
+	#				expd_df_root_can_see_decision_to_create_this_duchy_from_prev_single_county = yes
+	#			}
+	#		}
+	
+	# ROOT must own or control the county
+	PREV = { # The source county
+		tier = COUNT # Just to make it VERY clear that this is referring to a county
+		holder_scope = {
+			OR = {
+				character = ROOT
+				is_vassal_or_below_of = ROOT
+			}
+		}
+	}
+	
+	# ROOT must not be de jure liege of the source county
+	# ROOT must not own or control any other counties in the same de jure duchy
+	PREV = { # The source county
+		tier = COUNT # Just to make it VERY clear that this is referring to a county
+		expd_df_root_is_not_dejure_liege_or_above_of_this_title = yes
+		expd_df_root_does_not_own_other_counties_in_the_same_de_jure_duchy_as_this_county = yes
+	}
+	
+	# The new duchy must be titular and have no holder
+	has_holder = no
+	is_titular = yes
+	
+	# Copy various alternate start settings which are included in similar vanilla decisions
+	NOR = {
+		has_alternate_start_setting = {
+			setting = dejure
+			option = random
+		}
+		has_alternate_start_setting = {
+			setting = title_names
+			option = random
+		}
+		has_alternate_start_setting = {
+			setting = title_names
+			option = random_including_duchies
+		}
+	}
+	
+}
+
+expd_df_root_can_take_decision_to_create_this_duchy_from_prev_single_county = {
+	# Expected to be called in this format:
+	#		c_rhodos = {
+	#			show_scope_change = no
+	#			d_rhodos_expd_df = {
+	#				show_scope_change = no
+	#				expd_df_root_can_take_decision_to_create_this_duchy_from_prev_single_county = yes
+	#			}
+	#		}
+	# (The "show_scope_change = no" bits are required, otherwise the tooltips will probably be very confusing.)
+	
+	ROOT = {
+		show_scope_change = no
+		
+		# Standard vanilla conditions
+		is_adult = yes
+		independent = yes
+		prisoner = no
+		war = no
+		NOT = { trait = incapable }
+		
+		# Must completely control the county
+		completely_controls = PREVPREV
+		
+		PREVPREV = { # The source county
+			
+			tier = COUNT
+			
+			# Duplicate these conditions from the "potential" block, so the player knows not to break them
+			expd_df_root_is_not_dejure_liege_or_above_of_this_title = yes
+			expd_df_root_does_not_own_other_counties_in_the_same_de_jure_duchy_as_this_county = yes
+			
+			# Must personally hold the county title, or have a vassal hold it
+			has_holder = yes
+			holder_scope = {
+				OR = {
+					character = ROOT
+					is_vassal_or_below_of = ROOT
+				}
+			}
+			
+		}
+		
+		# Prestige & wealth & piety (wealth & piety will be deducted if you take the decision)
+		trigger_if = {
+			limit = {
+				ai = no
+				higher_real_tier_than = COUNT
+			}
+			prestige = 300
+		}
+		trigger_else = {
+			prestige = 1000
+		}
+		wealth = 150
+		piety = 100
+	}
+	
+}
