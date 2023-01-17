@@ -1,3 +1,2 @@
-	name="Expanded Decisions: Pregnancy"
-	path="mod/expanded_decisions_pregnancy"
-}
+name="Expanded Decisions: Pregnancy"
+path="mod/expanded_decisions_pregnancy"
