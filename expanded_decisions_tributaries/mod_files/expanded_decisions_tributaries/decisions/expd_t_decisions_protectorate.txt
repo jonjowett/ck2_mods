@@ -9,11 +9,14 @@ targetted_decisions = {
 		ai_check_interval = 6
 		
 		from_potential = {
-			independent = yes
+			independent  = yes
+			is_landed    = yes
+			is_tributary = no
 		}
 		
 		potential = {
 			independent  = yes
+			is_landed    = yes
 			is_tributary = no
 		}
 		
@@ -68,18 +71,20 @@ targetted_decisions = {
 		ai_check_interval = 24
 		
 		from_potential = {
-			independent = yes
-			ai = no
+			independent  = yes
+			is_landed    = yes
+			is_tributary = no
 		}
 		
 		potential = {
 			independent  = yes
+			is_landed    = yes
 			is_tributary = no
 		}
 		
 		allow = {
 			
-			# Debug mode bypasses all allow block requirements (so you can evaluate AI acceptance)
+			# Debug mode bypasses all allow block requirements (if you're a player) (so you can evaluate AI acceptance)
 			trigger_if = {
 				limit = {
 					FROM = { ai = no }
@@ -313,21 +318,25 @@ targetted_decisions = {
 		ai_acceptance = {
 			show_maybe_for_human = yes
 			
-			factor = 10         # Starting score
+			factor = 0          # Starting score
 			yes_threshold = 50  # AI will accept for score >= this
 			
-			# I like being supported by my dynasty, and especially by my parents/grandparents
+			# I like being supported by my dynasty, and especially by my parents/grandparents/ancestors
 			additive_modifier = {
 				value = 20
 				dynasty = FROM
 			}
 			additive_modifier = {
-				value = 20
+				value = 10
 				is_child_of = FROM
 			}
 			additive_modifier = {
-				value = 20
+				value = 10
 				is_grandchild_of = FROM
+			}
+			additive_modifier = {
+				value = 10
+				is_descendant_of = FROM
 			}
 			
 			# There's a powerful member of my dynasty who could support me!
@@ -349,6 +358,11 @@ targetted_decisions = {
 				value = -50
 				NOT = { dynasty = FROM }
 				current_heir = { dynasty = FROM }
+				OR = {
+					is_feudal = yes
+					is_tribal = yes
+					is_nomadic = yes
+				}
 			}
 			
 			# I REALLY like being propped-up by friends and/or lovers
@@ -369,6 +383,15 @@ targetted_decisions = {
 			additive_modifier = {
 				value = -20
 				higher_real_tier_than = FROM
+			}
+			
+			# Effect of being a holy order or mercenary band (IE: Can raise their own probably-rather-large band to defend themselves)
+			additive_modifier = {
+				value = -50
+				OR = {
+					holy_order = yes
+					mercenary = yes
+				}
 			}
 			
 			# Effect of opinion
@@ -534,7 +557,7 @@ targetted_decisions = {
 					text = EXPD_T_REASON_DEFENDING_AGAINST_LARGER_AGGRESSOR
 					any_war = {
 						defender = { character = ROOT }
-						war_score <= -20 #This reason is invalid if you're winning!
+						war_score <= -20 #This reason is invalid unless you're clearly losing!
 						attacker = {
 							relative_power_including_allies_defender = {
 								who = PREV
@@ -550,7 +573,7 @@ targetted_decisions = {
 					text = EXPD_T_REASON_DEFENDING_AGAINST_MUCH_LARGER_AGGRESSOR
 					any_war = {
 						defender = { character = ROOT }
-						war_score <= -20 #This reason is invalid if you're winning!
+						war_score <= -20 #This reason is invalid unless you're clearly losing!
 						attacker = {
 							relative_power_including_allies_defender = {
 								who = PREV
@@ -589,18 +612,42 @@ decisions = {
 		
 		allow = {
 			
-			war = no
+			# Cannot be at war with your suzerain, or in a war on the same side as your suzerain
+			# IE: Local rebellions are OK, offensive wars are OK as long as you didn't call your suzerain, defensive wars aren't OK
+			OR = {
+				war = no
+				custom_tooltip = {
+					text = EXPD_T_TOOLTIP_AT_WAR_BUT_NOT_WITH_SUZERAIN_OR_ON_SAME_SIDE_AS_SUZERAIN
+					war = yes
+					NOT = { suzerain = { war_with = ROOT } }
+					NOT = {
+						any_war = {
+							any_defender = { character = ROOT }
+							any_defender = { ROOT = { suzerain = { character = PREVPREVPREV } } }
+						}
+					}
+					NOT = {
+						any_war = {
+							any_attacker = { character = ROOT }
+							any_attacker = { ROOT = { suzerain = { character = PREVPREVPREV } } }
+						}
+					}
+				}
+			}
 			
 			# You can only freely release yourself in fairly extreme circumstances
 			# NB: This is the main difference compared with permanent tributaries - realm size is not checked.
 			OR = {
 				
-				# If you're not independent, you don't need a protector (because you have a feudal lord)
-				# (This should probably have been cleaned up by however you became a vassal... but just in case...)
+				# If you're not independent or not landed, you don't need a protector (because you have a feudal lord)
+				# (This should probably have been cleaned up by however you became a vassal/unlanded... but just in case...)
 				independent = no
+				is_landed = no
 				
-				# Suzerain is not independent, or has negative prestige while you have positive prestige.
+				# Suzerain is not independent, or not landed, or is themselves a tributary, or has negative prestige while you have positive prestige.
 				suzerain = { independent = no }
+				suzerain = { is_landed = no }
+				suzerain = { is_tributary = yes }
 				AND = {
 					suzerain = { prestige < 0 }
 					prestige > 0
@@ -715,36 +762,54 @@ decisions = {
 		}
 		ai_will_do = {
 			
-			factor = 1
+			factor = 1 # Base chance = 100%
 			
+			# Suzerain being lower tier is humiliating
 			modifier = {
-				factor = 2
+				factor = 10
 				suzerain = { lower_real_tier_than = ROOT }
 			}
 			
+			# More chance with higher AI ambition
 			modifier = {
 				factor = 2
-				trait = ambitious
-			}
-			modifier = {
-				factor = 2
-				trait = proud
+				ai_ambition > 20
 			}
 			modifier = {
 				factor = 2
-				trait = brave
+				ai_ambition > 40
 			}
 			modifier = {
-				factor = 0.25
-				trait = content
+				factor = 2
+				ai_ambition > 60
 			}
 			modifier = {
-				factor = 0.25
-				trait = humble
+				factor = 2
+				ai_ambition > 80
 			}
 			modifier = {
-				factor = 0.25
-				trait = craven
+				factor = 2
+				ai_ambition > 100
+			}
+			modifier = {
+				factor = 0.5
+				ai_ambition < -20
+			}
+			modifier = {
+				factor = 0.5
+				ai_ambition < -40
+			}
+			modifier = {
+				factor = 0.5
+				ai_ambition < -60
+			}
+			modifier = {
+				factor = 0.5
+				ai_ambition < -80
+			}
+			modifier = {
+				factor = 0.5
+				ai_ambition < -100
 			}
 			
 			# Bordered by a larger realm of different religion (who might attack me!)

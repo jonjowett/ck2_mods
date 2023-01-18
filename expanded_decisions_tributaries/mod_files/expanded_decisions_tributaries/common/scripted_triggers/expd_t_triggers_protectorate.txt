@@ -41,7 +41,7 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 			# Debug mode!
 			conditional_tooltip = {
 				trigger = {
-					FROM = { is_ai = no }
+					FROM = { ai = no }
 					has_global_flag = expd_t_debug_mode
 				}
 				custom_tooltip = {
@@ -108,4 +108,8 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 			}
 		}
 	}
+	
+	# Players can't be forced to be protectorates
+	ROOT = { ai = no }
+	
 }
