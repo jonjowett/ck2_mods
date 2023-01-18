@@ -1,0 +1,35 @@
+[h1]Summary:[/h1]
+In vanilla CK2, bloodlines are not always inherited properly. [i](Eg. If you create a bloodline after your daughter's matri-married husband has died then your daughter's children will not get the new bloodline.)[/i]
+
+This mod adds a player-only targeted decision which attempts to re-propagate all bloodlines owned by the targeted character according to each bloodline's inheritance rules. In other words: Characters who should have been part of a bloodline but weren't for some reason, will gain that bloodline.
+
+Unfortunately, it's not possible to do this perfectly in all possible situations (because the CK2 scripting language is [u]extremely[/u] limited in what you can do with bloodlines), so the bloodline propagation logic might occasionally add the wrong people to a bloodline - especially for modded bloodlines. [b][u]This cannot be undone - backup saves are recommended![/u][/b] The mod also includes extensive debugging tools (via self-targeted decisions) in case the user wishes to try to diagnose any issues.
+
+[h1]Compatibility/Impact:[/h1]
+The aim of the "Expanded Decisions" mod family is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
+[list]
+[*]Required CK2 version: 3.3.5.1
+[*]Achievement compatible: No
+[*]Safe to add to existing game: Yes
+[*]Safe to remove from existing game: Yes (but any changes will not be reverted)
+[*]Changes to vanilla files: None
+[*]Mod compatibility:
+[list]
+[*]The other mod doesn't add/remove/alter any bloodlines: Fully compatible
+[*]The other mod alters/removes one or more vanilla bloodlines: Compatible (ie. no errors) but propagation logic may be incorrect
+[*]The other mod adds bloodlines:
+[list]
+[*]More Bloodlines: Fully compatible
+[*]Even More Bloodlines: Fully compatible
+[*]Any other mod: Compatible (ie. no errors) but propagation logic may be incorrect
+[/list]
+[/list]
+[*]Changes to AI behaviour: None
+[*]Changes in game difficulty: Negligible
+[*]Localisation: English only
+[*]Mod development status:
+[list]
+[*]Feature-complete with no known bugs
+[*]May be updated in the future to support other mods that add bloodlines (depending whether the mod author has specified unique tags for each new bloodline)
+[/list]
+[/list]

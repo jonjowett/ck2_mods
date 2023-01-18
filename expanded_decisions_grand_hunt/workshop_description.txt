@@ -1,0 +1,31 @@
+[h1]Summary:[/h1]
+In the base game, the Grand Hunt is blocked for characters with any type of health condition - which includes relatively-benign conditions such as lunacy and being a eunuch.
+
+This mod adds a new Grand Hunt decision, which allows characters with any number of non-debilitating health conditions to go on a Grand Hunt.
+
+Conditions that are considered debilitating are:
+[list]
+[*]Any type of illness
+[*]Wounded or severely injured
+[*]Infirm, mangled, maimed or incapable
+[*]In a regency (ie. something else is preventing the ruler from taking normal actions)
+[/list]
+
+[h1]Compatibility/Impact:[/h1]
+The aim of the "Expanded Decisions" mod family is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
+[list]
+[*]Required CK2 version: 3.3.5.1
+[*]Achievement compatible: No
+[*]Safe to add to existing game: Yes
+[*]Safe to remove from existing game: Yes
+[*]Changes to vanilla files:
+[list][*]Alters ...\events\hunting_events.txt, to allow these vanilla Grand Hunt events to occur if a character has non-debilitating health conditions.[/list]
+[*]Mod compatibility:
+[list][*]Compatible with any mod that does not alter the vanilla Grand Hunt events (...\events\hunting_events.txt)[/list]
+[*]Changes to AI behaviour:
+[list][*]AI can take the new decision, if they fulfil the criteria. I don't know if they actually take it, and it probably doesn't make much difference either way.[/list]
+[*]Decrease in game difficulty: Negligible
+[*]Localisation: English only
+[*]Mod development status: Mostly-complete, but desired future developments are impractical:
+[list][*]Ideally, a character who ONLY has non-epidemic syphilis ("Great Pox") and/or cancer shouldn't be blocked. But this seems impossible without hardcoding a massive list of traits, which would also break compatibility with mods that add new health conditions.[/list]
+[/list]

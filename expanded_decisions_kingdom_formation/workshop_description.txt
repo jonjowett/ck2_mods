@@ -1,0 +1,119 @@
+[h1]Summary:[/h1]
+This mod adds intrigue menu decisions which allow you to form several interesting duchies/kingdoms, usually on islands. Depending on the state of the game at the time, the newly-formed title may be "ripped out" of its existing de jure empire/kingdom/duchy and placed into a more appropriate one.
+
+The intended purpose of this mod is to allow players to form overseas naval bases, eg. as raiding centres and/or vassal merchant republics, without having to worry about potential future de jure issues.
+
+[u]Formable kingdoms (from a single duchy):[/u] Crete, Cyprus, Gotland, Iceland, Mallorca, Mann, Taurica (Cherson), Trinacria (Sicily)
+
+[u]Formable duchies (from a single county):[/u] Canarias, Malta, Rhodes
+
+[u]Other notable features:[/u] Reform 769 Saxony (Irminsul flag); Move certain duchies into different de jure kingdoms; Create custom empire by merging kingdoms
+
+[h1]Compatibility/Impact:[/h1]
+The aim of the "Expanded Decisions" mod family is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
+[list][*]Required CK2 version: 3.3.5.1
+[*]Achievement compatible: No
+[*]Safe to add to existing game: Yes
+[*]Safe to remove from existing game:
+[list][*]If any [u]mod-added[/u] kingdom (eg. Crete) has been formed at any time in the game's history: [b][u]No[/u][/b]
+[*]Otherwise: Yes[/list]
+[*]Changes to vanilla files: None
+[*]Mod compatibility: Compatible with any mod which doesn't alter the map layout
+[*]Changes to AI behaviour: Minor
+[list][*][i]AI can also take these kingdom formation decisions (but they usually won't, due to the restrictions)[/i][/list]
+[*]Decrease in game difficulty: Minor
+[*]Localisation: English only
+[*]Mod development status: In progress
+[list]
+[*][i]Expect new formable kingdoms/duchies to be added in the future (notably: Socotra)[/i]
+[*][i]If you have specific requests, please comment below, and I will consider including them. (No guarantees, but I'm more likely to accept cool/thematic kingdoms which already exist in the history files, and those which have good-looking flags.)[/i]
+[*][i]Otherwise, I'll add new formable kingdoms/duchies depending on my own personal games and inclination.[/i]
+[*][i]Eventually, I plan to make it [u]optional[/u] to de jure move formed kingdoms into your current empire.[/i]
+[/list]
+[/list]
+
+[h1]Details:[/h1]
+
+[u]Kingdom formation (from a single duchy):[/u]
+[list]
+[*]Requirements:
+[list]
+[*]You must be independent, adult, at peace, and not incapable
+[*]You must have 1000 prestige (which [u]will not[/u] be removed)
+[*]You must have 300 gold and 400 piety (which [u]will[/u] be removed)
+[*]The new kingdom must be titular and have no current holder
+[list][*][i](IE: It must not have been formed previously)[/i][/list]
+[*]You (or your vassals) must own the duchy title and every holding in the "stem duchy" of the new kingdom
+[list][*][i](Eg: For the kingdom of Cyprus, you must own the duchy of Cyprus and every holding in that duchy)[/i][/list]
+[*]You must not be de jure liege of the new kingdom
+[list][*][i](Eg: The Byzantine emperor cannot form the kingdom of Cyprus, because he is already de jure liege of the duchy of Cyprus)[/i][/list]
+[*]You (or your vassals) must not own or control other duchies in the same de jure kingdom
+[list][*][i](Because, if you do, you should probably be trying to form that de jure kingdom)[/i][/list]
+[/list]
+[*]Actions that occur on kingdom formation:
+[list]
+[*]The kingdom title is created and granted to the character taking the decision
+[*]The "stem duchy" becomes de jure part of the new kingdom
+[*]If the character taking the decision is an emperor, the new kingdom becomes de jure part of their primary empire title
+[*]Gold & piety is deducted
+[/list]
+[*]Formable kingdoms:
+[list]
+[*]Repurposed vanilla kingdoms: Cyprus, Taurica (Cherson), Trinacria (Sicily)
+[*]New kingdoms added by this mod: Crete, Gotland, Iceland, Mallorca, Mann
+[/list]
+[/list]
+
+[u]Duchy formation (from a single county):[/u]
+[list]
+[*]Requirements (very similar to kingdom formation above):
+[list]
+[*]You must be independent, adult, at peace, and not incapable
+[*]You must have 300 prestige (which [u]will not[/u] be removed)
+[*]You must have 150 gold and 100 piety (which [u]will[/u] be removed)
+[*]The new duchy must be titular and have no current holder
+[*]You (or your vassals) must own the county title and every holding in the "stem county" of the new duchy
+[*]You must not be de jure liege of the "stem county"
+[*]You (or your vassals) must not own or control any other counties in the same de jure duchy as the "stem county"
+[/list]
+[*]Actions that occur on kingdom formation:
+[list]
+[*]The duchy title is created and granted to the character taking the decision
+[*]The "stem county" becomes de jure part of the new duchy
+[*]The "stem county" remains de jure part of the same kingdom as before, because the new duchy is de jure added to that kingdom
+[*]Gold & piety is deducted
+[/list]
+[*]Formable duchies:
+[list]
+[*]Repurposed vanilla duchies: None
+[*]New duchies added by this mod: Canarias, Malta, Rhodes
+[/list]
+[/list]
+
+[u]Additional special decisions:[/u]
+[list]
+[*]Reform the 769 kingdom of Saxony (Irminsul flag)
+[list]
+[*]Requirements: Similar to the vanilla decision to form the Grand Duchy of Saxony, except you must be independent.
+[*]On kingdom formation: 769 Saxony is reformed and granted to the character, and all relevant duchies are migrated into it.
+[/list]
+[*]De jure merge a formable duchy into a different kingdom:
+[list]
+[*]Requirements: Own (or have a vassal own) both the formable duchy and the formable kingdom
+[*]On duchy merge: The formable duchy is removed from its previous de jure kingdom and becomes de jure part of the other kingdom
+[*]Supported duchy merges: Crete->Cyprus, Rhodes->Cyprus, Mallorca->Sardinia & Corsica
+[/list]
+[*]Form an empire by merging multiple kingdoms
+[list]
+[*]Requirements:
+[list]
+[*]Similar to the vanilla decision to create a custom empire (Charlemagne DLC), except that de jure migration only requires every county to be owned (not every barony)
+[*]Must be a king (not an emperor) and must have Charlemagne DLC active (per Paradox policy)
+[/list]
+[*]On empire formation:
+[list]
+[*]For every kingdom that is fully owned/controlled by the character down to county level: de jure merge it into the new empire and then destroy it.
+[*]The new empire has the same laws and coat of arms as the previous primary kingdom.
+[/list]
+[/list]
+[/list]
