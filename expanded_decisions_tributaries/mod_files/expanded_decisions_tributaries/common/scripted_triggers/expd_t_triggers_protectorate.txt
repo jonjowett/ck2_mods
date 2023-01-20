@@ -20,6 +20,8 @@ expd_t_root_meets_basic_requirements_to_become_tributary_of_from_by_decision = {
 			who = FROM
 			value >= 0
 		}
+		
+		FROM = { prestige > 0 }
 	
 	}
 	
@@ -112,4 +114,30 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 	# Players can't be forced to be protectorates
 	ROOT = { ai = no }
 	
+}
+
+expd_t_this_character_can_instantly_stop_being_a_protectorate = {
+	trigger_if = {
+		limit = { has_global_flag = expd_t_debug_mode }
+		custom_tooltip = {
+			text = { EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED }
+			ai = no
+		}
+	}
+	custom_tooltip = {
+		text = { EXPD_T_TOOLTIP_PROTECTORATE_OR_SUZERAIN_IS_UNLANDED_OR_NOT_INDEPENDENT }
+		OR = {
+			
+			# If you're not independent or not landed, you don't need a protector (because you have a feudal lord)
+			# (This should probably have been cleaned up by however you became a vassal/unlanded... but just in case...)
+			independent = no
+			is_landed = no
+			
+			# Suzerain is not independent, or not landed, or is themselves a tributary, or has negative prestige while you have positive prestige.
+			suzerain = { independent = no }
+			suzerain = { is_landed = no }
+			suzerain = { is_tributary = yes }
+			
+		}
+	}
 }

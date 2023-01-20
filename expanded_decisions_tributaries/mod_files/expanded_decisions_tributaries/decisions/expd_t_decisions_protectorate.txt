@@ -1,3 +1,10 @@
+
+################################
+#                              #
+#      Targeted Decisions      #
+#                              #
+################################
+
 targetted_decisions = {
 	
 	expd_t_force_protectorate = {
@@ -597,10 +604,23 @@ targetted_decisions = {
 		}
 	}
 }
-	
+
+
+
+
+
+
+
+
+
+################################
+#                              #
+#   Intrigue Menu Decisions    #
+#                              #
+################################
+
 decisions = {
 	expd_t_protectorate_independence_normal = {
-		only_playable = yes
 		is_high_prio = yes
 		ai_check_interval = 6
 
@@ -612,144 +632,71 @@ decisions = {
 		
 		allow = {
 			
-			# Cannot be at war with your suzerain, or in a war on the same side as your suzerain
-			# IE: Local rebellions are OK, offensive wars are OK as long as you didn't call your suzerain, defensive wars aren't OK
-			OR = {
-				war = no
-				custom_tooltip = {
-					text = EXPD_T_TOOLTIP_AT_WAR_BUT_NOT_WITH_SUZERAIN_OR_ON_SAME_SIDE_AS_SUZERAIN
-					war = yes
-					NOT = { suzerain = { war_with = ROOT } }
-					NOT = {
-						any_war = {
-							any_defender = { character = ROOT }
-							any_defender = { ROOT = { suzerain = { character = PREVPREVPREV } } }
-						}
-					}
-					NOT = {
-						any_war = {
-							any_attacker = { character = ROOT }
-							any_attacker = { ROOT = { suzerain = { character = PREVPREVPREV } } }
-						}
-					}
-				}
-			}
-			
-			# You can only freely release yourself in fairly extreme circumstances
-			# NB: This is the main difference compared with permanent tributaries - realm size is not checked.
 			OR = {
 				
-				# If you're not independent or not landed, you don't need a protector (because you have a feudal lord)
-				# (This should probably have been cleaned up by however you became a vassal/unlanded... but just in case...)
-				independent = no
-				is_landed = no
+				expd_t_this_character_can_instantly_stop_being_a_protectorate = yes
 				
-				# Suzerain is not independent, or not landed, or is themselves a tributary, or has negative prestige while you have positive prestige.
-				suzerain = { independent = no }
-				suzerain = { is_landed = no }
-				suzerain = { is_tributary = yes }
 				AND = {
-					suzerain = { prestige < 0 }
-					prestige > 0
-				}
-				
-				# Suzerain has fewer troops than you and less prestige than you
-				# (Because you become the suzerain by having more troops or significantly more prestige.)
-				AND = {
-					suzerain = {
-						relative_power = {
-							who = ROOT
-							power < 0.8
+					
+					# Cannot be at war with your suzerain, or in a war on the same side as your suzerain
+					# IE: Local rebellions are OK, offensive wars are OK as long as you didn't call your suzerain, defensive wars aren't OK
+					OR = {
+						war = no
+						custom_tooltip = {
+							text = EXPD_T_TOOLTIP_AT_WAR_BUT_NOT_WITH_SUZERAIN_OR_ON_SAME_SIDE_AS_SUZERAIN
+							war = yes
+							NOT = { suzerain = { war_with = ROOT } }
+							NOT = {
+								any_war = {
+									any_defender = { character = ROOT }
+									any_defender = { ROOT = { suzerain = { character = PREVPREVPREV } } }
+								}
+							}
+							NOT = {
+								any_war = {
+									any_attacker = { character = ROOT }
+									any_attacker = { ROOT = { suzerain = { character = PREVPREVPREV } } }
+								}
+							}
 						}
 					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  0
-							prestige <= 1000
+					
+					# You can only freely release yourself in fairly extreme circumstances
+					# NB: This is the main difference compared with permanent tributaries - realm size is not checked.
+					OR = {
+						
+						# Suzerain has negative prestige while you have positive prestige.
+						AND = {
+							suzerain = { prestige < 0 }
+							prestige > 0
 						}
-						suzerain = { prestige <= 0 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  1000
-							prestige <= 2000
+						
+						# Suzerain has fewer troops than you and/or less prestige than you.
+						# (Because you become the suzerain by having more troops or significantly more prestige.)
+						suzerain = {
+							relative_power = {
+								who = ROOT
+								power < 0.25
+							}
 						}
-						suzerain = { prestige <= 1000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  2000
-							prestige <= 3000
+						AND = {
+							suzerain = {
+								relative_power = {
+									who = ROOT
+									power < 0.5
+								}
+							}
+							expd_t_this_characters_suzerain_has_less_prestige_than_this_character = yes
 						}
-						suzerain = { prestige <= 2000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  3000
-							prestige <= 4000
+						AND = {
+							suzerain = {
+								relative_power = {
+									who = ROOT
+									power < 0.8
+								}
+							}
+							expd_t_this_characters_suzerain_has_less_than_half_the_prestige_of_this_character = yes
 						}
-						suzerain = { prestige <= 3000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  4000
-							prestige <= 5000
-						}
-						suzerain = { prestige <= 4000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  5000
-							prestige <= 10000
-						}
-						suzerain = { prestige <= 5000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  10000
-							prestige <= 15000
-						}
-						suzerain = { prestige <= 10000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  15000
-							prestige <= 20000
-						}
-						suzerain = { prestige <= 15000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  20000
-							prestige <= 30000
-						}
-						suzerain = { prestige <= 20000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  30000
-							prestige <= 40000
-						}
-						suzerain = { prestige <= 30000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  40000
-							prestige <= 50000
-						}
-						suzerain = { prestige <= 40000 }
-					}
-				}
-				
-				# Debug mode! Player can bypass the other checks (but AI can't, to prevent them from instantly leaving).
-				trigger_if = {
-					limit = {
-						ai = no
-						has_global_flag = expd_t_debug_mode
-					}
-					custom_tooltip = {
-						text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
-						always = yes
 					}
 				}
 			}
@@ -763,6 +710,12 @@ decisions = {
 		ai_will_do = {
 			
 			factor = 1 # Base chance = 100%
+			
+			# Extreme chance if the relationship has become invalid
+			modifier = {
+				factor = 1000
+				expd_t_this_character_can_instantly_stop_being_a_protectorate = yes
+			}
 			
 			# Suzerain being lower tier is humiliating
 			modifier = {
