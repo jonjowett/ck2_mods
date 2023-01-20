@@ -4,9 +4,6 @@ targetted_decisions = {
 		only_playable = yes
 		filter = self
 		ai = no
-		from_potential = {
-			ai = no
-		}
 		potential = {
 			NOT = { has_global_flag = expd_t_debug_mode }
 		}
@@ -22,9 +19,6 @@ targetted_decisions = {
 		only_playable = yes
 		filter = self
 		ai = no
-		from_potential = {
-			ai = no
-		}
 		potential = {
 			has_global_flag = expd_t_debug_mode
 		}
@@ -34,6 +28,77 @@ targetted_decisions = {
 		effect = {
 			hidden_tooltip = { clr_global_flag = expd_t_debug_mode }
 		}
+	}
+	
+	expd_t_debug_list_all_protectors = {
+		only_playable = yes
+		filter = self
+		third_party_filter = all
+		ai = no
+		potential = {
+			has_global_flag = expd_t_debug_mode
+		}
+		allow = {
+			always = yes
+		}
+		third_party_potential = {
+			any_tributary = {
+				is_tributary = {
+					type = expd_t_protectorate
+					suzerain = FROMFROM
+				}
+			}
+		}
+		third_party_allow = {
+			always = no
+		}
+		effect = {
+			# Nothing
+		}
+	}
+	
+	expd_t_debug_list_all_protectorates = {
+		only_playable = yes
+		filter = self
+		third_party_filter = all
+		ai = no
+		potential = {
+			has_global_flag = expd_t_debug_mode
+		}
+		allow = {
+			always = yes
+		}
+		third_party_potential = {
+			is_tributary = { type = expd_t_protectorate }
+		}
+		third_party_allow = {
+			always = no
+		}
+		effect = {
+			# Nothing
+		}
+	}
+	
+	expd_t_debug_destroy_all_ai_protectorates = {
+		only_playable = yes
+		filter = self
+		ai = no
+		potential = {
+			has_global_flag = expd_t_debug_mode
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			any_character = {
+				limit = {
+					is_tributary = { type = expd_t_protectorate }
+					suzerain = { ai = yes }
+				}
+				suzerain = { remove_tributary = PREV }
+			}
+		}
+		
 	}
 	
 }
