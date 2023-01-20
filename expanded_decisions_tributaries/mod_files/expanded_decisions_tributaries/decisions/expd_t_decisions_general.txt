@@ -1,0 +1,35 @@
+targetted_decisions = {
+	
+	expd_t_transfer_vassal_to_tributary = {
+		ai = no
+		filter = independent_rulers
+		third_party_filter = vassals
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			is_tributary = { suzerain = FROM }
+		}
+		third_party_potential = {
+			liege = { character = FROM }
+			lower_real_tier_than = ROOT
+		}
+		allow = {
+			FROMFROM = {
+				lower_tier_than = ROOT
+				war = no
+			}
+			FROM = {
+				war = no
+			}
+		}
+		effect = {
+			FROMFROM = { set_defacto_liege = ROOT }
+			opinion = {
+				modifier = opinion_vassal_transfer
+				who = FROM
+			}
+		}
+	}
+	
+}
