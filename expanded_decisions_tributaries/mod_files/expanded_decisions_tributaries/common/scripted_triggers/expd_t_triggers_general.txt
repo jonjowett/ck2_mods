@@ -37,12 +37,5 @@ expd_t_is_modded_tributary_of_from = {
 	is_tributary = {
 		type = expd_t_protectorate
 		suzerain = FROM
-		#Validator hates this version
-		#suzerain = {
-		#	OR = {
-		#		character = FROM
-		#		any_liege = { character = FROM }
-		#	}
-		#}
 	}
 }
