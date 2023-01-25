@@ -42,10 +42,11 @@ targetted_decisions = {
 			always = yes
 		}
 		third_party_potential = {
-			any_tributary = {
-				is_tributary = {
-					type = expd_t_protectorate
-					suzerain = FROMFROM
+			FROMFROM = {
+				any_tributary = {
+					is_tributary = {
+						type = expd_t_protectorate
+					}
 				}
 			}
 		}
@@ -69,7 +70,7 @@ targetted_decisions = {
 			always = yes
 		}
 		third_party_potential = {
-			is_tributary = { type = expd_t_protectorate }
+			FROMFROM = { is_tributary = { type = expd_t_protectorate } }
 		}
 		third_party_allow = {
 			always = no
