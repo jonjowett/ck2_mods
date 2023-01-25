@@ -39,7 +39,7 @@ expd_t_free_tributary_cb = {
 			OR = {
 				AND = {
 					is_tributary = yes
-					suzerain = {
+					any_suzerain = {
 						OR = {
 							character = FROM
 							any_liege = {
@@ -50,7 +50,7 @@ expd_t_free_tributary_cb = {
 				}
 				any_vassal = {
 					is_tributary = yes
-					suzerain = {
+					any_suzerain = {
 						OR = {
 							character = FROM
 							any_liege = {
@@ -86,7 +86,7 @@ expd_t_free_tributary_cb = {
 			if = {
 				limit = {
 					is_tributary = yes
-					suzerain = {
+					any_suzerain = {
 						OR = {
 							character = FROM
 							any_liege = {
@@ -95,14 +95,14 @@ expd_t_free_tributary_cb = {
 						}
 					}
 				}
-				suzerain = {
+				any_suzerain = {
 					remove_tributary = PREV
 				}
 			}
 			any_vassal = {
 				limit = {
 					is_tributary = yes
-					suzerain = {
+					any_suzerain = {
 						OR = {
 							character = FROM
 							any_liege = {
@@ -111,7 +111,7 @@ expd_t_free_tributary_cb = {
 						}
 					}
 				}
-				suzerain = {
+				any_suzerain = {
 					remove_tributary = PREV
 				}
 			}
