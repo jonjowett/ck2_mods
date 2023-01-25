@@ -11,14 +11,41 @@ targetted_decisions = {
 			is_tributary = { suzerain = FROM }
 		}
 		third_party_potential = {
-			liege = { character = FROM }
-			lower_real_tier_than = ROOT
+			FROMFROM = {
+				liege = { character = ROOT_FROM }
+				lower_real_tier_than = ROOT
+			}
 		}
-		allow = {
+		third_party_allow = {
 			FROMFROM = {
 				lower_tier_than = ROOT
 				war = no
 			}
+		}
+		third_party_score = {
+			factor = 1
+			
+			# Prioritise de jure vassals of ROOT above all others
+			modifier = {
+				factor = 10
+				FROMFROM = { de_jure_liege_or_above = ROOT }
+			}
+			
+			# Then prioritise higher-ranking characters
+			modifier = {
+				factor = 2
+				FROMFROM = { higher_real_tier_than = DUKE  }
+			}
+			modifier = {
+				factor = 2
+				FROMFROM = { higher_real_tier_than = COUNT }
+			}
+			modifier = {
+				factor = 2
+				FROMFROM = { higher_real_tier_than = BARON }
+			}
+		}
+		allow = {
 			FROM = {
 				war = no
 			}
