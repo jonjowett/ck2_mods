@@ -5,6 +5,9 @@
 #                              #
 ################################
 
+# ROOT is the decision target (ie. potential protectorate)
+# FROM is the decision taker (ie. potential protector)
+
 targetted_decisions = {
 	
 	expd_t_force_protectorate = {
@@ -115,7 +118,7 @@ targetted_decisions = {
 					}
 				}
 				
-				expd_t_root_meets_basic_requirements_to_become_tributary_of_from_by_decision = yes
+				expd_t_root_meets_basic_requirements_to_become_protectorate_of_from_by_decision = yes
 				
 				# Cannot offer protection to someone who hates you (either rival or crime)
 				NOT = { is_foe = FROM }
@@ -134,47 +137,12 @@ targetted_decisions = {
 						}
 					}
 					
-					# Unfortunately, there's no prestige diff condition, hence this hacky workaround
-					conditional_tooltip = {
-						trigger = {
-							prestige <= 1000
+					FROM = {
+						show_scope_change = no
+						ROOT = {
+							show_scope_change = no
+							expd_t_prev_has_more_than_double_the_prestige_of_root = yes
 						}
-						FROM = { prestige >= 5000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  1000
-							prestige <= 2000
-						}
-						FROM = { prestige >= 10000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  2000
-							prestige <= 3000
-						}
-						FROM = { prestige >= 15000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  3000
-							prestige <= 4000
-						}
-						FROM = { prestige >= 20000 }
-					}
-					conditional_tooltip = {
-						trigger = {
-							prestige >  4000
-							prestige <= 5000
-						}
-						FROM = { prestige >= 25000 }
-					}
-					#This will always evaluate to false, but it ensures that the player always sees that there is a prestige option here
-					conditional_tooltip = {
-						trigger = {
-							prestige > 5000
-						}
-						prestige <= 5000
 					}
 					
 				}
@@ -352,10 +320,11 @@ targetted_decisions = {
 				any_dynasty_member = {
 					is_landed = yes
 					independent = yes
+					is_tributary = no
 					NOT = { character = FROM }
-					max_realm_levy_diff = {
+					relative_power = {
 						who = FROM
-						value >= 1000
+						power > 1
 					}
 				}
 			}
@@ -394,7 +363,7 @@ targetted_decisions = {
 			
 			# Effect of being a holy order or mercenary band (IE: Can raise their own probably-rather-large band to defend themselves)
 			additive_modifier = {
-				value = -50
+				value = -100
 				OR = {
 					holy_order = yes
 					mercenary = yes
@@ -506,7 +475,7 @@ targetted_decisions = {
 				}
 			}
 			
-			# Effect of my power (if I'm strong or wealthy, I don't need protection!)
+			# Effect of potential protectorate's power (if I'm strong or wealthy, I don't need protection!)
 			additive_modifier = {
 				value = -50
 				realm_levies >= 5000
@@ -534,6 +503,72 @@ targetted_decisions = {
 			additive_modifier = {
 				value = -50
 				wealth >= 5000
+			}
+			
+			# Effect of relative power: A potential protectorate is more likely to accept if their potential protector is much more powerful than they are, and less likely if their potential protector is similarly/less powerful
+			# NB: Being significantly less powerful should be blocked by the check to ensure that the potential protectorate can't immediately escape
+			additive_modifier = {
+				value = -100
+				relative_power = {
+					who = FROM
+					power >= 4
+				}
+			}
+			additive_modifier = {
+				value = -100
+				relative_power = {
+					who = FROM
+					power >= 3
+				}
+			}
+			additive_modifier = {
+				value = -100
+				relative_power = {
+					who = FROM
+					power >= 2
+				}
+			}
+			additive_modifier = {
+				value = -100
+				relative_power = {
+					who = FROM
+					power >= 1
+				}
+			}
+			additive_modifier = {
+				value = -100
+				relative_power = {
+					who = FROM
+					power >= 0.8
+				}
+			}
+			additive_modifier = {
+				value = 50
+				relative_power = {
+					who = FROM
+					power < 0.4
+				}
+			}
+			additive_modifier = {
+				value = 50
+				relative_power = {
+					who = FROM
+					power < 0.2
+				}
+			}
+			additive_modifier = {
+				value = 50
+				relative_power = {
+					who = FROM
+					power < 0.1
+				}
+			}
+			additive_modifier = {
+				value = 50
+				relative_power = {
+					who = FROM
+					power < 0.05
+				}
 			}
 			
 			# Effect of being primary defender in a losing war
@@ -591,6 +626,71 @@ targetted_decisions = {
 				}
 			}
 			
+			# Effect of distance (if the protector is further away then they are less likely to be effective)
+			additive_modifier = {
+				value = -50
+				distance_from_realm = {
+					who = FROM
+					value >= 100
+				}
+			}
+			additive_modifier = {
+				value = -50
+				distance_from_realm = {
+					who = FROM
+					value >= 200
+				}
+			}
+			additive_modifier = {
+				value = -50
+				distance_from_realm = {
+					who = FROM
+					value >= 300
+				}
+			}
+			additive_modifier = {
+				value = -100
+				distance_from_realm = {
+					who = FROM
+					value >= 500
+				}
+			}
+			additive_modifier = {
+				value = -100
+				distance_from_realm = {
+					who = FROM
+					value >= 1000
+				}
+			}
+			additive_modifier = {
+				value = -100
+				distance_from_realm = {
+					who = FROM
+					value >= 2000
+				}
+			}
+			additive_modifier = {
+				value = -100
+				distance_from_realm = {
+					who = FROM
+					value >= 3000
+				}
+			}
+			additive_modifier = {
+				value = -100
+				distance_from_realm = {
+					who = FROM
+					value >= 4000
+				}
+			}
+			additive_modifier = {
+				value = -100
+				distance_from_realm = {
+					who = FROM
+					value >= 5000
+				}
+			}
+			
 			# Debug mode!
 			additive_modifier = {
 				value = 1000
@@ -619,6 +719,8 @@ targetted_decisions = {
 #                              #
 ################################
 
+# ROOT is the decision taker (ie. the protectorate)
+
 decisions = {
 	expd_t_protectorate_independence_normal = {
 		is_high_prio = yes
@@ -634,12 +736,27 @@ decisions = {
 			
 			OR = {
 				
-				expd_t_this_character_can_instantly_stop_being_a_protectorate = yes
+				# Get out for free if you're a player in debug mode
+				trigger_if = {
+					limit = { has_global_flag = expd_t_debug_mode }
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
+						ai = no
+					}
+				}
 				
+				# Get out for free if either you or your suzerain is not independent
+				suzerain = {
+					show_scope_change = no
+					ROOT = {
+						show_scope_change = no
+						expd_t_root_can_instantly_stop_being_a_protectorate_of_prev_due_to_non_independence = yes
+					}
+				}
+				
+				# Not at war with your suzerain, and not in a war on the same side as your suzerain
+				# And signifcantly more powerful or prestigious than your suzerain
 				AND = {
-					
-					# Cannot be at war with your suzerain, or in a war on the same side as your suzerain
-					# IE: Local rebellions are OK, offensive wars are OK as long as you didn't call your suzerain, defensive wars aren't OK
 					OR = {
 						war = no
 						custom_tooltip = {
@@ -660,42 +777,11 @@ decisions = {
 							}
 						}
 					}
-					
-					# You can only freely release yourself in fairly extreme circumstances
-					# NB: This is the main difference compared with permanent tributaries - realm size is not checked.
-					OR = {
-						
-						# Suzerain has negative prestige while you have positive prestige.
-						AND = {
-							suzerain = { prestige < 0 }
-							prestige > 0
-						}
-						
-						# Suzerain has fewer troops than you and/or less prestige than you.
-						# (Because you become the suzerain by having more troops or significantly more prestige.)
-						suzerain = {
-							relative_power = {
-								who = ROOT
-								power < 0.25
-							}
-						}
-						AND = {
-							suzerain = {
-								relative_power = {
-									who = ROOT
-									power < 0.5
-								}
-							}
-							expd_t_this_characters_suzerain_has_less_prestige_than_this_character = yes
-						}
-						AND = {
-							suzerain = {
-								relative_power = {
-									who = ROOT
-									power < 0.8
-								}
-							}
-							expd_t_this_characters_suzerain_has_less_than_half_the_prestige_of_this_character = yes
+					suzerain = {
+						show_scope_change = no
+						ROOT = {
+							show_scope_change = no
+							expd_t_root_has_significantly_more_troops_or_prestige_than_prev = yes
 						}
 					}
 				}
@@ -714,13 +800,19 @@ decisions = {
 			# Extreme chance if the relationship has become invalid
 			modifier = {
 				factor = 1000
-				expd_t_this_character_can_instantly_stop_being_a_protectorate = yes
+				suzerain = {
+					show_scope_change = no
+					ROOT = {
+						show_scope_change = no
+						expd_t_root_can_instantly_stop_being_a_protectorate_of_prev_due_to_non_independence = yes
+					}
+				}
 			}
 			
 			# Suzerain being lower tier is humiliating
 			modifier = {
 				factor = 10
-				suzerain = { lower_real_tier_than = ROOT }
+				any_suzerain = { lower_real_tier_than = ROOT }
 			}
 			
 			# More chance with higher AI ambition
@@ -774,10 +866,6 @@ decisions = {
 						who = ROOT
 						power >= 2
 					}
-					relative_power_including_allies_attacker = {
-						who = ROOT
-						power < 4
-					}
 				}
 			}
 			modifier = {
@@ -787,10 +875,6 @@ decisions = {
 					relative_power_including_allies_attacker = {
 						who = ROOT
 						power >= 4
-					}
-					relative_power_including_allies_attacker = {
-						who = ROOT
-						power < 10
 					}
 				}
 			}

@@ -1,13 +1,9 @@
-expd_t_root_meets_basic_requirements_to_become_tributary_of_from_by_decision = {
+expd_t_root_meets_basic_requirements_to_become_protectorate_of_from_by_decision = {
 	
 	ROOT = {
 		
 		# Prettification
 		show_scope_change = no
-		
-		# Must be independent non-tributary
-		independent  = yes
-		is_tributary = no
 		
 		# ROOT must not be at war, or must be primary defender in a war (in the latter case, they can call you instantly after becoming a tributary)
 		OR = {
@@ -21,8 +17,24 @@ expd_t_root_meets_basic_requirements_to_become_tributary_of_from_by_decision = {
 			value >= 0
 		}
 		
-		FROM = { prestige > 0 }
+	}
 	
+	custom_tooltip = {
+		text = EXPD_T_TOOLTIP_ROOT_CANNOT_IMMEDIATELY_STOP_BEING_A_PROTECTORATE_OF_PREV_DUE_TO_NON_INDEPENDENCE
+		FROM = {
+			ROOT = {
+				expd_t_root_has_significantly_more_troops_or_prestige_than_prev = no
+			}
+		}
+	}
+	
+	custom_tooltip = {
+		text = EXPD_T_TOOLTIP_ROOT_CANNOT_IMMEDIATELY_STOP_BEING_A_PROTECTORATE_OF_PREV_DUE_TO_RELATIVE_PRESTIGE_OR_ARMY_SIZE
+		FROM = {
+			ROOT = {
+				expd_t_root_has_significantly_more_troops_or_prestige_than_prev = no
+			}
+		}
 	}
 	
 }
@@ -30,13 +42,19 @@ expd_t_root_meets_basic_requirements_to_become_tributary_of_from_by_decision = {
 expd_t_from_can_instantly_force_root_to_be_protectorate = {
 	
 	#Basic requirements must be met
-	expd_t_root_meets_basic_requirements_to_become_tributary_of_from_by_decision = yes
+	expd_t_root_meets_basic_requirements_to_become_protectorate_of_from_by_decision = yes
 	
 	# FROM must have somehow obtained ROOT's primary title for them
 	ROOT = {
 		
 		# Prettification
 		show_scope_change = no
+		
+		# Only AI can be forced to be protectorates
+		conditional_tooltip = {
+			trigger = { ai = no }
+			ai = yes
+		}
 		
 		OR = {
 			
@@ -69,8 +87,8 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 			}
 			
 			# Granted the target their primary title (which either gave them de facto independence, or the decision taker granted independence manually)
-			AND = {
-				real_tier = DUKE
+			trigger_if = {
+				limit = { real_tier = DUKE }
 				OR = {
 					has_opinion_modifier = {
 						who = FROM
@@ -82,8 +100,8 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 					}
 				}
 			}
-			AND = {
-				real_tier = KING
+			trigger_else_if = {
+				limit = { real_tier = KING }
 				OR = {
 					has_opinion_modifier = {
 						who = FROM
@@ -95,8 +113,8 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 					}
 				}
 			}
-			AND = {
-				real_tier = EMPEROR
+			trigger_else_if = {
+				limit = { real_tier = EMPEROR }
 				OR = {
 					has_opinion_modifier = {
 						who = FROM
@@ -108,36 +126,91 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 					}
 				}
 			}
+			trigger_else = {
+				custom_tooltip = {
+					text = EXPD_T_TOOLTIP_ROOT_IS_DUKE_OR_HIGHER_AND_WAS_GRANTED_PRIMARY_TIER_TITLE_BY_FROM
+					always = no
+				}
+			}
 		}
 	}
-	
-	# Players can't be forced to be protectorates
-	ROOT = { ai = no }
 	
 }
 
-expd_t_this_character_can_instantly_stop_being_a_protectorate = {
-	trigger_if = {
-		limit = { has_global_flag = expd_t_debug_mode }
+expd_t_root_has_significantly_more_troops_or_prestige_than_prev = {
+	OR = {
+		
+		# Prev has negative prestige while root has positive prestige.
 		custom_tooltip = {
-			text = { EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED }
-			ai = no
+			text = EXPD_T_TOOLTIP_PREV_HAS_LTMINUS100_PRESTIGE_AND_ROOT_HAS_GT100_PRESTIGE
+			PREV = { prestige < 100 }
+			ROOT = { prestige > 100 }
+		}
+		
+		# Suzerain has fewer troops than you and/or less prestige than you.
+		# (Because you become the suzerain by having more troops or significantly more prestige.)
+		custom_tooltip = {
+			text = EXPD_T_TOOLTIP_PREV_HAS_SMALLER_ARMY_THAN_ROOT_25PC
+			PREV = {
+				relative_power = {
+					who = ROOT
+					power < 0.25
+				}
+			}
+		}
+		AND = {
+			custom_tooltip = {
+				text = EXPD_T_TOOLTIP_PREV_HAS_SMALLER_ARMY_THAN_ROOT_50PC
+				PREV = {
+					relative_power = {
+						who = ROOT
+						power < 0.5
+					}
+				}
+			}
+			expd_t_prev_has_less_prestige_than_root = yes
+		}
+		AND = {
+			custom_tooltip = {
+				text = EXPD_T_TOOLTIP_PREV_HAS_SMALLER_ARMY_THAN_ROOT_80PC
+				PREV = {
+					relative_power = {
+						who = ROOT
+						power < 0.8
+					}
+				}
+			}
+			expd_t_prev_has_less_than_half_the_prestige_of_root = yes
 		}
 	}
-	custom_tooltip = {
-		text = { EXPD_T_TOOLTIP_PROTECTORATE_OR_SUZERAIN_IS_UNLANDED_OR_NOT_INDEPENDENT }
-		OR = {
-			
-			# If you're not independent or not landed, you don't need a protector (because you have a feudal lord)
-			# (This should probably have been cleaned up by however you became a vassal/unlanded... but just in case...)
-			independent = no
-			is_landed = no
-			
-			# Suzerain is not independent, or not landed, or is themselves a tributary, or has negative prestige while you have positive prestige.
-			suzerain = { independent = no }
-			suzerain = { is_landed = no }
-			suzerain = { is_tributary = yes }
-			
+}
+
+expd_t_root_can_instantly_stop_being_a_protectorate_of_prev_due_to_non_independence = {
+	OR = {
+		
+		# If you're not independent or not landed, you don't need a protector (because you have a feudal lord)
+		# (This should probably have been cleaned up by however you became a vassal/unlanded... but just in case...)
+		custom_tooltip = {
+			text = EXPD_T_TOOLTIP_ROOT_IS_INDEPENDENT_OR_UNLANDED
+			ROOT = {
+				OR = {
+					independent = no
+					is_landed = no
+				}
+			}
 		}
+		
+		# Suzerain is not independent, or not landed, or is themselves a tributary
+		custom_tooltip = {
+			text = EXPD_T_TOOLTIP_PREV_IS_INDEPENDENT_OR_UNLANDED_OR_TRIBUTARY
+			PREV = {
+				OR = {
+					independent = no
+					is_landed = no
+					is_tributary = yes
+				}
+			}
+		}
+		
 	}
 }

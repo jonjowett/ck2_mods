@@ -15,12 +15,7 @@ expd_t_free_tributary_cb = {
 
 	can_use = {
 		ROOT = {
-			OR = {
-				expd_t_is_modded_tributary_of_from = yes
-				any_vassal = {
-					expd_t_is_modded_tributary_of_from = yes
-				}
-			}
+			expd_t_is_modded_tributary_of_from = yes
 		}
 	}
 
@@ -35,31 +30,9 @@ expd_t_free_tributary_cb = {
 	}
 
 	is_valid = {
+		# Valid as long as this character is a protectorate of the defender
 		ROOT = {
-			OR = {
-				AND = {
-					is_tributary = yes
-					any_suzerain = {
-						OR = {
-							character = FROM
-							any_liege = {
-								character = FROM
-							}
-						}
-					}
-				}
-				any_vassal = {
-					is_tributary = yes
-					any_suzerain = {
-						OR = {
-							character = FROM
-							any_liege = {
-								character = FROM
-							}
-						}
-					}
-				}
-			}
+			expd_t_is_modded_tributary_of_from = yes
 		}
 	}
 
@@ -79,41 +52,11 @@ expd_t_free_tributary_cb = {
 			show_scope_change = no
 			prestige = -100
 		}
-
 		ROOT = {
 			show_scope_change = no
 			prestige = 100
-			if = {
-				limit = {
-					is_tributary = yes
-					any_suzerain = {
-						OR = {
-							character = FROM
-							any_liege = {
-								character = FROM
-							}
-						}
-					}
-				}
-				any_suzerain = {
-					remove_tributary = PREV
-				}
-			}
-			any_vassal = {
-				limit = {
-					is_tributary = yes
-					any_suzerain = {
-						OR = {
-							character = FROM
-							any_liege = {
-								character = FROM
-							}
-						}
-					}
-				}
-				any_suzerain = {
-					remove_tributary = PREV
-				}
+			any_suzerain = {
+				remove_tributary = PREV
 			}
 		}
 	}
@@ -138,7 +81,6 @@ expd_t_free_tributary_cb = {
 				value = 4.0
 			}
 		}
-
 		FROM = {
 			show_scope_change = no
 			prestige = 100
