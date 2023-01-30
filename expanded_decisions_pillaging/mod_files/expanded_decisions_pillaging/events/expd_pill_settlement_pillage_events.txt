@@ -11,6 +11,7 @@ character_event = {
 	picture = GFX_evt_firey_silhouette_hf
 	#ai = yes
 	trigger = {
+		has_global_flag = expd_pill_debug_mode_enabled # Temporarily, only show these events in debug mode
 		ROOT = {
 			FROM = {
 				expd_pill_this_holding_is_potentially_pillageable_by_prev_character = yes

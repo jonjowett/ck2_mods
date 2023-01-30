@@ -1,0 +1,41 @@
+targeted_decisions = {
+	# Currently, debug mode is only used to enable/disable the events that pop up post-conquest
+	expd_pill_debug_mode_enable = {
+		filter = self
+		is_high_prio = yes
+		ai = no
+		only_playable = yes
+		potential = {
+			NOT = { has_global_flag    = expd_pill_blocked_global     }
+			NOT = { has_character_flag = expd_pill_blocked_char       }
+			NOT = { has_global_flag    = expd_pill_debug_mode_enabled }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = expd_pill_debug_mode_enabled
+			}
+		}
+	}
+	expd_pill_debug_mode_disable = {
+		filter = self
+		is_high_prio = yes
+		ai = no
+		only_playable = yes
+		potential = {
+			NOT = { has_global_flag    = expd_pill_blocked_global     }
+			NOT = { has_character_flag = expd_pill_blocked_char       }
+			        has_global_flag    = expd_pill_debug_mode_enabled
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				clr_global_flag = expd_pill_debug_mode_enabled
+			}
+		}
+	}
+}
