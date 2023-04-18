@@ -24,6 +24,14 @@ targetted_decisions = {
 		}
 
 		allow = {
+			
+			# Replicate the from_potential block, because somehow men are STILL managing to make themselves shieldmaidens
+			is_female = yes
+			is_adult = yes
+			NOT = { trait = shieldmaiden }
+			is_member_of_any_warrior_lodge_trigger = yes
+			
+			# Otherwise, use the same criteria as for a ruler making a courtier a shieldmaiden
             custom_tooltip = {
 				text = is_not_incapable_inbred_or_imbecile_tt
 				NOT = { trait = incapable }
@@ -44,6 +52,7 @@ targetted_decisions = {
 				trigger = { is_ruler = yes }
 				wealth >= 50
 			}
+			
 		}
 
 		effect = {
