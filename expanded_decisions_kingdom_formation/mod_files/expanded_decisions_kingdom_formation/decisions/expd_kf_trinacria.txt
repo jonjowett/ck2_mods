@@ -5,21 +5,11 @@ decisions = {
 		ai_check_interval = 60
 
 		potential = {
-			d_sicily = {
-				k_trinacria = {
-					expd_kf_root_can_see_decision_to_create_this_kingdom_from_prev_single_duchy = yes
-				}
-			}
+			expd_kf_root_can_see_decision_to_create_trinacria = yes
 		}
 
 		allow = {
-			d_sicily = {
-				show_scope_change = no
-				k_trinacria = {
-					show_scope_change = no
-					expd_kf_root_can_take_decision_to_create_this_kingdom_from_prev_single_duchy = yes
-				}
-			}
+			expd_kf_root_can_take_decision_to_create_trinacria = yes
 		}
 
 		effect = {
@@ -28,6 +18,13 @@ decisions = {
 				k_trinacria = {
 					show_scope_change = no
 					expd_kf_create_this_kingdom_from_prev_single_duchy_and_grant_to_root = yes
+				}
+			}
+			if = {
+				limit = { d_malta_expd_df = { is_titular = no } }
+				custom_tooltip = {
+					text = expd_kf_malta_becomes_de_jure_part_of_trinacria_tt
+					d_malta_expd_df = { de_jure_liege = k_trinacria }
 				}
 			}
 		}

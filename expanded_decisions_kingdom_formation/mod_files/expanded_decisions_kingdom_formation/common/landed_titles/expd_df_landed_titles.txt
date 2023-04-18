@@ -51,3 +51,39 @@ d_malta_expd_df = {
 		}
 	}
 }
+
+d_kutch_expd_df = {
+	color={ 195 70 10 }
+	color2={ 255 255 255 }
+	capital = 1295 # Kutch
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				d_kutch_expd_df = {
+					is_titular = yes
+				}
+			}
+			d_kutch_expd_df = {
+				is_titular = no
+			}
+		}
+	}
+}
+
+d_maldives_expd_df = {
+	color={ 120 75 75 }
+	color2={ 255 255 255 }
+	capital = 1360 # Maldives
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				d_maldives_expd_df = {
+					is_titular = yes
+				}
+			}
+			d_maldives_expd_df = {
+				is_titular = no
+			}
+		}
+	}
+}

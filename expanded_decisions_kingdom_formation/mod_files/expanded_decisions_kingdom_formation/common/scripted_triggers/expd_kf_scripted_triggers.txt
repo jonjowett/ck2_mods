@@ -170,6 +170,165 @@ expd_kf_root_can_take_decision_to_create_this_kingdom_from_prev_single_duchy = {
 	
 }
 
+#############
+# Trinacria #
+#############
+
+expd_kf_root_can_see_decision_to_create_trinacria = {
+	ROOT = {
+		show_scope_change = no
+		
+		# ROOT must own or control a province in the duchy
+		d_sicily = { # The source duchy
+			tier = DUKE # Just to make it VERY clear that this is referring to a duchy
+			expd_kf_root_controls_a_province_in_this_duchy = yes
+		}
+		
+		# ROOT must not be de jure liege of the source duchy
+		d_sicily = { # The source duchy
+			expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
+		}
+		
+		# ROOT must not own or control any other duchies in the same de jure kingdom - except perhaps the custom duchy of Malta
+		expd_kf_root_does_not_own_other_duchies_in_the_same_kingdom_as_sicily_except_perhaps_malta = yes
+		
+		# The new kingdom must be titular and have no holder
+		k_trinacria = {
+			has_holder = no
+			is_titular = yes
+		}
+		
+		# Copy various alternate start settings which are included in similar vanilla decisions
+		NOR = {
+			has_alternate_start_setting = {
+				setting = dejure
+				option = random
+			}
+			has_alternate_start_setting = {
+				setting = title_names
+				option = random
+			}
+			has_alternate_start_setting = {
+				setting = title_names
+				option = random_including_duchies
+			}
+		}
+	}
+}
+
+expd_kf_root_can_take_decision_to_create_trinacria = {
+	ROOT = {
+		show_scope_change = no
+		
+		# Standard vanilla conditions
+		is_adult = yes
+		independent = yes
+		prisoner = no
+		war = no
+		NOT = { trait = incapable }
+		
+		# Must completely control the duchy of Sicily
+		d_sicily = {
+			tier = DUKE
+			ROOT = { 
+				show_scope_change = no
+				completely_controls = PREV
+			}
+			# Duplicate these conditions from the "potential" block, so the player knows not to break them
+			expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
+			expd_kf_root_does_not_own_other_duchies_in_the_same_kingdom_as_sicily_except_perhaps_malta = yes
+			# Must personally hold the duchy title, or have a vassal hold it
+			has_holder = yes
+			holder_scope = {
+				OR = {
+					character = ROOT
+					is_vassal_or_below_of = ROOT
+				}
+			}
+		}
+		
+		# If Malta is non-titular, must completely control the duchy of Malta
+		trigger_if = {
+			limit = { d_malta_expd_df = { is_titular = no } }
+			d_malta_expd_df = {
+				ROOT = { 
+					show_scope_change = no
+					completely_controls = PREV
+				}
+				tier = DUKE
+				# Duplicate these conditions from the "potential" block, so the player knows not to break them
+				expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
+				# Must personally hold the duchy title, or have a vassal hold it
+				has_holder = yes
+				holder_scope = {
+					OR = {
+						character = ROOT
+						is_vassal_or_below_of = ROOT
+					}
+				}
+			}
+		}
+		
+		# Prestige & wealth & piety (wealth & piety will be deducted if you take the decision)
+		trigger_if = {
+			limit = {
+				ai = no
+				higher_real_tier_than = DUKE
+			}
+			prestige = 1000
+		}
+		trigger_else = {
+			prestige = 2000
+		}
+		wealth = 300
+		piety = 400
+		
+	}
+	
+}
+
+expd_kf_root_does_not_own_other_duchies_in_the_same_kingdom_as_sicily_except_perhaps_malta = {
+	
+	# ROOT (or one of his vassals) does not have another duchy title in the same kingdom...
+	custom_tooltip = {
+		text = expd_kf_root_does_not_own_other_duchies_in_the_same_kingdom_as_sicily_except_perhaps_malta_tt
+		NOT = {
+			d_sicily = {
+				any_de_jure_liege_title = {
+					tier = KING
+					ROOT = {
+						any_realm_title = {
+							tier = DUKE
+							de_jure_liege = PREVPREV
+							NOT = { title = d_sicily }
+							NOT = { title = d_malta_expd_df }
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	# ...And ROOT does not completely control another duchy in the same kingdom
+	custom_tooltip = {
+		text = expd_kf_root_does_not_completely_control_other_duchies_in_the_same_kingdom_as_sicily_except_perhaps_malta_tt
+		NOT = {
+			d_sicily = {
+				any_de_jure_liege_title = {
+					tier = KING
+					any_de_jure_vassal_title = {
+						tier = DUKE
+						NOT = { title = d_sicily }
+						NOT = { title = d_malta_expd_df }
+						is_titular = no # Just in case titular duchies that are de jure part of a kingdom (eg. Amalfi) return "true" for "completely_controls"
+						ROOT = { completely_controls = PREV }
+					}
+				}
+			}
+		}
+	}
+}
+
 ##########
 # Saxony #
 ##########

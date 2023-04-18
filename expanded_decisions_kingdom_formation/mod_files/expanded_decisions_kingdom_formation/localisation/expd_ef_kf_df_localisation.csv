@@ -15,8 +15,6 @@ expd_ef_this_province_becomes_the_traditional_capital_of_the_empire_tt;[This.Get
 #
 # Kingdom formation decisions
 #
-expd_kf_create_cyprus;Create the Kingdom of Cyprus;Créer le Royaume de Chypre;Gründet das Königreich Zypern;;Crea el Reino de Chipre;;;;;x
-expd_kf_create_cyprus_desc;A new era will begin with my ascension as King of Cyprus.;Une nouvelle ère commence avec mon ascension sur le trône de Roi de Chypre.;Eine neue Ära wird mit meinem Aufstieg zum König von Zypern beginnen.;;Empieza una nueva era con mi ascenso al trono de Chipre.;;;;;x
 expd_kf_create_krete;Declare the Kingdom of Crete;;;;;;;;;x
 expd_kf_create_krete_desc;The Kingdom of Crete was, in ancient history, a strong and independent realm. It is also a strategic island fortress in the Eastern Mediterranean. Therefore, let us recreate the ancient kingdom and declare ourselves the rightful masters of the mythical land of Minos!;;;;;;;;;x
 expd_kf_create_trinacria;Divide Sicily;;;;;;;;;x
@@ -31,6 +29,19 @@ expd_kf_create_iceland;Declare the Kingdom of Iceland;;;;;;;;;x
 expd_kf_create_iceland_desc;The island of Iceland, originally uninhabited, was settled by Norse explorers in the 9th century and has since been largely ignored by the rest of Scandinavia and Europe. Let us therefore proclaim a new kingdom of Iceland, so that we may better manage our own affairs without European interference.;;;;;;;;;x
 expd_kf_create_mallorca;Declare the Balearic Kingdom;;;;;;;;;x
 expd_kf_create_mallorca_desc;The Balearic islands have been known since antiquity as the home of a unique culture which produced, among other things, some of the best slingers in the known world. Therefore, let us formalise this separation by declaring a new Balearic Kingdom!;;;;;;;;;x
+expd_kf_create_socotra;Declare the Kingdom of Socotra;;;;;;;;;x
+expd_kf_create_socotra_desc;The island of Socotra is located far from the mainland and is surrounded by treacherous currents, so it has always been somewhat autonomous. Therefore, let us reaffirm that autonomy by declaring a new kingdom of Socotra!;;;;;;;;;x
+expd_kf_create_kutch;Declare the Kingdom of Kutch;;;;;;;;;x
+expd_kf_create_kutch_desc;The islands of Kutch are surrounded by marshes and salt flats, which are impassible for most of the year. Therefore, let us proclaim a new kingdom of Kutch, wholly separate and independent from mainland affairs.;;;;;;;;;x
+expd_kf_create_maldives;Declare the Kingdom of the Maldives;;;;;;;;;x
+expd_kf_create_maldives_desc;The islands of the Maldives have always been viewed as a backwater and an afterthought by the inhabitants of southern India and Lanka. Let us therefore proclaim a new kingdom of the Maldives, so that we may better manage our own affairs without mainlander interference.;;;;;;;;;x
+#
+# Unusual kingdom formation decisions
+#
+# Cyprus - copied from vanilla
+expd_kf_create_cyprus;Create the Kingdom of Cyprus;Créer le Royaume de Chypre;Gründet das Königreich Zypern;;Crea el Reino de Chipre;;;;;x
+expd_kf_create_cyprus_desc;A new era will begin with my ascension as King of Cyprus.;Une nouvelle ère commence avec mon ascension sur le trône de Roi de Chypre.;Eine neue Ära wird mit meinem Aufstieg zum König von Zypern beginnen.;;Empieza una nueva era con mi ascenso al trono de Chipre.;;;;;x
+# Saxony - requires conquest of multiple duchies
 expd_kf_create_saxony;Create the Kingdom of Saxony;;;;;;;;;x
 expd_kf_create_saxony_desc;Having conquered all of the lands of Saxony, it is only right to reinstate the Kingdom of Saxony!;;;;;;;;;x
 #
@@ -42,6 +53,10 @@ expd_df_create_canarias;Create the Duchy of Canarias;;;;;;;;;x
 expd_df_create_canarias_desc;We believe that the islands of Canarias should be viewed as their own separate island entity, unrelated to the mainland.;;;;;;;;;x
 expd_df_create_malta;Create the Duchy of Malta;;;;;;;;;x
 expd_df_create_malta_desc;We believe that the island of Malta should be viewed as its own separate island entity, unrelated to the mainland.;;;;;;;;;x
+expd_df_create_kutch;Create the Duchy of Kutch;;;;;;;;;x
+expd_df_create_kutch_desc;We believe that the islands of Kutch should be viewed as their own separate entity, unrelated to the mainland.;;;;;;;;;x
+expd_df_create_maldives;Create the Duchy of the Maldives;;;;;;;;;x
+expd_df_create_maldives_desc;We believe that the islands of the Maldives should be viewed as their own separate entity, unrelated to the mainland.;;;;;;;;;x
 #
 # Duchy merge decisions
 #
@@ -64,6 +79,12 @@ k_iceland_expd_kf;Iceland;Islande;Island;;Islandia;;;;;;;;;x
 k_iceland_expd_kf_adj;Icelandic;islandaise;Isländisch;;Islandesa;;;;;;;;;x
 k_mallorca_expd_kf;Balearic Kingdom;;;;;;;;;;;;;x
 k_mallorca_expd_kf_adj;Balearic;;;;;;;;;;;;;x
+k_kutch_expd_kf;Kutch;;Kutch;;;;;;;;;;;x
+k_kutch_expd_kf_adj;Kutch;kutch;Kutchisch;;;;;;;;;;;x
+k_maldives_expd_kf;Maldives;Maldives;Maldediven;;;;;;;;;;;x
+k_maldives_expd_kf_adj;Maldivian;maldivienne;Maldedivisch;;;;;;;;;;;x
+k_socotra_expd_kf;Socotra;Socotra;Socotra;;Socotra;;;;;;;;;x
+k_socotra_expd_kf_adj;Socotran;Socotra;Socotranisch;;;;;;;;;;;x
 #
 # New duchies
 #
@@ -73,6 +94,10 @@ d_canarias_expd_df;Canarias;;;;;;;;;;;;;x
 d_canarias_expd_df_adj;Canarian;canarienne;Kanarisch;;Canario;;;;;;;;;x
 d_malta_expd_df;Malta;;;;;;;;;;;;;x
 d_malta_expd_df_adj;Maltese;;Kanarisch;;Canario;;;;;;;;;x
+d_kutch_expd_df;Kutch;;Kutch;;;;;;;;;;;x
+d_kutch_expd_df_adj;Kutch;kutch;Kutchisch;;;;;;;;;;;x
+d_maldives_expd_df;Maldives;Maldives;Maldediven;;;;;;;;;;;x
+d_maldives_expd_df_adj;Maldivian;maldivienne;Maldedivisch;;;;;;;;;;;x
 #
 # Kingdom formation tooltips
 #
@@ -82,6 +107,12 @@ expd_kf_root_does_not_completely_control_another_duchy_in_the_same_de_jure_kingd
 expd_kf_root_gains_this_kingdom_tt;The [This.GetFullName] is granted to [Root.GetTitledFirstName];;;;;;;;;;;;;x
 expd_kf_prev_duchy_becomes_de_jure_part_of_this_kingdom_tt;The [Prev.GetFullName] becomes de jure part of the [This.GetFullName];;;;;;;;;;;;;x
 expd_kf_this_kingdom_becomes_de_jure_part_of_roots_primary_empire_tt;The [This.GetFullName] becomes de jure part of the [Root.PrimaryTitle.GetFullName];;;;;;;;;;;;;x
+#
+# Kingdom of Trinacria tooltips
+#
+expd_kf_root_does_not_own_other_duchies_in_the_same_kingdom_as_sicily_except_perhaps_malta_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT own another duchy title in the same de jure kingdom as [d_sicily.GetFullName] (except for [d_malta_expd_df.GetFullName], if it exists);;;;;;;;;;;;;x
+expd_kf_root_does_not_completely_control_other_duchies_in_the_same_kingdom_as_sicily_except_perhaps_malta_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT completely control another duchy in the same de jure kingdom as [This.GetFullName] (except for [d_malta_expd_df.GetFullName], if it exists);;;;;;;;;;;;;x
+expd_kf_malta_becomes_de_jure_part_of_trinacria_tt;The [d_malta_expd_df.GetFullName] becomes de jure part of the [k_trinacria.GetFullName];;;;;;;;;;;;;x
 #
 # Kingdom of Saxony tooltips
 #
