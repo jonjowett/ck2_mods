@@ -78,13 +78,11 @@ targetted_decisions = {
 		filter = self
 		ai = no
 		
-		from_potential = {
-			ai = no
-			NOT = { has_character_flag = expd_pb_bloodline_propagation_blocked }
-		}
+		# from_potential is not valid for self-targeted decisions
 		
 		potential = {
-			always = yes
+			ai = no
+			NOT = { has_character_flag = expd_pb_bloodline_propagation_blocked }
 		}
 		
 		allow = {

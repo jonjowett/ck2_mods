@@ -8,12 +8,11 @@ targetted_decisions = {
 		filter = self
 		ai = no
 		
-		from_potential = {
-			ai = no 
-			has_global_flag = expd_pb_debug_mode
-		}
+		# from_potential is not valid for self-targeted decisions
 		
 		potential = {
+			ai = no 
+			has_global_flag = expd_pb_debug_mode
 			any_owned_bloodline = {
 				has_bloodline_flag = bloodline_viking
 				has_bloodline_flag = bloodline_historical_norse
@@ -72,12 +71,11 @@ targetted_decisions = {
 		filter = self
 		ai = no
 		
-		from_potential = {
-			ai = no 
-			has_global_flag = expd_pb_debug_mode
-		}
+		# from_potential is not valid for self-targeted decisions
 		
 		potential = {
+			ai = no 
+			has_global_flag = expd_pb_debug_mode
 			any_owned_bloodline = {
 				has_bloodline_flag = bsu_lcr
 				OR = {
