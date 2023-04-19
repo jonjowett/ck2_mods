@@ -1,22 +1,4 @@
 emb_raider_cb_target_is_independent = {
-	OR = {
-		
-		# Is an independent ruler who is not in revolt
-		independent = yes
-		
-		# Is an independent ruler who IS in revolt
-		AND = {
-			independent = no
-			liege_before_war = {
-				independent = yes
-				any_war = {
-					OR = {
-						attacker = { character = FROM }
-						defender = { character = FROM }
-					}
-				}
-			}
-		}
-		
-	}
+	# Independent characters are always their own top lieges. Thanks, Whizzer!
+	top_liege = { character = PREV }
 }
