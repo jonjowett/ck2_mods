@@ -173,12 +173,6 @@ targeted_decisions = {
 
 		effect = {
 			
-			# Trigger the vanilla event chain as normal, on the next day
-			hidden_effect = { 
-				character_event = { id = MNM.1610 days = 1 }
-				set_character_flag = wrote_magnum_opus
-			}
-			
 			# Deduct the cost, using the same logic as in the conditions above
 			if = {
 				limit = { expd_herm_has_not_already_written_a_second_magnum_opus = yes }
@@ -265,6 +259,15 @@ targeted_decisions = {
 			}
 			else = {
 				custom_tooltip = { text = expd_herm_logic_bug_please_report_tt }
+			}
+			
+			# Trigger the vanilla event chain as normal, on the next day
+			# MUST do this AFTER the deduction of currency above, because if you do it before
+			#           then all of the triggers will fail, because they check how recently wrote_magnum_opus was set,
+			#           and this block explicitly sets wrote_magnum_opus, ie. time since it was last set changes to zero.
+			hidden_effect = { 
+				character_event = { id = MNM.1610 days = 1 }
+				set_character_flag = wrote_magnum_opus
 			}
 		}
 		
