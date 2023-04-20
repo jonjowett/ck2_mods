@@ -1,0 +1,291 @@
+targeted_decisions = {
+	expd_herm_write_another_magnum_opus = {
+		is_in_society = yes
+		
+		filter = self
+		ai_target_filter = self
+
+		ai_check_interval = 12
+
+		potential = {
+			society_member_of = hermetics
+			society_rank = 4
+			prisoner = no
+			NOT = { trait = incapable }
+			has_character_flag = wrote_magnum_opus
+		}
+
+		allow = {
+			FROM = {
+				
+				# Decision can be visible while you're writing another magnum opus, but definitely can't be taken!
+				expd_herm_is_not_currently_writing_a_magnum_opus = yes
+				
+				# Show different costs depending on number of previous manum opuses written.
+				# Make sure to keep these conditions in line with the deductions in the effect block!
+				
+				# Second magnum opus by this character - increased cost, but manageable
+				trigger_if = {
+					limit = { expd_herm_has_not_already_written_a_second_magnum_opus = yes }
+					custom_tooltip = {
+						text = expd_herm_costs_below_are_for_second_magnum_opus_tt
+						always = yes
+					}
+					OR = {
+						AND = {
+							expd_herm_10_years_since_previous_magnum_opus = yes
+							society_currency >= 10000
+						}
+						AND = {
+							expd_herm_20_years_since_previous_magnum_opus = yes
+							society_currency >= 5000
+						}
+						AND = {
+							expd_herm_30_years_since_previous_magnum_opus = yes
+							society_currency >= 3000
+						}
+						AND = {
+							expd_herm_40_years_since_previous_magnum_opus = yes
+							society_currency >= 2000
+						}
+						AND = {
+							expd_herm_50_years_since_previous_magnum_opus = yes
+							society_currency >= 1000
+						}
+					}
+				}
+				
+				# Third magnum opus by this character - serious cost
+				trigger_else_if = {
+					limit = {
+						expd_herm_has_already_written_a_second_magnum_opus = yes
+						expd_herm_has_not_already_written_a_third_magnum_opus = yes
+					}
+					custom_tooltip = {
+						text = expd_herm_costs_below_are_for_third_magnum_opus_tt
+						always = yes
+					}
+					OR = {
+						AND = {
+							expd_herm_10_years_since_previous_magnum_opus = yes
+							society_currency >= 20000
+						}
+						AND = {
+							expd_herm_20_years_since_previous_magnum_opus = yes
+							society_currency >= 10000
+						}
+						AND = {
+							expd_herm_30_years_since_previous_magnum_opus = yes
+							society_currency >= 6000
+						}
+						AND = {
+							expd_herm_40_years_since_previous_magnum_opus = yes
+							society_currency >= 4000
+						}
+						AND = {
+							expd_herm_50_years_since_previous_magnum_opus = yes
+							society_currency >= 2000
+						}
+					}
+				}
+				
+				# Fourth or later magnum opus by this character - extreme cost! Probably only for immortals.
+				trigger_else_if = {
+					limit = { expd_herm_has_already_written_a_third_magnum_opus = yes }
+					custom_tooltip = {
+						text = expd_herm_costs_below_are_for_fourth_and_later_magnum_opus_tt
+						always = yes
+					}
+					OR = {
+						AND = {
+							expd_herm_10_years_since_previous_magnum_opus = yes
+							society_currency >= 40000
+						}
+						AND = {
+							expd_herm_20_years_since_previous_magnum_opus = yes
+							society_currency >= 20000
+						}
+						AND = {
+							expd_herm_30_years_since_previous_magnum_opus = yes
+							society_currency >= 10000
+						}
+						AND = {
+							expd_herm_40_years_since_previous_magnum_opus = yes
+							society_currency >= 7000
+						}
+						AND = {
+							expd_herm_50_years_since_previous_magnum_opus = yes
+							society_currency >= 5000
+						}
+					}
+				}
+				
+				# Error handling
+				trigger_else = {
+					custom_tooltip = { text = expd_herm_logic_bug_please_report_tt }
+					always = no
+				}
+				
+				# You must not own every possible book (or the vanilla event chain will break)
+				custom_tooltip = {
+					text = hermetics_wrote_magnum_opus_duplicate
+					OR = {
+    					NOR = {
+    						has_artifact = magnum_opus_theurgy_ritual_1
+							has_artifact = magnum_opus_theurgy_ritual_2
+							has_artifact = magnum_opus_theurgy_ritual_3
+							has_artifact = magnum_opus_theurgy_ritual_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_theurgy_contemplation_1
+							has_artifact = magnum_opus_theurgy_contemplation_2
+							has_artifact = magnum_opus_theurgy_contemplation_3
+							has_artifact = magnum_opus_theurgy_contemplation_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_astrology_stars_1
+							has_artifact = magnum_opus_astrology_stars_2
+							has_artifact = magnum_opus_astrology_stars_3
+							has_artifact = magnum_opus_astrology_stars_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_astrology_planets_1
+							has_artifact = magnum_opus_astrology_planets_2
+							has_artifact = magnum_opus_astrology_planets_3
+							has_artifact = magnum_opus_astrology_planets_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_alchemy_panacea_1
+							has_artifact = magnum_opus_alchemy_panacea_2
+							has_artifact = magnum_opus_alchemy_panacea_3
+							has_artifact = magnum_opus_alchemy_panacea_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_alchemy_transmutation_1
+							has_artifact = magnum_opus_alchemy_transmutation_2
+							has_artifact = magnum_opus_alchemy_transmutation_3
+							has_artifact = magnum_opus_alchemy_transmutation_4
+    					}
+    				}
+    			}
+			}
+		}
+
+		effect = {
+			
+			# Trigger the vanilla event chain as normal, on the next day
+			hidden_effect = { 
+				character_event = { id = MNM.1610 days = 1 }
+				set_character_flag = wrote_magnum_opus
+			}
+			
+			# Deduct the cost, using the same logic as in the conditions above
+			if = {
+				limit = { expd_herm_has_not_already_written_a_second_magnum_opus = yes }
+				hidden_effect = { set_character_flag = expd_herm_wrote_second_magnum_opus }
+				if = {
+					limit = { expd_herm_10_years_since_previous_magnum_opus = yes }
+					change_society_currency = -10000
+				}
+				else_if = {
+					limit = { expd_herm_20_years_since_previous_magnum_opus = yes }
+					change_society_currency = -5000
+				}
+				else_if = {
+					limit = { expd_herm_30_years_since_previous_magnum_opus = yes }
+					change_society_currency = -3000
+				}
+				else_if = {
+					limit = { expd_herm_40_years_since_previous_magnum_opus = yes }
+					change_society_currency = -2000
+				}
+				else_if = {
+					limit = { expd_herm_50_years_since_previous_magnum_opus = yes }
+					change_society_currency = -1000
+				}
+				else = {
+					custom_tooltip = { text = expd_herm_logic_bug_please_report_tt }
+				}
+			}
+			else_if = {
+				limit = {
+					expd_herm_has_already_written_a_second_magnum_opus = yes
+					expd_herm_has_not_already_written_a_third_magnum_opus = yes
+				}
+				hidden_effect = { set_character_flag = expd_herm_wrote_third_magnum_opus }
+				if = {
+					limit = { expd_herm_10_years_since_previous_magnum_opus = yes }
+					change_society_currency = -20000
+				}
+				else_if = {
+					limit = { expd_herm_20_years_since_previous_magnum_opus = yes }
+					change_society_currency = -10000
+				}
+				else_if = {
+					limit = { expd_herm_30_years_since_previous_magnum_opus = yes }
+					change_society_currency = -6000
+				}
+				else_if = {
+					limit = { expd_herm_40_years_since_previous_magnum_opus = yes }
+					change_society_currency = -4000
+				}
+				else_if = {
+					limit = { expd_herm_50_years_since_previous_magnum_opus = yes }
+					change_society_currency = -2000
+				}
+				else = {
+					custom_tooltip = { text = expd_herm_logic_bug_please_report_tt }
+				}
+			}
+			else_if = {
+				limit = { expd_herm_has_already_written_a_third_magnum_opus = yes }
+				if = {
+					limit = { expd_herm_10_years_since_previous_magnum_opus = yes }
+					change_society_currency = -40000
+				}
+				else_if = {
+					limit = { expd_herm_20_years_since_previous_magnum_opus = yes }
+					change_society_currency = -20000
+				}
+				else_if = {
+					limit = { expd_herm_30_years_since_previous_magnum_opus = yes }
+					change_society_currency = -10000
+				}
+				else_if = {
+					limit = { expd_herm_40_years_since_previous_magnum_opus = yes }
+					change_society_currency = -7000
+				}
+				else_if = {
+					limit = { expd_herm_50_years_since_previous_magnum_opus = yes }
+					change_society_currency = -5000
+				}
+				else = {
+					custom_tooltip = { text = expd_herm_logic_bug_please_report_tt }
+				}
+			}
+			else = {
+				custom_tooltip = { text = expd_herm_logic_bug_please_report_tt }
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.1
+			modifier = {
+				factor = 2
+				society_currency >= 2000
+			}
+			modifier = {
+				factor = 2
+				society_currency >= 4000
+			}
+			modifier = {
+				factor = 2
+				society_currency >= 6000
+			}
+			modifier = {
+				factor = 2
+				society_currency >= 10000
+			}
+		}
+	}
+}

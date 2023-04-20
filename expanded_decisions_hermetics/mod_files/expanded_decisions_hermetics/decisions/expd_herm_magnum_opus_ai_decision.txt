@@ -1,0 +1,97 @@
+targeted_decisions = {
+	
+	expd_herm_write_magnum_opus_ai = {
+		# Copy of the vanilla decision, aimed at ensuring that AI characters write magnum opuses sometimes
+		
+		is_in_society = yes
+		
+		filter = self
+		ai_target_filter = self
+
+		ai_check_interval = 12
+
+		potential = {
+			society_member_of = hermetics
+			society_rank = 4
+			prisoner = no
+			NOT = { trait = incapable }
+			ai = yes
+		}
+
+		allow = {
+			FROM = {
+				custom_tooltip = {
+					text = hermetics_wrote_magnum_opus_cd_tooltip
+					NOT = { has_character_flag = wrote_magnum_opus }
+				}
+				has_society_currency_major_trigger = yes
+				custom_tooltip = {
+					text = hermetics_wrote_magnum_opus_duplicate
+					OR = {
+    					NOR = {
+    						has_artifact = magnum_opus_theurgy_ritual_1
+							has_artifact = magnum_opus_theurgy_ritual_2
+							has_artifact = magnum_opus_theurgy_ritual_3
+							has_artifact = magnum_opus_theurgy_ritual_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_theurgy_contemplation_1
+							has_artifact = magnum_opus_theurgy_contemplation_2
+							has_artifact = magnum_opus_theurgy_contemplation_3
+							has_artifact = magnum_opus_theurgy_contemplation_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_astrology_stars_1
+							has_artifact = magnum_opus_astrology_stars_2
+							has_artifact = magnum_opus_astrology_stars_3
+							has_artifact = magnum_opus_astrology_stars_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_astrology_planets_1
+							has_artifact = magnum_opus_astrology_planets_2
+							has_artifact = magnum_opus_astrology_planets_3
+							has_artifact = magnum_opus_astrology_planets_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_alchemy_panacea_1
+							has_artifact = magnum_opus_alchemy_panacea_2
+							has_artifact = magnum_opus_alchemy_panacea_3
+							has_artifact = magnum_opus_alchemy_panacea_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_alchemy_transmutation_1
+							has_artifact = magnum_opus_alchemy_transmutation_2
+							has_artifact = magnum_opus_alchemy_transmutation_3
+							has_artifact = magnum_opus_alchemy_transmutation_4
+    					}
+    				}
+    			}
+			}
+		}
+
+		effect = {
+			hidden_effect = { 
+				character_event = { id = MNM.1610 days = 1 }
+				set_character_flag = wrote_magnum_opus
+			}
+			detract_society_currency_major_effect = yes
+		}
+		
+		ai_will_do = {
+			factor = 0.2
+			modifier = {
+				factor = 2
+				society_currency >= 1000
+			}
+			modifier = {
+				factor = 2
+				society_currency >= 2000
+			}
+			modifier = {
+				factor = 2
+				society_currency >= 3000
+			}
+		}
+	}
+	
+}

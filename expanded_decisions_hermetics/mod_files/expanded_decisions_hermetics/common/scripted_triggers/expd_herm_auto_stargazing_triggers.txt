@@ -1,0 +1,162 @@
+# Audax Validator EnableCommentMetadata
+
+# Ignore all warnings about unnecessary AND clauses (there are lots in this auto-stargaze logic, but they make the code clearer to me)
+# Audax Validator "!" Ignore_1001
+
+
+#######################
+# Ability to Stargaze #
+#######################
+
+expd_herm_this_character_can_stargaze = {
+	is_adult = yes
+	prisoner = no
+	war = no
+	NOT = { trait = blinded }
+	custom_tooltip = {
+		text = expd_herm_this_character_is_not_incapable_busy_or_inaccessible_tt
+		NOT = { trait = incapable }
+		NOT = { is_inaccessible_trigger = yes }
+		NOT = { has_character_flag = do_not_disturb }
+	}
+	custom_tooltip = {
+		text = has_not_recently_performed_stargazing
+		NOT = { has_character_modifier = stargazing_timer }
+		NOT = { has_character_modifier = inviting_to_stargazing }
+	}
+	custom_tooltip = {
+		text = expd_herm_this_character_does_not_have_a_communicable_disease_tt
+		has_epidemic = no
+		NOR = {
+			trait = leper
+			trait = has_bubonic_plague
+			trait = has_typhoid_fever
+			trait = has_typhus
+			trait = has_measles
+			trait = has_small_pox
+		}
+	}
+}
+
+expd_herm_this_character_can_be_invited_to_stargaze_by_root = {
+	NOT = { character = ROOT }
+	NOT = { is_rival = ROOT }
+	opinion = {
+		who = ROOT
+		value >= 0
+	}
+	ROOT = {
+		opinion = {
+			who = PREV
+			value >= 0
+		}
+	}
+	is_within_diplo_range = ROOT
+	expd_herm_this_character_can_stargaze = yes
+}
+
+
+
+##########################
+# Preparatory Activities #
+##########################
+
+expd_herm_root_can_use_prep_activity_observatory = {
+	OR = {
+		ROOT = { has_character_flag = built_observatory          }
+		ROOT = { has_character_flag = owns_observatory_equipment }
+	}
+}
+
+expd_herm_this_character_likes_prep_activity_observatory = {
+	OR = {
+		trait = scholar
+		trait = mystic
+		trait = theologian
+		trait = ambitious
+	}
+	expd_herm_this_character_hates_prep_activity_observatory = no
+}
+
+expd_herm_this_character_hates_prep_activity_observatory = {
+	OR = {
+		trait = envious
+		trait = arbitrary
+	}
+}
+
+expd_herm_this_character_likes_prep_activity_non_observatory = {
+	OR = {
+		expd_herm_this_character_likes_prep_activity_location = yes
+		expd_herm_this_character_likes_prep_activity_feast = yes
+		expd_herm_this_character_likes_prep_activity_study = yes
+	}
+}
+
+expd_herm_this_character_hates_prep_activity_non_observatory = {
+	AND = {
+		expd_herm_this_character_hates_prep_activity_location = yes
+		expd_herm_this_character_hates_prep_activity_feast = yes
+		expd_herm_this_character_hates_prep_activity_study = yes
+	}
+}
+
+expd_herm_this_character_likes_prep_activity_location = {
+	OR = {
+		trait = architect
+		trait = gardener
+		trait = diligent
+	}
+	expd_herm_this_character_hates_prep_activity_location = no
+}
+
+expd_herm_this_character_hates_prep_activity_location = {
+	OR = {
+		trait = slothful
+		trait = paranoid
+	}
+}
+
+expd_herm_this_character_likes_prep_activity_feast = {
+	OR = {
+		trait = gluttonous
+		trait = hedonist
+		trait = socializer
+		trait = gregarious
+		trait = drunkard
+		AND = {
+			religion_group = muslim
+			trait = decadent
+		}
+	}
+	expd_herm_this_character_hates_prep_activity_feast = no
+}
+
+expd_herm_this_character_hates_prep_activity_feast = {
+	OR = {
+		trait = temperate
+		trait = shy
+		AND = {
+			religion_group = muslim
+			NOT = { trait = decadent }
+		}
+	}
+}
+
+expd_herm_this_character_likes_prep_activity_study = {
+	OR = {
+		trait = erudite
+		trait = content
+		trait = scholar
+		trait = patient
+	}
+	expd_herm_this_character_hates_prep_activity_study = no
+}
+
+expd_herm_this_character_hates_prep_activity_study = {
+	OR = {
+		trait = slothful
+		trait = wroth
+		trait = gregarious
+	}
+}
