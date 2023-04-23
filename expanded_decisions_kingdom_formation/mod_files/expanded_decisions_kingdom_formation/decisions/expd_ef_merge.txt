@@ -6,14 +6,14 @@
 
 title_decisions = {
 	expd_ef_use_this_title_as_the_base_for_merge = {
-		only_playable = yes
-		only_independent = yes
 		ai = no
 		potential = {
-			FROM = { is_decision_potential = expd_ef_merge }
 			NOT = { has_title_flag = expd_ef_use_this_coa_@FROM }
 			higher_tier_than = BARON
 			temporary = no
+		}
+		from_potential = {
+			is_decision_potential = expd_ef_merge
 		}
 		allow = {
 			#FIXME: Why is this criterion not working?!
@@ -167,7 +167,10 @@ decisions = {
 			
 			tier = KING
 			NOT = { tier = EMPEROR }
-			primary_title = { expd_ef_root_controls_this_kingdom = yes }
+			custom_tooltip = {
+				text = expd_ef_root_completely_controls_his_primary_kingdom_tt
+				primary_title = { expd_ef_root_controls_this_kingdom = yes }
+			}
 			
 			custom_tooltip = {
 				text = expd_ef_root_completely_controls_at_least_3_kingdoms_tt
@@ -176,6 +179,8 @@ decisions = {
 					expd_ef_root_controls_this_kingdom = yes
 				}
 			}
+			
+			custom_tooltip = { text = expd_ef_info_completely_controls_meaning_tt }
 			
 			# Realm size mustn't be too large
 			expd_ef_roots_realm_size_is_not_too_large = yes
@@ -352,12 +357,15 @@ decisions = {
 			}
 			
 			# Create custom empire & every completely-controlled kingdom is made de jure vassal of the new empire & is then destroyed
-			# (Copied with modifications from form_new_empire in realm_decisions.txt)
+			# (Originally based on form_new_empire in realm_decisions.txt, but HEAVILY modified & improved.)
 			
-			# First, some tooltips to explain what will happen (including a list of affected kingdoms)
+			# Tooltips explaininig what will happen, at a high level
 			custom_tooltip = { text = expd_ef_root_forms_new_empire_by_merging_completely_controlled_kingdoms_tt }
+			custom_tooltip = { text = expd_ef_info_completely_controls_meaning_tt }
 			custom_tooltip = { text = expd_ef_the_new_empires_name_will_be_based_on_roots_primary_title_tt }
 			custom_tooltip = { text = expd_ef_the_new_empires_laws_will_be_copied_from_roots_primary_title_tt }
+			
+			# Tooltips explaining the new empire's CoA and map colour
 			if = {
 				limit = {
 					# For some reason, any_title = { has_title_flag = expd_ef_use_this_coa_@ROOT } doesn't work in this context.
@@ -377,6 +385,7 @@ decisions = {
 						text = expd_ef_the_new_empires_coa_will_be_based_on_this_flagged_title_tt
 						save_event_target_as = expd_ef_base_title
 					}
+					custom_tooltip = { text = expd_ef_info_new_empire_map_colour_tt }
 				}
 			}
 			else = {
@@ -385,7 +394,10 @@ decisions = {
 					primary_title = { save_event_target_as = expd_ef_base_title }
 				}
 				custom_tooltip = { text = expd_ef_info_can_base_new_empire_on_another_title_tt }
+				custom_tooltip = { text = expd_ef_info_new_empire_map_colour_tt }
 			}
+			
+			#Tooltips listing the exact kingdoms that will be merged, and the new traditional capital of the empire
 			any_demesne_title = {
 				limit = { expd_ef_root_controls_this_kingdom = yes }
 				custom_tooltip = { text = expd_ef_this_kingdom_becomes_part_of_the_new_empire_and_is_destroyed_tt }
@@ -401,17 +413,16 @@ decisions = {
 				}
 			}
 			
-			# Then, inside a hidden_tooltip, perform the actions
+			# Then, inside a hidden_tooltip, perform the actual actions
 			hidden_tooltip = {
 				primary_title = {
 					create_title = {
 						tier = EMPEROR
 						landless = no
 						temporary = no
-						custom_created = yes
+						custom_created = yes # This parameter is undocumented! Copied from the source, in case it's important somehow.
 						culture = ROOT
 						holder = ROOT
-						copy_title_laws = yes
 						base_title = event_target:expd_ef_base_title
 						name = expd_ef_roots_primary_title
 					}

@@ -6,8 +6,10 @@ expd_ef_merge_desc;As a great King, we can declare a new empire, distinct from a
 #
 # Empire formation main decision tooltips
 #
+expd_ef_root_completely_controls_his_primary_kingdom_tt;[Root.GetTitledFirstName] completely controls [Root.GetHerHis] primary title: the §Y[Root.PrimaryTitle.GetFullName]§!;;;;;;;;;x
 expd_ef_root_completely_controls_at_least_3_kingdoms_tt;[Root.GetTitledFirstName] has at least 3 kingdom titles which [Root.GetSheHe] completely controls;;;;;;;;;x
 expd_ef_root_completely_controls_this_kingdom_tt;[Root.GetTitledFirstName] completely controls the §Y[This.GetFullName]§!;;;;;;;;;x
+expd_ef_info_completely_controls_meaning_tt;§L...INFO: For the purpose of this decision, [Root.GetTitledFirstName] §Y'completely controls'§L a kingdom if all of its de jure counties and duchies: are owned by [Root.GetHerHim] personally, or are owned by one of [Root.GetHerHis] vassals, or don't exist. In other words, foreign-owned baronies (eg. from holy orders) will not block you from taking this decision.§!;;;;;;;;;x
 expd_ef_every_county_and_duchy_in_this_kingdom_is_controlled_by_root_tt;Every county and duchy in §Y[This.GetName]§! is owned by [Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals);;;;;;;;;x
 expd_ef_roots_realm_size_doesnt_matter_debug_mode_tt;§R!!!DEBUG MODE!!!§! No limit on [Root.GetTitledFirstName]'s realm size!;;;;;;;;;x
 expd_ef_roots_realm_size_less_than_120_tt;[Root.GetTitledFirstName]'s realm size is less than 120 (excluding vassal MR family palaces);;;;;;;;;x
@@ -23,6 +25,7 @@ expd_ef_the_new_empires_laws_will_be_copied_from_roots_primary_title_tt;The new 
 expd_ef_the_new_empires_coa_will_be_based_on_this_flagged_title_tt;The new empire's §Ycoat of arms§! and §Ymap colour§! will be based on this title;;;;;;;;;x
 expd_ef_the_new_empires_coa_will_be_based_on_roots_primary_title_tt;The new empire's §Ycoat of arms§! and §Ymap colour§! will be based on [Root.GetTitledFirstName]'s primary title: §Y[Root.PrimaryTitle.GetName]§!;;;;;;;;;x
 expd_ef_info_can_base_new_empire_on_another_title_tt;§L...INFO: If you wish, you can use any realm title as the basis for the §Ycoat of arms§L and §Ymap colour§L , by right-clicking on it and manually flagging it §YBEFORE§L taking this decision.§!;;;;;;;;;x
+expd_ef_info_new_empire_map_colour_tt;§L...§RWARNING!§L The new empire's exact §Ymap colour§L will be slightly but unpredictably different to that of the base title - and the actual colour can sometimes be VERY ugly! You should probably §Rsave your game§L and §Rbackup your save§L before taking this decision!§!;;;;;;;;;x
 expd_ef_this_kingdom_becomes_part_of_the_new_empire_and_is_destroyed_tt;Becomes de jure part of the new empire, and is then destroyed.;;;;;;;;;x
 expd_ef_this_province_becomes_the_traditional_capital_of_the_empire_tt;§Y[This.GetName]§!: Becomes the traditional capital province of the new empire.;;;;;;;;;x
 expd_ef_roots_primary_title;[Root.PrimaryTitle.GetName];;;;;;;;;x
