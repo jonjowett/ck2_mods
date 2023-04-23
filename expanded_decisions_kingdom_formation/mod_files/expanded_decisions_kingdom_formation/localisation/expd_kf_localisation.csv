@@ -52,23 +52,23 @@ k_socotra_expd_kf_adj;Socotran;Socotra;Socotranisch;;;;;;;;;;;x
 #
 # Kingdom formation tooltips
 #
-expd_kf_root_is_not_dejure_liege_or_above_of_this_title_tt;[Root.GetTitledFirstName] is NOT de jure liege of the [This.GetFullName];;;;;;;;;;;;;x
-expd_kf_root_does_not_own_another_duchy_title_in_the_same_de_jure_kingdom_as_this_duchy_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT own another duchy title in the same de jure kingdom as [This.GetFullName];;;;;;;;;;;;;x
-expd_kf_root_does_not_completely_control_another_duchy_in_the_same_de_jure_kingdom_as_this_duchy_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT completely control another duchy in the same de jure kingdom as [This.GetFullName];;;;;;;;;;;;;x
-expd_kf_root_gains_this_kingdom_tt;The [This.GetFullName] is granted to [Root.GetTitledFirstName];;;;;;;;;;;;;x
-expd_kf_prev_duchy_becomes_de_jure_part_of_this_kingdom_tt;The [Prev.GetFullName] becomes de jure part of the [This.GetFullName];;;;;;;;;;;;;x
-expd_kf_this_kingdom_becomes_de_jure_part_of_roots_primary_empire_tt;The [This.GetFullName] becomes de jure part of the [Root.PrimaryTitle.GetFullName];;;;;;;;;;;;;x
+expd_kf_root_is_not_dejure_liege_or_above_of_this_title_tt;[Root.GetTitledFirstName] is NOT de jure liege of the §Y[This.GetFullName]§!;;;;;;;;;;;;;x
+expd_kf_root_does_not_own_another_duchy_title_in_the_same_de_jure_kingdom_as_this_duchy_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT own another duchy title in the same de jure kingdom as the §Y[This.GetFullName]§!;;;;;;;;;;;;;x
+expd_kf_root_does_not_completely_control_another_duchy_in_the_same_de_jure_kingdom_as_this_duchy_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT completely control another duchy in the same de jure kingdom as the §Y[This.GetFullName]§!;;;;;;;;;;;;;x
+expd_kf_root_gains_this_kingdom_tt;The §Y[This.GetFullName]§! is granted to [Root.GetTitledFirstName];;;;;;;;;;;;;x
+expd_kf_prev_duchy_becomes_de_jure_part_of_this_kingdom_tt;The §Y[Prev.GetFullName]§! becomes de jure part of the §Y[This.GetFullName]§!;;;;;;;;;;;;;x
+expd_kf_this_kingdom_becomes_de_jure_part_of_roots_primary_empire_tt;The §Y[This.GetFullName] becomes de jure part of the §Y[Root.PrimaryTitle.GetFullName]§!;;;;;;;;;;;;;x
 #
 # Kingdom of Trinacria tooltips
 #
-expd_kf_root_does_not_own_other_duchies_in_the_same_kingdom_as_sicily_except_perhaps_malta_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT own another duchy title in the same de jure kingdom as [d_sicily.GetFullName] (except for [d_malta_expd_df.GetFullName], if it exists);;;;;;;;;;;;;x
-expd_kf_root_does_not_completely_control_other_duchies_in_the_same_kingdom_as_sicily_except_perhaps_malta_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT completely control another duchy in the same de jure kingdom as [This.GetFullName] (except for [d_malta_expd_df.GetFullName], if it exists);;;;;;;;;;;;;x
-expd_kf_malta_becomes_de_jure_part_of_trinacria_tt;The [d_malta_expd_df.GetFullName] becomes de jure part of the [k_trinacria.GetFullName];;;;;;;;;;;;;x
+expd_kf_root_does_not_own_other_duchies_in_the_same_kingdom_as_sicily_except_perhaps_malta_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT own another duchy title in the same de jure kingdom as the §Y[d_sicily.GetFullName]§! (except for the §Y[d_malta_expd_df.GetFullName]§!, if it exists);;;;;;;;;;;;;x
+expd_kf_root_does_not_completely_control_other_duchies_in_the_same_kingdom_as_sicily_except_perhaps_malta_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT completely control another duchy in the same de jure kingdom as the §Y[This.GetFullName]§! (except for the §Y[d_malta_expd_df.GetFullName]§!, if it exists);;;;;;;;;;;;;x
+expd_kf_malta_becomes_de_jure_part_of_trinacria_tt;The §Y[d_malta_expd_df.GetFullName]§! becomes de jure part of the §Y[k_trinacria.GetFullName]§!;;;;;;;;;;;;;x
 #
 # Kingdom of Saxony tooltips
 #
-expd_kf_this_kingdom_becomes_de_jure_part_of_prev_empire_tt;The [This.GetFullName] becomes de jure part of the [Prev.GetFullName];;;;;;;;;;;;;x
-expd_kf_k_saxony_becomes_de_jure_part_of_the_empire_containing_c_braunschweig_tt;The [k_saxony.GetFullName] becomes de jure part of the [c_braunschweig.Empire.GetFullName];;;;;;;;;;;;;x
-expd_kf_no_appropriate_de_jure_empire_detected_for_this_kingdom_tt;§RWARNING: No appropriate de jure empire was detected for the [This.GetFullName]! After it has been created, the [This.GetFullName] will not belong to any de jure empire.§!;;;;;;;;;;;;;x
-expd_kf_this_saxon_duchy_is_completely_controlled_by_root_tt;The [This.GetFullName] is completely controlled by [Root.GetTitledFirstName];;;;;;;;;;;;;x
-expd_kf_this_saxon_duchy_has_no_other_holder_tt;The [This.GetFullName] does not exist or is held by [Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals);;;;;;;;;;;;;x
+expd_kf_this_kingdom_becomes_de_jure_part_of_prev_empire_tt;The §Y[This.GetFullName]§! becomes de jure part of the §Y[Prev.GetFullName]§!;;;;;;;;;;;;;x
+expd_kf_k_saxony_becomes_de_jure_part_of_the_empire_containing_c_braunschweig_tt;The §Y[k_saxony.GetFullName]§! becomes de jure part of the §Y[c_braunschweig.Empire.GetFullName]§!;;;;;;;;;;;;;x
+expd_kf_no_appropriate_de_jure_empire_detected_for_this_kingdom_tt;§RWARNING: No appropriate de jure empire was detected for the §Y[This.GetFullName]§!! After it has been created, the §Y[This.GetFullName]§! will not belong to any de jure empire.§!;;;;;;;;;;;;;x
+expd_kf_this_saxon_duchy_is_completely_controlled_by_root_tt;The §Y[This.GetFullName]§! is completely controlled by [Root.GetTitledFirstName];;;;;;;;;;;;;x
+expd_kf_this_saxon_duchy_has_no_other_holder_tt;The §Y[This.GetFullName]§! does not exist or is held by [Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals);;;;;;;;;;;;;x
