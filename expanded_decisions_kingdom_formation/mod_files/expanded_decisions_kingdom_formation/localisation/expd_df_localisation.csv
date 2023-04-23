@@ -1,0 +1,33 @@
+#
+# Duchy formation decisions
+#
+expd_df_create_rhodos;Create the Duchy of Rhodes;;;;;;;;;x
+expd_df_create_rhodos_desc;We believe that the island of Rhodes should be viewed as its own separate island entity, unrelated to the mainland.;;;;;;;;;x
+expd_df_create_canarias;Create the Duchy of Canarias;;;;;;;;;x
+expd_df_create_canarias_desc;We believe that the islands of Canarias should be viewed as their own separate island entity, unrelated to the mainland.;;;;;;;;;x
+expd_df_create_malta;Create the Duchy of Malta;;;;;;;;;x
+expd_df_create_malta_desc;We believe that the island of Malta should be viewed as its own separate island entity, unrelated to the mainland.;;;;;;;;;x
+expd_df_create_kutch;Create the Duchy of Kutch;;;;;;;;;x
+expd_df_create_kutch_desc;We believe that the islands of Kutch should be viewed as their own separate entity, unrelated to the mainland.;;;;;;;;;x
+expd_df_create_maldives;Create the Duchy of the Maldives;;;;;;;;;x
+expd_df_create_maldives_desc;We believe that the islands of the Maldives should be viewed as their own separate entity, unrelated to the mainland.;;;;;;;;;x
+#
+# New duchies
+#
+d_rhodos_expd_df;Rhodes;;;;;;;;;;;;;x
+d_rhodos_expd_df_adj;Rhodian;rhodienne;Rhodisch;;Rodio;;;;;;;;;x
+d_canarias_expd_df;Canarias;;;;;;;;;;;;;x
+d_canarias_expd_df_adj;Canarian;canarienne;Kanarisch;;Canario;;;;;;;;;x
+d_malta_expd_df;Malta;;;;;;;;;;;;;x
+d_malta_expd_df_adj;Maltese;;Kanarisch;;Canario;;;;;;;;;x
+d_kutch_expd_df;Kutch;;Kutch;;;;;;;;;;;x
+d_kutch_expd_df_adj;Kutch;kutch;Kutchisch;;;;;;;;;;;x
+d_maldives_expd_df;Maldives;Maldives;Maldediven;;;;;;;;;;;x
+d_maldives_expd_df_adj;Maldivian;maldivienne;Maldedivisch;;;;;;;;;;;x
+#
+# Duchy formation tooltips
+#
+expd_df_root_is_not_dejure_liege_or_above_of_this_title_tt;[Root.GetTitledFirstName] is NOT de jure liege of [This.GetFullName];;;;;;;;;;;;;x
+expd_df_root_does_not_own_other_counties_in_the_same_de_jure_duchy_as_this_county_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT own another county title in the same de jure duchy as [This.GetFullName];;;;;;;;;;;;;x
+expd_df_root_gains_this_duchy_tt;The [This.GetFullName] is granted to [Root.GetTitledFirstName];;;;;;;;;;;;;x
+expd_df_prev_county_becomes_de_jure_part_of_this_duchy_tt;The [Prev.GetFullName] becomes de jure part of [This.GetFullName];;;;;;;;;;;;;x

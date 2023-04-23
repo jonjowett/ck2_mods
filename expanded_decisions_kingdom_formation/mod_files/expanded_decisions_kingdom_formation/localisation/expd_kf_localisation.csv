@@ -1,18 +1,4 @@
 #
-# Empire formation decisions & tooltips
-#
-expd_ef_merge;Forge a new Empire by combining Kingdoms;;;;;;;;;x
-expd_ef_merge_desc;As a great King, we can declare a new empire, distinct from all those that came before.;;;;;;;;;x
-expd_ef_root_completely_controls_at_least_3_kingdoms_tt;[Root.GetTitledFirstName] has at least 3 kingdom titles which [Root.GetSheHe] completely controls;;;;;;;;;x
-expd_ef_root_completely_controls_this_kingdom_tt;[Root.GetTitledFirstName] completely controls the [This.GetFullName];;;;;;;;;x
-expd_ef_every_county_and_duchy_in_this_kingdom_is_controlled_by_root_tt;Every county and duchy in [This.GetFullName] is owned by [Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals);;;;;;;;;x
-expd_ef_roots_realm_size_doesnt_matter_debug_mode_tt;!!!DEBUG MODE!!! No limit on [Root.GetTitledFirstName]'s realm size!;;;;;;;;;x
-expd_ef_roots_realm_size_less_than_120_tt;[Root.GetTitledFirstName]'s realm size is less than 120 (excluding vassal MR family palaces);;;;;;;;;x
-expd_ef_root_forms_new_empire_by_merging_completely_controlled_kingdoms_tt;[Root.GetTitledFirstName] will form a new empire by merging [Root.GetHerHis] completely-controlled kingdoms.;;;;;;;;;x
-expd_ef_the_new_empire_is_based_on_roots_primary_title_tt;The new empire's coat of arms and map colour will be based on [Root.GetTitledFirstName]'s primary title: the [Root.PrimaryTitle.GetFullBaseName].;;;;;;;;;x
-expd_ef_this_kingdom_becomes_part_of_the_new_empire_and_is_destroyed_tt;Becomes de jure part of the new empire, and is then destroyed.;;;;;;;;;x
-expd_ef_this_province_becomes_the_traditional_capital_of_the_empire_tt;[This.GetName] becomes the traditional capital province of the new empire.;;;;;;;;;x
-#
 # Kingdom formation decisions
 #
 expd_kf_create_krete;Declare the Kingdom of Crete;;;;;;;;;x
@@ -45,28 +31,6 @@ expd_kf_create_cyprus_desc;A new era will begin with my ascension as King of Cyp
 expd_kf_create_saxony;Create the Kingdom of Saxony;;;;;;;;;x
 expd_kf_create_saxony_desc;Having conquered all of the lands of Saxony, it is only right to reinstate the Kingdom of Saxony!;;;;;;;;;x
 #
-# Duchy formation decisions
-#
-expd_df_create_rhodos;Create the Duchy of Rhodes;;;;;;;;;x
-expd_df_create_rhodos_desc;We believe that the island of Rhodes should be viewed as its own separate island entity, unrelated to the mainland.;;;;;;;;;x
-expd_df_create_canarias;Create the Duchy of Canarias;;;;;;;;;x
-expd_df_create_canarias_desc;We believe that the islands of Canarias should be viewed as their own separate island entity, unrelated to the mainland.;;;;;;;;;x
-expd_df_create_malta;Create the Duchy of Malta;;;;;;;;;x
-expd_df_create_malta_desc;We believe that the island of Malta should be viewed as its own separate island entity, unrelated to the mainland.;;;;;;;;;x
-expd_df_create_kutch;Create the Duchy of Kutch;;;;;;;;;x
-expd_df_create_kutch_desc;We believe that the islands of Kutch should be viewed as their own separate entity, unrelated to the mainland.;;;;;;;;;x
-expd_df_create_maldives;Create the Duchy of the Maldives;;;;;;;;;x
-expd_df_create_maldives_desc;We believe that the islands of the Maldives should be viewed as their own separate entity, unrelated to the mainland.;;;;;;;;;x
-#
-# Duchy merge decisions
-#
-expd_dm_mallorca;Merge Mallorca into the Kingdom of Sardinia;;;;;;;;;x
-expd_dm_mallorca_desc;As the King of Sardinia, we can rightfully claim that all western Mediterranean islands should be part of our kingdom!;;;;;;;;;x
-expd_dm_rhodos;Merge Rhodes into the Kingdom of Cyprus;;;;;;;;;x
-expd_dm_rhodos_desc;As the King of Cyprus, we can rightfully claim that all eastern Mediterranean islands should be part of our kingdom!;;;;;;;;;x
-expd_dm_krete;Merge Krete into the Kingdom of Cyprus;;;;;;;;;x
-expd_dm_krete_desc;As the King of Cyprus, we can rightfully claim that all eastern Mediterranean islands should be part of our kingdom!;;;;;;;;;x
-#
 # New kingdoms
 #
 k_krete_expd_kf;Krete;Crète;Kreta;;Creta;;;;;;;;;x
@@ -85,19 +49,6 @@ k_maldives_expd_kf;Maldives;Maldives;Maldediven;;;;;;;;;;;x
 k_maldives_expd_kf_adj;Maldivian;maldivienne;Maldedivisch;;;;;;;;;;;x
 k_socotra_expd_kf;Socotra;Socotra;Socotra;;Socotra;;;;;;;;;x
 k_socotra_expd_kf_adj;Socotran;Socotra;Socotranisch;;;;;;;;;;;x
-#
-# New duchies
-#
-d_rhodos_expd_df;Rhodes;;;;;;;;;;;;;x
-d_rhodos_expd_df_adj;Rhodian;rhodienne;Rhodisch;;Rodio;;;;;;;;;x
-d_canarias_expd_df;Canarias;;;;;;;;;;;;;x
-d_canarias_expd_df_adj;Canarian;canarienne;Kanarisch;;Canario;;;;;;;;;x
-d_malta_expd_df;Malta;;;;;;;;;;;;;x
-d_malta_expd_df_adj;Maltese;;Kanarisch;;Canario;;;;;;;;;x
-d_kutch_expd_df;Kutch;;Kutch;;;;;;;;;;;x
-d_kutch_expd_df_adj;Kutch;kutch;Kutchisch;;;;;;;;;;;x
-d_maldives_expd_df;Maldives;Maldives;Maldediven;;;;;;;;;;;x
-d_maldives_expd_df_adj;Maldivian;maldivienne;Maldedivisch;;;;;;;;;;;x
 #
 # Kingdom formation tooltips
 #
@@ -121,18 +72,3 @@ expd_kf_k_saxony_becomes_de_jure_part_of_the_empire_containing_c_braunschweig_tt
 expd_kf_no_appropriate_de_jure_empire_detected_for_this_kingdom_tt;§RWARNING: No appropriate de jure empire was detected for the [This.GetFullName]! After it has been created, the [This.GetFullName] will not belong to any de jure empire.§!;;;;;;;;;;;;;x
 expd_kf_this_saxon_duchy_is_completely_controlled_by_root_tt;The [This.GetFullName] is completely controlled by [Root.GetTitledFirstName];;;;;;;;;;;;;x
 expd_kf_this_saxon_duchy_has_no_other_holder_tt;The [This.GetFullName] does not exist or is held by [Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals);;;;;;;;;;;;;x
-#
-# Duchy formation tooltips
-#
-expd_df_root_is_not_dejure_liege_or_above_of_this_title_tt;[Root.GetTitledFirstName] is NOT de jure liege of [This.GetFullName];;;;;;;;;;;;;x
-expd_df_root_does_not_own_other_counties_in_the_same_de_jure_duchy_as_this_county_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT own another county title in the same de jure duchy as [This.GetFullName];;;;;;;;;;;;;x
-expd_df_root_gains_this_duchy_tt;The [This.GetFullName] is granted to [Root.GetTitledFirstName];;;;;;;;;;;;;x
-expd_df_prev_county_becomes_de_jure_part_of_this_duchy_tt;The [Prev.GetFullName] becomes de jure part of [This.GetFullName];;;;;;;;;;;;;x
-#
-# Duchy merge tooltips
-#
-expd_dm_root_is_not_de_jure_liege_of_this_duchy_tt;[Root.GetTitledFirstName] is NOT de jure liege of [This.GetFullName];;;;;;;;;;;;;x
-expd_dm_root_holds_prev_kingdom_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) holds the [Prev.GetFullName];;;;;;;;;;;;;x
-expd_dm_root_completely_controls_prev_kingdom_tt;[Root.GetTitledFirstName] completely controls the [Prev.GetFullName];;;;;;;;;;;;;x
-expd_dm_every_county_and_duchy_in_prev_kingdom_is_controlled_by_root_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) holds every county and duchy in the [Prev.GetFullName];;;;;;;;;;;;;x
-expd_dm_this_duchy_becomes_de_jure_part_of_prev_kingdom_tt;The [This.GetFullName] becomes de jure part of the [Prev.GetFullName];;;;;;;;;;;;;x
