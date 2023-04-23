@@ -1,12 +1,12 @@
-expd_ef_root_controls_this_kingdom = {
+expd_cef_root_controls_this_kingdom = {
 	tier = KING
 	OR = {
 		custom_tooltip = {
-			text = expd_ef_root_completely_controls_this_kingdom_tt
+			text = expd_cef_root_completely_controls_this_kingdom_tt
 			ROOT = { completely_controls = PREV }
 		}
 		custom_tooltip = {
-			text = expd_ef_every_county_and_duchy_in_this_kingdom_is_controlled_by_root_tt
+			text = expd_cef_every_county_and_duchy_in_this_kingdom_is_controlled_by_root_tt
 			NOT = {
 				any_de_jure_vassal_title = {
 					OR = {
@@ -24,21 +24,21 @@ expd_ef_root_controls_this_kingdom = {
 	}
 }
 
-expd_ef_roots_realm_size_is_not_too_large = {
+expd_cef_roots_realm_size_is_not_too_large = {
 	# Realm size <= 120 
 	# NB: If ROOT is not MR then this should exclude vassal MR family palaces. Unfortunately, the realm_size condition includes family palaces, so we have to deduct them manually.
 	
 	trigger_if = {
-		limit = { has_global_flag = expd_ef_merge_debug_mode }
+		limit = { has_global_flag = expd_cef_merge_debug_mode }
 		custom_tooltip = {
-			text = expd_ef_roots_realm_size_doesnt_matter_debug_mode_tt
+			text = expd_cef_roots_realm_size_doesnt_matter_debug_mode_tt
 			always = yes
 		}
 	}
 	trigger_else = {
 		
 		custom_tooltip = {
-			text = expd_ef_roots_realm_size_less_than_120_tt
+			text = expd_cef_roots_realm_size_less_than_120_tt
 			trigger_if = {
 				limit = {
 					ROOT = { government = merchant_republic_government }
