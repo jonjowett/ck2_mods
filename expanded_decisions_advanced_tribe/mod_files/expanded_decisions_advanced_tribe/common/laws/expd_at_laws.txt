@@ -1,0 +1,124 @@
+law_groups = {
+	expd_at_out_of_realm_inheritance_laws = {
+		law_type = realm
+		allowed_for_councillors = yes
+	}
+	expd_at_imperial_administration_laws = {
+		law_type = realm
+		allowed_for_councillors = yes
+	}
+}
+
+
+
+
+############################
+# Out of realm inheritance #
+############################
+
+de_jure_laws = { # Crown law
+	
+	# Default (free inheritance)
+	expd_at_out_of_realm_inheritance_law_0 = {
+		group = expd_at_out_of_realm_inheritance_laws
+		default = yes
+		potential = { expd_at_this_title_should_have_tribal_laws = yes }
+		allow = {
+			always = yes
+		}
+		revoke_allowed = { always = no }
+		ai_will_do = { factor = 0 }
+		ai_will_revoke = { factor = 0 }
+		effect = {
+			hidden_tooltip = { revoke_law = expd_at_out_of_realm_inheritance_law_1 }
+			set_protected_inheritance = no
+		}
+	}
+	
+	# Restricted inheritance (restricted inheritance & -20 opinion)
+	expd_at_out_of_realm_inheritance_law_1 = {
+		group = expd_at_out_of_realm_inheritance_laws
+		default = no
+		potential = { expd_at_this_title_should_have_tribal_laws = yes }
+		allow = {
+			expd_at_this_title_is_a_highly_organised_tribe = yes
+		}
+		ai_will_do = { factor = 1 }
+		ai_will_revoke = { factor = 0 }
+		effect = {
+			hidden_tooltip = { revoke_law = expd_at_out_of_realm_inheritance_law_0 }
+			set_protected_inheritance = yes
+		}
+		vassal_opinion = -20
+	}
+	
+}
+
+
+
+
+
+###########################
+# Imperial administration #
+###########################
+
+laws = { # Realm law (not crown law)
+	
+	# Default (no effect)
+	expd_at_imperial_administration_law_0 = {
+		group = expd_at_imperial_administration_laws
+		default = yes
+		potential = { expd_at_this_title_should_have_tribal_laws = yes }
+		allow = {
+			hidden_tooltip = { NOT = { has_law = expd_at_imperial_administration_law_2 } }
+		}
+		ai_will_do = { factor = 0 }
+		ai_will_revoke = { factor = 0 }
+		effect = {
+			hidden_tooltip = { revoke_law = expd_at_imperial_administration_law_1 }
+		}
+	}
+	
+	# Advanced tribe (-10 opinion)
+	expd_at_imperial_administration_law_1 = {
+		group = expd_at_imperial_administration_laws
+		default = no
+		potential = { expd_at_this_title_should_have_tribal_laws = yes }
+		allow = {
+			expd_at_this_title_is_a_highly_organised_tribe = yes
+		}
+		ai_will_do = { factor = 10 }
+		ai_will_revoke = { factor = 0 }
+		effect = {
+			hidden_tooltip = {
+				revoke_law = expd_at_imperial_administration_law_0
+				revoke_law = expd_at_imperial_administration_law_2
+			}
+			custom_tooltip = { text = expd_at_can_construct_hospitals_via_special_decision_tt }
+		}
+		vassal_limit = 5
+		vassal_opinion = -10
+	}
+	
+	# Imperial administration (+25 vassals, -20 opinion)
+	expd_at_imperial_administration_law_2 = {
+		group = expd_at_imperial_administration_laws
+		default = no
+		potential = { expd_at_this_title_should_have_tribal_laws = yes }
+		allow = {
+			tier = EMPEROR
+			expd_at_this_title_is_a_highly_organised_tribe = yes
+			has_law = expd_at_out_of_realm_inheritance_law_1
+			hidden_tooltip = { NOT = { has_law = expd_at_imperial_administration_law_0 } }
+		}
+		ai_will_do = { factor = 10 }
+		ai_will_revoke = { factor = 0 }
+		effect = {
+			hidden_tooltip = { revoke_law = expd_at_imperial_administration_law_1 }
+			custom_tooltip = { text = expd_at_can_construct_hospitals_via_special_decision_tt }
+		}
+		vassal_limit = 25
+		vassal_opinion = -20
+	}
+	
+}

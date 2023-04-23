@@ -1,0 +1,35 @@
+expd_at_this_title_should_have_tribal_laws = {
+	has_dlc = "Zeus"
+	holder_scope = {
+		is_tribal = yes
+		is_feudal = no
+		is_nomadic = no
+		is_republic = no
+		is_theocracy = no
+	}
+}
+
+expd_at_this_title_is_a_highly_organised_tribe = {
+	
+	# Must have maximum tribal organization
+	has_law = tribal_organization_4
+	
+	# Must have revoked all council powers
+	has_law = law_voting_power_0
+	has_law = war_voting_power_0
+	has_law = revoke_title_voting_power_0
+	has_law = imprison_voting_power_0
+	has_law = grant_title_voting_power_0
+	has_law = banish_voting_power_0
+	has_law = execution_voting_power_0
+	
+	# Must have religious title revocation. Or, if tolerant, must have normal title revocation.
+	trigger_if = {
+		limit = { holder_scope = { has_religion_feature = religion_cosmopolitan } }
+		has_law = revoke_title_law_1
+	}
+	trigger_else = {
+		has_law = revoke_title_law_2
+	}
+	
+}

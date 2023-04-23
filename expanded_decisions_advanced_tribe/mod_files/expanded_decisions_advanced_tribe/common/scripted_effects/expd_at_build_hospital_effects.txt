@@ -1,0 +1,46 @@
+expd_at_build_hospital_effect = {
+	FROM = {
+		if = {
+			limit = {
+				expd_at_this_characters_learning_skill_is_40_plus = yes
+			}
+			wealth = -100
+		}
+		else_if = {
+			limit = {
+				OR = {
+					expd_at_this_characters_learning_skill_is_30_to_40 = yes
+					expd_at_this_characters_court_physician_has_learning_40_plus = yes
+				}
+			}
+			wealth = -150
+		}
+		else_if = {
+			limit = {
+				OR = {
+					expd_at_this_characters_learning_skill_is_20_to_30 = yes
+					expd_at_this_characters_court_physician_has_learning_30_to_40 = yes
+				}
+			}
+			wealth = -200
+		}
+		else_if = {
+			limit = {
+				OR = {
+					expd_at_this_characters_learning_skill_is_10_to_20 = yes
+					expd_at_this_characters_court_physician_has_learning_20_to_30 = yes
+				}
+			}
+			wealth = -300
+		}
+		else = {
+			# Fallback tooltip, just in case
+			wealth = -300
+		}
+	}
+	location = {
+		show_scope_change = no
+		build_holding = { type = hospital }
+		#create_hospital = THIS
+	}
+}

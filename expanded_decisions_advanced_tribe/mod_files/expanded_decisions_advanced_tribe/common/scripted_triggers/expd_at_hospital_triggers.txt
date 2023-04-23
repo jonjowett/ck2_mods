@@ -1,0 +1,129 @@
+expd_at_build_hospital_potential = {
+	tier = COUNT
+	location = { has_hospital = no }
+	OR = {
+		holder_scope = { character = FROM }
+		holder_scope = {
+			is_vassal_or_below_of = FROM
+			is_tribal = yes
+		}
+	}
+}
+
+expd_at_build_hospital_potential_high_prio = {
+	# Decision taker's capital, or decision taker's tribal demesne if decision taker's capital has a hospital
+	OR = {
+		FROM = { is_capital = PREV }
+		AND = {
+			FROM = { capital_scope = { has_hospital = yes } }
+			holder_scope = { character = FROM }
+			location = { has_tribal = yes }
+		}
+	}
+}
+
+expd_at_build_hospital_from_potential = {
+	is_tribal = yes
+	OR = {
+		has_law = expd_at_imperial_administration_law_1
+		has_law = expd_at_imperial_administration_law_2
+	}
+}
+
+expd_at_build_hospital_allow = {
+	FROM = {
+		OR = {
+			AND = {
+				OR = {
+					expd_at_this_characters_learning_skill_is_10_to_20 = yes
+					expd_at_this_characters_court_physician_has_learning_20_to_30 = yes
+				}
+				wealth >= 300
+			}
+			AND = {
+				OR = {
+					expd_at_this_characters_learning_skill_is_20_to_30 = yes
+					expd_at_this_characters_court_physician_has_learning_30_to_40 = yes
+				}
+				wealth >= 200
+			}
+			AND = {
+				OR = {
+					expd_at_this_characters_learning_skill_is_30_to_40 = yes
+					expd_at_this_characters_court_physician_has_learning_40_plus = yes
+				}
+				wealth >= 150
+			}
+			AND = {
+				expd_at_this_characters_learning_skill_is_40_plus = yes
+				wealth >= 100
+			}
+		}
+	}
+}
+
+expd_at_this_characters_learning_skill_is_10_to_20 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_learning_skill_is_10_to_20_tt
+		learning >= 10
+		learning < 20
+	}
+}
+
+expd_at_this_characters_learning_skill_is_20_to_30 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_learning_skill_is_20_to_30_tt
+		learning >= 20
+		learning < 30
+	}
+}
+
+expd_at_this_characters_learning_skill_is_30_to_40 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_learning_skill_is_30_to_40_tt
+		learning >= 30
+		learning < 40
+	}
+}
+
+expd_at_this_characters_learning_skill_is_40_plus= {
+	custom_tooltip = {
+		text = expd_at_this_characters_learning_skill_is_40_plus_tt
+		learning >= 40
+	}
+}
+
+expd_at_this_characters_court_physician_has_learning_20_to_30 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_court_physician_has_learning_20_to_30_tt
+		any_courtier_or_vassal = {
+			has_minor_title = title_court_physician
+			liege = { character = PREVPREV }
+			learning >= 20
+			learning < 30
+		}
+	}
+}
+
+expd_at_this_characters_court_physician_has_learning_30_to_40 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_court_physician_has_learning_30_to_40_tt
+		any_courtier_or_vassal = {
+			has_minor_title = title_court_physician
+			liege = { character = PREVPREV }
+			learning >= 30
+			learning < 40
+		}
+	}
+}
+
+expd_at_this_characters_court_physician_has_learning_40_plus = {
+	custom_tooltip = {
+		text = expd_at_this_characters_court_physician_has_learning_40_plus_tt
+		any_courtier_or_vassal = {
+			has_minor_title = title_court_physician
+			liege = { character = PREVPREV }
+			learning >= 40
+		}
+	}
+}
