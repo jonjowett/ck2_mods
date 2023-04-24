@@ -3,7 +3,6 @@ targeted_decisions = {
 	# Players can choose to block/unblock fast pillaging on a global level (affects all players and all AI)
 	expd_pill_block_global = {
 		filter = self
-		is_high_prio = yes
 		ai = no
 		only_playable = yes
 		potential = {
@@ -21,7 +20,6 @@ targeted_decisions = {
 	}
 	expd_pill_enable_global = {
 		filter = self
-		is_high_prio = yes
 		ai = no
 		only_playable = yes
 		potential = {
@@ -41,7 +39,6 @@ targeted_decisions = {
 	# The point of these decisions is to remove the possibility of accidental clicks
 	expd_pill_block_char = {
 		filter = self
-		is_high_prio = yes
 		ai = no
 		only_playable = yes
 		potential = {
@@ -63,7 +60,6 @@ targeted_decisions = {
 	}
 	expd_pill_enable_char = {
 		filter = self
-		is_high_prio = yes
 		ai = no
 		only_playable = yes
 		potential = {
