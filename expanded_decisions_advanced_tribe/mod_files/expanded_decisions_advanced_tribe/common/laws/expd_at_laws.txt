@@ -1,3 +1,6 @@
+# Audax Validator EnableCommentMetadata
+# revoke_allowed, ai_will_do and ai_will_revoke are required blocks, but the Validator flags them as errors
+
 law_groups = {
 	expd_at_out_of_realm_inheritance_laws = {
 		law_type = realm
@@ -26,8 +29,11 @@ de_jure_laws = { # Crown law
 		allow = {
 			always = yes
 		}
+		# Audax Validator "." Ignore_NEXT
 		revoke_allowed = { always = no }
+		# Audax Validator "." Ignore_NEXT
 		ai_will_do = { factor = 0 }
+		# Audax Validator "." Ignore_NEXT
 		ai_will_revoke = { factor = 0 }
 		effect = {
 			hidden_tooltip = { revoke_law = expd_at_out_of_realm_inheritance_law_1 }
@@ -43,7 +49,11 @@ de_jure_laws = { # Crown law
 		allow = {
 			expd_at_this_title_is_a_highly_organised_tribe = yes
 		}
+		# Audax Validator "." Ignore_NEXT
+		revoke_allowed = { always = no }
+		# Audax Validator "." Ignore_NEXT
 		ai_will_do = { factor = 1 }
+		# Audax Validator "." Ignore_NEXT
 		ai_will_revoke = { factor = 0 }
 		effect = {
 			hidden_tooltip = { revoke_law = expd_at_out_of_realm_inheritance_law_0 }
@@ -72,7 +82,11 @@ laws = { # Realm law (not crown law)
 		allow = {
 			hidden_tooltip = { NOT = { has_law = expd_at_imperial_administration_law_2 } }
 		}
+		# Audax Validator "." Ignore_NEXT
+		revoke_allowed = { always = no }
+		# Audax Validator "." Ignore_NEXT
 		ai_will_do = { factor = 0 }
+		# Audax Validator "." Ignore_NEXT
 		ai_will_revoke = { factor = 0 }
 		effect = {
 			hidden_tooltip = { revoke_law = expd_at_imperial_administration_law_1 }
@@ -87,14 +101,17 @@ laws = { # Realm law (not crown law)
 		allow = {
 			expd_at_this_title_is_a_highly_organised_tribe = yes
 		}
+		# Audax Validator "." Ignore_NEXT
+		revoke_allowed = { always = no }
+		# Audax Validator "." Ignore_NEXT
 		ai_will_do = { factor = 10 }
+		# Audax Validator "." Ignore_NEXT
 		ai_will_revoke = { factor = 0 }
 		effect = {
 			hidden_tooltip = {
 				revoke_law = expd_at_imperial_administration_law_0
 				revoke_law = expd_at_imperial_administration_law_2
 			}
-			custom_tooltip = { text = expd_at_can_construct_hospitals_via_special_decision_tt }
 		}
 		vassal_limit = 5
 		vassal_opinion = -10
@@ -109,14 +126,23 @@ laws = { # Realm law (not crown law)
 			tier = EMPEROR
 			expd_at_this_title_is_a_highly_organised_tribe = yes
 			has_law = expd_at_out_of_realm_inheritance_law_1
-			TECH_MAJESTY >= 5
+			holder_scope = {
+				show_scope_change = no
+				capital_scope = {
+					show_scope_change = no
+					TECH_MAJESTY >= 5
+				}
+			}
 			hidden_tooltip = { NOT = { has_law = expd_at_imperial_administration_law_0 } }
 		}
+		# Audax Validator "." Ignore_NEXT
+		revoke_allowed = { always = no }
+		# Audax Validator "." Ignore_NEXT
 		ai_will_do = { factor = 10 }
+		# Audax Validator "." Ignore_NEXT
 		ai_will_revoke = { factor = 0 }
 		effect = {
 			hidden_tooltip = { revoke_law = expd_at_imperial_administration_law_1 }
-			custom_tooltip = { text = expd_at_can_construct_hospitals_via_special_decision_tt }
 		}
 		vassal_limit = 25
 		vassal_opinion = -20
