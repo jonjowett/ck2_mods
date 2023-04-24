@@ -16,7 +16,7 @@ title_decisions = {
 			is_decision_potential = expd_cef_merge
 		}
 		allow = {
-			#FIXME: Why is this criterion not working?!
+			#FIXME: For some unknown reason, the expd_cef_root_controls_this_kingdom trigger causes is_decision_allowed to always return false. Therefore, this condition is omitted.
 			#custom_tooltip = {
 			#	text = expd_cef_from_can_take_the_expd_cef_merge_decision_tt
 			#	FROM = { is_decision_allowed = expd_cef_merge }
@@ -30,14 +30,15 @@ title_decisions = {
 					text = expd_cef_a_vassal_of_from_holds_this_title_tt
 					holder_scope = { is_vassal_or_below_of = FROM }
 				}
-				custom_tooltip = {
-					text = expd_cef_this_title_has_no_holder_and_is_de_jure_vassal_of_one_of_froms_titles_tt
-					# Audax Validator "." Ignore_1001
-					AND = {
-						has_holder = no
-						FROM = { any_demesne_title = { de_jure_vassal_or_below = ROOT } }
-					}
-				}
+				#FIXME: If there's no title holder then the empire creation effect can't locate it, so we have to rule out this option for the time being.
+				#custom_tooltip = {
+				#	text = expd_cef_this_title_has_no_holder_and_is_de_jure_vassal_of_one_of_froms_titles_tt
+				#	# Audax Validator "." Ignore_1001
+				#	AND = {
+				#		has_holder = no
+				#		FROM = { any_demesne_title = { de_jure_vassal_or_below = ROOT } }
+				#	}
+				#}
 			}
 		}
 		effect = {
