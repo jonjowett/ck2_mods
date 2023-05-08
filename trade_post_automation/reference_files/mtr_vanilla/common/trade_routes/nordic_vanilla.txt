@@ -1,0 +1,57 @@
+nordic_route = {	# Scandinavia - Denmark
+
+	wealth = 25.0			# Total base wealth of trade route
+	
+	trade_post_display_trigger = {
+		OR = {
+			
+			province_id = 301	# Gotland
+			province_id	= 290	# Uppland
+			province_id = 382	# Finland
+			province_id = 303	# Skane
+			province_id = 266	# Sjaeland
+			province_id = 264	# Slesvig
+			province_id = 274	# Bergenshus
+			province_id = 268	# Rogaland
+			province_id = 272	# Akershus
+			province_id = 281	# Angermanland
+			province_id = 1617	# Iceland
+			
+		}
+	}
+
+	modifier = {				# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.04
+		city_tax_modifier = 0.06
+		temple_tax_modifier = 0.03
+		tribal_tax_modifier = 0.30
+		trade_route_value = 7.0
+		local_movement_speed = 0.08
+		tech_growth_modifier = 0.05
+		icon = 6
+		}
+
+	start = {					# Start of trade route
+				1617 382 1604
+		}
+
+
+	### Inland route
+	path = {					# Rovaniemi - Uppland
+		1604 280 281 283 285 286 290
+		}
+	path = { 					# Finland - Uppland
+		382 291 290  
+		}
+	path = {					# Uppland - Gotland - Scania
+		290 289 294 293 301 300 931 6 303
+		}
+	path = { 					# Scania - Lubeck
+		303 266 265 264 263 262
+		}
+	
+	### Coastal route
+	path = { 					# Iceland - Scania
+		1617 33 34 274 269 268 270 271 272 296 297 302 303 
+		}
+}

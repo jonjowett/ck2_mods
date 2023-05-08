@@ -1,0 +1,40 @@
+trade_post = {
+	trigger = {
+		conditional_tooltip = {
+			trigger = {
+
+				OR = {
+					FROM = {
+						is_patrician = no
+					}
+					AND = {
+						port = no
+						FROM = {
+							is_patrician = yes
+						}
+					}
+				}
+			}
+			custom_tooltip = {
+						text = MTR_MAJOR_TRADE_NODE
+							hidden_tooltip = {
+								OR = {
+										amber_route_post_trigger = yes
+										asian_route_post_trigger = yes
+										nordic_route_post_trigger = yes
+										andalusian_route_post_trigger = yes
+										italian_route_post_trigger = yes										
+										british_route_post_trigger = yes
+										frankish_route_post_trigger = yes
+										saxon_route_post_trigger = yes
+										trans_saharan_trade_post_trigger = yes
+										silk_road_trade_post_trigger = yes
+										mooniyaang_trade_routes_trade_post_trigger = yes
+									}
+							}
+			}
+		}
+	}
+}
+
+

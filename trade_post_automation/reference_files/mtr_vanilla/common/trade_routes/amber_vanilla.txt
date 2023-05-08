@@ -1,0 +1,148 @@
+amber_route = {	# Rus - Poland - Hungary
+	
+	wealth = 25.0				# Total base wealth of trade route
+	
+	trade_post_display_trigger = {
+		OR = {
+		
+			province_id = 610	# Bolghar
+			province_id = 611	# Qazan
+			province_id = 614	# Ashli
+#			province_id = 595	# Sarai
+			province_id = 594	# Sarkel
+			province_id = 598	# Tmutarakan
+			province_id = 561	# Theodosia
+			province_id = 562	# Kerch
+			province_id = 555	# Pereyaslavl
+			province_id = 547	# Kiev
+			province_id = 536	# Halych
+			province_id = 531	# Sandomierz
+			province_id = 527	# Krakow
+			province_id = 440	# Olomouc
+			province_id = 445	# Pressburg
+			province_id = 444	# Esztergom
+			province_id = 456	# Carinthia
+			province_id = 395	# Archangelsk
+			province_id = 368	# Gdansk
+			province_id = 378	# Reval
+			province_id = 417	# Vitebsk
+			province_id = 402	# Veliky Ustug
+			province_id = 572	# Yaroslavl
+#			province_id = 583	# Suzdal
+			province_id = 582	# Vladimir
+			province_id = 584	# Nizhny Novgorod
+#			province_id = 581	# Murom
+			province_id = 580	# Ryazan
+			province_id = 568	# Smolensk
+			province_id = 419	# Polotsk
+			province_id = 550	# Minsk
+			province_id = 409	# Ladoga
+			province_id = 1596	# Riga
+			province_id = 414	# Novgorod
+		}
+	}
+
+	modifier = {	# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.04
+		city_tax_modifier = 0.06
+		temple_tax_modifier = 0.03
+		tribal_tax_modifier = 0.30
+		trade_route_value = 8.0
+		local_movement_speed = 0.08
+		tech_growth_modifier = 0.05
+		icon = 6
+		}
+
+	start = {	1844 395 409					# Start of trade route
+		}
+
+
+	### Inland route
+	path = { 					# Vishera - Qazan
+		1844 1841 886 1845 1717 1716 611
+		}
+	path = { 					# Qazan - Tana
+		611 610 609 592 595 594 596
+		}
+	path = { 					# Tana - Theodosia
+		596 599 598 562 561
+		}
+	path = { 					# Archangelsk - Vladimir
+		395 399 402 586 407 572 583 582
+		}
+	path = { 					# Qazan - Vladimir
+		611 614 590 584 582
+		}
+	path = { 					# Vladimir - Tula
+		582 581 580 578
+		}
+	path = { 					# Tula - Tver
+		578 1679 1677 570
+		}
+	path = { 					# Tver - Rusa
+		570 1668 412 1667 1662
+		}
+	path = {					# Ladoga - Rusa
+		409 414 1662
+		}
+	path = {					# Rusa - Polotsk
+		1662 415 419
+		}
+	path = {					# Ladoga - Riga
+		409 411 380 378 377 375 1596
+		}
+	path = { 					# Tver - Polotsk
+		570 1672 568 417 419
+		}
+	path = { 					# Polotsk - Riga
+		419 416 1594 1596
+		}
+	path = { 					# Tula - Kiev
+		578 1650 1666 1676 567 1675 555 547
+		}
+	path = { 					# Polotsk - Minsk
+		419 934 550
+		}
+	path = { 					# Minsk - Kiev
+		550 1653 1649 547
+		}
+	path = { 					# Kiev - Theodosia
+		547 544 543 558 559 561
+		}
+	path = { 					# Kiev - Halych
+		547 1648 546 536
+		}
+	path = { 					# Halych - Constantia
+		536 1638 511 510
+		}
+	path = { 					# Halych - Krakow
+		536 1636 534 532 527
+		}
+	path = { 					# Minsk - Sandomierz
+		550 1654 424 425 1584 531
+		}
+	path = { 					# Riga - Danzig
+		1596 374 421 372 422 371 370 368
+		}
+	path = { 					# Danzig - Sandomierz
+		368 429 428 528 531
+		}
+	path = { 					# Sandomierz - Krakow
+		531 527
+		}
+	path = { 					# Krakow - Olomouc
+		527 526 440
+		}
+	path = { 					# Olomouc - Fejer
+		440 445 444 451
+		}
+	path = { 					# Fejer - Belgrade
+		451 452 518 1968 505
+		}
+	path = { 					# Fejer - Carinthia
+		451 454 1693 1696 456
+		}
+	path = {					#Carinthia - Venice
+		456 1695 358 356
+		}
+}

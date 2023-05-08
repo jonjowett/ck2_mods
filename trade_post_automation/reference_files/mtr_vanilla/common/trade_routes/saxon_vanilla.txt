@@ -1,0 +1,61 @@
+saxon_route = {	# Central Europe
+
+	
+	wealth = 25.0			# Total base wealth of trade route
+	
+	trade_post_display_trigger = {
+		OR = {
+			
+			province_id = 262	# Lubeck
+			province_id = 258	# Bardowick
+			province_id = 366	# Stettin
+			province_id = 311	# Magdeburg
+			province_id = 313	# Landsberg
+			province_id = 437	# Praha
+			province_id = 447	# Linz
+			province_id = 435	# Wroclaw
+			province_id = 1985	# Regensburg
+			province_id = 259	# Hamburg
+			province_id = 119	# Cologne
+			province_id = 359	# Innsbruck
+			province_id = 123	# Mainz
+		}
+	}
+
+	modifier = {	# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.04
+		city_tax_modifier = 0.06
+		temple_tax_modifier = 0.03
+		tribal_tax_modifier = 0.15
+		trade_route_value = 8
+		local_movement_speed = 0.08
+		tech_growth_modifier = 0.05
+		icon = 6
+		}
+
+	start = {	
+			123 306 527		# Start of trade route
+		}
+
+
+	### Inland route
+	path = { 306 260 262 261 258 }
+	path = { 258 259 }
+	path = { 258 257 255 254 }
+	path = { 254 256 311 310 365 308 366 367 368 }
+	path = { 254 121 1987 1983 119 }
+	path = { 123 122 254 }
+	path = { 123 124 125 250 245 246 }
+	path = { 246 247 316 359 }
+	path = { 359 360 1700 1985 }
+	path = { 1985 314 313 }
+	path = { 313 254 }
+	path = { 359 1689 456 }
+	path = { 1985 361 447 362 437 }
+	path = { 437 439 313 }
+	path = { 437 438 440 }
+	path = { 527 433 435 1589 312 313 }
+}
+
+
+

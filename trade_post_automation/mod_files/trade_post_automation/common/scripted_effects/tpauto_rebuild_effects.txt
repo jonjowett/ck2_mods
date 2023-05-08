@@ -1,0 +1,763 @@
+# Audax Validator EnableCommentMetadata
+# Lots of extra ANDs in this file - ignore them all
+# Audax Validator "!" Ignore_1001
+
+################################################
+# Rebuild trade post according to stored flags #
+################################################
+
+tpauto_rebuild_trade_post = {
+	
+	if = {
+		
+		limit = { has_province_flag = tpauto_tracking_has_trade_post }
+		
+		if = {
+			limit = { has_trade_post = no }
+			hidden_tooltip = { owner = { save_event_target_as = tpauto_new_trade_post_owner } }
+			build_holding = {
+				type = trade_post
+				holder = event_target:tpauto_new_trade_post_owner
+			}
+			hidden_tooltip = { clear_event_target = tpauto_new_trade_post_owner }
+		}
+		
+		clr_province_flag = tpauto_tracking_trade_post_rebuilt
+		set_province_flag = tpauto_tracking_trade_post_rebuilt
+		
+		tpauto_rebuild_trade_post_buildings_vanilla = yes
+		tpauto_rebuild_trade_post_buildings_mtr = yes
+		
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+################################################
+# Delete some stored flags to simulate looting #
+################################################
+
+tpauto_clear_building_deletion_flags = {
+	clr_province_flag = tpauto_rebuild_buildings_deleted_zero
+	clr_province_flag = tpauto_rebuild_buildings_deleted_one
+	clr_province_flag = tpauto_rebuild_buildings_deleted_two
+}
+
+tpauto_rebuild_decide_number_of_buildings_deleted = {
+	
+	tpauto_clear_building_deletion_flags = yes
+	
+	random_list = {
+		
+		100 = {
+			mult_modifier = {
+				factor = 1.5
+				owner = { realm_stewardship = 20 }
+			}
+			mult_modifier = {
+				factor = 1.5
+				owner = { realm_stewardship = 25 }
+			}
+			mult_modifier = {
+				factor = 1.5
+				owner = { realm_stewardship = 30 }
+			}
+			mult_modifier = {
+				factor = 1.5
+				owner = { realm_stewardship = 35 }
+			}
+			mult_modifier = {
+				factor = 1.5
+				owner = { realm_stewardship = 40 }
+			}
+			mult_modifier = {
+				factor = 2
+				AND = {
+					has_province_flag = tpauto_tracking_trade_post_rebuilt
+					had_province_flag = {
+						flag = tpauto_tracking_trade_post_rebuilt
+						years <= 5
+					}
+				}
+			}
+			mult_modifier = {
+				factor = 2
+				AND = {
+					has_province_flag = tpauto_tracking_trade_post_rebuilt
+					had_province_flag = {
+						flag = tpauto_tracking_trade_post_rebuilt
+						years <= 10
+					}
+				}
+			}
+			mult_modifier = {
+				factor = 2
+				AND = {
+					has_province_flag = tpauto_tracking_trade_post_rebuilt
+					had_province_flag = {
+						flag = tpauto_tracking_trade_post_rebuilt
+						years <= 20
+					}
+				}
+			}
+			mult_modifier = {
+				factor = 2
+				AND = {
+					has_province_flag = tpauto_tracking_trade_post_rebuilt
+					had_province_flag = {
+						flag = tpauto_tracking_trade_post_rebuilt
+						years <= 50
+					}
+				}
+			}
+			
+			set_province_flag = tpauto_rebuild_buildings_deleted_zero
+			
+		}
+		
+		100 = {
+			set_province_flag = tpauto_rebuild_buildings_deleted_one
+		}
+		
+		100 = {
+			mult_modifier = {
+				factor = 0.666667
+				owner = { realm_stewardship = 20 }
+			}
+			mult_modifier = {
+				factor = 0.666667
+				owner = { realm_stewardship = 25 }
+			}
+			mult_modifier = {
+				factor = 0.666667
+				owner = { realm_stewardship = 30 }
+			}
+			mult_modifier = {
+				factor = 0.666667
+				owner = { realm_stewardship = 35 }
+			}
+			mult_modifier = {
+				factor = 0.666667
+				owner = { realm_stewardship = 40 }
+			}
+			mult_modifier = {
+				factor = 0.5
+				AND = {
+					has_province_flag = tpauto_tracking_trade_post_rebuilt
+					had_province_flag = {
+						flag = tpauto_tracking_trade_post_rebuilt
+						years <= 5
+					}
+				}
+			}
+			mult_modifier = {
+				factor = 0.5
+				AND = {
+					has_province_flag = tpauto_tracking_trade_post_rebuilt
+					had_province_flag = {
+						flag = tpauto_tracking_trade_post_rebuilt
+						years <= 10
+					}
+				}
+			}
+			mult_modifier = {
+				factor = 0.5
+				AND = {
+					has_province_flag = tpauto_tracking_trade_post_rebuilt
+					had_province_flag = {
+						flag = tpauto_tracking_trade_post_rebuilt
+						years <= 15
+					}
+				}
+			}
+			mult_modifier = {
+				factor = 0.5
+				AND = {
+					has_province_flag = tpauto_tracking_trade_post_rebuilt
+					had_province_flag = {
+						flag = tpauto_tracking_trade_post_rebuilt
+						years <= 20
+					}
+				}
+			}
+			mult_modifier = {
+				factor = 0.5
+				AND = {
+					has_province_flag = tpauto_tracking_trade_post_rebuilt
+					had_province_flag = {
+						flag = tpauto_tracking_trade_post_rebuilt
+						years <= 50
+					}
+				}
+			}
+			set_province_flag = tpauto_rebuild_buildings_deleted_two
+		}
+		
+	}
+	
+}
+
+tpauto_rebuild_delete_specified_number_of_building_flags = {
+	if = {
+		limit = { has_province_flag = tpauto_rebuild_buildings_deleted_zero }
+		custom_tooltip = { text = tpauto_rebuild_buildings_deleted_zero_tt }
+	}
+	else_if = {
+		limit = { has_province_flag = tpauto_rebuild_buildings_deleted_one }
+		custom_tooltip = {
+			text = tpauto_rebuild_buildings_deleted_one_tt
+			tpauto_rebuild_delete_single_random_building_flag = yes
+		}
+	}
+	else_if = {
+		limit = { has_province_flag = tpauto_rebuild_buildings_deleted_two }
+		custom_tooltip = {
+			text = tpauto_rebuild_buildings_deleted_two_tt
+			tpauto_rebuild_delete_single_random_building_flag = yes
+			tpauto_rebuild_delete_single_random_building_flag = yes
+		}
+	}
+	else = {
+		custom_tooltip = {
+			text = tpauto_rebuild_buildings_deleted_one_due_to_logic_error_tt
+			tpauto_rebuild_delete_single_random_building_flag = yes
+		}
+	}
+	hidden_tooltip = { tpauto_clear_building_deletion_flags = yes }
+}
+
+tpauto_rebuild_delete_single_random_building_flag = {
+	
+	random_list = {
+		
+		
+		
+		
+		
+		###########
+		# Vanilla #
+		###########
+		
+		
+		
+		
+		# 3-stage buildings
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_port_3 }
+			}
+			clr_province_flag = tpauto_tracking_tr_port_3
+			set_province_flag = tpauto_tracking_tr_port_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_port_2 }
+			}
+			clr_province_flag = tpauto_tracking_tr_port_2
+			set_province_flag = tpauto_tracking_tr_port_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_port_1 }
+			}
+			clr_province_flag = tpauto_tracking_tr_port_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_enclave_3 }
+			}
+			clr_province_flag = tpauto_tracking_tr_enclave_3
+			set_province_flag = tpauto_tracking_tr_enclave_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_enclave_2 }
+			}
+			clr_province_flag = tpauto_tracking_tr_enclave_2
+			set_province_flag = tpauto_tracking_tr_enclave_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_enclave_1 }
+			}
+			clr_province_flag = tpauto_tracking_tr_enclave_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_garrison_3 }
+			}
+			clr_province_flag = tpauto_tracking_tr_garrison_3
+			set_province_flag = tpauto_tracking_tr_garrison_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_garrison_2 }
+			}
+			clr_province_flag = tpauto_tracking_tr_garrison_2
+			set_province_flag = tpauto_tracking_tr_garrison_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_garrison_1 }
+			}
+			clr_province_flag = tpauto_tracking_tr_garrison_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_silk_road_3 }
+			}
+			clr_province_flag = tpauto_tracking_tr_silk_road_3
+			set_province_flag = tpauto_tracking_tr_silk_road_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_silk_road_2 }
+			}
+			clr_province_flag = tpauto_tracking_tr_silk_road_2
+			set_province_flag = tpauto_tracking_tr_silk_road_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_silk_road_1 }
+			}
+			clr_province_flag = tpauto_tracking_tr_silk_road_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_trade_offices_3 }
+			}
+			clr_province_flag = tpauto_tracking_trade_offices_3
+			set_province_flag = tpauto_tracking_trade_offices_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_trade_offices_2 }
+			}
+			clr_province_flag = tpauto_tracking_trade_offices_2
+			set_province_flag = tpauto_tracking_trade_offices_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_trade_offices_1 }
+			}
+			clr_province_flag = tpauto_tracking_trade_offices_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mercenary_garrison_3 }
+			}
+			clr_province_flag = tpauto_tracking_mercenary_garrison_3
+			set_province_flag = tpauto_tracking_mercenary_garrison_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mercenary_garrison_2 }
+			}
+			clr_province_flag = tpauto_tracking_mercenary_garrison_2
+			set_province_flag = tpauto_tracking_mercenary_garrison_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mercenary_garrison_1 }
+			}
+			clr_province_flag = tpauto_tracking_mercenary_garrison_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_radhanite_quarter_3 }
+			}
+			clr_province_flag = tpauto_tracking_radhanite_quarter_3
+			set_province_flag = tpauto_tracking_radhanite_quarter_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_radhanite_quarter_2 }
+			}
+			clr_province_flag = tpauto_tracking_radhanite_quarter_2
+			set_province_flag = tpauto_tracking_radhanite_quarter_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_radhanite_quarter_1 }
+			}
+			clr_province_flag = tpauto_tracking_radhanite_quarter_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_sahara_3 }
+			}
+			clr_province_flag = tpauto_tracking_tr_sahara_3
+			set_province_flag = tpauto_tracking_tr_sahara_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_sahara_2 }
+			}
+			clr_province_flag = tpauto_tracking_tr_sahara_2
+			set_province_flag = tpauto_tracking_tr_sahara_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_sahara_1 }
+			}
+			clr_province_flag = tpauto_tracking_tr_sahara_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_gold_mine_3 }
+			}
+			clr_province_flag = tpauto_tracking_tr_gold_mine_3
+			set_province_flag = tpauto_tracking_tr_gold_mine_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_gold_mine_2 }
+			}
+			clr_province_flag = tpauto_tracking_tr_gold_mine_2
+			set_province_flag = tpauto_tracking_tr_gold_mine_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_gold_mine_1 }
+			}
+			clr_province_flag = tpauto_tracking_tr_gold_mine_1
+		}
+		
+		
+		
+		
+		
+		# Single-stage buildings
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_salt_mine_1 }
+			}
+			clr_province_flag = tpauto_tracking_tr_salt_mine_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_tr_cloth_production_1 }
+			}
+			clr_province_flag = tpauto_tracking_tr_cloth_production_1
+		}
+		
+		
+		
+		
+		
+		#######
+		# MTR #
+		#######
+		
+		
+		
+		
+		# 3-stage buildings
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_amber_3 }
+			}
+			clr_province_flag = tpauto_tracking_amber_3
+			set_province_flag = tpauto_tracking_amber_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_amber_2 }
+			}
+			clr_province_flag = tpauto_tracking_amber_2
+			set_province_flag = tpauto_tracking_amber_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_amber_1 }
+			}
+			clr_province_flag = tpauto_tracking_amber_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_amber_trade_offices_3 }
+			}
+			clr_province_flag = tpauto_tracking_amber_trade_offices_3
+			set_province_flag = tpauto_tracking_amber_trade_offices_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_amber_trade_offices_2 }
+			}
+			clr_province_flag = tpauto_tracking_amber_trade_offices_2
+			set_province_flag = tpauto_tracking_amber_trade_offices_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_amber_trade_offices_1 }
+			}
+			clr_province_flag = tpauto_tracking_amber_trade_offices_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_amber_mercenary_garrison_3 }
+			}
+			clr_province_flag = tpauto_tracking_amber_mercenary_garrison_3
+			set_province_flag = tpauto_tracking_amber_mercenary_garrison_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_amber_mercenary_garrison_2 }
+			}
+			clr_province_flag = tpauto_tracking_amber_mercenary_garrison_2
+			set_province_flag = tpauto_tracking_amber_mercenary_garrison_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_amber_mercenary_garrison_1 }
+			}
+			clr_province_flag = tpauto_tracking_amber_mercenary_garrison_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_warehouse_3 }
+			}
+			clr_province_flag = tpauto_tracking_mtr_warehouse_3
+			set_province_flag = tpauto_tracking_mtr_warehouse_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_warehouse_2 }
+			}
+			clr_province_flag = tpauto_tracking_mtr_warehouse_2
+			set_province_flag = tpauto_tracking_mtr_warehouse_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_warehouse_1 }
+			}
+			clr_province_flag = tpauto_tracking_mtr_warehouse_1
+		}
+		
+		
+		
+		
+		
+		# Single-stage buildings (generic)
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_marketplace }
+			}
+			clr_province_flag = tpauto_tracking_mtr_marketplace
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_trade_port }
+			}
+			clr_province_flag = tpauto_tracking_mtr_trade_port
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_chapel }
+			}
+			clr_province_flag = tpauto_tracking_mtr_chapel
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_tavern }
+			}
+			clr_province_flag = tpauto_tracking_mtr_tavern
+		}
+		
+		
+		
+		
+		
+		# Single-stage buildings (resource)
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_timber }
+			}
+			clr_province_flag = tpauto_tracking_mtr_timber
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_amber }
+			}
+			clr_province_flag = tpauto_tracking_mtr_amber
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_furs }
+			}
+			clr_province_flag = tpauto_tracking_mtr_furs
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_slaves }
+			}
+			clr_province_flag = tpauto_tracking_mtr_slaves
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_silk }
+			}
+			clr_province_flag = tpauto_tracking_mtr_silk
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_glass }
+			}
+			clr_province_flag = tpauto_tracking_mtr_glass
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_silver }
+			}
+			clr_province_flag = tpauto_tracking_mtr_silver
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_salt }
+			}
+			clr_province_flag = tpauto_tracking_mtr_salt
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_wine }
+			}
+			clr_province_flag = tpauto_tracking_mtr_wine
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_wool }
+			}
+			clr_province_flag = tpauto_tracking_mtr_wool
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_fish }
+			}
+			clr_province_flag = tpauto_tracking_mtr_fish
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_fruits }
+			}
+			clr_province_flag = tpauto_tracking_mtr_fruits
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_horses }
+			}
+			clr_province_flag = tpauto_tracking_mtr_horses
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_iron }
+			}
+			clr_province_flag = tpauto_tracking_mtr_iron
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_gold }
+			}
+			clr_province_flag = tpauto_tracking_mtr_gold
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_gemstones }
+			}
+			clr_province_flag = tpauto_tracking_mtr_gemstones
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_mtr_wheat }
+			}
+			clr_province_flag = tpauto_tracking_mtr_wheat
+		}
+		
+	}
+}

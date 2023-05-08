@@ -1,0 +1,86 @@
+italian_route = {	# Italian Peninsula
+
+	
+	wealth = 25.0			# Total base wealth of trade route
+	
+	trade_post_display_trigger = {
+		OR = {
+		
+			province_id = 326	# Cagliari
+			province_id = 340	# Palermo
+			province_id = 343	# Siracuse
+			province_id = 935	# Amalfi
+			province_id = 333	# Roma
+			province_id = 328	# Florence
+			province_id = 350	# Ancona
+			province_id = 327	# Pisa
+			province_id = 352	# Bologna
+			province_id = 317	# Bolzano
+			province_id = 235	# Lombardia
+			province_id = 356	# Venice
+			province_id = 233	# Genoa
+			province_id = 817	# Tunis
+		}
+	}
+
+	modifier = {	# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.4
+		city_tax_modifier = 0.06
+		temple_tax_modifier = 0.03
+		tribal_tax_modifier = 0.15
+		trade_route_value = 7.0
+		local_movement_speed = 0.08
+		tech_growth_modifier = 0.05
+		icon = 6
+		}
+
+	start = {	
+			811 327	817			# Start of trade route
+		}
+
+
+	### Inland route
+	path = { 					# Messina - Capua
+		339 338 1712 337 336 935 334 851
+		}
+	path = {					# Capua - Florence
+		851 333 243 330 328
+		}
+	path = { 					# Pisa - Florence
+		327 328
+		}
+	path = {					# Florence - Bologna
+		328 352
+		}
+	path = {					# Capua - Bologna
+		851 929 350 1711 351 352
+		}
+	path = { 					# Bologna - Verona
+		352 353 319
+		}
+	path = { 					# Verona - Venice
+		319 357 356
+		}
+	path = {					# Verona - Insbruck
+		319 317 1613 359
+		}
+	path = { 					# Bologna - Lombardia
+		352 322 320 235
+		}
+	path = { 					# Lombardia - Schwyz
+		235 1709 1612 246
+		}
+	path = { 					# Lombardia - Genoa
+		235 234 233
+		}
+	
+	
+	### Coastal route
+	path = { 					# Tripolitania - Messina
+		811 812 343 339
+		}
+	path = {					# Tunis - Messina
+		817 326 340 339
+		}
+}
+

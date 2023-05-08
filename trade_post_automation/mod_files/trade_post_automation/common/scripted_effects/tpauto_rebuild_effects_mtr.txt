@@ -1,0 +1,535 @@
+# Audax Validator EnableCommentMetadata
+# The Validator can't read MTR (because it's zipped), so individually ignore every line that mentions a MTR-specific building
+
+tpauto_rebuild_trade_post_buildings_mtr = {
+	tpauto_rebuild_trade_post_buildings_mtr_amber = yes
+	tpauto_rebuild_trade_post_buildings_mtr_amber_trade_offices = yes
+	tpauto_rebuild_trade_post_buildings_mtr_amber_mercenary_garrison = yes
+	tpauto_rebuild_trade_post_buildings_mtr_mtr_warehouse = yes
+	tpauto_rebuild_trade_post_buildings_mtr_singles_generic = yes
+	tpauto_rebuild_trade_post_buildings_mtr_singles_resource = yes
+}
+
+tpauto_rebuild_trade_post_buildings_mtr_amber = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_1
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_amber_1
+				has_province_flag = tpauto_tracking_amber_2
+				has_province_flag = tpauto_tracking_amber_3
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = amber_1
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_2
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_amber_2
+				has_province_flag = tpauto_tracking_amber_3
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = amber_2
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_3
+			}
+			has_province_flag = tpauto_tracking_amber_3
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = amber_3
+		}
+	}
+
+}
+
+tpauto_rebuild_trade_post_buildings_mtr_amber_trade_offices = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_trade_offices_1
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_amber_trade_offices_1
+				has_province_flag = tpauto_tracking_amber_trade_offices_2
+				has_province_flag = tpauto_tracking_amber_trade_offices_3
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = amber_trade_offices_1
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_trade_offices_2
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_amber_trade_offices_2
+				has_province_flag = tpauto_tracking_amber_trade_offices_3
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = amber_trade_offices_2
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_trade_offices_3
+			}
+			has_province_flag = tpauto_tracking_amber_trade_offices_3
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = amber_trade_offices_3
+		}
+	}
+
+}
+
+tpauto_rebuild_trade_post_buildings_mtr_amber_mercenary_garrison = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_mercenary_garrison_1
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_amber_mercenary_garrison_1
+				has_province_flag = tpauto_tracking_amber_mercenary_garrison_2
+				has_province_flag = tpauto_tracking_amber_mercenary_garrison_3
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = amber_mercenary_garrison_1
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_mercenary_garrison_2
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_amber_mercenary_garrison_2
+				has_province_flag = tpauto_tracking_amber_mercenary_garrison_3
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = amber_mercenary_garrison_2
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_mercenary_garrison_3
+			}
+			has_province_flag = tpauto_tracking_amber_mercenary_garrison_3
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = amber_mercenary_garrison_3
+		}
+	}
+
+}
+
+tpauto_rebuild_trade_post_buildings_mtr_mtr_warehouse = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_warehouse_1
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_mtr_warehouse_1
+				has_province_flag = tpauto_tracking_mtr_warehouse_2
+				has_province_flag = tpauto_tracking_mtr_warehouse_3
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_warehouse_1
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_warehouse_2
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_mtr_warehouse_2
+				has_province_flag = tpauto_tracking_mtr_warehouse_3
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_warehouse_2
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_warehouse_3
+			}
+			has_province_flag = tpauto_tracking_mtr_warehouse_3
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_warehouse_3
+		}
+	}
+
+}
+
+tpauto_rebuild_trade_post_buildings_mtr_singles_generic = {
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_marketplace
+			}
+			has_province_flag = tpauto_tracking_mtr_marketplace
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_marketplace
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_trade_port
+			}
+			has_province_flag = tpauto_tracking_mtr_trade_port
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_trade_port
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_chapel
+			}
+			has_province_flag = tpauto_tracking_mtr_chapel
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_chapel
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_tavern
+			}
+			has_province_flag = tpauto_tracking_mtr_tavern
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_tavern
+		}
+	}
+}
+
+tpauto_rebuild_trade_post_buildings_mtr_singles_resource = {
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_timber
+			}
+			has_province_flag = tpauto_tracking_mtr_timber
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_timber
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_amber
+			}
+			has_province_flag = tpauto_tracking_mtr_amber
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_amber
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_furs
+			}
+			has_province_flag = tpauto_tracking_mtr_furs
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_furs
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_slaves
+			}
+			has_province_flag = tpauto_tracking_mtr_slaves
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_slaves
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_silk
+			}
+			has_province_flag = tpauto_tracking_mtr_silk
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_silk
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_glass
+			}
+			has_province_flag = tpauto_tracking_mtr_glass
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_glass
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_silver
+			}
+			has_province_flag = tpauto_tracking_mtr_silver
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_silver
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_salt
+			}
+			has_province_flag = tpauto_tracking_mtr_salt
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_salt
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_wine
+			}
+			has_province_flag = tpauto_tracking_mtr_wine
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_wine
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_wool
+			}
+			has_province_flag = tpauto_tracking_mtr_wool
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_wool
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_fish
+			}
+			has_province_flag = tpauto_tracking_mtr_fish
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_fish
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_fruits
+			}
+			has_province_flag = tpauto_tracking_mtr_fruits
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_fruits
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_horses
+			}
+			has_province_flag = tpauto_tracking_mtr_horses
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_horses
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_iron
+			}
+			has_province_flag = tpauto_tracking_mtr_iron
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_iron
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_gold
+			}
+			has_province_flag = tpauto_tracking_mtr_gold
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_gold
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_gemstones
+			}
+			has_province_flag = tpauto_tracking_mtr_gemstones
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_gemstones
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_wheat
+			}
+			has_province_flag = tpauto_tracking_mtr_wheat
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = mtr_wheat
+		}
+	}
+}
