@@ -1,4 +1,4 @@
-name="Even More Bloodlines (JJ)"
+name="Even More Bloodlines"
 path="mod/even_more_bloodlines"
 tags=
 {
