@@ -23,7 +23,10 @@ expd_pill_this_holding_is_potentially_pillageable_by_prev_character = {
 	# Pillaging can only occur on baronies & county capitals
 	OR = {
 		tier = BARON
-		tier = COUNT
+		AND = {
+			tier = COUNT
+			location = { has_capital = yes } # Completely-empty counties cannot be pillaged (this additional restriction is needed in some circumstances)
+		}
 	}
 	
 	# Only certain types of holdings can be pillaged
