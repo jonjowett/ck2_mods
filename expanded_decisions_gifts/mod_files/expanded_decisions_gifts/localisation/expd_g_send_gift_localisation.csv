@@ -1,23 +1,33 @@
+# Main decision
+expd_g_send_gold;§MED-G: Send Large Gift§!;;;;;;;;;x
+expd_g_send_gold_desc;Send a large gift to [Root.GetTitledFirstName], with §Yno effect on opinion§!.;;;;;;;;;x
+# Ability to send to non-rulers
+expd_g_send_gold_to_non_ruler_enable;§PED-G: Enable Large Gifts to Non-Rulers§!;;;;;;;;;x
+expd_g_send_gold_to_non_ruler_enable_desc;Allow large gifts to be sent to non-rulers;;;;;;;;;x
+expd_g_send_gold_to_non_ruler_disable;§PED-G: Disable Large Gifts to Non-Rulers§!;;;;;;;;;x
+expd_g_send_gold_to_non_ruler_disable_desc;Prevent large gifts from being sent to non-rulers;;;;;;;;;x
+expd_g_send_gold_to_non_ruler_is_permitted_tt;Sending large gifts to non-rulers is permitted. (This setting can be toggled via a self-targeted decision.);;;;;;;;;x
+# Change size of large gift
 expd_g_send_gold_increase_size;§MED-G: Increase Large Gift Size§!;;;;;;;;;x
 expd_g_send_gold_increase_size_desc;Increase the size of gifts that are sent using the special §YED-G: Send Large Gift§! targeted decision;;;;;;;;;x
 expd_g_send_gold_decrease_size;§MED-G: Decrease Large Gift Size§!;;;;;;;;;x
 expd_g_send_gold_decrease_size_desc;Decrease the size of gifts that are sent using the special §YED-G: Send Large Gift§! targeted decision;;;;;;;;;x
-expd_g_send_gold;§MED-G: Send Large Gift§!;;;;;;;;;x
-expd_g_send_gold_desc;Send a large gift to [Root.GetTitledFirstName], with §Yno effect on opinion§!.;;;;;;;;;x
+expd_g_send_gold_reset_size;§RED-G: DEBUG Reset Large Gift Size§!;;;;;;;;;x
+expd_g_send_gold_reset_size_desc;Reset the size of gifts that are sent using the special §YED-G: Send Large Gift§! targeted decision\n\n(This decision should only be visible if the hidden tracking variable has somehow got a value outside the expected range.);;;;;;;;;x
 expd_g_send_gold_is_not_disabled_tt;Large gifts have NOT been disabled. (They can be re-enabled via a self-targeted decision.);;;;;;;;;x
 expd_g_send_gold_size_is_not_minimum_tt;Large gift size is NOT already at the minimum possible value (ie. disabled);;;;;;;;;x
 expd_g_send_gold_size_is_not_maximum_tt;Large gift size is NOT already at the maximum possible value (ie. 10,000);;;;;;;;;x
-expd_g_send_gold_size_currently_0_tt;Large gifts are currently §Ydisabled§!;;;;;;;;;x
-expd_g_send_gold_size_currently_1_tt;Large gifts are currently §Y100 gold§!;;;;;;;;;x
-expd_g_send_gold_size_currently_2_tt;Large gifts are currently §Y300 gold§!;;;;;;;;;x
-expd_g_send_gold_size_currently_3_tt;Large gifts are currently §Y1,000 gold§!;;;;;;;;;x
-expd_g_send_gold_size_currently_4_tt;Large gifts are currently §Y3,000 gold§!;;;;;;;;;x
-expd_g_send_gold_size_currently_5_tt;Large gifts are currently §Y10,000 gold§!;;;;;;;;;x
+expd_g_send_gold_size_currently_0_tt;Large gifts are currently:\n§Ydisabled§!;;;;;;;;;x
+expd_g_send_gold_size_currently_1_tt;Large gifts are currently:\n§Y100 gold§!;;;;;;;;;x
+expd_g_send_gold_size_currently_2_tt;Large gifts are currently:\n§Y300 gold§!;;;;;;;;;x
+expd_g_send_gold_size_currently_3_tt;Large gifts are currently:\n§Y1,000 gold§!;;;;;;;;;x
+expd_g_send_gold_size_currently_4_tt;Large gifts are currently:\n§Y3,000 gold§!;;;;;;;;;x
+expd_g_send_gold_size_currently_5_tt;Large gifts are currently:\n§Y10,000 gold§!;;;;;;;;;x
 expd_g_send_gold_spacer_tt;§g-§!;;;;;;;;;x
-expd_g_send_gold_size_will_be_0_tt;After taking this decision, large gifts will be §Ydisabled§!;;;;;;;;;x
-expd_g_send_gold_size_will_be_1_tt;After taking this decision, large gifts will be §Y100 gold§!;;;;;;;;;x
-expd_g_send_gold_size_will_be_2_tt;After taking this decision, large gifts will be §Y300 gold§!;;;;;;;;;x
-expd_g_send_gold_size_will_be_3_tt;After taking this decision, large gifts will be §Y1,000 gold§!;;;;;;;;;x
-expd_g_send_gold_size_will_be_4_tt;After taking this decision, large gifts will be §Y3,000 gold§!;;;;;;;;;x
-expd_g_send_gold_size_will_be_5_tt;After taking this decision, large gifts will be §Y10,000 gold§!;;;;;;;;;x
+expd_g_send_gold_size_will_be_0_tt;After taking this decision, large gifts will be:\n§Ydisabled§!;;;;;;;;;x
+expd_g_send_gold_size_will_be_1_tt;After taking this decision, large gifts will be:\n§Y100 gold§!;;;;;;;;;x
+expd_g_send_gold_size_will_be_2_tt;After taking this decision, large gifts will be:\n§Y300 gold§!;;;;;;;;;x
+expd_g_send_gold_size_will_be_3_tt;After taking this decision, large gifts will be:\n§Y1,000 gold§!;;;;;;;;;x
+expd_g_send_gold_size_will_be_4_tt;After taking this decision, large gifts will be:\n§Y3,000 gold§!;;;;;;;;;x
+expd_g_send_gold_size_will_be_5_tt;After taking this decision, large gifts will be:\n§Y10,000 gold§!;;;;;;;;;x
 expd_g_send_gold_size_logic_error_tt;§R!!!LOGIC ERROR!!! This line of code should not be accessible under normal circumstances! Please report this issue so it can be fixed.§!;;;;;;;;;x

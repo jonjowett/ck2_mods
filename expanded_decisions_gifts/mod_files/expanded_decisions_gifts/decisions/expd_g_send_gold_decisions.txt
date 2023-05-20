@@ -3,6 +3,24 @@
 
 targeted_decisions = {
 	
+	expd_g_send_gold_to_non_ruler_enable = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = { NOT = { has_character_flag = expd_g_send_gold_to_non_ruler_permitted } }
+		allow = { always = yes }
+		effect = { hidden_tooltip = { set_character_flag = expd_g_send_gold_to_non_ruler_permitted } }
+	}
+	
+	expd_g_send_gold_to_non_ruler_disable = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = { has_character_flag = expd_g_send_gold_to_non_ruler_permitted }
+		allow = { always = yes }
+		effect = { hidden_tooltip = { clr_character_flag = expd_g_send_gold_to_non_ruler_permitted } }
+	}
+	
 	expd_g_send_gold_increase_size = {
 		filter = self
 		ai = no
@@ -117,6 +135,25 @@ targeted_decisions = {
 		}
 	}
 	
+	expd_g_send_gold_reset_size = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = {
+			OR = {
+				check_variable = { which = expd_g_send_gold_size value < 0 }
+				check_variable = { which = expd_g_send_gold_size value > 5 }
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_g_send_gold_size_will_be_1_tt
+				set_variable = { which = expd_g_send_gold_size value = 1 }
+			}
+		}
+	}
+	
 	expd_g_send_gold = {
 		filter = all
 		ai = no
@@ -124,6 +161,17 @@ targeted_decisions = {
 		from_potential = { always = yes }
 		potential = { always = yes }
 		allow = {
+	        trigger_if = {
+	        	limit = { NOT = { is_within_diplo_range = FROM } }
+	        	is_within_diplo_range = FROM # CPU HEAVY!
+	        }
+			OR = {
+				is_ruler = yes
+				custom_tooltip = {
+					text = expd_g_send_gold_to_non_ruler_is_permitted_tt
+					has_character_flag = expd_g_send_gold_to_non_ruler_permitted
+				}
+			}
 			trigger_if = {
 				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 0 } } }
 				custom_tooltip = {
