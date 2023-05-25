@@ -3,7 +3,13 @@ expd_cef_root_controls_this_kingdom = {
 	OR = {
 		custom_tooltip = {
 			text = expd_cef_root_completely_controls_this_kingdom_tt
-			ROOT = { completely_controls = PREV }
+			OR = {
+				ROOT = { completely_controls = PREV }
+				AND = {
+					is_titular = yes
+					holder_scope = { character = ROOT }
+				}
+			}
 		}
 		custom_tooltip = {
 			text = expd_cef_every_county_and_duchy_in_this_kingdom_is_controlled_by_root_tt
