@@ -9,7 +9,7 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 	
 	hidden_tooltip = {
 		# Calculate the "score" for this couple's fertility (higher is better, ie. pregnancy will occur sooner)
-		# score = womans_fertility * mans_fertility * iif(they_are_lovers,2,1)
+		# score = womans_fertility * mans_fertility * iif(they_are_lovers,2,1) * (0.8^min(5,number_of_mutual_living_children))
 		export_to_variable = { # Initialise the score variable with the woman's fertility
 			which = expd_preg_trigger_pregnancy_score
 			value = fertility
@@ -24,19 +24,49 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 			which = expd_preg_trigger_pregnancy_score
 			which = global_expd_preg_trigger_pregnancy_mans_fertility
 		}
-		if = {
+		if = { # Apply the lovers' adjustment
 			limit = { is_lover = event_target:expd_preg_triggered_pregnancy_father }
 			multiply_variable = {
 				which = expd_preg_trigger_pregnancy_score
 				value = 2
 			}
 		}
+		# Count the number of mutual children, and decrease the score for each one that exists, up to the limit
+		set_variable = {
+			which = expd_preg_trigger_pregnancy_child_count
+			value = 0
+		}
+		any_child = {
+			limit = { father = { character = event_target:expd_preg_triggered_pregnancy_father } }
+			PREV = {
+				change_variable = {
+					which = expd_preg_trigger_pregnancy_child_count
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					PREV = {
+						check_variable = {
+							which = expd_preg_trigger_pregnancy_child_count
+							value <= 5
+						}
+					}
+				}
+				PREV = {
+					multiply_variable = {
+						which = expd_preg_trigger_pregnancy_score
+						value = 0.8
+					}
+				}
+			}
+		}
 	}
 		
 	# Auto-generated code
 	#  --- days = 180/score
-	#  --- random = 90/score
-	# NB: Default fertility for a character is 50%, so an average couple will have a score of 0.25, ie. 720 +/- 360 days
+	#  --- random = 180/score
+	# NB: Default fertility for a character is 50%, so an average couple will have a score of 0.25, ie. 1080 +/- 360 days
 	
 	if = {
 		limit = {
@@ -53,82 +83,82 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 			text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY
 			if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 2 } }
-				character_event = { id = EXPDPregnancy.3000 days = 90 random = 45 }
+				character_event = { id = EXPDPregnancy.3000 days = 90 random = 90 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 1.8 } }
-				character_event = { id = EXPDPregnancy.3000 days = 100 random = 50 }
+				character_event = { id = EXPDPregnancy.3000 days = 100 random = 100 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 1.6 } }
-				character_event = { id = EXPDPregnancy.3000 days = 113 random = 56 }
+				character_event = { id = EXPDPregnancy.3000 days = 113 random = 113 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 1.4 } }
-				character_event = { id = EXPDPregnancy.3000 days = 129 random = 64 }
+				character_event = { id = EXPDPregnancy.3000 days = 129 random = 129 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 1.2 } }
-				character_event = { id = EXPDPregnancy.3000 days = 150 random = 75 }
+				character_event = { id = EXPDPregnancy.3000 days = 150 random = 150 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 1 } }
-				character_event = { id = EXPDPregnancy.3000 days = 180 random = 90 }
+				character_event = { id = EXPDPregnancy.3000 days = 180 random = 180 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.9 } }
-				character_event = { id = EXPDPregnancy.3000 days = 200 random = 100 }
+				character_event = { id = EXPDPregnancy.3000 days = 200 random = 200 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.8 } }
-				character_event = { id = EXPDPregnancy.3000 days = 225 random = 113 }
+				character_event = { id = EXPDPregnancy.3000 days = 225 random = 225 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.7 } }
-				character_event = { id = EXPDPregnancy.3000 days = 257 random = 129 }
+				character_event = { id = EXPDPregnancy.3000 days = 257 random = 257 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.6 } }
-				character_event = { id = EXPDPregnancy.3000 days = 300 random = 150 }
+				character_event = { id = EXPDPregnancy.3000 days = 300 random = 300 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.5 } }
-				character_event = { id = EXPDPregnancy.3000 days = 360 random = 180 }
+				character_event = { id = EXPDPregnancy.3000 days = 360 random = 360 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.45 } }
-				character_event = { id = EXPDPregnancy.3000 days = 400 random = 200 }
+				character_event = { id = EXPDPregnancy.3000 days = 400 random = 400 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.4 } }
-				character_event = { id = EXPDPregnancy.3000 days = 450 random = 225 }
+				character_event = { id = EXPDPregnancy.3000 days = 450 random = 450 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.35 } }
-				character_event = { id = EXPDPregnancy.3000 days = 514 random = 257 }
+				character_event = { id = EXPDPregnancy.3000 days = 514 random = 514 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.3 } }
-				character_event = { id = EXPDPregnancy.3000 days = 600 random = 300 }
+				character_event = { id = EXPDPregnancy.3000 days = 600 random = 600 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.25 } }
-				character_event = { id = EXPDPregnancy.3000 days = 720 random = 360 }
+				character_event = { id = EXPDPregnancy.3000 days = 720 random = 720 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.2 } }
-				character_event = { id = EXPDPregnancy.3000 days = 900 random = 450 }
+				character_event = { id = EXPDPregnancy.3000 days = 900 random = 900 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.15 } }
-				character_event = { id = EXPDPregnancy.3000 days = 1200 random = 600 }
+				character_event = { id = EXPDPregnancy.3000 days = 1200 random = 1200 }
 			}
 			else_if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 0.1 } }
-				character_event = { id = EXPDPregnancy.3000 days = 1800 random = 900 }
+				character_event = { id = EXPDPregnancy.3000 days = 1800 random = 1800 }
 			}
 			else = {
-				character_event = { id = EXPDPregnancy.3000 days = 3600 random = 1800 }
+				character_event = { id = EXPDPregnancy.3000 days = 3600 random = 3600 }
 			}
 		}
 	}
@@ -148,7 +178,7 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 			}
 			set_variable = {
 				which = expd_preg_trigger_pregnancy_plusminus_days_approx
-				value = 90
+				value = 180
 			}
 			divide_variable = {
 				which = expd_preg_trigger_pregnancy_plusminus_days_approx
@@ -167,6 +197,10 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 			}
 			set_variable = {
 				which = expd_preg_trigger_pregnancy_plusminus_days_approx
+				value = 0
+			}
+			set_variable = {
+				which = expd_preg_trigger_pregnancy_child_count
 				value = 0
 			}
 		}
