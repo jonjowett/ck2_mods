@@ -590,6 +590,7 @@ targetted_decisions = {
 					any_war = {
 						defender = { character = ROOT }
 						war_score >= 50
+						war_score <  80 # If defensive warscore is <-80, protector probably won't be able to help
 					}
 				}
 			}
