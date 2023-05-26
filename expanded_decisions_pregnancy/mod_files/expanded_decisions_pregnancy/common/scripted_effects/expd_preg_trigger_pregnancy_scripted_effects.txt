@@ -168,6 +168,7 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 		if = {
 			limit = { has_global_flag = expd_preg_debug_mode }
 			# If in debug mode, add some more info to the character, in the form of additional variables
+			# Derive the "days" and "random" values from above
 			set_variable = {
 				which = expd_preg_trigger_pregnancy_avg_days_approx
 				value = 180
@@ -183,6 +184,15 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 			divide_variable = {
 				which = expd_preg_trigger_pregnancy_plusminus_days_approx
 				which = expd_preg_trigger_pregnancy_score
+			}
+			# Transform "days" and "random" into "avg days +/- range"
+			divide_variable = {
+				which = expd_preg_trigger_pregnancy_plusminus_days_approx
+				value = 2
+			}
+			change_variable = {
+				which = expd_preg_trigger_pregnancy_avg_days_approx
+				which = expd_preg_trigger_pregnancy_plusminus_days_approx
 			}
 		}
 		else = {
