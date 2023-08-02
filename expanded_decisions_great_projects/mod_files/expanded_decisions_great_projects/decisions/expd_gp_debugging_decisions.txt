@@ -1,0 +1,122 @@
+targetted_decisions = {
+	
+	expd_gp_enable_debug_mode = {
+		filter = self
+		ai = no
+		only_independent = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			NOT = { has_global_flag = expd_gp_debug_mode }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { set_global_flag = expd_gp_debug_mode }
+		}
+	}
+	
+	expd_gp_disable_debug_mode = {
+		filter = self
+		ai = no
+		only_independent = yes
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			has_global_flag = expd_gp_debug_mode
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				clr_global_flag = expd_gp_debug_mode
+			}
+		}
+	}
+	
+}
+
+title_decisions = {
+	
+	expd_gp_debug_destroy_great_project = {
+		filter = realm_owned
+		ai = no
+		only_independent = yes
+		from_potential = {
+			always = yes
+		}
+		potential = {
+			has_global_flag = expd_gp_debug_mode
+			expd_gp_title_is_great_project_county = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			location = { destroy_wonder = yes }
+		}
+	}
+	
+	expd_gp_debug_destroy_random_improvement = {
+		filter = realm_owned
+		ai = no
+		only_independent = yes
+		from_potential = {
+			always = yes
+		}
+		potential = {
+			has_global_flag = expd_gp_debug_mode
+			expd_gp_title_is_great_project_county = yes
+			location = { wonder = { num_of_wonder_upgrades >= 1 } }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			location = { wonder = { random_upgrade_on_wonder = { destroy_wonder_upgrade = yes } } }
+		}
+	}
+	
+	expd_gp_debug_remove_improvement_slot = {
+		filter = realm_owned
+		ai = no
+		only_independent = yes
+		from_potential = {
+			always = yes
+		}
+		potential = {
+			has_global_flag = expd_gp_debug_mode
+			expd_gp_title_is_great_project_county = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			location = { wonder = { remove_wonder_upgrade_slots = 1 } }
+		}
+	}
+	
+	expd_gp_debug_add_improvement_slot = {
+		filter = realm_owned
+		ai = no
+		only_independent = yes
+		from_potential = {
+			always = yes
+		}
+		potential = {
+			has_global_flag = expd_gp_debug_mode
+			expd_gp_title_is_great_project_county = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			location = { wonder = { add_wonder_upgrade_slots = 1 } }
+		}
+	}
+	
+}
