@@ -1,0 +1,19 @@
+mbb_family_bloodline_effect_calc = {
+	# Calculate the total number of members of this character's dynasty that are inbred, and the proportion that are inbred.
+	mbb_family_bloodline_effect_cleanup = yes
+	any_dynasty_member_even_if_dead = {
+		PREV = { change_variable = { which = IB_family_bloodline_population value = 1 } }
+		if = {
+			limit = { trait = inbred }
+			PREV = { change_variable = { which = IB_family_bloodline_inbred value = 1 } }
+		}
+	}
+	set_variable = { which = IB_family_bloodline_inbred_proportion which = IB_family_bloodline_inbred }
+	divide_variable = { which = IB_family_bloodline_inbred_proportion which = IB_family_bloodline_population }
+}
+
+mbb_family_bloodline_effect_cleanup = {
+	set_variable = { which = IB_family_bloodline_population value = 0 }
+	set_variable = { which = IB_family_bloodline_inbred value = 0 }
+	set_variable = { which = IB_family_bloodline_inbred_proportion value = 0 }
+}

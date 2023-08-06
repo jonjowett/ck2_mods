@@ -89,6 +89,8 @@ long_character_event = {
 		
 		ai_chance = {
 			factor = 10
+			
+			# No or lame nickname => 0/100  => 0% chance of choosing to keep their current nickname
 			modifier = {
 				factor = 0
 				OR = {
@@ -96,15 +98,17 @@ long_character_event = {
 					this_has_lame_nickname_trigger = yes
 				}
 			}
+			
+			# Average nickname    => 10/100 => 10% chance of choosing to keep their current nickname
+			
+			# Cool nickname       => 30/100 => 25% chance of choosing to keep their current nickname
 			modifier = {
-				factor = 1 # IE: 10% chance of choosing to keep their current nickname.
-				this_has_average_nickname_trigger = yes
-			}
-			modifier = {
-				factor = 3 # IE: 25% chance of choosing to keep their current nickname.
+				factor = 3
 				this_has_cool_nickname_trigger = yes
 			}
-			# For AI characters with "super cool" nicknames, the modifiers on the other options mean there's a 100% chance of choosing to keep their current nickname.
+			
+			# Super cool nickname => 10/10  => 100% chance of choosing to keep their current nickname
+			
 		}
 		
 	}
