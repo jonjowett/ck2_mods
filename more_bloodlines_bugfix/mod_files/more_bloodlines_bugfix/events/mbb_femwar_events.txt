@@ -1,0 +1,27 @@
+namespace = IB
+
+character_event = {
+	id = IB.200
+	hide_window = yes
+	
+	is_triggered_only = yes
+
+	trigger = {
+		is_female = yes
+		is_alive = yes
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+	}
+	immediate = {
+		if = { 
+			limit = { 
+				ROOT = { check_variable = { which = IB_female_warrior value == 0 } } 	
+			}
+			ROOT = { set_variable = { which = IB_female_warrior value = 0 } }
+		}
+		change_variable = { which = IB_female_warrior value = 1}
+		ib_female_warrior_effect = yes # Bugfix: Move this inside the immediate block
+	}
+}
