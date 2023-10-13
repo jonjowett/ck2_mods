@@ -1,0 +1,508 @@
+namespace = EMBTraits
+
+# Numbering convention for events in this file:
+#  --- x00 = Initial event called by a relevant on_action
+#  --- x10 = Random choice whether to apply the trait
+#  --- x20 = Apply the trait
+#
+# Traits included:
+#  --- 1xx = Homosexual
+#  --- 2xx = Lustful
+#  --- 3xx = Shieldmaiden
+
+
+
+
+
+###############################
+#                             #
+#        HOMOSEXUALITY        #
+#                             #
+###############################
+
+# Certain bloodlines can cause an additional chance of becoming homosexual during adolescence.
+# This event is designed to be triggered on_adolescence, ie. once at exactly 12 years old.
+
+character_event = {
+	id = EMBTraits.100
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = ROOT
+				has_bloodline_flag = emb_bloodline_effect_flag_homosexual_mf
+			}
+			AND = {
+				is_female = no
+				any_owned_bloodline = {
+					bloodline_is_active_for = ROOT
+					has_bloodline_flag = emb_bloodline_effect_flag_homosexual_m
+				}
+			}
+			AND = {
+				is_female = yes
+				any_owned_bloodline = {
+					bloodline_is_active_for = ROOT
+					has_bloodline_flag = emb_bloodline_effect_flag_homosexual_f
+				}
+			}
+		}
+	}
+	immediate = {
+		# Check back when the child is 13 or 14
+		character_event = { id = EMBTraits.110 days = 365 random = 730 }
+	}
+}
+
+character_event = {
+	id = EMBTraits.110
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		# If the character is already homosexual, we can skip this
+		NOT = { trait = homosexual }
+	}
+	immediate = {
+		random_list = {
+			10 = {
+				# Fixed 10% chance of becoming homosexual
+				character_event = { id = EMBTraits.120 }
+			}
+			90 = {
+				# No effect
+			}
+		}
+	}
+}
+
+character_event = { # TODO: Add flavour text / ping events / etc
+	id = EMBTraits.120
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		add_trait = homosexual
+	}
+}
+
+
+
+
+
+###############################
+#                             #
+#            LUST             #
+#                             #
+###############################
+
+# Certain bloodlines can cause an additional chance of becoming lustful during adolescence.
+# This event is designed to be triggered on_adolescence, ie. once at exactly 12 years old.
+
+character_event = {
+	id = EMBTraits.200
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = ROOT
+				has_bloodline_flag = emb_bloodline_effect_flag_lustful_mf
+			}
+			AND = {
+				is_female = no
+				any_owned_bloodline = {
+					bloodline_is_active_for = ROOT
+					has_bloodline_flag = emb_bloodline_effect_flag_lustful_m
+				}
+			}
+			AND = {
+				is_female = yes
+				any_owned_bloodline = {
+					bloodline_is_active_for = ROOT
+					has_bloodline_flag = emb_bloodline_effect_flag_lustful_f
+				}
+			}
+		}
+	}
+	immediate = {
+		# Check back when the child is 15.25-15.75 (so that most/all other education changes have had a chance to have an effect)
+		character_event = { id = EMBTraits.210 days = 1186 random = 180 }
+	}
+}
+
+character_event = {
+	id = EMBTraits.210
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		# If the character is already lustful, we can skip all this
+		NOT = { trait = lustful }
+	}
+	immediate = {
+		random_list = {
+			80 = {
+				# No effect
+			}
+			20 = {
+				# 20% base chance of becoming lustful, influenced by educator's & parents' traits
+				mult_modifier = {
+					factor = 4
+					OR = {
+						AND = {
+							has_dlc = "Zeus"
+							educator = {
+								OR = {
+									trait = lustful
+									trait = seducer
+									trait = seductress
+								}
+							}
+						}
+						AND = {
+							NOT = { has_dlc = "Zeus" }
+							guardian = {
+								OR = {
+									trait = lustful
+									trait = seducer
+									trait = seductress
+								}
+							}
+						}
+					}
+				}
+				mult_modifier = {
+					factor = 0.25
+					OR = {
+						AND = {
+							has_dlc = "Zeus"
+							educator = {
+								OR = {
+									trait = chaste
+									trait = celibate
+								}
+							}
+						}
+						AND = {
+							NOT = { has_dlc = "Zeus" }
+							guardian = {
+								OR = {
+									trait = chaste
+									trait = celibate
+								}
+							}
+						}
+					}
+				}
+				mult_modifier = {
+					factor = 2
+					father_even_if_dead = {
+						OR = {
+							trait = lustful
+							trait = seducer
+						}
+					}
+				}
+				mult_modifier = {
+					factor = 0.5
+					father_even_if_dead = {
+						OR = {
+							trait = chaste
+							trait = celibate
+						}
+					}
+				}
+				mult_modifier = {
+					factor = 2
+					mother_even_if_dead = {
+						OR = {
+							trait = lustful
+							trait = seductress
+						}
+					}
+				}
+				mult_modifier = {
+					factor = 0.5
+					mother_even_if_dead = {
+						OR = {
+							trait = chaste
+							trait = celibate
+						}
+					}
+				}
+				character_event = { id = EMBTraits.220 }
+			}
+		}
+	}
+}
+
+character_event = { # TODO: Add flavour text / ping events / etc
+	id = EMBTraits.220
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		add_trait = lustful
+	}
+}
+
+
+
+
+
+###############################
+#                             #
+#        SHIELDMAIDEN         #
+#                             #
+###############################
+
+# Certain bloodlines can cause an additional chance of becoming a shieldmaiden in early adulthood.
+# This event is designed to be triggered on_adulthood, ie. once at exactly 16 years old.
+
+character_event = {
+	id = EMBTraits.300
+	hide_window = yes
+	is_triggered_only = yes
+	only_women = yes
+	trigger = {
+		any_owned_bloodline = {
+			bloodline_is_active_for = ROOT
+			has_bloodline_flag = emb_bloodline_effect_flag_shieldmaiden_f
+		}
+	}
+	immediate = {
+		# Check back sometime in the next year (so that any education cleanup events have definitely finished)
+		character_event = { id = EMBTraits.310 days = 90 random = 180 }
+	}
+}
+
+character_event = {
+	id = EMBTraits.310
+	hide_window = yes
+	is_triggered_only = yes
+	only_women = yes
+	immediate = {
+		if = {
+			limit = { trait = shieldmaiden }
+			# Character has already acquired the shieldmaiden trait somehow - there's nothing further to do!
+			# If necessary, clean up the deferral tracking variable:
+			if = {
+				limit = { check_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value > 0 } }
+				set_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value = 0 }
+			}
+		}
+		else = {
+			if = {
+				limit = { is_ill = yes }
+				if = {
+					limit = { check_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value == 0 } }
+					set_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value = 0 }
+				}
+				if = {
+					limit = { check_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value <= 5 } }
+					# Check back in another 180 days
+					# (We don't want to trigger the shieldmaiden event while the character is ill and might recover, because the weightings will be affected)
+					change_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value = 1 }
+					character_event = { id = EMBTraits.310 days = 180 }
+				}
+				else = {
+					# Character has been ill for 3 years and doesn't seem to be recovering, so force the event to occur anyway
+					# (IE: The event will definitely occur before age 19)
+					set_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value = 0 } # Cleanup the variable
+					character_event = { id = EMBTraits.311 }
+				}
+			}
+			else = {
+				# Character is not ill, continue to the main event
+				character_event = { id = EMBTraits.311 }
+				# If necessary, clean up the deferral tracking variable:
+				if = {
+					limit = { check_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value > 0 } }
+					set_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value = 0 }
+				}
+			}
+		}
+	}
+}
+
+character_event = {
+	id = EMBTraits.311
+	hide_window = yes
+	is_triggered_only = yes
+	only_women = yes
+	immediate = {
+		random_list = {
+			80 = {
+				# No effect
+			}
+			20 = {
+				
+				# Martial stat has a large impact
+				mult_modifier = {
+					factor = 0.1
+					martial < 2
+				}
+				mult_modifier = {
+					factor = 0.2
+					martial < 4
+				}
+				mult_modifier = {
+					factor = 0.3
+					martial < 6
+				}
+				mult_modifier = {
+					factor = 0.4
+					martial < 8
+				}
+				mult_modifier = {
+					factor = 0.5
+					martial < 10
+				}
+				mult_modifier = {
+					factor = 1.1
+					martial >= 12
+				}
+				mult_modifier = {
+					factor = 1.1
+					martial >= 16
+				}
+				mult_modifier = {
+					factor = 1.25
+					martial >= 20
+				}
+				mult_modifier = {
+					factor = 1.25
+					martial >= 24
+				}
+				mult_modifier = {
+					factor = 1.5
+					martial >= 28
+				}
+				mult_modifier = {
+					factor = 1.5
+					martial >= 32
+				}
+				
+				# High PCS has a medium positive impact, low PCS has a large negative impact
+				mult_modifier = {
+					factor = 0.1
+					combat_rating < -10
+				}
+				mult_modifier = {
+					factor = 0.1
+					combat_rating < 0
+				}
+				mult_modifier = {
+					factor = 0.5
+					combat_rating < 10
+				}
+				mult_modifier = {
+					factor = 1.1
+					combat_rating >= 20
+				}
+				mult_modifier = {
+					factor = 1.1
+					combat_rating >= 30
+				}
+				mult_modifier = {
+					factor = 1.25
+					combat_rating >= 40
+				}
+				mult_modifier = {
+					factor = 1.25
+					combat_rating >= 50
+				}
+				
+				# Mother, grandmother and great-grandmothers who were shieldmaidens causes a small positive impact
+				mult_modifier = {
+					factor = 1.1
+					mother_even_if_dead = { trait = shieldmaiden }
+				}
+				mult_modifier = {
+					factor = 1.1
+					OR = {
+						mother_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } }
+						father_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } }
+					}
+				}
+				mult_modifier = {
+					factor = 1.1
+					OR = {
+						mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } } }
+						mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } } }
+						father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } } }
+						father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } } }
+					}
+				}
+				
+				# Personal traits have a major impact
+				mult_modifier = {
+					factor = 0.1
+					trait = craven
+				}
+				mult_modifier = {
+					factor = 4
+					trait = brave
+				}
+				mult_modifier = {
+					factor = 0.1
+					is_weak_trigger = yes
+				}
+				mult_modifier = {
+					factor = 4
+					is_strong_trigger = yes
+				}
+				mult_modifier = {
+					factor = 0.5
+					has_education_martial_trigger = no
+				}
+				mult_modifier = {
+					factor = 1.5
+					trait = tough_soldier
+				}
+				mult_modifier = {
+					factor = 2
+					trait = skilled_tactician
+				}
+				mult_modifier = {
+					factor = 4
+					trait = brilliant_strategist
+				}
+				
+				# Disabilities have a major negative impact
+				mult_modifier = {
+					factor = 0
+					has_severe_disability_trigger = yes
+				}
+				mult_modifier = {
+					factor = 0.1
+					has_medium_disability_trigger = yes
+				}
+				
+				# Low health has a major negative impact
+				mult_modifier = {
+					factor = 0
+					health < 2
+				}
+				mult_modifier = {
+					factor = 0.1
+					health < 3
+				}
+				mult_modifier = {
+					factor = 0.25
+					health < 4
+				}
+				
+				character_event = { id = EMBTraits.320 }
+			}
+		}
+	}
+}
+
+character_event = { # TODO: Add flavour text / ping events / etc
+	id = EMBTraits.320
+	hide_window = yes
+	is_triggered_only = yes
+	only_women = yes
+	immediate = {
+		add_trait = shieldmaiden
+	}
+}

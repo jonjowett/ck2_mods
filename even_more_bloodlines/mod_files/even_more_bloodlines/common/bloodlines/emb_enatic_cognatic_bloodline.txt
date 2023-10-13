@@ -1,0 +1,199 @@
+# Base features:  Female opinion + allow enatic-cognatic succession + allow enforcement of this succession in your vassals
+# + Shieldmaiden: Combat ability + young adult women may declare themselves to be shieldmaidens
+# + Homosexual:   More female opinion + adolescent women may become homosexual
+# + Seductress:   Sex appeal + adolescent women may become lustful
+#
+# All bloodlines are matrilineally inherited, and are only active for women
+
+# Generic bloodline, for no special traits
+
+emb_enatic_cognatic_bloodline_generic = {
+	female_opinion = 10                                    # 10 base
+	bloodline_effect_enatic_cognatic = 1                   # Base feature
+	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
+	picture = GFX_bloodlines_symbol_family
+	inheritance = matrilineal
+	allow_bastards = yes
+	active = { is_female = yes }
+	flags = {
+		# Tracking
+		emb emb_f emb_enatic_cognatic
+		emb_enatic_cognatic_generic
+		# Base features
+		bloodline_enatic_cognatic
+		emb_bloodline_effect_flag_enatic_cognatic_realm
+	}
+}
+
+# Bloodlines for one special trait
+
+emb_enatic_cognatic_bloodline_shieldmaiden = {
+	female_opinion = 10                                    # 10 base
+	combat_rating = 5                                      # Shieldmaiden combat bonus
+	martial = 1                                            # Shieldmaiden martial stat bonus
+	bloodline_effect_enatic_cognatic = 1                   # Base feature
+	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
+	emb_bloodline_effect_shieldmaiden_f = 1                # Shieldmaiden chance
+	picture = GFX_bloodlines_symbol_war_child
+	inheritance = matrilineal
+	allow_bastards = yes
+	active = { is_female = yes }
+	flags = {
+		# Tracking
+		emb emb_f emb_enatic_cognatic
+		emb_enatic_cognatic_shieldmaiden
+		# Base features
+		bloodline_enatic_cognatic
+		emb_bloodline_effect_flag_enatic_cognatic_realm
+		# Extra features
+		emb_bloodline_effect_flag_shieldmaiden_f_f
+	}
+}
+
+emb_enatic_cognatic_bloodline_homosexual = {
+	female_opinion = 20                                    # 10 base + 10 for homosexual attraction
+	bloodline_effect_enatic_cognatic = 1                   # Base feature
+	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
+	emb_bloodline_effect_homosexual_f = 1                  # Homosexual chance
+	picture = GFX_bloodlines_symbol_family
+	inheritance = matrilineal
+	allow_bastards = yes
+	active = { is_female = yes }
+	flags = {
+		# Tracking
+		emb emb_f emb_enatic_cognatic
+		emb_enatic_cognatic_homosexual
+		# Base features
+		bloodline_enatic_cognatic
+		emb_bloodline_effect_flag_enatic_cognatic_realm
+		# Extra features
+		emb_bloodline_effect_flag_homosexual_f
+	}
+}
+
+emb_enatic_cognatic_bloodline_seductress = {
+	female_opinion = 10                                    # 10 base
+	sex_appeal_opinion = 10                                # Seductress sex appeal bonus
+	bloodline_effect_enatic_cognatic = 1                   # Base feature
+	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
+	emb_bloodline_effect_lustful_f = 1                     # Lustful chance
+	picture = GFX_bloodlines_symbol_fleur_de_lis
+	inheritance = matrilineal
+	allow_bastards = yes
+	active = { is_female = yes }
+	flags = {
+		# Tracking
+		emb emb_f emb_enatic_cognatic
+		emb_enatic_cognatic_seductress
+		# Base features
+		bloodline_enatic_cognatic
+		emb_bloodline_effect_flag_enatic_cognatic_realm
+		# Extra features
+		emb_bloodline_effect_flag_lustful_f
+	}
+}
+
+# Bloodlines for two special traits
+
+emb_enatic_cognatic_bloodline_homosexual_shieldmaiden = {
+	female_opinion = 20                                    # 10 base + 10 for homosexual attraction
+	combat_rating = 5                                      # Shieldmaiden combat bonus
+	martial = 1                                            # Shieldmaiden martial stat bonus
+	bloodline_effect_enatic_cognatic = 1                   # Base feature
+	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
+	emb_bloodline_effect_homosexual_f = 1                  # Homosexual chance
+	emb_bloodline_effect_shieldmaiden_f = 1                # Shieldmaiden chance
+	picture = GFX_bloodlines_symbol_war_child
+	inheritance = matrilineal
+	allow_bastards = yes
+	active = { is_female = yes }
+	flags = {
+		# Tracking
+		emb emb_f emb_enatic_cognatic
+		emb_enatic_cognatic_homosexual_shieldmaiden
+		# Base features
+		bloodline_enatic_cognatic
+		emb_bloodline_effect_flag_enatic_cognatic_realm
+		# Extra features
+		emb_bloodline_effect_flag_homosexual_f
+		emb_bloodline_effect_flag_shieldmaiden_f
+	}
+}
+
+emb_enatic_cognatic_bloodline_homosexual_seductress = {
+	female_opinion = 20                                    # 10 base + 10 for homosexual attraction
+	sex_appeal_opinion = 10                                # Seductress sex appeal bonus
+	bloodline_effect_enatic_cognatic = 1                   # Base feature
+	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
+	emb_bloodline_effect_lustful_homosexual_f = 1          # Lustful chance & Homosexual chance
+	picture = GFX_bloodlines_symbol_murder_rose
+	inheritance = matrilineal
+	allow_bastards = yes
+	active = { is_female = yes }
+	flags = {
+		# Tracking
+		emb emb_f emb_enatic_cognatic
+		emb_enatic_cognatic_homosexual_seductress
+		# Base features
+		bloodline_enatic_cognatic
+		emb_bloodline_effect_flag_enatic_cognatic_realm
+		# Extra features
+		emb_bloodline_effect_flag_homosexual_f
+		emb_bloodline_effect_flag_lustful_f
+	}
+}
+
+emb_enatic_cognatic_bloodline_shieldmaiden_seductress = {
+	female_opinion = 10                                    # 10 base
+	sex_appeal_opinion = 10                                # Seductress sex appeal bonus
+	combat_rating = 5                                      # Shieldmaiden combat bonus
+	martial = 1                                            # Shieldmaiden martial stat bonus
+	bloodline_effect_enatic_cognatic = 1                   # Base feature
+	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
+	emb_bloodline_effect_lustful_f = 1                     # Lustful chance
+	emb_bloodline_effect_shieldmaiden_f = 1                # Shieldmaiden chance
+	picture = GFX_bloodlines_symbol_murder_rose
+	inheritance = matrilineal
+	allow_bastards = yes
+	active = { is_female = yes }
+	flags = {
+		# Tracking
+		emb emb_f emb_enatic_cognatic
+		emb_enatic_cognatic_shieldmaiden_seductress
+		# Base features
+		bloodline_enatic_cognatic
+		emb_bloodline_effect_flag_enatic_cognatic_realm
+		# Extra features
+		emb_bloodline_effect_flag_lustful_f
+		emb_bloodline_effect_flag_shieldmaiden_f
+	}
+}
+
+# Bloodlines for all three special traits
+
+emb_enatic_cognatic_bloodline_homosexual_shieldmaiden_seductress = {
+	female_opinion = 20                                    # 10 base + 10 for homosexual attraction
+	sex_appeal_opinion = 10                                # Seductress sex appeal bonus
+	combat_rating = 5                                      # Shieldmaiden combat bonus
+	martial = 1                                            # Shieldmaiden martial stat bonus
+	bloodline_effect_enatic_cognatic = 1                   # Base feature
+	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
+	emb_bloodline_effect_lustful_homosexual_f = 1          # Lustful chance & Homosexual chance
+	emb_bloodline_effect_shieldmaiden_f = 1                # Shieldmaiden chance
+	picture = GFX_bloodlines_symbol_murder_rose
+	inheritance = matrilineal
+	allow_bastards = yes
+	active = { is_female = yes }
+	flags = {
+		# Tracking
+		emb emb_f emb_enatic_cognatic
+		emb_enatic_cognatic_shieldmaiden_homosexual_shieldmaiden_seductress
+		# Base features
+		bloodline_enatic_cognatic
+		emb_bloodline_effect_flag_enatic_cognatic_realm
+		# Extra features
+		emb_bloodline_effect_flag_homosexual_f
+		emb_bloodline_effect_flag_lustful_f
+		emb_bloodline_effect_flag_shieldmaiden_f
+	}
+}

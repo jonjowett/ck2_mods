@@ -1,0 +1,257 @@
+# Audax Validator EnableCommentMetadata
+
+emb_root_can_create_enatic_cognatic_bloodline = {
+	emb_enatic_cognatic_root_has_founded_a_bloodline = yes
+	emb_enatic_cognatic_root_is_an_active_member_of_a_bloodline_founded_by_a_different_woman = yes
+	emb_enatic_cognatic_root_is_an_active_member_of_a_second_bloodline_founded_by_a_second_different_woman = yes
+	ROOT = {
+		show_scope_change = no
+		independent = yes
+		OR = {
+			real_tier = KING
+			real_tier = EMPEROR
+		}
+	}
+	conditional_tooltip = {
+		limit = {
+			NOT = { 
+				has_game_rule = {
+					name = gender
+					value = all
+				}
+			}
+		}
+		OR = {
+			AND = {
+				ROOT = {
+					show_scope_change = no
+					primary_title = {
+						show_scope_change = no
+						has_law = status_of_women_4
+					}
+				}
+				emb_enatic_cognatic_root_does_not_follow_a_religion_with_male_dominance = yes
+			}
+			emb_enatic_cognatic_root_follows_a_religion_with_gender_equality_or_female_dominance = yes
+		}
+	}
+}
+
+emb_enatic_cognatic_root_has_founded_a_bloodline = {
+	custom_tooltip = {
+		text = emb_enatic_cognatic_root_has_founded_a_bloodline_tt
+		ROOT = {
+			any_owned_bloodline = {
+				founder = {
+					character = ROOT
+				}
+			}
+		}
+	}
+}
+
+emb_enatic_cognatic_root_is_an_active_member_of_a_bloodline_founded_by_a_different_woman = {
+	custom_tooltip = {
+		text = emb_enatic_cognatic_root_is_an_active_member_of_a_bloodline_founded_by_a_different_woman_tt
+		ROOT = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = ROOT
+				founder = {
+					is_female = yes
+					NOT = { character = ROOT }
+				}
+			}
+		}
+	}
+}
+
+emb_enatic_cognatic_root_is_an_active_member_of_a_second_bloodline_founded_by_a_second_different_woman = {
+	custom_tooltip = {
+		text = emb_enatic_cognatic_root_is_an_active_member_of_a_second_bloodline_founded_by_a_second_different_woman_tt
+		ROOT = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = ROOT
+				founder = {
+					is_female = yes
+					NOT = { character = ROOT }
+					ROOT = {
+						any_owned_bloodline = {
+							bloodline_is_active_for = ROOT
+							founder = {
+								is_female = yes
+								NOT = { character = ROOT }
+								NOT = { character = PREVPREVPREV }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+emb_enatic_cognatic_root_does_not_follow_a_religion_with_male_dominance = {
+	custom_tooltip = {
+		text = emb_enatic_cognatic_root_does_not_follow_a_religion_with_male_dominance_tt
+		ROOT = {
+			NOT = {
+				has_religion_feature = religion_patriarchal
+			}
+		}
+	}
+}
+
+emb_enatic_cognatic_root_follows_a_religion_with_gender_equality_or_female_dominance = {
+	custom_tooltip = {
+		text = emb_enatic_cognatic_root_follows_a_religion_with_gender_equality_or_female_dominance_tt
+		ROOT = {
+			OR = {
+				religion = cathar
+				religion = messalian
+				has_religion_feature = religion_matriarchal
+				has_religion_feature = religion_equal
+				has_religion_feature = religion_feature_bon
+			}
+		}
+	}
+}
+
+emb_enatic_cognatic_root_or_active_bloodline_founder_is_female_homosexual = {
+	OR = {
+		ROOT = {
+			# Audax Validator "." Ignore_1001
+			AND = {
+				is_female = yes
+				trait = homosexual
+			}
+		}
+		ROOT = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = ROOT
+				founder = {
+					# Audax Validator "." Ignore_1001
+					AND = {
+						is_female = yes
+						trait = homosexual
+					}
+				}
+			}
+		}
+	}
+}
+
+emb_enatic_cognatic_root_or_active_bloodline_founder_is_female_seductress = {
+	OR = {
+		ROOT = {
+			# Audax Validator "." Ignore_1001
+			AND = {
+				is_female = yes
+				trait = seductress
+			}
+		}
+		ROOT = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = ROOT
+				founder = {
+					# Audax Validator "." Ignore_1001
+					AND = {
+						is_female = yes
+						trait = seductress
+					}
+				}
+			}
+		}
+	}
+}
+
+emb_enatic_cognatic_root_is_female_homosexual_seductress = {
+	ROOT = {
+		# Audax Validator "." Ignore_1001
+		AND = {
+			is_female = yes
+			trait = homosexual
+			trait = seductress
+		}
+	}
+}
+
+emb_enatic_cognatic_roots_active_bloodline_founder_is_female_homosexual_seductress = {
+	ROOT = {
+		any_owned_bloodline = {
+			bloodline_is_active_for = ROOT
+			founder = {
+				# Audax Validator "." Ignore_1001
+				AND = {
+					is_female = yes
+					trait = homosexual
+					trait = seductress
+				}
+			}
+		}
+	}
+}
+
+emb_enatic_cognatic_root_or_active_bloodline_founder_is_female_homosexual_seductress = {
+	OR = {
+		emb_enatic_cognatic_root_is_female_homosexual_seductress = yes
+		emb_enatic_cognatic_roots_active_bloodline_founder_is_female_homosexual_seductress = yes
+	}
+}
+
+emb_enatic_cognatic_root_is_female_heterosexual_seductress = {
+	ROOT = {
+		# Audax Validator "." Ignore_1001
+		AND = {
+			is_female = yes
+			NOT = { trait = homosexual }
+			trait = seductress
+		}
+	}
+}
+
+emb_enatic_cognatic_roots_active_bloodline_founder_is_female_heterosexual_seductress = {
+	ROOT = {
+		any_owned_bloodline = {
+			bloodline_is_active_for = ROOT
+			founder = {
+				# Audax Validator "." Ignore_1001
+				AND = {
+					is_female = yes
+					NOT = { trait = homosexual }
+					trait = seductress
+				}
+			}
+		}
+	}
+}
+
+emb_enatic_cognatic_root_or_active_bloodline_founder_is_female_heterosexual_seductress = {
+	OR = {
+		emb_enatic_cognatic_root_is_female_heterosexual_seductress = yes
+		emb_enatic_cognatic_roots_active_bloodline_founder_is_female_heterosexual_seductress = yes
+	}
+}
+
+emb_enatic_cognatic_root_or_active_bloodline_founder_is_female_shieldmaiden = {
+	OR = {
+		ROOT = {
+			# Audax Validator "." Ignore_1001
+			AND = {
+				is_female = yes
+				trait = shieldmaiden
+			}
+		}
+		ROOT = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = ROOT
+				founder = {
+					# Audax Validator "." Ignore_1001
+					AND = {
+						is_female = yes
+						trait = shieldmaiden
+					}
+				}
+			}
+		}
+	}
+}
