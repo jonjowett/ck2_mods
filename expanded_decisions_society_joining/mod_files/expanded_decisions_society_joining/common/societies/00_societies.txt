@@ -2782,95 +2782,33 @@ hermetics = {
 				is_patrician = yes
 			}
 		}
-		learning = 10
-		OR = {
-			has_religion_feature = religion_astrology
-			religion_group = christian
-			religion_group = muslim
-			religion_group = jewish_group
-			religion_group = zoroastrian_group
-			custom_tooltip = {
-				text = zunist_hermetic_join_tooltip
-				hidden_trigger = {
-					OR = {
-						religion = zun_pagan					
-						religion = zun_pagan_reformed
-					}
-				}
-			}
-			custom_tooltip = {
-				text = hellenic_hermetic_join_tooltip
-
-				OR = {
-					religion = hellenic_pagan
-					religion = hellenic_pagan_reformed
-				}
-			}
-			religion = taoist
-			
-			#Mod added - Allow characters to join if they could temporarily convert while paused
-			expd_sj_character_can_join_hermetics_trigger = yes
-			
-		}
 		
-		OR = {
-			
-			# Mod added - allow astrology-focused tribals & nomads to join
-			# (The reformation screen says that this doctrine unlocks the Hermetics, so it should actually do that!)
-			has_religion_feature = religion_astrology
-			
-			custom_tooltip = {
-				text = zunist_hermetic_join_tooltip
-				hidden_trigger = {
-					OR = {
-						religion = zun_pagan					
-						religion = zun_pagan_reformed
-					}
-				}
-			}
-			custom_tooltip = {
-				text = hellenic_hermetic_join_tooltip
-
-				OR = {
-					religion = hellenic_pagan
-					religion = hellenic_pagan_reformed
-				}
-			}
-			religion = taoist
-			NOR = {
-				is_nomadic = yes
-				is_tribal = yes
-			}
-		}
-		hidden_trigger = { mercenary = no }
+		# Mod alteration: Move these triggers to the top of the list, so the tooltip looks better
 		age = 16
-		hidden_trigger = {
-			NOT = { has_character_flag = society_join_block }
-		}
 		trigger_if = {
 			limit = { prisoner = yes }
 			prisoner = no
 		}
+		trigger_if = { # Mod alteration: Make this trigger visible if it fails
+			limit = { mercenary = yes }
+			mercenary = no
+		}
+		
+		# Mod alteration: Split the religious requirement out into its own trigger
+		# The major change here is that characters are allowed to join if they could temporarily convert to a supported religion while paused
+		expd_sj_character_fulfils_religious_requirements_to_join_hermetics_trigger = yes
+		
+		# Mod alteration: replace the extended condition that's basically "tribals and nomads can only join if they have one of this list of religions"
+		#                 with a new condition that requires that tribals and nomads fulfil additional conditions compared with feudals etc.
+		# NB: The religious requirement is already handled, immediately above.
+		expd_sj_characters_fulfils_government_requirements_to_join_hermetics_trigger = yes
+		
+		hidden_trigger = { NOT = { has_character_flag = society_join_block } }
+		
 	}
 
 	show_society = {
-		OR = {
-			has_religion_feature = religion_astrology
-			religion_group = christian
-			religion_group = muslim
-			religion_group = jewish_group
-			religion_group = zoroastrian_group
-			religion = zun_pagan
-			religion = zun_pagan_reformed
-			religion = hellenic_pagan
-			religion = hellenic_pagan_reformed
-			religion = taoist
-			society_member_of = hermetics
-			
-			#Mod added - allow characters to see the society if they could potentially join via temporary conversion
-			expd_sj_character_can_see_hermetics_trigger = yes
-			
-		}
+		expd_sj_character_can_see_hermetics_trigger = yes
 	}
 	
 	potential = {

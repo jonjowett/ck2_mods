@@ -1,0 +1,44 @@
+expd_sj_add_tracking_flag_to_legendary_bloodline = {
+	custom_tooltip = {
+		text = expd_sj_non_zealous_characters_with_this_bloodline_will_always_be_able_to_join_roots_society_tt
+		if = {
+			limit = { event_target:society_affiliation = { is_society = warrior_lodge_norse } }
+			new_bloodline = { set_bloodline_flag = expd_sj_warrior_lodge_norse }
+		}
+		else_if = {
+			limit = { event_target:society_affiliation = { is_society = warrior_lodge_tengri } }
+			new_bloodline = { set_bloodline_flag = expd_sj_warrior_lodge_tengri }
+		}
+		else_if = {
+			limit = { event_target:society_affiliation = { is_society = warrior_lodge_baltic } }
+			new_bloodline = { set_bloodline_flag = expd_sj_warrior_lodge_baltic }
+		}
+		else_if = {
+			limit = { event_target:society_affiliation = { is_society = warrior_lodge_finnish } }
+			new_bloodline = { set_bloodline_flag = expd_sj_warrior_lodge_finnish }
+		}
+		else_if = {
+			limit = { event_target:society_affiliation = { is_society = warrior_lodge_slavic } }
+			new_bloodline = { set_bloodline_flag = expd_sj_warrior_lodge_slavic }
+		}
+		else_if = {
+			limit = { event_target:society_affiliation = { is_society = warrior_lodge_west_african } }
+			new_bloodline = { set_bloodline_flag = expd_sj_warrior_lodge_west_african }
+		}
+		else_if = {
+			limit = { event_target:society_affiliation = { is_society = warrior_lodge_zun } }
+			new_bloodline = { set_bloodline_flag = expd_sj_warrior_lodge_zun }
+		}
+		else_if = {
+			limit = { event_target:society_affiliation = { is_society = warrior_lodge_bon } }
+			new_bloodline = { set_bloodline_flag = expd_sj_warrior_lodge_bon }
+		}
+		else_if = {
+			limit = { event_target:society_affiliation = { is_society = warrior_lodge_hellenic } }
+			new_bloodline = { set_bloodline_flag = expd_sj_warrior_lodge_hellenic }
+		}
+		else = {
+			new_bloodline = { set_bloodline_flag = expd_sj_warrior_lodge_unknown }
+		}
+	}
+}

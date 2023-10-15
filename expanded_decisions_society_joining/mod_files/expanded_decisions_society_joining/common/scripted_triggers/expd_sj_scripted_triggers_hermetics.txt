@@ -1,20 +1,317 @@
+#############################
+#                           #
+#    USED IN OTHER FILES    #
+#                           #
+#############################
+
+
+
 expd_sj_character_can_see_hermetics_trigger = {
-	conditional_tooltip = {
-		trigger = { always = yes }  # Hack to avoid unnecessary nested AND clauses, while retaining the requirement for an AND in case this trigger is used in some other context
-		NOT = { trait = zealous }
-		expd_sj_character_has_religious_ties_to_hermetics_trigger = yes
+	OR = {
+		society_member_of = hermetics
+		expd_sj_characters_religion_allows_joining_hermetics_trigger = yes
+		AND = {
+			NOT = { trait = zealous }
+			expd_sj_character_has_religious_ties_to_hermetics_trigger = yes
+		}
 	}
 }
 
-expd_sj_character_can_join_hermetics_trigger = {
-	conditional_tooltip = {
-		trigger = { always = yes }  # Hack to avoid unnecessary nested AND clauses, while retaining the requirement for an AND in case this trigger is used in some other context
-		NOT = { trait = zealous }
-		piety >= 250
-		prestige >= 500
-		expd_sj_character_has_religious_ties_to_hermetics_trigger = yes
+expd_sj_character_fulfils_religious_requirements_to_join_hermetics_trigger = {
+	OR = {
+		expd_sj_characters_religion_allows_joining_hermetics_trigger = yes
+		AND = {
+			NOT = { trait = zealous }
+			piety >= 250
+			prestige >= 500
+			expd_sj_character_has_religious_ties_to_hermetics_trigger = yes
+		}
 	}
 }
+
+expd_sj_characters_religion_allows_joining_hermetics_trigger = {
+	custom_tooltip = {
+		text = expd_sj_characters_religion_allows_joining_hermetics_tt
+		expd_sj_religion_supports_hermetics_trigger = yes
+	}
+}
+
+expd_sj_characters_fulfils_government_requirements_to_join_hermetics_trigger = {
+	trigger_if = { # Only show this trigger for characters where it's relevant (because, otherwise, it's an unnecessary complication)
+		limit = { is_tribal = yes }
+		OR = {
+			custom_tooltip = {
+				text = expd_sj_character_is_tribal_and_has_25_learning_and_1_hermetic_thing_tt
+				expd_sj_character_has_1_hermetic_thing = yes
+				learning >= 25
+			}
+			custom_tooltip = {
+				text = expd_sj_character_is_tribal_and_has_20_learning_and_2_hermetic_things_tt
+				expd_sj_character_has_2_hermetic_things = yes
+				learning >= 20
+			}
+			custom_tooltip = {
+				text = expd_sj_character_is_tribal_and_has_15_learning_and_3_hermetic_things_tt
+				expd_sj_character_has_3_hermetic_things = yes
+				learning >= 15
+			}
+			custom_tooltip = {
+				text = expd_sj_character_is_tribal_and_has_10_learning_and_4_hermetic_things_tt
+				expd_sj_character_has_4_hermetic_things = yes
+				learning >= 10
+			}
+			expd_sj_hermetic_things_info = yes
+		}
+	}
+	trigger_else_if = { # Only show this trigger for characters where it's relevant (because, otherwise, it's an unnecessary complication)
+		limit = { is_nomadic = yes }
+		OR = {
+			custom_tooltip = {
+				text = expd_sj_character_is_nomadic_and_has_30_learning_and_1_hermetic_thing_tt
+				expd_sj_character_has_1_hermetic_thing = yes
+				learning >= 30
+			}
+			custom_tooltip = {
+				text = expd_sj_character_is_nomadic_and_has_25_learning_and_2_hermetic_things_tt
+				expd_sj_character_has_2_hermetic_things = yes
+				learning >= 25
+			}
+			custom_tooltip = {
+				text = expd_sj_character_is_nomadic_and_has_20_learning_and_3_hermetic_things_tt
+				expd_sj_character_has_3_hermetic_things = yes
+				learning >= 20
+			}
+			custom_tooltip = {
+				text = expd_sj_character_is_nomadic_and_has_15_learning_and_4_hermetic_things_tt
+				expd_sj_character_has_4_hermetic_things = yes
+				learning >= 15
+			}
+			expd_sj_hermetic_things_info = yes
+		}
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = expd_sj_character_is_not_nomadic_or_tribal_and_has_10_learning_tt
+			learning >= 10
+		}
+	}
+}
+
+
+
+
+
+##############################
+#                            #
+#   UTILITIES - GOVERNMENT   #
+#                            #
+##############################
+
+
+
+expd_sj_hermetic_things_info = {
+	conditional_tooltip = {
+		trigger = { always = yes }
+		custom_tooltip = {
+			text = expd_sj_hermetic_things_info_tt
+			always = no
+		}
+		custom_tooltip = {
+			text = expd_sj_hermetic_things_info_bloodline_tt
+			expd_sj_character_has_hermetic_bloodline = yes
+		}
+		custom_tooltip = {
+			text = expd_sj_hermetic_things_info_artifact_tt
+			expd_sj_character_has_major_hermetic_artifact = yes
+		}
+		custom_tooltip = {
+			text = expd_sj_hermetic_things_info_lifestyle_tt
+			expd_sj_character_has_scholarly_lifestyle = yes
+		}
+		custom_tooltip = {
+			text = expd_sj_hermetic_things_info_observatory_tt
+			expd_sj_character_has_an_observatory = yes
+		}
+	}
+}
+
+expd_sj_character_has_1_hermetic_thing = {
+	custom_tooltip = {
+		text = expd_sj_character_has_1_hermetic_thing_tt
+		OR ={
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = no
+				expd_sj_character_has_major_hermetic_artifact = no
+				expd_sj_character_has_scholarly_lifestyle = no
+				expd_sj_character_has_an_observatory = yes
+			}
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = no
+				expd_sj_character_has_major_hermetic_artifact = no
+				expd_sj_character_has_scholarly_lifestyle = yes
+				expd_sj_character_has_an_observatory = no
+			}
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = no
+				expd_sj_character_has_major_hermetic_artifact = yes
+				expd_sj_character_has_scholarly_lifestyle = no
+				expd_sj_character_has_an_observatory = no
+			}
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = yes
+				expd_sj_character_has_major_hermetic_artifact = no
+				expd_sj_character_has_scholarly_lifestyle = no
+				expd_sj_character_has_an_observatory = no
+			}
+		}
+	}
+}
+
+expd_sj_character_has_2_hermetic_things = {
+	custom_tooltip = {
+		text = expd_sj_character_has_2_hermetic_things_tt
+		OR ={
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = yes
+				expd_sj_character_has_major_hermetic_artifact = yes
+				expd_sj_character_has_scholarly_lifestyle = no
+				expd_sj_character_has_an_observatory = no
+			}
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = yes
+				expd_sj_character_has_major_hermetic_artifact = no
+				expd_sj_character_has_scholarly_lifestyle = yes
+				expd_sj_character_has_an_observatory = no
+			}
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = yes
+				expd_sj_character_has_major_hermetic_artifact = no
+				expd_sj_character_has_scholarly_lifestyle = no
+				expd_sj_character_has_an_observatory = yes
+			}
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = no
+				expd_sj_character_has_major_hermetic_artifact = yes
+				expd_sj_character_has_scholarly_lifestyle = yes
+				expd_sj_character_has_an_observatory = no
+			}
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = no
+				expd_sj_character_has_major_hermetic_artifact = yes
+				expd_sj_character_has_scholarly_lifestyle = no
+				expd_sj_character_has_an_observatory = yes
+			}
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = no
+				expd_sj_character_has_major_hermetic_artifact = no
+				expd_sj_character_has_scholarly_lifestyle = yes
+				expd_sj_character_has_an_observatory = yes
+			}
+		}
+	}
+}
+
+expd_sj_character_has_3_hermetic_things = {
+	custom_tooltip = {
+		text = expd_sj_character_has_3_hermetic_things_tt
+		OR ={
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = yes
+				expd_sj_character_has_major_hermetic_artifact = yes
+				expd_sj_character_has_scholarly_lifestyle = yes
+				expd_sj_character_has_an_observatory = no
+			}
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = yes
+				expd_sj_character_has_major_hermetic_artifact = yes
+				expd_sj_character_has_scholarly_lifestyle = no
+				expd_sj_character_has_an_observatory = yes
+			}
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = yes
+				expd_sj_character_has_major_hermetic_artifact = no
+				expd_sj_character_has_scholarly_lifestyle = yes
+				expd_sj_character_has_an_observatory = yes
+			}
+			AND = {
+				expd_sj_character_has_hermetic_bloodline = no
+				expd_sj_character_has_major_hermetic_artifact = yes
+				expd_sj_character_has_scholarly_lifestyle = yes
+				expd_sj_character_has_an_observatory = yes
+			}
+		}
+	}
+}
+
+expd_sj_character_has_4_hermetic_things = {
+	custom_tooltip = {
+		text = expd_sj_character_has_4_hermetic_things_tt
+		expd_sj_character_has_hermetic_bloodline = yes
+		expd_sj_character_has_major_hermetic_artifact = yes
+		expd_sj_character_has_scholarly_lifestyle = yes
+		expd_sj_character_has_an_observatory = yes
+	}
+}
+
+expd_sj_character_has_hermetic_bloodline = {
+	custom_tooltip = {
+		text = expd_sj_character_has_hermetic_bloodline_tt
+		always = no
+	}
+}
+
+expd_sj_character_has_major_hermetic_artifact = {
+	custom_tooltip = {
+		text = expd_sj_character_has_major_hermetic_artifact_tt
+		OR = {
+			any_artifact = {
+				has_artifact_flag = hermetics
+				has_artifact_flag = invention
+				quality >= 3
+			}
+			any_artifact = {
+				artifact_type = necronomicon
+			}
+		}
+	}
+}
+
+expd_sj_character_has_scholarly_lifestyle = {
+	custom_tooltip = {
+		text = expd_sj_character_has_scholarly_lifestyle_tt
+		OR = {
+			has_focus = focus_scholarship
+			trait = scholar
+			trait = mystic
+		}
+	}
+}
+
+expd_sj_character_has_an_observatory = {
+	custom_tooltip = {
+		text = expd_sj_character_has_an_observatory_tt
+		OR = {
+			has_character_flag = built_observatory
+			any_demesne_province = {
+				has_hospital = yes
+				hospital_owner = { character = PREVPREV }
+				hospital_has_building = observatory_1
+			}
+		}
+	}
+}
+
+
+
+
+
+##############################
+#                            #
+#    UTILITIES - RELIGION    #
+#                            #
+##############################
+
+
 
 expd_sj_character_has_religious_ties_to_hermetics_trigger = {
 	custom_tooltip = {
@@ -26,6 +323,7 @@ expd_sj_character_has_religious_ties_to_hermetics_trigger = {
 				any_consort = { expd_sj_religion_supports_hermetics_trigger = yes }
 				any_lover = { expd_sj_religion_supports_hermetics_trigger = yes }
 				any_demesne_title = { expd_sj_is_holy_site_of_religion_supporting_hermetics = yes }
+				any_demesne_title = { any_de_jure_vassal_title  = { expd_sj_is_holy_site_of_religion_supporting_hermetics = yes } }
 			}
 		}
 	}

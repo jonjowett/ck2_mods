@@ -1,5 +1,17 @@
 # NB: In all of these triggers, FROM is expected to be the society that the character is trying to join
 
+
+
+
+
+#############################
+#                           #
+#    USED IN OTHER FILES    #
+#                           #
+#############################
+
+
+
 expd_sj_character_can_see_warrior_lodge_trigger = {
 	conditional_tooltip = {
 		trigger = { always = yes }  # Hack to avoid unnecessary nested AND clauses, while retaining the requirement for an AND in case this trigger is used in some other context
@@ -13,7 +25,7 @@ expd_sj_character_can_see_warrior_lodge_trigger = {
 
 expd_sj_character_can_join_warrior_lodge_trigger = {
 	conditional_tooltip = {
-		trigger = { always = yes }  # Hack to avoid unnecessary nested AND clauses, while retaining the requirement for an AND in case this trigger is used in some other context
+		trigger = { always = yes }  # Hack to avoid unnecessary nested AND clauses (ie. ugly tooltips), while retaining the requirement for an AND in case this trigger is used in some other context
 		NOT = { trait = zealous }
 		piety >= 250
 		prestige >= 500
@@ -23,6 +35,18 @@ expd_sj_character_can_join_warrior_lodge_trigger = {
 		}
 	}
 }
+
+
+
+
+
+##############################
+#                            #
+#   UTILITIES - BLOODLINES   #
+#                            #
+##############################
+
+
 
 expd_sj_character_has_bloodline_ties_to_warrior_lodge_trigger = {
 	OR = {
@@ -191,6 +215,9 @@ expd_sj_character_has_legendary_bloodline_ties_to_warrior_lodge_trigger = {
 				
 				OR = {
 					
+					# Main test: This bloodline has the correct custom flag that indicates it was formed by a member of the society in FROM
+					expd_sj_this_bloodline_has_the_flag_for_the_specific_warrior_lodge_in_from = yes
+					
 					#Special case: The legendary pet eagle bloodline is ONLY available to the Tengri warrior lodge, and it has a unique flag, so we can detect this one for sure
 					AND = {
 						FROM = { is_society = warrior_lodge_tengri }
@@ -200,237 +227,329 @@ expd_sj_character_has_legendary_bloodline_ties_to_warrior_lodge_trigger = {
 					# For every other legendary bloodline, we have to do a workaround:
 					# --- Assume that the bloodline founder will EITHER be of the society's religion OR will have the commander trait associated with the society. (Or both.)
 					# --- This should suffice for AI characters (who usually take the trait and usually stay with the "correct" religion)
-					expd_sj_bloodline_founder_religion_matches_society = yes
-					expd_sj_bloodline_founder_commander_trait_matches_society = yes
-					
+					# --- This is also necessary for compatibility, eg. if this mod is added part-way through an existing game.
+					# --- However, this test is woefully insufficient for previous player characters who use this mod's features to collect multiple warrior lodge commander traits. (Descendents will be able to join any warrior lodge for which the bloodline founder had the commander trait.)
+					AND = {
+						NOR = {
+							has_bloodline_flag = expd_sj_warrior_lodge_norse
+							has_bloodline_flag = expd_sj_warrior_lodge_tengri
+							has_bloodline_flag = expd_sj_warrior_lodge_baltic
+							has_bloodline_flag = expd_sj_warrior_lodge_finnish
+							has_bloodline_flag = expd_sj_warrior_lodge_slavic
+							has_bloodline_flag = expd_sj_warrior_lodge_west_african
+							has_bloodline_flag = expd_sj_warrior_lodge_zun
+							has_bloodline_flag = expd_sj_warrior_lodge_bon
+							has_bloodline_flag = expd_sj_warrior_lodge_hellenic
+						}
+						OR = {
+							expd_sj_bloodline_founder_religion_matches_society = yes
+							expd_sj_bloodline_founder_commander_trait_matches_society = yes
+						}
+					}
 				}
 			}
 		}
 	}
 }
 
+expd_sj_this_bloodline_has_the_flag_for_the_specific_warrior_lodge_in_from = {
+	trigger_if = {
+		limit = { FROM = { is_society = warrior_lodge_norse } }
+		custom_tooltip = {
+			text = expd_sj_this_bloodline_has_the_flag_for_the_specific_warrior_lodge_tt
+			has_bloodline_flag = expd_sj_warrior_lodge_norse
+		}
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_tengri } }
+		custom_tooltip = {
+			text = expd_sj_this_bloodline_has_the_flag_for_the_specific_warrior_lodge_tt
+			has_bloodline_flag = expd_sj_warrior_lodge_tengri
+		}
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_baltic } }
+		custom_tooltip = {
+			text = expd_sj_this_bloodline_has_the_flag_for_the_specific_warrior_lodge_tt
+			has_bloodline_flag = expd_sj_warrior_lodge_baltic
+		}
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_finnish } }
+		custom_tooltip = {
+			text = expd_sj_this_bloodline_has_the_flag_for_the_specific_warrior_lodge_tt
+			has_bloodline_flag = expd_sj_warrior_lodge_finnish
+		}
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_slavic } }
+		custom_tooltip = {
+			text = expd_sj_this_bloodline_has_the_flag_for_the_specific_warrior_lodge_tt
+			has_bloodline_flag = expd_sj_warrior_lodge_slavic
+		}
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_west_african } }
+		custom_tooltip = {
+			text = expd_sj_this_bloodline_has_the_flag_for_the_specific_warrior_lodge_tt
+			has_bloodline_flag = expd_sj_warrior_lodge_west_african
+		}
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_zun } }
+		custom_tooltip = {
+			text = expd_sj_this_bloodline_has_the_flag_for_the_specific_warrior_lodge_tt
+			has_bloodline_flag = expd_sj_warrior_lodge_zun
+		}
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_bon } }
+		custom_tooltip = {
+			text = expd_sj_this_bloodline_has_the_flag_for_the_specific_warrior_lodge_tt
+			has_bloodline_flag = expd_sj_warrior_lodge_bon
+		}
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_hellenic } }
+		custom_tooltip = {
+			text = expd_sj_this_bloodline_has_the_flag_for_the_specific_warrior_lodge_tt
+			has_bloodline_flag = expd_sj_warrior_lodge_hellenic
+		}
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = expd_sj_error_this_society_is_not_recognised_by_the_mod_tt
+			always = no
+		}
+	}
+}
+
 expd_sj_bloodline_founder_religion_matches_society = {
-	OR = {
-		AND = {
-			FROM = { is_society = warrior_lodge_norse }
-			founder = { religion_openly_norse_or_reformed_trigger = yes }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_tengri }
-			founder = { religion_openly_tengri_or_reformed_trigger = yes }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_baltic }
-			founder = { religion_openly_baltic_or_reformed_trigger = yes }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_finnish }
-			founder = { religion_openly_finnish_or_reformed_trigger = yes }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_slavic }
-			founder = { religion_openly_slavic_or_reformed_trigger = yes }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_west_african }
-			founder = { religion_openly_west_african_or_reformed_trigger = yes }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_zun }
-			founder = { religion_openly_zun_or_reformed_trigger = yes }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_bon }
-			founder = { religion_openly_bon_or_reformed_trigger = yes }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_hellenic }
-			founder = { religion_openly_hellenic_or_reformed_trigger = yes }
+	trigger_if = {
+		limit = { FROM = { is_society = warrior_lodge_norse } }
+		founder = { religion_openly_norse_or_reformed_trigger = yes }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_tengri } }
+		founder = { religion_openly_tengri_or_reformed_trigger = yes }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_baltic } }
+		founder = { religion_openly_baltic_or_reformed_trigger = yes }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_finnish } }
+		founder = { religion_openly_finnish_or_reformed_trigger = yes }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_slavic } }
+		founder = { religion_openly_slavic_or_reformed_trigger = yes }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_west_african } }
+		founder = { religion_openly_west_african_or_reformed_trigger = yes }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_zun } }
+		founder = { religion_openly_zun_or_reformed_trigger = yes }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_bon } }
+		founder = { religion_openly_bon_or_reformed_trigger = yes }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_hellenic } }
+		founder = { religion_openly_hellenic_or_reformed_trigger = yes }
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = expd_sj_error_this_society_is_not_recognised_by_the_mod_tt
+			always = no
 		}
 	}
 }
 
 expd_sj_bloodline_founder_commander_trait_matches_society = {
-	OR = {
-		AND = {
-			FROM = { is_society = warrior_lodge_norse }
-			founder = { trait = norse_leader }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_tengri }
-			founder = { trait = tengri_leader }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_baltic }
-			founder = { trait = baltic_leader }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_finnish }
-			founder = { trait = finnish_leader }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_slavic }
-			founder = { trait = slavic_leader }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_west_african }
-			founder = { trait = west_african_leader }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_zun }
-			founder = { trait = zun_leader }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_bon }
-			founder = { trait = bon_leader }
-		}
-		AND = {
-			FROM = { is_society = warrior_lodge_hellenic }
-			founder = { trait = hellenic_leader }
+	trigger_if = {
+		limit = { FROM = { is_society = warrior_lodge_norse } }
+		founder = { trait = norse_leader }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_tengri } }
+		founder = { trait = tengri_leader }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_baltic } }
+		founder = { trait = baltic_leader }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_finnish } }
+		founder = { trait = finnish_leader }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_slavic } }
+		founder = { trait = slavic_leader }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_west_african } }
+		founder = { trait = west_african_leader }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_zun } }
+		founder = { trait = zun_leader }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_bon } }
+		founder = { trait = bon_leader }
+	}
+	trigger_else_if = {
+		limit = { FROM = { is_society = warrior_lodge_hellenic } }
+		founder = { trait = hellenic_leader }
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = expd_sj_error_this_society_is_not_recognised_by_the_mod_tt
+			always = no
 		}
 	}
 }
 
+
+
+
+
+##############################
+#                            #
+#    UTILITIES - RELIGION    #
+#                            #
+##############################
+
+
+
 expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = {
 	custom_tooltip = {
 		text = expd_sj_character_has_religious_ties_to_warrior_lodge_tt
-		hidden_trigger = {
+		trigger_if = {
+			limit = { FROM = { is_society = warrior_lodge_norse } }
 			OR = {
-				AND = {
-					FROM = {
-						is_society = warrior_lodge_norse
-					}
-					OR = {
-						secret_religion = norse_pagan
-						secret_religion = norse_pagan_reformed
-						any_friend = { religion_openly_norse_or_reformed_trigger = yes }
-						any_spouse = { religion_openly_norse_or_reformed_trigger = yes }
-						any_consort = { religion_openly_norse_or_reformed_trigger = yes }
-						any_lover = { religion_openly_norse_or_reformed_trigger = yes }
-						any_demesne_title = { is_holy_site = norse_pagan }
-						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = norse_pagan } }
-					}
-				}
-				AND = {
-					FROM = {
-						is_society = warrior_lodge_tengri
-					}
-					OR = {
-						secret_religion = tengri_pagan
-						secret_religion = tengri_pagan_reformed
-						any_friend = { religion_openly_tengri_or_reformed_trigger = yes }
-						any_spouse = { religion_openly_tengri_or_reformed_trigger = yes }
-						any_consort = { religion_openly_tengri_or_reformed_trigger = yes }
-						any_lover = { religion_openly_tengri_or_reformed_trigger = yes }
-						any_demesne_title = { is_holy_site = tengri_pagan }
-						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = tengri_pagan } }
-					}
-				}
-				AND = {
-					FROM = {
-						is_society = warrior_lodge_baltic
-					}
-					OR = {
-						secret_religion = baltic_pagan
-						secret_religion = baltic_pagan_reformed
-						any_friend = { religion_openly_baltic_or_reformed_trigger = yes }
-						any_spouse = { religion_openly_baltic_or_reformed_trigger = yes }
-						any_consort = { religion_openly_baltic_or_reformed_trigger = yes }
-						any_lover = { religion_openly_baltic_or_reformed_trigger = yes }
-						any_demesne_title = { is_holy_site = baltic_pagan }
-						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = baltic_pagan } }
-					}
-				}
-				AND = {
-					FROM = {
-						is_society = warrior_lodge_finnish
-					}
-					OR = {
-						secret_religion = finnish_pagan
-						secret_religion = finnish_pagan_reformed
-						any_friend = { religion_openly_finnish_or_reformed_trigger = yes }
-						any_spouse = { religion_openly_finnish_or_reformed_trigger = yes }
-						any_consort = { religion_openly_finnish_or_reformed_trigger = yes }
-						any_lover = { religion_openly_finnish_or_reformed_trigger = yes }
-						any_demesne_title = { is_holy_site = finnish_pagan }
-						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = finnish_pagan } }
-					}
-				}
-				AND = {
-					FROM = {
-						is_society = warrior_lodge_slavic
-					}
-					OR = {
-						secret_religion = slavic_pagan
-						secret_religion = slavic_pagan_reformed
-						any_friend = { religion_openly_slavic_or_reformed_trigger = yes }
-						any_spouse = { religion_openly_slavic_or_reformed_trigger = yes }
-						any_consort = { religion_openly_slavic_or_reformed_trigger = yes }
-						any_lover = { religion_openly_slavic_or_reformed_trigger = yes }
-						any_demesne_title = { is_holy_site = slavic_pagan }
-						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = slavic_pagan } }
-					}
-				}
-				AND = {
-					FROM = {
-						is_society = warrior_lodge_west_african
-					}
-					OR = {
-						secret_religion = west_african_pagan
-						secret_religion = west_african_pagan_reformed
-						any_friend = { religion_openly_west_african_or_reformed_trigger = yes }
-						any_spouse = { religion_openly_west_african_or_reformed_trigger = yes }
-						any_consort = { religion_openly_west_african_or_reformed_trigger = yes }
-						any_lover = { religion_openly_west_african_or_reformed_trigger = yes }
-						any_demesne_title = { is_holy_site = west_african_pagan }
-						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = west_african_pagan } }
-					}
-				}
-				AND = {
-					FROM = {
-						is_society = warrior_lodge_zun
-					}
-					OR = {
-						secret_religion = zun_pagan
-						secret_religion = zun_pagan_reformed
-						any_friend = { religion_openly_zun_or_reformed_trigger = yes }
-						any_spouse = { religion_openly_zun_or_reformed_trigger = yes }
-						any_consort = { religion_openly_zun_or_reformed_trigger = yes }
-						any_lover = { religion_openly_zun_or_reformed_trigger = yes }
-						any_demesne_title = { is_holy_site = zun_pagan }
-						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = zun_pagan } }
-					}
-				}
-				AND = {
-					FROM = {
-						is_society = warrior_lodge_bon
-					}
-					OR = {
-						secret_religion = bon
-						secret_religion = bon_reformed
-						any_friend = { religion_openly_bon_or_reformed_trigger = yes }
-						any_spouse = { religion_openly_bon_or_reformed_trigger = yes }
-						any_consort = { religion_openly_bon_or_reformed_trigger = yes }
-						any_lover = { religion_openly_bon_or_reformed_trigger = yes }
-						any_demesne_title = { is_holy_site = bon }
-						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = bon } }
-					}
-				}
-				AND = {
-					FROM = {
-						is_society = warrior_lodge_hellenic
-					}
-					OR = {
-						secret_religion = hellenic_pagan
-						secret_religion = hellenic_pagan_reformed
-						any_friend = { religion_openly_hellenic_or_reformed_trigger = yes }
-						any_spouse = { religion_openly_hellenic_or_reformed_trigger = yes }
-						any_consort = { religion_openly_hellenic_or_reformed_trigger = yes }
-						any_lover = { religion_openly_hellenic_or_reformed_trigger = yes }
-						any_demesne_title = { is_holy_site = hellenic_pagan }
-						any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = hellenic_pagan } }
-					}
-				}
+				secret_religion = norse_pagan
+				secret_religion = norse_pagan_reformed
+				any_friend = { religion_openly_norse_or_reformed_trigger = yes }
+				any_spouse = { religion_openly_norse_or_reformed_trigger = yes }
+				any_consort = { religion_openly_norse_or_reformed_trigger = yes }
+				any_lover = { religion_openly_norse_or_reformed_trigger = yes }
+				any_demesne_title = { is_holy_site = norse_pagan }
+				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = norse_pagan } }
+			}
+		}
+		trigger_else_if = {
+			limit = { FROM = { is_society = warrior_lodge_tengri } }
+			OR = {
+				secret_religion = tengri_pagan
+				secret_religion = tengri_pagan_reformed
+				any_friend = { religion_openly_tengri_or_reformed_trigger = yes }
+				any_spouse = { religion_openly_tengri_or_reformed_trigger = yes }
+				any_consort = { religion_openly_tengri_or_reformed_trigger = yes }
+				any_lover = { religion_openly_tengri_or_reformed_trigger = yes }
+				any_demesne_title = { is_holy_site = tengri_pagan }
+				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = tengri_pagan } }
+			}
+		}
+		trigger_else_if = {
+			limit = { FROM = { is_society = warrior_lodge_baltic } }
+			OR = {
+				secret_religion = baltic_pagan
+				secret_religion = baltic_pagan_reformed
+				any_friend = { religion_openly_baltic_or_reformed_trigger = yes }
+				any_spouse = { religion_openly_baltic_or_reformed_trigger = yes }
+				any_consort = { religion_openly_baltic_or_reformed_trigger = yes }
+				any_lover = { religion_openly_baltic_or_reformed_trigger = yes }
+				any_demesne_title = { is_holy_site = baltic_pagan }
+				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = baltic_pagan } }
+			}
+		}
+		trigger_else_if = {
+			limit = { FROM = { is_society = warrior_lodge_finnish } }
+			OR = {
+				secret_religion = finnish_pagan
+				secret_religion = finnish_pagan_reformed
+				any_friend = { religion_openly_finnish_or_reformed_trigger = yes }
+				any_spouse = { religion_openly_finnish_or_reformed_trigger = yes }
+				any_consort = { religion_openly_finnish_or_reformed_trigger = yes }
+				any_lover = { religion_openly_finnish_or_reformed_trigger = yes }
+				any_demesne_title = { is_holy_site = finnish_pagan }
+				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = finnish_pagan } }
+			}
+		}
+		trigger_else_if = {
+			limit = { FROM = { is_society = warrior_lodge_slavic } }
+			OR = {
+				secret_religion = slavic_pagan
+				secret_religion = slavic_pagan_reformed
+				any_friend = { religion_openly_slavic_or_reformed_trigger = yes }
+				any_spouse = { religion_openly_slavic_or_reformed_trigger = yes }
+				any_consort = { religion_openly_slavic_or_reformed_trigger = yes }
+				any_lover = { religion_openly_slavic_or_reformed_trigger = yes }
+				any_demesne_title = { is_holy_site = slavic_pagan }
+				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = slavic_pagan } }
+			}
+		}
+		trigger_else_if = {
+			limit = { FROM = { is_society = warrior_lodge_west_african } }
+			OR = {
+				secret_religion = west_african_pagan
+				secret_religion = west_african_pagan_reformed
+				any_friend = { religion_openly_west_african_or_reformed_trigger = yes }
+				any_spouse = { religion_openly_west_african_or_reformed_trigger = yes }
+				any_consort = { religion_openly_west_african_or_reformed_trigger = yes }
+				any_lover = { religion_openly_west_african_or_reformed_trigger = yes }
+				any_demesne_title = { is_holy_site = west_african_pagan }
+				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = west_african_pagan } }
+			}
+		}
+		trigger_else_if = {
+			limit = { FROM = { is_society = warrior_lodge_zun } }
+			OR = {
+				secret_religion = zun_pagan
+				secret_religion = zun_pagan_reformed
+				any_friend = { religion_openly_zun_or_reformed_trigger = yes }
+				any_spouse = { religion_openly_zun_or_reformed_trigger = yes }
+				any_consort = { religion_openly_zun_or_reformed_trigger = yes }
+				any_lover = { religion_openly_zun_or_reformed_trigger = yes }
+				any_demesne_title = { is_holy_site = zun_pagan }
+				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = zun_pagan } }
+			}
+		}
+		trigger_else_if = {
+			limit = { FROM = { is_society = warrior_lodge_bon } }
+			OR = {
+				secret_religion = bon
+				secret_religion = bon_reformed
+				any_friend = { religion_openly_bon_or_reformed_trigger = yes }
+				any_spouse = { religion_openly_bon_or_reformed_trigger = yes }
+				any_consort = { religion_openly_bon_or_reformed_trigger = yes }
+				any_lover = { religion_openly_bon_or_reformed_trigger = yes }
+				any_demesne_title = { is_holy_site = bon }
+				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = bon } }
+			}
+		}
+		trigger_else_if = {
+			limit = { FROM = { is_society = warrior_lodge_hellenic } }
+			OR = {
+				secret_religion = hellenic_pagan
+				secret_religion = hellenic_pagan_reformed
+				any_friend = { religion_openly_hellenic_or_reformed_trigger = yes }
+				any_spouse = { religion_openly_hellenic_or_reformed_trigger = yes }
+				any_consort = { religion_openly_hellenic_or_reformed_trigger = yes }
+				any_lover = { religion_openly_hellenic_or_reformed_trigger = yes }
+				any_demesne_title = { is_holy_site = hellenic_pagan }
+				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = hellenic_pagan } }
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = expd_sj_error_this_society_is_not_recognised_by_the_mod_tt
+				always = no
 			}
 		}
 	}
