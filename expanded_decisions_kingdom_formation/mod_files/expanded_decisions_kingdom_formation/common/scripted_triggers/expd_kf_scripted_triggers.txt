@@ -49,6 +49,63 @@ expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duch
 	}
 }
 
+expd_kf_root_is_a_human_player_who_owns_every_count_plus_title_in_the_same_de_jure_kingdom_as_this_duchy = {
+	custom_tooltip = {
+		text = expd_kf_root_is_a_human_player_with_shattering_turned_on_tt
+		ROOT = { ai = no }
+		has_global_flag = expd_kf_human_shattering
+	}
+	custom_tooltip = {
+		text = expd_kf_the_de_jure_kingdom_containing_this_duchy_is_held_by_root_or_vassal_or_noone_tt
+		any_de_jure_liege_title = {
+			tier = KING
+			OR = {
+				holder_scope = { character = ROOT }
+				holder_scope = { is_vassal_or_below_of = ROOT }
+				has_holder = no
+			}
+		}
+	}
+	custom_tooltip = {
+		text = expd_kf_every_duchy_title_in_the_de_jure_kingdom_containing_this_duchy_is_held_by_root_or_vassal_or_noone_tt
+		NOT = {
+			any_de_jure_liege_title = {
+				tier = KING
+				any_de_jure_vassal_title = {
+					tier = DUKE
+					NOT = {
+						OR = {
+							holder_scope = { character = ROOT }
+							holder_scope = { is_vassal_or_below_of = ROOT }
+							has_holder = no
+						}
+					}
+				}
+			}
+		}
+	}
+	custom_tooltip = {
+		text = expd_kf_every_county_title_in_the_de_jure_kingdom_containing_this_duchy_is_held_by_root_or_vassal_tt
+		NOT = {
+			any_de_jure_liege_title = {
+				tier = KING
+				any_de_jure_vassal_title = {
+					tier = DUKE
+					any_de_jure_vassal_title = {
+						tier = COUNT
+						NOT = {
+							OR = {
+								holder_scope = { character = ROOT }
+								holder_scope = { is_vassal_or_below_of = ROOT }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 expd_kf_root_controls_a_province_in_this_duchy = {
 	any_de_jure_vassal_title = { # Any county in the duchy
 		tier = COUNT
@@ -79,12 +136,20 @@ expd_kf_root_can_see_decision_to_create_this_kingdom_from_prev_single_duchy = {
 		expd_kf_root_controls_a_province_in_this_duchy = yes
 	}
 	
-	# ROOT must not be de jure liege of the source duchy
-	# ROOT must not own or control any other duchies in the same de jure kingdom
+	# Either ROOT must not be de jure liege of the source duchy, and ROOT must not own or control any other duchies in the same de jure kingdom
+	# Or ROOT *is* de jure liege of the source duchy, and ROOT is a player
 	PREV = { # The source duchy
 		tier = DUKE # Just to make it VERY clear that this is referring to a duchy
-		expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
-		expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duchy = yes
+		OR = {
+			AND = {
+				expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
+				expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duchy = yes
+			}
+			AND = {
+				has_global_flag = expd_kf_human_shattering
+				ROOT = { ai = no }
+			}
+		}
 	}
 	
 	# The new kingdom must be titular and have no holder
@@ -138,8 +203,13 @@ expd_kf_root_can_take_decision_to_create_this_kingdom_from_prev_single_duchy = {
 			tier = DUKE
 			
 			# Duplicate these conditions from the "potential" block, so the player knows not to break them
-			expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
-			expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duchy = yes
+			OR = {
+				AND = {
+					expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
+					expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duchy = yes
+				}
+				expd_kf_root_is_a_human_player_who_owns_every_count_plus_title_in_the_same_de_jure_kingdom_as_this_duchy = yes
+			}
 			
 			# Must personally hold the duchy title, or have a vassal hold it
 			has_holder = yes
