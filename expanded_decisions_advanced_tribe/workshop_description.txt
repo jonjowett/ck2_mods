@@ -1,0 +1,126 @@
+[h1]Summary:[/h1]
+This mod allows tribal characters to unlock certain features that are normally only available to feudal/theocratic/republican characters, albeit with some significant disadvantages.
+
+These unlockable features are:
+[list]
+[*]Ability to construct cities and hospitals
+[*]Regulated Inheritance law (titles cannot pass outside the realm via inheritance)
+[*]+25 vassal limit via a custom version of the Imperial Administration law
+[/list]
+
+The aim is to make late-game tribal gameplay a bit more pleasant, so that you don't feel "forced" to change to feudal/republican for the sake of your sanity.
+
+[h1]Features:[/h1]
+
+[u]Ability to construct Cities (expensively):[/u]
+[list]
+[*]Method:
+[list][*]County-level title decision, ie. by right-clicking on a county's coat of arms.[/list]
+[*]Prerequisites:
+[list][*]This ability is only available if the character has passed the custom "Advanced Tribal Administration" or "Imperial Administration" law (see below).[/list]
+[*]Cost:
+[list]
+[*]The base cost is 1000 gold, but this is progressively reduced if you or your steward have high stewardship skill.
+[*]The minimum cost is 500 gold, if you personally have a stewardship skill of 40+.
+[*]If you personally have a stewardship skill of 30-39, or your steward has a stewardship skill of 40+, then the cost is 600 gold.
+[*]...etc...
+[/list]
+[*]AI:
+[list][*]This decision is [u]blocked[/u] for AI characters.[/list]
+[*]Rationale:
+[list][*]In vanilla, tribal characters can create vassal MRs from existing cities, so it's reasonable to allow them to construct very-expensive cities for the same purpose.[/list]
+[*]Additional notes:
+[list]
+[*]Cities constructed via decision are created instantly. (Due to technical limitations, it is not possible to construct the city gradually over time, as per the vanilla game.
+[/list]
+[/list]
+
+[u]Ability to construct Hospitals (expensively):[/u]
+[list]
+[*]Method:
+[list][*]County-level title decision, ie. by right-clicking on a county's coat of arms.[/list]
+[*]Prerequisites:
+[list][*]This ability is only available if the character has passed the custom "Advanced Tribal Administration" or "Imperial Administration" law (see below).[/list]
+[*]Cost:
+[list]
+[*]The base cost is 300 gold, but this is progressively reduced if you or your court physician have high learning skill.
+[*]The minimum cost is 100 gold, if you personally have learning skill of 40+.
+[*]If you personally have learning skill of 30-39, or your court physician has learning skill of 40+, then the cost is 150 gold.
+[*]...etc...
+[/list]
+[*]AI:
+[list]
+[*]This decision is [u]available[/u] for AI characters, and has appropriate weightings to ensure they are sensible about it.
+[*]However, it's rather unlikely that an AI character will unlock this decision, because the AI is unlikely to pass the "Advanced Tribal Administration" law, because the AI is very bad at revoking council privileges.
+[/list]
+[*]Rationale:
+[list][*]In vanilla, existing hospitals can be upgraded by tribal characters, so it's only fair to let them construct new ones.[/list]
+[*]Additional notes:
+[list]
+[*]Hospitals constructed via decision are created instantly. (Due to technical limitations, it is not possible to construct the hospital gradually over time, as per the vanilla game.)
+[*]For counties in your demesne, this is considered a "high priority" decision - ie. you will receive an alert if you can construct a hospital in any of your demesne counties. (If you are eligible, you can construct hospitals in any county in your realm, but you will not receive an alert for counties outside your demesne, because you probably don't want to build a hospital for all of your vassals.)
+[/list]
+[/list]
+
+[u]Regulated Inheritance Law:[/u]
+[list]
+[*](Default) Free Inheritance: Titles can pass outside the realm
+[*]Regulated Inheritance:
+[list]
+[*]Requires: Max "tribal organisation" law; and all council powers revoked; and either the religious title revocation law or  a religion with "cosmopolitan" nature and the normal/basic title revocation law.
+[*]Effect: Titles can not pass outside the realm via inheritance, -20 vassal opinion
+[*]Compared with vanilla, this law: has a larger vassal opinion penalty (-20 instead of -10).
+[/list]
+[/list]
+
+[u]Administration Laws:[/u]
+[list]
+[*](Default) Basic Tribal Administration: No effect
+[*]Advanced Tribal Administration:
+[list]
+[*]Requires: Max "tribal organisation" law; and all council powers revoked; and either the religious title revocation law or  a religion with "cosmopolitan" nature and the normal/basic title revocation law.
+[*]Effect: +5 vassal limit, -10 vassal opinion, unlocks hospital & city construction decisions
+[*]Compared with the vanilla Late Feudal Administration law, this law: has a vassal opinion penalty; does [u]not[/u] unlock primo/ultimo succession; and vassals who refuse liege requests are [u]not[/u] considered to be traitors.
+[/list]
+[*]Imperial Administration:
+[list]
+[*]Requires: Advanced Tribal Administration law (see above), Regulated Inheritance law (see above), emperor-tier primary title, majesty tech 5 in capital
+[*]Effect: +25 vassal limit, -20 vassal opinion
+[*]Compared with the vanilla Imperial Administration law, this law: does [u]not[/u] unlock viceroyalties or allow free duchy revocation; does [u]not[/u] allow free vassal retraction; and has a larger vassal opinion penalty (-20 instead of -10).
+[/list]
+[/list]
+
+[u]Important note about these new laws:[/u]
+[list]
+[*]If you pass any of these laws, and then later reform to feudal/republican government, you will [u]not[/u] be automatically granted the equivalent feudal/republican law.
+[*]Eg: If you pass the modded "Imperial Administration" law and then reform to feudal, you will [u]not[/u] have the vanilla "Imperial Administration" law.
+[/list]
+
+[h1]Recommended companion mod:[/h1]
+[list]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2852619093]Expanded Decisions: Pillaging[/url] (for enhanced pillaging for tribal characters)
+[/list]
+
+[h1]Compatibility/Impact:[/h1]
+The aim of the "Expanded Decisions" mod family is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
+[list]
+[*]Required CK2 version: 3.3.5.1
+[*]Achievement compatible: No
+[*]Safe to add to existing game: Yes
+[*]Safe to remove from existing game: Yes
+[*]Changes to vanilla files: None
+[*]Mod compatibility: Should be compatible with all other mods, including mods which change/add laws - but those might feel a bit weird!
+[*]Changes to AI behaviour: Minor (AI can theoretically pass these laws, but in practice it's unlikely because AI rarely manage to revoke all council powers)
+[*]Decrease in game difficulty: Minor (Vassal limit, hospitals and cities are all nice-to-have but not game-breaking)
+[*]Localisation: English only
+[*]Mod development status: Complete
+[*]Known bugs/issues:
+[list][*][b][u]Requires Conclave DLC.[/u][/b] (If you don't have Conclave, it will seem like this mod does nothing.)[/list]
+[/list]
+
+[h1]Other Versions / Alternate Download / Reuse:[/h1]
+[list]
+[*]All of my CK2 mods are version-controlled via a [url=https://github.com/jonjowett/ck2_mods]Github repository[/url] (eg. if you want earlier/beta versions of any of my mods). 
+[*]I also publish a [url=https://github.com/jonjowett/ck2_mods/blob/master/expanded_decisions_advanced_tribe/packaged_mod/expanded_decisions_advanced_tribe.zip]zip version[/url] of this mod on Github.
+[*]All of my mods are published on Github under the MIT license, and I'm following the same logic here on the workshop. Essentially, you're welcome to reuse my mods in any way you wish as long as you provide attribution (eg. credit and/or a link).
+[/list]
