@@ -112,9 +112,39 @@ expd_sj_characters_fulfils_government_requirements_to_join_hermetics_trigger = {
 expd_sj_hermetic_things_info = {
 	conditional_tooltip = {
 		trigger = { always = yes }
-		custom_tooltip = {
-			text = expd_sj_hermetic_things_info_tt
-			always = no
+		trigger_if = {
+			limit = { expd_sj_character_has_1_hermetic_thing = yes }
+			custom_tooltip = {
+				text = expd_sj_hermetic_things_info_1_tt
+				always = no
+			}
+		}
+		trigger_else_if = {
+			limit = { expd_sj_character_has_2_hermetic_things = yes }
+			custom_tooltip = {
+				text = expd_sj_hermetic_things_info_2_tt
+				always = no
+			}
+		}
+		trigger_else_if = {
+			limit = { expd_sj_character_has_3_hermetic_things = yes }
+			custom_tooltip = {
+				text = expd_sj_hermetic_things_info_3_tt
+				always = no
+			}
+		}
+		trigger_else_if = {
+			limit = { expd_sj_character_has_4_hermetic_things = yes }
+			custom_tooltip = {
+				text = expd_sj_hermetic_things_info_4_tt
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = expd_sj_hermetic_things_info_0_tt
+				always = no
+			}
 		}
 		custom_tooltip = {
 			text = expd_sj_hermetic_things_info_bloodline_tt
@@ -280,8 +310,11 @@ expd_sj_character_has_scholarly_lifestyle = {
 		text = expd_sj_character_has_scholarly_lifestyle_tt
 		OR = {
 			has_focus = focus_scholarship
+			has_focus = focus_theology
 			trait = scholar
 			trait = mystic
+			trait = theologian
+			trait = physician
 		}
 	}
 }
