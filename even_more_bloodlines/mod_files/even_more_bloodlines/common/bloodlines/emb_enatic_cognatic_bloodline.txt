@@ -8,9 +8,8 @@
 # Generic bloodline, for no special traits
 
 emb_enatic_cognatic_bloodline_generic = {
-	female_opinion = 10                                    # 10 base
-	bloodline_effect_enatic_cognatic = 1                   # Base feature
-	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
+	female_opinion = 10                                           # Non-homosexual: 10 opinion from other women
+	emb_bloodline_effect_enatic_cognatic_realm = 1                # Base feature (allow & allow forcing of en-cog succ)
 	picture = GFX_bloodlines_symbol_family
 	inheritance = matrilineal
 	allow_bastards = yes
@@ -28,12 +27,12 @@ emb_enatic_cognatic_bloodline_generic = {
 # Bloodlines for one special trait
 
 emb_enatic_cognatic_bloodline_shieldmaiden = {
-	female_opinion = 10                                    # 10 base
-	combat_rating = 5                                      # Shieldmaiden combat bonus
-	martial = 1                                            # Shieldmaiden martial stat bonus
-	bloodline_effect_enatic_cognatic = 1                   # Base feature
-	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
-	emb_bloodline_effect_shieldmaiden_f = 1                # Shieldmaiden chance
+	female_opinion = 10                                           # Non-homosexual: 10 opinion from other women
+	combat_rating = 5                                             # Shieldmaiden combat bonus
+	martial = 1                                                   # Shieldmaiden martial stat bonus
+	emb_bloodline_effect_enatic_cognatic_realm = 1                # Base feature (allow & allow forcing of en-cog succ)
+	emb_bloodline_effect_shieldmaiden_f = 1                       # Shieldmaiden chance
+	emb_bloodline_effect_enatic_cognatic_blank_for_spacing = 1    # Blank line, to ensure proper distribution of effects in bloodline screen
 	picture = GFX_bloodlines_symbol_war_child
 	inheritance = matrilineal
 	allow_bastards = yes
@@ -46,15 +45,15 @@ emb_enatic_cognatic_bloodline_shieldmaiden = {
 		bloodline_enatic_cognatic
 		emb_bloodline_effect_flag_enatic_cognatic_realm
 		# Extra features
-		emb_bloodline_effect_flag_shieldmaiden_f_f
+		emb_bloodline_effect_flag_shieldmaiden_f
 	}
 }
 
 emb_enatic_cognatic_bloodline_homosexual = {
-	female_opinion = 20                                    # 10 base + 10 for homosexual attraction
-	bloodline_effect_enatic_cognatic = 1                   # Base feature
-	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
-	emb_bloodline_effect_homosexual_f = 1                  # Homosexual chance
+	female_opinion = 20                                           # Homosexual: 10 opinion from other women + 10 homosexual attraction
+	emb_bloodline_effect_enatic_cognatic_blank_for_spacing = 1    # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_bloodline_effect_enatic_cognatic_realm = 1                # Base feature (allow & allow forcing of en-cog succ)
+	emb_bloodline_effect_homosexual_f = 1                         # Homosexual chance
 	picture = GFX_bloodlines_symbol_family
 	inheritance = matrilineal
 	allow_bastards = yes
@@ -72,11 +71,10 @@ emb_enatic_cognatic_bloodline_homosexual = {
 }
 
 emb_enatic_cognatic_bloodline_seductress = {
-	female_opinion = 10                                    # 10 base
-	sex_appeal_opinion = 10                                # Seductress sex appeal bonus
-	bloodline_effect_enatic_cognatic = 1                   # Base feature
-	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
-	emb_bloodline_effect_lustful_f = 1                     # Lustful chance
+	female_opinion = 10                                           # Non-homosexual: 10 opinion from other women
+	sex_appeal_opinion = 10                                       # Seductress sex appeal bonus
+	emb_bloodline_effect_enatic_cognatic_realm = 1                # Base feature (allow & allow forcing of en-cog succ)
+	emb_bloodline_effect_lustful_f = 1                            # Lustful chance
 	picture = GFX_bloodlines_symbol_fleur_de_lis
 	inheritance = matrilineal
 	allow_bastards = yes
@@ -96,13 +94,12 @@ emb_enatic_cognatic_bloodline_seductress = {
 # Bloodlines for two special traits
 
 emb_enatic_cognatic_bloodline_homosexual_shieldmaiden = {
-	female_opinion = 20                                    # 10 base + 10 for homosexual attraction
-	combat_rating = 5                                      # Shieldmaiden combat bonus
-	martial = 1                                            # Shieldmaiden martial stat bonus
-	bloodline_effect_enatic_cognatic = 1                   # Base feature
-	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
-	emb_bloodline_effect_homosexual_f = 1                  # Homosexual chance
-	emb_bloodline_effect_shieldmaiden_f = 1                # Shieldmaiden chance
+	female_opinion = 20                                           # Homosexual: 10 opinion from other women + 10 homosexual attraction
+	combat_rating = 5                                             # Shieldmaiden combat bonus
+	martial = 1                                                   # Shieldmaiden martial stat bonus
+	emb_bloodline_effect_enatic_cognatic_realm = 1                # Base feature (allow & allow forcing of en-cog succ)
+	emb_bloodline_effect_homosexual_shieldmaiden_f = 1            # Homosexual & Shieldmaiden chance
+	emb_bloodline_effect_enatic_cognatic_blank_for_spacing = 1    # Blank line, to ensure proper distribution of effects in bloodline screen
 	picture = GFX_bloodlines_symbol_war_child
 	inheritance = matrilineal
 	allow_bastards = yes
@@ -121,11 +118,10 @@ emb_enatic_cognatic_bloodline_homosexual_shieldmaiden = {
 }
 
 emb_enatic_cognatic_bloodline_homosexual_seductress = {
-	female_opinion = 20                                    # 10 base + 10 for homosexual attraction
-	sex_appeal_opinion = 10                                # Seductress sex appeal bonus
-	bloodline_effect_enatic_cognatic = 1                   # Base feature
-	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
-	emb_bloodline_effect_lustful_homosexual_f = 1          # Lustful chance & Homosexual chance
+	female_opinion = 20                                           # Homosexual: 10 opinion from other women + 10 homosexual attraction
+	sex_appeal_opinion = 10                                       # Seductress sex appeal bonus
+	emb_bloodline_effect_enatic_cognatic_realm = 1                # Base feature (allow & allow forcing of en-cog succ)
+	emb_bloodline_effect_lustful_homosexual_f = 1                 # Lustful & Homosexual chance
 	picture = GFX_bloodlines_symbol_murder_rose
 	inheritance = matrilineal
 	allow_bastards = yes
@@ -144,14 +140,13 @@ emb_enatic_cognatic_bloodline_homosexual_seductress = {
 }
 
 emb_enatic_cognatic_bloodline_shieldmaiden_seductress = {
-	female_opinion = 10                                    # 10 base
-	sex_appeal_opinion = 10                                # Seductress sex appeal bonus
-	combat_rating = 5                                      # Shieldmaiden combat bonus
-	martial = 1                                            # Shieldmaiden martial stat bonus
-	bloodline_effect_enatic_cognatic = 1                   # Base feature
-	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
-	emb_bloodline_effect_lustful_f = 1                     # Lustful chance
-	emb_bloodline_effect_shieldmaiden_f = 1                # Shieldmaiden chance
+	female_opinion = 10                                           # Non-homosexual: 10 opinion from other women
+	sex_appeal_opinion = 10                                       # Seductress sex appeal bonus
+	combat_rating = 5                                             # Shieldmaiden combat bonus
+	martial = 1                                                   # Shieldmaiden martial stat bonus
+	emb_bloodline_effect_enatic_cognatic_realm = 1                # Base feature (allow & allow forcing of en-cog succ)
+	emb_bloodline_effect_lustful_shieldmaiden_f = 1               # Lustful & Shieldmaiden chance
+	emb_bloodline_effect_enatic_cognatic_blank_for_spacing = 1    # Blank line, to ensure proper distribution of effects in bloodline screen
 	picture = GFX_bloodlines_symbol_murder_rose
 	inheritance = matrilineal
 	allow_bastards = yes
@@ -172,14 +167,13 @@ emb_enatic_cognatic_bloodline_shieldmaiden_seductress = {
 # Bloodlines for all three special traits
 
 emb_enatic_cognatic_bloodline_homosexual_shieldmaiden_seductress = {
-	female_opinion = 20                                    # 10 base + 10 for homosexual attraction
-	sex_appeal_opinion = 10                                # Seductress sex appeal bonus
-	combat_rating = 5                                      # Shieldmaiden combat bonus
-	martial = 1                                            # Shieldmaiden martial stat bonus
-	bloodline_effect_enatic_cognatic = 1                   # Base feature
-	emb_bloodline_effect_enatic_cognatic_realm = 1         # Base feature
-	emb_bloodline_effect_lustful_homosexual_f = 1          # Lustful chance & Homosexual chance
-	emb_bloodline_effect_shieldmaiden_f = 1                # Shieldmaiden chance
+	female_opinion = 20                                           # Homosexual: 10 opinion from other women + 10 homosexual attraction
+	sex_appeal_opinion = 10                                       # Seductress sex appeal bonus
+	combat_rating = 5                                             # Shieldmaiden combat bonus
+	martial = 1                                                   # Shieldmaiden martial stat bonus
+	emb_bloodline_effect_enatic_cognatic_realm = 1                # Base feature (allow & allow forcing of en-cog succ)
+	emb_bloodline_effect_lustful_homosexual_shieldmaiden_f = 1    # Lustful, Homosexual & Shieldmaiden chance
+	emb_bloodline_effect_enatic_cognatic_blank_for_spacing = 1    # Blank line, to ensure proper distribution of effects in bloodline screen
 	picture = GFX_bloodlines_symbol_murder_rose
 	inheritance = matrilineal
 	allow_bastards = yes

@@ -68,14 +68,40 @@ emb_grant_enatic_cognatic_bloodline_to_root = {
 	}
 	
 	# Apply the same name and description to all bloodlines
+	# Can't use new_bloodline scope in this context (??because it's not in the same block??), so do a lookup instead
 	hidden_tooltip = {
-		new_bloodline = {
-			set_description = emb_enatic_cognatic_bloodline_universal_name
-			set_name = emb_enatic_cognatic_bloodline_universal_desc
+		any_owned_bloodline = {
+			limit = {
+				has_bloodline_flag = emb_enatic_cognatic
+				founder = { character = ROOT }
+			}
+			set_name = emb_enatic_cognatic_bloodline_universal_name
+			set_description = emb_enatic_cognatic_bloodline_universal_desc
 		}
 	}
 	
 	# Inform the player that their choices matter
 	custom_tooltip = { text = emb_enatic_cognatic_info_bloodline_depends_on_traits_tt }
+	if = {
+		limit = { emb_enatic_cognatic_root_or_active_bloodline_founder_is_female_homosexual = yes }
+		custom_tooltip = { text = emb_enatic_cognatic_info_bloodline_depends_on_traits_homosexual_yes_tt }
+	}
+	else = {
+		custom_tooltip = { text = emb_enatic_cognatic_info_bloodline_depends_on_traits_homosexual_no_tt }
+	}
+	if = {
+		limit = { emb_enatic_cognatic_root_or_active_bloodline_founder_is_female_shieldmaiden = yes }
+		custom_tooltip = { text = emb_enatic_cognatic_info_bloodline_depends_on_traits_shieldmaiden_yes_tt }
+	}
+	else = {
+		custom_tooltip = { text = emb_enatic_cognatic_info_bloodline_depends_on_traits_shieldmaiden_no_tt }
+	}
+	if = {
+		limit = { emb_enatic_cognatic_root_or_active_bloodline_founder_is_female_seductress = yes }
+		custom_tooltip = { text = emb_enatic_cognatic_info_bloodline_depends_on_traits_seductress_yes_tt }
+	}
+	else = {
+		custom_tooltip = { text = emb_enatic_cognatic_info_bloodline_depends_on_traits_seductress_no_tt }
+	}
 	
 }
