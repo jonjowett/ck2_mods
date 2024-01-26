@@ -1,41 +1,33 @@
-k_krete_expd_kf = {
-	color={ 205 110 35 }
-	color2={ 255 255 20 }
-	hellenic_pagan_reformed = 500 # Crusade target weight
-	capital = 480 # Chandax
+k_amalfi_expd_kf = {
+	color={ 140 200 230 }
+	color2={ 255 255 255 }
+	capital = 935 # Amalfi
 	allow = {
 		conditional_tooltip = {
 			trigger = {
-				k_krete_expd_kf = {
+				k_amalfi_expd_kf = {
 					is_titular = yes
 				}
 			}
-			k_krete_expd_kf = {
+			k_amalfi_expd_kf = {
 				is_titular = no
 			}
 		}
 	}
 }
 
-k_mann_expd_kf = {
-	color={ 25 65 243 }
+k_canarias_expd_kf = {
+	color={ 60 190 43 }
 	color2={ 255 255 255 }
-	capital = 54 # Isle of Man
-	welsh = "Manaw"
-	norwegian = "Mann"
-	danish = "Mann"
-	swedish = "Mann"
-	norse = "Mann"
-	pictish = "Manu"
-	irish = "Mhannin"
+	capital = 849 # Canarias
 	allow = {
 		conditional_tooltip = {
 			trigger = {
-				k_mann_expd_kf = {
+				k_canarias_expd_kf = {
 					is_titular = yes
 				}
 			}
-			k_mann_expd_kf = {
+			k_canarias_expd_kf = {
 				is_titular = no
 			}
 		}
@@ -60,25 +52,6 @@ k_gotland_expd_kf = {
 	}
 }
 
-k_mallorca_expd_kf = {
-	color = { 68 126 72 }
-	color2={ 255 255 255 }
-	capital = 827 # Mallorca
-	short_name = yes #Localised as the Balearic Kingdom
-	allow = {
-		conditional_tooltip = {
-			trigger = {
-				k_mallorca_expd_kf = {
-					is_titular = yes
-				}
-			}
-			k_mallorca_expd_kf = {
-				is_titular = no
-			}
-		}
-	}
-}
-
 k_iceland_expd_kf = {
 	color={ 195 190 255 }
 	color2={ 220 220 220 }
@@ -95,6 +68,25 @@ k_iceland_expd_kf = {
 				}
 			}
 			k_iceland_expd_kf = {
+				is_titular = no
+			}
+		}
+	}
+}
+
+k_krete_expd_kf = {
+	color={ 205 110 35 }
+	color2={ 255 255 20 }
+	hellenic_pagan_reformed = 500 # Crusade target weight
+	capital = 480 # Chandax
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				k_krete_expd_kf = {
+					is_titular = yes
+				}
+			}
+			k_krete_expd_kf = {
 				is_titular = no
 			}
 		}
@@ -131,6 +123,89 @@ k_maldives_expd_kf = {
 				}
 			}
 			k_maldives_expd_kf = {
+				is_titular = no
+			}
+		}
+	}
+}
+
+k_mallorca_expd_kf = {
+	color = { 68 126 72 }
+	color2={ 255 255 255 }
+	capital = 827 # Mallorca
+	short_name = yes #Localised as the Balearic Kingdom
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				k_mallorca_expd_kf = {
+					is_titular = yes
+				}
+			}
+			k_mallorca_expd_kf = {
+				is_titular = no
+			}
+		}
+	}
+}
+
+k_malta_expd_kf = {
+	color={ 155 254 86 }
+	color2={ 255 255 255 }
+	capital = 812 # Malta
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				k_malta_expd_kf = {
+					is_titular = yes
+				}
+			}
+			k_malta_expd_kf = {
+				is_titular = no
+			}
+		}
+	}
+}
+
+k_mann_expd_kf = {
+	color={ 25 65 243 }
+	color2={ 255 255 255 }
+	capital = 54 # Isle of Man
+	welsh = "Manaw"
+	norwegian = "Mann"
+	danish = "Mann"
+	swedish = "Mann"
+	norse = "Mann"
+	pictish = "Manu"
+	irish = "Mhannin"
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				k_mann_expd_kf = {
+					is_titular = yes
+				}
+			}
+			k_mann_expd_kf = {
+				is_titular = no
+			}
+		}
+	}
+}
+
+k_ragusa_expd_kf = {
+	color={ 133 98 17 }
+	color2={ 255 255 255 }
+	capital = 468
+	title = "RECTOR_TITLE"
+	title_female = "RECTOR_TITLE_FEMALE"
+	dignity = 10
+	allow = {
+		conditional_tooltip = {
+			trigger = {
+				k_ragusa_expd_kf = {
+					is_titular = yes
+				}
+			}
+			k_ragusa_expd_kf = {
 				is_titular = no
 			}
 		}
