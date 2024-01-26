@@ -1,25 +1,32 @@
+#
 # Tooltips explaining trade post auto-reconstruction
 tpauto_manual_construction_temporarily_blocked_tt;Trade post construction is not temporarily blocked.;;;;;;;;;x
-tpauto_can_auto_rebuild_trade_post_tt;Â§YFOR INFO ONLY:Â§! When the conditions below are fulfilled then the trade post will be automatically reconstructed within a year.;;;;;;;;;x
-tpauto_is_a_potential_trade_post_tt;Is a potential Trade Post. (Open the Â§YTrade ZonesÂ§! map mode to see valid Counties);;;;;;;;;;;;;
+tpauto_can_auto_rebuild_trade_post_tt;§YFOR INFO ONLY:§! When the conditions below are fulfilled then the trade post will be automatically reconstructed within a year.;;;;;;;;;x
+tpauto_is_a_potential_trade_post_tt;Is a potential Trade Post. (Open the §YTrade Zones§! map mode to see valid Counties);;;;;;;;;;;;;
+#
 # Tooltips explaining buildings lost during auto-reconstruction
-tpauto_rebuild_buildings_deleted_zero_tt;Â§lAll previously-existing buildings will be reconstructed!Â§!;;;;;;;;;x
-tpauto_rebuild_buildings_deleted_one_tt;Â§YOneÂ§l of the buildings listed below will Â§YNOTÂ§l be reconstructed!Â§!;;;;;;;;;x
-tpauto_rebuild_buildings_deleted_two_tt;Â§YTwoÂ§l of the buildings listed below will Â§YNOTÂ§l be reconstructed!Â§!;;;;;;;;;x
-tpauto_rebuild_buildings_deleted_one_due_to_logic_error_tt;Â§R!!!LOGIC ERROR!!! Something unexpected happened, so the auto-reconstruction is in fallback mode!Â§!\nÂ§YOneÂ§l of the buildings listed below will Â§YNOTÂ§l be reconstructed!Â§!;;;;;;;;;x
+tpauto_rebuild_buildings_deleted_zero_tt;§lAll previously-existing buildings will be reconstructed!§!;;;;;;;;;x
+tpauto_rebuild_buildings_deleted_one_tt;§YOne§l of the buildings listed below will §RNOT§l be reconstructed!§!;;;;;;;;;x
+tpauto_rebuild_buildings_deleted_two_tt;§YTwo§l of the buildings listed below will §RNOT§l be reconstructed!§!;;;;;;;;;x
+tpauto_rebuild_buildings_deleted_one_due_to_logic_error_tt;§R!!!LOGIC ERROR!!! Something unexpected happened, so the auto-reconstruction is in fallback mode!§!\n§YOne§l of the buildings listed below will §YNOT§l be reconstructed!§!;;;;;;;;;x
+#
+#
 # Auto-rebuild event
+#
 TPAuto_2201_Desc;My realm is at peace, and trade has started to flow again. Merchants have returned to [From.GetName], and the trade post has been revitalised. Unfortunately, some of the buildings were badly damaged in the fighting, and the merchants have sent a delegation to ask what I wish to do about the situation.;;;;;;;;;x
+# Option text for buttons - keep it short, to avoid overflow
 TPAuto_2201_Option_RebuildWithSomeDeletion;Demolish the damaged buildings;;;;;;;;;x
-TPAuto_2201_Option_RebuildWithNoDeletion_Luck;Luckily, while one group of merchants was complaining, a different group repaired the buildings!;;;;;;;;;x
+TPAuto_2201_Option_RebuildWithNoDeletion_Luck;Luckily, other merchants had already repaired the buildings!;;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Pay;Pay a professional to repair the damaged buildings;;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_NoRegent;I will personally supervise the repairs!;;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_Regent;My Regent will personally supervise the repairs!;;;;;;;;;x
-TPAuto_2201_Option_RebuildWithNoDeletion_Trader_NoRegent;My fellow merchants happily volunteered to pay for the repairs!;;;;;;;;;x
-TPAuto_2201_Option_RebuildWithNoDeletion_Trader_Regent;The merchants happily volunteered to pay for the repairs!;;;;;;;;;x
-TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_NoRegent;That damage is actually really easy to repair, let me show you how!;;;;;;;;;x
-TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_Regent;My Regent showed the merchants an easy way to repair the damage.;;;;;;;;;x
-TPAuto_2201_Option_RebuildWithNoDeletion_Education_NoRegent;If you pay to repair the buildings, you'll make the money back in no time!;;;;;;;;;x
-TPAuto_2201_Option_RebuildWithNoDeletion_Education_Regent;My Regent persuaded the merchants to pay for the repairs, in anticipation of future profits.;;;;;;;;;x
+TPAuto_2201_Option_RebuildWithNoDeletion_Trader_NoRegent;My fellow merchants volunteered to pay for the repairs!;;;;;;;;;x
+TPAuto_2201_Option_RebuildWithNoDeletion_Trader_Regent;The merchants volunteered to pay for the repairs!;;;;;;;;;x
+TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_NoRegent;Let me show you an easy way to repair that damage!;;;;;;;;;x
+TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_Regent;Let my Regent show you an easy way to repair that damage!;;;;;;;;;x
+TPAuto_2201_Option_RebuildWithNoDeletion_Education_NoRegent;If you repair the buildings, you'll make the money back in no time!;;;;;;;;;x
+TPAuto_2201_Option_RebuildWithNoDeletion_Education_Regent;My Regent persuaded the merchants to pay for the repairs.;;;;;;;;;x
+# Tooltip explanations
 TPAuto_2201_OptionTTI_Luck;This occurred due to pure luck (weighted by high stewardship skill and whether the trade post was recently auto-rebuilt);;;;;;;;;x
 TPAuto_2201_OptionTTI_Trader_NoRegent;This option is available because you are a renowned Trader;;;;;;;;;x
 TPAuto_2201_OptionTTI_Trader_Regent;This option is available because your Regent is a renowned Trader;;;;;;;;;x
