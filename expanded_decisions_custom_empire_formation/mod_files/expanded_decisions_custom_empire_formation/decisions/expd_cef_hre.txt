@@ -79,13 +79,26 @@ decisions = {
 				princely_elective_apply_elector_setup_effect = yes
 			}
 			
+			capital_scope = {
+				show_scope_change = no
+				county = {
+					custom_tooltip = {
+						text = expd_cef_hre_this_county_becomes_traditional_capital_of_the_hre_tt
+						save_event_target_as = expd_cef_hre_roots_current_capital
+					}
+				}
+			}
+			
 			primary_title = {
 				show_scope_change = no
 				e_hre = {
 					show_scope_change = no
 					grant_title = ROOT
-					copy_title_laws = PREV
-					set_coa = PREV
+					hidden_tooltip = {
+						copy_title_laws = PREV
+						set_coa = PREV
+						set_preferred_capital = event_target:expd_cef_hre_roots_current_capital
+					}
 					add_law = succ_hre_elective
 				}
 			}

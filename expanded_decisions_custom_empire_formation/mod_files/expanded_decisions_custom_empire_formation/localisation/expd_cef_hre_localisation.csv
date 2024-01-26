@@ -8,9 +8,9 @@ expd_cef_hre_form_the_hre_late_desc;With a realm to rival that of Charlemagne, I
 #
 # Informational tooltips
 #
-expd_cef_hre_info_all_held_kingdoms_in_the_realm_become_part_of_the_hre_tt;§L...§!\nAll §Ykingdoms§! in the realm become de jure part of the §YHoly Roman Empire§!:;;;;;;;;;x
-expd_cef_hre_info_all_unheld_de_jure_vassal_kingdoms_become_part_of_the_hre_tt;§L...§!\nAll §Yunheld kingdoms§! that are §Yde jure vassals§! of [Root.GetTitledFirstName] become de jure part of the §YHoly Roman Empire§!:;;;;;;;;;x
-expd_cef_hre_info_all_unheld_completely_controlled_kingdoms_become_part_of_the_hre_tt;§L...§!\nAll §Yunheld kingdoms§! that are §Ycompletely controlled§! by [Root.GetTitledFirstName] become de jure part of the §YHoly Roman Empire§!:;;;;;;;;;x
+expd_cef_hre_info_all_held_kingdoms_in_the_realm_become_part_of_the_hre_tt;§L...§!\nAll §Ykingdoms§! in the realm become de jure part of §Y[e_hre.Title.GetName]§!:;;;;;;;;;x
+expd_cef_hre_info_all_unheld_de_jure_vassal_kingdoms_become_part_of_the_hre_tt;§L...§!\nAll §Yunheld kingdoms§! that are §Yde jure vassals§! of [Root.GetTitledFirstName] become de jure part of §Y[e_hre.Title.GetName]§!:;;;;;;;;;x
+expd_cef_hre_info_all_unheld_completely_controlled_kingdoms_become_part_of_the_hre_tt;§L...§!\nAll §Yunheld kingdoms§! that are §Ycompletely controlled§! by [Root.GetTitledFirstName] become de jure part of §Y[e_hre.Title.GetName]§!:;;;;;;;;;x
 expd_cef_hre_info_all_empires_are_destroyed_and_cannot_be_recreated_tt;§L...§!\nAll of [Root.GetTitledFirstName]'s §Yempires§! are §Ypermanently destroyed§!:;;;;;;;;;x
 expd_cef_hre_info_central_italy_is_granted_to_roots_religious_head_tt;§L...§!\n§YCentral Italy§! is granted to [Root.RelHead.GetBestName]:;;;;;;;;;x
 #
@@ -23,13 +23,14 @@ expd_cef_hre_this_empire_is_destroyed_and_cannot_be_recreated_tt;Is destroyed an
 #
 # Misc tooltips
 #
-expd_cef_hre_root_is_crowned_by_his_religious_head_tt;[Root.GetTitledFirstName] is crowned by [Root.RelHead.GetBestName];;;;;;;;x
+expd_cef_hre_root_is_crowned_by_his_religious_head_tt;[Root.GetTitledFirstName] is §Ycrowned§! by [Root.RelHead.GetBestName];;;;;;;;x
 expd_cef_hre_root_grants_this_county_to_his_religous_head_tt;Is granted to [Root.RelHead.GetBestName];;;;;;;;x
+expd_cef_hre_this_county_becomes_traditional_capital_of_the_hre_tt;[This.GetName] becomes the §Ytraditional capital§! of [e_hre.Title.GetName];;;;;;;;x
 expd_cef_hre_capital_electors_tt;§L...§!\nThe HRE's §YElectors§! will be set based on based on the location of [Root.GetTitledFirstName]'s capital;;;;;;;;;x
 expd_cef_hre_german_electors_tt;§L...§!\nThe HRE will be set up with §YGerman Electors§!;;;;;;;;;x
-expd_cef_hre_byz_is_unhappy_about_this_development_tt;§L...§!\nThe §YByzantine Empire§! is insulted by this development;;;;;;;;;x
+expd_cef_hre_byz_is_unhappy_about_this_development_tt;§L...§!\n§Y[e_byzantium.Title.GetNameCap]§! is insulted by this development;;;;;;;;;x
 #
 # Mod version of Otto bloodline
 #
 expd_cef_hre_otto_bloodline_name;Founder's Blood;;;;;;;;;x
-expd_cef_hre_otto_bloodline_desc;Conquered Italy, regained the old lands of the Holy Roman Empire and raised its banners once more.;A conquis l'Italie et regagné les anciennes terres du Saint-Empire romain.;Eroberte Italien, gewannt die alten Länder des Heiligen Römischen Reiches zurück und hisste erneut dessen Banner.;;Conquistó Italia, recuperó las antiguas tierras del Sacro Imperio Romano, cuyos estandartes volvió a levantar.;;;;;x
+expd_cef_hre_otto_bloodline_desc;Conquered Italy, regained the old lands of [e_hre.Title.GetName] and raised its banners once more.;A conquis l'Italie et regagné les anciennes terres du Saint-Empire romain.;Eroberte Italien, gewannt die alten Länder des Heiligen Römischen Reiches zurück und hisste erneut dessen Banner.;;Conquistó Italia, recuperó las antiguas tierras del Sacro Imperio Romano, cuyos estandartes volvió a levantar.;;;;;x
