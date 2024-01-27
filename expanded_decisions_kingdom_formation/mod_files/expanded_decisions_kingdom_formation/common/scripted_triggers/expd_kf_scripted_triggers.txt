@@ -61,13 +61,16 @@ expd_kf_root_is_a_human_player_who_owns_every_count_plus_title_in_the_same_de_ju
 		}
 		custom_tooltip = {
 			text = expd_kf_the_de_jure_kingdom_containing_this_duchy_is_held_by_root_or_vassal_or_noone_tt
-			any_de_jure_liege_title = {
-				tier = KING
-				OR = {
-					holder_scope = { character = ROOT }
-					holder_scope = { is_vassal_or_below_of = ROOT }
-					has_holder = no
+			OR = {
+				any_de_jure_liege_title = {
+					tier = KING
+					OR = {
+						holder_scope = { character = ROOT }
+						holder_scope = { is_vassal_or_below_of = ROOT }
+						has_holder = no
+					}
 				}
+				NOT = { any_de_jure_liege_title = { tier = KING } } # The duchy has no de jure kingdom, eg. Amalfi
 			}
 		}
 		custom_tooltip = {

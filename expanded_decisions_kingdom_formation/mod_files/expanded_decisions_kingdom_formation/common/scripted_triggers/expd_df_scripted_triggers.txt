@@ -144,3 +144,53 @@ expd_df_root_can_take_decision_to_create_this_duchy_from_prev_single_county = {
 	}
 	
 }
+
+
+
+
+expd_df_root_can_see_decision_to_create_amalfi_from_prev_single_county = {
+	# Same as above, except there's no requirement for Amalfi to be titular, and ROOT must NOT be a republic
+	
+	# ROOT must own or control the county
+	PREV = { # The source county
+		tier = COUNT # Just to make it VERY clear that this is referring to a county
+		holder_scope = {
+			OR = {
+				character = ROOT
+				is_vassal_or_below_of = ROOT
+			}
+		}
+	}
+	
+	# ROOT must not be de jure liege of the source county
+	# ROOT must not own or control any other counties in the same de jure duchy
+	PREV = { # The source county
+		tier = COUNT # Just to make it VERY clear that this is referring to a county
+		expd_df_root_is_not_dejure_liege_or_above_of_this_title = yes
+		expd_df_root_does_not_own_other_counties_in_the_same_de_jure_duchy_as_this_county = yes
+	}
+	
+	# The new duchy must be titular and have no holder
+	has_holder = no
+	#is_titular = yes
+	
+	# ROOT must NOT be a republic (otherwise they can create it normally)
+	ROOT = { is_republic = no }
+	
+	# Copy various alternate start settings which are included in similar vanilla decisions
+	NOR = {
+		has_alternate_start_setting = {
+			setting = dejure
+			option = random
+		}
+		has_alternate_start_setting = {
+			setting = title_names
+			option = random
+		}
+		has_alternate_start_setting = {
+			setting = title_names
+			option = random_including_duchies
+		}
+	}
+	
+}
