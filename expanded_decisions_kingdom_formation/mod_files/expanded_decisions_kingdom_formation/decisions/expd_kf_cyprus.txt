@@ -3,7 +3,7 @@ decisions = {
 		only_playable = yes
 		is_high_prio = yes
 		ai_check_interval = 60
-
+		
 		potential = {
 			d_cyprus = {
 				k_cyprus = {
@@ -17,7 +17,7 @@ decisions = {
 				NOT = { higher_tier_than = DUKE }
 			}
 		}
-
+		
 		allow = {
 			d_cyprus = {
 				show_scope_change = no
@@ -27,7 +27,7 @@ decisions = {
 				}
 			}
 		}
-
+		
 		effect = {
 			d_cyprus = {
 				show_scope_change = no
@@ -40,5 +40,10 @@ decisions = {
 			# Show the vanilla narrative event for forming the kingdom of Cyprus
 			narrative_event = { id = HFP.40014 }
 		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
 	}
 }

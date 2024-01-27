@@ -3,15 +3,15 @@ decisions = {
 		only_playable = yes
 		is_high_prio = yes
 		ai_check_interval = 60
-
+		
 		potential = {
 			expd_kf_root_can_see_decision_to_create_trinacria = yes
 		}
-
+		
 		allow = {
 			expd_kf_root_can_take_decision_to_create_trinacria = yes
 		}
-
+		
 		effect = {
 			d_sicily = {
 				show_scope_change = no
@@ -28,5 +28,10 @@ decisions = {
 				}
 			}
 		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
 	}
 }

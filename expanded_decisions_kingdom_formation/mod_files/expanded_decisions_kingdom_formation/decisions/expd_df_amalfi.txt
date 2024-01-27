@@ -3,7 +3,7 @@ decisions = {
 		only_playable = yes
 		is_high_prio = yes
 		ai_check_interval = 60
-
+		
 		potential = {
 			c_amalfi = {
 				d_amalfi = {
@@ -12,7 +12,7 @@ decisions = {
 				}
 			}
 		}
-
+		
 		allow = {
 			c_amalfi = {
 				show_scope_change = no
@@ -22,7 +22,7 @@ decisions = {
 				}
 			}
 		}
-
+		
 		effect = {
 			c_amalfi = {
 				show_scope_change = no
@@ -32,5 +32,10 @@ decisions = {
 				}
 			}
 		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
 	}
 }

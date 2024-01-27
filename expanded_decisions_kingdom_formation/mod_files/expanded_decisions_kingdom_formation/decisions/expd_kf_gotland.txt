@@ -3,7 +3,7 @@ decisions = {
 		only_playable = yes
 		is_high_prio = yes
 		ai_check_interval = 60
-
+		
 		potential = {
 			d_gotland = {
 				k_gotland_expd_kf = {
@@ -11,7 +11,7 @@ decisions = {
 				}
 			}
 		}
-
+		
 		allow = {
 			d_gotland = {
 				show_scope_change = no
@@ -21,7 +21,7 @@ decisions = {
 				}
 			}
 		}
-
+		
 		effect = {
 			d_gotland = {
 				show_scope_change = no
@@ -30,6 +30,10 @@ decisions = {
 					expd_kf_create_this_kingdom_from_prev_single_duchy_and_grant_to_root = yes
 				}
 			}
+		}
+		
+		ai_will_do = {
+			factor = 1
 		}
 		
 	}
