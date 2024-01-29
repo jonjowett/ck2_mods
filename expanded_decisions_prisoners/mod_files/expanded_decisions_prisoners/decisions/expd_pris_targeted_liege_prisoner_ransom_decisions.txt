@@ -59,6 +59,10 @@ targeted_decisions = {
 					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
 					has_character_modifier = house_arrest
 				}
+				any_courtier = {
+					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+					NOT = { has_character_modifier = house_arrest }
+				}
 			}
 		}
 		
@@ -98,6 +102,10 @@ targeted_decisions = {
 					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
 					has_character_modifier = the_dungeon
 				}
+				any_courtier = {
+					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+					NOT = { has_character_modifier = the_dungeon }
+				}
 			}
 		}
 		
@@ -136,6 +144,10 @@ targeted_decisions = {
 				any_courtier = {
 					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
 					has_character_modifier = the_oubliette
+				}
+				any_courtier = {
+					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+					NOT = { has_character_modifier = the_oubliette }
 				}
 			}
 		}

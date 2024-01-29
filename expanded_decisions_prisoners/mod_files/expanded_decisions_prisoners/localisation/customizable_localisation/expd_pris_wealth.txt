@@ -1,0 +1,73 @@
+defined_text = {
+	name = expd_pris_wealth
+	use_first_valid = yes
+	text = {
+		trigger = { wealth > 1000 }
+		localisation_key = expd_pris_wealth_gt_1000
+	}
+	text = {
+		trigger = { wealth > 900 }
+		localisation_key = expd_pris_wealth_gt_900
+	}
+	text = {
+		trigger = { wealth > 800 }
+		localisation_key = expd_pris_wealth_gt_800
+	}
+	text = {
+		trigger = { wealth > 700 }
+		localisation_key = expd_pris_wealth_gt_700
+	}
+	text = {
+		trigger = { wealth > 600 }
+		localisation_key = expd_pris_wealth_gt_600
+	}
+	text = {
+		trigger = { wealth > 500 }
+		localisation_key = expd_pris_wealth_gt_500
+	}
+	text = {
+		trigger = { wealth > 400 }
+		localisation_key = expd_pris_wealth_gt_400
+	}
+	text = {
+		trigger = { wealth > 300 }
+		localisation_key = expd_pris_wealth_gt_300
+	}
+	text = {
+		trigger = { wealth > 200 }
+		localisation_key = expd_pris_wealth_gt_200
+	}
+	text = {
+		trigger = { wealth > 100 }
+		localisation_key = expd_pris_wealth_gt_100
+	}
+	text = {
+		trigger = { wealth > 50 }
+		localisation_key = expd_pris_wealth_gt_50
+	}
+}
+
+defined_text = {
+	name = expd_pris_artifact
+	use_first_valid = yes
+	text = {
+		trigger = { any_artifact = { quality == 5 } }
+		localisation_key = expd_pris_artifact_quality_5
+	}
+	text = {
+		trigger = { any_artifact = { quality == 4 } }
+		localisation_key = expd_pris_artifact_quality_4
+	}
+	text = {
+		trigger = { any_artifact = { quality == 3 } }
+		localisation_key = expd_pris_artifact_quality_3
+	}
+	text = {
+		trigger = { any_artifact = { quality == 2 } }
+		localisation_key = expd_pris_artifact_quality_2
+	}
+	text = {
+		trigger = { any_artifact = { quality == 1 } }
+		localisation_key = expd_pris_artifact_quality_1
+	}
+}
