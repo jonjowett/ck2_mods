@@ -12,10 +12,16 @@ decisions = {
 			has_global_flag = emb_reconquista_mainland_iberia_has_been_conquered_by_non_christians
 			religion_group = christian
 			
-			# Hide the decision from non-independent AI, because the any_province scope is expensive and is used in the allow block
+			# Only show the decision to players and large independent AI in Iberia, because the any_province scope is expensive and is used in the allow block
 			OR = {
-				independent = yes
 				ai = no
+				AND = {
+					independent = yes
+					any_realm_province = {
+						emb_reconquista_this_province_is_in_mainland_iberia = yes
+						count = 20
+					}
+				}
 			}
 			
 			# This decision can only be taken once per game
@@ -55,6 +61,13 @@ decisions = {
 			else = {
 				create_bloodline = { type = emb_reconquista_bloodline_f }
 			}
+			hidden_tooltip = {
+				any_owned_bloodline = {
+					limit = { has_bloodline_flag = emb_reconquista_bloodline }
+					set_name        = emb_reconquista_bloodline_name_universal
+					set_description = emb_reconquista_bloodline_desc_universal
+				}
+			}
 			
 			if = {
 				limit = { can_apply_super_cool_nickname_trigger = yes }
@@ -62,6 +75,32 @@ decisions = {
 			}
 			
 			hidden_tooltip = { set_global_flag = emb_reconquista_bloodline_has_been_forged }
+			
+			# Every kingdom in mainland Iberia (which isn't already part of an empire you hold) is added to your de jure empire
+			if = {
+				limit = { tier = EMPEROR }
+				custom_tooltip = { text = emb_reconquista_every_kingdom_in_mainland_iberia_is_added_to_roots_de_jure_empire_tt }
+				hidden_tooltip = {
+					primary_title = {
+						save_event_target_as = emb_reconquista_roots_primary_title_for_migration
+					}
+				}
+				any_landed_title = {
+					limit = {
+						tier = KING
+						is_titular = no
+						any_de_jure_vassal_title = {
+							tier = COUNT
+							location = { emb_reconquista_this_province_is_in_mainland_iberia = yes }
+						}
+						NOT = { any_de_jure_liege_title = { holder_scope = { character = ROOT } } }
+					}
+					custom_tooltip = {
+						text = emb_reconquista_this_kingdom_becomes_part_of_roots_primary_title_tt
+						de_jure_liege = event_target:emb_reconquista_roots_primary_title_for_migration
+					}
+				}
+			}
 			
 		}
 		
