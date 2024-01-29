@@ -1,0 +1,42 @@
+namespace = EMBReconquista
+
+# on_yearly_pulse: The Pope checks whether Iberia has been conquered by non-Christians
+character_event = {
+	
+	id = EMBReconquista.1000
+	
+	hide_window = yes
+	is_triggered_only = yes
+	
+	# Pope is always a male AI ruler, so we can prefilter here to improve performance
+	only_rulers = yes
+	ai = yes
+	only_men = yes
+	
+	trigger = {
+		
+		# Only fire for the Pope
+		k_papal_state = { holder_scope = { character = ROOT } }
+		
+		# Once Iberia has been conquered, this event never needs to fire again
+		NOT = { has_global_flag = emb_reconquista_mainland_iberia_has_been_conquered_by_non_christians }
+		
+	}
+	
+	immediate = {
+		if = {
+			limit = {
+				# There are at most 3 provinces owned by Christians in mainland Iberia
+				NOT = {
+					any_province = {
+						emb_reconquista_this_province_is_in_mainland_iberia = yes
+						owner = { top_liege = { religion_group = christian } }
+						count = 4
+					}
+				}
+			}
+			set_global_flag = emb_reconquista_mainland_iberia_has_been_conquered_by_non_christians
+		}
+	}
+	
+}
