@@ -387,6 +387,14 @@ found_a_legendary_bloodline_effect = { #For any hero
 					has_character_modifier = friend_of_eagles
 					trait = falconer
 				}
+				mult_modifier = {
+					factor = 0.01
+					expd_sj_this_character_already_has_eagle_hunter_bloodline = yes
+				}
+				mult_modifier = {
+					factor = 10
+					expd_sj_this_character_is_predisposed_to_eagle_hunter_bloodline = yes
+				}
 				if = {
 					limit = { is_female = yes }
 					create_bloodline = { type = legendary_eagle_hunter_female society = event_target:society_affiliation }
@@ -404,9 +412,18 @@ found_a_legendary_bloodline_effect = { #For any hero
 						20 = { set_name = bloodline_legendary_eagle_hunter_D }
 					}
 				}
+				expd_sj_add_legendary_bloodline_type_flag_eagle_hunter = yes
 			}
 			10 = { # (Way of Life exclusive)
 				trigger = { has_dlc = "Way of Life" }
+				mult_modifier = {
+					factor = 0.01
+					expd_sj_this_character_already_has_dog_hunter_bloodline = yes
+				}
+				mult_modifier = {
+					factor = 10
+					expd_sj_this_character_is_predisposed_to_dog_hunter_bloodline = yes
+				}
 				if = {
 					limit = { is_female = yes }
 					create_bloodline = { type = legendary_dog_hunter_female society = event_target:society_affiliation }
@@ -414,7 +431,6 @@ found_a_legendary_bloodline_effect = { #For any hero
 				else = {
 					create_bloodline = { type = legendary_dog_hunter_male society = event_target:society_affiliation }	
 				}
-
 				new_bloodline = {
 					set_description = bloodline_desc_legendary_dog_hunter
 					random_list = { 
@@ -425,8 +441,17 @@ found_a_legendary_bloodline_effect = { #For any hero
 						20 = { set_name = bloodline_legendary_dog_hunter_D }
 					}
 				}
+				expd_sj_add_legendary_bloodline_type_flag_dog_hunter = yes
 			}
 			5 = { #Available to all
+				mult_modifier = {
+					factor = 0.02
+					expd_sj_this_character_already_has_survivor_bloodline = yes
+				}
+				mult_modifier = {
+					factor = 10
+					expd_sj_this_character_is_predisposed_to_survivor_bloodline = yes
+				}
 				if = {
 					limit = { is_female = yes }
 					create_bloodline = { type = legendary_battle_survivor_female society = event_target:society_affiliation }
@@ -444,9 +469,18 @@ found_a_legendary_bloodline_effect = { #For any hero
 						20 = { set_name = bloodline_legendary_battle_survivor_D }
 					}
 				}
+				expd_sj_add_legendary_bloodline_type_flag_survivor = yes
 			}
 			5 = { #(Conclave exclusive)
 				trigger = { has_dlc = "Conclave" }
+				mult_modifier = {
+					factor = 0.02
+					expd_sj_this_character_already_has_leader_bloodline = yes
+				}
+				mult_modifier = {
+					factor = 10
+					expd_sj_this_character_is_predisposed_to_leader_bloodline = yes
+				}
 				if = {
 					limit = { is_female = yes }
 					create_bloodline = { type = legendary_leader_female society = event_target:society_affiliation }
@@ -464,8 +498,17 @@ found_a_legendary_bloodline_effect = { #For any hero
 						20 = { set_name = bloodline_legendary_leader_D }
 					}
 				}
+				expd_sj_add_legendary_bloodline_type_flag_leader = yes
 			}
 			5 = { #Available to all
+				mult_modifier = {
+					factor = 0.02
+					expd_sj_this_character_already_has_warrior_bloodline = yes
+				}
+				mult_modifier = {
+					factor = 10
+					expd_sj_this_character_is_predisposed_to_warrior_bloodline = yes
+				}
 				if = {
 					limit = { is_female = yes }
 					create_bloodline = { type = legendary_warrior_female society = event_target:society_affiliation }
@@ -473,7 +516,6 @@ found_a_legendary_bloodline_effect = { #For any hero
 				else = {
 					create_bloodline = { type = legendary_warrior_male society = event_target:society_affiliation }	
 				}
-				
 				new_bloodline = {
 					set_description = bloodline_desc_legendary_warrior
 					random_list = { 
@@ -484,13 +526,22 @@ found_a_legendary_bloodline_effect = { #For any hero
 						20 = { set_name = bloodline_legendary_warrior_D }
 					}
 				}
+				expd_sj_add_legendary_bloodline_type_flag_warrior = yes
 			}
 			10 = { #(Monks & Mystics/Jade Dragon exclusive)
 				trigger = {
 					OR = {
-						has_dlc = "Monks and Mystics"
+						has_dlc = "Mystics" # Mod bugfix
 						has_dlc = "Jade Dragon"
 					}
+				}
+				mult_modifier = {
+					factor = 0.01
+					expd_sj_this_character_already_has_soldier_bloodline = yes
+				}
+				mult_modifier = {
+					factor = 10
+					expd_sj_this_character_is_predisposed_to_soldier_bloodline = yes
 				}
 				if = {
 					limit = { is_female = yes }
@@ -509,8 +560,17 @@ found_a_legendary_bloodline_effect = { #For any hero
 						20 = { set_name = bloodline_legendary_soldier_D }
 					}
 				}
+				expd_sj_add_legendary_bloodline_type_flag_soldier = yes
 			}
 			5 = { #Available to all
+				mult_modifier = {
+					factor = 0.02
+					expd_sj_this_character_already_has_bard_bloodline = yes
+				}
+				mult_modifier = {
+					factor = 10
+					expd_sj_this_character_is_predisposed_to_bard_bloodline = yes
+				}
 				if = {
 					limit = { is_female = yes }
 					create_bloodline = { type = legendary_battle_bard_female society = event_target:society_affiliation }
@@ -528,8 +588,17 @@ found_a_legendary_bloodline_effect = { #For any hero
 						20 = { set_name = bloodline_legendary_battle_bard_D }
 					}
 				}
+				expd_sj_add_legendary_bloodline_type_flag_bard = yes
 			}
 			5 = { #Available to all
+				mult_modifier = {
+					factor = 0.02
+					expd_sj_this_character_already_has_commander_bloodline = yes
+				}
+				mult_modifier = {
+					factor = 10
+					expd_sj_this_character_is_predisposed_to_commander_bloodline = yes
+				}
 				if = {
 					limit = { is_female = yes }
 					create_bloodline = { type = legendary_commander_female society = event_target:society_affiliation }
@@ -547,8 +616,17 @@ found_a_legendary_bloodline_effect = { #For any hero
 						20 = { set_name = bloodline_legendary_commander_D }
 					}
 				}
+				expd_sj_add_legendary_bloodline_type_flag_commander = yes
 			}
 			5 = { #Available to all
+				mult_modifier = {
+					factor = 0.02
+					expd_sj_this_character_already_has_captor_bloodline = yes
+				}
+				mult_modifier = {
+					factor = 10
+					expd_sj_this_character_is_predisposed_to_captor_bloodline = yes
+				}
 				if = {
 					limit = { is_female = yes }
 					create_bloodline = { type = legendary_captor_female society = event_target:society_affiliation }
@@ -566,8 +644,17 @@ found_a_legendary_bloodline_effect = { #For any hero
 						20 = { set_name = bloodline_legendary_captor_D }
 					}
 				}
+				expd_sj_add_legendary_bloodline_type_flag_captor = yes
 			}
 			5 = { #Available to all
+				mult_modifier = {
+					factor = 0.02
+					expd_sj_this_character_already_has_raider_bloodline = yes
+				}
+				mult_modifier = {
+					factor = 10
+					expd_sj_this_character_is_predisposed_to_raider_bloodline = yes
+				}
 				if = {
 					limit = { is_female = yes }
 					create_bloodline = { type = legendary_raider_female society = event_target:society_affiliation }
@@ -585,6 +672,7 @@ found_a_legendary_bloodline_effect = { #For any hero
 						20 = { set_name = bloodline_legendary_raider_D }
 					}
 				}
+				expd_sj_add_legendary_bloodline_type_flag_raider = yes
 			}
 		}
 	}
