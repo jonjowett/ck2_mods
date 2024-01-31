@@ -27,8 +27,10 @@ decisions = {
 			}
 			
 			# This decision can only be taken once per game
-			NOT = { has_global_flag = emb_reconquista_bloodline_has_been_forged }
-			NOT = { any_owned_bloodline = { has_bloodline_flag = emb_reconquista_bloodline } }
+			NOR = {
+				has_global_flag = emb_reconquista_bloodline_has_been_forged
+				any_owned_bloodline = { has_bloodline_flag = emb_reconquista_bloodline }
+			}
 			
 		}
 		
@@ -49,6 +51,13 @@ decisions = {
 						emb_reconquista_this_province_is_in_mainland_iberia = yes
 						owner = { top_liege = { NOT = { character = ROOT } } }
 					}
+				}
+			}
+			custom_tooltip = {
+				text = emb_reconquista_bloodline_has_not_been_forged_tt
+				NOR = {
+					has_global_flag = emb_reconquista_bloodline_has_been_forged
+					any_owned_bloodline = { has_bloodline_flag = emb_reconquista_bloodline }
 				}
 			}
 			
