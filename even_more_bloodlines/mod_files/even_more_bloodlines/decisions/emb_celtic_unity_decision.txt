@@ -1,0 +1,128 @@
+decisions = {
+	
+	emb_forge_celtic_unity_bloodline = {
+		
+		only_playable = yes
+		
+		is_high_prio = yes 
+		ai_check_interval = 12
+		
+		potential = {
+			
+			has_dlc = "Holy Fury"
+			
+			# Show the decision to Celtic characters, and to non-Celtic players who have their capital in a Celtic province (ie. can instantly culture convert)
+			OR = {
+				culture_group = celtic
+				AND = {
+					ai = no
+					capital_scope = { culture_group = celtic }
+				}
+			}
+			
+			# Only show the decision to players and large independent AI in Western Europe, because the any_province scope is expensive and is used in the allow block
+			OR = {
+				ai = no
+				AND = {
+					independent = yes
+					any_realm_province = {
+						region = world_europe_west
+						count >= 20
+					}
+				}
+			}
+			
+			OR = {
+				NOR = {
+					any_bloodline = { has_bloodline_flag = emb_celtic_unity }
+					has_global_flag = emb_celtic_unity_bloodline_has_been_forged
+				}
+				AND = {
+					ai = no
+					has_global_flag = emb_celtic_unity_debug_show_decision
+				}
+			}
+			
+		}
+		
+		allow = {
+			
+			independent = yes
+			culture_group = celtic
+			
+			custom_tooltip = {
+				text = emb_celtic_unity_this_character_owns_at_least_1_province_of_their_culture_tt
+				any_realm_province = {
+					culture = PREV
+				}
+			}
+			
+			custom_tooltip = {
+				text = emb_celtic_unity_this_character_owns_at_least_1_province_of_a_different_celtic_culture_tt
+				any_realm_province = {
+					culture_group = celtic
+					NOT = { culture = PREV }
+				}
+			}
+			
+			custom_tooltip = {
+				text = emb_celtic_unity_this_character_owns_at_least_20_provinces_of_any_celtic_culture_in_western_europe_region_tt
+				any_realm_province = {
+					region = world_europe_west
+					culture_group = celtic
+					count >= 20
+				}
+			}
+			
+			custom_tooltip = {
+				text = emb_celtic_unity_this_character_owns_every_celtic_culture_province_in_western_europe_region_tt
+				NOT = {
+					any_province = {
+						region = world_europe_west
+						owner = { top_liege = { NOT = { character = PREVPREVPREV } } }
+					}
+				}
+			}
+			
+			custom_tooltip = {
+				text = emb_celtic_unity_bloodline_has_not_been_forged_tt
+				NOR = {
+					any_bloodline = { has_bloodline_flag = emb_celtic_unity }
+					has_global_flag = emb_celtic_unity_bloodline_has_been_forged
+				}
+			}
+			
+		}
+		
+		effect = {
+			
+			emb_celtic_unity_grant_bloodline_to_this_character = yes
+			
+			if = {
+				limit = { can_apply_super_cool_nickname_trigger = yes }
+				custom_tooltip = {
+					text = emb_celtic_unity_this_character_is_given_black_boar_nickname_tt
+					if = {
+						limit = { any_owned_bloodline = { has_bloodline_flag = emb_celtic_unity } }
+						# Wrap the nickname in an additional check, in case a bug means that a character manages to take the decision without creating a bloodline
+						give_nickname = nick_the_black_boar
+					}
+				}
+			}
+			
+			hidden_tooltip = {
+				if = {
+					limit = { any_owned_bloodline = { has_bloodline_flag = emb_celtic_unity } }
+					# Wrap the blocking flag in an additional check, in case a bug means that a character manages to take the decision without creating a bloodline
+					set_global_flag = emb_celtic_unity_bloodline_has_been_forged
+				}
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+	}
+}

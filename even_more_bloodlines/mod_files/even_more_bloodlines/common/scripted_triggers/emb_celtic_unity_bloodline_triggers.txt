@@ -1,0 +1,523 @@
+
+#######################################
+# Ability to recruit special retinues #
+#######################################
+
+emb_celtic_unity_this_character_can_recruit_special_retinues_breton = {
+	is_nomadic = no
+	culture_group = celtic
+	OR = {
+		NOT = { culture = breton }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_breton = yes
+	}
+	OR = {
+		emb_celtic_union_has_an_active_bloodline_with_celtic_unity_breton = yes
+		emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_breton = yes
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_breton = yes
+	}
+}
+
+emb_celtic_unity_this_character_can_recruit_special_retinues_irish = {
+	is_nomadic = no
+	culture_group = celtic
+	OR = {
+		NOT = { culture = irish }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_irish = yes
+	}
+	OR = {
+		emb_celtic_union_has_an_active_bloodline_with_celtic_unity_irish = yes
+		emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_irish = yes
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_irish = yes
+	}
+}
+
+emb_celtic_unity_this_character_can_recruit_special_retinues_pictish = {
+	is_nomadic = no
+	culture_group = celtic
+	OR = {
+		NOT = { culture = pictish }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_pictish = yes
+	}
+	OR = {
+		emb_celtic_union_has_an_active_bloodline_with_celtic_unity_pictish = yes
+		emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_pictish = yes
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_pictish = yes
+	}
+}
+
+emb_celtic_unity_this_character_can_recruit_special_retinues_scottish = {
+	is_nomadic = no
+	culture_group = celtic
+	OR = {
+		NOT = { culture = scottish }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_scottish = yes
+	}
+	OR = {
+		emb_celtic_union_has_an_active_bloodline_with_celtic_unity_scottish = yes
+		emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_scottish = yes
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_scottish = yes
+	}
+}
+
+emb_celtic_unity_this_character_can_recruit_special_retinues_welsh = {
+	is_nomadic = no
+	culture_group = celtic
+	OR = {
+		NOT = { culture = welsh }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_welsh = yes
+	}
+	OR = {
+		emb_celtic_union_has_an_active_bloodline_with_celtic_unity_welsh = yes
+		emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_welsh = yes
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_welsh = yes
+	}
+}
+
+
+
+
+
+#################################################
+# Ability to build & activate special buildings #
+#################################################
+
+emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = {
+	ROOT = {
+		culture_group = celtic
+		NOT = { culture = breton }
+	}
+	FROM = {
+		culture_group = celtic
+		OR = {
+			emb_celtic_union_has_an_active_bloodline_with_celtic_unity_breton = yes
+			emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_breton = yes
+			emb_celtic_unity_is_human_with_debug_mode_turned_on_breton = yes
+		}
+	}
+}
+
+emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = {
+	ROOT = {
+		culture_group = celtic
+		NOT = { culture = irish }
+	}
+	FROM = {
+		culture_group = celtic
+		OR = {
+			emb_celtic_union_has_an_active_bloodline_with_celtic_unity_irish = yes
+			emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_irish = yes
+			emb_celtic_unity_is_human_with_debug_mode_turned_on_irish = yes
+		}
+	}
+}
+
+emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = {
+	ROOT = {
+		culture_group = celtic
+		NOT = { culture = pictish }
+	}
+	FROM = {
+		culture_group = celtic
+		OR = {
+			emb_celtic_union_has_an_active_bloodline_with_celtic_unity_pictish = yes
+			emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_pictish = yes
+			emb_celtic_unity_is_human_with_debug_mode_turned_on_pictish = yes
+		}
+	}
+}
+
+emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = {
+	ROOT = {
+		culture_group = celtic
+		NOT = { culture = scottish }
+	}
+	FROM = {
+		culture_group = celtic
+		OR = {
+			emb_celtic_union_has_an_active_bloodline_with_celtic_unity_scottish = yes
+			emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_scottish = yes
+			emb_celtic_unity_is_human_with_debug_mode_turned_on_scottish = yes
+		}
+	}
+}
+
+emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = {
+	ROOT = {
+		culture_group = celtic
+		NOT = { culture = welsh }
+	}
+	FROM = {
+		culture_group = celtic
+		OR = {
+			emb_celtic_union_has_an_active_bloodline_with_celtic_unity_welsh = yes
+			emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_welsh = yes
+			emb_celtic_unity_is_human_with_debug_mode_turned_on_welsh = yes
+		}
+	}
+}
+
+
+
+
+
+#############################
+# Bloodline detection - own #
+#############################
+
+emb_celtic_union_has_an_active_bloodline_with_celtic_unity = {
+	OR = {
+		emb_celtic_union_has_an_active_bloodline_with_celtic_unity_breton = yes
+		emb_celtic_union_has_an_active_bloodline_with_celtic_unity_irish = yes
+		emb_celtic_union_has_an_active_bloodline_with_celtic_unity_pictish = yes
+		emb_celtic_union_has_an_active_bloodline_with_celtic_unity_scottish = yes
+		emb_celtic_union_has_an_active_bloodline_with_celtic_unity_welsh = yes
+	}
+}
+
+emb_celtic_union_has_an_active_bloodline_with_celtic_unity_breton = {
+	custom_tooltip = {
+		text = emb_celtic_union_has_an_active_bloodline_with_celtic_unity_breton_tt
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = emb_bloodline_effect_flag_celtic_breton
+		}
+	}
+}
+
+emb_celtic_union_has_an_active_bloodline_with_celtic_unity_irish = {
+	custom_tooltip = {
+		text = emb_celtic_union_has_an_active_bloodline_with_celtic_unity_irish_tt
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = emb_bloodline_effect_flag_celtic_irish
+		}
+	}
+}
+
+emb_celtic_union_has_an_active_bloodline_with_celtic_unity_pictish = {
+	custom_tooltip = {
+		text = emb_celtic_union_has_an_active_bloodline_with_celtic_unity_pictish_tt
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = emb_bloodline_effect_flag_celtic_pictish
+		}
+	}
+}
+
+emb_celtic_union_has_an_active_bloodline_with_celtic_unity_scottish = {
+	custom_tooltip = {
+		text = emb_celtic_union_has_an_active_bloodline_with_celtic_unity_scottish_tt
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = emb_bloodline_effect_flag_celtic_scottish
+		}
+	}
+}
+
+emb_celtic_union_has_an_active_bloodline_with_celtic_unity_welsh = {
+	custom_tooltip = {
+		text = emb_celtic_union_has_an_active_bloodline_with_celtic_unity_welsh_tt
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = emb_bloodline_effect_flag_celtic_welsh
+		}
+	}
+}
+
+
+
+
+
+###############################
+# Bloodline detection - liege #
+###############################
+
+emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity = {
+	OR = {
+		emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_breton = yes
+		emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_irish = yes
+		emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_pictish = yes
+		emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_scottish = yes
+		emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_welsh = yes
+	}
+}
+
+emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_breton = {
+	custom_tooltip = {
+		text = emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_breton_tt
+		any_liege = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = emb_bloodline_effect_flag_celtic_breton
+			}
+			emb_celtic_union_this_character_has_same_or_more_advanced_government_than_prev = yes
+		}
+	}
+}
+
+emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_irish = {
+	custom_tooltip = {
+		text = emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_irish_tt
+		any_liege = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = emb_bloodline_effect_flag_celtic_irish
+			}
+			emb_celtic_union_this_character_has_same_or_more_advanced_government_than_prev = yes
+		}
+	}
+}
+
+emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_pictish = {
+	custom_tooltip = {
+		text = emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_pictish_tt
+		any_liege = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = emb_bloodline_effect_flag_celtic_pictish
+			}
+			emb_celtic_union_this_character_has_same_or_more_advanced_government_than_prev = yes
+		}
+	}
+}
+
+emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_scottish = {
+	custom_tooltip = {
+		text = emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_scottish_tt
+		any_liege = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = emb_bloodline_effect_flag_celtic_scottish
+			}
+			emb_celtic_union_this_character_has_same_or_more_advanced_government_than_prev = yes
+		}
+	}
+}
+
+emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_welsh = {
+	custom_tooltip = {
+		text = emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity_welsh_tt
+		any_liege = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = emb_bloodline_effect_flag_celtic_welsh
+			}
+			emb_celtic_union_this_character_has_same_or_more_advanced_government_than_prev = yes
+		}
+	}
+}
+
+emb_celtic_union_this_character_has_same_or_more_advanced_government_than_prev = {
+	
+	OR = {
+		
+		# Feudal, Theocracy & Republic are all "advanced", so if this character has one of those govs then the trigger is always true
+		is_feudal = yes
+		is_republic = yes
+		is_theocracy = yes
+		
+		# If this character is tribal then PREV must be nomadic or tribal
+		AND = {
+			is_tribal = yes
+			PREV = {
+				OR = {
+					is_nomadic = yes
+					is_tribal = yes
+				}
+			}
+		}
+		
+		# If this character is nomadic then PREV must also be nomadic
+		AND = {
+			is_nomadic = yes
+			PREV = { is_nomadic = yes }
+		}
+		
+	}
+	
+}
+
+
+
+
+
+########################
+# Debug mode detection #
+########################
+
+emb_celtic_unity_is_human_with_debug_mode_turned_on_breton = {
+	trigger_if = {
+		limit = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_breton
+		}
+		custom_tooltip = {
+			text = emb_celtic_unity_human_with_debug_mode_turned_on_tt
+			always = yes
+		}
+	}
+	trigger_else = { hidden_tooltip = { always = yes } }
+}
+
+emb_celtic_unity_is_human_with_debug_mode_turned_on_irish = {
+	trigger_if = {
+		limit = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_irish
+		}
+		custom_tooltip = {
+			text = emb_celtic_unity_human_with_debug_mode_turned_on_tt
+			always = yes
+		}
+	}
+	trigger_else = { hidden_tooltip = { always = yes } }
+}
+
+emb_celtic_unity_is_human_with_debug_mode_turned_on_pictish = {
+	trigger_if = {
+		limit = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_pictish
+		}
+		custom_tooltip = {
+			text = emb_celtic_unity_human_with_debug_mode_turned_on_tt
+			always = yes
+		}
+	}
+	trigger_else = { hidden_tooltip = { always = yes } }
+}
+
+emb_celtic_unity_is_human_with_debug_mode_turned_on_scottish = {
+	trigger_if = {
+		limit = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_scottish
+		}
+		custom_tooltip = {
+			text = emb_celtic_unity_human_with_debug_mode_turned_on_tt
+			always = yes
+		}
+	}
+	trigger_else = { hidden_tooltip = { always = yes } }
+}
+
+emb_celtic_unity_is_human_with_debug_mode_turned_on_welsh = {
+	trigger_if = {
+		limit = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_welsh
+		}
+		custom_tooltip = {
+			text = emb_celtic_unity_human_with_debug_mode_turned_on_tt
+			always = yes
+		}
+	}
+	trigger_else = { hidden_tooltip = { always = yes } }
+}
+
+
+
+
+
+#########################################
+# Ownership of Celtic-culture provinces #
+#########################################
+
+emb_celtic_unity_this_character_owns_at_least_one_breton_province = {
+	OR = {
+		any_realm_province = { culture = breton }
+		AND = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_breton
+		}
+	}
+}
+
+emb_celtic_unity_this_character_owns_at_least_one_irish_province = {
+	OR = {
+		any_realm_province = { culture = irish }
+		AND = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_irish
+		}
+	}
+}
+
+emb_celtic_unity_this_character_owns_at_least_one_pictish_province = {
+	OR = {
+		any_realm_province = { culture = pictish }
+		AND = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_pictish
+		}
+	}
+}
+
+emb_celtic_unity_this_character_owns_at_least_one_scottish_province = {
+	OR = {
+		any_realm_province = { culture = scottish }
+		AND = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_scottish
+		}
+	}
+}
+
+emb_celtic_unity_this_character_owns_at_least_one_welsh_province = {
+	OR = {
+		any_realm_province = { culture = welsh }
+		AND = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_welsh
+		}
+	}
+}
+
+
+
+
+
+######################
+# Culture conversion #
+######################
+
+emb_celtic_unity_this_character_can_do_culture_conversion = {
+	
+	# Is count or above
+	# NB: only_playable includes baron-tier patricians, and we don't want those
+	NOT = { real_tier = BARON }
+	
+	# Is Celtic culture
+	culture_group = celtic
+	
+	# Has a relevant bloodline
+	OR = {
+		emb_celtic_union_has_an_active_bloodline_with_celtic_unity = yes
+		emb_celtic_union_any_liege_has_an_active_bloodline_with_celtic_unity = yes
+	}
+	
+	# Is not primary defender in a war (ie. might lose provinces)
+	OR = {
+		war = no
+		AND = {
+			independent = yes
+			NOT = { any_war = { defender = { character = PREVPREV } } }
+		}
+		AND = {
+			independent = no
+			NOT = { any_liege = { any_war = { defender = { character = PREVPREV } } } }
+		}
+	}
+	
+}
+
+emb_celtic_unity_this_province_is_eligible_for_culture_conversion = {
+	NOT = { culture_group = celtic }
+	OR = {
+		# Port or single-landlocked, or has a Celtic-culture province nearby
+		port = yes
+		any_neighbor_province = { port = yes }
+		any_neighbor_province = { culture_group = celtic }
+		any_neighbor_province = { any_neighbor_province = { culture_group = celtic } }
+	}
+}

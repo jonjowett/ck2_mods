@@ -1,0 +1,828 @@
+namespace = EMBCelticUnity
+
+# Triggered by on_yearly_pulse
+character_event = {
+	id = EMBCelticUnity.1000
+	
+	only_playable = yes
+	culture_group = celtic
+	
+	is_triggered_only = yes
+	hide_window = yes
+	
+	trigger = {
+		# Only continue if the character can culture convert via this event chain
+		# Unless the player is a late-game Celt, this will be true of VERY FEW (probably zero) characters!
+		emb_celtic_unity_this_character_can_do_culture_conversion = yes
+	}
+	
+	immediate = {
+		
+		# Trigger the next event in the chain on every eligible province, in a random number of days.
+		# (If there are no eligible provinces, there will be no events.)
+		any_demesne_province = {
+			limit = { emb_celtic_unity_this_province_is_eligible_for_culture_conversion = yes }
+			set_variable = {
+				which = emb_celtic_culture_conversion_event_start_retries
+				value = 0
+			}
+			if = {
+				limit = {
+					ROOT = { ai = no }
+					has_global_flag = emb_celtic_unity_debug_culture_conversion
+				}
+				# For players in debug mode, the event chain proceeds immediately
+				province_event = { id = EMBCelticUnity.1100 }
+			}
+			else = {
+				province_event = {
+					id = EMBCelticUnity.1100
+					days = 45
+					random = 90
+				}
+			}
+		}
+		
+	}
+	
+}
+
+# Check that there's not another culture conversion event in progress for this character
+# If there is, wait a while and try again
+province_event = {
+	id = EMBCelticUnity.1100
+	
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		
+		# If the province owner doesn't already have a culture conversion event in progress: flag them, start the event, and unflag them tomorrow
+		if = {
+			limit = { NOT = { owner = { has_character_flag = emb_celtic_unity_culture_conversion_in_progress } } }
+			set_variable = {
+				which = emb_celtic_culture_conversion_event_start_retries
+				value = 0
+			}
+			owner = { set_character_flag = emb_celtic_unity_culture_conversion_in_progress }
+			province_event = { id = EMBCelticUnity.1200 }
+			owner = { character_event = { id = EMBCelticUnity.1101 days = 1 } }
+		}
+		
+		# If the province owner DOES have a culture conversion event in progress (due to a weird random coincidence), try again up to 5 times
+		else_if = {
+			limit = {
+				check_variable = {
+					which = emb_celtic_culture_conversion_event_start_retries
+					value <= 5
+				}
+			}
+			change_variable = {
+				which = emb_celtic_culture_conversion_event_start_retries
+				value = 1
+			}
+			province_event = { id = EMBCelticUnity.1100 days = 5 random = 10 }
+		}
+		
+		# If the province owner is still blocked after 6 attempts (ie. at most 210 days after the yearly pulse), give up (and try again next year)
+		else = {
+			set_variable = {
+				which = emb_celtic_culture_conversion_event_start_retries
+				value = 0
+			}
+		}
+		
+	}
+	
+}
+
+character_event = {
+	id = EMBCelticUnity.1101
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		clr_character_flag = emb_celtic_unity_culture_conversion_in_progress
+	}
+}
+
+# In this event, there is a random chance that this province will be eligible for conversion, ie. that the event chain will continue.
+# All subsequent events in the chain are immediate - the previous events ensure that there's only one at a time for each province owner.
+province_event = {
+	id = EMBCelticUnity.1200
+	
+	is_triggered_only = yes
+	hide_window = yes
+	
+	trigger = {
+		# Check that all conditions are still met for culture conversion of this province, and silently quit if something important changed
+		owner = { emb_celtic_unity_this_character_can_do_culture_conversion = yes }
+		emb_celtic_unity_this_province_is_eligible_for_culture_conversion = yes
+	}
+	
+	# The character has at least one province that is eligible for culture conversion.
+	# Decide whether they get to culture convert this time.
+	immediate = {
+		random_list = {
+			
+			4000 = {
+				# Nothing
+				
+				# In debug mode, culture conversion always happens for players
+				mult_modifier = {
+					factor = 0
+					owner = { ai = no }
+					has_global_flag = emb_celtic_unity_debug_culture_conversion
+				}
+			}
+			
+			100 = {
+				# Conversion happens!
+				# Base rate: 40 years (as per RIP.11706)
+				
+				# Boost for capital provinces of characters without any Celtic provinces
+				# Size of boost depends on character tier
+				mult_modifier = {
+					factor = 10
+					owner = {
+						tier = EMPEROR
+						any_demesne_province = { NOT = { culture_group = celtic } }
+						capital_scope = { province = PREVPREV }
+					}
+				}
+				mult_modifier = {
+					factor = 3
+					owner = {
+						tier = KING
+						any_demesne_province = { NOT = { culture_group = celtic } }
+						capital_scope = { province = PREVPREV }
+					}
+				}
+				mult_modifier = {
+					factor = 2
+					owner = {
+						tier = DUKE
+						any_demesne_province = { NOT = { culture_group = celtic } }
+						capital_scope = { province = PREVPREV }
+					}
+				}
+				mult_modifier = {
+					factor = 1.5
+					owner = {
+						tier = COUNT
+						any_demesne_province = { NOT = { culture_group = celtic } }
+						capital_scope = { province = PREVPREV }
+					}
+				}
+				
+				# Small boost from provincial prosperity 
+				mult_modifier = {
+					factor = 1.25
+					has_province_modifier = prosperity_modifier_1
+				}
+				mult_modifier = {
+					factor = 1.5
+					has_province_modifier = prosperity_modifier_2
+				}
+				mult_modifier = {
+					factor = 2
+					has_province_modifier = prosperity_modifier_3
+				}
+				
+				# Slowdown for non-independent characters (as per RIP.11706)
+				mult_modifier = {
+					factor = 0.5
+					owner = { independent = no }
+				}
+				
+				# 10% boost from stewardship & learning & traits (as per RIP.11706)
+				mult_modifier = {
+					factor = 1.1
+					owner = { stewardship = 12 }
+				}
+				mult_modifier = {
+					factor = 1.1
+					owner = { stewardship = 16 }
+				}
+				mult_modifier = {
+					factor = 1.1
+					owner = { stewardship = 18 }
+				}
+				mult_modifier = {
+					factor = 1.1
+					owner = { learning = 12 }
+				}
+				mult_modifier = {
+					factor = 1.1
+					owner = { learning = 16 }
+				}
+				mult_modifier = {
+					factor = 1.1
+					owner = { learning = 18 }
+				}
+				mult_modifier = {
+					factor = 1.1
+					owner = { is_smart_trigger = yes }
+				}
+				mult_modifier = {
+					factor = 1.1
+					owner = {
+						OR = {
+							trait = administrator
+							trait = architect
+							trait = scholar
+							trait = gardener
+						}
+					}
+				}
+				mult_modifier = {
+					factor = 1.1
+					owner = { trait = diligent }
+				}
+				mult_modifier = {
+					factor = 1.1
+					owner = {
+						OR = {
+							trait = scholarly_theologian
+							trait = mastermind_theologian
+							trait = charismatic_negotiator
+							trait = grey_eminence
+							trait = fortune_builder
+							trait = midas_touched
+						}
+					}
+				}
+				
+				province_event = { id = EMBCelticUnity.1300 }
+				
+			}
+		}
+	}
+	
+}
+
+# Conversion is going to be offered - calculate number of nearby same-culture and Celtic provinces
+province_event = {
+	id = EMBCelticUnity.1300
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		
+		
+		
+		# Initialise the tracking variables for this province
+		set_variable = {
+			which = emb_celtic_unity_total_nearby_any_culture_provinces
+			value = 0
+		}
+		set_variable = {
+			which = emb_celtic_unity_total_nearby_celtic_culture_provinces
+			value = 0
+		}
+		
+		
+		
+		# Store the owner of this province in an event target (so we don't run out of PREVs below)
+		owner = { save_event_target_as = owner_of_root_province }
+		
+		
+		
+		# Check immediate, distance-2 and distance-3 neighbours (worth 2 / 1.333333 / 1 respectively)
+		# Provinces with exact same culture as the owner are worth 50% more (ie. 3 / 2 / 1.5)
+		
+		# Immediate neighbours
+		any_neighbor_province = {
+			if = {
+				limit = { is_land = yes }
+				ROOT = {
+					change_variable = {
+						which = emb_celtic_unity_total_nearby_any_culture_provinces
+						value = 1
+					}
+				}
+				if = {
+					limit = { culture = event_target:owner_of_root_province }
+					ROOT = {
+						change_variable = {
+							which = emb_celtic_unity_total_nearby_celtic_culture_provinces
+							value = 3
+						}
+					}
+				}
+				else_if = {
+					limit = { culture_group = celtic }
+					ROOT = {
+						change_variable = {
+							which = emb_celtic_unity_total_nearby_celtic_culture_provinces
+							value = 2
+						}
+					}
+				}
+				else = {
+					# Not any kind of Celtic, do nothing
+				}
+			}
+			else = {
+				# Not land, do nothing
+			}
+			
+			# Distance-2 neighbours
+			any_neighbor_province = {
+				limit = { NOT = { any_neighbor_province = { province = ROOT } } }
+				if = {
+					limit = { is_land = yes }
+					ROOT = {
+						change_variable = {
+							which = emb_celtic_unity_total_nearby_any_culture_provinces
+							value = 1
+						}
+					}
+					if = {
+						limit = { culture = event_target:owner_of_root_province }
+						ROOT = {
+							change_variable = {
+								which = emb_celtic_unity_total_nearby_celtic_culture_provinces
+								value = 2
+							}
+						}
+					}
+					else_if = {
+						limit = { culture_group = celtic }
+						ROOT = {
+							change_variable = {
+								which = emb_celtic_unity_total_nearby_celtic_culture_provinces
+								value = 1.333333
+							}
+						}
+					}
+					else = {
+						# Not any kind of Celtic, do nothing
+					}
+				}
+				else = {
+					# Not land, do nothing
+				}
+				
+				# Distance-3 neighbours
+				any_neighbor_province = {
+					limit = {
+						NOT = { any_neighbor_province = { province = ROOT } }
+						NOT = { any_neighbor_province = { any_neighbor_province = { province = ROOT } } }
+					}
+					if = {
+						limit = { is_land = yes }
+						ROOT = {
+							change_variable = {
+								which = emb_celtic_unity_total_nearby_any_culture_provinces
+								value = 1
+							}
+						}
+						if = {
+							limit = { culture = event_target:owner_of_root_province }
+							ROOT = {
+								change_variable = {
+									which = emb_celtic_unity_total_nearby_celtic_culture_provinces
+									value = 1.5
+								}
+							}
+						}
+						else_if = {
+							limit = { culture_group = celtic }
+							ROOT = {
+								change_variable = {
+									which = emb_celtic_unity_total_nearby_celtic_culture_provinces
+									value = 1
+								}
+							}
+						}
+						else = {
+							# Not any kind of Celtic, do nothing
+						}
+					}
+					else = {
+						# Not land, do nothing
+					}
+				}
+				
+			}
+		}
+		
+		
+		
+		# Calculate fraction of nearby provinces that are Celtic culture
+		# NB#1: Due to the weighting above, this may be > 1
+		# NB#2: Need to protect against div-zero
+		set_variable = {
+			which = emb_celtic_unity_frac_of_nearby_provinces_that_are_celtic
+			value = 0
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = emb_celtic_unity_total_nearby_any_culture_provinces
+					value >= 0
+				}
+				check_variable = {
+					which = emb_celtic_unity_total_nearby_celtic_culture_provinces
+					value >= 0
+				}
+			}
+			set_variable = {
+				which = emb_celtic_unity_frac_of_nearby_provinces_that_are_celtic
+				which = emb_celtic_unity_total_nearby_celtic_culture_provinces
+			}
+			divide_variable = {
+				which = emb_celtic_unity_frac_of_nearby_provinces_that_are_celtic
+				which = emb_celtic_unity_total_nearby_any_culture_provinces
+			}
+		}
+		
+		
+		
+		# Calculate discount from nearby provinces ( = frac_of_nearby_provinces / 2 )
+		set_variable = {
+			which = emb_celtic_unity_culture_conversion_discount_from_nearby_provinces
+			value = 0
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = emb_celtic_unity_frac_of_nearby_provinces_that_are_celtic
+					value > 0
+				}
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_discount_from_nearby_provinces
+				which = emb_celtic_unity_frac_of_nearby_provinces_that_are_celtic
+			}
+			divide_variable = {
+				which = emb_celtic_unity_culture_conversion_discount_from_nearby_provinces
+				value = 2
+			}
+		}
+		
+		
+		
+		# Calculate discount from previous deferrals ( = no_of_deferrals / 20 )
+		if = {
+			limit = {
+				check_variable = {
+					which = emb_celtic_unity_culture_conversion_deferrals
+					value == 0
+				}
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_deferrals
+				value = 0
+			}
+		}
+		set_variable = {
+			which = emb_celtic_unity_culture_conversion_discount_from_recent_deferrals
+			value = 0
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = emb_celtic_unity_culture_conversion_deferrals
+					value > 0
+				}
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_discount_from_recent_deferrals
+				which = emb_celtic_unity_culture_conversion_deferrals
+			}
+			divide_variable = {
+				which = emb_celtic_unity_culture_conversion_discount_from_recent_deferrals
+				value = 20
+			}
+		}
+		
+		
+		
+		# Calculate overall discount (sum of discounts, capped at 50%)
+		set_variable = {
+			which = emb_celtic_unity_culture_conversion_discount
+			value = 0
+		}
+		change_variable = {
+			which = emb_celtic_unity_culture_conversion_discount
+			which = emb_celtic_unity_culture_conversion_discount_from_nearby_provinces
+		}
+		change_variable = {
+			which = emb_celtic_unity_culture_conversion_discount
+			which = emb_celtic_unity_culture_conversion_discount_from_recent_deferrals
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = emb_celtic_unity_culture_conversion_discount
+					value > 0.5
+				}
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_discount
+				value = 0.5
+			}
+			set_province_flag = emb_celtic_unity_culture_conversion_discount_is_maximised
+		}
+		
+		
+		
+		# Calculate base cost of conversion ( = -1 * owner's scaled_wealth, constrained to [-200,-1000] )
+		set_variable = {
+			which = emb_celtic_unity_culture_conversion_base_cost
+			value = 0
+		}
+		owner = {
+			# Export the owner's scaled_wealth as a temporary variable
+			export_to_variable = {
+				which = emb_celtic_unity_culture_conversion_base_cost
+				value = scaled_wealth
+			}
+			# Copy the variable value back to the province scope
+			ROOT = {
+				set_variable = {
+					which = emb_celtic_unity_culture_conversion_base_cost
+					which = PREV
+				}
+			}
+			# Clear the variable value on the owner
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_base_cost
+				value = 0
+			}
+		}
+		multiply_variable = {
+			which = emb_celtic_unity_culture_conversion_base_cost
+			value = -1
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = emb_celtic_unity_culture_conversion_base_cost
+					value >= -200
+				}
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_base_cost
+				value = -200
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = emb_celtic_unity_culture_conversion_base_cost
+					value <= -1000
+				}
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_base_cost
+				value = -1000
+			}
+		}
+		
+		
+		
+		# Calculate actual cost of conversion ( = base_cost * ( 1 - discount ) )
+		set_variable = {
+			which = emb_celtic_unity_culture_conversion_discount_factor
+			value = 1
+		}
+		subtract_variable = {
+			which = emb_celtic_unity_culture_conversion_discount_factor
+			which = emb_celtic_unity_culture_conversion_discount
+		}
+		set_variable = {
+			which = emb_celtic_unity_culture_conversion_cost
+			which = emb_celtic_unity_culture_conversion_base_cost
+		}
+		multiply_variable = {
+			which = emb_celtic_unity_culture_conversion_cost
+			which = emb_celtic_unity_culture_conversion_discount_factor
+		}
+		
+		
+		
+		# Copy the conversion cost variable to the province owner
+		owner = {
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_cost
+				value = 0
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_cost
+				which = PREV
+			}
+		}
+		
+		
+		
+		# Cleanup intermediate variables
+		clear_event_target = owner_of_root_province
+		if = {
+			limit = { NOT = { has_global_flag = emb_celtic_unity_debug_culture_conversion } }
+			set_variable = {
+				which = emb_celtic_unity_total_nearby_celtic_culture_provinces
+				value = 0
+			}
+			set_variable = {
+				which = emb_celtic_unity_total_nearby_any_culture_provinces
+				value = 0
+			}
+			set_variable = {
+				which = emb_celtic_unity_frac_of_nearby_provinces_that_are_celtic
+				value = 0
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_discount_from_nearby_provinces
+				value = 0
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_discount_from_recent_deferrals
+				value = 0
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_discount
+				value = 0
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_base_cost
+				value = 0
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_discount_factor
+				value = 0
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_cost
+				value = 0
+			}
+		}
+		
+		
+		
+		# Finally, trigger the visible culture-conversion event for the owner
+		province_event = { id = EMBCelticUnity.1400 }
+		
+		
+		
+	}
+}
+
+# Offer the province owner the opportunity to convert the province culture to their own - for a price...
+# Based on RIP.11706
+province_event = {
+	id = EMBCelticUnity.1400
+	title = PROSPERITY_TITLE
+	desc = RIP.11706.d
+	picture = "GFX_evt_culture_change"
+	border = GFX_event_normal_frame_economy
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		owner = {
+			export_to_variable = {
+				which = emb_celtic_unity_culture_conversion_remaining_wealth
+				value = wealth # Hopefully positive
+			}
+			change_variable = {
+				which = emb_celtic_unity_culture_conversion_remaining_wealth
+				which = emb_celtic_unity_culture_conversion_cost # Negative
+			}
+			export_to_variable = {
+				which = emb_celtic_unity_culture_conversion_scaled_wealth
+				value = scaled_wealth # Hopefully positive
+			}
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_remaining_wealth_as_frac_of_scaled_wealth
+				which = emb_celtic_unity_culture_conversion_remaining_wealth
+			}
+			divide_variable = {
+				which = emb_celtic_unity_culture_conversion_remaining_wealth_as_frac_of_scaled_wealth
+				which = emb_celtic_unity_culture_conversion_scaled_wealth
+			}
+		}
+	}
+	
+	option = {
+		name = RIP.11706.a
+		
+		owner = {
+			wealth = emb_celtic_unity_culture_conversion_cost
+			hidden_tooltip = {
+				if = {
+					limit = {
+						has_ambition = obj_strengthen_religion
+						NOT = { religion = ROOT }
+					}
+					change_variable = { which = strengthen_religion value = 1 }
+				}
+			}
+			ROOT = {
+				culture = PREV
+				if = {
+					limit = { NOT = { religion = PREV } }
+					religion = PREV
+				}
+				if = {
+					limit = { has_province_modifier = nomad_agitation }
+					remove_province_modifier = nomad_agitation
+				}
+			}
+		}
+		
+		hidden_tooltip = {
+			set_variable = {
+				which = emb_celtic_unity_culture_conversion_deferrals
+				value = 0
+			}
+		}
+		
+		ai_chance = { 
+			factor = 50
+			modifier = {
+				factor = 0
+				check_variable = {
+					which = emb_celtic_unity_culture_conversion_remaining_wealth
+					value <= 100
+				}
+			}
+			modifier = {
+				factor = 2
+				check_variable = {
+					which = emb_celtic_unity_culture_conversion_remaining_wealth_as_frac_of_scaled_wealth
+					value > 1
+				}
+			}
+			modifier = {
+				factor = 2
+				check_variable = {
+					which = emb_celtic_unity_culture_conversion_remaining_wealth_as_frac_of_scaled_wealth
+					value > 3
+				}
+			}
+		}
+		
+	}
+	option = {
+		name = RIP.11706.b
+		
+		hidden_tooltip = {
+			change_variable = {
+				which = emb_celtic_unity_culture_conversion_deferrals
+				value = 1
+			}
+		}
+		
+		if = {
+			limit = { has_province_flag = emb_celtic_unity_culture_conversion_discount_is_maximised }
+			custom_tooltip = { text = emb_celtic_unity_culture_conversion_discount_is_maximised_tt }
+		}
+		else = {
+			custom_tooltip = { text = emb_celtic_unity_culture_conversion_discount_will_be_increased_next_time_tt }
+		}
+		
+		ai_chance = { 
+			factor = 50
+			modifier = {
+				factor = 0
+				check_variable = {
+					which = emb_celtic_unity_culture_conversion_remaining_wealth
+					value > 100
+				}
+				check_variable = {
+					which = emb_celtic_unity_culture_conversion_remaining_wealth_as_frac_of_scaled_wealth
+					value > 5
+				}
+			}
+		}
+		
+	}
+	
+	after = {
+		hidden_tooltip = {
+			clr_province_flag = emb_celtic_unity_culture_conversion_discount_is_maximised
+			owner = {
+				clr_character_flag = emb_celtic_unity_culture_conversion_in_progress
+				set_variable = {
+					which = emb_celtic_unity_culture_conversion_cost
+					value = 0
+				}
+				set_variable = {
+					which = emb_celtic_unity_culture_conversion_remaining_wealth
+					value = 0
+				}
+				set_variable = {
+					which = emb_celtic_unity_culture_conversion_scaled_wealth
+					value = 0
+				}
+				set_variable = {
+					which = emb_celtic_unity_culture_conversion_remaining_wealth_as_frac_of_scaled_wealth
+					value = 0
+				}
+			}
+		}
+	}
+	
+}

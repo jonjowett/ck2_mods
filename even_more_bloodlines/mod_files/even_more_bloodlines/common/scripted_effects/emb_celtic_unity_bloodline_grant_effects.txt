@@ -1,0 +1,396 @@
+emb_celtic_unity_grant_bloodline_to_this_character = {
+	if = {
+		limit = { emb_celtic_unity_this_character_owns_at_least_one_breton_province = yes }
+		if = {
+			limit = { emb_celtic_unity_this_character_owns_at_least_one_irish_province = yes }
+			if = {
+				limit = { emb_celtic_unity_this_character_owns_at_least_one_pictish_province = yes }
+				if = {
+					limit = { emb_celtic_unity_this_character_owns_at_least_one_scottish_province = yes }
+					if = { # All 5
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_irish_pictish_scottish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_irish_pictish_scottish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Not Welsh
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_irish_pictish_scottish inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_irish_pictish_scottish inheritance = matrilineal }
+						}
+					}
+				}
+				else = { # Not Scottish
+					if = { # Not Scottish
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_irish_pictish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_irish_pictish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Not Scottish or Welsh
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_irish_pictish inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_irish_pictish inheritance = matrilineal }
+						}
+					}
+				}
+			}
+			else = { # Not Pictish
+				if = { # Not Pictish
+					limit = { emb_celtic_unity_this_character_owns_at_least_one_scottish_province = yes }
+					if = { # Not Pictish
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_irish_scottish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_irish_scottish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Not Pictish or Welsh
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_irish_scottish inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_irish_scottish inheritance = matrilineal }
+						}
+					}
+				}
+				else = { # Not Pictish or Scottish
+					if = { # Not Pictish or Scottish
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_irish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_irish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Not Pictish or Scottish or Welsh
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_irish inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_irish inheritance = matrilineal }
+						}
+					}
+				}
+			}
+		}
+		else = { # Not Irish
+			if = { # Not Irish
+				limit = { emb_celtic_unity_this_character_owns_at_least_one_pictish_province = yes }
+				if = { # Not Irish
+					limit = { emb_celtic_unity_this_character_owns_at_least_one_scottish_province = yes }
+					if = { # Not Irish
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_pictish_scottish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_pictish_scottish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Not Irish or Welsh
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_pictish_scottish inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_pictish_scottish inheritance = matrilineal }
+						}
+					}
+				}
+				else = { # Not Irish or Scottish
+					if = { # Not Irish or Scottish
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_pictish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_pictish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Not Irish or Scottish or Welsh
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_pictish inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_pictish inheritance = matrilineal }
+						}
+					}
+				}
+			}
+			else = { # Not Irish or Pictish
+				if = { # Not Irish or Pictish
+					limit = { emb_celtic_unity_this_character_owns_at_least_one_scottish_province = yes }
+					if = { # Not Irish or Pictish
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_scottish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_scottish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Not Irish or Pictish or Welsh
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_scottish inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_scottish inheritance = matrilineal }
+						}
+					}
+				}
+				else = { # Not Irish or Pictish or Scottish
+					if = {
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_breton_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_breton_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Only Breton: Invalid!
+						custom_tooltip = { text = emb_celtic_unity_no_valid_bloodline_tt }
+					}
+				}
+			}
+		}
+	}
+	else = { # Not Breton
+		if = { # Not Breton
+			limit = { emb_celtic_unity_this_character_owns_at_least_one_irish_province = yes }
+			if = { # Not Breton
+				limit = { emb_celtic_unity_this_character_owns_at_least_one_pictish_province = yes }
+				if = { # Not Breton
+					limit = { emb_celtic_unity_this_character_owns_at_least_one_scottish_province = yes }
+					if = { # Not Breton
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_irish_pictish_scottish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_irish_pictish_scottish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Not Breton or Welsh
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_irish_pictish_scottish inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_irish_pictish_scottish inheritance = matrilineal }
+						}
+					}
+				}
+				else = { # Not Breton or Scottish
+					if = { # Not Breton or Scottish
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_irish_pictish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_irish_pictish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Not Breton or Scottish or Welsh
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_irish_pictish inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_irish_pictish inheritance = matrilineal }
+						}
+					}
+				}
+			}
+			else = { # Not Breton or Pictish
+				if = { # Not Breton or Pictish
+					limit = { emb_celtic_unity_this_character_owns_at_least_one_scottish_province = yes }
+					if = { # Not Breton or Pictish
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_irish_scottish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_irish_scottish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Not Breton or Pictish or Welsh
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_irish_scottish inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_irish_scottish inheritance = matrilineal }
+						}
+					}
+				}
+				else = { # Not Breton or Pictish or Scottish
+					if = {
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_irish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_irish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Only Irish: Invalid!
+						custom_tooltip = { text = emb_celtic_unity_no_valid_bloodline_tt }
+					}
+				}
+			}
+		}
+		else = { # Not Breton or Irish
+			if = { # Not Breton or Irish
+				limit = { emb_celtic_unity_this_character_owns_at_least_one_pictish_province = yes }
+				if = { # Not Breton or Irish
+					limit = { emb_celtic_unity_this_character_owns_at_least_one_scottish_province = yes }
+					if = { # Not Breton or Irish
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_pictish_scottish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_pictish_scottish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Not Breton or Irish or Welsh
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_pictish_scottish inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_pictish_scottish inheritance = matrilineal }
+						}
+					}
+				}
+				else = { # Not Breton or Irish or Scottish
+					if = { # Not Breton or Irish or Scottish
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_pictish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_pictish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Only Pictish: Invalid!
+						custom_tooltip = { text = emb_celtic_unity_no_valid_bloodline_tt }
+					}
+				}
+			}
+			else = { # Not Breton or Irish or Pictish
+				if = { # Not Breton or Irish or Pictish
+					limit = { emb_celtic_unity_this_character_owns_at_least_one_scottish_province = yes }
+					if = { # Not Breton or Irish or Pictish
+						limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+						if = {
+							limit = { is_female = no }
+							create_bloodline = { type = emb_celtic_unity_scottish_welsh inheritance = patrilineal }
+						}
+						else = {
+							create_bloodline = { type = emb_celtic_unity_scottish_welsh inheritance = matrilineal }
+						}
+					}
+					else = { # Only Scottish: Invalid!
+						custom_tooltip = { text = emb_celtic_unity_no_valid_bloodline_tt }
+					}
+				}
+				else = { # Only Welsh (or nothing at all): Invalid!
+					custom_tooltip = { text = emb_celtic_unity_no_valid_bloodline_tt }
+				}
+			}
+		}
+	}
+	
+	hidden_tooltip = {
+		any_owned_bloodline = {
+			limit = {
+				founder = { character = PREVPREV }
+				has_bloodline_flag = emb_celtic_unity
+			}
+			if = {
+				limit = { PREV = { is_female = no } }
+				set_bloodline_flag = emb_m
+			}
+			else = {
+				set_bloodline_flag = emb_f
+			}
+			set_name        = emb_celtic_unity_bloodline_universal_name
+			set_description = emb_celtic_unity_bloodline_universal_desc
+		}
+	}
+	
+	custom_tooltip = { text = emb_celtic_unity_bloodline_info_first_line_tt }
+	if = {
+		limit = { emb_celtic_unity_this_character_owns_at_least_one_breton_province = yes }
+		custom_tooltip = { text = emb_celtic_unity_bloodline_info_owns_at_least_one_breton_province_y_tt }
+	}
+	else = {
+		custom_tooltip = { text = emb_celtic_unity_bloodline_info_owns_at_least_one_breton_province_n_tt }
+	}
+	if = {
+		limit = { emb_celtic_unity_this_character_owns_at_least_one_irish_province = yes }
+		custom_tooltip = { text = emb_celtic_unity_bloodline_info_owns_at_least_one_irish_province_y_tt }
+	}
+	else = {
+		custom_tooltip = { text = emb_celtic_unity_bloodline_info_owns_at_least_one_irish_province_n_tt }
+	}
+	if = {
+		limit = { emb_celtic_unity_this_character_owns_at_least_one_pictish_province = yes }
+		custom_tooltip = { text = emb_celtic_unity_bloodline_info_owns_at_least_one_pictish_province_y_tt }
+	}
+	else = {
+		custom_tooltip = { text = emb_celtic_unity_bloodline_info_owns_at_least_one_pictish_province_n_tt }
+	}
+	if = {
+		limit = { emb_celtic_unity_this_character_owns_at_least_one_scottish_province = yes }
+		custom_tooltip = { text = emb_celtic_unity_bloodline_info_owns_at_least_one_scottish_province_y_tt }
+	}
+	else = {
+		custom_tooltip = { text = emb_celtic_unity_bloodline_info_owns_at_least_one_scottish_province_n_tt }
+	}
+	if = {
+		limit = { emb_celtic_unity_this_character_owns_at_least_one_welsh_province = yes }
+		custom_tooltip = { text = emb_celtic_unity_bloodline_info_owns_at_least_one_welsh_province_y_tt }
+	}
+	else = {
+		custom_tooltip = { text = emb_celtic_unity_bloodline_info_owns_at_least_one_welsh_province_n_tt }
+	}
+	custom_tooltip = { text = emb_celtic_unity_bloodline_info_after_tt }
+	
+}
