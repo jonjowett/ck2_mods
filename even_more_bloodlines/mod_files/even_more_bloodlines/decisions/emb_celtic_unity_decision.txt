@@ -51,6 +51,14 @@ decisions = {
 			culture_group = celtic
 			
 			custom_tooltip = {
+				text = emb_celtic_unity_bloodline_has_not_been_forged_tt
+				NOR = {
+					any_bloodline = { has_bloodline_flag = emb_celtic_unity }
+					has_global_flag = emb_celtic_unity_bloodline_has_been_forged
+				}
+			}
+			
+			custom_tooltip = {
 				text = emb_celtic_unity_this_character_owns_at_least_1_province_of_their_culture_tt
 				any_realm_province = {
 					culture = PREV
@@ -74,21 +82,17 @@ decisions = {
 				}
 			}
 			
-			custom_tooltip = {
-				text = emb_celtic_unity_this_character_owns_every_celtic_culture_province_in_western_europe_region_tt
-				NOT = {
-					any_province = {
-						region = world_europe_west
-						owner = { top_liege = { NOT = { character = PREVPREVPREV } } }
-					}
+			trigger_if = {
+				limit = { NOT = { any_province = { emb_celtic_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned = yes } } }
+				custom_tooltip = {
+					text = emb_celtic_unity_this_character_owns_every_celtic_culture_province_in_western_europe_region_tt
+					always = yes
 				}
 			}
-			
-			custom_tooltip = {
-				text = emb_celtic_unity_bloodline_has_not_been_forged_tt
-				NOR = {
-					any_bloodline = { has_bloodline_flag = emb_celtic_unity }
-					has_global_flag = emb_celtic_unity_bloodline_has_been_forged
+			trigger_else = {
+				custom_tooltip = {
+					text = emb_celtic_unity_this_character_does_not_own_every_celtic_culture_province_in_western_europe_region_tt
+					always = no
 				}
 			}
 			
@@ -116,6 +120,22 @@ decisions = {
 					# Wrap the blocking flag in an additional check, in case a bug means that a character manages to take the decision without creating a bloodline
 					set_global_flag = emb_celtic_unity_bloodline_has_been_forged
 				}
+			}
+			
+			if = {
+				limit = { ai = no }
+				if = {
+					limit = { any_province = { emb_celtic_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned = yes } }
+					custom_tooltip = { text = emb_celtic_unity_info_list_of_missing_provinces_tt }
+					any_province = {
+						limit = { emb_celtic_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned = yes }
+						show_scope_change = no
+						custom_tooltip = { text = emb_celtic_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned_tt }
+					}
+				}
+			}
+			else = {
+				custom_tooltip = { text = emb_celtic_unity_info_list_of_missing_provinces_is_not_provided_for_ai_tt }
 			}
 			
 		}
