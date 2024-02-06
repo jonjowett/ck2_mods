@@ -1,0 +1,141 @@
+decisions = {
+	
+	emb_forge_hermetic_bloodline = {
+		
+		only_rulers = yes
+		is_in_society = yes
+		
+		is_high_prio = yes 
+		ai_check_interval = 12
+		
+		potential = {
+			
+			# Only Hermetics can see the decision
+			has_dlc = "Mystics"
+			society_member_of = hermetics
+			
+			# Hide the decision from AI who don't fulfil the basic requirements
+			OR = {
+				ai = no
+				AND = {
+					society_rank == 4
+					learning >= 30
+					society_currency >= 5000
+				}
+			}
+			
+			# Hide the decision from characters who already have a Hermetic bloodline
+			NOT = { any_owned_bloodline = { has_bloodline_flag = emb_hermetic_bloodline } }
+			
+		}
+		
+		allow = {
+			
+			custom_tooltip = {
+				text = emb_hermetic_is_rank_4_tt
+				society_rank == 4
+			}
+			
+			society_currency >= 5000
+			
+			
+			trigger_if = {
+				limit = { has_character_modifier = best_laboratory }
+				custom_tooltip = {
+					text = emb_hermetic_has_best_laboratory_and_learning_gte_30_tt
+					learning >= 30
+				}
+			}
+			trigger_else_if = {
+				limit = { has_character_modifier = great_laboratory }
+				custom_tooltip = {
+					text = emb_hermetic_has_great_laboratory_and_learning_gte_35_tt
+					learning >= 35
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = emb_hermetic_has_no_laboratory_and_learning_gte_40_tt
+					learning >= 40
+				}
+			}
+			
+			OR = {
+				trait = scholar
+				trait = mystic
+				trait = theologian
+				trait = mastermind_theologian
+				learning >= 40
+			}
+			
+			emb_hermetic_this_character_owns_and_has_activated_an_emerald_tablet = yes
+			
+			emb_hermetic_this_character_owns_a_lot_of_high_quality_magnum_opuses = yes
+			
+		}
+		
+		effect = {
+			
+			change_society_currency = -5000
+			
+			if = {
+				limit = { is_female = no }
+				create_bloodline = {
+					type = emb_hermetic_bloodline
+					inheritance = patrilineal
+				}
+			}
+			else = {
+				create_bloodline = {
+					type = emb_hermetic_bloodline
+					inheritance = matrilineal
+				}
+			}
+			
+			hidden_tooltip = {
+				any_owned_bloodline = {
+					limit = {
+						has_bloodline_flag = emb_hermetic_bloodline
+						founder = { character = PREVPREV }
+					}
+					
+					# Set a fixed name & description
+					set_name        = emb_hermetic_bloodline_universal_name
+					set_description = emb_hermetic_bloodline_universal_desc
+					
+					# Set up the inheritance tracking flags
+					if = {
+						limit = { PREV = { is_female = no } }
+						set_bloodline_flag = emb_m
+					}
+					else = {
+						set_bloodline_flag = emb_f
+					}
+					
+				}
+			}
+			
+			hidden_tooltip = { sound_effect = bloodline_added }
+			
+			if = {
+				limit = { emb_hermetic_this_character_owns_and_has_activated_a_necronomicon = yes }
+				custom_tooltip = {
+					text = emb_hermetic_using_the_necronomicon_alters_the_bloodline_tt 
+					any_owned_bloodline = {
+						limit = {
+							has_bloodline_flag = emb_hermetic_bloodline
+							founder = { character = PREVPREV }
+						}
+						set_bloodline_flag = emb_bloodline_effect_hereditary_necronomicon_madness
+					}
+				}
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+	}
+}

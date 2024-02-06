@@ -1,0 +1,20 @@
+# NB: You MUST assign inheritance rules and emb_m/emb_f/emb_ad flags when the bloodline is awarded
+
+emb_hermetic_bloodline = {
+	learning = 2
+	emb_bloodline_effect_education_upgrade_learning = 1
+	emb_hermetic_bloodline_effect_respected = 1
+	allow_bastards = yes
+	flags = {
+		# Tracking
+		emb
+		emb_hermetic_bloodline
+		created_bloodline
+		# Features implemented by ED: Society joining
+		expd_sj_hermetics_easier_to_join
+		expd_sj_hermetics_more_currency
+		# Features implemented by this mod
+		emb_bloodline_effect_ai_auto_join_hermetics
+		emb_bloodline_effect_education_upgrade_learning
+	}
+}
