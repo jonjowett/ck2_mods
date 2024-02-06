@@ -1,12 +1,13 @@
 targeted_decisions = {
 	expd_herm_write_another_magnum_opus = {
 		is_in_society = yes
+		is_high_prio = yes
 		
 		filter = self
 		ai_target_filter = self
-
+		
 		ai_check_interval = 12
-
+		
 		potential = {
 			society_member_of = hermetics
 			society_rank = 4
@@ -14,12 +15,55 @@ targeted_decisions = {
 			NOT = { trait = incapable }
 			has_character_flag = wrote_magnum_opus
 		}
-
+		
 		allow = {
 			FROM = {
 				
 				# Decision can be visible while you're writing another magnum opus, but definitely can't be taken!
 				expd_herm_is_not_currently_writing_a_magnum_opus = yes
+				
+				# You must not own every possible book (or the vanilla event chain will break)
+				custom_tooltip = {
+					text = hermetics_wrote_magnum_opus_duplicate
+					OR = {
+    					NOR = {
+    						has_artifact = magnum_opus_theurgy_ritual_1
+							has_artifact = magnum_opus_theurgy_ritual_2
+							has_artifact = magnum_opus_theurgy_ritual_3
+							has_artifact = magnum_opus_theurgy_ritual_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_theurgy_contemplation_1
+							has_artifact = magnum_opus_theurgy_contemplation_2
+							has_artifact = magnum_opus_theurgy_contemplation_3
+							has_artifact = magnum_opus_theurgy_contemplation_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_astrology_stars_1
+							has_artifact = magnum_opus_astrology_stars_2
+							has_artifact = magnum_opus_astrology_stars_3
+							has_artifact = magnum_opus_astrology_stars_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_astrology_planets_1
+							has_artifact = magnum_opus_astrology_planets_2
+							has_artifact = magnum_opus_astrology_planets_3
+							has_artifact = magnum_opus_astrology_planets_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_alchemy_panacea_1
+							has_artifact = magnum_opus_alchemy_panacea_2
+							has_artifact = magnum_opus_alchemy_panacea_3
+							has_artifact = magnum_opus_alchemy_panacea_4
+    					}
+    					NOR = {
+    						has_artifact = magnum_opus_alchemy_transmutation_1
+							has_artifact = magnum_opus_alchemy_transmutation_2
+							has_artifact = magnum_opus_alchemy_transmutation_3
+							has_artifact = magnum_opus_alchemy_transmutation_4
+    					}
+    				}
+    			}
 				
 				# Show different costs depending on number of previous manum opuses written.
 				# Make sure to keep these conditions in line with the deductions in the effect block!
@@ -126,48 +170,6 @@ targeted_decisions = {
 					always = no
 				}
 				
-				# You must not own every possible book (or the vanilla event chain will break)
-				custom_tooltip = {
-					text = hermetics_wrote_magnum_opus_duplicate
-					OR = {
-    					NOR = {
-    						has_artifact = magnum_opus_theurgy_ritual_1
-							has_artifact = magnum_opus_theurgy_ritual_2
-							has_artifact = magnum_opus_theurgy_ritual_3
-							has_artifact = magnum_opus_theurgy_ritual_4
-    					}
-    					NOR = {
-    						has_artifact = magnum_opus_theurgy_contemplation_1
-							has_artifact = magnum_opus_theurgy_contemplation_2
-							has_artifact = magnum_opus_theurgy_contemplation_3
-							has_artifact = magnum_opus_theurgy_contemplation_4
-    					}
-    					NOR = {
-    						has_artifact = magnum_opus_astrology_stars_1
-							has_artifact = magnum_opus_astrology_stars_2
-							has_artifact = magnum_opus_astrology_stars_3
-							has_artifact = magnum_opus_astrology_stars_4
-    					}
-    					NOR = {
-    						has_artifact = magnum_opus_astrology_planets_1
-							has_artifact = magnum_opus_astrology_planets_2
-							has_artifact = magnum_opus_astrology_planets_3
-							has_artifact = magnum_opus_astrology_planets_4
-    					}
-    					NOR = {
-    						has_artifact = magnum_opus_alchemy_panacea_1
-							has_artifact = magnum_opus_alchemy_panacea_2
-							has_artifact = magnum_opus_alchemy_panacea_3
-							has_artifact = magnum_opus_alchemy_panacea_4
-    					}
-    					NOR = {
-    						has_artifact = magnum_opus_alchemy_transmutation_1
-							has_artifact = magnum_opus_alchemy_transmutation_2
-							has_artifact = magnum_opus_alchemy_transmutation_3
-							has_artifact = magnum_opus_alchemy_transmutation_4
-    					}
-    				}
-    			}
 			}
 		}
 
