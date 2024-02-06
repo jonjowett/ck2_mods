@@ -434,12 +434,20 @@ expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = {
 			OR = {
 				secret_religion = norse_pagan
 				secret_religion = norse_pagan_reformed
-				any_friend = { religion_openly_norse_or_reformed_trigger = yes }
-				any_spouse = { religion_openly_norse_or_reformed_trigger = yes }
-				any_consort = { religion_openly_norse_or_reformed_trigger = yes }
-				any_lover = { religion_openly_norse_or_reformed_trigger = yes }
-				any_demesne_title = { is_holy_site = norse_pagan }
-				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = norse_pagan } }
+				any_friend             = { religion_openly_norse_or_reformed_trigger = yes }
+				any_spouse             = { religion_openly_norse_or_reformed_trigger = yes }
+				any_consort            = { religion_openly_norse_or_reformed_trigger = yes }
+				any_lover              = { religion_openly_norse_or_reformed_trigger = yes }
+				mother_even_if_dead    = { religion_openly_norse_or_reformed_trigger = yes }
+				father_even_if_dead    = { religion_openly_norse_or_reformed_trigger = yes }
+				any_child_even_if_dead = { religion_openly_norse_or_reformed_trigger = yes }
+				any_demesne_title = {
+					tier = COUNT
+					OR = {
+						is_holy_site = norse_pagan
+						any_de_jure_vassal_title  = { is_holy_site = norse_pagan }
+					}
+				}
 			}
 		}
 		trigger_else_if = {
@@ -447,12 +455,20 @@ expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = {
 			OR = {
 				secret_religion = tengri_pagan
 				secret_religion = tengri_pagan_reformed
-				any_friend = { religion_openly_tengri_or_reformed_trigger = yes }
-				any_spouse = { religion_openly_tengri_or_reformed_trigger = yes }
-				any_consort = { religion_openly_tengri_or_reformed_trigger = yes }
-				any_lover = { religion_openly_tengri_or_reformed_trigger = yes }
-				any_demesne_title = { is_holy_site = tengri_pagan }
-				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = tengri_pagan } }
+				any_friend             = { religion_openly_tengri_or_reformed_trigger = yes }
+				any_spouse             = { religion_openly_tengri_or_reformed_trigger = yes }
+				any_consort            = { religion_openly_tengri_or_reformed_trigger = yes }
+				any_lover              = { religion_openly_tengri_or_reformed_trigger = yes }
+				mother_even_if_dead    = { religion_openly_tengri_or_reformed_trigger = yes }
+				father_even_if_dead    = { religion_openly_tengri_or_reformed_trigger = yes }
+				any_child_even_if_dead = { religion_openly_tengri_or_reformed_trigger = yes }
+				any_demesne_title = {
+					tier = COUNT
+					OR = {
+						is_holy_site = tengri_pagan
+						any_de_jure_vassal_title  = { is_holy_site = tengri_pagan }
+					}
+				}
 			}
 		}
 		trigger_else_if = {
@@ -460,12 +476,20 @@ expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = {
 			OR = {
 				secret_religion = baltic_pagan
 				secret_religion = baltic_pagan_reformed
-				any_friend = { religion_openly_baltic_or_reformed_trigger = yes }
-				any_spouse = { religion_openly_baltic_or_reformed_trigger = yes }
-				any_consort = { religion_openly_baltic_or_reformed_trigger = yes }
-				any_lover = { religion_openly_baltic_or_reformed_trigger = yes }
-				any_demesne_title = { is_holy_site = baltic_pagan }
-				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = baltic_pagan } }
+				any_friend             = { religion_openly_baltic_or_reformed_trigger = yes }
+				any_spouse             = { religion_openly_baltic_or_reformed_trigger = yes }
+				any_consort            = { religion_openly_baltic_or_reformed_trigger = yes }
+				any_lover              = { religion_openly_baltic_or_reformed_trigger = yes }
+				mother_even_if_dead    = { religion_openly_baltic_or_reformed_trigger = yes }
+				father_even_if_dead    = { religion_openly_baltic_or_reformed_trigger = yes }
+				any_child_even_if_dead = { religion_openly_baltic_or_reformed_trigger = yes }
+				any_demesne_title = {
+					tier = COUNT
+					OR = {
+						is_holy_site = baltic_pagan
+						any_de_jure_vassal_title  = { is_holy_site = baltic_pagan }
+					}
+				}
 			}
 		}
 		trigger_else_if = {
@@ -473,12 +497,20 @@ expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = {
 			OR = {
 				secret_religion = finnish_pagan
 				secret_religion = finnish_pagan_reformed
-				any_friend = { religion_openly_finnish_or_reformed_trigger = yes }
-				any_spouse = { religion_openly_finnish_or_reformed_trigger = yes }
-				any_consort = { religion_openly_finnish_or_reformed_trigger = yes }
-				any_lover = { religion_openly_finnish_or_reformed_trigger = yes }
-				any_demesne_title = { is_holy_site = finnish_pagan }
-				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = finnish_pagan } }
+				any_friend             = { religion_openly_finnish_or_reformed_trigger = yes }
+				any_spouse             = { religion_openly_finnish_or_reformed_trigger = yes }
+				any_consort            = { religion_openly_finnish_or_reformed_trigger = yes }
+				any_lover              = { religion_openly_finnish_or_reformed_trigger = yes }
+				mother_even_if_dead    = { religion_openly_finnish_or_reformed_trigger = yes }
+				father_even_if_dead    = { religion_openly_finnish_or_reformed_trigger = yes }
+				any_child_even_if_dead = { religion_openly_finnish_or_reformed_trigger = yes }
+				any_demesne_title = {
+					tier = COUNT
+					OR = {
+						is_holy_site = finnish_pagan
+						any_de_jure_vassal_title  = { is_holy_site = finnish_pagan }
+					}
+				}
 			}
 		}
 		trigger_else_if = {
@@ -486,12 +518,20 @@ expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = {
 			OR = {
 				secret_religion = slavic_pagan
 				secret_religion = slavic_pagan_reformed
-				any_friend = { religion_openly_slavic_or_reformed_trigger = yes }
-				any_spouse = { religion_openly_slavic_or_reformed_trigger = yes }
-				any_consort = { religion_openly_slavic_or_reformed_trigger = yes }
-				any_lover = { religion_openly_slavic_or_reformed_trigger = yes }
-				any_demesne_title = { is_holy_site = slavic_pagan }
-				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = slavic_pagan } }
+				any_friend             = { religion_openly_slavic_or_reformed_trigger = yes }
+				any_spouse             = { religion_openly_slavic_or_reformed_trigger = yes }
+				any_consort            = { religion_openly_slavic_or_reformed_trigger = yes }
+				any_lover              = { religion_openly_slavic_or_reformed_trigger = yes }
+				mother_even_if_dead    = { religion_openly_slavic_or_reformed_trigger = yes }
+				father_even_if_dead    = { religion_openly_slavic_or_reformed_trigger = yes }
+				any_child_even_if_dead = { religion_openly_slavic_or_reformed_trigger = yes }
+				any_demesne_title = {
+					tier = COUNT
+						OR = {
+						is_holy_site = slavic_pagan
+						any_de_jure_vassal_title  = { is_holy_site = slavic_pagan }
+					}
+				}
 			}
 		}
 		trigger_else_if = {
@@ -499,12 +539,20 @@ expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = {
 			OR = {
 				secret_religion = west_african_pagan
 				secret_religion = west_african_pagan_reformed
-				any_friend = { religion_openly_west_african_or_reformed_trigger = yes }
-				any_spouse = { religion_openly_west_african_or_reformed_trigger = yes }
-				any_consort = { religion_openly_west_african_or_reformed_trigger = yes }
-				any_lover = { religion_openly_west_african_or_reformed_trigger = yes }
-				any_demesne_title = { is_holy_site = west_african_pagan }
-				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = west_african_pagan } }
+				any_friend             = { religion_openly_west_african_or_reformed_trigger = yes }
+				any_spouse             = { religion_openly_west_african_or_reformed_trigger = yes }
+				any_consort            = { religion_openly_west_african_or_reformed_trigger = yes }
+				any_lover              = { religion_openly_west_african_or_reformed_trigger = yes }
+				mother_even_if_dead    = { religion_openly_west_african_or_reformed_trigger = yes }
+				father_even_if_dead    = { religion_openly_west_african_or_reformed_trigger = yes }
+				any_child_even_if_dead = { religion_openly_west_african_or_reformed_trigger = yes }
+				any_demesne_title = {
+					tier = COUNT
+					OR = {
+						is_holy_site = west_african_pagan
+						any_de_jure_vassal_title  = { is_holy_site = west_african_pagan }
+					}
+				}
 			}
 		}
 		trigger_else_if = {
@@ -512,12 +560,20 @@ expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = {
 			OR = {
 				secret_religion = zun_pagan
 				secret_religion = zun_pagan_reformed
-				any_friend = { religion_openly_zun_or_reformed_trigger = yes }
-				any_spouse = { religion_openly_zun_or_reformed_trigger = yes }
-				any_consort = { religion_openly_zun_or_reformed_trigger = yes }
-				any_lover = { religion_openly_zun_or_reformed_trigger = yes }
-				any_demesne_title = { is_holy_site = zun_pagan }
-				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = zun_pagan } }
+				any_friend             = { religion_openly_zun_or_reformed_trigger = yes }
+				any_spouse             = { religion_openly_zun_or_reformed_trigger = yes }
+				any_consort            = { religion_openly_zun_or_reformed_trigger = yes }
+				any_lover              = { religion_openly_zun_or_reformed_trigger = yes }
+				mother_even_if_dead    = { religion_openly_zun_or_reformed_trigger = yes }
+				father_even_if_dead    = { religion_openly_zun_or_reformed_trigger = yes }
+				any_child_even_if_dead = { religion_openly_zun_or_reformed_trigger = yes }
+				any_demesne_title = {
+					tier = COUNT
+					OR = {
+						is_holy_site = zun_pagan
+						any_de_jure_vassal_title  = { is_holy_site = zun_pagan }
+					}
+				}
 			}
 		}
 		trigger_else_if = {
@@ -525,12 +581,20 @@ expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = {
 			OR = {
 				secret_religion = bon
 				secret_religion = bon_reformed
-				any_friend = { religion_openly_bon_or_reformed_trigger = yes }
-				any_spouse = { religion_openly_bon_or_reformed_trigger = yes }
-				any_consort = { religion_openly_bon_or_reformed_trigger = yes }
-				any_lover = { religion_openly_bon_or_reformed_trigger = yes }
-				any_demesne_title = { is_holy_site = bon }
-				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = bon } }
+				any_friend             = { religion_openly_bon_or_reformed_trigger = yes }
+				any_spouse             = { religion_openly_bon_or_reformed_trigger = yes }
+				any_consort            = { religion_openly_bon_or_reformed_trigger = yes }
+				any_lover              = { religion_openly_bon_or_reformed_trigger = yes }
+				mother_even_if_dead    = { religion_openly_bon_or_reformed_trigger = yes }
+				father_even_if_dead    = { religion_openly_bon_or_reformed_trigger = yes }
+				any_child_even_if_dead = { religion_openly_bon_or_reformed_trigger = yes }
+				any_demesne_title = {
+					tier = COUNT
+					OR = {
+						is_holy_site = bon
+						any_de_jure_vassal_title  = { is_holy_site = bon }
+					}
+				}
 			}
 		}
 		trigger_else_if = {
@@ -538,12 +602,20 @@ expd_sj_character_has_religious_ties_to_warrior_lodge_trigger = {
 			OR = {
 				secret_religion = hellenic_pagan
 				secret_religion = hellenic_pagan_reformed
-				any_friend = { religion_openly_hellenic_or_reformed_trigger = yes }
-				any_spouse = { religion_openly_hellenic_or_reformed_trigger = yes }
-				any_consort = { religion_openly_hellenic_or_reformed_trigger = yes }
-				any_lover = { religion_openly_hellenic_or_reformed_trigger = yes }
-				any_demesne_title = { is_holy_site = hellenic_pagan }
-				any_demesne_title = { any_de_jure_vassal_title  = { is_holy_site = hellenic_pagan } }
+				any_friend             = { religion_openly_hellenic_or_reformed_trigger = yes }
+				any_spouse             = { religion_openly_hellenic_or_reformed_trigger = yes }
+				any_consort            = { religion_openly_hellenic_or_reformed_trigger = yes }
+				any_lover              = { religion_openly_hellenic_or_reformed_trigger = yes }
+				mother_even_if_dead    = { religion_openly_hellenic_or_reformed_trigger = yes }
+				father_even_if_dead    = { religion_openly_hellenic_or_reformed_trigger = yes }
+				any_child_even_if_dead = { religion_openly_hellenic_or_reformed_trigger = yes }
+				any_demesne_title = {
+					tier = COUNT
+					OR = {
+						is_holy_site = hellenic_pagan
+						any_de_jure_vassal_title  = { is_holy_site = hellenic_pagan }
+					}
+				}
 			}
 		}
 		trigger_else = {
