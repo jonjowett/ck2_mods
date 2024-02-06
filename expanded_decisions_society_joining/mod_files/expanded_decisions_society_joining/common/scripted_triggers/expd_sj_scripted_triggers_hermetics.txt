@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 #############################
 #                           #
 #    USED IN OTHER FILES    #
@@ -12,7 +14,10 @@ expd_sj_character_can_see_hermetics_trigger = {
 		expd_sj_characters_religion_allows_joining_hermetics_trigger = yes
 		AND = {
 			NOT = { trait = zealous }
-			expd_sj_character_has_religious_ties_to_hermetics_trigger = yes
+			OR = {
+				expd_sj_character_has_religious_ties_to_hermetics_trigger = yes
+				expd_sj_character_has_hermetic_bloodline = yes
+			}
 		}
 	}
 }
@@ -20,11 +25,22 @@ expd_sj_character_can_see_hermetics_trigger = {
 expd_sj_character_fulfils_religious_requirements_to_join_hermetics_trigger = {
 	OR = {
 		expd_sj_characters_religion_allows_joining_hermetics_trigger = yes
-		AND = {
-			NOT = { trait = zealous }
-			piety >= 250
-			prestige >= 500
-			expd_sj_character_has_religious_ties_to_hermetics_trigger = yes
+		trigger_if = {
+			limit = { expd_sj_character_has_hermetic_bloodline = yes }
+			# Audax Validator "." Ignore_1001
+			AND = {
+				NOT = { trait = zealous }
+				expd_sj_character_has_hermetic_bloodline = yes
+			}
+		}
+		trigger_else = {
+			# Audax Validator "." Ignore_1001
+			AND = {
+				NOT = { trait = zealous }
+				piety >= 250
+				prestige >= 500
+				expd_sj_character_has_religious_ties_to_hermetics_trigger = yes
+			}
 		}
 	}
 }
@@ -286,7 +302,10 @@ expd_sj_character_has_4_hermetic_things = {
 expd_sj_character_has_hermetic_bloodline = {
 	custom_tooltip = {
 		text = expd_sj_character_has_hermetic_bloodline_tt
-		always = no
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = expd_sj_hermetics_easier_to_join
+		}
 	}
 }
 
@@ -350,12 +369,20 @@ expd_sj_character_has_religious_ties_to_hermetics_trigger = {
 		text = expd_sj_character_has_religious_ties_to_hermetics_tt
 		hidden_trigger = {
 			OR = {
-				any_friend = { expd_sj_religion_supports_hermetics_trigger = yes }
-				any_spouse = { expd_sj_religion_supports_hermetics_trigger = yes }
-				any_consort = { expd_sj_religion_supports_hermetics_trigger = yes }
-				any_lover = { expd_sj_religion_supports_hermetics_trigger = yes }
-				any_demesne_title = { expd_sj_is_holy_site_of_religion_supporting_hermetics = yes }
-				any_demesne_title = { any_de_jure_vassal_title  = { expd_sj_is_holy_site_of_religion_supporting_hermetics = yes } }
+				any_friend             = { expd_sj_religion_supports_hermetics_trigger = yes }
+				any_spouse             = { expd_sj_religion_supports_hermetics_trigger = yes }
+				any_consort            = { expd_sj_religion_supports_hermetics_trigger = yes }
+				any_lover              = { expd_sj_religion_supports_hermetics_trigger = yes }
+				mother_even_if_dead    = { expd_sj_religion_supports_hermetics_trigger = yes }
+				father_even_if_dead    = { expd_sj_religion_supports_hermetics_trigger = yes }
+				any_child_even_if_dead = { expd_sj_religion_supports_hermetics_trigger = yes }
+				any_demesne_title = {
+					tier = COUNT
+					OR = {
+						expd_sj_is_holy_site_of_religion_supporting_hermetics = yes
+						any_de_jure_vassal_title  = { expd_sj_is_holy_site_of_religion_supporting_hermetics = yes }
+					}
+				}
 			}
 		}
 	}

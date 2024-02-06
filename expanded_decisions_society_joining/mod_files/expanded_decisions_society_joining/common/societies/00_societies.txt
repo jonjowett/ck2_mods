@@ -2923,6 +2923,28 @@ hermetics = {
 			rank = 4
 			value = 10
 		}
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_bloodline_tt
+			trigger = {
+				any_owned_bloodline = {
+					NOT = { founder = { character = PREVPREV } }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_hermetics_more_currency
+				}
+			}
+			value = 3 # Same as saintly bloodlines in monastic orders
+		}
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_bloodline_founder_tt
+			trigger = {
+				any_owned_bloodline = {
+					founder = { character = PREVPREV }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_hermetics_more_currency
+				}
+			}
+			value = 20 # Founder of Hermetic bloodline gains insane amounts of society currency
+		}
 	}
 
 	member_score_per_attribute = 3
