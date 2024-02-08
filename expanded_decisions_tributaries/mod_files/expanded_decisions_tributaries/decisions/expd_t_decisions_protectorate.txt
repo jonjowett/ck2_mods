@@ -60,6 +60,7 @@ targetted_decisions = {
 					tributary_type = expd_t_protectorate
 				}
 			}
+			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
 		}
 		
 		ai_will_do = {
@@ -190,6 +191,7 @@ targetted_decisions = {
 					tributary_type = expd_t_protectorate
 				}
 			}
+			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
 		}
 		
 		ai_will_do = {
@@ -792,6 +794,10 @@ decisions = {
 			any_suzerain = {
 				character_event = { id = JD.2200 }
 				remove_tributary = ROOT
+				hidden_tooltip = {
+					character_event = { id = EDTSuzerainBuff.2000 }
+					character_event = { id = EDTSuzerainBuff.1000 }
+				}
 			}
 		}
 		ai_will_do = {

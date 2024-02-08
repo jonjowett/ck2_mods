@@ -39,3 +39,16 @@ expd_t_is_modded_tributary_of_from = {
 		suzerain = FROM
 	}
 }
+
+expd_t_is_normal_or_modded_permanent_tributary_of_root = {
+	OR = {
+		is_tributary = {
+			type = permanent
+			suzerain = ROOT
+		}
+		is_tributary = {
+			type = expd_t_protectorate
+			suzerain = ROOT
+		}
+	}
+}
