@@ -2924,7 +2924,7 @@ hermetics = {
 			value = 10
 		}
 		triggered_gain = {
-			desc = expd_sj_character_gains_extra_currency_from_bloodline_tt
+			desc = expd_sj_character_gains_extra_currency_from_hermetic_bloodline_tt
 			trigger = {
 				any_owned_bloodline = {
 					NOT = { founder = { character = PREVPREV } }
@@ -2935,7 +2935,7 @@ hermetics = {
 			value = 3 # Same as saintly bloodlines in monastic orders
 		}
 		triggered_gain = {
-			desc = expd_sj_character_gains_extra_currency_from_bloodline_founder_tt
+			desc = expd_sj_character_gains_extra_currency_from_hermetic_bloodline_founder_tt
 			trigger = {
 				any_owned_bloodline = {
 					founder = { character = PREVPREV }
@@ -2989,6 +2989,18 @@ hermetics = {
 			factor = 1.5
 			trait = just
 		}
+		
+		modifier = {
+			custom_tooltip = {
+				text = expd_sj_character_gains_extra_score_from_hermetic_bloodline_tt
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_hermetics_more_currency
+				}
+			}
+			factor = 1.5
+		}
+		
 	}
 	
 	startup_populate = {
@@ -6492,6 +6504,30 @@ warrior_lodge_norse = {
 			trait = hunchback
 			value = -1
 		}
+		
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_tt
+			trigger = {
+				any_owned_bloodline = {
+					NOT = { founder = { character = PREVPREV } }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_norse
+				}
+			}
+			value = 3 # Same as saintly bloodlines in monastic orders
+		}
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_founder_tt
+			trigger = {
+				any_owned_bloodline = {
+					founder = { character = PREVPREV }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_norse
+				}
+			}
+			value = 5 # Surviving legendary warriors gain slightly more currency than their peers
+		}
+		
 	}
 	
 	member_score_per_attribute = 3
@@ -6686,6 +6722,18 @@ warrior_lodge_norse = {
 			trait = hunchback
 			factor = 0.8
 		}
+		
+		additive_modifier = {
+			custom_tooltip = {
+				text = expd_sj_character_gains_extra_score_from_legendary_warrior_bloodline_tt
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_norse
+				}
+			}
+			value = 20
+		}
+		
 	}	
 
 	startup_populate = {
@@ -7086,6 +7134,30 @@ warrior_lodge_tengri = { # Also generally for Nomads
 			trait = hunchback
 			value = -1
 		}
+		
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_tt
+			trigger = {
+				any_owned_bloodline = {
+					NOT = { founder = { character = PREVPREV } }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_tengri
+				}
+			}
+			value = 3 # Same as saintly bloodlines in monastic orders
+		}
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_founder_tt
+			trigger = {
+				any_owned_bloodline = {
+					founder = { character = PREVPREV }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_tengri
+				}
+			}
+			value = 5 # Surviving legendary warriors gain slightly more currency than their peers
+		}
+		
 	}
 	
 	member_score_per_attribute = 3
@@ -7280,6 +7352,18 @@ warrior_lodge_tengri = { # Also generally for Nomads
 			trait = hunchback
 			factor = 0.8
 		}
+		
+		additive_modifier = {
+			custom_tooltip = {
+				text = expd_sj_character_gains_extra_score_from_legendary_warrior_bloodline_tt
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_tengri
+				}
+			}
+			value = 20
+		}
+		
 	}	
 
 	startup_populate = {
@@ -7681,6 +7765,30 @@ warrior_lodge_baltic = {
 			trait = hunchback
 			value = -1
 		}
+		
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_tt
+			trigger = {
+				any_owned_bloodline = {
+					NOT = { founder = { character = PREVPREV } }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_baltic
+				}
+			}
+			value = 3 # Same as saintly bloodlines in monastic orders
+		}
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_founder_tt
+			trigger = {
+				any_owned_bloodline = {
+					founder = { character = PREVPREV }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_baltic
+				}
+			}
+			value = 5 # Surviving legendary warriors gain slightly more currency than their peers
+		}
+		
 	}
 	
 	member_score_per_attribute = 3
@@ -7875,6 +7983,18 @@ warrior_lodge_baltic = {
 			trait = hunchback
 			factor = 0.8
 		}
+		
+		additive_modifier = {
+			custom_tooltip = {
+				text = expd_sj_character_gains_extra_score_from_legendary_warrior_bloodline_tt
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_baltic
+				}
+			}
+			value = 20
+		}
+		
 	}	
 
 	startup_populate = {
@@ -8273,6 +8393,30 @@ warrior_lodge_finnish = {
 			trait = hunchback
 			value = -1
 		}
+		
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_tt
+			trigger = {
+				any_owned_bloodline = {
+					NOT = { founder = { character = PREVPREV } }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_finnish
+				}
+			}
+			value = 3 # Same as saintly bloodlines in monastic orders
+		}
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_founder_tt
+			trigger = {
+				any_owned_bloodline = {
+					founder = { character = PREVPREV }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_finnish
+				}
+			}
+			value = 5 # Surviving legendary warriors gain slightly more currency than their peers
+		}
+		
 	}
 	
 	member_score_per_attribute = 3
@@ -8467,6 +8611,18 @@ warrior_lodge_finnish = {
 			trait = hunchback
 			factor = 0.8
 		}
+		
+		additive_modifier = {
+			custom_tooltip = {
+				text = expd_sj_character_gains_extra_score_from_legendary_warrior_bloodline_tt
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_finnish
+				}
+			}
+			value = 20
+		}
+		
 	}	
 
 	startup_populate = {
@@ -8865,6 +9021,30 @@ warrior_lodge_slavic = {
 			trait = hunchback
 			value = -1
 		}
+		
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_tt
+			trigger = {
+				any_owned_bloodline = {
+					NOT = { founder = { character = PREVPREV } }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_slavic
+				}
+			}
+			value = 3 # Same as saintly bloodlines in monastic orders
+		}
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_founder_tt
+			trigger = {
+				any_owned_bloodline = {
+					founder = { character = PREVPREV }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_slavic
+				}
+			}
+			value = 5 # Surviving legendary warriors gain slightly more currency than their peers
+		}
+		
 	}
 	
 	member_score_per_attribute = 3
@@ -9059,6 +9239,18 @@ warrior_lodge_slavic = {
 			trait = hunchback
 			factor = 0.8
 		}
+		
+		additive_modifier = {
+			custom_tooltip = {
+				text = expd_sj_character_gains_extra_score_from_legendary_warrior_bloodline_tt
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_slavic
+				}
+			}
+			value = 20
+		}
+		
 	}	
 
 	startup_populate = {
@@ -9461,6 +9653,30 @@ warrior_lodge_west_african = {
 			trait = hunchback
 			value = -1
 		}
+		
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_tt
+			trigger = {
+				any_owned_bloodline = {
+					NOT = { founder = { character = PREVPREV } }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_west_african
+				}
+			}
+			value = 3 # Same as saintly bloodlines in monastic orders
+		}
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_founder_tt
+			trigger = {
+				any_owned_bloodline = {
+					founder = { character = PREVPREV }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_west_african
+				}
+			}
+			value = 5 # Surviving legendary warriors gain slightly more currency than their peers
+		}
+		
 	}
 	
 	member_score_per_attribute = 3
@@ -9655,6 +9871,18 @@ warrior_lodge_west_african = {
 			trait = hunchback
 			factor = 0.8
 		}
+		
+		additive_modifier = {
+			custom_tooltip = {
+				text = expd_sj_character_gains_extra_score_from_legendary_warrior_bloodline_tt
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_west_african
+				}
+			}
+			value = 20
+		}
+		
 	}	
 
 	startup_populate = {
@@ -10053,6 +10281,30 @@ warrior_lodge_zun = {
 			trait = hunchback
 			value = -1
 		}
+		
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_tt
+			trigger = {
+				any_owned_bloodline = {
+					NOT = { founder = { character = PREVPREV } }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_zun
+				}
+			}
+			value = 3 # Same as saintly bloodlines in monastic orders
+		}
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_founder_tt
+			trigger = {
+				any_owned_bloodline = {
+					founder = { character = PREVPREV }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_zun
+				}
+			}
+			value = 5 # Surviving legendary warriors gain slightly more currency than their peers
+		}
+		
 	}
 	
 	member_score_per_attribute = 3
@@ -10247,6 +10499,18 @@ warrior_lodge_zun = {
 			trait = hunchback
 			factor = 0.8
 		}
+		
+		additive_modifier = {
+			custom_tooltip = {
+				text = expd_sj_character_gains_extra_score_from_legendary_warrior_bloodline_tt
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_zun
+				}
+			}
+			value = 20
+		}
+		
 	}	
 
 	startup_populate = {
@@ -10645,6 +10909,30 @@ warrior_lodge_bon = {
 			trait = hunchback
 			value = -1
 		}
+		
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_tt
+			trigger = {
+				any_owned_bloodline = {
+					NOT = { founder = { character = PREVPREV } }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_bon
+				}
+			}
+			value = 3 # Same as saintly bloodlines in monastic orders
+		}
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_founder_tt
+			trigger = {
+				any_owned_bloodline = {
+					founder = { character = PREVPREV }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_bon
+				}
+			}
+			value = 5 # Surviving legendary warriors gain slightly more currency than their peers
+		}
+		
 	}
 	
 	member_score_per_attribute = 3
@@ -10839,6 +11127,18 @@ warrior_lodge_bon = {
 			trait = hunchback
 			factor = 0.8
 		}
+		
+		additive_modifier = {
+			custom_tooltip = {
+				text = expd_sj_character_gains_extra_score_from_legendary_warrior_bloodline_tt
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_bon
+				}
+			}
+			value = 20
+		}
+		
 	}	
 
 	startup_populate = {
@@ -11237,6 +11537,30 @@ is_adult = yes
 			trait = hunchback
 			value = -1
 		}
+		
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_tt
+			trigger = {
+				any_owned_bloodline = {
+					NOT = { founder = { character = PREVPREV } }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_hellenic
+				}
+			}
+			value = 3 # Same as saintly bloodlines in monastic orders
+		}
+		triggered_gain = {
+			desc = expd_sj_character_gains_extra_currency_from_legendary_warrior_bloodline_founder_tt
+			trigger = {
+				any_owned_bloodline = {
+					founder = { character = PREVPREV }
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_hellenic
+				}
+			}
+			value = 5 # Surviving legendary warriors gain slightly more currency than their peers
+		}
+		
 	}
 	
 	member_score_per_attribute = 3
@@ -11431,6 +11755,18 @@ is_adult = yes
 			trait = hunchback
 			factor = 0.8
 		}
+		
+		additive_modifier = {
+			custom_tooltip = {
+				text = expd_sj_character_gains_extra_score_from_legendary_warrior_bloodline_tt
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = expd_sj_warrior_lodge_hellenic
+				}
+			}
+			value = 20
+		}
+		
 	}	
 
 	startup_populate = {
