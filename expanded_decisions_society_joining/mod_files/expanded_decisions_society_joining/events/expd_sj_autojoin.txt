@@ -1,0 +1,505 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = EDSJAutoJoin
+
+
+
+
+
+##########################################
+#                                        #
+#             Choose AutoJoin            #
+#                                        #
+##########################################
+
+character_event = {
+	
+	id = EDSJAutoJoin.1000
+	
+	is_triggered_only = yes
+	hide_window = yes
+	
+	# Only for AI - players can make their own decisions
+	ai = yes
+	
+	# Characters already in a society obviously cannot autojoin
+	is_in_society = no
+	
+	# Characters with problems can't autojoin
+	prisoner = no
+	only_capable = yes
+	is_sick = no
+	
+	# Characters may autojoin between 17 & 30
+	# Weightings should make characters more likely to join quickly if they are suited to the society
+	min_age = 17
+	max_age = 30
+	
+	trigger = {
+		
+		# Characters must either have no title or have no regent
+		OR = {
+			has_regent = no
+			is_ruler = no
+		}
+		
+		# Characters must be eligible to autojoin something
+		OR = {
+			this_character_can_autojoin_a_warrior_lodge = yes
+			this_character_can_autojoin_hermetics = yes
+		}
+		
+	}
+	
+	immediate = {
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_1001
+				AND = {
+					this_character_can_autojoin_a_warrior_lodge = yes
+					this_character_can_autojoin_hermetics = yes
+				}
+			}
+			if = {
+				limit = { this_character_prefers_warrior_lodge_over_hermetics = yes }
+				character_event = { id = EDSJAutoJoin.2000 } # Possibly autojoin a relevant warrior lodge
+			}
+			else = {
+				character_event = { id = EDSJAutoJoin.3000 } # Possibly autojoin the hermetics
+			}
+		}
+		else_if = {
+			limit = { this_character_can_autojoin_a_warrior_lodge = yes }
+			character_event = { id = EDSJAutoJoin.2000 } # Possibly autojoin a relevant warrior lodge
+		}
+		else = {
+			character_event = { id = EDSJAutoJoin.3000 } # Possibly autojoin the hermetics
+		}
+	}
+	
+}
+
+
+
+
+
+##########################################
+#                                        #
+#        Autojoin a Warrior Lodge        #
+#                                        #
+##########################################
+
+character_event = {
+	id = EDSJAutoJoin.2000
+	is_triggered_only = yes
+	hide_window = yes
+	ai = yes
+	immediate = {
+		random_list = {
+			90 = {
+				# Do nothing
+			}
+			10 = {
+				# Join a warrior lodge
+				
+				# Decreased chance if the character has low or average martial
+				mult_modifier = {
+					factor = 0.4
+					martial < 12
+				}
+				mult_modifier = {
+					factor = 0.6
+					martial < 14
+				}
+				mult_modifier = {
+					factor = 0.6
+					martial < 16
+				}
+				mult_modifier = {
+					factor = 0.8
+					martial < 18
+				}
+				mult_modifier = {
+					factor = 0.8
+					martial < 20
+				}
+				
+				# Increased chance if the character has high martial
+				mult_modifier = {
+					factor = 1.5
+					martial >= 24
+				}
+				mult_modifier = {
+					factor = 1.5
+					martial >= 26
+				}
+				mult_modifier = {
+					factor = 2
+					martial >= 28
+				}
+				mult_modifier = {
+					factor = 2
+					martial >= 30
+				}
+				
+				# Decreased chance if the character has low or average combat skill
+				mult_modifier = {
+					factor = 0.2
+					combat_rating < 20
+				}
+				mult_modifier = {
+					factor = 0.3
+					combat_rating < 30
+				}
+				mult_modifier = {
+					factor = 0.4
+					combat_rating < 40
+				}
+				mult_modifier = {
+					factor = 0.5
+					combat_rating < 50
+				}
+				
+				# Increased chance if the character has high combat_rating
+				mult_modifier = {
+					factor = 1.5
+					combat_rating >= 80
+				}
+				mult_modifier = {
+					factor = 1.5
+					combat_rating >= 100
+				}
+				mult_modifier = {
+					factor = 2
+					combat_rating >= 120
+				}
+				mult_modifier = {
+					factor = 2
+					combat_rating >= 150
+				}
+				
+				# Increased chance with various warrior-lodge-related traits
+				mult_modifier = {
+					factor = 2
+					has_education_martial_trigger = yes
+				}
+				mult_modifier = {
+					factor = 2
+					has_lifestyle_martial_trigger = yes
+				}
+				mult_modifier = {
+					factor = 2
+					is_smart_trigger = yes
+				}
+				mult_modifier = {
+					factor = 2
+					is_strong_trigger = yes
+				}
+				mult_modifier = {
+					factor = 2
+					trait = brave
+				}
+				mult_modifier = {
+					factor = 2
+					trait = ambitious
+				}
+				mult_modifier = {
+					factor = 2
+					trait = adventurer
+				}
+				mult_modifier = {
+					factor = 2
+					trait = shieldmaiden
+				}
+				mult_modifier = {
+					factor = 2
+					# Audax Validator "." Ignore_1001
+					AND = {
+						OR = {
+							trait = berserker
+							trait = varangian
+						}
+						this_character_can_autojoin_warrior_lodge_norse = yes
+					}
+				}
+				mult_modifier = {
+					factor = 2
+					OR = {
+						trait = pirate
+						trait = viking
+						trait = ravager
+						trait = seaking
+						trait = sea_queen
+					}
+				}
+				
+				# Decreased chance with traits which oppose warrior lodges
+				mult_modifier = {
+					factor = 0.1
+					trait = slothful
+				}
+				mult_modifier = {
+					factor = 0.1
+					trait = content
+				}
+				mult_modifier = {
+					factor = 0.1
+					OR = {
+						trait = dwarf
+						trait = clubfooted
+						trait = hunchback
+					}
+				}
+				
+				# Some things will completely prevent autojoining
+				mult_modifier = {
+					factor = 0
+					this_character_has_issues_blocking_autojoin_warrior_lodge = yes
+				}
+				
+				# Finally, trigger the event
+				character_event = { id = EDSJAutoJoin.2001 }
+				
+			}
+		}
+	}
+}
+
+character_event = {
+	id = EDSJAutoJoin.2001
+	is_triggered_only = yes
+	hide_window = yes
+	ai = yes
+	immediate = {
+		random_list = {
+			10 = {
+				mult_modifier = {
+					factor = 0
+					this_character_can_autojoin_warrior_lodge_norse = no
+				}
+				mult_modifier = {
+					factor = 10000
+					OR = {
+						trait = berserker
+						trait = varangian
+					}
+				}
+				join_society = warrior_lodge_norse
+				character_event = { id = EDSJAutoJoin.9000 }
+			}
+			10 = {
+				mult_modifier = {
+					factor = 0
+					this_character_can_autojoin_warrior_lodge_tengri = no
+				}
+				join_society = warrior_lodge_tengri
+				character_event = { id = EDSJAutoJoin.9000 }
+			}
+			10 = {
+				mult_modifier = {
+					factor = 0
+					this_character_can_autojoin_warrior_lodge_baltic = no
+				}
+				join_society = warrior_lodge_baltic
+				character_event = { id = EDSJAutoJoin.9000 }
+			}
+			10 = {
+				mult_modifier = {
+					factor = 0
+					this_character_can_autojoin_warrior_lodge_finnish = no
+				}
+				join_society = warrior_lodge_finnish
+				character_event = { id = EDSJAutoJoin.9000 }
+			}
+			10 = {
+				mult_modifier = {
+					factor = 0
+					this_character_can_autojoin_warrior_lodge_slavic = no
+				}
+				join_society = warrior_lodge_slavic
+				character_event = { id = EDSJAutoJoin.9000 }
+			}
+			10 = {
+				mult_modifier = {
+					factor = 0
+					this_character_can_autojoin_warrior_lodge_west_african = no
+				}
+				join_society = warrior_lodge_west_african
+				character_event = { id = EDSJAutoJoin.9000 }
+			}
+			10 = {
+				mult_modifier = {
+					factor = 0
+					this_character_can_autojoin_warrior_lodge_zun = no
+				}
+				join_society = warrior_lodge_zun
+				character_event = { id = EDSJAutoJoin.9000 }
+			}
+			10 = {
+				mult_modifier = {
+					factor = 0
+					this_character_can_autojoin_warrior_lodge_bon = no
+				}
+				join_society = warrior_lodge_bon
+				character_event = { id = EDSJAutoJoin.9000 }
+			}
+			10 = {
+				mult_modifier = {
+					factor = 0
+					this_character_can_autojoin_warrior_lodge_hellenic = no
+				}
+				join_society = warrior_lodge_hellenic
+				character_event = { id = EDSJAutoJoin.9000 }
+			}
+			fallback = {
+				# Something went wrong - do nothing
+			}
+		}
+	}
+}
+
+
+
+
+
+##########################################
+#                                        #
+#         Autojoin the Hermetics         #
+#                                        #
+##########################################
+
+character_event = {
+	id = EDSJAutoJoin.3000
+	is_triggered_only = yes
+	hide_window = yes
+	ai = yes
+	immediate = {
+		random_list = {
+			90 = {
+				# Do nothing
+			}
+			10 = {
+				# Join the Hermetics
+				
+				# Decreased chance if the character has low or average learning
+				mult_modifier = {
+					factor = 0.4
+					learning < 12
+				}
+				mult_modifier = {
+					factor = 0.6
+					learning < 14
+				}
+				mult_modifier = {
+					factor = 0.6
+					learning < 16
+				}
+				mult_modifier = {
+					factor = 0.8
+					learning < 18
+				}
+				mult_modifier = {
+					factor = 0.8
+					learning < 20
+				}
+				
+				# Increased chance if the character has high learning
+				mult_modifier = {
+					factor = 1.5
+					learning >= 24
+				}
+				mult_modifier = {
+					factor = 1.5
+					learning >= 26
+				}
+				mult_modifier = {
+					factor = 2
+					learning >= 28
+				}
+				mult_modifier = {
+					factor = 2
+					learning >= 30
+				}
+				
+				# Increased chance with hermetic-related traits
+				mult_modifier = {
+					factor = 2
+					has_education_learning_trigger = yes
+				}
+				mult_modifier = {
+					factor = 2
+					has_lifestyle_learning_trigger = yes
+				}
+				mult_modifier = {
+					factor = 1.5
+					trait = erudite
+				}
+				mult_modifier = {
+					factor = 2
+					is_smart_trigger = yes
+				}
+				
+				# Some things completely prevent autojoining
+				mult_modifier = {
+					factor = 0
+					this_character_has_issues_blocking_autojoin_hermetics = yes
+				}
+				
+				# Finally, trigger the event
+				character_event = { id = EDSJAutoJoin.3001 }
+				
+			}
+		}
+	}
+}
+
+character_event = {
+	id = EDSJAutoJoin.3001
+	is_triggered_only = yes
+	hide_window = yes
+	ai = yes
+	immediate = {
+		join_society = hermetics
+		character_event = { id = EDSJAutoJoin.9000 }
+	}
+}
+
+
+
+
+
+##########################################
+#                                        #
+#           Debug notifications          #
+#                                        #
+##########################################
+
+character_event = {
+	id = EDSJAutoJoin.9000
+	is_triggered_only = yes
+	hide_window = yes
+	has_global_flag = expd_sj_debug_autojoin
+	immediate = {
+		any_player = { character_event = { id = EDSJAutoJoin.9001 } }
+	}
+}
+
+character_event = {
+	
+	id = EDSJAutoJoin.9001
+	
+	is_triggered_only = yes
+	
+	ai = no
+	has_global_flag = expd_sj_debug_autojoin
+	
+	title = EDSJAutoJoin_9001_Title
+	desc  = EDSJAutoJoin_9001_Desc
+	
+	picture = GFX_evt_recieve_letter
+	
+	show_from_from = yes
+	
+	option = { name = OK }
+	
+}

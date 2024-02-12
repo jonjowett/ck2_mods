@@ -2776,10 +2776,12 @@ hermetics = {
 					society = hermetics
 					rank = 1
 				}
+				this_character_has_active_hermetic_bloodline = no
 			}
 			OR = {
 				is_landed = yes
 				is_patrician = yes
+				this_character_has_active_hermetic_bloodline = yes
 			}
 		}
 		
@@ -6155,6 +6157,7 @@ warrior_lodge_norse = {
 					society = warrior_lodge_norse
 					rank = 1
 				}
+				this_character_has_active_warrior_lodge_bloodline_norse = no
 			}
 		}
 		is_adult = yes
@@ -6782,6 +6785,7 @@ warrior_lodge_tengri = { # Also generally for Nomads
 					society = warrior_lodge_tengri
 					rank = 1
 				}
+				this_character_has_active_warrior_lodge_bloodline_tengri = no
 			}
 		}
 		is_adult = yes
@@ -7415,6 +7419,7 @@ warrior_lodge_baltic = {
 					society = warrior_lodge_baltic
 					rank = 1
 				}
+				this_character_has_active_warrior_lodge_bloodline_baltic = no
 			}
 		}
 		is_adult = yes
@@ -8043,6 +8048,7 @@ warrior_lodge_finnish = {
 					society = warrior_lodge_finnish
 					rank = 1
 				}
+				this_character_has_active_warrior_lodge_bloodline_finnish = no
 			}
 		}
 		is_adult = yes
@@ -8671,6 +8677,7 @@ warrior_lodge_slavic = {
 					society = warrior_lodge_slavic
 					rank = 1
 				}
+				this_character_has_active_warrior_lodge_bloodline_slavic = no
 			}
 		}
 		is_adult = yes
@@ -9299,6 +9306,7 @@ warrior_lodge_west_african = {
 					society = warrior_lodge_west_african
 					rank = 1
 				}
+				this_character_has_active_warrior_lodge_bloodline_west_african = no
 			}
 		}
 		is_adult = yes
@@ -9932,6 +9940,7 @@ warrior_lodge_zun = {
 					society = warrior_lodge_zun
 					rank = 1
 				}
+				this_character_has_active_warrior_lodge_bloodline_zun = no
 			}
 		}
 		is_adult = yes
@@ -10560,6 +10569,7 @@ warrior_lodge_bon = {
 					society = warrior_lodge_bon
 					rank = 1
 				}
+				this_character_has_active_warrior_lodge_bloodline_bon = no
 			}
 		}
 		is_adult = yes
@@ -11189,9 +11199,10 @@ warrior_lodge_hellenic = {
 					society = warrior_lodge_hellenic
 					rank = 1
 				}
+				this_character_has_active_warrior_lodge_bloodline_hellenic = no
 			}
 		}
-is_adult = yes
+		is_adult = yes
 		custom_tooltip = {
 			text = has_not_angered_society_tt
 			hidden_trigger = { NOT = { has_character_modifier = warrior_lodge_failed_joining_cd } }

@@ -1,0 +1,632 @@
+# Audax Validator EnableCommentMetadata
+
+this_character_can_autojoin_a_warrior_lodge = {
+	OR = {
+		this_character_can_autojoin_warrior_lodge_norse = yes
+		this_character_can_autojoin_warrior_lodge_tengri = yes
+		this_character_can_autojoin_warrior_lodge_baltic = yes
+		this_character_can_autojoin_warrior_lodge_finnish = yes
+		this_character_can_autojoin_warrior_lodge_slavic = yes
+		this_character_can_autojoin_warrior_lodge_west_african = yes
+		this_character_can_autojoin_warrior_lodge_zun = yes
+		this_character_can_autojoin_warrior_lodge_bon = yes
+		this_character_can_autojoin_warrior_lodge_hellenic = yes
+	}
+}
+
+this_character_can_autojoin_hermetics = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		can_join_society = hermetics
+		hermetics = { society_has_members = yes }
+		this_character_has_active_hermetic_bloodline = yes
+		this_character_has_issues_blocking_autojoin_hermetics = no
+	}
+}
+
+this_character_can_autojoin_warrior_lodge_norse = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		can_join_society = warrior_lodge_norse
+		warrior_lodge_norse = { society_has_members = yes }
+		this_character_has_active_warrior_lodge_bloodline_norse = yes
+		this_character_has_issues_blocking_autojoin_warrior_lodge = no
+	}
+}
+
+this_character_can_autojoin_warrior_lodge_tengri = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		can_join_society = warrior_lodge_tengri
+		warrior_lodge_tengri = { society_has_members = yes }
+		this_character_has_active_warrior_lodge_bloodline_tengri = yes
+		this_character_has_issues_blocking_autojoin_warrior_lodge = no
+	}
+}
+
+this_character_can_autojoin_warrior_lodge_baltic = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		can_join_society = warrior_lodge_baltic
+		warrior_lodge_baltic = { society_has_members = yes }
+		this_character_has_active_warrior_lodge_bloodline_baltic = yes
+		this_character_has_issues_blocking_autojoin_warrior_lodge = no
+	}
+}
+
+this_character_can_autojoin_warrior_lodge_finnish = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		can_join_society = warrior_lodge_finnish
+		warrior_lodge_finnish = { society_has_members = yes }
+		this_character_has_active_warrior_lodge_bloodline_finnish = yes
+		this_character_has_issues_blocking_autojoin_warrior_lodge = no
+	}
+}
+
+this_character_can_autojoin_warrior_lodge_slavic = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		can_join_society = warrior_lodge_slavic
+		warrior_lodge_slavic = { society_has_members = yes }
+		this_character_has_active_warrior_lodge_bloodline_slavic = yes
+		this_character_has_issues_blocking_autojoin_warrior_lodge = no
+	}
+}
+
+this_character_can_autojoin_warrior_lodge_west_african = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		can_join_society = warrior_lodge_west_african
+		warrior_lodge_west_african = { society_has_members = yes }
+		this_character_has_active_warrior_lodge_bloodline_west_african = yes
+		this_character_has_issues_blocking_autojoin_warrior_lodge = no
+	}
+}
+
+this_character_can_autojoin_warrior_lodge_zun = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		can_join_society = warrior_lodge_zun
+		warrior_lodge_zun = { society_has_members = yes }
+		this_character_has_active_warrior_lodge_bloodline_zun = yes
+		this_character_has_issues_blocking_autojoin_warrior_lodge = no
+	}
+}
+
+this_character_can_autojoin_warrior_lodge_bon = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		can_join_society = warrior_lodge_bon
+		warrior_lodge_bon = { society_has_members = yes }
+		this_character_has_active_warrior_lodge_bloodline_bon = yes
+		this_character_has_issues_blocking_autojoin_warrior_lodge = no
+	}
+}
+
+this_character_can_autojoin_warrior_lodge_hellenic = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		can_join_society = warrior_lodge_hellenic
+		warrior_lodge_hellenic = { society_has_members = yes }
+		this_character_has_active_warrior_lodge_bloodline_hellenic = yes
+		this_character_has_issues_blocking_autojoin_warrior_lodge = no
+	}
+}
+
+this_character_has_issues_blocking_autojoin_hermetics = {
+	OR = {
+		learning <= 10
+		is_dumb_trigger = yes
+		NOT = { has_dlc = "Mystics" }
+	}
+}
+
+this_character_has_issues_blocking_autojoin_warrior_lodge = {
+	OR = {
+		trait = craven
+		martial <= 10
+		combat_rating <= 10
+		NOT = { has_dlc = "Holy Fury" }
+	}
+}
+
+this_character_has_active_hermetic_bloodline = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		has_bloodline_flag = emb_bloodline_effect_ai_auto_join_hermetics
+	}
+}
+
+this_character_has_active_warrior_lodge_bloodline_norse = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		has_bloodline_flag = expd_sj_warrior_lodge_norse
+	}
+}
+
+this_character_has_active_warrior_lodge_bloodline_tengri = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		has_bloodline_flag = expd_sj_warrior_lodge_tengri
+	}
+}
+
+this_character_has_active_warrior_lodge_bloodline_baltic = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		has_bloodline_flag = expd_sj_warrior_lodge_baltic
+	}
+}
+
+this_character_has_active_warrior_lodge_bloodline_finnish = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		has_bloodline_flag = expd_sj_warrior_lodge_finnish
+	}
+}
+
+this_character_has_active_warrior_lodge_bloodline_slavic = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		has_bloodline_flag = expd_sj_warrior_lodge_slavic
+	}
+}
+
+this_character_has_active_warrior_lodge_bloodline_west_african = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		has_bloodline_flag = expd_sj_warrior_lodge_west_african
+	}
+}
+
+this_character_has_active_warrior_lodge_bloodline_zun = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		has_bloodline_flag = expd_sj_warrior_lodge_zun
+	}
+}
+
+this_character_has_active_warrior_lodge_bloodline_bon = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		has_bloodline_flag = expd_sj_warrior_lodge_bon
+	}
+}
+
+this_character_has_active_warrior_lodge_bloodline_hellenic = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		has_bloodline_flag = expd_sj_warrior_lodge_hellenic
+	}
+}
+
+
+this_character_prefers_warrior_lodge_over_hermetics = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		is_weak_trigger = no
+		martial >= 10
+		combat_rating >= 10
+		NOR = {
+			trait = craven
+			trait = dwarf
+			trait = clubfooted
+			trait = hunchback
+		}
+		OR = {
+			has_education_martial_trigger = yes
+			has_lifestyle_martial_trigger = yes
+			AND = {
+				has_education_learning_trigger = no
+				has_lifestyle_learning_trigger = no
+				this_character_has_martial_greater_than_learning = yes
+			}
+		}
+	}
+}
+
+this_character_has_martial_greater_than_learning = {
+	OR = {
+		AND = {
+			martial  >   1
+			learning <=  1
+		}
+		AND = {
+			martial  >   2
+			learning <=  2
+		}
+		AND = {
+			martial  >   3
+			learning <=  3
+		}
+		AND = {
+			martial  >   4
+			learning <=  4
+		}
+		AND = {
+			martial  >   5
+			learning <=  5
+		}
+		AND = {
+			martial  >   6
+			learning <=  6
+		}
+		AND = {
+			martial  >   7
+			learning <=  7
+		}
+		AND = {
+			martial  >   8
+			learning <=  8
+		}
+		AND = {
+			martial  >   9
+			learning <=  9
+		}
+		AND = {
+			martial  >  10
+			learning <= 10
+		}
+		AND = {
+			martial  >  11
+			learning <= 11
+		}
+		AND = {
+			martial  >  12
+			learning <= 12
+		}
+		AND = {
+			martial  >  13
+			learning <= 13
+		}
+		AND = {
+			martial  >  14
+			learning <= 14
+		}
+		AND = {
+			martial  >  15
+			learning <= 15
+		}
+		AND = {
+			martial  >  16
+			learning <= 16
+		}
+		AND = {
+			martial  >  17
+			learning <= 17
+		}
+		AND = {
+			martial  >  18
+			learning <= 18
+		}
+		AND = {
+			martial  >  19
+			learning <= 19
+		}
+		AND = {
+			martial  >  20
+			learning <= 20
+		}
+		AND = {
+			martial  >  21
+			learning <= 21
+		}
+		AND = {
+			martial  >  22
+			learning <= 22
+		}
+		AND = {
+			martial  >  23
+			learning <= 23
+		}
+		AND = {
+			martial  >  24
+			learning <= 24
+		}
+		AND = {
+			martial  >  25
+			learning <= 25
+		}
+		AND = {
+			martial  >  26
+			learning <= 26
+		}
+		AND = {
+			martial  >  27
+			learning <= 27
+		}
+		AND = {
+			martial  >  28
+			learning <= 28
+		}
+		AND = {
+			martial  >  29
+			learning <= 29
+		}
+		AND = {
+			martial  >  30
+			learning <= 30
+		}
+		AND = {
+			martial  >  31
+			learning <= 31
+		}
+		AND = {
+			martial  >  32
+			learning <= 32
+		}
+		AND = {
+			martial  >  33
+			learning <= 33
+		}
+		AND = {
+			martial  >  34
+			learning <= 34
+		}
+		AND = {
+			martial  >  35
+			learning <= 35
+		}
+		AND = {
+			martial  >  36
+			learning <= 36
+		}
+		AND = {
+			martial  >  37
+			learning <= 37
+		}
+		AND = {
+			martial  >  38
+			learning <= 38
+		}
+		AND = {
+			martial  >  39
+			learning <= 39
+		}
+		AND = {
+			martial  >  40
+			learning <= 40
+		}
+		AND = {
+			martial  >  41
+			learning <= 41
+		}
+		AND = {
+			martial  >  42
+			learning <= 42
+		}
+		AND = {
+			martial  >  43
+			learning <= 43
+		}
+		AND = {
+			martial  >  44
+			learning <= 44
+		}
+		AND = {
+			martial  >  45
+			learning <= 45
+		}
+		AND = {
+			martial  >  46
+			learning <= 46
+		}
+		AND = {
+			martial  >  47
+			learning <= 47
+		}
+		AND = {
+			martial  >  48
+			learning <= 48
+		}
+		AND = {
+			martial  >  49
+			learning <= 49
+		}
+		AND = {
+			martial  >  50
+			learning <= 50
+		}
+		AND = {
+			martial  >  51
+			learning <= 51
+		}
+		AND = {
+			martial  >  52
+			learning <= 52
+		}
+		AND = {
+			martial  >  53
+			learning <= 53
+		}
+		AND = {
+			martial  >  54
+			learning <= 54
+		}
+		AND = {
+			martial  >  55
+			learning <= 55
+		}
+		AND = {
+			martial  >  56
+			learning <= 56
+		}
+		AND = {
+			martial  >  57
+			learning <= 57
+		}
+		AND = {
+			martial  >  58
+			learning <= 58
+		}
+		AND = {
+			martial  >  59
+			learning <= 59
+		}
+		AND = {
+			martial  >  60
+			learning <= 60
+		}
+		AND = {
+			martial  >  61
+			learning <= 61
+		}
+		AND = {
+			martial  >  62
+			learning <= 62
+		}
+		AND = {
+			martial  >  63
+			learning <= 63
+		}
+		AND = {
+			martial  >  64
+			learning <= 64
+		}
+		AND = {
+			martial  >  65
+			learning <= 65
+		}
+		AND = {
+			martial  >  66
+			learning <= 66
+		}
+		AND = {
+			martial  >  67
+			learning <= 67
+		}
+		AND = {
+			martial  >  68
+			learning <= 68
+		}
+		AND = {
+			martial  >  69
+			learning <= 69
+		}
+		AND = {
+			martial  >  70
+			learning <= 70
+		}
+		AND = {
+			martial  >  71
+			learning <= 71
+		}
+		AND = {
+			martial  >  72
+			learning <= 72
+		}
+		AND = {
+			martial  >  73
+			learning <= 73
+		}
+		AND = {
+			martial  >  74
+			learning <= 74
+		}
+		AND = {
+			martial  >  75
+			learning <= 75
+		}
+		AND = {
+			martial  >  76
+			learning <= 76
+		}
+		AND = {
+			martial  >  77
+			learning <= 77
+		}
+		AND = {
+			martial  >  78
+			learning <= 78
+		}
+		AND = {
+			martial  >  79
+			learning <= 79
+		}
+		AND = {
+			martial  >  80
+			learning <= 80
+		}
+		AND = {
+			martial  >  81
+			learning <= 81
+		}
+		AND = {
+			martial  >  82
+			learning <= 82
+		}
+		AND = {
+			martial  >  83
+			learning <= 83
+		}
+		AND = {
+			martial  >  84
+			learning <= 84
+		}
+		AND = {
+			martial  >  85
+			learning <= 85
+		}
+		AND = {
+			martial  >  86
+			learning <= 86
+		}
+		AND = {
+			martial  >  87
+			learning <= 87
+		}
+		AND = {
+			martial  >  88
+			learning <= 88
+		}
+		AND = {
+			martial  >  89
+			learning <= 89
+		}
+		AND = {
+			martial  >  90
+			learning <= 90
+		}
+		AND = {
+			martial  >  91
+			learning <= 91
+		}
+		AND = {
+			martial  >  92
+			learning <= 92
+		}
+		AND = {
+			martial  >  93
+			learning <= 93
+		}
+		AND = {
+			martial  >  94
+			learning <= 94
+		}
+		AND = {
+			martial  >  95
+			learning <= 95
+		}
+		AND = {
+			martial  >  96
+			learning <= 96
+		}
+		AND = {
+			martial  >  97
+			learning <= 97
+		}
+		AND = {
+			martial  >  98
+			learning <= 98
+		}
+		AND = {
+			martial  >  99
+			learning <= 99
+		}
+		AND = {
+			martial  >  100
+			learning <= 100
+		}
+	}
+}
