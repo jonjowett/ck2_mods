@@ -383,41 +383,33 @@ character_event = {
 				
 				# Decreased chance if the character has low or average learning
 				mult_modifier = {
-					factor = 0.4
+					factor = 0.2
 					learning < 12
 				}
 				mult_modifier = {
-					factor = 0.6
+					factor = 0.3
 					learning < 14
 				}
 				mult_modifier = {
-					factor = 0.6
+					factor = 0.4
 					learning < 16
-				}
-				mult_modifier = {
-					factor = 0.8
-					learning < 18
-				}
-				mult_modifier = {
-					factor = 0.8
-					learning < 20
 				}
 				
 				# Increased chance if the character has high learning
 				mult_modifier = {
-					factor = 1.5
+					factor = 4
 					learning >= 24
 				}
 				mult_modifier = {
-					factor = 1.5
+					factor = 4
 					learning >= 26
 				}
 				mult_modifier = {
-					factor = 2
+					factor = 8
 					learning >= 28
 				}
 				mult_modifier = {
-					factor = 2
+					factor = 8
 					learning >= 30
 				}
 				
