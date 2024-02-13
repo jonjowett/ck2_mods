@@ -1,0 +1,50 @@
+namespace = CSHUpdates
+
+character_event = {
+	id = CSHUpdates.1000
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		
+		# Wealth
+		remove_trait = csh_wealth_0
+		remove_trait = csh_wealth_1
+		remove_trait = csh_wealth_2
+		remove_trait = csh_wealth_3
+		remove_trait = csh_wealth_4
+		remove_trait = csh_wealth_5
+		if = {
+			limit = { wealth < 100 }
+			add_trait = csh_wealth_0
+		}
+		else_if = {
+			limit = { wealth < 300 }
+			add_trait = csh_wealth_1
+		}
+		else_if = {
+			limit = { wealth < 1000 }
+			add_trait = csh_wealth_2
+		}
+		else_if = {
+			limit = { wealth < 3000 }
+			add_trait = csh_wealth_3
+		}
+		else_if = {
+			limit = { wealth < 10000 }
+			add_trait = csh_wealth_4
+		}
+		else = {
+			add_trait = csh_wealth_5
+		}
+		
+	}
+}
+
+character_event = {
+	id = CSHUpdates.1001
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		any_character = { character_event = { id = CSHUpdates.1000 } }
+	}
+}

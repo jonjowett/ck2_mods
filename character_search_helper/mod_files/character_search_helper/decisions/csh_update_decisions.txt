@@ -1,0 +1,14 @@
+decisions = {
+	csh_update_all_characters = {
+		ai = no
+		potential = { ai = no }
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = csh_update_all_characters_tt
+				character_event = { id = CSHUpdates.1001 }
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+}
