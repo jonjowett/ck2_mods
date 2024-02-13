@@ -503,3 +503,18 @@ character_event = {
 	option = { name = OK }
 	
 }
+
+# Manual cleanup of early versions of the hermetic bloodline
+character_event = {
+	id = EDSJAutoJoin.9901
+	ai = no
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		any_owned_bloodline = {
+			limit = { has_bloodline_flag = emb_bloodline_effect_ai_auto_join_hermetics }
+			clr_bloodline_flag = emb_bloodline_effect_ai_auto_join_hermetics
+			set_bloodline_flag = expd_sj_hermetics_ai_auto_join
+		}
+	}
+}
