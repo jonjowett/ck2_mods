@@ -11,7 +11,10 @@ targetted_decisions = {
 			NOT = { has_global_flag = expd_gp_debug_mode }
 		}
 		allow = {
-			always = yes
+			custom_tooltip = {
+				text = expd_gp_debug_mode_cant_be_activated_in_multiplayer_tt
+				NOT = { any_player = { NOT = { character = FROM } } }
+			}
 		}
 		effect = {
 			hidden_tooltip = { set_global_flag = expd_gp_debug_mode }
@@ -22,6 +25,7 @@ targetted_decisions = {
 		filter = self
 		ai = no
 		only_independent = yes
+		is_high_prio = yes
 		from_potential = {
 			ai = no
 		}
@@ -32,9 +36,7 @@ targetted_decisions = {
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = {
-				clr_global_flag = expd_gp_debug_mode
-			}
+			hidden_tooltip = { clr_global_flag = expd_gp_debug_mode }
 		}
 	}
 	
@@ -57,7 +59,7 @@ title_decisions = {
 			always = yes
 		}
 		effect = {
-			location = { destroy_wonder = yes }
+			hidden_tooltip = { location = { destroy_wonder = yes } }
 		}
 	}
 	
@@ -77,7 +79,7 @@ title_decisions = {
 			always = yes
 		}
 		effect = {
-			location = { wonder = { random_upgrade_on_wonder = { destroy_wonder_upgrade = yes } } }
+			hidden_tooltip = { location = { wonder = { random_upgrade_on_wonder = { destroy_wonder_upgrade = yes } } } }
 		}
 	}
 	
@@ -96,7 +98,7 @@ title_decisions = {
 			always = yes
 		}
 		effect = {
-			location = { wonder = { remove_wonder_upgrade_slots = 1 } }
+			expd_gp_remove_slot_from_wonder_in_this_county = yes
 		}
 	}
 	
@@ -115,7 +117,7 @@ title_decisions = {
 			always = yes
 		}
 		effect = {
-			location = { wonder = { add_wonder_upgrade_slots = 1 } }
+			expd_gp_add_slot_to_wonder_in_this_county = yes
 		}
 	}
 	
