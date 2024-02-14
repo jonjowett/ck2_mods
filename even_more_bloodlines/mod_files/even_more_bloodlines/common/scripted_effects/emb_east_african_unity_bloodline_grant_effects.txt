@@ -1,0 +1,30 @@
+emb_east_african_unity_grant_bloodline_to_this_character = {
+	
+	if = {
+		limit = { is_female = no }
+		create_bloodline = { type = emb_east_african_unity inheritance = patrilineal }
+	}
+	else = {
+		create_bloodline = { type = emb_east_african_unity inheritance = matrilineal }
+	}
+	
+	hidden_tooltip = {
+		any_owned_bloodline = {
+			limit = {
+				founder = { character = PREVPREV }
+				has_bloodline_flag = emb_east_african_unity
+			}
+			if = {
+				limit = { PREV = { is_female = no } }
+				set_bloodline_flag = emb_m
+			}
+			else = {
+				set_bloodline_flag = emb_f
+			}
+			set_name        = emb_east_african_unity_bloodline_universal_name
+			set_description = emb_east_african_unity_bloodline_universal_desc
+		}
+		sound_effect = bloodline_added
+	}
+	
+}

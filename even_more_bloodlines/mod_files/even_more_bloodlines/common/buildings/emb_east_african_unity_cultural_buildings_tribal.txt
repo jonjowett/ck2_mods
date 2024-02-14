@@ -1,0 +1,357 @@
+# Triggers are in Province scope. The From Scope contains the settlement holder (character)
+# start trigger is in title scope.
+
+# Copied tb_culture_* from vanilla
+# Renamed to emb_tb_culture_*
+# Changed potential & active & trigger blocks
+# Commented-out extra_tech_building_start (because we don't ever want to autocreate these at new game start)
+
+tribal = {
+	
+	
+	
+	
+	
+	# Ethiopian Light Infantry Drilling Ground
+	emb_tb_culture_ethiopian_1 = {
+		desc = ca_culture_ethiopian_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+				has_building = emb_tb_culture_ethiopian_1
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+		}
+		
+		prestige_cost = 100
+		build_time = 365
+		light_infantry = 30
+		light_infantry_offensive = 0.15
+		ai_creation_factor = 101
+		
+		#extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_ethiopian_2 = {
+		desc = ca_culture_ethiopian_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+				has_building = emb_tb_culture_ethiopian_1
+				has_building = emb_tb_culture_ethiopian_2
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+		}
+		upgrades_from = emb_tb_culture_ethiopian_1
+		prestige_cost = 200
+		build_time = 547
+		light_infantry = 40
+		light_infantry_offensive = 0.15
+		ai_creation_factor = 101
+		
+		convert_to_castle = emb_ca_culture_ethiopian_1
+		
+		#extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_ethiopian_3 = {
+		desc = ca_culture_ethiopian_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+				has_building = emb_tb_culture_ethiopian_1
+				has_building = emb_tb_culture_ethiopian_2
+				has_building = emb_tb_culture_ethiopian_3
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+		}
+		upgrades_from = emb_tb_culture_ethiopian_2
+		prestige_cost = 300
+		build_time = 730
+		light_infantry = 50
+		light_infantry_offensive = 0.15
+		ai_creation_factor = 101
+		
+		#extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_ethiopian_4 = {
+		desc = ca_culture_ethiopian_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+				has_building = emb_tb_culture_ethiopian_1
+				has_building = emb_tb_culture_ethiopian_2
+				has_building = emb_tb_culture_ethiopian_3
+				has_building = emb_tb_culture_ethiopian_4
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_ethiopian = yes
+		}
+		upgrades_from = emb_tb_culture_ethiopian_3
+		prestige_cost = 400
+		build_time = 1095
+		light_infantry = 60
+		light_infantry_offensive = 0.15
+		ai_creation_factor = 101
+		
+		convert_to_castle = emb_ca_culture_ethiopian_2
+		
+		#extra_tech_building_start = 0.8
+	}
+	
+	
+	
+	
+	
+	# Somali Light Infantry Barracks
+	emb_tb_culture_somali_1 = {
+		desc = ca_culture_somali_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+				has_building = emb_tb_culture_somali_1
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+		}
+		
+		prestige_cost = 100
+		build_time = 365
+		light_infantry = 30
+		light_infantry_defensive = 0.15
+		ai_creation_factor = 101
+		
+		#extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_somali_2 = {
+		desc = ca_culture_somali_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+				has_building = emb_tb_culture_somali_1
+				has_building = emb_tb_culture_somali_2
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+		}
+		upgrades_from = emb_tb_culture_somali_1
+		prestige_cost = 200
+		build_time = 547
+		light_infantry = 40
+		light_infantry_defensive = 0.15
+		ai_creation_factor = 101
+		
+		convert_to_castle = emb_ca_culture_somali_1
+		
+		#extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_somali_3 = {
+		desc = ca_culture_somali_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+				has_building = emb_tb_culture_somali_1
+				has_building = emb_tb_culture_somali_2
+				has_building = emb_tb_culture_somali_3
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+		}
+		upgrades_from = emb_tb_culture_somali_2
+		prestige_cost = 300
+		build_time = 730
+		light_infantry = 50
+		light_infantry_defensive = 0.15
+		ai_creation_factor = 101
+		
+		#extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_somali_4 = {
+		desc = ca_culture_somali_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+				has_building = emb_tb_culture_somali_1
+				has_building = emb_tb_culture_somali_2
+				has_building = emb_tb_culture_somali_3
+				has_building = emb_tb_culture_somali_4
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_somali = yes
+		}
+		upgrades_from = emb_tb_culture_somali_3
+		prestige_cost = 400
+		build_time = 1095
+		light_infantry = 60
+		light_infantry_defensive = 0.15
+		ai_creation_factor = 101
+		
+		convert_to_castle = emb_ca_culture_somali_2
+		
+		#extra_tech_building_start = 0.8
+	}
+	
+	
+	
+	
+	
+	# Nubian warrior barracks
+	emb_tb_culture_nubian_1 = {
+		desc = ca_culture_nubian_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+				has_building = emb_tb_culture_nubian_1
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+		}
+		
+		prestige_cost = 100
+		build_time = 365
+		heavy_infantry = 5
+		light_infantry = 10
+		archers = 10
+		archers_defensive = 0.15
+		ai_creation_factor = 101
+		
+		#extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_nubian_2 = {
+		desc = ca_culture_nubian_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+				has_building = emb_tb_culture_nubian_1
+				has_building = emb_tb_culture_nubian_2
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0 
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+		}
+		upgrades_from = emb_tb_culture_nubian_1
+		prestige_cost = 200
+		build_time = 547
+		heavy_infantry = 7
+		light_infantry = 13
+		archers = 13
+		archers_defensive = 0.15
+		ai_creation_factor = 101
+		
+		convert_to_castle = emb_ca_culture_nubian_1
+		
+		#extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_nubian_3 = {
+		desc = ca_culture_nubian_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+				has_building = emb_tb_culture_nubian_1
+				has_building = emb_tb_culture_nubian_2
+				has_building = emb_tb_culture_nubian_3
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+		}
+		upgrades_from = emb_tb_culture_nubian_2
+		prestige_cost = 300
+		build_time = 730
+		heavy_infantry = 7
+		light_infantry = 15
+		archers = 15
+		archers_defensive = 0.15
+		ai_creation_factor = 101
+		
+		#extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_nubian_4 = {
+		desc = ca_culture_nubian_1_desc
+		potential = {
+			OR = {
+				emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+				has_building = emb_tb_culture_nubian_1
+				has_building = emb_tb_culture_nubian_2
+				has_building = emb_tb_culture_nubian_3
+				has_building = emb_tb_culture_nubian_4
+			}
+		}
+		is_active_trigger = {
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_east_african_unity_from_can_activate_special_building_in_root_province_nubian = yes
+		}
+		upgrades_from = emb_tb_culture_nubian_3
+		prestige_cost = 400
+		build_time = 1095
+		heavy_infantry = 10
+		light_infantry = 20
+		archers = 20
+		archers_defensive = 0.15
+		ai_creation_factor = 101
+		
+		convert_to_castle = emb_ca_culture_nubian_2
+		
+		#extra_tech_building_start = 0.8
+	}
+	
+}
+
+

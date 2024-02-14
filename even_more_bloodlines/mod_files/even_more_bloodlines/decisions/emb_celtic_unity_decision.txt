@@ -13,10 +13,10 @@ decisions = {
 			
 			# Show the decision to Celtic characters, and to non-Celtic players who have their capital in a Celtic province (ie. can instantly culture convert)
 			OR = {
-				culture_group = celtic
+				emb_celtic_unity_this_character_is_of_a_supported_culture = yes
 				AND = {
 					ai = no
-					capital_scope = { culture_group = celtic }
+					capital_scope = { emb_celtic_unity_this_province_is_of_a_supported_culture = yes }
 				}
 			}
 			
@@ -48,7 +48,8 @@ decisions = {
 		allow = {
 			
 			independent = yes
-			culture_group = celtic
+			
+			emb_celtic_unity_this_character_is_of_a_supported_culture = yes
 			
 			custom_tooltip = {
 				text = emb_celtic_unity_bloodline_has_not_been_forged_tt
@@ -68,7 +69,7 @@ decisions = {
 			custom_tooltip = {
 				text = emb_celtic_unity_this_character_owns_at_least_1_province_of_a_different_celtic_culture_tt
 				any_realm_province = {
-					culture_group = celtic
+					emb_celtic_unity_this_province_is_of_a_supported_culture = yes
 					NOT = { culture = PREV }
 				}
 			}
@@ -77,7 +78,7 @@ decisions = {
 				text = emb_celtic_unity_this_character_owns_at_least_20_provinces_of_any_celtic_culture_in_western_europe_region_tt
 				any_realm_province = {
 					region = world_europe_west
-					culture_group = celtic
+					emb_celtic_unity_this_province_is_of_a_supported_culture = yes
 					count >= 20
 				}
 			}
@@ -130,12 +131,12 @@ decisions = {
 					any_province = {
 						limit = { emb_celtic_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned = yes }
 						show_scope_change = no
-						custom_tooltip = { text = emb_celtic_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned_tt }
+						custom_tooltip = { text = emb_cultural_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned_tt }
 					}
 				}
 			}
 			else = {
-				custom_tooltip = { text = emb_celtic_unity_info_list_of_missing_provinces_is_not_provided_for_ai_tt }
+				custom_tooltip = { text = emb_cultural_unity_info_list_of_missing_provinces_is_not_provided_for_ai_tt }
 			}
 			
 		}

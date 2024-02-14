@@ -4,7 +4,7 @@
 # Grants Celtic opinion, and characters with the bloodline can build all relevant retinues and all relevant cultural buildings (in Celtic-culture provinces).
 # Does NOT apply to vassals, unless they also have the culture.
 
-# NB: The bloodline MUST be created by event/recision, and this MUST specify BOTH inheritance rules AND the relevant emb_m/emb_f/emb_ad flag.
+# NB: The bloodline MUST be created by event/decision, and this MUST specify BOTH inheritance rules AND the relevant emb_m/emb_f/emb_ad flag.
 
 
 
@@ -21,7 +21,7 @@ emb_celtic_unity_breton_irish = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -40,7 +40,7 @@ emb_celtic_unity_breton_pictish = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -59,7 +59,7 @@ emb_celtic_unity_breton_scottish = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -78,7 +78,7 @@ emb_celtic_unity_breton_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -97,7 +97,7 @@ emb_celtic_unity_irish_pictish = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -116,7 +116,7 @@ emb_celtic_unity_irish_scottish = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -135,7 +135,7 @@ emb_celtic_unity_irish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -154,7 +154,7 @@ emb_celtic_unity_pictish_scottish = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -173,7 +173,7 @@ emb_celtic_unity_pictish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -192,7 +192,7 @@ emb_celtic_unity_scottish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -219,7 +219,7 @@ emb_celtic_unity_breton_irish_pictish = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -239,7 +239,7 @@ emb_celtic_unity_breton_irish_scottish = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -259,7 +259,7 @@ emb_celtic_unity_breton_irish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -279,7 +279,7 @@ emb_celtic_unity_breton_pictish_scottish = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -299,7 +299,7 @@ emb_celtic_unity_breton_pictish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -319,7 +319,7 @@ emb_celtic_unity_breton_scottish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -339,7 +339,7 @@ emb_celtic_unity_irish_pictish_scottish = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -359,7 +359,7 @@ emb_celtic_unity_irish_pictish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -379,7 +379,7 @@ emb_celtic_unity_irish_scottish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -399,7 +399,7 @@ emb_celtic_unity_pictish_scottish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -427,7 +427,7 @@ emb_celtic_unity_breton_irish_pictish_scottish = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -448,7 +448,7 @@ emb_celtic_unity_breton_irish_pictish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -469,7 +469,7 @@ emb_celtic_unity_breton_irish_scottish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -490,7 +490,7 @@ emb_celtic_unity_breton_pictish_scottish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -511,7 +511,7 @@ emb_celtic_unity_irish_pictish_scottish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
@@ -540,7 +540,7 @@ emb_celtic_unity_breton_irish_pictish_scottish_welsh = {
 	emb_bloodline_effect_celtic_retinues = 1
 	emb_bloodline_effect_celtic_buildings = 1
 	allow_bastards = yes
-	active = { culture_group = celtic }
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
 	flags = {
 		# Tracking
 		emb
