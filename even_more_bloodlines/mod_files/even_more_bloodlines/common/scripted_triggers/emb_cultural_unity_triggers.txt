@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 emb_cultural_unity_this_character_belongs_to_a_culture_that_can_do_bloodline_culture_conversion = {
 	OR = {
 		emb_celtic_unity_this_character_is_of_a_supported_culture = yes
@@ -74,7 +76,17 @@ emb_cultural_unity_this_province_is_eligible_for_culture_conversion_by_fromfrom 
 		# Port or single-landlocked, or has a same-culture-group province nearby
 		port = yes
 		any_neighbor_province = { port = yes }
-		any_neighbor_province = { culture_group = FROMFROM }
-		any_neighbor_province = { any_neighbor_province = { culture_group = FROMFROM } }
+		any_neighbor_province = {
+			# The Validator thinks FROMFROM isn't correct in this scope, but it is and it works, so ignore the error
+			# Audax Validator "." Ignore_NEXT
+			culture_group = FROMFROM
+		}
+		any_neighbor_province = {
+			any_neighbor_province = {
+				# The Validator thinks FROMFROM isn't correct in this scope, but it is and it works, so ignore the error
+				# Audax Validator "." Ignore_NEXT
+				culture_group = FROMFROM
+			}
+		}
 	}
 }

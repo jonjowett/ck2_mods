@@ -822,14 +822,18 @@ province_event = {
 			# (Non-cynical) AI is more likely to pay if province religion doesn't match theirs (since this includes a free religious conversion)
 			modifier = {
 				factor = 1.5
-				NOT = { religion = ROOT }
-				NOT = { trait = cynical }
+				owner = {
+					NOT = { religion = ROOT }
+					NOT = { trait = cynical }
+				}
 			}
 			modifier = {
 				factor = 1.5
-				NOT = { religion = ROOT }
-				NOT = { trait = cynical }
-				trait = zealous
+				owner = {
+					NOT = { religion = ROOT }
+					NOT = { trait = cynical }
+					trait = zealous
+				}
 			}
 			
 		}

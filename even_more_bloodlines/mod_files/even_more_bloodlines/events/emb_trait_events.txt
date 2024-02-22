@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 namespace = EMBTraits
 
 # Numbering convention for events in this file:
@@ -548,7 +550,7 @@ character_event = {
 		# Check back sometime in the next year (so that any education cleanup events have definitely finished)
 		guardian = { save_event_target_as = emb_education_upgrade_childs_guardian }
 		character_event = { id = EMBTraits.410 days = 90 random = 180 }
-		character_event = { id = EMBTraits.499 days = 275 }
+		character_event = { id = EMBTraits.499 days = 275 } # Always at least 5 days after the main event was triggered (on the previous line)
 	}
 }
 
@@ -821,42 +823,43 @@ character_event = {
 	}
 	
 	option = {
-		
 		name = EMBTraits420_Option_EducationAlreadyMaxed
-		
-		trigger = {
-			OR = {
-				trait = grey_eminence
-				trait = brilliant_strategist
-				trait = midas_touched
-				trait = elusive_shadow
-				trait = mastermind_theologian
-			}
-		}
-		
-		if = {
-			limit = { trait = grey_eminence }
-			change_diplomacy = 2
-		}
-		else_if = {
-			limit = { trait = brilliant_strategist }
-			change_martial = 2
-		}
-		else_if = {
-			limit = { trait = midas_touched }
-			change_stewardship = 2
-		}
-		else_if = {
-			limit = { trait = elusive_shadow }
-			change_intrigue = 2
-		}
-		else_if = {
-			limit = { trait = mastermind_theologian }
-			change_learning = 2
-		}
-		
+		trigger = { trait = grey_eminence }
+		change_diplomacy = 2
+		show_trait = grey_eminence
 		hidden_tooltip = { set_character_flag = emb_education_upgrade_not_performed_already_at_max }
-		
+	}
+	
+	option = {
+		name = EMBTraits420_Option_EducationAlreadyMaxed
+		trigger = { trait = brilliant_strategist }
+		change_martial = 2
+		show_trait = brilliant_strategist
+		hidden_tooltip = { set_character_flag = emb_education_upgrade_not_performed_already_at_max }
+	}
+	
+	option = {
+		name = EMBTraits420_Option_EducationAlreadyMaxed
+		trigger = { trait = midas_touched }
+		change_stewardship = 2
+		show_trait = midas_touched
+		hidden_tooltip = { set_character_flag = emb_education_upgrade_not_performed_already_at_max }
+	}
+	
+	option = {
+		name = EMBTraits420_Option_EducationAlreadyMaxed
+		trigger = { trait = elusive_shadow }
+		change_intrigue = 2
+		show_trait = elusive_shadow
+		hidden_tooltip = { set_character_flag = emb_education_upgrade_not_performed_already_at_max }
+	}
+	
+	option = {
+		name = EMBTraits420_Option_EducationAlreadyMaxed
+		trigger = { trait = mastermind_theologian }
+		change_learning = 2
+		show_trait = mastermind_theologian
+		hidden_tooltip = { set_character_flag = emb_education_upgrade_not_performed_already_at_max }
 	}
 	
 	after = {
@@ -864,9 +867,11 @@ character_event = {
 		# Notify the child's guardian, host (if unlanded), parents, and player close relatives about the upgraded education.
 		# But if someone fulfils several of these roles, they should only be notified once!
 		hidden_tooltip = {
-			event_target:emb_education_upgrade_childs_guardian = {
-				character_event = { id = EMBTraits.421 }
-			}
+			
+			# Guardian
+			event_target:emb_education_upgrade_childs_guardian = { character_event = { id = EMBTraits.421 } }
+			
+			# Father (if not guardian)
 			if = {
 				limit = {
 					NOT = {
@@ -875,6 +880,8 @@ character_event = {
 				}
 				father = { character_event = { id = EMBTraits.421 } }
 			}
+			
+			# Mother (if not guardian or father)
 			if = {
 				limit = {
 					NOR = {
@@ -884,6 +891,8 @@ character_event = {
 				}
 				mother = { character_event = { id = EMBTraits.421 } }
 			}
+			
+			# Host (if not mother, father or guardian)
 			if = {
 				limit = {
 					is_landed = no
@@ -895,6 +904,8 @@ character_event = {
 				}
 				host = { character_event = { id = EMBTraits.421 } }
 			}
+			
+			# Non-AI close relative (if not mother, father, guardian or host)
 			any_close_relative = {
 				limit = {
 					ai = no
@@ -910,6 +921,7 @@ character_event = {
 				}
 				character_event = { id = EMBTraits.421 }
 			}
+			
 		}
 		
 	}
@@ -970,15 +982,313 @@ character_event = {
 	}
 	
 	# Show a different option button depending on what happened
+	
+	# Stat increase
 	option = {
-		trigger = { FROM = { has_character_flag = emb_education_upgrade_performed } }
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				trait = grey_eminence
+			}
+		}
+		show_trait = grey_eminence
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				trait = brilliant_strategist
+			}
+		}
+		show_trait = brilliant_strategist
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				trait = midas_touched
+			}
+		}
+		show_trait = midas_touched
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				trait = elusive_shadow
+			}
+		}
+		show_trait = elusive_shadow
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				trait = mastermind_theologian
+			}
+		}
+		show_trait = mastermind_theologian
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				NOR = {
+					trait = grey_eminence
+					trait = brilliant_strategist
+					trait = midas_touched
+					trait = elusive_shadow
+					trait = mastermind_theologian
+				}
+			}
+		}
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+		tooltip_info_custom = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_FallbackTooltip_tt
+	}
+	
+	# Education upgrade: Diplomacy
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = underhanded_rogue
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = naive_appeaser
+		show_trait = underhanded_rogue
 		name = EMBTraits421_Option_UpgradePerformed
 		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
 	}
 	option = {
-		trigger = { FROM = { has_character_flag = emb_education_upgrade_not_performed_already_at_max } }
-		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
-		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = charismatic_negotiator
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = underhanded_rogue
+		show_trait = charismatic_negotiator
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = grey_eminence
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = charismatic_negotiator
+		show_trait = grey_eminence
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	
+	# Education upgrade: Martial
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = tough_soldier
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = misguided_warrior
+		show_trait = tough_soldier
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = skilled_tactician
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = tough_soldier
+		show_trait = skilled_tactician
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = brilliant_strategist
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = skilled_tactician
+		show_trait = brilliant_strategist
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	
+	# Education upgrade: Stewardship
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = thrifty_clerk
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = indulgent_wastrel
+		show_trait = thrifty_clerk
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = fortune_builder
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = thrifty_clerk
+		show_trait = fortune_builder
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = midas_touched
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = fortune_builder
+		show_trait = midas_touched
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	
+	# Education upgrade: Intrigue
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = flamboyant_schemer
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = amateurish_plotter
+		show_trait = flamboyant_schemer
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = intricate_webweaver
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = flamboyant_schemer
+		show_trait = intricate_webweaver
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = elusive_shadow
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = intricate_webweaver
+		show_trait = elusive_shadow
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	
+	# Education upgrade: Learning
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = martial_cleric
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = detached_priest
+		show_trait = martial_cleric
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = scholarly_theologian
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = martial_cleric
+		show_trait = scholarly_theologian
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = mastermind_theologian
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = scholarly_theologian
+		show_trait = mastermind_theologian
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	
+	# Education upgrade: Fallback
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				NOR = {
+					trait = underhanded_rogue
+					trait = charismatic_negotiator
+					trait = grey_eminence
+					trait = tough_soldier
+					trait = skilled_tactician
+					trait = brilliant_strategist
+					trait = thrifty_clerk
+					trait = fortune_builder
+					trait = midas_touched
+					trait = flamboyant_schemer
+					trait = intricate_webweaver
+					trait = elusive_shadow
+					trait = martial_cleric
+					trait = scholarly_theologian
+					trait = mastermind_theologian
+				}
+			}
+		}
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+		tooltip_info_custom = EMBTraits421_Option_UpgradePerformed_FallbackTooltip_tt
 	}
 	
 }
