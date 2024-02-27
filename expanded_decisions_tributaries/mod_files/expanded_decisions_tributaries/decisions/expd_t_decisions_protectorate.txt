@@ -61,6 +61,10 @@ targetted_decisions = {
 				}
 			}
 			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
+			if = {
+				limit = { ROOT = { is_primary_war_defender = yes } }
+				FROM = { join_defender_wars = ROOT }
+			}
 		}
 		
 		ai_will_do = {
@@ -151,21 +155,48 @@ targetted_decisions = {
 				OR = {
 					
 					# Propping up independent rulers of your dynasty is a time-honoured tradition
-					dynasty = FROM
-					
 					# Propping up rulers whose heirs are of your dynasty is also good business
-					current_heir = { dynasty = FROM }
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_ROOT_OR_ROOTS_HEIR_IS_SAME_DYNASTY_AS_FROM
+						OR = {
+							dynasty = FROM
+							current_heir = { dynasty = FROM }
+						}
+					}
 					
-					# Propping up friends and lovers makes sense
-					is_friend = FROM
-					is_lover  = FROM
+					# Propping up friends, lovers and spouses makes sense
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_ROOT_IS_FRIEND_OR_LOVER_OR_SPOUSE_OF_FROM
+						OR = {
+							is_friend = FROM
+							is_lover  = FROM
+							any_spouse = { character = FROM }
+						}
+					}
+					
+					# People with the same secret religion can prop each other up (although why they would do so rather than coming out is not obvious)
+					# Hide this option unless the decision-taker has a secret religion (it's an easter egg!)
+					trigger_if = {
+						limit = { FROM = { has_secret_religion = yes } }
+						custom_tooltip = {
+							text = EXPD_T_TOOLTIP_ROOT_HAS_SAME_SECRET_RELIGION_AS_FROM
+							ROOT = { has_secret_religion = yes }
+							FROM = { secret_religion_scope = { ROOT = { secret_religion_scope = { religion = PREVPREV } } } }
+						}
+					}
+					trigger_else = {
+						hidden_tooltip = { always = no }
+					}
 					
 					# Zealots can prop up co-religionists who border large nations (ie. kingdoms and empires) following other religions
 					AND = {
-						FROM = {
-							trait = zealous
-							has_secret_religion = no
-							religion = ROOT
+						custom_tooltip = {
+							text = EXPD_T_TOOLTIP_FROM_IS_ZEALOUS_AND_OF_SAME_RELIGION_AS_ROOT
+							FROM = {
+								trait = zealous
+								has_secret_religion = no
+								religion = ROOT
+							}
 						}
 						custom_tooltip = {
 							text = EXPD_T_TOOLTIP_TARGET_HAS_POWERFUL_NEIGHBOUR_OF_DIFF_RELIGION
@@ -179,6 +210,7 @@ targetted_decisions = {
 							}
 						}
 					}
+					
 				}
 			}
 		}
@@ -192,6 +224,10 @@ targetted_decisions = {
 				}
 			}
 			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
+			if = {
+				limit = { ROOT = { is_primary_war_defender = yes } }
+				FROM = { join_defender_wars = ROOT }
+			}
 		}
 		
 		ai_will_do = {
@@ -276,7 +312,7 @@ targetted_decisions = {
 				}
 			}
 			
-			#AI is more likely to set up protectorates if they are very wealthy (IE: can hire mercs)
+			# AI is more likely to set up protectorates if they are very wealthy (IE: can hire mercs)
 			modifier = {
 				factor = 2
 				FROM = { wealth = 2000 }
@@ -289,7 +325,291 @@ targetted_decisions = {
 				factor = 2
 				FROM = { wealth = 10000 }
 			}
-				
+			
+			# AI is less likely to offer if they will be immediately dragged into costly defensive wars.
+			# This penalty is halved for brave decision-takers.
+			# Note that this check compares the primary attackers and all allies against the *decision-taker* (not the current defender)
+			modifier = {
+				factor = 0.8
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.2
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.9
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.2
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.8
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.3
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.9
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.3
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.4
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.75
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.4
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.5
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.75
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.5
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.2
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.6
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.6
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.6
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.2
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.7
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.6
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.7
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.1
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.8
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.55
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.8
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.1
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.9
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.55
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.9
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 1.0
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 1.0
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.25
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 1.5
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 2
+						}
+					}
+				}
+			}
+			
 		}
 		
 		ai_acceptance = {
@@ -351,6 +671,10 @@ targetted_decisions = {
 			additive_modifier = {
 				value = 50
 				is_lover = FROM
+			}
+			additive_modifier = {
+				value = 50
+				any_spouse = { character = FROM }
 			}
 			
 			# Effect of tier difference
@@ -706,6 +1030,94 @@ targetted_decisions = {
 			
 		}
 	}
+	
+	expd_t_change_type_to_protectorate = {
+		# This decision allows players to change permanent tributaries into protectorates
+		# FROM = suzerain; ROOT = tributary
+		
+		only_independent = yes
+		filter = independent_rulers
+		
+		# This decision is only for players!
+		ai_filter = none
+		
+		from_potential = {
+			independent  = yes
+			is_landed    = yes
+			is_tributary = no
+			ai           = no
+		}
+		
+		potential = {
+			independent  = yes
+			is_landed    = yes
+			is_tributary = {
+				type = permanent
+				suzerain = FROM
+			}
+		}
+		
+		allow = {
+			always = yes
+		}
+		
+		effect = {
+			FROM = {
+				make_tributary = {
+					who = ROOT
+					percentage = 0.2
+					tributary_type = expd_t_protectorate
+				}
+			}
+			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
+		}
+		
+	}
+	
+	expd_t_change_type_to_vanilla_permanent = {
+		# This decision allows players to change permanent tributaries into protectorates
+		# (Potentially useful for removing the mod from an ongoing save)
+		# FROM = suzerain; ROOT = tributary
+		
+		only_independent = yes
+		filter = independent_rulers
+		
+		# This decision is only for players!
+		ai_filter = none
+		
+		from_potential = {
+			independent  = yes
+			is_landed    = yes
+			is_tributary = no
+			ai           = no
+		}
+		
+		potential = {
+			independent  = yes
+			is_landed    = yes
+			is_tributary = {
+				type = expd_t_protectorate
+				suzerain = FROM
+			}
+		}
+		
+		allow = {
+			always = yes
+		}
+		
+		effect = {
+			FROM = {
+				make_tributary = {
+					who = ROOT
+					percentage = 0.2
+					tributary_type = permanent
+				}
+			}
+			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
+		}
+		
+	}
+	
 }
 
 

@@ -214,3 +214,34 @@ expd_t_root_can_instantly_stop_being_a_protectorate_of_prev_due_to_non_independe
 		
 	}
 }
+
+expd_t_root_is_primary_defender_in_a_war = {
+	ROOT = { any_war = { defender = { character = ROOT } } }
+}
+
+expd_t_from_is_very_happy_to_join_roots_defensive_wars = {
+	# Used to decide whether AI will offer protection to characters who are primary defenders in their own war(s)
+	FROM = {
+		OR = {
+			trait = brave
+			trait = berserker
+			trait = lunatic
+			trait = possessed
+			trait = wroth
+			AND = {
+				trait = zealous
+				ROOT = {
+					religion = FROM
+					any_war = {
+						defender = { character = ROOT }
+						attacker = { NOT = { religion = ROOT } }
+					}
+				}
+			}
+		}
+		NOR = {
+			trait = craven
+			trait = shy
+		}
+	}
+}
