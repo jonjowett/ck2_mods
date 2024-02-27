@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 # Equivalent to "liberate_religion" ("# New6") in 01_cb_types
 # Only can_use and can_use_gui have been changed from the vanilla version
 # DAlso, deleted the duplicate is_valid_title block that's present in vanilla
@@ -34,12 +36,16 @@ expd_t_religious_liberation_cb = {
 				}
 			}
 		}
-		hidden_tooltip = { fire_haruspicy_event_effect = yes }
+		hidden_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			fire_haruspicy_event_effect = yes
+		}
 		if = {
 			limit = { defender = { is_offmap_governor = offmap_china } }
 			attacker = {  
 				sound_effect = china_angered_emperor
-				detract_grace_super_huge_effect = yes
+				# Audax Validator "." Ignore_NEXT
+				detract_grace_super_huge_effect = yes 
 			}
 		}
 	}
@@ -412,6 +418,7 @@ expd_t_religious_liberation_cb = {
 		hidden_tooltip = {
 			check_if_reconquista_finished_effect = yes
 			FROM = {
+				# Audax Validator "." Ignore_NEXT
 				landless_pope_effect = yes
 			}
 		}

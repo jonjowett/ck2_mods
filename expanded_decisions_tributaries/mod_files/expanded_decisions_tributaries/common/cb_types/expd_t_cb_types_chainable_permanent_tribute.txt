@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 # Equivalent to "tributary_permanent_cb" ("# New8") in 01_cb_types
 # Required because the vanilla chaining won't work with modded tributaries
 # Only can_use has been changed from the vanilla version
@@ -182,11 +184,15 @@ expd_t_chainable_permanent_tributary_cb = { # New8
 			set_character_flag = surrender_tributary_permanent_cb
 			character_event = { id = JD.2500 days = 5 tooltip = surrender_tributary_tt }
 		}
-		hidden_tooltip = { fire_haruspicy_event_effect = yes }
+		hidden_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			fire_haruspicy_event_effect = yes
+		}
 		if = {
 			limit = { defender = { is_offmap_governor = offmap_china } }
 			attacker = {  
 				sound_effect = china_angered_emperor
+				# Audax Validator "." Ignore_NEXT
 				detract_grace_super_huge_effect = yes 
 			}
 		}

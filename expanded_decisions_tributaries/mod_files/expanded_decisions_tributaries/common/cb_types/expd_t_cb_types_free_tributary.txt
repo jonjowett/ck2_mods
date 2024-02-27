@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 # Equivalent to "free_tributary_cb" ("# 56") in 00_cb_types
 # Only can_use and can_use_gui have been changed from the vanilla version
 
@@ -37,11 +39,15 @@ expd_t_free_tributary_cb = {
 	}
 
 	on_add = {
-		hidden_tooltip = { fire_haruspicy_event_effect = yes }
+		hidden_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			fire_haruspicy_event_effect = yes
+		}
 		if = {
 			limit = { defender = { is_offmap_governor = offmap_china } }
 			attacker = {  
 				sound_effect = china_angered_emperor
+				# Audax Validator "." Ignore_NEXT
 				detract_grace_super_huge_effect = yes 
 			}
 		}
