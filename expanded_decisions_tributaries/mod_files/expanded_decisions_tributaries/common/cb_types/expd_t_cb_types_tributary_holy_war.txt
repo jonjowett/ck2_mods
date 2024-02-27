@@ -1,0 +1,540 @@
+# Audax Validator EnableCommentMetadata
+
+# Declare holy war on behalf of one of your permanent tributaries
+# Equivalent to "religious" (line 5816) in 00_cb_types, except that: validity is depends on the tributary; any costs are paid by the suzerain; and the tributary joins the war.
+
+other_expd_t_tributary_holy_war_cb = {
+	name = CB_NAME_RELIGIOUS
+	war_name = WAR_NAME_RELIGIOUS
+	sprite = 9
+	truce_days = 3650
+	is_permanent = yes
+	is_holy_war = yes
+	check_de_jure_tier = DUKE # this scans all dejure duchies for the counties which are held by or vassals(or below) of selected character. Only valid if is_permanent = yes
+	
+	allowed_to_target_tributaries = no
+	
+	sort_priority = 801 # Appears immediately after your own Holy War CBs vs the same target
+	
+	can_use = {
+		
+		# Temporary for testing - only available for players
+		ROOT = { ai = no }
+		
+		# Attacker and his tributary must be landed and independent
+		ROOT = {
+			independent = yes
+			is_landed = yes
+		}
+		FROMFROM = {
+			independent = yes
+			is_landed = yes
+		}
+		
+		# Defender must be functionally independent (including temporary independence via faction revolt etc)
+		FROM = { top_liege = { character = PREV } }
+		
+		# Third party tributary must be a permanent same-religion tributary of ROOT, and must have the vanilla holy war CB vs the defender
+		#    (This is a shortcut so we don't need to duplicate all of the complex checks from vanilla.)
+		FROMFROM = {
+			expd_t_is_normal_or_modded_permanent_tributary_of_root = yes
+			religion = ROOT
+			can_use_cb = {
+				target = FROM
+				casus_belli = religious
+			}
+		}
+		
+	}
+	
+	can_use_gui = {
+		
+		# As per vanilla, ROOT must have the ability to pay 250 piety on war dec if they are buddhist
+		ROOT = {
+			OR = {
+				NOT = { religion = buddhist }
+				piety = 250
+			}
+		}
+		
+		# ROOT must not already be primary attacker in another war
+		# This is needed so that we can force the third party to join *this* war as a secondary participant (due to the limitations on the join_attacker_wars command)
+		ROOT = { expd_t_this_character_is_not_primary_attacker_in_any_other_war = yes }
+		
+	}
+	
+	can_use_title = {
+		
+		# The third-party tributary needs at least one county in the target kingdom, or a border, or be only two sea zones away from one of the target counties
+		# Same as the can_use_title clause in the vanilla holy war CB (approx line 5951 in 00_cb_types), except all instances of ROOT have been changed to FROMFROM.
+		any_direct_de_jure_vassal_title = {
+			OR = {
+				holder_scope = {
+					OR = {
+						character = FROMFROM
+						is_liege_or_above = FROMFROM
+					}
+				}
+				location = {
+					any_neighbor_province = {
+						OR = {
+							AND = {
+								has_owner = yes
+								owner = {
+									OR = {
+										character = FROMFROM
+										is_liege_or_above = FROMFROM
+									}
+								}
+							}
+							AND = {
+								is_land = no
+								OR = {
+									FROMFROM = { religion_group = muslim }
+									FROM = { religion_group = muslim }
+									AND = {
+										FROMFROM = { religion_group = pagan_group }
+										has_global_flag = pagan_ghws_unlocked
+									}
+									AND = {
+										FROMFROM = { religion_group = christian }
+										has_global_flag = christian_crusades_unlocked
+									}
+									AND = {
+										FROMFROM = { religion_group = muslim }
+										has_global_flag = muslim_jihads_unlocked
+									}
+								}
+								any_neighbor_province = {
+									OR = {
+										AND = {
+											has_owner = yes
+											owner = {
+												OR = {
+													character = FROMFROM
+													is_liege_or_above = FROMFROM
+												}
+											}
+										}
+										AND = {
+											is_land = no
+											any_neighbor_province = {
+												owner = {
+													OR = {
+														character = FROMFROM
+														is_liege_or_above = FROMFROM
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+	}
+	
+	is_valid = {
+		
+		# ROOT and his tributary must fulfil the validity requirements for the vanilla holy war
+		FROMFROM = { expd_t_this_character_can_maintain_valid_holy_war_against_from = yes }
+		ROOT     = { expd_t_this_character_can_maintain_valid_holy_war_against_from = yes }
+		
+		# The third-party tributary must remain a same-religion permanent tributary of ROOT
+		FROMFROM = {
+			expd_t_is_normal_or_modded_permanent_tributary_of_root = yes
+			religion = ROOT
+		}
+		
+	}
+	
+	on_add = {
+		
+		# Force the third-party tributary to join the war as a secondary participant
+		FROMFROM = { join_attacker_wars = ROOT }
+		
+		# Do everything from vanilla
+		ROOT = {
+			show_scope_change = no
+			if = {
+				limit = { religion = buddhist }
+				piety = -250
+			}
+		}
+		hidden_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			fire_haruspicy_event_effect = yes
+		}
+		if = {
+			limit = { defender = { is_offmap_governor = offmap_china } }
+			attacker = {  
+				sound_effect = china_angered_emperor
+				# Audax Validator "." Ignore_NEXT
+				detract_grace_super_huge_effect = yes 
+			}
+		}
+		
+	}
+	
+	on_success = { # Identical to vanilla
+		any_attacker = {
+			limit = { NOT = { character = ROOT } }
+			hidden_tooltip = { 
+				participation_scaled_piety = 100
+				participation_scaled_prestige = 50
+				if = {
+					limit = {
+						uses_decadence = yes
+					}
+					participation_scaled_decadence = -10
+				}
+				hidden_tooltip = {
+					if = {
+						limit = {
+							has_ambition = obj_strengthen_religion
+						}
+						change_variable = { which = strengthen_religion value = 1 }
+					}
+				}
+			}
+		}
+		
+		ROOT = { 
+			participation_scaled_piety = 100
+			participation_scaled_prestige = 50
+			if = {
+				limit = {
+					uses_decadence = yes
+				}
+				participation_scaled_decadence = -10
+			}
+			religion_authority = {
+				modifier = won_holy_war
+				years = 20
+			}
+			hidden_tooltip = {
+				if = {
+					limit = {
+						has_ambition = obj_strengthen_religion
+					}
+					change_variable = { which = strengthen_religion value = 1 }
+				}
+			}
+		}
+		FROM = {
+			if = {
+				limit = {
+					NOT = {
+						has_character_modifier = known_satanist
+					}
+				}
+				religion_authority = {
+					modifier = lost_holy_war
+					years = 20
+				}		
+			}
+		}
+		FROM = { show_scope_change = no piety = -100 }
+		FROM = { show_scope_change = no prestige = -50 }
+	}
+	
+	on_success_title = { # Same as vanilla, except ROOT has been changed to FROMFROM, and tooltips altered accordingly
+		if = { # Standard Holy War behaviour for Non-Muslims and Muslims fighting other Muslims
+			show_scope_change = no
+			limit = {
+				OR = {
+					FROMFROM = { NOT = { religion_group = muslim } }
+					AND = {
+						FROMFROM = { religion_group = muslim }
+						FROM     = { religion_group = muslim }
+					}
+				}
+			}
+			custom_tooltip = {
+				text = expd_t_tributary_holy_war_cb_succ_title_nonmuslim_tt
+				hidden_tooltip = {
+					FROMFROM = {
+						vassalize_or_take_under_title = {
+							title = PREV
+							enemy = FROM
+							same_religion = yes # Only vassalize rulers of my religion
+							is_religious = yes
+							type = holy_war
+						}
+					}
+				}
+			}
+		}
+		if = { # Muslims fighting Non-Muslims preserve vassals
+			show_scope_change = no
+			limit = {
+				FROMFROM =         { religion_group = muslim }
+				FROM     = { NOT = { religion_group = muslim } }
+			}
+			custom_tooltip = {
+				text = expd_t_tributary_holy_war_cb_succ_title_muslim_tt
+				hidden_tooltip = {
+					FROMFROM = {
+						vassalize_or_take_under_title = {
+							title = PREV
+							enemy = FROM
+							is_religious = yes
+							type = holy_war
+						}
+					}
+				}
+			}
+		}
+		hidden_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			check_war_effect = yes
+			FROM = {
+				# Audax Validator "." Ignore_NEXT
+				landless_pope_effect = yes
+			}
+		}
+	}
+	
+	on_fail = { # Identical to vanilla (ROOT pays the penalty!)
+		ROOT = {
+			show_scope_change = no
+			piety = -50 
+			prestige = -100
+		}
+	}
+	
+	on_reverse_demand = { # Identical to vanilla (ROOT pays the penalty!)
+		ROOT = {
+			show_scope_change = no
+			transfer_scaled_wealth = {
+				to = FROM
+				value = 4.0
+			}
+			piety = -75
+			prestige = -150
+		}
+		FROM = {
+			participation_scaled_piety = 200
+			participation_scaled_prestige = 100
+			if = {
+				limit = {
+					uses_decadence = yes
+				}
+				participation_scaled_decadence = -10
+			}
+		}
+		any_defender = {
+			limit = { NOT = { character = FROM } }
+			hidden_tooltip = { 
+				participation_scaled_piety = 200
+				participation_scaled_prestige = 100
+				if = {
+					limit = {
+						uses_decadence = yes
+					}
+					participation_scaled_decadence = -10
+				}
+				hidden_tooltip = {
+					if = {
+						limit = {
+							has_ambition = obj_strengthen_religion
+						}
+						change_variable = { which = strengthen_religion value = 1 }
+					}
+				}
+			}
+		}
+		any_attacker = {
+			limit = {
+				character = ROOT
+				uses_decadence = yes
+				NOT = {
+					any_liege = {
+						dynasty = PREV
+					}
+				}
+			}
+			participation_scaled_decadence = 20
+		}
+		any_attacker = {
+			limit = {
+				NOT = { character = ROOT }
+				uses_decadence = yes
+				NOT = {
+					any_liege = {
+						dynasty = PREV
+					}
+				}
+			}
+			hidden_tooltip = { 
+				participation_scaled_decadence = 20
+			}
+		}
+		ROOT = { 
+			religion_authority = {
+				modifier = lost_holy_war
+				years = 20
+			}
+		}
+		FROM = { 
+			religion_authority = {
+				modifier = won_holy_war
+				years = 20
+			}
+			hidden_tooltip = {
+				if = {
+					limit = {
+						has_ambition = obj_strengthen_religion
+					}
+					change_variable = { which = strengthen_religion value = 1 }
+				}
+			}
+		}
+	}
+	
+	attacker_ai_victory_worth = { # Identical to vanilla
+		factor = -1 # always accept
+	}
+	
+	attacker_ai_defeat_worth = { # Identical to vanilla
+		factor = 100
+	}
+	
+	defender_ai_victory_worth = { # Identical to vanilla
+		factor = -1 # always accept
+	}
+	
+	defender_ai_defeat_worth = { # Identical to vanilla
+		factor = 100
+	}
+	
+	ai_will_do = { # Identical to vanilla
+		factor = 1
+		
+		modifier = { #Focus on Coronation first.
+			factor = 0.1
+			has_dlc = "Holy Fury"
+			ROOT = {
+				is_feudal = yes
+				OR = {
+					religion = catholic
+					religion = fraticelli
+				}
+				NOR = {
+					trait = crowned_by_priest
+					trait = crowned_by_bishop
+					trait = crowned_by_pope
+					trait = crowned_by_myself
+				}
+			}
+		}
+		
+		modifier = {
+			factor = 0
+			FROM = {
+				is_nomadic = yes
+			}
+			ROOT = {
+				is_nomadic = no
+				NOT = {
+					is_tribal = yes
+				}
+			}
+			NOT = {
+				any_direct_de_jure_vassal_title = {
+					any_direct_de_jure_vassal_title = {
+						OR = {
+							holding_type = castle
+							holding_type = city
+						}
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			FROM = {
+				is_nomadic = yes
+			}
+			ROOT = {
+				is_tribal = yes
+			}
+			NOT = {
+				any_direct_de_jure_vassal_title = {
+					any_direct_de_jure_vassal_title = {
+						OR = {
+							holding_type = castle
+							holding_type = city
+							holding_type = tribal
+						}
+					}
+				}
+			}
+		}
+		
+		# Try to guide the Hordes in the right direction
+		modifier = {
+			factor = 0.1
+			ROOT = {
+				OR = {
+					dynasty = 613 # Seljuks
+					dynasty = 800 # Timurids
+					primary_title = { title = e_il-khanate }
+				}
+			}
+			OR = {
+				empire = {
+					NOT = {
+						OR = {
+							title = e_persia
+							title = e_byzantium
+							title = e_arabia
+						}
+					}
+				}
+				FROM = {
+					primary_title = { title = e_golden_horde }
+					NOT = { year = 1300 }
+				}
+			}
+		}
+		modifier = {
+			factor = 0.1
+			ROOT = {
+				primary_title = { title = e_golden_horde }
+			}
+			OR = {
+				empire = {
+					OR = {
+						title = e_persia
+						title = e_byzantium
+						title = e_arabia
+					}
+				}
+				FROM = {
+					primary_title = { title = e_il-khanate }
+					NOT = { year = 1300 }
+				}
+			}
+		}
+		modifier = {
+			factor = 2.0
+			OR = {
+				culture = persian
+				culture = baloch
+				culture = afghan
+				culture = turkish
+			}
+			empire = {
+				OR = {
+					title = e_persia
+					title = e_rajastan
+				}
+			}
+		}
+	}
+}

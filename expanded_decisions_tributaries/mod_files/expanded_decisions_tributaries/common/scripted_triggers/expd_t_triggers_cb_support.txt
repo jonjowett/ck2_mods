@@ -59,6 +59,39 @@ expd_t_this_de_jure_kingdom_borders_root_or_roots_same_religion_tributaries = {
 
 
 
+############
+# Holy War #
+############
+
+expd_t_this_character_can_maintain_valid_holy_war_against_from = {
+	# Slightly-modified version of the "is_valid" clause of the "religious" CB (approx line 6023 of 00_cb_types)
+	NOT = { religion_group = pagan_group }
+	NOT = { pacifist = yes }
+	NOT = { same_realm = FROM }
+	OR = {
+		NOT = { religion_group = FROM }
+		is_heresy_of = FROM
+		is_parent_religion = FROM
+		AND = {
+			has_dharmic_religion_trigger = yes
+			FROM = { religion = taoist }
+		}
+		AND = {
+			religion_group = FROM
+			NOT = { has_character_modifier = known_satanist }
+			FROM = { has_character_modifier = known_satanist }
+		}
+		AND = {
+			religion_group = muslim
+			NOT = { religion = FROM }
+		}
+	}
+	# Add the requirement that this character must be functionally independent
+	# This replaces all of the vanilla conditions on the top_liege
+	top_liege = { character = PREV }
+}
+
+
 
 
 #############
@@ -169,5 +202,12 @@ expd_t_this_province_borders_root_or_roots_same_religion_tributaries = {
 				}
 			}
 		}
+	}
+}
+
+expd_t_this_character_is_not_primary_attacker_in_any_other_war = {
+	custom_tooltip = {
+		text = expd_t_this_character_is_not_primary_attacker_in_any_other_war_tt
+		NOT = { any_war = { attacker = { character = PREVPREV } } }
 	}
 }
