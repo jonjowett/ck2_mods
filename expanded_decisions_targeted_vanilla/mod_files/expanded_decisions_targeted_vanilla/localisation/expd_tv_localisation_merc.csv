@@ -1,0 +1,28 @@
+#
+# Main Menu
+EXPDTVM_MainMenu_EvtTitle;Mercenary Size: Main Menu;;;;;;;;;;;;;x
+EXPDTVM_MainMenu_EvtDesc;[From.GetFirstNameWithNick] has created a new mercenary company:\n[From.PrimaryTitle.GetName]\nThe default size of this mercenary company may be much too large for AI characters to hire, in which case you can reduce it using the options below.\n\nNote 1: An AI character in your position would calculate as follows: your max demesne levy size is [Root.expd_tv_merc_max_demesne_levies_approx.GetValue], therefore the merc company's size will be [Root.expd_tv_merc_size_default_approx.GetValue], the target size is [Root.expd_tv_merc_size_target_min.GetValue]-[Root.expd_tv_merc_size_target_max.GetValue], therefore the desired multiplier is [Root.expd_tv_merc_size_target_mult_min_pc.GetValue]-[Root.expd_tv_merc_size_target_mult_max_pc.GetValue]%.\n\nNote 2: You will be able to preview the new size before it is finalised.;;;;;;;;;;;;;x
+EXPDTVM_MainMenu_EvtOpt_NoChange;Keep the company at its default size;;;;;;;;;;;;;x
+EXPDTVM_MainMenu_EvtOpt_Reduce_50_40_30;Slightly reduce the company's size (to 50/40/30% of the default);;;;;;;;;;;;;x
+EXPDTVM_MainMenu_EvtOpt_Reduce_20_15_10;Significantly reduce the company's size (to 20/15/10% of the default);;;;;;;;;;;;;x
+EXPDTVM_MainMenu_EvtOpt_Reduce_5_2point5_1;Drastically reduce the company's size (to 5/2.5/1% of the default);;;;;;;;;;;;;x
+#
+# Various reduction choice events
+EXPDTVM_ChooseReduction_EvtTitle;Mercenary Size: Choose Reduction;;;;;;;;;;;;;x
+EXPDTVM_ChooseReduction_EvtDesc;Choose a specific reduction in the size of the new mercenary company: [From.PrimaryTitle.GetName]\nNote 1: If you did not have full levies when the mercenary company was created, it will start out part-empty and will refill over time. Its final default size (after refilling) will be approx [Root.expd_tv_merc_size_default_as_frac_of_max_demesne_levies_pc.GetValue]% of your current maximum demesne levies. Its hiring cost will NOT change while it is refilling, but its maintenance cost WILL.\nNote 2: An AI character in your position would calculate as follows: your max demesne levy size is [Root.expd_tv_merc_max_demesne_levies_approx.GetValue], therefore the merc company's size will be [Root.expd_tv_merc_size_default_approx.GetValue], the target size is [Root.expd_tv_merc_size_target_min.GetValue]-[Root.expd_tv_merc_size_target_max.GetValue], therefore the desired multiplier is [Root.expd_tv_merc_size_target_mult_min_pc.GetValue]-[Root.expd_tv_merc_size_target_mult_max_pc.GetValue]%.\nNote 3: You will be able to preview the new size before it is finalised.;;;;;;;;;;;;;x
+EXPDTVM_ChooseReduction_EvtOpt_Reset;Return to the main menu;;;;;;;;;;;;;x
+EXPDTVM_ChooseReduction_EvtOpt_ReduceTo50pc;Reduce the company to 50% of its default size;;;;;;;;;;;;;x
+EXPDTVM_ChooseReduction_EvtOpt_ReduceTo40pc;Reduce the company to 40% of its default size;;;;;;;;;;;;;x
+EXPDTVM_ChooseReduction_EvtOpt_ReduceTo30pc;Reduce the company to 30% of its default size;;;;;;;;;;;;;x
+EXPDTVM_ChooseReduction_EvtOpt_ReduceTo20pc;Reduce the company to 20% of its default size;;;;;;;;;;;;;x
+EXPDTVM_ChooseReduction_EvtOpt_ReduceTo15pc;Reduce the company to 15% of its default size;;;;;;;;;;;;;x
+EXPDTVM_ChooseReduction_EvtOpt_ReduceTo10pc;Reduce the company to 10% of its default size;;;;;;;;;;;;;x
+EXPDTVM_ChooseReduction_EvtOpt_ReduceTo5pc;Reduce the company to 5% of its default size;;;;;;;;;;;;;x
+EXPDTVM_ChooseReduction_EvtOpt_ReduceTo2point5pc;Reduce the company to 2.5% of its default size;;;;;;;;;;;;;x
+EXPDTVM_ChooseReduction_EvtOpt_ReduceTo1pc;Reduce the company to 1% of its default size;;;;;;;;;;;;;x
+#
+# Final Confirmation
+EXPDTVM_FinalConfirmation_EvtTitle;Mercenary Size: Final Confirmation;;;;;;;;;;;;;x
+EXPDTVM_FinalConfirmation_EvtDesc;The mercenary company's new size and cost can now be seen in the mercenary hiring screen.\nNote 1: You may need to refresh the UI by switching to another tab.\nNote 2: If you did not have full levies when the mercenary company was created, it will start out part-empty and will refill over time. (See Notes 1 & 2 on the "Choose Reduction" screen for full details.)\nNote 3: Occasional events can increase the size of the company by 5%, which is relative to the default size not the current size. Eg: If you reduced the company to 5% of its original size then this event would double the company's size.\nNote 4: You will NOT be able to change the size in the future!\n\nAre you happy with the current size of the mercenary company?;;;;;;;;;;;;;x
+EXPDTVM_FinalConfirmation_EvtOpt_OK;Yes, finalise the mercenary company at this size;;;;;;;;;;;;;x
+EXPDTVM_FinalConfirmation_EvtOpt_Reset;No, undo the changes and return to the main menu;;;;;;;;;;;;;x
