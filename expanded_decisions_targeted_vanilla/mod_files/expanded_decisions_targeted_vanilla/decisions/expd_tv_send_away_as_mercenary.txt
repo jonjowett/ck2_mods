@@ -55,27 +55,20 @@ targetted_decisions = {
 					}
 				}
 			}
+			mercenary = no
 			
-			#Mod changes: Altered version of the vanilla potential block, allowing the decision to be used on more people
+			#Mod changes: Is of your dynasty, or is a bastard of your dynasty (red or black blood drop on portrait)
 			OR = {
-				AND = { 
-					is_female = no 
-					FROM = { NOT = { has_religion_feature = religion_matriarchal } }
-				}
-				AND = { 
-					is_female = yes 
-					FROM = { has_religion_feature = religion_matriarchal }
-				}
-				FROM = { primary_title = { has_law = status_of_women_4 } }
-				
-				#Mod changes: Allow shieldmaidens to be sent away, even if laws would otherwise prohibit it
+				dynasty = FROM
 				AND = {
-					is_female = yes
-					trait = shieldmaiden
+					trait = bastard
+					OR = {
+						mother_even_if_dead = { dynasty = FROM }
+						father_even_if_dead = { dynasty = FROM }
+					}
 				}
 			}
-			mercenary = no
-			dynasty = FROM
+			
 			OR = {
 				#Any descendant & any close relative
 				is_descendant_of = FROM
@@ -98,8 +91,41 @@ targetted_decisions = {
 				}
 			}
 			NOT = { trait = incapable }
-			dynasty = FROM
+			
+			#Mod changes: Is of your dynasty, or is a bastard of your dynasty (red or black blood drop on portrait)
+			OR = {
+				dynasty = FROM
+				AND = {
+					trait = bastard
+					OR = {
+						mother_even_if_dead = { dynasty = FROM }
+						father_even_if_dead = { dynasty = FROM }
+					}
+				}
+			}
+			
+			#Mod changes: Moved the gender requirement to the allow block, since it's now more nuanced
+			OR = {
+				AND = { 
+					is_female = no 
+					FROM = { NOT = { has_religion_feature = religion_matriarchal } }
+				}
+				AND = { 
+					is_female = yes 
+					FROM = { has_religion_feature = religion_matriarchal }
+				}
+				FROM = { primary_title = { has_law = status_of_women_4 } }
+				
+				#Mod changes: Allow shieldmaidens to be sent away, even if laws would otherwise prohibit it
+				AND = {
+					is_female = yes
+					trait = shieldmaiden
+				}
+			}
+			
+			#Redundant with the home_court scope specified at the top of the decision
 			liege = { character = FROM }
+			
 			FROM = {
 				OR = {
 					AND = {
