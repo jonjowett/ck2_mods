@@ -38,9 +38,7 @@ targetted_decisions = {
 			OR = {
 				government = nomadic_government
 				has_character_modifier = mercenary_traditions
-				any_owned_bloodline = {
-					has_bloodline_flag = bloodline_mercenary_traditions
-				}
+				expd_tv_this_character_has_a_mercenary_bloodline = yes
 			}
 		}
 		
@@ -58,16 +56,7 @@ targetted_decisions = {
 			mercenary = no
 			
 			#Mod changes: Is of your dynasty, or is a bastard of your dynasty (red or black blood drop on portrait)
-			OR = {
-				dynasty = FROM
-				AND = {
-					trait = bastard
-					OR = {
-						mother_even_if_dead = { dynasty = FROM }
-						father_even_if_dead = { dynasty = FROM }
-					}
-				}
-			}
+			expd_tv_this_character_is_of_froms_dynasty_including_bastard = yes
 			
 			OR = {
 				#Any descendant & any close relative
@@ -76,7 +65,7 @@ targetted_decisions = {
 				
 				#Any dynast who could take the vanilla decision if they were male & landed 
 				has_character_modifier = mercenary_traditions
-				any_owned_bloodline = { has_bloodline_flag = bloodline_mercenary_traditions }
+				expd_tv_this_character_has_a_mercenary_bloodline = yes
 			}
 			
 		}
@@ -92,62 +81,62 @@ targetted_decisions = {
 			}
 			NOT = { trait = incapable }
 			
-			#Mod changes: Is of your dynasty, or is a bastard of your dynasty (red or black blood drop on portrait)
-			OR = {
-				dynasty = FROM
-				AND = {
-					trait = bastard
-					OR = {
-						mother_even_if_dead = { dynasty = FROM }
-						father_even_if_dead = { dynasty = FROM }
-					}
-				}
-			}
-			
 			#Mod changes: Moved the gender requirement to the allow block, since it's now more nuanced
-			OR = {
-				AND = { 
-					is_female = no 
-					FROM = { NOT = { has_religion_feature = religion_matriarchal } }
-				}
-				AND = { 
-					is_female = yes 
-					FROM = { has_religion_feature = religion_matriarchal }
-				}
-				FROM = { primary_title = { has_law = status_of_women_4 } }
-				
-				#Mod changes: Allow shieldmaidens to be sent away, even if laws would otherwise prohibit it
-				AND = {
-					is_female = yes
-					trait = shieldmaiden
-				}
+			trigger_if = {
+				limit = { is_female = no } # Male courtier
+				ROOT = { NOT = { has_religion_feature = religion_matriarchal } }
+				FROM = { NOT = { has_religion_feature = religion_matriarchal } }
 			}
-			
-			#Redundant with the home_court scope specified at the top of the decision
-			liege = { character = FROM }
-			
-			FROM = {
+			trigger_else = { # Female courtier
 				OR = {
 					AND = {
-						government = nomadic_government
-						unused_manpower = 500
-						max_manpower = 500
+						ROOT = { has_religion_feature = religion_matriarchal }
+						FROM = { has_religion_feature = religion_matriarchal }
 					}
 					AND = {
-						NOT = { government = nomadic_government }
-						demesne_garrison_size = 500
+						ROOT = { has_religion_feature = religion_equal }
+						FROM = { has_religion_feature = religion_equal }
 					}
+					FROM = { primary_title = { has_law = status_of_women_4 } }
+					#Mod changes: Allow shieldmaidens to be sent away, even if laws would otherwise prohibit it
+					ROOT = { trait = shieldmaiden }
 				}
 			}
+			
+			# This was included in vanilla even though it is redundant with the home_court scope specified at the top of the decision
+			# Probably included here as an extra explanation for players
+			liege = { character = FROM }
+			
+			# Add some of the potential conditions, as extra explanations for players
+			expd_tv_this_character_is_of_froms_dynasty_including_bastard = yes
 			OR = {
-				FROM = {
-					government = nomadic_government
-				}
+				#Any descendant & any close relative
+				is_descendant_of = FROM
+				is_close_relative = FROM
+				#Any dynast who could take the vanilla decision if they were male & landed 
 				has_character_modifier = mercenary_traditions
-				any_owned_bloodline = {
-					has_bloodline_flag = bloodline_mercenary_traditions
+				expd_tv_this_character_has_a_mercenary_bloodline = yes
+			}
+			
+			# Cleaned-up version of the vanilla condition
+			FROM = {
+				trigger_if = {
+					limit = { government = nomadic_government }
+					unused_manpower = 500
+					max_manpower = 500
+				}
+				trigger_else = {
+					demesne_garrison_size = 500
 				}
 			}
+			
+			# Cleaned-up version of the vanilla condition
+			OR = {
+				FROM = { government = nomadic_government }
+				ROOT = { has_character_modifier = mercenary_traditions }
+				ROOT = { expd_tv_this_character_has_a_mercenary_bloodline = yes }
+			}
+			
 		}
 		effect = {
 			FROM = {
@@ -192,12 +181,9 @@ targetted_decisions = {
 					}
 				}
 				
-				ROOT = {
-					set_defacto_liege = THIS
-				}
+				ROOT = { set_defacto_liege = THIS }
 			}
 			set_character_flag = is_mercenary_leader
-
 			add_trait = adventurer
 			add_character_modifier = { modifier = started_mercenary_company months = 30 }
 		}
@@ -206,7 +192,6 @@ targetted_decisions = {
 			modifier = {
 				factor = 0.5
 			}
-
 			modifier = {
 				factor = 0
 				OR = {
@@ -270,23 +255,22 @@ targetted_decisions = {
 				prestige = 1000
 			}
 
+			# Adjusted weights so that highly-martially-educated characters are more likely to be sent
+			# (But not drastically more likely, in line with the vanilla approach above)
 			modifier = {
 				factor = 2
 				trait = misguided_warrior
 			}
-
 			modifier = {
-				factor = 2
+				factor = 3
 				trait = tough_soldier
 			}
-
 			modifier = {
-				factor = 2
+				factor = 4
 				trait = skilled_tactician
 			}
-
 			modifier = {
-				factor = 2
+				factor = 5
 				trait = brilliant_strategist
 			}
 			
