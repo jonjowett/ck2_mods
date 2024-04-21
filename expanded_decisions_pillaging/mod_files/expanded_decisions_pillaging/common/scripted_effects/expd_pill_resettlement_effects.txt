@@ -1,0 +1,12 @@
+expd_pill_resettle_root_province_from_this_province = {
+	ROOT = {
+		show_scope_change = no
+		owner = { prestige = -50 }
+		custom_tooltip = {
+			text = EXPD_PILL_TOOLTIP_CREATE_NEW_TRIBE_IN_THIS_PROVINCE
+			build_holding = { type = tribal }
+		}
+		culture = PREV
+		religion = PREV
+	}
+}
