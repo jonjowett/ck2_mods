@@ -159,8 +159,82 @@ targetted_decisions = {
 			expd_preg_this_is_valid_target_for_rootfrom_to_trigger_pregnancy = yes
 		}
 		third_party_potential = {
-			FROMFROM = {
-				expd_preg_this_is_valid_father_for_rootfrom_to_trigger_pregnancy_on_root = yes
+			FROMFROM = { expd_preg_this_is_valid_father_for_rootfrom_to_trigger_pregnancy_on_root = yes }
+		}
+		third_party_allow = {
+			always = yes
+		}
+		third_party_score = {
+			factor = 0
+			additive_modifier = {
+				value = 101
+				custom_tooltip = {
+					text = EXPD_PREG_TOOLTIP_FROMFROM_IS_HUSBAND_OF_ROOT
+					ROOT = { any_spouse  = { character = FROMFROM } }
+				}
+			}
+			additive_modifier = {
+				value = 100
+				custom_tooltip = {
+					text = EXPD_PREG_TOOLTIP_FROMFROM_IS_CONSORT_OF_ROOT
+					ROOT = { any_consort = { character = FROMFROM } }
+				}
+			}
+			additive_modifier = {
+				value = 100
+				custom_tooltip = {
+					text = EXPD_PREG_TOOLTIP_FROMFROM_IS_LEGITIMATE_LOVER_OF_ROOT
+					ROOT = { any_lover   = { character = FROMFROM } }
+					OR = {
+						ROOT = { any_spouse  = { character = FROMFROM } }
+						ROOT = { any_consort = { character = FROMFROM } }
+					}
+				}
+			}
+			additive_modifier = {
+				value = 50
+				custom_tooltip = {
+					text = EXPD_PREG_TOOLTIP_FROMFROM_IS_ILLEGITIMATE_LOVER_OF_ROOT
+					ROOT = { any_lover   = { character = FROMFROM } }
+					NOR = {
+						ROOT = { any_spouse  = { character = FROMFROM } }
+						ROOT = { any_consort = { character = FROMFROM } }
+					}
+				}
+			}
+			modifier = {
+				factor = 1.5
+				custom_tooltip = {
+					text = EXPD_PREG_TOOLTIP_FROMFROM_HAS_HIGH_FERTILITY
+					FROMFROM = {
+						fertility >= 0.8
+						fertility <  1.0
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				custom_tooltip = {
+					text = EXPD_PREG_TOOLTIP_FROMFROM_HAS_VERY_HIGH_FERTILITY
+					FROMFROM = { fertility >= 1.0 }
+				}
+			}
+			modifier = {
+				factor = 0.75
+				custom_tooltip = {
+					text = EXPD_PREG_TOOLTIP_FROMFROM_HAS_LOW_FERTILITY
+					FROMFROM = {
+						fertility >= 0.2
+						fertility <  0.35
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				custom_tooltip = {
+					text = EXPD_PREG_TOOLTIP_FROMFROM_HAS_VERY_LOW_FERTILITY
+					FROMFROM = { fertility < 0.2 }
+				}
 			}
 		}
 		allow = {

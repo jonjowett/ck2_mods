@@ -73,14 +73,42 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 			has_global_flag = expd_preg_debug_mode
 			has_global_flag = expd_preg_debug_mode_instant
 		}
-		custom_tooltip = {
-			text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY
+		if = {
+			limit = { ROOT = { any_spouse  = { character = FROMFROM } } }
+			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_HUSBAND }
+		}
+		else_if = {
+			limit = { ROOT = { any_consort = { character = FROMFROM } } }
+			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_CONSORT }
+		}
+		else_if = {
+			limit = { ROOT = { any_lover   = { character = FROMFROM } } }
+			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_LOVER }
+		}
+		else = {
+			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_FALLBACK }
+		}
+		hidden_tooltip = {
 			character_event = { id = EXPDPregnancy.3000 }
 		}
 	}
 	else = {
-		custom_tooltip = {
-			text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY
+		if = {
+			limit = { ROOT = { any_spouse  = { character = FROMFROM } } }
+			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_HUSBAND }
+		}
+		else_if = {
+			limit = { ROOT = { any_consort = { character = FROMFROM } } }
+			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_CONSORT }
+		}
+		else_if = {
+			limit = { ROOT = { any_lover   = { character = FROMFROM } } }
+			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_LOVER }
+		}
+		else = {
+			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_FALLBACK }
+		}
+		hidden_tooltip = {
 			if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 2 } }
 				character_event = { id = EXPDPregnancy.3000 days = 90 random = 90 }
