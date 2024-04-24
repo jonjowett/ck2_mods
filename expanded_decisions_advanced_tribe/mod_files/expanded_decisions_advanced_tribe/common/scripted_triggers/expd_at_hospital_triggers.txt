@@ -11,6 +11,7 @@ expd_at_build_hospital_potential = {
 }
 
 expd_at_build_hospital_potential_high_prio = {
+	
 	# Decision taker's capital, or decision taker's tribal demesne if decision taker's capital has a hospital
 	OR = {
 		FROM = { is_capital = PREV }
@@ -20,6 +21,19 @@ expd_at_build_hospital_potential_high_prio = {
 			location = { has_tribal = yes }
 		}
 	}
+	
+	# The tribal holding must be the county capital and must have max level of the two cash buildings
+	location = {
+		capital_holding = {
+			holding_type = tribal
+			has_building = tb_hillfort_4
+			has_building = tb_market_town_4
+		}
+	}
+	
+	# The decision taker must have significant excess wealth
+	FROM = { wealth >= 1000 }
+	
 }
 
 expd_at_build_hospital_from_potential = {
