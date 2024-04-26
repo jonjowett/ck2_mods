@@ -1,0 +1,58 @@
+[h1]Summary:[/h1]
+
+There is a particularly annoying bug in the CK2 game engine: If a raider successfully sieges the top holding in a county, any Silk Road / Saharan / etc trade post in that holding is destroyed, along with all of its very expensive buildings.
+
+This mod tracks every building in every trade post in the world and, if they are destroyed, they will be automatically rebuilt about a year later. (See full details below.)
+
+This means that you don't immediately lose the thousands of gold that you sank into a trade post just because some dumb raider got lucky while you weren't paying enough attention. (It also protects AI characters from the same issue.)
+
+[h1]Details:[/h1]
+
+Supported trade posts:
+[list]
+[*] Silk Road
+[*] Saharan
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1812286001]MTR (Vanilla)[/url]
+[*] (Trade posts from other mods can probably be added on request)
+[/list]
+
+Requirements for an auto-rebuild to occur:
+[list]
+[*] Wait about a year
+[*] Province owner must be at peace
+[*] No province holdings have the "looted" modifier (ie. it's been a while since they were last looted by a raider)
+[/list]
+
+What happens during an auto-rebuild rebuild:
+[list]
+[*] The basic trade post is always reconstructed for no cost (and is assigned to the province owner)
+[*] All but 0-2 of the buildings are always reconstructed
+[*] An event occurs, where the province owner is offered the choice of what to do about those 0-2 which weren't auto-reconstructed:
+[list]
+[*] If you're very lucky, or are being repeatedly trolled by raiders, everything will be reconstructed for free
+[*] If you (or your regent) have particularly high stats or certain lifestyle traits, everything will be reconstructed for free
+[*] Otherwise, you can choose whether to pay for the reconstruction or accept the loss of the buildings.
+[/list]
+[/list]
+
+[h1]Compatibility/Impact:[/h1]
+For almost all of my mods, including this one, my aim is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
+[list]
+[*]Required CK2 version: 3.3.5.1
+[*]Achievement compatible: No
+[*]Safe to add to existing game: Yes
+[*]Safe to remove from existing game: Yes
+[*]Changes to vanilla files: None
+[*]Mod compatibility: Should be compatible with all other mods
+[*]Changes to AI behaviour: None
+[*]Decrease in game difficulty: Minor
+[*]Localisation: English only
+[*]Mod development status: Complete (although wider mod support may be added in the future, on request)
+[/list]
+
+[h1]Other Versions / Alternate Download / Reuse:[/h1]
+[list]
+[*]All of my CK2 mods are version-controlled via a [url=https://github.com/jonjowett/ck2_mods]Github repository[/url] (eg. if you want earlier/beta versions of any of my mods). 
+[*]I also publish a [url=https://github.com/jonjowett/ck2_mods/blob/master/trade_post_automation/packaged_mod/trade_post_automation.zip]zip version[/url] of this mod on Github.
+[*]All of my mods are published on Github under the MIT license, and I'm following the same logic here on the workshop. Essentially, you're welcome to reuse my mods in any way you wish as long as you provide attribution (eg. credit and/or a link).
+[/list]
