@@ -5,14 +5,25 @@ decisions = {
 
 		potential = {
 			
-			# Only show this decision if the "potential" conditions for the vanilla "grand hunt" decision are met (and there are no other potential hunts which don't have spurious health blocks)
-			is_decision_potential = hold_grand_hunt
+			# Only show this decision if the "potential" conditions for the vanilla "grand hunt" decision are met
+			#    (and there are no other potential hunts which don't have spurious health blocks)
+			expd_gh_this_character_should_be_able_to_see_base_game_grand_hunt_decision = yes
 			NOT = { is_decision_potential = hold_tiger_hunt }
 			NOT = { is_decision_potential = hold_nerge }
 			
-			# Only show this decision if the character has unimportant health traits which would otherwise block the vanilla decision
-			health_traits >= 1
-			expd_gh_this_character_can_hunt = yes
+			# Only show this decision if the base game decision would be blocked for spurious reasons
+			OR = {
+				
+				# Women can't ever hunt in the base game (?!)
+				is_female = yes
+				
+				# Character has unimportant health traits which would otherwise block the vanilla decision
+				AND = {
+					health_traits >= 1
+					expd_gh_this_character_can_hunt = yes
+				}
+				
+			}
 			
 		}
 		allow = {
@@ -26,11 +37,12 @@ decisions = {
 					}
 				}
 			}
-			month = 8
 			wealth = 25
+			month = 8
 			NOT = { month = 10 }
 			
 			expd_gh_this_character_can_hunt = yes
+			expd_gh_this_character_fulfils_gender_requirements_for_grand_hunt = yes
 			
 			prisoner = no
 			NOT = { is_inaccessible_trigger = yes }
