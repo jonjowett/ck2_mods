@@ -1,0 +1,51 @@
+title_decisions = {
+	
+	edcheat_move_de_jure_duchy = {
+		filter = realm_owned
+		ai_target_filter = none
+		ai = no
+		
+		potential = {
+			
+			# Only duke-tier titles
+			tier = DUKE
+			
+			# De facto liege is not de jure liege
+			any_defacto_liege = {
+				tier = KING
+				NOT = {
+					any_de_jure_vassal_title = {
+						tier = DUKE
+						title = PREVPREV
+					}
+				}
+			}
+			
+			# No titular or other weird duchies
+			any_de_jure_vassal_title = {
+				tier = COUNT
+			}
+		}
+		
+		allow = {
+			ROOT = {
+				has_holder = yes
+				holder_scope = {
+					OR = {
+						character = FROM
+						is_vassal_or_below_of = FROM
+					}
+				}
+			}
+		}
+		
+		effect = {
+			any_defacto_liege = {
+				limit = { tier = KING }
+				ROOT = { de_jure_liege = PREV }
+			}
+		}
+		
+	}
+	
+}

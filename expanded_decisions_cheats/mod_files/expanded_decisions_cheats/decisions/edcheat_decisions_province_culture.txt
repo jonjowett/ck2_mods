@@ -1,0 +1,39 @@
+title_decisions = {
+	
+	edcheat_change_province_culture = {
+		filter = realm_owned
+		ai_target_filter = none
+		ai = no
+		
+		potential = {
+			tier = COUNT
+		}
+		
+		allow = {
+			ROOT = {
+				has_holder = yes
+				holder_scope = {
+					OR = {
+						character = FROM
+						is_vassal_or_below_of = FROM
+					}
+				}
+			}
+		}
+		
+		effect = {
+			location = {
+				random_neighbor_province = {
+					limit = { NOT = { culture = PREV } }
+					ROOT = {
+						location = {
+							culture = PREVPREV
+						}
+					}
+				}
+			}
+		}
+		
+	}
+	
+}
