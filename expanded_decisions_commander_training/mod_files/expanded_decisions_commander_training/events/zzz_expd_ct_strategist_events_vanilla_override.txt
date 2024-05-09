@@ -15,6 +15,7 @@ character_event = {
 			has_character_modifier = jd_strategist
 			liege = {
 				any_courtier_or_vassal = { #Potential student commander
+					has_minor_title = title_commander
 					expd_ct_this_character_is_a_valid_target_for_chinese_training = yes
 				}
 			}
@@ -73,11 +74,15 @@ character_event = {
 		
 		random_courtier_or_vassal = {
 			limit = { has_character_modifier = jd_strategist }
+			preferred_limit = { has_character_flag = jd_strategist_golden_age } # If you got a speedup from having a GA strategist, he should be the one doing the training
 			save_event_target_as = commander_teacher
 		}
 		
 		random_courtier_or_vassal = {
-			limit = { expd_ct_this_character_is_a_valid_target_for_chinese_training = yes }
+			limit = {
+				has_minor_title = title_commander
+				expd_ct_this_character_is_a_valid_target_for_chinese_training = yes
+			}
 			
 			# Mod edit: Teach the better commanders first
 			preferred_limit = { martial = 40 }

@@ -1,10 +1,30 @@
 # Chinese Strategist
 #
+# Decision
+expd_ct_chinese_training_decision;§MED-CT: Chinese Training§!;;;;;;;;;;;;;x
+expd_ct_chinese_training_decision_desc;[Root.GetFirstName] will be trained in Chinese strategy;;;;;;;;;;;;;x
+# Decision blocker
+expd_ct_block_chinese_training;Recently requested Chinese training;;;;;;;;;;;;;x
+expd_ct_block_chinese_training_desc;[Root.GetBestName] has recently asked [Root.GetHerHis] Chinese strategist to train a specific commander.\n\nHowever, Chinese strategists have an unusual amount of autonomy, due to their ties with their homeland, and they begrudge this kind of direct interference with their duties. [Root.GetBestName] will have to wait a while before making another such request.\n\n§g(This modifier was added by a targeted decision included in the §MED-CT§g mod. The duration is reduced by having multiple strategists, and by having a Golden Age strategist.)§!;;;;;;;;;;;;;x
 # Triggers
 expd_ct_this_character_has_zero_or_one_chinese_commander_trait_tt;Does NOT already have two §YChinese leadership traits§!;;;;;;;;;;;;;x
 expd_ct_this_character_has_no_chinese_commander_traits_tt;Has no §YChinese leadership traits§!;;;;;;;;;;;;;x
 # Effects
-expd_ct_this_character_gains_trait_master_of_flame_tt;Gains '§YWay of the Dragon§!';;;;;;;;;;;;;x
-expd_ct_this_character_gains_trait_logistics_expert_tt;Gains '§YWay of the Dog§!';;;;;;;;;;;;;x
-expd_ct_this_character_gains_trait_levy_coordinator_tt;Gains '§YWay of the Tiger§!';;;;;;;;;;;;;x
-expd_ct_this_character_gains_trait_sapper_tt;Gains '§YWay of the Leopard§!';;;;;;;;;;;;;x
+expd_ct_name_of_chinese_strategist_tt;Teacher: §Y[commander_teacher.GetFullName]§!;;;;;;;;;;;;;x
+expd_ct_this_character_gains_trait_master_of_flame_tt;§YWay of the Dragon§!;;;;;;;;;;;;;x
+expd_ct_this_character_gains_trait_logistics_expert_tt;§YWay of the Dog§!;;;;;;;;;;;;;x
+expd_ct_this_character_gains_trait_levy_coordinator_tt;§YWay of the Tiger§!;;;;;;;;;;;;;x
+expd_ct_this_character_gains_trait_sapper_tt;§YWay of the Leopard§!;;;;;;;;;;;;;x
+expd_ct_chinese_training_cooldown_reduced_2_golden_age_strategists_tt;§GCooldown reduced: 2 Golden Age strategists!§!;;;;;;;;;;;;;x
+expd_ct_chinese_training_cooldown_reduced_golden_age_strategist_tt;§GCooldown reduced: Golden Age strategist!§!;;;;;;;;;;;;;x
+expd_ct_chinese_training_cooldown_reduced_2_strategists_tt;§GCooldown reduced: 2 strategists!§!;;;;;;;;;;;;;x
+#
+# Marshal
+#
+# Decision blocker
+expd_ct_block_marshal_training;Recently requested Marshal training;;;;;;;;;;;;;x
+expd_ct_block_marshal_training_desc;[Root.GetBestName] has recently asked [Root.GetHerHis] Marshal to train a specific commander.\n\nHowever, Marshals can only perform a limited amount of additional training over and above their regular duties, so [Root.GetBestName] will have to wait a while before making another such request.\n\n§g(This modifier was added by a targeted decision included in the §MED-CT§g mod. The duration is reduced by having a Marshal with higher martial skill.)§!;;;;;;;;;;;;;x
+#
+# General
+#
+expd_ct_blank_line_tt;§g-§!;;;;;;;;;;;;;x
