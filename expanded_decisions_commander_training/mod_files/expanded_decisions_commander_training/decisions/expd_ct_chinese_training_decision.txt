@@ -20,12 +20,16 @@ targetted_decisions = {
 		}
 		
 		potential = {
-			# Only show if FROM is targeting him/herself, or targeting one of his/her commanders
+			# Only show if FROM is self-targeting, or targeting one of their commanders, or targeting their marshal
 			ROOT = {
 				OR = {
 					character = FROM
 					AND = {
 						has_minor_title = title_commander
+						liege = { character = FROM }
+					}
+					AND = {
+						has_job_title = job_marshal
 						liege = { character = FROM }
 					}
 				}
@@ -233,8 +237,9 @@ targetted_decisions = {
 				
 				FROM = {
 					
-					# Independent, not a Chinese tributary, no peace deal
+					# Independent, landed, not a Chinese tributary, no peace deal
 					independent = yes
+					is_landed = yes # Only landed characters are threatened by China!
 					NOT = { any_suzerain = { primary_title = { title = e_china_west_governor } } }
 					NOT = { has_character_modifier = peace_deal_with_china }
 					
