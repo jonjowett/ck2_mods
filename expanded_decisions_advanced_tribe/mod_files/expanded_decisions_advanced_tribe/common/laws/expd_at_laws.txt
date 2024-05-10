@@ -25,7 +25,10 @@ de_jure_laws = { # Crown law
 	expd_at_out_of_realm_inheritance_law_0 = {
 		group = expd_at_out_of_realm_inheritance_laws
 		default = yes
-		potential = { expd_at_this_title_should_have_tribal_laws = yes }
+		potential = {
+			expd_at_this_title_should_have_tribal_laws = yes
+			expd_at_this_title_should_have_crown_laws = yes
+		}
 		allow = {
 			always = yes
 		}
@@ -45,7 +48,10 @@ de_jure_laws = { # Crown law
 	expd_at_out_of_realm_inheritance_law_1 = {
 		group = expd_at_out_of_realm_inheritance_laws
 		default = no
-		potential = { expd_at_this_title_should_have_tribal_laws = yes }
+		potential = {
+			expd_at_this_title_should_have_tribal_laws = yes
+			expd_at_this_title_should_have_crown_laws = yes
+		}
 		allow = {
 			expd_at_this_title_is_a_highly_organised_tribe = yes
 		}
@@ -59,7 +65,11 @@ de_jure_laws = { # Crown law
 			hidden_tooltip = { revoke_law = expd_at_out_of_realm_inheritance_law_0 }
 			set_protected_inheritance = yes
 		}
-		vassal_opinion = -20
+		# If you use vassal_opinion here, the opinion modifier applies to everyone everywhere in the world - base game bug?
+		city_opinion   = -20
+		castle_opinion = -20
+		temple_opinion = -20
+		tribal_opinion = -20
 	}
 	
 }

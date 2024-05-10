@@ -9,6 +9,32 @@ expd_at_this_title_should_have_tribal_laws = {
 	}
 }
 
+expd_at_this_title_should_have_crown_laws = {
+	
+	OR = {
+		
+		# Empires always get crown laws
+		tier = EMPEROR
+		
+		AND = {
+			tier = KING
+			OR = {
+				
+				# This kingdom doesn't belong to a de jure empire
+				NOT = { any_de_jure_liege_title = { tier = EMPEROR } }
+				
+				# This kingdom's de jure liege title has no holder
+				any_de_jure_liege_title = {
+					tier = EMPEROR
+					NOT = { holder_scope = { always = yes } }
+				}
+				
+			}
+		}
+	}
+	
+}
+
 expd_at_this_title_is_a_highly_organised_tribe = {
 	holder_scope = {
 		show_scope_change = no
