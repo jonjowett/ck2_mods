@@ -2,7 +2,7 @@
 #
 # Decision
 expd_ct_chinese_training_decision;§MED-CT: Chinese Training§!;;;;;;;;;;;;;x
-expd_ct_chinese_training_decision_desc;[Root.GetFirstName] will be trained in Chinese strategy;;;;;;;;;;;;;x
+expd_ct_chinese_training_decision_desc;[Root.GetFirstName] will be trained in §YChinese strategy§!;;;;;;;;;;;;;x
 # Decision blocker
 expd_ct_block_chinese_training;Recently requested Chinese training;;;;;;;;;;;;;x
 expd_ct_block_chinese_training_desc;[Root.GetBestName] has recently asked [Root.GetHerHis] Chinese strategist to train a specific commander.\n\nHowever, Chinese strategists have an unusual amount of autonomy, due to their ties with their homeland, and they begrudge this kind of direct interference with their duties. [Root.GetBestName] will have to wait a while before making another such request.\n\n§g(This modifier was added by a targeted decision included in the §MED-CT§g mod. The duration is reduced by having multiple strategists, and by having a Golden Age strategist.)§!;;;;;;;;;;;;;x
@@ -21,10 +21,29 @@ expd_ct_chinese_training_cooldown_reduced_2_strategists_tt;§GCooldown reduced: 2
 #
 # Marshal
 #
+# Decision
+expd_ct_marshal_training_decision;§MED-CT: Marshal Training§!;;;;;;;;;;;;;x
+expd_ct_marshal_training_decision_desc;[Root.GetBestName] will be trained by [From.GetTitledFirstName]'s §YMarshal§!;;;;;;;;;;;;;x
 # Decision blocker
 expd_ct_block_marshal_training;Recently requested Marshal training;;;;;;;;;;;;;x
-expd_ct_block_marshal_training_desc;[Root.GetBestName] has recently asked [Root.GetHerHis] Marshal to train a specific commander.\n\nHowever, Marshals can only perform a limited amount of additional training over and above their regular duties, so [Root.GetBestName] will have to wait a while before making another such request.\n\n§g(This modifier was added by a targeted decision included in the §MED-CT§g mod. The duration is reduced by having a Marshal with higher martial skill.)§!;;;;;;;;;;;;;x
-#
+expd_ct_block_marshal_training_desc;[Root.GetBestName] has recently asked [Root.GetHerHis] Marshal to train a specific commander.\n\nHowever, Marshals can only perform a limited amount of additional training over and above their regular duties, so [Root.GetBestName] will have to wait a while before making another such request.\n\n§g(This modifier was added by a targeted decision included in the §MED-CT§g mod. The duration is reduced if the Marshal who provided the training had higher martial skill.)§!;;;;;;;;;;;;;x
+# Triggers
+expd_ct_this_character_has_a_marshal_tt;Has a §YMarshal§!;;;;;;;;;;;;;x
+expd_ct_this_character_does_not_owe_a_favor_to_their_marshal_tt;Does NOT owe a favor to [This.GetHerHis] §YMarshal§!;;;;;;;;;;;;;x
+expd_ct_this_character_has_no_conventional_leadership_traits_tt;Has no §Yconventional leadership traits§!;;;;;;;;;;;;;x
+# Effects
+expd_ct_marshal_training_trigger_event_tt;An event occurs, allowing you to view the details of the training and the cost.\n\nNB: You may choose to cancel the training for no cost.;;;;;;;;;;;;;x
+expd_ct_marshal_training_type_light_foot_leader_tt;§YLight Foot Leader§!;;;;;;;;;;;;;x
+expd_ct_marshal_training_type_heavy_infantry_leader_tt;§YHeavy Infantry Leader§!;;;;;;;;;;;;;x
+expd_ct_marshal_training_type_cavalry_leader_tt;§YCavalry Leader§!;;;;;;;;;;;;;x
+expd_ct_marshal_training_type_trickster_tt;§YTrickster§!;;;;;;;;;;;;;x
+expd_ct_marshal_training_type_organizer_tt;§YOrganizer§!;;;;;;;;;;;;;x
+expd_ct_marshal_training_type_aggressive_leader_tt;§YAggressive Leader§!;;;;;;;;;;;;;x
+expd_ct_marshal_training_type_defensive_leader_tt;§YDefender§!;;;;;;;;;;;;;x
+expd_ct_marshal_training_type_experimenter_tt;§YDirect Leader§!;;;;;;;;;;;;;x
+expd_ct_marshal_training_type_flanker_tt;§YFlanker§!;;;;;;;;;;;;;x
+expd_ct_marshal_training_type_siege_leader_tt;§YSiege Leader§!;;;;;;;;;;;;;x
+expd_ct_block_marshal_training_warning_long_duration_tt;§RWARNING! Duration is longer than §Y5 years§R, due to the Marshal's low martial skill!;;;;;;;;;;;;;x
 # General
 #
 expd_ct_blank_line_tt;§g-§!;;;;;;;;;;;;;x
