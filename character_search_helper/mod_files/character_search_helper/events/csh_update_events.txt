@@ -14,27 +14,60 @@ character_event = {
 		remove_trait = csh_wealth_4
 		remove_trait = csh_wealth_5
 		if = {
-			limit = { wealth < 100 }
-			add_trait = csh_wealth_0
+			limit = { ai = yes }
+			if = {
+				limit = { wealth < 100 }
+				add_trait = csh_wealth_0
+			}
+			else_if = {
+				limit = { wealth < 300 }
+				add_trait = csh_wealth_1
+			}
+			else_if = {
+				limit = { wealth < 1000 }
+				add_trait = csh_wealth_2
+			}
+			else_if = {
+				limit = { wealth < 3000 }
+				add_trait = csh_wealth_3
+			}
+			else_if = {
+				limit = { wealth < 10000 }
+				add_trait = csh_wealth_4
+			}
+			else = {
+				add_trait = csh_wealth_5
+			}
 		}
-		else_if = {
-			limit = { wealth < 300 }
-			add_trait = csh_wealth_1
-		}
-		else_if = {
-			limit = { wealth < 1000 }
-			add_trait = csh_wealth_2
-		}
-		else_if = {
-			limit = { wealth < 3000 }
-			add_trait = csh_wealth_3
-		}
-		else_if = {
-			limit = { wealth < 10000 }
-			add_trait = csh_wealth_4
-		}
-		else = {
-			add_trait = csh_wealth_5
+		
+		# Artifacts
+		remove_trait = csh_artifact_1
+		remove_trait = csh_artifact_2
+		remove_trait = csh_artifact_3
+		remove_trait = csh_artifact_4
+		remove_trait = csh_artifact_5
+		if = {
+			limit = { ai = yes }
+			if = {
+				limit = { any_artifact = { quality == 1 } }
+				add_trait = csh_artifact_1
+			}
+			if = {
+				limit = { any_artifact = { quality == 2 } }
+				add_trait = csh_artifact_2
+			}
+			if = {
+				limit = { any_artifact = { quality == 3 } }
+				add_trait = csh_artifact_3
+			}
+			if = {
+				limit = { any_artifact = { quality == 4 } }
+				add_trait = csh_artifact_4
+			}
+			if = {
+				limit = { any_artifact = { quality == 5 } }
+				add_trait = csh_artifact_5
+			}
 		}
 		
 	}
