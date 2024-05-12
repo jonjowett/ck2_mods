@@ -43,6 +43,12 @@ expd_ct_this_character_has_no_conventional_leadership_traits = {
 	}
 }
 
+expd_ct_marshal_training_payment_is_favor = {
+	ai = no
+	has_dlc = "Conclave"
+	NOT = { has_global_flag = expd_ct_debug_force_non_conclave_marshal_training }
+}
+
 expd_ct_this_characters_favor_size_is_emperor = {
 	OR = {
 		real_tier = EMPEROR
