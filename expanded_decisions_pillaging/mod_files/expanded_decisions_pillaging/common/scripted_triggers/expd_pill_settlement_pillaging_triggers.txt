@@ -10,7 +10,16 @@ expd_pill_this_holding_is_potentially_pillageable_by_prev_character = {
 	NOT = { has_global_flag = expd_pill_blocked_global }
 	
 	# Pillaging is only available if the pillager personally owns the holding
-	owner = { character = PREV }
+	OR = {
+		AND = {
+			tier = COUNT
+			capital_holding = { holder_scope = { character = PREVPREVPREV } }
+		}
+		AND = {
+			tier = BARON
+			holder_scope = { character = PREVPREV }
+		}
+	}
 	
 	# Pillaging is only available to tribes and nomads
 	PREV = {

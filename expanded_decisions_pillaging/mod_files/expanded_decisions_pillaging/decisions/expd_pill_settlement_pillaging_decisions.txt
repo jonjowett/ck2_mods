@@ -18,10 +18,10 @@ settlement_decisions = {
 		#  --- Hire a holy man and leave the dialog on-screen
 		#  --- Grant the holy man all the pillaged land (which resets the pillaging flags)
 		#  --- Kill the holy man via the dialog, inheriting his land
-		# This costs 25 per loop, but that is excessively harsh for the purpose of this decision because you can give multiple holdings to the same holy man before autokilling him.
-		#  --- Therefore, costs have been discounted to 5 per loop.
-		#  --- A future development might be to do some maths (with character/province variables and events) to calculate the correct piety cost:
-		#            max(0, ((25 * {number of holdings in settlement} / 2) - {total piety taken due to instant pillaging in the last N days} )
+		# This costs 25 per loop, but that flat rate is excessively harsh because you can give multiple holdings to the same holy man before autokilling him.
+		#  --- Therefore, the instant-pillage effect keeps track of the quantity of piety recently spent on pillaging,
+		#         and refunds the lesser of {max amount of piety recently spent on pillaging any holding} and
+		#         {amount of piety spent on pillaging this holding}.
 		
 		#Currently disabled for the AI by the pre-filter and the ai_will_do section. Could potentially be enabled, if we could be sure the AI would be sensible about it.
 		ai = no
