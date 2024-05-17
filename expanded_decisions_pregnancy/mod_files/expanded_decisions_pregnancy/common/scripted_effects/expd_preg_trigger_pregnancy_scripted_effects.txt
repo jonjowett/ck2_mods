@@ -1,10 +1,19 @@
 expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 	
+	# Clean up any leftover flags from an earlier triggered pregnancy
+	hidden_tooltip = { character_event = { id = EXPDPregnancy.3999 } }
+	
 	# Set the character flag - this is an important gate on the eventual trigger-pregnancy event
 	hidden_tooltip = {
 		set_character_flag = expd_preg_triggered_pregnancy_in_progress
-		FROMFROM = { save_event_target_as = expd_preg_triggered_pregnancy_father    }
-		FROM     = { save_event_target_as = expd_preg_triggered_pregnancy_triggerer }
+		FROMFROM = { save_event_target_as = expd_preg_triggered_pregnancy_father_temp    }
+		FROM     = { save_event_target_as = expd_preg_triggered_pregnancy_triggerer_temp }
+		ROOT = {
+			save_persistent_event_target = { name = expd_preg_triggered_pregnancy_father    scope = event_target:expd_preg_triggered_pregnancy_father_temp    }
+			save_persistent_event_target = { name = expd_preg_triggered_pregnancy_triggerer scope = event_target:expd_preg_triggered_pregnancy_triggerer_temp }
+		}
+		clear_event_target = expd_preg_triggered_pregnancy_father_temp
+		clear_event_target = expd_preg_triggered_pregnancy_triggerer_temp
 	}
 	
 	hidden_tooltip = {
@@ -14,7 +23,7 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 			which = expd_preg_trigger_pregnancy_score
 			value = fertility
 		}
-		event_target:expd_preg_triggered_pregnancy_father = { # Put the man's fertility in a temporary global variable
+		persistent_event_target:expd_preg_triggered_pregnancy_father = { # Put the man's fertility in a temporary global variable
 			export_to_variable = {
 				which = global_expd_preg_trigger_pregnancy_mans_fertility
 				value = fertility
@@ -25,44 +34,28 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 			which = global_expd_preg_trigger_pregnancy_mans_fertility
 		}
 		if = { # Apply the lovers' adjustment
-			limit = { is_lover = event_target:expd_preg_triggered_pregnancy_father }
+			limit = { is_lover = persistent_event_target:expd_preg_triggered_pregnancy_father }
 			multiply_variable = {
 				which = expd_preg_trigger_pregnancy_score
 				value = 2
 			}
 		}
-		# Count the number of mutual children, and decrease the score for each one that exists, up to the limit
-		set_variable = {
-			which = expd_preg_trigger_pregnancy_child_count
-			value = 0
+		# Decrease the score depending on the number of previous successful triggered pregnancies
+		#  --- NB: Deliberately does NOT include pregnancies that occurred independently of this mod (eg. lovers, normal random pregnancies)
+		if = {
+			limit = { check_variable = { which = expd_preg_triggered_pregnancy_occurrences value == 0 } }
+			set_variable = { which = expd_preg_triggered_pregnancy_occurrences value = 0 }
 		}
-		any_child = {
-			limit = { father = { character = event_target:expd_preg_triggered_pregnancy_father } }
-			PREV = {
-				change_variable = {
-					which = expd_preg_trigger_pregnancy_child_count
-					value = 1
-				}
-			}
-			if = {
-				limit = {
-					PREV = {
-						check_variable = {
-							which = expd_preg_trigger_pregnancy_child_count
-							value <= 5
-						}
-					}
-				}
-				PREV = {
-					multiply_variable = {
-						which = expd_preg_trigger_pregnancy_score
-						value = 0.8
-					}
-				}
-			}
+		set_variable = { which = expd_preg_trigger_pregnancy_loop_counter value = 0 }
+		while = {
+			limit = { check_variable = { which = expd_preg_trigger_pregnancy_loop_counter which < expd_preg_triggered_pregnancy_occurrences } }
+			multiply_variable = { which = expd_preg_trigger_pregnancy_score value = 0.8 }
+			change_variable = { which = expd_preg_trigger_pregnancy_loop_counter value = 1 }
 		}
-	}
+		set_variable = { which = expd_preg_trigger_pregnancy_loop_counter value = 0 }
 		
+	}
+	
 	# Auto-generated code
 	#  --- days = 180/score
 	#  --- random = 180/score
@@ -74,15 +67,15 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 			has_global_flag = expd_preg_debug_mode_instant
 		}
 		if = {
-			limit = { ROOT = { any_spouse  = { character = FROMFROM } } }
+			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_spouse  = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_HUSBAND }
 		}
 		else_if = {
-			limit = { ROOT = { any_consort = { character = FROMFROM } } }
+			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_consort = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_CONSORT }
 		}
 		else_if = {
-			limit = { ROOT = { any_lover   = { character = FROMFROM } } }
+			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_lover   = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_LOVER }
 		}
 		else = {
@@ -94,15 +87,15 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 	}
 	else = {
 		if = {
-			limit = { ROOT = { any_spouse  = { character = FROMFROM } } }
+			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_spouse  = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_HUSBAND }
 		}
 		else_if = {
-			limit = { ROOT = { any_consort = { character = FROMFROM } } }
+			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_consort = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_CONSORT }
 		}
 		else_if = {
-			limit = { ROOT = { any_lover   = { character = FROMFROM } } }
+			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_lover   = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_LOVER }
 		}
 		else = {

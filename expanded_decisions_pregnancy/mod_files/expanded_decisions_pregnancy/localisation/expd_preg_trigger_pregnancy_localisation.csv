@@ -4,21 +4,25 @@ expd_preg_enable_decisions_desc;The "§MED-EP: Encourage Pregnancy§!" decision wi
 expd_preg_disable_decisions;§PED-EP: Disable Encourage Pregnancy§!;;;;;;;;;x
 expd_preg_disable_decisions_desc;The "§MED-EP: Encourage Pregnancy§!" decision will be disabled (until re-enabled by taking the "§PED-EP: Enable Encourage Pregnancy§!" decision);;;;;;;;;x
 expd_preg_trigger_pregnancy_in_target;§MED-EP: Encourage Pregnancy§!;;;;;;;;;x
-expd_preg_trigger_pregnancy_in_target_desc;Encourage §Y[Root.GetBestName]§! to become pregnant;;;;;;;;;x
-EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_HUSBAND;§Y[Root.GetBestName]§! will attempt to become pregnant by her §Ghusband §Y[FromFrom.GetBestName]§! at a random time in the future (depending on their current fertility).;;;;;;;;;x
-EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_CONSORT;§Y[Root.GetBestName]§! will attempt to become pregnant by her §Gconsort §Y[FromFrom.GetBestName]§! at a random time in the future (depending on their current fertility).;;;;;;;;;x
-EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_LOVER;§Y[Root.GetBestName]§! will attempt to become pregnant by her §Rlover §Y[FromFrom.GetBestName]§! at a random time in the future (depending on their current fertility).\n§RWARNING! The child may be illegitimate!§!;;;;;;;;;x
-EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_FALLBACK;§Y[Root.GetBestName]§! will attempt to become pregnant by §Y[FromFrom.GetBestName]§! at a random time in the future (depending on their current fertility).;;;;;;;;;x
-EXPD_PREG_TOOLTIP_HAS_NOT_ALREADY_GOT_TRIGGERED_PREGNANCY;§Y[Root.GetBestName]§! has NOT already been encouraged to become pregnant;;;;;;;;;x
+expd_preg_trigger_pregnancy_in_target_desc;Encourage §Y[Root.GetFullName]§! to become pregnant;;;;;;;;;x
+EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_HUSBAND;§Y[Root.GetFullName]§! will attempt to become pregnant by her §Ghusband §Y[FromFrom.GetFullName]§! at a random time in the future (depending on their current fertility).;;;;;;;;;x
+EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_CONSORT;§Y[Root.GetFullName]§! will attempt to become pregnant by her §Gconsort §Y[FromFrom.GetFullName]§! at a random time in the future (depending on their current fertility).;;;;;;;;;x
+EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_LOVER;§Y[Root.GetFullName]§! will attempt to become pregnant by her §Rlover §Y[FromFrom.GetFullName]§! at a random time in the future (depending on their current fertility).\n§RWARNING! The child may be illegitimate!§!;;;;;;;;;x
+EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_FALLBACK;§Y[Root.GetFullName]§! will attempt to become pregnant by §Y[FromFrom.GetFullName]§! at a random time in the future (depending on their current fertility).;;;;;;;;;x
+EXPD_PREG_TOOLTIP_HAS_NOT_ALREADY_GOT_TRIGGERED_PREGNANCY;§Y[Root.GetFullName]§! HAS NOT already been encouraged to become pregnant;;;;;;;;;x
 EXPD_PREG_TOOLTIP_HAS_NOT_BLOCKED_TRIGGERED_PREGNANCY_VIA_DECISION;"§MED-EP: Encourage Pregnancy§!" has NOT been temporarily blocked for §Y[From.GetTitledFirstName]§! (by self-targeted decision);;;;;;;;;x
-EXPD_PREG_TOOLTIP_FROMFROM_IS_HUSBAND_OF_ROOT;§Y[FromFrom.GetBestName]§! is §Ghusband§! of §Y[Root.GetBestName]§!;;;;;;;;;x
-EXPD_PREG_TOOLTIP_FROMFROM_IS_CONSORT_OF_ROOT;§Y[FromFrom.GetBestName]§! is §Gconsort§! of §Y[Root.GetBestName]§!\n§g...INFO: Children of consorts have a lifetime -1 diplomacy modifier;;;;;;;;;x
-EXPD_PREG_TOOLTIP_FROMFROM_IS_LEGITIMATE_LOVER_OF_ROOT;§Y[FromFrom.GetBestName]§! is §Glover§! of §Y[Root.GetBestName]§!\n§g...INFO: Lovers have doubled fertility§!;;;;;;;;;x
-EXPD_PREG_TOOLTIP_FROMFROM_IS_ILLEGITIMATE_LOVER_OF_ROOT;§Y[FromFrom.GetBestName]§! is §Rlover§! of §Y[Root.GetBestName]§!\n§g...INFO: Lovers have doubled fertility, but the child may be illegitimate§!;;;;;;;;;x
-EXPD_PREG_TOOLTIP_FROMFROM_HAS_HIGH_FERTILITY;§Y[FromFrom.GetBestName]§! has §Ghigh fertility§!;;;;;;;;;x
-EXPD_PREG_TOOLTIP_FROMFROM_HAS_VERY_HIGH_FERTILITY;§Y[FromFrom.GetBestName]§! has §Gvery high fertility§!;;;;;;;;;x
-EXPD_PREG_TOOLTIP_FROMFROM_HAS_LOW_FERTILITY;§Y[FromFrom.GetBestName]§! has §Rlow fertility§!;;;;;;;;;x
-EXPD_PREG_TOOLTIP_FROMFROM_HAS_VERY_LOW_FERTILITY;§Y[FromFrom.GetBestName]§! has §Rvery low fertility§!;;;;;;;;;x
+EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_BROKEN;The stored link to the father of the triggered pregnancy has somehow been broken\n\n§g...INFO: If you are continuing an existing game and you have recently updated the ED-EP mod to a new version, this is probably a spurious error caused by the update and all encouraged pregnancies that you set up in the old version will occur as normal (taking the decision again will reset the timer, which is probably not what you want). Otherwise, this indicates a bug and you should take the decision again.;;;;;;;;;x
+EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_DEAD;The father of the triggered pregnancy (§Y[Root.expd_preg_triggered_pregnancy_father.GetFullName]§!) is §Ydead§!;;;;;;;;;x
+EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_NOT_SPOUSE_CONSORT_LOVER;The father of the triggered pregnancy (§Y[Root.expd_preg_triggered_pregnancy_father.GetFullName]§!) is NOT §Y[Root.GetFullName]§!'s §Yspouse§!, §Yconsort§! or §Ylover§!;;;;;;;;;x
+EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_PERMANENTLY_INFERTILE;The father of the triggered pregnancy (§Y[Root.expd_preg_triggered_pregnancy_father.GetFullName]§!) is permanently infertile (§Ycelibate§! or §Yeunuch§!);;;;;;;;;x
+EXPD_PREG_TOOLTIP_FROMFROM_IS_HUSBAND_OF_ROOT;§Y[FromFrom.GetFullName]§! is §Ghusband§! of §Y[Root.GetFullName]§!;;;;;;;;;x
+EXPD_PREG_TOOLTIP_FROMFROM_IS_CONSORT_OF_ROOT;§Y[FromFrom.GetFullName]§! is §Gconsort§! of §Y[Root.GetFullName]§!\n§g...INFO: Children of consorts have a lifetime -1 diplomacy modifier;;;;;;;;;x
+EXPD_PREG_TOOLTIP_FROMFROM_IS_LEGITIMATE_LOVER_OF_ROOT;§Y[FromFrom.GetFullName]§! is §Glover§! of §Y[Root.GetFullName]§!\n§g...INFO: Lovers have doubled fertility§!;;;;;;;;;x
+EXPD_PREG_TOOLTIP_FROMFROM_IS_ILLEGITIMATE_LOVER_OF_ROOT;§Y[FromFrom.GetFullName]§! is §Rlover§! of §Y[Root.GetFullName]§!\n§g...INFO: Lovers have doubled fertility, but the child may be illegitimate§!;;;;;;;;;x
+EXPD_PREG_TOOLTIP_FROMFROM_HAS_HIGH_FERTILITY;§Y[FromFrom.GetFullName]§! has §Ghigh fertility§!;;;;;;;;;x
+EXPD_PREG_TOOLTIP_FROMFROM_HAS_VERY_HIGH_FERTILITY;§Y[FromFrom.GetFullName]§! has §Gvery high fertility§!;;;;;;;;;x
+EXPD_PREG_TOOLTIP_FROMFROM_HAS_LOW_FERTILITY;§Y[FromFrom.GetFullName]§! has §Rlow fertility§!;;;;;;;;;x
+EXPD_PREG_TOOLTIP_FROMFROM_HAS_VERY_LOW_FERTILITY;§Y[FromFrom.GetFullName]§! has §Rvery low fertility§!;;;;;;;;;x
 # Debug mode
 expd_preg_enable_debug_mode;§RED-EP: Enable Debug Mode§!;;;;;;;;;x
 expd_preg_disable_debug_mode;§RED-EP: Disable Debug Mode§!;;;;;;;;;x
@@ -29,12 +33,12 @@ expd_preg_debug_mode_disable_instant_pregnancy;§RED-EP: Disable Instant Pregnanc
 expd_preg_debug_mode_enable_instant_pregnancy_desc;§RDEBUG MODE:§! The "§MED-EP: Encourage Pregnancy§!" targeted decision will now attempt to trigger pregnancy instantly.;;;;;;;;;x
 expd_preg_debug_mode_disable_instant_pregnancy_desc;§RDEBUG MODE:§! The "§MED-EP: Encourage Pregnancy§!" targeted decision will now attempt trigger pregnancy after the usual delay.;;;;;;;;x
 expd_preg_debug_mode_clear_triggered_pregnancy;§RED-EP: Cancel Encouragement§!;;;;;;;;;x
-expd_preg_debug_mode_clear_triggered_pregnancy_desc;§RDEBUG MODE:§! The encouraged pregnancy between §Y[Root.GetBestName]§! and §Y[Root.expd_preg_triggered_pregnancy_father.GetBestName]§! that was encouraged by §Y[Root.expd_preg_triggered_pregnancy_triggerer.GetBestName]§! will be cancelled.;;;;;;;;x
-EVTDESC_EXPDPregnancy_3001;I have become pregnant with the child of [From.expd_preg_triggered_pregnancy_father.GetBestName], thanks to your encouragement.;;;;;;;;;x
-EVTDESC_EXPDPregnancy_3002;Despite your encouragement, I was not able to become pregnant with [From.expd_preg_triggered_pregnancy_father.GetBestName]'s child.;;;;;;;;;x
-EVTDESC_EXPDPregnancy_3003;Thank you for encouraging me to become pregnant with [From.expd_preg_triggered_pregnancy_father.GetBestName]'s child. However, as it turns out, I did not need that encouragement - I have become pregnant on my own.;;;;;;;;;x
-EVTOPT_ExptPregnancy_OK;OK;;;;;;;;;x
-EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_HUSBAND;§RDEBUG MODE:§! §Y[Root.GetBestName]§! will attempt to become pregnant by her §Ghusband §Y[FromFrom.GetBestName]§! IMMEDIATELY (via the custom event);;;;;;;;;x
-EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_CONSORT;§RDEBUG MODE:§! §Y[Root.GetBestName]§! will attempt to become pregnant by her §Gconsort §Y[FromFrom.GetBestName]§! IMMEDIATELY (via the custom event);;;;;;;;;x
-EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_LOVER;§RDEBUG MODE:§! §Y[Root.GetBestName]§! will attempt to become pregnant by her §Rlover §Y[FromFrom.GetBestName]§! IMMEDIATELY (via the custom event);;;;;;;;;x
-EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_FALLBACK;§RDEBUG MODE:§! §Y[Root.GetBestName]§! will attempt to become pregnant by §Y[FromFrom.GetBestName]§! IMMEDIATELY (via the custom event);;;;;;;;;x
+expd_preg_debug_mode_clear_triggered_pregnancy_desc;§RDEBUG MODE:§! The encouraged pregnancy between §Y[Root.GetFullName]§! and §Y[Root.expd_preg_triggered_pregnancy_father.GetFullName]§! that was encouraged by §Y[Root.expd_preg_triggered_pregnancy_triggerer.GetFullName]§! will be cancelled.;;;;;;;;x
+EVTDESC_EXPDPregnancy_3001;I have become pregnant with the child of [From.expd_preg_triggered_pregnancy_father.GetFullName], thanks to your encouragement.;;;;;;;;;x
+EVTDESC_EXPDPregnancy_3002;Despite your encouragement, I was not able to become pregnant with [From.expd_preg_triggered_pregnancy_father.GetFullName]'s child.;;;;;;;;;x
+EVTDESC_EXPDPregnancy_3003;Thank you for encouraging me to become pregnant with [From.expd_preg_triggered_pregnancy_father.GetFullName]'s child. However, as it turns out, I did not need that encouragement - I have become pregnant on my own.;;;;;;;;;x
+EVTOPT_ExpdPregnancy_OK;OK;;;;;;;;;x
+EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_HUSBAND;§RDEBUG MODE:§! §Y[Root.GetFullName]§! will attempt to become pregnant by her §Ghusband §Y[FromFrom.GetFullName]§! IMMEDIATELY (via the custom event);;;;;;;;;x
+EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_CONSORT;§RDEBUG MODE:§! §Y[Root.GetFullName]§! will attempt to become pregnant by her §Gconsort §Y[FromFrom.GetFullName]§! IMMEDIATELY (via the custom event);;;;;;;;;x
+EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_LOVER;§RDEBUG MODE:§! §Y[Root.GetFullName]§! will attempt to become pregnant by her §Rlover §Y[FromFrom.GetFullName]§! IMMEDIATELY (via the custom event);;;;;;;;;x
+EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_FALLBACK;§RDEBUG MODE:§! §Y[Root.GetFullName]§! will attempt to become pregnant by §Y[FromFrom.GetFullName]§! IMMEDIATELY (via the custom event);;;;;;;;;x
