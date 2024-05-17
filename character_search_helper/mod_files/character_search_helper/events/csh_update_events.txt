@@ -70,6 +70,18 @@ character_event = {
 			}
 		}
 		
+		# Foes (for duelling)
+		remove_trait = csh_foe
+		if = {
+			limit = {
+				OR = {
+					any_player = { is_foe = PREV }
+					any_player = { ROOT = { is_foe = PREV } }
+				}
+			}
+			add_trait = csh_foe
+		}
+		
 	}
 }
 

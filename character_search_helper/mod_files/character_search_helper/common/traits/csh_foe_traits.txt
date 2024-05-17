@@ -1,0 +1,10 @@
+csh_foe = {
+	customizer = no
+	random = no
+	is_visible = {
+		OR = {
+			ROOT = { is_foe = FROM }
+			FROM = { is_foe = ROOT }
+		}
+	}
+}
