@@ -56,26 +56,22 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 		
 	}
 	
-	# Auto-generated code
-	#  --- days = 180/score
-	#  --- random = 180/score
-	# NB: Default fertility for a character is 50%, so an average couple will have a score of 0.25, ie. 1080 +/- 360 days
-	
+	# NB: The visible descriptions (below) must use FROMFROM (not the persistent_event_target), so that they are displayed properly to the user.
 	if = {
 		limit = {
 			has_global_flag = expd_preg_debug_mode
 			has_global_flag = expd_preg_debug_mode_instant
 		}
 		if = {
-			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_spouse  = { character = ROOT } } }
+			limit = { FROMFROM = { any_spouse  = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_HUSBAND }
 		}
 		else_if = {
-			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_consort = { character = ROOT } } }
+			limit = { FROMFROM = { any_consort = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_CONSORT }
 		}
 		else_if = {
-			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_lover   = { character = ROOT } } }
+			limit = { FROMFROM = { any_lover   = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_INSTANTLY_LOVER }
 		}
 		else = {
@@ -87,21 +83,25 @@ expd_preg_rootfrom_triggers_pregnancy_on_root_by_fromfrom = {
 	}
 	else = {
 		if = {
-			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_spouse  = { character = ROOT } } }
+			limit = { FROMFROM = { any_spouse  = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_HUSBAND }
 		}
 		else_if = {
-			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_consort = { character = ROOT } } }
+			limit = { FROMFROM = { any_consort = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_CONSORT }
 		}
 		else_if = {
-			limit = { persistent_event_target:expd_preg_triggered_pregnancy_father = { any_lover   = { character = ROOT } } }
+			limit = { FROMFROM = { any_lover   = { character = ROOT } } }
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_LOVER }
 		}
 		else = {
 			custom_tooltip = { text = EXPD_PREG_TOOLTIP_TRIGGER_PREGNANCY_DEPENDING_ON_JOINT_FERTILITY_FALLBACK }
 		}
 		hidden_tooltip = {
+			# Auto-generated code
+			#  --- days = 180/score
+			#  --- random = 180/score
+			# NB: Default fertility for a character is 50%, so an average couple will have a score of 0.25, ie. 1080 +/- 360 days
 			if = {
 				limit = { check_variable = { which = expd_preg_trigger_pregnancy_score value >= 2 } }
 				character_event = { id = EXPDPregnancy.3000 days = 90 random = 90 }

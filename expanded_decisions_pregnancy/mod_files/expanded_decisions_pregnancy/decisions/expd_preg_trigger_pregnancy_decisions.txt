@@ -162,54 +162,62 @@ targetted_decisions = {
 		
 		
 		allow = {
+			
+			# Never allowed if the target is already pregnant
+			is_pregnant = no
+			
+			# If a triggered pregnancy is already in progress: only allowed if it has become completely invalid
 			trigger_if = {
-				limit = { is_pregnant = yes }
-				is_pregnant = no
+				limit = { NOT = { has_character_flag = expd_preg_triggered_pregnancy_in_progress } }
+				custom_tooltip = {
+					text = EXPD_PREG_TOOLTIP_HAS_NOT_ALREADY_GOT_TRIGGERED_PREGNANCY
+					always = yes
+				}
 			}
 			trigger_else = {
 				trigger_if = {
-					limit = { FROM = { has_character_flag = expd_preg_decisions_blocked } }
+					limit = { NOT = { persistent_event_target:expd_preg_triggered_pregnancy_father = { always = yes } } }
 					custom_tooltip = {
-						text = EXPD_PREG_TOOLTIP_HAS_NOT_BLOCKED_TRIGGERED_PREGNANCY_VIA_DECISION
+						text = EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_BROKEN
 						always = no
 					}
 				}
-				trigger_if = {
-					limit = { has_character_flag = expd_preg_triggered_pregnancy_in_progress }
-					trigger_if = {
-						limit = { NOT = { persistent_event_target:expd_preg_triggered_pregnancy_father = { always = yes } } }
+				trigger_else = {
+					OR = {
 						custom_tooltip = {
-							text = EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_BROKEN
-							always = no
+							text = EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_DEAD
+							persistent_event_target:expd_preg_triggered_pregnancy_father = { is_alive = no }
 						}
-					}
-					trigger_else = {
-						OR = {
-							custom_tooltip = {
-								text = EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_DEAD
-								persistent_event_target:expd_preg_triggered_pregnancy_father = { is_alive = no }
+						custom_tooltip = {
+							text = EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_NOT_SPOUSE_CONSORT_LOVER
+							persistent_event_target:expd_preg_triggered_pregnancy_father = {
+								NOT = { any_spouse  = { character = ROOT } }
+								NOT = { any_consort = { character = ROOT } }
+								NOT = { any_lover   = { character = ROOT } }
 							}
-							custom_tooltip = {
-								text = EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_NOT_SPOUSE_CONSORT_LOVER
-								persistent_event_target:expd_preg_triggered_pregnancy_father = {
-									NOT = { any_spouse  = { character = ROOT } }
-									NOT = { any_consort = { character = ROOT } }
-									NOT = { any_lover   = { character = ROOT } }
-								}
-							}
-							custom_tooltip = {
-								text = EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_PERMANENTLY_INFERTILE
-								persistent_event_target:expd_preg_triggered_pregnancy_father = {
-									OR = {
-										trait = celibate
-										trait = eunuch
-									}
+						}
+						custom_tooltip = {
+							text = EXPD_PREG_TOOLTIP_FATHER_OF_TRIGGERED_PREGNANCY_IS_PERMANENTLY_INFERTILE
+							persistent_event_target:expd_preg_triggered_pregnancy_father = {
+								OR = {
+									trait = celibate
+									trait = eunuch
 								}
 							}
 						}
 					}
 				}
 			}
+			
+			# Never allowed if the decision-taker has chosen to block all decisions
+			trigger_if = {
+				limit = { FROM = { has_character_flag = expd_preg_decisions_blocked } }
+				custom_tooltip = {
+					text = EXPD_PREG_TOOLTIP_HAS_NOT_BLOCKED_TRIGGERED_PREGNANCY_VIA_DECISION
+					always = no
+				}
+			}
+			
 		}
 		
 		
