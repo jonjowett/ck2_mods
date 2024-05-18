@@ -30,11 +30,23 @@ expd_ct_root_can_lead_rootfroms_armies_and_is_not_marshal = {
 }
 
 expd_ct_this_character_can_receive_marshal_training = {
+	trigger_if = {
+		limit = { has_character_modifier = drill_cooldown_timer }
+		custom_tooltip = {
+			text = expd_ct_this_character_has_not_recently_received_marshal_training_blocked_tt
+			always = no
+		}
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = expd_ct_this_character_has_not_recently_received_marshal_training_allowed_tt
+			always = yes
+		}
+	}
 	OR = {
 		martial < 20
 		expd_ct_this_character_has_no_conventional_leadership_traits = yes
 	}
-	NOT = { has_character_modifier = drill_cooldown_timer }
 }
 
 expd_ct_this_character_has_no_conventional_leadership_traits = {

@@ -28,9 +28,11 @@ character_event = {
 	
 	immediate = {
 		# Cosmetic: If trainee won't gain a trait, set the relevant flag in advance so the martial stat gain is stated correctly
-		if = {
-			limit = { event_target:commander_improved = { expd_ct_this_character_has_no_conventional_leadership_traits = no } }
-			set_character_flag = expd_ct_marshal_no_trait_gain
+		event_target:commander_improved = { 
+			if = {
+				limit = { expd_ct_this_character_has_no_conventional_leadership_traits = no }
+				set_character_flag = expd_ct_marshal_no_trait_gain
+			}
 		}
 	}
 	
@@ -304,7 +306,10 @@ character_event = {
 		
 		# Don't choose the training ahead of time - show the possibilities to the decision-taker
 		expd_ct_choose_marshal_training_for_trainee = yes
-		custom_tooltip = { text = expd_ct_blank_line_tt }
+		if = {
+			limit = { NOT = { event_target:commander_improved = { has_character_flag = expd_ct_marshal_no_trait_gain } } }
+			custom_tooltip = { text = expd_ct_blank_line_tt }
+		}
 		expd_ct_apply_marshal_training_to_trainee_following_targetted_decision = yes
 		
 	}
