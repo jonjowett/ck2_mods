@@ -88,6 +88,15 @@ targetted_decisions = {
 				
 				NOT = { has_character_modifier = expd_ct_block_marshal_training }
 				
+				# Prevent exploits via race conditions
+				trigger_if = {
+					limit = { had_character_flag = { flag = expd_ct_deciding_marshal_training years <= 1 } }
+					custom_tooltip = {
+						text = expd_ct_deciding_marshal_training_tt
+						always = no
+					}
+				}
+				
 			}
 		}
 		
@@ -95,6 +104,10 @@ targetted_decisions = {
 			
 			# Do the training
 			hidden_tooltip = {
+				FROM = {
+					clr_character_flag = expd_ct_deciding_marshal_training
+					set_character_flag = expd_ct_deciding_marshal_training
+				}
 				FROM = { job_marshal = { save_event_target_as = expd_ct_marshal_performing_training } }
 				ROOT = { save_event_target_as = commander_improved }
 			}
