@@ -4,12 +4,17 @@ decisions = {
 		is_in_society = yes
 		ai_check_interval = 12
 		
+		
+		
 		potential = {
 			society_member_of = hermetics
 			society_rank = 4     # Magus
 		}
 		
+		
+		
 		allow = {
+			
 			trigger_if = {
 				limit = { ai = no }
 				# Default event requires learning 10 and martial/stewardship 8. Make it harder for the player.
@@ -27,19 +32,24 @@ decisions = {
 					stewardship = 8
 				}
 			}
+			
 			war = no
+			
 			custom_tooltip = {
 				text = expd_herm_this_character_is_not_inaccessible_incapable_or_prisoner_tt
 				block_general_event_trigger = no
 			}
+			
 			custom_tooltip = {
 				text = expd_herm_this_character_has_built_a_laboratory_tt
 				has_character_flag = built_laboratory
 			}
+			
 			custom_tooltip = {
 				text = expd_herm_this_character_is_not_already_participating_in_a_gathering_tt
 				NOT = { has_character_flag = gathering_of_the_minds }
 			}
+			
 			custom_tooltip = {
 				text = expd_herm_at_least_4_people_in_the_society_have_mutual_opinion_15_with_this_character_tt
 				any_society_member = {
@@ -48,6 +58,7 @@ decisions = {
 					reverse_opinion = { who = ROOT value = 15 }
 				}
 			}
+			
 			trigger_if = {
 				# Fixed price of 3000 currency for the player
 				limit = { ai = no}
@@ -58,13 +69,37 @@ decisions = {
 				# (But they probably won't take it with this little currency, due to the weights in ai_will_do.)
 				society_currency >= 2000
 			}
-			custom_tooltip = {
-				text = expd_herm_has_not_recently_used_this_decision_to_call_a_gathering_tt
-				NOT = { has_character_modifier = expd_herm_recently_called_a_gathering_modifier }
+			
+			trigger_if = {
+				limit = { has_character_modifier = expd_herm_recently_called_a_gathering_modifier }
+				custom_tooltip = {
+					text = expd_herm_has_not_recently_used_this_decision_to_call_a_gathering_blocked_tt
+					always = no
+				}
 			}
+			trigger_else = {
+				custom_tooltip = {
+					text = expd_herm_has_not_recently_used_this_decision_to_call_a_gathering_allowed_tt
+					always = yes
+				}
+			}
+			
+			# Prevent exploits via race conditions
+			trigger_if = {
+				limit = { had_character_flag = { flag = expd_herm_deciding_whether_to_call_a_gathering years <= 1 } }
+				custom_tooltip = {
+					text = expd_herm_deciding_whether_to_call_a_gathering_tt
+					always = no
+				}
+			}
+			
 		}
 		
 		effect = {
+			hidden_tooltip = {
+				clr_character_flag = expd_herm_deciding_whether_to_call_a_gathering
+				set_character_flag = expd_herm_deciding_whether_to_call_a_gathering
+			}
 			character_event = {
 				id = ExpdHerm.1000
 				tooltip = expd_herm_this_character_will_call_a_gathering_tt

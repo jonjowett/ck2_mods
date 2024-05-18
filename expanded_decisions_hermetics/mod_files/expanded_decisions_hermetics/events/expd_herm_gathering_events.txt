@@ -39,6 +39,7 @@ character_event = {
 			add_character_modifier = {
 				name = expd_herm_recently_called_a_gathering_modifier
 				years = 5
+				hidden = yes
 			}
 		}
 		ai_chance = {
@@ -77,4 +78,9 @@ character_event = {
 			}
 		}
 	}
+	
+	after = {
+		hidden_tooltip = { clr_character_flag = expd_herm_deciding_whether_to_call_a_gathering }
+	}
+	
 }
