@@ -65,32 +65,9 @@ decisions = {
 		}
 		
 		effect = {
-			if = {
-				# Fixed price of 3000 currency for the player
-				limit = { ai = no}
-				change_society_currency = -3000
-			}
-			else = {
-				# Variable price of 2000-3000 currency, depending on the amount that the AI character has
-				if = {
-					limit = { society_currency >= 3000 }
-					change_society_currency = -3000
-				}
-				else_if = {
-					limit = { society_currency >= 2500 }
-					change_society_currency = -2500
-				}
-				else = {
-					change_society_currency = -2000
-				}
-			}
 			character_event = {
-				id = MNM.1460
+				id = ExpdHerm.1000
 				tooltip = expd_herm_this_character_will_call_a_gathering_tt
-			}
-			add_character_modifier = {
-				name = expd_herm_recently_called_a_gathering_modifier
-				years = 5
 			}
 		}
 		
