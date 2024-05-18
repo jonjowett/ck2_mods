@@ -16,18 +16,14 @@ targetted_decisions = {
 		
 		potential = {
 			# Only show if FROM is self-targeting, or targeting one of their commanders
-			ROOT = {
-				OR = {
-					character = FROM
-					AND = {
-						has_minor_title = title_commander
-						liege = { character = FROM }
-					}
-				}
-			}
+			expd_ct_root_can_lead_rootfroms_armies_and_is_not_marshal = yes
 		}
 		
 		allow = {
+			
+			# Duplicate the potential block, so that the player can understand who is targetable
+			expd_ct_root_can_lead_rootfroms_armies_and_is_not_marshal = yes
+			
 			# ROOT must be a valid target
 			ROOT = { expd_ct_this_character_can_receive_marshal_training = yes }
 			
@@ -43,8 +39,11 @@ targetted_decisions = {
 					}
 				}
 				
-				# If FROM has a Marshal, check he is available for training and that FROM can afford to pay him
 				trigger_else = {
+					
+					# If FROM has a Marshal, check he is available for training and that FROM can afford to pay him
+					
+					# Marshal is valid
 					job_marshal = { expd_ct_this_character_can_provide_marshal_training = yes }
 					
 					# If you have Conclave, must be able to give them a favor
@@ -78,23 +77,39 @@ targetted_decisions = {
 							wealth >= 80
 						}
 					}
-				}
-				
-				# Additional cost for self-targeted decision
-				trigger_if = {
-					limit = { character = ROOT }
-					prestige >= 1000 # Keep in sync with logic below
-				}
-				
-				NOT = { has_character_modifier = expd_ct_block_marshal_training }
-				
-				# Prevent exploits via race conditions
-				trigger_if = {
-					limit = { had_character_flag = { flag = expd_ct_deciding_marshal_training years <= 1 } }
-					custom_tooltip = {
-						text = expd_ct_deciding_marshal_training_tt
-						always = no
+					
+					# Include all other costs in this trigger_if block so the tooltips are a bit clearer
+					
+					# Additional cost for self-targeted decision
+					trigger_if = {
+						limit = { character = ROOT }
+						prestige >= 1000 # Keep in sync with logic below
 					}
+					
+					# Has not recently performed any marshal training
+					trigger_if = {
+						limit = { has_character_modifier = expd_ct_block_marshal_training }
+						custom_tooltip = {
+							text = expd_ct_block_marshal_training_blocked_tt
+							always = no
+						}
+					}
+					trigger_else = {
+						custom_tooltip = {
+							text = expd_ct_block_marshal_training_allowed_tt
+							always = yes
+						}
+					}
+					
+					# Prevent exploits via race conditions
+					trigger_if = {
+						limit = { had_character_flag = { flag = expd_ct_deciding_marshal_training years <= 1 } }
+						custom_tooltip = {
+							text = expd_ct_deciding_marshal_training_tt
+							always = no
+						}
+					}
+					
 				}
 				
 			}

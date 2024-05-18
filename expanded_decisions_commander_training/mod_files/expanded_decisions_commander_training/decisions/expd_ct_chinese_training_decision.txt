@@ -20,25 +20,19 @@ targetted_decisions = {
 		}
 		
 		potential = {
-			# Only show if FROM is self-targeting, or targeting one of their commanders, or targeting their marshal
-			ROOT = {
-				OR = {
-					character = FROM
-					AND = {
-						has_minor_title = title_commander
-						liege = { character = FROM }
-					}
-					AND = {
-						has_job_title = job_marshal
-						liege = { character = FROM }
-					}
-				}
-			}
+			# Only show if FROM is targeting someone who can lead one of their armies
+			expd_ct_root_can_lead_rootfroms_armies = yes
 		}
 		
 		allow = {
-			# Only allow if ROOT is a valid target, FROM has sufficient grace and is not in timeout
+			
+			# Duplicate the potential block, so that the player can understand who is targetable
+			expd_ct_root_can_lead_rootfroms_armies = yes
+			
+			# It must be possible to train ROOT
 			ROOT = { expd_ct_this_character_is_a_valid_target_for_chinese_training = yes }
+			
+			# FROM must have sufficient grace and not be in timeout
 			FROM = {
 				
 				# Half-price for golden age strategists!
@@ -67,7 +61,20 @@ targetted_decisions = {
 					prestige >= 1000 # Keep in sync with logic below
 				}
 				
-				NOT = { has_character_modifier = expd_ct_block_chinese_training }
+				# Has not recently asked for Chinese training
+				trigger_if = {
+					limit = { has_character_modifier = expd_ct_block_chinese_training }
+					custom_tooltip = {
+						text = expd_ct_block_chinese_training_blocked_tt
+						always = no
+					}
+				}
+				trigger_else = {
+					custom_tooltip = {
+						text = expd_ct_block_chinese_training_allowed_tt
+						always = yes
+					}
+				}
 				
 			}
 		}
@@ -134,9 +141,10 @@ targetted_decisions = {
 							}
 						}
 					}
-					add_character_modifier = {
-						name  = expd_ct_block_chinese_training
-						years = 1
+					add_character_modifier     = { name = expd_ct_block_chinese_training years = 1 }
+					hidden_tooltip = {
+						remove_character_modifier       = expd_ct_block_chinese_training
+						add_character_modifier = { name = expd_ct_block_chinese_training years = 1 hidden = yes }
 					}
 					custom_tooltip = { text = expd_ct_chinese_training_cooldown_reduced_2_golden_age_strategists_tt }
 				}
@@ -147,9 +155,10 @@ targetted_decisions = {
 							has_character_flag = jd_strategist_golden_age
 						}
 					}
-					add_character_modifier = {
-						name  = expd_ct_block_chinese_training
-						years = 2
+					add_character_modifier     = { name = expd_ct_block_chinese_training years = 2 }
+					hidden_tooltip = {
+						remove_character_modifier       = expd_ct_block_chinese_training
+						add_character_modifier = { name = expd_ct_block_chinese_training years = 2 hidden = yes }
 					}
 					custom_tooltip = { text = expd_ct_chinese_training_cooldown_reduced_golden_age_strategist_tt }
 				}
@@ -165,16 +174,18 @@ targetted_decisions = {
 							}
 						}
 					}
-					add_character_modifier = {
-						name  = expd_ct_block_chinese_training
-						years = 2
+					add_character_modifier     = { name = expd_ct_block_chinese_training years = 2 }
+					hidden_tooltip = {
+						remove_character_modifier       = expd_ct_block_chinese_training
+						add_character_modifier = { name = expd_ct_block_chinese_training years = 2 hidden = yes }
 					}
 					custom_tooltip = { text = expd_ct_chinese_training_cooldown_reduced_2_strategists_tt }
 				}
 				else = {
-					add_character_modifier = {
-						name  = expd_ct_block_chinese_training
-						years = 3
+					add_character_modifier     = { name = expd_ct_block_chinese_training years = 3 }
+					hidden_tooltip = {
+						remove_character_modifier       = expd_ct_block_chinese_training
+						add_character_modifier = { name = expd_ct_block_chinese_training years = 3 hidden = yes }
 					}
 				}
 				

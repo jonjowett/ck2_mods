@@ -136,82 +136,162 @@ character_event = {
 		# The value should be equal to the MTTH of the modded base game event, with a minimum cooldown of 3 years
 		if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial <  2  } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 488 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 488 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 488 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial <  4  } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 391 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 391 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 391 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial <  6  } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 313 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 313 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 313 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial <  8  } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 250 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 250 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 250 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial <  10 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 200 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 200 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 200 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 10 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 170 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 170 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 170 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 11 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 144 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 144 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 144 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 12 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 123 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 123 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 123 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 13 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 104 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 104 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 104 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 14 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 89 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 89 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 89 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 15 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 75 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 75 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 75 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 16 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 64 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 64 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 64 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 17 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 58 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 58 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 58 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 18 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 52 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 52 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 52 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 19 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 47 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 47 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 47 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 20 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 44 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 44 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 44 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial == 21 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 42 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 42 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 42 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial <= 23 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 40 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 40 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 40 hidden = yes }
+			}
 		}
 		else_if = {
 			limit = { event_target:expd_ct_marshal_performing_training = { martial <= 25 } }
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 38 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 38 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 38 hidden = yes }
+			}
 		}
 		else = {
-			add_character_modifier = { name = expd_ct_block_marshal_training months = 36 }
+			add_character_modifier     = { name = expd_ct_block_marshal_training months = 36 }
+			hidden_tooltip = {
+				remove_character_modifier       = expd_ct_block_marshal_training
+				add_character_modifier = { name = expd_ct_block_marshal_training months = 36 hidden = yes }
+			}
 		}
 		
 		# Add a warning for the user, in case the cooldown will be really long
