@@ -1,0 +1,118 @@
+society_decisions = {
+	
+	expd_herm_acquire_ingredients_decision = {
+		
+		ai = no
+		
+		is_high_prio = yes
+		
+		
+		
+		potential = {
+			society_member_of = hermetics
+			has_character_modifier = acquire_ingredients_decision_cooldown_timer
+		}
+		
+		
+		
+		allow = {
+			
+			custom_tooltip = {
+				text = tooltip_not_busy
+				block_general_event_trigger = no
+			}
+			
+			custom_tooltip = {
+				text = expd_herm_vanilla_acquire_ingredients_decision_cooldown_timer_tt
+				has_character_modifier = acquire_ingredients_decision_cooldown_timer
+			}
+			
+			trigger_if = {
+				limit = { has_character_modifier = expd_herm_acquire_ingredients_decision_cooldown_timer }
+				custom_tooltip = {
+					text = expd_herm_acquire_ingredients_decision_cooldown_timer_blocked_tt
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = expd_herm_acquire_ingredients_decision_cooldown_timer_allowed_tt
+					always = yes
+				}
+			}
+			
+			custom_tooltip = {
+				text = acquire_ingredients_decision_apprentice_requirement
+				hidden_trigger = {
+					any_courtier_or_vassal = {
+						liege = { character = ROOT }
+						has_minor_title = title_hermetics_apprentice
+					}
+				}
+			}
+			
+			custom_tooltip = {
+				text = acquire_ingredients_decision_too_many_ingredients
+				hidden_trigger = {
+					NOT = {
+						any_artifact = {
+							count = 5
+							has_artifact_flag = ingredient
+						}
+					}
+				}
+			}
+			
+			trigger_if = {
+				limit = { has_character_modifier = expd_herm_acquire_ingredients_decision_cooldown_timer_more_expensive }
+				society_currency >= 200
+			}
+			trigger_else = {
+				society_currency >= 100
+			}
+			
+		}
+		
+		
+		
+		effect = {
+			
+			if = {
+				limit = { has_character_modifier = expd_herm_acquire_ingredients_decision_cooldown_timer_more_expensive }
+				change_society_currency = -200
+				custom_tooltip = { text = expd_herm_acquire_ingredients_decision_more_expensive_tt }
+			}
+			else = {
+				change_society_currency = -100
+			}
+			
+			custom_tooltip = { text = expd_herm_blank_line_tt }
+			
+			custom_tooltip = { text = acquire_ingredients_effect_tooltip }
+			
+			hidden_tooltip = {
+				remove_character_modifier = expd_herm_acquire_ingredients_decision_cooldown_timer
+				remove_character_modifier = expd_herm_acquire_ingredients_decision_cooldown_timer_more_expensive
+				add_character_modifier = {
+					modifier = expd_herm_acquire_ingredients_decision_cooldown_timer
+					years = 1
+					hidden = yes
+				}
+				add_character_modifier = {
+					modifier = expd_herm_acquire_ingredients_decision_cooldown_timer_more_expensive
+					years = 3
+					hidden = yes
+				}
+				character_event = { id = MNM.1800 }
+			}
+			
+		}
+		
+		
+		
+		ai_will_do = { factor = 0 } # AI will never do this
+		
+		
+		
+	}
+}

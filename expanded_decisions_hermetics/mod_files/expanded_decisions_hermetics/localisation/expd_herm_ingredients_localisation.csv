@@ -1,0 +1,14 @@
+#
+# Decision
+expd_herm_acquire_ingredients_decision;Acquire Ingredients (bypassing cooldown);;;;;;;;;;;;;x
+expd_herm_acquire_ingredients_decision_desc;By expending a small amount of §YEsoteric Knowledge§!, you and your apprentice can venture on another trip to gather rare ingredients.;;;;;;;;;;;;;x
+#
+# Tooltips
+expd_herm_vanilla_acquire_ingredients_decision_cooldown_timer_tt;Is blocked from taking the 'Acquire Ingredients' decision (cooldown expires §Y[Root.acquire_ingredients_decision_cooldown_timer.GetExpiryDate]§!);;;;;;;;;;;;;x
+expd_herm_acquire_ingredients_decision_cooldown_timer_blocked_tt;Has NOT recently used §Ythis decision§! to acquire ingredients (cooldown expires §Y[Root.expd_herm_acquire_ingredients_decision_cooldown_timer.GetExpiryDate]§!);;;;;;;;;;;;;x
+expd_herm_acquire_ingredients_decision_cooldown_timer_allowed_tt;Has NOT recently used §Ythis decision§! to acquire ingredients;;;;;;;;;;;;;x
+expd_herm_acquire_ingredients_decision_more_expensive_tt;§RWARNING!§! Cost is §Ydoubled§! due to frequent use! (Cooldown expires §Y[Root.expd_herm_acquire_ingredients_decision_cooldown_timer_more_expensive.GetExpiryDate]§!.);;;;;;;;;;;;;x
+#
+# Timing modifiers (should never be seen, but included so that the Validator doesn't complain)
+expd_herm_acquire_ingredients_decision_cooldown_timer;Recently ventured to acquire ingredients (bypassing cooldown);;;;;;;;;;;;;x
+expd_herm_acquire_ingredients_decision_cooldown_timer_more_expensive;Very recently ventured to acquire ingredients (bypassing cooldown);;;;;;;;;;;;;x
