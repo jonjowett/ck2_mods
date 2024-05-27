@@ -17,7 +17,7 @@ character_event = {
 			limit = { ai = yes }
 			if = {
 				limit = { wealth < 100 }
-				add_trait = csh_wealth_0
+				#add_trait = csh_wealth_0
 			}
 			else_if = {
 				limit = { wealth < 300 }
@@ -46,6 +46,10 @@ character_event = {
 		remove_trait = csh_artifact_3
 		remove_trait = csh_artifact_4
 		remove_trait = csh_artifact_5
+		remove_trait = csh_artifact_6
+		remove_trait = csh_artifact_7
+		remove_trait = csh_artifact_8
+		remove_trait = csh_artifact_9
 		if = {
 			limit = { ai = yes }
 			if = {
@@ -67,6 +71,22 @@ character_event = {
 			if = {
 				limit = { any_artifact = { quality == 5 } }
 				add_trait = csh_artifact_5
+			}
+			if = {
+				limit = { any_artifact = { quality == 6 } }
+				add_trait = csh_artifact_6
+			}
+			if = {
+				limit = { any_artifact = { quality == 7 } }
+				add_trait = csh_artifact_7
+			}
+			if = {
+				limit = { any_artifact = { quality == 8 } }
+				add_trait = csh_artifact_8
+			}
+			if = {
+				limit = { any_artifact = { quality >= 9 } }
+				add_trait = csh_artifact_9
 			}
 		}
 		
