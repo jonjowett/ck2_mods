@@ -6,18 +6,25 @@ targetted_decisions = {
 		only_independent = yes
 		from_potential = {
 			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
 		}
 		potential = {
 			NOT = { has_global_flag = expd_gp_debug_mode }
 		}
 		allow = {
-			custom_tooltip = {
-				text = expd_gp_debug_mode_cant_be_activated_in_multiplayer_tt
-				NOT = { any_player = { NOT = { character = FROM } } }
-			}
+			always = yes
 		}
 		effect = {
 			hidden_tooltip = { set_global_flag = expd_gp_debug_mode }
+			hidden_tooltip = {
+				any_player = {
+					limit = { NOT = { character = FROM } }
+					character_event = { id = ExpdGPDebugNotification.1 }
+				}
+			}
 		}
 	}
 	
@@ -28,6 +35,10 @@ targetted_decisions = {
 		is_high_prio = yes
 		from_potential = {
 			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
 		}
 		potential = {
 			has_global_flag = expd_gp_debug_mode
@@ -49,7 +60,11 @@ title_decisions = {
 		ai = no
 		only_independent = yes
 		from_potential = {
-			always = yes
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
 		}
 		potential = {
 			has_global_flag = expd_gp_debug_mode
@@ -68,7 +83,11 @@ title_decisions = {
 		ai = no
 		only_independent = yes
 		from_potential = {
-			always = yes
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
 		}
 		potential = {
 			has_global_flag = expd_gp_debug_mode
@@ -88,7 +107,11 @@ title_decisions = {
 		ai = no
 		only_independent = yes
 		from_potential = {
-			always = yes
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
 		}
 		potential = {
 			has_global_flag = expd_gp_debug_mode
@@ -107,7 +130,11 @@ title_decisions = {
 		ai = no
 		only_independent = yes
 		from_potential = {
-			always = yes
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
 		}
 		potential = {
 			has_global_flag = expd_gp_debug_mode
