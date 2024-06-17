@@ -78,3 +78,15 @@ expd_pris_send_all_prisoners_to_oubliette_effect = {
 		expd_pris_send_single_prisoner_to_oubliette_effect = yes
 	}
 }
+
+expd_pris_cleanup_this_characters_modifiers_prior_to_setting_a_new_default_prison = {
+	remove_character_modifier = expd_pris_default_prison_house_arrest
+	remove_character_modifier = expd_pris_default_prison_dungeon
+	remove_character_modifier = expd_pris_default_prison_oubliette
+	remove_character_modifier = expd_pris_default_prison_location_policy_cooldown
+	add_character_modifier = {
+		name     = expd_pris_default_prison_location_policy_cooldown
+		years    = 3
+		hidden   = yes
+	}
+}

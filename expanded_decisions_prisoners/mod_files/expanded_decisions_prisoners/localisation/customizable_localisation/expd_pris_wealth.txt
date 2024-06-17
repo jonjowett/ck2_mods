@@ -51,6 +51,22 @@ defined_text = {
 	name = expd_pris_artifact
 	use_first_valid = yes
 	text = {
+		trigger = { any_artifact = { quality >= 9 } }
+		localisation_key = expd_pris_artifact_quality_9
+	}
+	text = {
+		trigger = { any_artifact = { quality == 8 } }
+		localisation_key = expd_pris_artifact_quality_8
+	}
+	text = {
+		trigger = { any_artifact = { quality == 7 } }
+		localisation_key = expd_pris_artifact_quality_7
+	}
+	text = {
+		trigger = { any_artifact = { quality == 6 } }
+		localisation_key = expd_pris_artifact_quality_6
+	}
+	text = {
 		trigger = { any_artifact = { quality == 5 } }
 		localisation_key = expd_pris_artifact_quality_5
 	}

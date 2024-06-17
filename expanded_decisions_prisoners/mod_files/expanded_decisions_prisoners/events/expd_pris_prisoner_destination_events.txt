@@ -16,22 +16,22 @@ character_event = {
 				host = { character = FROM }
 				FROM = {
 					OR = {
-						has_character_flag = expd_pris_all_prisoners_sent_to_house_arrest
-						has_character_flag = expd_pris_all_prisoners_sent_to_dungeon
-						has_character_flag = expd_pris_all_prisoners_sent_to_oubliette
+						has_character_modifier = expd_pris_default_prison_house_arrest
+						has_character_modifier = expd_pris_default_prison_dungeon
+						has_character_modifier = expd_pris_default_prison_oubliette
 					}
 				}
 			}
 			if = {
-				limit = { FROM = { has_character_flag = expd_pris_all_prisoners_sent_to_house_arrest } }
+				limit = { FROM = { has_character_modifier = expd_pris_default_prison_house_arrest } }
 				expd_pris_send_single_prisoner_to_house_arrest_effect = yes
 			}
 			else_if = {
-				limit = { FROM = { has_character_flag = expd_pris_all_prisoners_sent_to_oubliette } }
+				limit = { FROM = { has_character_modifier = expd_pris_default_prison_oubliette } }
 				expd_pris_send_single_prisoner_to_oubliette_effect = yes
 			}
 			else = {
-				# Either expd_pris_all_prisoners_sent_to_dungeon ; or fallback option in case of logic errors
+				# Either expd_pris_default_prison_dungeon ; or fallback option in case of logic errors
 				expd_pris_send_single_prisoner_to_dungeon_effect = yes
 			}
 		}

@@ -4,28 +4,6 @@ expd_pris_default_prisoner_location_policy_is_not_on_cooldown = {
 	#  --- There are multiple decisions, and the AI can take them all on the same day if they want, which would be a bit silly.
 	OR = {
 		ai = no
-		AND = {
-			OR = {
-				NOT = { has_character_flag = expd_pris_all_prisoners_sent_to_house_arrest }
-				had_character_flag = {
-					flag = expd_pris_all_prisoners_sent_to_house_arrest
-					years >= 3
-				}
-			}
-			OR = {
-				NOT = { has_character_flag = expd_pris_all_prisoners_sent_to_dungeon }
-				had_character_flag = {
-					flag = expd_pris_all_prisoners_sent_to_dungeon
-					years >= 3
-				}
-			}
-			OR = {
-				NOT = { has_character_flag = expd_pris_all_prisoners_sent_to_oubliette }
-				had_character_flag = {
-					flag = expd_pris_all_prisoners_sent_to_oubliette
-					years >= 3
-				}
-			}
-		}
+		NOT = { has_character_modifier = expd_pris_default_prison_location_policy_cooldown }
 	}
 }

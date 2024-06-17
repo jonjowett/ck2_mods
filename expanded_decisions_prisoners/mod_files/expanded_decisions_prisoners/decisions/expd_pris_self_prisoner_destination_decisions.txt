@@ -15,15 +15,19 @@ targetted_decisions = {
 		allow = {
 			custom_tooltip = {
 				text = EXPD_PRIS_TOOLTIP_NOT_ALREADY_SENDING_ALL_PRISONERS_TO_HOUSE_ARREST_BY_DEFAULT
-				NOT = { has_character_flag = expd_pris_all_prisoners_sent_to_house_arrest }
+				NOT = { has_character_modifier = expd_pris_default_prison_house_arrest }
 			}
 		}
 		effect = {
 			custom_tooltip = {
 				text = EXPD_PRIS_TOOLTIP_ALL_NEW_PRISONERS_SENT_TO_HOUSE_ARREST_BY_DEFAULT
-				set_character_flag = expd_pris_all_prisoners_sent_to_house_arrest
-				clr_character_flag = expd_pris_all_prisoners_sent_to_dungeon
-				clr_character_flag = expd_pris_all_prisoners_sent_to_oubliette
+				expd_pris_cleanup_this_characters_modifiers_prior_to_setting_a_new_default_prison = yes
+				add_character_modifier = {
+					name     = expd_pris_default_prison_house_arrest
+					duration = -1
+					hidden   = yes
+					inherit  = yes
+				}
 			}
 			if = {
 				limit = { ai = yes }
@@ -71,15 +75,19 @@ targetted_decisions = {
 		allow = {
 			custom_tooltip = {
 				text = EXPD_PRIS_TOOLTIP_NOT_ALREADY_SENDING_ALL_PRISONERS_TO_DUNGEON_BY_DEFAULT
-				NOT = { has_character_flag = expd_pris_all_prisoners_sent_to_dungeon }
+				NOT = { has_character_modifier = expd_pris_default_prison_dungeon }
 			}
 		}
 		effect = {
 			custom_tooltip = {
 				text = EXPD_PRIS_TOOLTIP_ALL_NEW_PRISONERS_SENT_TO_DUNGEON_BY_DEFAULT
-				clr_character_flag = expd_pris_all_prisoners_sent_to_house_arrest
-				set_character_flag = expd_pris_all_prisoners_sent_to_dungeon
-				clr_character_flag = expd_pris_all_prisoners_sent_to_oubliette
+				expd_pris_cleanup_this_characters_modifiers_prior_to_setting_a_new_default_prison = yes
+				add_character_modifier = {
+					name     = expd_pris_default_prison_dungeon
+					duration = -1
+					hidden   = yes
+					inherit  = yes
+				}
 			}
 			if = {
 				limit = { ai = yes }
@@ -140,15 +148,19 @@ targetted_decisions = {
 		allow = {
 			custom_tooltip = {
 				text = EXPD_PRIS_TOOLTIP_NOT_ALREADY_SENDING_ALL_PRISONERS_TO_OUBLIETTE_BY_DEFAULT
-				NOT = { has_character_flag = expd_pris_all_prisoners_sent_to_oubliette }
+				NOT = { has_character_modifier = expd_pris_default_prison_oubliette }
 			}
 		}
 		effect = {
 			custom_tooltip = {
 				text = EXPD_PRIS_TOOLTIP_ALL_NEW_PRISONERS_SENT_TO_OUBLIETTE_BY_DEFAULT
-				clr_character_flag = expd_pris_all_prisoners_sent_to_house_arrest
-				clr_character_flag = expd_pris_all_prisoners_sent_to_dungeon
-				set_character_flag = expd_pris_all_prisoners_sent_to_oubliette
+				expd_pris_cleanup_this_characters_modifiers_prior_to_setting_a_new_default_prison = yes
+				add_character_modifier = {
+					name     = expd_pris_default_prison_oubliette
+					duration = -1
+					hidden   = yes
+					inherit  = yes
+				}
 			}
 			if = {
 				limit = { ai = yes }
