@@ -1,0 +1,126 @@
+namespace = tttbg
+
+character_event = {
+	id = tttbg.1
+	desc = desctttbg.1
+	is_triggered_only = yes
+	
+	immediate = {
+		any_character = {
+			limit = {
+				has_character_flag = selectedprisoner
+				is_alive = yes
+			}
+			save_event_target_as = prisonertomove
+			clr_character_flag = selectedprisoner
+		}
+	}
+	
+	option = {
+		ai_chance = { factor = 100 }
+		name = "Take the prisoner in."
+		event_target:prisonertomove = { imprison = no }
+		event_target:prisonertomove = { imprison = ROOT }
+		clear_event_target = prisonertomove
+	}
+	option = {
+		ai_chance = { factor = 0 }
+		name = "We don't need them."
+	}
+}
+
+character_event = {
+	id = tttbg.2
+	desc = desctttbg.2
+	is_triggered_only = yes
+	
+	immediate = {
+		any_character = {
+			limit = {
+				has_character_flag = selectedprisoner
+				is_alive = yes
+			}
+			save_event_target_as = prisonertomove
+			clr_character_flag = selectedprisoner
+		}
+		any_character = {
+			limit = {
+				has_character_flag = askingforprisoner
+				is_alive = yes
+			}
+			save_event_target_as = jailortomove
+			clr_character_flag = askingforprisoner
+		}
+	}
+	
+	option = {
+		ai_chance = { factor = 0 
+			modifier = {
+				factor = 100
+				event_target:jailortomove = {
+					is_liege_of = ROOT
+				}
+			}
+			modifier = {
+				factor = 3
+				trait = just
+			}
+			modifier = {
+				factor = 3
+				trait = shy
+			}
+			modifier = {
+				factor = 3
+				trait = craven
+			}
+			modifier = {
+				factor = 3
+				event_target:jailortomove = { reverse_opinion = { who = PREV value = 50 }
+			}
+			modifier = {
+				factor = 3
+				event_target:jailortomove = { reverse_opinion = { who = PREV value = 75 }
+			}
+			modifier = {
+				factor = 3
+				event_target:jailortomove = { reverse_opinion = { who = PREV value = 100 }
+			}
+		}
+		name = "Hand over the prisoner."
+		event_target:prisonertomove = { imprison = no }
+		event_target:prisonertomove = { imprison = event_target:jailortomove }
+		clear_event_target = prisonertomove
+		clear_event_target = jailortomove
+	}
+	option = {
+		ai_chance = { factor = 100 
+			modifier = {
+				factor = 0
+				event_target:jailortomove = {
+					is_liege_of = ROOT
+				}
+			}
+			modifier = {
+				factor = 3
+				trait = wroth
+			}
+			modifier = {
+				factor = 3
+				trait = cruel
+			}
+			modifier = {
+				factor = 3
+				trait = stubborn
+			}
+			modifier = {
+				factor = 3
+				trait = impaler
+			}
+			modifier = {
+				factor = 3
+				trait = greedy
+			}
+		}
+		name = "We shall keep the prisoner."
+	}
+}

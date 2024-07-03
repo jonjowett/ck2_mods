@@ -1,0 +1,229 @@
+targetted_decisions = {
+     send_gold = {
+		ai_target_filter = none
+		ai_third_party_filter = none
+		from_potential = {
+			is_ruler = yes
+			has_character_flag = send_25
+		}
+			allow = {
+			FROM = { wealth = 25 }
+			}
+			effect = {
+			FROM = { wealth = -25 }
+			ROOT = { wealth = 25 }
+			}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	send_gold50 = {
+		ai_target_filter = none
+		ai_third_party_filter = none
+		from_potential = {
+			has_character_flag = send_50
+			is_ruler = yes
+		}
+			allow = {
+			FROM = { wealth = 50 }
+			}
+			effect = {
+			FROM = { wealth = -50 }
+			ROOT = { wealth = 50 }
+			}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	send_gold100 = {
+		ai_target_filter = none
+		ai_third_party_filter = none
+		from_potential = {
+			is_ruler = yes
+			has_character_flag = send_100
+		}
+			allow = {
+			FROM = { wealth = 100 }
+			}
+			effect = {
+			FROM = { wealth = -100 }
+			ROOT = { wealth = 100 }
+			}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	send_gold250 = {
+		ai_target_filter = none
+		ai_third_party_filter = none
+		from_potential = {
+			wealth = 250
+			is_ruler = yes
+			has_character_flag = send_250
+		}
+			allow = {
+			FROM = { wealth = 250}
+			}
+			effect = {
+			FROM = { wealth = -250}
+			ROOT = { wealth = 250}
+			}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	send_gold500 = {
+		ai_target_filter = none
+		ai_third_party_filter = none
+		from_potential = {
+			is_ruler = yes
+			has_character_flag = send_500
+		}
+			allow = {
+			FROM = { wealth = 500 }
+			}
+			effect = {
+			FROM = { wealth = -500 }
+			ROOT = { wealth = 500 }
+			}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	send_gold1000 = {
+		ai_target_filter = none
+		ai_third_party_filter = none
+		from_potential = {
+			is_ruler = yes
+			has_character_flag = send_1000
+		}
+			allow = {
+			FROM = { wealth = 1000 }
+			}
+			effect = {
+			FROM = { wealth = -1000 }
+			ROOT = { wealth = 1000 }
+			}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

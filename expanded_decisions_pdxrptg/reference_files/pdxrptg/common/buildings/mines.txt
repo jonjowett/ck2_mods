@@ -1,0 +1,108 @@
+city = {
+	ci_gold_mine_1 = {
+		desc = gold_mine_1_desc
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ci_gold_mine_1 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		tax_income = 15.0
+		
+		convert_to_castle = ca_gold_mine_1
+	}
+	ci_silver_mine_1 = {
+		desc = silver_mine_1_desc
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ci_silver_mine_1 }
+			}
+		}
+
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		tax_income = 10.0
+		convert_to_castle = ca_silver_mine_1
+	}
+
+	ci_copper_mine_1 = {
+		desc = copper_mine_1_desc
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ci_copper_mine_1 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		tax_income = 5.0
+		convert_to_castle = ca_copper_mine_1
+	}
+}
+
+castle = {
+	ca_gold_mine_1 = {
+		desc = gold_mine_1_desc
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_gold_mine_1 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+
+		tax_income = 15.0
+		
+		convert_to_city = ci_gold_mine_1
+	}
+
+	ca_silver_mine_1 = {
+		desc = silver_mine_1_desc
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_silver_mine_1 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		tax_income = 10.0
+		convert_to_city = ci_silver_mine_1
+	}
+	
+	ca_copper_mine_1 = {
+		desc = copper_mine_1_desc
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_copper_mine_1 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		tax_income = 5.0
+		convert_to_city = ci_copper_mine_1
+	}
+
+}

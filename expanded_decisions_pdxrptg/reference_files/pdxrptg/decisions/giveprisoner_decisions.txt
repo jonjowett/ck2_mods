@@ -1,0 +1,104 @@
+targetted_decisions = {
+	
+	enable_prisoner_transfering = {
+		only_playable = yes
+		diplomacy_icon = GFX_break_non_aggression_pact
+		filter = self
+		
+		potential = {
+			NOT = { has_character_flag = selectingprisonersttt }
+			ai = no
+		}
+		allow = {		
+			demesne_size = 1
+		}
+		effect = {	
+			set_character_flag = selectingprisonersttt
+		}
+	}
+	
+	disable_prisoner_transfering = {
+		only_playable = yes
+		diplomacy_icon = GFX_break_non_aggression_pact
+		filter = self
+		
+		potential = {
+			has_character_flag = selectingprisonersttt
+			ai = no
+		}
+		allow = {		
+			demesne_size = 1
+		}
+		effect = {	
+			clr_character_flag = selectingprisonersttt
+		}
+	}
+	
+	select_prisoner = {
+		diplomacy_icon = GFX_break_non_aggression_pact
+		only_playable = yes
+		
+		from_potential = {
+			has_character_flag = selectingprisonersttt
+		}
+		potential = {
+			host = { character = FROM }
+			prisoner = yes
+			NOT = { has_character_flag = selectedprisoner }
+		}
+		allow = {
+		}
+		effect = {
+			ROOT = {
+				set_character_flag = selectedprisoner
+			}
+		}
+	}
+	
+	deselect_prisoner = {
+		diplomacy_icon = GFX_break_non_aggression_pact
+		only_playable = yes
+		
+		from_potential = {
+			has_character_flag = selectingprisonersttt
+		}
+		potential = {
+			host = { character = FROM }
+			prisoner = yes
+			has_character_flag = selectedprisoner
+		}
+		allow = {
+		}
+		effect = {	
+			ROOT = {
+				clr_character_flag = selectedprisoner
+			}
+		}
+	}
+	
+	handover_prisoner = {
+		diplomacy_icon = GFX_break_non_aggression_pact
+		only_playable = yes
+		
+		from_potential = {
+			has_character_flag = selectingprisonersttt
+			any_courtier = {
+				has_character_flag = selectedprisoner
+			}
+		}
+		potential = {
+			NOT = { has_character_flag = selectedprisoner }
+			demesne_size = 1
+		}
+		allow = {
+			demesne_size = 1
+		}
+		effect = {
+			ROOT = {
+				character_event = { id = tttbg.1 }
+			}
+		}
+	}
+	
+	
+}

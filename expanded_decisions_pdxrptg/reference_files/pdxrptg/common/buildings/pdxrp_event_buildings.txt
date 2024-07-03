@@ -1,0 +1,619 @@
+castle = {
+	ca_mercenary_encampment_1 = {
+		desc = mercenary_encampment
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_mercenary_encampment_1 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+
+		light_infantry = 100
+		archers = 100
+	}
+
+	ca_mercenary_encampment_2 = {
+		desc = mercenary_encampment
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_mercenary_encampment_2 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+		upgrades_from = ca_mercenary_encampment_1
+
+		ai_creation_factor = 0
+		
+		heavy_infantry = 100
+	}
+
+	ca_mercenary_encampment_3 = {
+		desc = mercenary_encampment
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_mercenary_encampment_3 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+		upgrades_from = ca_mercenary_encampment_2
+
+		ai_creation_factor = 0
+		
+		archers = 200
+		light_infantry = 200
+		heavy_infantry = 200
+	}
+
+	ca_mercenary_encampment_4 = {
+		desc = mercenary_encampment
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_mercenary_encampment_4 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+		upgrades_from = ca_mercenary_encampment_3
+
+		ai_creation_factor = 0
+		
+		knights = 50
+		light_cavalry = 300
+	}
+
+	ca_mercenary_encampment_5 = {
+		desc = mercenary_encampment
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_mercenary_encampment_5 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+		upgrades_from = ca_mercenary_encampment_4
+
+		ai_creation_factor = 0
+		
+		knights = 50
+		heavy_infantry = 200
+		light_cavalry = 200
+	}
+
+	ca_village_men_at_arms = {
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_village_men_at_arms }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		light_infantry = 100
+		archers = 100
+	}
+
+	ca_retired_legionary_settlement = {
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_retired_legionary_settlement }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		heavy_infantry = 200
+	}
+
+	ca_former_poacher_village = {
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_former_poacher_village }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		archers = 200
+	}
+
+	ca_town_guard = {
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_town_guard }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		light_infantry = 200
+		garrison_size = 0.5
+	}
+
+	ca_roman_special_fortifications_1 = {
+		desc = roman_special_fortifications
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_roman_special_fortifications_1 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+
+		garrison_size = 0.5
+		fort_level = 2.5		
+	}
+
+	ca_roman_special_fortifications_2 = {
+		desc = roman_special_fortifications
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_roman_special_fortifications_2 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+		upgrades_from = ca_roman_special_fortifications_1
+
+		ai_creation_factor = 0
+		
+		garrison_size = 0.5
+		fort_level = 2.5		
+	}
+
+	ca_holy_order_monastery_1 = {
+		desc = holy_order_monastery
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_holy_order_monastery_1 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+
+		knights = 50
+		heavy_infantry = 100
+	}
+
+	ca_holy_order_monastery_2 = {
+		desc = holy_order_monastery
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_holy_order_monastery_2 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+		upgrades_from = ca_holy_order_monastery_1
+
+		ai_creation_factor = 0
+		
+		knights = 50
+		heavy_infantry = 200
+	}
+
+	ca_holy_order_monastery_3 = {
+		desc = holy_order_monastery
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_holy_order_monastery_3 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+		upgrades_from = ca_holy_order_monastery_2
+
+		ai_creation_factor = 0
+		
+
+		knights = 50
+		heavy_infantry = 200
+	}
+
+
+
+	ca_trade_hub_1 = {
+		desc = trade_hub
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_trade_hub_1 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+
+		tax_income = 5
+		tradevalue = 50		
+	}
+
+	ca_trade_hub_2 = {
+		desc = trade_hub
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_trade_hub_2 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+		upgrades_from = ca_trade_hub_1
+
+		ai_creation_factor = 0
+		
+		tax_income = 5
+		tradevalue = 50				
+	}
+	
+	ca_trade_hub_3 = {
+		desc = trade_hub
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_trade_hub_3 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+		upgrades_from = ca_trade_hub_2
+
+		ai_creation_factor = 0
+		
+		tax_income = 5
+		tradevalue = 50				
+	}
+
+	ca_settled_barbarian_hamlet = {
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_settled_barbarian_hamlet }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		light_infantry = 100
+		heavy_infantry = 50
+		archers = 100
+	}
+
+	ca_provincial_militia_1 = {
+		desc = provincial_militia
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_provincial_militia_1 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+
+		light_infantry = 200
+	}
+
+	ca_provincial_militia_2 = {
+		desc = provincial_militia
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_provincial_militia_2 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+		upgrades_from = ca_provincial_militia_1
+
+		ai_creation_factor = 0
+		
+		light_infantry = 300
+	}
+
+	ca_provincial_militia_3 = {
+		desc = provincial_militia
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_provincial_militia_3 }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+		upgrades_from = ca_provincial_militia_2
+
+		ai_creation_factor = 0
+		
+
+		light_infantry = 500
+	}
+
+	ca_state_sponsored_farms = {
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_state_sponsored_farms }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		tax_income = 5
+	}
+
+	ca_sassanid_defectors_hamlet = {
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_sassanid_defectors_hamlet }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		knights = 150
+	}
+
+	ca_underground_catacombs = {
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_underground_catacombs }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		fort_level = 5
+	}
+
+	ca_military_harbour = {
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_military_harbour }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		galleys = 30
+	}
+
+	ca_conscription_centre = {
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_conscription_centre }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		light_infantry = 100
+		levy_size = 0.3
+	}
+
+	ca_provincial_castra = {
+		potential = {
+			OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = ca_provincial_castra }
+			}
+		}
+		gold_cost = 1
+		build_time = 1
+
+		ai_creation_factor = 0
+		
+		heavy_infantry = 200
+	}
+	
+	moat = {
+		potential = {
+		always = yes }
+		gold_cost = 400
+		build_time = 500
+		trigger = { TECH_RELIGIOUS_CUSTOMS = 0 }
+
+		ai_creation_factor = 0
+		desc = moat_desc
+		tax_income = 0.1
+		fort_level = 1
+		garrison_size = 0.05
+		add_number_to_name = no
+		extra_tech_building_start = 10.0
+	}
+	
+	improved_moat = {
+		potential = {
+		always = yes }
+		gold_cost = 1600
+		build_time = 1000
+		upgrades_from = moat
+		trigger = { TECH_RELIGIOUS_CUSTOMS = 0 }
+
+		ai_creation_factor = 0
+		desc = improved_moat_desc
+		tax_income = 0.4
+		fort_level = 4
+		garrison_size = 0.2
+		add_number_to_name = no
+		extra_tech_building_start = 10.0
+	}
+	
+	cavalry_1 = {
+		potential = {
+		always = yes }
+			
+		gold_cost = 200
+		build_time = 300
+		trigger = { TECH_RELIGIOUS_CUSTOMS = 0 }
+		
+		ai_creation_factor = 10
+		desc = cavalry_1_desc
+		light_cavalry = 30
+		knights = 10
+		tax_income = 0.1
+		add_number_to_name = no
+		extra_tech_building_start = 10.0
+	}
+	
+	cavalry_2 = {
+		potential = {
+		always = yes }
+		gold_cost = 200
+		build_time = 300
+		upgrades_from = cavalry_1
+		trigger = { TECH_RELIGIOUS_CUSTOMS = 0 }
+		ai_creation_factor = 10
+		desc = cavalry_2_desc
+		light_cavalry = 30
+		knights = 10
+		tax_income = 0.1
+		add_number_to_name = no
+		extra_tech_building_start = 10.0
+	}
+	
+	cavalry_3 = {
+		potential = {
+		always = yes }
+		gold_cost = 600
+		build_time = 900
+		trigger = { TECH_RELIGIOUS_CUSTOMS = 0 }
+		upgrades_from = cavalry_2
+		ai_creation_factor = 10
+		desc = cavalry_3_desc
+		light_cavalry = 90
+		knights = 30
+		tax_income = 0.3
+		add_number_to_name = no
+		extra_tech_building_start = 10.0
+	}
+	kingdom_capital_rural = {
+		potential = {
+			
+				OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = kingdom_capital_rural }
+			}
+				
+			} #Add here if stupid
+		
+		desc = kingdom_capital_rural_desc
+		gold_cost = 1
+		build_time = 1 
+		ai_creation_factor = 0
+		tax_income = 15
+		fort_level = 3.0
+		light_infantry = 100.0
+		archers = 100.0
+		light_cavalry = 100.0
+		heavy_infantry = 100.0
+		knights = 100.0
+		battlemages = 50.0
+		garrison_size = 1
+		levy_size = 0.25
+		add_number_to_name = no
+
+		extra_tech_building_start = 0.0 # should spawn by default.
+	}
+	
+	kingdom_capital_coastal = {
+		potential = {
+				OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = kingdom_capital_coastal}
+			}
+			} #Add here if stupid
+			
+		desc = kingdom_capital_coastal_desc
+		gold_cost = 1
+		build_time = 1 
+		ai_creation_factor = 0
+		tax_income = 15
+		fort_level = 3.0
+		light_infantry = 100.0
+		archers = 100.0
+		light_cavalry = 100.0
+		heavy_infantry = 100.0
+		knights = 100.0
+		galleys = 25
+		garrison_size = 1
+		levy_size = 0.25
+		add_number_to_name = no
+
+		extra_tech_building_start = 0.0 # should spawn by default.
+	}
+		imperial_capital = {
+		potential = {
+			
+				OR = {
+				FROM = { top_liege = { has_character_flag = unit_spawning_enabled } }
+				FROMFROM = { has_building = imperial_capital }
+			}
+			 #Add here if stupid
+		}
+		desc = imperial_capital_desc
+		gold_cost = 1
+		build_time = 1 
+		ai_creation_factor = 0
+		tax_income = 20
+		fort_level = 5.0
+		archers = 100.0
+		heavy_infantry = 200.0
+		light_infantry = 200.0
+		knights = 25
+		battlemages = 25
+		galleys = 50
+		garrison_size = 1
+		add_number_to_name = no
+
+		extra_tech_building_start = 0.0 # should spawn by default.
+	}
+	
+}

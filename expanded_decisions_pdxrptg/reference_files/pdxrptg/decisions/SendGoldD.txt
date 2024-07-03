@@ -1,0 +1,163 @@
+decisions = {
+		DMsend_gold = {
+			is_high_prio = yes
+			potential = {
+			NOT = { has_character_flag = customize_gold }
+		}
+			allow = {
+			ai = no
+		}
+			effect = {
+			set_character_flag = customize_gold
+		}
+	}
+		Dsend_gold = {
+			is_high_prio = yes
+			potential = {	
+				has_character_flag = customize_gold
+		}
+			allow = {
+			ai = no
+		}
+			effect = {
+			set_character_flag = send_25
+			clr_character_flag = send_50
+			clr_character_flag = send_100
+			clr_character_flag = send_250
+			clr_character_flag = send_1000
+			clr_character_flag = send_500
+		}
+	}
+		Dsend_gold50 = {
+			is_high_prio = yes
+			potential = {	
+				has_character_flag = customize_gold
+		}
+			allow = {
+			ai = no
+		}
+			effect = {
+			set_character_flag = send_50
+			clr_character_flag = send_1000
+			clr_character_flag = send_25
+			clr_character_flag = send_100
+			clr_character_flag = send_500
+			clr_character_flag = send_250
+		}
+	}
+		Dsend_gold100 = {
+			is_high_prio = yes
+			potential = {	
+				has_character_flag = customize_gold
+		}
+			allow = {
+			ai = no
+		}
+			effect = {
+			set_character_flag = send_100
+			clr_character_flag = send_25
+			clr_character_flag = send_50
+			clr_character_flag = send_250
+			clr_character_flag = send_500
+			clr_character_flag = send_1000
+		}
+	}
+		Dsend_gold250 = {
+			is_high_prio = yes
+			potential = {	
+				has_character_flag = customize_gold
+		}
+			allow = {
+			ai = no
+		}
+			effect = {
+			set_character_flag = send_250
+			clr_character_flag = send_100
+			clr_character_flag = send_500
+			clr_character_flag = send_1000
+			clr_character_flag = send_50
+			clr_character_flag = send_25
+		}
+	}
+		Dsend_gold500 = {
+			is_high_prio = yes
+			potential = {	
+				has_character_flag = customize_gold
+		}
+			allow = {
+			ai = no
+		}
+			effect = {
+			set_character_flag = send_500
+			clr_character_flag = send_1000
+			clr_character_flag = send_25
+			clr_character_flag = send_50
+			clr_character_flag = send_100
+			clr_character_flag = send_250
+		}
+	}
+		Dsend_gold1000 = {
+			is_high_prio = yes
+			potential = {	
+				has_character_flag = customize_gold
+		}
+			allow = {
+			ai = no
+		}
+			effect = {
+			set_character_flag = send_1000
+			clr_character_flag = send_500
+			clr_character_flag = send_250
+			clr_character_flag = send_100
+			clr_character_flag = send_50
+			clr_character_flag = send_25
+		}
+	}
+		close_send = {
+			is_high_prio = yes
+			potential = {	
+				has_character_flag = customize_gold
+		}
+			allow = {
+			ai = no
+		}
+			effect = {
+			clr_character_flag = customize_gold
+		}	
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
