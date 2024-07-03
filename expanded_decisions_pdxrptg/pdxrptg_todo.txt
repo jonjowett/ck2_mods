@@ -13,10 +13,16 @@ ek changes
     - figure out why hermaeus.70 decline option always goes bad despite theoretically only having 20% chance of going bad
     - add trait icons for the army boost spells (morale, damage)
     - investigate and fix lack of raid traits
+       - pirate trait exists, and has custom picture, but can only be granted to historical characters.
+       - pirate trait is commented-out of many events.
+       - ravager & sea king/queen traits exist, but have vanilla pictures - not ideal for consistency.
+       - relabel "viking" as "pirate", and grant viking/ravager/seaking/seaqueen as normal? NB: Will also need to edit the relevant events.
     X allow secret religious conversion if you don't own the county but either {own the baron-tier bishopric personally} or {are the direct liege of the character who owns the baron-tier bishopric} (this is bugged in ek_secret_religion_conversions.txt because a title can't be both COUNT and BARON tier)
     - acquisition of commander traits seems broken - characters can only gain 1 trait (if they start with none), but chars can spawn with 3-4 traits
     - smithing level (tier 2) and smithing section (tier 3) are the wrong way round in the localisation (level > section)
     - check the coding of the "ask to leave court" decision (can't send away distant descendants?!)
+       - EK version of decision is using what looks like an old can_be_asked_to_leave_court_trigger
+       - Add new separate decision, much the same as the other, except it allows different people to be sent away
     - event description for ekartnote.28 is missing the province name (malformed brackets?)
  - convenience features (no decrease in difficulty):
     - ability to stop all events asking if I want to reveal my vampirism / lycanthropy
@@ -52,10 +58,12 @@ ek changes
     - companions society should allow the owner of INACTIVE jorrvaskr to join (otherwise, what's the point in enabling jorrvaskr if the owner is a member?!)
     - "heal mind" spell should first remove slow/dull, and only grant perceptive if the target has neither slow nor dull.
     - option to disallow yourself from receiving "set a specific focus" society missions
+    - title_chief_architect gives a small improvement in build cost & time & also for wonders (based on their skill?)
  - improvement features (major):
     - trade routes need rebalancing (some are much more profitable than others - too many sources?)
     - some way of decreasing the cost of buildings (eg. game rule adds permanent local_build_cost_modifier=-0.2 to all provinces; maybe wonder_build_cost_modifier=-0.2 as well?)
     - the "black market" decision (imperial city wonder upgrade) is commented-out and it's not obvious what it's supposed to do. implement it.
+       - See ekwonder.50 in ...\events\ek_wonder_events.txt
     - the "force duel" decision (palace of the kings wonder upgrade) doesn't seem to be implemented at all. Implement it.
     - cult of the ancestor moth badly needs some flavour (missions, events, etc)
     - alchemist also sells potion of magicka regen
