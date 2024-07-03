@@ -1,0 +1,69 @@
+ek changes
+ - moderator tools:
+    - add 1k & 10k undead spawn decision
+    - ? 100k spawn decision for all units
+    - option for no disband on peace + no attrit + no maint
+    - add option to spawn boats
+ - bugfixes:
+    X warlord cb - can_use_title - uses any_direct_de_jure_vassal_title, which means it's looking for duchies, but the logic assumes it's looking for counties
+    - warlord cb - maybe it should be completely disallowed against all characters in Morrowind, unless they aren't in a Great House?
+    X check the initial event which grants magicka to players, make sure it's working properly
+       - seems to work now?
+    - figure out exactly what's going wrong with empire of tamriel formation, and fix it
+    - figure out why hermaeus.70 decline option always goes bad despite theoretically only having 20% chance of going bad
+    - add trait icons for the army boost spells (morale, damage)
+    - investigate and fix lack of raid traits
+    X allow secret religious conversion if you don't own the county but either {own the baron-tier bishopric personally} or {are the direct liege of the character who owns the baron-tier bishopric} (this is bugged in ek_secret_religion_conversions.txt because a title can't be both COUNT and BARON tier)
+    - acquisition of commander traits seems broken - characters can only gain 1 trait (if they start with none), but chars can spawn with 3-4 traits
+    - smithing level (tier 2) and smithing section (tier 3) are the wrong way round in the localisation (level > section)
+    - check the coding of the "ask to leave court" decision (can't send away distant descendants?!)
+    - event description for ekartnote.28 is missing the province name (malformed brackets?)
+ - convenience features (no decrease in difficulty):
+    - ability to stop all events asking if I want to reveal my vampirism / lycanthropy
+    - decision to reveal vampirism / lycanthropy to spouses/friends/lovers (eg. in case the event is disabled by the previous point)
+    - ability to drop a specialism (player only)
+    - add a tooltip to the greybeard hermitage building, stating that you need to be level 2 in greybeard soc to recruit tongue retinues (editing a building localisation is less involved than editing an entire society!)
+    - alert/event for potion expiry (easy!)
+    - alert/event for magickal effect expiry (hard!)
+    - alert for magicka full (eg. via new intrigue decision, only allowed when magicka is full, which opens the spellbook, and which can be set to high prio by the player separately to the normal "open spellbook" decision)
+    - alert/event for offmap decisions which are available and would be highly beneficial
+    - elder council vote to join result event should have candidate portrait in top right (and high chancellor in option)
+    - event which gives browsable list of elder council members (because browsing the member list switches the screen and is highly annoying)
+    - improve the "skillsimprove" tooltip (for veterancy increase due to battle events)
+ - improvement features (minor):
+    - ability to have more specialisms (eg. dragonborn (NOT dragonblood) => +1; tier 5 education => +1; has ever been grandmaster of a society => +1)
+    - boost magicka regen based on learning stat
+    - add magicka regen flag to selected artifacts (and remove the hardcoding from ring of the erudite)
+    - change the viet chests (eg. very secure chest) into theft-prevention special items
+    - no artifact loss on inheritance
+    - additional dremora kynmarcher decision for some/all daedric lords, giving non-war specialists (intrigue for nocturnal, learning for hermaeus, diplo for azura, etc etc)
+    - check and maybe cap library recurring cost (it's stupid expensive when you're large)
+    - fix the daedric artifact triggers so they can be gained and activated by characters who SECRETLY follow that daedra's religion
+    - add another DIFFICULT way of gaining/activating daedric artifacts (tbd - maybe an event chain? maybe invest the same amount of favor again with the relevant daedra => permanent modifier?)
+    - fewer restrictions on duelling (eg: membership of fighters' guild or companions; high-tier warrior education; certain specialisms; certain lifestyles)
+    - amulet of kings adventurers need a cost cap (4k for a 2-kingdom empire?!?!!!) (maybe add a large reward at the end if they actually find it?)
+    - amulet of kings merchant needs a cost cap, and also should be less likely to succeed in cheating you if (a) you have been cheated before; or (b) you are a high-tier mage; or (c) you are deceitful/arbitrary/etc
+    - gladiator cost (imperial city decision) should be capped (500 gold)
+    - employment decision costs should be capped (150 gold)
+    - legendary mage cosmetic surgery should also be able to fix scars
+    - every society which allows purchasing techpoints should allow more purchasing at exponentially increased cost
+    - remove soft cap on number of personality traits (~5 in base game)
+    - sanguine should only offer special brews which you haven't currently tasted
+    - companions society should allow the owner of INACTIVE jorrvaskr to join (otherwise, what's the point in enabling jorrvaskr if the owner is a member?!)
+    - "heal mind" spell should first remove slow/dull, and only grant perceptive if the target has neither slow nor dull.
+    - option to disallow yourself from receiving "set a specific focus" society missions
+ - improvement features (major):
+    - trade routes need rebalancing (some are much more profitable than others - too many sources?)
+    - some way of decreasing the cost of buildings (eg. game rule adds permanent local_build_cost_modifier=-0.2 to all provinces; maybe wonder_build_cost_modifier=-0.2 as well?)
+    - the "black market" decision (imperial city wonder upgrade) is commented-out and it's not obvious what it's supposed to do. implement it.
+    - the "force duel" decision (palace of the kings wonder upgrade) doesn't seem to be implemented at all. Implement it.
+    - cult of the ancestor moth badly needs some flavour (missions, events, etc)
+    - alchemist also sells potion of magicka regen
+
+general ideas
+ - get AI to treat themselves if the first treatment expires
+ - get AI to marry if they've been unmarried for a long time
+ - change the duelling engine to properly support PCS up to 300
+ - ability to cancel a favor you have on someone (to prevent the permanent alert)
+ - ability to cancel out favors if you and the target have favors on each other
+ - nobles' responses to feast invitations need more nuanced decision-making
