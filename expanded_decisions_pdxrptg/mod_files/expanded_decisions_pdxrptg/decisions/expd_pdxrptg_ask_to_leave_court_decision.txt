@@ -1,0 +1,166 @@
+targetted_decisions = {
+	
+	expd_pdxrptg_ask_to_leave_court = {
+		
+		filter = court
+		ai_target_filter = court
+		
+		ai = no
+		
+		
+		
+		from_potential = {
+			has_dlc = "Reapers"
+			NOT = { has_character_flag = spellbook_open }
+		}
+		
+		
+		
+		potential = {
+			
+			# Don't show this decision if FROM can take the regular "Ask to Leave Court" decision for this character
+			NOT = {
+				FROM = {
+					is_targeted_decision_potential = {
+						key = ask_to_leave_court
+						character = ROOT
+					}
+				}
+			}
+			
+			# Check that ROOT and their spouse(s) can be asked to leave FROM's court, according to the slightly-more-relaxed criteria
+			liege = { character = FROM }
+			expd_pdxrptg_this_character_can_be_asked_to_leave_froms_court_using_slightly_more_relaxed_criteria = yes
+			NOT = {
+				any_spouse = {
+					liege = { character = FROM }
+					expd_pdxrptg_this_character_can_be_asked_to_leave_froms_court_using_slightly_more_relaxed_criteria = no
+				}
+			}
+			
+		}
+		
+		
+		
+		# The rest of this decision is identical to ask_to_leave_court in ...\decisions\rip_various_decisions.txt
+		
+		allow = {
+			NOT = {
+				trait = incapable
+			}
+			prisoner = no
+			NOT = {
+				any_spouse = {
+					liege = { character = FROM }
+					OR = {
+						trait = incapable
+						prisoner = yes
+					}
+				}
+			}
+		}
+		
+		
+		
+		effect = {
+			FROM = { prestige = -5 }
+			
+			opinion = {
+				modifier = opinion_disappointed
+				who = FROM
+				years = 10
+			}
+			
+			any_spouse = {
+				limit = { liege = { character = FROM } }
+				opinion = {
+					modifier = opinion_disappointed
+					who = FROM
+					years = 10
+				}
+			}
+			
+			if = { # Move to a same-religion court
+				limit = {
+					any_playable_ruler = {
+						is_within_diplo_range = ROOT
+						religion = ROOT
+						their_opinion = { who = ROOT value = 10 }
+						NOT = { character = FROM }
+					}
+				}
+				any_playable_ruler = {
+					limit = {
+						is_within_diplo_range = ROOT
+						religion = ROOT
+						their_opinion = { who = ROOT value = 10 }
+						NOT = { character = FROM }
+					}
+					save_event_target_as = new_court
+				}
+				move_character = event_target:new_court
+				any_spouse = {
+					limit = {
+						liege = { character = FROM }
+					}
+					move_character = event_target:new_court
+				}
+				break = yes
+			}
+			
+			if = { # Move to any court where the character likes me
+				limit = {
+					any_playable_ruler = {
+						is_within_diplo_range = ROOT
+						their_opinion = { who = ROOT value = 10 }
+						NOT = { character = FROM }
+					}
+				}
+				any_playable_ruler = {
+					limit = {
+						is_within_diplo_range = ROOT
+						their_opinion = { who = ROOT value = 10 }
+						NOT = { character = FROM }
+					}
+					save_event_target_as = new_court_secondary
+				}
+				move_character = event_target:new_court_secondary
+				any_spouse = {
+					limit = {
+						liege = { character = FROM }
+					}
+					move_character = event_target:new_court_secondary
+				}
+				break = yes
+			}
+			
+			if = { # Go anywhere but here
+				limit = {
+					any_playable_ruler = {
+						NOT = { character = FROM }
+					}
+				}
+				any_playable_ruler = {
+					limit = {
+						NOT = { character = FROM }
+					}
+					save_event_target_as = new_court_backup
+				}
+				move_character = event_target:new_court_backup
+				any_spouse = {
+					limit = {
+						liege = { character = FROM }
+					}
+					move_character = event_target:new_court_backup
+				}
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+		
+	}
+	
+}
