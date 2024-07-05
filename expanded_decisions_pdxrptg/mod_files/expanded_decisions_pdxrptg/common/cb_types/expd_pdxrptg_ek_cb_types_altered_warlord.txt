@@ -1,0 +1,332 @@
+warlord_conquest = {
+	name = CB_NAME_WARLORD_CONQUEST
+	war_name = WAR_NAME_WARLORD_CONQUEST
+	sprite = 38
+	truce_days = 3650
+	hostile_against_others = yes
+	full_hostility = yes
+	can_ask_to_join_war = yes
+	attacker_can_call_allies = no
+	defender_can_call_allies = yes
+	is_permanent = yes
+	check_de_jure_tier = KING
+	is_holy_war = yes
+	#check_all_titles = yes
+
+	sort_priority = 1500
+	
+	can_use_gui = {
+		check_if_crusader_trigger = yes
+		cb_no_blockers = yes
+	}
+	
+	can_use = {
+		ROOT = {
+			#CB Specific Traits and things
+			OR = {
+				trait = warlord
+				has_ambition = obj_warlord
+			}
+			NOT = { trait = incapable }
+			NOT = { same_realm = FROM }	
+			#Undead Handling
+			NOT = { trait = undead } #Not as Undead
+			FROM = { NOT = { trait = undead } } #Not vs Undead
+			#Riddlethar vs. Mane
+			OR = {
+				ROOT = { NOT = { religion = riddlethar } }
+				AND = {
+					FROM = { NOT = { trait = mane } }
+					ROOT = { religion = riddlethar }
+				}
+			}
+			#Almsivi Religion
+			OR = {
+				ROOT = { NOT = { religion = almsivi } }
+				AND = {
+					FROM = { 
+						NOT = { has_landed_title = k_almsivi } 
+						religion = almsivi
+					}
+					ROOT = { religion = almsivi }
+				}
+				AND = {
+					ROOT = { 
+						has_landed_title = k_almsivi
+						religion = almsivi 
+					}
+					FROM = { religion = almsivi }
+				}				
+			}
+			#Great House Titles
+			OR = {
+				ROOT = { has_house_trait = no }
+				FROM = { is_great_house_grandmaster = no }
+			}
+		}
+	}
+
+	on_add = {
+		hidden_tooltip = { fire_haruspicy_event_effect = yes }
+		# CB:CHINA
+		# if = {
+		# 	limit = { defender = { is_offmap_governor = offmap_china } }
+		# 	attacker = {  
+		# 		sound_effect = china_angered_emperor
+		# 		detract_grace_super_huge_effect = yes 
+		# 	}
+		# }
+	}
+	
+	can_use_title = {
+		# THIS is the high kingdom title
+		
+		# [[[ MOD EDIT
+		# Bugfix: Now correctly looks for counties, not duchies.
+		# Bugfix: Defender cannot be a rebel against a Morrowind Great House
+		# Also, changed all is_liege_or_above to is_vassal_or_below_of, in line with recommended modding conventions.
+		# General code cleanup & added a few more explanations.
+		
+		# The attacker needs at least one county in the target kingdom, or a border, or be only one sea zone away from one of your counties
+		any_de_jure_vassal_title = {
+			tier = COUNT
+			OR = {
+				holder_scope = {
+					OR = {
+						character = ROOT
+						is_vassal_or_below_of = ROOT
+					}
+				}
+				location = {
+					any_neighbor_province = {
+						OR = {
+							AND = {
+								is_land   = yes # Technically superfluous with has_owner = yes, but makes it clearer
+								has_owner = yes
+								owner = {
+									OR = {
+										character = ROOT
+										is_vassal_or_below_of = ROOT
+									}
+								}
+							}
+							AND = {
+								is_land = no
+								any_neighbor_province = {
+									is_land   = yes # Technically superfluous with has_owner = yes, but makes it clearer
+									has_owner = yes
+									owner = {
+										OR = {
+											character = ROOT
+											is_vassal_or_below_of = ROOT
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		OR = {
+			# Target is neither de jure king nor emperor of the target kingdom
+			NOR = {
+				holder_scope = { character = FROM }
+				empire = { holder_scope = { character = FROM } }
+				# Special Case - Great Houses and the Tribunal Temple within Morrowind
+				AND = {
+					OR = {
+						title = k_morrowind
+						title = k_vvardenfell
+					}
+					FROM = {
+						OR = {
+							has_landed_title = k_almsivi
+							is_great_house_grandmaster = yes
+							
+							# Attempt to detect rebellions against Tribunal Temple / Grandmasters
+							# (eg. faction revolt; or anti-tyranny revolt due to failed imprisonment; or anti-tyranny revolt due to refused revocation)
+							# (because you shouldn't be allowed to use warlord CB on people simply because they are in revolt)
+							# Effectively: the target character is NOT the temple or a grandmaster, and {is primary attacker/defender} vs {{the temple or a grandmaster} {who is the primary defender/attacker}}
+							AND = {
+								NOR = {
+									has_landed_title = k_almsivi
+									is_great_house_grandmaster = yes
+								}
+								OR = {
+									AND = {
+										is_primary_war_attacker = yes
+										any_war = { defender = { OR = { has_landed_title = k_almsivi is_great_house_grandmaster = yes } } }
+									}
+									AND = {
+										is_primary_war_defender = yes
+										any_war = { attacker = { OR = { has_landed_title = k_almsivi is_great_house_grandmaster = yes } } }
+									}
+								}
+							}
+							
+						}
+					}
+				}
+			}
+			
+			# If attacker IS holder of the target title or its de jure empire, or is attacking into morrowind
+			# Then they can do so in the following situations:
+			
+			# Attacker is de jure king of the target kingdom
+			holder_scope = { character = ROOT }
+			
+			# Target is a de jure vassal of attacker's empire
+			empire = { holder_scope = { character = ROOT } }
+			
+			# Target is a Province being attacked by Tamriel
+			AND = {
+				is_imperial_province = yes
+				e_tamriel = { holder_scope = { character = ROOT } }
+			}
+		}
+		
+		
+		# END OF MOD EDITS ]]]
+		
+		
+		
+	}
+	
+	is_valid_title = {
+		FROM = {
+			any_realm_title = {
+				de_jure_liege_or_above = PREVPREV
+			}
+		}
+	}
+	
+	on_success = {
+		#Ambition and Prestige Handling
+		any_attacker = {
+			limit = { character = ROOT }
+			participation_scaled_prestige = 100
+		}
+		if = {
+			limit = { ROOT = { has_ambition = obj_warlord } }
+			ROOT = { set_character_flag = warlord_flg }
+		}
+		any_attacker = {
+			limit = { NOT = { character = ROOT } }
+			hidden_tooltip = { participation_scaled_prestige = 100 }
+		}
+
+		hidden_tooltip = {
+			ROOT = {
+				#occupy_minors_of_occupied_settlements = FROM #Needs to be changed
+				#gain_all_occupied_titles = FROM #Needs to be changed
+				
+				if = {
+					limit = {
+						has_nickname = no
+					}
+					random_list = {
+						10 = { give_nickname = nick_the_great }
+						10 = { give_nickname = nick_the_victorious }
+						10 = { give_nickname = nick_the_bold }
+						10 = { give_nickname = nick_the_conqueror }
+					}
+				}
+				
+				if = {
+					limit = {
+						has_nickname = nick_the_bastard
+					}
+					give_nickname = nick_the_conqueror
+				}
+			}
+		}
+
+		FROM = {
+			prestige = -200
+		}
+	}
+
+	on_success_title = {
+		custom_tooltip = {
+			text = pagan_subjugation_tip
+			hidden_tooltip = {
+				ROOT = {
+					subjugate_or_take_under_title = { # If the target only has territory within the kingdom, he is simply vassalized
+						title = PREV
+						enemy = FROM
+					}
+				}
+			}
+		}
+	}
+		
+
+	on_fail = {
+		FROM = {
+			piety = 50
+		}
+		any_defender = {
+			limit = { character = FROM }
+			participation_scaled_prestige = 50
+		}
+		any_defender = {
+			limit = { NOT = { character = FROM } }
+			hidden_tooltip = { participation_scaled_prestige = 50 }
+		}
+		ROOT = {
+			piety = -100
+			prestige = -100
+		}
+	}
+
+	on_reverse_demand = {
+		ROOT = {
+			prestige = -200
+			piety = -200
+			transfer_scaled_wealth = {
+				to = FROM
+				value = 5.0
+			}
+		}
+		FROM = {
+			piety = 100
+		}
+		any_defender = {
+			limit = { character = FROM }
+			participation_scaled_prestige = 100
+		}
+		any_defender = {
+			limit = { NOT = { character = FROM } }
+			hidden_tooltip = { participation_scaled_prestige = 100 }
+		}
+	}
+	
+	on_attacker_leader_death = {
+		hidden_tooltip = {
+			any_defender = {
+				letter_event = {
+					id = 251
+				}
+			}
+		}
+		end_war = invalid
+	}
+
+	attacker_ai_victory_worth = {
+		factor = 100
+	}
+	
+	attacker_ai_defeat_worth = {
+		factor = 100
+	}
+
+	defender_ai_victory_worth = {
+		factor = -1 # always accept
+	}
+	
+	defender_ai_defeat_worth = {
+		factor = 100
+	}
+}
