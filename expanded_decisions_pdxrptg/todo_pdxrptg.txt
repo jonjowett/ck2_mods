@@ -20,10 +20,11 @@ ek changes
     X allow secret religious conversion if you don't own the county but either {own the baron-tier bishopric personally} or {are the direct liege of the character who owns the baron-tier bishopric} (this is bugged in ek_secret_religion_conversions.txt because a title can't be both COUNT and BARON tier)
     - acquisition of commander traits seems broken - characters can only gain 1 trait (if they start with none), but chars can spawn with 3-4 traits
     - smithing level (tier 2) and smithing section (tier 3) are the wrong way round in the localisation (level > section)
-    - check the coding of the "ask to leave court" decision (can't send away distant descendants?!)
+    X check the coding of the "ask to leave court" decision (can't send away distant descendants?!)
        - EK version of decision is using what looks like an old can_be_asked_to_leave_court_trigger
        - Add new separate decision, much the same as the other, except it allows different people to be sent away
     - event description for ekartnote.28 is missing the province name (malformed brackets?)
+    - add proper tooltips for when a bloodline is disabled with "no posessed bloodline:"
  - convenience features (no decrease in difficulty):
     - ability to stop all events asking if I want to reveal my vampirism / lycanthropy
     - decision to reveal vampirism / lycanthropy to spouses/friends/lovers (eg. in case the event is disabled by the previous point)
