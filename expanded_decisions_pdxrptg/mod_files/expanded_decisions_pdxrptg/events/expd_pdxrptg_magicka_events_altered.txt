@@ -1,0 +1,293 @@
+namespace = magicka
+
+# Set up initial magicka for players
+character_event = {
+	id = magicka.0
+	hide_window = yes
+	
+	is_triggered_only = yes
+	
+	only_playable = yes
+	ai = no
+	
+	immediate = {
+		if = {
+			limit = { is_spellcaster = yes }
+			if = {
+				limit = { NOT = { has_character_modifier = magicka_counter } }
+				
+				# Mod edit: On initial creation of magicka pool, magicka is set to max
+				set_magicka_to_max = yes
+				
+				# Show magicka counter to the player
+				add_character_modifier = {
+					name = magicka_counter
+					duration = -1
+				}
+				
+				# Force-start magicka regen system
+				character_event = { id = magicka.99 }
+				
+			}
+			if = {
+				limit = { has_character_modifier = magicka_counter }
+				refresh_max_magicka = yes
+			}
+		}
+		else = { # Actively remove magicka for characters that have ceased to be spellcasters
+			remove_character_modifier = magicka_counter
+			delete_magicka = yes
+		}
+	}
+}
+
+# Force restart magicka regen system
+character_event = {
+	id = magicka.99
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	only_playable = yes
+	trigger = {
+		is_spellcaster = yes
+	}
+	immediate = {
+		clr_character_flag = expd_pdxrptg_magicka_regen_recent
+		character_event = { id = magicka.100 days = 1 }
+	}
+}
+
+# Set up magicka regen on a monthly interval
+# Triggered by yearly on-actions, and by the initial creation of a magicka pool (above)
+character_event = {
+	id = magicka.100
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	only_playable = yes
+	trigger = {
+		is_spellcaster = yes
+		has_character_modifier = magicka_counter
+	}
+	immediate = {
+		
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_character_flag = expd_pdxrptg_magicka_regen_recent }
+					had_character_flag = {
+						flag = expd_pdxrptg_magicka_regen_recent
+						months >= 3
+					}
+				}
+			}
+			
+			# Clear out any leftovers from prior magicka regen loops
+			clr_character_flag = expd_pdxrptg_magicka_regen_recent
+			clear_delayed_event = { id = magicka.101 }
+			
+			# Restart the magicka regen loop, on a random day sometime within the next month
+			character_event = { id = magicka.101 days = 1 random = 27}
+			
+		}
+	}
+}
+
+# Perform magicka regen for this character
+character_event = {
+	id = magicka.101
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	only_playable = yes
+	trigger = {
+		is_spellcaster = yes
+		has_character_modifier = magicka_counter
+		OR = {
+			NOT = { has_character_flag = expd_pdxrptg_magicka_regen_recent }
+			had_character_flag = {
+				flag = expd_pdxrptg_magicka_regen_recent
+				months < 3
+			}
+		}
+	}
+	immediate = {
+		
+		
+		# Base regen rate from learning stat is learning / 8
+		set_variable       = { which = magicka_regen_rate_from_learning  value = 0        }
+		export_to_variable = { which = magicka_regen_rate_from_learning  value = learning }
+		divide_variable    = { which = magicka_regen_rate_from_learning  value = 8        }
+		
+		# Some named artifacts give base regen
+		set_variable = { which = magicka_regen_rate_from_artifacts value = 0 }
+		if = {
+			limit = { any_artifact = { artifact_type = amulet_of_alessia    is_artifact_equipped = yes } }
+			change_variable = { which = magicka_regen_rate_from_artifacts value = 2 }
+		}
+		if = {
+			limit = { any_artifact = { artifact_type = amulet_of_akatosh    is_artifact_equipped = yes } }
+			trigger_switch = {
+				on_trigger = learning
+				30 = { change_variable = { which = magicka_regen_rate_from_artifacts value = 3 } }
+				15 = { change_variable = { which = magicka_regen_rate_from_artifacts value = 2 } }
+				0  = { change_variable = { which = magicka_regen_rate_from_artifacts value = 1 } }
+			}
+		}
+		if = {
+			limit = { any_artifact = { artifact_type = amulet_of_hagraven   is_artifact_equipped = yes } }
+			change_variable = { which = magicka_regen_rate_from_artifacts value = 1 }
+		}
+		if = {
+			limit = { any_artifact = { artifact_type = ring_of_erudite      is_artifact_equipped = yes } }
+			change_variable = { which = magicka_regen_rate_from_artifacts value = 2 }
+		}
+		
+		# Include support for artifacts that give base magicka regen via artifact flag
+		any_artifact = { clr_artifact_flag = magicka_regen_counted }
+		while = {
+			limit = {
+				any_artifact = {
+					is_artifact_active = yes
+					OR = {
+						has_artifact_flag = magicka_regen_0
+						has_artifact_flag = magicka_regen_1
+						has_artifact_flag = magicka_regen_2
+						has_artifact_flag = magicka_regen_3
+						has_artifact_flag = magicka_regen_4
+						has_artifact_flag = magicka_regen_5
+						has_artifact_flag = magicka_regen_6
+						has_artifact_flag = magicka_regen_7
+						has_artifact_flag = magicka_regen_8
+					}
+					NOT = { has_artifact_flag = magicka_regen_counted }
+				}
+			}
+			random_artifact = {
+				limit = {
+					is_artifact_active = yes
+					OR = {
+						has_artifact_flag = magicka_regen_0
+						has_artifact_flag = magicka_regen_1
+						has_artifact_flag = magicka_regen_2
+						has_artifact_flag = magicka_regen_3
+						has_artifact_flag = magicka_regen_4
+						has_artifact_flag = magicka_regen_5
+						has_artifact_flag = magicka_regen_6
+						has_artifact_flag = magicka_regen_7
+						has_artifact_flag = magicka_regen_8
+					}
+					NOT = { has_artifact_flag = magicka_regen_counted }
+				}
+				if      = { limit = { has_artifact_flag = magicka_regen_0 } PREV = { change_variable = { which = magicka_regen_rate_from_artifacts value = 0.25 } } }
+				else_if = { limit = { has_artifact_flag = magicka_regen_1 } PREV = { change_variable = { which = magicka_regen_rate_from_artifacts value = 0.50 } } }
+				else_if = { limit = { has_artifact_flag = magicka_regen_2 } PREV = { change_variable = { which = magicka_regen_rate_from_artifacts value = 0.75 } } }
+				else_if = { limit = { has_artifact_flag = magicka_regen_3 } PREV = { change_variable = { which = magicka_regen_rate_from_artifacts value = 1.00 } } }
+				else_if = { limit = { has_artifact_flag = magicka_regen_4 } PREV = { change_variable = { which = magicka_regen_rate_from_artifacts value = 1.25 } } }
+				else_if = { limit = { has_artifact_flag = magicka_regen_5 } PREV = { change_variable = { which = magicka_regen_rate_from_artifacts value = 1.50 } } }
+				else_if = { limit = { has_artifact_flag = magicka_regen_6 } PREV = { change_variable = { which = magicka_regen_rate_from_artifacts value = 2.00 } } }
+				else_if = { limit = { has_artifact_flag = magicka_regen_7 } PREV = { change_variable = { which = magicka_regen_rate_from_artifacts value = 3.00 } } }
+				else_if = { limit = { has_artifact_flag = magicka_regen_8 } PREV = { change_variable = { which = magicka_regen_rate_from_artifacts value = 5.00 } } }
+				set_artifact_flag = magicka_regen_counted
+			}
+		}
+		any_artifact = { clr_artifact_flag = magicka_regen_counted }
+		
+		
+		
+		
+		
+		# In the main version of the mod, this base rate is once per 6 months
+		# This event is once per month
+		# So, divide all base rates by 6
+		divide_variable = { which = magicka_regen_rate_from_learning  value = 6 }
+		divide_variable = { which = magicka_regen_rate_from_artifacts value = 6 }
+		
+		
+		
+		
+		
+		# Calculate a multiplier to regen rate based on traits etc
+		set_variable = { which = magicka_regen_rate_multiplier value = 1 }
+		if = {
+			limit = { any_artifact = { is_artifact_equipped = yes artifact_type = ring_of_erudite } }
+			divide_variable = { which = magicka_regen_rate_multiplier value = 0.8  }
+		}
+		if = {
+			limit = { any_artifact = { is_artifact_equipped = yes artifact_type = amulet_of_akatosh } } 
+			divide_variable = { which = magicka_regen_rate_multiplier value = 0.8  }
+		}
+		
+		if      = { limit = { trait = dragonborn }                               divide_variable = { which = magicka_regen_rate_multiplier value = 0.75 } }
+		else    = { limit = { trait = dragonborn_descendant }                    divide_variable = { which = magicka_regen_rate_multiplier value = 0.85 } }
+		
+		if      = { limit = { trait = lich }                                     divide_variable = { which = magicka_regen_rate_multiplier value = 0.9  } }
+		if      = { limit = { trait = mane }                                     divide_variable = { which = magicka_regen_rate_multiplier value = 0.9  } }
+		
+		if      = { limit = { is_smart_trigger = yes }                           divide_variable = { which = magicka_regen_rate_multiplier value = 0.8  } }
+		if      = { limit = { is_dumb_trigger = yes }                            divide_variable = { which = magicka_regen_rate_multiplier value = 1.2  } }
+		if      = { limit = { has_mental_disorder_trigger = yes }                divide_variable = { which = magicka_regen_rate_multiplier value = 1.15 } }
+		if      = { limit = { trait = skooma_addiction }                         divide_variable = { which = magicka_regen_rate_multiplier value = 1.15 } }
+		
+		if      = { limit = { trait = chrondiasis }                              divide_variable = { which = magicka_regen_rate_multiplier value = 1.5  } }
+		else_if = { limit = { has_disease_trigger = yes }                        divide_variable = { which = magicka_regen_rate_multiplier value = 1.25 } }
+		
+		if      = { limit = { has_severe_disability_trigger = yes }              divide_variable = { which = magicka_regen_rate_multiplier value = 1.25 } }
+		else_if = { limit = { has_medium_disability_trigger = yes }              divide_variable = { which = magicka_regen_rate_multiplier value = 1.15 } }
+		else_if = { limit = { has_minor_disability_trigger  = yes }              divide_variable = { which = magicka_regen_rate_multiplier value = 1.05 } }
+		
+		if      = { limit = { trait = mage_1 }                                   divide_variable = { which = magicka_regen_rate_multiplier value = 0.95 } }
+		else_if = { limit = { trait = mage_2 }                                   divide_variable = { which = magicka_regen_rate_multiplier value = 0.90 } }
+		else_if = { limit = { trait = mage_3 }                                   divide_variable = { which = magicka_regen_rate_multiplier value = 0.85 } }
+		else_if = { limit = { trait = mage_4 }                                   divide_variable = { which = magicka_regen_rate_multiplier value = 0.80 } }
+		else_if = { limit = { trait = mage_5 }                                   divide_variable = { which = magicka_regen_rate_multiplier value = 0.70 } } # Legendary mages get a bigger bonus
+		
+		if      = { limit = { highest_spellcaster_specialisation_is_3 = yes }    divide_variable = { which = magicka_regen_rate_multiplier value = 0.80 } } # Slightly bigger bonus for getting a spellcaster specialty to level 3
+		else_if = { limit = { highest_spellcaster_specialisation_is_2 = yes }    divide_variable = { which = magicka_regen_rate_multiplier value = 0.90 } }
+		else_if = { limit = { highest_spellcaster_specialisation_is_1 = yes }    divide_variable = { which = magicka_regen_rate_multiplier value = 0.95 } }
+		
+		
+		
+		
+		
+		# Calculate magicka regen rate for this month
+		set_variable      = { which = magicka_regen_rate value = 0 }
+		change_variable   = { which = magicka_regen_rate which = magicka_regen_rate_from_learning  }
+		change_variable   = { which = magicka_regen_rate which = magicka_regen_rate_from_artifacts }
+		multiply_variable = { which = magicka_regen_rate which = magicka_regen_rate_multiplier     }
+		
+		# Add the regen amount to the character's current magicka
+		change_variable   = { which = magicka_current    which = magicka_regen_rate }
+		
+		# Make sure we haven't exceeded the maximum storeable magicka
+		if = {
+			limit = { check_variable = { which = magicka_current which = magicka_max } }
+			set_variable = { which = magicka_current which = magicka_max }
+		}
+		
+		# Record that the event has occurred 
+		clr_character_flag = expd_pdxrptg_magicka_regen_recent
+		set_character_flag = expd_pdxrptg_magicka_regen_recent
+		
+		# Schedule the next magicka regen for 1 month's time
+		clear_delayed_event = { id = magicka.101 }
+		character_event     = { id = magicka.101 months = 1 }
+		
+	}
+}
+
+# Debug / cheat event - restore max magicka
+character_event = {
+	id = magicka.999
+	hide_window = yes
+	is_triggered_only = yes
+	ai = no
+	only_playable = yes
+	trigger = {
+		is_spellcaster = yes
+		has_character_modifier = magicka_counter
+	}
+	immediate = {
+		set_magicka_to_max = yes
+	}
+}

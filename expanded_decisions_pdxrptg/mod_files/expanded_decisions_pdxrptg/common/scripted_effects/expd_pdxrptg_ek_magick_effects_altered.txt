@@ -1,0 +1,58 @@
+# set_magicka is retained for compatibility in case it is used elsewhere in the code
+set_magicka = {
+	set_magicka_to_zero = yes
+}
+
+delete_magicka = {
+	set_variable = { which = magicka_current value = 0 }
+	set_variable = { which = magicka_max     value = 0 }
+}
+
+set_magicka_to_zero = {
+	refresh_max_magicka = yes
+	set_variable = { which = magicka_current value = 0 }
+}
+
+set_magicka_to_max = {
+	refresh_max_magicka = yes
+	if = {
+		limit = { check_variable = { which = magicka_max value >= 0 } }
+		set_variable = { which = magicka_current which = magicka_max }
+	}
+}
+
+# Define the Magicka pool using Learning as the base value, multiplied by 2 ; 1 Learning = 2 Magicka.
+refresh_max_magicka = {
+	set_variable = { which = magicka_max value = 0 }
+	export_to_variable = { which = magicka_max value = learning }
+	multiply_variable = { which = magicka_max value = 2 }
+	
+	#Artifact Bonuses
+	if = {
+		limit = {
+			any_artifact = {
+				artifact_type = amulet_of_julianos
+				is_artifact_equipped = yes
+			}
+		}
+		change_variable = { which = magicka_max value = 6 }
+	}
+	#Artifact Maluses
+	if = {
+		limit = {
+			any_artifact = {
+				artifact_type = weapon_forkh
+				is_artifact_equipped = yes
+			}
+			check_variable = { which = magicka_max value = 2 }
+		}
+		divide_variable = { which = magicka_max value = 2 }
+	}
+	
+	if = {
+		limit = {
+			check_variable = { which = magicka_current which = magicka_max } #Actually checks if the variable is equal to or greater than.
+		}
+		set_variable = { which = magicka_current which = magicka_max } #This forces it to be equal if it is equal to or greater than.
+	}
+}
