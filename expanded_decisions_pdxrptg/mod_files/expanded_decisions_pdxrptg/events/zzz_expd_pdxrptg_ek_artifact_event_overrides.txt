@@ -1,0 +1,70 @@
+#General artifacts events for EK
+#Please reserve 0-100 for system functions. Specific artifact events can go beyond that.
+
+namespace = ekartifacts 
+
+character_event = { #Clearing excess non-active artifacts
+	id = ekartifacts.20
+	hide_window = yes
+	
+	is_triggered_only = yes
+	
+	ai = yes     # MOD EDIT: AI only
+	min_age = 16 # Adults only
+	
+	trigger = {
+		num_of_artifacts >= 5
+		any_artifact = {
+			is_artifact_active = no
+			is_indestructible = no
+			NOR = {
+				has_artifact_flag = no_inherit
+				has_artifact_flag = unique
+				has_artifact_flag = daedric_artifact
+			}
+		}
+	}
+
+	immediate = {
+		any_artifact = {
+			limit = {
+				is_artifact_active = no
+				is_indestructible = no
+				NOR = {
+					has_artifact_flag = no_inherit
+					has_artifact_flag = unique
+					has_artifact_flag = daedric_artifact
+					has_artifact_flag = pet
+					has_artifact_flag = mount
+				}
+			}
+			random = {
+				chance = 70
+				set_artifact_flag = force_sell
+			}
+        }
+    }
+}
+
+# Destroy any artifacts belonging to unrelated, unlanded courtiers in player courts on death.
+# MOD EDIT: REMOVED!!
+character_event = {
+	id = ekartifacts.6
+	hide_window = yes
+	is_triggered_only = yes
+	hide_window = yes
+	ai = yes
+	immediate = {
+		# do nothing
+	}
+}
+character_event = {
+	id = ekartifacts.7
+	hide_window = yes
+	is_triggered_only = yes
+	hide_window = yes
+	ai = yes
+	immediate = {
+		# do nothing
+	}
+}
