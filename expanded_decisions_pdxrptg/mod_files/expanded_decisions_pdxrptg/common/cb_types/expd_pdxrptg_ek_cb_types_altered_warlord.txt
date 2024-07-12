@@ -230,12 +230,16 @@ warlord_conquest = {
 			# Target is a de jure vassal of attacker's empire
 			empire = { holder_scope = { character = ROOT } }
 			
-			# Target is a Province being attacked by Tamriel
+			# Target is a Province being attacked by either Tamriel or the official pretender to Tamriel
 			AND = {
 				# Audax Validator "." Ignore_NEXT
 				is_imperial_province = yes
-				# Audax Validator "." Ignore_NEXT
-				e_tamriel = { holder_scope = { character = ROOT } }
+				OR = {
+					# Audax Validator "." Ignore_NEXT
+					e_tamriel          = { holder_scope = { character = ROOT } }
+					# Audax Validator "." Ignore_NEXT
+					e_pretender_empire = { holder_scope = { character = ROOT } }
+				}
 			}
 		}
 		
