@@ -1,0 +1,20 @@
+csh_update_all_traits_for_all_characters = {
+	custom_tooltip = {
+		text = csh_update_all_characters_tt
+		any_character = { character_event = { id = CSHUpdates.1000 } }
+	}
+}
+
+csh_update_all_traits_for_root = {
+	ROOT = {
+		csh_update_wealth_trait_for_this_character = yes
+		csh_update_artifact_traits_for_this_character = yes
+	}
+	csh_update_foe_trait_for_root = yes
+}
+
+csh_remove_all_traits_from_this_character = {
+	csh_remove_all_wealth_traits_from_this_character = yes
+	csh_remove_all_artifact_traits_from_this_character = yes
+	csh_remove_foe_trait_from_this_character = yes
+}

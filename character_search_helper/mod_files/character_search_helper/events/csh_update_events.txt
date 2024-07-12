@@ -1,115 +1,27 @@
 namespace = CSHUpdates
 
+# Update traits ad-hoc or on yearly pulse
 character_event = {
 	id = CSHUpdates.1000
 	is_triggered_only = yes
 	hide_window = yes
+	trigger = {
+		NOT = { has_global_flag = csh_updates_disabled }
+	}
 	immediate = {
-		
-		# Wealth
-		remove_trait = csh_wealth_0
-		remove_trait = csh_wealth_1
-		remove_trait = csh_wealth_2
-		remove_trait = csh_wealth_3
-		remove_trait = csh_wealth_4
-		remove_trait = csh_wealth_5
-		if = {
-			limit = { ai = yes }
-			if = {
-				limit = { wealth < 100 }
-				#add_trait = csh_wealth_0
-			}
-			else_if = {
-				limit = { wealth < 300 }
-				add_trait = csh_wealth_1
-			}
-			else_if = {
-				limit = { wealth < 1000 }
-				add_trait = csh_wealth_2
-			}
-			else_if = {
-				limit = { wealth < 3000 }
-				add_trait = csh_wealth_3
-			}
-			else_if = {
-				limit = { wealth < 10000 }
-				add_trait = csh_wealth_4
-			}
-			else = {
-				add_trait = csh_wealth_5
-			}
-		}
-		
-		# Artifacts
-		remove_trait = csh_artifact_1
-		remove_trait = csh_artifact_2
-		remove_trait = csh_artifact_3
-		remove_trait = csh_artifact_4
-		remove_trait = csh_artifact_5
-		remove_trait = csh_artifact_6
-		remove_trait = csh_artifact_7
-		remove_trait = csh_artifact_8
-		remove_trait = csh_artifact_9
-		if = {
-			limit = { ai = yes }
-			if = {
-				limit = { any_artifact = { quality == 1 } }
-				add_trait = csh_artifact_1
-			}
-			if = {
-				limit = { any_artifact = { quality == 2 } }
-				add_trait = csh_artifact_2
-			}
-			if = {
-				limit = { any_artifact = { quality == 3 } }
-				add_trait = csh_artifact_3
-			}
-			if = {
-				limit = { any_artifact = { quality == 4 } }
-				add_trait = csh_artifact_4
-			}
-			if = {
-				limit = { any_artifact = { quality == 5 } }
-				add_trait = csh_artifact_5
-			}
-			if = {
-				limit = { any_artifact = { quality == 6 } }
-				add_trait = csh_artifact_6
-			}
-			if = {
-				limit = { any_artifact = { quality == 7 } }
-				add_trait = csh_artifact_7
-			}
-			if = {
-				limit = { any_artifact = { quality == 8 } }
-				add_trait = csh_artifact_8
-			}
-			if = {
-				limit = { any_artifact = { quality >= 9 } }
-				add_trait = csh_artifact_9
-			}
-		}
-		
-		# Foes (for duelling)
-		remove_trait = csh_foe
-		if = {
-			limit = {
-				OR = {
-					any_player = { is_foe = PREV }
-					any_player = { ROOT = { is_foe = PREV } }
-				}
-			}
-			add_trait = csh_foe
-		}
-		
+		csh_update_all_traits_for_root = yes
 	}
 }
 
+# Remove traits on death
 character_event = {
-	id = CSHUpdates.1001
+	id = CSHUpdates.2000
 	is_triggered_only = yes
 	hide_window = yes
+	trigger = {
+		NOT = { has_global_flag = csh_updates_disabled }
+	}
 	immediate = {
-		any_character = { character_event = { id = CSHUpdates.1000 } }
+		csh_remove_all_traits_from_this_character = yes
 	}
 }

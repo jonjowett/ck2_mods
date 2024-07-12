@@ -1,14 +1,72 @@
 decisions = {
+	
+	
+	
 	csh_update_all_characters = {
 		ai = no
-		potential = { ai = no }
+		potential = {
+			NOT = { has_global_flag = csh_updates_disabled }
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			csh_update_all_traits_for_all_characters = yes
+		}
+		ai_will_do = { factor = 0 }
+	}
+	
+	
+	
+	csh_remove_all_traits_and_disable_updates = {
+		ai = no
+		potential = {
+			NOT = { has_global_flag = csh_updates_disabled }
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
 		allow = { always = yes }
 		effect = {
 			custom_tooltip = {
-				text = csh_update_all_characters_tt
-				character_event = { id = CSHUpdates.1001 }
+				text = csh_disable_updates_tt
+				set_global_flag = csh_updates_disabled
+			}
+			custom_tooltip = { text = csh_big_separator }
+			custom_tooltip = {
+				text = csh_remove_all_traits_tt
+				any_character = { csh_remove_all_traits_from_this_character = yes }
 			}
 		}
 		ai_will_do = { factor = 0 }
 	}
+	
+	
+	
+	csh_reenable_updates = {
+		ai = no
+		potential = {
+			has_global_flag = csh_updates_disabled
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = csh_reenable_updates_tt
+				clr_global_flag = csh_updates_disabled
+			}
+			custom_tooltip = { text = csh_big_separator }
+			csh_update_all_traits_for_all_characters = yes
+		}
+		ai_will_do = { factor = 0 }
+	}
+	
+	
+	
 }

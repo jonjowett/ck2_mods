@@ -2,6 +2,7 @@ csh_foe = {
 	customizer = no
 	random = no
 	is_visible = {
+		FROM = { is_alive = yes }
 		OR = {
 			ROOT = { is_foe = FROM }
 			FROM = { is_foe = ROOT }

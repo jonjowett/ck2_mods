@@ -1,0 +1,38 @@
+csh_remove_all_wealth_traits_from_this_character = {
+	remove_trait = csh_wealth_0
+	remove_trait = csh_wealth_1
+	remove_trait = csh_wealth_2
+	remove_trait = csh_wealth_3
+	remove_trait = csh_wealth_4
+	remove_trait = csh_wealth_5
+}
+
+csh_update_wealth_trait_for_this_character = {
+	csh_remove_all_wealth_traits_from_this_character = yes
+	if = {
+		limit = { ai = yes } # Don't add any of these traits to players
+		if = {
+			limit = { wealth < 100 }
+			#add_trait = csh_wealth_0
+		}
+		else_if = {
+			limit = { wealth < 300 }
+			add_trait = csh_wealth_1
+		}
+		else_if = {
+			limit = { wealth < 1000 }
+			add_trait = csh_wealth_2
+		}
+		else_if = {
+			limit = { wealth < 3000 }
+			add_trait = csh_wealth_3
+		}
+		else_if = {
+			limit = { wealth < 10000 }
+			add_trait = csh_wealth_4
+		}
+		else = {
+			add_trait = csh_wealth_5
+		}
+	}
+}
