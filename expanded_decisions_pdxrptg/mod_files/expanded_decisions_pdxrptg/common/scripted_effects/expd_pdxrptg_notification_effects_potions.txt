@@ -1,0 +1,17 @@
+expd_pdxrptg_notifications_potion_effect_expiry_start = {
+	custom_tooltip = {
+		text = expd_pdxrptg_notification_potion_effect_ended_will_be_enabled_tt
+		expd_pdxrptg_notifications_potion_effect_expiry_stop = yes
+		set_character_flag = expd_pdxrptg_notification_potion_effect_ended
+		character_event = { id = ExpdPdxrptgNotifications.2000 }
+	}
+}
+
+expd_pdxrptg_notifications_potion_effect_expiry_stop = {
+	custom_tooltip = {
+		text = expd_pdxrptg_notification_potion_effect_ended_will_be_disabled_tt
+		clr_character_flag = expd_pdxrptg_notification_potion_effect_ended
+		clear_delayed_event = { id = ExpdPdxrptgNotifications.2000 }
+		clr_character_flag  = expd_pdxrptg_notification_potion_effect_exists
+	}
+}

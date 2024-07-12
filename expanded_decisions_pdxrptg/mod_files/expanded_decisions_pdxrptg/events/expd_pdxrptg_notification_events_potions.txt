@@ -1,0 +1,73 @@
+namespace = ExpdPdxrptgNotifications
+
+# Magicka notifications use events 1000-1999
+# Potions notifications use events 2000-2999
+
+# Potion tracking cycle
+character_event = {
+	id = ExpdPdxrptgNotifications.2000
+	hide_window = yes
+	is_triggered_only = yes
+	ai = no
+	trigger = {
+		# Only execute this event if the character has the potion effect notification turned on
+		has_character_flag = expd_pdxrptg_notification_potion_effect_ended
+	}
+	immediate = {
+		
+		# Set up next month's check
+		# Do this BEFORE this month's check, so that the delayed check event can be cancelled by the user from the notification event
+		character_event = {
+			id = ExpdPdxrptgNotifications.2000
+			months = 1
+		}
+		
+		# Check the potion effect status
+		if = {
+			limit = { chugged_it_down_innit_bruv = yes } # Has an active potion effect
+			if = {
+				limit = { has_character_flag = expd_pdxrptg_notification_potion_effect_exists }
+				# Has an active potion effect this month and had one last month - do nothing
+			}
+			else = {
+				# New active potion effect this month - record the fact and continue the cycle of checks
+				set_character_flag = expd_pdxrptg_notification_potion_effect_exists
+			}
+		}
+		else = {
+			if = {
+				limit = { has_character_flag = expd_pdxrptg_notification_potion_effect_exists }
+				# Potion effect expired sometime in the last month - notify the player
+				character_event = { id = ExpdPdxrptgNotifications.2001 }
+				clr_character_flag = expd_pdxrptg_notification_potion_effect_exists
+			}
+			else = {
+				# No active potion effect this month or last month - do nothing
+			}
+		}
+	}
+}
+
+# Notification that potion effect has expired
+character_event = {
+	
+	id           = ExpdPdxrptgNotifications.2001
+	title        = ExpdPdxrptgNotifications_PotionEffectExpired_Title
+	desc         = ExpdPdxrptgNotifications_PotionEffectExpired_Desc
+	border       = GFX_event_normal_frame_religion
+	picture      = GFX_evt_experiment
+	portrait     = none
+	
+	is_triggered_only = yes
+	
+	ai = no
+	
+	option = { name = OK }
+	
+	option = {
+		name = ExpdPdxrptgNotifications_Option_DisableThisNotification
+		expd_pdxrptg_notifications_potion_effect_expiry_stop = yes
+		ai_chance = { factor = 0 }
+	}
+	
+}

@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 namespace = magicka
 
 # Set up initial magicka for players
@@ -5,6 +7,7 @@ character_event = {
 	id = magicka.0
 	hide_window = yes
 	
+	# Audax Validator "." Ignore_NEXT
 	is_triggered_only = yes
 	
 	only_playable = yes
@@ -37,6 +40,7 @@ character_event = {
 		else = { # Actively remove magicka for characters that have ceased to be spellcasters
 			remove_character_modifier = magicka_counter
 			delete_magicka = yes
+			expd_pdxrptg_notifications_magicka_disable_all = yes
 		}
 	}
 }
@@ -256,6 +260,9 @@ character_event = {
 		change_variable   = { which = magicka_regen_rate which = magicka_regen_rate_from_artifacts }
 		multiply_variable = { which = magicka_regen_rate which = magicka_regen_rate_multiplier     }
 		
+		# Store the magicka amount pre regen
+		expd_pdxrptg_notifications_magicka_pre_regen = yes
+		
 		# Add the regen amount to the character's current magicka
 		change_variable   = { which = magicka_current    which = magicka_regen_rate }
 		
@@ -264,6 +271,9 @@ character_event = {
 			limit = { check_variable = { which = magicka_current which = magicka_max } }
 			set_variable = { which = magicka_current which = magicka_max }
 		}
+		
+		# The actual magicka regen is finished at this point, so we should check whether there are any notifications to Show
+		expd_pdxrptg_notifications_magicka_post_regen = yes
 		
 		# Record that the event has occurred 
 		clr_character_flag = expd_pdxrptg_magicka_regen_recent
@@ -278,16 +288,24 @@ character_event = {
 
 # Debug / cheat event - restore max magicka
 character_event = {
+	
 	id = magicka.999
 	hide_window = yes
+	
+	# Audax Validator "." Ignore_NEXT
 	is_triggered_only = yes
+	
 	ai = no
 	only_playable = yes
+	
 	trigger = {
 		is_spellcaster = yes
 		has_character_modifier = magicka_counter
 	}
+	
 	immediate = {
 		set_magicka_to_max = yes
+		# No need to check/show any notifications - the player knows they cheated to get full magicka!
 	}
+	
 }

@@ -1,0 +1,35 @@
+has_submenu_open = {
+	
+	OR = {
+		
+		# Base mod
+		has_character_flag = employment_open
+		has_character_flag = spellbook_open
+		has_character_flag = title_open
+		has_character_flag = marketplace_open
+		has_character_flag = society_open
+		has_character_flag = adventuring_open
+		has_character_flag = alchemist_open
+		has_character_flag = news_open
+		#has_character_flag = minor_title_open
+		#has_character_flag = prisoners_open
+		has_character_flag = supernatural_open
+		
+		# Submod added
+		has_character_flag = expd_pdxrptg_notification_submenu_is_open
+		
+	}
+	
+	ai = no
+	
+}
+
+is_in_marketplace_shop = { #Add flags for more marketplace subsubmenus here.
+	custom_tooltip = {
+		text = isinstoretext
+		OR = {
+			has_character_flag = alchemist_open
+			has_character_flag = adventuring_open
+		}
+	}
+}

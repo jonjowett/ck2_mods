@@ -1,0 +1,59 @@
+namespace = ExpdPdxrptgNotifications
+
+# Magicka notifications use events 1000-1999
+# Potions notifications use events 2000-2999
+
+character_event = {
+	
+	id           = ExpdPdxrptgNotifications.1000
+	title        = ExpdPdxrptgNotifications_MagickaFull_Title
+	desc         = ExpdPdxrptgNotifications_MagickaFull_Desc
+	border       = GFX_event_normal_frame_religion
+	picture      = GFX_evt_tome
+	portrait     = none
+	#notification = yes # In case players want to make these appear in the high/low prio queue
+	
+	is_triggered_only = yes
+	
+	ai = no
+	
+	option = { name = OK }
+	
+	option = {
+		name = ExpdPdxrptgNotifications_Option_DisableThisNotification
+		custom_tooltip = {
+			text = expd_pdxrptg_notification_magicka_full_will_be_disabled_tt
+			clr_character_flag = expd_pdxrptg_notification_magicka_full
+		}
+		ai_chance = { factor = 0 }
+	}
+	
+	
+}
+
+character_event = {
+	
+	id           = ExpdPdxrptgNotifications.1100
+	title        = ExpdPdxrptgNotifications_MagickaHalf_Title
+	desc         = ExpdPdxrptgNotifications_MagickaHalf_Desc
+	border       = GFX_event_normal_frame_religion
+	picture      = GFX_evt_library
+	portrait     = none
+	
+	is_triggered_only = yes
+	
+	ai = no
+	
+	option = { name = OK }
+	
+	option = {
+		name = ExpdPdxrptgNotifications_Option_DisableThisNotification
+		custom_tooltip = {
+			text = expd_pdxrptg_notification_magicka_half_will_be_disabled_tt
+			clr_character_flag = expd_pdxrptg_notification_magicka_half
+		}
+		ai_chance = { factor = 0 }
+	}
+	
+	
+}
