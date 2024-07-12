@@ -23,36 +23,29 @@ set_magicka_to_max = {
 
 # Define the Magicka pool using Learning as the base value, multiplied by 2 ; 1 Learning = 2 Magicka.
 refresh_max_magicka = {
+	
 	set_variable = { which = magicka_max value = 0 }
 	export_to_variable = { which = magicka_max value = learning }
 	multiply_variable = { which = magicka_max value = 2 }
 	
 	#Artifact Bonuses
 	if = {
-		limit = {
-			any_artifact = {
-				artifact_type = amulet_of_julianos
-				is_artifact_equipped = yes
-			}
-		}
+		limit = { expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_julianos = yes }
 		change_variable = { which = magicka_max value = 6 }
 	}
 	#Artifact Maluses
 	if = {
 		limit = {
-			any_artifact = {
-				artifact_type = weapon_forkh
-				is_artifact_equipped = yes
-			}
+			expd_pdxrptg_this_character_has_artifact_equipped_weapon_forkh = yes
 			check_variable = { which = magicka_max value = 2 }
 		}
 		divide_variable = { which = magicka_max value = 2 }
 	}
 	
+	# Cap current magicka at new max magicka (if necessary)
 	if = {
-		limit = {
-			check_variable = { which = magicka_current which = magicka_max } #Actually checks if the variable is equal to or greater than.
-		}
-		set_variable = { which = magicka_current which = magicka_max } #This forces it to be equal if it is equal to or greater than.
+		limit = { check_variable = { which = magicka_current which > magicka_max } }
+		set_variable = { which = magicka_current which = magicka_max }
 	}
+	
 }

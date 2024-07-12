@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 namespace = ExpdPdxrptgNotifications
 
 # Magicka notifications use events 1000-1999
@@ -24,7 +26,10 @@ character_event = {
 		
 		# Check the potion effect status
 		if = {
-			limit = { chugged_it_down_innit_bruv = yes } # Has an active potion effect
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				chugged_it_down_innit_bruv = yes # Has an active potion effect
+			}
 			if = {
 				limit = { has_character_flag = expd_pdxrptg_notification_potion_effect_exists }
 				# Has an active potion effect this month and had one last month - do nothing

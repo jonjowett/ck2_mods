@@ -1,5 +1,11 @@
+# Audax Validator EnableCommentMetadata
+
+# Missing warlord_conquest_desc in localisation (it's in the base mod) (tested & this does not prevent validation of the rest of the CB)
+# Audax Validator "." Ignore_NEXT
 warlord_conquest = {
+	# Audax Validator "." Ignore_NEXT
 	name = CB_NAME_WARLORD_CONQUEST
+	# Audax Validator "." Ignore_NEXT
 	war_name = WAR_NAME_WARLORD_CONQUEST
 	sprite = 38
 	truce_days = 3650
@@ -24,44 +30,64 @@ warlord_conquest = {
 		ROOT = {
 			#CB Specific Traits and things
 			OR = {
+				# Audax Validator "." Ignore_NEXT
 				trait = warlord
+				# Audax Validator "." Ignore_NEXT
 				has_ambition = obj_warlord
 			}
 			NOT = { trait = incapable }
 			NOT = { same_realm = FROM }	
-			#Undead Handling
-			NOT = { trait = undead } #Not as Undead
-			FROM = { NOT = { trait = undead } } #Not vs Undead
-			#Riddlethar vs. Mane
-			OR = {
-				ROOT = { NOT = { religion = riddlethar } }
-				AND = {
-					FROM = { NOT = { trait = mane } }
-					ROOT = { religion = riddlethar }
+			#Undead Handling - not as undead or vs undead
+			NOR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = undead
+				FROM = {
+					# Audax Validator "." Ignore_NEXT
+					trait = undead
 				}
 			}
-			#Almsivi Religion
-			OR = {
-				ROOT = { NOT = { religion = almsivi } }
-				AND = {
-					FROM = { 
-						NOT = { has_landed_title = k_almsivi } 
-						religion = almsivi
-					}
-					ROOT = { religion = almsivi }
+			# Riddlethar cannot warlord vs the Mane
+			NAND = {
+				FROM = {
+					# Audax Validator "." Ignore_NEXT
+					trait = mane
 				}
-				AND = {
-					ROOT = { 
+				ROOT = {
+					# Audax Validator "." Ignore_NEXT
+					religion = riddlethar
+				}
+			}
+			# Almsivi cannot warlord against their religious head, and he can't warlord them
+			NAND = {
+				ROOT = {
+					# Audax Validator "." Ignore_NEXT
+					religion = almsivi
+				}
+				FROM = {
+					# Audax Validator "." Ignore_NEXT
+					religion = almsivi
+				}
+				OR = {
+					ROOT = {
+						# Audax Validator "." Ignore_NEXT
 						has_landed_title = k_almsivi
-						religion = almsivi 
 					}
-					FROM = { religion = almsivi }
-				}				
+					FROM = {
+						# Audax Validator "." Ignore_NEXT
+						has_landed_title = k_almsivi
+					}
+				}
 			}
 			#Great House Titles
 			OR = {
-				ROOT = { has_house_trait = no }
-				FROM = { is_great_house_grandmaster = no }
+				ROOT = {
+					# Audax Validator "." Ignore_NEXT
+					has_house_trait = no
+				}
+				FROM = {
+					# Audax Validator "." Ignore_NEXT
+					is_great_house_grandmaster = no
+				}
 			}
 		}
 	}
@@ -137,12 +163,16 @@ warlord_conquest = {
 				# Special Case - Great Houses and the Tribunal Temple within Morrowind
 				AND = {
 					OR = {
+						# Audax Validator "." Ignore_NEXT
 						title = k_morrowind
+						# Audax Validator "." Ignore_NEXT
 						title = k_vvardenfell
 					}
 					FROM = {
 						OR = {
+							# Audax Validator "." Ignore_NEXT
 							has_landed_title = k_almsivi
+							# Audax Validator "." Ignore_NEXT
 							is_great_house_grandmaster = yes
 							
 							# Attempt to detect rebellions against Tribunal Temple / Grandmasters
@@ -151,17 +181,37 @@ warlord_conquest = {
 							# Effectively: the target character is NOT the temple or a grandmaster, and {is primary attacker/defender} vs {{the temple or a grandmaster} {who is the primary defender/attacker}}
 							AND = {
 								NOR = {
+									# Audax Validator "." Ignore_NEXT
 									has_landed_title = k_almsivi
+									# Audax Validator "." Ignore_NEXT
 									is_great_house_grandmaster = yes
 								}
 								OR = {
 									AND = {
 										is_primary_war_attacker = yes
-										any_war = { defender = { OR = { has_landed_title = k_almsivi is_great_house_grandmaster = yes } } }
+										any_war = {
+											defender = {
+												OR = {
+													# Audax Validator "." Ignore_NEXT
+													has_landed_title = k_almsivi
+													# Audax Validator "." Ignore_NEXT
+													is_great_house_grandmaster = yes
+												}
+											}
+										}
 									}
 									AND = {
 										is_primary_war_defender = yes
-										any_war = { attacker = { OR = { has_landed_title = k_almsivi is_great_house_grandmaster = yes } } }
+										any_war = {
+											attacker = {
+												OR = {
+													# Audax Validator "." Ignore_NEXT
+													has_landed_title = k_almsivi
+													# Audax Validator "." Ignore_NEXT
+													is_great_house_grandmaster = yes
+												}
+											}
+										}
 									}
 								}
 							}
@@ -182,7 +232,9 @@ warlord_conquest = {
 			
 			# Target is a Province being attacked by Tamriel
 			AND = {
+				# Audax Validator "." Ignore_NEXT
 				is_imperial_province = yes
+				# Audax Validator "." Ignore_NEXT
 				e_tamriel = { holder_scope = { character = ROOT } }
 			}
 		}
@@ -209,7 +261,12 @@ warlord_conquest = {
 			participation_scaled_prestige = 100
 		}
 		if = {
-			limit = { ROOT = { has_ambition = obj_warlord } }
+			limit = {
+				ROOT = {
+					# Audax Validator "." Ignore_NEXT
+					has_ambition = obj_warlord
+				}
+			}
 			ROOT = { set_character_flag = warlord_flg }
 		}
 		any_attacker = {

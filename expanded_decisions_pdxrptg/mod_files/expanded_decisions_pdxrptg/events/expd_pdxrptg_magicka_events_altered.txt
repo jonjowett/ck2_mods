@@ -3,11 +3,12 @@
 namespace = magicka
 
 # Set up initial magicka for players
+# (triggered only but appears never to be called, because it's called by on_actions in the base mod)
+# Audax Validator "." Ignore_NEXT
 character_event = {
 	id = magicka.0
 	hide_window = yes
 	
-	# Audax Validator "." Ignore_NEXT
 	is_triggered_only = yes
 	
 	only_playable = yes
@@ -15,15 +16,24 @@ character_event = {
 	
 	immediate = {
 		if = {
-			limit = { is_spellcaster = yes }
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				is_spellcaster = yes
+			}
 			if = {
-				limit = { NOT = { has_character_modifier = magicka_counter } }
+				limit = {
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						has_character_modifier = magicka_counter
+					}
+				}
 				
 				# Mod edit: On initial creation of magicka pool, magicka is set to max
 				set_magicka_to_max = yes
 				
 				# Show magicka counter to the player
 				add_character_modifier = {
+					# Audax Validator "." Ignore_NEXT
 					name = magicka_counter
 					duration = -1
 				}
@@ -33,11 +43,15 @@ character_event = {
 				
 			}
 			if = {
-				limit = { has_character_modifier = magicka_counter }
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_character_modifier = magicka_counter
+				}
 				refresh_max_magicka = yes
 			}
 		}
 		else = { # Actively remove magicka for characters that have ceased to be spellcasters
+			# Audax Validator "." Ignore_NEXT
 			remove_character_modifier = magicka_counter
 			delete_magicka = yes
 			expd_pdxrptg_notifications_magicka_disable_all = yes
@@ -53,6 +67,7 @@ character_event = {
 	ai = no
 	only_playable = yes
 	trigger = {
+		# Audax Validator "." Ignore_NEXT
 		is_spellcaster = yes
 	}
 	immediate = {
@@ -70,8 +85,7 @@ character_event = {
 	ai = no
 	only_playable = yes
 	trigger = {
-		is_spellcaster = yes
-		has_character_modifier = magicka_counter
+		expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
 	}
 	immediate = {
 		
@@ -105,8 +119,7 @@ character_event = {
 	ai = no
 	only_playable = yes
 	trigger = {
-		is_spellcaster = yes
-		has_character_modifier = magicka_counter
+		expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
 		OR = {
 			NOT = { has_character_flag = expd_pdxrptg_magicka_regen_recent }
 			had_character_flag = {
@@ -126,11 +139,11 @@ character_event = {
 		# Some named artifacts give base regen
 		set_variable = { which = magicka_regen_rate_from_artifacts value = 0 }
 		if = {
-			limit = { any_artifact = { artifact_type = amulet_of_alessia    is_artifact_equipped = yes } }
+			limit = { expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_alessia = yes }
 			change_variable = { which = magicka_regen_rate_from_artifacts value = 2 }
 		}
 		if = {
-			limit = { any_artifact = { artifact_type = amulet_of_akatosh    is_artifact_equipped = yes } }
+			limit = { expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_akatosh = yes }
 			trigger_switch = {
 				on_trigger = learning
 				30 = { change_variable = { which = magicka_regen_rate_from_artifacts value = 3 } }
@@ -139,11 +152,11 @@ character_event = {
 			}
 		}
 		if = {
-			limit = { any_artifact = { artifact_type = amulet_of_hagraven   is_artifact_equipped = yes } }
+			limit = { expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_hagraven = yes }
 			change_variable = { which = magicka_regen_rate_from_artifacts value = 1 }
 		}
 		if = {
-			limit = { any_artifact = { artifact_type = ring_of_erudite      is_artifact_equipped = yes } }
+			limit = { expd_pdxrptg_this_character_has_artifact_equipped_ring_of_erudite = yes }
 			change_variable = { which = magicka_regen_rate_from_artifacts value = 2 }
 		}
 		
@@ -213,42 +226,36 @@ character_event = {
 		
 		# Calculate a multiplier to regen rate based on traits etc
 		set_variable = { which = magicka_regen_rate_multiplier value = 1 }
-		if = {
-			limit = { any_artifact = { is_artifact_equipped = yes artifact_type = ring_of_erudite } }
-			divide_variable = { which = magicka_regen_rate_multiplier value = 0.8  }
-		}
-		if = {
-			limit = { any_artifact = { is_artifact_equipped = yes artifact_type = amulet_of_akatosh } } 
-			divide_variable = { which = magicka_regen_rate_multiplier value = 0.8  }
-		}
+		if      = { limit = { expd_pdxrptg_this_character_has_artifact_equipped_ring_of_erudite = yes }       divide_variable = { which = magicka_regen_rate_multiplier value = 0.8  } }
+		if      = { limit = { expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_akatosh = yes }     divide_variable = { which = magicka_regen_rate_multiplier value = 0.8  } }
 		
-		if      = { limit = { trait = dragonborn }                               divide_variable = { which = magicka_regen_rate_multiplier value = 0.75 } }
-		else    = { limit = { trait = dragonborn_descendant }                    divide_variable = { which = magicka_regen_rate_multiplier value = 0.85 } }
+		if      = { limit = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }                        divide_variable = { which = magicka_regen_rate_multiplier value = 0.75 } }
+		else_if = { limit = { expd_pdxrptg_this_character_has_trait_dragonborn_descendant = yes }             divide_variable = { which = magicka_regen_rate_multiplier value = 0.85 } }
 		
-		if      = { limit = { trait = lich }                                     divide_variable = { which = magicka_regen_rate_multiplier value = 0.9  } }
-		if      = { limit = { trait = mane }                                     divide_variable = { which = magicka_regen_rate_multiplier value = 0.9  } }
+		if      = { limit = { expd_pdxrptg_this_character_has_trait_lich = yes }                              divide_variable = { which = magicka_regen_rate_multiplier value = 0.9  } }
+		if      = { limit = { expd_pdxrptg_this_character_has_trait_mane = yes }                              divide_variable = { which = magicka_regen_rate_multiplier value = 0.9  } }
 		
-		if      = { limit = { is_smart_trigger = yes }                           divide_variable = { which = magicka_regen_rate_multiplier value = 0.8  } }
-		if      = { limit = { is_dumb_trigger = yes }                            divide_variable = { which = magicka_regen_rate_multiplier value = 1.2  } }
-		if      = { limit = { has_mental_disorder_trigger = yes }                divide_variable = { which = magicka_regen_rate_multiplier value = 1.15 } }
-		if      = { limit = { trait = skooma_addiction }                         divide_variable = { which = magicka_regen_rate_multiplier value = 1.15 } }
+		if      = { limit = { is_smart_trigger = yes }                                                        divide_variable = { which = magicka_regen_rate_multiplier value = 0.8  } }
+		if      = { limit = { is_dumb_trigger = yes }                                                         divide_variable = { which = magicka_regen_rate_multiplier value = 1.2  } }
+		if      = { limit = { has_mental_disorder_trigger = yes }                                             divide_variable = { which = magicka_regen_rate_multiplier value = 1.15 } }
+		if      = { limit = { expd_pdxrptg_this_character_has_trait_skooma_addiction = yes }                  divide_variable = { which = magicka_regen_rate_multiplier value = 1.15 } }
 		
-		if      = { limit = { trait = chrondiasis }                              divide_variable = { which = magicka_regen_rate_multiplier value = 1.5  } }
-		else_if = { limit = { has_disease_trigger = yes }                        divide_variable = { which = magicka_regen_rate_multiplier value = 1.25 } }
+		if      = { limit = { expd_pdxrptg_this_character_has_trait_chrondiasis = yes }                       divide_variable = { which = magicka_regen_rate_multiplier value = 1.5  } }
+		else_if = { limit = { has_disease_trigger = yes }                                                     divide_variable = { which = magicka_regen_rate_multiplier value = 1.25 } }
 		
-		if      = { limit = { has_severe_disability_trigger = yes }              divide_variable = { which = magicka_regen_rate_multiplier value = 1.25 } }
-		else_if = { limit = { has_medium_disability_trigger = yes }              divide_variable = { which = magicka_regen_rate_multiplier value = 1.15 } }
-		else_if = { limit = { has_minor_disability_trigger  = yes }              divide_variable = { which = magicka_regen_rate_multiplier value = 1.05 } }
+		if      = { limit = { has_severe_disability_trigger = yes }                                           divide_variable = { which = magicka_regen_rate_multiplier value = 1.25 } }
+		else_if = { limit = { has_medium_disability_trigger = yes }                                           divide_variable = { which = magicka_regen_rate_multiplier value = 1.15 } }
+		else_if = { limit = { has_minor_disability_trigger  = yes }                                           divide_variable = { which = magicka_regen_rate_multiplier value = 1.05 } }
 		
-		if      = { limit = { trait = mage_1 }                                   divide_variable = { which = magicka_regen_rate_multiplier value = 0.95 } }
-		else_if = { limit = { trait = mage_2 }                                   divide_variable = { which = magicka_regen_rate_multiplier value = 0.90 } }
-		else_if = { limit = { trait = mage_3 }                                   divide_variable = { which = magicka_regen_rate_multiplier value = 0.85 } }
-		else_if = { limit = { trait = mage_4 }                                   divide_variable = { which = magicka_regen_rate_multiplier value = 0.80 } }
-		else_if = { limit = { trait = mage_5 }                                   divide_variable = { which = magicka_regen_rate_multiplier value = 0.70 } } # Legendary mages get a bigger bonus
+		if      = { limit = { expd_pdxrptg_this_character_has_trait_mage_1 = yes }                            divide_variable = { which = magicka_regen_rate_multiplier value = 0.95 } }
+		else_if = { limit = { expd_pdxrptg_this_character_has_trait_mage_2 = yes }                            divide_variable = { which = magicka_regen_rate_multiplier value = 0.90 } }
+		else_if = { limit = { expd_pdxrptg_this_character_has_trait_mage_3 = yes }                            divide_variable = { which = magicka_regen_rate_multiplier value = 0.85 } }
+		else_if = { limit = { expd_pdxrptg_this_character_has_trait_mage_4 = yes }                            divide_variable = { which = magicka_regen_rate_multiplier value = 0.80 } }
+		else_if = { limit = { expd_pdxrptg_this_character_has_trait_mage_5 = yes }                            divide_variable = { which = magicka_regen_rate_multiplier value = 0.70 } } # Legendary mages get a bigger bonus
 		
-		if      = { limit = { highest_spellcaster_specialisation_is_3 = yes }    divide_variable = { which = magicka_regen_rate_multiplier value = 0.80 } } # Slightly bigger bonus for getting a spellcaster specialty to level 3
-		else_if = { limit = { highest_spellcaster_specialisation_is_2 = yes }    divide_variable = { which = magicka_regen_rate_multiplier value = 0.90 } }
-		else_if = { limit = { highest_spellcaster_specialisation_is_1 = yes }    divide_variable = { which = magicka_regen_rate_multiplier value = 0.95 } }
+		if      = { limit = { highest_spellcaster_specialisation_is_3 = yes }                                 divide_variable = { which = magicka_regen_rate_multiplier value = 0.80 } } # Slightly bigger bonus for getting a spellcaster specialty to level 3
+		else_if = { limit = { highest_spellcaster_specialisation_is_2 = yes }                                 divide_variable = { which = magicka_regen_rate_multiplier value = 0.90 } }
+		else_if = { limit = { highest_spellcaster_specialisation_is_1 = yes }                                 divide_variable = { which = magicka_regen_rate_multiplier value = 0.95 } }
 		
 		
 		
@@ -287,20 +294,20 @@ character_event = {
 }
 
 # Debug / cheat event - restore max magicka
+# (triggered only but never called)
+# Audax Validator "." Ignore_NEXT
 character_event = {
 	
 	id = magicka.999
 	hide_window = yes
 	
-	# Audax Validator "." Ignore_NEXT
 	is_triggered_only = yes
 	
 	ai = no
 	only_playable = yes
 	
 	trigger = {
-		is_spellcaster = yes
-		has_character_modifier = magicka_counter
+		expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
 	}
 	
 	immediate = {

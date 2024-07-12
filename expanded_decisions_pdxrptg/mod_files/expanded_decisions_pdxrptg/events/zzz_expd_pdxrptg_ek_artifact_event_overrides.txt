@@ -1,8 +1,12 @@
+# Audax Validator EnableCommentMetadata
+
 #General artifacts events for EK
 #Please reserve 0-100 for system functions. Specific artifact events can go beyond that.
 
 namespace = ekartifacts 
 
+# (Appears to be a triggered-only event that is never called, but is actually called by on_actions in the base mod)
+# Audax Validator "." Ignore_NEXT
 character_event = { #Clearing excess non-active artifacts
 	id = ekartifacts.20
 	hide_window = yes
@@ -48,21 +52,23 @@ character_event = { #Clearing excess non-active artifacts
 
 # Destroy any artifacts belonging to unrelated, unlanded courtiers in player courts on death.
 # MOD EDIT: REMOVED!!
+# (Appears to be a triggered-only event that is never called, but is actually called by on_actions in the base mod)
+# Audax Validator "." Ignore_NEXT
 character_event = {
 	id = ekartifacts.6
 	hide_window = yes
 	is_triggered_only = yes
-	hide_window = yes
 	ai = yes
 	immediate = {
 		# do nothing
 	}
 }
+# (Appears to be a triggered-only event that is never called, but is actually called by on_actions in the base mod)
+# Audax Validator "." Ignore_NEXT
 character_event = {
 	id = ekartifacts.7
 	hide_window = yes
 	is_triggered_only = yes
-	hide_window = yes
 	ai = yes
 	immediate = {
 		# do nothing
