@@ -10,6 +10,13 @@ expd_pdxrptg_this_character_has_trait_dragonborn_descendant = {
 	trait = dragonborn_descendant
 }
 
+expd_pdxrptg_this_character_has_trait_dragonblood = {
+	OR = {
+		expd_pdxrptg_this_character_has_trait_dragonborn = yes
+		expd_pdxrptg_this_character_has_trait_dragonborn_descendant = yes
+	}
+}
+
 expd_pdxrptg_this_character_has_trait_lich = {
 	# Audax Validator "." Ignore_NEXT
 	trait = lich

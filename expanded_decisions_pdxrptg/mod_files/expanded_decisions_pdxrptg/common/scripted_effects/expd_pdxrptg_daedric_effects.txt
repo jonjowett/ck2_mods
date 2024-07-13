@@ -1,0 +1,150 @@
+# Audax Validator EnableCommentMetadata
+
+
+expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = {
+	if = {
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			is_immortal = yes
+		}
+		add_offmap_currency = {
+			offmap = ROOT
+			value = -7500
+		}
+	}
+	else_if = {
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			is_long_lived = yes
+		}
+		add_offmap_currency = {
+			offmap = ROOT
+			value = -5000
+		}
+	}
+	else = {
+		add_offmap_currency = {
+			offmap = ROOT
+			value = -2500
+		}
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_azura = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_azura_tt
+		set_character_flag = expd_pdxrptg_favoured_by_azura
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_boethiah = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_boethiah_tt
+		set_character_flag = expd_pdxrptg_favoured_by_boethiah
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_clavicus = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_clavicus_tt
+		set_character_flag = expd_pdxrptg_favoured_by_clavicus
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_hermaeus = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_hermaeus_tt
+		set_character_flag = expd_pdxrptg_favoured_by_hermaeus
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_hircine = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_hircine_tt
+		set_character_flag = expd_pdxrptg_favoured_by_hircine
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_jyggalag = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_jyggalag_tt
+		set_character_flag = expd_pdxrptg_favoured_by_jyggalag
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_malacath = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_malacath_tt
+		set_character_flag = expd_pdxrptg_favoured_by_malacath
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_mehrunes = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_mehrunes_tt
+		set_character_flag = expd_pdxrptg_favoured_by_mehrunes
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_mephala = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_mephala_tt
+		set_character_flag = expd_pdxrptg_favoured_by_mephala
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_meridia = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_meridia_tt
+		set_character_flag = expd_pdxrptg_favoured_by_meridia
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_molag = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_molag_tt
+		set_character_flag = expd_pdxrptg_favoured_by_molag
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_namira = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_namira_tt
+		set_character_flag = expd_pdxrptg_favoured_by_namira
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_nocturnal = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_nocturnal_tt
+		set_character_flag = expd_pdxrptg_favoured_by_nocturnal
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_peryite = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_peryite_tt
+		set_character_flag = expd_pdxrptg_favoured_by_peryite
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_sanguine = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_sanguine_tt
+		set_character_flag = expd_pdxrptg_favoured_by_sanguine
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_sheogorath = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_sheogorath_tt
+		set_character_flag = expd_pdxrptg_favoured_by_sheogorath
+	}
+}
+
+expd_pdxrptg_this_character_becomes_favoured_by_vaermina = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_becomes_favoured_by_vaermina_tt
+		set_character_flag = expd_pdxrptg_favoured_by_vaermina
+	}
+}
