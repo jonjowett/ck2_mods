@@ -1,0 +1,32 @@
+# Audax Validator EnableCommentMetadata
+
+
+# For situations where a person gains dragonblood but it should not be given to their existing descendants
+# Eg: If they gain dragonblood via some unconventional method (other than inheriting it or rediscovering it),
+#         they should get dragonblood, and so should any future descendants (via default EK genetic inheritance),
+#         but any existing descendants were born before the character became dragonblooded, so they should NOT get it.
+expd_pdxrptg_this_character_gains_minimal_dragonblood = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_gains_minimal_dragonblood_tt
+		if = {
+			limit = { expd_pdxrptg_this_character_has_trait_dragonblood = no }
+			# Audax Validator "." Ignore_NEXT
+			add_trait = dragonborn_descendant
+			if = {
+				limit = { expd_pdxrptg_this_characters_actual_dragonblood_trait_will_be_publicly_visible = no }
+				add_trait = expd_pdxrptg_dragonborn_descendant_cosmetic
+			}
+		}
+	}
+}
+
+# For situations where a person discovers that they had dragonblood all along
+expd_pdxrptg_this_character_and_all_descendants_gain_minimal_dragonblood = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_and_all_descendants_gain_minimal_dragonblood_tt
+		expd_pdxrptg_this_character_gains_minimal_dragonblood = yes
+		any_child_even_if_dead = {
+			expd_pdxrptg_this_character_and_all_descendants_gain_minimal_dragonblood = yes
+		}
+	}
+}

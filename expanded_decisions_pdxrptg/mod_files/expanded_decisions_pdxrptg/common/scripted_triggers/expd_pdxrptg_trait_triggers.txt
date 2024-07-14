@@ -6,14 +6,37 @@ expd_pdxrptg_this_character_has_trait_dragonborn = {
 }
 
 expd_pdxrptg_this_character_has_trait_dragonborn_descendant = {
-	# Audax Validator "." Ignore_NEXT
-	trait = dragonborn_descendant
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_has_trait_dragonborn_descendant_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			trait = dragonborn_g_1
+			# Audax Validator "." Ignore_NEXT
+			trait = dragonborn_g_2
+			# Audax Validator "." Ignore_NEXT
+			trait = dragonborn_g_3
+			# Audax Validator "." Ignore_NEXT
+			trait = dragonborn_g_4
+			# Audax Validator "." Ignore_NEXT
+			trait = dragonborn_descendant
+		}
+	}
 }
 
 expd_pdxrptg_this_character_has_trait_dragonblood = {
 	OR = {
 		expd_pdxrptg_this_character_has_trait_dragonborn = yes
 		expd_pdxrptg_this_character_has_trait_dragonborn_descendant = yes
+	}
+}
+
+expd_pdxrptg_this_characters_actual_dragonblood_trait_will_be_publicly_visible = {
+	OR = {
+		AND = {
+			true_father_even_if_dead = { expd_pdxrptg_this_character_has_trait_dragonblood = yes }
+			NOT = { trait = bastard }
+		}
+		mother_even_if_dead = { expd_pdxrptg_this_character_has_trait_dragonblood = yes }
 	}
 }
 
