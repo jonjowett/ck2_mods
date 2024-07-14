@@ -8,6 +8,8 @@ expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = {
 			is_immortal = yes
 		}
 		add_offmap_currency = {
+			# ROOT is not recognised as a valid offmap_power by the Validator v1.38.3 - MANY false positives
+			# Audax Validator "." Ignore_NEXT
 			offmap = ROOT
 			value = -7500
 		}
@@ -18,12 +20,16 @@ expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = {
 			is_long_lived = yes
 		}
 		add_offmap_currency = {
+			# ROOT is not recognised as a valid offmap_power by the Validator v1.38.3 - MANY false positives
+			# Audax Validator "." Ignore_NEXT
 			offmap = ROOT
 			value = -5000
 		}
 	}
 	else = {
 		add_offmap_currency = {
+			# ROOT is not recognised as a valid offmap_power by the Validator v1.38.3 - MANY false positives
+			# Audax Validator "." Ignore_NEXT
 			offmap = ROOT
 			value = -2500
 		}

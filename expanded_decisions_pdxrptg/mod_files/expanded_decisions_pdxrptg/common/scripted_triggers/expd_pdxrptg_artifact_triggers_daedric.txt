@@ -400,17 +400,32 @@ expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artif
 			# Audax Validator "." Ignore_NEXT
 			is_immortal = yes
 		}
-		has_offmap_currency = { offmap = ROOT value = 7500 }
+		has_offmap_currency = {
+			# ROOT is not recognised as a valid offmap_power by the Validator v1.38.3 - MANY false positives
+			# Audax Validator "." Ignore_NEXT
+			offmap = ROOT
+			value = 7500
+		}
 	}
 	trigger_else_if = {
 		limit = {
 			# Audax Validator "." Ignore_NEXT
 			is_long_lived = yes
 		}
-		has_offmap_currency = { offmap = ROOT value = 5000 }
+		has_offmap_currency = {
+			# ROOT is not recognised as a valid offmap_power by the Validator v1.38.3 - MANY false positives
+			# Audax Validator "." Ignore_NEXT
+			offmap = ROOT
+			value = 5000
+		}
 	}
 	trigger_else = {
-		has_offmap_currency = { offmap = ROOT value = 2500 }
+		has_offmap_currency = {
+			# ROOT is not recognised as a valid offmap_power by the Validator v1.38.3 - MANY false positives
+			# Audax Validator "." Ignore_NEXT
+			offmap = ROOT
+			value = 2500
+		}
 	}
 }
 
@@ -420,17 +435,32 @@ expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_da
 			# Audax Validator "." Ignore_NEXT
 			is_immortal = yes
 		}
-		has_offmap_currency = { offmap = ROOT value = 15000 }
+		has_offmap_currency = {
+			# ROOT is not recognised as a valid offmap_power by the Validator v1.38.3 - MANY false positives
+			# Audax Validator "." Ignore_NEXT
+			offmap = ROOT
+			value = 15000
+		}
 	}
 	trigger_else_if = {
 		limit = {
 			# Audax Validator "." Ignore_NEXT
 			is_long_lived = yes
 		}
-		has_offmap_currency = { offmap = ROOT value = 10000 }
+		has_offmap_currency = {
+			# ROOT is not recognised as a valid offmap_power by the Validator v1.38.3 - MANY false positives
+			# Audax Validator "." Ignore_NEXT
+			offmap = ROOT
+			value = 10000
+		}
 	}
 	trigger_else = {
-		has_offmap_currency = { offmap = ROOT value = 5000 }
+		has_offmap_currency = {
+			# ROOT is not recognised as a valid offmap_power by the Validator v1.38.3 - MANY false positives
+			# Audax Validator "." Ignore_NEXT
+			offmap = ROOT
+			value = 5000
+		}
 	}
 }
 
