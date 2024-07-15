@@ -40,6 +40,17 @@ expd_pdxrptg_this_character_has_artifact_equipped_ring_of_erudite = {
 	}
 }
 
+expd_pdxrptg_this_character_has_artifact_equipped_ring_of_happiness = {
+	any_artifact = {
+		# Audax Validator "." Ignore_NEXT
+		artifact_type = ring_happiness
+		OR = {
+			is_artifact_equipped = yes
+			PREV = { ai = yes }
+		}
+	}
+}
+
 expd_pdxrptg_this_character_has_artifact_equipped_weapon_forkh = {
 	any_artifact = {
 		# Audax Validator "." Ignore_NEXT
