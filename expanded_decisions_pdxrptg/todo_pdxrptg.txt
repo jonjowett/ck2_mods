@@ -21,8 +21,8 @@ ek changes
     - acquisition of commander traits seems broken - characters can only gain 1 trait (if they start with none), but chars can spawn with 3-4 traits
     - smithing level (tier 2) and smithing section (tier 3) are the wrong way round in the localisation (level > section)
     X check the coding of the "ask to leave court" decision (can't send away distant descendants?!)
-       - EK version of decision is using what looks like an old can_be_asked_to_leave_court_trigger
-       - Add new separate decision, much the same as the other, except it allows different people to be sent away
+    X  - EK version of decision is using what looks like an old can_be_asked_to_leave_court_trigger
+    X  - Add new separate decision, much the same as the other, except it allows different people to be sent away
     - event description for ekartnote.28 is missing the province name (malformed brackets?)
     - add proper tooltips for when a bloodline is disabled with "no posessed bloodline:"
     - change the MTTH-1-day event which removes magic commander traits to something more performant.
@@ -37,7 +37,8 @@ ek changes
     - alert/event for magickal effect expiry (hard!)
     X alert for magicka full (eg. via new intrigue decision, only allowed when magicka is full, which opens the spellbook, and which can be set to high prio by the player separately to the normal "open spellbook" decision)
     - alert/event for offmap decisions which are available and would be highly beneficial
-    - elder council vote to join result event (eldercouncil.751) should have candidate portrait in top right (and high chancellor in option)
+    X elder council vote to join result event (eldercouncil.751) should have candidate portrait in top right (and high chancellor in option)
+       - need to deal with the issue where >10 voters in an event option causes all portraits to disappear
     - event which gives browsable list of elder council members (because browsing the member list switches the screen and is highly annoying)
     - improve the "skillsimprove" tooltip (for veterancy increase due to battle events)
  - improvement features (minor):
