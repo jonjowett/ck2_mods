@@ -232,8 +232,12 @@ warlord_conquest = {
 			
 			# Target is a Province being attacked by either Tamriel or the official pretender to Tamriel
 			AND = {
-				# Audax Validator "." Ignore_NEXT
-				is_imperial_province = yes
+				OR = {
+					# Audax Validator "." Ignore_NEXT
+					is_imperial_province = yes
+					# Audax Validator "." Ignore_NEXT
+					title = k_vvardenfell # Don't know why Vvardenfell is not considered an imperial province - seems like a bug
+				}
 				OR = {
 					# Audax Validator "." Ignore_NEXT
 					e_tamriel          = { holder_scope = { character = ROOT } }
