@@ -2,7 +2,16 @@ csh_artifact_1 = {
 	customizer = no
 	random = no
 	is_visible = {
-		FROM = { is_alive = yes }
+		OR = {
+			ROOT = { ai = yes }
+			FROM = {
+				is_alive = yes
+				any_artifact = {
+					quality == 1
+					csh_this_artifact_is_not_filtered_out_by_root = yes
+				}
+			}
+		}
 	}
 }
 
@@ -10,7 +19,16 @@ csh_artifact_2 = {
 	customizer = no
 	random = no
 	is_visible = {
-		FROM = { is_alive = yes }
+		OR = {
+			ROOT = { ai = yes }
+			FROM = {
+				is_alive = yes
+				any_artifact = {
+					quality == 2
+					csh_this_artifact_is_not_filtered_out_by_root = yes
+				}
+			}
+		}
 	}
 }
 
@@ -18,7 +36,16 @@ csh_artifact_3 = {
 	customizer = no
 	random = no
 	is_visible = {
-		FROM = { is_alive = yes }
+		OR = {
+			ROOT = { ai = yes }
+			FROM = {
+				is_alive = yes
+				any_artifact = {
+					quality == 3
+					csh_this_artifact_is_not_filtered_out_by_root = yes
+				}
+			}
+		}
 	}
 }
 
@@ -26,7 +53,16 @@ csh_artifact_4 = {
 	customizer = no
 	random = no
 	is_visible = {
-		FROM = { is_alive = yes }
+		OR = {
+			ROOT = { ai = yes }
+			FROM = {
+				is_alive = yes
+				any_artifact = {
+					quality == 4
+					csh_this_artifact_is_not_filtered_out_by_root = yes
+				}
+			}
+		}
 	}
 }
 
@@ -34,7 +70,16 @@ csh_artifact_5 = {
 	customizer = no
 	random = no
 	is_visible = {
-		FROM = { is_alive = yes }
+		OR = {
+			ROOT = { ai = yes }
+			FROM = {
+				is_alive = yes
+				any_artifact = {
+					quality == 5
+					csh_this_artifact_is_not_filtered_out_by_root = yes
+				}
+			}
+		}
 	}
 }
 
@@ -42,7 +87,16 @@ csh_artifact_6 = {
 	customizer = no
 	random = no
 	is_visible = {
-		FROM = { is_alive = yes }
+		OR = {
+			ROOT = { ai = yes }
+			FROM = {
+				is_alive = yes
+				any_artifact = {
+					quality == 6
+					csh_this_artifact_is_not_filtered_out_by_root = yes
+				}
+			}
+		}
 	}
 }
 
@@ -50,7 +104,16 @@ csh_artifact_7 = {
 	customizer = no
 	random = no
 	is_visible = {
-		FROM = { is_alive = yes }
+		OR = {
+			ROOT = { ai = yes }
+			FROM = {
+				is_alive = yes
+				any_artifact = {
+					quality == 7
+					csh_this_artifact_is_not_filtered_out_by_root = yes
+				}
+			}
+		}
 	}
 }
 
@@ -58,7 +121,16 @@ csh_artifact_8 = {
 	customizer = no
 	random = no
 	is_visible = {
-		FROM = { is_alive = yes }
+		OR = {
+			ROOT = { ai = yes }
+			FROM = {
+				is_alive = yes
+				any_artifact = {
+					quality == 8
+					csh_this_artifact_is_not_filtered_out_by_root = yes
+				}
+			}
+		}
 	}
 }
 
@@ -66,7 +138,16 @@ csh_artifact_9 = {
 	customizer = no
 	random = no
 	is_visible = {
-		FROM = { is_alive = yes }
+		OR = {
+			ROOT = { ai = yes }
+			FROM = {
+				is_alive = yes
+				any_artifact = {
+					quality >= 9
+					csh_this_artifact_is_not_filtered_out_by_root = yes
+				}
+			}
+		}
 	}
 }
 

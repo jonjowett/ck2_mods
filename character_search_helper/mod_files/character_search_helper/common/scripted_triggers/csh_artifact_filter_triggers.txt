@@ -1,0 +1,34 @@
+csh_this_artifact_is_not_filtered_out_by_root = {
+	OR = {
+		ROOT = { NOT = { has_character_flag = csh_artifact_filter_only_unowned } }
+		NOT = { artifact_type_owned_by = ROOT }
+	}
+	OR = {
+		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_armor } }
+		NOT = { has_artifact_flag = armor } 
+	}
+	OR = {
+		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_books } }
+		NOR = { has_artifact_flag = book has_artifact_flag = fake_book has_artifact_flag = antiquity_book }
+	}
+	OR = {
+		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_clutter } }
+		NOT = { has_artifact_flag = VIET_clutter_flag } 
+	}
+	OR = {
+		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_mounts_or_pets } }
+		NOR = { has_artifact_flag = mount has_artifact_flag = pet }
+	}
+	OR = {
+		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_necklaces } }
+		NOR = { has_artifact_flag = necklace has_artifact_flag = amulet }
+	}
+	OR = {
+		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_rings } }
+		NOT = { has_artifact_flag = ring } 
+	}
+	OR = {
+		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_weapons } }
+		NOT = { has_artifact_flag = combat_weapon } 
+	}
+}
