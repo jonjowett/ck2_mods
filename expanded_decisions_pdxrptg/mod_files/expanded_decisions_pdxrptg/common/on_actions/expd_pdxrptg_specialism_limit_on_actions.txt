@@ -1,0 +1,13 @@
+on_character_society_rank_up = {
+	events = {
+		ExpdPdxRptgSpecialismLimit.100 # Give +1 specialism to Grandmasters
+	}
+}
+
+on_yearly_pulse = {
+	events = {
+		ExpdPdxRptgSpecialismLimit.100 # Give +1 specialism to Grandmasters (in case they missed the rank-up event)
+		ExpdPdxRptgSpecialismLimit.200 # Notify Dragonborn that they have +1 specialism
+		ExpdPdxRptgSpecialismLimit.300 # Notify characters with legendary education that they have +1 specialism
+	}
+}
