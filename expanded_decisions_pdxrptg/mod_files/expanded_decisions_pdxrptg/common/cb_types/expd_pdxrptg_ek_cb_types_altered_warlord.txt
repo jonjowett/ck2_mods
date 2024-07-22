@@ -28,16 +28,22 @@ warlord_conquest = {
 	
 	can_use = {
 		ROOT = {
-			#CB Specific Traits and things
+			
+			# Must have warlord trait or ambition
 			OR = {
 				# Audax Validator "." Ignore_NEXT
 				trait = warlord
 				# Audax Validator "." Ignore_NEXT
 				has_ambition = obj_warlord
 			}
+			
+			# Cannot be incapable
 			NOT = { trait = incapable }
-			NOT = { same_realm = FROM }	
-			#Undead Handling - not as undead or vs undead
+			
+			# Cannot target same realm (obviously!)
+			NOT = { same_realm = FROM }
+			
+			# Undead Handling - cannot use this CB as undead or vs undead
 			NOR = {
 				# Audax Validator "." Ignore_NEXT
 				trait = undead
@@ -46,7 +52,8 @@ warlord_conquest = {
 					trait = undead
 				}
 			}
-			# Riddlethar cannot warlord vs the Mane
+			
+			# Riddlethar characters cannot use warlord CB vs the Mane
 			NAND = {
 				FROM = {
 					# Audax Validator "." Ignore_NEXT
@@ -57,7 +64,8 @@ warlord_conquest = {
 					religion = riddlethar
 				}
 			}
-			# Almsivi cannot warlord against their religious head, and he can't warlord them
+			
+			# Almsivi cannot use warlord CB against their religious head, and he can't warlord them
 			NAND = {
 				ROOT = {
 					# Audax Validator "." Ignore_NEXT
@@ -78,30 +86,24 @@ warlord_conquest = {
 					}
 				}
 			}
-			#Great House Titles
-			OR = {
+			
+			# Members of Dunmer Great Houses cannot use warlord CB vs Grandmasters of Great Houses
+			NAND = {
 				ROOT = {
 					# Audax Validator "." Ignore_NEXT
-					has_house_trait = no
+					has_house_trait = yes
 				}
 				FROM = {
 					# Audax Validator "." Ignore_NEXT
-					is_great_house_grandmaster = no
+					is_great_house_grandmaster = yes
 				}
 			}
+			
 		}
 	}
 
 	on_add = {
 		hidden_tooltip = { fire_haruspicy_event_effect = yes }
-		# CB:CHINA
-		# if = {
-		# 	limit = { defender = { is_offmap_governor = offmap_china } }
-		# 	attacker = {  
-		# 		sound_effect = china_angered_emperor
-		# 		detract_grace_super_huge_effect = yes 
-		# 	}
-		# }
 	}
 	
 	can_use_title = {
@@ -113,16 +115,24 @@ warlord_conquest = {
 		# Also, changed all is_liege_or_above to is_vassal_or_below_of, in line with recommended modding conventions.
 		# General code cleanup & added a few more explanations.
 		
-		# The attacker needs at least one county in the target kingdom, or a border, or be only one sea zone away from one of your counties
+		# The attacker is "close enough" to the targeted kingdom
+		#  --- Owns at least one county in the target kingdom, or has a border, or is at most two sea zones away
 		any_de_jure_vassal_title = {
+			
 			tier = COUNT
+			
 			OR = {
+				
+				# Any county that is de jure part of the kingdom is owned by the attacker
 				holder_scope = {
 					OR = {
 						character = ROOT
 						is_vassal_or_below_of = ROOT
 					}
 				}
+				
+				# Attacker owns a province adjacent to the kingdom, or that is at most 2 sea zones away
+				# (2 sea zones is consistent with the "inquisition"/holy war CB - ie. allows High Rock vs Yokuda & Valenwood vs Pyandonea)
 				location = {
 					any_neighbor_province = {
 						OR = {
@@ -149,6 +159,22 @@ warlord_conquest = {
 									}
 								}
 							}
+							AND = {
+								is_land = no
+								any_neighbor_province = {
+									is_land = no
+									any_neighbor_province = {
+										is_land   = yes # Technically superfluous with has_owner = yes, but makes it clearer
+										has_owner = yes
+										owner = {
+											OR = {
+												character = ROOT
+												is_vassal_or_below_of = ROOT
+											}
+										}
+									}
+								}
+							}
 						}
 					}
 				}
@@ -160,7 +186,9 @@ warlord_conquest = {
 			NOR = {
 				holder_scope = { character = FROM }
 				empire = { holder_scope = { character = FROM } }
+				
 				# Special Case - Great Houses and the Tribunal Temple within Morrowind
+				#  --- They are treated as if they have de jure kingdoms, ie. they can't be targeted under normal circumstances.
 				AND = {
 					OR = {
 						# Audax Validator "." Ignore_NEXT
@@ -168,8 +196,10 @@ warlord_conquest = {
 						# Audax Validator "." Ignore_NEXT
 						title = k_vvardenfell
 					}
+					
 					FROM = {
 						OR = {
+							
 							# Audax Validator "." Ignore_NEXT
 							has_landed_title = k_almsivi
 							# Audax Validator "." Ignore_NEXT
