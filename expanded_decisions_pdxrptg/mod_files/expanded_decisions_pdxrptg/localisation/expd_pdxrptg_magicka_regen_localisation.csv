@@ -1,0 +1,90 @@
+# This file contains localisation strings required for the custom_localisation code
+#      which provides a detailed breakdown of the magicka regen calculation
+#
+# These strings are eventually concatenated, so always include a "\n" at the start.
+#
+#
+#
+# Base Value: It's all stored in character variables, so it's easily accessed
+#
+expd_pdxrptg_magicka_regen_info_base_value_tt;\n\nBase Magicka Regeneration Rate:\n - From Learning: §Y[Root.magicka_regen_rate_from_learning.GetValue]§!\n - From Artifacts: §Y[Root.magicka_regen_rate_from_artifacts.GetValue]§!\n - From Potions: §Y[Root.magicka_regen_rate_from_potions.GetValue]§!\nTotal: §Y[Root.magicka_regen_rate_base.GetValue]§!;;;;;;;;;;;;;x
+#
+#
+#
+# Multiplicative Values: Good Effects
+#  --- Show missing good effects (unless they are super-rare)
+#
+expd_pdxrptg_magicka_regen_info_multipliers_good_tt;\n\nMultipliers to Base Magicka Regeneration Rate:[expd_pdxrptg_magicka_regen_info_multipliers_erudite][expd_pdxrptg_magicka_regen_info_multipliers_akatosh][expd_pdxrptg_magicka_regen_info_multipliers_potion][expd_pdxrptg_magicka_regen_info_multipliers_dragonborn][expd_pdxrptg_magicka_regen_info_multipliers_lich][expd_pdxrptg_magicka_regen_info_multipliers_mane][expd_pdxrptg_magicka_regen_info_multipliers_smart][expd_pdxrptg_magicka_regen_info_multipliers_mage][expd_pdxrptg_magicka_regen_info_multipliers_spellcaster];;;;;;;;;;;;;x
+#
+expd_pdxrptg_magicka_regen_info_good_multiplier_ring_of_erudite_y_tt;\n(§G*§!) §YRing of the Erudite§! is equipped: §G1.250§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_ring_of_erudite_n_tt;\n(§RX§!) §YRing of the Erudite§! is equipped §g(potential multiplier: 1.250)§!;;;;;;;;;;;;;x
+#
+expd_pdxrptg_magicka_regen_info_good_multiplier_amulet_of_akatosh_y_tt;\n(§G*§!) §YAmulet of Akatosh§! is equipped: §G1.250§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_amulet_of_akatosh_n_tt;\n(§RX§!) §YAmulet of Akatosh§! is equipped §g(potential multiplier: 1.250)§!;;;;;;;;;;;;;x
+#
+expd_pdxrptg_magicka_regen_info_good_multiplier_potion_of_magicka_regeneration_y_tt;\n(§G*§!) Has imbibed §YPotion of Magicka Regeneration§!: §G1.250§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_potion_of_magicka_regeneration_n_tt;\n(§RX§!) Has imbibed §YPotion of Magicka Regeneration§! §g(potential multiplier: 1.250)§!;;;;;;;;;;;;;x
+#
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_dragonborn_tt;\n(§G*§!) Is §YDragonborn§!: §G1.333§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_dragonborn_descendant_tt;\n(§G*§!) Is §YDragon-Blooded§!: §G1.176§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_dragonborn_n_tt;\n(§RX§!) Is §YDragonborn§! §g(potential multiplier: 1.333)§! or §YDragonblooded§! §g(potential multiplier: 1.176)§!;;;;;;;;;;;;;x
+#
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_lich_tt;\n(§G*§!) Is §YLich§!: §G1.111§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mane_tt;\n(§G*§!) Is §YMane§!: §G1.111§!;;;;;;;;;;;;;x
+#
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_smart_y_tt;\n(§G*§!) Is §YSmart§!: §G1.250§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_smart_n_tt;\n(§RX§!) Is §YSmart§! §g(potential multiplier: 1.250)§!;;;;;;;;;;;;;x
+#
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_1_tt;\n(§G*§!) Is §YNovice Mage§!: §G1.053§! §g(improved education increases this value)§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_2_tt;\n(§G*§!) Is §YJourneyman Mage§!: §G1.111§! §g(improved education increases this value)§!!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_3_tt;\n(§G*§!) Is §YExperienced Mage§!: §G1.176§! §g(improved education increases this value)§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_4_tt;\n(§G*§!) Is §YMaster Mage§!: §G1.250§! §g(improved education increases this value)§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_5_tt;\n(§G*§!) Is §YLegendary Mage§!: §G1.429§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_n_tt;\n(§RX§!) Is a §YMage§! §g(better education gives a larger modifier)§!;;;;;;;;;;;;;x
+#
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_spellcaster_1_tt;\n(§G*§!) Has a §YTier-1 Spellcaster Specialism§!: §G1.053§! §g(higher tier increases this value)§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_spellcaster_2_tt;\n(§G*§!) Has a §YTier-2 Spellcaster Specialism§!: §G1.111§! §g(higher tier increases this value)§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_spellcaster_3_tt;\n(§G*§!) Has a §YTier-3 Spellcaster Specialism§!: §G1.250§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_good_multiplier_trait_spellcaster_n_tt;\n(§RX§!) Has a §YSpellcaster Specialism§! §g(higher tier gives a larger modifier)§!;;;;;;;;;;;;;x
+#
+#
+#
+# Multiplicative Values: Bad Effects
+#  --- Show only those bad effects that are actually present
+#
+expd_pdxrptg_magicka_regen_info_multipliers_bad_tt;[expd_pdxrptg_magicka_regen_info_multipliers_dumb][expd_pdxrptg_magicka_regen_info_multipliers_mental_disorder][expd_pdxrptg_magicka_regen_info_multipliers_skooma_addiction][expd_pdxrptg_magicka_regen_info_multipliers_disease][expd_pdxrptg_magicka_regen_info_multipliers_disability];;;;;;;;;;;;;x
+#
+expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_dumb_tt;\n(§G*§!) Is §YDumb§!: §R0.833§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_mental_disorder_tt;\n(§G*§!) Has a §YMental Disorder§!: §R0.870§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_skooma_addiction_tt;\n(§G*§!) Has §YSkooma Addiction§!: §R0.870§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_chondriasis_tt;\n(§G*§!) Has §YChondriasis§!: §R0.667§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_disease_tt;\n(§G*§!) Has a §YDisease§!: §R0.800§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_disability_severe_tt;\n(§G*§!) Has a §YSevere Disability§!: §R0.800§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_disability_medium_tt;\n(§G*§!) Has a §YMedium Disability§!: §R0.870§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_disability_minor_tt;\n(§G*§!) Has a §YMinor Disability§!: §R0.952§!;;;;;;;;;;;;;x
+#
+#
+#
+# Final Stuff
+#
+expd_pdxrptg_magicka_regen_info_multipliers_total_tt;\nTotal: §Y[Root.magicka_regen_rate_multiplier.GetValue]§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_regen_info_disclaimer_tt;\n§g(Figures in §Yyellow§g are taken from the actual calculation and should always be correct. Figures in any other colour are hardcoded for the purpose of this tooltip - please inform the §YED:PRT§g developer (NOT the developer of the main mod) if there appear to be any inconsistencies.)§!;;;;;;;;;;;;;x
+#
+#
+#
+#
+#
+# ==========================
+#
+#
+#
+#
+#
+# Max magicka calc
+expd_pdxrptg_magicka_max_info_learning_tt;\n(§G*§!) From Learning: §Y[Root.magicka_max.GetValue]§! §g(2 per Learning)§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_max_info_julianos_y_tt;\n(§G*§!) §YAmulet of Julianos§! is equipped: §G20§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_max_info_julianos_n_tt;\n(§RX§!) §YAmulet of Julianos§! is equipped §g(potential value: 20)§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_max_info_potion_y_tt;\n(§G*§!) Has imbibed §YPotion of Fortify Magicka§!: §G20§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_max_info_potion_n_tt;\n(§RX§!) Has imbibed §YPotion of Fortify Magicka§! §g(potential value: 20)§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_max_info_forkh_tt;\n(§G*§!) §YFork of Horripilation§! is equipped: §RMaximum Magicka is halved!§!;;;;;;;;;;;;;x
+expd_pdxrptg_magicka_max_info_total_tt;\nTotal: §Y[Root.magicka_max.GetValue]§!;;;;;;;;;;;;;x
