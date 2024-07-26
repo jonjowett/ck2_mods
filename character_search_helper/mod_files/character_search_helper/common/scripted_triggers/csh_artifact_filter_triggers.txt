@@ -5,30 +5,80 @@ csh_this_artifact_is_not_filtered_out_by_root = {
 	}
 	OR = {
 		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_armor } }
-		NOT = { has_artifact_flag = armor } 
+		csh_this_artifact_is_armor = no
 	}
 	OR = {
 		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_books } }
-		NOR = { has_artifact_flag = book has_artifact_flag = fake_book has_artifact_flag = antiquity_book }
+		csh_this_artifact_is_book = no
 	}
 	OR = {
 		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_clutter } }
-		NOT = { has_artifact_flag = VIET_clutter_flag } 
+		csh_this_artifact_is_clutter = no
 	}
 	OR = {
 		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_mounts_or_pets } }
-		NOR = { has_artifact_flag = mount has_artifact_flag = pet }
+		csh_this_artifact_is_mount_or_pet = no
 	}
 	OR = {
 		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_necklaces } }
-		NOR = { has_artifact_flag = necklace has_artifact_flag = amulet }
+		csh_this_artifact_is_necklace = no
 	}
 	OR = {
 		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_rings } }
-		NOT = { has_artifact_flag = ring } 
+		csh_this_artifact_is_ring = no
 	}
 	OR = {
 		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_weapons } }
-		NOT = { has_artifact_flag = combat_weapon } 
+		csh_this_artifact_is_weapon = no
 	}
+	OR = {
+		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_other } }
+		# If you have the "no other" filter turned on then ONLY properly-classified objects should be shown
+		csh_this_artifact_is_armor = yes
+		csh_this_artifact_is_book = yes
+		csh_this_artifact_is_clutter = yes
+		csh_this_artifact_is_mount_or_pet = yes
+		csh_this_artifact_is_necklace = yes
+		csh_this_artifact_is_ring = yes
+		csh_this_artifact_is_weapon = yes
+	}
+}
+
+csh_this_artifact_is_armor = {
+	has_artifact_flag = armor
+}
+
+csh_this_artifact_is_book = {
+	OR = {
+		has_artifact_flag = book
+		has_artifact_flag = fake_book
+		has_artifact_flag = antiquity_book
+		has_artifact_flag = map
+	}
+}
+
+csh_this_artifact_is_clutter = {
+	has_artifact_flag = VIET_clutter_flag
+}
+
+csh_this_artifact_is_mount_or_pet = {
+	OR = {
+		has_artifact_flag = mount
+		has_artifact_flag = pet
+	}
+}
+
+csh_this_artifact_is_necklace = {
+	OR = {
+		has_artifact_flag = necklace
+		has_artifact_flag = amulet
+	}
+}
+
+csh_this_artifact_is_ring = {
+	has_artifact_flag = ring
+}
+
+csh_this_artifact_is_weapon = {
+	has_artifact_flag = combat_weapon
 }

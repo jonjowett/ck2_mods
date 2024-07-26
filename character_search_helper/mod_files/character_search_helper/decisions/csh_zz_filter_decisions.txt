@@ -40,6 +40,93 @@ decisions = {
 	
 	
 	
+	# Another "master" decision: Toggle all filters on/off
+	
+	csh_artifact_filter_toggle_all = {
+		ai = no
+		potential = {
+			NOT = { has_global_flag = csh_updates_disabled }
+			csh_another_mod_wants_to_suppress_this_decision = no
+			has_character_flag = csh_show_artifact_filters
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				clr_character_flag = csh_artifact_filter_only_unowned
+				clr_character_flag = csh_artifact_filter_no_armor
+				clr_character_flag = csh_artifact_filter_no_books
+				clr_character_flag = csh_artifact_filter_no_clutter
+				clr_character_flag = csh_artifact_filter_no_mounts_or_pets
+				clr_character_flag = csh_artifact_filter_no_rings
+				clr_character_flag = csh_artifact_filter_no_necklaces
+				clr_character_flag = csh_artifact_filter_no_weapons
+				clr_character_flag = csh_artifact_filter_no_other
+			}
+			if = {
+				limit = {
+					OR = {
+						has_character_flag = csh_artifact_filter_only_unowned
+						has_character_flag = csh_artifact_filter_no_armor
+						has_character_flag = csh_artifact_filter_no_books
+						has_character_flag = csh_artifact_filter_no_clutter
+						has_character_flag = csh_artifact_filter_no_mounts_or_pets
+						has_character_flag = csh_artifact_filter_no_rings
+						has_character_flag = csh_artifact_filter_no_necklaces
+						has_character_flag = csh_artifact_filter_no_weapons
+						has_character_flag = csh_artifact_filter_no_other
+					}
+				}
+				custom_tooltip = { text = csh_artifact_filter_all_filters_will_be_disabled_tt }
+			}
+			else = {
+				custom_tooltip = {
+					text = csh_artifact_filter_all_filters_will_be_enabled_tt
+					
+					# The "only unowned" and "no other" decisions are always available,
+					#    so we should always set them
+					set_character_flag = csh_artifact_filter_only_unowned
+					set_character_flag = csh_artifact_filter_no_other
+					
+					# All other filters are only available (ie. only set by this decision)
+					#    if the user has at least one of the relevant type of artifact
+					if = {
+						limit = { any_artifact = { csh_this_artifact_is_armor = yes } }
+						set_character_flag = csh_artifact_filter_no_armor
+					}
+					if = {
+						limit = { any_artifact = { csh_this_artifact_is_book = yes } }
+						set_character_flag = csh_artifact_filter_no_books
+					}
+					if = {
+						limit = { any_artifact = { csh_this_artifact_is_clutter = yes } }
+						set_character_flag = csh_artifact_filter_no_clutter
+					}
+					if = {
+						limit = { any_artifact = { csh_this_artifact_is_mount_or_pet = yes } }
+						set_character_flag = csh_artifact_filter_no_mounts_or_pets
+					}
+					if = {
+						limit = { any_artifact = { csh_this_artifact_is_necklace = yes } }
+						set_character_flag = csh_artifact_filter_no_necklaces
+					}
+					if = {
+						limit = { any_artifact = { csh_this_artifact_is_ring = yes } }
+						set_character_flag = csh_artifact_filter_no_rings
+					}
+					if = {
+						limit = { any_artifact = { csh_this_artifact_is_weapon = yes } }
+						set_character_flag = csh_artifact_filter_no_weapons
+					}
+					
+				}
+			}
+		}
+	}
+	
+	
+	
+	
+	
 	# Special filter: Only unowned
 	
 	csh_artifact_filter_toggle_only_unowned = {
@@ -74,6 +161,9 @@ decisions = {
 	
 	# Normal exclusionary filters, based on artifact flags
 	
+	# As a general rule, these decisions are ONLY visible if the character has at least one of the relevant type of artifact
+	#  --- This means we can offer full support for all mods, with very little additional effort!
+	
 	csh_artifact_filter_toggle_no_armor = {
 		ai = no
 		potential = {
@@ -81,7 +171,7 @@ decisions = {
 			csh_another_mod_wants_to_suppress_this_decision = no
 			has_character_flag = csh_show_artifact_filters
 			OR = {
-				any_artifact = { has_artifact_flag = armor }
+				any_artifact = { csh_this_artifact_is_armor = yes }
 				has_character_flag = csh_artifact_filter_no_armor
 			}
 		}
@@ -113,13 +203,7 @@ decisions = {
 			csh_another_mod_wants_to_suppress_this_decision = no
 			has_character_flag = csh_show_artifact_filters
 			OR = {
-				any_artifact = {
-					OR = {
-						has_artifact_flag = book
-						has_artifact_flag = fake_book
-						has_artifact_flag = antiquity_book
-					}
-				}
+				any_artifact = { csh_this_artifact_is_book = yes }
 				has_character_flag = csh_artifact_filter_no_books
 			}
 		}
@@ -151,7 +235,7 @@ decisions = {
 			csh_another_mod_wants_to_suppress_this_decision = no
 			has_character_flag = csh_show_artifact_filters
 			OR = {
-				any_artifact = { has_artifact_flag = VIET_clutter_flag }
+				any_artifact = { csh_this_artifact_is_clutter = yes }
 				has_character_flag = csh_artifact_filter_no_clutter
 			}
 		}
@@ -181,12 +265,7 @@ decisions = {
 			csh_another_mod_wants_to_suppress_this_decision = no
 			has_character_flag = csh_show_artifact_filters
 			OR = {
-				any_artifact = {
-					OR = {
-						has_artifact_flag = mount
-						has_artifact_flag = pet
-					}
-				}
+				any_artifact = { csh_this_artifact_is_mount_or_pet = yes }
 				has_character_flag = csh_artifact_filter_no_mounts_or_pets
 			}
 		}
@@ -218,8 +297,8 @@ decisions = {
 			csh_another_mod_wants_to_suppress_this_decision = no
 			has_character_flag = csh_show_artifact_filters
 			OR = {
-				any_artifact = { OR = { has_artifact_flag = necklace has_artifact_flag = amulet } }
-				has_character_flag = csh_artifact_filter_no_rings
+				any_artifact = { csh_this_artifact_is_necklace = yes }
+				has_character_flag = csh_artifact_filter_no_necklaces
 			}
 		}
 		allow = { always = yes }
@@ -250,7 +329,7 @@ decisions = {
 			csh_another_mod_wants_to_suppress_this_decision = no
 			has_character_flag = csh_show_artifact_filters
 			OR = {
-				any_artifact = { has_artifact_flag = ring }
+				any_artifact = { csh_this_artifact_is_ring = yes }
 				has_character_flag = csh_artifact_filter_no_rings
 			}
 		}
@@ -282,7 +361,7 @@ decisions = {
 			csh_another_mod_wants_to_suppress_this_decision = no
 			has_character_flag = csh_show_artifact_filters
 			OR = {
-				any_artifact = { has_artifact_flag = combat_weapon }
+				any_artifact = { csh_this_artifact_is_weapon = yes }
 				has_character_flag = csh_artifact_filter_no_weapons
 			}
 		}
@@ -299,6 +378,34 @@ decisions = {
 				custom_tooltip = {
 					text = csh_artifact_filter_no_weapons_will_be_enabled_tt
 					set_character_flag = csh_artifact_filter_no_weapons
+				}
+			}
+			custom_tooltip = { text = csh_artifact_filter_notes_tt }
+		}
+	}
+	
+	
+	
+	csh_artifact_filter_toggle_no_other = {
+		ai = no
+		potential = {
+			NOT = { has_global_flag = csh_updates_disabled }
+			csh_another_mod_wants_to_suppress_this_decision = no
+			has_character_flag = csh_show_artifact_filters
+		}
+		allow = { always = yes }
+		effect = {
+			if = {
+				limit = { has_character_flag = csh_artifact_filter_no_other }
+				custom_tooltip = {
+					text = csh_artifact_filter_no_other_will_be_disabled_tt
+					clr_character_flag = csh_artifact_filter_no_other
+				}
+			}
+			else = {
+				custom_tooltip = {
+					text = csh_artifact_filter_no_other_will_be_enabled_tt
+					set_character_flag = csh_artifact_filter_no_other
 				}
 			}
 			custom_tooltip = { text = csh_artifact_filter_notes_tt }
