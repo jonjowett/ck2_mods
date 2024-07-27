@@ -51,17 +51,6 @@ decisions = {
 		}
 		allow = { always = yes }
 		effect = {
-			hidden_tooltip = {
-				clr_character_flag = csh_artifact_filter_only_unowned
-				clr_character_flag = csh_artifact_filter_no_armor
-				clr_character_flag = csh_artifact_filter_no_books
-				clr_character_flag = csh_artifact_filter_no_clutter
-				clr_character_flag = csh_artifact_filter_no_mounts_or_pets
-				clr_character_flag = csh_artifact_filter_no_rings
-				clr_character_flag = csh_artifact_filter_no_necklaces
-				clr_character_flag = csh_artifact_filter_no_weapons
-				clr_character_flag = csh_artifact_filter_no_other
-			}
 			if = {
 				limit = {
 					OR = {
@@ -76,11 +65,33 @@ decisions = {
 						has_character_flag = csh_artifact_filter_no_other
 					}
 				}
-				custom_tooltip = { text = csh_artifact_filter_all_filters_will_be_disabled_tt }
+				custom_tooltip = {
+					text = csh_artifact_filter_all_filters_will_be_disabled_tt
+					clr_character_flag = csh_artifact_filter_only_unowned
+					clr_character_flag = csh_artifact_filter_no_armor
+					clr_character_flag = csh_artifact_filter_no_books
+					clr_character_flag = csh_artifact_filter_no_clutter
+					clr_character_flag = csh_artifact_filter_no_mounts_or_pets
+					clr_character_flag = csh_artifact_filter_no_rings
+					clr_character_flag = csh_artifact_filter_no_necklaces
+					clr_character_flag = csh_artifact_filter_no_weapons
+					clr_character_flag = csh_artifact_filter_no_other
+				}
 			}
 			else = {
 				custom_tooltip = {
 					text = csh_artifact_filter_all_filters_will_be_enabled_tt
+					
+					# For safety, clear all flags before starting to set them again
+					clr_character_flag = csh_artifact_filter_only_unowned
+					clr_character_flag = csh_artifact_filter_no_armor
+					clr_character_flag = csh_artifact_filter_no_books
+					clr_character_flag = csh_artifact_filter_no_clutter
+					clr_character_flag = csh_artifact_filter_no_mounts_or_pets
+					clr_character_flag = csh_artifact_filter_no_rings
+					clr_character_flag = csh_artifact_filter_no_necklaces
+					clr_character_flag = csh_artifact_filter_no_weapons
+					clr_character_flag = csh_artifact_filter_no_other
 					
 					# The "only unowned" and "no other" decisions are always available,
 					#    so we should always set them
