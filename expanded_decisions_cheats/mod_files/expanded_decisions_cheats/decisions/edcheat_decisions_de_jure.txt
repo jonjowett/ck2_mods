@@ -1,29 +1,66 @@
 title_decisions = {
 	
-	edcheat_move_de_jure_duchy = {
+	edcheat_move_de_jure = {
 		filter = realm_owned
 		ai_target_filter = none
 		ai = no
 		
 		potential = {
 			
-			# Only duke-tier titles
-			tier = DUKE
+			multiplayer = no
 			
-			# De facto liege is not de jure liege
-			any_defacto_liege = {
-				tier = KING
-				NOT = {
-					any_de_jure_vassal_title = {
+			has_holder = yes
+			
+			OR = {
+				
+				# Move county to new duchy
+				AND = {
+					tier = COUNT
+					# De facto liege is not de jure liege
+					any_defacto_liege = {
 						tier = DUKE
-						title = PREVPREV
+						NOT = {
+							any_de_jure_vassal_title = {
+								tier = COUNT
+								title = PREVPREV
+							}
+						}
 					}
 				}
-			}
-			
-			# No titular or other weird duchies
-			any_de_jure_vassal_title = {
-				tier = COUNT
+				
+				# Move duchy to new kingdom
+				AND = {
+					tier = DUKE
+					# De facto liege is not de jure liege
+					any_defacto_liege = {
+						tier = KING
+						NOT = {
+							any_de_jure_vassal_title = {
+								tier = DUKE
+								title = PREVPREV
+							}
+						}
+					}
+					# No titular or other weird duchies
+					any_de_jure_vassal_title = { tier = COUNT }
+				}
+				
+				# Move kingdom to new empire
+				AND = {
+					tier = KING
+					# De facto liege is not de jure liege
+					any_defacto_liege = {
+						tier = EMPEROR
+						NOT = {
+							any_de_jure_vassal_title = {
+								tier = KING
+								title = PREVPREV
+							}
+						}
+					}
+					# No titular or other weird kingdoms
+					any_de_jure_vassal_title = { tier = DUKE }
+				}
 			}
 		}
 		
@@ -40,12 +77,127 @@ title_decisions = {
 		}
 		
 		effect = {
-			any_defacto_liege = {
+			if = {
+				limit = { tier = COUNT }
+				any_defacto_liege = {
+					limit = { tier = DUKE }
+					ROOT = { de_jure_liege = PREV }
+				}
+			}
+			else_if = {
+				limit = { tier = DUKE }
+				any_defacto_liege = {
+					limit = { tier = KING }
+					ROOT = { de_jure_liege = PREV }
+				}
+			}
+			else_if = {
 				limit = { tier = KING }
-				ROOT = { de_jure_liege = PREV }
+				any_defacto_liege = {
+					limit = { tier = EMPEROR }
+					ROOT = { de_jure_liege = PREV }
+				}
+			}
+			else = {
+				# Error, do nothing!
 			}
 		}
 		
+	}
+	
+	
+	edcheat_flag_title = {
+		filter = realm_owned
+		ai_target_filter = none
+		ai = no
+		potential = {
+			multiplayer = no
+			has_holder = yes
+			OR = {
+				tier = DUKE
+				tier = KING
+				tier = EMPEROR
+			}
+			NOT = { any_landed_title = { has_title_flag = edcheat_flagged_title } }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			set_title_flag = edcheat_flagged_title
+		}
+	}
+	
+	edcheat_unflag_title = {
+		filter = realm_owned
+		ai_target_filter = none
+		ai = no
+		potential = {
+			multiplayer = no
+			has_holder = yes
+			any_landed_title = { has_title_flag = edcheat_flagged_title }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			any_title = {
+				limit = { has_title_flag = edcheat_flagged_title }
+				clr_title_flag = edcheat_flagged_title
+			}
+		}
+	}
+	
+	edcheat_move_this_title_to_flagged_title = {
+		filter = realm_owned
+		ai_target_filter = none
+		ai = no
+		potential = {
+			multiplayer = no
+			has_holder = yes
+			any_landed_title = {
+				has_title_flag = edcheat_flagged_title
+				OR = {
+					AND = {
+						tier = DUKE
+						ROOT = { tier = COUNT }
+					}
+					AND = {
+						tier = KING
+						ROOT = { tier = DUKE }
+					}
+					AND = {
+						tier = EMPEROR
+						ROOT = { tier = KING }
+					}
+				}
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			any_title = {
+				limit = {
+					has_title_flag = edcheat_flagged_title
+					OR = {
+						AND = {
+							tier = DUKE
+							ROOT = { tier = COUNT }
+						}
+						AND = {
+							tier = KING
+							ROOT = { tier = DUKE }
+						}
+						AND = {
+							tier = EMPEROR
+							ROOT = { tier = KING }
+						}
+					}
+				}
+				ROOT = { de_jure_liege = PREV }
+			}
+		}
 	}
 	
 }
