@@ -1,0 +1,76 @@
+[h1]Summary:[/h1]
+
+This mod adds dynamic traits to characters, making it easier to search for them using the in-game "character finder".
+
+The specific trait names allow you to perform wide searches with simple queries. [i](Eg: "CSH-V" for everyone with >=300 gold.)[/i]
+
+You can turn off these traits temporarily via an intrigue menu decision. [i](Eg: if you want to avoid clutter or increase performance.)[/i] [i](NB: In multiplayer games, only the host can do this.)[/i]
+
+For performance reasons, these traits are gradually updated once per year per character. If necessary, you can [u]force[/u] a global update via an intrigue menu decision. [i](NB: In multiplayer games, only the host can do this.)[/i]
+
+
+
+
+[h1]Searchable Traits:[/h1]
+
+[i]NB: To avoid cluttering your own character's profile, these custom traits will [u]not[/u] be added to any human players.[/i]
+
+[h3]Foes[/h3]
+[list]
+[*] The "CSH-Foe" trait is added to all characters who are "foes" (ie. valid duelling targets) of a human player.
+[list][*] [i](Because sometimes you want a duel opponent, so you can increase your skill, but you can't locate any valid targets. Eg: If you have few/no rivals.)[/i][/list]
+[*] Multiplayer support: The trait is only visible if the character is [u]your[/u] foe. (Your fellow players' foes will not show up in search results.)
+[/list]
+
+[h3]Wealth[/h3]
+[list]
+[*] Added to all characters who have more than a trivial amount of cash.
+[*] Specific thresholds:
+[list]
+[*] "CSH-Rich" : 100-300 gold
+[*] "CSH-VRich" : 300-1k gold
+[*] "CSH-VVRich" : 1k-3k gold
+[*] "CSH-VVVRich" : 3k-10k gold
+[*] "CSH-VVVVRich" : >10k gold
+[/list][/list]
+
+[h3]Artifacts[/h3]
+[list]
+[*] "CSH-Q..." traits are added to all characters who have an artifact of the specified quality.
+[list][*] [i](Eg: A character with an artifact of quality 3 will have the "CSH-Q3" trait.)[/i][/list]
+[*] Intrigue menu decisions allow you to hide these traits if you already own the artifact in question.
+[list][*] [i](IE: Since it's often pointless to own more than one of any artifact, you can use the intrigue menu filters in conjunction with the "CSH-Q..." traits to locate artifacts which you do not already own.)[/i][/list]
+[*] Supports artifacts up to [u]quality 9[/u] (ie. granular support for most modded artifacts)
+[list][*] [i](Owners of artifacts with quality >= 9 receive the "CSH-Q9" trait - ie. extremely high-quality modded artifacts are supported, but they cannot be differentiated.)[/i][/list]
+[/list]
+
+
+
+
+[h1]Compatibility/Impact:[/h1]
+The aim of the "Expanded Decisions" mod family is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
+[list][*]Required CK2 version: 3.3.5.1
+[*]Achievement compatible: No
+[*]Safe to add to existing game: Yes
+[*]Safe to remove from existing game: Yes
+[*]Changes to vanilla files: None
+[*]Mod compatibility: Should be compatible with all other mods
+[*]Changes to AI behaviour: None
+[*]Decrease in game difficulty: Minor
+[*]Localisation: English only
+[*]Mod development status: Complete
+[list]
+[*]New searchable traits may be added in the future, if they seem like a good idea.
+[*]I am not an artist. If the trait icons bother you, and you want to provide better ones, let me know!
+[/list]
+[/list]
+
+
+
+
+[h1]Other Versions / Alternate Download / Reuse:[/h1]
+[list]
+[*]All of my CK2 mods are version-controlled via a [url=https://github.com/jonjowett/ck2_mods]Github repository[/url] (eg. if you want earlier/beta versions of any of my mods). 
+[*]I also publish a [url=https://github.com/jonjowett/ck2_mods/blob/master/expanded_decisions_character_search_helper/packaged_mod/expanded_decisions_character_search_helper.zip]zip version[/url] of this mod on Github.
+[*]All of my mods are published on Github under the MIT license, and I'm following the same logic here on the workshop. Essentially, you're welcome to reuse my mods in any way you wish as long as you provide attribution (eg. credit and/or a link).
+[/list]
