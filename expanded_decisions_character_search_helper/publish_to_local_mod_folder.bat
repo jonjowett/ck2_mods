@@ -2,18 +2,18 @@
 
 ::Constants
 set ck_mod_folder=.\..\..\..\Parado~1\Crusad~1\mod\
-set mod_name=character_search_helper
+set mod_name=expanded_decisions_character_search_helper
 set modfiles_folder=.\mod_files\
 
 ::Set locations of files
 set modfile_name=%mod_name%.mod
 set moddir_name=%mod_name%\
-set modfile_source=%ck_mod_folder%%modfile_name%
-set modfile_dest_folder=%modfiles_folder%
+set modfile_source=%modfiles_folder%%modfile_name%
+set modfile_dest_folder=%ck_mod_folder%
 set modfile_dest=%modfile_dest_folder%%modfile_name%
-set moddir_source=%ck_mod_folder%%moddir_name%
-set moddir_dest_folder=%modfiles_folder%
-set moddir_dest=%moddir_dest_folder%%moddir_name%
+set moddir_source=%modfiles_folder%%moddir_name%
+set moddir_dest_folder=%ck_mod_folder%
+set moddir_dest=%ck_mod_folder%%moddir_name%
 
 ::echo.
 ::echo Debugging:

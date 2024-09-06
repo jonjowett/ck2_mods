@@ -2,7 +2,7 @@
 
 ::Constants
 set zip_loc=.\..\_utilities\7z_CmdLine\7z.exe
-set mod_name=character_search_helper
+set mod_name=expanded_decisions_character_search_helper
 set modfiles_folder=.\mod_files\
 
 ::Set locations of files
