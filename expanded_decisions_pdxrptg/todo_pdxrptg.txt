@@ -11,7 +11,6 @@ ek changes
     - warlord cb - kings where {all of the kingdoms they hold have their traditional capitals inside the targeted kingdom} should be vassalised (not reduced to a few counties on the periphery).
        - kings that have kingdoms and counties outside the target should be treated the same as before.
     X check the initial event which grants magicka to players, make sure it's working properly
-    X  - seems to work now?
     - figure out exactly what's going wrong with empire of tamriel formation, and fix it
     - figure out why hermaeus.70 decline option always goes bad despite theoretically only having 20% chance of going bad
     - add trait icons for the army boost spells (morale, damage)
@@ -24,8 +23,8 @@ ek changes
     - acquisition of commander traits seems broken - characters can only gain 1 trait (if they start with none), but chars can spawn with 3-4 traits
     - smithing level (tier 2) and smithing section (tier 3) are the wrong way round in the localisation (level > section)
     X check the coding of the "ask to leave court" decision (can't send away distant descendants?!)
-    X  - EK version of decision is using what looks like an old can_be_asked_to_leave_court_trigger
-    X  - Add new separate decision, much the same as the other, except it allows different people to be sent away
+       X EK version of decision is using what looks like an old can_be_asked_to_leave_court_trigger
+       X Add new separate decision, much the same as the other, except it allows different people to be sent away
     - event description for ekartnote.28 is missing the province name (malformed brackets?)
     - add proper tooltips for when a bloodline is disabled with "no posessed bloodline:"
     - change the MTTH-1-day event which removes magic commander traits to something more performant.
@@ -48,7 +47,7 @@ ek changes
     - event which gives browsable list of elder council members (because browsing the member list switches the screen and is highly annoying)
     - improve the "skillsimprove" tooltip (for veterancy increase due to battle events)
  - improvement features (minor):
-    - ability to have more specialisms (eg. dragonborn (NOT dragonblood) => +1; tier 5 education => +1; has ever been grandmaster of a society => +1)
+    X ability to have more specialisms (eg. dragonborn (NOT dragonblood) => +1; tier 5 education => +1; has ever been grandmaster of a society => +1)
     X boost magicka regen based on learning stat
     - add magicka regen flag to selected artifacts (and remove the hardcoding from ring of the erudite)
     - change the viet chests (eg. very secure chest) into theft-prevention special items
@@ -57,17 +56,18 @@ ek changes
     - check and maybe cap library recurring cost (it's stupid expensive when you're large)
     X fix the daedric artifact triggers so they can be gained and activated by characters who SECRETLY follow that daedra's religion
     - add another DIFFICULT way of gaining/activating daedric artifacts (tbd - maybe an event chain? maybe invest the same amount of favor again with the relevant daedra => permanent modifier?)
-       - framework added ("favoured by X") but this is not currently possible to gain outside of console / save edit
+       X framework added ("favoured by X") but this is not currently possible to gain outside of console / save edit
     - fewer restrictions on duelling (eg: membership of fighters' guild or companions; high-tier warrior education; certain specialisms; certain lifestyles)
     - amulet of kings adventurers need a cost cap (4k for a 2-kingdom empire?!?!!!) (maybe add a large reward at the end if they actually find it?)
     - amulet of kings merchant needs a cost cap, and also should be less likely to succeed in cheating you if (a) you have been cheated before; or (b) you are a high-tier mage; or (c) you are deceitful/arbitrary/etc
     - gladiator cost (imperial city decision) should be capped (500 gold)
     - employment decision costs should be capped (150 gold)
     - legendary mage cosmetic surgery should also be able to fix scars
-    - every society which allows purchasing techpoints should allow more purchasing at exponentially increased cost
+    - every society which allows purchasing techpoints should allow more purchasing at exponentially increased cost (as a sink for excess society currency points)
     - remove soft cap on number of personality traits (~5 in base game)
     - sanguine should only offer special brews which you haven't currently tasted
-    - companions society should allow the owner of INACTIVE jorrvaskr to join (otherwise, what's the point in enabling jorrvaskr if the owner is a member?!)
+    X companions society should allow the owner of INACTIVE jorrvaskr to join (otherwise, what's the point in enabling jorrvaskr if the owner is a member?!)
+       X Done, as a side-effect of the updated regional restrictions
     - "heal mind" spell should first remove slow/dull, and only grant perceptive if the target has neither slow nor dull.
     - option to disallow yourself from receiving "set a specific focus" society missions
     - title_chief_architect gives a small improvement in build cost & time & also for wonders (based on their skill?)
@@ -81,6 +81,7 @@ ek changes
        - some kind of dark ritual where you capture a load of dragonblooded people, drain their blood, and infuse yourself with their essence
     - steal artifact decision (ekthieving.1) should always allow members of the thieves guild to steal from people in the same top realm
     - option to drop swordsinging if in greybeards, and to drop thuum if in swordsingers
+    X option to drop/regain necromancer trait (with appropriate penalties) (because *practising* necromancy blocks you from joining societies, but long-lived/immortal characters should be allowed to renounce the practice so they can partake in normal society... as long as they stick to their vow...)
  - improvement features (major):
     - trade routes need rebalancing (some are much more profitable than others - too many sources?)
     - some way of decreasing the cost of buildings (eg. game rule adds permanent local_build_cost_modifier=-0.2 to all provinces; maybe wonder_build_cost_modifier=-0.2 as well?)
@@ -88,7 +89,7 @@ ek changes
        - See ekwonder.50 in ...\events\ek_wonder_events.txt
     - the "force duel" decision (palace of the kings wonder upgrade) doesn't seem to be implemented at all. Implement it.
     - cult of the ancestor moth badly needs some flavour (missions, events, etc)
-    - alchemist also sells potion of magicka regen
+    X alchemist also sells potion of magicka regen
 
 general ideas
  - get AI to treat themselves if the first treatment expires
@@ -96,4 +97,4 @@ general ideas
  - change the duelling engine to properly support PCS up to 300
  - ability to cancel a favor you have on someone (to prevent the permanent alert)
  - ability to cancel out favors if you and the target have favors on each other
- - nobles' responses to feast invitations need more nuanced decision-making
+ - nobles' responses to feast invitations need more nuanced decision-making (not just "lol random!")
