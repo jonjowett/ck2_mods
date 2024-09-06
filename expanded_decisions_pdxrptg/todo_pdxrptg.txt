@@ -6,7 +6,10 @@ ek changes
     - add option to spawn boats
  - bugfixes:
     X warlord cb - can_use_title - uses any_direct_de_jure_vassal_title, which means it's looking for duchies, but the logic assumes it's looking for counties
-    - warlord cb - maybe it should be completely disallowed against all characters in Morrowind, unless they aren't in a Great House?
+    X warlord cb - maybe it should be completely disallowed against all characters in Morrowind, unless they aren't in a Great House?
+    - warlord objective - dragonborn emperors (who aren't e_tamriel) can take the objective, but it immediately aborts (because they are emperors) - fix the inconsistency
+    - warlord cb - kings where {all of the kingdoms they hold have their traditional capitals inside the targeted kingdom} should be vassalised (not reduced to a few counties on the periphery).
+       - kings that have kingdoms and counties outside the target should be treated the same as before.
     X check the initial event which grants magicka to players, make sure it's working properly
     X  - seems to work now?
     - figure out exactly what's going wrong with empire of tamriel formation, and fix it
@@ -28,6 +31,9 @@ ek changes
     - change the MTTH-1-day event which removes magic commander traits to something more performant.
     X reinstate something like ekartifacts.103 (removes stressed/depressed if you have ring of happiness), as a backup in case stressed/depressed is applied by an event when it shouldn't be
     - ?? mane loses artifacts and/or gold on inheritance (possibly only AI mane?)
+    - some troop types (camel cav, tongues, ...more?...) are not impacted by military tech (and they should be)
+    - fertility is incorrectly zeroised after a character has become immortal (eg. vampirism) (very noticeable for women who become immortal when younger than 45)
+    - should not be able to spam "request religious conversion" to get a near-guaranteed conversion (even one success is enough)
  - convenience features (no decrease in difficulty):
     - ability to stop all events asking if I want to reveal my vampirism / lycanthropy
     - decision to reveal vampirism / lycanthropy to spouses/friends/lovers (eg. in case the event is disabled by the previous point)
@@ -73,6 +79,8 @@ ek changes
        X successfully light the dragonfires => automatic
        - petition akatosh (some kind of mystic vision quest?)
        - some kind of dark ritual where you capture a load of dragonblooded people, drain their blood, and infuse yourself with their essence
+    - steal artifact decision (ekthieving.1) should always allow members of the thieves guild to steal from people in the same top realm
+    - option to drop swordsinging if in greybeards, and to drop thuum if in swordsingers
  - improvement features (major):
     - trade routes need rebalancing (some are much more profitable than others - too many sources?)
     - some way of decreasing the cost of buildings (eg. game rule adds permanent local_build_cost_modifier=-0.2 to all provinces; maybe wonder_build_cost_modifier=-0.2 as well?)
