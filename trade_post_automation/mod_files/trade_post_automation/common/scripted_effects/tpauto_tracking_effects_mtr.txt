@@ -1,258 +1,270 @@
 # Audax Validator EnableCommentMetadata
 # The Validator can't read MTR (because it's zipped), so individually ignore every line that mentions a MTR-specific building
 
-tpauto_tracking_effect_record_mtr_trade_post_buildings = {
-	
-	# 3-stage buildings
+tpauto_tracking_effect_record_trade_post_buildings_mtr = {
 	
 	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = amber_1
+		limit = { tpauto_allow_tracking_and_rebuild_mtr = yes }
+		
+		
+		
+		
+		
+		# 3-stage buildings
+		
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_1
+			}
+			set_province_flag = tpauto_tracking_amber_1
 		}
-		set_province_flag = tpauto_tracking_amber_1
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = amber_2
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_2
+			}
+			clr_province_flag = tpauto_tracking_amber_1
+			set_province_flag = tpauto_tracking_amber_2
 		}
-		clr_province_flag = tpauto_tracking_amber_1
-		set_province_flag = tpauto_tracking_amber_2
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = amber_3
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_3
+			}
+			clr_province_flag = tpauto_tracking_amber_1
+			clr_province_flag = tpauto_tracking_amber_2
+			set_province_flag = tpauto_tracking_amber_3
 		}
-		clr_province_flag = tpauto_tracking_amber_1
-		clr_province_flag = tpauto_tracking_amber_2
-		set_province_flag = tpauto_tracking_amber_3
-	}
-	
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = amber_trade_offices_1
+		
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_trade_offices_1
+			}
+			set_province_flag = tpauto_tracking_amber_trade_offices_1
 		}
-		set_province_flag = tpauto_tracking_amber_trade_offices_1
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = amber_trade_offices_2
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_trade_offices_2
+			}
+			clr_province_flag = tpauto_tracking_amber_trade_offices_1
+			set_province_flag = tpauto_tracking_amber_trade_offices_2
 		}
-		clr_province_flag = tpauto_tracking_amber_trade_offices_1
-		set_province_flag = tpauto_tracking_amber_trade_offices_2
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = amber_trade_offices_3
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_trade_offices_3
+			}
+			clr_province_flag = tpauto_tracking_amber_trade_offices_1
+			clr_province_flag = tpauto_tracking_amber_trade_offices_2
+			set_province_flag = tpauto_tracking_amber_trade_offices_3
 		}
-		clr_province_flag = tpauto_tracking_amber_trade_offices_1
-		clr_province_flag = tpauto_tracking_amber_trade_offices_2
-		set_province_flag = tpauto_tracking_amber_trade_offices_3
-	}
-	
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = amber_mercenary_garrison_1
+		
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_mercenary_garrison_1
+			}
+			set_province_flag = tpauto_tracking_amber_mercenary_garrison_1
 		}
-		set_province_flag = tpauto_tracking_amber_mercenary_garrison_1
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = amber_mercenary_garrison_2
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_mercenary_garrison_2
+			}
+			clr_province_flag = tpauto_tracking_amber_mercenary_garrison_1
+			set_province_flag = tpauto_tracking_amber_mercenary_garrison_2
 		}
-		clr_province_flag = tpauto_tracking_amber_mercenary_garrison_1
-		set_province_flag = tpauto_tracking_amber_mercenary_garrison_2
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = amber_mercenary_garrison_3
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = amber_mercenary_garrison_3
+			}
+			clr_province_flag = tpauto_tracking_amber_mercenary_garrison_1
+			clr_province_flag = tpauto_tracking_amber_mercenary_garrison_2
+			set_province_flag = tpauto_tracking_amber_mercenary_garrison_3
 		}
-		clr_province_flag = tpauto_tracking_amber_mercenary_garrison_1
-		clr_province_flag = tpauto_tracking_amber_mercenary_garrison_2
-		set_province_flag = tpauto_tracking_amber_mercenary_garrison_3
-	}
-	
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_warehouse_1
+		
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_warehouse_1
+			}
+			set_province_flag = tpauto_tracking_mtr_warehouse_1
 		}
-		set_province_flag = tpauto_tracking_mtr_warehouse_1
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_warehouse_2
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_warehouse_2
+			}
+			clr_province_flag = tpauto_tracking_mtr_warehouse_1
+			set_province_flag = tpauto_tracking_mtr_warehouse_2
 		}
-		clr_province_flag = tpauto_tracking_mtr_warehouse_1
-		set_province_flag = tpauto_tracking_mtr_warehouse_2
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_warehouse_3
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_warehouse_3
+			}
+			clr_province_flag = tpauto_tracking_mtr_warehouse_1
+			clr_province_flag = tpauto_tracking_mtr_warehouse_2
+			set_province_flag = tpauto_tracking_mtr_warehouse_3
 		}
-		clr_province_flag = tpauto_tracking_mtr_warehouse_1
-		clr_province_flag = tpauto_tracking_mtr_warehouse_2
-		set_province_flag = tpauto_tracking_mtr_warehouse_3
-	}
-	
-	# Single-stage buildings
-	
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_marketplace
+		
+		
+		
+		
+		
+		# Single-stage buildings
+		
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_marketplace
+			}
+			set_province_flag = tpauto_tracking_mtr_marketplace
 		}
-		set_province_flag = tpauto_tracking_mtr_marketplace
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_trade_port
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_trade_port
+			}
+			set_province_flag = tpauto_tracking_mtr_trade_port
 		}
-		set_province_flag = tpauto_tracking_mtr_trade_port
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_chapel
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_chapel
+			}
+			set_province_flag = tpauto_tracking_mtr_chapel
 		}
-		set_province_flag = tpauto_tracking_mtr_chapel
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_tavern
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_tavern
+			}
+			set_province_flag = tpauto_tracking_mtr_tavern
 		}
-		set_province_flag = tpauto_tracking_mtr_tavern
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_timber
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_timber
+			}
+			set_province_flag = tpauto_tracking_mtr_timber
 		}
-		set_province_flag = tpauto_tracking_mtr_timber
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_amber
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_amber
+			}
+			set_province_flag = tpauto_tracking_mtr_amber
 		}
-		set_province_flag = tpauto_tracking_mtr_amber
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_furs
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_furs
+			}
+			set_province_flag = tpauto_tracking_mtr_furs
 		}
-		set_province_flag = tpauto_tracking_mtr_furs
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_slaves
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_slaves
+			}
+			set_province_flag = tpauto_tracking_mtr_slaves
 		}
-		set_province_flag = tpauto_tracking_mtr_slaves
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_silk
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_silk
+			}
+			set_province_flag = tpauto_tracking_mtr_silk
 		}
-		set_province_flag = tpauto_tracking_mtr_silk
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_glass
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_glass
+			}
+			set_province_flag = tpauto_tracking_mtr_glass
 		}
-		set_province_flag = tpauto_tracking_mtr_glass
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_silver
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_silver
+			}
+			set_province_flag = tpauto_tracking_mtr_silver
 		}
-		set_province_flag = tpauto_tracking_mtr_silver
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_salt
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_salt
+			}
+			set_province_flag = tpauto_tracking_mtr_salt
 		}
-		set_province_flag = tpauto_tracking_mtr_salt
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_wine
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_wine
+			}
+			set_province_flag = tpauto_tracking_mtr_wine
 		}
-		set_province_flag = tpauto_tracking_mtr_wine
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_wool
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_wool
+			}
+			set_province_flag = tpauto_tracking_mtr_wool
 		}
-		set_province_flag = tpauto_tracking_mtr_wool
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_fish
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_fish
+			}
+			set_province_flag = tpauto_tracking_mtr_fish
 		}
-		set_province_flag = tpauto_tracking_mtr_fish
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_fruits
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_fruits
+			}
+			set_province_flag = tpauto_tracking_mtr_fruits
 		}
-		set_province_flag = tpauto_tracking_mtr_fruits
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_horses
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_horses
+			}
+			set_province_flag = tpauto_tracking_mtr_horses
 		}
-		set_province_flag = tpauto_tracking_mtr_horses
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_iron
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_iron
+			}
+			set_province_flag = tpauto_tracking_mtr_iron
 		}
-		set_province_flag = tpauto_tracking_mtr_iron
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_gold
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_gold
+			}
+			set_province_flag = tpauto_tracking_mtr_gold
 		}
-		set_province_flag = tpauto_tracking_mtr_gold
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_gemstones
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_gemstones
+			}
+			set_province_flag = tpauto_tracking_mtr_gemstones
 		}
-		set_province_flag = tpauto_tracking_mtr_gemstones
-	}
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			trade_post_has_building = mtr_wheat
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = mtr_wheat
+			}
+			set_province_flag = tpauto_tracking_mtr_wheat
 		}
-		set_province_flag = tpauto_tracking_mtr_wheat
+		
 	}
-	
 }

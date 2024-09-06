@@ -1,18 +1,36 @@
 # Audax Validator EnableCommentMetadata
 
+tpauto_allow_tracking_and_rebuild_vanilla = {
+	tpauto_pdxrptg_mod_is_active = no
+}
+
+tpauto_use_vanilla_education_traits = {
+	tpauto_pdxrptg_mod_is_active = no
+}
+
 tpauto_this_province_can_have_trade_route_trade_post = {
 	custom_tooltip = {
 		text = tpauto_is_a_potential_trade_post_tt
 		OR = {
 			
 			# Vanilla
-			silk_road_trade_post_trigger = yes
-			trans_saharan_trade_post_trigger = yes
+			tpauto_this_province_can_have_trade_route_trade_post_vanilla = yes
 			
-			# MTR (Vanilla)
+			# MTR (Vanilla/CleanSlate/HIP)
 			tpauto_this_province_can_have_trade_route_trade_post_mtr = yes
 			
+			# PDXRPTG
+			tpauto_this_province_can_have_trade_route_trade_post_pdxrptg = yes
+			
 		}
+	}
+}
+
+tpauto_this_province_can_have_trade_route_trade_post_vanilla = {
+	tpauto_allow_tracking_and_rebuild_vanilla = yes
+	OR = {
+		silk_road_trade_post_trigger = yes
+		trans_saharan_trade_post_trigger = yes
 	}
 }
 
@@ -62,9 +80,7 @@ tpauto_this_character_can_rebuild_at_no_cost_trader = {
 		}
 		AND = {
 			has_regent = yes
-			regent = {
-				has_character_modifier = trader
-			}
+			regent = { has_character_modifier = trader }
 		}
 	}
 }
@@ -104,12 +120,15 @@ tpauto_this_character_can_rebuild_at_no_cost_lifestyle_administrator = {
 
 tpauto_this_character_can_rebuild_at_no_cost_education = {
 	OR = {
-		tpauto_this_character_can_rebuild_at_no_cost_education_fortune_builder = yes
-		tpauto_this_character_can_rebuild_at_no_cost_education_midas_touched   = yes
+		tpauto_this_character_can_rebuild_at_no_cost_education_fortune_builder      = yes
+		tpauto_this_character_can_rebuild_at_no_cost_education_midas_touched        = yes
+		tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_4 = yes
+		tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_5 = yes
 	}
 }
 
 tpauto_this_character_can_rebuild_at_no_cost_education_fortune_builder = {
+	tpauto_use_vanilla_education_traits = yes
 	OR = {
 		AND = {
 			has_regent = no
@@ -123,6 +142,7 @@ tpauto_this_character_can_rebuild_at_no_cost_education_fortune_builder = {
 }
 
 tpauto_this_character_can_rebuild_at_no_cost_education_midas_touched = {
+	tpauto_use_vanilla_education_traits = yes
 	OR = {
 		AND = {
 			has_regent = no

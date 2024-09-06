@@ -1,0 +1,42 @@
+# Audax Validator EnableCommentMetadata
+
+# This *should* overwrite the vanilla and PDXRPTG trade post holding_type,
+#    because the filename is later in the alphabet and the mod is loaded after both of those.
+
+# Suppress "Duplicate ID" warning
+# Audax Validator "." Ignore_NEXT
+trade_post = {
+	trigger = {
+		conditional_tooltip = {
+			limit = {
+				OR = {
+					FROM = {
+						is_patrician = no
+					}
+					AND = {
+						port = no
+						FROM = {
+							is_patrician = yes
+						}
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					tpauto_manual_construction_temporarily_blocked = yes
+					tpauto_this_province_can_have_trade_route_trade_post = yes
+				}
+				custom_tooltip = {
+					text = tpauto_manual_construction_temporarily_blocked_tt
+					always = no
+				}
+				tpauto_can_auto_rebuild_trade_post = yes
+			}
+			trigger_else = {
+				tpauto_this_province_can_have_trade_route_trade_post = yes
+			}
+		}
+	}
+}
+
+

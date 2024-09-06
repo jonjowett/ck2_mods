@@ -11,25 +11,37 @@ tpauto_rebuild_buildings_deleted_two_tt;§YTwo§l of the buildings listed below wi
 tpauto_rebuild_buildings_deleted_one_due_to_logic_error_tt;§R!!!LOGIC ERROR!!! Something unexpected happened, so the auto-reconstruction is in fallback mode!§!\n§YOne§l of the buildings listed below will §YNOT§l be reconstructed!§!;;;;;;;;;x
 #
 #
+#
 # Auto-rebuild event
+# NB: The "NoRegent"/"Regent" options are chosen using customizable_localisation
 #
 TPAuto_2201_Desc;My realm is at peace, and trade has started to flow again. Merchants have returned to [From.GetName], and the trade post has been revitalised. Unfortunately, some of the buildings were badly damaged in the fighting, and the merchants have sent a delegation to ask what I wish to do about the situation.;;;;;;;;;x
 # Option text for buttons - keep it short, to avoid overflow
 TPAuto_2201_Option_RebuildWithSomeDeletion;Demolish the damaged buildings;;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Luck;Luckily, other merchants had already repaired the buildings!;;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Pay;Pay a professional to repair the damaged buildings;;;;;;;;;x
+TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship;[TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_Regent_NoRegent];;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_NoRegent;I will personally supervise the repairs!;;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_Regent;My Regent will personally supervise the repairs!;;;;;;;;;x
+TPAuto_2201_Option_RebuildWithNoDeletion_Trader;[TPAuto_2201_Option_RebuildWithNoDeletion_Trader_Regent_NoRegent];;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Trader_NoRegent;My fellow merchants volunteered to pay for the repairs!;;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Trader_Regent;The merchants volunteered to pay for the repairs!;;;;;;;;;x
+TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle;[TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_Regent_NoRegent];;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_NoRegent;Let me show you an easy way to repair that damage!;;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_Regent;Let my Regent show you an easy way to repair that damage!;;;;;;;;;x
+TPAuto_2201_Option_RebuildWithNoDeletion_Education;[TPAuto_2201_Option_RebuildWithNoDeletion_Education_Regent_NoRegent];;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Education_NoRegent;If you repair the buildings, you'll make the money back in no time!;;;;;;;;;x
 TPAuto_2201_Option_RebuildWithNoDeletion_Education_Regent;My Regent persuaded the merchants to pay for the repairs.;;;;;;;;;x
+# Misc
+TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_ExplainDiscount_tt;§GThis is half the normal price!§!\n§g.§!;;;;;;;;;x
 # Tooltip explanations
-TPAuto_2201_OptionTTI_Luck;This occurred due to pure luck (weighted by high stewardship skill and whether the trade post was recently auto-rebuilt);;;;;;;;;x
+TPAuto_2201_OptionTTI_Luck;This occurred due to pure luck (weighted by high Stewardship skill and whether the trade post was recently auto-rebuilt);;;;;;;;;x
+TPAuto_2201_OptionTTI_Trader;[TPAuto_2201_OptionTTI_Trader_Regent_NoRegent];;;;;;;;;x
 TPAuto_2201_OptionTTI_Trader_NoRegent;This option is available because you are a renowned Trader;;;;;;;;;x
 TPAuto_2201_OptionTTI_Trader_Regent;This option is available because your Regent is a renowned Trader;;;;;;;;;x
-TPAuto_2201_OptionTTI_Lifestyle;This option is available due to your experience in construction or administration;;;;;;;;;x
-TPAuto_2201_OptionTTI_Education;This option is available due to your high-quality education as a Steward;;;;;;;;;x
-
+TPAuto_2201_OptionTTI_Lifestyle;[TPAuto_2201_OptionTTI_Lifestyle_Regent_NoRegent];;;;;;;;;x
+TPAuto_2201_OptionTTI_Lifestyle_NoRegent;This option is available due to your experience in construction or administration;;;;;;;;;x
+TPAuto_2201_OptionTTI_Lifestyle_Regent;This option is available due to your Regent's experience in construction or administration;;;;;;;;;x
+TPAuto_2201_OptionTTI_Education;[TPAuto_2201_OptionTTI_Education_Regent_NoRegent];;;;;;;;;x
+TPAuto_2201_OptionTTI_Education_NoRegent;This option is available due to your high-quality Stewardship education;;;;;;;;;x
+TPAuto_2201_OptionTTI_Education_Regent;This option is available due to your Regent's high-quality Stewardship education;;;;;;;;;x

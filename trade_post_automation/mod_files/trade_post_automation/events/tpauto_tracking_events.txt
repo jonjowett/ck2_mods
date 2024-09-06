@@ -149,9 +149,7 @@ province_event = {
 		has_trade_post = yes
 	}
 	immediate = {
-		set_province_flag = tpauto_tracking_has_trade_post
-		tpauto_tracking_effect_record_vanilla_trade_post_buildings = yes
-		tpauto_tracking_effect_record_mtr_trade_post_buildings = yes
+		tpauto_tracking_effect_record_trade_post_buildings = yes
 	}
 }
 
@@ -303,14 +301,7 @@ character_event = {
 			tpauto_this_character_can_rebuild_at_no_cost = no
 		}
 		tooltip_info = stewardship
-		name = {
-			text = TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_NoRegent
-			trigger = { has_regent = no }
-		}
-		name = {
-			text = TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_Regent
-			trigger = { has_regent = yes }
-		}
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship
 		if = {
 			limit = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
 			wealth = -150
@@ -318,6 +309,7 @@ character_event = {
 		else = {
 			wealth = -75
 		}
+		custom_tooltip = { text = TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_ExplainDiscount_tt }
 		FROM = { tpauto_rebuild_trade_post = yes }
 		ai_chance = {
 			factor = 10
@@ -380,40 +372,24 @@ character_event = {
 	
 	# Option 4: Something special means you can rebuild in full for free
 	# Only the "most awesome" reason will be shown
+	
+	# Awesome reason #1: Renowned trader
 	option = {
-		trigger = {
-			tpauto_this_character_can_rebuild_at_no_cost_trader = yes
-			has_regent = no
-		}
-		tooltip_info_custom = TPAuto_2201_OptionTTI_Trader_NoRegent
-		name = TPAuto_2201_Option_RebuildWithNoDeletion_Trader_NoRegent
+		trigger = { tpauto_this_character_can_rebuild_at_no_cost_trader = yes }
+		tooltip_info_custom = TPAuto_2201_OptionTTI_Trader
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Trader
 		FROM = { tpauto_rebuild_trade_post = yes }
 		ai_chance = { factor = 1000 }
 	}
-	option = {
-		trigger = {
-			tpauto_this_character_can_rebuild_at_no_cost_trader = yes
-			has_regent = yes
-		}
-		tooltip_info_custom = TPAuto_2201_OptionTTI_Trader_Regent
-		name = TPAuto_2201_Option_RebuildWithNoDeletion_Trader_Regent
-		FROM = { tpauto_rebuild_trade_post = yes }
-		ai_chance = { factor = 1000 }
-	}
+	
+	# Awesome reason #2: Architect or Administrator lifestyle
 	option = {
 		trigger = {
 			tpauto_this_character_can_rebuild_at_no_cost_trader = no
 			tpauto_this_character_can_rebuild_at_no_cost_lifestyle_architect = yes
 		}
 		tooltip_info_custom = TPAuto_2201_OptionTTI_Lifestyle
-		name = {
-			text = TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_NoRegent
-			trigger = { has_regent = no }
-		}
-		name = {
-			text = TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_Regent
-			trigger = { has_regent = yes }
-		}
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle
 		show_trait = architect
 		FROM = { tpauto_rebuild_trade_post = yes }
 		ai_chance = { factor = 1000 }
@@ -425,18 +401,13 @@ character_event = {
 			tpauto_this_character_can_rebuild_at_no_cost_lifestyle_administrator = yes
 		}
 		tooltip_info_custom = TPAuto_2201_OptionTTI_Lifestyle
-		name = {
-			text = TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_NoRegent
-			trigger = { has_regent = no }
-		}
-		name = {
-			text = TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_Regent
-			trigger = { has_regent = yes }
-		}
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle
 		show_trait = administrator
 		FROM = { tpauto_rebuild_trade_post = yes }
 		ai_chance = { factor = 1000 }
 	}
+	
+	# Awesome reason #3: Best or second-best stewardship education
 	option = {
 		trigger = {
 			tpauto_this_character_can_rebuild_at_no_cost_trader = no
@@ -444,14 +415,7 @@ character_event = {
 			tpauto_this_character_can_rebuild_at_no_cost_education_midas_touched = yes
 		}
 		tooltip_info_custom = TPAuto_2201_OptionTTI_Education
-		name = {
-			text = TPAuto_2201_Option_RebuildWithNoDeletion_Education_NoRegent
-			trigger = { has_regent = no }
-		}
-		name = {
-			text = TPAuto_2201_Option_RebuildWithNoDeletion_Education_Regent
-			trigger = { has_regent = yes }
-		}
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Education
 		show_trait = midas_touched
 		FROM = { tpauto_rebuild_trade_post = yes }
 		ai_chance = { factor = 1000 }
@@ -464,16 +428,39 @@ character_event = {
 			tpauto_this_character_can_rebuild_at_no_cost_education_fortune_builder = yes
 		}
 		tooltip_info_custom = TPAuto_2201_OptionTTI_Education
-		name = {
-			text = TPAuto_2201_Option_RebuildWithNoDeletion_Education_NoRegent
-			trigger = { has_regent = no }
-		}
-		name = {
-			text = TPAuto_2201_Option_RebuildWithNoDeletion_Education_Regent
-			trigger = { has_regent = yes }
-		}
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Education
 		show_trait = fortune_builder
 		FROM = { tpauto_rebuild_trade_post = yes }
 		ai_chance = { factor = 1000 }
 	}
+	
+	# Awesome reason #3a: Best or second-best stewardship education (PDXRPTG mod)
+	option = {
+		trigger = {
+			tpauto_this_character_can_rebuild_at_no_cost_trader = no
+			tpauto_this_character_can_rebuild_at_no_cost_lifestyle = no
+			tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_5 = yes
+		}
+		tooltip_info_custom = TPAuto_2201_OptionTTI_Education
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Education
+		# Audax Validator "." Ignore_NEXT
+		show_trait = magistrate_5
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = { factor = 1000 }
+	}
+	option = {
+		trigger = {
+			tpauto_this_character_can_rebuild_at_no_cost_trader = no
+			tpauto_this_character_can_rebuild_at_no_cost_lifestyle = no
+			tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_5 = no
+			tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_4 = yes
+		}
+		tooltip_info_custom = TPAuto_2201_OptionTTI_Education
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Education
+		# Audax Validator "." Ignore_NEXT
+		show_trait = magistrate_4
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = { factor = 1000 }
+	}
+	
 }

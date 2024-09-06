@@ -2,12 +2,15 @@
 # The Validator can't read MTR (because it's zipped), so individually ignore every line that mentions a MTR-specific building
 
 tpauto_rebuild_trade_post_buildings_mtr = {
-	tpauto_rebuild_trade_post_buildings_mtr_amber = yes
-	tpauto_rebuild_trade_post_buildings_mtr_amber_trade_offices = yes
-	tpauto_rebuild_trade_post_buildings_mtr_amber_mercenary_garrison = yes
-	tpauto_rebuild_trade_post_buildings_mtr_mtr_warehouse = yes
-	tpauto_rebuild_trade_post_buildings_mtr_singles_generic = yes
-	tpauto_rebuild_trade_post_buildings_mtr_singles_resource = yes
+	if = {
+		limit = { tpauto_allow_tracking_and_rebuild_mtr = yes }
+		tpauto_rebuild_trade_post_buildings_mtr_amber = yes
+		tpauto_rebuild_trade_post_buildings_mtr_amber_trade_offices = yes
+		tpauto_rebuild_trade_post_buildings_mtr_amber_mercenary_garrison = yes
+		tpauto_rebuild_trade_post_buildings_mtr_mtr_warehouse = yes
+		tpauto_rebuild_trade_post_buildings_mtr_singles_generic = yes
+		tpauto_rebuild_trade_post_buildings_mtr_singles_resource = yes
+	}
 }
 
 tpauto_rebuild_trade_post_buildings_mtr_amber = {
