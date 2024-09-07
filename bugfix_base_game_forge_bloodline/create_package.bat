@@ -2,7 +2,7 @@
 
 ::Constants
 set zip_loc=.\..\_utilities\7z_CmdLine\7z.exe
-set mod_name=vanilla_forge_bloodline_bugfix
+set mod_name=bugfix_base_game_forge_bloodline
 set modfiles_folder=.\mod_files\
 
 ::Set locations of files
