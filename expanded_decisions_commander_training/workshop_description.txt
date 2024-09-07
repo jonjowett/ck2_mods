@@ -1,0 +1,112 @@
+[h1]Summary:[/h1]
+
+The main feature of this mod is that you can [u]pay[/u] for your Marshal and Chinese Strategist to train a [u]specific[/u] commander, once every few years.
+
+You can also ask them to train your character (which is not possible in the base game).
+
+And there are a number of smaller improvements to the whole process of commander training (see below).
+
+
+
+
+[h1]Details:[/h1]
+
+[h3]Ad-hoc training:[/h3]
+
+This is done by targeted decision (right-click interaction menu) on the trainee.
+
+[u]Cost:[/u]
+[list]
+[*] For the Marshal training, you have to give them a favor (or a favor you have on them will be cancelled).
+[list][*] [i](If you don't have Conclave DLC, you instead have to pay an amount of gold equivalent to buying a favor.)[/i][/list]
+[*] For the Chinese Strategist training, the payment is 200 Grace
+[list][*] [i](For a Golden Age Strategist, the cost is only 100 - following the base game's pattern of Golden Age courtiers being twice as effective.)[/i][/list]
+[*] If you ask them to train your character, there is an additional large prestige cost.
+[/list]
+
+[u]Cooldown:[/u]
+[list]
+[*] For the Marshal training, the cooldown is based on the Marshal's martial stat.
+[list][*] [i](Higher stat means shorter cooldown.)[/i][/list]
+[*] For the Chinese Strategist training, the cooldown is based on the number of Strategists in your court.
+[list][*] [i](More strategists means shorter cooldown.)[/i][/list]
+[*] Cooldowns are attached to the ruler who asks for the training.
+[list][*] [i](Firing your Marshal won't help - you can only reset the cooldown by dying...)[/i][/list]
+[/list]
+
+[u]Limits:[/u]
+[list]
+[*] You cannot exceed the base game's limits on commander training:
+[list]
+[*] {2 conventional + 1 Chinese} or {1 conventional + 2 Chinese} commander traits
+[*] Marshal training will not increase a trainee's martial stat if it is already 20+
+[/list][/list]
+
+[u]AI:[/u]
+[list]
+[*] AI rulers can and will use this feature, in appropriate circumstances.
+[*] AI rulers who take the Marshal training decision will pay gold instead of transferring favors.
+[list][*] [i](Because writing logic to correctly evaluate whether an AI should give/use a favor would be unbelievably difficult.)[/i][/list]
+[/list]
+
+[h3]Trait selection:[/h3]
+
+While the specific trait received by the trainee is still random, it should be a bit more sensible:
+[list]
+[*] It was previously completely random; now there are weightings based on the trainer's and trainee's existing traits.
+[list][*] [i](Eg: If the trainer is a Defender and the trainee is Patient then the trainee is very likely to become a Defender.)[/i][/list]
+[*] The trainee is slightly more likely to get a complimentary trait.
+[list][*] [i](Eg: A Siege Leader is more likely to get Way of the Leopard.)[/i][/list]
+[*] The trainee will [u]not[/u] get an opposing trait.
+[list][*] [i](Eg: A Winter Leader will not get Flanker.)[/i][/list]
+[*] This applies to both the ad-hoc training (see above) and the base game's random training events.
+[/list]
+
+[h3]Frequency of random training:[/h3]
+
+For the base game's free random training events, the MTTH calculation has been slightly revamped.
+
+Having a Marshal with a martial stat above 23 means that the event will occur more often.
+[list]
+[*] In the base game, having a Marshal with martial 22+ meant the event would occur on average every ~40 months. (Higher martial stat had no impact.)
+[*] With this mod, having a Marshal with martial stat over 22 leads to further increases in event frequency. The effect now caps at martial 40, with the event occurring on average every ~28 months.
+[/list]
+
+Having two or three Chinese Strategists in your court makes the event twice or three times as likely to occur.
+[list]
+[*] This event is formulated as a random choice on the offmap pulse.
+[*] So, its expected frequency depends on the total number of offmap-pulse events you qualify for at any given time - it's not an easy-to-calculate constant (unlike the Marshal training).
+[/list]
+
+
+
+
+[h1]Compatibility/Impact:[/h1]
+The aim of the "Expanded Decisions" mod family is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
+[list]
+[*]Required CK2 version: 3.3.5.1
+[*]Achievement compatible: No
+[*]Safe to add to existing game: Yes
+[*]Safe to remove from existing game: Yes
+[*]Changes to vanilla files: None
+[*]Mod compatibility:
+[list]
+[*]In general, this mod should be compatible with all other mods.
+[*]The only exception is if the other mod [u]also[/u] modifies one of the random commander training events (MNM.70010, MNM.70011, JD.20041).
+[/list]
+[*]Changes to AI behaviour: Minor
+[*]Decrease in game difficulty: Minor
+[*]Localisation: English only
+[*]Mod development status: Complete
+[*]Known bugs/issues: None
+[/list]
+
+
+
+
+[h1]Other Versions / Alternate Download / Reuse:[/h1]
+[list]
+[*]All of my CK2 mods are version-controlled via a [url=https://github.com/jonjowett/ck2_mods]Github repository[/url] (eg. if you want earlier/beta versions of any of my mods). 
+[*]I also publish a [url=https://github.com/jonjowett/ck2_mods/blob/master/expanded_decisions_commander_training/packaged_mod/expanded_decisions_commander_training.zip]zip version[/url] of this mod on Github.
+[*]All of my mods are published on Github under the MIT license, and I'm following the same logic here on the workshop. Essentially, you're welcome to reuse my mods in any way you wish as long as you provide attribution (eg. credit and/or a link).
+[/list]
