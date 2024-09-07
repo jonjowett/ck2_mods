@@ -2,7 +2,7 @@
 
 ::Constants
 set zip_loc=.\..\_utilities\7z_CmdLine\7z.exe
-set mod_name=better_pagan_reformation
+set mod_name=ai_reformed_pagans_convert_their_provinces
 set modfiles_folder=.\mod_files\
 
 ::Set locations of files
