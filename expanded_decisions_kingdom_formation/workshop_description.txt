@@ -1,37 +1,21 @@
-[b][u]I am temporarily unable to update this mod due to a bug in Steam Workshop. In the meantime, if you want the latest version, you can download it in [url=https://github.com/jonjowett/ck2_mods/blob/master/expanded_decisions_kingdom_formation/packaged_mod/expanded_decisions_kingdom_formation.zip]zip format[/url].[/u][/b]
-
 [h1]Summary:[/h1]
 This mod adds intrigue menu decisions which allow you to form several interesting duchies/kingdoms, usually on islands. Depending on the state of the game at the time, the newly-formed title may be "ripped out" of its existing de jure empire/kingdom/duchy and placed into a more appropriate one.
 
 The intended purpose of this mod is to allow players to form overseas naval bases, eg. as raiding centres and/or vassal merchant republics, without having to worry about potential future de jure issues.
 
-[u]Formable kingdoms (from a single duchy):[/u] Crete, Cyprus, Gotland, Iceland, Mallorca, Mann, Taurica (Cherson), Trinacria (Sicily)
+[u]Formable duchies (from a single county):[/u] Amalfi, Canarias, Kutch, Maldives, Malta, Rhodes
 
-[u]Formable duchies (from a single county):[/u] Canarias, Malta, Rhodes
+[u]Formable kingdoms (from a single duchy):[/u] Amalfi, Canarias, Crete, Cyprus, Gotland, Iceland, Kutch, Maldives, Mallorca, Malta, Mann, Ragusa, Socotra, Taurica (Cherson), Trinacria (Sicily)
 
-[u]Other notable features:[/u] Reform 769 Saxony (Irminsul flag); Move certain duchies into different de jure kingdoms; Create custom empire by merging kingdoms
-
-[h1]Compatibility/Impact:[/h1]
-The aim of the "Expanded Decisions" mod family is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
-[list][*]Required CK2 version: 3.3.5.1
-[*]Achievement compatible: No
-[*]Safe to add to existing game: Yes
-[*]Safe to remove from existing game:
-[list][*]If any [u]mod-added[/u] kingdom (eg. Crete) has been formed at any time in the game's history: [b][u]No[/u][/b]
-[*]Otherwise: Yes[/list]
-[*]Changes to vanilla files: None
-[*]Mod compatibility: Compatible with any mod which doesn't alter the map layout
-[*]Changes to AI behaviour: Minor
-[list][*][i]AI can also take these kingdom formation decisions (but they usually won't, due to the restrictions)[/i][/list]
-[*]Decrease in game difficulty: Minor
-[*]Localisation: English only
-[*]Mod development status: In progress
+[u]Other notable features:[/u]
 [list]
-[*][i]Expect new formable kingdoms/duchies to be added in the future (notably: Socotra)[/i]
-[*][i]If you have specific requests, please comment below, and I will consider including them. (No guarantees, but I'm more likely to accept cool/thematic kingdoms which already exist in the history files, and those which have good-looking flags.)[/i]
-[*][i]Otherwise, I'll add new formable kingdoms/duchies depending on my own personal games and inclination.[/i]
-[*][i]Eventually, I plan to make it [u]optional[/u] to de jure move formed kingdoms into your current empire.[/i]
+[*]Reform 769 Saxony (Irminsul flag);
+[*]Move certain duchies into different de jure kingdoms:
+[list]
+[*]Crete and Rhodes into Cyprus
+[*]Mallorca into Sardinia & Corsica
 [/list]
+[*]Optional significantly-less-stringent requirements for human players
 [/list]
 
 [h1]Details:[/h1]
@@ -62,7 +46,7 @@ The aim of the "Expanded Decisions" mod family is to be as compatible as possibl
 [*]Formable kingdoms:
 [list]
 [*]Repurposed vanilla kingdoms: Cyprus, Taurica (Cherson), Trinacria (Sicily)
-[*]New kingdoms added by this mod: Crete, Gotland, Iceland, Mallorca, Mann
+[*]New kingdoms added by this mod: Amalfi, Canarias, Crete, Gotland, Iceland, Kutch, Maldives, Mallorca, Malta, Mann, Ragusa, Socotra
 [/list]
 [/list]
 
@@ -87,8 +71,8 @@ The aim of the "Expanded Decisions" mod family is to be as compatible as possibl
 [/list]
 [*]Formable duchies:
 [list]
-[*]Repurposed vanilla duchies: None
-[*]New duchies added by this mod: Canarias, Malta, Rhodes
+[*]Repurposed vanilla duchies: Amalfi
+[*]New duchies added by this mod: Canarias, Kutch, Maldives, Malta, Rhodes
 [/list]
 [/list]
 
@@ -105,18 +89,28 @@ The aim of the "Expanded Decisions" mod family is to be as compatible as possibl
 [*]On duchy merge: The formable duchy is removed from its previous de jure kingdom and becomes de jure part of the other kingdom
 [*]Supported duchy merges: Crete->Cyprus, Rhodes->Cyprus, Mallorca->Sardinia & Corsica
 [/list]
-[*]Form an empire by merging multiple kingdoms
-[list]
-[*]Requirements:
-[list]
-[*]Similar to the vanilla decision to create a custom empire (Charlemagne DLC), except that de jure migration only requires every county to be owned (not every barony)
-[*]Must be a king (not an emperor) and must have Charlemagne DLC active (per Paradox policy)
 [/list]
-[*]On empire formation:
+
+[h1]Compatibility/Impact:[/h1]
+The aim of the "Expanded Decisions" mod family is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
+[list][*]Required CK2 version: 3.3.5.1
+[*]Achievement compatible: No
+[*]Safe to add to existing game: Yes
+[*]Safe to remove from existing game:
+[list][*]If any [u]mod-added[/u] kingdom (eg. Crete) has been formed at any time in the game's history: [b][u]No[/u][/b]
+[*]Otherwise: Yes[/list]
+[*]Changes to vanilla files: None
+[*]Mod compatibility: Compatible with any mod which doesn't alter the map layout
+[*]Changes to AI behaviour: Minor
+[list][*][i]AI can also take these kingdom formation decisions (but they usually won't, due to the restrictions)[/i][/list]
+[*]Decrease in game difficulty: Minor
+[*]Localisation: English only
+[*]Mod development status: In progress
 [list]
-[*]For every kingdom that is fully owned/controlled by the character down to county level: de jure merge it into the new empire and then destroy it.
-[*]The new empire has the same laws and coat of arms as the previous primary kingdom.
-[/list]
+[*][i]Expect new formable kingdoms/duchies to be added in the future[/i]
+[*][i]If you have specific requests, please comment below, and I will consider including them. (No guarantees, but I'm more likely to accept cool/thematic kingdoms which already exist in the history files, and those which have good-looking flags.)[/i]
+[*][i]Otherwise, I'll add new formable kingdoms/duchies depending on my own personal games and inclination.[/i]
+[*][i]Eventually, I plan to make it [u]optional[/u] to de jure move formed kingdoms into your current empire.[/i]
 [/list]
 [/list]
 

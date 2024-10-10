@@ -4,6 +4,14 @@
 # Utilities #
 #############
 
+expd_kf_root_fulfils_basic_requirements_to_create_this_title = {
+	# Audax Validator "." Ignore_1001
+	AND = {
+		expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
+		expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duchy = yes
+	}
+}
+
 expd_kf_root_is_not_dejure_liege_or_above_of_this_title = {
 	custom_tooltip = {
 		text = expd_kf_root_is_not_dejure_liege_or_above_of_this_title_tt
@@ -168,10 +176,7 @@ expd_kf_root_can_see_decision_to_create_this_kingdom_from_prev_single_duchy = {
 	PREV = { # The source duchy
 		tier = DUKE # Just to make it VERY clear that this is referring to a duchy
 		OR = {
-			AND = {
-				expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
-				expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duchy = yes
-			}
+			expd_kf_root_fulfils_basic_requirements_to_create_this_title = yes
 			AND = {
 				has_global_flag = expd_kf_human_shattering
 				ROOT = { ai = no }
@@ -227,24 +232,30 @@ expd_kf_root_can_take_decision_to_create_this_kingdom_from_prev_single_duchy = {
 		
 		PREVPREV = { # The source duchy
 			
-			tier = DUKE
-			
-			# Duplicate these conditions from the "potential" block, so the player knows not to break them
-			OR = {
-				AND = {
-					expd_kf_root_is_not_dejure_liege_or_above_of_this_title = yes
-					expd_kf_root_does_not_own_other_duchies_in_the_same_de_jure_kingdom_as_this_duchy = yes
-				}
-				expd_kf_root_is_a_human_player_who_owns_every_count_plus_title_in_the_same_de_jure_kingdom_as_this_duchy = yes
-			}
+			hidden_tooltip = { tier = DUKE }
 			
 			# Must personally hold the duchy title, or have a vassal hold it
-			has_holder = yes
-			holder_scope = {
-				OR = {
-					character = ROOT
-					is_vassal_or_below_of = ROOT
+			custom_tooltip = {
+				text = expd_kf_this_title_has_a_holder_who_is_root_or_roots_vassal_tt
+				has_holder = yes
+				holder_scope = {
+					OR = {
+						character = ROOT
+						is_vassal_or_below_of = ROOT
+					}
 				}
+			}
+			
+			# Duplicate these conditions from the "potential" block, so the player knows not to break them
+			trigger_if = {
+				limit = { has_global_flag = expd_kf_human_shattering }
+				OR = {
+					expd_kf_root_fulfils_basic_requirements_to_create_this_title = yes
+					expd_kf_root_is_a_human_player_who_owns_every_count_plus_title_in_the_same_de_jure_kingdom_as_this_duchy = yes
+				}
+			}
+			trigger_else = {
+				expd_kf_root_fulfils_basic_requirements_to_create_this_title = yes
 			}
 			
 		}
