@@ -1,5 +1,3 @@
-[b][u]I am temporarily unable to update this mod due to a bug in Steam Workshop. In the meantime, if you want the latest version, you can download it in [url=https://github.com/jonjowett/ck2_mods/blob/master/expanded_decisions_society_joining/packaged_mod/expanded_decisions_society_joining.zip]zip format[/url].[/u][/b]
-
 [h1]Summary:[/h1]
 This mod makes it [u]slightly[/u] easier for [u]non-zealous[/u] characters to join warrior lodges and the Hermetics.
 
@@ -12,7 +10,19 @@ Additional options that allow a character to join a warrior lodge:
 [/list]
 
 Additional options that allow a character to join the Hermetic Society:
-[list][*]If they could in theory: pause, convert to a religion that allows the Hermetics, join the society, convert back to their previous religion, unpause.[/list]
+[list]
+[*]If they could in theory: pause, convert to a religion that allows the Hermetics, join the society, convert back to their previous religion, unpause.
+[*]Tribal and nomadic rulers (who cannot join the Hermetics in the base game) can join via this mod if they have decent learning stat and one or more pre-existing "hermetic things" (hermetic bloodline, major hermetic artifact, scholarly lifestyle, observatory).
+[/list]
+
+Other features:
+[list]
+[*]Warrior lodge legendary bloodlines are now awarded according to your character's traits/achievements/etc, and you will only receive a duplicate bloodline type if there are no other options.
+[*]AI characters with legendary warrior lodge or hermetic bloodlines are likely to join the relevant societies.
+[/list]
+
+[h1]Recommended Companion Mod:[/h1]
+[list][*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2974515212]Even More Bloodlines[/url] (for the Hermetic bloodline)[/list]
 
 [h1]Compatibility/Impact:[/h1]
 The aim of the "Expanded Decisions" mod family is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
@@ -22,12 +32,18 @@ The aim of the "Expanded Decisions" mod family is to be as compatible as possibl
 [*]Safe to add to existing game: Yes
 [*]Safe to remove from existing game: Yes (but any changes will not be reverted)
 [*]Changes to vanilla files:
-[list][*]Alters ...\common\societies\00_societies.txt[/list]
+[list]
+[*]...\common\scripted_effects\06_scripted_effects_legendary_bloodlines.txt (Warrior Lodge Legendary Journey & Bloodlines)
+[*]...\common\societies\00_societies.txt (every base game society)
+[/list]
 [*]Mod compatibility:
-[list][*]Compatible with any mod that does not alter the vanilla societies (...\common\societies\00_societies.txt)[/list]
+[list][*]Compatible with any mod that does not also alter the base game files listed above[/list]
 [*]Changes to AI behaviour:
-[list][*]AI can now join wrong-religion societies a bit more easily, but this doesn't seem to have any material effect.[/list]
-[*]Decrease in game difficulty: Negligible
+[list]
+[*]AI can now join wrong-religion societies a bit more easily, but this doesn't seem to have any material effect.
+[*]AI with legendary bloodlines may automatically join relevant societies.
+[/list]
+[*]Decrease in game difficulty: Minor
 [*]Localisation: English only
 [*]Mod development status: Feature-complete with no known bugs[/list]
 
