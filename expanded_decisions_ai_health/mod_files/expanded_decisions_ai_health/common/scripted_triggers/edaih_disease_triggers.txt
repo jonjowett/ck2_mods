@@ -1,0 +1,72 @@
+edaih_this_character_has_a_treatable_illness_or_symptom = {
+	OR = {
+		edaih_this_character_has_a_treatable_illness = yes
+		edaih_this_character_has_a_treatable_symptom = yes
+	}
+}
+
+edaih_this_character_has_a_treatable_illness = {
+	OR = {
+		has_epidemic = yes
+		trait = pneumonic
+		trait = syphilitic
+		trait = leper
+		trait = flu
+		trait = dysentery
+		trait = gout
+		trait = food_poisoning
+		trait = rabies
+		trait = cancer
+		trait = scurvy
+	}
+}
+
+edaih_this_character_has_a_treatable_symptom = {
+	has_any_symptom = yes
+}
+
+edaih_this_character_can_be_treated = {
+	# Loosely based on ...\decisions\rip_various_decisions.txt > seek_treatment
+	# NB: We can simplify the logic here by removing many of the cooldowns present in that decision,
+	#     because this mod uses a loop with minimum period of 30 days.
+	
+	# Not currently being treated, or current treatment process has got stuck somehow
+	OR = {
+		NOT = { has_character_flag = being_treated }
+		had_character_flag = { flag = being_treated days = 20 }
+	}
+	
+	# Does not currently have a successful treatment
+	OR = {
+		edaih_this_character_needs_symptom_treatment = yes
+		edaih_this_character_needs_disease_treatment = yes
+	}
+	
+}
+
+edaih_this_character_needs_symptom_treatment = {
+	# Has a symptom, no illness, and no symptom treatment
+	AND = {
+		edaih_this_character_has_a_treatable_illness = no
+		edaih_this_character_has_a_treatable_symptom = yes
+		NOR = {
+			has_character_modifier = symptom_treatment_1
+			has_character_modifier = symptom_treatment_2
+			has_character_modifier = symptom_treatment_3
+			has_character_modifier = symptom_treatment_4
+		}
+	}
+}
+
+edaih_this_character_needs_disease_treatment = {
+	# Has a disease and no successful disease treatment
+	AND = {
+		edaih_this_character_has_a_treatable_illness = yes
+		NOR = {
+			has_character_modifier = mystic_treatment_decent
+			has_character_modifier = successful_treatment_1
+			has_character_modifier = successful_treatment_2
+			has_character_modifier = successful_treatment_3
+		}
+	}
+}

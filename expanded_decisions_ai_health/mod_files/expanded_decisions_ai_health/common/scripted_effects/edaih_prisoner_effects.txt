@@ -1,0 +1,188 @@
+edaih_this_prisoner_pays_their_own_ransom_and_is_released = {
+	
+	if = {
+		limit = { prisoner = yes }
+		
+		if = {
+			limit = { is_ruler = yes }
+			
+			# Pay the ransom
+			if = {
+				limit = { tier = EMPEROR }
+				wealth = -385
+				host = { wealth = 385 }
+			}
+			else_if = {
+				limit = { tier = KING }
+				wealth = -250
+				host = { wealth = 250 }
+			}
+			else_if = {
+				limit = { tier = DUKE }
+				wealth = -145
+				host = { wealth = 145 }
+			}
+			else_if = {
+				limit = { tier = COUNT }
+				wealth = -70
+				host = { wealth = 70 }
+			}
+			else = {
+				wealth = -25
+				host = { wealth = 25 }
+			}
+			
+			# Be released from prison
+			imprison = no
+			
+			# If wealth is negative and a loan is available, take out the loan
+			# Hidden because players may see this effect (eg. AI prisoner of player jailor)
+			hidden_tooltip = {
+				if = {
+					limit = { wealth < 0 }
+					if = {
+						limit = { edaih_this_imprisoned_character_can_take_out_a_loan_after_release_special_jewish = yes }
+						add_character_modifier = {
+							name = borrowed_from_jews_special
+							duration = -1
+							inherit = yes
+						}
+						wealth = 600
+					}
+					else_if = {
+						limit = { edaih_this_imprisoned_character_can_take_out_a_loan_after_release_jewish = yes }
+						add_character_modifier = { name = borrowed_from_jews duration = -1 inherit = yes }
+						wealth = 300
+					}
+					else_if = {
+						limit = { edaih_this_imprisoned_character_can_take_out_a_loan_after_release_holy_order = yes }
+						if = {
+							limit = { is_decision_potential = borrow_money_knights_templar }
+							add_character_modifier = { name = borrowed_from_knights_templar duration = -1 inherit = yes }
+							d_knights_templar = { holder_scope = { character_event = { id = SoA.1010 } } }
+							wealth = 300
+							piety = -100
+						}
+						else_if = {
+							limit = { is_decision_potential = borrow_money_assassins }
+							add_character_modifier = { name = borrowed_from_assassins duration = -1 inherit = yes }
+							d_hashshashin = { holder_scope = { character_event = { id = SoA.1410 } } }
+							wealth = 300
+							piety = -100
+							if = {
+								limit = { has_dlc = "Mystics" }
+								set_variable = { which = assassins_debt value = 300 }
+							}
+						}
+						else_if = {
+							limit = { is_decision_potential = borrow_money_bektashi }
+							add_character_modifier = { name = borrowed_from_bektashi duration = -1 inherit = yes }
+							d_bektashi = { holder_scope = { character_event = { id = SoA.1210 } } }
+							wealth = 300
+							piety = -100
+						}
+						else_if = {
+							limit = { is_decision_potential = borrow_money_haruriyyah }
+							add_character_modifier = { name = borrowed_from_haruriyyah duration = -1 inherit = yes }
+							d_haruriyyah = { holder_scope = { character_event = { id = CM.4310 } } }
+							wealth = 300
+							piety = -100
+						}
+					}
+					else_if = {
+						limit = { edaih_this_imprisoned_character_can_take_out_a_loan_after_release_radhanite = yes }
+						add_character_modifier = { name = borrowed_from_radhanites duration = -1 inherit = yes }
+						wealth = 200
+					}
+				}
+			}
+		}
+		
+		else = {
+			
+			# Pay the ransom
+			if = {
+				limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_emperor = yes }
+				wealth = -110
+				host = { wealth = 110 }
+			}
+			else_if = {
+				limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_king = yes }
+				wealth = -74
+				host = { wealth = 74 }
+			}
+			else_if = {
+				limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_duke = yes }
+				wealth = -46
+				host = { wealth = 46 }
+			}
+			else_if = {
+				limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_count = yes }
+				wealth = -26
+				host = { wealth = 26 }
+			}
+			else_if = {
+				limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_baron = yes }
+				wealth = -14
+				host = { wealth = 14 }
+			}
+			else = {
+				wealth = -10
+				host = { wealth = 10 }
+			}
+			
+			# Be released from prison
+			imprison = no
+			
+		}
+	
+	}
+	else = {
+		# Not a prisoner (probably due to player shenanigans) - do nothing
+	}
+}
+
+edaih_this_prisoners_liege_pays_their_ransom_and_they_are_released = {
+	
+	if = {
+		limit = { prisoner = yes }
+		
+		# Pay the ransom
+		if = {
+			limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_emperor = yes }
+			liege = { wealth = -110 }
+			host = { wealth = 110 }
+		}
+		else_if = {
+			limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_king = yes }
+			liege = { wealth = -74 }
+			host = { wealth = 74 }
+		}
+		else_if = {
+			limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_duke = yes }
+			liege = { wealth = -46 }
+			host = { wealth = 46 }
+		}
+		else_if = {
+			limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_count = yes }
+			liege = { wealth = -26 }
+			host = { wealth = 26 }
+		}
+		else_if = {
+			limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_baron = yes }
+			liege = { wealth = -14 }
+			host = { wealth = 14 }
+		}
+		else = {
+			liege = { wealth = -10 }
+			host = { wealth = 10 }
+		}
+		
+		# Be released from prison
+		imprison = no
+		
+	}
+	else = {
+		# Not a prisoner (probably due to player shenanigans) - do nothing
+	}
+}

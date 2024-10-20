@@ -1,0 +1,44 @@
+edaih_this_character_has_a_court_physician_in_their_court = {
+	any_courtier_or_vassal = {
+		is_adult = yes
+		has_minor_title = title_court_physician
+		liege = { character = PREVPREV }
+	}
+}
+
+edaih_this_character_has_a_good_court_physician_in_their_court = {
+	any_courtier_or_vassal = {
+		is_adult = yes
+		has_minor_title = title_court_physician
+		physician_good_trigger = yes
+		liege = { character = PREVPREV }
+	}
+}
+
+edaih_this_character_has_a_decent_court_physician_in_their_court = {
+	any_courtier_or_vassal = {
+		is_adult = yes
+		has_minor_title = title_court_physician
+		physician_good_trigger = no
+		physician_bad_trigger = no
+		liege = { character = PREVPREV }
+	}
+}
+
+edaih_this_character_has_a_good_or_decent_court_physician_in_their_court = {
+	any_courtier_or_vassal = {
+		is_adult = yes
+		has_minor_title = title_court_physician
+		physician_bad_trigger = no
+		liege = { character = PREVPREV }
+	}
+}
+
+edaih_this_character_has_a_bad_court_physician_in_their_court = {
+	any_courtier_or_vassal = {
+		is_adult = yes
+		has_minor_title = title_court_physician
+		physician_bad_trigger = yes
+		liege = { character = PREVPREV }
+	}
+}

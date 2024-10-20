@@ -1,0 +1,678 @@
+namespace = ExpDAIHealth
+
+# Event IDs:
+#    1000-1999: General / Admin
+#    2000-2999: Event chain for untreated prisoners
+#    3000-3999: Event chain for untreated non-imprisoned rulers
+#    4000-4999: Event chain for untreated non-imprisoned courtiers
+
+# on_yearly_pulse: AI character: Do I have an untreated disease?
+character_event = {
+	
+	id = ExpDAIHealth.1000
+	
+	hide_window = yes
+	is_triggered_only = yes
+	
+	ai = yes
+	is_sick = yes
+	has_dlc = "Reapers"
+	
+	trigger = {
+		
+		# Character has a condition which can be treated
+		edaih_this_character_has_a_treatable_illness_or_symptom = yes
+		
+		# Character does not already have a treatment loop in progress, or the treatment loop is old (stuck?)
+		OR = {
+			NOT = { has_character_flag = edaih_ai_treatment_event_chain_in_progress }
+			had_character_flag = { flag = edaih_ai_treatment_event_chain_in_progress days >= 100 }
+		}
+		
+	}
+	immediate = {
+		# Start a new treatment loop
+		character_event = { id = ExpDAIHealth.1001 }
+	}
+}
+
+# Main repeating event for AI with treatable illness
+character_event = {
+	id = ExpDAIHealth.1001
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		
+		# Clear any existing treatment loops
+		clear_delayed_event = { id = ExpDAIHealth.1001 }
+		
+		# Reset the treatment loop tracking flag
+		clr_character_flag = edaih_ai_treatment_event_chain_in_progress
+		set_character_flag = edaih_ai_treatment_event_chain_in_progress
+		
+		if = {
+			limit = { ai = yes }
+			if = {
+				limit = { edaih_this_character_has_a_treatable_illness_or_symptom = yes }
+				if = {
+					limit = { edaih_this_character_can_be_treated = yes }
+					# Character is ill and can be treated (no treatment, only has symptom treatment, etc)
+					# Try something, and check back in 90 days
+					character_event = { id = ExpDAIHealth.1001 days = 90 }
+					character_event = { id = ExpDAIHealth.1002 }
+				}
+				else = {
+					# Character is ill but cannot be treated (probably because their treatment has not expired)
+					# Check back in 30 days
+					character_event = { id = ExpDAIHealth.1001 days = 30 }
+				}
+			}
+			else = {
+				# Character is no longer ill - cancel the treatment loop
+				clr_character_flag = edaih_ai_treatment_event_chain_in_progress
+			}
+		}
+		else = {
+			# Character is not (or is no longer) an AI - cancel the treatment loop
+			clr_character_flag = edaih_ai_treatment_event_chain_in_progress
+		}
+		
+	}
+}
+
+# This AI character wants to be treated
+character_event = {
+	id = ExpDAIHealth.1002
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		# Separate event chains for: prisoners, non-imprisoned rulers, and non-imprisoned courtiers
+		if = {
+			limit = { prisoner = yes }
+			character_event = { id = ExpDAIHealth.2000 }
+		}
+		else_if = {
+			limit = { is_ruler = yes }
+			character_event = { id = ExpDAIHealth.3000 }
+		}
+		else = {
+			character_event = { id = ExpDAIHealth.4000 }
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+###########################################
+#                                         #
+#           UNTREATED PRISONERS           #
+#                                         #
+###########################################
+
+
+
+
+
+character_event = {
+	id = ExpDAIHealth.2000
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		
+		if = {
+			limit = { has_character_modifier = house_arrest }
+			if = {
+				limit = {
+					edaih_this_imprisoned_character_has_a_better_court_physician_at_home = yes
+					edaih_this_imprisoned_character_can_be_ransomed = yes
+				}
+				# Ask for compassionate release (by paying ransom) so I can be treated by my home physician
+				character_event = { id = ExpDAIHealth.2100 }
+			}
+			else_if = {
+				limit = {
+					edaih_this_imprisoned_character_has_a_better_court_physician_at_home = yes
+					edaih_this_imprisoned_character_can_be_ransomed = no
+					edaih_this_imprisoned_character_thinks_his_jailor_might_release_him_for_free = yes
+				}
+				# Ask for compassionate release (without paying ransom) so I can be treated by my home physician
+				character_event = { id = ExpDAIHealth.2200 }
+			}
+			else_if = {
+				limit = { host = { edaih_this_character_has_a_good_or_decent_court_physician_in_their_court = yes } }
+				# Jailor has a good-enough court physician, and I'm in house arrest so I can call on him at will
+				character_event = { id = ExpDAIHealth.2400 }
+			}
+			else = {
+				# Suffer in silence
+			}
+		}
+		else = {
+			if = {
+				limit = { edaih_this_imprisoned_character_can_be_ransomed = yes }
+				# Ask for compassionate release (by paying ransom)
+				# Even if there's no physician at home, being released is worthwhile due to the removal of the health malus.
+				character_event = { id = ExpDAIHealth.2100 }
+			}
+			else_if = {
+				limit = {
+					edaih_this_imprisoned_character_can_be_ransomed = no
+					edaih_this_imprisoned_character_thinks_his_jailor_might_release_him_for_free = yes
+				}
+				# Ask for compassionate release (without paying ransom)
+				# Even if there's no physician at home, being released is worthwhile due to the removal of the health malus.
+				character_event = { id = ExpDAIHealth.2200 }
+			}
+			else_if = {
+				limit = {
+					host = { edaih_this_character_has_a_good_or_decent_court_physician_in_their_court = yes }
+					OR = {
+						NOT = { has_character_flag = edaih_prisoner_treatment_rejected }
+						had_character_flag = { flag = edaih_prisoner_treatment_rejected years >= 1 }
+					}
+				}
+				# Jailor has a good-enough court physician; ask to be treated
+				character_event = { id = ExpDAIHealth.2300 }
+			}
+			else = {
+				# Suffer in silence
+			}
+		}
+	}
+}
+
+# Sick prisoner wants to be ransomed
+# ROOT = Prisoner
+character_event = {
+	id = ExpDAIHealth.2100
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		if = {
+			limit = { edaih_this_imprisoned_character_can_be_ransomed = yes }
+			if = {
+				limit = {
+					OR = {
+						edaih_this_imprisoned_character_is_a_ruler_and_can_afford_to_pay_their_own_ransom = yes
+						edaih_this_imprisoned_character_is_not_a_ruler_and_can_afford_to_pay_their_own_ransom = yes
+					}
+				}
+				# Offer to pay my ransom
+				host = { character_event = { id = ExpDAIHealth.2120 } }
+			}
+			else = {
+				# Ask my liege to pay for my release 
+				liege = { character_event = { id = ExpDAIHealth.2110 } }
+			}
+		}
+		else = {
+			# Some kind of inconsistency! Debug event to player.
+			any_player = { character_event = { id = ExpDAIHealth.9001 } }
+		}
+	}
+}
+
+# Sick unlanded prisoner asks their liege to pay their ransom, so they can be treated
+# ROOT = Prisoner's liege ; FROM = Prisoner
+character_event = {
+	id    = ExpDAIHealth.2110
+	title = ExpDAIHealth_2110_Title
+	desc  = ExpDAIHealth_2110_Desc
+	
+	
+	
+	is_triggered_only = yes
+	trigger = {
+		FROM = {
+			ai = yes
+			prisoner = yes
+			liege = { character = ROOT }
+			edaih_this_imprisoned_character_is_not_a_ruler_and_their_liege_can_afford_to_pay_their_ransom = yes
+		}
+	}
+	fail_trigger_effect = {
+		# If something has changed, FROM should re-evaluate their treatment options
+		FROM = { character_event = { id = ExpDAIHealth.1001 } }
+	}
+	
+	
+	
+	immediate = {
+		# Store the ransom amount in a variable on the prisoner, so it can be included in localisation
+		FROM = {
+			set_variable = { which = edaih_prisoner_ransom_amount value = 0 }
+			if = {
+				limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_emperor = yes }
+				set_variable = { which = edaih_prisoner_ransom_amount value = 110 }
+			}
+			else_if = {
+				limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_king = yes }
+				set_variable = { which = edaih_prisoner_ransom_amount value = 74 }
+			}
+			else_if = {
+				limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_duke = yes }
+				set_variable = { which = edaih_prisoner_ransom_amount value = 46 }
+			}
+			else_if = {
+				limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_count = yes }
+				set_variable = { which = edaih_prisoner_ransom_amount value = 26 }
+			}
+			else_if = {
+				limit = { edaih_this_imprisoned_character_is_unlanded_child_of_living_baron = yes }
+				set_variable = { which = edaih_prisoner_ransom_amount value = 14 }
+			}
+			else = {
+				set_variable = { which = edaih_prisoner_ransom_amount value = 10 }
+			}
+		}
+		# Calculate the hypothetical wealth of the prisoner's liege after paying the prisoner's ransom, and store it on the prisoner
+		# The purpose of this value is to help AI lieges to decide whether to pay the ransom
+		FROM = {
+			export_to_variable = { which = edaih_prisoner_lieges_wealth_after_paying_ransom value = wealth who = ROOT }
+			subtract_variable = { which = edaih_prisoner_lieges_wealth_after_paying_ransom which = edaih_prisoner_ransom_amount }
+		}
+	}
+	
+	
+	
+	option = {
+		
+		name = ExpDAIHealth_2110_Option_IWillPayFromsRansom
+		
+		if = {
+			limit = { FROM = { prisoner = yes } }
+			
+			custom_tooltip = { text = ExpDAIHealth_2110_Option_FromWillBeRansomedByMe }
+			
+			FROM = { opinion = { name = opinion_very_grateful who = ROOT years = 5 } }
+			
+			hidden_tooltip = {
+				FROM = {
+					clr_character_flag = edaih_prisoner_ransom_rejected_by_liege
+					character_event = { id = ExpDAIHealth.2111 }
+				}
+			}
+			
+		}
+		else = {
+			# FROM is somehow no longer a prisoner - go back to the top and start again
+			custom_tooltip = { text = edaih_from_is_no_longer_a_prisoner_tt }
+			hidden_tooltip = { FROM = { character_event = { id = ExpDAIHealth.1001 } } }
+		}
+		
+		ai_chance = {
+			
+			factor = 10
+			
+			mult_modifier = {
+				factor = 0
+				edaih_this_character_should_always_be_horrible_to_from = yes
+			}
+			mult_modifier = { # Bias lieges towards paying ransom
+				factor = 2
+				always = yes
+			}
+			
+			# Some traits bias lieges against ransoming
+			mult_modifier = {
+				factor = 0.5
+				trait = greedy
+			}
+			mult_modifier = {
+				factor = 0.5
+				trait = cruel
+			}
+			mult_modifier = {
+				factor = 0.5
+				trait = arbitrary
+			}
+			
+			# More likely to ransom prisoners I like
+			mult_modifier = {
+				factor = 0.2
+				opinion = { who = FROM value <= -50 }
+			}
+			mult_modifier = {
+				factor = 0.5
+				opinion = { who = FROM value <= -25 }
+			}
+			mult_modifier = {
+				factor = 2
+				opinion = { who = FROM value >= 0 }
+			}
+			mult_modifier = {
+				factor = 5
+				opinion = { who = FROM value >= 25 }
+			}
+			
+			# More likely to ransom dynasts
+			mult_modifier = {
+				factor = 2
+				dynasty = FROM
+			}
+			mult_modifier = {
+				factor = 10
+				is_close_relative = FROM
+			}
+			mult_modifier = {
+				factor = 1000
+				FROM = {
+					dynasty = ROOT
+					is_primary_heir = ROOT
+				}
+			}
+			
+			# Wealth remaining after paying ransom
+			mult_modifier = {
+				factor = 0.2
+				FROM = { check_variable = { which = edaih_prisoner_lieges_wealth_after_paying_ransom value <= 10 } }
+			}
+			mult_modifier = {
+				factor = 0.5
+				FROM = { check_variable = { which = edaih_prisoner_lieges_wealth_after_paying_ransom value <= 50 } }
+			}
+			mult_modifier = {
+				factor = 2
+				FROM = { check_variable = { which = edaih_prisoner_lieges_wealth_after_paying_ransom value >= 100 } }
+			}
+			mult_modifier = {
+				factor = 5
+				FROM = { check_variable = { which = edaih_prisoner_lieges_wealth_after_paying_ransom value >= 500 } }
+			}
+			mult_modifier = {
+				factor = 10
+				FROM = { check_variable = { which = edaih_prisoner_lieges_wealth_after_paying_ransom value >= 1000 } }
+			}
+			
+		}
+	}
+	
+	
+	
+	option = {
+		name = ExpDAIHealth_2110_Option_IWillNotPayFromsRansom
+		
+		FROM = { opinion = { name = opinion_very_disappointed who = ROOT years = 5 } }
+		
+		# Reset the ransom rejected flag, so this prisoner doesn't bother their liege again for a few years
+		hidden_tooltip = {
+			FROM = {
+				clr_character_flag = edaih_prisoner_ransom_rejected_by_liege
+				set_character_flag = edaih_prisoner_ransom_rejected_by_liege
+			}
+		}
+		
+		ai_chance = {
+			factor = 10
+			mult_modifier = {
+				factor = 0
+				edaih_this_character_should_always_be_nice_to_from = yes
+			}
+		}
+		
+	}
+	
+	
+	
+	after = {
+		# Clear stored variables
+		hidden_tooltip = {
+			FROM = {
+				set_variable = { which = edaih_prisoner_ransom_amount value = 0 }
+				set_variable = { which = edaih_prisoner_lieges_wealth_after_paying_ransom value = 0 }
+			}
+		}
+	}
+}
+
+# Ping event on prisoner
+# My liege has agreed to pay my ransom - send request to jailor
+# ROOT = Prisoner ; FROM (unused) = prisoner's liege
+character_event = {
+	id = ExpDAIHealth.2111
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		host = { character_event = { id = ExpDAIHealth.2120 } }
+	}
+}
+
+
+# Sick prisoner asks for compassionate release
+# ROOT = Jailor ; FROM = Prisoner
+character_event = {
+	id    = ExpDAIHealth.2120
+	title = ExpDAIHealth_2120_Title
+	desc  = ExpDAIHealth_2120_Desc
+	
+	
+	
+	is_triggered_only = yes
+	trigger = {
+		FROM = {
+			ai = yes
+			prisoner = yes
+			host = { character = ROOT }
+			OR = {
+				edaih_this_imprisoned_character_is_a_ruler_and_can_afford_to_pay_their_own_ransom = yes
+				edaih_this_imprisoned_character_is_not_a_ruler_and_can_afford_to_pay_their_own_ransom = yes
+				edaih_this_imprisoned_character_is_not_a_ruler_and_their_liege_can_afford_to_pay_their_ransom = yes
+			}
+		}
+	}
+	fail_trigger_effect = {
+		# If something has changed, FROM should re-evaluate their treatment options
+		FROM = { character_event = { id = ExpDAIHealth.1001 } }
+	}
+	
+	
+	
+	option = {
+		
+		name = ExpDAIHealth_2120_Option_RansomGranted
+		
+		if = {
+			limit = {
+				FROM = {
+					prisoner = yes
+					host = { character = ROOT }
+				}
+			}
+			
+			# Pay the ransom & release the prisoner
+			if = {
+				limit = {
+					OR = {
+						edaih_this_imprisoned_character_is_a_ruler_and_can_afford_to_pay_their_own_ransom = yes
+						edaih_this_imprisoned_character_is_not_a_ruler_and_can_afford_to_pay_their_own_ransom = yes
+					}
+				}
+				FROM = { edaih_this_prisoner_pays_their_own_ransom_and_is_released = yes }
+			}
+			else = {
+				FROM = { edaih_this_prisoners_liege_pays_their_ransom_and_they_are_released = yes }
+			}
+			
+			FROM = { opinion = { name = opinion_very_grateful who = ROOT years = 5 } }
+			
+			hidden_tooltip = { FROM = { clr_character_flag = edaih_prisoner_ransom_rejected_by_jailor } }
+		}
+		else = {
+			# FROM is somehow no longer imprisoned by ROOT - do nothing
+			custom_tooltip = { text = edaih_from_is_no_longer_imprisoned_by_you_tt }
+		}
+		
+		ai_chance = {
+			
+			factor = 10
+			
+			mult_modifier = {
+				factor = 0
+				edaih_this_character_should_always_be_horrible_to_from = yes
+			}
+			
+			# Influence of traits
+			# NB: If the AI jailor is kind then the other options are blocked
+			mult_modifier = {
+				factor = 10
+				trait = greedy
+			}
+			
+			# Lower current wealth => higher chance of allowing a prisoner to be ransomed
+			mult_modifier = {
+				factor = 2
+				wealth <= 100
+			}
+			mult_modifier = {
+				factor = 2
+				wealth <= 200
+			}
+			mult_modifier = {
+				factor = 2
+				wealth <= 500
+			}
+			mult_modifier = {
+				factor = 2
+				wealth <= 1000
+			}
+			
+			# Non-super-rich AI who are at war should be very willing to ransom irrelevant prisoners
+			mult_modifier = {
+				factor = 10
+				wealth <= 1000
+				OR = {
+					is_primary_war_attacker = yes
+					is_primary_war_defender = yes
+				}
+			}
+			
+			# Higher opinion of prisoner => higher chance of allowing them to be ransomed
+			# NB: opinion >= 50 means AI jailors cannot take any of the other options
+			mult_modifier = {
+				factor = 2
+				opinion = { who = FROM value >= -25 }
+			}
+			mult_modifier = {
+				factor = 2
+				opinion = { who = FROM value >= 0 }
+			}
+			mult_modifier = {
+				factor = 2
+				opinion = { who = FROM value >= 25 }
+			}
+			
+		}
+	}
+	
+	
+	
+	option = {
+		
+		name = ExpDAIHealth_2120_Option_RansomDenied
+		
+		if = {
+			limit = {
+				FROM = {
+					prisoner = yes
+					host = { character = ROOT }
+				}
+			}
+			
+			FROM = { opinion = { name = opinion_very_disappointed who = ROOT years = 2 } }
+			
+			# Reset the ransom rejected flag, so this prisoner doesn't bother their jailor again for a few years
+			hidden_tooltip = {
+				FROM = {
+					clr_character_flag = edaih_prisoner_ransom_rejected_by_jailor
+					set_character_flag = edaih_prisoner_ransom_rejected_by_jailor
+				}
+			}
+		}
+		else = {
+			# FROM is somehow no longer imprisoned by ROOT - do nothing
+			custom_tooltip = { text = edaih_from_is_no_longer_imprisoned_by_you_tt }
+		}
+		
+		ai_chance = {
+			factor = 10
+			mult_modifier = {
+				factor = 0
+				edaih_this_character_should_always_be_nice_to_from = yes
+			}
+		}
+		
+	}
+	
+	
+	
+	option = {
+		
+		name = ExpDAIHealth_2120_Option_RansomDenied_Oubliette
+		
+		trigger = { FROM = { NOT = { has_character_modifier = the_oubliette } } }
+		
+		if = {
+			limit = {
+				FROM = {
+					prisoner = yes
+					host = { character = ROOT }
+				}
+			}
+			
+			# Move the prisoner to the oubliette
+			hidden_tooltip = {
+				FROM = {
+					remove_character_modifier = house_arrest
+					remove_character_modifier = the_dungeon
+				}
+			}
+			FROM = { add_character_modifier = { name = the_oubliette duration = -1 } }
+			
+			FROM = { opinion = { name = opinion_deeply_insulted who = ROOT years = 5 } }
+			
+			# Reset the ransom rejected flag, so this prisoner doesn't bother their jailor again for a few years
+			hidden_tooltip = {
+				FROM = {
+					clr_character_flag = edaih_prisoner_ransom_rejected_by_jailor
+					set_character_flag = edaih_prisoner_ransom_rejected_by_jailor
+				}
+			}
+		}
+		else = {
+			# FROM is somehow no longer imprisoned by ROOT - do nothing
+			custom_tooltip = { text = edaih_from_is_no_longer_imprisoned_by_you_tt }
+		}
+		
+		ai_chance = {
+			factor = 10
+			mult_modifier = {
+				factor = 0
+				edaih_this_character_should_always_be_nice_to_from = yes
+			}
+			mult_modifier = {
+				factor = 2
+				trait = arbitrary
+			}
+			mult_modifier = {
+				factor = 5
+				trait = cruel
+			}
+			mult_modifier = {
+				factor = 0
+				NOT = { trait = cruel }
+				opinion = { who = FROM value >= 0 }
+			}
+		}
+	}
+	after = {
+		# FROM (the ex-prisoner) should re-evaluate their treatment options
+		hidden_tooltip = { FROM = { character_event = { id = ExpDAIHealth.1001 } } }
+	}
+}

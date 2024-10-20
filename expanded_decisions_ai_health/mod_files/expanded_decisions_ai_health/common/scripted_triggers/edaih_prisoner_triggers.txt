@@ -1,0 +1,541 @@
+
+
+edaih_this_imprisoned_character_has_a_better_court_physician_at_home = {
+	OR = {
+		AND = {
+			host = { edaih_this_character_has_a_good_court_physician_in_their_court = no }
+			OR = {
+				AND = {
+					is_ruler = yes
+					edaih_this_character_has_a_good_court_physician_in_their_court = yes
+				}
+				AND = {
+					is_ruler = yes
+					independent = no
+					edaih_this_character_has_a_court_physician_in_their_court = no
+					liege = { edaih_this_character_has_a_good_court_physician_in_their_court = yes }
+				}
+				AND = {
+					is_ruler = no
+					liege = { edaih_this_character_has_a_good_court_physician_in_their_court = yes }
+				}
+			}
+		}
+		AND = {
+			host = { edaih_this_character_has_a_good_or_decent_court_physician_in_their_court = no }
+			OR = {
+				AND = {
+					is_ruler = yes
+					edaih_this_character_has_a_good_or_decent_court_physician_in_their_court = yes
+				}
+				AND = {
+					is_ruler = yes
+					independent = no
+					edaih_this_character_has_a_court_physician_in_their_court = no
+					liege = { edaih_this_character_has_a_good_or_decent_court_physician_in_their_court = yes }
+				}
+				AND = {
+					is_ruler = no
+					liege = { edaih_this_character_has_a_good_or_decent_court_physician_in_their_court = yes }
+				}
+			}
+		}
+	}
+}
+
+edaih_this_imprisoned_character_can_be_ransomed = {
+	
+	edaih_this_imprisoned_character_is_important_for_a_war = no
+	
+	edaih_this_imprisoned_character_is_a_rowdy_vassal_of_their_jailor = no
+	
+	# Jailor does NOT hate this prisoner
+	host = {
+		edaih_this_character_considers_prev_to_be_a_traitor   = no
+		edaih_this_character_considers_prev_to_be_a_maleficar = no
+		NOT = { is_rival = PREV }
+		NOT = { is_foe   = PREV }
+		NOT = { opinion = { who = PREV value <= -80 } } # In case the jailor hates the prisoner for some other reason
+	}
+	
+	# Someone can pay the ransom
+	OR = {
+		edaih_this_imprisoned_character_is_a_ruler_and_can_afford_to_pay_their_own_ransom = yes
+		edaih_this_imprisoned_character_is_not_a_ruler_and_can_afford_to_pay_their_own_ransom = yes
+		AND = {
+			edaih_this_imprisoned_character_is_not_a_ruler_and_their_liege_can_afford_to_pay_their_ransom = yes
+			OR = {
+				NOT = { has_character_flag = edaih_prisoner_ransom_rejected_by_liege }
+				had_character_flag = { flag = edaih_prisoner_ransom_rejected_by_liege years >= 2 }
+			}
+		}
+	}
+	
+	# A self-ransom request has not recently been rejected
+	OR = {
+		NOT = { has_character_flag = edaih_prisoner_ransom_rejected_by_jailor }
+		had_character_flag = { flag = edaih_prisoner_ransom_rejected_by_jailor years >= 2 }
+	}
+	
+}
+
+edaih_this_imprisoned_character_is_important_for_a_war = {
+	host = {
+		any_war = {
+			defender = {
+				OR = {
+					character         = PREVPREVPREV # Prisoner
+					is_close_relative = PREVPREVPREV
+					is_primary_heir   = PREVPREVPREV
+				}
+			}
+			any_attacker = {
+				OR = {
+					character            = PREVPREV # Jailor
+					is_liege_or_above_of = PREVPREV
+				}
+			}
+		}
+		any_war = {
+			attacker = {
+				OR = {
+					character         = PREVPREVPREV # Prisoner
+					is_close_relative = PREVPREVPREV
+					is_primary_heir   = PREVPREVPREV
+				}
+			}
+			any_defender = {
+				OR = {
+					character            = PREVPREV # Jailor
+					is_liege_or_above_of = PREVPREV
+				}
+			}
+		}
+	}
+}
+
+edaih_this_imprisoned_character_is_a_rowdy_vassal_of_their_jailor = {
+	
+	is_ruler = yes
+	independent = no
+	
+	# Barons probably can't join factions at all. If they can, they probably only matter for counts.
+	OR = {
+		higher_tier_than = BARON
+		host = { tier = COUNT }
+	}
+	
+	# Prisoner is direct vassal of jailor
+	host = { any_vassal = { character = PREVPREV } }
+	
+	# Prisoner is NOT a 100% obedient vassal of jailor
+	NOT = {
+		host = {
+			any_vassal = {
+				character = PREVPREV
+				obedient = PREV
+			}
+		}
+	}
+	
+	OR = {
+		
+		# Prisoner might join a faction
+		AND = {
+			# Prisoner opinion of jailor <= 50 (opinion gain due to loss of diplomacy of prisoner is more than offset by the opinion loss due to being imprisoned)
+			NOT = { host = { reverse_opinion = { who = PREV value > 50 } } }
+			# Prisoner and jailor do NOT have a NAP, or NAPs don't block faction membership
+			OR = {
+				NOT = { host = { has_non_aggression_pact_with = PREV } }
+				NOT = { has_game_rule = { name = non_aggression_pacts_block_factions value = on } }
+			}
+		}
+		
+	}
+	
+}
+
+edaih_this_character_considers_prev_to_be_a_traitor = {
+	# Returns true if the prisoner is in prison for what the jailor considers to be a good reason.
+	# This is just a list of all opinion modifiers which have a *_reason, since there doesn't seem to be a better way.
+	
+	OR = {
+		
+		# Base game
+		has_opinion_modifier = { who = PREV name = declared_war }
+		has_opinion_modifier = { who = PREV name = opinion_dishonorable }
+		has_opinion_modifier = { who = PREV name = opinion_traitor }
+		has_opinion_modifier = { who = PREV name = opinion_rebel_traitor }
+		has_opinion_modifier = { who = PREV name = opinion_regicide_traitor }
+		has_opinion_modifier = { who = PREV name = attempted_murder_of_spouse }
+		has_opinion_modifier = { who = PREV name = attempted_murder_of_child }
+		has_opinion_modifier = { who = PREV name = attempted_murder_of_parent }
+		has_opinion_modifier = { who = PREV name = attempted_murder_of_sibling }
+		has_opinion_modifier = { who = PREV name = attempted_murder_of_vassal }
+		has_opinion_modifier = { who = PREV name = attempted_murder_of_spouse_vassal }
+		has_opinion_modifier = { who = PREV name = attempted_murder }
+		has_opinion_modifier = { who = PREV name = opinion_spouse_slayer }
+		has_opinion_modifier = { who = PREV name = opinion_murder_attempt }
+		has_opinion_modifier = { who = PREV name = opinion_killed_close_kin }
+		has_opinion_modifier = { who = PREV name = opinion_killed_father }
+		has_opinion_modifier = { who = PREV name = opinion_refused_abdicate_title }
+		has_opinion_modifier = { who = PREV name = opinion_hajj_attempt_murder }
+		has_opinion_modifier = { who = PREV name = opinion_fatwa_target }
+		has_opinion_modifier = { who = PREV name = opinion_refused_order }
+		has_opinion_modifier = { who = PREV name = opinion_castrated_me }
+		has_opinion_modifier = { who = PREV name = opinion_castrated_family }
+		has_opinion_modifier = { who = PREV name = opinion_castrated_close_kin }
+		has_opinion_modifier = { who = PREV name = opinion_blinded_me }
+		has_opinion_modifier = { who = PREV name = opinion_blinded_family }
+		has_opinion_modifier = { who = PREV name = opinion_blinded_close_kin }
+		has_opinion_modifier = { who = PREV name = opinion_witch }
+		has_opinion_modifier = { who = PREV name = opinion_takfir }
+		has_opinion_modifier = { who = PREV name = opinion_attempted_abduction }
+		has_opinion_modifier = { who = PREV name = opinion_unfaithful_wife }
+		has_opinion_modifier = { who = PREV name = opinion_unfaithful_husband }
+		has_opinion_modifier = { who = PREV name = opinion_unfaithful_husband_crime }
+		has_opinion_modifier = { who = PREV name = opinion_cuckolded }
+		has_opinion_modifier = { who = PREV name = opinion_killed_lover }
+		has_opinion_modifier = { who = PREV name = opinion_charge_heresiarch }
+		has_opinion_modifier = { who = PREV name = opinion_charge_infidel }
+		has_opinion_modifier = { who = PREV name = opinion_charge_deviant }
+		has_opinion_modifier = { who = PREV name = opinion_charge_illegitimate }
+		has_opinion_modifier = { who = PREV name = opinion_charge_cultist }
+		has_opinion_modifier = { who = PREV name = opinion_charge_dw }
+		has_opinion_modifier = { who = PREV name = opinion_charge_traitor }
+		has_opinion_modifier = { who = PREV name = opinion_charge_slanderer }
+		has_opinion_modifier = { who = PREV name = abuse_of_office }
+		has_opinion_modifier = { who = PREV name = opinion_tortured_me }
+		has_opinion_modifier = { who = PREV name = opinion_tortured_family }
+		has_opinion_modifier = { who = PREV name = opinion_tortured_close_kin }
+		has_opinion_modifier = { who = PREV name = opinion_mutilated_me }
+		has_opinion_modifier = { who = PREV name = opinion_mutilated_family }
+		has_opinion_modifier = { who = PREV name = opinion_mutilated_close_kin }
+		has_opinion_modifier = { who = PREV name = opinion_leave }
+		has_opinion_modifier = { who = PREV name = opinion_thief }
+		has_opinion_modifier = { who = PREV name = opinion_outlawed_society }
+		has_opinion_modifier = { who = PREV name = opinion_accused_apostate }
+		has_opinion_modifier = { who = PREV name = opinion_broke_contract }
+		
+		# PDXRPTG
+		AND = {
+			edaih_pdxrptg_mod_is_active = yes
+			OR = {
+				# esm_opinions.txt
+				has_opinion_modifier = { who = PREV name = tried_to_sacrifice_me }
+				has_opinion_modifier = { who = PREV name = tortured_me }
+				has_opinion_modifier = { who = PREV name = slandered_spouse }
+				has_opinion_modifier = { who = PREV name = opinion_sold_family }
+				has_opinion_modifier = { who = PREV name = opinion_slavery_illegal }
+				has_opinion_modifier = { who = PREV name = opinion_kidnapped_dynasty }
+				has_opinion_modifier = { who = PREV name = opinion_kidnapped_family }
+				has_opinion_modifier = { who = PREV name = opinion_kidnapped_me }
+				has_opinion_modifier = { who = PREV name = opinion_attempted_kidnap }
+				has_opinion_modifier = { who = PREV name = made_me_chicken }
+				has_opinion_modifier = { who = PREV name = opinion_cultist }
+				has_opinion_modifier = { who = PREV name = opinion_stole_throne }
+				has_opinion_modifier = { who = PREV name = opinion_feral_monster }
+				has_opinion_modifier = { who = PREV name = opinion_evil_monster }
+				has_opinion_modifier = { who = PREV name = opinion_hostile_lycan }
+				has_opinion_modifier = { who = PREV name = opinion_hostile_vampire }
+				has_opinion_modifier = { who = PREV name = opinion_cursed_me }
+				has_opinion_modifier = { who = PREV name = opinion_cursed_my_lands }
+				has_opinion_modifier = { who = PREV name = opinion_res_murdered_my_people }
+				has_opinion_modifier = { who = PREV name = opinion_res_exiled_my_people }
+				# EKPlots_opinion_modifiers.txt
+				has_opinion_modifier = { who = PREV name = opinion_traitor_scum }
+				# AO_opinion_modifiers.txt
+				has_opinion_modifier = { who = PREV name = opinion_attempt_kidnap }
+				has_opinion_modifier = { who = PREV name = opinion_kidnapper }
+				has_opinion_modifier = { who = PREV name = opinion_kidnapped_kin }
+				has_opinion_modifier = { who = PREV name = opinion_broke_peace }
+				has_opinion_modifier = { who = PREV name = opinion_broke_peace_2 }
+				has_opinion_modifier = { who = PREV name = attempted_kidnapping }
+				has_opinion_modifier = { who = PREV name = attempted_kidnapping_of_kin }
+				has_opinion_modifier = { who = PREV name = attempted_kidnapping_of_vassal }
+				has_opinion_modifier = { who = PREV name = devious_plotter }
+			}
+		}
+	}
+}
+
+edaih_this_character_considers_prev_to_be_a_maleficar = {
+	OR = {
+		AND = {
+			PREV = { has_character_modifier = known_witch }
+			PREV = { has_character_modifier = known_satanist }
+			PREV = { has_character_modifier = known_secret_society_member }
+			NOT = { same_society_as = PREV }
+		}
+		AND = {
+			PREV = { has_character_modifier = accused_apostate }
+			NOT = { secret_religion = PREV }
+		}
+		AND = {
+			religion = PREV
+			PREV = { trait = excommunicated }
+		}
+	}
+}
+
+edaih_this_imprisoned_character_is_a_ruler_and_can_afford_to_pay_their_own_ransom = {
+	is_ruler = yes
+	OR = {
+		AND = {
+			tier = EMPEROR
+			OR = {
+				wealth >= 385
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_special_jewish = yes
+				AND = {
+					wealth >= 85
+					OR = {
+						edaih_this_imprisoned_character_can_take_out_a_loan_after_release_jewish = yes
+						edaih_this_imprisoned_character_can_take_out_a_loan_after_release_holy_order = yes
+					}
+				}
+				AND = {
+					wealth >= 185
+					edaih_this_imprisoned_character_can_take_out_a_loan_after_release_radhanite = yes
+				}
+			}
+		}
+		AND = {
+			tier = KING
+			OR = {
+				wealth >= 250
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_special_jewish = yes
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_jewish = yes
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_holy_order = yes
+				AND = {
+					wealth >= 50
+					edaih_this_imprisoned_character_can_take_out_a_loan_after_release_radhanite = yes
+				}
+			}
+		}
+		AND = {
+			tier = DUKE
+			OR = {
+				wealth >= 145
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_special_jewish = yes
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_jewish = yes
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_holy_order = yes
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_radhanite = yes
+			}
+		}
+		AND = {
+			tier = COUNT
+			OR = {
+				wealth >= 70
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_special_jewish = yes
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_jewish = yes
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_holy_order = yes
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_radhanite = yes
+			}
+		}
+		AND = {
+			tier = BARON
+			OR = {
+				wealth >= 25
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_special_jewish = yes
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_jewish = yes
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_holy_order = yes
+				edaih_this_imprisoned_character_can_take_out_a_loan_after_release_radhanite = yes
+			}
+		}
+	}
+}
+
+edaih_this_imprisoned_character_is_not_a_ruler_and_can_afford_to_pay_their_own_ransom = {
+	OR = {
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_living_emperor = yes
+			wealth >= 110
+		}
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_living_king = yes
+			wealth >= 74
+		}
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_living_duke = yes
+			wealth >= 46
+		}
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_living_count = yes
+			wealth >= 26
+		}
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_living_baron = yes
+			wealth >= 14
+		}
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_noone_special = yes
+			wealth >= 10
+		}
+	}
+}
+
+edaih_this_imprisoned_character_is_not_a_ruler_and_their_liege_can_afford_to_pay_their_ransom = {
+	
+	# Not imprisoned by their own liege
+	NOT = {
+		host = {
+			any_courtier_or_vassal = {
+				character = PREVPREV
+				liege = { character = PREVPREV }
+			}
+		}
+	}
+	
+	OR = {
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_living_emperor = yes
+			liege = { wealth >= 110 }
+		}
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_living_king = yes
+			liege = { wealth >= 74 }
+		}
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_living_duke = yes
+			liege = { wealth >= 46 }
+		}
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_living_count = yes
+			liege = { wealth >= 26 }
+		}
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_living_baron = yes
+			liege = { wealth >= 14 }
+		}
+		AND = {
+			edaih_this_imprisoned_character_is_unlanded_child_of_noone_special = yes
+			liege = { wealth >= 10 }
+		}
+	}
+}
+
+edaih_this_imprisoned_character_can_take_out_a_loan_after_release_special_jewish = { # 600
+	is_playable = yes
+	is_decision_potential = borrow_money_jewish_special
+	NOT = { has_character_modifier = borrowed_from_jews_special }
+	top_liege = { NOT = { has_character_modifier = expelled_jewish } }
+}
+
+edaih_this_imprisoned_character_can_take_out_a_loan_after_release_jewish = { # 300
+	is_playable = yes
+	is_decision_potential = borrow_money_jews
+	NOT = { has_character_modifier = borrowed_from_jews }
+	top_liege = { NOT = { has_character_modifier = expelled_jewish } }
+}
+
+edaih_this_imprisoned_character_can_take_out_a_loan_after_release_holy_order = { # 300
+	is_playable = yes
+	OR = {
+		is_decision_potential = borrow_money_knights_templar
+		is_decision_potential = borrow_money_assassins
+		is_decision_potential = borrow_money_bektashi
+		is_decision_potential = borrow_money_haruriyyah
+	}
+}
+
+edaih_this_imprisoned_character_can_take_out_a_loan_after_release_radhanite = { # 200
+	is_playable = yes
+	is_decision_potential = borrow_money_radhanites
+	any_demesne_province = {
+		has_trade_post = yes
+		trade_route = silk_road
+	}
+	NOT = { government = order_government }
+	NOT = { has_character_modifier = borrowed_from_radhanites }
+	top_liege = { NOT = { has_character_modifier = expelled_jewish } }
+}
+
+edaih_this_imprisoned_character_is_unlanded_child_of_living_emperor = {
+	is_ruler = no
+	OR = {
+		mother = { is_alive = yes tier = EMPEROR }
+		father = { is_alive = yes tier = EMPEROR }
+	}
+}
+
+edaih_this_imprisoned_character_is_unlanded_child_of_living_king = {
+	is_ruler = no
+	OR = {
+		AND = {
+			mother = { is_alive = yes tier = KING }
+			NOT = { father = { is_alive = yes higher_tier_than = KING } }
+		}
+		AND = {
+			father = { is_alive = yes tier = KING }
+			NOT = { mother = { is_alive = yes higher_tier_than = KING } }
+		}
+	}
+}
+
+edaih_this_imprisoned_character_is_unlanded_child_of_living_duke = {
+	is_ruler = no
+	OR = {
+		AND = {
+			mother = { is_alive = yes tier = DUKE }
+			NOT = { father = { is_alive = yes higher_tier_than = DUKE } }
+		}
+		AND = {
+			father = { is_alive = yes tier = DUKE }
+			NOT = { mother = { is_alive = yes higher_tier_than = DUKE } }
+		}
+	}
+}
+
+edaih_this_imprisoned_character_is_unlanded_child_of_living_count = {
+	is_ruler = no
+	OR = {
+		AND = {
+			mother = { is_alive = yes tier = COUNT }
+			NOT = { father = { is_alive = yes higher_tier_than = COUNT } }
+		}
+		AND = {
+			father = { is_alive = yes tier = COUNT }
+			NOT = { mother = { is_alive = yes higher_tier_than = COUNT } }
+		}
+	}
+}
+
+edaih_this_imprisoned_character_is_unlanded_child_of_living_baron = {
+	is_ruler = no
+	OR = {
+		AND = {
+			mother = { is_alive = yes tier = BARON }
+			NOT = { father = { is_alive = yes higher_tier_than = BARON } }
+		}
+		AND = {
+			father = { is_alive = yes tier = BARON }
+			NOT = { mother = { is_alive = yes higher_tier_than = BARON } }
+		}
+	}
+}
+
+edaih_this_imprisoned_character_is_unlanded_child_of_noone_special = {
+	NOR = {
+		mother = { is_alive = yes is_ruler = yes }
+		father = { is_alive = yes is_ruler = yes }
+	}
+}
+
+edaih_this_character_should_always_be_nice_to_from = {
+	edaih_this_character_should_always_be_horrible_to_from = no
+	OR = {
+		trait = kind
+		trait = charitable
+		trait = just
+		is_friend = FROM
+		is_lover  = FROM
+		opinion = { who = FROM value >= 50 }
+	}
+}
+
+edaih_this_character_should_always_be_horrible_to_from = {
+	OR = {
+		is_rival = FROM
+		is_foe   = FROM
+	}
+}
