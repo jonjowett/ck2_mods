@@ -161,15 +161,15 @@ targeted_decisions = {
 		from_potential = { always = yes }
 		potential = { always = yes }
 		allow = {
-	        trigger_if = {
-	        	limit = { NOT = { is_within_diplo_range = FROM } }
-	        	is_within_diplo_range = FROM # CPU HEAVY!
-	        }
+			trigger_if = {
+				limit = { NOT = { is_within_diplo_range = FROM } }
+				is_within_diplo_range = FROM # CPU HEAVY!
+			}
 			OR = {
 				is_ruler = yes
 				custom_tooltip = {
 					text = expd_g_send_gold_to_non_ruler_is_permitted_tt
-					has_character_flag = expd_g_send_gold_to_non_ruler_permitted
+					FROM = { has_character_flag = expd_g_send_gold_to_non_ruler_permitted }
 				}
 			}
 			trigger_if = {
