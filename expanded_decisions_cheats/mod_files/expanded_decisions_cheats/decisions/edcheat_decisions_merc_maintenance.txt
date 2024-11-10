@@ -1,0 +1,27 @@
+targeted_decisions = {
+	edcheat_zero_merc_maint = {
+		ai = no
+		filter = self
+		ai_target_filter = none
+		potential = {
+			any_mercenary_band = {
+				band_creator = { character = PREVPREV }
+			}
+		}
+		allow = {
+			any_mercenary_band = {
+				band_creator = { character = PREVPREV }
+				has_mercenary_maintenance_modifier = maintaining_mercenary_band
+			}
+		}
+		effect = {
+			any_mercenary_band = {
+				limit = {
+					band_creator = { character = PREVPREV }
+					has_mercenary_maintenance_modifier = maintaining_mercenary_band
+				}
+				set_mercenary_maintenance_modifier = edcheat_maintaining_mercenary_band
+			}
+		}
+	}
+}
