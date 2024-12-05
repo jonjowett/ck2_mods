@@ -613,9 +613,6 @@ decadent = {
 #flying general/commander
 master_of_flame = { # Way of the Dragon
 	leader = yes
-	potential = {
-		always = no
-	}
 	
 	command_modifier = {
 		damage = 0.2
@@ -625,9 +622,6 @@ master_of_flame = { # Way of the Dragon
 
 logistics_expert = { # Way of the Dog
 	leader = yes
-	potential = {
-		always = no
-	}
 	attrition = -0.5
 	days_of_supply = 30
 
@@ -638,9 +632,6 @@ logistics_expert = { # Way of the Dog
 
 levy_coordinator = { # Way of the Tiger
 	leader = yes
-	potential = {
-		always = no
-	}
 
 	command_modifier = {
 		flank = 0.2
@@ -651,9 +642,6 @@ levy_coordinator = { # Way of the Tiger
 
 sapper = { # Way of the Leopard
 	leader = yes
-	potential = {
-		always = no
-	}
 
 	command_modifier = {
 		terrain = forest
@@ -913,17 +901,25 @@ crusader_king = {
 		kailash_guardian
 	}
 	
-	ai_zeal = 20
-
-	martial = 3
-	levy_size = 0.2
-	combat_rating = 15
-	
+	diplomacy = 10
+	martial = 30
+	stewardship = 10
+	intrigue = 10 
+	learning = 10
+	combat_rating = 150
+	levy_size = 1
+	global_tax_modifier = 1
+	health = 5
+	defensive_plot_power_modifier = 1
 	command_modifier = {
-		religious_enemy = 0.3
+		damage = 0.3
+		defence = 0.3
+		morale_offence = 0.3
+		morale_defence = 0.3
+		center = 0.3
+		siege = 0.5
+		speed 0.5
 	}
-
-	same_religion_opinion = 35
 	
 	customizer = no
 	random = no

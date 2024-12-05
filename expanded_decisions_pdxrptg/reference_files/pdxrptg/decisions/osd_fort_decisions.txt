@@ -1,0 +1,156 @@
+fort_decisions = {
+	osd_minor_redevelopment = { 
+		only_playable = yes
+		filter = owned
+		ai_target_filter = owned
+		ai=no
+
+		from_potential = {
+		}
+		
+		potential = {
+            fort_owner= {
+				character=FROM
+            }
+			location = {
+				NOT = { has_province_modifier = osd_major_supply_depot }
+				NOT = {	has_province_modifier = osd_medium_supply_depot }
+				NOT = {	has_province_modifier = osd_minor_supply_depot }
+			}
+        }
+
+		allow = {
+			fort_has_building = ft_supply_1
+		}
+
+		effect = {
+			location = {
+				add_province_modifier = {
+			name = osd_minor_supply_depot
+			duration = -1
+		}
+		remove_province_modifier = osd_medium_supply_depot
+		remove_province_modifier = osd_major_supply_depot
+		province_event = { id = osd.7777 days=30 }
+		wealth = -300
+		}
+	}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	osd_medium_redevelopment = { 
+		only_playable = yes
+		filter = owned
+		ai_target_filter = owned
+		ai=no
+
+		from_potential = {
+		}
+		
+		potential = {
+            fort_owner= {
+				character=FROM
+            }
+			fort_has_building = ft_supply_2
+			location = {
+				NOT = { has_province_modifier = osd_major_supply_depot }
+				NOT = { has_province_modifier = osd_medium_supply_depot }
+			}
+        }
+
+		allow = {
+			fort_has_building = ft_supply_2
+		}
+
+		effect = {
+			location = {
+				add_province_modifier = {
+				name = osd_medium_supply_depot
+				duration = -1
+				}
+		remove_province_modifier = osd_minor_supply_depot
+		remove_province_modifier = osd_major_supply_depot
+		province_event = { id = osd.7777 days=30 }
+		wealth= -400
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	osd_major_redevelopment = { 
+		only_playable = yes
+		filter = owned
+		ai_target_filter = owned
+		ai=no
+
+		from_potential = {
+		}
+		
+		potential = {
+            fort_owner= {
+				character=FROM
+            }
+			fort_has_building = ft_supply_3
+			NOT = { has_province_modifier = osd_major_supply_depot }
+        }
+
+		allow = {
+			fort_has_building = ft_supply_3
+		}
+
+		effect = {
+			location = {
+				add_province_modifier = {
+			name = osd_major_supply_depot
+			duration = -1
+		}
+		remove_province_modifier = osd_medium_supply_depot
+		remove_province_modifier = osd_minor_supply_depot
+		province_event = { id = osd.7777 days=30 }
+		wealth= -500
+		}
+		}	
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	osd_fort_removal = { 
+		only_playable = yes
+		filter = owned
+		ai_target_filter = owned
+		ai=no
+
+		from_potential = {
+		}
+		
+		potential = {
+            fort_owner= {
+				character=FROM
+            }
+			location = {
+				OR = {
+                has_province_modifier = osd_minor_supply_depot
+                has_province_modifier = osd_medium_supply_depot
+                has_province_modifier = osd_major_supply_depot
+            }
+			}
+        }
+
+		allow = {
+			always=yes
+		}
+
+		effect = {
+			location = {
+		remove_province_modifier = osd_medium_supply_depot
+		remove_province_modifier = osd_major_supply_depot
+		remove_province_modifier = osd_minor_supply_depot
+			}
+		}
+	}
+}

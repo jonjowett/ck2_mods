@@ -364,16 +364,16 @@ character_event = {
 	option = {
 		name = EVTOPTA600000
 		trigger = {
-			check_variable = { which = magicka_current value = 1 }
+			check_variable = { which = magicka_current value = 5 }
 			OR = {
 				is_mage = yes
 				has_court_mage = yes
 			}
 		}
 		clr_character_flag = casting_spell
-		custom_tooltip = { text = MAGICKA_COST_1
+		custom_tooltip = { text = MAGICKA_COST_5
 			hidden_tooltip = {
-				spell_cost_1 = yes
+				spell_cost_5 = yes
 				
 				remove_character_modifier = spell_fortify_health_1
 				remove_character_modifier = spell_fortify_health_2
@@ -453,16 +453,16 @@ character_event = {
 	option = {
 		name = EVTOPTB600000
 		trigger = {
-			check_variable = { which = magicka_current value = 4 }
+			check_variable = { which = magicka_current value = 12 }
 			OR = {
 				is_mage = yes
 				has_court_mage = yes
 			}
 		}
 		clr_character_flag = casting_spell
-		custom_tooltip = { text = MAGICKA_COST_4
+		custom_tooltip = { text = MAGICKA_COST_12
 			hidden_tooltip = {
-				spell_cost_4 = yes
+				spell_cost_12 = yes
 				
 				location = {
 					remove_province_modifier = spell_decay_walls_1
@@ -7598,7 +7598,7 @@ character_event = {
 					remove_character_modifier = spell_ward
 					add_character_modifier = {
 						name = spell_ward
-						duration = 3650
+						duration = 1095
 					}
 				}
 			}
@@ -7635,7 +7635,7 @@ character_event = {
 					remove_character_modifier = spell_ward
 					add_character_modifier = {
 						name = spell_ward
-						duration = 7300
+						duration = 2190
 					}
 				}
 			}
@@ -7671,7 +7671,7 @@ character_event = {
 					remove_character_modifier = spell_ward
 					add_character_modifier = {
 						name = spell_ward
-						duration = 10950
+						duration = 3650
 					}
 				}
 			}
@@ -7726,7 +7726,7 @@ character_event = {
 						remove_province_modifier = province_spell_ward
 						add_province_modifier = {
 							name = province_spell_ward
-							duration = 3650
+							duration = 1095
 						}
 					}
 				}
@@ -7767,7 +7767,7 @@ character_event = {
 						remove_province_modifier = province_spell_ward
 						add_province_modifier = {
 							name = province_spell_ward
-							duration = 7300
+							duration = 2190
 						}
 					}
 				}
@@ -7807,7 +7807,7 @@ character_event = {
 						remove_province_modifier = province_spell_ward
 						add_province_modifier = {
 							name = province_spell_ward
-							duration = 10950
+							duration = 3650
 						}
 					}
 				}

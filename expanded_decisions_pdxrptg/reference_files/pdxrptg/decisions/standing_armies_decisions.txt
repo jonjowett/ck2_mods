@@ -92,13 +92,6 @@ targetted_decisions = {
 			}
 			FROM = {
 				wealth = -100
-				any_realm_province = {
-					add_province_modifier = {
-						modifier = standing_army_recruiting
-						stacking = yes
-						months = 6
-					}
-				}
 			}
 			any_mercenary_band = {
 				limit = { holder_scope = { character = ROOT } }
@@ -334,77 +327,7 @@ targetted_decisions = {
 			}	
 		}
 
-		ai_will_do = {
-			factor = 0.1
-			modifier = {
-				factor = 0.1
-				any_vassal = {
-					any_demesne_title = { has_title_flag = standing_army_1 }
-				}
-			}
-			modifier = {
-				factor = 0.1
-				any_vassal = {
-					any_demesne_title = { has_title_flag = standing_army_2 }
-				}
-			}
-			modifier = {
-				factor = 0.1
-				any_vassal = {
-					any_demesne_title = { has_title_flag = standing_army_3 }
-				}
-			}
-			modifier = {
-				factor = 0.1
-				any_vassal = {
-					any_demesne_title = { has_title_flag = standing_army_4 }
-				}
-			}
-			modifier = {
-				factor = 0.1
-				any_vassal = {
-					any_demesne_title = { has_title_flag = standing_army_5 }
-				}
-			}
-
-			modifier = {
-				factor = 2
-				FROM = { realm_size = 100 }
-			}
-			modifier = {
-				factor = 2
-				FROM = { realm_size = 200 }
-			}
-			modifier = {
-				factor = 2
-				FROM = { realm_size = 400 }
-			}
-
-			modifier = {
-				factor = 0.5
-				NOT = { FROM = { wealth = 300 } }
-			}
-			modifier = {
-				factor = 0.2
-				NOT = { FROM = { wealth = 200 } }
-			}
-			modifier = {
-				factor = 2
-				FROM = { opinion = { who = ROOT value = 50 } }
-			}
-			modifier = {
-				factor = 2
-				FROM = { opinion = { who = ROOT value = 25 } }
-			}
-			modifier = {
-				factor = 0.1
-				FROM = { opinion = { who = ROOT value = -25 } }
-			}
-			modifier = {
-				factor = 0.0
-				FROM = { opinion = { who = ROOT value = -50 } }
-			}
-		}
+		ai_will_do = { factor = 0 }
 	}
 
 	change_composition_standing_army = {
@@ -447,29 +370,7 @@ targetted_decisions = {
 			character_event = { id = stand.5 }
 		}
 
-		ai_will_do = {
-			factor = 0.1
-			modifier = {
-				factor = 0.5
-				NOT = { FROM = { wealth = 300 } }
-			}
-			modifier = {
-				factor = 0.2
-				NOT = { FROM = { wealth = 200 } }
-			}
-			modifier = {
-				factor = 0.1
-				NOT = { FROM = { wealth = 100 } }
-			}
-			modifier = {
-				factor = 0.1
-				FROM = { character = ROOT }
-			}
-			modifier = {
-				factor = 2
-				FROM = { has_education_martial_trigger = yes }
-			}
-		}
+		ai_will_do = { factor = 0 }
 	}
 	
 	send_troops_standing_army = {
@@ -514,99 +415,7 @@ targetted_decisions = {
 			character_event = { id = stand.7 }
 		}
 
-		ai_will_do = {
-			factor = 0.001
-			modifier = {
-				factor = 4
-				FROM = {
-					AND = {
-						independent = yes
-						character = ROOT
-					}
-				}
-			}
-			modifier = {
-				factor = 4
-				NOT = { FROM = { character = ROOT } }
-			}
-			modifier = {
-				factor = 2
-				any_mercenary_band = {
-					AND = {
-						holder_scope = {
-							AND = {
-								character = ROOT
-								independent = no
-							}
-						}
-						NOT = {
-							check_variable = { which = army_size value = 10 }
-						}
-					}
-				}	
-			}
-			modifier = {
-				factor = 2
-				any_mercenary_band = {
-					AND = {
-						holder_scope = {
-							AND = {
-								character = ROOT
-								independent = no
-							}
-						}
-						NOT = {
-							check_variable = { which = army_size value = 20 }
-						}
-					}
-				}	
-			}
-			modifier = {
-				factor = 2
-				any_mercenary_band = {
-					AND = {
-						holder_scope = {
-							AND = {
-								character = ROOT
-								independent = no
-							}
-						}
-						NOT = {
-							check_variable = { which = army_size value = 50 }
-						}
-					}
-				}	
-			}
-			modifier = {
-				factor = 2
-				FROM = { realm_size = 100 }
-			}
-			modifier = {
-				factor = 2
-				FROM = { realm_size = 200 }
-			}
-			modifier = {
-				factor = 2
-				FROM = { realm_size = 400 }
-			}
-
-			modifier = {
-				factor = 0.5
-				NOT = { FROM = { wealth = 300 } }
-			}
-			modifier = {
-				factor = 0.2
-				NOT = { FROM = { wealth = 200 } }
-			}
-			modifier = {
-				factor = 0.1
-				NOT = { FROM = { wealth = 100 } }
-			}
-			modifier = {
-				factor = 2
-				FROM = { has_education_martial_trigger = yes }
-			}
-		}
+		ai_will_do = { factor = 0 }
 	}
 
 	dissolve_standing_army = {
@@ -642,13 +451,7 @@ targetted_decisions = {
 			character_event = { id = stand.1 }
 		}
 
-		ai_will_do = {
-			factor = 0.1
-			modifier = {
-				factor = 0.0
-				has_law = standing_army_law_2
-			}
-		}
+		ai_will_do = { factor = 0 }
 	}
 
 	make_general_standing_army_third_party = {
@@ -775,70 +578,6 @@ targetted_decisions = {
 			FROM = { character_event = { id = stand.18 } }
 		}
 
-		ai_will_do = {
-			factor = 0.01
-			modifier = {
-				factor = 10
-				FROM = {
-					AND = {
-						character = ROOT
-						independent = yes
-					}
-				}
-			}
-			modifier = {
-				factor = 2
-				FROM = {
-					AND = {
-						character = ROOT
-						independent = no
-					}
-				}
-			}
-			modifier = {
-				factor = 2
-				FROM = {
-					wealth = 100
-				}
-			}
-			modifier = {
-				factor = 2
-				FROM = {
-					wealth = 300
-				}
-			}
-			modifier = {
-				factor = 2
-				reverse_opinion = { who = FROM value = 30 }
-			}
-			modifier = {
-				factor = 2
-				reverse_opinion = { who = FROM value = 60 }
-			}
-			modifier = {
-				factor = 0.5
-				NOT = { reverse_opinion = { who = FROM value = 10 } }
-			}
-			modifier = {
-				factor = 0.1
-				NOT = { reverse_opinion = { who = FROM value = -10 } }
-			}
-			modifier = {
-				factor = 0.1
-				FROM = {
-					trait = greedy
-				}
-			}
-			modifier = {
-				factor = 0.1
-				FROM = {
-					OR = {
-						trait = slothful
-						trait = arbitrary
-					}
-				}
-			}
-									
-		}
+		ai_will_do = { factor = 0 }
 	}
 }

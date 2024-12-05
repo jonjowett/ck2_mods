@@ -1,5 +1,5 @@
 name="PDXRP Tamriel Game"
-archive="mod/pdxrptg.mod.zip"
+archive="mod/pdxrptg.zip"
 replace_path="common"
 replace_path="common/alternate_start"
 replace_path="common/artifacts"

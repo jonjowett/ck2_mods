@@ -1,0 +1,35 @@
+namespace = osd
+province_event = { #Check for fort building
+    id=osd.7777
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {
+        location= {
+            OR = {
+                has_province_modifier = osd_minor_supply_depot
+                has_province_modifier = osd_medium_supply_depot
+                has_province_modifier = osd_major_supply_depot
+            }
+        }
+    }
+    immediate = {
+        if = {
+            limit = {
+                OR = {
+                    fort_has_building = ft_supply_1
+                    fort_has_building = ft_supply_2
+                    fort_has_building = ft_supply_3
+                }
+            }
+            province_event = { id=osd.7777 days=30 }
+        }
+        else = {
+            remove_province_modifier = osd_minor_supply_depot
+            remove_province_modifier = osd_medium_supply_depot
+            remove_province_modifier = osd_major_supply_depot
+        }
+    }
+}
+
+		
+	

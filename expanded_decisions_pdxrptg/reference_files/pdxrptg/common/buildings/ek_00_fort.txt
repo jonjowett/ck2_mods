@@ -11,6 +11,7 @@ fort = {
 		
 		fort_level = 1
 		garrison_size = 0.5
+		supply_limit = 10
 		
 		extra_tech_building_start = 10.0 # Never get at start of game
 	}
@@ -90,6 +91,41 @@ fort = {
 		
 		garrison_size = 3
 		local_tax_modifier = -0.025
+		
+		extra_tech_building_start = 10.0 # Never get at start of game
+	}
+	ft_supply_1 = {
+		potential = {
+			building_holding_is_tower = no
+		}
+		desc = ft_supply_1_desc
+		gold_cost = 100
+		build_time = 100
+		ai_creation_factor = 0
+		
+		extra_tech_building_start = 10.0 # Never get at start of game
+	}
+	ft_supply_2 = {
+		potential = {
+			building_holding_is_tower = no
+		}
+		desc = ft_supply_2_desc
+		upgrades_from = ft_supply_1
+		gold_cost = 250
+		build_time = 250
+		ai_creation_factor = 0
+		
+		extra_tech_building_start = 10.0 # Never get at start of game
+	}
+	ft_supply_3 = {
+		potential = {
+			building_holding_is_tower = no
+		}
+		desc = ft_supply_3_desc
+		upgrades_from = ft_supply_2
+		gold_cost = 500
+		build_time = 500
+		ai_creation_factor = 0
 		
 		extra_tech_building_start = 10.0 # Never get at start of game
 	}

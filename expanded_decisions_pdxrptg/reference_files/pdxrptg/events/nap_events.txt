@@ -1,0 +1,69 @@
+namespace = Nap
+
+#Offer for a NAP is sent.
+letter_event = {
+    id = Nap.100
+    desc = EVTDESC_Nap_100
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+
+    option = {
+		name = EVTOPTA_Nap_100
+		FROMFROM = { 
+			letter_event = { 
+				id = Nap.101
+				days = 4 
+			}
+		}
+		opinion = {
+			who = FROMFROM
+			modifier = friendly_nap
+			months = 999
+		}
+	}
+	option = {
+		name = EVTOPTB_Nap_100
+		trigger = {
+			ai = no #The AI may not refuse to accept, because they already have 75 opinion of the FROM
+		}
+
+		FROMFROM = { 
+			letter_event = { 
+				id = Nap.102
+				days = 4 
+			}
+		}
+		opinion = {
+			who = FROMFROM
+			modifier = rejected_nap
+			months = 12
+		}
+	}
+}
+     
+#Offer for a NAP was accepted!
+letter_event = {
+    id = Nap.101
+    desc = EVTDESC_Nap_101
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+
+    option = {
+		name = EVTOPTA_Nap_101
+	}
+}
+
+#Offer for a NAP was rejected!
+letter_event = {
+    id = Nap.102
+    desc = EVTDESC_Nap_102
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+
+    option = {
+		name = EVTOPTA_Nap_102
+	}
+}   

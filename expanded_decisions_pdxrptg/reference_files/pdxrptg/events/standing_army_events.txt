@@ -212,15 +212,7 @@ character_event = {
 			change_variable = { which = army_size value = 1 }
 		}
 		wealth = -50
-		top_liege = {
-			any_realm_province = {
-				add_province_modifier = {
-					modifier = standing_army_recruiting
-					stacking = yes
-					months = 6
-				}
-			}
-		}
+		
 	}
 	option = {
 		name = EVTOPTB_ZE_23106
@@ -259,15 +251,6 @@ character_event = {
 			change_variable = { which = army_size value = 1 }
 		}
 		wealth = -50
-		top_liege = {
-			any_realm_province = {
-				add_province_modifier = {
-					modifier = standing_army_recruiting
-					stacking = yes
-					months = 6
-				}
-			}
-		}
 	}
 	option = {
 		name = send_archers_text
@@ -285,15 +268,7 @@ character_event = {
 			change_variable = { which = army_size value = 1 }
 		}
 		wealth = -50
-		top_liege = {
-			any_realm_province = {
-				add_province_modifier = {
-					modifier = standing_army_recruiting
-					stacking = yes
-					months = 6
-				}
-			}
-		}
+		
 	}
 	option = {
 		name = STAND8OP4
@@ -674,83 +649,6 @@ character_event = {
 				trait = charitable
 			}
 		}
-		hidden_tooltip = {
-			trigger_switch = {
-				on_trigger = has_character_flag
-				upkeep_size_1 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size1
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_2 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size2
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_3 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size3
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_4 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size4
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_5 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size5
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_6 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size6
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-			}
-			clr_character_flag = upkeep_size_1
-			clr_character_flag = upkeep_size_2
-			clr_character_flag = upkeep_size_3
-			clr_character_flag = upkeep_size_4
-			clr_character_flag = upkeep_size_5
-			clr_character_flag = upkeep_size_6
-		}
 		wealth = local_upkeep_cost
 	}
 
@@ -886,85 +784,6 @@ character_event = {
 				trait = charitable
 			}
 		}
-		hidden_tooltip = {
-			FROM = {
-				trigger_switch = {
-					on_trigger = has_character_flag
-					upkeep_size_1 = {
-						top_liege = {
-							any_realm_province = {
-								add_province_modifier = {
-									modifier = standing_army_recruiting_size1
-									stacking = yes
-									months = 6
-								}
-							}
-						}
-					}
-					upkeep_size_2 = {
-						top_liege = {
-							any_realm_province = {
-								add_province_modifier = {
-									modifier = standing_army_recruiting_size2
-									stacking = yes
-									months = 6
-								}
-							}
-						}
-					}
-					upkeep_size_3 = {
-						top_liege = {
-							any_realm_province = {
-								add_province_modifier = {
-									modifier = standing_army_recruiting_size3
-									stacking = yes
-									months = 6
-								}
-							}
-						}
-					}
-					upkeep_size_4 = {
-						top_liege = {
-							any_realm_province = {
-								add_province_modifier = {
-									modifier = standing_army_recruiting_size4
-									stacking = yes
-									months = 6
-								}
-							}
-						}
-					}
-					upkeep_size_5 = {
-						top_liege = {
-							any_realm_province = {
-								add_province_modifier = {
-									modifier = standing_army_recruiting_size5
-									stacking = yes
-									months = 6
-								}
-							}
-						}
-					}
-					upkeep_size_6 = {
-						top_liege = {
-							any_realm_province = {
-								add_province_modifier = {
-									modifier = standing_army_recruiting_size6
-									stacking = yes
-									months = 6
-								}
-							}
-						}
-					}
-				}
-				clr_character_flag = upkeep_size_1
-				clr_character_flag = upkeep_size_2
-				clr_character_flag = upkeep_size_3
-				clr_character_flag = upkeep_size_4
-				clr_character_flag = upkeep_size_5
-				clr_character_flag = upkeep_size_6
-			}
-		}
 		wealth = local_upkeep_cost
 	}
 
@@ -1078,83 +897,6 @@ character_event = {
 	option = { # pay
 		name = "I'll find a way to get back at my liege."
 		wealth = local_upkeep_cost
-		hidden_tooltip = {
-			trigger_switch = {
-				on_trigger = has_character_flag
-				upkeep_size_1 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size1
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_2 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size2
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_3 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size3
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_4 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size4
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_5 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size5
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_6 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size6
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-			}
-			clr_character_flag = upkeep_size_1
-			clr_character_flag = upkeep_size_2
-			clr_character_flag = upkeep_size_3
-			clr_character_flag = upkeep_size_4
-			clr_character_flag = upkeep_size_5
-			clr_character_flag = upkeep_size_6
-		}
 	}
 }
 
@@ -1250,114 +992,6 @@ character_event = {
 			factor = 100
 		}
 		wealth = local_upkeep_cost
-		hidden_tooltip = {
-			FROM = { 
-				any_demesne_title = {
-					limit = {
-						OR = {
-							has_title_flag = standing_army_1
-							has_title_flag = standing_army_2
-							has_title_flag = standing_army_3
-							has_title_flag = standing_army_4
-							has_title_flag = standing_army_5
-						}
-					}
-					trigger_switch = {
-						on_trigger = has_title_flag
-						understaffed_1  = {
-							clr_title_flag = understaffed_1
-						}
-						understaffed_2  = {
-							clr_title_flag = understaffed_2
-							set_title_flag = understaffed_1
-						}
-						understaffed_3  = {
-							clr_title_flag = understaffed_3
-							set_title_flag = understaffed_2
-						}
-						understaffed_4  = {
-							clr_title_flag = understaffed_4
-							set_title_flag = understaffed_3
-						}
-					}
-				}
-			}
-			trigger_switch = {
-				on_trigger = has_character_flag
-				upkeep_size_1 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size1
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_2 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size2
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_3 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size3
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_4 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size4
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_5 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size5
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-				upkeep_size_6 = {
-					top_liege = {
-						any_realm_province = {
-							add_province_modifier = {
-								modifier = standing_army_recruiting_size6
-								stacking = yes
-								months = 6
-							}
-						}
-					}
-				}
-			}
-			clr_character_flag = upkeep_size_1
-			clr_character_flag = upkeep_size_2
-			clr_character_flag = upkeep_size_3
-			clr_character_flag = upkeep_size_4
-			clr_character_flag = upkeep_size_5
-			clr_character_flag = upkeep_size_6
-		}
 	}
 	option = { # Don't pay
 		name = STAND18EVENTOP2
