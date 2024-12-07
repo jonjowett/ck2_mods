@@ -1,0 +1,86 @@
+# Audax Validator EnableCommentMetadata
+
+# The base PDXRPTG mod has integrated the friendly NAP mod, while only allowing it to be used between players.
+# Change this so that players can always send NAPs to each other, and so that players/AI can send NAPs to people they like.
+# Finally, clean up redundant conditions and add proper AI logic.
+
+targeted_decisions = {
+	
+	nap_non_aggression_pact = {
+		
+		ai_target_filter = independent_rulers
+		ai_check_interval = 12
+		
+		from_potential = {
+			is_landed = yes
+			OR = {
+				ai = no
+				independent = yes
+			}
+		}
+		potential = {
+			NOT = { has_non_aggression_pact_with = FROM }
+			is_landed = yes
+		}
+		allow = {
+			#These conditions are for ROOT.
+			trigger_if = {
+				limit = { FROM = { ai = no } }
+				OR = {
+					# Players can always send NAP offers to other players
+					ai = no
+					# Otherwise, players can only send offers to people who like them
+					opinion = { who = FROM value = 75 }
+				}
+			}
+			trigger_else = {
+				# AI can only send offers to people who like them
+				opinion = { who = FROM value = 75 }
+			}
+			prisoner = no
+			is_within_diplo_range = FROM
+			custom_tooltip = {
+				# Audax Validator "." Ignore_NEXT
+				text = already_sent_nap
+				NOT = {
+					has_opinion_modifier = {
+						who = FROM
+						# Audax Validator "." Ignore_NEXT
+						modifier = sent_nap
+					}
+				}
+			}
+		}
+		effect = {
+			opinion = {
+				who = FROM
+				# Audax Validator "." Ignore_NEXT
+				modifier = sent_nap
+				months = 12
+			}
+			letter_event = {
+				# Audax Validator "." Ignore_NEXT
+				id = Nap.100
+			}
+		}
+		ai_will_do = {
+			factor = 0.25
+			modifier = {
+				ROOT = { opinion = { who = FROM value >= 80 } }
+				factor = 1.25
+			}
+			modifier = {
+				ROOT = { opinion = { who = FROM value >= 85 } }
+				factor = 1.25
+			}
+			modifier = {
+				ROOT = { opinion = { who = FROM value >= 90 } }
+				factor = 1.25
+			}
+			modifier = {
+				ROOT = { opinion = { who = FROM value >= 95 } }
+				factor = 1.25
+			}
+		}
+	}
+}
