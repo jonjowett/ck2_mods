@@ -1,0 +1,78 @@
+# Audax Validator EnableCommentMetadata
+
+targetted_decisions = {
+
+	request_religious_conversion = {
+		filter = sub_realm
+		ai_target_filter = sub_realm
+		
+		ai_check_interval = 12
+		
+		from_potential = {
+			is_ruler = yes
+			NOT = { has_character_flag = spellbook_open }
+		}
+		potential = {
+			vassal_of = FROM
+			NOT = { religion = FROM }
+		}
+		allow = {
+			custom_tooltip = {
+				text = expd_pdxrptg_conversion_both_from_and_root_are_at_peace_tt
+				FROM = { war = no }
+				ROOT = { war = no }
+			}
+			opinion = { who = FROM value = 80 }
+			NOT = { trait = zealous } #Zealous characters simply will not abandon their beliefs
+			#Argonians are tightly connected to the Hist
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				religion = hist
+			}
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				has_character_modifier = request_conversion_timer
+			}
+			custom_tooltip = {
+				text = expd_pdxrptg_conversion_has_not_already_been_requested_tt
+				NOT = { has_character_flag = conversion_requested }
+			}
+			trigger_if = {
+				limit = { has_character_flag = ai_flag_refuse_conversion }
+				custom_tooltip = {
+					text = expd_pdxrptg_conversion_this_ai_character_will_always_refuse_tt
+					always = no
+				}
+			}
+		}
+		effect = {
+			
+			# Show the player the likely outcomes
+			if = {
+				limit = { ROOT = { ai = yes } }
+				random_list = {
+					50 = {
+						expd_pdxrptg_conversion_ai_acceptance_modifiers = yes
+						custom_tooltip = { text = expd_pdxrptg_conversion_ai_accepts_tt }
+					}
+					50 = {
+						expd_pdxrptg_conversion_ai_refusal_modifiers = yes
+						custom_tooltip = { text = expd_pdxrptg_conversion_ai_refuses_tt }
+					}
+				}
+			}
+			else = {
+				custom_tooltip = { text = expd_pdxrptg_conversion_player_tt }
+			}
+			
+			hidden_tooltip = {
+				set_character_flag = conversion_requested
+				letter_event = { id = conversion.1 days = 3 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	
+	}
+}

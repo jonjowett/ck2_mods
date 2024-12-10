@@ -1,0 +1,273 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_conversion_ai_acceptance_modifiers = {
+	modifier = {
+		factor = 0.5
+		# Audax Validator "." Ignore_NEXT
+		is_hedonistic_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_prudish_religion = yes
+		}
+	}
+	modifier = {
+		factor = 0.5
+		# Audax Validator "." Ignore_NEXT
+		is_prudish_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_hedonistic_religion = yes
+		}
+	}
+	modifier = {
+		factor = 0.5
+		# Audax Validator "." Ignore_NEXT
+		is_necromancy_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_anti_necromancy_religion = yes
+		}
+	}
+	modifier = {
+		factor = 0.5
+		# Audax Validator "." Ignore_NEXT
+		is_anti_necromancy_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_necromancy_religion = yes
+		}
+	}
+	modifier = {
+		factor = 0.5
+		# Audax Validator "." Ignore_NEXT
+		is_warlike_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_pacifist_religion = yes
+		}
+	}
+	modifier = {
+		factor = 0.5
+		# Audax Validator "." Ignore_NEXT
+		is_pacifist_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_warlike_religion = yes
+		}
+	}
+	modifier = {
+		factor = 0.5
+		# Audax Validator "." Ignore_NEXT
+		is_honest_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_clandestine_religion = yes
+		}
+	}
+	modifier = {
+		factor = 0.5
+		# Audax Validator "." Ignore_NEXT
+		is_clandestine_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_honest_religion = yes
+		}
+	}
+	modifier = {
+		factor = 0.5
+		# Audax Validator "." Ignore_NEXT
+		is_generous_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_selfish_religion = yes
+		}
+	}
+	modifier = {
+		factor = 0.5
+		# Audax Validator "." Ignore_NEXT
+		is_selfish_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_generous_religion = yes
+		}
+	}
+	modifier = {
+		factor = 1.5
+		# Audax Validator "." Ignore_NEXT
+		is_hedonistic_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_hedonistic_religion = yes
+		}
+	}
+	modifier = {
+		factor = 1.5
+		# Audax Validator "." Ignore_NEXT
+		is_prudish_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_prudish_religion = yes
+		}
+	}
+	modifier = {
+		factor = 1.5
+		# Audax Validator "." Ignore_NEXT
+		is_necromancy_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_necromancy_religion = yes
+		}
+	}
+	modifier = {
+		factor = 1.5
+		# Audax Validator "." Ignore_NEXT
+		is_anti_necromancy_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_anti_necromancy_religion = yes
+		}
+	}
+	modifier = {
+		factor = 1.5
+		# Audax Validator "." Ignore_NEXT
+		is_warlike_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_warlike_religion = yes
+		}
+	}
+	modifier = {
+		factor = 1.5
+		# Audax Validator "." Ignore_NEXT
+		is_pacifist_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_pacifist_religion = yes
+		}
+	}
+	modifier = {
+		factor = 1.5
+		# Audax Validator "." Ignore_NEXT
+		is_honest_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_honest_religion = yes
+		}
+	}
+	modifier = {
+		factor = 1.5
+		# Audax Validator "." Ignore_NEXT
+		is_clandestine_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_clandestine_religion = yes
+		}
+	}
+	modifier = {
+		factor = 1.5
+		# Audax Validator "." Ignore_NEXT
+		is_generous_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_generous_religion = yes
+		}
+	}
+	modifier = {
+		factor = 1.5
+		# Audax Validator "." Ignore_NEXT
+		is_selfish_religion = yes
+		FROM = {
+			# Audax Validator "." Ignore_NEXT
+			is_selfish_religion = yes
+		}
+	}
+	modifier = { #Religions that don't take kindly to conversion attempts
+		factor = 0.1
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			religion = almsivi_old_velothi
+			# Audax Validator "." Ignore_NEXT
+			religion = nerevarine
+			# Audax Validator "." Ignore_NEXT
+			religion = sixth_house
+		}
+	}
+	
+	# Mod added - Higher opinion slightly increases chance of acceptance
+	modifier = {
+		factor = 1.05
+		opinion = { who = FROM value >= 85 }
+	}
+	modifier = {
+		factor = 1.05
+		opinion = { who = FROM value >= 90 }
+	}
+	modifier = {
+		factor = 1.05
+		opinion = { who = FROM value >= 95 }
+	}
+	modifier = {
+		factor = 1.05
+		opinion = { who = FROM value >= 100 }
+	}
+}
+
+expd_pdxrptg_conversion_ai_refusal_modifiers = {
+	modifier = {
+		factor = 1.5
+		trait = proud #Proud characters are less likely to believe they are wrong
+	}
+	modifier = {
+		factor = 0.15
+		trait = cynical #Cynical characters tend to not really care
+	}
+	modifier = {
+		factor = 0.75
+		trait = humble #Humble characters are more likely to believe they are wrong
+	}
+	
+	# Mod added:
+	#  --- Non-rulers are slightly less likely to refuse
+	#  --- Rulers are likely to refuse if FROM has no ability to revoke their titles (whether due to laws, truce or NAP)
+	#  --- Rulers are somewhat likely to refuse as long as FROM doesn't have religious revocation
+	#  --- Rulers are very unlikely to refuse if FROM has religious revocation and is much more powerful than them
+	modifier = {
+		factor = 0.9
+		is_ruler = no
+	}
+	modifier = {
+		factor = 1.5
+		is_ruler = yes
+		OR = {
+			FROM = { has_truce = PREV }
+			FROM = { has_non_aggression_pact_with = PREV }
+			FROM = {
+				expd_pdxrptg_this_character_has_revocation = no
+				expd_pdxrptg_this_character_has_free_religious_revocation = no
+			}
+		}
+	}
+	modifier = {
+		factor = 1.25
+		is_ruler = yes
+		FROM = {
+			NOT = { has_truce = PREV }
+			NOT = { has_non_aggression_pact_with = PREV }
+			expd_pdxrptg_this_character_has_revocation = yes
+			expd_pdxrptg_this_character_has_free_religious_revocation = no
+		}
+	}
+	modifier = {
+		factor = 0.5
+		is_ruler = yes
+		FROM = {
+			NOT = { has_truce = PREV }
+			NOT = { has_non_aggression_pact_with = PREV }
+			expd_pdxrptg_this_character_has_revocation = yes
+			expd_pdxrptg_this_character_has_free_religious_revocation = yes
+		}
+		in_faction = no
+		relative_power_to_liege <= 0.1
+	}
+	
+}
