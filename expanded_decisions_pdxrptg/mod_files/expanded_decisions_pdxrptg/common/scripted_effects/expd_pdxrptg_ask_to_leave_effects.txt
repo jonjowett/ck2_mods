@@ -1,0 +1,58 @@
+expd_pdxrptg_move_this_character_and_all_relatives_in_froms_court_to_prevs_court = {
+	
+	# Assumes that the destination is stored in PREV
+	# Assumes that this character is currently in FROM's court
+	
+	# Eg: Call this from new court character scope:
+	#           <new court character scope> = {
+	#                <this character scope> = {
+	#                     expd_pdxrptg_move_this_character_and_all_relatives_in_froms_court_to_prevs_court = yes
+	#                }
+	#           }
+	
+	# Add a flag to every character who is being moved
+	set_character_flag = expd_pdxrptg_this_character_is_being_moved
+	any_spouse = {
+		limit = { liege = { character = FROM } }
+		set_character_flag = expd_pdxrptg_this_character_is_being_moved
+	}
+	any_consort = {
+		limit = { liege = { character = FROM } }
+		set_character_flag = expd_pdxrptg_this_character_is_being_moved
+	}
+	any_child = {
+		limit = {
+			is_adult = no
+			liege = { character = FROM }
+		}
+		set_character_flag = expd_pdxrptg_this_character_is_being_moved
+	}
+	
+	# Move everyone with the flag
+	move_character = PREV
+	any_spouse = {
+		limit = { has_character_flag = expd_pdxrptg_this_character_is_being_moved }
+		move_character = PREVPREV
+	}
+	any_consort = {
+		limit = { has_character_flag = expd_pdxrptg_this_character_is_being_moved }
+		move_character = PREVPREV
+	}
+	any_child = {
+		limit = { has_character_flag = expd_pdxrptg_this_character_is_being_moved }
+		move_character = PREVPREV
+	}
+	
+	# Remove the flags
+	clr_character_flag = expd_pdxrptg_this_character_is_being_moved
+	any_spouse = {
+		clr_character_flag = expd_pdxrptg_this_character_is_being_moved
+	}
+	any_consort = {
+		clr_character_flag = expd_pdxrptg_this_character_is_being_moved
+	}
+	any_child = {
+		clr_character_flag = expd_pdxrptg_this_character_is_being_moved
+	}
+	
+}

@@ -4,10 +4,6 @@ expd_pdxrptg_this_character_can_be_asked_to_leave_froms_court_using_slightly_mor
 	# Includes slight modifications to update it for the PDXRPTG mod
 	
 	NOR = {
-		custom_tooltip = { #To avoid double negation
-			text = is_a_child_tt
-			is_adult = no
-		}
 		prisoner = yes
 		trait = incapable
 		is_ruler = yes
@@ -98,6 +94,9 @@ expd_pdxrptg_this_character_can_be_asked_to_leave_froms_court_using_slightly_mor
 				has_character_modifier = out_traveling
 			}
 		}
+		
+		# Guardians who have wards who are NOT their own children are ineligible
+		any_ward = { NOT = { is_child_of = PREV } }
 		
 		#Special circumstances
 		custom_tooltip = {
