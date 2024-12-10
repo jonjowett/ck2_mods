@@ -7,6 +7,10 @@ decisions = {
 		potential = {
 			# Audax Validator "." Ignore_NEXT
 			trait = necromancer
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				has_submenu_open = yes
+			}
 		}
 		allow = {
 			NOT = { has_character_modifier = expd_pdxrptg_restarted_necromancy_temporary }
@@ -88,6 +92,10 @@ decisions = {
 			NOT = {
 				# Audax Validator "." Ignore_NEXT
 				trait = necromancer
+			}
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				has_submenu_open = yes
 			}
 			has_character_modifier = expd_pdxrptg_renounced_necromancy_semi_permanent
 		}
