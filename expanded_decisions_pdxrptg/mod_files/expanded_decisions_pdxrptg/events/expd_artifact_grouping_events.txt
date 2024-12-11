@@ -1,0 +1,27 @@
+namespace = ExpdArtifactGrouping
+
+character_event = {
+	id = ExpdArtifactGrouping.100
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = { num_of_artifacts > 0 }
+			if = {
+				limit = { ai = no }
+				# Players: Refresh artifact groupings
+				# THIS IS EXPENSIVE AND SHOULD NOT BE DONE FOR AI
+				expd_artifact_grouping_add_grouping_flags_to_this_characters_artifacts = yes
+			}
+			else = {
+				# AI: Clear all leftover artifact grouping flags etc
+				# Don't ever do this for players, because they want the benefits of grouping!
+				expd_artifact_grouping_clear_all_comparison_flags_from_this_characters_artifacts = yes
+				expd_artifact_grouping_clear_all_grouping_flags_from_this_characters_artifacts = yes
+			}
+		}
+		else = {
+			# No artifacts => nothing to do
+		}
+	}
+}
