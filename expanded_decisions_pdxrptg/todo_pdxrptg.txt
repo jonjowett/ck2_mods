@@ -40,6 +40,8 @@ ek changes
     - add a tooltip to the greybeard hermitage building, stating that you need to be level 2 in greybeard soc to recruit tongue retinues (editing a building localisation is less involved than editing an entire society!)
     X alert/event for potion expiry (easy!)
     - alert/event for magickal effect expiry (hard!)
+       - notification of magic province effects expiring (demesne/realm/designated provinces)
+       - notification of magic character effects expiring (self/court/rival/foe/interesting/designated)
     X alert for magicka full (eg. via new intrigue decision, only allowed when magicka is full, which opens the spellbook, and which can be set to high prio by the player separately to the normal "open spellbook" decision)
     - alert/event for offmap decisions which are available and would be highly beneficial
     X elder council vote to join result event (eldercouncil.751) should have candidate portrait in top right (and high chancellor in option)
@@ -84,14 +86,16 @@ ek changes
     - steal artifact decision (ekthieving.1) should always allow members of the thieves guild to steal from people in the same top realm
     - option to drop swordsinging if in greybeards, and to drop thuum if in swordsingers
     X option to drop/regain necromancer trait (with appropriate penalties) (because *practising* necromancy blocks you from joining societies, but long-lived/immortal characters should be allowed to renounce the practice so they can partake in normal society... as long as they stick to their vow...)
+    - ability to call in scenarists/fighters/etc to resolve province modifiers
  - improvement features (major):
     - trade routes need rebalancing (some are much more profitable than others - too many sources?)
     - some way of decreasing the cost of buildings (eg. game rule adds permanent local_build_cost_modifier=-0.2 to all provinces; maybe wonder_build_cost_modifier=-0.2 as well?)
     - the "black market" decision (imperial city wonder upgrade) is commented-out and it's not obvious what it's supposed to do. implement it.
        - See ekwonder.50 in ...\events\ek_wonder_events.txt
-    - the "force duel" decision (palace of the kings wonder upgrade) doesn't seem to be implemented at all. Implement it.
+    X the "force duel" decision (palace of the kings wonder upgrade) doesn't seem to be implemented at all. Implement it.
     - cult of the ancestor moth badly needs some flavour (missions, events, etc)
     X alchemist also sells potion of magicka regen
+    - reinstate the "forge bloodline" ambition - the forgeable bloodlines are already coded...
 
 general ideas
  - get AI to treat themselves if the first treatment expires
