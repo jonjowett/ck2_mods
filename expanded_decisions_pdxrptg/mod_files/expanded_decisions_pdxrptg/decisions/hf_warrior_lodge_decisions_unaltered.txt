@@ -1,0 +1,297 @@
+# Audax Validator EnableCommentMetadata
+
+# Ignore all errors, because the only alterations in this file are the deletion of some decisions
+# Audax Validator "!" Ignore_NEXT
+
+targeted_decisions = {
+
+# duel_decision removed
+
+	#########################################
+	#              CLAIM duels              #
+	#########################################
+	claim_duel_decision = {
+		only_playable = yes
+		is_high_prio = yes
+		diplomacy_icon = GFX_duel_decision
+
+		ai_check_interval = 10
+		
+		from_potential = {
+			is_playable = yes
+			is_adult = yes
+			prisoner = no
+			has_dlc = "Holy Fury"
+
+			is_tribal = yes
+
+			any_claim = {
+				always = yes
+			}
+
+			has_regent = no
+			is_inaccessible_trigger = no
+
+			# OR = {
+			#	 ai = no				
+			#	 is_female = no
+			#	 AND = {
+			#		 is_female = yes
+			#		 OR = {
+			#			 trait = brave
+			#			 religion_group = pagan_group
+			#			 is_nomadic = yes
+			#			 religion = buddhist
+			#			 religion = bogomilist
+			#			 gender_equality_trigger = yes
+			#		 }
+			#	 }
+			# }
+		}
+		
+		potential = {
+			OR = {
+				AND = { # they are independent...
+					independent = yes
+					FROM = { has_strong_claim = PREV }
+				}
+				AND = { # You share liege...
+					liege = {
+						any_vassal = {
+							character = FROM
+						}
+					}
+					FROM = { has_strong_claim = PREV }
+				}
+#				AND = {
+#					any_vassal = {
+#						ai = yes
+#						FROM = { has_strong_claim = PREV }
+#					}
+#				}
+			}
+			OR = {
+				AND = { #Either you are adult, as well as your target...
+					is_adult = yes
+					FROM = { is_adult = yes }
+				}
+				AND = { #Or you are both children! WEIRD!
+					is_adult = no
+					FROM = { is_adult = no }
+				}
+			}
+
+			prisoner = no
+			NOT = { character = FROM }
+			is_inaccessible_trigger = no
+			FROM = { NOT = { has_character_flag = claim_duel@PREV } }
+		}
+		
+ 		allow = {
+			### For CLAIM duels ###
+			custom_tooltip = {
+				text = both_tribal_tt
+				is_tribal = yes
+				FROM = { is_tribal = yes }
+			}
+			FROM = { has_strong_claim = PREV }
+
+			#Both are healthy
+			custom_tooltip = {
+				text = duel_tooltip_sickness
+				FROM = {
+					NOR = { #Not in sickly in bed, but sick if well treated is okay
+						has_character_modifier = bedridden_illness
+						has_character_modifier = severe_illness
+						trait = incapable
+					}
+				}
+				ROOT = {
+					NOR = { #Not in sickly in bed, but sick if well treated is okay
+						has_character_modifier = bedridden_illness
+						has_character_modifier = severe_illness
+						trait = incapable
+					}
+				}
+			}
+				
+			#Checks gender and some religious stuff... (turned into apply_any_applicable_harsh_penalties_effect instead)
+#			custom_tooltip = {
+#				text = duel_tooltip_valid_target
+#				hidden_tooltip = { ### Not female or challenger religion accepts female warriors
+#					 OR = {
+#						is_female = no
+#
+#						is_member_of_roots_warrior_lodge_trigger = yes
+						#
+#						#Both FROM and ROOT have gender equality
+#						AND = {
+#							OR = {
+#								trait = brave
+#								gender_equality_trigger = yes
+#								religion_group = pagan_group
+#								is_nomadic = yes
+#								religion = buddhist
+#								religion = bogomilist
+#							}
+#							FROM = {
+#								OR = {
+#									gender_equality_trigger = yes
+#									religion_group = pagan_group
+#									is_nomadic = yes
+#									religion = buddhist
+#									religion = bogomilist
+#								}
+#							}
+#						}
+#					}
+#					### Not priest or challenger religion is pagan
+#					trigger_if = {
+#						limit = { is_member_of_any_warrior_lodge_trigger = no }
+#						OR = {
+#							is_priest = no
+#							FROM = { religion_group = pagan_group }
+#						}
+#					}
+#				}
+#			}
+
+			custom_tooltip = {
+				text = duel_tooltip_recent_duel
+				hidden_tooltip = {
+					FROM = { NOT = { has_character_modifier = recent_duel_timer } }
+					NOT = { has_character_modifier = recent_duel_timer }
+				}
+			}
+
+			custom_tooltip = {
+				text = duel_tooltip_recent_challenge_tt
+				hidden_tooltip = {
+					FROM = { NOT = { has_character_modifier = recently_challenged_rule_timer } }
+				}	
+			}
+
+			custom_tooltip = {
+				#text = duel_tooltip_busy
+				text = duel_tooltip_no_war
+				hidden_tooltip = {
+					FROM = {
+						#NOT = { has_character_flag = do_not_disturb }
+						NOT = { war = yes }
+					}
+					#NOT = { has_character_flag = do_not_disturb }
+					NOT = { war = yes }
+				}
+			}
+			
+			is_within_diplo_range = FROM # CPU HEAVY!
+
+			trigger_if = {
+				limit = {
+					has_character_modifier = has_recently_declined_duel_cooldown
+				}
+				custom_tooltip = {
+					text = opinion_duel_decline_cooldown_tt
+					NOT = {
+						has_character_modifier = has_recently_declined_duel_cooldown
+					}
+				}
+			}
+		}
+		
+		effect = {
+			#REQUIRED event targets for setting up duel evaluation!
+			FROM = { save_event_target_as = combatant_1 } #the person issuing the duel...
+			save_event_target_as = combatant_2 #the target of the duel...
+
+			apply_degree_of_dishonorable_duel_effect = yes #checks a bunch of age and health statuses...
+			apply_any_applicable_harsh_penalties_effect = yes
+						
+			if = { # If Challenger has more than one claim to fight for...
+				limit = {
+					any_demesne_title = {
+						count > 1
+						FROM = { has_strong_claim = PREV }
+					}
+				}
+				random_demesne_title = {
+					limit = { event_target:combatant_1 = { has_strong_claim = PREV } }
+					preferred_limit = { tier = emperor }
+					preferred_limit = { tier = king }
+					preferred_limit = { tier = duke }
+					preferred_limit = { tier = count }
+					preferred_limit = { tier = baron }
+					save_event_target_as = target_title
+				}
+				event_target:combatant_1 = { set_character_flag = wants_multiple_titles_from@event_target:combatant_2 }
+			}
+			else_if = { # There is only ONE claim involved...
+				limit = {
+					any_demesne_title = {
+						FROM = { has_strong_claim = PREV }
+					}
+				}
+				random_demesne_title = {
+					limit = { event_target:combatant_1 = { has_strong_claim = PREV } }
+					save_event_target_as = target_title
+				}
+				event_target:combatant_1 = { set_character_flag = wants_single_title_from@event_target:combatant_2 }
+			}
+
+			FROM = {
+				set_character_flag = claim_duel@ROOT
+				pacifists_lose_piety_effect = yes
+				add_character_modifier = {
+					modifier = recent_duel_timer
+					duration = 90
+					hidden = yes
+				}
+			}
+
+			FROM = {
+				show_scope_change = no
+				increase_troublemaker_status_effect = yes
+			}
+
+			hidden_effect = {
+				FROM = {
+					add_character_modifier = {
+						modifier = recently_challenged_rule_timer
+						duration = 90
+						hidden = yes
+					}
+				}
+			}
+			
+			hidden_tooltip = {
+				character_event = { id = HF.10095 days = 1 } #Duel evaluation (hidden) + result event as follow-up.
+			}
+		}
+		
+		revoke_allowed = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_character_modifier = declined_prestige_duel_timer #if the target has already declined a duel, AI's won't attempt to duel them while the timer is still
+			}
+			modifier = {
+				factor = 0.1
+			}
+			modifier = {
+				factor = 1.1
+				trait = brave
+			}
+			modifier = {
+				factor = 1.5
+				trait = ambitious
+			}
+			title_tier_reduction_score = yes
+		}
+	}
+
+# Everything is commented-out, so let's remove it for simplicity/brevity
+
+}
