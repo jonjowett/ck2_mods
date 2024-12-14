@@ -1,0 +1,436 @@
+# Audax Validator EnableCommentMetadata
+
+# In this file, we override the events related to the marketplace library:
+#  --- Purchases now have a maximum cost (as well as a minimum)
+#  --- Chance of good/bad outcome is displayed to the player
+#  --- Chance of bad outcome is slightly decreased (compared with base mod) for every stat >= 30
+#  --- Restructured from MTTH to absolute delay (avg delay = MTTH rounded to nearest 6 months; actual delay = random between MTTH/2 and 3*MTTH/2)
+#  --- Players can see all options, even if they don't have the cash on-hand (because it's good to know how much you'll need)
+#
+# NB: The relevant events are ekevmisc.6 (popup from decision), .7 (outcome of long-term study) and .8 (buy a book)
+
+namespace = ekevmisc
+
+# Prevent false-positive in Validator (event is_triggered_only but is never called)
+# Audax Validator "." Ignore_NEXT
+character_event = { # Character purchases study materials (popup from decision)
+	
+	# Audax Validator "." Ignore_NEXT
+	id = ekevmisc.6
+	
+	# Audax Validator "." Ignore_NEXT
+	desc = ekevmisc6desc
+	
+	picture = GFX_evt_tome #Library pic
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		
+		# Suppress library decision in intrigue menu
+		set_character_flag = evlibraryvisiting
+		
+		# Calculate length of study period
+		# Factors taken from the MTTH in the base mod's ekevmisc.7
+		# Potential values: 12, 18, 24, ... , 114, 120
+		set_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 24 } # Base duration = 2 years
+		if = {
+			limit = { is_immortal = yes }
+			multiply_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 2.0 }
+		}
+		if = {
+			limit = { is_long_lived = yes }
+			multiply_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 2.0 }
+		}
+		if = {
+			limit = { trait = genius }
+			multiply_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 0.6 }
+		}
+		if = {
+			limit = { trait = quick }
+			multiply_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 0.7 }
+		}
+		if = {
+			limit = { trait = shrewd }
+			multiply_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 0.8 }
+		}
+		if = {
+			limit = { trait = erudite }
+			multiply_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 0.8 }
+		}
+		if = {
+			limit = { trait = diligent }
+			multiply_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 0.9 }
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trait = slovenly
+			}
+			multiply_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 1.3 }
+		}
+		
+		# Round to nearest 6 months
+		set_variable      = { which = expd_pdxrptg_library_study_duration_months_avg_remainder which = expd_pdxrptg_library_study_duration_months_avg }
+		modulo_variable   = { which = expd_pdxrptg_library_study_duration_months_avg_remainder value = 6 }
+		subtract_variable = { which = expd_pdxrptg_library_study_duration_months_avg which = expd_pdxrptg_library_study_duration_months_avg_remainder }
+		if = {
+			limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg_remainder value >= 3 } }
+			change_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 6 }
+		}
+		
+		# Floor at 12 months (1 year) (because minimum study time is 1/2 year)
+		# Cap at 120 months (10 years) (for simplicity later)
+		if = {
+			limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value < 12 } }
+			set_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 12 }
+		}
+		if = {
+			limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value > 120 } }
+			set_variable = { which = expd_pdxrptg_library_study_duration_months_avg value = 120 }
+		}
+		
+		# Calculate avg time in years before the event can occur (for tooltips only, this is actually hardcoded based on the avg time in months)
+		set_variable      = { which = expd_pdxrptg_library_study_duration_years_avg which = expd_pdxrptg_library_study_duration_months_avg }
+		divide_variable   = { which = expd_pdxrptg_library_study_duration_years_avg value = 12 }
+		
+	}
+	
+	option = { # Long-term study
+		# Audax Validator "." Ignore_NEXT
+		name = ekevmisc6opta
+		trigger = {
+			NOT = { has_character_flag = evlibrarystudying }
+			OR = {
+				ai = no
+				scaled_wealth = { value = -0.25 min = -100 max = -500 }
+			}
+		}
+		scaled_wealth = { value = -0.25 min = -100 max = -500 }
+		hidden_tooltip = { set_character_flag = evlibrarystudying }
+		custom_tooltip = { text = expd_pdxrptg_library_study_duration_tt }
+		random_list = {
+			50 = {
+				# Derived from the event below
+				# Chance of increasing each stat is 10 if that stat is <30, and 1 otherwise.
+				# Condense this into one option, with additive modifiers, to avoid an over-complicated tooltip.
+				additive_modifier = { value = -9 diplomacy   >= 30 }
+				additive_modifier = { value = -9 martial     >= 30 }
+				additive_modifier = { value = -9 stewardship >= 30 }
+				additive_modifier = { value = -9 intrigue    >= 30 }
+				additive_modifier = { value = -9 learning    >= 30 }
+				custom_tooltip = { text = expd_pdxrptg_library_study_success_tt }
+			}
+			25 = {
+				# Multiplicative modifiers directly copied from the event below
+				mult_modifier = { factor = 0.75 trait = scholar }
+				mult_modifier = { factor = 0.75 diplomacy   >= 30 }
+				mult_modifier = { factor = 0.75 martial     >= 30 }
+				mult_modifier = { factor = 0.75 stewardship >= 30 }
+				mult_modifier = { factor = 0.75 intrigue    >= 30 }
+				mult_modifier = { factor = 0.75 learning    >= 30 }
+				mult_modifier = { factor = 0.5 diplomacy >= 30 martial >= 30 stewardship >= 30 intrigue >= 30 learning >= 30 }
+				custom_tooltip = { text = expd_pdxrptg_library_study_failure_tt }
+			}
+		}
+		hidden_tooltip = {
+			if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 12 } }
+				character_event = { id = ekevmisc.7 months =  6 random =  12 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 18 } }
+				character_event = { id = ekevmisc.7 months =  9 random =  18 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 24 } }
+				character_event = { id = ekevmisc.7 months = 12 random =  24 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 30 } }
+				character_event = { id = ekevmisc.7 months = 15 random =  30 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 36 } }
+				character_event = { id = ekevmisc.7 months = 18 random =  36 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 42 } }
+				character_event = { id = ekevmisc.7 months = 21 random =  42 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 48 } }
+				character_event = { id = ekevmisc.7 months = 24 random =  48 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 54 } }
+				character_event = { id = ekevmisc.7 months = 27 random =  54 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 60 } }
+				character_event = { id = ekevmisc.7 months = 30 random =  60 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 66 } }
+				character_event = { id = ekevmisc.7 months = 33 random =  66 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 72 } }
+				character_event = { id = ekevmisc.7 months = 36 random =  72 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 78 } }
+				character_event = { id = ekevmisc.7 months = 39 random =  78 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 84 } }
+				character_event = { id = ekevmisc.7 months = 42 random =  84 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 90 } }
+				character_event = { id = ekevmisc.7 months = 45 random =  90 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 96 } }
+				character_event = { id = ekevmisc.7 months = 48 random =  96 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 102 } }
+				character_event = { id = ekevmisc.7 months = 51 random = 102 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 108 } }
+				character_event = { id = ekevmisc.7 months = 54 random = 108 }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_pdxrptg_library_study_duration_months_avg value <= 114 } }
+				character_event = { id = ekevmisc.7 months = 57 random = 114 }
+			}
+			else = {
+				character_event = { id = ekevmisc.7 months = 60 random = 120 }
+			}
+		}
+		hidden_tooltip = { clr_character_flag = evlibraryvisiting }
+	}
+	
+	option = { # Buy a book
+		# Audax Validator "." Ignore_NEXT
+		name = ekevmisc6optc
+		trigger = { ai = no } #AI should use this decision for stat-padding, not buying books.
+		character_event = { id = ekevmisc.8 }
+	}
+	
+	option = { # Nevermind
+		# Audax Validator "." Ignore_NEXT
+		name = ekevmisc6optb
+		trigger = { ai = no }
+		hidden_tooltip = { clr_character_flag = evlibraryvisiting }
+	}
+	
+	after = {
+		hidden_tooltip = {
+			set_variable = { which = expd_pdxrptg_library_study_duration_months_avg           value = 0 }
+			set_variable = { which = expd_pdxrptg_library_study_duration_months_avg_remainder value = 0 }
+			set_variable = { which = expd_pdxrptg_library_study_duration_years_avg            value = 0 }
+		}
+	}
+	
+}
+
+character_event = { # Character receives results of studying
+	
+	id = ekevmisc.7
+	
+	desc = {
+		trigger = { NOT = { has_character_flag = evlibraryfailure } }
+		# Audax Validator "." Ignore_NEXT
+		text = ekevmisc7desca
+	}
+	desc = {
+		trigger = { has_character_flag = evlibraryfailure }
+		# Audax Validator "." Ignore_NEXT
+		text = ekevmisc7descb
+	}
+	
+	picture = GFX_evt_tome
+	
+	is_triggered_only = yes
+	
+	trigger = { has_character_flag = evlibrarystudying }
+	
+	immediate = { # Roll for results here to get a clean tooltip
+		
+		clr_character_flag = evlibrarystudying
+		
+		# Base:                2/3 chance of success,  1/3 chance of failure
+		# Chance of success decreases for every stat >= 30, until...
+		# If all stats >= 30: ~50% chance of success, ~50% chance of failure
+		#
+		# NB: Ensure that the tooltips in the previous event are kept in sync with this list of factors!
+		random_list = {
+			10 = {
+				set_character_flag = evlibrarydiplomacy 
+				mult_modifier = { factor = 0.1  diplomacy   >= 30 }
+			}
+			10 = {
+				set_character_flag = evlibrarymartial
+				mult_modifier = { factor = 0.1  martial     >= 30 }
+			}
+			10 = {
+				set_character_flag = evlibrarystewardship
+				mult_modifier = { factor = 0.1  stewardship >= 30 }
+			}
+			10 = {
+				set_character_flag = evlibraryintrigue
+				mult_modifier = { factor = 0.1  intrigue    >= 30 }
+			}
+			10 = {
+				set_character_flag = evlibrarylearning
+				mult_modifier = { factor = 0.1  learning    >= 30 }
+			}
+			25 = {
+				
+				set_character_flag = evlibraryfailure
+				
+				# Retain the scholar improvement from the base mod - it's a nice easter egg
+				mult_modifier = { factor = 0.75 trait = scholar }
+				
+				# Slightly reduce the chance of failure for every stat >= 30 (to compensate for the decreased chance of picking it above)
+				mult_modifier = { factor = 0.85 diplomacy   >= 30 }
+				mult_modifier = { factor = 0.85 martial     >= 30 }
+				mult_modifier = { factor = 0.85 stewardship >= 30 }
+				mult_modifier = { factor = 0.85 intrigue    >= 30 }
+				mult_modifier = { factor = 0.85 learning    >= 30 }
+				
+				# This final adjustment is needed, otherwise the chance of success with 5 stats >= 30 is MUCH lower than with 4 stats >= 30
+				mult_modifier = { factor = 0.5 diplomacy >= 30 martial >= 30 stewardship >= 30 intrigue >= 30 learning >= 30 }
+				
+			}
+		}
+		
+	}
+	
+	option = { # Success - Study again
+		# Audax Validator "." Ignore_NEXT
+		name = ekevmisc7opta
+		trigger = {
+			NOT = { has_character_flag = evlibraryfailure }
+			OR = {
+				ai = no
+				scaled_wealth = { value = 0.25 min = 100 max = 500 }
+			}
+		}
+		if = {
+			limit = { has_character_flag = evlibrarydiplomacy }
+			change_diplomacy = 1
+		}
+		else_if = {
+			limit = { has_character_flag = evlibrarymartial }
+			change_martial = 1
+		}
+		else_if = {
+			limit = { has_character_flag = evlibrarystewardship }
+			change_stewardship = 1
+		}
+		else_if = {
+			limit = { has_character_flag = evlibraryintrigue }
+			change_intrigue = 1
+		}
+		else_if = {
+			limit = { has_character_flag = evlibrarylearning }
+			change_learning = 1
+		}
+		scaled_wealth = { value = -0.25 min = -100 max = -500 }
+		set_character_flag = evlibrarystudying
+	}
+	option = { # Success - Finished studying
+		# Audax Validator "." Ignore_NEXT
+		name = ekevmisc7optb
+		trigger = { NOT = { has_character_flag = evlibraryfailure } }
+		if = {
+			limit = { has_character_flag = evlibrarydiplomacy }
+			change_diplomacy = 1
+		}
+		else_if = {
+			limit = { has_character_flag = evlibrarymartial }
+			change_martial = 1
+		}
+		else_if = {
+			limit = { has_character_flag = evlibrarystewardship }
+			change_stewardship = 1
+		}
+		else_if = {
+			limit = { has_character_flag = evlibraryintrigue }
+			change_intrigue = 1
+		}
+		else_if = {
+			limit = { has_character_flag = evlibrarylearning }
+			change_learning = 1
+		}
+	}
+	option = { # Failure - Study again
+		# Audax Validator "." Ignore_NEXT
+		name = ekevmisc7optc
+		trigger = {
+			has_character_flag = evlibraryfailure
+			OR = {
+				ai = no
+				scaled_wealth = { value = 0.25 min = 100 max = 500 }
+			}
+		}
+		scaled_wealth = { value = -0.25 min = -100 max = -500 }
+		set_character_flag = evlibrarystudying
+	}
+	option = { # Failure - Give up
+		# Audax Validator "." Ignore_NEXT
+		name = ekevmisc7optd
+		trigger = { has_character_flag = evlibraryfailure }
+	}
+	
+	after = { # Cleanup
+		clr_character_flag = evlibrarydiplomacy
+		clr_character_flag = evlibrarymartial
+		clr_character_flag = evlibrarystewardship
+		clr_character_flag = evlibraryintrigue
+		clr_character_flag = evlibrarylearning
+		clr_character_flag = evlibraryfailure
+	}
+	
+}
+
+character_event = { # Character buys book
+	
+	id = ekevmisc.8
+	
+	# Audax Validator "." Ignore_NEXT
+	desc = ekevmisc8desc
+	
+	picture = GFX_evt_tome # Library pic
+	
+	is_triggered_only = yes
+	
+	option = { # Purchase book
+		# Audax Validator "." Ignore_NEXT
+		name = ekevmisc8opta
+		trigger = {
+			OR = {
+				ai = no
+				scaled_wealth = { value = 0.30 min = 150 max = 600 }
+			}
+		}
+		scaled_wealth = { value = -0.30 min = -150 max = -600 }
+		custom_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			text = generate_EK_lore_book_text
+			# Audax Validator "." Ignore_NEXT
+			generate_EK_lore_book = yes
+		}
+	}
+	option = { # Nevermind
+		# Audax Validator "." Ignore_NEXT
+		name = nevermind
+	}
+	
+	after = { hidden_tooltip = { clr_character_flag = evlibraryvisiting } }
+	
+}
