@@ -1,0 +1,336 @@
+# Audax Validator EnableCommentMetadata
+
+decisions = {
+	
+	
+	
+	
+	
+	################################################
+	#                                              #
+	#                   VAMPIRES                   #
+	#                                              #
+	################################################
+	
+	
+	
+	expd_pdxrptg_vampire_never_reveal = {
+		ai = no
+		potential = {
+			has_character_flag = supernatural_open
+			# Audax Validator "." Ignore_NEXT
+			trait = vampire
+			NOR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = known_vampire
+				# Audax Validator "." Ignore_NEXT
+				trait = known_vampire_benevolent
+			}
+			NOT = { has_character_flag = expd_pdxrptg_vampire_never_reveal }
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_vampire_never_reveal_effect_tt
+				set_character_flag = expd_pdxrptg_vampire_never_reveal
+			}
+		}
+	}
+	
+	
+	
+	expd_pdxrptg_vampire_allow_reveal = {
+		ai = no
+		potential = {
+			has_character_flag = supernatural_open
+			# Audax Validator "." Ignore_NEXT
+			trait = vampire
+			NOR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = known_vampire
+				# Audax Validator "." Ignore_NEXT
+				trait = known_vampire_benevolent
+			}
+			has_character_flag = expd_pdxrptg_vampire_never_reveal
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_vampire_allow_reveal_effect_tt
+				clr_character_flag = expd_pdxrptg_vampire_never_reveal
+			}
+		}
+	}
+	
+	
+	
+	expd_pdxrptg_vampire_random_reveal = {
+		ai = no
+		potential = {
+			has_character_flag = supernatural_open
+			# Audax Validator "." Ignore_NEXT
+			trait = vampire
+			NOR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = known_vampire
+				# Audax Validator "." Ignore_NEXT
+				trait = known_vampire_benevolent
+			}
+		}
+		allow = {
+			is_indisposed = no
+			is_inaccessible_trigger = no
+			custom_tooltip = {
+				text = expd_pdxrptg_vampire_is_not_currently_hunting_tt
+				NOT = { has_character_flag = hunting_vampire }
+			}
+			OR = {
+				AND = {
+					num_of_friends >= 1
+					any_friend = {
+						NOT = { is_lover = ROOT }
+						expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+					}
+				}
+				AND = {
+					num_of_spouses >= 1
+					any_spouse = {
+						NOR = {
+							is_friend = ROOT
+							is_lover = ROOT 
+							is_rival = ROOT
+						}
+						expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+					}
+				}
+				AND = {
+					num_of_lovers >= 1
+					any_lover = {
+						NOT = { is_rival = ROOT }
+						expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+					}
+				}
+				
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_vampire_random_reveal_effect_tt
+				set_character_flag = expd_pdxrptg_vampire_temp_allow_revelations
+				random_list = {
+					10 = {
+						mult_modifier = {
+							factor = 0
+							NAND = {
+								num_of_friends >= 1
+								any_friend = {
+									NOT = { is_lover = ROOT }
+									expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+								}
+							}
+						}
+						character_event = { id = vamp.350 }
+					}
+					10 = {
+						mult_modifier = {
+							factor = 0
+							NAND = {
+								num_of_spouses >= 1
+								any_spouse = {
+									NOR = {
+										is_friend = ROOT
+										is_lover = ROOT 
+										is_rival = ROOT
+									}
+									expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+								}
+							}
+						}
+						character_event = { id = vamp.400 }
+					}
+					10 = {
+						mult_modifier = {
+							factor = 0
+							NAND = {
+								num_of_lovers >= 1
+								any_lover = {
+									NOT = { is_rival = ROOT }
+									expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+								}
+							}
+						}
+						character_event = { id = vamp.450 }
+					}
+				}
+				clr_character_flag = expd_pdxrptg_vampire_temp_allow_revelations
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	################################################
+	#                                              #
+	#                 LYCANTHROPES                 #
+	#                                              #
+	################################################
+	
+	
+	
+	expd_pdxrptg_lycan_never_reveal = {
+		ai = no
+		potential = {
+			has_character_flag = supernatural_open
+			# Audax Validator "." Ignore_NEXT
+			trait = lycan
+			NOR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = known_lycan
+				# Audax Validator "." Ignore_NEXT
+				trait = known_lycan_benevolent
+			}
+			NOT = { has_character_flag = expd_pdxrptg_lycan_never_reveal }
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_lycan_never_reveal_effect_tt
+				set_character_flag = expd_pdxrptg_lycan_never_reveal
+			}
+		}
+	}
+	
+	
+	
+	expd_pdxrptg_lycan_allow_reveal = {
+		ai = no
+		potential = {
+			has_character_flag = supernatural_open
+			# Audax Validator "." Ignore_NEXT
+			trait = lycan
+			NOR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = known_lycan
+				# Audax Validator "." Ignore_NEXT
+				trait = known_lycan_benevolent
+			}
+			has_character_flag = expd_pdxrptg_lycan_never_reveal
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_lycan_allow_reveal_effect_tt
+				clr_character_flag = expd_pdxrptg_lycan_never_reveal
+			}
+		}
+	}
+	
+	
+	
+	expd_pdxrptg_lycan_random_reveal = {
+		ai = no
+		potential = {
+			has_character_flag = supernatural_open
+			# Audax Validator "." Ignore_NEXT
+			trait = lycan
+			NOR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = known_lycan
+				# Audax Validator "." Ignore_NEXT
+				trait = known_lycan_benevolent
+			}
+		}
+		allow = {
+			is_indisposed = no
+			is_inaccessible_trigger = no
+			custom_tooltip = {
+				text = expd_pdxrptg_lycan_is_not_currently_hunting_tt
+				NOT = { has_character_flag = hunting_lycan }
+			}
+			OR = {
+				AND = {
+					num_of_friends >= 1
+					any_friend = {
+						NOT = { is_lover = ROOT }
+						expd_pdxrptg_root_lycan_can_reveal_status_to_this_character = yes
+					}
+				}
+				AND = {
+					num_of_spouses >= 1
+					any_spouse = {
+						NOR = {
+							is_friend = ROOT
+							is_lover = ROOT 
+							is_rival = ROOT
+						}
+						expd_pdxrptg_root_lycan_can_reveal_status_to_this_character = yes
+					}
+				}
+				AND = {
+					num_of_lovers >= 1
+					any_lover = {
+						NOT = { is_rival = ROOT }
+						expd_pdxrptg_root_lycan_can_reveal_status_to_this_character = yes
+					}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_lycan_random_reveal_effect_tt
+				set_character_flag = expd_pdxrptg_lycan_temp_allow_revelations
+				random_list = {
+					10 = {
+						mult_modifier = {
+							factor = 0
+							NAND = {
+								num_of_friends >= 1
+								any_friend = {
+									NOT = { is_lover = ROOT }
+									expd_pdxrptg_root_lycan_can_reveal_status_to_this_character = yes
+								}
+							}
+						}
+						character_event = { id = lycan.350 }
+					}
+					10 = {
+						mult_modifier = {
+							factor = 0
+							NAND = {
+								num_of_spouses >= 1
+								any_spouse = {
+									NOR = {
+										is_friend = ROOT
+										is_lover = ROOT 
+										is_rival = ROOT
+									}
+									expd_pdxrptg_root_lycan_can_reveal_status_to_this_character = yes
+								}
+							}
+						}
+						character_event = { id = lycan.400 }
+					}
+					10 = {
+						mult_modifier = {
+							factor = 0
+							NAND = {
+								num_of_lovers >= 1
+								any_lover = {
+									NOT = { is_rival = ROOT }
+									expd_pdxrptg_root_lycan_can_reveal_status_to_this_character = yes
+								}
+							}
+						}
+						character_event = { id = lycan.450 }
+					}
+				}
+				clr_character_flag = expd_pdxrptg_lycan_temp_allow_revelations
+			}
+		}
+	}
+	
+	
+	
+}
