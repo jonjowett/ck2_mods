@@ -33,8 +33,13 @@ ek changes
     - some troop types (camel cav, tongues, ...more?...) are not impacted by military tech (and they should be)
     - fertility is incorrectly zeroised after a character has become immortal (eg. vampirism) (very noticeable for women who become immortal when younger than 45)
     X should not be able to spam "request religious conversion" to get a near-guaranteed conversion (even one success is enough)
+    - suppress event VIETmisc.8285 (references to China)
+    - suppress event VIETScarboroughFair.100 (references to Zoroastrianism)
+    - suppress event 3020 (reference to the Pope)
+    - ekruins.40 should have a follow-up event telling you if the ruin repairs succeeded or failed (so you can go there and fix it)
+    - customise send gold amount & mod tools decisions are visible in submenus (they shouldn't be)
  - convenience features (no decrease in difficulty):
-    - ability to stop all events asking if I want to reveal my vampirism / lycanthropy
+    - ability to stop all events asking if I want to reveal my vampirism / lycanthropy (vamp.350, .450)
     - decision to reveal vampirism / lycanthropy to spouses/friends/lovers (eg. in case the event is disabled by the previous point)
     - ability to drop a specialism (player only)
     - add a tooltip to the greybeard hermitage building, stating that you need to be level 2 in greybeard soc to recruit tongue retinues (editing a building localisation is less involved than editing an entire society!)
@@ -42,6 +47,7 @@ ek changes
     - alert/event for magickal effect expiry (hard!)
        - notification of magic province effects expiring (demesne/realm/designated provinces)
        - notification of magic character effects expiring (self/court/rival/foe/interesting/designated)
+    - permanent magic spells (by decreasing max magicka)
     X alert for magicka full (eg. via new intrigue decision, only allowed when magicka is full, which opens the spellbook, and which can be set to high prio by the player separately to the normal "open spellbook" decision)
     - alert/event for offmap decisions which are available and would be highly beneficial
     X elder council vote to join result event (eldercouncil.751) should have candidate portrait in top right (and high chancellor in option)
@@ -57,7 +63,7 @@ ek changes
     - change the viet chests (eg. very secure chest) into theft-prevention special items
     X no artifact loss on inheritance
     - additional dremora kynmarcher decision for some/all daedric lords, giving non-war specialists (intrigue for nocturnal, learning for hermaeus, diplo for azura, etc etc)
-    - check and maybe cap library recurring cost (it's stupid expensive when you're large)
+    X check and maybe cap library recurring cost (it's stupid expensive when you're large)
     X fix the daedric artifact triggers so they can be gained and activated by characters who SECRETLY follow that daedra's religion
     - add another DIFFICULT way of gaining/activating daedric artifacts (tbd - maybe an event chain? maybe invest the same amount of favor again with the relevant daedra => permanent modifier?)
        X framework added ("favoured by X") but this is not currently possible to gain outside of console / save edit
@@ -73,7 +79,7 @@ ek changes
     X companions society should allow the owner of INACTIVE jorrvaskr to join (otherwise, what's the point in enabling jorrvaskr if the owner is a member?!)
        X Done, as a side-effect of the updated regional restrictions
     - "heal mind" spell should first remove slow/dull, and only grant perceptive if the target has neither slow nor dull.
-    - option to disallow yourself from receiving "set a specific focus" society missions
+    X option to disallow yourself from receiving "set a specific focus" society missions
     - title_chief_architect gives a small improvement in build cost & time & also for wonders (based on their skill?)
     - spellcaster specialisms should allow you to cast relevant spells even if you aren't a mage
     - if you were ever grandmaster of the greybeards in the past, you can recruit tongue retinues for the rest of your life.
