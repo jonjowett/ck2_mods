@@ -1,17 +1,15 @@
 [h1]Summary:[/h1]
 
-This mod fixes and improves numerous issues with the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3346002144]PDXRPTG[/url] mod (which is itself based on Elder Kings):
+This mod fixes and improves numerous issues with the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3346002144]PDXRPTG[/url] mod (which is itself based on Elder Kings).
+
+[h2]Major changes[/h2]
+[i](Important impact on most playable characters)[/i]
 [list]
 [*] Several bugfixes to the Warlord CB, so it can actually be used as originally intended(*).
 [*] Completely reworked the magicka system to improve performance and user experience while maintaining the base mod's balance.
-[*] Secret conversion now works as originally intended(*).
-[*] New player-only "Ask to Leave Court" decision which allows many more people to be sent away. (So you can have a court of fewer than 100 people if you want.)
-[*] Artifacts are never lost on inheritance.
-[*] Secret Daedric worshippers can acquire and equip that Daedra's artifact.
-[*] Dragonborn descendants can acquire Daedric artifacts (if they have access to a Daedra without worshipping them).
 [*] Lighting the Dragonfires grants the "Dragonborn Descendant" trait. (**)
-[*] Ring of Happiness can [u]remove[/u] stressed/depressed (instead of merely preventing it most of the time).
-[*] Using the Ring of Happiness can lead to dependency - removing the ring when you're dependent on it can [u]cause[/u] depression.
+[*] Ring of Happiness can [u]remove[/u] stressed/depressed (instead of merely preventing it most of the time). And using it can lead to dependency & withdrawal.
+[*] Artifacts are never lost on inheritance.
 [*] The default limit on number of specialisms (2) can be increased by 1 by each of:
 [list]
 [*] Having ever been Grandmaster of a society;
@@ -19,7 +17,23 @@ This mod fixes and improves numerous issues with the [url=https://steamcommunity
 [*] Being the Dragonborn.
 [/list]
 [*] Reworked joining criteria for regional societies (eg. Swordsingers)
+[*] Reworked Library visits (in the Marketplace): costs are capped; better tooltips; better performance; slightly less chance of long-term study failure for high-stat characters.
+[*] Updated the "Steal Artifact" decision, broadening the situations where thieving organisations can be used. And, if an option is blocked, the player is now given an explanation.
+[/list]
+
+[h2]Minor changes:[/h2]
+[i](Minor impact, or only impacts a small number of playable characters)[/i]
+[list]
+[*] Secret conversion now works as originally intended(*).
+[*] New player-only "Ask to Leave Court" decision which allows many more people to be sent away. (So you can have a court of fewer than 100 people if you want.)
+[*] Secret Daedric worshippers can acquire and equip that Daedra's artifact.
+[*] Dragonborn descendants can acquire Daedric artifacts (if they have access to a Daedra without worshipping them).
 [*] Ability to renounce & resume Necromancy (with heavy penalties in each case)
+[*] Request Religious Conversion cannot be spammed
+[*] The artifact list for the offmap "Offer Artifact" decision is now grouped (eg: if you have 5 silver rings, they will appear in the list together, instead of being scattered)
+[*] Slight rework of society quest eligibility: You can block "Change Focus" quests; and Grandmasters will never receive "Change Focus" or "Minor" quests.
+[*] Duelling can now be unlocked by The Pit in the Palace of the Kings (as per its description)
+[*] Unknown Vampires/Lycans can now disable event spam asking them to reveal themselves. And they can also deliberately trigger the revelation event.
 [/list]
 
 [i](*) Based on the structure of the existing code, code comments, in-game tooltips, and my own interpretation.[/i]
