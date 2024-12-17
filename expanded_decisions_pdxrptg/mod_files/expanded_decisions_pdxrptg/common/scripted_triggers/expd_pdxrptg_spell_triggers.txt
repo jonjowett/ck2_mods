@@ -1,0 +1,29 @@
+expd_pdxrptg_from_can_cast_a_spell_on_this_settlement = {
+	OR = {
+		
+		# Original condition (any province within 800 distance units of FROM's capital)
+		location = { distance = { who = FROM distance < 800 } }
+		
+		# Added condition #1 (any province in FROM's subrealm)
+		location = {
+			any_province_holding = {
+				holder_scope = {
+					OR = {
+						character = FROM
+						any_liege = { character = FROM }
+					}
+				}
+			}
+		}
+		
+		# Added condition #2 (any province very close to FROM's actual location - eg. nearby enemy provinces if they are a commander)
+		location = {
+			FROM = {
+				location = {
+					distance = { where = PREVPREV distance < 100 }
+				}
+			}
+		}
+		
+	}
+}
