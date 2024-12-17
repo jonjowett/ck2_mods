@@ -1,0 +1,54 @@
+# Audax Validator EnableCommentMetadata
+
+# New offmap decision, allowing players to flag themselves as "favoured by {daedra}",
+#      which allows permanent activation of the daedric artifact.
+# Cost is the same as buying the daedric artifact itself - ie. super-expensive!
+
+offmap_decisions = {
+	expd_pdxrptg_daedric_favour_gain = {
+		ai = no
+		only_playable = yes
+		button_name = offmap_boons
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+		}
+		potential = {
+			expd_pdxrptg_daedric_favour_this_offmap_power_is_a_daedric_lord = yes
+		}
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+				
+				expd_pdxrptg_daedric_favour_this_character_is_not_dragonblood = yes
+				
+				expd_pdxrptg_daedric_favour_this_character_is_not_already_favoured_by_prev_offmap_power = yes
+				
+				expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offmap_power = yes
+				
+			}
+			# Audax Validator "." Ignore_NEXT
+			can_get_boon_from_daedra = yes
+		}
+
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+				expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_prev_offmap_power = yes
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+}

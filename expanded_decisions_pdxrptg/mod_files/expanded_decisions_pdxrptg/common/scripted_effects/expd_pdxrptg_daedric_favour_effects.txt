@@ -1,0 +1,194 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_prev_offmap_power = {
+	if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_azura = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_azura = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_boethiah = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_boethiah= yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_clavicus = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_clavicus = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_hermaeus = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_hermaeus = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_hircine = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_hircine = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_jyggalag = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_jyggalag = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_malacath = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_malacath = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_mehrunes = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_mehrunes = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_mephala = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_mephala = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_meridia = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_meridia = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_molag = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_molag = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_namira = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_namira = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_nocturnal = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_nocturnal = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_peryite = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_peryite = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_sanguine = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_sanguine = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_sheogorath = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_sheogorath = yes
+	}
+	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_vaermina = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_vaermina = yes
+	}
+	else = {
+		custom_tooltip = { text = expd_pdxrptg_daedric_favour_error_tt }
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_azura = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_azura_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_azura
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_boethiah = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_boethiah_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_boethiah
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_clavicus = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_clavicus_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_clavicus
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_hermaeus = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_hermaeus_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_hermaeus
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_hircine = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_hircine_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_hircine
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_jyggalag = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_jyggalag_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_jyggalag
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_malacath = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_malacath_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_malacath
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_mehrunes = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_mehrunes_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_mehrunes
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_mephala = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_mephala_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_mephala
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_meridia = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_meridia_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_meridia
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_molag = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_molag_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_molag
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_namira = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_namira_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_namira
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_nocturnal = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_nocturnal_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_nocturnal
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_peryite = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_peryite_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_peryite
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_sanguine = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_sanguine_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_sanguine
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_sheogorath = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_sheogorath_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_sheogorath
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_vaermina = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_vaermina_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_vaermina
+	}
+}
