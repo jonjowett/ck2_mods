@@ -26,10 +26,7 @@ targeted_decisions = {
 							value = unrestricted
 						}
 						expd_pdxrptg_duel_this_character_has_duelling_potentially_unlocked_by_wonder_bloodworks = yes
-						any_owned_bloodline = {
-							bloodline_is_active_for = PREV
-							has_bloodline_flag = bloodline_duel
-						}
+						any_owned_bloodline = { has_bloodline_flag = bloodline_duel }
 					}
 					OR = {
 						has_dlc = "Way of Life"
@@ -71,6 +68,35 @@ targeted_decisions = {
 						}
 					}
 				}
+				FROM = {
+					OR = {
+						trigger_if = {
+							limit = { has_dlc = "Way of Life" }
+							has_focus = focus_war
+						}
+						trigger_if = {
+							limit = { has_dlc = "Holy Fury" }
+							custom_tooltip = {
+								text = expd_pdxrptg_duel_this_character_is_a_member_of_a_martial_society_tt
+								is_member_of_any_warrior_lodge_trigger = yes
+							}
+						}
+						trigger_if = {
+							limit = { expd_pdxrptg_duel_this_character_has_duelling_potentially_unlocked_by_wonder_bloodworks = yes }
+							expd_pdxrptg_duel_this_character_has_duelling_allowed_by_wonder_bloodworks = yes
+						}
+						trigger_if = {
+							limit = { any_owned_bloodline = { has_bloodline_flag = bloodline_duel } }
+							custom_tooltip = {
+								text = expd_pdxrtpg_duel_this_character_has_an_active_bloodline_which_enables_duelling_tt
+								any_owned_bloodline = {
+									bloodline_is_active_for = PREV
+									has_bloodline_flag = bloodline_duel
+								}
+							}
+						}
+					}
+				}
 				OR = { # RELATIONSHIP/mission reqs...
 					custom_tooltip = {
 						text = duel_tooltip_rivals
@@ -102,10 +128,6 @@ targeted_decisions = {
 								trait = zealous
 							}
 						}
-					}
-					trigger_if = {
-						limit = { FROM = { expd_pdxrptg_duel_this_character_has_duelling_potentially_unlocked_by_wonder_bloodworks = yes } }
-						FROM = { expd_pdxrptg_duel_this_character_has_duelling_allowed_by_wonder_bloodworks = yes }
 					}
 				}
 			}
