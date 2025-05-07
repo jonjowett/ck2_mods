@@ -18,7 +18,7 @@ expd_gp_remove_slot_from_wonder_in_this_county = {
 				limit = { check_variable = { which = expd_gp_wonder_slots_added value <= 0 } }
 				set_variable = { which = expd_gp_wonder_slots_added value = 1 }
 			}
-			wonder = { add_wonder_upgrade_slots = 1 }
+			wonder = { remove_wonder_upgrade_slots = 1 }
 			change_variable = { which = expd_gp_wonder_slots_added value = -1 }
 		}
 	}
