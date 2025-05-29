@@ -1,0 +1,543 @@
+# Passthrough so the single override line isn't unreasonably long.
+# NB: This data is only shown/evaluated for living characters.
+
+defined_text = {
+	
+	name = BCT_InvBlock
+	use_first_valid = yes
+	
+	text = {
+		trigger = { is_alive = yes }
+		localisation_key = BCT_InvBlock_Actual
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+##############################
+#                            #
+#       TOTAL BLOCKERS       #
+#                            #
+##############################
+
+
+
+# "Total blockers" are character properties which are absolute blocks against invitation.
+# They are evaluated in decreasing order, with the most-difficult-to-work-around (IMO) taking precedence.
+# If any are present then all other blockers are suppressed.
+
+defined_text = {
+	
+	name = BCT_InvBlock_EvaluateTotalBlockers
+	use_first_valid = yes
+	
+	# Character flag which completely blocks invitations, incl via favors
+	text = {
+		trigger = { has_character_flag = no_court_invites }
+		localisation_key = BCT_InvBlock_TotalBlocker_Unmovable
+	}
+	
+	# Ruler
+	text = {
+		trigger = { is_ruler = yes }
+		localisation_key = BCT_InvBlock_TotalBlocker_Ruler
+	}
+	
+	# Prisoner - sometimes you can get them to free themselves by sending loads of money, but it's not at all guaranteed.
+	text = {
+		trigger = {
+			is_ruler = no
+			prisoner = yes
+		}
+		localisation_key = BCT_InvBlock_TotalBlocker_Prisoner
+	}
+	
+	# Lesser partner in marriage in same court as spouse
+	# Yes, you can kill the spouse, but there's a very good chance they will spontaneously relocate afterwards, changing everything.
+	text = {
+		trigger = {
+			is_ruler = no
+			OR = {
+				AND = {
+					is_female = yes
+					is_married = yes
+					is_married_matrilineally = no
+				}
+				AND = {
+					is_female = no
+					is_married = yes
+					is_married_matrilineally = yes
+				}
+			}
+			OR = {
+				host = { any_spouse = { character = PREVPREV } } # Spouse is host
+				host = { any_courtier = { any_spouse = { character = PREVPREVPREV } } } # Spouse is fellow courtier
+			}
+		}
+		localisation_key = BCT_InvBlock_TotalBlocker_LesserSpouse
+	}
+	
+	# Consort/concubine - can sometimes be worked-around, eg. by taking them yourself, or by recruiting them
+	# All such workarounds are near-instant, so either you can do them or you can't.
+	text = {
+		trigger = {
+			is_ruler = no
+			is_consort = yes
+			is_female = no
+		}
+		localisation_key = BCT_InvBlock_TotalBlocker_Consort
+	}
+	text = {
+		trigger = {
+			is_ruler = no
+			is_consort = yes
+			is_female = yes
+		}
+		localisation_key = BCT_InvBlock_TotalBlocker_Concubine
+	}
+	
+	# Child - you can only wait, possibly a long time, and their religion/marital status/etc are likely to change.
+	text = {
+		trigger = { is_adult = no }
+		localisation_key = BCT_InvBlock_TotalBlocker_Child
+	}
+	
+	# No total blockers - continue!
+	text = {
+		trigger = { always = yes }
+		localisation_key = BCT_InvBlock_ListNormalBlockers
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+##############################
+#                            #
+#       NORMAL BLOCKERS      #
+#                            #
+##############################
+
+
+
+# "Normal" blockers are the remaining blockers which might all be "fixable", one way or another.
+# We assume that all characters that reach this part of the evaluation have no "total blockers",
+#            so that we don't have to massively duplicate/overcomplicate the code. Specifically:
+#  --- No unmovables
+#  --- No rulers
+#  --- No prisoners
+#  --- No consorts/concubines
+#  --- No children
+#  --- No lesser spouses
+
+# !!!!! IMPORTANT !!!!!
+# If you change anything in any of these blocks, you MUST make an IDENTICAL change in the "None" area at the bottom!
+# This is why the formatting here is a bit weird:
+#  --- All triggers are indented so they can be directly copy-pasted to the "None" area.
+#  --- All comments are included inside the trigger, so it's easier to keep track of what's going on in the "None" area.
+
+defined_text = {
+	
+	name = BCT_InvBlock_DiffRelGroup
+	use_first_valid = yes
+	
+	text = {
+		trigger = {
+					# No Conclave & all players (MP/SP) are of diff religion group - blocked
+					NOT = { has_dlc = "Conclave" }
+					NOT = { any_player = { religion_group = PREV } }
+		}
+		localisation_key = BCT_InvBlock_DiffRelGroup_Blocked
+	}
+	
+	text = {
+		trigger = {
+					# Conclave & all players (MP/SP) are of diff religion group - need favor
+					has_dlc = "Conclave"
+					NOT = { any_player = { religion_group = PREV } }
+		}
+		localisation_key = BCT_InvBlock_DiffRelGroup_NeedFavor
+	}
+	
+	text = {
+		trigger = {
+					# MP game & some players have correct religion group - uncertain
+					multiplayer = yes
+					any_player = { religion_group = PREV }
+					any_player = { NOT = { religion_group = PREV } }
+		}
+		localisation_key = BCT_InvBlock_DiffRelGroup_Uncertain_MP
+	}
+	
+}
+
+defined_text = {
+	
+	name = BCT_InvBlock_Married
+	use_first_valid = yes
+	
+	text = {
+		trigger = {
+					# Married, all players (MP/SP) have diff rel group - blocked
+					is_married = yes
+					NOT = { any_player = { religion_group = PREV } }
+		}
+		localisation_key = BCT_InvBlock_Married_Blocked
+	}
+	
+	text = {
+		trigger = {
+					# Married & MP game & some but not all players have diff rel group - uncertain
+					is_married = yes
+					multiplayer = yes
+					any_player = { religion_group = PREV }
+					any_player = { NOT = { religion_group = PREV } }
+		}
+		localisation_key = BCT_InvBlock_Married_Uncertain_MP
+	}
+	
+}
+
+defined_text = {
+	
+	name = BCT_InvBlock_Councillor
+	use_first_valid = yes
+	
+	text = {
+		trigger = {
+					# Is councillor & all players (MP/SP) have diff rel group - blocked
+					is_councillor = yes
+					NOT = { any_player = { religion_group = PREV } }
+		}
+		localisation_key = BCT_InvBlock_Councillor_Blocked
+	}
+	
+	text = {
+		trigger = {
+					# Is councillor & MP game & some but not all players have diff rel group - uncertain
+					is_councillor = yes
+					multiplayer = yes
+					any_player = { religion_group = PREV }
+					any_player = { NOT = { religion_group = PREV } }
+		}
+		localisation_key = BCT_InvBlock_Councillor_Uncertain_MP
+	}
+	
+}
+
+defined_text = {
+	
+	name = BCT_InvBlock_LiegeRelative
+	use_first_valid = yes
+	
+	text = {
+		trigger = {
+					# Is close relative (excl nibling/aunt/uncle) of liege & all players (MP/SP) have diff rel group - blocked
+					liege = {
+						is_close_relative = PREV
+						NOT = { is_aunt_uncle_of = PREV }
+						NOT = { is_nibling_of    = PREV }
+					}
+					NOT = { any_player = { religion_group = PREV } }
+		}
+		localisation_key = BCT_InvBlock_LiegeRelative_Blocked
+	}
+	
+	text = {
+		trigger = {
+					# Is close relative (excl nibling/aunt/uncle) of liege & MP game & some but not all players have diff rel group- uncertain
+					liege = {
+						is_close_relative = PREV
+						NOT = { is_aunt_uncle_of = PREV }
+						NOT = { is_nibling_of    = PREV }
+					}
+					multiplayer = yes
+					any_player = { religion_group = PREV }
+					any_player = { NOT = { religion_group = PREV } }
+		}
+		localisation_key = BCT_InvBlock_LiegeRelative_Uncertain_MP
+	}
+	
+}
+
+defined_text = {
+	
+	name = BCT_InvBlock_Adventure
+	use_first_valid = yes
+	
+	text = {
+		trigger = {
+					# Preparing an adventure against a player, in SP
+					multiplayer = no
+					any_player = {
+						OR = {
+							has_opinion_modifier = { who = PREV name = preparing_to_invade_me }
+							has_opinion_modifier = { who = PREV name = preparing_to_invade }
+							has_opinion_modifier = { who = PREV name = opinion_targeted_by_adventurer }
+						}
+					}
+		}
+		localisation_key = BCT_InvBlock_Adventure_Blocked
+	}
+	
+	text = {
+		trigger = {
+					# Preparing an adventure against a player, in MP
+					multiplayer = yes
+					any_player = {
+						OR = {
+							has_opinion_modifier = { who = PREV name = preparing_to_invade_me }
+							has_opinion_modifier = { who = PREV name = preparing_to_invade }
+							has_opinion_modifier = { who = PREV name = opinion_targeted_by_adventurer }
+						}
+					}
+		}
+		localisation_key = BCT_InvBlock_Adventure_Uncertain_MP
+	}
+	
+}
+
+
+defined_text = {
+	
+	name = BCT_InvBlock_Rival
+	use_first_valid = yes
+	
+	text = {
+		trigger = {
+					# Rival of a player, in SP
+					multiplayer = no
+					any_player = { is_rival = PREV }
+		}
+		localisation_key = BCT_InvBlock_Rival_Blocked
+	}
+	
+	text = {
+		trigger = {
+					# Foe of a player, in SP
+					multiplayer = no
+					any_player = { is_foe = PREV }
+		}
+		localisation_key = BCT_InvBlock_Foe_Uncertain
+	}
+	
+	text = {
+		trigger = {
+					# Rival of a player, in a MP game
+					multiplayer = yes
+					any_player = { is_rival = PREV }
+		}
+		localisation_key = BCT_InvBlock_Rival_Uncertain_MP
+	}
+	
+	text = {
+		trigger = {
+					# Foe of a player, in a MP game
+					multiplayer = yes
+					any_player = { is_foe = PREV }
+		}
+		localisation_key = BCT_InvBlock_Foe_Uncertain_MP
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+##############################
+#                            #
+#            NONE            #
+#                            #
+##############################
+
+
+
+# Special case:
+#  --- Copy every condition from above into the trigger
+#  --- Wrap each in an AND={} block (if necessary)
+#  --- Wrap everything in a NOR={} block
+
+defined_text = {
+	name = BCT_InvBlock_None
+	use_first_valid = yes
+	text = {
+		trigger = {
+			NOR = {
+				
+				
+				
+				AND = {
+					# No Conclave & all players (MP/SP) are of diff religion group - blocked
+					NOT = { has_dlc = "Conclave" }
+					NOT = { any_player = { religion_group = PREV } }
+				}
+				
+				
+				
+				AND = {
+					# Conclave & all players (MP/SP) are of diff religion group - need favor
+					has_dlc = "Conclave"
+					NOT = { any_player = { religion_group = PREV } }
+				}
+				
+				
+				
+				AND = {
+					# MP game & some players have correct religion group - uncertain
+					multiplayer = yes
+					any_player = { religion_group = PREV }
+					any_player = { NOT = { religion_group = PREV } }
+				}
+				
+				
+				
+				AND = {
+					# Married, all players (MP/SP) have diff rel group - blocked
+					is_married = yes
+					NOT = { any_player = { religion_group = PREV } }
+				}
+				
+				
+				
+				AND = {
+					# Married & MP game & some but not all players have diff rel group - uncertain
+					is_married = yes
+					multiplayer = yes
+					any_player = { religion_group = PREV }
+					any_player = { NOT = { religion_group = PREV } }
+				}
+				
+				
+				
+				AND = {
+					# Is councillor & all players (MP/SP) have diff rel group - blocked
+					is_councillor = yes
+					NOT = { any_player = { religion_group = PREV } }
+				}
+				
+				
+				
+				AND = {
+					# Is councillor & MP game & some but not all players have diff rel group - uncertain
+					is_councillor = yes
+					multiplayer = yes
+					any_player = { religion_group = PREV }
+					any_player = { NOT = { religion_group = PREV } }
+				}
+				
+				
+				
+				AND = {
+					# Is close relative (excl nibling/aunt/uncle) of liege & all players (MP/SP) have diff rel group - blocked
+					liege = {
+						is_close_relative = PREV
+						NOT = { is_aunt_uncle_of = PREV }
+						NOT = { is_nibling_of    = PREV }
+					}
+					NOT = { any_player = { religion_group = PREV } }
+				}
+				
+				
+				
+				AND = {
+					# Is close relative (excl nibling/aunt/uncle) of liege & MP game & some but not all players have diff rel group- uncertain
+					liege = {
+						is_close_relative = PREV
+						NOT = { is_aunt_uncle_of = PREV }
+						NOT = { is_nibling_of    = PREV }
+					}
+					multiplayer = yes
+					any_player = { religion_group = PREV }
+					any_player = { NOT = { religion_group = PREV } }
+				}
+				
+				
+				
+				AND = {
+					# Preparing an adventure against a player, in SP
+					multiplayer = no
+					any_player = {
+						OR = {
+							has_opinion_modifier = { who = PREV name = preparing_to_invade_me }
+							has_opinion_modifier = { who = PREV name = preparing_to_invade }
+							has_opinion_modifier = { who = PREV name = opinion_targeted_by_adventurer }
+						}
+					}
+				}
+				
+				
+				
+				AND = {
+					# Preparing an adventure against a player, in MP
+					multiplayer = yes
+					any_player = {
+						OR = {
+							has_opinion_modifier = { who = PREV name = preparing_to_invade_me }
+							has_opinion_modifier = { who = PREV name = preparing_to_invade }
+							has_opinion_modifier = { who = PREV name = opinion_targeted_by_adventurer }
+						}
+					}
+				}
+				
+				
+				
+				AND = {
+					# Rival of a player, in SP
+					multiplayer = no
+					any_player = { is_rival = PREV }
+				}
+				
+				
+				
+				AND = {
+					# Foe of a player, in SP
+					multiplayer = no
+					any_player = { is_foe = PREV }
+				}
+				
+				
+				
+				AND = {
+					# Rival of a player, in a MP game
+					multiplayer = yes
+					any_player = { is_rival = PREV }
+				}
+				
+				
+				
+				AND = {
+					# Foe of a player, in a MP game
+					multiplayer = yes
+					any_player = { is_foe = PREV }
+				}
+				
+				
+				
+			}
+		}
+		localisation_key = BCT_InvBlock_None
+	}
+}

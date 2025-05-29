@@ -1,0 +1,18 @@
+# Main wealth line
+BCT_Wealth_Actual;\nWealth: [BCT_Wealth_Amount]\nWealth Inheritance:[BCT_Wealth_Inheritance_Ruler][BCT_Wealth_Inheritance_NoRelatives][BCT_Wealth_Inheritance_Ancestors][BCT_Wealth_Inheritance_Siblings][BCT_Wealth_Inheritance_Descendants];;;;;;;;;;;;;x
+# Rulers' wealth can't (easily) be inherited
+BCT_Wealth_Inheritance_Ruler_Actual; §R(Ruler)§!;;;;;;;;;;;;;x
+BCT_Wealth_Inheritance_NoRelatives_Actual; §G(No living relatives)§!;;;;;;;;;;;;;x
+BCT_Wealth_Inheritance_Ancestors_Actual; §Y(Ancestors)§!;;;;;;;;;;;;;x
+BCT_Wealth_Inheritance_Descendants_Actual; §Y(Descendants)§!;;;;;;;;;;;;;x
+BCT_Wealth_Inheritance_Siblings_Actual; §Y(Siblings)§!;;;;;;;;;;;;;x
+# Wealth amount
+BCT_Wealth_LT0;§R<0§!;;;;;;;;;;;;;x
+BCT_Wealth_0_10;§g0-10§!;;;;;;;;;;;;;x
+BCT_Wealth_10_30;10-30;;;;;;;;;;;;;x
+BCT_Wealth_30_100;§Y30-100§!;;;;;;;;;;;;;x
+BCT_Wealth_100_300;§M100-300§!;;;;;;;;;;;;;x
+BCT_Wealth_300_1000;§G300-1000§!;;;;;;;;;;;;;x
+BCT_Wealth_1000_3000;§P1000-3000§!;;;;;;;;;;;;;x
+BCT_Wealth_3000_10000;§B3000-10000§!;;;;;;;;;;;;;x
+BCT_Wealth_GT10000;§l>10000§!;;;;;;;;;;;;;x

@@ -1,0 +1,259 @@
+# Passthrough so the single override line isn't unreasonably long
+# NB: This data is only shown/evaluated for living characters.
+
+defined_text = {
+	name = BCT_Wealth
+	use_first_valid = yes
+	text = {
+		trigger = { is_alive = yes }
+		localisation_key = BCT_Wealth_Actual
+	}
+}
+
+
+
+
+
+
+
+
+
+
+###############################
+#                             #
+#        Wealth Amount        #
+#                             #
+###############################
+
+
+
+defined_text = {
+	name = BCT_Wealth_Amount
+	use_first_valid = yes
+	text = {
+		trigger = { wealth = 10000 }
+		localisation_key = BCT_Wealth_GT10000
+	}
+	text = {
+		trigger = { wealth = 3000 }
+		localisation_key = BCT_Wealth_3000_10000
+	}
+	text = {
+		trigger = { wealth = 1000 }
+		localisation_key = BCT_Wealth_1000_3000
+	}
+	text = {
+		trigger = { wealth = 300 }
+		localisation_key = BCT_Wealth_300_1000
+	}
+	text = {
+		trigger = { wealth = 100 }
+		localisation_key = BCT_Wealth_100_300
+	}
+	text = {
+		trigger = { wealth = 30 }
+		localisation_key = BCT_Wealth_30_100
+	}
+	text = {
+		trigger = { wealth = 10 }
+		localisation_key = BCT_Wealth_10_30
+	}
+	text = {
+		trigger = { wealth = 0 }
+		localisation_key = BCT_Wealth_0_10
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = BCT_Wealth_LT0
+	}
+}
+
+
+
+
+
+
+
+
+
+
+################################
+#                              #
+#      Wealth Inheritance      #
+#                              #
+################################
+
+# Rulers' wealth can be more difficult to inherit, flag this separately
+defined_text = {
+	name = BCT_Wealth_Inheritance_Ruler
+	use_first_valid = yes
+	text = {
+		trigger = { is_ruler = yes }
+		localisation_key = BCT_Wealth_Inheritance_Ruler_Actual
+	}
+}
+
+
+# !!! IMPORTANT !!!
+# Need to keep the "no relatives" alert in-sync with the individual alerts below.
+
+defined_text = {
+	name = BCT_Wealth_Inheritance_NoRelatives
+	use_first_valid = yes
+	text = {
+		trigger = {
+			NOR = {
+				
+				# Ancestors (4 generations)
+				mother_even_if_dead = { is_alive = yes }
+				father_even_if_dead = { is_alive = yes }
+				mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } }
+				mother_even_if_dead = { father_even_if_dead = { is_alive = yes } }
+				father_even_if_dead = { mother_even_if_dead = { is_alive = yes } }
+				father_even_if_dead = { father_even_if_dead = { is_alive = yes } }
+				mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } }
+				mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } }
+				mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } }
+				mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } }
+				father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } }
+				father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } }
+				father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } }
+				father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } }
+				mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				
+				# Descendants (4 generations)
+				any_child_even_if_dead = {
+					OR = {
+						is_alive = yes
+						any_child_even_if_dead = {
+							OR = {
+								is_alive = yes
+								any_child_even_if_dead = {
+									OR = {
+										is_alive = yes
+										any_child_even_if_dead = {
+											is_alive = yes
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				# Siblings
+				any_sibling_even_if_dead = { is_alive = yes }
+				
+			}
+		}
+		localisation_key = BCT_Wealth_Inheritance_NoRelatives_Actual
+	}
+}
+
+
+
+defined_text = {
+	name = BCT_Wealth_Inheritance_Ancestors
+	use_first_valid = yes
+	text = {
+		trigger = {
+			# Ancestors (4 generations)
+			# Copied from above
+			OR = {
+				mother_even_if_dead = { is_alive = yes }
+				father_even_if_dead = { is_alive = yes }
+				mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } }
+				mother_even_if_dead = { father_even_if_dead = { is_alive = yes } }
+				father_even_if_dead = { mother_even_if_dead = { is_alive = yes } }
+				father_even_if_dead = { father_even_if_dead = { is_alive = yes } }
+				mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } }
+				mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } }
+				mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } }
+				mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } }
+				father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } }
+				father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } }
+				father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } }
+				father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } }
+				mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { is_alive = yes } } } }
+				father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { is_alive = yes } } } }
+			}
+		}
+		localisation_key = BCT_Wealth_Inheritance_Ancestors_Actual
+	}
+}
+
+
+
+defined_text = {
+	name = BCT_Wealth_Inheritance_Descendants
+	use_first_valid = yes
+	text = {
+		trigger = {
+			# Descendants (4 generations)
+			# Copied from above
+			any_child_even_if_dead = {
+				OR = {
+					is_alive = yes
+					any_child_even_if_dead = {
+						OR = {
+							is_alive = yes
+							any_child_even_if_dead = {
+								OR = {
+									is_alive = yes
+									any_child_even_if_dead = {
+										is_alive = yes
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		localisation_key = BCT_Wealth_Inheritance_Descendants_Actual
+	}
+}
+
+
+
+defined_text = {
+	name = BCT_Wealth_Inheritance_Siblings
+	use_first_valid = yes
+	text = {
+		trigger = {
+			# Siblings
+			# Copied from above
+			any_sibling_even_if_dead = { is_alive = yes }
+		}
+		localisation_key = BCT_Wealth_Inheritance_Siblings_Actual
+	}
+}

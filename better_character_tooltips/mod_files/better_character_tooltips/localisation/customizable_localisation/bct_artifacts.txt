@@ -1,0 +1,343 @@
+# Passthrough so the single override line isn't unreasonably long.
+# NB: This data is only shown/evaluated for living characters who have at least one artifact.
+
+defined_text = {
+	name = BCT_Artifacts
+	use_first_valid = yes
+	text = {
+		trigger = {
+			is_alive = yes
+			num_of_artifacts >= 1
+		}
+		localisation_key = BCT_Artifacts_Actual
+	}
+}
+
+# Q9 is custom (because it must handle Q>=9, not just Q==9)
+
+defined_text = {
+	name = BCT_Artifacts_Q9
+	use_first_valid = yes
+	text = {
+		trigger = { any_artifact = { quality >= 9 count >= 5 } }
+		localisation_key = BCT_Artifacts_Q9_5
+	}
+	text = {
+		trigger = { any_artifact = { quality >= 9 count = 4 } }
+		localisation_key = BCT_Artifacts_Q9_4
+	}
+	text = {
+		trigger = { any_artifact = { quality >= 9 count = 3 } }
+		localisation_key = BCT_Artifacts_Q9_3
+	}
+	text = {
+		trigger = { any_artifact = { quality >= 9 count = 2 } }
+		localisation_key = BCT_Artifacts_Q9_2
+	}
+	text = {
+		trigger = { any_artifact = { quality >= 9 count = 1 } }
+		localisation_key = BCT_Artifacts_Q9_1
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q9_Comma
+	use_first_valid = yes
+	text = {
+		# Only add a comma if this character has an artifact of lower quality.
+		# NB: any_artifact = { quality < 9 } doesn't work, so we use any_artifact = { NOT = { quality >= 9 } }
+		trigger = {
+			any_artifact = {         quality == 9   }
+			any_artifact = { NOT = { quality >= 9 } }
+		}
+		localisation_key = BCT_Artifacts_Comma
+	}
+}
+
+# Q8 is the template for all lower Qs (copy / paste / replace 8 with N)
+
+defined_text = {
+	name = BCT_Artifacts_Q8
+	use_first_valid = yes
+	text = {
+		trigger = { any_artifact = { quality == 8 count >= 5 } }
+		localisation_key = BCT_Artifacts_Q8_5
+	}
+	text = {
+		trigger = { any_artifact = { quality == 8 count = 4 } }
+		localisation_key = BCT_Artifacts_Q8_4
+	}
+	text = {
+		trigger = { any_artifact = { quality == 8 count = 3 } }
+		localisation_key = BCT_Artifacts_Q8_3
+	}
+	text = {
+		trigger = { any_artifact = { quality == 8 count = 2 } }
+		localisation_key = BCT_Artifacts_Q8_2
+	}
+	text = {
+		trigger = { any_artifact = { quality == 8 count = 1 } }
+		localisation_key = BCT_Artifacts_Q8_1
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q8_Comma
+	use_first_valid = yes
+	text = {
+		trigger = {
+			any_artifact = {         quality == 8   }
+			any_artifact = { NOT = { quality >= 8 } }
+		}
+		localisation_key = BCT_Artifacts_Comma
+	}
+}
+
+# Q7 and below generated via copy/paste
+
+defined_text = {
+	name = BCT_Artifacts_Q7
+	use_first_valid = yes
+	text = {
+		trigger = { any_artifact = { quality == 7 count >= 5 } }
+		localisation_key = BCT_Artifacts_Q7_5
+	}
+	text = {
+		trigger = { any_artifact = { quality == 7 count = 4 } }
+		localisation_key = BCT_Artifacts_Q7_4
+	}
+	text = {
+		trigger = { any_artifact = { quality == 7 count = 3 } }
+		localisation_key = BCT_Artifacts_Q7_3
+	}
+	text = {
+		trigger = { any_artifact = { quality == 7 count = 2 } }
+		localisation_key = BCT_Artifacts_Q7_2
+	}
+	text = {
+		trigger = { any_artifact = { quality == 7 count = 1 } }
+		localisation_key = BCT_Artifacts_Q7_1
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q7_Comma
+	use_first_valid = yes
+	text = {
+		trigger = {
+			any_artifact = {         quality == 7   }
+			any_artifact = { NOT = { quality >= 7 } }
+		}
+		localisation_key = BCT_Artifacts_Comma
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q6
+	use_first_valid = yes
+	text = {
+		trigger = { any_artifact = { quality == 6 count >= 5 } }
+		localisation_key = BCT_Artifacts_Q6_5
+	}
+	text = {
+		trigger = { any_artifact = { quality == 6 count = 4 } }
+		localisation_key = BCT_Artifacts_Q6_4
+	}
+	text = {
+		trigger = { any_artifact = { quality == 6 count = 3 } }
+		localisation_key = BCT_Artifacts_Q6_3
+	}
+	text = {
+		trigger = { any_artifact = { quality == 6 count = 2 } }
+		localisation_key = BCT_Artifacts_Q6_2
+	}
+	text = {
+		trigger = { any_artifact = { quality == 6 count = 1 } }
+		localisation_key = BCT_Artifacts_Q6_1
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q6_Comma
+	use_first_valid = yes
+	text = {
+		trigger = {
+			any_artifact = {         quality == 6   }
+			any_artifact = { NOT = { quality >= 6 } }
+		}
+		localisation_key = BCT_Artifacts_Comma
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q5
+	use_first_valid = yes
+	text = {
+		trigger = { any_artifact = { quality == 5 count >= 5 } }
+		localisation_key = BCT_Artifacts_Q5_5
+	}
+	text = {
+		trigger = { any_artifact = { quality == 5 count = 4 } }
+		localisation_key = BCT_Artifacts_Q5_4
+	}
+	text = {
+		trigger = { any_artifact = { quality == 5 count = 3 } }
+		localisation_key = BCT_Artifacts_Q5_3
+	}
+	text = {
+		trigger = { any_artifact = { quality == 5 count = 2 } }
+		localisation_key = BCT_Artifacts_Q5_2
+	}
+	text = {
+		trigger = { any_artifact = { quality == 5 count = 1 } }
+		localisation_key = BCT_Artifacts_Q5_1
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q5_Comma
+	use_first_valid = yes
+	text = {
+		trigger = {
+			any_artifact = {         quality == 5   }
+			any_artifact = { NOT = { quality >= 5 } }
+		}
+		localisation_key = BCT_Artifacts_Comma
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q4
+	use_first_valid = yes
+	text = {
+		trigger = { any_artifact = { quality == 4 count >= 5 } }
+		localisation_key = BCT_Artifacts_Q4_5
+	}
+	text = {
+		trigger = { any_artifact = { quality == 4 count = 4 } }
+		localisation_key = BCT_Artifacts_Q4_4
+	}
+	text = {
+		trigger = { any_artifact = { quality == 4 count = 3 } }
+		localisation_key = BCT_Artifacts_Q4_3
+	}
+	text = {
+		trigger = { any_artifact = { quality == 4 count = 2 } }
+		localisation_key = BCT_Artifacts_Q4_2
+	}
+	text = {
+		trigger = { any_artifact = { quality == 4 count = 1 } }
+		localisation_key = BCT_Artifacts_Q4_1
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q4_Comma
+	use_first_valid = yes
+	text = {
+		trigger = {
+			any_artifact = {         quality == 4   }
+			any_artifact = { NOT = { quality >= 4 } }
+		}
+		localisation_key = BCT_Artifacts_Comma
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q3
+	use_first_valid = yes
+	text = {
+		trigger = { any_artifact = { quality == 3 count >= 5 } }
+		localisation_key = BCT_Artifacts_Q3_5
+	}
+	text = {
+		trigger = { any_artifact = { quality == 3 count = 4 } }
+		localisation_key = BCT_Artifacts_Q3_4
+	}
+	text = {
+		trigger = { any_artifact = { quality == 3 count = 3 } }
+		localisation_key = BCT_Artifacts_Q3_3
+	}
+	text = {
+		trigger = { any_artifact = { quality == 3 count = 2 } }
+		localisation_key = BCT_Artifacts_Q3_2
+	}
+	text = {
+		trigger = { any_artifact = { quality == 3 count = 1 } }
+		localisation_key = BCT_Artifacts_Q3_1
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q3_Comma
+	use_first_valid = yes
+	text = {
+		trigger = {
+			any_artifact = {         quality == 3   }
+			any_artifact = { NOT = { quality >= 3 } }
+		}
+		localisation_key = BCT_Artifacts_Comma
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q2
+	use_first_valid = yes
+	text = {
+		trigger = { any_artifact = { quality == 2 count >= 5 } }
+		localisation_key = BCT_Artifacts_Q2_5
+	}
+	text = {
+		trigger = { any_artifact = { quality == 2 count = 4 } }
+		localisation_key = BCT_Artifacts_Q2_4
+	}
+	text = {
+		trigger = { any_artifact = { quality == 2 count = 3 } }
+		localisation_key = BCT_Artifacts_Q2_3
+	}
+	text = {
+		trigger = { any_artifact = { quality == 2 count = 2 } }
+		localisation_key = BCT_Artifacts_Q2_2
+	}
+	text = {
+		trigger = { any_artifact = { quality == 2 count = 1 } }
+		localisation_key = BCT_Artifacts_Q2_1
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q2_Comma
+	use_first_valid = yes
+	text = {
+		trigger = {
+			any_artifact = {         quality == 2   }
+			any_artifact = { NOT = { quality >= 2 } }
+		}
+		localisation_key = BCT_Artifacts_Comma
+	}
+}
+
+defined_text = {
+	name = BCT_Artifacts_Q1
+	use_first_valid = yes
+	text = {
+		trigger = { any_artifact = { quality == 1 count >= 5 } }
+		localisation_key = BCT_Artifacts_Q1_5
+	}
+	text = {
+		trigger = { any_artifact = { quality == 1 count = 4 } }
+		localisation_key = BCT_Artifacts_Q1_4
+	}
+	text = {
+		trigger = { any_artifact = { quality == 1 count = 3 } }
+		localisation_key = BCT_Artifacts_Q1_3
+	}
+	text = {
+		trigger = { any_artifact = { quality == 1 count = 2 } }
+		localisation_key = BCT_Artifacts_Q1_2
+	}
+	text = {
+		trigger = { any_artifact = { quality == 1 count = 1 } }
+		localisation_key = BCT_Artifacts_Q1_1
+	}
+}

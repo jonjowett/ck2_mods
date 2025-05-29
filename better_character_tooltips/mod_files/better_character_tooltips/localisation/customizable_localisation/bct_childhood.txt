@@ -1,0 +1,244 @@
+# Passthrough so the single override line isn't unreasonably long.
+# NB: This data is only shown/evaluated for living children, and only if Conclave is active.
+
+defined_text = {
+	name = BCT_Childhood
+	use_first_valid = yes
+	text = {
+		trigger = {
+			is_alive = yes
+			is_adult = no
+			has_dlc = "Conclave"
+		}
+		localisation_key = BCT_Childhood_Actual
+	}
+}
+
+
+
+
+
+
+
+
+
+
+# Never had any of the childhood traits
+
+defined_text = {
+	name = BCT_Childhood_None
+	use_first_valid = yes
+	text = {
+		trigger = {
+			NOR = {
+				trait = haughty
+				trait = affectionate
+				trait = timid
+				trait = rowdy
+				trait = willful
+				trait = brooding
+				trait = indolent
+				trait = playful
+				trait = conscientious
+				trait = fussy
+				trait = curious
+				trait = idolizer
+				has_character_flag = was_haughty
+				has_character_flag = was_affectionate
+				has_character_flag = was_timid
+				has_character_flag = was_rowdy
+				has_character_flag = was_willful
+				has_character_flag = was_brooding
+				has_character_flag = was_indolent
+				has_character_flag = was_playful
+				has_character_flag = was_conscientious
+				has_character_flag = was_fussy
+				has_character_flag = was_curious
+				has_character_flag = was_idolizer
+			}
+		}
+		localisation_key = BCT_Childhood_None_Actual
+	}
+}
+
+
+
+
+
+
+
+
+
+
+# Generated text
+
+# Template for generator (keep commented-out, except if you're copy/pasting)
+#defined_text = {
+#    name = BCT_Childhood_YYY
+#    use_first_valid = yes
+#    text = {
+#        trigger = { trait = XXX }
+#        localisation_key = BCT_Childhood_YYY_Now
+#    }
+#    text = {
+#        trigger = { has_character_flag = was_XXX }
+#        localisation_key = BCT_Childhood_YYY_Previous
+#    }
+#}
+
+
+defined_text = {
+    name = BCT_Childhood_Haughty
+    use_first_valid = yes
+    text = {
+        trigger = { trait = haughty }
+        localisation_key = BCT_Childhood_Haughty_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_haughty }
+        localisation_key = BCT_Childhood_Haughty_Previous
+    }
+}
+
+defined_text = {
+    name = BCT_Childhood_Affectionate
+    use_first_valid = yes
+    text = {
+        trigger = { trait = affectionate }
+        localisation_key = BCT_Childhood_Affectionate_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_affectionate }
+        localisation_key = BCT_Childhood_Affectionate_Previous
+    }
+}
+
+defined_text = {
+    name = BCT_Childhood_Timid
+    use_first_valid = yes
+    text = {
+        trigger = { trait = timid }
+        localisation_key = BCT_Childhood_Timid_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_timid }
+        localisation_key = BCT_Childhood_Timid_Previous
+    }
+}
+
+defined_text = {
+    name = BCT_Childhood_Rowdy
+    use_first_valid = yes
+    text = {
+        trigger = { trait = rowdy }
+        localisation_key = BCT_Childhood_Rowdy_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_rowdy }
+        localisation_key = BCT_Childhood_Rowdy_Previous
+    }
+}
+
+defined_text = {
+    name = BCT_Childhood_Willful
+    use_first_valid = yes
+    text = {
+        trigger = { trait = willful }
+        localisation_key = BCT_Childhood_Willful_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_willful }
+        localisation_key = BCT_Childhood_Willful_Previous
+    }
+}
+
+defined_text = {
+    name = BCT_Childhood_Brooding
+    use_first_valid = yes
+    text = {
+        trigger = { trait = brooding }
+        localisation_key = BCT_Childhood_Brooding_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_brooding }
+        localisation_key = BCT_Childhood_Brooding_Previous
+    }
+}
+
+defined_text = {
+    name = BCT_Childhood_Indolent
+    use_first_valid = yes
+    text = {
+        trigger = { trait = indolent }
+        localisation_key = BCT_Childhood_Indolent_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_indolent }
+        localisation_key = BCT_Childhood_Indolent_Previous
+    }
+}
+
+defined_text = {
+    name = BCT_Childhood_Playful
+    use_first_valid = yes
+    text = {
+        trigger = { trait = playful }
+        localisation_key = BCT_Childhood_Playful_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_playful }
+        localisation_key = BCT_Childhood_Playful_Previous
+    }
+}
+
+defined_text = {
+    name = BCT_Childhood_Conscientious
+    use_first_valid = yes
+    text = {
+        trigger = { trait = conscientious }
+        localisation_key = BCT_Childhood_Conscientious_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_conscientious }
+        localisation_key = BCT_Childhood_Conscientious_Previous
+    }
+}
+
+defined_text = {
+    name = BCT_Childhood_Fussy
+    use_first_valid = yes
+    text = {
+        trigger = { trait = fussy }
+        localisation_key = BCT_Childhood_Fussy_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_fussy }
+        localisation_key = BCT_Childhood_Fussy_Previous
+    }
+}
+
+defined_text = {
+    name = BCT_Childhood_Curious
+    use_first_valid = yes
+    text = {
+        trigger = { trait = curious }
+        localisation_key = BCT_Childhood_Curious_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_curious }
+        localisation_key = BCT_Childhood_Curious_Previous
+    }
+}
+
+defined_text = {
+    name = BCT_Childhood_Idolizer
+    use_first_valid = yes
+    text = {
+        trigger = { trait = idolizer }
+        localisation_key = BCT_Childhood_Idolizer_Now
+    }
+    text = {
+        trigger = { has_character_flag = was_idolizer }
+        localisation_key = BCT_Childhood_Idolizer_Previous
+    }
+}
