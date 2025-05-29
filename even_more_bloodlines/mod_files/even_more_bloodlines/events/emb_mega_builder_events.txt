@@ -1,0 +1,494 @@
+namespace = EMBMegaBuilder
+
+# Event IDs:
+#   1       : "Gateway" event - the only event which should be called from outside this file
+#   2 -  99 : General management / tracking / decision-making
+# 100 - 199 : Grant mega builder bloodline
+
+
+
+
+
+
+
+
+
+
+# Called from on_settlement_construction_completed
+# FROM is the title; ROOT is the builder
+character_event = {
+	
+	id = EMBMegaBuilder.1
+	
+	is_triggered_only = yes
+	hide_window = yes
+	
+	has_dlc = "Holy Fury" # Bloodlines require HF
+	
+	# Only continue if the newly-constructed holding is a castle/city/temple
+	trigger = {
+		FROM = {
+			OR = {
+				holding_type = castle
+				holding_type = city
+				holding_type = temple
+			}
+		}
+	}
+	
+	# Continue the event chain tomorrow, to allow time for HF.24022-24 to complete
+	immediate = {
+		character_event = { id = EMBMegaBuilder.2 days = 1 }
+	}
+	
+}
+
+# ROOT is the builder; FROMFROM is the title
+character_event = {
+	
+	id = EMBMegaBuilder.2
+	
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		
+		# Track total number of holdings constructed
+		if = {
+			limit = { check_variable = { which = emb_mega_builder_count value < 1 } }
+			# Counter has not yet been initialised for this character
+			if = {
+				limit = { check_variable = { which = bloodline_built_holdings value > 0 } }
+				# Copy counter value from base game's forge bloodline counter.
+				# This is especially useful if this mod is added part-way through a game.
+				set_variable = { which = emb_mega_builder_count which = bloodline_built_holdings }
+			}
+			else = {
+				# Base game's forge bloodline counter is zero for some reason ?!?!
+				# Start the counter at 1
+				set_variable = { which = emb_mega_builder_count value = 1 }
+			}
+		}
+		else = {
+			# Counter has been initialised for this character - increase it by 1.
+			change_variable = { which = emb_mega_builder_count value = 1 }
+		}
+		
+		# Check for bloodline eligibility
+		if = {
+			limit = {
+				check_variable = { which = emb_mega_builder_count value >= 100 }
+				NOT = { any_owned_bloodline = { has_bloodline_flag = emb_mega_builder } }
+			}
+			narrative_event = { id = EMBMegaBuilder.100 }
+		}
+		
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+# Grant mega-builder bloodline
+# ROOT is the builder; FROMFROMFROM is the title
+narrative_event = {
+	
+	
+	
+	
+	
+	id      = EMBMegaBuilder.100
+	title   = EMBMegaBuilder_100_Title
+	desc    = EMBMegaBuilder_100_Desc
+	border  = GFX_event_narrative_frame_economy
+	
+	is_triggered_only = yes
+	hide_from         = yes
+	
+	
+	
+	
+	
+	# Event picture is some kind of magnificent building, depending on builder's religion
+	
+	picture = {
+		trigger = {
+			OR = {
+				is_random_world = no
+				has_religion_feature = religion_feature_pyramids
+			}
+			OR = {
+				religion = zun_pagan
+				religion = zun_pagan_reformed
+				religion = aztec
+				religion = aztec_reformed
+				has_religion_feature = religion_feature_pyramids
+			}
+		}
+		picture = GFX_evt_sun_temple
+	}
+	picture = {
+		trigger = {
+			is_random_world = no
+			has_dharmic_religion_trigger = yes
+			NOR = {
+				religion = zun_pagan
+				religion = zun_pagan_reformed
+				religion = aztec
+				religion = aztec_reformed
+				has_religion_feature = religion_feature_pyramids
+			}
+		}
+		picture = GFX_evt_india_temple
+	}
+	picture = {
+		trigger = {
+			is_random_world = no
+			religion = taoist
+			NOR = {
+				has_dharmic_religion_trigger = yes
+				religion = zun_pagan
+				religion = zun_pagan_reformed
+				religion = aztec
+				religion = aztec_reformed
+				has_religion_feature = religion_feature_pyramids
+			}
+		}
+		picture = GFX_evt_china_expansionist
+	}
+	picture = {
+		trigger = {
+			NOR = {
+				religion = taoist
+				has_dharmic_religion_trigger = yes
+				religion = zun_pagan
+				religion = zun_pagan_reformed
+				religion = aztec
+				religion = aztec_reformed
+				has_religion_feature = religion_feature_pyramids
+			}
+		}
+		picture = GFX_evt_magnificent_castle
+	}
+	
+	
+	
+	
+	
+	# Event options allow the player (or AI) to choose their nickname (or to not receive a new nickname).
+	
+	option = {
+		name = EMBMegaBuilder_100_Option_Architect
+		trigger = {
+			OR = {
+				ai = no
+				has_nickname = no
+				can_apply_super_cool_nickname_trigger = yes
+			}
+		}
+		give_nickname = nick_the_architect
+		custom_tooltip = {
+			text = EMBMegaBuilder_100_BloodlineName_TT_Architect
+			set_character_flag = emb_mega_builder_architect
+		}
+		ai_chance = { factor = 1 } # AI chooses a valid option at random
+	}
+	
+	option = {
+		name = EMBMegaBuilder_100_Option_Carpenter
+		trigger = {
+			OR = {
+				ai = no
+				has_nickname = no
+				can_apply_super_cool_nickname_trigger = yes
+			}
+		}
+		give_nickname = nick_the_carpenter
+		custom_tooltip = {
+			text = EMBMegaBuilder_100_BloodlineName_TT_Carpenter
+			set_character_flag = emb_mega_builder_carpenter
+		}
+		ai_chance = { factor = 1 } # AI chooses a valid option at random
+	}
+	
+	option = {
+		name = EMBMegaBuilder_100_Option_Founder
+		trigger = {
+			OR = {
+				ai = no
+				has_nickname = no
+				can_apply_super_cool_nickname_trigger = yes
+			}
+		}
+		give_nickname = nick_the_founder
+		custom_tooltip = {
+			text = EMBMegaBuilder_100_BloodlineName_TT_Founder
+			set_character_flag = emb_mega_builder_founder
+		}
+		ai_chance = { factor = 1 } # AI chooses a valid option at random
+	}
+	
+	option = {
+		name = EMBMegaBuilder_100_Option_NoNickname
+		trigger = {
+			has_nickname = yes
+			OR = {
+				ai = no
+				can_apply_super_cool_nickname_trigger = no
+			}
+		}
+		custom_tooltip = {
+			text = EMBMegaBuilder_100_BloodlineName_TT_Default
+			set_character_flag = emb_mega_builder_nonickname
+		}
+		ai_chance = { factor = 1 } # AI chooses a valid option at random
+	}
+	
+	
+	
+	
+	
+	after = {
+		
+		# Create the bloodline
+		custom_tooltip = { text = EMBMegaBuilder_100_NewLine_TT }
+		if = {
+			limit = { is_female = no }
+			create_bloodline = {
+				type = emb_mega_builder
+				inheritance = patrilineal
+			}
+		}
+		else = {
+			create_bloodline = {
+				type = emb_mega_builder
+				inheritance = matrilineal
+			}
+		}
+		
+		# Finalise bloodline setup
+		hidden_tooltip = {
+			new_bloodline = {
+				# Inheritance tracking flags
+				if = {
+					limit = { PREV = { is_female = no } }
+					set_bloodline_flag = emb_m
+				}
+				else = {
+					set_bloodline_flag = emb_f
+				}
+				# Different bloodline name, depending on your choice of nickname
+				if = {
+					limit = { PREV = { has_character_flag = emb_mega_builder_architect } }
+					set_name = emb_mega_builder_name_architect
+				}
+				else_if = {
+					limit = { PREV = { has_character_flag = emb_mega_builder_carpenter } }
+					set_name = emb_mega_builder_name_carpenter
+				}
+				else_if = {
+					limit = { PREV = { has_character_flag = emb_mega_builder_founder } }
+					set_name = emb_mega_builder_name_founder
+				}
+				else = {
+					set_name = emb_mega_builder_name_default
+				}
+			}
+		}
+		
+		# Upgrade founder's stewardship education
+		custom_tooltip = { text = EMBMegaBuilder_100_NewLine_TT }
+		if = {
+			limit = { trait = indulgent_wastrel }
+			custom_tooltip = { text = EMBMegaBuilder_100_EducationImprovement_Founder_Occurs_TT }
+			hidden_tooltip = { remove_trait = indulgent_wastrel }
+			add_trait = fortune_builder
+		}
+		else_if = {
+			limit = { trait = thrifty_clerk }
+			custom_tooltip = { text = EMBMegaBuilder_100_EducationImprovement_Founder_Occurs_TT }
+			hidden_tooltip = { remove_trait = thrifty_clerk }
+			add_trait = fortune_builder
+		}
+		else_if = {
+			limit = { trait = fortune_builder }
+			custom_tooltip = { text = EMBMegaBuilder_100_EducationImprovement_Founder_Occurs_TT }
+			hidden_tooltip = { remove_trait = fortune_builder }
+			add_trait = midas_touched
+			change_stewardship = 1
+		}
+		else_if = {
+			limit = { trait = midas_touched }
+			custom_tooltip = { text = EMBMegaBuilder_100_EducationImprovement_Founder_AlreadyMax_TT }
+			change_stewardship = 2
+		}
+		else = {
+			custom_tooltip = { text = EMBMegaBuilder_100_EducationImprovement_Founder_NotPossible_TT }
+			change_stewardship = 1
+		}
+		
+		# Upgrade descendants' stewardship education
+		custom_tooltip = { text = EMBMegaBuilder_100_NewLine_TT }
+		custom_tooltip = {
+			text = EMBMegaBuilder_100_EducationImprovement_Descendants_Occurs_TT
+			new_bloodline = {
+				any_bloodline_member = {
+					limit = {
+						# Is adult non-dumb steward, and does not already have a stewardship upgrade bloodline (other than this one).
+						is_adult = yes
+						is_dumb_trigger = no
+						has_education_stewardship_trigger = yes
+						NOT = {
+							any_owned_bloodline = {
+								NOT = { bloodline = PREVPREV }
+								OR = {
+									bloodline_is_active_for = PREV
+									has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+								}
+								OR = {
+									has_bloodline_flag = emb_bloodline_effect_education_upgrade_all
+									has_bloodline_flag = emb_bloodline_effect_education_upgrade_stewardship
+								}
+							}
+						}
+					}
+					# Setup education upgrade as per EMBTraits.400, but without the delay
+					ROOT = { save_event_target_as = emb_education_upgrade_childs_guardian }
+					if = {
+						limit = { age > 16 }
+						character_event = { id = EMBTraits.410 days =  1 }               # For ages 17+, it's safe to trigger immediately (and perhaps best, so the player can see the effect).
+						character_event = { id = EMBTraits.499 days = 10 }               # Always at least 5 days after the main event was triggered (on the previous line).
+					}
+					else = {
+						character_event = { id = EMBTraits.410 days =  90 random = 180 } # For 16-year-olds, wait awhile in case something else will touch their education.
+						character_event = { id = EMBTraits.499 days = 275              } # Always at least 5 days after the main event was triggered (on the previous line).
+					}
+				}
+			}
+		}
+		
+		# Offer lifestyle trait
+		custom_tooltip = { text = EMBMegaBuilder_100_NewLine_TT }
+		custom_tooltip = {
+			text = EMBMegaBuilder_100_LifestyleTraitOffered_TT
+			character_event = { id = EMBMegaBuilder.101 }
+		}
+		if = {
+			limit = { lifestyle_traits >= 1 }
+			custom_tooltip = { text = EMBMegaBuilder_100_LifestyleTraitOffered_ExcessWillBeRemoved_TT }
+		}
+		
+	}
+	
+}
+
+character_event = {
+	
+	id   = EMBMegaBuilder.101
+	desc = EMBMegaBuilder_101_Desc
+	
+	picture = GFX_evt_bloodlines
+	
+	is_triggered_only = yes
+	
+	
+	
+	# Current Administrators
+	
+	option = {
+		name = EMBMegaBuilder_101_Option_AlreadyAdministrator_Keep
+		tooltip_info = administrator
+		show_trait   = administrator
+		trigger = { trait = administrator }
+		change_stewardship = 2
+		ai_chance = { factor = 1 } # AI will keep their existing lifestyle
+	}
+	
+	option = {
+		name = EMBMegaBuilder_101_Option_AlreadyAdministrator_BecomeArchitect
+		tooltip_info = administrator
+		trigger = { trait = administrator }
+		emb_mega_builder_remove_all_existing_lifestyle_traits_from_this_character = yes
+		add_trait = architect
+		change_stewardship = 2
+		ai_chance = { factor = 0 } # AI will keep their existing lifestyle
+	}
+	
+	
+	
+	# Current Architects
+	
+	option = {
+		name = EMBMegaBuilder_101_Option_AlreadyArchitect_Keep
+		tooltip_info = architect
+		show_trait   = architect
+		trigger = { trait = architect }
+		change_stewardship = 2
+		ai_chance = { factor = 1 } # AI will keep their existing lifestyle
+	}
+	
+	option = {
+		name = EMBMegaBuilder_101_Option_AlreadyArchitect_BecomeAdministrator
+		tooltip_info = architect
+		trigger = { trait = architect }
+		emb_mega_builder_remove_all_existing_lifestyle_traits_from_this_character = yes
+		add_trait = administrator
+		change_stewardship = 2
+		ai_chance = { factor = 0 } # AI will keep their existing lifestyle
+	}
+	
+	
+	
+	# Gain Administrator or Architect or nothing, for characters who don't currently have either trait
+	
+	option = {
+		name = EMBMegaBuilder_101_Option_GainAdministrator
+		trigger = { NOR = { trait = administrator trait = architect } }
+		emb_mega_builder_remove_all_existing_lifestyle_traits_from_this_character = yes
+		add_trait = administrator
+		ai_chance = { factor = 1 modifier = { factor = 0 lifestyle_traits >= 1 } } # AI will NEVER choose this if they have ANY lifestyle traits
+	}
+	
+	option = {
+		name = EMBMegaBuilder_101_Option_GainArchitect
+		trigger = { NOR = { trait = administrator trait = architect } }
+		emb_mega_builder_remove_all_existing_lifestyle_traits_from_this_character = yes
+		add_trait = architect
+		ai_chance = { factor = 1 modifier = { factor = 0 lifestyle_traits >= 1 } } # AI will NEVER choose this if they have ANY lifestyle traits
+	}
+	
+	option = {
+		name = EMBMegaBuilder_101_Option_DoNothing
+		trigger = { NOR = { trait = administrator trait = architect } }
+		ai_chance = { factor = 1 modifier = { factor = 0 lifestyle_traits < 1 } } # AI will NEVER choose this if they have NO lifestyle trait
+	}
+	
+	
+	
+	# Cleanup event afterwards
+	
+	after = {
+		hidden_tooltip = { character_event = { id = EMBMegaBuilder.199 } }
+	}
+	
+}
+
+# Cleanup
+character_event = {
+	id = EMBMegaBuilder.199
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		clr_character_flag = emb_mega_builder_architect
+		clr_character_flag = emb_mega_builder_carpenter
+		clr_character_flag = emb_mega_builder_founder
+		clr_character_flag = emb_mega_builder_nonickname
+	}
+}

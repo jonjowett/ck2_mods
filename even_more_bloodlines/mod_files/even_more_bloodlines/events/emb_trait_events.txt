@@ -534,7 +534,10 @@ character_event = {
 	has_dlc = "Holy Fury"
 	trigger = {
 		any_owned_bloodline = {
-			bloodline_is_active_for = ROOT
+			OR = {
+				bloodline_is_active_for = ROOT
+				has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+			}
 			OR = {
 				has_bloodline_flag = emb_bloodline_effect_education_upgrade_all
 				has_bloodline_flag = emb_bloodline_effect_education_upgrade_diplomacy
@@ -564,7 +567,10 @@ character_event = {
 		if = {
 			limit = {
 				any_owned_bloodline = {
-					bloodline_is_active_for = ROOT
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
 					has_bloodline_flag = emb_bloodline_effect_education_upgrade_all
 				}
 			}
@@ -605,7 +611,10 @@ character_event = {
 				set_character_flag = emb_education_upgrade_all
 				random_owned_bloodline = {
 					limit = {
-						bloodline_is_active_for = ROOT
+						OR = {
+							bloodline_is_active_for = ROOT
+							has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+						}
 						has_bloodline_flag = emb_bloodline_effect_education_upgrade_all
 					}
 					founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }
@@ -616,7 +625,10 @@ character_event = {
 			limit = {
 				has_education_diplomacy_trigger = yes
 				any_owned_bloodline = {
-					bloodline_is_active_for = ROOT
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
 					has_bloodline_flag = emb_bloodline_effect_education_upgrade_diplomacy
 				}
 			}
@@ -624,7 +636,10 @@ character_event = {
 			set_character_flag = emb_education_upgrade_diplomacy
 			random_owned_bloodline = {
 				limit = {
-					bloodline_is_active_for = ROOT
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
 					has_bloodline_flag = emb_bloodline_effect_education_upgrade_diplomacy
 				}
 				founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }
@@ -634,7 +649,10 @@ character_event = {
 			limit = {
 				has_education_martial_trigger = yes
 				any_owned_bloodline = {
-					bloodline_is_active_for = ROOT
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
 					has_bloodline_flag = emb_bloodline_effect_education_upgrade_martial
 				}
 			}
@@ -642,7 +660,10 @@ character_event = {
 			set_character_flag = emb_education_upgrade_martial
 			random_owned_bloodline = {
 				limit = {
-					bloodline_is_active_for = ROOT
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
 					has_bloodline_flag = emb_bloodline_effect_education_upgrade_martial
 				}
 				founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }
@@ -652,7 +673,10 @@ character_event = {
 			limit = {
 				has_education_stewardship_trigger = yes
 				any_owned_bloodline = {
-					bloodline_is_active_for = ROOT
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
 					has_bloodline_flag = emb_bloodline_effect_education_upgrade_stewardship
 				}
 			}
@@ -660,7 +684,10 @@ character_event = {
 			set_character_flag = emb_education_upgrade_stewardship
 			random_owned_bloodline = {
 				limit = {
-					bloodline_is_active_for = ROOT
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
 					has_bloodline_flag = emb_bloodline_effect_education_upgrade_stewardship
 				}
 				founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }
@@ -670,7 +697,10 @@ character_event = {
 			limit = {
 				has_education_intrigue_trigger = yes
 				any_owned_bloodline = {
-					bloodline_is_active_for = ROOT
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
 					has_bloodline_flag = emb_bloodline_effect_education_upgrade_intrigue
 				}
 			}
@@ -678,7 +708,10 @@ character_event = {
 			set_character_flag = emb_education_upgrade_intrigue
 			random_owned_bloodline = {
 				limit = {
-					bloodline_is_active_for = ROOT
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
 					has_bloodline_flag = emb_bloodline_effect_education_upgrade_intrigue
 				}
 				founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }
@@ -688,7 +721,10 @@ character_event = {
 			limit = {
 				has_education_learning_trigger = yes
 				any_owned_bloodline = {
-					bloodline_is_active_for = ROOT
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
 					has_bloodline_flag = emb_bloodline_effect_education_upgrade_learning
 				}
 			}
@@ -696,7 +732,10 @@ character_event = {
 			set_character_flag = emb_education_upgrade_learning
 			random_owned_bloodline = {
 				limit = {
-					bloodline_is_active_for = ROOT
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
 					has_bloodline_flag = emb_bloodline_effect_education_upgrade_learning
 				}
 				founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }

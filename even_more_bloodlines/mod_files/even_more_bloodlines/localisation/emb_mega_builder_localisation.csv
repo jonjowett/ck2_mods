@@ -1,0 +1,61 @@
+# Bloodline
+emb_mega_builder;Blood of the Extravagant Expansionist;;;;;;;;;;;;;x
+emb_mega_builder_desc;[Root.GetTitledFirstName]'s massive building programme eclipsed anything the world has ever seen, before or since. [Root.GetHerHisCap] descendants will benefit from [Root.GetHerHis] hard-earned knowledge about efficient construction and realm management.;;;;;;;;;;;;;x
+# Dynamic bloodline name
+emb_mega_builder_name_default;Blood of the Extravagant Expansionist;;;;;;;;;;;;;x
+emb_mega_builder_name_architect;Blood of the Supreme Architect;;;;;;;;;;;;;x
+emb_mega_builder_name_carpenter;Blood of the Grandmaster Carpenter;;;;;;;;;;;;;x
+emb_mega_builder_name_founder;Blood of the Glorious Founder;;;;;;;;;;;;;x
+EMBMegaBuilder_100_BloodlineName_TT_Default;The bloodline will be known as: §YBlood of the Extravagant Expansionist§!;;;;;;;;;;;;;x
+EMBMegaBuilder_100_BloodlineName_TT_Architect;The bloodline will be known as: §YBlood of the Supreme Architect§!;;;;;;;;;;;;;x
+EMBMegaBuilder_100_BloodlineName_TT_Carpenter;The bloodline will be known as: §YBlood of the Grandmaster Carpenter§!;;;;;;;;;;;;;x
+EMBMegaBuilder_100_BloodlineName_TT_Founder;The bloodline will be known as: §YBlood of the Glorious Founder§!;;;;;;;;;;;;;x
+# Bloodline activation conditions
+emb_mega_builder_active_condition_tt_is_founder;Is the bloodline founder;;;;;;;;;;;;;x
+emb_mega_builder_active_condition_tt_excellent_stewardship;Is an excellent steward ([EMBMegaBuilder_CL_FortuneBuilder], [EMBMegaBuilder_CL_MidasTouched], or [EMBMegaBuilder_CL_Stewardship25]);;;;;;;;;;;;;x
+emb_mega_builder_active_condition_tt_relevant_traits;Has a relevant lifestyle trait ([EMBMegaBuilder_CL_Administrator], [EMBMegaBuilder_CL_Architect], [EMBMegaBuilder_CL_Scholar]);;;;;;;;;;;;;x
+emb_mega_builder_active_condition_tt_education_is_being_upgraded;Is a child whose stewardship education is being upgraded;;;;;;;;;;;;;x
+emb_mega_builder_active_condition_tt_has_constructed_10_new_holdings;Has constructed 10 new holdings (currently: [EMBMegaBuilder_CL_Constructed10]);;;;;;;;;;;;;x
+emb_mega_builder_active_condition_tt_nomadic_tribal;Is NOT §Ytribal§! or §Ynomadic§!;;;;;;;;;;;;;x
+emb_mega_builder_active_condition_tt_nomadic_tribal_bypassed_debug;§P!!!DEBUG!!!§! Bloodline forced to be active for tribal/nomadic character;;;;;;;;;;;;;x
+emb_mega_builder_active_condition_tt_debug_activated;§P!!!DEBUG!!!§! Forced §Gactivation§! (due to character flag §Yemb_mega_builder_debug_activate§!);;;;;;;;;;;;;x
+emb_mega_builder_active_condition_tt_debug_deactivated;§P!!!DEBUG!!!§! Forced §Rdeactivation§! (due to character flag §Yemb_mega_builder_debug_deactivate§!);;;;;;;;;;;;;x
+# Bloodline activation conditions - custom loc
+EMBMegaBuilder_CL_FortuneBuilder_Y;§GFortune Builder§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_FortuneBuilder_N;§RFortune Builder§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_MidasTouched_Y;§GMidas Touched§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_MidasTouched_N;§RMidas Touched§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_Stewardship25_Y;§GStewardship >= 25§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_Stewardship25_N;§RStewardship >= 25§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_Administrator_Y;§GAdministrator§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_Administrator_N;§RAdministrator§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_Architect_Y;§GArchitect§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_Architect_N;§RArchitect§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_Scholar_Y;§GScholar§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_Scholar_N;§RScholar§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_Constructed10_Y;§G[Root.emb_mega_builder_count.GetValue]§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_Constructed10_N;§R[Root.emb_mega_builder_count.GetValue]§!;;;;;;;;;;;;;x
+EMBMegaBuilder_CL_Constructed10_N_0;§R0§!;;;;;;;;;;;;;x
+# Bloodline grant event
+EMBMegaBuilder_100_Title;Construction Complete!;;;;;;;;;;;;;x
+EMBMegaBuilder_100_Desc;"My [Root.GetLordLady]," announced the herald, "your foreman has sent word that the construction of [FromFromFrom.GetFullName] is now complete!"\nWhen you first started your building programme, years ago, messages like this would be a cause for celebration. Now, it's just another Tuesday. To be perfectly honest, you're not even completely sure where [FromFromFrom.GetName] is located. Somewhere in the east of [FromFromFrom.Kingdom.GetName], perhaps?\n\nAs you lean back in your throne, you reflect on all of the lessons you have learned - and you realise that this project has pushed you to a new level of efficiency, in both architecture and administration.;;;;;;;;;;;;;x
+EMBMegaBuilder_100_Option_Architect;I am the Supreme Architect;;;;;;;;;;;;;x
+EMBMegaBuilder_100_Option_Carpenter;I am the Grandmaster Carpenter;;;;;;;;;;;;;x
+EMBMegaBuilder_100_Option_Founder;I am the Glorious Founder;;;;;;;;;;;;;x
+EMBMegaBuilder_100_Option_NoNickname;I will keep my current nickname;;;;;;;;;;;;;x
+EMBMegaBuilder_100_NewLine_TT;§g-§!;;;;;;;;;;;;;x
+EMBMegaBuilder_100_EducationImprovement_Founder_Occurs_TT;Your §YStewardship education§! is §Gimproved§!!;;;;;;;;;;;;;x
+EMBMegaBuilder_100_EducationImprovement_Founder_AlreadyMax_TT;Your §YStewardship education§! cannot be improved any further!;;;;;;;;;;;;;x
+EMBMegaBuilder_100_EducationImprovement_Founder_NotPossible_TT;You do NOT have a §YStewardship education§!, so it cannot be improved! Instead:;;;;;;;;;;;;;x
+EMBMegaBuilder_100_EducationImprovement_Descendants_Occurs_TT;All adult non-dumb bloodline members' §YStewardship educations§! will be improved!;;;;;;;;;;;;;x
+EMBMegaBuilder_100_LifestyleTraitOffered_TT;An event will occur, where you may choose the §YAdministrator§! or §YArchitect§! lifestyle trait.;;;;;;;;;;;;x
+EMBMegaBuilder_100_LifestyleTraitOffered_ExcessWillBeRemoved_TT;If you choose a new lifestyle trait, your current lifestyle trait will be §Rremoved§!!;;;;;;;;;;;;x
+# Lifestyle grant event (for founder)
+EMBMegaBuilder_101_Desc;On reflection, I have realised that I could become one of the best Administrators or Architects in the world - if I was willing to dedicate the rest of my life to the relevant profession.;;;;;;;;;;;;;x
+EMBMegaBuilder_101_Option_AlreadyAdministrator_Keep;I will be the world's greatest Administrator!;;;;;;;;;;;;;x
+EMBMegaBuilder_101_Option_AlreadyAdministrator_BecomeArchitect;I will be the world's greatest Architect!;;;;;;;;;;;;;x
+EMBMegaBuilder_101_Option_AlreadyArchitect_Keep;I will be the world's greatest Architect!;;;;;;;;;;;;;x
+EMBMegaBuilder_101_Option_AlreadyArchitect_BecomeAdministrator;I will be the world's greatest Administrator!;;;;;;;;;;;;;x
+EMBMegaBuilder_101_Option_GainAdministrator;From now on, I will focus on Administration!;;;;;;;;;;;;;x
+EMBMegaBuilder_101_Option_GainArchitect;From now on, I will focus on Architecture!;;;;;;;;;;;;;x
+EMBMegaBuilder_101_Option_DoNothing;I will not change my current lifestyle;;;;;;;;;;;;;x
