@@ -31,16 +31,8 @@ defined_text = {
 	name = BCT_Wealth_Amount
 	use_first_valid = yes
 	text = {
-		trigger = { wealth = 10000 }
-		localisation_key = BCT_Wealth_GT10000
-	}
-	text = {
-		trigger = { wealth = 3000 }
-		localisation_key = BCT_Wealth_3000_10000
-	}
-	text = {
 		trigger = { wealth = 1000 }
-		localisation_key = BCT_Wealth_1000_3000
+		localisation_key = BCT_Wealth_GT1000
 	}
 	text = {
 		trigger = { wealth = 300 }
