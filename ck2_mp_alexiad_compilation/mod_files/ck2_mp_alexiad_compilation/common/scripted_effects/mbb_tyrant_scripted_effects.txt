@@ -1,0 +1,8 @@
+# Add a new scripted_effect, copied from IB_tyrantly_bloodline_effect_temple, with the correct name
+# Relevant events (ie. IB.70) will now work properly (ie. grant the bloodline)
+IB_tyrantly_bloodline_effect = {
+	if = {
+		limit = { check_variable = { which = IB_tyrant value = 30 } }
+		ROOT = { character_event = { id = IB.71 } }
+	}
+}

@@ -1,0 +1,116 @@
+namespace = EDTSuzerainBuff
+
+# On suitable occasions for suzerains:
+#  --- Detect the size of their tributaries and apply appropriate buffs (event .1100)
+#  --- Schedule a later event that will remove their buffs if they are have lost their tributaries (event .2000)
+# Suitable occasions are:
+#  --- on_yearly_pulse
+#  --- on_war_ended_victory & _whitepeace & _defeat (fire for both the attacker and for the defender, the latter via event .1001 below)
+#  --- On successfully forcing or offering protectorate status
+character_event = {
+	id = EDTSuzerainBuff.1000
+	
+	only_independent = yes
+	only_playable = yes
+	
+	is_triggered_only = yes
+	hide_window = yes
+	
+	trigger = {
+		any_tributary = { expd_t_is_normal_or_modded_permanent_tributary_of_root = yes }
+	}
+	
+	immediate = {
+		character_event = { id = EDTSuzerainBuff.1100 }
+	}
+	
+}
+
+# For on_actions which fire for ROOT but we want to trigger event 1000 on FROM
+character_event = {
+	id = EDTSuzerainBuff.1001
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		FROM = { character_event = { id = EDTSuzerainBuff.1000 } }
+	}
+}
+
+# Calculate total realm size of tributaries, and add that many copies of the suzerain buff to this character
+character_event = {
+	id = EDTSuzerainBuff.1100
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		
+		# Trigger auto-removal of all buffs in 2 years' time, in case the character can no longer trigger event .1000 on their yearly pulse
+		character_event = { id = EDTSuzerainBuff.2000 years = 2 }
+		
+		# Remove all current instances of the buff
+		remove_character_modifiers = {
+			name = expd_t_suzerain_buff_per_tributary_holding
+			amount = 30000
+		}
+		
+		# Calculate total realm size of all qualifying tributaries
+		set_variable = { which = expd_t_total_tributary_realm_size value = 0 }
+		any_tributary = {
+			limit = { expd_t_is_normal_or_modded_permanent_tributary_of_root = yes }
+			ROOT = {
+				export_to_variable = {
+					which = expd_t_this_tributary_realm_size
+					value = realm_size
+					who = PREV
+				}
+				change_variable = {
+					which = expd_t_total_tributary_realm_size
+					which = expd_t_this_tributary_realm_size
+				}
+			}
+		}
+		
+		# Apply one instance of the buff for each holding in each tributary's realm
+		set_variable = { which = expd_t_suzerain_buff_counter value = 0 }
+		while = {
+			limit = {
+				check_variable = {
+					which = expd_t_suzerain_buff_counter
+					which < expd_t_total_tributary_realm_size
+				}
+			}
+			add_character_modifier = {
+				name = expd_t_suzerain_buff_per_tributary_holding
+				duration = -1
+				stacking = yes
+			}
+			change_variable = {
+				which = expd_t_suzerain_buff_counter
+				value = 1
+			}
+		}
+		
+		# Clean up variables
+		set_variable = { which = expd_t_this_tributary_realm_size  value = 0 }
+		set_variable = { which = expd_t_total_tributary_realm_size value = 0 }
+		
+	}
+}
+
+character_event = {
+	id = EDTSuzerainBuff.2000
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		OR = {
+			independent = no
+			is_playable = no
+			NOT = { any_tributary = { expd_t_is_normal_or_modded_permanent_tributary_of_root = yes } }
+		}
+	}
+	immediate = {
+		remove_character_modifiers = {
+			name = expd_t_suzerain_buff_per_tributary_holding
+			amount = 30000
+		}
+	}
+}

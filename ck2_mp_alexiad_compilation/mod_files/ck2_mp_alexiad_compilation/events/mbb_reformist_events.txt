@@ -1,0 +1,214 @@
+namespace = IB
+
+character_event = {
+	id = IB.30
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+	}
+	immediate = {
+		# Store root's religion in an event target, so that religion-switching with the event visible has no effect on the bloodline.
+		#  --- Any religion can acquire this bloodline by conquering all 5 holy sites, temporarily converting, reforming, converting back.
+		#  --- It's not fair that this (rather powerful) bloodline is active for non-reformable religions - especially as it can be stacked. +60 same religion as Orthodox/Sunni/etc is OP as hell.
+		ROOT = {
+			religion_scope = {
+				save_event_target_as = mbb_religion_that_was_reformed
+			}
+		}
+		long_character_event = { id = IB.9930 }
+	}
+}
+
+long_character_event = {
+	id = IB.9930
+	
+	picture = { 
+		trigger = { 
+			ROOT = { 
+				OR = { 
+					religion = hellenic_pagan
+					religion = hellenic_pagan_reformed
+				}
+			}
+		} 
+		picture = GFX_evt_hellenic_temple
+	}
+	picture = { 
+		trigger = { 
+			ROOT = { 
+				OR = { 
+					religion = west_african_pagan
+					religion = west_african_pagan_reformed
+				}
+			}
+		} 
+		picture = GFX_evt_west_african_ruler
+	}
+	picture = { 
+		trigger = { 
+			ROOT = { 
+				NOR = { 
+					religion = hellenic_pagan
+					religion = hellenic_pagan_reformed
+					religion = west_african_pagan
+					religion = west_african_pagan_reformed
+				}
+			}
+		} 
+		picture = GFX_evt_pagan_reformation
+	}
+	
+	desc = mbb_reformist_bloodline_event_text
+	is_triggered_only = yes
+	
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+	option = {
+		
+		name = {
+			text = mbb_reformist_bloodline_option_name_default_no_nickname
+			trigger = { mbb_religion_that_was_reformed_is_godking = no }
+		}
+		name = {
+			text = mbb_reformist_bloodline_option_name_godking_no_nickname
+			trigger = { mbb_religion_that_was_reformed_is_godking = yes }
+		}
+		
+		tooltip_info_custom = mbb_reformist_bloodline_option_tooltip_no_nickname
+		
+		prestige = 300
+		piety = 300
+		
+		mbb_create_reformist_bloodline = yes
+		
+		ai_chance = {
+			factor = 10
+			
+			# No or lame nickname => 0/100  => 0% chance of choosing to keep their current nickname
+			modifier = {
+				factor = 0
+				OR = {
+					has_nickname = no
+					this_has_lame_nickname_trigger = yes
+				}
+			}
+			
+			# Average nickname    => 10/100 => 10% chance of choosing to keep their current nickname
+			
+			# Cool nickname       => 30/100 => 25% chance of choosing to keep their current nickname
+			modifier = {
+				factor = 3
+				this_has_cool_nickname_trigger = yes
+			}
+			
+			# Super cool nickname => 10/10  => 100% chance of choosing to keep their current nickname
+			
+		}
+		
+	}
+	
+	option = {
+		
+		name = {
+			text = mbb_reformist_bloodline_option_name_default_with_nickname
+			trigger = { mbb_religion_that_was_reformed_is_godking = no }
+		}
+		name = {
+			text = mbb_reformist_bloodline_option_name_godking_with_nickname
+			trigger = { mbb_religion_that_was_reformed_is_godking = yes }
+		}
+		
+		tooltip_info_custom = mbb_reformist_bloodline_option_tooltip_leadership_nickname
+		
+		# Put the nickname grant at the top, so it's more obvious to the user
+		mbb_grant_reformist_nickname_leadership = yes
+		
+		prestige = 300
+		piety = 300
+		
+		mbb_create_reformist_bloodline = yes
+		
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				this_has_super_cool_nickname_trigger = yes
+			}
+		}
+	}
+	
+	option = {
+		
+		name = {
+			text = mbb_reformist_bloodline_option_name_default_with_nickname
+			trigger = { mbb_religion_that_was_reformed_is_godking = no }
+		}
+		name = {
+			text = mbb_reformist_bloodline_option_name_godking_with_nickname
+			trigger = { mbb_religion_that_was_reformed_is_godking = yes }
+		}
+		
+		tooltip_info_custom = mbb_reformist_bloodline_option_tooltip_nature_nickname
+		
+		# Put the nickname grant at the top, so it's more obvious to the user
+		mbb_grant_reformist_nickname_nature = yes
+		
+		prestige = 300
+		piety = 300
+		
+		mbb_create_reformist_bloodline = yes
+		
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				this_has_super_cool_nickname_trigger = yes
+			}
+		}
+		
+	}
+	
+	option = {
+		
+		name = {
+			text = mbb_reformist_bloodline_option_name_default_with_nickname
+			trigger = { mbb_religion_that_was_reformed_is_godking = no }
+		}
+		name = {
+			text = mbb_reformist_bloodline_option_name_godking_with_nickname
+			trigger = { mbb_religion_that_was_reformed_is_godking = yes }
+		}
+		
+		tooltip_info_custom = mbb_reformist_bloodline_option_tooltip_doctrine_nickname
+		
+		# Put the nickname grant at the top, so it's more obvious to the user
+		mbb_grant_reformist_nickname_doctrine = yes
+		
+		prestige = 300
+		piety = 300
+		
+		mbb_create_reformist_bloodline = yes
+		
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				this_has_super_cool_nickname_trigger = yes
+			}
+		}
+		
+	}
+	
+	after = {
+		hidden_tooltip = {
+			clear_event_target = mbb_religion_that_was_reformed
+		}
+	}
+	
+}

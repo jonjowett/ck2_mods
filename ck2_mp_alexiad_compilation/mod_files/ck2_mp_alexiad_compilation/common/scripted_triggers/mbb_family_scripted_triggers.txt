@@ -1,0 +1,10 @@
+# Audax Validator EnableCommentMetadata
+# Audax Validator "!" Ignore_1001
+
+mbb_this_characters_dynasty_should_have_the_family_bloodline = {
+	# Requires mbb_family_bloodline_effect_calc to have been run on this character
+	AND = {
+		check_variable = { which = IB_family_bloodline_inbred            value >= 20   } # IE: >=20 members of this dynasty were inbred
+		check_variable = { which = IB_family_bloodline_inbred_proportion value >= 0.02 } # IE: >=2% of the members of this dynasty were inbred
+	}
+}

@@ -1,0 +1,113 @@
+namespace = ExpdPill
+
+# Event triggered by on_new_holder/on_new_holder_inheritance ensuring that they pillage newly-conquered holdings in some circumstances
+# Eventually intended to be AI-only (the player can take the settlement decisions whenever they want!), but should work properly for players too.
+# FROM is the title that was newly acquired (ie. if count/baron-tier, FROM is the holding to be pillaged), ROOT is the pillager
+character_event = {
+	id = ExpdPill.1000
+	is_triggered_only = yes
+	title = expd_pill_event_1000_title
+	desc = expd_pill_event_1000_desc
+	picture = GFX_evt_firey_silhouette_hf
+	#ai = yes
+	trigger = {
+		has_global_flag = expd_pill_debug_mode_enabled # Temporarily, only show these events in debug mode
+		ROOT = {
+			FROM = {
+				expd_pill_this_holding_is_potentially_pillageable_by_prev_character = yes
+				expd_pill_this_holding_is_allowed_to_be_pillaged_by_prev_character = yes
+			}
+		}
+	}
+	option = {
+		name = expd_pill_event_1000_opta
+		
+		# Destroy the holding
+		ROOT = {
+			show_scope_change = no
+			FROM = {
+				show_scope_change = no
+				expd_pill_this_holding_is_fully_pillaged_by_prev_character = yes
+			}
+		}
+		
+		# Add a temporary character flag, to ensure the effects below are properly described in tooltips
+		hidden_tooltip = { ROOT = { set_character_flag = expd_pill_temp_flag_in_ai_event_after_destroying_settlement } }
+		
+		# If that was the last holding and ROOT is tribal, insta-build a tribe
+		if = {
+			limit = {
+				ROOT = { is_tribal = yes }
+				OR = {
+					AND = {
+						ROOT = { has_character_flag = expd_pill_temp_flag_in_ai_event_after_destroying_settlement }
+						FROM = { location = { num_of_settlements == 0 } }
+					}
+					AND = {
+						NOT = { ROOT = { has_character_flag = expd_pill_temp_flag_in_ai_event_after_destroying_settlement } }
+						FROM = { location = { num_of_settlements == 1 } }
+					}
+				}
+			}
+			# Insta-build a tribe and grant it to ROOT
+			FROM = {
+				show_scope_change = no
+				location = {
+					build_holding = {
+						type = tribal
+						holder = ROOT
+					}
+				}
+			}
+			# Just in case, set province and religion culture equal to ROOT's
+			FROM = {
+				show_scope_change = no
+				location = {
+					religion = ROOT
+					culture = ROOT
+				}
+			}
+			# If the tribe was built normally, the cost would have been adjusted by the local build cost.
+			# However, we can't easily access the build cost in the province, and insta-building is a small advantage, so charge the full base amount of 100 prestige.
+			ROOT = {
+				show_scope_change = no
+				prestige = -100
+			}
+		}
+		
+		# Clear the temporary character flag
+		hidden_tooltip = { ROOT = { clr_character_flag = expd_pill_temp_flag_in_ai_event_after_destroying_settlement } }
+		
+		# AI should ALWAYS do this, because the triggers above ensure that they can ONLY do it if it's beneficial for them.
+		ai_chance = {
+			factor = 1 
+		}
+	}
+	option = {
+		name = expd_pill_event_1000_optb
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+# Cleanup piety-tracking flags from full-pillaging holdings
+# NB: This event MUST be called MORE than N days after EVERY full-pillage action, where N is the number of days in had_character_flag in the trigger
+character_event = {
+	id = ExpdPill.9000
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		had_character_flag = {
+			flag = expd_pill_full_pillage_recently_occurred
+			days = 30
+		}
+	}
+	immediate = {
+		clr_character_flag = expd_pill_full_pillage_recently_occurred
+		set_variable = {
+			which = expd_pill_full_pillage_max_piety_recently_deducted
+			value = 0
+		}
+	}
+}

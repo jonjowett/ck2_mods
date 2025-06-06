@@ -1,0 +1,9 @@
+expd_pris_default_prisoner_location_policy_is_not_on_cooldown = {
+	# Allow players to change their policy as often as they like
+	# But prevent the AI from changing their policy too often
+	#  --- There are multiple decisions, and the AI can take them all on the same day if they want, which would be a bit silly.
+	OR = {
+		ai = no
+		NOT = { has_character_modifier = expd_pris_default_prison_location_policy_cooldown }
+	}
+}

@@ -1,0 +1,82 @@
+# Reward for character who takes 50+ provinces in an invasion
+# Allow 1 invasion per lifetime (does not stack with Alexander/Ashoka)
+# Adds vassal opinion modifiers on being at war, on war success/defeat, and on being at peace for too long
+# Multiple flavours of the same bloodline, depending on world location / existing bloodlines / etc
+
+emb_true_heir_of_alexander_bloodline_m = {
+	combat_rating = 5
+	monthly_character_prestige = 0.5
+	emb_bloodline_effect_blank1_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_bloodline_effect_blank2_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_great_conqueror_bloodline_effect_one_invasion = 1
+	emb_great_conqueror_bloodline_effect_expected_conquest = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_bucephalus
+	flags = { emb emb_m emb_alexander_bloodline emb_alexander_bloodline_flavor_alexander created_bloodline bloodline_great_conquerors bloodline_ambition emb_bloodline_effect_expected_conquest }
+}
+
+emb_true_heir_of_alexander_bloodline_f = {
+	combat_rating = 5
+	monthly_character_prestige = 0.5
+	emb_bloodline_effect_blank1_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_bloodline_effect_blank2_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_great_conqueror_bloodline_effect_one_invasion = 1
+	emb_great_conqueror_bloodline_effect_expected_conquest = 1
+	inheritance = matrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_bucephalus
+	flags = { emb emb_f emb_alexander_bloodline emb_alexander_bloodline_flavor_alexander created_bloodline bloodline_great_conquerors bloodline_ambition emb_bloodline_effect_expected_conquest }
+}
+
+emb_true_heir_of_ashoka_bloodline_m = {
+	combat_rating = 5
+	monthly_character_prestige = 0.5
+	emb_bloodline_effect_blank1_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_bloodline_effect_blank2_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_great_conqueror_bloodline_effect_one_invasion = 1
+	emb_great_conqueror_bloodline_effect_expected_conquest = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_ashoka_lion
+	flags = { emb emb_m emb_alexander_bloodline emb_alexander_bloodline_flavor_ashoka created_bloodline bloodline_great_conquerors bloodline_ambition emb_bloodline_effect_expected_conquest }
+}
+
+emb_true_heir_of_ashoka_bloodline_f = {
+	combat_rating = 5
+	monthly_character_prestige = 0.5
+	emb_bloodline_effect_blank1_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_bloodline_effect_blank2_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_great_conqueror_bloodline_effect_one_invasion = 1
+	emb_great_conqueror_bloodline_effect_expected_conquest = 1
+	inheritance = matrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_ashoka_lion
+	flags = { emb emb_f emb_alexander_bloodline emb_alexander_bloodline_flavor_ashoka created_bloodline bloodline_great_conquerors bloodline_ambition emb_bloodline_effect_expected_conquest }
+}
+
+emb_generic_new_great_conqueror_bloodline_m = {
+	combat_rating = 5
+	monthly_character_prestige = 0.5
+	emb_bloodline_effect_blank1_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_bloodline_effect_blank2_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_great_conqueror_bloodline_effect_one_invasion = 1
+	emb_great_conqueror_bloodline_effect_expected_conquest = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_bucephalus
+	flags = { emb emb_m emb_alexander_bloodline emb_alexander_bloodline_flavor_generic created_bloodline bloodline_great_conquerors bloodline_ambition emb_bloodline_effect_expected_conquest }
+}
+
+emb_generic_new_great_conqueror_bloodline_f = {
+	combat_rating = 5
+	monthly_character_prestige = 0.5
+	emb_bloodline_effect_blank1_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_bloodline_effect_blank2_for_spacing = 1                   # Blank line, to ensure proper distribution of effects in bloodline screen
+	emb_great_conqueror_bloodline_effect_one_invasion = 1
+	emb_great_conqueror_bloodline_effect_expected_conquest = 1
+	inheritance = matrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_bucephalus
+	flags = { emb emb_f emb_alexander_bloodline emb_alexander_bloodline_flavor_generic created_bloodline bloodline_great_conquerors bloodline_ambition emb_bloodline_effect_expected_conquest }
+}

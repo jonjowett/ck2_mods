@@ -1,0 +1,193 @@
+expd_tv_this_character_passes_the_basic_vanilla_requirements_to_be_recruited_to_a_warrior_lodge_by_from = {
+	
+	age = 12
+	
+	trigger_if = {
+		limit = { #can't be in a society already...
+			is_in_society = yes
+			NOR = { # but not a secret one...
+				is_secret_religious_society_member_trigger = yes
+				is_devil_worshiper_trigger = yes
+				society_member_of = the_assassins
+			}
+		}
+		is_in_society = no
+	}
+
+	trigger_if = {
+		limit = {
+			OR = {
+				has_character_flag = is_being_recruited_to_warrior_lodge_by_parent
+				has_character_flag = refused_trial
+			}
+		}
+		custom_tooltip = {
+			text = already_attempted_recruitment_tt
+			NOR = {
+				has_character_flag = refused_trial
+				has_character_flag = is_being_recruited_to_warrior_lodge_by_parent
+			}
+		}
+	}
+	trigger_if = {
+		limit = {
+			OR = { #Either you or the recruit have a bloodline that matters...
+				FROM = {
+					any_owned_bloodline = {
+						has_bloodline_flag = bloodline_legendary_warrior
+					}
+				}
+				any_owned_bloodline = {
+					has_bloodline_flag = bloodline_legendary_warrior
+				}
+				custom_tooltip = {
+					text = has_mission_to_recruit_tt
+					FROM = {
+						has_quest = quest_warrior_lodge_recruit
+						quest_target = { character = ROOT }
+					}
+				}
+			}
+		}
+		OR = {
+			FROM = { show_scope_change = no has_society_currency_tiny_trigger = yes } #It could cost currency...
+			custom_tooltip = {
+				text = legendary_warrior_bloodline_trigger_tt
+				OR = { #Or you or the recruit have a bloodline that matters...
+					FROM = {
+						any_owned_bloodline = {
+							has_bloodline_flag = bloodline_legendary_warrior
+						}
+					}
+					any_owned_bloodline = {
+						has_bloodline_flag = bloodline_legendary_warrior
+					}
+				}
+			}
+			custom_tooltip = { #Or you have a mission to recruit ROOT...
+				text = has_mission_to_recruit_tt
+				FROM = {
+					has_quest = quest_warrior_lodge_recruit
+					quest_target = { character = ROOT }
+				}
+			}
+		}
+	}
+	trigger_if = {
+		limit = {
+			NOR = { #No one has a bloodline that matters...
+				FROM = {
+					any_owned_bloodline = {
+						has_bloodline_flag = bloodline_legendary_warrior
+					}
+				}
+				any_owned_bloodline = {
+					has_bloodline_flag = bloodline_legendary_warrior
+				}
+			}
+			NOT = {
+				custom_tooltip = {
+					text = has_mission_to_recruit_tt
+					FROM = {
+						has_quest = quest_warrior_lodge_recruit
+						quest_target = { character = ROOT }
+					}
+				}
+			}
+		}
+		FROM = { show_scope_change = no has_society_currency_tiny_trigger = yes } #It could cost currency...
+	}
+
+	is_inaccessible_trigger = no
+
+	custom_tooltip = {
+		text = characters_are_not_busy_tt
+		hidden_tooltip = {
+			FROM = {
+				NOT = { has_character_flag = do_not_disturb }
+				NOT = { war = yes }
+			}
+			NOT = { has_character_flag = do_not_disturb }
+			NOT = { war = yes }
+		}
+	}
+	
+	trigger_if = {
+		limit = { NOT = { is_within_diplo_range = FROM } }
+		is_within_diplo_range = FROM # CPU HEAVY!
+	}
+	
+}
+
+expd_tv_this_character_passes_the_additional_vanilla_requirements_to_be_recruited_to_a_warrior_lodge_by_from = {
+	trigger_if = { #If landed, target character must be tribal or nomadic
+		limit = { is_landed = yes }
+		OR = {
+			has_tribal_or_nomadic_government_trigger = yes
+			custom_tooltip = {
+				text = has_mission_to_recruit_tt
+				FROM = {
+					has_quest = quest_warrior_lodge_recruit
+					quest_target = { character = ROOT }
+				}
+			}
+		}
+	}
+	trigger_if = { #If landed, recruiting character must be tribal or nomadic
+		limit = { FROM = { is_landed = yes } }
+		OR = {
+			FROM = { has_tribal_or_nomadic_government_trigger = yes }
+			custom_tooltip = {
+				text = has_mission_to_recruit_tt
+				FROM = {
+					has_quest = quest_warrior_lodge_recruit
+					quest_target = { character = ROOT }
+				}
+			}
+		}
+	}
+}
+
+expd_tv_this_character_has_a_religion_that_is_accepted_by_froms_warrior_lodge = {
+	custom_tooltip = {
+		text = expd_tv_this_character_has_a_religion_that_is_accepted_by_froms_warrior_lodge_tt
+		OR = {
+			AND = {
+				FROM = { society = { is_society = warrior_lodge_norse } }
+				religion_openly_norse_or_reformed_trigger = yes
+			}
+			AND = {
+				FROM = { society = { is_society = warrior_lodge_tengri } }
+				religion_openly_tengri_or_reformed_trigger = yes
+			}
+			AND = {
+				FROM = { society = { is_society = warrior_lodge_baltic } }
+				religion_openly_baltic_or_reformed_trigger = yes
+			}
+			AND = {
+				FROM = { society = { is_society = warrior_lodge_finnish } }
+				religion_openly_finnish_or_reformed_trigger = yes
+			}
+			AND = {
+				FROM = { society = { is_society = warrior_lodge_slavic } }
+				religion_openly_slavic_or_reformed_trigger = yes
+			}
+			AND = {
+				FROM = { society = { is_society = warrior_lodge_west_african } }
+				religion_openly_west_african_or_reformed_trigger = yes
+			}
+			AND = {
+				FROM = { society = { is_society = warrior_lodge_zun } }
+				religion_openly_zun_or_reformed_trigger = yes
+			}
+			AND = {
+				FROM = { society = { is_society = warrior_lodge_bon } }
+				religion_openly_bon_or_reformed_trigger = yes
+			}
+			AND = {
+				FROM = { society = { is_society = warrior_lodge_hellenic } }
+				religion_openly_hellenic_or_reformed_trigger = yes
+			}
+		}
+	}
+}

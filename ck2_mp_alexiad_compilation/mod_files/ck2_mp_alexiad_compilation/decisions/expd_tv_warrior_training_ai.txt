@@ -1,0 +1,120 @@
+targeted_decisions = {
+	
+	# Essentially identical to hf_warrior_lodge_decisions.txt > warrior_training,
+	#    but with radically altered "ai_will_do" block (MUCH more detail),
+	#    and with slightly-altered "potential" block (AI only, playable status not required).
+	expd_tv_warrior_training_ai = {
+		is_in_society = yes
+		
+		filter = self
+		ai_target_filter = self
+		ai_check_interval = 12
+		
+		potential = {
+			ai = yes
+			character = FROM
+			has_dlc = "Holy Fury"
+			is_adult = yes
+			is_member_of_any_warrior_lodge_trigger = yes
+			society_rank >= 2
+			NOT = { has_character_flag = choosing_warrior_training } #to stop you spamming the button
+			has_current_warrior_lodge_leader_trait_trigger = no #to keep it hidden once you're done
+		}
+		
+		allow = {
+			has_society_currency_medium_trigger = yes
+			custom_tooltip = {
+				text = has_no_warrior_training_with_current_society_tt
+				has_current_warrior_lodge_leader_trait_trigger = no
+			}
+		}
+		
+		effect = {
+			hidden_tooltip = {
+				character_event = { id = HF.10040 } #Gain trait...
+			}
+			set_character_flag = choosing_warrior_training
+			detract_society_currency_medium_effect = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			# AI are much less likely to take this decision if it would stop them from ranking up
+			modifier = {
+				factor = 0.1
+				OR = {
+					AND = {
+						society_rank == 2
+						society_currency <= 1300
+					}
+					AND = {
+						society_rank == 3
+						society_currency <= 2800
+					}
+				}
+			}
+			
+			# AI are more likely to take this decision if they are titled, commander, and/or have good mil education and high mil skill
+			modifier = {
+				factor = 2
+				is_ruler = yes # Deliberately includes mercs etc
+			}
+			modifier = {
+				factor = 2
+				has_minor_title = title_commander
+			}
+			modifier = {
+				factor = 1.5
+				trait = skilled_tactician
+				martial >= 16
+			}
+			modifier = {
+				factor = 2
+				trait = brilliant_strategist
+				martial >= 16
+			}
+			
+			# AI are much less likely to take this decision if they have wrong religion & would get negative piety as a result
+			modifier = {
+				factor = 0.1
+				has_religion_matching_joined_warrior_lodge_trigger = no
+				piety <= 150
+				NOT = { trait = cynical } # Piety schmiety - only losers care about that rubbish
+			}
+			
+			# AI are much less likely to take this decision if they have a negative commander trait (because they don't want to be made commanders)
+			modifier = {
+				factor = 0.1
+				trait = craven
+			}
+			modifier = {
+				factor = 0.1
+				trait = lisp
+			}
+			modifier = {
+				factor = 0.1
+				trait = stutter
+			}
+			modifier = {
+				factor = 0.1
+				trait = slothful
+			}
+			modifier = {
+				factor = 0.1
+				trait = shy
+			}
+			
+			# AI are more likely to take this decision at higher ranks
+			modifier = {
+				factor = 5
+				society_rank == 3
+			}
+			modifier = {
+				factor = 100000 # Basically always - heroes should always get the trait, no matter the cost/relevance
+				society_rank == 4
+			}
+		}
+	}
+	
+}

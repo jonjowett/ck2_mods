@@ -1,0 +1,1064 @@
+namespace = EXPDTargetedVanillaMerc
+
+# The aim of this set of events is to allow creators of bloodline/nomad merc companies to adjust the initial size of the company.
+# This is helpful because the automatic size of companies created by players will often be so large that they will never be hired by anyone (except perhaps the player).
+
+
+
+
+
+###########
+# Gateway #
+###########
+
+# This event is expected to be called from on_new_holder
+# ROOT is the character, FROM is the title, FROMFROM is the old holder
+# The purpose of this event is to filter out all on_new_holder events which don't match our desired criteria (ie. new nomad-style merc captain)
+character_event = {
+	id = EXPDTargetedVanillaMerc.100
+	hide_window = yes
+	is_triggered_only = yes
+	
+	trigger = {
+		
+		#######################################################################################
+		#                                                                                     #
+		# WARNING: THIS LOGIC IS EXTREMELY DELICATE                                           #
+		# A lot of conditions that seem like they should work... actually don't.              #
+		# Be sure to test any alterations thoroughly, to ensure they are working as intended. #
+		#                                                                                     #
+		#######################################################################################
+		
+		# We only want to continue for newly-created dynamic bloodline/nomad merc companies
+		
+		# Title is landless merc adventurer with no income siphon
+		#  --- Feudal merc companies have a siphon and should not be adventurer titles
+		#  --- Base game merc companies should not be adventurer titles and should not have a band_creator (see below)
+		FROM = {
+			is_landless_type_title = yes
+			mercenary = yes
+			adventurer = yes
+			mercenary_siphon_factor == 0
+		}
+		
+		# There is no previous title holder (other than the current holder, who is included in the any_previous_holder scope in this situation for some unintuitive reason)
+		FROM = { NOT = { any_previous_holder = { NOT = { character = ROOT } } } }
+		# Also check that FROMFROM is null, since this is also true for new merc companies, and the other condition is rather unintuitive (so it might fail in some unexpected way)
+		NOT = { FROMFROM = { always = yes } }
+		
+		# NB: We can't check for the merc captain having "started merc company" char modifier, because this is added after the title is created, ie. after this event is triggered.
+		
+		# Band creator can in theory create bloodline/nomad merc companies
+		# (IE: Copy the from_potential block of the targeted decision to "Send away as mercenary")
+		# NB: We can't shortcut this with is_targeted_decision_potential, because there's no way to guarantee that there's another potential target for the decision.
+		FROM = {
+			band_creator = {
+				is_playable = yes
+				OR = {
+					has_dlc = "Horse Lords"
+					any_owned_bloodline = {
+						has_bloodline_flag = bloodline_mercenary_traditions
+					}
+				}
+				is_adult = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				OR = {
+					government = nomadic_government
+					has_character_modifier = mercenary_traditions
+					any_owned_bloodline = {
+						has_bloodline_flag = bloodline_mercenary_traditions
+					}
+				}
+			}
+		}
+		
+	}
+	
+	immediate = {
+		FROM = {
+			band_creator = {
+				character_event = { id = EXPDTargetedVanillaMerc.200 }
+			}
+		}
+	}
+	
+}
+
+
+
+
+
+################################
+# Maths for AI decision-making #
+################################
+
+# Set numerous variables on the merc band creator, to help with AI decision-making (and to add localisation text for players)
+# This event is expected to be called for the merc band creator by the merc captain.
+# IE: In this event, ROOT is the merc band creator and FROM is the merc captain.
+character_event = {
+	id = EXPDTargetedVanillaMerc.200
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		
+		# Magic numbers
+		set_variable = {
+			which = expd_tv_merc_size_target_min # AI target minimum merc company size (pick a low value so that companies are still hireable after future growth via event)
+			value = 500
+		}
+		set_variable = {
+			which = expd_tv_merc_size_target_max # AI target maximum merc company size (pick a low value so that companies are still hireable after future growth via event)
+			value = 1500
+		}
+		set_variable = {
+			which = expd_tv_merc_size_default_as_frac_of_max_demesne_levies # Expected merc company default size, as fraction of max demesne levies
+			value = 0.25
+		}
+		
+		# Max demesne levies can, in most cases, be calculated directly by looping over all demesne holdings
+		set_variable = {
+			which = expd_tv_merc_max_demesne_levies_approx
+			value = 0
+		}
+		any_demesne_title = {
+			limit = {
+				OR = {
+					tier = COUNT
+					tier = BARON
+				}
+			}
+			location = {
+				any_province_holding = {
+					limit = {
+						holder_scope = { character = ROOT }
+						NOT = { has_flag = expd_tv_merc_already_counted }
+					}
+					ROOT = {
+						# It's extremely unlikely that the garrison is zero, while the raisable levy can often be zero (eg. after a siege).
+						# So, we should try to calculate the max raisable levy from garrison & total levy, and this should almost always work.
+						export_to_variable = {
+							which = expd_tv_merc_this_holding_garrison
+							value = holding_garrison
+							who = PREV
+						}
+						export_to_variable = {
+							which = expd_tv_merc_this_holding_garrison_percent
+							value = holding_garrison_percent
+							who = PREV
+						}
+						export_to_variable = {
+							which = expd_tv_merc_this_holding_total_levy
+							value = holding_total_levy
+							who = PREV
+						}
+						export_to_variable = {
+							which = expd_tv_merc_this_holding_total_levy_percent
+							value = holding_total_levy_percent
+							who = PREV
+						}
+						if = {
+							limit = {
+								check_variable = {
+									which = expd_tv_merc_this_holding_garrison
+									value > 0
+								}
+								check_variable = {
+									which = expd_tv_merc_this_holding_garrison_percent
+									value > 0
+								}
+								check_variable = {
+									which = expd_tv_merc_this_holding_total_levy
+									value > 0
+								}
+								check_variable = {
+									which = expd_tv_merc_this_holding_total_levy_percent
+									value > 0
+								}
+							}
+							set_variable = {
+								which = expd_tv_merc_this_holding_garrison_max
+								which = expd_tv_merc_this_holding_garrison
+							}
+							divide_variable = {
+								which = expd_tv_merc_this_holding_garrison_max
+								which = expd_tv_merc_this_holding_garrison_percent
+							}
+							set_variable = {
+								which = expd_tv_merc_this_holding_total_levy_max
+								which = expd_tv_merc_this_holding_total_levy
+							}
+							divide_variable = {
+								which = expd_tv_merc_this_holding_total_levy_max
+								which = expd_tv_merc_this_holding_total_levy_percent
+							}
+							set_variable = {
+								which = expd_tv_merc_this_holding_raisable_levy_max
+								which = expd_tv_merc_this_holding_total_levy_max
+							}
+							subtract_variable = {
+								which = expd_tv_merc_this_holding_raisable_levy_max
+								which = expd_tv_merc_this_holding_garrison_max
+							}
+						}
+						else = {
+							# At least one of the 4 exports above has returned zero, which is highly unlikely, but it means we can't use it in calculations (or we'll get a div-zero error)
+							set_variable = {
+								which = expd_tv_merc_this_holding_raisable_levy_max
+								value = 0
+							}
+						}
+						# Sanity check: Can't have <0 raisable levy
+						if = {
+							limit = {
+								check_variable = {
+									which = expd_tv_merc_this_holding_raisable_levy_max
+									value < 0
+								}
+							}
+							set_variable = {
+								which = expd_tv_merc_this_holding_raisable_levy_max
+								value = 0
+							}
+						}
+						# Add this holding's levies to the total
+						change_variable = {
+							which = expd_tv_merc_max_demesne_levies_approx
+							which = expd_tv_merc_this_holding_raisable_levy_max
+						}
+					}
+					# Flag this holding to avoid double-counting
+					set_flag = expd_tv_merc_already_counted
+				}
+			}
+		}
+		# Clear holding flags
+		any_demesne_title = {
+			limit = {
+				OR = {
+					tier = COUNT
+					tier = BARON
+				}
+			}
+			location = {
+				any_province_holding = {
+					limit = { holder_scope = { character = ROOT } }
+					clr_flag = expd_tv_merc_already_counted
+				}
+			}
+		}
+		
+		# Round down
+		set_variable = {
+			which = expd_tv_merc_max_demesne_levies_approx_modone
+			which = expd_tv_merc_max_demesne_levies_approx
+		}
+		modulo_variable = {
+			which = expd_tv_merc_max_demesne_levies_approx_modone
+			value = 1
+		}
+		subtract_variable = {
+			which = expd_tv_merc_max_demesne_levies_approx
+			which = expd_tv_merc_max_demesne_levies_approx_modone
+		}
+		
+		# Default values of final output variables (in case something goes wrong and the calculation ends early)
+		set_variable = {
+			which = expd_tv_merc_size_default_approx
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_size_target_mult_min
+			value = 1
+		}
+		set_variable = {
+			which = expd_tv_merc_size_target_mult_max
+			value = 1
+		}
+		
+		if = {
+			limit = {
+				check_variable = {
+					which = expd_tv_merc_max_demesne_levies_approx
+					value > 0
+				}
+			}
+			
+			# Merc company default size =~ Max demesne levies * {approx 30%}
+			set_variable = {
+				which = expd_tv_merc_size_default_approx
+				which = expd_tv_merc_max_demesne_levies_approx
+			}
+			multiply_variable = {
+				which = expd_tv_merc_size_default_approx
+				which = expd_tv_merc_size_default_as_frac_of_max_demesne_levies
+			}
+			
+			# Round down
+			set_variable = {
+				which = expd_tv_merc_size_default_approx_modone
+				which = expd_tv_merc_size_default_approx
+			}
+			modulo_variable = {
+				which = expd_tv_merc_size_default_approx_modone
+				value = 1
+			}
+			subtract_variable = {
+				which = expd_tv_merc_size_default_approx
+				which = expd_tv_merc_size_default_approx_modone
+			}
+			
+			if = {
+				limit = {
+					check_variable = {
+						which = expd_tv_merc_size_default_approx
+						value > 0
+					}
+				}
+				# Target merc company multiplier = Target merc company size / Default merc company size
+				set_variable = {
+					which = expd_tv_merc_size_target_mult_min
+					which = expd_tv_merc_size_target_min
+				}
+				divide_variable = {
+					which = expd_tv_merc_size_target_mult_min
+					which = expd_tv_merc_size_default_approx
+				}
+				set_variable = {
+					which = expd_tv_merc_size_target_mult_max
+					which = expd_tv_merc_size_target_max
+				}
+				divide_variable = {
+					which = expd_tv_merc_size_target_mult_max
+					which = expd_tv_merc_size_default_approx
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = expd_tv_merc_max_demesne_levies_approx
+				value = 0
+			}
+		}
+		
+		# Multiply the fractional variables by 100, for use in localisation text
+		set_variable = {
+			which = expd_tv_merc_size_target_mult_min_pc
+			which = expd_tv_merc_size_target_mult_min
+		}
+		multiply_variable = {
+			which = expd_tv_merc_size_target_mult_min_pc
+			value = 100
+		}
+		set_variable = {
+			which = expd_tv_merc_size_target_mult_max_pc
+			which = expd_tv_merc_size_target_mult_max
+		}
+		multiply_variable = {
+			which = expd_tv_merc_size_target_mult_max_pc
+			value = 100
+		}
+		set_variable = {
+			which = expd_tv_merc_size_default_as_frac_of_max_demesne_levies_pc
+			which = expd_tv_merc_size_default_as_frac_of_max_demesne_levies
+		}
+		multiply_variable = {
+			which = expd_tv_merc_size_default_as_frac_of_max_demesne_levies_pc
+			value = 100
+		}
+		
+		# Continue to the main menu
+		FROM = { character_event = { id = EXPDTargetedVanillaMerc.210 } }
+		
+	}
+	
+}
+
+
+
+
+
+#############
+# Main menu #
+#############
+
+# Invisible ping event, ensuring that ROOT and FROM are preserved and are consistent in every non-ping event.
+# This event is expected to be called for the merc captain by the merc band creator.
+# IE: In this event, ROOT is the merc captain and FROM is the merc band creator.
+character_event = {
+	id = EXPDTargetedVanillaMerc.210
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		FROM = { narrative_event = { id = EXPDTargetedVanillaMerc.211 } }
+	}
+}
+
+# Offer the merc band creator the opportunity to change the merc band size
+# This event is expected to be called for the merc band creator by the merc captain.
+# IE: In this event, ROOT is the merc band creator and FROM is the merc captain.
+narrative_event = {
+	id = EXPDTargetedVanillaMerc.211
+	title = EXPDTVM_MainMenu_EvtTitle
+	desc = EXPDTVM_MainMenu_EvtDesc
+	picture = GFX_evt_battle
+	border = GFX_event_narrative_frame_war
+	is_triggered_only = yes
+	
+	
+	option = {
+		name = EXPDTVM_MainMenu_EvtOpt_NoChange
+		# Normal "no change" option for players, and for AI which can reasonably make this choice
+		# This option is only invalid for AI if they ***must*** apply a multiplier significantly lower than 1
+		#
+		#
+		# NB: If you change this trigger, you MUST copy/paste the same logic below
+		trigger = {
+			OR = {
+				ai = no
+				check_variable = {
+					which = expd_tv_merc_size_target_mult_max
+					value >= 0.8
+				}
+			}
+		}
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } } }
+		ai_chance = { factor = 10000 }
+	}
+	
+	option = {
+		name = EXPDTVM_MainMenu_EvtOpt_NoChange
+		# Fallback "no change" option, for AI, in case something goes wrong with the calculation
+		#  --- The low relative weight means this should never be picked unless there is no other choice
+		#  --- The trigger is deliberately phrased as the negation of the "normal" no change option, so that any future maintenance is simpler.
+		trigger = {
+			NOR = {
+				ai = no
+				check_variable = {
+					which = expd_tv_merc_size_target_mult_max
+					value >= 0.8
+				}
+			}
+		}
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } } }
+		ai_chance = { factor = 0.001 }
+	}
+	
+	option = {
+		name = EXPDTVM_MainMenu_EvtOpt_Reduce_50_40_30
+		trigger = {
+			OR = {
+				ai = no
+				AND = {
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_min
+						value <= 0.8 # Bottom of next level up
+					}
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_max
+						value >= 0.2 # Top of next level down
+					}
+				}
+			}
+		}
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.221 } } }
+		ai_chance = { factor = 10000 } # If this option is valid, the AI should have an even chance of choosing it
+	}
+	
+	option = {
+		name = EXPDTVM_MainMenu_EvtOpt_Reduce_20_15_10
+		trigger = {
+			OR = {
+				ai = no
+				AND = {
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_min
+						value <= 0.3 # Bottom of next level up
+					}
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_max
+						value >= 0.05 # Top of next level down
+					}
+				}
+			}
+		}
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.223 } } }
+		ai_chance = { factor = 10000 }
+	}
+	
+	option = {
+		name = EXPDTVM_MainMenu_EvtOpt_Reduce_5_2point5_1
+		trigger = {
+			OR = {
+				ai = no
+				check_variable = {
+					which = expd_tv_merc_size_target_mult_min
+					value <= 0.1 # Bottom of next level up
+				}
+			}
+		}
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.225 } } }
+		ai_chance = { factor = 10000 }
+	}
+	
+}
+
+
+
+
+
+##########################
+# Size adjustment events #
+##########################
+
+# Invisible ping event, ensuring that ROOT and FROM are preserved and are consistent in every non-ping event.
+# This event is expected to be called for the merc captain by the merc band creator.
+# IE: In this event, ROOT is the merc captain and FROM is the merc band creator.
+character_event = {
+	id = EXPDTargetedVanillaMerc.221
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		FROM = { narrative_event = { id = EXPDTargetedVanillaMerc.222 } }
+	}
+}
+
+# Visible size choice by merc band creator
+# This event is expected to be called for the merc band creator by the merc captain.
+# IE: In this event, ROOT is the merc band creator and FROM is the merc captain.
+narrative_event = {
+	id = EXPDTargetedVanillaMerc.222
+	title = EXPDTVM_ChooseReduction_EvtTitle
+	desc = EXPDTVM_ChooseReduction_EvtDesc
+	picture = GFX_evt_battle
+	border = GFX_event_narrative_frame_war
+	is_triggered_only = yes
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_Reset
+		trigger = { ai = no }
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.900 } } }
+	}
+	option = {
+		name = EXPDTVM_MainMenu_EvtOpt_NoChange
+		# Fallback option for AI only, which should only be picked if something goes very wrong
+		trigger = { ai = yes }
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } } }
+		ai_chance = { factor = 0.001 }
+	}
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_ReduceTo50pc
+		trigger = {
+			OR = {
+				ai = no
+				AND = {
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_min
+						value <= 0.8 # Bottom of next level up
+					}
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_max
+						value >= 0.4 # Top of next level down
+					}
+				}
+			}
+		}
+		hidden_tooltip = {
+			FROM = {
+				primary_title = { change_title_army_size = -0.5 }
+				set_flag = expd_tv_merc_reduced_to_50pc
+			}
+			FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } }
+		}
+		ai_chance = { factor = 10000 }
+	}
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_ReduceTo40pc
+		trigger = {
+			OR = {
+				ai = no
+				AND = {
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_min
+						value <= 0.5 # Bottom of next level up
+					}
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_max
+						value >= 0.3 # Top of next level down
+					}
+				}
+			}
+		}
+		hidden_tooltip = {
+			FROM = {
+				primary_title = { change_title_army_size = -0.6 }
+				set_flag = expd_tv_merc_reduced_to_40pc
+			}
+			FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } }
+		}
+		ai_chance = { factor = 10000 }
+	}
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_ReduceTo30pc
+		trigger = {
+			OR = {
+				ai = no
+				AND = {
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_min
+						value <= 0.4 # Bottom of next level up
+					}
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_max
+						value >= 0.2 # Top of next level down
+					}
+				}
+			}
+		}
+		hidden_tooltip = {
+			FROM = {
+				primary_title = { change_title_army_size = -0.7 }
+				set_flag = expd_tv_merc_reduced_to_30pc
+			}
+			FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } }
+		}
+		ai_chance = { factor = 10000 }
+	}
+}
+
+# Invisible ping event, ensuring that ROOT and FROM are preserved and are consistent in every non-ping event.
+# This event is expected to be called for the merc captain by the merc band creator.
+# IE: In this event, ROOT is the merc captain and FROM is the merc band creator.
+character_event = {
+	id = EXPDTargetedVanillaMerc.223
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		FROM = { narrative_event = { id = EXPDTargetedVanillaMerc.224 } }
+	}
+}
+
+# Visible size choice by merc band creator
+# This event is expected to be called for the merc band creator by the merc captain.
+# IE: In this event, ROOT is the merc band creator and FROM is the merc captain.
+narrative_event = {
+	id = EXPDTargetedVanillaMerc.224
+	title = EXPDTVM_ChooseReduction_EvtTitle
+	desc = EXPDTVM_ChooseReduction_EvtDesc
+	picture = GFX_evt_battle
+	border = GFX_event_narrative_frame_war
+	is_triggered_only = yes
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_Reset
+		trigger = { ai = no }
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.900 } } }
+	}
+	option = {
+		name = EXPDTVM_MainMenu_EvtOpt_NoChange
+		# Fallback option for AI only, which should only be picked if something goes very wrong
+		trigger = { ai = yes }
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } } }
+		ai_chance = { factor = 0.001 }
+	}
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_ReduceTo20pc
+		trigger = {
+			OR = {
+				ai = no
+				AND = {
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_min
+						value <= 0.3 # Bottom of next level up
+					}
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_max
+						value >= 0.1 # Top of next level down
+					}
+				}
+			}
+		}
+		hidden_tooltip = {
+			FROM = {
+				primary_title = { change_title_army_size = -0.8 }
+				set_flag = expd_tv_merc_reduced_to_20pc
+			}
+			FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } }
+		}
+		ai_chance = { factor = 10000 }
+	}
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_ReduceTo15pc
+		trigger = {
+			OR = {
+				ai = no
+				AND = {
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_min
+						value <= 0.2 # Bottom of next level up
+					}
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_max
+						value >= 0.1 # Top of next level down
+					}
+				}
+			}
+		}
+		hidden_tooltip = {
+			FROM = {
+				primary_title = { change_title_army_size = -0.85 }
+				set_flag = expd_tv_merc_reduced_to_15pc
+			}
+			FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } }
+		}
+		ai_chance = { factor = 10000 }
+	}
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_ReduceTo10pc
+		trigger = {
+			OR = {
+				ai = no
+				AND = {
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_min
+						value <= 0.15 # Bottom of next level up
+					}
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_max
+						value >= 0.05 # Top of next level down
+					}
+				}
+			}
+		}
+		hidden_tooltip = {
+			FROM = {
+				primary_title = { change_title_army_size = -0.9 }
+				set_flag = expd_tv_merc_reduced_to_10pc
+			}
+			FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } }
+		}
+		ai_chance = { factor = 10000 }
+	}
+}
+
+# Invisible ping event, ensuring that ROOT and FROM are preserved and are consistent in every non-ping event.
+# This event is expected to be called for the merc captain by the merc band creator.
+# IE: In this event, ROOT is the merc captain and FROM is the merc band creator.
+character_event = {
+	id = EXPDTargetedVanillaMerc.225
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		FROM = { narrative_event = { id = EXPDTargetedVanillaMerc.226 } }
+	}
+}
+
+# Visible size choice by merc band creator
+# This event is expected to be called for the merc band creator by the merc captain.
+# IE: In this event, ROOT is the merc band creator and FROM is the merc captain.
+narrative_event = {
+	id = EXPDTargetedVanillaMerc.226
+	title = EXPDTVM_ChooseReduction_EvtTitle
+	desc = EXPDTVM_ChooseReduction_EvtDesc
+	picture = GFX_evt_battle
+	border = GFX_event_narrative_frame_war
+	is_triggered_only = yes
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_Reset
+		trigger = { ai = no }
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.900 } } }
+	}
+	option = {
+		name = EXPDTVM_MainMenu_EvtOpt_NoChange
+		# Fallback option for AI only, which should only be picked if something goes very wrong
+		trigger = { ai = yes }
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } } }
+		ai_chance = { factor = 0.001 }
+	}
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_ReduceTo5pc
+		trigger = {
+			OR = {
+				ai = no
+				AND = {
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_min
+						value <= 0.1 # Bottom of next level up
+					}
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_max
+						value >= 0.025 # Top of next level down
+					}
+				}
+			}
+		}
+		hidden_tooltip = {
+			FROM = {
+				primary_title = { change_title_army_size = -0.95 }
+				set_flag = expd_tv_merc_reduced_to_5pc
+			}
+			FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } }
+		}
+		ai_chance = { factor = 10000 }
+	}
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_ReduceTo2point5pc
+		trigger = {
+			OR = {
+				ai = no
+				AND = {
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_min
+						value <= 0.05 # Bottom of next level up
+					}
+					check_variable = {
+						which = expd_tv_merc_size_target_mult_max
+						value >= 0.01 # Top of next level down
+					}
+				}
+			}
+		}
+		hidden_tooltip = {
+			FROM = {
+				primary_title = { change_title_army_size = -0.975 }
+				set_flag = expd_tv_merc_reduced_to_2point5pc
+			}
+			FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } }
+		}
+		ai_chance = { factor = 10000 }
+	}
+	option = {
+		name = EXPDTVM_ChooseReduction_EvtOpt_ReduceTo1pc
+		trigger = {
+			OR = {
+				ai = no
+				check_variable = {
+					which = expd_tv_merc_size_target_mult_min
+					value <= 0.025 # Bottom of next level up
+				}
+				# There is no next level down
+			}
+		}
+		hidden_tooltip = {
+			FROM = {
+				primary_title = { change_title_army_size = -0.99 }
+				set_flag = expd_tv_merc_reduced_to_1pc
+			}
+			FROM = { character_event = { id = EXPDTargetedVanillaMerc.800 } }
+		}
+		ai_chance = { factor = 10000 }
+	}
+}
+
+
+
+
+
+######################
+# Final Confirmation #
+######################
+
+# Invisible ping event, ensuring that ROOT and FROM are preserved and are consistent in every non-ping event.
+# This event is expected to be called for the merc captain by the merc band creator.
+# IE: In this event, ROOT is the merc captain and FROM is the merc band creator.
+character_event = {
+	id = EXPDTargetedVanillaMerc.800
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		FROM = { narrative_event = { id = EXPDTargetedVanillaMerc.801 } }
+	}
+}
+
+# Visible final confirmation by merc band creator
+# This event is expected to be called for the merc band creator by the merc captain.
+# IE: In this event, ROOT is the merc band creator and FROM is the merc captain.
+narrative_event = {
+	id = EXPDTargetedVanillaMerc.801
+	title = EXPDTVM_FinalConfirmation_EvtTitle
+	desc = EXPDTVM_FinalConfirmation_EvtDesc
+	picture = GFX_evt_battle
+	border = GFX_event_narrative_frame_war
+	is_triggered_only = yes
+	option = {
+		name = EXPDTVM_FinalConfirmation_EvtOpt_OK
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.910 } } }
+	}
+	option = {
+		name = EXPDTVM_FinalConfirmation_EvtOpt_Reset
+		trigger = { ai = no }
+		hidden_tooltip = { FROM = { character_event = { id = EXPDTargetedVanillaMerc.900 } } }
+	}
+}
+
+
+
+
+
+#########
+# Reset #
+#########
+
+# Reset all changes to the merc band & go back to the beginning
+# This event is expected to be called for the merc captain by the merc band creator.
+# IE: In this event, ROOT is the merc captain and FROM is the merc band creator.
+character_event = {
+	id = EXPDTargetedVanillaMerc.900
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		if = {
+			limit = { has_character_flag = expd_tv_merc_reduced_to_50pc }
+			primary_title = { change_title_army_size = 0.5 }
+			clr_flag = expd_tv_merc_reduced_to_50pc
+		}
+		if = {
+			limit = { has_character_flag = expd_tv_merc_reduced_to_40pc }
+			primary_title = { change_title_army_size = 0.6 }
+			clr_flag = expd_tv_merc_reduced_to_40pc
+		}
+		if = {
+			limit = { has_character_flag = expd_tv_merc_reduced_to_30pc }
+			primary_title = { change_title_army_size = 0.7 }
+			clr_flag = expd_tv_merc_reduced_to_30pc
+		}
+		if = {
+			limit = { has_character_flag = expd_tv_merc_reduced_to_20pc }
+			primary_title = { change_title_army_size = 0.8 }
+			clr_flag = expd_tv_merc_reduced_to_20pc
+		}
+		if = {
+			limit = { has_character_flag = expd_tv_merc_reduced_to_15pc }
+			primary_title = { change_title_army_size = 0.85 }
+			clr_flag = expd_tv_merc_reduced_to_15pc
+		}
+		if = {
+			limit = { has_character_flag = expd_tv_merc_reduced_to_10pc }
+			primary_title = { change_title_army_size = 0.9 }
+			clr_flag = expd_tv_merc_reduced_to_10pc
+		}
+		if = {
+			limit = { has_character_flag = expd_tv_merc_reduced_to_5pc }
+			primary_title = { change_title_army_size = 0.95 }
+			clr_flag = expd_tv_merc_reduced_to_5pc
+		}
+		if = {
+			limit = { has_character_flag = expd_tv_merc_reduced_to_2point5pc }
+			primary_title = { change_title_army_size = 0.975 }
+			clr_flag = expd_tv_merc_reduced_to_2point5pc
+		}
+		if = {
+			limit = { has_character_flag = expd_tv_merc_reduced_to_1pc }
+			primary_title = { change_title_army_size = 0.99 }
+			clr_flag = expd_tv_merc_reduced_to_1pc
+		}
+		FROM = { narrative_event = { id = EXPDTargetedVanillaMerc.211 } }
+	}
+}
+
+
+
+
+
+###########
+# Cleanup #
+###########
+
+# Reset all variables & flags which were set on the mercenary captain & mercenary band creator
+# This event is expected to be called for the merc captain by the merc band creator.
+# IE: In this event, ROOT is the merc captain and FROM is the merc band creator.
+character_event = {
+	id = EXPDTargetedVanillaMerc.910
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		clr_flag = expd_tv_merc_reduced_to_50pc
+		clr_flag = expd_tv_merc_reduced_to_40pc
+		clr_flag = expd_tv_merc_reduced_to_30pc
+		clr_flag = expd_tv_merc_reduced_to_20pc
+		clr_flag = expd_tv_merc_reduced_to_15pc
+		clr_flag = expd_tv_merc_reduced_to_10pc
+		clr_flag = expd_tv_merc_reduced_to_5pc
+		clr_flag = expd_tv_merc_reduced_to_2point5pc
+		clr_flag = expd_tv_merc_reduced_to_1pc
+		FROM = { character_event = { id = EXPDTargetedVanillaMerc.911 } }
+	}
+}
+
+# Reset all variables & flags which were set on the mercenary captain & mercenary band creator
+# This event is expected to be called for the merc band creator by the merc captain.
+# IE: In this event, ROOT is the merc band creator and FROM is the merc captain.
+character_event = {
+	id = EXPDTargetedVanillaMerc.911
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		set_variable = {
+			which = expd_tv_merc_size_target_min
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_size_target_max
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_size_default_as_frac_of_max_demesne_levies
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_max_demesne_levies_approx
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_this_holding_garrison
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_this_holding_garrison_percent
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_this_holding_total_levy
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_this_holding_total_levy_percent
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_this_holding_garrison_max
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_this_holding_total_levy_max
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_this_holding_raisable_levy_max
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_max_demesne_levies_approx_modone
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_size_target_mult_min
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_size_target_mult_max
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_size_target_mult_min_pc
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_size_target_mult_max_pc
+			value = 0
+		}
+		set_variable = {
+			which = expd_tv_merc_size_default_as_frac_of_max_demesne_levies_pc
+			value = 0
+		}
+	}
+}

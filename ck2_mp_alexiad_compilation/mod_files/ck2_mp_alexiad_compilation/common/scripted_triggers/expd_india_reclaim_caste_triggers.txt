@@ -1,0 +1,243 @@
+expd_india_this_character_fulfils_basic_requirements_to_reclaim_their_caste = {
+	
+	# Is Hindu ruler with no caste
+	is_ruler = yes
+	religion = hindu
+	expd_india_this_character_has_no_caste = yes
+	
+	# Has RoI DLC or is AI
+	OR = {
+		has_dlc = "Rajas of India"
+		ai = yes
+	}
+	
+}
+
+expd_india_this_character_has_sufficient_piety_and_prestige_to_reclaim_their_caste = {
+	# AI can do this for free
+	trigger_if = {
+		limit = { ai = yes }
+		always = yes
+	}
+	# Players require tier-dependent prestige & piety
+	trigger_else_if = {
+		limit = { tier = EMPEROR }
+		prestige = 1000
+		piety = 200
+	}
+	trigger_else_if = {
+		limit = { tier = KING }
+		prestige = 500
+		piety = 100
+	}
+	trigger_else = {
+		prestige = 200
+		piety = 50
+	}
+}
+
+expd_india_this_character_has_no_caste = {
+	NOR = {
+		trait = kshatriya
+		trait = vaishya
+		trait = brahmin
+	}
+}
+
+expd_india_this_character_can_reclaim_brahmin = {
+	
+	has_dharmic_religion_trigger = yes
+	
+	expd_india_this_character_has_no_caste = yes
+	
+	OR = {
+		
+		# From parents
+		AND = {
+			# Parents are not vaishya/kshatriya
+			mother_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } }
+			father_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } }
+			# One parent is brahmin
+			OR = {
+				mother_even_if_dead = { trait = brahmin }
+				father_even_if_dead = { trait = brahmin }
+			}
+		}
+		
+		# From grandparents
+		AND = {
+			# Parents have no caste
+			mother_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			father_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			# Grandparents are not vaishya/kshatriya
+			mother_even_if_dead = { mother_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } }
+			mother_even_if_dead = { father_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } }
+			father_even_if_dead = { mother_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } }
+			father_even_if_dead = { father_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } }
+			# One grandparent is brahmin
+			OR = {
+				mother_even_if_dead = { mother_even_if_dead = { trait = brahmin } }
+				mother_even_if_dead = { father_even_if_dead = { trait = brahmin } }
+				father_even_if_dead = { mother_even_if_dead = { trait = brahmin } }
+				father_even_if_dead = { father_even_if_dead = { trait = brahmin } }
+			}
+		}
+		
+		# From great-grandparents
+		AND = {
+			# Parents and grandparents have no caste
+			mother_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			father_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			mother_even_if_dead = { mother_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			mother_even_if_dead = { father_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			father_even_if_dead = { mother_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			father_even_if_dead = { father_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			# Great-grandparents are not vaishya/kshatriya
+			mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } } }
+			mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } } }
+			mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } } }
+			mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } } }
+			father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } } }
+			father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } } }
+			father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } } }
+			father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { NOR = { trait = vaishya trait = kshatriya } } } }
+			# One great-grandparent is brahmin
+			OR = {
+				mother_even_if_dead = { mother_even_if_dead = { trait = brahmin } }
+				mother_even_if_dead = { father_even_if_dead = { trait = brahmin } }
+				father_even_if_dead = { mother_even_if_dead = { trait = brahmin } }
+				father_even_if_dead = { father_even_if_dead = { trait = brahmin } }
+			}
+		}
+		
+	}
+	
+}
+
+expd_india_this_character_can_reclaim_kshatriya = {
+	
+	has_dharmic_religion_trigger = yes
+	
+	expd_india_this_character_has_no_caste = yes
+	
+	OR = {
+		
+		# From parents
+		AND = {
+			# Parents are not vaishya
+			mother_even_if_dead = { NOT = { trait = vaishya } }
+			father_even_if_dead = { NOT = { trait = vaishya } }
+			# One parent is kshatriya
+			OR = {
+				mother_even_if_dead = { trait = kshatriya }
+				father_even_if_dead = { trait = kshatriya }
+			}
+		}
+		
+		# From grandparents
+		AND = {
+			# Parents have no caste
+			mother_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			father_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			# Grandparents are not vaishya
+			mother_even_if_dead = { mother_even_if_dead = { NOT = { trait = vaishya } } }
+			mother_even_if_dead = { father_even_if_dead = { NOT = { trait = vaishya } } }
+			father_even_if_dead = { mother_even_if_dead = { NOT = { trait = vaishya } } }
+			father_even_if_dead = { father_even_if_dead = { NOT = { trait = vaishya } } }
+			# One grandparent is kshatriya
+			OR = {
+				mother_even_if_dead = { mother_even_if_dead = { trait = kshatriya } }
+				mother_even_if_dead = { father_even_if_dead = { trait = kshatriya } }
+				father_even_if_dead = { mother_even_if_dead = { trait = kshatriya } }
+				father_even_if_dead = { father_even_if_dead = { trait = kshatriya } }
+			}
+		}
+		
+		# From great-grandparents
+		AND = {
+			# Parents and grandparents have no caste
+			mother_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			father_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			mother_even_if_dead = { mother_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			mother_even_if_dead = { father_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			father_even_if_dead = { mother_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			father_even_if_dead = { father_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			# Great-grandparents are not vaishya
+			mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { NOT = { trait = vaishya } } } }
+			mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { NOT = { trait = vaishya } } } }
+			mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { NOT = { trait = vaishya } } } }
+			mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { NOT = { trait = vaishya } } } }
+			father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { NOT = { trait = vaishya } } } }
+			father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { NOT = { trait = vaishya } } } }
+			father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { NOT = { trait = vaishya } } } }
+			father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { NOT = { trait = vaishya } } } }
+			# One great-grandparent is kshatriya
+			OR = {
+				mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { trait = kshatriya } } }
+				mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { trait = kshatriya } } }
+				mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { trait = kshatriya } } }
+				mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { trait = kshatriya } } }
+				father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { trait = kshatriya } } }
+				father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { trait = kshatriya } } }
+				father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { trait = kshatriya } } }
+				father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { trait = kshatriya } } }
+			}
+		}
+		
+	}
+	
+}
+
+expd_india_this_character_can_reclaim_vaishya = {
+	
+	has_dharmic_religion_trigger = yes
+	
+	expd_india_this_character_has_no_caste = yes
+	
+	OR = {
+		
+		# From parents
+		# No need to exclude other castes, since vaishya is the lowest
+		# One parent is vaishya
+		mother_even_if_dead = { trait = vaishya }
+		father_even_if_dead = { trait = vaishya }
+		
+		# From grandparents
+		AND = {
+			# Parents have no caste
+			mother_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			father_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			# One grandparent is vaishya
+			OR = {
+				mother_even_if_dead = { mother_even_if_dead = { trait = vaishya } }
+				mother_even_if_dead = { father_even_if_dead = { trait = vaishya } }
+				father_even_if_dead = { mother_even_if_dead = { trait = vaishya } }
+				father_even_if_dead = { father_even_if_dead = { trait = vaishya } }
+			}
+		}
+		
+		# From great-grandparents
+		AND = {
+			# Parents and grandparents have no caste
+			mother_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			father_even_if_dead = { expd_india_this_character_has_no_caste = yes }
+			mother_even_if_dead = { mother_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			mother_even_if_dead = { father_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			father_even_if_dead = { mother_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			father_even_if_dead = { father_even_if_dead = { expd_india_this_character_has_no_caste = yes } }
+			# One great-grandparent is vaishya
+			OR = {
+				mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { trait = vaishya } } }
+				mother_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { trait = vaishya } } }
+				mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { trait = vaishya } } }
+				mother_even_if_dead = { father_even_if_dead = { father_even_if_dead = { trait = vaishya } } }
+				father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { trait = vaishya } } }
+				father_even_if_dead = { mother_even_if_dead = { father_even_if_dead = { trait = vaishya } } }
+				father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { trait = vaishya } } }
+				father_even_if_dead = { father_even_if_dead = { father_even_if_dead = { trait = vaishya } } }
+			}
+		}
+		
+	}
+	
+}

@@ -1,0 +1,151 @@
+targetted_decisions = {
+	
+	expd_gp_enable_debug_mode = {
+		filter = self
+		ai = no
+		only_independent = yes
+		from_potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
+		potential = {
+			NOT = { has_global_flag = expd_gp_debug_mode }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { set_global_flag = expd_gp_debug_mode }
+			hidden_tooltip = {
+				any_player = {
+					limit = { NOT = { character = FROM } }
+					character_event = { id = ExpdGPDebugNotification.1 }
+				}
+			}
+		}
+	}
+	
+	expd_gp_disable_debug_mode = {
+		filter = self
+		ai = no
+		only_independent = yes
+		is_high_prio = yes
+		from_potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
+		potential = {
+			has_global_flag = expd_gp_debug_mode
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { clr_global_flag = expd_gp_debug_mode }
+		}
+	}
+	
+}
+
+title_decisions = {
+	
+	expd_gp_debug_destroy_great_project = {
+		filter = realm_owned
+		ai = no
+		only_independent = yes
+		from_potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
+		potential = {
+			has_global_flag = expd_gp_debug_mode
+			expd_gp_title_is_great_project_county = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { location = { destroy_wonder = yes } }
+		}
+	}
+	
+	expd_gp_debug_destroy_random_improvement = {
+		filter = realm_owned
+		ai = no
+		only_independent = yes
+		from_potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
+		potential = {
+			has_global_flag = expd_gp_debug_mode
+			expd_gp_title_is_great_project_county = yes
+			location = { wonder = { num_of_wonder_upgrades >= 1 } }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { location = { wonder = { random_upgrade_on_wonder = { destroy_wonder_upgrade = yes } } } }
+		}
+	}
+	
+	expd_gp_debug_remove_improvement_slot = {
+		filter = realm_owned
+		ai = no
+		only_independent = yes
+		from_potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
+		potential = {
+			has_global_flag = expd_gp_debug_mode
+			expd_gp_title_is_great_project_county = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			expd_gp_remove_slot_from_wonder_in_this_county = yes
+		}
+	}
+	
+	expd_gp_debug_add_improvement_slot = {
+		filter = realm_owned
+		ai = no
+		only_independent = yes
+		from_potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
+		potential = {
+			has_global_flag = expd_gp_debug_mode
+			expd_gp_title_is_great_project_county = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			expd_gp_add_slot_to_wonder_in_this_county = yes
+		}
+	}
+	
+}

@@ -1,0 +1,59 @@
+# Audax Validator EnableCommentMetadata
+
+emb_alexander_this_character_is_eligible_for_ashoka_flavored_bloodline = {
+	
+	OR = {
+		
+		# Has Ashoka bloodline
+		any_owned_bloodline = { has_bloodline_flag = bloodline_ashoka }
+		
+		# Is Indian religion
+		religion_group = indian_group
+		
+		# Is Indian culture
+		culture_group = indo_aryan_group
+		culture_group = dravidian_group
+		
+		# Has capital in India
+		capital_scope = { region = world_india }
+		
+	}
+	
+}
+
+emb_alexander_this_character_is_eligible_for_alexander_flavored_bloodline = {
+	
+	# Audax Validator "." Ignore_1001
+	AND = {
+		
+		# Ashoka flavour is cooler and overrides this one
+		emb_alexander_this_character_is_eligible_for_ashoka_flavored_bloodline = no
+		
+		OR = {
+		
+			# Has Alex bloodline
+			any_owned_bloodline = { has_bloodline_flag = bloodline_alexander }
+			
+			# Is Hellenic pagan or Christian
+			religion = hellenic_pagan
+			religion = hellenic_pagan_reformed
+			religion_group = christian
+			
+			# Is Post-Roman culture
+			culture_group = latin
+			culture_group = central_germanic
+			culture_group = west_germanic
+			culture_group = iberian
+			culture_group = byzantine
+			
+			# Has capital in old Roman Empire
+			capital_scope = { region = world_europe_west }
+			capital_scope = { region = world_europe_south }
+			capital_scope = { region = world_middle_east }
+			capital_scope = { region = world_asia_minor }
+			
+		}
+		
+	}
+	
+}

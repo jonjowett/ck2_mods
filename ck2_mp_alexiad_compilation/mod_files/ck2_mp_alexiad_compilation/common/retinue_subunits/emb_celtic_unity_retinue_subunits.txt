@@ -1,0 +1,86 @@
+# EMB_RETTYPE_* is a copy of the vanilla RETTYPE_*, with altered potential clause (and altered name in the UI)
+
+EMB_RETTYPE_CUL_FRANK_NOR_GER = 
+{
+	first_type = 4
+	first_amount = 150
+	
+	second_type = 3
+	second_amount = 100
+	
+	potential = {
+		emb_celtic_unity_this_character_can_recruit_special_retinues_breton = yes
+	}
+	
+	modifier = {
+		knights_offensive = 0.1
+		knights_defensive = 0.1
+		knights_morale = 0.2
+	}
+}
+
+EMB_RETTYPE_CUL_IRISH = 
+{
+	first_type = 1
+	first_amount = 200
+	
+	potential = {
+		emb_celtic_unity_this_character_can_recruit_special_retinues_irish = yes
+	}
+	
+	modifier = {
+		heavy_infantry_defensive = 0.4
+		heavy_infantry_morale = 0.2
+	}
+}
+
+EMB_RETTYPE_CUL_PICTISH = 
+{
+	first_type = 0
+	first_amount = 375
+	second_type = 5
+	second_amount = 125
+	
+	potential = {
+		emb_celtic_unity_this_character_can_recruit_special_retinues_pictish = yes
+	}
+	
+	modifier = {
+		light_infantry_offensive = 0.3
+		light_infantry_defensive = 0.1
+		light_infantry_morale = 0.2
+		archers_offensive = 0.1
+		archers_morale = 0.1
+	}
+}
+
+EMB_RETTYPE_CUL_SCOT = 
+{
+	first_type = 2
+	first_amount = 400
+	
+	potential = {
+		emb_celtic_unity_this_character_can_recruit_special_retinues_scottish = yes
+	}
+	
+	modifier = {
+		pikemen_defensive = 0.4
+		pikemen_offensive = 0.2
+		pikemen_morale = 0.2
+	}
+}
+
+EMB_RETTYPE_CUL_ENG = 
+{
+	first_type = 5
+	first_amount = 250
+	
+	potential = {
+		emb_celtic_unity_this_character_can_recruit_special_retinues_welsh = yes
+	}
+	
+	modifier = {
+		archers_offensive = 0.2
+		archers_defensive = 0.1
+	}
+}

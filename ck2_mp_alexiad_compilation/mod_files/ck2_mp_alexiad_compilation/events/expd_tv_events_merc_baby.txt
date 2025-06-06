@@ -1,0 +1,34 @@
+namespace = EXPDTargetedVanillaMercBaby
+
+# When a baby is born to the leader of a created mercenary band, move it to the band creator's court
+character_event = {
+	id = EXPDTargetedVanillaMercBaby.100
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		liege = {
+			mercenary = yes
+			OR = {
+				is_father = ROOT
+				is_mother = ROOT
+			}
+			primary_title = {
+				NOT = { has_title_flag = ze_dyn_merc }              # Not a Feudal mercenary company (from Conclave)
+				NOT = { NOT = { band_creator = { always = yes } } } # Band creator exists (ie. this is a dynamic merc company, and the link has not been broken due to some weird error)
+				band_creator = { is_landed = yes }                  # Band creator is landed
+			}
+		}
+	}
+	immediate = {
+		# Move the baby to the band creator's court
+		liege = {
+			primary_title = {
+				band_creator = {
+					ROOT = {
+						move_character = PREV
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,147 @@
+decisions = {
+	
+	expd_india_reclaim_brahmin = {
+		
+		only_rulers = yes
+		is_high_prio = yes
+		ai_check_interval = 3
+		
+		potential = {
+			expd_india_this_character_fulfils_basic_requirements_to_reclaim_their_caste = yes
+			expd_india_this_character_can_reclaim_brahmin = yes
+		}
+		
+		allow = { expd_india_this_character_has_sufficient_piety_and_prestige_to_reclaim_their_caste = yes }
+		
+		effect = {
+			
+			expd_india_deduct_piety_and_prestige_from_this_character_who_is_reclaiming_their_caste = yes
+			
+			# Become brahmin
+			add_trait = brahmin
+			
+			# Your children, grandchildren and great-grandchildren also become brahmin
+			custom_tooltip = {
+				text = expd_india_reclaim_brahmin_update_descendants_tt
+				any_child_even_if_dead = {
+					limit = { expd_india_this_character_can_reclaim_brahmin = yes }
+					add_trait = brahmin
+				}
+				any_child_even_if_dead = {
+					any_child_even_if_dead = {
+						limit = { expd_india_this_character_can_reclaim_brahmin = yes }
+						add_trait = brahmin
+					}
+				}
+				any_child_even_if_dead = {
+					any_child_even_if_dead = {
+						any_child_even_if_dead = {
+							limit = { expd_india_this_character_can_reclaim_brahmin = yes }
+							add_trait = brahmin
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = { factor = 1 }
+		
+	}
+	
+	expd_india_reclaim_kshatriya = {
+		
+		only_rulers = yes
+		is_high_prio = yes
+		ai_check_interval = 3
+		
+		potential = {
+			expd_india_this_character_fulfils_basic_requirements_to_reclaim_their_caste = yes
+			expd_india_this_character_can_reclaim_kshatriya = yes
+		}
+		
+		allow = { expd_india_this_character_has_sufficient_piety_and_prestige_to_reclaim_their_caste = yes }
+		
+		effect = {
+			
+			expd_india_deduct_piety_and_prestige_from_this_character_who_is_reclaiming_their_caste = yes
+			
+			# Become kshatriya
+			add_trait = kshatriya
+			
+			# Your children, grandchildren and great-grandchildren also become kshatriya
+			custom_tooltip = {
+				text = expd_india_reclaim_kshatriya_update_descendants_tt
+				any_child_even_if_dead = {
+					limit = { expd_india_this_character_can_reclaim_kshatriya = yes }
+					add_trait = kshatriya
+				}
+				any_child_even_if_dead = {
+					any_child_even_if_dead = {
+						limit = { expd_india_this_character_can_reclaim_kshatriya = yes }
+						add_trait = kshatriya
+					}
+				}
+				any_child_even_if_dead = {
+					any_child_even_if_dead = {
+						any_child_even_if_dead = {
+							limit = { expd_india_this_character_can_reclaim_kshatriya = yes }
+							add_trait = kshatriya
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = { factor = 1 }
+		
+	}
+	
+	expd_india_reclaim_vaishya = {
+		
+		only_rulers = yes
+		is_high_prio = yes
+		ai_check_interval = 3
+		
+		potential = {
+			expd_india_this_character_fulfils_basic_requirements_to_reclaim_their_caste = yes
+			expd_india_this_character_can_reclaim_vaishya = yes
+		}
+		
+		allow = { expd_india_this_character_has_sufficient_piety_and_prestige_to_reclaim_their_caste = yes }
+		
+		effect = {
+			
+			expd_india_deduct_piety_and_prestige_from_this_character_who_is_reclaiming_their_caste = yes
+			
+			# Become Vaishya
+			add_trait = vaishya
+			
+			# Your children, grandchildren and great-grandchildren also become vaishya
+			custom_tooltip = {
+				text = expd_india_reclaim_vaishya_update_descendants_tt
+				any_child_even_if_dead = {
+					limit = { expd_india_this_character_can_reclaim_vaishya = yes }
+					add_trait = vaishya
+				}
+				any_child_even_if_dead = {
+					any_child_even_if_dead = {
+						limit = { expd_india_this_character_can_reclaim_vaishya = yes }
+						add_trait = vaishya
+					}
+				}
+				any_child_even_if_dead = {
+					any_child_even_if_dead = {
+						any_child_even_if_dead = {
+							limit = { expd_india_this_character_can_reclaim_vaishya = yes }
+							add_trait = vaishya
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = { factor = 1 }
+		
+	}
+	
+}

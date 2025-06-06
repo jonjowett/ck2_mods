@@ -1,0 +1,21 @@
+#############
+# Gathering #
+#############
+#
+# Decision
+expd_herm_call_gathering;Call a Gathering of Great Minds;;;;;;;;;;;;;x
+expd_herm_call_gathering_desc;Call together the greatest minds in the Hermetic society, to study an esoteric problem.;;;;;;;;;;;;;x
+#
+# Tooltips
+expd_herm_this_character_is_not_inaccessible_incapable_or_prisoner_tt;Is not inaccessible, incapable or a prisoner;;;;;;;;;;;;;x
+expd_herm_this_character_has_built_a_laboratory_tt;Has built a §Ylaboratory§!;;;;;;;;;;;;;x
+expd_herm_this_character_is_not_already_participating_in_a_gathering_tt;Is not already participating in a gathering;;;;;;;;;;;;;x
+expd_herm_at_least_4_people_in_the_society_have_mutual_opinion_15_with_this_character_tt;At least 4 people in the §YHermetic Society§! have mutual opinion >= 15 with [This.GetTitledFirstName];;;;;;;;;;;;;x
+expd_herm_has_not_recently_used_this_decision_to_call_a_gathering_allowed_tt;Has NOT recently used this decision to call a gathering;;;;;;;;;;;;;x
+expd_herm_has_not_recently_used_this_decision_to_call_a_gathering_blocked_tt;Has NOT recently used this decision to call a gathering (cooldown expires §Y[This.expd_herm_recently_called_a_gathering_modifier.GetExpiryDate]§!);;;;;;;;;;;;;x
+expd_herm_deciding_whether_to_call_a_gathering_tt;Is NOT deciding whether to call a gathering\n§g...INFO: This blocker should disappear after you click an option in the popup event. If it doesn't, that's a bug, but it should always disappear after 1 year.§!;;;;;;;;;;;;;x
+expd_herm_this_character_will_call_a_gathering_tt;[This.GetTitledFirstName] will call a gathering of the greatest minds in the §YHermetic Society§!\n\nNB: Calling a Gathering via this decision (instead of waiting for a random event) has an §Radditional cost§! of §R3000 Esoteric Knowledge§!!;;;;;;;;;;;;;x
+#
+# Modifier to track cooldown
+expd_herm_recently_called_a_gathering_modifier;Recently called a Gathering;;;;;;;;;;;;;x
+expd_herm_recently_called_a_gathering_modifier_desc;[This.GetTitledFirstName] has recently called a gathering of the greatest minds in the Hermetic Society, and must wait a while before [This.GetSheHe] can do so again.;;;;;;;;;;;;;x

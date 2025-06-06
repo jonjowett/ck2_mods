@@ -1,0 +1,119 @@
+##################################
+#                                #
+# Debugging events               #
+# Event IDs: EMBRaider.9000-9999 #
+#                                #
+##################################
+
+# Audax Validator EnableCommentMetadata
+# (The validator rightly says that the debugging events are never called, but we want to ignore those errors.)
+
+namespace = EMBRaider
+
+# Debugging: Set raider count = 0
+# Audax Validator "." Ignore_1005
+character_event = {
+	id = EMBRaider.9000
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		set_variable = { which = emb_raider_loot_count value = 0 }
+	}
+}
+
+# Debugging: Set raider count = 50
+# Audax Validator "." Ignore_1005
+character_event = {
+	id = EMBRaider.9050
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		set_variable = { which = emb_raider_loot_count value = 50 }
+	}
+}
+
+# Debugging: Set raider count = 100
+# Audax Validator "." Ignore_1005
+character_event = {
+	id = EMBRaider.9100
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		set_variable = { which = emb_raider_loot_count value = 100 }
+	}
+}
+
+# Debugging: Set raider count = 150
+# Audax Validator "." Ignore_1005
+character_event = {
+	id = EMBRaider.9150
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		set_variable = { which = emb_raider_loot_count value = 150 }
+	}
+}
+
+# Debugging: Set raider count = 194
+# Audax Validator "." Ignore_1005
+character_event = {
+	id = EMBRaider.9194
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		set_variable = { which = emb_raider_loot_count value = 194 }
+	}
+}
+
+# Debugging: Set raider count = 195
+# Audax Validator "." Ignore_1005
+character_event = {
+	id = EMBRaider.9195
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		set_variable = { which = emb_raider_loot_count value = 195 }
+	}
+}
+
+# Debugging: Set raider count = 199
+# Audax Validator "." Ignore_1005
+character_event = {
+	id = EMBRaider.9199
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		set_variable = { which = emb_raider_loot_count value = 199 }
+	}
+}
+
+# Debugging: Set raider count = 200
+# Audax Validator "." Ignore_1005
+character_event = {
+	id = EMBRaider.9200
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		set_variable = { which = emb_raider_loot_count value = 200 }
+	}
+}
+
+# Debugging: Set raider count = viking_raids
+# Audax Validator "." Ignore_1005
+character_event = {
+	id = EMBRaider.9999
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		set_variable = { which = emb_raider_loot_count which = viking_raids }
+	}
+}

@@ -1,0 +1,154 @@
+decisions = {
+	
+	emb_forge_east_african_unity_bloodline = {
+		
+		only_playable = yes
+		
+		is_high_prio = yes 
+		ai_check_interval = 12
+		
+		potential = {
+			
+			has_dlc = "Holy Fury"
+			
+			# Show the decision to East African characters, and to non-East-African players who have their capital in an East African province (ie. can instantly culture convert)
+			OR = {
+				emb_east_african_unity_this_character_is_of_a_supported_culture = yes
+				AND = {
+					ai = no
+					capital_scope = {
+						emb_east_african_unity_this_province_is_of_a_supported_culture = yes
+					}
+				}
+			}
+			
+			# Only show the decision to players and large independent AI in East Africa, because the any_province scope is expensive and is used in the allow block
+			OR = {
+				ai = no
+				AND = {
+					independent = yes
+					any_realm_province = {
+						region = world_africa_east
+						count >= 20
+					}
+				}
+			}
+			
+			OR = {
+				NOR = {
+					any_bloodline = { has_bloodline_flag = emb_east_african_unity }
+					has_global_flag = emb_east_african_unity_bloodline_has_been_forged
+				}
+				AND = {
+					ai = no
+					has_global_flag = emb_east_african_unity_debug_show_decision
+				}
+			}
+			
+		}
+		
+		allow = {
+			
+			independent = yes
+			
+			custom_tooltip = {
+				text = emb_east_african_unity_this_character_has_east_african_culture_tt
+				emb_east_african_unity_this_character_is_of_a_supported_culture = yes
+			}
+			
+			custom_tooltip = {
+				text = emb_east_african_unity_bloodline_has_not_been_forged_tt
+				NOR = {
+					any_bloodline = { has_bloodline_flag = emb_east_african_unity }
+					has_global_flag = emb_east_african_unity_bloodline_has_been_forged
+				}
+			}
+			
+			custom_tooltip = {
+				text = emb_east_african_unity_this_character_owns_at_least_1_ethiopian_province_tt
+				any_realm_province = { culture = ethiopian }
+			}
+			
+			custom_tooltip = {
+				text = emb_east_african_unity_this_character_owns_at_least_1_nubian_province_tt
+				any_realm_province = { culture = nubian }
+			}
+			
+			custom_tooltip = {
+				text = emb_east_african_unity_this_character_owns_at_least_1_somali_province_tt
+				any_realm_province = { culture = somali }
+			}
+			
+			custom_tooltip = {
+				text = emb_east_african_unity_this_character_owns_at_least_20_provinces_of_any_east_african_culture_in_east_africa_region_tt
+				any_realm_province = {
+					region = world_africa_east
+					emb_east_african_unity_this_province_is_of_a_supported_culture = yes
+					count >= 20
+				}
+			}
+			
+			trigger_if = {
+				limit = { NOT = { any_province = { emb_east_african_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned = yes } } }
+				custom_tooltip = {
+					text = emb_east_african_unity_this_character_owns_every_east_african_culture_province_in_east_africa_region_tt
+					always = yes
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = emb_east_african_unity_this_character_does_not_own_every_east_african_culture_province_in_east_africa_region_tt
+					always = no
+				}
+			}
+			
+		}
+		
+		effect = {
+			
+			emb_east_african_unity_grant_bloodline_to_this_character = yes
+			
+			if = {
+				limit = { can_apply_super_cool_nickname_trigger = yes }
+				custom_tooltip = {
+					text = emb_east_african_unity_this_character_is_given_adjudicator_nickname_tt
+					if = {
+						limit = { any_owned_bloodline = { has_bloodline_flag = emb_east_african_unity } }
+						# Wrap the nickname in an additional check, in case a bug means that a character manages to take the decision without creating a bloodline
+						give_nickname = nick_the_adjudicator
+					}
+				}
+			}
+			
+			hidden_tooltip = {
+				if = {
+					limit = { any_owned_bloodline = { has_bloodline_flag = emb_east_african_unity } }
+					# Wrap the blocking flag in an additional check, in case a bug means that a character manages to take the decision without creating a bloodline
+					set_global_flag = emb_east_african_unity_bloodline_has_been_forged
+				}
+			}
+			
+			if = {
+				limit = { ai = no }
+				if = {
+					limit = { any_province = { emb_east_african_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned = yes } }
+					custom_tooltip = { text = emb_east_african_unity_info_list_of_missing_provinces_tt }
+					any_province = {
+						limit = { emb_east_african_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned = yes }
+						show_scope_change = no
+						custom_tooltip = { text = emb_cultural_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned_tt }
+					}
+				}
+			}
+			else = {
+				custom_tooltip = { text = emb_cultural_unity_info_list_of_missing_provinces_is_not_provided_for_ai_tt }
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+	}
+}

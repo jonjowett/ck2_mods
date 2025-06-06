@@ -1,0 +1,39 @@
+decisions = {
+	expd_rn_refuse_nomination = {
+		only_playable = yes
+		is_high_prio = yes
+		ai = no # Refusing nomination is for players only
+		potential = {
+			ai = no
+			NOT = { has_character_modifier = expd_rn_refuse_nomination_modifier }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			add_character_modifier = {
+				name = expd_rn_refuse_nomination_modifier
+				duration = -1
+				stacking = no
+				inherit = yes
+			}
+		}
+	}
+	expd_rn_allow_nomination = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 12
+		potential = {
+			has_character_modifier = expd_rn_refuse_nomination_modifier
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			remove_character_modifier = expd_rn_refuse_nomination_modifier
+		}
+		ai_will_do = {
+			factor = 1 # AI always wants to be nominated, so they will always take this decision if it's available
+		}
+	}
+}

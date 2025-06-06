@@ -1,0 +1,608 @@
+# Must be Celtic, own a province of your culture, and own a province of another culture.
+# IE: Must have at least 2 different Celtic cultures in your realm.
+# Celtic cultures are: Breton, Irish, Pictish, Scottish, Welsh
+# Grants Celtic opinion, and characters with the bloodline can build all relevant retinues and all relevant cultural buildings (in Celtic-culture provinces).
+# Does NOT apply to vassals, unless they also have the culture.
+
+# NB: The bloodline MUST be created by event/decision, and this MUST specify BOTH the inheritance rules AND the relevant emb_m/emb_f/emb_ad flag.
+
+
+
+
+
+########################
+#      2 Cultures      #
+########################
+
+emb_celtic_unity_breton_irish = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_irish = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_irish
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_irish
+	}
+}
+
+emb_celtic_unity_breton_pictish = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_pictish = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_pictish
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_pictish
+	}
+}
+
+emb_celtic_unity_breton_scottish = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_scottish = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_scottish
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_scottish
+	}
+}
+
+emb_celtic_unity_breton_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+emb_celtic_unity_irish_pictish = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_irish_pictish = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_irish_pictish
+		# Features
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_pictish
+	}
+}
+
+emb_celtic_unity_irish_scottish = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_irish_scottish = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_irish_scottish
+		# Features
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_scottish
+	}
+}
+
+emb_celtic_unity_irish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_irish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_irish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+emb_celtic_unity_pictish_scottish = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_pictish_scottish = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_pictish_scottish
+		# Features
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_scottish
+	}
+}
+
+emb_celtic_unity_pictish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_pictish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_pictish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+emb_celtic_unity_scottish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_scottish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_scottish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_scottish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+
+
+
+
+########################
+#      3 Cultures      #
+########################
+
+emb_celtic_unity_breton_irish_pictish = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_irish_pictish = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_irish_pictish
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_pictish
+	}
+}
+
+emb_celtic_unity_breton_irish_scottish = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_irish_scottish = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_irish_scottish
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_scottish
+	}
+}
+
+emb_celtic_unity_breton_irish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_irish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_irish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+emb_celtic_unity_breton_pictish_scottish = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_pictish_scottish = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_pictish_scottish
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_scottish
+	}
+}
+
+emb_celtic_unity_breton_pictish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_pictish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_pictish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+emb_celtic_unity_breton_scottish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_scottish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_scottish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_scottish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+emb_celtic_unity_irish_pictish_scottish = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_irish_pictish_scottish = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_irish_pictish_scottish
+		# Features
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_scottish
+	}
+}
+
+emb_celtic_unity_irish_pictish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_irish_pictish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_irish_pictish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+emb_celtic_unity_irish_scottish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_irish_scottish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_irish_scottish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_scottish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+emb_celtic_unity_pictish_scottish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_pictish_scottish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_pictish_scottish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_scottish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+
+
+
+
+########################
+#      4 Cultures      #
+########################
+
+emb_celtic_unity_breton_irish_pictish_scottish = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_irish_pictish_scottish = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_irish_pictish_scottish
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_scottish
+	}
+}
+
+emb_celtic_unity_breton_irish_pictish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_irish_pictish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_irish_pictish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+emb_celtic_unity_breton_irish_scottish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_irish_scottish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_irish_scottish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_scottish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+emb_celtic_unity_breton_pictish_scottish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_pictish_scottish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_pictish_scottish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_scottish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+emb_celtic_unity_irish_pictish_scottish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_irish_pictish_scottish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_irish_pictish_scottish_welsh
+		# Features
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_scottish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}
+
+
+
+
+
+########################
+#      5 Cultures      #
+########################
+
+emb_celtic_unity_breton_irish_pictish_scottish_welsh = {
+	celtic_opinion = 5
+	emb_bloodline_effect_celtic_breton_irish_pictish_scottish_welsh = 1
+	emb_bloodline_effect_celtic_culture_conversion = 1
+	emb_bloodline_effect_celtic_retinues = 1
+	emb_bloodline_effect_celtic_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = { emb_celtic_unity_this_character_is_of_a_supported_culture = yes }
+	flags = {
+		# Tracking
+		emb
+		created_bloodline
+		emb_celtic_unity
+		emb_celtic_unity_breton_irish_pictish_scottish
+		# Features
+		emb_bloodline_effect_flag_celtic_breton
+		emb_bloodline_effect_flag_celtic_irish
+		emb_bloodline_effect_flag_celtic_pictish
+		emb_bloodline_effect_flag_celtic_scottish
+		emb_bloodline_effect_flag_celtic_welsh
+	}
+}

@@ -1,0 +1,29 @@
+# Audax Validator EnableCommentMetadata
+
+csh_another_mod_wants_to_suppress_this_decision = {
+	
+	# PDXRPTG & ED:PDXRPTG submod
+	# Audax Validator "." Ignore_NEXT
+	AND = {
+		csh_pdxrptg_mod_is_active = yes
+		NOT = {
+			# Audax Validator "." Ignore_NEXT
+			has_submenu_open = no
+		}
+	}
+	
+}
+
+csh_pdxrptg_mod_is_active = {
+	# Based on ...\events\ek_startup.txt , event startup.0
+	# It's a rather primitive test, but it should be effective!
+	#  --- All of these flags seem very EK-specific, so they shouldn't be created in any other context.
+	OR = {
+		has_global_flag = mages_tamriel_necromancy_allowed
+		has_global_flag = mages_tamriel_necromancy_banned
+		has_global_flag = mages_akavir_necromancy_allowed
+		has_global_flag = mages_akavir_necromancy_banned
+		has_global_flag = house_veloth_extinct
+		has_global_flag = house_sul_extinct
+	}
+}

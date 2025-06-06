@@ -1,0 +1,105 @@
+targetted_decisions = {
+	
+	expd_t_enable_debug_mode = {
+		only_playable = yes
+		filter = self
+		ai = no
+		potential = {
+			NOT = { has_global_flag = expd_t_debug_mode }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { set_global_flag = expd_t_debug_mode }
+		}
+	}
+	
+	expd_t_disable_debug_mode = {
+		only_playable = yes
+		filter = self
+		ai = no
+		potential = {
+			has_global_flag = expd_t_debug_mode
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { clr_global_flag = expd_t_debug_mode }
+		}
+	}
+	
+	expd_t_debug_list_all_protectors = {
+		only_playable = yes
+		filter = self
+		third_party_filter = all
+		ai = no
+		potential = {
+			has_global_flag = expd_t_debug_mode
+		}
+		allow = {
+			always = yes
+		}
+		third_party_potential = {
+			FROMFROM = {
+				any_tributary = {
+					is_tributary = {
+						type = expd_t_protectorate
+					}
+				}
+			}
+		}
+		third_party_allow = {
+			always = no
+		}
+		effect = {
+			# Nothing
+		}
+	}
+	
+	expd_t_debug_list_all_protectorates = {
+		only_playable = yes
+		filter = self
+		third_party_filter = all
+		ai = no
+		potential = {
+			has_global_flag = expd_t_debug_mode
+		}
+		allow = {
+			always = yes
+		}
+		third_party_potential = {
+			FROMFROM = { is_tributary = { type = expd_t_protectorate } }
+		}
+		third_party_allow = {
+			always = no
+		}
+		effect = {
+			# Nothing
+		}
+	}
+	
+	expd_t_debug_destroy_all_ai_protectorates = {
+		only_playable = yes
+		filter = self
+		ai = no
+		potential = {
+			has_global_flag = expd_t_debug_mode
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			any_character = {
+				limit = {
+					is_tributary = { type = expd_t_protectorate }
+					suzerain = { ai = yes }
+				}
+				suzerain = { remove_tributary = PREV }
+			}
+		}
+		
+	}
+	
+}

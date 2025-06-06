@@ -1,0 +1,240 @@
+# Decisions allowing players to send mass amounts of gold to other characters
+# Fixed gift sizes are indexed using the character variable expd_g_send_gold_size: 0 = disabled, 1=100, 2=300, 3=1000, 4=3000, 5=10000
+
+targeted_decisions = {
+	
+	expd_g_send_gold_to_non_ruler_enable = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = { NOT = { has_character_flag = expd_g_send_gold_to_non_ruler_permitted } }
+		allow = { always = yes }
+		effect = { hidden_tooltip = { set_character_flag = expd_g_send_gold_to_non_ruler_permitted } }
+	}
+	
+	expd_g_send_gold_to_non_ruler_disable = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = { has_character_flag = expd_g_send_gold_to_non_ruler_permitted }
+		allow = { always = yes }
+		effect = { hidden_tooltip = { clr_character_flag = expd_g_send_gold_to_non_ruler_permitted } }
+	}
+	
+	expd_g_send_gold_increase_size = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = { always = yes }
+		allow = {
+			custom_tooltip = {
+				text = expd_g_send_gold_size_is_not_maximum_tt
+				check_variable = {
+					which = expd_g_send_gold_size
+					value < 5
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = { check_variable = { which = expd_g_send_gold_size value == 0 } }
+				custom_tooltip = { text = expd_g_send_gold_size_currently_0_tt }
+				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
+				custom_tooltip = { text = expd_g_send_gold_size_will_be_1_tt }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_g_send_gold_size value == 1 } }
+				custom_tooltip = { text = expd_g_send_gold_size_currently_1_tt }
+				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
+				custom_tooltip = { text = expd_g_send_gold_size_will_be_2_tt }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_g_send_gold_size value == 2 } }
+				custom_tooltip = { text = expd_g_send_gold_size_currently_2_tt }
+				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
+				custom_tooltip = { text = expd_g_send_gold_size_will_be_3_tt }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_g_send_gold_size value == 3 } }
+				custom_tooltip = { text = expd_g_send_gold_size_currently_3_tt }
+				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
+				custom_tooltip = { text = expd_g_send_gold_size_will_be_4_tt }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_g_send_gold_size value == 4 } }
+				custom_tooltip = { text = expd_g_send_gold_size_currently_4_tt }
+				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
+				custom_tooltip = { text = expd_g_send_gold_size_will_be_5_tt }
+			}
+			else = {
+				custom_tooltip = { text = expd_g_send_gold_size_logic_error_tt }
+			}
+			hidden_tooltip = {
+				change_variable = {
+					which = expd_g_send_gold_size
+					value = 1
+				}
+			}
+		}
+	}
+	
+	expd_g_send_gold_decrease_size = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = { always = yes }
+		allow = {
+			custom_tooltip = {
+				text = expd_g_send_gold_size_is_not_minimum_tt
+				check_variable = {
+					which = expd_g_send_gold_size
+					value > 0
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = { check_variable = { which = expd_g_send_gold_size value == 1 } }
+				custom_tooltip = { text = expd_g_send_gold_size_currently_1_tt }
+				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
+				custom_tooltip = { text = expd_g_send_gold_size_will_be_0_tt }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_g_send_gold_size value == 2 } }
+				custom_tooltip = { text = expd_g_send_gold_size_currently_2_tt }
+				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
+				custom_tooltip = { text = expd_g_send_gold_size_will_be_1_tt }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_g_send_gold_size value == 3 } }
+				custom_tooltip = { text = expd_g_send_gold_size_currently_3_tt }
+				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
+				custom_tooltip = { text = expd_g_send_gold_size_will_be_2_tt }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_g_send_gold_size value == 4 } }
+				custom_tooltip = { text = expd_g_send_gold_size_currently_4_tt }
+				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
+				custom_tooltip = { text = expd_g_send_gold_size_will_be_3_tt }
+			}
+			else_if = {
+				limit = { check_variable = { which = expd_g_send_gold_size value == 5 } }
+				custom_tooltip = { text = expd_g_send_gold_size_currently_5_tt }
+				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
+				custom_tooltip = { text = expd_g_send_gold_size_will_be_4_tt }
+			}
+			else = {
+				custom_tooltip = { text = expd_g_send_gold_size_logic_error_tt }
+			}
+			hidden_tooltip = {
+				change_variable = {
+					which = expd_g_send_gold_size
+					value = -1
+				}
+			}
+		}
+	}
+	
+	expd_g_send_gold_reset_size = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = {
+			OR = {
+				check_variable = { which = expd_g_send_gold_size value < 0 }
+				check_variable = { which = expd_g_send_gold_size value > 5 }
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_g_send_gold_size_will_be_1_tt
+				set_variable = { which = expd_g_send_gold_size value = 1 }
+			}
+		}
+	}
+	
+	expd_g_send_gold = {
+		filter = all
+		ai = no
+		only_playable = yes
+		from_potential = { always = yes }
+		potential = { always = yes }
+		allow = {
+			trigger_if = {
+				limit = { NOT = { is_within_diplo_range = FROM } }
+				is_within_diplo_range = FROM # CPU HEAVY!
+			}
+			OR = {
+				is_ruler = yes
+				custom_tooltip = {
+					text = expd_g_send_gold_to_non_ruler_is_permitted_tt
+					FROM = { has_character_flag = expd_g_send_gold_to_non_ruler_permitted }
+				}
+			}
+			trigger_if = {
+				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 0 } } }
+				custom_tooltip = {
+					text = expd_g_send_gold_is_not_disabled_tt
+					always = no
+				}
+			}
+			trigger_else_if = {
+				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 1 } } }
+				FROM = { wealth >= 100 }
+			}
+			trigger_else_if = {
+				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 2 } } }
+				FROM = { wealth >= 300 }
+			}
+			trigger_else_if = {
+				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 3 } } }
+				FROM = { wealth >= 1000 }
+			}
+			trigger_else_if = {
+				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 4 } } }
+				FROM = { wealth >= 3000 }
+			}
+			trigger_else_if = {
+				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 5 } } }
+				FROM = { wealth >= 10000 }
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = expd_g_send_gold_size_logic_error_tt
+					always = no
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 1 } } }
+				FROM = { wealth = -100 }
+				ROOT = { wealth =  100 }
+			}
+			else_if = {
+				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 2 } } }
+				FROM = { wealth = -300 }
+				ROOT = { wealth =  300 }
+			}
+			else_if = {
+				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 3 } } }
+				FROM = { wealth = -1000 }
+				ROOT = { wealth =  1000 }
+			}
+			else_if = {
+				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 4 } } }
+				FROM = { wealth = -3000 }
+				ROOT = { wealth =  3000 }
+			}
+			else_if = {
+				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 5 } } }
+				FROM = { wealth = -10000 }
+				ROOT = { wealth =  10000 }
+			}
+			else = {
+				custom_tooltip = { text = expd_g_send_gold_size_logic_error_tt }
+			}
+		}
+	}
+}

@@ -1,0 +1,92 @@
+namespace = IB
+
+character_event = {
+	id = IB.50
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		# Reworked (simpler) trigger condition, with exactly the same meaning as in the original:
+		#  --- This newborn child is inbred and of the same dynasty as any player
+		trait = inbred
+		any_player = { dynasty = ROOT }
+	}
+	immediate = {
+		
+		# Record the total number of player-dynasty inbred children, reusing the same variable as in the base mod
+		change_variable = { which = global_IB_family_bloodline_var value = 1 }
+		
+		# Decide whether to award the family bloodline and, if yes, award it.
+		# Logic is hardcoded into the event, below, so that it can easily be compared with the debugging/cleanup event.
+		
+		# Quick filters to avoid unnecessary calcs:
+		#  --- There must have been at least 20 player-dynasty inbred children
+		#  --- There must not already be a family bloodline founded by a member of this child's dynasty
+		if = {
+			limit = {
+				check_variable = { which = global_IB_family_bloodline_var value = 20 }
+				NOT = {
+					any_bloodline = {
+						has_bloodline_flag = IB_family_bloodline
+						founder = { dynasty = ROOT }
+					}
+				}
+			}
+			
+			# Calculate the number and proportion of inbred characters in the dynasty, storing the results in variables on the newborn
+			mbb_family_bloodline_effect_calc = yes
+			
+			# If >=20 members and >=2% were inbred, "award" the bloodline to a random player in this dynasty.
+			# (It's very unlikely that there will be more than one player per dynasty, so we won't bother handling this situation.)
+			if = {
+				limit = { mbb_this_characters_dynasty_should_have_the_family_bloodline = yes }
+				random_player = {
+					limit = { dynasty = ROOT }
+					character_event = { id = IB.51 }
+				}
+			}
+			
+			# Cleanup the variables stored on the newborn
+			mbb_family_bloodline_effect_cleanup = yes
+			
+		}
+		
+	}
+}
+
+character_event = {
+	# Debugging event, to be manually triggered if desired when the bugfix has been loaded into an ongoing game.
+	# Checks that every family bloodline has been awarded correctly, and deletes those which were not.
+	# Checks every player's dynasty to see if they should have a family bloodline and, if they should, "awards" the bloodline.
+	id = IB.9950
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = { any_bloodline = { has_bloodline_flag = IB_family_bloodline } }
+			any_bloodline = {
+				limit = { has_bloodline_flag = IB_family_bloodline }
+				founder = {
+					random_dynasty_member = {
+						preferred_limit = { ai = no }
+						mbb_family_bloodline_effect_calc = yes
+						if = {
+							limit = { mbb_this_characters_dynasty_should_have_the_family_bloodline = no }
+							PREVPREV = { destroy_bloodline = yes }
+							clr_global_flag = IB_family_bloodline
+						}
+						mbb_family_bloodline_effect_cleanup = yes
+					}
+				}
+			}
+		}
+		any_player = {
+			mbb_family_bloodline_effect_calc = yes
+			if = {
+				limit = { mbb_this_characters_dynasty_should_have_the_family_bloodline = yes }
+				character_event = { id = IB.51 }
+				set_global_flag = IB_family_bloodline
+			}
+			mbb_family_bloodline_effect_cleanup = yes
+		}
+	}
+}

@@ -1,0 +1,463 @@
+# Audax Validator EnableCommentMetadata
+
+#######################################
+# Set base title for map colour & CoA #
+#######################################
+
+title_decisions = {
+	expd_cef_use_this_title_as_the_base_for_merge = {
+		ai = no
+		potential = {
+			NOT = { has_title_flag = expd_cef_use_this_coa_@FROM }
+			higher_tier_than = BARON
+			temporary = no
+		}
+		from_potential = {
+			is_decision_potential = expd_cef_merge
+		}
+		allow = {
+			#FIXME: For some unknown reason, the expd_cef_root_controls_this_kingdom trigger causes is_decision_allowed to always return false. Therefore, this condition is omitted.
+			#custom_tooltip = {
+			#	text = expd_cef_from_can_take_the_expd_cef_merge_decision_tt
+			#	FROM = { is_decision_allowed = expd_cef_merge }
+			#}
+			OR = {
+				custom_tooltip = {
+					text = expd_cef_from_holds_this_title_personally_tt
+					holder_scope = { character = FROM }
+				}
+				custom_tooltip = {
+					text = expd_cef_a_vassal_of_from_holds_this_title_tt
+					holder_scope = { is_vassal_or_below_of = FROM }
+				}
+				#FIXME: If there's no title holder then the empire creation effect can't locate it, so we have to rule out this option for the time being.
+				#custom_tooltip = {
+				#	text = expd_cef_this_title_has_no_holder_and_is_de_jure_vassal_of_one_of_froms_titles_tt
+				#	# Audax Validator "." Ignore_1001
+				#	AND = {
+				#		has_holder = no
+				#		FROM = { any_demesne_title = { de_jure_vassal_or_below = ROOT } }
+				#	}
+				#}
+			}
+		}
+		effect = {
+			any_title = {
+				limit = { has_title_flag = expd_cef_use_this_coa_@FROM }
+				show_scope_change = no
+				custom_tooltip = {
+					text = expd_cef_this_title_will_no_longer_be_used_as_the_base_for_the_empire_merge_decision_tt
+					clr_title_flag = expd_cef_use_this_coa_@FROM
+				}
+			}
+			custom_tooltip = { text = expd_cef_spacer_tt }
+			custom_tooltip = {
+				text = expd_cef_this_title_will_be_used_as_the_base_for_the_empire_merge_decision_tt
+				set_title_flag = expd_cef_use_this_coa_@FROM
+			}	
+		}
+	}
+	expd_cef_stop_using_this_title_as_the_base_for_merge = {
+		only_playable = yes
+		only_independent = yes
+		ai = no
+		potential = {
+			has_title_flag = expd_cef_use_this_coa_@FROM
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_cef_this_title_will_no_longer_be_used_as_the_base_for_the_empire_merge_decision_tt
+				clr_title_flag = expd_cef_use_this_coa_@FROM
+			}
+		}
+	}
+}
+
+
+
+
+#################
+# Create Empire #
+#################
+
+decisions = {
+	expd_cef_merge = {
+		
+		only_playable = yes
+		only_independent = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+
+		potential = {
+			
+			# Is a king with at least two kingdoms
+			tier = KING
+			NOT = { tier = EMPEROR }
+			any_demesne_title = {
+				count >= 2
+				tier = KING
+			}
+			
+			# Realm size mustn't be too large
+			trigger_if = {
+				limit = { ai = yes }
+				expd_cef_roots_realm_size_is_not_too_large = yes
+			}
+			
+			# Misc conditions copied from form_new_empire in realm_decisions.txt
+			OR = {
+				has_dlc = "Charlemagne"
+				AND = {
+					is_alternate_start = yes
+					OR = {
+						has_alternate_start_parameter = {
+							key = dejure_kingdoms
+							value = none
+						}
+						has_alternate_start_parameter = {
+							key = dejure_empires
+							value = none
+						}
+					}
+				}
+			}
+			OR = {
+				ai = no
+				AND = {
+					trait = proud
+					prestige = 40000
+				}
+				AND = {
+					trait = ambitious
+					prestige = 40000
+				}
+				prestige = 120000
+				AND = {
+					is_alternate_start = yes
+					OR = {
+						has_alternate_start_parameter = {
+							key = dejure_kingdoms
+							value = none
+						}
+						has_alternate_start_parameter = {
+							key = dejure_empires
+							value = none
+						}
+					}
+				}
+			}
+			holy_order = no
+			NOT = {
+				has_game_rule = {
+					name = dynamic_realms
+					value = off
+				}
+			}
+			
+		}
+		
+		allow = {
+	
+			# Is an independent adult capable king with at least 3 fully-controlled kingdoms
+			
+			is_adult = yes
+			prisoner = no
+			independent = yes
+			war = no
+			NOT = { trait = incapable }
+			
+			tier = KING
+			NOT = { tier = EMPEROR }
+			custom_tooltip = {
+				text = expd_cef_root_completely_controls_his_primary_kingdom_tt
+				primary_title = { expd_cef_root_controls_this_kingdom = yes }
+			}
+			
+			custom_tooltip = {
+				text = expd_cef_root_completely_controls_at_least_3_kingdoms_tt
+				any_demesne_title = {
+					count >= 3
+					is_titular = no
+					expd_cef_root_controls_this_kingdom = yes
+				}
+			}
+			
+			custom_tooltip = { text = expd_cef_info_completely_controls_meaning_tt }
+			
+			# Realm size mustn't be too large
+			trigger_if = {
+				limit = { ai = yes }
+				expd_cef_roots_realm_size_is_not_too_large = yes
+			}
+			
+			# Wealth and piety will be deducted (prestige will not)
+			prestige = 10000
+			wealth = 1000
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_demesne_title = {
+							count = 4
+							expd_cef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = 500
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_3_kingdoms_tt }
+			}
+			trigger_else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 4
+						expd_cef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 5
+							expd_cef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = 600
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_4_kingdoms_tt }
+			}
+			trigger_else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 5
+						expd_cef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 6
+							expd_cef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = 700
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_5_kingdoms_tt }
+			}
+			trigger_else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 6
+						expd_cef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 7
+							expd_cef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = 800
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_6_kingdoms_tt }
+			}
+			trigger_else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 7
+						expd_cef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 8
+							expd_cef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = 900
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_7_kingdoms_tt }
+			}
+			trigger_else = {
+				piety = 1000
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_8_or_more_kingdoms_tt }
+			}
+			
+		}
+		
+		effect = {
+			
+			# Deduct wealth & piety first (so that the deduction is calculated correctly)
+			wealth = -1000
+			if = {
+				limit = {
+					NOT = {
+						any_demesne_title = {
+							count = 4
+							expd_cef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = -500
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_3_kingdoms_tt }
+			}
+			else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 4
+						expd_cef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 5
+							expd_cef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = -600
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_4_kingdoms_tt }
+			}
+			else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 5
+						expd_cef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 6
+							expd_cef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = -700
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_5_kingdoms_tt }
+			}
+			else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 6
+						expd_cef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 7
+							expd_cef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = -800
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_6_kingdoms_tt }
+			}
+			else_if = {
+				limit = {
+					any_demesne_title = {
+						count = 7
+						expd_cef_root_controls_this_kingdom = yes
+					}
+					NOT = {
+						any_demesne_title = {
+							count = 8
+							expd_cef_root_controls_this_kingdom = yes
+						}
+					}
+				}
+				piety = -900
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_7_kingdoms_tt }
+			}
+			else = {
+				piety = -1000
+				custom_tooltip = { text = expd_cef_info_this_piety_cost_is_based_on_8_or_more_kingdoms_tt }
+			}
+			
+			# Create custom empire & every completely-controlled kingdom is made de jure vassal of the new empire & is then destroyed
+			# (Originally based on form_new_empire in realm_decisions.txt, but HEAVILY modified & improved.)
+			
+			# Tooltips explaininig what will happen, at a high level
+			custom_tooltip = { text = expd_cef_root_forms_new_empire_by_merging_completely_controlled_kingdoms_tt }
+			custom_tooltip = { text = expd_cef_info_completely_controls_meaning_tt }
+			custom_tooltip = { text = expd_cef_the_new_empires_name_will_be_based_on_roots_primary_title_tt }
+			custom_tooltip = { text = expd_cef_the_new_empires_laws_will_be_copied_from_roots_primary_title_tt }
+			
+			# Tooltips explaining the new empire's CoA and map colour
+			if = {
+				limit = {
+					# For some reason, any_title = { has_title_flag = expd_cef_use_this_coa_@ROOT } doesn't work in this context.
+					OR = {
+						any_realm_title          = { has_title_flag = expd_cef_use_this_coa_@ROOT }
+						any_demesne_title        = { has_title_flag = expd_cef_use_this_coa_@ROOT }
+						any_de_jure_vassal_title = { has_title_flag = expd_cef_use_this_coa_@ROOT }
+					}
+				}
+				any_title = { 
+					limit = { has_title_flag = expd_cef_use_this_coa_@ROOT }
+					show_scope_change = no
+					# If there's more than one such title (which there really shouldn't be), pick one at random. If the user doesn't like it, they can use the title decisions to fix it.
+					# NB: "count" is deterministic (but not externally predictable), which means that the title shown in the tooltip will be always be the same as the title that's used as the base.
+					count = 1
+					custom_tooltip = {
+						text = expd_cef_the_new_empires_coa_will_be_based_on_this_flagged_title_tt
+						save_event_target_as = expd_cef_base_title
+					}
+					custom_tooltip = { text = expd_cef_info_new_empire_map_colour_tt }
+				}
+			}
+			else = {
+				custom_tooltip = {
+					text = expd_cef_the_new_empires_coa_will_be_based_on_roots_primary_title_tt
+					primary_title = { save_event_target_as = expd_cef_base_title }
+				}
+				custom_tooltip = { text = expd_cef_info_can_base_new_empire_on_another_title_tt }
+				custom_tooltip = { text = expd_cef_info_new_empire_map_colour_tt }
+			}
+			
+			#Tooltips listing the exact kingdoms that will be merged, and the new traditional capital of the empire
+			any_demesne_title = {
+				limit = { expd_cef_root_controls_this_kingdom = yes }
+				custom_tooltip = { text = expd_cef_this_kingdom_becomes_part_of_the_new_empire_and_is_destroyed_tt }
+			}
+			capital_scope = {
+				show_scope_change = no # capital_scope is just "Capital:" in the tooltips, which doesn't look good. Include the province name in the localisation string below instead.
+				county = {
+					show_scope_change = no
+					custom_tooltip = {
+						text = expd_cef_this_province_becomes_the_traditional_capital_of_the_empire_tt
+						save_event_target_as = expd_cef_new_empire_capital
+					}
+				}
+			}
+			
+			# Then, inside a hidden_tooltip, perform the actual actions
+			hidden_tooltip = {
+				primary_title = {
+					create_title = {
+						tier = EMPEROR
+						landless = no
+						temporary = no
+						custom_created = yes # This parameter is undocumented! Copied from the source, in case it's important somehow.
+						culture = ROOT
+						holder = ROOT
+						base_title = event_target:expd_cef_base_title
+						name = expd_cef_roots_primary_title
+					}
+					new_title = {
+						copy_title_laws = PREV
+						copy_title_history = PREV
+						set_preferred_capital = event_target:expd_cef_new_empire_capital
+					}
+				}
+				ROOT = {
+					any_demesne_title = {
+						limit = { expd_cef_root_controls_this_kingdom = yes }
+						de_jure_liege = PREVPREV
+						destroy_landed_title = THIS
+					}
+				}
+				any_title = {
+					limit = { has_title_flag = expd_cef_use_this_coa_@ROOT }
+					clr_title_flag = expd_cef_use_this_coa_@ROOT
+				}
+			}
+			
+			# Put something in the chronicle (because why not?!)
+			chronicle = {
+				entry = CHRONICLE_FOUNDED_NEW_KINGDOM_OR_EMPIRE
+				portrait = [Root.GetID]
+			}
+		}
+	}
+}

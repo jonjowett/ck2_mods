@@ -1,0 +1,169 @@
+# Audax Validator EnableCommentMetadata
+# revoke_allowed, ai_will_do and ai_will_revoke are required blocks, but the Validator flags them as errors
+
+law_groups = {
+#	expd_at_out_of_realm_inheritance_laws = {
+#		law_type = realm
+#		allowed_for_councillors = yes
+#	}
+	expd_at_imperial_administration_laws = {
+		law_type = realm
+		allowed_for_councillors = yes
+	}
+}
+
+
+
+
+############################
+# Out of realm inheritance #
+############################
+
+# Removed because crown laws don't work properly for tribal characters (seems to be an engine issue)
+
+#de_jure_laws = { # Crown law
+#	
+#	# Default (free inheritance)
+#	expd_at_out_of_realm_inheritance_law_0 = {
+#		group = expd_at_out_of_realm_inheritance_laws
+#		default = yes
+#		potential = {
+#			expd_at_this_title_should_have_tribal_laws = yes
+#			expd_at_this_title_should_have_crown_laws = yes
+#		}
+#		allow = {
+#			always = yes
+#		}
+#		# Audax Validator "." Ignore_NEXT
+#		revoke_allowed = { always = no }
+#		# Audax Validator "." Ignore_NEXT
+#		ai_will_do = { factor = 0 }
+#		# Audax Validator "." Ignore_NEXT
+#		ai_will_revoke = { factor = 0 }
+#		effect = {
+#			hidden_tooltip = { revoke_law = expd_at_out_of_realm_inheritance_law_1 }
+#			set_protected_inheritance = no
+#		}
+#	}
+#	
+#	# Restricted inheritance (restricted inheritance & -20 opinion)
+#	expd_at_out_of_realm_inheritance_law_1 = {
+#		group = expd_at_out_of_realm_inheritance_laws
+#		default = no
+#		potential = {
+#			expd_at_this_title_should_have_tribal_laws = yes
+#			expd_at_this_title_should_have_crown_laws = yes
+#		}
+#		allow = {
+#			expd_at_this_title_is_a_highly_organised_tribe = yes
+#		}
+#		# Audax Validator "." Ignore_NEXT
+#		revoke_allowed = { always = no }
+#		# Audax Validator "." Ignore_NEXT
+#		ai_will_do = { factor = 1 }
+#		# Audax Validator "." Ignore_NEXT
+#		ai_will_revoke = { factor = 0 }
+#		effect = {
+#			hidden_tooltip = { revoke_law = expd_at_out_of_realm_inheritance_law_0 }
+#			set_protected_inheritance = yes
+#		}
+#		# If you use vassal_opinion here, the opinion modifier applies to everyone everywhere in the world - base game bug?
+#		city_opinion   = -20
+#		castle_opinion = -20
+#		temple_opinion = -20
+#		tribal_opinion = -20
+#	}
+#	
+#}
+
+
+
+
+
+###########################
+# Imperial administration #
+###########################
+
+laws = { # Realm law (not crown law)
+	
+	# Default (no effect)
+	expd_at_imperial_administration_law_0 = {
+		group = expd_at_imperial_administration_laws
+		default = yes
+		potential = { expd_at_this_title_should_have_tribal_laws = yes }
+		allow = {
+			hidden_tooltip = { NOT = { has_law = expd_at_imperial_administration_law_2 } }
+		}
+		# Audax Validator "." Ignore_NEXT
+		revoke_allowed = { always = no }
+		# Audax Validator "." Ignore_NEXT
+		ai_will_do = { factor = 0 }
+		# Audax Validator "." Ignore_NEXT
+		ai_will_revoke = { factor = 0 }
+		effect = {
+			hidden_tooltip = {
+				revoke_law = expd_at_imperial_administration_law_1
+				revoke_law = expd_at_imperial_administration_law_2
+			}
+		}
+	}
+	
+	# Advanced tribe (-10 opinion)
+	expd_at_imperial_administration_law_1 = {
+		group = expd_at_imperial_administration_laws
+		default = no
+		potential = { expd_at_this_title_should_have_tribal_laws = yes }
+		allow = {
+			expd_at_this_title_is_a_highly_organised_tribe = yes
+		}
+		# Audax Validator "." Ignore_NEXT
+		revoke_allowed = { always = no }
+		# Audax Validator "." Ignore_NEXT
+		ai_will_do = { factor = 10 }
+		# Audax Validator "." Ignore_NEXT
+		ai_will_revoke = { factor = 0 }
+		effect = {
+			hidden_tooltip = {
+				revoke_law = expd_at_imperial_administration_law_0
+				revoke_law = expd_at_imperial_administration_law_2
+			}
+		}
+		vassal_limit = 5
+		vassal_opinion = -10
+	}
+	
+	# Imperial administration (+25 vassals, -20 opinion)
+	expd_at_imperial_administration_law_2 = {
+		group = expd_at_imperial_administration_laws
+		default = no
+		potential = { expd_at_this_title_should_have_tribal_laws = yes }
+		allow = {
+			tier = EMPEROR
+			expd_at_this_title_is_a_highly_organised_tribe = yes
+			has_law = expd_at_out_of_realm_inheritance_law_1
+			holder_scope = {
+				show_scope_change = no
+				capital_scope = {
+					show_scope_change = no
+					TECH_MAJESTY >= 5
+				}
+			}
+			hidden_tooltip = { NOT = { has_law = expd_at_imperial_administration_law_0 } }
+		}
+		# Audax Validator "." Ignore_NEXT
+		revoke_allowed = { always = no }
+		# Audax Validator "." Ignore_NEXT
+		ai_will_do = { factor = 10 }
+		# Audax Validator "." Ignore_NEXT
+		ai_will_revoke = { factor = 0 }
+		effect = {
+			hidden_tooltip = {
+				revoke_law = expd_at_imperial_administration_law_0
+				revoke_law = expd_at_imperial_administration_law_1
+			}
+		}
+		vassal_limit = 25
+		vassal_opinion = -20
+	}
+	
+}

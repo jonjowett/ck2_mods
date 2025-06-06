@@ -1,0 +1,98 @@
+expd_gh_this_character_can_hunt = {
+	# This trigger is designed to replace NOT = { health_traits = 1 } in the original decisions
+	
+	custom_tooltip = {
+		text = expd_gh_this_character_can_hunt_tt
+		
+		# Block hunting if the character is ill in any way
+		# NB: This includes all symptoms as well as all illnesses and all epidemics.
+		#     Arguably, someone with ONLY syphilis and/or cancer should be able to hunt, but there's no easy way to check for this.
+		is_ill = no 
+		
+		# Block hunting for characters who are recovering from physical injuries
+		NOT = { trait = wounded }
+		NOT = { trait = severely_injured }
+		
+		# Block hunting for characters with severe permanent physical/mental injuries that would seem to make hunting impossible
+		NOT = { trait = infirm }
+		NOT = { trait = mangled }
+		NOT = { trait = maimed }
+		is_incapable = no
+		
+	}
+	
+	# Final catch-all to ensure that this can't be used for any condition that causes a regency
+	has_regent = no
+	
+}
+
+expd_gh_this_character_should_be_able_to_see_base_game_grand_hunt_decision = {
+	
+	# Potential block of base game grand hunt decision, with spurious blockers removed
+	is_playable = yes
+	age = 16
+	prisoner = no
+	# is_female = no # Mod edit: Removed & moved to allow block so players can see the conditions
+	OR = {
+		religion_group = christian
+		religion_group = pagan_group
+		religion_group = zoroastrian_group
+		has_alternate_start_parameter = { key = religion_names value = random }
+	}
+	NOT = {
+		OR = {
+			has_landed_title = e_mongol_empire
+			has_landed_title = e_golden_horde
+			has_landed_title = e_il-khanate
+		}
+	}
+	NOT = { has_character_modifier = holding_grand_hunt }
+	OR = {
+		NOT = { has_dlc = "Way of Life" }
+		has_focus = focus_hunting
+	}
+	
+}
+
+expd_gh_this_character_fulfils_gender_requirements_for_grand_hunt = {
+	
+	trigger_if = {
+		limit = {
+			OR = {
+				is_female = no
+				has_game_rule = { name = gender value = all }
+			}
+		}
+		hidden_tooltip = { always = yes }
+	}
+	trigger_else = {
+		OR = {
+			trait = hunter
+			trait = shieldmaiden
+			is_member_of_any_warrior_lodge_trigger = yes
+			has_law = status_of_women_4
+			custom_tooltip = {
+				text = expd_gh_tooltip_follows_an_equal_or_feminist_religion
+				OR = {
+					religion = cathar
+					religion = messalian
+					religion = bogomilist
+					religion = mazdaki
+					has_religion_feature = religion_equal
+					has_religion_feature = religion_matriarchal
+				}
+			}
+			custom_tooltip = {
+				text = expd_gh_tooltip_has_an_active_feminist_bloodline
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					OR = {
+						has_bloodline_flag = bloodline_enatic_cognatic # Any bloodline granting enatic-cognatic succession (base game & hopefully most relevant modded bloodlines)
+						has_bloodline_flag = emb_enatic_cognatic       # Even More Bloodlines - any feminist bloodline
+						has_bloodline_flag = IB_femwar_bloodline       # More Bloodlines - any FemWar bloodline
+				}
+			}
+		}
+	}
+	
+}

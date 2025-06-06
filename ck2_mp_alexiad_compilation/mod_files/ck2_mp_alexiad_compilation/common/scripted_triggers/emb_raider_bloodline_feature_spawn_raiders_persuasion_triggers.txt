@@ -1,0 +1,142 @@
+emb_raider_this_character_can_persuade_spawned_raiders_martial = {
+	martial >= 20
+	NOT = { has_character_modifier = emb_persuaded_spawned_raiders_martial }
+}
+
+emb_raider_this_character_can_persuade_spawned_raiders_diplomacy = {
+	diplomacy >= 20
+	NOT = { has_character_modifier = emb_persuaded_spawned_raiders_diplomacy }
+}
+
+emb_raider_this_character_can_persuade_spawned_raiders_intrigue = {
+	intrigue >= 20
+	NOT = { has_character_modifier = emb_persuaded_spawned_raiders_intrigue }
+}
+
+emb_raider_this_character_can_persuade_spawned_raiders_viking = {
+	OR = {
+		trait = viking
+		trait = pirate
+		trait = ravager
+		trait = seaking
+		trait = sea_queen
+	}
+	NOT = { has_character_modifier = emb_persuaded_spawned_raiders_viking }
+}
+
+emb_raider_this_character_can_persuade_spawned_raiders_ravager = {
+	emb_raider_this_character_can_persuade_spawned_raiders_viking = no
+	OR = {
+		trait = ravager
+		trait = seaking
+		trait = sea_queen
+	}
+	NOT = { has_character_modifier = emb_persuaded_spawned_raiders_ravager }
+}
+
+emb_raider_this_character_can_persuade_spawned_raiders_seaking = {
+	emb_raider_this_character_can_persuade_spawned_raiders_viking = no
+	emb_raider_this_character_can_persuade_spawned_raiders_ravager = no
+	OR = {
+		trait = seaking
+		trait = sea_queen
+	}
+	NOT = { has_character_modifier = emb_persuaded_spawned_raiders_seaking }
+}
+
+emb_raider_this_character_can_persuade_spawned_raiders_bribe = {
+	emb_raider_this_character_can_afford_spawned_raiders_bribe = yes
+	NOT = { has_character_modifier = emb_persuaded_spawned_raiders_bribe }
+}
+
+emb_raider_this_character_can_persuade_spawned_raiders_second_bribe = {
+	emb_raider_this_character_can_persuade_spawned_raiders_bribe = no
+	emb_raider_this_character_can_afford_spawned_raiders_bribe = yes
+	NOT = { has_character_modifier = emb_persuaded_spawned_raiders_second_bribe }
+}
+
+emb_raider_this_character_can_persuade_spawned_raiders_third_bribe = {
+	emb_raider_this_character_can_persuade_spawned_raiders_bribe = no
+	emb_raider_this_character_can_persuade_spawned_raiders_second_bribe = no
+	emb_raider_this_character_can_afford_spawned_raiders_bribe = yes
+	NOT = { has_character_modifier = emb_persuaded_spawned_raiders_third_bribe }
+}
+
+emb_raider_this_character_has_better_persuasion_options_available = {
+	OR = {
+		emb_raider_this_character_can_persuade_spawned_raiders_martial = yes
+		emb_raider_this_character_can_persuade_spawned_raiders_diplomacy = yes
+		emb_raider_this_character_can_persuade_spawned_raiders_intrigue = yes
+		emb_raider_this_character_can_persuade_spawned_raiders_viking = yes
+		emb_raider_this_character_can_persuade_spawned_raiders_ravager = yes
+		emb_raider_this_character_can_persuade_spawned_raiders_seaking = yes
+	}
+}
+
+emb_raider_this_character_can_afford_spawned_raiders_bribe = {
+	OR = {
+		AND = {
+			tier = EMPEROR
+			prestige >= 100
+		}
+		AND = {
+			tier = KING
+			prestige >= 50
+		}
+		AND = {
+			tier = DUKE
+			prestige >= 25
+		}
+		prestige >= 10
+	}
+	OR = {
+		AND = {
+			tier = EMPEROR
+			ai = no
+			OR = {
+				AND = {
+					is_tribal = no
+					wealth >= 50
+				}
+				wealth >= 25
+			}
+		}
+		AND = {
+			tier = KING
+			ai = no
+			OR = {
+				AND = {
+					is_tribal = no
+					wealth >= 25
+				}
+				wealth >= 10
+			}
+		}
+		AND = {
+			tier = DUKE
+			ai = no
+			OR = {
+				AND = {
+					is_tribal = no
+					wealth >= 10
+				}
+				wealth >= 5
+			}
+		}
+		wealth >= 5
+	}
+}
+
+emb_raider_this_character_has_any_spawned_raider_persuasion_modifier = {
+	OR = {
+		has_character_modifier = emb_persuaded_spawned_raiders_martial
+		has_character_modifier = emb_persuaded_spawned_raiders_diplomacy
+		has_character_modifier = emb_persuaded_spawned_raiders_intrigue
+		has_character_modifier = emb_persuaded_spawned_raiders_viking
+		has_character_modifier = emb_persuaded_spawned_raiders_ravager
+		has_character_modifier = emb_persuaded_spawned_raiders_seaking
+		has_character_modifier = emb_persuaded_spawned_raiders_bribe
+		has_character_modifier = emb_persuaded_spawned_raiders_second_bribe
+		has_character_modifier = emb_persuaded_spawned_raiders_third_bribe
+	}
+}

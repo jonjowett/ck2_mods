@@ -1,0 +1,42 @@
+#
+# Duchy formation decisions
+#
+expd_df_create_amalfi;Create the Duchy of Amalfi;;;;;;;;;x
+expd_df_create_amalfi_desc;The Amalfi peninsula has long been the home of a fiercely-independent merchant republic. Let us formalise this independence by proclaiming a new Duchy of Amalfi!;;;;;;;;;x
+expd_df_create_canarias;Create the Duchy of Canarias;;;;;;;;;x
+expd_df_create_canarias_desc;We believe that the islands of Canarias should be viewed as their own separate island entity, unrelated to the mainland.;;;;;;;;;x
+expd_df_create_kutch;Create the Duchy of Kutch;;;;;;;;;x
+expd_df_create_kutch_desc;We believe that the islands of Kutch should be viewed as their own separate entity, unrelated to the mainland.;;;;;;;;;x
+expd_df_create_maldives;Create the Duchy of the Maldives;;;;;;;;;x
+expd_df_create_maldives_desc;We believe that the islands of the Maldives should be viewed as their own separate entity, unrelated to the mainland.;;;;;;;;;x
+expd_df_create_malta;Create the Duchy of Malta;;;;;;;;;x
+expd_df_create_malta_desc;We believe that the islands of Malta should be viewed as their own separate island entity, unrelated to the mainland.;;;;;;;;;x
+expd_df_create_rhodos;Create the Duchy of Rhodes;;;;;;;;;x
+expd_df_create_rhodos_desc;We believe that the island of Rhodes should be viewed as its own separate island entity, unrelated to the mainland.;;;;;;;;;x
+#
+# New duchies
+#
+d_rhodos_expd_df;Rhodes;;;;;;;;;;;;;x
+d_rhodos_expd_df_adj;Rhodian;rhodienne;Rhodisch;;Rodio;;;;;;;;;x
+d_canarias_expd_df;Canarias;;;;;;;;;;;;;x
+d_canarias_expd_df_adj;Canarian;canarienne;Kanarisch;;Canario;;;;;;;;;x
+d_malta_expd_df;Malta;;;;;;;;;;;;;x
+d_malta_expd_df_adj;Maltese;;Kanarisch;;Canario;;;;;;;;;x
+d_kutch_expd_df;Kutch;;Kutch;;;;;;;;;;;x
+d_kutch_expd_df_adj;Kutch;kutch;Kutchisch;;;;;;;;;;;x
+d_maldives_expd_df;Maldives;Maldives;Maldediven;;;;;;;;;;;x
+d_maldives_expd_df_adj;Maldivian;maldivienne;Maldedivisch;;;;;;;;;;;x
+#
+# Duchy formation tooltips
+#
+expd_df_root_is_not_dejure_liege_or_above_of_this_title_tt;[Root.GetTitledFirstName] is NOT de jure liege of the §Y[This.GetFullName]§!;;;;;;;;;;;;;x
+expd_df_root_does_not_own_other_counties_in_the_same_de_jure_duchy_as_this_county_tt;[Root.GetTitledFirstName] (or one of [Root.GetHerHis] vassals) does NOT own another county title in the same de jure duchy as the §Y[This.GetFullName]§!;;;;;;;;;;;;;x
+expd_df_root_gains_this_duchy_tt;The §Y[This.GetFullName]§! is granted to [Root.GetTitledFirstName];;;;;;;;;;;;;x
+expd_df_prev_county_becomes_de_jure_part_of_this_duchy_tt;The §Y[Prev.GetFullName]§! becomes de jure part of the §Y[This.GetFullName]§!;;;;;;;;;;;;;x
+expd_df_this_title_has_a_holder_who_is_root_or_roots_vassal_tt;The §Y[This.GetFullName]§! is held by [Root.GetTitledFirstName] or one of [Root.GetHerHis] vassals;;;;;;;;;;;;;x
+#
+# Duchy formation tooltips - hidden "human_shattering" mode
+#
+expd_df_root_is_a_human_player_with_shattering_turned_on_tt;[Root.GetTitledFirstName] is a human player, and "shattering mode" is turned on;;;;;;;;;;;;;x
+expd_df_the_de_jure_duchy_containing_this_county_is_held_by_root_or_vassal_or_noone_tt;The de jure duchy containing the §Y[This.GetFullName]§! has no holder, or is held by [Root.GetTitledFirstName], or is held by one of [Root.GetHerHis] vassals;;;;;;;;;;;;;x
+expd_df_every_county_title_in_the_de_jure_duchy_containing_this_county_is_held_by_root_or_vassal_or_noone_tt;Every count-tier title in the de jure duchy containing the §Y[This.GetFullName]§! is held by [Root.GetTitledFirstName] or one of [Root.GetHerHis] vassals;;;;;;;;;;;;;x

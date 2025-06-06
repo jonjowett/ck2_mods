@@ -1,0 +1,462 @@
+######################
+# Supported cultures #
+######################
+
+emb_celtic_unity_this_character_is_of_a_supported_culture = {
+	culture_group = celtic
+}
+
+emb_celtic_unity_this_province_is_of_a_supported_culture = {
+	culture_group = celtic
+}
+
+emb_celtic_unity_this_province_cannot_be_culture_converted = {
+	culture_group = celtic
+}
+
+
+
+
+
+#######################################
+# Ability to recruit special retinues #
+#######################################
+
+emb_celtic_unity_this_character_can_recruit_special_retinues_breton = {
+	is_nomadic = no
+	emb_celtic_unity_this_character_is_of_a_supported_culture = yes
+	OR = {
+		NOT = { culture = breton }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_breton = yes
+	}
+	OR = {
+		emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_breton = yes
+		emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_breton = yes
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_breton = yes
+	}
+}
+
+emb_celtic_unity_this_character_can_recruit_special_retinues_irish = {
+	is_nomadic = no
+	emb_celtic_unity_this_character_is_of_a_supported_culture = yes
+	OR = {
+		NOT = { culture = irish }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_irish = yes
+	}
+	OR = {
+		emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_irish = yes
+		emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_irish = yes
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_irish = yes
+	}
+}
+
+emb_celtic_unity_this_character_can_recruit_special_retinues_pictish = {
+	is_nomadic = no
+	emb_celtic_unity_this_character_is_of_a_supported_culture = yes
+	OR = {
+		NOT = { culture = pictish }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_pictish = yes
+	}
+	OR = {
+		emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_pictish = yes
+		emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_pictish = yes
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_pictish = yes
+	}
+}
+
+emb_celtic_unity_this_character_can_recruit_special_retinues_scottish = {
+	is_nomadic = no
+	emb_celtic_unity_this_character_is_of_a_supported_culture = yes
+	OR = {
+		NOT = { culture = scottish }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_scottish = yes
+	}
+	OR = {
+		emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_scottish = yes
+		emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_scottish = yes
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_scottish = yes
+	}
+}
+
+emb_celtic_unity_this_character_can_recruit_special_retinues_welsh = {
+	is_nomadic = no
+	emb_celtic_unity_this_character_is_of_a_supported_culture = yes
+	OR = {
+		NOT = { culture = welsh }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_welsh = yes
+	}
+	OR = {
+		emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_welsh = yes
+		emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_welsh = yes
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_welsh = yes
+	}
+}
+
+
+
+
+
+#################################################
+# Ability to build & activate special buildings #
+#################################################
+
+emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = {
+	ROOT = {
+		emb_celtic_unity_this_character_is_of_a_supported_culture = yes
+		NOT = { culture = breton }
+	}
+	FROM = {
+		emb_celtic_unity_this_province_is_of_a_supported_culture = yes
+		OR = {
+			emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_breton = yes
+			emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_breton = yes
+			emb_celtic_unity_is_human_with_debug_mode_turned_on_breton = yes
+		}
+	}
+}
+
+emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = {
+	ROOT = {
+		emb_celtic_unity_this_character_is_of_a_supported_culture = yes
+		NOT = { culture = irish }
+	}
+	FROM = {
+		emb_celtic_unity_this_province_is_of_a_supported_culture = yes
+		OR = {
+			emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_irish = yes
+			emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_irish = yes
+			emb_celtic_unity_is_human_with_debug_mode_turned_on_irish = yes
+		}
+	}
+}
+
+emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = {
+	ROOT = {
+		emb_celtic_unity_this_character_is_of_a_supported_culture = yes
+		NOT = { culture = pictish }
+	}
+	FROM = {
+		emb_celtic_unity_this_province_is_of_a_supported_culture = yes
+		OR = {
+			emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_pictish = yes
+			emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_pictish = yes
+			emb_celtic_unity_is_human_with_debug_mode_turned_on_pictish = yes
+		}
+	}
+}
+
+emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = {
+	ROOT = {
+		emb_celtic_unity_this_character_is_of_a_supported_culture = yes
+		NOT = { culture = scottish }
+	}
+	FROM = {
+		emb_celtic_unity_this_province_is_of_a_supported_culture = yes
+		OR = {
+			emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_scottish = yes
+			emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_scottish = yes
+			emb_celtic_unity_is_human_with_debug_mode_turned_on_scottish = yes
+		}
+	}
+}
+
+emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = {
+	ROOT = {
+		emb_celtic_unity_this_character_is_of_a_supported_culture = yes
+		NOT = { culture = welsh }
+	}
+	FROM = {
+		emb_celtic_unity_this_province_is_of_a_supported_culture = yes
+		OR = {
+			emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_welsh = yes
+			emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_welsh = yes
+			emb_celtic_unity_is_human_with_debug_mode_turned_on_welsh = yes
+		}
+	}
+}
+
+
+
+
+
+#############################
+# Bloodline detection - own #
+#############################
+
+emb_celtic_unity_has_an_active_bloodline_with_celtic_unity = {
+	OR = {
+		emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_breton = yes
+		emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_irish = yes
+		emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_pictish = yes
+		emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_scottish = yes
+		emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_welsh = yes
+	}
+}
+
+emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_breton = {
+	custom_tooltip = {
+		text = emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_breton_tt
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = emb_bloodline_effect_flag_celtic_breton
+		}
+	}
+}
+
+emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_irish = {
+	custom_tooltip = {
+		text = emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_irish_tt
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = emb_bloodline_effect_flag_celtic_irish
+		}
+	}
+}
+
+emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_pictish = {
+	custom_tooltip = {
+		text = emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_pictish_tt
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = emb_bloodline_effect_flag_celtic_pictish
+		}
+	}
+}
+
+emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_scottish = {
+	custom_tooltip = {
+		text = emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_scottish_tt
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = emb_bloodline_effect_flag_celtic_scottish
+		}
+	}
+}
+
+emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_welsh = {
+	custom_tooltip = {
+		text = emb_celtic_unity_has_an_active_bloodline_with_celtic_unity_welsh_tt
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = emb_bloodline_effect_flag_celtic_welsh
+		}
+	}
+}
+
+
+
+
+
+###############################
+# Bloodline detection - liege #
+###############################
+
+emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity = {
+	OR = {
+		emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_breton = yes
+		emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_irish = yes
+		emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_pictish = yes
+		emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_scottish = yes
+		emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_welsh = yes
+	}
+}
+
+emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_breton = {
+	custom_tooltip = {
+		text = emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_breton_tt
+		any_liege = {
+			culture_group = PREV
+			any_owned_bloodline = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = emb_bloodline_effect_flag_celtic_breton
+			}
+			emb_this_character_has_same_or_more_advanced_government_than_prev = yes
+		}
+	}
+}
+
+emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_irish = {
+	custom_tooltip = {
+		text = emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_irish_tt
+		any_liege = {
+			culture_group = PREV
+			any_owned_bloodline = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = emb_bloodline_effect_flag_celtic_irish
+			}
+			emb_this_character_has_same_or_more_advanced_government_than_prev = yes
+		}
+	}
+}
+
+emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_pictish = {
+	custom_tooltip = {
+		text = emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_pictish_tt
+		any_liege = {
+			culture_group = PREV
+			any_owned_bloodline = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = emb_bloodline_effect_flag_celtic_pictish
+			}
+			emb_this_character_has_same_or_more_advanced_government_than_prev = yes
+		}
+	}
+}
+
+emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_scottish = {
+	custom_tooltip = {
+		text = emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_scottish_tt
+		any_liege = {
+			culture_group = PREV
+			any_owned_bloodline = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = emb_bloodline_effect_flag_celtic_scottish
+			}
+			emb_this_character_has_same_or_more_advanced_government_than_prev = yes
+		}
+	}
+}
+
+emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_welsh = {
+	custom_tooltip = {
+		text = emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity_welsh_tt
+		any_liege = {
+			culture_group = PREV
+			any_owned_bloodline = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = emb_bloodline_effect_flag_celtic_welsh
+			}
+			emb_this_character_has_same_or_more_advanced_government_than_prev = yes
+		}
+	}
+}
+
+
+
+
+
+########################
+# Debug mode detection #
+########################
+
+emb_celtic_unity_is_human_with_debug_mode_turned_on_breton = {
+	trigger_if = {
+		limit = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_breton
+		}
+		custom_tooltip = {
+			text = emb_cultural_unity_human_with_debug_mode_turned_on_tt
+			always = yes
+		}
+	}
+	trigger_else = { hidden_tooltip = { always = no } }
+}
+
+emb_celtic_unity_is_human_with_debug_mode_turned_on_irish = {
+	trigger_if = {
+		limit = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_irish
+		}
+		custom_tooltip = {
+			text = emb_cultural_unity_human_with_debug_mode_turned_on_tt
+			always = yes
+		}
+	}
+	trigger_else = { hidden_tooltip = { always = no } }
+}
+
+emb_celtic_unity_is_human_with_debug_mode_turned_on_pictish = {
+	trigger_if = {
+		limit = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_pictish
+		}
+		custom_tooltip = {
+			text = emb_cultural_unity_human_with_debug_mode_turned_on_tt
+			always = yes
+		}
+	}
+	trigger_else = { hidden_tooltip = { always = no } }
+}
+
+emb_celtic_unity_is_human_with_debug_mode_turned_on_scottish = {
+	trigger_if = {
+		limit = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_scottish
+		}
+		custom_tooltip = {
+			text = emb_cultural_unity_human_with_debug_mode_turned_on_tt
+			always = yes
+		}
+	}
+	trigger_else = { hidden_tooltip = { always = no } }
+}
+
+emb_celtic_unity_is_human_with_debug_mode_turned_on_welsh = {
+	trigger_if = {
+		limit = {
+			ai = no
+			has_global_flag = emb_celtic_unity_debug_welsh
+		}
+		custom_tooltip = {
+			text = emb_cultural_unity_human_with_debug_mode_turned_on_tt
+			always = yes
+		}
+	}
+	trigger_else = { hidden_tooltip = { always = no } }
+}
+
+
+
+
+
+#########################################
+# Ownership of Celtic-culture provinces #
+#########################################
+
+emb_celtic_unity_this_character_owns_at_least_one_breton_province = {
+	OR = {
+		any_realm_province = { culture = breton }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_breton = yes
+	}
+}
+
+emb_celtic_unity_this_character_owns_at_least_one_irish_province = {
+	OR = {
+		any_realm_province = { culture = irish }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_irish = yes
+	}
+}
+
+emb_celtic_unity_this_character_owns_at_least_one_pictish_province = {
+	OR = {
+		any_realm_province = { culture = pictish }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_pictish = yes
+	}
+}
+
+emb_celtic_unity_this_character_owns_at_least_one_scottish_province = {
+	OR = {
+		any_realm_province = { culture = scottish }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_scottish = yes
+	}
+}
+
+emb_celtic_unity_this_character_owns_at_least_one_welsh_province = {
+	OR = {
+		any_realm_province = { culture = welsh }
+		emb_celtic_unity_is_human_with_debug_mode_turned_on_welsh = yes
+	}
+}
+
+emb_celtic_unity_this_province_is_needed_to_form_the_bloodline_but_is_not_owned = {
+	region = world_europe_west
+	emb_celtic_unity_this_province_is_of_a_supported_culture = yes
+	NOR = {
+		owner = { character = PREVPREV }
+		owner = { any_liege = { character = PREVPREVPREV } }
+	}
+}

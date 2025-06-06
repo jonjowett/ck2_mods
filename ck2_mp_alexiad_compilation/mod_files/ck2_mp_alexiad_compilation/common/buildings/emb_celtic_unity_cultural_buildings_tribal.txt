@@ -1,0 +1,585 @@
+# Triggers are in Province scope. The From Scope contains the settlement holder (character)
+# start trigger is in title scope.
+
+# Copied tb_culture_* from vanilla
+# Renamed to emb_tb_culture_*
+# Changed potential & active & trigger blocks
+# Commented-out extra_tech_building_start (because we don't ever want to autocreate these at new game start)
+
+tribal = {
+	
+	
+	
+	
+	
+	#Welsh and English Longbow archery range
+	emb_tb_culture_saxon_english_1 = {
+		desc = ca_culture_saxon_english_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+				has_building = emb_tb_culture_saxon_english_1
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+		} 
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0 
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+		}
+		
+		prestige_cost = 100
+		build_time = 365
+		archers_offensive = 0.15
+		archers = 3
+		ai_creation_factor = 51
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_saxon_english_2 = {
+		desc = ca_culture_saxon_english_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+				has_building = emb_tb_culture_saxon_english_1
+				has_building = emb_tb_culture_saxon_english_2
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+		} 
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0 
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+		}
+		upgrades_from = emb_tb_culture_saxon_english_1
+		prestige_cost = 200
+		build_time = 547
+		archers_offensive = 0.15
+		archers = 4
+		ai_creation_factor = 51
+		
+		convert_to_castle = emb_ca_culture_saxon_english_1
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_saxon_english_3 = {
+		desc = ca_culture_saxon_english_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+				has_building = emb_tb_culture_saxon_english_1
+				has_building = emb_tb_culture_saxon_english_2
+				has_building = emb_tb_culture_saxon_english_3
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+		} 
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+		}
+		upgrades_from = emb_tb_culture_saxon_english_2
+		prestige_cost = 300
+		build_time = 730
+		archers_offensive = 0.15
+		archers = 5
+		ai_creation_factor = 51
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_saxon_english_4 = {
+		desc = ca_culture_saxon_english_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+				has_building = emb_tb_culture_saxon_english_1
+				has_building = emb_tb_culture_saxon_english_2
+				has_building = emb_tb_culture_saxon_english_3
+				has_building = emb_tb_culture_saxon_english_4
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+		} 
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_welsh = yes
+		}
+		upgrades_from = emb_tb_culture_saxon_english_3
+		prestige_cost = 400
+		build_time = 1095
+		archers_offensive = 0.15
+		archers = 6
+		ai_creation_factor = 51
+		
+		convert_to_castle = emb_ca_culture_saxon_english_2
+		
+		# extra_tech_building_start = 0.8
+	}
+	
+	
+	
+	
+	
+	#Scottish Schiltron
+	emb_tb_culture_scottish_1 = {
+		desc = ca_culture_scottish_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+				has_building = emb_tb_culture_scottish_1
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+		}
+		
+		prestige_cost = 100
+		build_time = 365
+		pikemen = 2
+		pikemen_defensive = 0.15
+		ai_creation_factor = 51
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_scottish_2 = {
+		desc = ca_culture_scottish_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+				has_building = emb_tb_culture_scottish_1
+				has_building = emb_tb_culture_scottish_2
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+		}
+		upgrades_from = emb_tb_culture_scottish_1
+		prestige_cost = 200
+		build_time = 547
+		pikemen = 2
+		pikemen_defensive = 0.15
+		ai_creation_factor = 51
+		
+		convert_to_castle = emb_ca_culture_scottish_1
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_scottish_3 = {
+		desc = ca_culture_scottish_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+				has_building = emb_tb_culture_scottish_1
+				has_building = emb_tb_culture_scottish_2
+				has_building = emb_tb_culture_scottish_3
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+		}
+		upgrades_from = emb_tb_culture_scottish_2
+		prestige_cost = 300
+		build_time = 730
+		pikemen = 3
+		pikemen_defensive = 0.15
+		ai_creation_factor = 51
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_scottish_4 = {
+		desc = ca_culture_scottish_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+				has_building = emb_tb_culture_scottish_1
+				has_building = emb_tb_culture_scottish_2
+				has_building = emb_tb_culture_scottish_3
+				has_building = emb_tb_culture_scottish_4
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_scottish = yes
+		}
+		upgrades_from = emb_tb_culture_scottish_3
+		prestige_cost = 400
+		build_time = 1095
+		pikemen = 4
+		pikemen_defensive = 0.15
+		ai_creation_factor = 51
+		
+		convert_to_castle = emb_ca_culture_scottish_2
+		
+		# extra_tech_building_start = 0.8
+	}
+	
+	
+	
+	
+	
+	#Frankish, Occitan, Norman and German Lists (and Breton)
+	emb_tb_culture_frank_norman_german_1 = {
+		desc = tb_culture_frank_norman_german_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+				has_building = emb_tb_culture_frank_norman_german_1
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+		}
+		
+		prestige_cost = 100
+		build_time = 365
+		heavy_infantry = 1
+		heavy_infantry_defensive = 0.10
+		heavy_infantry_morale = 0.05
+		light_cavalry = 1
+		ai_creation_factor = 51
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_frank_norman_german_2 = {
+		desc = tb_culture_frank_norman_german_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+				has_building = emb_tb_culture_frank_norman_german_1
+				has_building = emb_tb_culture_frank_norman_german_2
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+		}
+		upgrades_from = emb_tb_culture_frank_norman_german_1
+		prestige_cost = 200
+		build_time = 547
+		heavy_infantry = 1
+		heavy_infantry_defensive = 0.10
+		heavy_infantry_morale = 0.05
+		light_cavalry = 1
+		ai_creation_factor = 51
+		
+		convert_to_castle = emb_ca_culture_frank_norman_german_1
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_frank_norman_german_3 = {
+		desc = tb_culture_frank_norman_german_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+				has_building = emb_tb_culture_frank_norman_german_1
+				has_building = emb_tb_culture_frank_norman_german_2
+				has_building = emb_tb_culture_frank_norman_german_3
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+		}
+		upgrades_from = emb_tb_culture_frank_norman_german_2
+		prestige_cost = 300
+		build_time = 730
+		heavy_infantry = 1
+		heavy_infantry_defensive = 0.10
+		heavy_infantry_morale = 0.05
+		light_cavalry = 1
+		ai_creation_factor = 51
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_frank_norman_german_4 = {
+		desc = tb_culture_frank_norman_german_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+				has_building = emb_tb_culture_frank_norman_german_1
+				has_building = emb_tb_culture_frank_norman_german_2
+				has_building = emb_tb_culture_frank_norman_german_3
+				has_building = emb_tb_culture_frank_norman_german_4
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_breton = yes
+		}
+		upgrades_from = emb_tb_culture_frank_norman_german_3
+		prestige_cost = 400
+		build_time = 1095
+		heavy_infantry = 2
+		heavy_infantry_defensive = 0.10
+		heavy_infantry_morale = 0.05
+		light_cavalry = 2
+		ai_creation_factor = 51
+		
+		convert_to_castle = emb_ca_culture_frank_norman_german_2
+		
+		# extra_tech_building_start = 0.8
+	}
+	
+	
+	
+	
+	
+	# Irish Gallowglass
+	emb_tb_culture_irish_1 = {
+		desc = ca_culture_irish_1_desc
+		potential = {
+			OR = { 
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+				has_building = emb_tb_culture_irish_1
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+		}
+		
+		prestige_cost = 100
+		build_time = 365
+		heavy_infantry = 2
+		heavy_infantry_defensive = 0.15
+		ai_creation_factor = 51
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_irish_2 = {
+		desc = ca_culture_irish_1_desc
+		potential = {
+			OR = { 
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+				has_building = emb_tb_culture_irish_1
+				has_building = emb_tb_culture_irish_2
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+		}
+		upgrades_from = emb_tb_culture_irish_1
+		prestige_cost = 200
+		build_time = 547
+		heavy_infantry = 2
+		heavy_infantry_defensive = 0.15
+		ai_creation_factor = 51
+		
+		convert_to_castle = emb_ca_culture_irish_1
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_irish_3 = {
+		desc = ca_culture_irish_1_desc
+		potential = {
+			OR = { 
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+				has_building = emb_tb_culture_irish_1
+				has_building = emb_tb_culture_irish_2
+				has_building = emb_tb_culture_irish_3
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+		}
+		upgrades_from = emb_tb_culture_irish_2
+		prestige_cost = 300
+		build_time = 730
+		heavy_infantry = 3
+		heavy_infantry_defensive = 0.15
+		ai_creation_factor = 51
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_irish_4 = {
+		desc = ca_culture_irish_1_desc
+		potential = {
+			OR = { 
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+				has_building = emb_tb_culture_irish_1
+				has_building = emb_tb_culture_irish_2
+				has_building = emb_tb_culture_irish_3
+				has_building = emb_tb_culture_irish_4
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_irish = yes
+		}
+		upgrades_from = emb_tb_culture_irish_3
+		prestige_cost = 400
+		build_time = 1095
+		heavy_infantry = 3
+		heavy_infantry_defensive = 0.15
+		ai_creation_factor = 51
+		
+		convert_to_castle = emb_ca_culture_irish_2
+		
+		# extra_tech_building_start = 0.8
+	}
+	
+	
+	
+	
+	
+	# Pictish Hall of War
+	emb_tb_culture_pictish_1 = {
+		desc = ca_culture_pictish_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+				has_building = emb_tb_culture_pictish_1
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+		}
+		
+		prestige_cost = 100
+		build_time = 365
+		light_infantry = 2
+		heavy_infantry = 1
+		light_infantry_morale = 0.15
+		ai_creation_factor = 51
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_pictish_2 = {
+		desc = ca_culture_pictish_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+				has_building = emb_tb_culture_pictish_1
+				has_building = emb_tb_culture_pictish_2
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 0
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+		}
+		upgrades_from = emb_tb_culture_pictish_1
+		prestige_cost = 200
+		build_time = 547
+		light_infantry = 2
+		heavy_infantry = 1
+		light_infantry_morale = 0.15
+		ai_creation_factor = 51
+		
+		convert_to_castle = emb_ca_culture_pictish_1
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_pictish_3 = {
+		desc = ca_culture_pictish_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+				has_building = emb_tb_culture_pictish_1
+				has_building = emb_tb_culture_pictish_2
+				has_building = emb_tb_culture_pictish_3
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+		}
+		upgrades_from = emb_tb_culture_pictish_2
+		prestige_cost = 300
+		build_time = 730
+		light_infantry = 3
+		heavy_infantry = 2
+		light_infantry_morale = 0.15
+		ai_creation_factor = 51
+		
+		# extra_tech_building_start = 0.8
+	}
+	emb_tb_culture_pictish_4 = {
+		desc = ca_culture_pictish_1_desc
+		potential = {
+			OR = {
+				emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+				has_building = emb_tb_culture_pictish_1
+				has_building = emb_tb_culture_pictish_2
+				has_building = emb_tb_culture_pictish_3
+				has_building = emb_tb_culture_pictish_4
+			}
+		}
+		is_active_trigger = {
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+		}
+		trigger = { 
+			TECH_CASTLE_CONSTRUCTION = 1
+			emb_celtic_unity_from_can_activate_special_building_in_root_province_pictish = yes
+		}
+		upgrades_from = emb_tb_culture_pictish_3
+		prestige_cost = 400
+		build_time = 1095
+		light_infantry = 3
+		heavy_infantry = 2
+		light_infantry_morale = 0.15
+		ai_creation_factor = 51
+		
+		convert_to_castle = emb_ca_culture_pictish_2
+		
+		# extra_tech_building_start = 0.8
+	}
+	
+}
+
+

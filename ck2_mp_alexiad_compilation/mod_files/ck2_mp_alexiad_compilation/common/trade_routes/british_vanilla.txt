@@ -1,0 +1,82 @@
+british_route = {					# Non-duplicate provinces: 47
+
+	
+	wealth = 8 #8					# Total base wealth of trade route ## 8/start_points*trade_posts/4
+	
+	trade_post_display_trigger = {	# Trade posts: 12
+		OR = {
+			
+			province_id = 11		# Dublin
+			province_id = 15		# Cork
+			province_id = 41		# Aberdeen
+			province_id = 32		# Middlesex
+			province_id = 61		# Lincoln
+			province_id = 57		# York
+			province_id = 52		# Northumberland
+			province_id = 48		# Lothian
+			province_id = 43		# Gowrie
+			province_id = 26		# Winchester
+			province_id = 21		# Gloucester
+			province_id = 18		# Dyfed
+
+		}
+	}
+
+	modifier = {					# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.04
+		city_tax_modifier = 0.06
+		temple_tax_modifier = 0.03
+		tribal_tax_modifier = 0.25
+		trade_route_value = 1.28	# (wealth/nd_provinces)*(start_points*5)/2
+		local_movement_speed = 0.08
+		tech_growth_modifier = 0.05
+		icon = 6
+	}
+
+	start = {						# Start of trade route
+		11 15 41
+	}
+
+	### Inland route
+	path = { 						# Aberdeen - Northampton
+		41 43 42 48 51 52 56 57 1941 61 68
+	}
+	path = { 						# Worcester - Northampton
+		30 67 68
+	}
+	path = { 						# Northampton - Middlesex
+		68 69 32
+	}
+	path = { 						# Somerset - Kent
+		28 27 26 25 73
+	}
+	path = { 						# Somerset - Devon
+		28 29
+	}
+	path = { 						# Gloucester - Somerset
+		21 1944 28
+	}
+	path = { 						# Gloucester - Worcester
+		21 30
+	}
+	path = { 						# Worcester - Chester
+		30 66 59
+	}
+	path = { 						# Middlesex - Kent
+		32 73
+	}
+	path = { 						# Dublin - Leinster
+		11 16
+	}
+	path = { 						# Cork - Leinster
+		15 12 16
+	}
+	
+	### Coastal route
+	path = { 						# Leinster - Gloucester
+		16 18 1946 19 20 21
+	}
+	path = { 						# Kent - Guines
+		73 74
+	}
+}

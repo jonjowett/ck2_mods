@@ -1,0 +1,26 @@
+# Must be Ethiopian, Nubian or Somali, and must own at least one province of each culture.
+# Grants East African opinion (which includes Daju, because I'm lazy and it already exists in vanilla),
+#    and characters with the bloodline can build all relevant retinues and all relevant cultural buildings (in non-Daju East-African-culture provinces).
+# Does NOT apply to vassals, unless they also have the culture.
+
+# NB: The bloodline MUST be created by event/decision, and this MUST specify BOTH inheritance rules AND the relevant emb_m/emb_f/emb_ad flag.
+
+emb_east_african_unity = {
+	east_african_opinion = 5
+	emb_bloodline_effect_east_african_culture_conversion = 1
+	emb_bloodline_effect_east_african_retinues = 1
+	emb_bloodline_effect_east_african_buildings = 1
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_peace_builder
+	active = {
+		emb_east_african_unity_this_character_is_of_a_supported_culture = yes
+	}
+	flags = {
+		# Tracking
+		emb
+		emb_east_african_unity
+		created_bloodline
+		# Features
+		emb_bloodline_effect_flag_east_african
+	}
+}

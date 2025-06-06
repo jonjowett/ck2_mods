@@ -1,0 +1,37 @@
+decisions = {
+	expd_kf_create_trinacria = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+		
+		potential = {
+			expd_kf_root_can_see_decision_to_create_trinacria = yes
+		}
+		
+		allow = {
+			expd_kf_root_can_take_decision_to_create_trinacria = yes
+		}
+		
+		effect = {
+			d_sicily = {
+				show_scope_change = no
+				k_trinacria = {
+					show_scope_change = no
+					expd_kf_create_this_kingdom_from_prev_single_duchy_and_grant_to_root = yes
+				}
+			}
+			if = {
+				limit = { d_malta_expd_df = { is_titular = no } }
+				custom_tooltip = {
+					text = expd_kf_malta_becomes_de_jure_part_of_trinacria_tt
+					d_malta_expd_df = { de_jure_liege = k_trinacria }
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+	}
+}

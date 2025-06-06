@@ -1,0 +1,200 @@
+expd_cef_root_controls_this_kingdom = {
+	tier = KING
+	OR = {
+		custom_tooltip = {
+			text = expd_cef_root_completely_controls_this_kingdom_tt
+			OR = {
+				ROOT = { completely_controls = PREV }
+				AND = {
+					is_titular = yes
+					holder_scope = { character = ROOT }
+				}
+			}
+		}
+		custom_tooltip = {
+			text = expd_cef_every_county_and_duchy_in_this_kingdom_is_controlled_by_root_tt
+			NOT = {
+				any_de_jure_vassal_title = {
+					OR = {
+						tier = COUNT
+						tier = DUKE
+					}
+					has_holder = yes
+					holder_scope = {
+						NOT = { character = ROOT }
+						NOT = { is_vassal_or_below_of = ROOT }
+					}
+				}
+			}
+		}
+	}
+}
+
+expd_cef_roots_realm_size_is_not_too_large = {
+	# Realm size <= 120 
+	# NB: If ROOT is not MR then this should exclude vassal MR family palaces. Unfortunately, the realm_size condition includes family palaces, so we have to deduct them manually.
+	
+	trigger_if = {
+		limit = { has_global_flag = expd_cef_merge_debug_mode }
+		custom_tooltip = {
+			text = expd_cef_roots_realm_size_doesnt_matter_debug_mode_tt
+			always = yes
+		}
+	}
+	trigger_else = {
+		
+		custom_tooltip = {
+			text = expd_cef_roots_realm_size_less_than_120_tt
+			trigger_if = {
+				limit = {
+					ROOT = { government = merchant_republic_government }
+				}
+				NOT = { realm_size = 120 }
+			}
+			trigger_else_if = {
+				limit = {
+					NOT = { ROOT = { government = merchant_republic_government } }
+					NOT = {
+						any_realm_title = {
+							OR = {
+								tier = DUKE
+								tier = KING
+							}
+							holder_scope = { government = merchant_republic_government }
+						}
+					}
+				}
+				NOT = { realm_size = 120 }
+			}
+			trigger_else_if = {
+				limit = {
+					NOT = { ROOT = { government = merchant_republic_government } }
+					any_realm_title = {
+						count = 1
+						OR = {
+							tier = DUKE
+							tier = KING
+						}
+						holder_scope = { government = merchant_republic_government }
+					}
+				}
+				NOT = { realm_size = 125 }
+			}
+			trigger_else_if = {
+				limit = {
+					NOT = { ROOT = { government = merchant_republic_government } }
+					any_realm_title = {
+						count = 2
+						OR = {
+							tier = DUKE
+							tier = KING
+						}
+						holder_scope = { government = merchant_republic_government }
+					}
+				}
+				NOT = { realm_size = 130 }
+			}
+			trigger_else_if = {
+				limit = {
+					NOT = { ROOT = { government = merchant_republic_government } }
+					any_realm_title = {
+						count = 3
+						OR = {
+							tier = DUKE
+							tier = KING
+						}
+						holder_scope = { government = merchant_republic_government }
+					}
+				}
+				NOT = { realm_size = 135 }
+			}
+			trigger_else_if = {
+				limit = {
+					NOT = { ROOT = { government = merchant_republic_government } }
+					any_realm_title = {
+						count = 4
+						OR = {
+							tier = DUKE
+							tier = KING
+						}
+						holder_scope = { government = merchant_republic_government }
+					}
+				}
+				NOT = { realm_size = 140 }
+			}
+			trigger_else_if = {
+				limit = {
+					NOT = { ROOT = { government = merchant_republic_government } }
+					any_realm_title = {
+						count = 5
+						OR = {
+							tier = DUKE
+							tier = KING
+						}
+						holder_scope = { government = merchant_republic_government }
+					}
+				}
+				NOT = { realm_size = 145 }
+			}
+			trigger_else_if = {
+				limit = {
+					NOT = { ROOT = { government = merchant_republic_government } }
+					any_realm_title = {
+						count = 6
+						OR = {
+							tier = DUKE
+							tier = KING
+						}
+						holder_scope = { government = merchant_republic_government }
+					}
+				}
+				NOT = { realm_size = 150 }
+			}
+			trigger_else_if = {
+				limit = {
+					NOT = { ROOT = { government = merchant_republic_government } }
+					any_realm_title = {
+						count = 7
+						OR = {
+							tier = DUKE
+							tier = KING
+						}
+						holder_scope = { government = merchant_republic_government }
+					}
+				}
+				NOT = { realm_size = 155 }
+			}
+			trigger_else_if = {
+				limit = {
+					NOT = { ROOT = { government = merchant_republic_government } }
+					any_realm_title = {
+						count = 8
+						OR = {
+							tier = DUKE
+							tier = KING
+						}
+						holder_scope = { government = merchant_republic_government }
+					}
+				}
+				NOT = { realm_size = 160 }
+			}
+			trigger_else_if = {
+				limit = {
+					NOT = { ROOT = { government = merchant_republic_government } }
+					any_realm_title = {
+						count = 9
+						OR = {
+							tier = DUKE
+							tier = KING
+						}
+						holder_scope = { government = merchant_republic_government }
+					}
+				}
+				NOT = { realm_size = 165 }
+			}
+			trigger_else = {
+				NOT = { realm_size = 170 }
+			}
+		}
+	}
+}

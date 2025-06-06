@@ -1,0 +1,52 @@
+decisions = {
+	expd_df_kf_human_shattering_enable = {
+		ai = no
+		is_high_prio = yes
+		potential = {
+			OR = {
+				NOT = { has_global_flag = expd_df_human_shattering }
+				NOT = { has_global_flag = expd_kf_human_shattering }
+			}
+		}
+		allow = {
+			trigger_if = {
+				limit = { multiplayer = no }
+				always = yes
+			}
+			trigger_else = {
+				is_multiplayer_host_character = yes
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_df_kf_human_shattering_is_now_enabled_tt
+				set_global_flag = expd_df_human_shattering
+				set_global_flag = expd_kf_human_shattering
+			}
+		}
+	}
+	expd_df_kf_human_shattering_disable = {
+		ai = no
+		is_high_prio = yes
+		potential = {
+			has_global_flag = expd_df_human_shattering
+			has_global_flag = expd_kf_human_shattering
+		}
+		allow = {
+			trigger_if = {
+				limit = { multiplayer = no }
+				always = yes
+			}
+			trigger_else = {
+				is_multiplayer_host_character = yes
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_df_kf_human_shattering_is_now_disabled_tt
+				clr_global_flag = expd_df_human_shattering
+				clr_global_flag = expd_kf_human_shattering
+			}
+		}
+	}
+}

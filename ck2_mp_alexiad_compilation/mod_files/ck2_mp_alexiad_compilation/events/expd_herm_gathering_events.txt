@@ -1,0 +1,86 @@
+namespace = ExpdHerm
+
+# Slightly-modified version of MNM.1460
+character_event = {
+	id = ExpdHerm.1000
+	desc = EVTDESC_MNM_1460
+	picture = GFX_evt_gathering_of_minds
+	border = GFX_event_normal_frame_religion
+	
+	is_triggered_only = yes
+	capable_only = yes
+	
+	option = { 
+		name = EVTOPTA_MNM_1460
+		custom_tooltip = { text = EVTOPTA_MNM_1460_TT }
+		scaled_wealth = { value = -0.5 min = -20 }
+		if = {
+			# Fixed price of 3000 currency for the player
+			limit = { ai = no}
+			change_society_currency = -3000
+		}
+		else = {
+			# Variable price of 2000-3000 currency, depending on the amount that the AI character has
+			if = {
+				limit = { society_currency >= 3000 }
+				change_society_currency = -3000
+			}
+			else_if = {
+				limit = { society_currency >= 2500 }
+				change_society_currency = -2500
+			}
+			else = {
+				change_society_currency = -2000
+			}
+		}
+		hidden_effect = { 
+			character_event = { id = MNM.1461 days = 7 } 
+			set_character_flag = gathering_of_the_minds
+			add_character_modifier = {
+				name = expd_herm_recently_called_a_gathering_modifier
+				years = 5
+				hidden = yes
+			}
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				NOT = {
+					scaled_wealth = {
+						value = 0.5
+						min = 20
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				NOT = {
+					scaled_wealth = {
+						value = 1
+						min = 40
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = EVTOPTB_MNM_1460
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				scaled_wealth = {
+					value = 2
+					min = 40
+				}
+			}
+		}
+	}
+	
+	after = {
+		hidden_tooltip = { clr_character_flag = expd_herm_deciding_whether_to_call_a_gathering }
+	}
+	
+}

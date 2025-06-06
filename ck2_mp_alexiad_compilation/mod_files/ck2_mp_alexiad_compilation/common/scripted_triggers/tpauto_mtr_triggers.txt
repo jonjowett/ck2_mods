@@ -1,0 +1,22 @@
+# Audax Validator EnableCommentMetadata
+# The Validator can't read MTR (because it's zipped), so split MTR into an isolated file and ignore every error
+# Audax Validator "!" Ignore_NEXT
+
+tpauto_allow_tracking_and_rebuild_mtr = {
+	tpauto_pdxrptg_mod_is_active = no
+}
+
+tpauto_this_province_can_have_trade_route_trade_post_mtr = {
+	tpauto_allow_tracking_and_rebuild_mtr = yes
+	OR = {
+		amber_route_post_trigger = yes
+		asian_route_post_trigger = yes
+		nordic_route_post_trigger = yes
+		andalusian_route_post_trigger = yes
+		italian_route_post_trigger = yes
+		british_route_post_trigger = yes
+		frankish_route_post_trigger = yes
+		saxon_route_post_trigger = yes
+		mooniyaang_trade_routes_trade_post_trigger = yes
+	}
+}

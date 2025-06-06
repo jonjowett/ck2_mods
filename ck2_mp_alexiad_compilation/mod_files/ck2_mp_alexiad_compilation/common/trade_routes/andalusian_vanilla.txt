@@ -1,0 +1,85 @@
+andalusian_route = {				# Non-duplicate provinces: 54
+
+	
+	wealth = 10	#10					# Total base wealth of trade route ## 8/start_points*trade_posts/4
+	
+	trade_post_display_trigger = {	# Trade posts: 15
+		OR = {
+		
+			province_id = 157		# Santiago
+			province_id	= 152		# Navarra
+			province_id = 206		# Huesca
+			province_id = 173		# Tarragona
+			province_id = 202		# Zaragoza
+			province_id = 199		# Burgos
+			province_id = 197		# Toledo
+			province_id = 171		# Valencia
+			province_id = 827		# Palma
+#			province_id = 168		# Almeria
+			province_id	= 180		# Granada
+			province_id = 181		# Cordoba
+			province_id = 182		# Sevilla
+			province_id = 160		# Lisboa
+			province_id = 832		# Orania
+			
+		}
+	}
+
+	modifier = {					# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.04
+		city_tax_modifier = 0.06
+		temple_tax_modifier = 0.03
+		tribal_tax_modifier = 0.25
+		trade_route_value = 1.39	# (wealth/nd_provinces)*(start_points*5)/2
+		local_movement_speed = 0.08
+		tech_growth_modifier = 0.05
+		icon = 6
+	}
+
+	start = {						# Start of trade route
+		839 827 1733
+	}
+
+	### Inland route
+	path = {						# Ceuta - Cordoba 
+		839 166 182 181
+	}	
+	path = {						# Cordoba - Toledo 
+		181 196 197
+	}
+	path = { 						# Toledo - Burgos
+		197 1978 200 199
+	}
+	path = { 						# Toledo - Lisboa
+		197 194 193 186 160
+	}
+	path = { 						# Burgos - Navarra
+		199 201 152
+	}
+	path = {						# Burgos - Navarra (coast) 
+		199 1975 191 188 158 157 156 155 154 153 152
+	}
+	path = {						# Navarra - Zaragoza 
+		152 202
+	}
+	path = { 						# Zaragoza - Empuries
+		202 206 205
+	}
+	path = { 						# Empuries - Narbonne
+		205 211 212
+	}
+	path = { 						# Tarragona - Zaragoza
+		173 174 202				
+	}
+	path = { 						# Tarragona - Empuries
+		173 204 205
+	}
+
+	###Coastal route
+	path = { 						# Palma - Tarragona
+		827 171 172 173
+	}
+	path = {						# Muluja - Almeria - Cordoba
+		1733 836 832 168 180 181
+	}
+}

@@ -1,0 +1,55 @@
+mbb_author_update_variables_magnum_opus = {
+	hidden_tooltip = {
+		mbb_author_initialise_tracking_variables = yes
+		if = {
+			limit = {
+				AND = {
+					learning = 18
+					NOT = { learning = 25 }
+				}
+			}
+			# Tier 3 Magnum Opus was produced
+			change_variable = { which = IB_bookquality_3 value = 1}
+			IB_author_bloodline_effect = yes
+		}
+		else_if = {
+			limit = { learning = 25 }
+			# Tier 4 Magnum Opus was produced
+			change_variable = { which = IB_bookquality_4 value = 1}
+			IB_author_bloodline_effect = yes
+		}
+		else = {
+			# Tier 1 or 2 Magnum Opus was produced - does not count
+		}
+	}
+}
+
+mbb_author_update_variables_composed_book = {
+	hidden_tooltip = {
+		mbb_author_initialise_tracking_variables = yes
+		if = {
+			limit = { event_target:new_book = { quality = 4 } }
+			change_variable = { which = IB_bookquality_4 value = 1}
+			IB_author_bloodline_effect = yes
+		}
+		else_if = {
+			limit = { event_target:new_book = { quality = 3 } }
+			change_variable = { which = IB_bookquality_3 value = 1}
+			IB_author_bloodline_effect = yes
+		}
+		else = {
+			# Tier 1 or 2 book was produced - does not count
+		}
+	}
+}
+
+mbb_author_initialise_tracking_variables = {
+	if = { 
+		limit = { ROOT = { check_variable = { which = IB_bookquality_4 value == 0 } } }
+		ROOT = { set_variable = { which = IB_bookquality_4 value = 0 } }
+	}
+	if = { 
+		limit = { ROOT = { check_variable = { which = IB_bookquality_3 value == 0 } } }
+		ROOT = { set_variable = { which = IB_bookquality_3 value = 0 } }
+	}
+}

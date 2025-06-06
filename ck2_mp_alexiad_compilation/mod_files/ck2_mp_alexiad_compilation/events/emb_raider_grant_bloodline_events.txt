@@ -1,0 +1,345 @@
+###############################################
+#                                             #
+# Events that check for and update bloodlines #
+# Event IDs: EMBRaider.1000-1999              #
+#                                             #
+###############################################
+
+namespace = EMBRaider
+
+
+
+
+
+#######################
+# Update looter count #
+#######################
+
+# Called from on_loot_settlement
+character_event = {
+	id = EMBRaider.1000
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		
+		# Update this character's loot counter
+		if = {
+			limit = { check_variable = { which = emb_raider_loot_count value < 1 } }
+			set_variable = { which = emb_raider_loot_count value = 0 }
+		}
+		change_variable = { which = emb_raider_loot_count value = 1}
+		
+		# Compatibility if mod is added partway through a run: If the Vanilla viking_raids counter is bigger than this mod's internal counter, set the internal counter to viking_raids
+		# (viking_raids only updates if you are a viking, whereas the internal counter always updates, so viking_raids should always be <= the internal counter.)
+		if = {
+			limit = { check_variable = { which = viking_raids which >= emb_raider_loot_count } }
+			set_variable = { which = emb_raider_loot_count which = viking_raids }
+		}
+		
+		# Check whether they deserve a bloodline and, if so, give it
+		if = {
+			limit = {
+				check_variable = { which = emb_raider_loot_count value >= 195 } # Trigger ever-so-slightly BEFORE the vanilla bloodline (200 raids), because we want to override the vanilla (not-so-great) bloodline with these modded bloodlines for all characters
+				NOT = {
+					any_owned_bloodline = {
+						founder = { character = ROOT }
+						has_bloodline_flag = emb_raider
+					}
+				}
+			}
+			emb_raider_select_raider_bloodline_for_this_character = yes
+			emb_raider_select_raider_nickname_for_this_character = yes
+			character_event = { id = EMBRaider.1100 }
+		}
+		if = {
+			limit = {
+				check_variable = { which = emb_raider_loot_count value >= 400 }
+				NOT = { any_owned_bloodline = { has_bloodline_flag = emb_raider_ultimate } }
+			}
+			narrative_event = { id = EMBRaider.1200 }
+		}
+		
+	}
+}
+
+
+
+
+
+#################################
+# Grant normal raider bloodline #
+#################################
+
+# Ping event to set and store which bloodline/nickname will be awarded
+character_event = {
+	id = EMBRaider.1100
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		check_variable = {
+			which = emb_raider_loot_count
+			value >= 195
+		}
+	}
+	immediate = {
+		emb_raider_select_raider_bloodline_for_this_character = yes
+		emb_raider_select_raider_nickname_for_this_character = yes
+		narrative_event = { id = EMBRaider.1101 }
+	}
+}
+
+# Visible event granting the bloodline
+# NEVER call this event directly - ALWAYS go through EMBRaider.1101
+# Based on HF.23212
+narrative_event = {
+	id = EMBRaider.1101
+	title = EVTTITLE23212
+	desc = {
+		trigger = {
+			is_female = no
+			is_alternate_start = no
+			OR = {
+				religion = norse_pagan 
+				religion = norse_pagan_reformed
+			}
+		}
+		text = EVTDESCAHF23212
+	}
+	desc = {
+		trigger = {
+			is_female = yes
+			is_alternate_start = no
+			OR = {
+				religion = norse_pagan 
+				religion = norse_pagan_reformed
+			}
+		}
+		text = EVTDESCBHF23212
+	}
+	desc = {
+		trigger = {
+			OR = {
+				is_alternate_start = yes
+				NOR = {
+					religion = norse_pagan 
+					religion = norse_pagan_reformed
+				}
+			}
+		}
+		text = EVTDESCCHF23212
+	}
+	picture = { 
+		trigger = { is_female = no } 
+		picture = GFX_evt_vikings_arriving_oldgods
+	}
+	picture = { 
+		trigger = { is_female = yes } 
+		picture = GFX_evt_norse_tempest
+	}
+	border = GFX_event_narrative_frame_war
+	sound = bloodline_added
+	
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	
+	trigger = {
+		check_variable = {
+			which = emb_raider_loot_count
+			value >= 195
+		}
+	}
+	
+	# Give bloodline without overriding super-cool nickname
+	option = {
+		name = EVTOPTAHF23212
+		add_blood_splatter_effect = yes
+		if = {
+			limit = { this_has_super_cool_nickname_trigger = no }
+			emb_raider_give_selected_raider_nickname_to_this_character = yes
+		}
+		emb_raider_give_selected_raider_bloodline_to_this_character = yes
+		emb_raider_give_raider_face_tattoo_to_this_character = yes
+	}
+	
+	# If you already have a super-cool nickname: Option to give bloodline and override existing super-cool nickname
+	option = {
+		name = EVTOPTAHF23212
+		trigger = { this_has_super_cool_nickname_trigger = yes }
+		add_blood_splatter_effect = yes
+		emb_raider_give_selected_raider_nickname_to_this_character = yes
+		emb_raider_give_selected_raider_bloodline_to_this_character = yes
+		emb_raider_give_raider_face_tattoo_to_this_character = yes
+	}
+	
+	after = {
+		hidden_tooltip = {
+			emb_raider_cleanup_character_flags = yes
+			any_player = { 
+				limit = {
+					NOT = { character = ROOT }
+					is_within_diplo_range = ROOT
+				}
+				narrative_event = { id = EMBRaider.1102 } 
+			}
+		}
+	}
+}
+
+# Notify other players of the earned bloodline
+# Based on HF.23213
+# TODO: Proper localisation & description
+narrative_event = {
+	id = EMBRaider.1102
+	title = EVTTITLE23213
+	desc = EVTDESCHF23213
+	picture = { 
+		trigger = { FROM = { is_female = no } } 
+		picture = GFX_evt_vikings_arriving_oldgods
+	}
+	picture = { 
+		trigger = { FROM = { is_female = yes } } 
+		picture = GFX_evt_norse_tempest
+	}
+	border = GFX_event_narrative_frame_war
+	
+	is_triggered_only = yes
+
+	option = {
+		name = EVTOPTAHF23213
+		trigger = { 
+			OR = { 
+				religion = norse_pagan 
+				religion = norse_pagan_reformed
+				AND = { 
+					has_religion_feature = religion_adventuring 
+					has_religion_feature = religion_seafaring
+				}
+			} 
+		} 
+	}
+	option = {
+		name = EVTOPTBHF23213
+		trigger = { 
+			NOR = { 
+				religion = norse_pagan 
+				religion = norse_pagan_reformed
+				AND = { 
+					has_religion_feature = religion_adventuring 
+					has_religion_feature = religion_seafaring
+				}
+			} 
+		} 
+	}
+}
+
+
+
+
+
+###################################
+# Grant ultimate raider bloodline #
+###################################
+
+narrative_event = {
+	id = EMBRaider.1200
+	title = EMBRaider_1200_EVTTITLE
+	desc = EMBRaider_1200_EVTDESC
+	picture = {
+		trigger = { is_female = no } 
+		picture = GFX_evt_vikings_arriving_oldgods
+	}
+	picture = { 
+		trigger = { is_female = yes } 
+		picture = GFX_evt_norse_tempest
+	}
+	border = GFX_event_narrative_frame_war
+	sound = bloodline_added
+	
+	has_dlc = "Holy Fury"
+	is_triggered_only = yes
+	
+	trigger = {
+		check_variable = { which = emb_raider_loot_count value >= 400 }
+		NOT = { any_owned_bloodline = { has_bloodline_flag = emb_raider_ultimate } }
+	}
+	
+	# Give ultimate bloodline
+	option = {
+		name = EMBRaider_1200_EVTOPT_A
+		add_blood_splatter_effect = yes
+		emb_raider_give_raider_face_tattoo_to_this_character = yes
+		if = { 
+			limit = { is_female = no }
+			create_bloodline = { type = emb_raider_ultimate_bloodline_m }
+		}
+		else = {
+			create_bloodline = { type = emb_raider_ultimate_bloodline_f }
+		}
+		new_bloodline = {
+			set_name = emb_raider_ultimate_bloodline_name
+			set_description = "emb_raider_ultimate_bloodline_desc"
+		}
+	}
+	
+	after = {
+		hidden_tooltip = {
+			emb_raider_cleanup_character_flags = yes
+			any_player = { 
+				limit = {
+					NOT = { character = ROOT }
+					is_within_diplo_range = ROOT
+				}
+				narrative_event = { id = EMBRaider.1201 } 
+			}
+		}
+	}
+}
+
+# Notify other players of the earned bloodline
+# Based on HF.23213
+# TODO: Proper localisation & description
+narrative_event = {
+	id = EMBRaider.1201
+	title = EVTTITLE23213
+	desc = EVTDESCHF23213
+	picture = { 
+		trigger = { FROM = { is_female = no } } 
+		picture = GFX_evt_vikings_arriving_oldgods
+	}
+	picture = { 
+		trigger = { FROM = { is_female = yes } } 
+		picture = GFX_evt_norse_tempest
+	}
+	border = GFX_event_narrative_frame_war
+	
+	is_triggered_only = yes
+
+	option = {
+		name = EVTOPTAHF23213
+		trigger = { 
+			OR = { 
+				religion = norse_pagan 
+				religion = norse_pagan_reformed
+				AND = { 
+					has_religion_feature = religion_adventuring 
+					has_religion_feature = religion_seafaring
+				}
+			} 
+		} 
+	}
+	option = {
+		name = EVTOPTBHF23213
+		trigger = { 
+			NOR = { 
+				religion = norse_pagan 
+				religion = norse_pagan_reformed
+				AND = { 
+					has_religion_feature = religion_adventuring 
+					has_religion_feature = religion_seafaring
+				}
+			} 
+		} 
+	}
+}

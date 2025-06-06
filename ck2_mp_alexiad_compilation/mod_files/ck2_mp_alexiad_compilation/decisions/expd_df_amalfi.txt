@@ -1,0 +1,40 @@
+decisions = {
+	expd_df_create_amalfi = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+		
+		potential = {
+			c_amalfi = {
+				d_amalfi = {
+					expd_df_root_can_see_decision_to_create_this_duchy_from_prev_single_county = yes
+				}
+			}
+		}
+		
+		allow = {
+			c_amalfi = {
+				show_scope_change = no
+				d_amalfi = {
+					show_scope_change = no
+					expd_df_root_can_take_decision_to_create_this_duchy_from_prev_single_county = yes
+				}
+			}
+		}
+		
+		effect = {
+			c_amalfi = {
+				show_scope_change = no
+				d_amalfi = {
+					show_scope_change = no
+					expd_df_create_this_duchy_from_prev_single_county_and_grant_to_root = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+	}
+}

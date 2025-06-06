@@ -1,0 +1,82 @@
+targeted_decisions = {
+	
+	# Players can choose to block/unblock fast pillaging on a global level (affects all players and all AI)
+	expd_pill_block_global = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = {
+			NOT = { has_global_flag = expd_pill_blocked_global }
+			NOT = { any_player = { NOT = { character = ROOT } } } # You cannot disable fast pillaging globally in multiplayer. If you want to do that, disable the mod!
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = expd_pill_blocked_global
+			}
+		}
+	}
+	expd_pill_enable_global = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = {
+			has_global_flag = expd_pill_blocked_global
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				clr_global_flag = expd_pill_blocked_global
+			}
+		}
+	}
+	
+	# Character-level blocks are only available for players, and only if fast pillaging is not blocked on a global level
+	# The point of these decisions is to remove the possibility of accidental clicks
+	expd_pill_block_char = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = {
+			NOT = { has_character_flag = expd_pill_blocked_char }
+			NOT = { has_global_flag = expd_pill_blocked_global }
+			OR = {
+				is_tribal = yes
+				is_nomadic = yes
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				set_character_flag = expd_pill_blocked_char
+			}
+		}
+	}
+	expd_pill_enable_char = {
+		filter = self
+		ai = no
+		only_playable = yes
+		potential = {
+			has_character_flag = expd_pill_blocked_char
+			NOT = { has_global_flag = expd_pill_blocked_global }
+			OR = {
+				is_tribal = yes
+				is_nomadic = yes
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				clr_character_flag = expd_pill_blocked_char
+			}
+		}
+	}
+}

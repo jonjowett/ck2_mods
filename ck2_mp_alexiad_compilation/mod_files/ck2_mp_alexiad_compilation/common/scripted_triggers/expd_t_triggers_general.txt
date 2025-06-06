@@ -1,0 +1,54 @@
+expd_t_is_religious_enemy_of_from = {
+	OR = {
+		NOT = { religion_group = FROM }
+		is_heresy_of = FROM
+		is_parent_religion = FROM
+	}
+}
+
+expd_t_is_religious_enemy_of_root = {
+	OR = {
+		NOT = { religion_group = ROOT }
+		is_heresy_of = ROOT
+		is_parent_religion = ROOT
+	}
+}
+
+expd_t_top_liege_is_normal_or_modded_tributary_of_root = {
+	top_liege = {
+		OR = {
+			is_tributary = {
+				type = permanent
+				suzerain = ROOT
+			}
+			is_tributary = {
+				type = default
+				suzerain = ROOT
+			}
+			is_tributary = {
+				type = expd_t_protectorate
+				suzerain = ROOT
+			}
+		}
+	}
+}
+
+expd_t_is_modded_tributary_of_from = {
+	is_tributary = {
+		type = expd_t_protectorate
+		suzerain = FROM
+	}
+}
+
+expd_t_is_normal_or_modded_permanent_tributary_of_root = {
+	OR = {
+		is_tributary = {
+			type = permanent
+			suzerain = ROOT
+		}
+		is_tributary = {
+			type = expd_t_protectorate
+			suzerain = ROOT
+		}
+	}
+}

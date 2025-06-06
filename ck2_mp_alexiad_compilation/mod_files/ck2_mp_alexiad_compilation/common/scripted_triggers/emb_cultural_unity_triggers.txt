@@ -1,0 +1,92 @@
+# Audax Validator EnableCommentMetadata
+
+emb_cultural_unity_this_character_belongs_to_a_culture_that_can_do_bloodline_culture_conversion = {
+	OR = {
+		emb_celtic_unity_this_character_is_of_a_supported_culture = yes
+		emb_east_african_unity_this_character_is_of_a_supported_culture = yes
+	}
+}
+
+emb_cultural_unity_this_province_cannot_be_culture_converted = {
+	OR = {
+		emb_celtic_unity_this_province_cannot_be_culture_converted = yes
+		emb_east_african_unity_this_province_cannot_be_culture_converted = yes
+	}
+	owner = { culture_group = PREV }
+}
+
+emb_cultural_unity_this_character_has_an_active_bloodline_with_cultural_unity = {
+	OR = {
+		emb_celtic_unity_has_an_active_bloodline_with_celtic_unity = yes
+		emb_east_african_unity_has_an_active_bloodline_with_east_african_unity = yes
+	}
+}
+
+emb_cultural_unity_any_same_culture_group_liege_has_an_active_bloodline_with_cultural_unity = {
+	OR = {
+		emb_celtic_unity_any_same_culture_group_liege_has_an_active_bloodline_with_celtic_unity = yes
+		emb_east_african_unity_any_same_culture_group_liege_has_an_active_bloodline_with_east_african_unity = yes
+	}
+}
+
+emb_cultural_unity_this_character_can_do_bloodline_culture_conversion = {
+	
+	# Is count or above
+	# NB: only_playable includes baron-tier patricians, and we don't want those
+	NOT = { real_tier = BARON }
+	
+	# Belongs to a relevant culture
+	emb_cultural_unity_this_character_belongs_to_a_culture_that_can_do_bloodline_culture_conversion = yes
+	
+	# Has a relevant bloodline
+	OR = {
+		emb_cultural_unity_this_character_has_an_active_bloodline_with_cultural_unity = yes
+		emb_cultural_unity_any_same_culture_group_liege_has_an_active_bloodline_with_cultural_unity = yes
+	}
+	
+	# Is not primary defender in a war (ie. might lose provinces)
+	OR = {
+		war = no
+		AND = {
+			independent = yes
+			NOT = { any_war = { defender = { character = PREVPREV } } }
+		}
+		AND = {
+			independent = no
+			NOT = { any_liege = { any_war = { defender = { character = PREVPREV } } } }
+		}
+	}
+	
+}
+
+emb_cultural_unity_this_province_is_eligible_for_culture_conversion_by_root = {
+	emb_cultural_unity_this_province_cannot_be_culture_converted = no
+	OR = {
+		# Port or single-landlocked, or has a same-culture-group province nearby
+		port = yes
+		any_neighbor_province = { port = yes }
+		any_neighbor_province = { culture_group = ROOT }
+		any_neighbor_province = { any_neighbor_province = { culture_group = ROOT } }
+	}
+}
+
+emb_cultural_unity_this_province_is_eligible_for_culture_conversion_by_fromfrom = {
+	emb_cultural_unity_this_province_cannot_be_culture_converted = no
+	OR = {
+		# Port or single-landlocked, or has a same-culture-group province nearby
+		port = yes
+		any_neighbor_province = { port = yes }
+		any_neighbor_province = {
+			# The Validator thinks FROMFROM isn't correct in this scope, but it is and it works, so ignore the error
+			# Audax Validator "." Ignore_NEXT
+			culture_group = FROMFROM
+		}
+		any_neighbor_province = {
+			any_neighbor_province = {
+				# The Validator thinks FROMFROM isn't correct in this scope, but it is and it works, so ignore the error
+				# Audax Validator "." Ignore_NEXT
+				culture_group = FROMFROM
+			}
+		}
+	}
+}

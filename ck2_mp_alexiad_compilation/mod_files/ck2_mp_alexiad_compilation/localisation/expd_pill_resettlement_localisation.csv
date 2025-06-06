@@ -1,0 +1,17 @@
+# Decision
+expd_pill_resettle_from_neighbouring_province;§MED-Pill: Resettle§!;;;;;;;;;x
+expd_pill_resettle_from_neighbouring_province_desc;Tribespeople from an adjacent province will resettle [Root.GetName].;;;;;;;;;x
+EXPD_PILL_TOOLTIP_THIS_PROVINCE_HAS_ADJACENT_PROVINCE_OF_DIFF_CULTURE_OR_RELIGION;[This.GetName] has an adjacent land province of different culture or religion\n§g...INFO: If you want to resettle this province with your own exact culture and religion, use the base game interactions (click on the big empty square in the province window) to build a tribe normally!§!;;;;;;;;;x
+EXPD_PILL_TOOLTIP_THIS_PROVINCE_HAS_NO_SETTLEMENTS_AND_NO_CONSTRUCTION;[This.GetName] has no settlements and no ongoing construction;;;;;;;;;x
+EXPD_PILL_TOOLTIP_EVENT_OCCURS_ALLOWING_RESETTLEMENT_FROM_ADJACENT_PROVINCE;You will receive an event which allows you to choose which adjacent province resettles [Root.GetName] (ie. what the new culture and religion of [Root.GetName] will be);;;;;;;;;x
+# Event
+ExpdPillResettle_ChooseSource_EvtTitle;Resettlement of [Root.GetName];;;;;;;;;x
+ExpdPillResettle_ChooseSource_EvtDesc;Since [Root.GetName] is an empty land with no inhabitants, we can invite settlers from a neighboring province to create a new tribal settlement.\n\nThe options below are chosen randomly with weighting - if there are more than 3 adjacent religion/culture combinations, and you don't see the option you want in the list below, cancel and try again.;;;;;;;;;x
+ExpdPillResettle_ChooseSource_EvtOpt_NoValidSources;Logic error! No valid adjacent provinces found!;;;;;;;;;x
+ExpdPillResettle_ChooseSource_EvtOpt_FromSource1;[expd_pill_resettlement_possible_source_1.Religion.GetName] [expd_pill_resettlement_possible_source_1.Culture.GetName] (from [expd_pill_resettlement_possible_source_1.GetName]);;;;;;;;;x
+ExpdPillResettle_ChooseSource_EvtOpt_FromSource2;[expd_pill_resettlement_possible_source_2.Religion.GetName] [expd_pill_resettlement_possible_source_2.Culture.GetName] (from [expd_pill_resettlement_possible_source_2.GetName]);;;;;;;;;x
+ExpdPillResettle_ChooseSource_EvtOpt_FromSource3;[expd_pill_resettlement_possible_source_3.Religion.GetName] [expd_pill_resettlement_possible_source_3.Culture.GetName] (from [expd_pill_resettlement_possible_source_3.GetName]);;;;;;;;;x
+ExpdPillResettle_ChooseSource_EvtOpt_Cancel;Actually, I changed my mind...;;;;;;;;;x
+EXPD_PILL_TOOLTIP_INFO_THERE_ARE_LTE3_SOURCES;Info: There are §Yat most 3§! possible sources of resettlement, so the same exact options will be presented if you try again.\n\nNote: You will NEVER be presented with the option to resettle your own exact culture and religion, because you can do this using normal base game interactions (ie. by clicking the big empty square in the province window to construct a new tribal holding).;;;;;;;;;x
+EXPD_PILL_TOOLTIP_INFO_THERE_ARE_GT3_SOURCES;Info: There are §Ymore than 3§! possible sources of resettlement. So, if you try again immediately, different options may be randomly selected.\n\nNote: You will NEVER be presented with the option to resettle your own exact culture and religion, because you can do this using normal base game interactions (ie. by clicking the big empty square in the province window to construct a new tribal holding).;;;;;;;;;x
+EXPD_PILL_TOOLTIP_CREATE_NEW_TRIBE_IN_THIS_PROVINCE;Instantly build a new §Ytribal settlement§! in [This.GetName];;;;;;;;;x

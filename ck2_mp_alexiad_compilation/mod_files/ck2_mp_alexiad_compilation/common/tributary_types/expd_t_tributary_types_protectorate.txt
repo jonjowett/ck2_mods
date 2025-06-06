@@ -1,0 +1,149 @@
+expd_t_protectorate = {
+	
+	# Very similar to a permanent tributary.
+	# The reason for the difference is that this type of tributary can't be auto-released if the suzerain is smaller.
+	# There is also a small prestige/piety transfer from tributary to suzerain, in recognition of the riskiness of having a protectorate.
+	
+	tributary_name = EXPD_T_PROTECTORATE_TRIBUTARY_NAME
+	tributary_plural = EXPD_T_PROTECTORATE_TRIBUTARY_PLURAL
+	suzerain_name = EXPD_T_PROTECTORATE_SUZERAIN_NAME
+	tribute_name = TRIBUTARY_DEFAULT_TRIBUTE
+	breaks_at_suzerain_death = no
+	suzerain_must_defend = yes
+	suzerain_can_join_infighting = yes
+	tributary_can_be_summoned = no
+	tributary_must_defend = no
+	tributaries_can_unite = yes
+	breaks_on_realm_change = yes
+	icon = 10
+	cbs_against_suzerain = {
+		expd_t_free_tributary_cb #CB added by this mod, but otherwise the same as free_tributary_cb
+	}
+	income_tribute_percentage = {
+		value = 0.20
+	}
+	reinforce_tribute_percentage = {
+		value = 0.15
+	}
+	
+	# Prestige is always transferred to suzerain, based on tributary tier
+	prestige_to_suzerain = {
+		value = 0
+		additive_modifier = {
+			value = 0.25
+			FROM = { tier = DUKE }
+		}
+		additive_modifier = {
+			value = 0.5
+			FROM = { tier = KING }
+		}
+		additive_modifier = {
+			value = 1
+			FROM = { tier = EMPEROR }
+		}
+	}
+	prestige_to_tributary = {
+		value = 0
+		additive_modifier = {
+			value = -0.25
+			tier = DUKE
+		}
+		additive_modifier = {
+			value = -0.5
+			tier = KING
+		}
+		additive_modifier = {
+			value = -1
+			tier = EMPEROR
+		}
+	}
+	
+	#Piety is transferred to suzerain, based on tributary tier, but only if the tributary has same religion as suzerain and borders a powerful religious enemy
+	piety_to_suzerain = {
+		value = 0
+		additive_modifier = {
+			value = 0.25
+			FROM = {
+				tier = DUKE
+				religion = ROOT
+				any_neighbor_independent_ruler = {
+					expd_t_is_religious_enemy_of_from = yes
+					relative_power_including_allies_attacker = {
+						who = FROM
+						power >= 2
+					}
+				}
+			}
+		}
+		additive_modifier = {
+			value = 0.5
+			FROM = {
+				tier = KING
+				religion = ROOT
+				any_neighbor_independent_ruler = {
+					expd_t_is_religious_enemy_of_from = yes
+					relative_power_including_allies_attacker = {
+						who = FROM
+						power >= 2
+					}
+				}
+			}
+		}
+		additive_modifier = {
+			value = 1
+			FROM = {
+				tier = EMPEROR
+				religion = ROOT
+				any_neighbor_independent_ruler = {
+					expd_t_is_religious_enemy_of_from = yes
+					relative_power_including_allies_attacker = {
+						who = FROM
+						power >= 2
+					}
+				}
+			}
+		}
+	}
+	
+	piety_to_tributary = {
+		value = 0
+		
+		#Give piety if the protectorate borders a larger religious enemy
+		additive_modifier = {
+			value = -0.25
+			tier = DUKE
+			religion = FROM
+			any_neighbor_independent_ruler = {
+				expd_t_is_religious_enemy_of_from = yes
+				relative_power_including_allies_attacker = {
+					who = ROOT
+					power >= 2
+				}
+			}
+		}
+		additive_modifier = {
+			value = -0.5
+			tier = KING
+			religion = FROM
+			any_neighbor_independent_ruler = {
+				expd_t_is_religious_enemy_of_from = yes
+				relative_power_including_allies_attacker = {
+					who = ROOT
+					power >= 2
+				}
+			}
+		}
+		additive_modifier = {
+			value = -1
+			tier = EMPEROR
+			religion = FROM
+			any_neighbor_independent_ruler = {
+				expd_t_is_religious_enemy_of_from = yes
+				relative_power_including_allies_attacker = {
+					who = ROOT
+					power >= 2
+				}
+			}
+		}
+	}
+}
