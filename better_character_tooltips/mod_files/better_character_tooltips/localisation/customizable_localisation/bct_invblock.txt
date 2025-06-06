@@ -221,7 +221,12 @@ defined_text = {
 	text = {
 		trigger = {
 					# Is councillor & all players (MP/SP) have diff rel group - blocked
-					is_councillor = yes
+					OR = {
+						is_councillor = yes
+						has_minor_title = title_regent
+						has_minor_title = title_councilmember_king    # Advisor slot #1
+						has_minor_title = title_councilmember_emperor # Advisor slot #2
+					}
 					NOT = { any_player = { religion_group = PREV } }
 		}
 		localisation_key = BCT_InvBlock_Councillor_Blocked
@@ -230,7 +235,12 @@ defined_text = {
 	text = {
 		trigger = {
 					# Is councillor & MP game & some but not all players have diff rel group - uncertain
-					is_councillor = yes
+					OR = {
+						is_councillor = yes
+						has_minor_title = title_regent
+						has_minor_title = title_councilmember_king    # Advisor slot #1
+						has_minor_title = title_councilmember_emperor # Advisor slot #2
+					}
 					multiplayer = yes
 					any_player = { religion_group = PREV }
 					any_player = { NOT = { religion_group = PREV } }
