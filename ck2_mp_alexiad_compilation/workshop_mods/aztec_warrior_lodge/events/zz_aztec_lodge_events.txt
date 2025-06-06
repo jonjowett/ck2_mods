@@ -1,0 +1,113 @@
+namespace = AZC
+
+#Shorn Ones has been created.
+#Players notified.
+narrative_event = {
+	id = AZC.25026
+	title = EVTTITLE_AZC_25026
+	desc = EVTDESC_AZC_25026
+	hide_from = yes
+	hide_new = yes
+
+	picture = GFX_evt_battle_mesoamerican
+	
+	only_playable = yes
+	hide_from = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = EVTOPTA_AZC_25026
+		trigger = {
+			OR = { 
+				society_member_of = warrior_lodge_aztec 
+				religion = aztec_reformed
+				secret_religion = aztec_reformed
+				can_join_society = warrior_lodge_aztec
+			}
+		}
+		if = {
+			limit = { 
+				NOT = { society_member_of = warrior_lodge_aztec }
+				can_join_society = warrior_lodge_aztec
+			}
+			join_society = warrior_lodge_aztec
+		}
+	}
+	option = {
+		name = EVTOPTB_AZC_25026
+		trigger = {
+			NOR = { 
+				society_member_of = warrior_lodge_aztec
+				religion = aztec_reformed
+				secret_religion = aztec_reformed
+			}
+		}
+	}
+}
+
+#Aztec Battle trance.
+character_event = {
+	id = AZC.25006
+	desc = EVTDESC_AZC_25006
+	picture = GFX_evt_sun_temple
+	border = GFX_event_normal_frame_war
+	
+	is_triggered_only = yes
+
+	immediate = { 
+		random_list = { 
+			33 = { trigger = { is_female = no } sound_effect = battle_trance_male_01 } 
+			33 = { trigger = { is_female = no } sound_effect = battle_trance_male_02 } 
+			33 = { trigger = { is_female = no } sound_effect = battle_trance_male_03 } 
+			33 = { trigger = { is_female = yes } sound_effect = battle_trance_female_01 } 
+			33 = { trigger = { is_female = yes } sound_effect = battle_trance_female_02 } 
+			33 = { trigger = { is_female = yes } sound_effect = battle_trance_female_03 } 
+		}
+	}
+	option = { 
+		name = EVTOPTA_AZC_25006
+		add_character_modifier = { 
+			modifier = lodge_aztec_battle_trance_1
+			duration = 2655
+		}
+        ai_chance = {    
+            factor = 30
+        }
+	}
+	option = { 
+		name = EVTOPTB_AZC_25006
+		add_character_modifier = { 
+			modifier = lodge_aztec_battle_trance_2
+			duration = 2655
+		}
+        ai_chance = {    
+            factor = 30
+        }
+	}
+	option = { 
+		name = EVTOPTC_AZC_25006
+		add_character_modifier = { 
+			modifier = lodge_aztec_battle_trance_3
+			duration = 2655
+		}
+        ai_chance = {    
+            factor = 30
+        }
+	}
+	option = { #Changed my mind.
+		name = EVTOPTD_AZC_25006
+       hidden_tooltip = {
+           	if = { 
+           		limit = { society_member_of = warrior_lodge_aztec } #Safety check for sneaky players.
+           		add_society_currency_minor_effect = yes 
+           	}
+        }
+        ai_chance = {    
+            factor = 0
+        }
+	}
+	after = { 
+		clr_character_flag = flag_picking_battle_trance
+	}
+}

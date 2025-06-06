@@ -1,0 +1,49 @@
+targeted_decisions = {
+	
+	nap_non_aggression_pact = {
+		
+		ai_target_filter = independent_rulers
+		
+		from_potential = {
+			is_landed = yes
+			OR = {
+				ai = no
+				independent = yes
+			}
+		}
+		potential = {
+			prisoner = no
+			NOT = { has_non_aggression_pact_with = FROM }
+			#With the ai_target_filter independent_rulers this condition may not be necessary.
+			#is_landed = yes
+		}
+		allow = {
+			#These conditions are for ROOT.
+			opinion = { who = FROM value = 75 }
+			NOT = { has_non_aggression_pact_with = FROM }
+			prisoner = no
+			is_within_diplo_range = FROM
+			custom_tooltip = {
+				text = already_sent_nap
+				NOT = { has_opinion_modifier = { who = FROM modifier = sent_nap } }
+			}
+			
+		}
+		effect = {
+			opinion = {
+				who = FROM
+				modifier = sent_nap
+				months = 12
+			}
+			letter_event = { id = Nap.100 }
+		}
+		revoke_allowed = {
+			always = no
+		}
+		
+		ai_will_do = {
+			factor = 0.25
+		}
+	}
+}
+	

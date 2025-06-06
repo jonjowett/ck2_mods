@@ -1,0 +1,173 @@
+spriteTypes = {
+	
+	# Warrior Lodges - AZTEC
+	
+	spriteType = {
+		name = "GFX_society_warrior_lodge_aztec_male_clothes_behind"
+		textureFile = "gfx/characters/societies/wl_zun_male_clothes_behind.dds"
+		noOfFrames = 4
+	}
+	spriteType = {
+		name = "GFX_society_warrior_lodge_aztec_male_clothes"
+		textureFile = "gfx/characters/societies/wl_zun_male_clothes.dds"
+		noOfFrames = 4
+	}
+	spriteType = {
+		name = "GFX_society_warrior_lodge_aztec_male_clothes_infront"
+		textureFile = "gfx/characters/societies/wl_zun_male_clothes_infront.dds"
+		noOfFrames = 4
+	}
+	spriteType = {
+		name = "GFX_society_warrior_lodge_aztec_male_headgear_behind"
+		textureFile = "gfx/characters/societies/wl_zun_male_headgear_behind.dds"
+		noOfFrames = 4
+	}
+	spriteType = {
+		name = "GFX_society_warrior_lodge_aztec_male_headgear"
+		textureFile = "gfx/characters/societies/wl_zun_male_headgear.dds"
+		noOfFrames = 4
+	}
+	
+	portraitType = { #Portraits - Male
+		effectFile = "gfx/FX/portrait.lua"
+		name = "PORTRAIT_society_warrior_lodge_aztec_male_clothing"
+		
+		weight = {
+			additive_modifier = {
+				value = 10000
+				portrait_age > child
+				portrait_is_female = no
+				portrait_clothing = yes
+				portrait_society = warrior_lodge_aztec
+			}
+		}
+		
+		layer = { 
+			"GFX_society_warrior_lodge_aztec_male_headgear_behind:p5:c1"
+			"GFX_society_warrior_lodge_aztec_male_clothes_behind:p3:c0"
+			"GFX_society_warrior_lodge_aztec_male_clothes:p3:c2"
+			"GFX_empty:c3"
+			"GFX_society_warrior_lodge_aztec_male_headgear:p5:c5"
+			"GFX_empty:c8"
+			"GFX_empty:c7"
+			"GFX_society_warrior_lodge_aztec_male_clothes_infront:p3:c7"
+		}
+		
+		# Correct rank
+		allow_property_values = {
+			3 = {
+				0 = {
+					portrait_society_rank = 1
+				}
+				1 = {
+					portrait_society_rank = 2
+				}
+				2 = {
+					portrait_society_rank = 3
+				}
+				3 = {
+					portrait_society_rank = 4
+				}
+			}
+			5 = {
+				0 = {
+					portrait_society_rank = 1
+				}
+				1 = {
+					portrait_society_rank = 2
+				}
+				2 = {
+					portrait_society_rank = 3
+				}
+				3 = {
+					portrait_society_rank = 4
+				}
+			}
+		}
+	}
+	
+	
+	spriteType = {
+		name = "GFX_society_warrior_lodge_aztec_female_clothes_behind"
+		textureFile = "gfx/characters/societies/wl_zun_female_clothes_behind.dds"
+		noOfFrames = 4
+	}
+	spriteType = {
+		name = "GFX_society_warrior_lodge_aztec_female_clothes"
+		textureFile = "gfx/characters/societies/wl_zun_female_clothes.dds"
+		noOfFrames = 4
+	}
+	spriteType = {
+		name = "GFX_society_warrior_lodge_aztec_female_clothes_infront"
+		textureFile = "gfx/characters/societies/wl_zun_female_clothes_infront.dds"
+		noOfFrames = 4
+	}
+	spriteType = {
+		name = "GFX_society_warrior_lodge_aztec_female_headgear_behind"
+		textureFile = "gfx/characters/societies/wl_zun_female_headgear_behind.dds"
+		noOfFrames = 4
+	}
+	spriteType = {
+		name = "GFX_society_warrior_lodge_aztec_female_headgear"
+		textureFile = "gfx/characters/societies/wl_zun_female_headgear.dds"
+		noOfFrames = 4
+	}
+
+	portraitType = { #Portraits - Female
+		effectFile = "gfx/FX/portrait.lua"
+		name = "PORTRAIT_society_warrior_lodge_aztec_female_clothing"
+		
+		weight = {
+			additive_modifier = {
+				value = 10000
+				portrait_age > child
+				portrait_is_female = yes
+				portrait_clothing = yes
+				portrait_society = warrior_lodge_aztec
+			}
+		}
+		
+		layer = { 
+			"GFX_society_warrior_lodge_aztec_female_headgear_behind:p5:c1"
+			"GFX_society_warrior_lodge_aztec_female_clothes_behind:p3:c0"
+			"GFX_empty:c8"
+			"GFX_society_warrior_lodge_aztec_female_clothes:p3:c2"
+			"GFX_empty:c3"
+			"GFX_society_warrior_lodge_aztec_female_headgear:p5:c5"
+			"GFX_empty:c7"
+			"GFX_society_warrior_lodge_aztec_female_clothes_infront:p3:c7"
+		}
+		
+		# Correct rank
+		allow_property_values = {
+			3 = {
+				0 = {
+					portrait_society_rank = 1
+				}
+				1 = {
+					portrait_society_rank = 2
+				}
+				2 = {
+					portrait_society_rank = 3
+				}
+				3 = {
+					portrait_society_rank = 4
+				}
+			}
+			5 = {
+				0 = {
+					portrait_society_rank = 1
+				}
+				1 = {
+					portrait_society_rank = 2
+				}
+				2 = {
+					portrait_society_rank = 3
+				}
+				3 = {
+					portrait_society_rank = 4
+				}
+			}
+		}
+	}
+}

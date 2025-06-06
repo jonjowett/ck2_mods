@@ -1,0 +1,517 @@
+#########################
+##### MTR BUILDINGS #####
+#########################
+
+trade_post = {
+
+########################
+### COMMON BUILDINGS ###
+########################
+
+
+	amber_1 = {	
+
+		desc = amber_1_desc
+		potential = { 
+			OR = {
+				FROM = { is_patrician = yes }
+				NOR = {
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_BUILDINGS_OFF
+					}
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_RESOURCES_ONLY
+					}
+				}
+			}
+		}
+		trigger = {
+			TECH_TRADE_PRACTICES = 1
+		}
+		gold_cost = 250
+		build_time = 250
+		ai_creation_factor = 97
+		add_number_to_name = no
+		
+		trade_route_value = 3
+		tradevalue = 12
+		fort_level = 1
+		
+		extra_tech_building_start = 10.0 # Never get at start of game
+	}
+	
+	amber_2 = {
+		
+		desc = amber_2_desc
+		potential = { 
+			OR = {
+				FROM = { is_patrician = yes }
+				NOR = {
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_BUILDINGS_OFF
+					}
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_RESOURCES_ONLY
+					}
+				}
+			}
+		}
+		trigger = {
+			TECH_TRADE_PRACTICES = 2
+		}
+		gold_cost = 450
+		build_time = 300
+		upgrades_from = amber_1
+		ai_creation_factor = 75
+		add_number_to_name = no
+		
+		trade_route_wealth = 1.5	# Affects total value of trade route
+		tradevalue = 20
+		fort_level = 1
+		
+		extra_tech_building_start = 10.0 # Never get at start of game
+	}
+	
+#	amber_3 = {
+#		
+#		desc = amber_3_desc
+#		potential = { 
+#			OR = {
+#				FROM = { is_patrician = yes }
+#				NOT = {
+#					has_game_rule = {
+#						name = MEDIEVAL_TRADE_ROUTES
+#						value = MTR_BUILDINGS_OFF
+#					}
+#				}
+#			}
+#		}
+#		trigger = {
+#			TECH_TRADE_PRACTICES = 4
+#		}
+#		gold_cost = 800
+#		build_time = 400
+#		upgrades_from = amber_2
+#		ai_creation_factor = 95
+#		add_number_to_name = no
+#		
+#		trade_route_wealth = 1.8	# Affects total value of trade route
+#		tradevalue = 24
+#		fort_level = 1
+#		
+#		extra_tech_building_start = 10.0 # Never get at start of game
+#	}
+
+	amber_trade_offices_1 = {
+		
+		desc = amber_trade_offices_1_desc
+		potential = { 
+			OR = {
+				FROM = { is_patrician = yes }
+				NOR = {
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_BUILDINGS_OFF
+					}
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_RESOURCES_ONLY
+					}
+				}
+			}
+		}
+		trigger = {
+			TECH_TRADE_PRACTICES = 1
+		}
+		prerequisites = { amber_1 }
+		gold_cost = 450
+		build_time = 400
+		ai_creation_factor = 32
+		add_number_to_name = no
+		
+		tech_growth_modifier = 0.1
+		monthly_character_prestige = 0.2
+		retinuesize = 25
+		
+		extra_tech_building_start = 10.0 # Never get at start of game
+	}
+	
+#	amber_trade_offices_2 = {
+#		
+#		desc = amber_trade_offices_2_desc
+#		potential = { 
+#			OR = {
+#				FROM = { is_patrician = yes }
+#				NOT = {
+#					has_game_rule = {
+#						name = MEDIEVAL_TRADE_ROUTES
+#						value = MTR_BUILDINGS_OFF
+#					}
+#				}
+#			}
+#		}
+#		trigger = {
+#			TECH_TRADE_PRACTICES = 3
+#		}
+#		gold_cost = 520
+#		build_time = 380
+#		upgrades_from = amber_trade_offices_1
+#		ai_creation_factor = 5
+#		add_number_to_name = no
+#		
+#		monthly_character_prestige = 0.3
+#		retinuesize = 45
+#		
+#		extra_tech_building_start = 10.0 # Never get at start of game
+#	}
+	
+#	amber_trade_offices_3 = {
+#		
+#		desc = amber_trade_offices_3_desc
+#		potential = { 
+#			OR = {
+#				FROM = { is_patrician = yes }
+#				NOT = {
+#					has_game_rule = {
+#						name = MEDIEVAL_TRADE_ROUTES
+#						value = MTR_BUILDINGS_OFF
+#					}
+#				}
+#			}
+#		}
+#		trigger = {
+#			TECH_TRADE_PRACTICES = 5
+#		}
+#		gold_cost = 700
+#		build_time = 600
+#		upgrades_from = amber_trade_offices_2
+#		ai_creation_factor = 5
+#		add_number_to_name = no
+#		
+#		monthly_character_prestige = 0.5
+#		retinuesize = 70
+#		
+#		extra_tech_building_start = 10.0 # Never get at start of game
+#	}
+	
+	amber_mercenary_garrison_1 = {
+		
+		desc = amber_mercenary_garrison_1_desc
+		potential = { 
+			OR = {
+				FROM = { is_patrician = yes }
+				NOR = {
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_BUILDINGS_OFF
+					}
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_RESOURCES_ONLY
+					}
+				}
+			}
+		}
+#		trigger = {
+#			TECH_CASTLE_CONSTRUCTION = 1
+#		}
+		prerequisites = { amber_1 }
+		gold_cost = 150
+		build_time = 150
+		ai_creation_factor = 95
+		add_number_to_name = no
+		
+		garrison_size = 1
+		tradevalue = 2
+		
+		extra_tech_building_start = 10.0 # Never get at start of game
+	}	
+	
+	amber_mercenary_garrison_2 = {
+		
+		desc = amber_mercenary_garrison_2_desc
+		potential = { 
+			OR = {
+				FROM = { is_patrician = yes }
+				NOR = {
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_BUILDINGS_OFF
+					}
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_RESOURCES_ONLY
+					}
+				}
+			}
+		}
+		trigger = {
+			TECH_CASTLE_CONSTRUCTION = 2
+		}
+		gold_cost = 250
+		build_time = 200
+		upgrades_from = amber_mercenary_garrison_1
+		ai_creation_factor = 85
+		add_number_to_name = no
+		
+		garrison_size = 2
+		fort_level = 0.5
+		tradevalue = 3
+		
+		extra_tech_building_start = 10.0 # Never get at start of game
+	}	
+	
+#	amber_mercenary_garrison_3 = {
+#		
+#		desc = amber_mercenary_garrison_3_desc
+#		potential = { 
+#			OR = {
+#				FROM = { is_patrician = yes }
+#				NOT = {
+#					has_game_rule = {
+#						name = MEDIEVAL_TRADE_ROUTES
+#						value = MTR_BUILDINGS_OFF
+#					}
+#				}
+#			}
+#		}
+#		trigger = {
+#			TECH_CASTLE_CONSTRUCTION = 3
+#		}
+#		gold_cost = 800
+#		build_time = 400
+#		upgrades_from = amber_mercenary_garrison_2
+#		ai_creation_factor = 5
+#		add_number_to_name = no
+#		
+#		garrison_size = 2
+#		fort_level = 0.5
+#		tradevalue = 5
+#		
+#		extra_tech_building_start = 10.0 # Never get at start of game
+#	}
+
+	mtr_warehouse_1 = {
+		
+		desc = mtr_warehouse_1_desc
+		potential = { 
+			OR = {
+				FROM = { is_patrician = yes }
+				NOR = {
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_BUILDINGS_OFF
+					}
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_RESOURCES_ONLY
+					}
+				}
+			}
+		}
+		trigger = {
+			TECH_TRADE_PRACTICES = 1
+		}
+		gold_cost = 350
+		build_time = 300
+		prerequisites = { amber_1 }
+		ai_creation_factor = 75
+		add_number_to_name = no
+		
+		tradevalue = 5
+		trade_route_wealth = 0.5
+		
+		extra_tech_building_start = 10 # Never get at start of game
+	}
+	
+		
+#	mtr_warehouse_2 = {
+#	
+#		desc = mtr_warehouse_2_desc
+#		potential = { 
+#			OR = {
+#				FROM = { is_patrician = yes }
+#				NOT = {
+#					has_game_rule = {
+#						name = MEDIEVAL_TRADE_ROUTES
+#						value = MTR_BUILDINGS_OFF
+#					}
+#				}
+#			}
+#		}
+#		trigger = {
+#			TECH_TRADE_PRACTICES = 3
+#			}
+#		gold_cost = 470
+#		build_time = 520
+#		upgrades_from = mtr_warehouse_1
+#		ai_creation_factor = 5
+#		add_number_to_name = no
+#		
+#		tradevalue = 8
+#		trade_route_wealth = 0.75
+#		
+#		extra_tech_building_start = 10 # Never get at start of game
+#	}
+	
+	
+#	mtr_warehouse_3 = {
+#	
+#		desc = mtr_warehouse_3_desc
+#		potential = { 
+#			OR = {
+#				FROM = { is_patrician = yes }
+#				NOT = {
+#					has_game_rule = {
+#						name = MEDIEVAL_TRADE_ROUTES
+#						value = MTR_BUILDINGS_OFF
+#					}
+#				}
+#			}
+#		}
+#		trigger = {
+#			TECH_TRADE_PRACTICES = 5
+#			}
+#		gold_cost = 520
+#		build_time = 600
+#		upgrades_from = mtr_warehouse_2
+#		ai_creation_factor = 5
+#		add_number_to_name = no
+#		
+#		tradevalue = 12
+#		trade_route_wealth = 1
+#		
+#		extra_tech_building_start = 10 # Never get at start of game
+#	}
+	
+	
+	mtr_marketplace = {
+	
+		desc = mtr_marketplace_desc
+		potential = { 
+			OR = {
+				FROM = { is_patrician = yes }
+				NOR = {
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_BUILDINGS_OFF
+					}
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_RESOURCES_ONLY
+					}
+				}
+			}
+		}
+		trigger = {
+			TECH_TRADE_PRACTICES = 1
+		}
+		gold_cost = 300
+		build_time = 300
+		prerequisites = { amber_1 }
+		ai_creation_factor = 65
+		add_number_to_name = no
+		
+		trade_route_wealth = 0.75
+		
+		extra_tech_building_start = 10 # Never get at start of game
+	}
+
+
+	mtr_trade_port = {
+		
+		desc = mtr_trade_port_desc
+		potential = { 
+			location = { port = yes }
+			OR = {
+				FROM = { is_patrician = yes }
+				NOR = {
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_BUILDINGS_OFF
+					}
+					has_game_rule = {
+						name = MEDIEVAL_TRADE_ROUTES
+						value = MTR_RESOURCES_ONLY
+					}
+				}
+			}
+		}
+		trigger = {
+			TECH_TRADE_PRACTICES = 2
+		}
+		gold_cost = 350
+		build_time = 300
+		prerequisites = { amber_2 mtr_marketplace }
+		ai_creation_factor = 65
+		add_number_to_name = no
+		
+		trade_route_wealth = 1
+		tech_growth_modifier = 0.05
+		
+		extra_tech_building_start = 10 # Never get at start of game
+	}
+	
+	
+#	mtr_chapel = {
+#	
+#		desc = mtr_chapel_desc
+#		potential = { 
+#			OR = {
+#				FROM = { is_patrician = yes }
+#				NOT = {
+#					has_game_rule = {
+#						name = MEDIEVAL_TRADE_ROUTES
+#						value = MTR_BUILDINGS_OFF
+#					}
+#				}
+#			}
+#		}
+#		trigger = {
+#			TECH_CITY_CONSTRUCTION = 1
+#		}
+#		gold_cost = 210
+#		build_time = 150
+#		prerequisites = { amber_1 }
+#		ai_creation_factor = 5
+#		add_number_to_name = no
+#		
+#		monthly_character_piety = 0.20
+#		monthly_character_prestige = 0.10
+#		
+#		extra_tech_building_start = 10
+#	}
+	
+	
+#	mtr_tavern = {
+#		
+#		desc = mtr_tavern_desc
+#		potential = { 
+#			OR = {
+#				FROM = { is_patrician = yes }
+#				NOT = {
+#					has_game_rule = {
+#						name = MEDIEVAL_TRADE_ROUTES
+#						value = MTR_BUILDINGS_OFF
+#					}
+#				}
+#			}
+#		}
+#		trigger = {
+#			TECH_CITY_CONSTRUCTION = 1
+#		}
+#		gold_cost = 150
+#		build_time = 200
+#		prerequisites = { amber_1 }
+#		ai_creation_factor = 12
+#		add_number_to_name = no
+#		
+#		monthly_character_piety = -0.15
+#		tax_income = 1.5
+#	
+#		extra_tech_building_start = 10
+#	}

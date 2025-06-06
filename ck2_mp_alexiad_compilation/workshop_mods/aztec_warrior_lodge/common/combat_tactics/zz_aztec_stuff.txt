@@ -1,0 +1,73 @@
+# -*- ck2.combat_tactics -*-
+
+### At the moment we have a pretty basic icon system for combat tactics showing
+### the uniticon which has the biggest bonus value in the tactic.
+### This is the sprite number for each unit:
+### Good 	 1=LI	 2=HI	 3=PIKE	 4=LC	 5=KNIGHTS	 6=ARCHERS	 7=HORSE ARCH.	 8=GALLEY	 9=ELEPHANT	10=CAMEL
+### Neutral 11=LI	12=HI	13=PIKE	14=LC	15=KNIGHTS	16=ARCHERS	17=HORSE ARCH.	18=GALLEY	19=ELEPHANT	20=CAMEL
+### Bad 	21=LI	22=HI	23=PIKE	24=LC	25=KNIGHTS	26=ARCHERS	27=HORSE ARCH.	28=GALLEY	29=ELEPHANT	30=CAMEL
+
+#Call to Glory - Jaguar's Fury - aztec (archers)
+glorious_aztec_tactic = {
+	days = 18
+	sprite = 6
+	group = volley
+
+	trigger = {
+		phase = skirmish  
+		archers = 0.01
+		leader = {
+			has_character_modifier = call_to_glory
+			society_member_of = warrior_lodge_aztec
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 15
+		modifier = {
+			factor = 1.5
+			flank_has_leader = yes
+			leader = {
+				martial = 8
+			}
+			light_troops = { 
+				who = archers
+				value = 0.6
+			}
+		}
+		modifier = {
+			factor = 1.5
+			flank_has_leader = yes
+			leader = {
+				martial = 12
+			}
+			light_troops = { 
+				who = archers
+				value = 0.5
+			}
+		}
+		modifier = {
+			factor = 1.5
+			flank_has_leader = yes
+			leader = {
+				martial = 16
+			}
+			light_troops = { 
+				who = archers
+				value = 0.4
+			}
+		}
+	}
+
+	archers_offensive = 3.75
+	archers_defensive = 1.25
+	
+	enemy = {
+		group = harass
+		factor = 1
+	}
+	enemy = {
+		group = charge
+		factor = 1
+	}
+}

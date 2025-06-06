@@ -1,0 +1,110 @@
+asian_route = {						# Non-duplicate provinces: 80
+	
+	
+	wealth = 7 #7.3				# Total base wealth of trade route ## 8/start_points*trade_posts/4
+	
+	trade_post_display_trigger = {	# Trade posts: 22
+		OR = {
+			
+			province_id = 737		# Tzamondos
+			province_id = 753		# Ankara
+			province_id = 741		# Nikomedia
+			province_id = 496		# Constantinople
+			province_id = 1932		# Polybotos
+			province_id = 746		# Ephesos
+			province_id = 744		# Abydos
+			province_id = 755		# Antalya
+			province_id = 757		# Famagusta
+			province_id = 483		# Rhodos
+			province_id = 477		# Methone
+			province_id = 510		# Constantia
+			province_id = 1887		# Skopje
+			province_id = 470		# Dyrrachion
+			province_id = 468		# Ragusa
+			province_id = 467		# Split
+			province_id = 490		# Thessalonika
+			province_id = 482		# Athens
+			province_id = 499		# Tarnovo
+			province_id = 505		# Belgrade
+			province_id = 806		# Cyrenaica
+			province_id = 480		# Crete
+			
+		}
+	}
+
+	modifier = {					# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.04
+		city_tax_modifier = 0.06
+		temple_tax_modifier = 0.03
+		tribal_tax_modifier = 0.25
+		trade_route_value = 1.38	# (wealth/nd_provinces)*(start_points*5)/2
+		local_movement_speed = 0.08
+		tech_growth_modifier = 0.05
+		icon = 6
+	}
+
+	start = {						# Start of trade route
+		505 704 733	764	806	802	
+	}
+
+	### Inland route
+	path = { 						# Tzamondos - Ankara
+		737 1934 752 753
+	}
+	path = { 						# Ankara - Nikomedia
+		753 1930 740 741
+	}
+	path = { 						# Nikomedia - Constantinople
+		741 496
+	}
+	path = { 						# Polybotos - Ankara
+		1932 1931 753
+	}
+	path = { 						# Polybotos - Nikomedia
+		1932 748 746 745 744 743 742 750 741
+	}
+	path = { 						# Aleppo - Tzamondos
+		733 734 735 736 737
+	}
+	path = { 						# Theodosiopolis - Tzamondos
+		704 706 737
+	}
+	path = { 						# Belgrade - Vidin
+		505 506
+	}
+	path = { 						# Vidin - Thessalonika
+		506 501 1888 492 490
+	}
+	path = { 						# Vidin - Tarnovo
+		506 507 499
+	}
+	path = { 						# Skopje - Split
+		1887 471 470 469 1972 468 466 467
+	}
+	path = { 						# Thessalonika - Skopje
+		490 1887 
+	}
+	path = { 						# Athens - Thessalonika
+		482 475 489 490
+	}
+	path = { 						# Thessalonika - Constantinople
+		490 1882 1885 1884 495 496
+	}
+	path = { 						# Tarnovo - Constantinople
+		499 494 497 496
+	}
+	path = { 						# Tarnovo - Constantia
+		499 508 509 510
+	}
+	
+	### Coastal route
+	path = { 						# Antioch - Polybotos
+		764 757 755 1932 
+	}
+	path = { 						# Alexandria - Crete - Rhodos - Athens
+		802 480 483 482
+	}
+	path = {						# Cyrenaica - Athens
+		806 477 481 482
+	}
+}
