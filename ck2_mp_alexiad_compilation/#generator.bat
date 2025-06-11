@@ -38,7 +38,7 @@ pause
 
 
 
-:: Copy files from git mods that do NOT have any dependencies
+:: Copy files from git mods which have no significant dependencies
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%ai_reformed_pagans_convert_their_provinces%git_mod_subfolder%ai_reformed_pagans_convert_their_provinces\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%better_slavic_union%git_mod_subfolder%better_slavic_union\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%even_more_bloodlines%git_mod_subfolder%even_more_bloodlines\ %this_mod_folder_location%
@@ -67,10 +67,7 @@ pause
 
 
 
-:: Copy files from workshop mods
-
-:: Workshop mods
-xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%aztec_warrior_lodge\ %this_mod_folder_location%
+:: Copy files from workshop mods which have no significant dependencies
 xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%hunting_dog_bloodline_fix\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%last_legendary_gathering_time\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%medieval_trade_routes\ %this_mod_folder_location%
@@ -85,10 +82,19 @@ pause
 
 
 
-:: Copy files from git mods that are dependent on other mods
+:: Copy mods with complex dependencies
+
+:: Git mods
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%bugfix_base_game_forge_bloodline%git_mod_subfolder%bugfix_base_game_forge_bloodline\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%more_bloodlines_bugfix%git_mod_subfolder%more_bloodlines_bugfix\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%trade_post_automation%git_mod_subfolder%trade_post_automation\ %this_mod_folder_location%
+
+:: Workshop mods
+:: Aztec Warrior Lodge MUST be after both ED:SJ and the community patch (it's a heavily-customised version of the steam workshop mod)
+xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%aztec_warrior_lodge\ %this_mod_folder_location%
+
+:: Final changes specific to this game
+xcopy /R /Y /Q /S /E /I .\z_final_changes\ %this_mod_folder_location%
 pause
 
 
