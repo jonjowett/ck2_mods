@@ -1,0 +1,31 @@
+#
+# Decisions
+mp_alexiad_apply_invasion_permission_flag_to_this_character_decision;§PMP-Inv:§! Apply Inv Perm Flag;;;;;;;;;;;;;x
+mp_alexiad_apply_invasion_permission_flag_to_this_character_decision_desc;If §Y[This.GetTitledFirstName]§! is a human player, [This.GetHerHis] ability to invade will be managed via title flags.;;;;;;;;;;;;;x
+mp_alexiad_remove_invasion_permission_flag_from_this_character_decision;§PMP-Inv:§! Remove Inv Perm Flag;;;;;;;;;;;;;x
+mp_alexiad_remove_invasion_permission_flag_from_this_character_decision_desc;§Y[This.GetTitledFirstName]§! will §Rnot be permitted to invade§! (if [This.GetSheHe] is a human player).;;;;;;;;;;;;;x
+mp_alexiad_remove_invasion_permission_flag_from_listed_character_decision;§PMP-Inv:§! Remove Inv Perm Flag (List);;;;;;;;;;;;;x
+mp_alexiad_remove_invasion_permission_flag_from_listed_character_decision_desc;The specified character will §Rnot be permitted to invade§! (if they are a human player).;;;;;;;;;;;;;x
+mp_alexiad_apply_invasion_permission_flag_to_this_title_decision;§PMP-Inv:§! Apply Inv Perm Flag;;;;;;;;;;;;;x
+mp_alexiad_apply_invasion_permission_flag_to_this_title_decision_desc;The specified character will §Gbe permitted to invade§! the §Y[This.GetFullBaseName]§! (if they are a human player).;;;;;;;;;;;;;x
+mp_alexiad_remove_invasion_permission_flag_from_this_title_decision;§PMP-Inv:§! Remove Inv Perm Flag;;;;;;;;;;;;;x
+mp_alexiad_remove_invasion_permission_flag_from_this_title_decision_desc;The specified character will §Rnot be permitted to invade§! the §Y[This.GetFullBaseName]§! (if they are a human player).;;;;;;;;;;;;;x
+#
+# Triggers
+mp_alexiad_this_character_has_no_invasion_permission_flag_tt;§M(MP-Inv)§! Has NO invasion permission flag;;;;;;;;;;;;;x
+mp_alexiad_this_character_has_any_invasion_permission_flag;§M(MP-Inv)§! Has ANY invasion permission flag;;;;;;;;;;;;;x
+mp_alexiad_all_invasion_permission_character_flags_have_not_been_issued_tt;§M(MP-Inv)§! At least one character invasion permission flag is available for use;;;;;;;;;;;;;x
+mp_alexiad_all_invasion_permission_character_flags_have_been_issued_tt;§M(MP-Inv)§! No character invasion permission flags are available for use;;;;;;;;;;;;;x
+mp_alexiad_root_does_not_have_permission_to_invade_at_least_one_of_froms_kingdoms_tt;§M(MP-Inv)§! [Root.GetTitledFirstName] does NOT have permission to invade ANY of [From.GetTitledFirstName]'s kingdoms;;;;;;;;;;;;;x
+mp_alexiad_root_does_not_have_permission_to_invade_at_least_one_of_froms_kingdoms_cb_tt;§M(MP-Inv)§! [Root.GetTitledFirstName] does NOT have permission to invade ANY of [From.GetTitledFirstName]'s kingdoms\n§g......§Y(All possible Invasion CBs will be shown, for reference, but they cannot be used.)§!;;;;;;;;;;;;;x
+mp_alexiad_root_has_permission_to_invade_at_least_one_of_froms_kingdoms_tt;§M(MP-Inv)§! [Root.GetTitledFirstName] has permission to invade at least one of [From.GetTitledFirstName]'s kingdoms;;;;;;;;;;;;;x
+mp_alexiad_root_has_permission_to_invade_at_least_one_of_froms_kingdoms_cb_tt;§M(MP-Inv)§! [Root.GetTitledFirstName] has permission to invade at least one of [From.GetTitledFirstName]'s kingdoms\n§g......§Y(Only Invasion CBs with permission are shown, due to engine limitations.)§!;;;;;;;;;;;;;x
+mp_alexiad_this_title_has_invasion_permission_flag_matching_prev_character_tt;§M(MP-Inv)§! [Prev.GetTitledFirstName] has permission to invade the [This.GetFullBaseName];;;;;;;;;;;;;x
+mp_alexiad_this_title_has_invasion_permission_flag_matching_root_character_tt;§M(MP-Inv)§! [Root.GetTitledFirstName] has permission to invade the [This.GetFullBaseName];;;;;;;;;;;;;x
+mp_alexiad_no_invasion_restrictions_for_ai_tt;§M(MP-Inv)§! No invasion restrictions for AI characters!;;;;;;;;;;;;;x
+#
+# Effects
+mp_alexiad_apply_invasion_permission_flag_to_this_character_tt;§Y[This.GetTitledFirstName]§!: Invasion permission management §Gstarted§!;;;;;;;;;;;;;x
+mp_alexiad_remove_invasion_permission_flag_from_this_character_tt;§Y[This.GetTitledFirstName]§!: Invasion permission management §Rended§!;;;;;;;;;;;;;x
+mp_alexiad_apply_prev_characters_invasion_permission_flag_to_this_title_tt;Invasion permission §Ggranted§!;;;;;;;;;;;;;x
+mp_alexiad_remove_prev_characters_invasion_permission_flag_from_this_title_tt;Invasion permission §Grevoked§!;;;;;;;;;;;;;x
