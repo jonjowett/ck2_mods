@@ -22,6 +22,10 @@ targetted_decisions = {
 			independent  = yes
 			is_landed    = yes
 			is_tributary = no
+			OR = {
+				is_within_diplo_range = ROOT
+				has_global_flag = expd_t_debug_mode
+			}
 		}
 		
 		potential = {
@@ -89,6 +93,10 @@ targetted_decisions = {
 			independent  = yes
 			is_landed    = yes
 			is_tributary = no
+			OR = {
+				is_within_diplo_range = ROOT
+				has_global_flag = expd_t_debug_mode
+			}
 		}
 		
 		potential = {
@@ -127,6 +135,9 @@ targetted_decisions = {
 				
 				# Cannot offer protection to someone who hates you (either rival or crime)
 				NOT = { is_foe = FROM }
+				
+				# Cannot offer protection to a human player (because they have no chance to refuse)
+				ai = yes
 				
 				# The potential suzerain must be either a lot stronger or a lot more prestigious than the potential tributary
 				
@@ -653,7 +664,7 @@ targetted_decisions = {
 			
 			# You're only propping me up so the heir of your dynasty inherits...
 			additive_modifier = {
-				value = -50
+				value = -100
 				NOT = { dynasty = FROM }
 				current_heir = { dynasty = FROM }
 				OR = {
@@ -689,7 +700,7 @@ targetted_decisions = {
 			
 			# Effect of being a holy order or mercenary band (IE: Can raise their own probably-rather-large band to defend themselves)
 			additive_modifier = {
-				value = -100
+				value = -200
 				OR = {
 					holy_order = yes
 					mercenary = yes
@@ -828,6 +839,14 @@ targetted_decisions = {
 			}
 			additive_modifier = {
 				value = -50
+				wealth >= 3000
+			}
+			additive_modifier = {
+				value = -50
+				wealth >= 4000
+			}
+			additive_modifier = {
+				value = -50
 				wealth >= 5000
 			}
 			
@@ -897,7 +916,8 @@ targetted_decisions = {
 				}
 			}
 			
-			# Effect of being primary defender in a losing war
+			# Effect of being primary defender in a losing war: Warscore
+			# -20% to -50%
 			additive_modifier = {
 				value = 100
 				custom_tooltip = {
@@ -909,6 +929,7 @@ targetted_decisions = {
 					}
 				}
 			}
+			# -50% to -80%
 			additive_modifier = {
 				value = 200
 				custom_tooltip = {
@@ -916,17 +937,21 @@ targetted_decisions = {
 					any_war = {
 						defender = { character = ROOT }
 						war_score >= 50
-						war_score <  80 # If defensive warscore is <-80, protector probably won't be able to help
+						war_score <  80
 					}
 				}
 			}
+			# If defensive warscore is < -80%, protector probably won't be able to help in time
+			
+			# Effect of being primary defender in a losing war: Larger attacker
+			# Attacker is 2x bigger
 			additive_modifier = {
 				value = 50
 				custom_tooltip = {
 					text = EXPD_T_REASON_DEFENDING_AGAINST_LARGER_AGGRESSOR
 					any_war = {
 						defender = { character = ROOT }
-						war_score <= -20 #This reason is invalid unless you're clearly losing!
+						war_score >= 20 #This reason is invalid unless you're clearly losing!
 						attacker = {
 							relative_power_including_allies_defender = {
 								who = PREV
@@ -936,13 +961,14 @@ targetted_decisions = {
 					}
 				}
 			}
+			# Attacker is 4x bigger
 			additive_modifier = {
 				value = 50
 				custom_tooltip = {
 					text = EXPD_T_REASON_DEFENDING_AGAINST_MUCH_LARGER_AGGRESSOR
 					any_war = {
 						defender = { character = ROOT }
-						war_score <= -20 #This reason is invalid unless you're clearly losing!
+						war_score >= 20 #This reason is invalid unless you're clearly losing!
 						attacker = {
 							relative_power_including_allies_defender = {
 								who = PREV
@@ -969,7 +995,7 @@ targetted_decisions = {
 				}
 			}
 			additive_modifier = {
-				value = -50
+				value = -100
 				distance_from_realm = {
 					who = FROM
 					value >= 300
@@ -979,48 +1005,48 @@ targetted_decisions = {
 				value = -100
 				distance_from_realm = {
 					who = FROM
+					value >= 400
+				}
+			}
+			additive_modifier = {
+				value = -150
+				distance_from_realm = {
+					who = FROM
 					value >= 500
 				}
 			}
 			additive_modifier = {
-				value = -100
+				value = -150
+				distance_from_realm = {
+					who = FROM
+					value >= 600
+				}
+			}
+			additive_modifier = {
+				value = -200
+				distance_from_realm = {
+					who = FROM
+					value >= 700
+				}
+			}
+			additive_modifier = {
+				value = -200
+				distance_from_realm = {
+					who = FROM
+					value >= 800
+				}
+			}
+			additive_modifier = {
+				value = -1000
 				distance_from_realm = {
 					who = FROM
 					value >= 1000
 				}
 			}
-			additive_modifier = {
-				value = -100
-				distance_from_realm = {
-					who = FROM
-					value >= 2000
-				}
-			}
-			additive_modifier = {
-				value = -100
-				distance_from_realm = {
-					who = FROM
-					value >= 3000
-				}
-			}
-			additive_modifier = {
-				value = -100
-				distance_from_realm = {
-					who = FROM
-					value >= 4000
-				}
-			}
-			additive_modifier = {
-				value = -100
-				distance_from_realm = {
-					who = FROM
-					value >= 5000
-				}
-			}
 			
 			# Debug mode!
 			additive_modifier = {
-				value = 1000
+				value = 10000
 				custom_tooltip = {
 					text = EXPD_T_REASON_DEBUG_MODE_ENABLED
 					FROM = { ai = no }
