@@ -60,10 +60,7 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 			
 			# Debug mode!
 			conditional_tooltip = {
-				trigger = {
-					FROM = { ai = no }
-					has_global_flag = expd_t_debug_mode
-				}
+				trigger = { FROM = { expd_t_this_character_can_use_debug_mode = yes } }
 				custom_tooltip = {
 					text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
 					always = yes

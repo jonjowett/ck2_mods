@@ -6,6 +6,10 @@ targetted_decisions = {
 		ai = no
 		potential = {
 			NOT = { has_global_flag = expd_t_debug_mode }
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
 		}
 		allow = {
 			always = yes
@@ -20,7 +24,7 @@ targetted_decisions = {
 		filter = self
 		ai = no
 		potential = {
-			has_global_flag = expd_t_debug_mode
+			expd_t_this_character_can_use_debug_mode = yes
 		}
 		allow = {
 			always = yes
@@ -36,7 +40,7 @@ targetted_decisions = {
 		third_party_filter = all
 		ai = no
 		potential = {
-			has_global_flag = expd_t_debug_mode
+			expd_t_this_character_can_use_debug_mode = yes
 		}
 		allow = {
 			always = yes
@@ -64,7 +68,7 @@ targetted_decisions = {
 		third_party_filter = all
 		ai = no
 		potential = {
-			has_global_flag = expd_t_debug_mode
+			expd_t_this_character_can_use_debug_mode = yes
 		}
 		allow = {
 			always = yes
@@ -85,7 +89,7 @@ targetted_decisions = {
 		filter = self
 		ai = no
 		potential = {
-			has_global_flag = expd_t_debug_mode
+			expd_t_this_character_can_use_debug_mode = yes
 		}
 		allow = {
 			always = yes

@@ -24,7 +24,7 @@ targetted_decisions = {
 			is_tributary = no
 			OR = {
 				is_within_diplo_range = ROOT
-				has_global_flag = expd_t_debug_mode
+				expd_t_this_character_can_use_debug_mode = yes
 			}
 		}
 		
@@ -38,10 +38,7 @@ targetted_decisions = {
 			
 			# Debug mode bypasses all allow block requirements (if you're a player) (so you can force-protectorise independent rulers)
 			trigger_if = {
-				limit = {
-					FROM = { ai = no }
-					has_global_flag = expd_t_debug_mode
-				}
+				limit = { FROM = { expd_t_this_character_can_use_debug_mode = yes } }
 				custom_tooltip = {
 					text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
 					always = yes
@@ -95,7 +92,7 @@ targetted_decisions = {
 			is_tributary = no
 			OR = {
 				is_within_diplo_range = ROOT
-				has_global_flag = expd_t_debug_mode
+				expd_t_this_character_can_use_debug_mode = yes
 			}
 		}
 		
@@ -109,10 +106,7 @@ targetted_decisions = {
 			
 			# Debug mode bypasses all allow block requirements (if you're a player) (so you can evaluate AI acceptance)
 			trigger_if = {
-				limit = {
-					FROM = { ai = no }
-					has_global_flag = expd_t_debug_mode
-				}
+				limit = { FROM = { expd_t_this_character_can_use_debug_mode = yes } }
 				custom_tooltip = {
 					text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
 					always = yes
@@ -1049,8 +1043,7 @@ targetted_decisions = {
 				value = 10000
 				custom_tooltip = {
 					text = EXPD_T_REASON_DEBUG_MODE_ENABLED
-					FROM = { ai = no }
-					has_global_flag = expd_t_debug_mode
+					FROM = { expd_t_this_character_can_use_debug_mode = yes }
 				}
 			}
 			
@@ -1163,10 +1156,12 @@ targetted_decisions = {
 # ROOT is the decision taker (ie. the protectorate)
 
 decisions = {
+	
 	expd_t_protectorate_independence_normal = {
+		
 		is_high_prio = yes
 		ai_check_interval = 6
-
+		
 		potential = {
 			is_tributary = {
 				type = expd_t_protectorate
@@ -1179,10 +1174,10 @@ decisions = {
 				
 				# Get out for free if you're a player in debug mode
 				trigger_if = {
-					limit = { has_global_flag = expd_t_debug_mode }
+					limit = { expd_t_this_character_can_use_debug_mode = yes }
 					custom_tooltip = {
 						text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
-						ai = no
+						always = yes
 					}
 				}
 				
