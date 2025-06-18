@@ -28,11 +28,11 @@ if exist %this_mod_folder_location% (
 
 :: Community Patch
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%community_patch_personalised%git_mod_subfolder%community_patch_personalised\ %this_mod_folder_location%
-pause
+::pause
 
 :: More Bloodlines (from MBB ref folder)
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%more_bloodlines_bugfix\reference_files\more_bloodlines\ %this_mod_folder_location%
-pause
+::pause
 
 
 
@@ -61,7 +61,7 @@ xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_targeted_van
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_tributaries%git_mod_subfolder%expanded_decisions_tributaries\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%fixed_wol_personalised%git_mod_subfolder%fixed_wol_personalised\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%normans_can_raid%git_mod_subfolder%normans_can_raid\ %this_mod_folder_location%
-pause
+::pause
 
 
 
@@ -76,7 +76,7 @@ xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%no_artifact_losing\ %this_
 xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%three_doctrines_reform\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%trait_softcap_exterminated\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%viking_counter_ironman\ %this_mod_folder_location%
-pause
+::pause
 
 
 
@@ -95,7 +95,7 @@ xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%aztec_warrior_lodge\ %this
 
 :: Final changes specific to this game
 xcopy /R /Y /Q /S /E /I .\z_final_changes\ %this_mod_folder_location%
-pause
+::pause
 
 
 
@@ -103,4 +103,4 @@ pause
 
 :: Cleanup: Delete all files in the root mod folder
 del /F /Q %this_mod_folder_location%*
-pause
+::pause

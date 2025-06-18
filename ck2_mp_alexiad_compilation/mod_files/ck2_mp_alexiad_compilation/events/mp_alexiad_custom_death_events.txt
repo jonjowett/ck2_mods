@@ -1,0 +1,16 @@
+namespace = mp_alexiad_custom_death
+
+character_event = {
+	id = mp_alexiad_custom_death.1
+	desc = HFP_DESC_30200
+	picture = GFX_evt_battle
+	border = GFX_event_normal_frame_war
+	hide_from = yes
+	is_triggered_only = yes
+	option = {
+		name = EVTOPTA_HFP_30200
+		death = {
+			death_reason = death_crocodile
+		}
+	}
+}
