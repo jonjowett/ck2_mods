@@ -10,22 +10,11 @@ targetted_decisions = {
 		ai = no
 		filter = all_including_me
 		
-		# In MP, only the host can change flags
-		from_potential = {
-			ai = no
-			OR = {
-				multiplayer = no
-				is_multiplayer_host_character = yes
-			}
-		}
+		from_potential = { edmp_this_character_can_take_admin_actions = yes }
 		
-		# In MP, only humans can be flagged
+		# Only allow potential-humans to be flagged
 		potential = {
-			OR = {
-				multiplayer = no
-				ai = no
-			}
-			is_playable = yes
+			edmp_this_character_could_be_a_human_player = yes
 			edmp_this_character_has_no_invasion_permission_flag = yes
 		}
 		
@@ -44,14 +33,7 @@ targetted_decisions = {
 		ai = no
 		filter = all_including_me
 		
-		# In MP, only the host can change flags
-		from_potential = {
-			ai = no
-			OR = {
-				multiplayer = no
-				is_multiplayer_host_character = yes
-			}
-		}
+		from_potential = { edmp_this_character_can_take_admin_actions = yes }
 		
 		# Any character with a flag can be manually unflagged (player or not)
 		potential = { edmp_this_character_has_any_invasion_permission_flag = yes }
@@ -80,16 +62,10 @@ targetted_decisions = {
 		# Non-functional in self-targeted decisions
 		from_potential = { always = yes }
 		
-		# In MP, only the host can change flags
-		potential = {
-			ai = no
-			OR = {
-				multiplayer = no
-				is_multiplayer_host_character = yes
-			}
-		}
+		potential = { edmp_this_character_can_take_admin_actions = yes }
 		
-		allow = { always = yes }
+		# Only allow the decision to be taken if there will be someone in the third-party list
+		allow = {                 any_character = { edmp_this_character_has_any_invasion_permission_flag = yes } }
 		
 		third_party_potential = { ROOT_FROMFROM = { edmp_this_character_has_any_invasion_permission_flag = yes } }
 		
@@ -132,14 +108,7 @@ title_decisions = {
 		# Since there's no filter, this probably doesn't matter, but let's use FROM (decision-taker) just to be safe.
 		third_party = FROM
 		
-		# In MP, only the host can change flags
-		from_potential = {
-			ai = no
-			OR = {
-				multiplayer = no
-				is_multiplayer_host_character = yes
-			}
-		}
+		from_potential = { edmp_this_character_can_take_admin_actions = yes }
 		
 		# Invasion permission can only be given at kingdom level, and only to kingdoms that have de jure vassals.
 		# Further, only show this decision if there is someone who could be given permission.
@@ -149,7 +118,12 @@ title_decisions = {
 				any_direct_de_jure_vassal_title = { tier = COUNT }
 				any_direct_de_jure_vassal_title = { any_direct_de_jure_vassal_title = { tier = COUNT } }
 			}
-			any_character = { # Keep in sync with third_party_potential
+		}
+		
+		# Only allow the decision to be taken if there will be someone in the third-party list
+		allow = {
+			any_character = {
+				# Keep the contents of this block in sync with the equivalent section in third_party_potential
 				edmp_this_character_has_any_invasion_permission_flag = yes
 				ROOT = { edmp_this_title_has_invasion_permission_flag_matching_prev_character = no }
 			}
@@ -157,15 +131,14 @@ title_decisions = {
 		
 		# Only include characters for whom invasion permission management is enabled, but they do NOT have permission for this kingdom
 		third_party_potential = {
-			ROOT_FROMFROM = { # Keep in sync with potential
+			ROOT_FROMFROM = {
+				# Keep the contents of this block in sync with the equivalent section in allow
 				edmp_this_character_has_any_invasion_permission_flag = yes
 				ROOT = { edmp_this_title_has_invasion_permission_flag_matching_prev_character = no }
 			}
 		}
 		
 		third_party_allow = { always = yes }
-		
-		allow = { always = yes }
 		
 		effect = { ROOT_FROMFROM = { ROOT = { edmp_apply_prev_characters_invasion_permission_flag_to_this_title = yes } } }
 		
@@ -186,14 +159,7 @@ title_decisions = {
 		# Since there's no filter, this probably doesn't matter, but let's use FROM (decision-taker) just to be safe.
 		third_party = FROM
 		
-		# In MP, only the host can change flags
-		from_potential = {
-			ai = no
-			OR = {
-				multiplayer = no
-				is_multiplayer_host_character = yes
-			}
-		}
+		from_potential = { edmp_this_character_can_take_admin_actions = yes }
 		
 		# Invasion permission can only be given at kingdom level, and only to kingdoms that have de jure vassals.
 		# Further, only show this decision if there is someone who could have permission revoked.
@@ -203,21 +169,25 @@ title_decisions = {
 				any_direct_de_jure_vassal_title = { tier = COUNT }
 				any_direct_de_jure_vassal_title = { any_direct_de_jure_vassal_title = { tier = COUNT } }
 			}
-			any_character = { # Keep in sync with third_party_potential
+		}
+		
+		# Only allow the decision to be taken if there will be someone in the third-party list
+		allow = {
+			any_character = {
+				# Keep the contents of this block in sync with the equivalent section in third_party_potential
 				ROOT = { edmp_this_title_has_invasion_permission_flag_matching_prev_character = yes }
 			}
 		}
 		
 		# Only include characters who have permission to invade this specific title
 		third_party_potential = {
-			ROOT_FROMFROM = { # Keep in sync with potential
+			ROOT_FROMFROM = {
+				# Keep the contents of this block in sync with the equivalent section in allow
 				ROOT = { edmp_this_title_has_invasion_permission_flag_matching_prev_character = yes }
 			}
 		}
 		
 		third_party_allow = { always = yes }
-		
-		allow = { always = yes }
 		
 		effect = { ROOT_FROMFROM = { ROOT = { edmp_remove_prev_characters_invasion_permission_flag_from_this_title = yes } } }
 		

@@ -10,7 +10,7 @@ namespace = edmp_global
 
 # Gateway event for the main/global menu.
 # This should be the ONLY entrance and ONLY exit from the menu.
-character_event = {
+narrative_event = {
 	
 	id      = edmp_global.1000
 	title   = edmp_global_1000_title
@@ -27,7 +27,7 @@ character_event = {
 	
 	option = {
 		name = edmp_global_1000_evtopt_cbs
-		hidden_tooltip = { character_event = { id = edmp_global.2000 } }
+		hidden_tooltip = { narrative_event = { id = edmp_global.2000 } }
 	}
 	
 	option = {
@@ -43,7 +43,7 @@ character_event = {
 
 # Gateway event for the CB menu.
 # This should be the ONLY entrance and ONLY exit from the CB menu.
-character_event = {
+narrative_event = {
 	
 	id      = edmp_global.2000
 	title   = edmp_global_2000_title
@@ -59,7 +59,7 @@ character_event = {
 	option = {
 		name = edmp_global_2000_evtopt_invasions_are_disabled_for_everyone_by_game_rule_exit
 		trigger = { has_game_rule = { name = multiplayer_invasions value = off } }
-		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+		hidden_tooltip = { narrative_event = { id = edmp_global.1000 } }
 	}
 	option = {
 		trigger = { NOT = { has_game_rule = { name = multiplayer_invasions value = off } } }
@@ -75,7 +75,7 @@ character_event = {
 			text = edmp_global_2000_evtopt_invasions_are_managed_individually
 			trigger = { edmp_global_invasion_permissions_are_managed_individually = yes }
 		}
-		hidden_tooltip = { long_character_event = { id = edmp_global.2100 } }
+		hidden_tooltip = { narrative_event = { id = edmp_global.2100 } }
 	}
 	
 	
@@ -83,13 +83,13 @@ character_event = {
 	# Exit, back to main menu
 	option = {
 		name = edmp_global_evtopt_exit
-		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+		hidden_tooltip = { narrative_event = { id = edmp_global.1000 } }
 	}
 	
 }
 
 # Manage Invasion CB rules
-long_character_event = {
+narrative_event = {
 	
 	id      = edmp_global.2100
 	title   = edmp_global_2100_title
@@ -103,24 +103,27 @@ long_character_event = {
 		name = edmp_global_2100_evtopt_set_invasions_disabled_for_everyone
 		trigger = { edmp_global_invasions_are_not_disabled_for_everyone = yes }
 		edmp_global_invasions_set_disabled_for_everyone = yes
+		hidden_tooltip = { narrative_event = { id = edmp_global.2100 } }
 	}
 	
 	option = {
 		name = edmp_global_2100_evtopt_set_invasions_managed_individually
 		trigger = { edmp_global_invasion_permissions_are_not_managed_individually = yes }
 		edmp_global_invasions_set_permissions_managed_individually = yes
+		hidden_tooltip = { narrative_event = { id = edmp_global.2100 } }
 	}
 	
 	option = {
 		name = edmp_global_2100_evtopt_set_invasions_enabled_for_everyone
 		trigger = { edmp_global_invasions_are_not_enabled_for_everyone = yes }
 		edmp_global_invasions_set_enabled_for_everyone = yes
+		hidden_tooltip = { narrative_event = { id = edmp_global.2100 } }
 	}
 	
 	# Exit, back to CB menu
 	option = {
 		name = edmp_global_evtopt_exit
-		hidden_tooltip = { character_event = { id = edmp_global.2000 } }
+		hidden_tooltip = { narrative_event = { id = edmp_global.2000 } }
 	}
 	
 }

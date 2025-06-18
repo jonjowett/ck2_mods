@@ -7,9 +7,10 @@ edmp_invasion_can_use_gui = {
 	#  --- If this is true, the list of possible kingdom targets MUST be filtered by can_use_title.
 	# In SP, also show the MP game rule logic to the player, even though it won't have any effect
 	#      (so that an MP save editor can audit).
+	
 	OR = {
-		ROOT = { show_scope_change = no ai = yes }
-		multiplayer = no
+		
+		# This trigger_if block MUST appear above all other conditions, or the in-game tooltip is messed up.
 		trigger_if = {
 			limit = { edmp_global_invasions_are_disabled_for_everyone = yes }
 			edmp_global_invasions_are_not_disabled_for_everyone = yes # Should always be false (ie. blocking) in this context
@@ -18,20 +19,22 @@ edmp_invasion_can_use_gui = {
 			limit = { edmp_global_invasions_are_enabled_for_everyone = yes }
 			edmp_global_invasions_are_enabled_for_everyone = yes # Should always be true in this context, included so that the player is notified
 		}
-		trigger_else = {
-			# Retain this extra AND for a better tooltip
-			# Audax Validator "." Ignore_1001
-			AND = {
-				edmp_global_invasion_permissions_are_managed_individually = yes # Should always be true in this context, included so that the player is notified
-				trigger_if = {
-					limit = { edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms = yes }
-					custom_tooltip = { text = edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms_cb_tt always = yes }
-				}
-				trigger_else = {
-					custom_tooltip = { text = edmp_root_does_not_have_permission_to_invade_at_least_one_of_froms_kingdoms_cb_tt always = no }
-				}
+		trigger_else_if = {
+			limit = {
+				# Implicit: Invasions are managed individually for each human player
+				edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms = yes
 			}
+			custom_tooltip = { text = edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms_cb_tt always = yes }
 		}
+		trigger_else = {
+			# Invasions are managed individually for each player, and ROOT does NOT have permission to invade FROM
+			custom_tooltip = { text = edmp_root_does_not_have_permission_to_invade_at_least_one_of_froms_kingdoms_cb_tt always = no }
+		}
+		
+		edmp_root_is_an_ai = yes
+		
+		edmp_this_is_not_a_multiplayer_game = yes
+		
 	}
 }
 
@@ -41,8 +44,7 @@ edmp_invasion_can_use_title = {
 	#       then ONLY show those titles where ROOT has permission.
 	# Otherwise, show all
 	OR = {
-		ROOT = { show_scope_change = no ai = yes }
-		multiplayer = no
+		
 		trigger_if = {
 			limit = {
 				edmp_global_invasion_permissions_are_managed_individually = yes
@@ -56,6 +58,11 @@ edmp_invasion_can_use_title = {
 				always = yes
 			}
 		}
+		
+		edmp_root_is_an_ai = yes
+		
+		edmp_this_is_not_a_multiplayer_game = yes
+		
 	}
 }
 
@@ -167,7 +174,7 @@ edmp_root_does_not_have_permission_to_invade_at_least_one_of_froms_kingdoms = {
 edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms = {
 	custom_tooltip = {
 		text = edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms_tt
-		FROM = {
+		ROOT_FROM = {
 			any_realm_title = {
 				tier = COUNT
 				any_dejure_liege = {

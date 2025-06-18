@@ -4,14 +4,7 @@ decisions = {
 		
 		ai = no
 		
-		# In MP, only the host can change global rules
-		potential = {
-			ai = no
-			OR = {
-				multiplayer = no
-				is_multiplayer_host_character = yes
-			}
-		}
+		potential = { edmp_this_character_can_take_admin_actions = yes }
 		
 		allow = {
 			custom_tooltip = {
@@ -23,7 +16,7 @@ decisions = {
 		effect = {
 			custom_tooltip = {
 				text = edmp_global_menu_popup_event_tt
-				character_event = { id = edmp_global.1000 }
+				narrative_event = { id = edmp_global.1000 }
 			}
 		}
 		
@@ -44,11 +37,7 @@ targetted_decisions = {
 		# In SP, only a player with the menu open should be able to see this decision.
 		# In MP, only the host with the menu open should be able to see this decision.
 		potential = {
-			ai = no
-			OR = {
-				multiplayer = no
-				is_multiplayer_host_character = yes
-			}
+			edmp_this_character_can_take_admin_actions = yes
 			has_global_flag = edmp_global_menu_open
 		}
 		
