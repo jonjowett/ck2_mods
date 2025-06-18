@@ -95,6 +95,15 @@ targetted_decisions = {
 			always = yes
 		}
 		effect = {
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = expd_t_debug_mode_notification_sent_tt
+					save_event_target_as = expd_t_debug_mode_decision_taker
+					any_player = { character_event = { id = EDTDebugModeNotification.1000 } }
+					clear_event_target = expd_t_debug_mode_decision_taker
+				}
+			}
 			any_character = {
 				limit = {
 					is_tributary = { type = expd_t_protectorate }
@@ -104,6 +113,69 @@ targetted_decisions = {
 			}
 		}
 		
+	}
+	
+	expd_t_debug_cancel_all_of_this_suzerains_protectorates = {
+		only_playable = yes
+		filter = independent_rulers_including_me
+		ai = no
+		from_potential = {
+			expd_t_this_character_can_use_debug_mode = yes
+		}
+		potential = {
+			any_tributary = { is_tributary = { type = expd_t_protectorate } }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = expd_t_debug_mode_notification_sent_tt
+					FROM = { save_event_target_as = expd_t_debug_mode_decision_taker }
+					ROOT = { save_event_target_as = expd_t_debug_mode_character_affected }
+					FROM = { any_player = { character_event = { id = EDTDebugModeNotification.1100 } } }
+					clear_event_target = expd_t_debug_mode_decision_taker
+					clear_event_target = expd_t_debug_mode_character_affected
+				}
+			}
+			any_tributary = {
+				limit = { is_tributary = { type = expd_t_protectorate } }
+				suzerain = { remove_tributary = PREV }
+			}
+		}
+	}
+	
+	expd_t_debug_cancel_this_protectorate = {
+		only_playable = yes
+		filter = independent_rulers_including_me
+		ai = no
+		from_potential = {
+			expd_t_this_character_can_use_debug_mode = yes
+		}
+		potential = {
+			is_tributary = { type = expd_t_protectorate }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = expd_t_debug_mode_notification_sent_tt
+					FROM     = { save_event_target_as = expd_t_debug_mode_decision_taker }
+					ROOT     = { save_event_target_as = expd_t_debug_mode_character_affected }
+					suzerain = { save_event_target_as = expd_t_debug_mode_character_affected_other }
+					FROM = { any_player = { character_event = { id = EDTDebugModeNotification.1200 } } }
+					clear_event_target = expd_t_debug_mode_decision_taker
+					clear_event_target = expd_t_debug_mode_character_affected
+					clear_event_target = expd_t_debug_mode_character_affected_other
+				}
+			}
+			suzerain = { remove_tributary = PREV }
+		}
 	}
 	
 }

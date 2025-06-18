@@ -1,0 +1,73 @@
+namespace = EDTDebugModeNotification
+
+# Expected scopes, which should be set up in advance (if relevant) for all events:
+#
+# ROOT                                                    = (Human) character being notified
+#
+# event_target:expd_t_debug_mode_decision_taker           = (Human) character who took a debug mode action (usually the multiplayer host)
+# event_target:expd_t_debug_mode_character_affected       = (AI/human) character primarily affected by the debug mode action
+# event_target:expd_t_debug_mode_character_affected_other = (AI/human) character secondarily affected by the debug mode action
+
+
+character_event = {
+	id       = EDTDebugModeNotification.1000
+	desc     = EDTDebugModeNotification_1000_Desc
+	title    = EDTDebugModeNotification_GenericTitle
+	picture  = GFX_evt_camaraderie
+	portrait = event_target:expd_t_debug_mode_decision_taker
+	is_triggered_only = yes
+	option = { name = OK }
+}
+
+character_event = {
+	id       = EDTDebugModeNotification.1100
+	desc     = EDTDebugModeNotification_1100_Desc
+	title    = EDTDebugModeNotification_GenericTitle
+	picture  = GFX_evt_camaraderie
+	portrait = event_target:expd_t_debug_mode_decision_taker
+	is_triggered_only = yes
+	option = {
+		show_portrait = event_target:expd_t_debug_mode_character_affected
+		name = OK
+	}
+}
+
+character_event = {
+	id       = EDTDebugModeNotification.1200
+	desc     = EDTDebugModeNotification_1200_Desc
+	title    = EDTDebugModeNotification_GenericTitle
+	picture  = GFX_evt_camaraderie
+	portrait = event_target:expd_t_debug_mode_decision_taker
+	is_triggered_only = yes
+	option = {
+		show_portrait = event_target:expd_t_debug_mode_character_affected
+		show_portrait = event_target:expd_t_debug_mode_character_affected_other
+		name = OK
+	}
+}
+
+character_event = {
+	id       = EDTDebugModeNotification.2000
+	desc     = EDTDebugModeNotification_2000_Desc
+	title    = EDTDebugModeNotification_GenericTitle
+	picture  = GFX_evt_camaraderie
+	portrait = event_target:expd_t_debug_mode_decision_taker
+	is_triggered_only = yes
+	option = {
+		show_portrait = event_target:expd_t_debug_mode_character_affected
+		name = OK
+	}
+}
+
+character_event = {
+	id       = EDTDebugModeNotification.3000
+	desc     = EDTDebugModeNotification_3000_Desc
+	title    = EDTDebugModeNotification_GenericTitle
+	picture  = GFX_evt_camaraderie
+	portrait = event_target:expd_t_debug_mode_decision_taker
+	is_triggered_only = yes
+	option = {
+		show_portrait = event_target:expd_t_debug_mode_character_affected
+		name = OK
+	}
+}

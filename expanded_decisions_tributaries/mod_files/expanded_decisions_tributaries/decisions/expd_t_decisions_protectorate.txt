@@ -54,6 +54,20 @@ targetted_decisions = {
 		}
 		
 		effect = {
+			if = {
+				limit = {
+					multiplayer = yes
+					FROM = { expd_t_this_character_can_use_debug_mode = yes }
+				}
+				custom_tooltip = {
+					text = expd_t_debug_mode_notification_sent_tt
+					FROM = { save_event_target_as = expd_t_debug_mode_decision_taker }
+					ROOT = { save_event_target_as = expd_t_debug_mode_character_affected }
+					FROM = { any_player = { character_event = { id = EDTDebugModeNotification.2000 } } }
+					clear_event_target = expd_t_debug_mode_decision_taker
+					clear_event_target = expd_t_debug_mode_character_affected
+				}
+			}
 			FROM = {
 				make_tributary = {
 					who = ROOT
@@ -221,6 +235,20 @@ targetted_decisions = {
 		}
 		
 		effect = {
+			if = {
+				limit = {
+					multiplayer = yes
+					FROM = { expd_t_this_character_can_use_debug_mode = yes }
+				}
+				custom_tooltip = {
+					text = expd_t_debug_mode_notification_sent_tt
+					FROM = { save_event_target_as = expd_t_debug_mode_decision_taker }
+					ROOT = { save_event_target_as = expd_t_debug_mode_character_affected }
+					FROM = { any_player = { character_event = { id = EDTDebugModeNotification.2000 } } }
+					clear_event_target = expd_t_debug_mode_decision_taker
+					clear_event_target = expd_t_debug_mode_character_affected
+				}
+			}
 			FROM = {
 				make_tributary = {
 					who = ROOT
@@ -1224,6 +1252,20 @@ decisions = {
 			}
 		}
 		effect = {
+			if = {
+				limit = {
+					multiplayer = yes
+					expd_t_this_character_can_use_debug_mode = yes
+				}
+				custom_tooltip = {
+					text = expd_t_debug_mode_notification_sent_tt
+					ROOT     = { save_event_target_as = expd_t_debug_mode_decision_taker }
+					suzerain = { save_event_target_as = expd_t_debug_mode_character_affected }
+					any_player = { character_event = { id = EDTDebugModeNotification.3000 } }
+					clear_event_target = expd_t_debug_mode_decision_taker
+					clear_event_target = expd_t_debug_mode_character_affected
+				}
+			}
 			any_suzerain = {
 				character_event = { id = JD.2200 }
 				remove_tributary = ROOT
