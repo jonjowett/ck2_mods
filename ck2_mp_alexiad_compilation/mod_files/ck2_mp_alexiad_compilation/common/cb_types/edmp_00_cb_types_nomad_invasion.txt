@@ -19,46 +19,11 @@ nomad_invasion = {
 			population = 30000
 			population_factor = 0.75 # 75% of max
 		}
-		
-		###### Begin mod changes ######
-		# If ROOT is a human who has permission to invade any of FROM's titles:
-		#  --- Enable the CB for all relevant titles.
-		#  --- Ensure that ONLY the titles ROOT has permission to invade are displayed (via can_use_title).
-		# Otherwise, if ROOT is a human, disable ALL invasions, with a relevant message.
-		# Finally (ie. for AI), do nothing.
-		trigger_if = {
-			limit = {
-				ROOT = { ai = no }
-				mp_alexiad_root_has_permission_to_invade_at_least_one_of_froms_kingdoms = yes
-			}
-			custom_tooltip = { text = mp_alexiad_root_has_permission_to_invade_at_least_one_of_froms_kingdoms_cb_tt always = yes }
-		}
-		trigger_else_if = {
-			limit = { ROOT = { ai = no } }
-			custom_tooltip = { text = mp_alexiad_root_does_not_have_permission_to_invade_at_least_one_of_froms_kingdoms_cb_tt always = no }
-		}
-		trigger_else = {
-			custom_tooltip = { text = mp_alexiad_no_invasion_restrictions_for_ai_tt always = yes }
-		}
-		###### End of mod changes ######
-		
+		edmp_invasion_can_use_gui = yes
 	}
 	
 	can_use_title = {
-		###### Begin mod changes ######
-		# If ROOT is a human and has permission to invade ANY title held by FROM, ONLY show those where ROOT has permission
-		# Otherwise, show all
-		trigger_if = {
-			limit = {
-				ROOT = { ai = no }
-				mp_alexiad_root_has_permission_to_invade_at_least_one_of_froms_kingdoms = yes
-			}
-			mp_alexiad_this_title_has_invasion_permission_flag_matching_root_character = yes
-		}
-		trigger_else = {
-			custom_tooltip = { text = mp_alexiad_no_invasion_restricitons_for_ai_tt always = yes }
-		}
-		###### End of mod changes ######
+		edmp_invasion_can_use_title = yes
 	}
 	
 	on_add = {
@@ -91,7 +56,17 @@ nomad_invasion = {
 		ROOT = {
 			NOT = { same_realm = FROM }
 		}
+	}
+	
+	is_valid_title = {
 		
+		FROM = {
+			any_realm_province = {
+				de_jure_liege_or_above = PREVPREV
+			}
+		}
+		
+		# Mod bugfix: Moved from is_valid to is_valid_title
 		OR = { # This ensures that the AI doesn't declare this type of war against someone who only holds a few counties within the targeted title...
 			ROOT = {
 				ai = no
@@ -106,14 +81,7 @@ nomad_invasion = {
 				}
 			}
 		}
-	}
-	
-	is_valid_title = {
-		FROM = {
-			any_realm_province = {
-				de_jure_liege_or_above = PREVPREV
-			}
-		}
+		
 	}
 
 	on_success = {
@@ -137,6 +105,7 @@ nomad_invasion = {
 						save_event_target_as = nickname_target
 					}
 					ROOT = { 
+						# Audax Validator "." Ignore_NEXT
 						save_event_target_as = nickname_receiver
 					}
 					random_list = {

@@ -1,0 +1,8 @@
+expd_t_this_character_can_use_debug_mode = {
+	ai = no
+	has_global_flag = expd_t_debug_mode
+	OR = {
+		multiplayer = no
+		is_multiplayer_host_character = yes
+	}
+}

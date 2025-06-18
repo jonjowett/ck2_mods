@@ -1,0 +1,30 @@
+namespace = edmp_gmn
+
+# Numbering scheme:
+#  --- Notification events should have the same event number as the equivalent rule-change event.
+#  --- Eg: The event allowing change in invasion rules is edmp_global.2100, so the correct ID for the notification is edmp_gmn.2100.
+
+character_event = {
+	
+	id      = edmp_gmn.2100
+	title   = edmp_gmn_title
+	picture = GFX_evt_camaraderie
+	
+	desc = {
+		trigger = { edmp_global_invasions_are_disabled_for_everyone = yes }
+		text = edmp_gmn_2100_desc_invasions_are_disabled_for_everyone
+	}
+	desc = {
+		trigger = { edmp_global_invasion_permissions_are_managed_individually = yes }
+		text = edmp_gmn_2100_desc_invasions_are_managed_individually
+	}
+	desc = {
+		trigger = { edmp_global_invasions_are_enabled_for_everyone = yes }
+		text = edmp_gmn_2100_desc_invasions_are_enabled_for_everyone
+	}
+	
+	is_triggered_only = yes
+	
+	option = { name = edmp_gmn_evtopt_ok }
+	
+}

@@ -1,4 +1,10 @@
+# Audax Validator EnableCommentMetadata
+
+# "More Bloodlines" makes a minor change to the on_reverse_demand section, and this needs to be preserved (or that bloodline will be unobtainable).
+# If "More Bloodlines" is NOT included in the game, it should be safe to include a call to a non-existent event.
+
 # Crusade using the new crusade system. See crusades.info in the religion folder for documentation
+# Audax Validator "." Ignore_NEXT
 new_crusade = {
 	name = CB_NAME_CRUSADE
 	war_name = WAR_NAME_CRUSADE
@@ -165,6 +171,7 @@ new_crusade = {
 	on_success_title = {
 		ROOT = {
 			crusade_target_title = {
+				# Audax Validator "." Ignore_NEXT
 				save_event_target_as = new_crusade_title
 			}
 		}
@@ -176,6 +183,7 @@ new_crusade = {
 		}
 
 		most_participating_crusader = {
+			# Audax Validator "." Ignore_NEXT
 			save_event_target_as = new_crusade_most_participating_member
 		}
 
@@ -225,8 +233,9 @@ new_crusade = {
 					set_character_flag = achievement_venetian_guile
 				}
 			}
-
-			if = {
+			
+			# Mod edit: Bugfix: Changed this if statement to any_attacker. (AIs without a beneficiary should choose one RIGHT NOW!)
+			any_attacker = {
 				limit = {
 					ai = yes
 					NOT = {
@@ -237,7 +246,7 @@ new_crusade = {
 				}
 				character_event = { id = HFP.41007 }
 			}
-		
+			
 			# Should we give the seized land to the Official Crusade Recipient?
 			if = {
 				limit = {
@@ -659,6 +668,7 @@ new_crusade = {
 	                	}
 	                }
 				}
+				# Audax Validator "." Ignore_NEXT
 				save_event_target_as = crusade_attacker
 				character_event = { id = HFP.41007 }
 			}
@@ -1070,6 +1080,7 @@ new_crusade = {
 					set_variable = { which = count value = 20 }
 					while = {
 						limit = {
+							# Audax Validator "." Ignore_1001
 							AND = {
 								wealth = 2000
 								check_variable = { which = count value = 1 }
@@ -1462,11 +1473,14 @@ new_crusade = {
 		}
 		if = {
 			limit = {
-				ROOT = { religion = christian }
+				# Mod edit: Bugfix: religion -> religion_group
+				ROOT = { religion_group = christian }
 			}
 			most_participating_defender = {
-				character_event = { id = IB.170 }
-				
+				character_event = {
+					# Audax Validator "." Ignore_NEXT
+					id = IB.170
+				}
 			}
 		}
 		any_defender = {

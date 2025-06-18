@@ -88,6 +88,8 @@ xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%viking_counter_ironman\ %t
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%bugfix_base_game_forge_bloodline%git_mod_subfolder%bugfix_base_game_forge_bloodline\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%more_bloodlines_bugfix%git_mod_subfolder%more_bloodlines_bugfix\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%trade_post_automation%git_mod_subfolder%trade_post_automation\ %this_mod_folder_location%
+:: ED:MP must be after both More Bloodlines and MBB
+xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_multiplayer%git_mod_subfolder%expanded_decisions_multiplayer\ %this_mod_folder_location%
 
 :: Workshop mods
 :: Aztec Warrior Lodge MUST be after both ED:SJ and the community patch (it's a heavily-customised version of the steam workshop mod)

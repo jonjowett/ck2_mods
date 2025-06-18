@@ -1,0 +1,126 @@
+namespace = edmp_global
+
+# Numbering convention:
+# 1000      = Main gateway event (sole entrance & exit from the menu)
+# 2000-2999 = Casus Belli rules
+
+
+
+
+
+# Gateway event for the main/global menu.
+# This should be the ONLY entrance and ONLY exit from the menu.
+character_event = {
+	
+	id      = edmp_global.1000
+	title   = edmp_global_1000_title
+	desc    = edmp_global_1000_desc
+	picture = GFX_evt_camaraderie
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		clr_global_flag = edmp_global_menu_open
+		set_global_flag = edmp_global_menu_open
+	}
+	
+	option = {
+		name = edmp_global_1000_evtopt_cbs
+		hidden_tooltip = { character_event = { id = edmp_global.2000 } }
+	}
+	
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { clr_global_flag = edmp_global_menu_open }
+	}
+	
+}
+
+
+
+
+
+# Gateway event for the CB menu.
+# This should be the ONLY entrance and ONLY exit from the CB menu.
+character_event = {
+	
+	id      = edmp_global.2000
+	title   = edmp_global_2000_title
+	desc    = edmp_global_2000_desc
+	picture = GFX_evt_camaraderie
+	
+	is_triggered_only = yes
+	ai = no
+	
+	
+	
+	# Invasions (only one option will be visible)
+	option = {
+		name = edmp_global_2000_evtopt_invasions_are_disabled_for_everyone_by_game_rule_exit
+		trigger = { has_game_rule = { name = multiplayer_invasions value = off } }
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+	}
+	option = {
+		trigger = { NOT = { has_game_rule = { name = multiplayer_invasions value = off } } }
+		name = {
+			text = edmp_global_2000_evtopt_invasions_are_disabled_for_everyone
+			trigger = { edmp_global_invasions_are_disabled_for_everyone           = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_invasions_are_enabled_for_everyone
+			trigger = { edmp_global_invasions_are_enabled_for_everyone            = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_invasions_are_managed_individually
+			trigger = { edmp_global_invasion_permissions_are_managed_individually = yes }
+		}
+		hidden_tooltip = { long_character_event = { id = edmp_global.2100 } }
+	}
+	
+	
+	
+	# Exit, back to main menu
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+	}
+	
+}
+
+# Manage Invasion CB rules
+long_character_event = {
+	
+	id      = edmp_global.2100
+	title   = edmp_global_2100_title
+	desc    = edmp_global_2100_desc
+	picture = GFX_evt_camaraderie
+	
+	is_triggered_only = yes
+	ai = no
+	
+	option = {
+		name = edmp_global_2100_evtopt_set_invasions_disabled_for_everyone
+		trigger = { edmp_global_invasions_are_not_disabled_for_everyone = yes }
+		edmp_global_invasions_set_disabled_for_everyone = yes
+	}
+	
+	option = {
+		name = edmp_global_2100_evtopt_set_invasions_managed_individually
+		trigger = { edmp_global_invasion_permissions_are_not_managed_individually = yes }
+		edmp_global_invasions_set_permissions_managed_individually = yes
+	}
+	
+	option = {
+		name = edmp_global_2100_evtopt_set_invasions_enabled_for_everyone
+		trigger = { edmp_global_invasions_are_not_enabled_for_everyone = yes }
+		edmp_global_invasions_set_enabled_for_everyone = yes
+	}
+	
+	# Exit, back to CB menu
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { character_event = { id = edmp_global.2000 } }
+	}
+	
+}

@@ -1,0 +1,66 @@
+decisions = {
+	
+	edmp_global_menu_show = {
+		
+		ai = no
+		
+		# In MP, only the host can change global rules
+		potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
+		
+		allow = {
+			custom_tooltip = {
+				text = edmp_global_menu_not_currently_open_for_anyone_tt
+				NOT = { has_global_flag = edmp_global_menu_open }
+			}
+		}
+		
+		effect = {
+			custom_tooltip = {
+				text = edmp_global_menu_popup_event_tt
+				character_event = { id = edmp_global.1000 }
+			}
+		}
+		
+	}
+	
+}
+
+targetted_decisions = {
+	
+	edmp_global_menu_debug_remove_modifier = {
+		
+		ai = no
+		filter = self
+		
+		# Non-functional in self-targeted decisions
+		from_potential = { always = yes }
+		
+		# In SP, only a player with the menu open should be able to see this decision.
+		# In MP, only the host with the menu open should be able to see this decision.
+		potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+			has_global_flag = edmp_global_menu_open
+		}
+		
+		allow = { always = yes }
+		
+		effect = {
+			custom_tooltip = {
+				text = edmp_global_menu_open_flag_removed_tt
+				clr_global_flag = edmp_global_menu_open
+			}
+		}
+		
+	}
+	
+}
