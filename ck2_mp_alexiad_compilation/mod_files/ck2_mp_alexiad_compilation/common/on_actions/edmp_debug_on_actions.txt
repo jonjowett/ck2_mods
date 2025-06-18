@@ -1,0 +1,8 @@
+# Disable debug modes when loading an existing game in MP.
+# Note that debug modes cannot be "already enabled" for new games, so there is no need to bother with on_chronicle_start.
+on_startup = {
+	events = {
+		EDMPDebug.9001
+		EDMPDebug.9002
+	}
+}
