@@ -1,0 +1,36 @@
+#
+# Intrigue menu decision: show global menu
+edmp_global_menu_show;(ED:MP) Show Global Menu;;;;;;;;;;;;;x
+edmp_global_menu_show_desc;Manage dynamic global game rules;;;;;;;;;;;;;x
+edmp_global_menu_not_currently_open_for_anyone_tt;§YNo-one§! has the §M(ED:MP)§! Global Menu open;;;;;;;;;;;;;x
+edmp_global_menu_popup_event_tt;Opens the §M(ED:MP)§! Global Menu;;;;;;;;;;;;;x
+#
+# Self-targeted debug decision: remove the modifier that's making the global menu seem open
+edmp_global_menu_debug_remove_modifier;§R(ED:MP) Debug - Reset Global Menu§!;;;;;;;;;;;;;x
+edmp_global_menu_debug_remove_modifier_desc;Reset the global flag that tracks whether the global menu is open.\n§RWARNING!§! If you do this while anyone actually has the menu open, multiple people will be able to change global rules simultaneously, which will probably cause severe confusion!;;;;;;;;;;;;;x
+edmp_global_menu_open_flag_removed_tt;§M(ED:MP)§! "Global Menu Open" flag §Gcleared§!;;;;;;;;;;;;;x
+#
+# Generic event text
+edmp_global_evtopt_exit;Exit;;;;;;;;;;;;;x
+edmp_global_checkmark_checked;X;;;;;;;;;;;;;x
+edmp_global_checkmark_unchecked;§g-§!;;;;;;;;;;;;;x
+#
+# Main/Global menu
+edmp_global_1000_title;ED:MP - Global Menu;;;;;;;;;;;;;x
+edmp_global_1000_desc;Please select the dynamic game rule you wish to manage;;;;;;;;;;;;;x
+edmp_global_1000_evtopt_cbs;Casus Belli;;;;;;;;;;;;;x
+#
+# CB menu
+edmp_global_2000_title;ED:MP - Global - CBs;;;;;;;;;;;;;x
+edmp_global_2000_desc;Please select the CB rule you wish to manage;;;;;;;;;;;;;x
+edmp_global_2000_evtopt_invasions_are_disabled_for_everyone_by_game_rule_exit;Invasions (current: disabled by game rule - EXIT);;;;;;;;;;;;;x
+edmp_global_2000_evtopt_invasions_are_disabled_for_everyone;Invasions (current: disabled for all players);;;;;;;;;;;;;x
+edmp_global_2000_evtopt_invasions_are_enabled_for_everyone;Invasions (current: enabled for all players);;;;;;;;;;;;;x
+edmp_global_2000_evtopt_invasions_are_managed_individually;Invasions (current: players individually managed);;;;;;;;;;;;;x
+#
+# Invasions menu
+edmp_global_2100_title;ED:MP - Global - CBs - Invasion;;;;;;;;;;;;;x
+edmp_global_2100_desc;Explanation of Invasion Rules:\n([edmp_global_checkmark_invasions_disabled]) Disabled for all human players\n([edmp_global_checkmark_invasions_managed_individually]) Managed individually for all human players\n([edmp_global_checkmark_invasions_enabled]) Enabled for all human players\nNotes:\n(1) Above, "([edmp_global_checkmark_always_checked])" indicates the current rule.\n(2) Only human players who would normally be able to invade are affected by these rules.\n(3) For "managed individually", the host must specify which kingdoms each player is permitted to invade.\nPlease select a new invasion rule, or "exit" to return to the previous menu.;;;;;;;;;;;;;x
+edmp_global_2100_evtopt_set_invasions_disabled_for_everyone;Set Invasion Rule: Disabled for all human players;;;;;;;;;;;;;x
+edmp_global_2100_evtopt_set_invasions_managed_individually;Set Invasion Rule: Managed ;;;;;;;;;;;;;x
+edmp_global_2100_evtopt_set_invasions_enabled_for_everyone;;;;;;;;;;;;;;x
