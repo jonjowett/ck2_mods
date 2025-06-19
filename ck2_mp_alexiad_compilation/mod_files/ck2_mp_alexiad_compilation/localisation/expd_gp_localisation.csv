@@ -1,43 +1,61 @@
 #
 # Debugging - self-targeted decisions
 #
-expd_gp_enable_debug_mode;§RED-GP: Enable Debug Mode§!;;;;;;;;;x
-expd_gp_enable_debug_mode_desc;§YGreat Project Debug Mode§!\nEnabling debug mode will enable additional decisions, which allow full control of §YGreat Projects§! in your realm at zero cost.;;;;;;;;;x
-expd_gp_disable_debug_mode;§RED-GP: Disable Debug Mode§!;;;;;;;;;x
-expd_gp_disable_debug_mode_desc;§YGreat Project Debug Mode§!\nDisable all debugging functionality;;;;;;;;;x
-expd_gp_debug_mode_cant_be_activated_in_multiplayer_tt;There is at most one player character in the game. (Debug mode cannot be activated in multiplayer.);;;;;;;;;x
+expd_gp_enable_debug_mode;§R(ED:GP)§! Enable Debug Mode;;;;;;;;;;;;;x
+expd_gp_enable_debug_mode_desc;§YGreat Project Debug Mode§!\nEnabling debug mode will enable additional decisions, which allow full control of §YGreat Projects§! in your realm at zero cost.;;;;;;;;;;;;;x
+expd_gp_disable_debug_mode;§R(ED:GP)§! Disable Debug Mode;;;;;;;;;;;;;x
+expd_gp_disable_debug_mode_desc;§YGreat Project Debug Mode§!\nDisable all debugging functionality;;;;;;;;;;;;;x
 #
 # Debugging - title decisions
 #
-expd_gp_debug_destroy_great_project;§RED-GP: Destroy Great Project§!;;;;;;;;;x
-expd_gp_debug_destroy_great_project_desc;The Great Project "§Y[This.Location.Wonder.GetName]§!" (in §Y[This.Location.GetName]§!) will be §Rpermanently destroyed§!.;;;;;;;;;x
-expd_gp_debug_destroy_random_improvement;§RED-GP: Destroy Random Upgrade§!;;;;;;;;;x
-expd_gp_debug_destroy_random_improvement_desc;A §Yrandom upgrade§! on the Great Project "§Y[This.Location.Wonder.GetName]§!" (in §Y[This.Location.GetName]§!)will be §Rdestroyed§!.;;;;;;;;;x
-expd_gp_debug_add_improvement_slot;§RED-GP: Add Upgrade Slot§!;;;;;;;;;x
-expd_gp_debug_add_improvement_slot_desc;Add an §Yupgrade slot§! to the Great Project "§Y[This.Location.Wonder.GetName]§!" (in §Y[This.Location.GetName]§!).;;;;;;;;;x
-expd_gp_debug_remove_improvement_slot;§RED-GP: Remove Upgrade Slot§!;;;;;;;;;x
-expd_gp_debug_remove_improvement_slot_desc;Remove an §Yupgrade slot§! from the Great Project "§Y[This.Location.Wonder.GetName]§!" (in §Y[This.Location.GetName]§!).;;;;;;;;;x
+expd_gp_debug_destroy_great_project;§R(ED:GP)§! Destroy Great Project;;;;;;;;;;;;;x
+expd_gp_debug_destroy_great_project_desc;§R!!!DEBUG MODE!!!§!\nThe Great Project "§Y[This.Location.Wonder.GetName]§!" (in §Y[This.Location.GetName]§!) will be §Rpermanently destroyed§!.;;;;;;;;;;;;;x
+expd_gp_debug_destroy_random_improvement;§R(ED:GP)§! Destroy Random Upgrade;;;;;;;;;;;;;x
+expd_gp_debug_destroy_random_improvement_desc;§R!!!DEBUG MODE!!!§!\nA §Yrandom upgrade§! on the Great Project "§Y[This.Location.Wonder.GetName]§!" (in §Y[This.Location.GetName]§!)will be §Rdestroyed§!.;;;;;;;;;;;;;x
+expd_gp_debug_add_improvement_slot;§R(ED:GP)§! Add Upgrade Slot;;;;;;;;;;;;;x
+expd_gp_debug_add_improvement_slot_desc;§R!!!DEBUG MODE!!!§!\nAdd an §Yupgrade slot§! to the Great Project "§Y[This.Location.Wonder.GetName]§!" (in §Y[This.Location.GetName]§!).;;;;;;;;;;;;;x
+expd_gp_debug_remove_improvement_slot;§R(ED:GP)§! Remove Upgrade Slot;;;;;;;;;;;;;x
+expd_gp_debug_remove_improvement_slot_desc;§R!!!DEBUG MODE!!!§!\nRemove an §Yupgrade slot§! from the Great Project "§Y[This.Location.Wonder.GetName]§!" (in §Y[This.Location.GetName]§!).;;;;;;;;;;;;;x
+expd_gp_debug_increase_expansion_cost;§R(ED:GP)§! Increase Expansion Cost;;;;;;;;;;;;;x
+expd_gp_debug_increase_expansion_cost_desc;§R!!!DEBUG MODE!!!§!\nThe cost of the "§M(ED:GP)§! Purchase Upgrade Slot" decision will be §Yincreased by one level§!.\nNB: This also impacts the §Yability§! of the local player to take this decision.;;;;;;;;;;;;;x
+expd_gp_debug_increase_expansion_cost;§R(ED:GP)§! Decrease Expansion Cost;;;;;;;;;;;;;x
+expd_gp_debug_increase_expansion_cost_desc;§R!!!DEBUG MODE!!!§!\nThe cost of the "§M(ED:GP)§! Purchase Upgrade Slot" decision will be §Ydecreased by one level§!.\nNB: This also impacts the §Yability§! of the local player to take this decision.;;;;;;;;;;;;;x
 #
 # Main decisions
 #
-expd_gp_add_improvement_slot;§MED-GP: Purchase Upgrade Slot§!;;;;;;;;x
-expd_gp_add_improvement_slot_desc;Pay a large amount of gold to add an §Yupgrade slot§! to the Great Project "§Y[This.Location.Wonder.GetName]§!" (in §Y[This.Location.GetName]§!).;;;;;;;;;x
+expd_gp_add_improvement_slot;§M(ED:GP)§! Purchase Upgrade Slot;;;;;;;;;;;;;x
+expd_gp_add_improvement_slot_desc;Pay a large amount of gold to add an §Yupgrade slot§! to the Great Project "§Y[This.Location.Wonder.GetName]§!" (in §Y[This.Location.GetName]§!).;;;;;;;;;;;;;x
 #
 # scripted_effect tooltips
 #
-expd_gp_add_slot_to_wonder_in_this_county_tt;An §Yupgrade slot§! will be §Gadded§! to "§Y[This.Location.Wonder.GetName]§!";;;;;;;;x
-expd_gp_remove_slot_from_wonder_in_this_county_tt;An §Yupgrade slot§! will be §Rremoved§! from "§Y[This.Location.Wonder.GetName]§!";;;;;;;;x
+expd_gp_add_slot_to_wonder_in_this_county_tt;An §Yupgrade slot§! will be §Gadded§! to "§Y[This.Location.Wonder.GetName]§!";;;;;;;;;;;;;x
+expd_gp_remove_slot_from_wonder_in_this_county_tt;An §Yupgrade slot§! will be §Rremoved§! from "§Y[This.Location.Wonder.GetName]§!";;;;;;;;;;;;;x
+expd_gp_increase_expansion_cost_in_this_county_tt;The cost to purchase an additional upgrade slots for "§Y[This.Location.Wonder.GetName]§!" will be §Yincreased by one level§!;;;;;;;;;;;;;x
+expd_gp_decrease_expansion_cost_in_this_county_tt;The cost to purchase an additional upgrade slots for "§Y[This.Location.Wonder.GetName]§!" will be §Ydecreased by one level§!;;;;;;;;;;;;;x
+expd_gp_add_slot_to_wonder_in_this_county_no_cost_increase_tt;An §Yupgrade slot§! will be §Gadded§! to "§Y[This.Location.Wonder.GetName]§!" - without impacting the cost to purchase additional upgrade slots.;;;;;;;;;;;;;x
+expd_gp_remove_slot_from_wonder_in_this_county_no_cost_decrease_tt;An §Yupgrade slot§! will be §Rremoved§! from "§Y[This.Location.Wonder.GetName]§!" - without impacting the cost to purchase additional upgrade slots.;;;;;;;;;;;;;x
 #
 # scripted_trigger tooltips
 #
-expd_gp_title_is_great_project_county_tt;There is a Great Project in [This.Location.GetName];;;;;;;;x
-expd_gp_the_wonder_in_this_county_is_active_tt;The Great Project in [This.Location.GetName] is §Yactive§!;;;;;;;;x
-expd_gp_the_wonder_in_this_county_is_at_max_stage_tt;The Great Project in [This.Location.GetName] has been built to its §Ymaximum stage§!;;;;;;;;x
-expd_gp_the_wonder_in_this_county_is_not_currently_damaged_or_being_looted_or_being_restored_tt;The Great Project in [This.Location.GetName] is NOT currently §Ydamaged§!, §Ybeing looted§! or §Ybeing restored§!.;;;;;;;;x
-expd_gp_the_wonder_in_this_county_is_not_under_construction_tt;The Great Project in [This.Location.GetName] is NOT currently §Yunder construction§!.;;;;;;;;x
-expd_gp_the_wonder_in_this_county_has_gte8_and_lt16_upgrades_tt;The Great Project in [This.Location.GetName] has between §Y8 and 15 upgrades§!.;;;;;;;;x
-expd_gp_the_wonder_in_this_county_has_had_at_most_7_slots_previously_added_tt;The Great Project in [This.Location.GetName] has had §Yat most 7 slots§! previously added;;;;;;;;x
+expd_gp_title_is_great_project_county_tt;There is a Great Project in [This.Location.GetName];;;;;;;;;;;;;x
+expd_gp_the_wonder_in_this_county_is_active_tt;The Great Project in [This.Location.GetName] is §Yactive§!;;;;;;;;;;;;;x
+expd_gp_the_wonder_in_this_county_is_at_max_stage_tt;The Great Project in [This.Location.GetName] has been built to its §Ymaximum stage§!;;;;;;;;;;;;;x
+expd_gp_the_wonder_in_this_county_is_not_currently_damaged_or_being_looted_or_being_restored_tt;The Great Project in [This.Location.GetName] is NOT currently §Ydamaged§!, §Ybeing looted§! or §Ybeing restored§!.;;;;;;;;;;;;;x
+expd_gp_the_wonder_in_this_county_is_not_under_construction_tt;The Great Project in [This.Location.GetName] is NOT currently §Yunder construction§!.;;;;;;;;;;;;;x
+expd_gp_the_wonder_in_this_county_has_gte8_upgrades_tt;The Great Project in [This.Location.GetName] has §Yat least 8 upgrades§!.;;;;;;;;;;;;;x
+expd_gp_the_wonder_in_this_county_has_had_at_most_7_slots_previously_added_tt;The Great Project in [This.Location.GetName] has had §Yat most 7 slots§! previously added by the §M(ED:GP)§! mod;;;;;;;;;;;;;x
 #
-# Debug mode notification for multiplayer
+# Debug mode notifications for multiplayer
 #
-expd_gp_debug_notification_event_desc;WARNING! Your multiplayer host (see portrait above) has enabled debug mode for the "Expanded Decisions: Great Projects" mod!\n\nThis gives them game-breaking power over all great projects in the world, and should only ever be used to fix bugs.\n\nWatch them carefully to ensure that they don't abuse this power...;;;;;;;;x
+expd_gp_all_players_notified_tt;§MAll players will be notified of this Debug Mode action!§!;;;;;;;;;;;;;x
+ExpdGPDebugNotification_Title;(ED:GP) Debug Mode Notification;;;;;;;;;;;;;x
+ExpdGPDebugNotification_Desc;[expd_gp_debug_notification_decision_taker.GetTitledFirstName] (Username: [expd_gp_debug_notification_decision_taker.GetHumanName]) has made the following Debug Mode change to the "[expd_gp_debug_notification_gp_province.Wonder.GetName]" Great Project, in the province of [expd_gp_debug_notification_gp_province.GetName]:\n\n[expd_gp_debug_notification_action_detail];;;;;;;;;;;;;x
+ExpdGPDebugNotification_EvtOpt_Ok_Affected;OK (This is my Great Project!);;;;;;;;;;;;;x
+ExpdGPDebugNotification_EvtOpt_Ok_Unaffected;OK;;;;;;;;;;;;;x
+expd_gp_debug_notification_action_destroy_gp;Great Project Destroyed;;;;;;;;;;;;;x
+expd_gp_debug_notification_action_destroy_improvement;Random Improvement Destroyed;;;;;;;;;;;;;x
+expd_gp_debug_notification_action_add_improvement_slot;Improvement Slot Added;;;;;;;;;;;;;x
+expd_gp_debug_notification_action_remove_improvement_slot;Improvement Slot Removed;;;;;;;;;;;;;x
+expd_gp_debug_notification_action_increase_expansion_cost;Expansion Cost Increased;;;;;;;;;;;;;x
+expd_gp_debug_notification_action_decrease_expansion_cost;Expansion Cost Decreased;;;;;;;;;;;;;x
+expd_gp_debug_notification_action_unknown;Unknown;;;;;;;;;;;;;x

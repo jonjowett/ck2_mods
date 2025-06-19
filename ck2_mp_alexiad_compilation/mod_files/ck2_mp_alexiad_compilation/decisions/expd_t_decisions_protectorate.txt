@@ -1209,6 +1209,18 @@ decisions = {
 					}
 				}
 				
+				# Get out for free if you're a player in a multiplayer game
+				trigger_if = {
+					limit = {
+						ai = no
+						multiplayer = yes
+					}
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_HUMAN_IN_MULTIPLAYER
+						always = yes
+					}
+				}
+				
 				# Get out for free if either you or your suzerain is not independent
 				suzerain = {
 					show_scope_change = no

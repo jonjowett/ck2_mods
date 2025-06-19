@@ -7,15 +7,13 @@ decisions = {
 				NOT = { has_global_flag = expd_df_human_shattering }
 				NOT = { has_global_flag = expd_kf_human_shattering }
 			}
-		}
-		allow = {
-			trigger_if = {
-				limit = { multiplayer = no }
-				always = yes
-			}
-			trigger_else = {
+			OR = {
+				multiplayer = no
 				is_multiplayer_host_character = yes
 			}
+		}
+		allow = {
+			always = yes
 		}
 		effect = {
 			custom_tooltip = {
@@ -31,15 +29,13 @@ decisions = {
 		potential = {
 			has_global_flag = expd_df_human_shattering
 			has_global_flag = expd_kf_human_shattering
-		}
-		allow = {
-			trigger_if = {
-				limit = { multiplayer = no }
-				always = yes
-			}
-			trigger_else = {
+			OR = {
+				multiplayer = no
 				is_multiplayer_host_character = yes
 			}
+		}
+		allow = {
+			always = yes
 		}
 		effect = {
 			custom_tooltip = {

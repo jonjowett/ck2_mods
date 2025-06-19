@@ -7,18 +7,27 @@ targeted_decisions = {
 		filter = self
 		ai = no
 		only_playable = yes
-		potential = { NOT = { has_character_flag = expd_g_send_gold_to_non_ruler_permitted } }
+		potential = { NOT = { has_character_modifier = expd_g_send_gold_to_non_ruler_permitted } }
 		allow = { always = yes }
-		effect = { hidden_tooltip = { set_character_flag = expd_g_send_gold_to_non_ruler_permitted } }
+		effect = {
+			hidden_tooltip = {
+				add_character_modifier = {
+					name     = expd_g_send_gold_to_non_ruler_permitted
+					duration = -1
+					hidden   = yes
+					inherit  = yes
+				}
+			}
+		}
 	}
 	
 	expd_g_send_gold_to_non_ruler_disable = {
 		filter = self
 		ai = no
 		only_playable = yes
-		potential = { has_character_flag = expd_g_send_gold_to_non_ruler_permitted }
+		potential = { has_character_modifier = expd_g_send_gold_to_non_ruler_permitted }
 		allow = { always = yes }
-		effect = { hidden_tooltip = { clr_character_flag = expd_g_send_gold_to_non_ruler_permitted } }
+		effect = { hidden_tooltip = { remove_character_modifier = expd_g_send_gold_to_non_ruler_permitted } }
 	}
 	
 	expd_g_send_gold_increase_size = {
@@ -29,51 +38,124 @@ targeted_decisions = {
 		allow = {
 			custom_tooltip = {
 				text = expd_g_send_gold_size_is_not_maximum_tt
-				check_variable = {
-					which = expd_g_send_gold_size
-					value < 5
-				}
+				NOT = { has_character_modifier = expd_g_send_gold_size_5 }
 			}
 		}
 		effect = {
 			if = {
-				limit = { check_variable = { which = expd_g_send_gold_size value == 0 } }
+				limit = {
+					OR = {
+						has_character_modifier = expd_g_send_gold_size_0
+						NOR = {
+							has_character_modifier = expd_g_send_gold_size_0
+							has_character_modifier = expd_g_send_gold_size_1
+							has_character_modifier = expd_g_send_gold_size_2
+							has_character_modifier = expd_g_send_gold_size_3
+							has_character_modifier = expd_g_send_gold_size_4
+							has_character_modifier = expd_g_send_gold_size_5
+						}
+					}
+				}
 				custom_tooltip = { text = expd_g_send_gold_size_currently_0_tt }
 				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
 				custom_tooltip = { text = expd_g_send_gold_size_will_be_1_tt }
+				hidden_tooltip = {
+					remove_character_modifier = expd_g_send_gold_size_0
+					remove_character_modifier = expd_g_send_gold_size_1
+					remove_character_modifier = expd_g_send_gold_size_2
+					remove_character_modifier = expd_g_send_gold_size_3
+					remove_character_modifier = expd_g_send_gold_size_4
+					remove_character_modifier = expd_g_send_gold_size_5
+					add_character_modifier = {
+						name     = expd_g_send_gold_size_1
+						duration = -1
+						hidden   = yes
+						inherit  = yes
+					}
+				}
 			}
 			else_if = {
-				limit = { check_variable = { which = expd_g_send_gold_size value == 1 } }
+				limit = { has_character_modifier = expd_g_send_gold_size_1 }
 				custom_tooltip = { text = expd_g_send_gold_size_currently_1_tt }
 				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
 				custom_tooltip = { text = expd_g_send_gold_size_will_be_2_tt }
+				hidden_tooltip = {
+					remove_character_modifier = expd_g_send_gold_size_0
+					remove_character_modifier = expd_g_send_gold_size_1
+					remove_character_modifier = expd_g_send_gold_size_2
+					remove_character_modifier = expd_g_send_gold_size_3
+					remove_character_modifier = expd_g_send_gold_size_4
+					remove_character_modifier = expd_g_send_gold_size_5
+					add_character_modifier = {
+						name     = expd_g_send_gold_size_2
+						duration = -1
+						hidden   = yes
+						inherit  = yes
+					}
+				}
 			}
 			else_if = {
-				limit = { check_variable = { which = expd_g_send_gold_size value == 2 } }
+				limit = { has_character_modifier = expd_g_send_gold_size_2 }
 				custom_tooltip = { text = expd_g_send_gold_size_currently_2_tt }
 				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
 				custom_tooltip = { text = expd_g_send_gold_size_will_be_3_tt }
+				hidden_tooltip = {
+					remove_character_modifier = expd_g_send_gold_size_0
+					remove_character_modifier = expd_g_send_gold_size_1
+					remove_character_modifier = expd_g_send_gold_size_2
+					remove_character_modifier = expd_g_send_gold_size_3
+					remove_character_modifier = expd_g_send_gold_size_4
+					remove_character_modifier = expd_g_send_gold_size_5
+					add_character_modifier = {
+						name     = expd_g_send_gold_size_3
+						duration = -1
+						hidden   = yes
+						inherit  = yes
+					}
+				}
 			}
 			else_if = {
-				limit = { check_variable = { which = expd_g_send_gold_size value == 3 } }
+				limit = { has_character_modifier = expd_g_send_gold_size_3 }
 				custom_tooltip = { text = expd_g_send_gold_size_currently_3_tt }
 				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
 				custom_tooltip = { text = expd_g_send_gold_size_will_be_4_tt }
+				hidden_tooltip = {
+					remove_character_modifier = expd_g_send_gold_size_0
+					remove_character_modifier = expd_g_send_gold_size_1
+					remove_character_modifier = expd_g_send_gold_size_2
+					remove_character_modifier = expd_g_send_gold_size_3
+					remove_character_modifier = expd_g_send_gold_size_4
+					remove_character_modifier = expd_g_send_gold_size_5
+					add_character_modifier = {
+						name     = expd_g_send_gold_size_4
+						duration = -1
+						hidden   = yes
+						inherit  = yes
+					}
+				}
 			}
 			else_if = {
-				limit = { check_variable = { which = expd_g_send_gold_size value == 4 } }
+				limit = { has_character_modifier = expd_g_send_gold_size_4 }
 				custom_tooltip = { text = expd_g_send_gold_size_currently_4_tt }
 				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
 				custom_tooltip = { text = expd_g_send_gold_size_will_be_5_tt }
+				hidden_tooltip = {
+					remove_character_modifier = expd_g_send_gold_size_0
+					remove_character_modifier = expd_g_send_gold_size_1
+					remove_character_modifier = expd_g_send_gold_size_2
+					remove_character_modifier = expd_g_send_gold_size_3
+					remove_character_modifier = expd_g_send_gold_size_4
+					remove_character_modifier = expd_g_send_gold_size_5
+					add_character_modifier = {
+						name     = expd_g_send_gold_size_5
+						duration = -1
+						hidden   = yes
+						inherit  = yes
+					}
+				}
 			}
 			else = {
 				custom_tooltip = { text = expd_g_send_gold_size_logic_error_tt }
-			}
-			hidden_tooltip = {
-				change_variable = {
-					which = expd_g_send_gold_size
-					value = 1
-				}
 			}
 		}
 	}
@@ -86,70 +168,118 @@ targeted_decisions = {
 		allow = {
 			custom_tooltip = {
 				text = expd_g_send_gold_size_is_not_minimum_tt
-				check_variable = {
-					which = expd_g_send_gold_size
-					value > 0
+				OR = {
+					has_character_modifier = expd_g_send_gold_size_1
+					has_character_modifier = expd_g_send_gold_size_2
+					has_character_modifier = expd_g_send_gold_size_3
+					has_character_modifier = expd_g_send_gold_size_4
+					has_character_modifier = expd_g_send_gold_size_5
 				}
 			}
 		}
 		effect = {
 			if = {
-				limit = { check_variable = { which = expd_g_send_gold_size value == 1 } }
+				limit = { has_character_modifier = expd_g_send_gold_size_1 }
 				custom_tooltip = { text = expd_g_send_gold_size_currently_1_tt }
 				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
 				custom_tooltip = { text = expd_g_send_gold_size_will_be_0_tt }
+				hidden_tooltip = {
+					remove_character_modifier = expd_g_send_gold_size_0
+					remove_character_modifier = expd_g_send_gold_size_1
+					remove_character_modifier = expd_g_send_gold_size_2
+					remove_character_modifier = expd_g_send_gold_size_3
+					remove_character_modifier = expd_g_send_gold_size_4
+					remove_character_modifier = expd_g_send_gold_size_5
+					add_character_modifier = {
+						name     = expd_g_send_gold_size_0
+						duration = -1
+						hidden   = yes
+						inherit  = yes
+					}
+				}
 			}
 			else_if = {
-				limit = { check_variable = { which = expd_g_send_gold_size value == 2 } }
+				limit = { has_character_modifier = expd_g_send_gold_size_2 }
 				custom_tooltip = { text = expd_g_send_gold_size_currently_2_tt }
 				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
 				custom_tooltip = { text = expd_g_send_gold_size_will_be_1_tt }
+				hidden_tooltip = {
+					remove_character_modifier = expd_g_send_gold_size_0
+					remove_character_modifier = expd_g_send_gold_size_1
+					remove_character_modifier = expd_g_send_gold_size_2
+					remove_character_modifier = expd_g_send_gold_size_3
+					remove_character_modifier = expd_g_send_gold_size_4
+					remove_character_modifier = expd_g_send_gold_size_5
+					add_character_modifier = {
+						name     = expd_g_send_gold_size_1
+						duration = -1
+						hidden   = yes
+						inherit  = yes
+					}
+				}
 			}
 			else_if = {
-				limit = { check_variable = { which = expd_g_send_gold_size value == 3 } }
+				limit = { has_character_modifier = expd_g_send_gold_size_3 }
 				custom_tooltip = { text = expd_g_send_gold_size_currently_3_tt }
 				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
 				custom_tooltip = { text = expd_g_send_gold_size_will_be_2_tt }
+				hidden_tooltip = {
+					remove_character_modifier = expd_g_send_gold_size_0
+					remove_character_modifier = expd_g_send_gold_size_1
+					remove_character_modifier = expd_g_send_gold_size_2
+					remove_character_modifier = expd_g_send_gold_size_3
+					remove_character_modifier = expd_g_send_gold_size_4
+					remove_character_modifier = expd_g_send_gold_size_5
+					add_character_modifier = {
+						name     = expd_g_send_gold_size_2
+						duration = -1
+						hidden   = yes
+						inherit  = yes
+					}
+				}
 			}
 			else_if = {
-				limit = { check_variable = { which = expd_g_send_gold_size value == 4 } }
+				limit = { has_character_modifier = expd_g_send_gold_size_4 }
 				custom_tooltip = { text = expd_g_send_gold_size_currently_4_tt }
 				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
 				custom_tooltip = { text = expd_g_send_gold_size_will_be_3_tt }
+				hidden_tooltip = {
+					remove_character_modifier = expd_g_send_gold_size_0
+					remove_character_modifier = expd_g_send_gold_size_1
+					remove_character_modifier = expd_g_send_gold_size_2
+					remove_character_modifier = expd_g_send_gold_size_3
+					remove_character_modifier = expd_g_send_gold_size_4
+					remove_character_modifier = expd_g_send_gold_size_5
+					add_character_modifier = {
+						name     = expd_g_send_gold_size_3
+						duration = -1
+						hidden   = yes
+						inherit  = yes
+					}
+				}
 			}
 			else_if = {
-				limit = { check_variable = { which = expd_g_send_gold_size value == 5 } }
+				limit = { has_character_modifier = expd_g_send_gold_size_5 }
 				custom_tooltip = { text = expd_g_send_gold_size_currently_5_tt }
 				custom_tooltip = { text = expd_g_send_gold_spacer_tt }
 				custom_tooltip = { text = expd_g_send_gold_size_will_be_4_tt }
+				hidden_tooltip = {
+					remove_character_modifier = expd_g_send_gold_size_0
+					remove_character_modifier = expd_g_send_gold_size_1
+					remove_character_modifier = expd_g_send_gold_size_2
+					remove_character_modifier = expd_g_send_gold_size_3
+					remove_character_modifier = expd_g_send_gold_size_4
+					remove_character_modifier = expd_g_send_gold_size_5
+					add_character_modifier = {
+						name     = expd_g_send_gold_size_4
+						duration = -1
+						hidden   = yes
+						inherit  = yes
+					}
+				}
 			}
 			else = {
 				custom_tooltip = { text = expd_g_send_gold_size_logic_error_tt }
-			}
-			hidden_tooltip = {
-				change_variable = {
-					which = expd_g_send_gold_size
-					value = -1
-				}
-			}
-		}
-	}
-	
-	expd_g_send_gold_reset_size = {
-		filter = self
-		ai = no
-		only_playable = yes
-		potential = {
-			OR = {
-				check_variable = { which = expd_g_send_gold_size value < 0 }
-				check_variable = { which = expd_g_send_gold_size value > 5 }
-			}
-		}
-		allow = { always = yes }
-		effect = {
-			custom_tooltip = {
-				text = expd_g_send_gold_size_will_be_1_tt
-				set_variable = { which = expd_g_send_gold_size value = 1 }
 			}
 		}
 	}
@@ -173,30 +303,30 @@ targeted_decisions = {
 				}
 			}
 			trigger_if = {
-				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 0 } } }
+				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_0 } }
 				custom_tooltip = {
 					text = expd_g_send_gold_is_not_disabled_tt
 					always = no
 				}
 			}
 			trigger_else_if = {
-				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 1 } } }
+				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_1 } }
 				FROM = { wealth >= 100 }
 			}
 			trigger_else_if = {
-				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 2 } } }
+				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_2 } }
 				FROM = { wealth >= 300 }
 			}
 			trigger_else_if = {
-				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 3 } } }
+				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_3 } }
 				FROM = { wealth >= 1000 }
 			}
 			trigger_else_if = {
-				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 4 } } }
+				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_4 } }
 				FROM = { wealth >= 3000 }
 			}
 			trigger_else_if = {
-				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 5 } } }
+				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_5 } }
 				FROM = { wealth >= 10000 }
 			}
 			trigger_else = {
@@ -208,27 +338,27 @@ targeted_decisions = {
 		}
 		effect = {
 			if = {
-				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 1 } } }
+				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_1 } }
 				FROM = { wealth = -100 }
 				ROOT = { wealth =  100 }
 			}
 			else_if = {
-				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 2 } } }
+				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_2 } }
 				FROM = { wealth = -300 }
 				ROOT = { wealth =  300 }
 			}
 			else_if = {
-				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 3 } } }
+				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_3 } }
 				FROM = { wealth = -1000 }
 				ROOT = { wealth =  1000 }
 			}
 			else_if = {
-				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 4 } } }
+				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_4 } }
 				FROM = { wealth = -3000 }
 				ROOT = { wealth =  3000 }
 			}
 			else_if = {
-				limit = { FROM = { check_variable = { which = expd_g_send_gold_size value == 5 } } }
+				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_5 } }
 				FROM = { wealth = -10000 }
 				ROOT = { wealth =  10000 }
 			}

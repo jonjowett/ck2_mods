@@ -1,9 +1,27 @@
 namespace = ExpdGPDebugNotification
 
 character_event = {
-	id      = ExpdGPDebugNotification.1
-	desc    = expd_gp_debug_notification_event_desc
-	picture = GFX_evt_accused
+	id       = ExpdGPDebugNotification.1000
+	title    = ExpdGPDebugNotification_Title
+	desc     = ExpdGPDebugNotification_Desc
+	picture  = GFX_evt_camaraderie
+	portrait = event_target:expd_gp_debug_notification_decision_taker
 	is_triggered_only = yes
-	option = { name = OK }
+	option = {
+		trigger = { character = event_target:expd_gp_debug_notification_gp_owner }
+		show_portrait = event_target:expd_gp_debug_notification_local_count
+		tooltip_info = yes
+		name = ExpdGPDebugNotification_EvtOpt_Ok_Affected
+	}
+	option = {
+		trigger = {
+			NOR = {
+				character = event_target:expd_gp_debug_notification_local_count
+				character = event_target:expd_gp_debug_notification_gp_owner
+			}
+		}
+		show_portrait = event_target:expd_gp_debug_notification_local_count
+		show_portrait = event_target:expd_gp_debug_notification_gp_owner
+		name = ExpdGPDebugNotification_EvtOpt_Ok_Unaffected
+	}
 }
