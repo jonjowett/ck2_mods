@@ -8,6 +8,10 @@ targeted_decisions = {
 			NOT = { has_global_flag    = expd_pill_blocked_global     }
 			NOT = { has_character_flag = expd_pill_blocked_char       }
 			NOT = { has_global_flag    = expd_pill_debug_mode_enabled }
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
 		}
 		allow = {
 			always = yes
@@ -26,6 +30,10 @@ targeted_decisions = {
 			NOT = { has_global_flag    = expd_pill_blocked_global     }
 			NOT = { has_character_flag = expd_pill_blocked_char       }
 			        has_global_flag    = expd_pill_debug_mode_enabled
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
 		}
 		allow = {
 			always = yes

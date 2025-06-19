@@ -1,0 +1,51 @@
+namespace = ExpdPillNotification
+
+character_event = {
+	
+	id      = ExpdPillNotification.1000
+	title   = ExpdPillNotification_Title
+	picture = GFX_evt_camaraderie
+	desc = {
+		trigger = { has_global_flag = expd_pill_blocked_global }
+		text = ExpdPillNotification_Desc_GloballyBlocked
+	}
+	desc = {
+		trigger = { NOT = { has_global_flag = expd_pill_blocked_global } }
+		text = ExpdPillNotification_Desc_GloballyEnabled
+	}
+	
+	is_triggered_only = yes
+	
+	option = {
+		trigger = {
+			has_global_flag = expd_pill_blocked_global
+			OR = {
+				is_nomadic = yes
+				is_tribal  = yes
+			}
+		}
+		name = ExpdPillNotification_EvtOpt_Curses
+	}
+	
+	option = {
+		trigger = {
+			NOT = { has_global_flag = expd_pill_blocked_global }
+			OR = {
+				is_nomadic = yes
+				is_tribal  = yes
+			}
+		}
+		name = ExpdPillNotification_EvtOpt_Excellent
+	}
+	
+	option = {
+		trigger = {
+			NOR = {
+				is_nomadic = yes
+				is_tribal  = yes
+			}
+		}
+		name = ExpdPillNotification_EvtOpt_OK_Unaffected
+	}
+	
+}

@@ -7,14 +7,25 @@ targeted_decisions = {
 		only_playable = yes
 		potential = {
 			NOT = { has_global_flag = expd_pill_blocked_global }
-			NOT = { any_player = { NOT = { character = ROOT } } } # You cannot disable fast pillaging globally in multiplayer. If you want to do that, disable the mod!
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
 		}
 		allow = {
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = {
-				set_global_flag = expd_pill_blocked_global
+			hidden_tooltip = { set_global_flag = expd_pill_blocked_global }
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = expd_pill_players_notified_of_rule_change_tt
+					any_player = {
+						limit = { NOT = { character = PREV } }
+						character_event = { id = ExpdPillNotification.1000 }
+					}
+				}
 			}
 		}
 	}
@@ -24,13 +35,25 @@ targeted_decisions = {
 		only_playable = yes
 		potential = {
 			has_global_flag = expd_pill_blocked_global
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
 		}
 		allow = {
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = {
-				clr_global_flag = expd_pill_blocked_global
+			hidden_tooltip = { clr_global_flag = expd_pill_blocked_global }
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = expd_pill_players_notified_of_rule_change_tt
+					any_player = {
+						limit = { NOT = { character = PREV } }
+						character_event = { id = ExpdPillNotification.1000 }
+					}
+				}
 			}
 		}
 	}
