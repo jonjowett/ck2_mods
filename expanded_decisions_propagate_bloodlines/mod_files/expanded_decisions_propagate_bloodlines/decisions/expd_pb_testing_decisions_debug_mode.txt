@@ -10,10 +10,9 @@ targetted_decisions = {
 		only_playable = yes
 		filter = self
 		ai = no
-		from_potential = {
-			ai = no
-		}
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
 		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
 			NOT = { has_global_flag = expd_pb_debug_mode }
 			NOT = { has_character_flag = expd_pb_bloodline_propagation_blocked }
 		}
@@ -31,10 +30,9 @@ targetted_decisions = {
 		only_playable = yes
 		filter = self
 		ai = no
-		from_potential = {
-			ai = no
-		}
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
 		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
 			has_global_flag = expd_pb_debug_mode
 		}
 		allow = {
@@ -52,7 +50,7 @@ targetted_decisions = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			ai = no
+			expd_pb_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			has_global_flag = expd_pb_debug_mode
@@ -70,7 +68,7 @@ targetted_decisions = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			ai = no
+			expd_pb_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			has_global_flag = expd_pb_debug_mode
@@ -88,7 +86,7 @@ targetted_decisions = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			ai = no
+			expd_pb_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			has_global_flag = expd_pb_debug_mode
@@ -106,7 +104,7 @@ targetted_decisions = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			ai = no
+			expd_pb_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			has_global_flag = expd_pb_debug_mode
@@ -124,7 +122,7 @@ targetted_decisions = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			ai = no
+			expd_pb_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			has_global_flag = expd_pb_debug_mode
@@ -144,7 +142,7 @@ targetted_decisions = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			ai = no
+			expd_pb_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			has_global_flag = expd_pb_debug_mode
@@ -164,7 +162,7 @@ targetted_decisions = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			ai = no
+			expd_pb_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			has_global_flag = expd_pb_debug_mode
@@ -184,7 +182,7 @@ targetted_decisions = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			ai = no
+			expd_pb_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			has_global_flag = expd_pb_debug_mode
@@ -204,7 +202,7 @@ targetted_decisions = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			ai = no
+			expd_pb_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			has_global_flag = expd_pb_debug_mode
@@ -224,7 +222,7 @@ targetted_decisions = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			ai = no
+			expd_pb_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			has_global_flag = expd_pb_debug_mode
@@ -244,7 +242,7 @@ targetted_decisions = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			ai = no
+			expd_pb_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			has_global_flag = expd_pb_debug_mode
@@ -266,10 +264,9 @@ targetted_decisions = {
 		filter = self
 		third_party_filter = all_including_me
 		ai = no
-		from_potential = {
-			ai = no
-		}
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
 		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
 			has_global_flag = expd_pb_debug_mode
 		}
 		third_party_potential = {
@@ -288,10 +285,9 @@ targetted_decisions = {
 		filter = self
 		third_party_filter = all_including_me
 		ai = no
-		from_potential = {
-			ai = no
-		}
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
 		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
 			has_global_flag = expd_pb_debug_mode
 		}
 		third_party_potential = {
@@ -322,10 +318,9 @@ targetted_decisions = {
 		filter = self
 		third_party_filter = all_including_me
 		ai = no
-		from_potential = {
-			ai = no
-		}
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
 		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
 			has_global_flag = expd_pb_debug_mode
 		}
 		third_party_potential = {
@@ -355,10 +350,9 @@ targetted_decisions = {
 		filter = self
 		third_party_filter = all_including_me
 		ai = no
-		from_potential = {
-			ai = no
-		}
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
 		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
 			has_global_flag = expd_pb_debug_mode
 		}
 		third_party_potential = {
@@ -388,10 +382,9 @@ targetted_decisions = {
 		filter = self
 		third_party_filter = all_including_me
 		ai = no
-		from_potential = {
-			ai = no
-		}
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
 		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
 			has_global_flag = expd_pb_debug_mode
 		}
 		third_party_potential = {
@@ -421,10 +414,9 @@ targetted_decisions = {
 		filter = self
 		third_party_filter = all_including_me
 		ai = no
-		from_potential = {
-			ai = no
-		}
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
 		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
 			has_global_flag = expd_pb_debug_mode
 		}
 		third_party_potential = {

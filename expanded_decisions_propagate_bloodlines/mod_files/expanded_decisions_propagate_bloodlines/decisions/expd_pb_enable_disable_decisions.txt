@@ -4,10 +4,9 @@ targetted_decisions = {
 		only_playable = yes
 		filter = self
 		ai = no
-		from_potential = {
-			ai = no
-		}
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
 		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
 			has_character_flag = expd_pb_bloodline_propagation_blocked
 		}
 		allow = {
@@ -24,10 +23,9 @@ targetted_decisions = {
 		only_playable = yes
 		filter = self
 		ai = no
-		from_potential = {
-			ai = no
-		}
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
 		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
 			NOT = { has_character_flag = expd_pb_bloodline_propagation_blocked }
 		}
 		allow = {
