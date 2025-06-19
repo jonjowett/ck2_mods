@@ -1,37 +1,37 @@
 # Block/Unblock decisions on self
-expd_pris_self_enable_targeted_liege_prisoner_decisions;§PED-P: Enable Liege Decisions§!;;;;;;;;;x
+expd_pris_self_enable_targeted_liege_prisoner_decisions;§P(ED:Pris)§! Enable Liege Decisions;;;;;;;;;x
 expd_pris_self_enable_targeted_liege_prisoner_decisions_desc;All decisions which target §Y[Root.GetTitledFirstName]§!'s prisoners' lieges will be enabled;;;;;;;;;x
-expd_pris_self_block_targeted_liege_prisoner_decisions;§PED-P: Disable Liege Decisions§!;;;;;;;;;x
-expd_pris_self_block_targeted_liege_prisoner_decisions_desc;All decisions which target §Y[Root.GetTitledFirstName]§!'s prisoners' lieges will be disabled (until re-enabled by taking the "§PED-P: Enable Liege Prisoner Decisions§!" decision);;;;;;;;;x
+expd_pris_self_block_targeted_liege_prisoner_decisions;§P(ED:Pris)§! Disable Liege Decisions;;;;;;;;;x
+expd_pris_self_block_targeted_liege_prisoner_decisions_desc;All decisions which target §Y[Root.GetTitledFirstName]§!'s prisoners' lieges will be disabled (until re-enabled by taking the "§P(ED:Pris)§! Enable Liege Decisions" decision);;;;;;;;;x
 EXPD_PRIS_TOOLTIP_TARGETED_LIEGE_PRISONER_DECISIONS_NOT_BLOCKED_ON_FROM;Targeted-liege prisoner decisions have NOT been temporarily blocked for [From.GetTitledFirstName] (by self-targeted decision);;;;;;;;;x
 # Prisoner movements: name & description
-expd_pris_targeted_move_all_prisoners_from_this_liege_to_house_arrest;§MED-P: Move Prisoners: House Arrest§!;;;;;;;;;x
+expd_pris_targeted_move_all_prisoners_from_this_liege_to_house_arrest;§M(ED:Pris)§! Move: House Arrest;;;;;;;;;x
 expd_pris_targeted_move_all_prisoners_from_this_liege_to_house_arrest_desc;Move all of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that originate in §Y[Root.GetTitledFirstName]§!'s court to §Yhouse arrest§!;;;;;;;;;x
-expd_pris_targeted_move_all_prisoners_from_this_liege_to_dungeon;§MED-P: Move Prisoners: Dungeon§!;;;;;;;;;x
+expd_pris_targeted_move_all_prisoners_from_this_liege_to_dungeon;§M(ED:Pris)§! Move: Dungeon;;;;;;;;;x
 expd_pris_targeted_move_all_prisoners_from_this_liege_to_dungeon_desc;Move all of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that originate in §Y[Root.GetTitledFirstName]§!'s court to §Ythe dungeon§!;;;;;;;;;x
-expd_pris_targeted_move_all_prisoners_from_this_liege_to_oubliette;§MED-P: Move Prisoners: Oubliette§!;;;;;;;;;x
+expd_pris_targeted_move_all_prisoners_from_this_liege_to_oubliette;§M(ED:Pris)§! Move: Oubliette;;;;;;;;;x
 expd_pris_targeted_move_all_prisoners_from_this_liege_to_oubliette_desc;Move all of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that originate in §Y[Root.GetTitledFirstName]§!'s court to §Ythe oubliette§!;;;;;;;;;x
 # Prisoner release: name & description
-expd_pris_targeted_release_single_prisoner_from_this_liege;§GED-P: Release: Single§!;;;;;;;;;x
+expd_pris_targeted_release_single_prisoner_from_this_liege;§M(ED:Pris)§! Release: Single;;;;;;;;;x
 expd_pris_targeted_release_single_prisoner_from_this_liege_desc;Release one of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
-expd_pris_targeted_release_all_prisoners_from_this_liege;§GED-P: Release: All§!;;;;;;;;;x
+expd_pris_targeted_release_all_prisoners_from_this_liege;§M(ED:Pris)§! Release: All;;;;;;;;;x
 expd_pris_targeted_release_all_prisoners_from_this_liege_desc;Release all of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
-expd_pris_targeted_release_all_house_arrested_prisoners_from_this_liege;§GED-P: Release: All House-Arrested§!;;;;;;;;;x
+expd_pris_targeted_release_all_house_arrested_prisoners_from_this_liege;§M(ED:Pris)§! Release: All House-Arrested;;;;;;;;;x
 expd_pris_targeted_release_all_house_arrested_prisoners_from_this_liege_desc;Release all of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that are currently under §Yhouse arrest§! and that originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
-expd_pris_targeted_release_all_dungeon_prisoners_from_this_liege;§GED-P: Release: All in Dungeon§!;;;;;;;;;x
+expd_pris_targeted_release_all_dungeon_prisoners_from_this_liege;§M(ED:Pris)§! Release: All in Dungeon;;;;;;;;;x
 expd_pris_targeted_release_all_dungeon_prisoners_from_this_liege_desc;Release all of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that are currently in §Ythe dungeon§! and that originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
-expd_pris_targeted_release_all_oublietted_prisoners_from_this_liege;§GED-P: Release: All Oublietted§!;;;;;;;;;x
+expd_pris_targeted_release_all_oublietted_prisoners_from_this_liege;§M(ED:Pris)§! Release: All Oublietted;;;;;;;;;x
 expd_pris_targeted_release_all_oublietted_prisoners_from_this_liege_desc;Release all of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that are currently in §Ythe oubliette§! and that originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
 # Prisoner execution: name & description
-expd_pris_targeted_execution_single_prisoner_from_this_liege;§gED-P: Execute: Single§!;;;;;;;;;x
+expd_pris_targeted_execution_single_prisoner_from_this_liege;§M(ED:Pris)§! Execute: Single;;;;;;;;;x
 expd_pris_targeted_execution_single_prisoner_from_this_liege_desc;Execute one of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
-expd_pris_targeted_execution_all_prisoners_from_this_liege;§gED-P: Execute: All§!;;;;;;;;;x
+expd_pris_targeted_execution_all_prisoners_from_this_liege;§M(ED:Pris)§! Execute: All;;;;;;;;;x
 expd_pris_targeted_execution_all_prisoners_from_this_liege_desc;Execute all of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
-expd_pris_targeted_execution_all_house_arrested_prisoners_from_this_liege;§gED-P: Execute: All House-Arrested§!;;;;;;;;;x
+expd_pris_targeted_execution_all_house_arrested_prisoners_from_this_liege;§M(ED:Pris)§! Execute: All House-Arrested;;;;;;;;;x
 expd_pris_targeted_execution_all_house_arrested_prisoners_from_this_liege_desc;Execute all of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that are currently under §Yhouse arrest§! and that originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
-expd_pris_targeted_execution_all_dungeon_prisoners_from_this_liege;§gED-P: Execute: All in Dungeon§!;;;;;;;;;x
+expd_pris_targeted_execution_all_dungeon_prisoners_from_this_liege;§M(ED:Pris)§! Execute: All in Dungeon;;;;;;;;;x
 expd_pris_targeted_execution_all_dungeon_prisoners_from_this_liege_desc;Execute all of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that are currently in §Ythe dungeon§! and that originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
-expd_pris_targeted_execution_all_oublietted_prisoners_from_this_liege;§gED-P: Execute: All Oublietted§!;;;;;;;;;x
+expd_pris_targeted_execution_all_oublietted_prisoners_from_this_liege;§M(ED:Pris)§! Execute: All Oublietted;;;;;;;;;x
 expd_pris_targeted_execution_all_oublietted_prisoners_from_this_liege_desc;Execute all of §Y[From.GetTitledFirstName]§!'s §Yunlanded§! prisoners that are currently in §Ythe oubliette§! and that originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
 # Prisoner execution: tooltips
 EXPD_PRIS_TOOLTIP_FROM_WILL_GAIN_TYRANNY_DUE_TO_MASS_EXECUTION;§Y[From.GetTitledFirstName]§! will §Rgain tyranny§!!;;;;;;;;;x
@@ -42,13 +42,13 @@ EXPD_PRIS_TOOLTIP_BLANK_LINE;---;;;;;;;;x
 EXPD_PRIS_TOOLTIP_THIS_PRISONER_IS_EXECUTED_IN_MASS_EXECUTION;Executed[expd_pris_wealth][expd_pris_artifact];;;;;;;;;x
 EXPD_PRIS_TOOLTIP_THIS_PRISONER_IS_RELEASED;Released[expd_pris_wealth][expd_pris_artifact];;;;;;;;;x
 # Prisoner ransom: name & description
-expd_pris_targeted_ransom_all_possible_prisoners_from_this_liege;§LED-P: Ransom Prisoners: All§!;;;;;;;;;x
+expd_pris_targeted_ransom_all_possible_prisoners_from_this_liege;§M(ED:Pris)§! Ransom: All;;;;;;;;;x
 expd_pris_targeted_ransom_all_possible_prisoners_from_this_liege_desc;Ransom as many prisoners as possible that are held by §Y[From.GetTitledFirstName]§! and originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
-expd_pris_targeted_ransom_all_possible_house_arrested_prisoners_from_this_liege;§LED-P: Ransom Prisoners: House-Arrested§!;;;;;;;;;x
+expd_pris_targeted_ransom_all_possible_house_arrested_prisoners_from_this_liege;§M(ED:Pris)§! Ransom: All House-Arrested;;;;;;;;;x
 expd_pris_targeted_ransom_all_possible_house_arrested_prisoners_from_this_liege_desc;Ransom as many prisoners as possible that are held in §Yhouse arrest§! by §Y[From.GetTitledFirstName]§! and originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
-expd_pris_targeted_ransom_all_possible_dungeon_prisoners_from_this_liege;§LED-P: Ransom Prisoners: Dungeon§!;;;;;;;;;x
+expd_pris_targeted_ransom_all_possible_dungeon_prisoners_from_this_liege;§M(ED:Pris)§! Ransom: All in Dungeon;;;;;;;;;x
 expd_pris_targeted_ransom_all_possible_dungeon_prisoners_from_this_liege_desc;Ransom as many prisoners as possible that are held in §Y[From.GetTitledFirstName]§!'s §Ydungeon§! and originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
-expd_pris_targeted_ransom_all_possible_oublietted_prisoners_from_this_liege;§LED-P: Ransom Prisoners: Oubliette§!;;;;;;;;;x
+expd_pris_targeted_ransom_all_possible_oublietted_prisoners_from_this_liege;§M(ED:Pris)§! Ransom: All Oublietted;;;;;;;;;x
 expd_pris_targeted_ransom_all_possible_oublietted_prisoners_from_this_liege_desc;Ransom as many prisoners as possible that are held in §Y[From.GetTitledFirstName]§!'s §Youbliette§! and originate in §Y[Root.GetTitledFirstName]§!'s court;;;;;;;;;x
 # Prisoner ransom: tooltips
 EXPD_PRIS_TOOLTIP_UNLANDED_PRISONER_RANSOMS_THEMSELF_CHILD_OF_EMPEROR;§GRansoms [This.GetHerHim]self§! (110¤)[expd_pris_wealth][expd_pris_artifact];;;;;;;;;x
@@ -82,12 +82,12 @@ expd_pris_wealth_gt_800; (has 800-900¤);;;;;;;;;x
 expd_pris_wealth_gt_900; (has 900-1000¤);;;;;;;;;x
 expd_pris_wealth_gt_1000; (has >1000¤);;;;;;;;;x
 # Prisoner artifact ownership
-expd_pris_artifact_quality_1; (has §Ytier 1 artifact§!);;;;;;;;;x
-expd_pris_artifact_quality_2; (has §Ytier 2 artifact§!);;;;;;;;;x
-expd_pris_artifact_quality_3; (has §Gtier 3 artifact§!);;;;;;;;;x
+expd_pris_artifact_quality_1; (has §gtier 1 artifact§!);;;;;;;;;x
+expd_pris_artifact_quality_2; (has tier 2 artifact);;;;;;;;;x
+expd_pris_artifact_quality_3; (has §Mtier 3 artifact§!);;;;;;;;;x
 expd_pris_artifact_quality_4; (has §Gtier 4 artifact§!);;;;;;;;;x
-expd_pris_artifact_quality_5; (has §Rtier 5 artifact§!);;;;;;;;;x
-expd_pris_artifact_quality_6; (has §Rtier 6 artifact§!);;;;;;;;;x
-expd_pris_artifact_quality_7; (has §Rtier 7 artifact§!);;;;;;;;;x
-expd_pris_artifact_quality_8; (has §Rtier 8 artifact§!);;;;;;;;;x
-expd_pris_artifact_quality_9; (has §Rtier 9+ artifact§!);;;;;;;;;x
+expd_pris_artifact_quality_5; (has §Ptier 5 artifact§!);;;;;;;;;x
+expd_pris_artifact_quality_6; (has §ltier 6 artifact§!);;;;;;;;;x
+expd_pris_artifact_quality_7; (has §ltier 7 artifact§!);;;;;;;;;x
+expd_pris_artifact_quality_8; (has §ltier 8 artifact§!);;;;;;;;;x
+expd_pris_artifact_quality_9; (has §ltier 9+ artifact§!);;;;;;;;;x
