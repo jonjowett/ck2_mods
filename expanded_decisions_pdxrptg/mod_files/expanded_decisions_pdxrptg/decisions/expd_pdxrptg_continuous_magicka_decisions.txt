@@ -1,0 +1,158 @@
+## Audax Validator EnableCommentMetadata
+#
+#targetted_decisions = {
+#	
+#	expd_pdxrptg_cm_self_start = {
+#		ai = no
+#		filter = self
+#		from_potential = {
+#			# Leave blank, put all conditions in potential block
+#		}
+#		potential = {
+#			NOT = { has_character_modifier = expd_pdxrptg_cm_self }
+#			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+#		}
+#		allow = {
+#			custom_tooltip = {
+#				text = expd_pdxrptg_cm_event_is_not_open_tt
+#				NOT = { has_character_flag = expd_pdxrptg_cm_event_open }
+#			}
+#		}
+#		effect = {
+#			hidden_tooltip = {
+#				set_character_flag = expd_pdxrptg_cm_event_open
+#				character_event = { id = ExpdPdxrptgCM.1000 }
+#			}
+#		}
+#		ai_will_do = { always = no }
+#	}
+#	
+#	expd_pdxrptg_cm_self_stop = {
+#		ai = no
+#		filter = self
+#		from_potential = {
+#			# Leave blank, put all conditions in potential block
+#		}
+#		potential = {
+#			has_character_modifier = expd_pdxrptg_cm_self
+#		}
+#		allow = {
+#			custom_tooltip = {
+#				text = expd_pdxrptg_cm_event_is_not_open_tt
+#				NOT = { has_character_flag = expd_pdxrptg_cm_event_open }
+#			}
+#		}
+#		effect = {
+#			hidden_tooltip = {
+#				set_character_flag = expd_pdxrptg_cm_event_open
+#				character_event = { id = ExpdPdxrptgCM.1100 }
+#			}
+#		}
+#		ai_will_do = { always = no }
+#	}
+#	
+#	expd_pdxrptg_cm_self_cancel_single_buff = {
+#		ai = no
+#		filter = self
+#		from_potential = {
+#			# Leave blank, put all conditions in potential block
+#		}
+#		potential = {
+#			has_character_modifier = expd_pdxrptg_cm_self
+#			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+#		}
+#		allow = {
+#			custom_tooltip = {
+#				text = expd_pdxrptg_cm_event_is_not_open_tt
+#				NOT = { has_character_flag = expd_pdxrptg_cm_event_open }
+#			}
+#		}
+#		effect = {
+#			hidden_tooltip = {
+#				set_character_flag = expd_pdxrptg_cm_event_open
+#				character_event = { id = ExpdPdxrptgCM.1200 }
+#			}
+#		}
+#		ai_will_do = { always = no }
+#	}
+#	
+#}
+#
+#settlement_decisions = {
+#	
+#	expd_pdxrptg_cm_demesne_start = {
+#		ai = no
+#		filter = owned
+#		from_potential = {
+#			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+#		}
+#		potential = {
+#			is_capital = yes
+#			NOT = { location = { has_province_modifier = expd_pdxrptg_cm_demesne } }
+#		}
+#		allow = {
+#			custom_tooltip = {
+#				text = expd_pdxrptg_cm_event_is_not_open_tt
+#				NOT = { has_character_flag = expd_pdxrptg_cm_event_open }
+#			}
+#		}
+#		effect = {
+#			hidden_tooltip = {
+#				set_character_flag = expd_pdxrptg_cm_event_open
+#				province_event = { id = ExpdPdxrptgCM.2000 }
+#			}
+#		}
+#		ai_will_do = { always = no }
+#	}
+#	
+#	expd_pdxrptg_cm_demesne_stop = {
+#		ai = no
+#		filter = owned
+#		from_potential = {
+#			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+#		}
+#		potential = {
+#			is_capital = yes
+#			location = { has_province_modifier = expd_pdxrptg_cm_demesne }
+#		}
+#		allow = {
+#			custom_tooltip = {
+#				text = expd_pdxrptg_cm_event_is_not_open_tt
+#				NOT = { has_character_flag = expd_pdxrptg_cm_event_open }
+#			}
+#		}
+#		effect = {
+#			hidden_tooltip = {
+#				set_character_flag = expd_pdxrptg_cm_event_open
+#				province_event = { id = ExpdPdxrptgCM.2100 }
+#			}
+#		}
+#		ai_will_do = { always = no }
+#	}
+#	
+#	expd_pdxrptg_cm_demesne_cancel_single_buff = {
+#		ai = no
+#		filter = owned
+#		from_potential = {
+#			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+#		}
+#		potential = {
+#			is_capital = yes
+#			location = { has_province_modifier = expd_pdxrptg_cm_demesne }
+#		}
+#		allow = {
+#			custom_tooltip = {
+#				text = expd_pdxrptg_cm_event_is_not_open_tt
+#				NOT = { has_character_flag = expd_pdxrptg_cm_event_open }
+#			}
+#		}
+#		effect = {
+#			hidden_tooltip = {
+#				set_character_flag = expd_pdxrptg_cm_event_open
+#				province_event = { id = ExpdPdxrptgCM.2200 }
+#			}
+#		}
+#		ai_will_do = { always = no }
+#	}
+#	
+#}

@@ -1,0 +1,220 @@
+## Audax Validator EnableCommentMetadata
+#
+#namespace = ExpdPdxrptgCM
+#
+## Events 1000-1999: UI for continuous magicka on self
+## Events 2000-2999: UI for continuous magicka on demesne
+## Events 8000-8999: Auto-cancellation of continuous magicka
+## Events 9000-9999: Debugging
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#################################################
+##                                              #
+##          CONTINUOUS MAGICKA ON SELF          #
+##                                              #
+#################################################
+#
+#
+#
+## Start
+#character_event = {
+#	id = ExpdPdxrptgCM.1000
+#	desc = ExpdPdxrptgCM_1000_Desc
+#	picture = GFX_evt_mage
+#	is_triggered_only = yes
+#	ai = no
+#	immediate = {
+#		set_character_flag = expd_pdxrptg_cm_event_open
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_Continue
+#		add_character_modifier = {
+#			name = expd_pdxrptg_cm_self
+#			duration = -1
+#		}
+#		ai_chance = { factor = 0 }
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_Cancel
+#		ai_chance = { factor = 1 }
+#	}
+#	after = {
+#		hidden_tooltip = { clr_character_flag = expd_pdxrptg_cm_event_open }
+#	}
+#}
+#
+## Stop
+#character_event = {
+#	id = ExpdPdxrptgCM.1100
+#	desc = ExpdPdxrptgCM_1100_Desc
+#	picture = GFX_evt_mage
+#	is_triggered_only = yes
+#	ai = no
+#	immediate = {
+#		set_character_flag = expd_pdxrptg_cm_event_open
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_Continue
+#		remove_character_modifier = expd_pdxrptg_cm_self
+#		ai_chance = { factor = 1 }
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_Cancel
+#		ai_chance = { factor = 0 }
+#	}
+#	after = {
+#		hidden_tooltip = { clr_character_flag = expd_pdxrptg_cm_event_open }
+#	}
+#}
+#
+## Remove a buff
+## TODO:
+##  --- Calculate total number of active buffs (N)
+##  --- Work out which iteration of this event we're on (say, iteration X)
+##  --- Event option 1 removes buff (X*2)-1
+##  --- If X > N/2 then event option 2 removes buff (X*2)
+##  --- If X < N/2 then event option 3 increases X by 1 and calls this event again
+##  --- Event option 4 cancels
+#character_event = {
+#	id = ExpdPdxrptgCM.1200
+#	desc = ExpdPdxrptgCM_1200_Desc
+#	picture = GFX_evt_mage
+#	is_triggered_only = yes
+#	ai = no
+#	immediate = {
+#		set_character_flag = expd_pdxrptg_cm_event_open
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_1200_RemoveBuff1
+#		ai_chance = { factor = 0 }
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_1200_RemoveBuff2
+#		ai_chance = { factor = 0 }
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_ExtOpt_1200_Recurse
+#		ai_chance = { factor = 0 }
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_Cancel
+#		ai_chance = { factor = 1 }
+#	}
+#	after = {
+#		hidden_tooltip = { clr_character_flag = expd_pdxrptg_cm_event_open }
+#	}
+#}
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+####################################################
+##                                                 #
+##          CONTINUOUS MAGICKA ON DEMESNE          #
+##                                                 #
+####################################################
+#
+#
+#
+## Start
+#province_event = {
+#	id = ExpdPdxrptgCM.2000
+#	desc = ExpdPdxrptgCM_2000_Desc
+#	picture = GFX_evt_mage
+#	is_triggered_only = yes
+#	ai = no
+#	immediate = {
+#		set_character_flag = expd_pdxrptg_cm_event_open
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_Continue
+#		add_province_modifier = {
+#			name = expd_pdxrptg_cm_demesne
+#			duration = -1
+#		}
+#		ai_chance = { factor = 0 }
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_Cancel
+#		ai_chance = { factor = 1 }
+#	}
+#	after = {
+#		hidden_tooltip = { clr_character_flag = expd_pdxrptg_cm_event_open }
+#	}
+#}
+#
+## Stop
+#character_event = {
+#	id = ExpdPdxrptgCM.2100
+#	desc = ExpdPdxrptgCM_2100_Desc
+#	picture = GFX_evt_mage
+#	is_triggered_only = yes
+#	ai = no
+#	immediate = {
+#		set_character_flag = expd_pdxrptg_cm_event_open
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_Continue
+#		remove_province_modifier = expd_pdxrptg_cm_demesne
+#		ai_chance = { factor = 1 }
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_Cancel
+#		ai_chance = { factor = 0 }
+#	}
+#	after = {
+#		hidden_tooltip = { clr_character_flag = expd_pdxrptg_cm_event_open }
+#	}
+#}
+#
+## Remove a buff
+## TODO:
+##  --- Calculate total number of active buffs (N)
+##  --- Work out which iteration of this event we're on (say, iteration X)
+##  --- Event option 1 removes buff (X*2)-1
+##  --- If X > N/2 then event option 2 removes buff (X*2)
+##  --- If X < N/2 then event option 3 increases X by 1 and calls this event again
+##  --- Event option 4 cancels
+#character_event = {
+#	id = ExpdPdxrptgCM.2200
+#	desc = ExpdPdxrptgCM_2200_Desc
+#	picture = GFX_evt_mage
+#	is_triggered_only = yes
+#	ai = no
+#	immediate = {
+#		set_character_flag = expd_pdxrptg_cm_event_open
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_2200_RemoveBuff1
+#		ai_chance = { factor = 0 }
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_2200_RemoveBuff2
+#		ai_chance = { factor = 0 }
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_ExtOpt_2200_Recurse
+#		ai_chance = { factor = 0 }
+#	}
+#	option = {
+#		name = ExpdPdxrptgCM_EvtOpt_Cancel
+#		ai_chance = { factor = 1 }
+#	}
+#	after = {
+#		hidden_tooltip = { clr_character_flag = expd_pdxrptg_cm_event_open }
+#	}
+#}
