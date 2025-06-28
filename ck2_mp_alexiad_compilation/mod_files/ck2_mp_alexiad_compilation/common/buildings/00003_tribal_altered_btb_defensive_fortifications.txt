@@ -1,0 +1,99 @@
+ # Triggers are in Province scope. The From Scope contains the settlement holder (character)
+ # start trigger is in title scope.
+
+tribal = {
+	
+	tb_defensive_fortifications_1 = {
+		desc = tb_defensive_fortifications_1_desc
+		potential = {
+			btb_tribal_defensive_fortifications_can_exist_here_1 = yes
+		}
+		is_active_trigger = {
+			btb_tribal_defensive_fortifications_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_CASTLE_CONSTRUCTION = 0 }
+		piety_cost = 100
+		build_time = 365
+		fort_level = 0.20
+		garrison_size = 0.15
+		archers = 10
+		ai_creation_factor = 97
+		ai_feudal_modifier = 10
+		ai_republic_modifier = -10
+		
+		extra_tech_building_start = 0.3
+	}
+	
+	tb_defensive_fortifications_2 = {
+		desc = tb_defensive_fortifications_2_desc
+		potential = {
+			btb_tribal_defensive_fortifications_can_exist_here_2 = yes
+		}
+		is_active_trigger = {
+			btb_tribal_defensive_fortifications_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_CASTLE_CONSTRUCTION = 0 }
+		upgrades_from = tb_defensive_fortifications_1
+		piety_cost = 150
+		build_time = 365
+		fort_level = 0.20
+		garrison_size = 0.15
+		archers = 10
+		ai_creation_factor = 98
+		ai_feudal_modifier = 10
+		ai_republic_modifier = -10
+		
+		convert_to_city = ct_wall_q_1
+		convert_to_castle = ca_wall_q_1
+		
+		extra_tech_building_start = 1.5
+	}
+	
+	tb_defensive_fortifications_3 = {
+		desc = tb_defensive_fortifications_3_desc
+		potential = {
+			btb_tribal_defensive_fortifications_can_exist_here_3 = yes
+		}
+		is_active_trigger = {
+			btb_tribal_defensive_fortifications_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+		upgrades_from = tb_defensive_fortifications_2
+		piety_cost = 200
+		build_time = 365
+		fort_level = 0.20
+		garrison_size = 0.15
+		archers = 10
+		ai_creation_factor = 99
+		ai_feudal_modifier = 10
+		ai_republic_modifier = -10
+		
+		extra_tech_building_start = 2
+	}
+	
+	tb_defensive_fortifications_4 = {
+		desc = tb_defensive_fortifications_4_desc
+		potential = {
+			btb_tribal_defensive_fortifications_can_exist_here_4 = yes
+		}
+		is_active_trigger = {
+			btb_tribal_defensive_fortifications_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+		upgrades_from = tb_defensive_fortifications_3
+		piety_cost = 250
+		build_time = 365
+		fort_level = 0.20
+		garrison_size = 0.15
+		archers = 10
+		ai_creation_factor = 100
+		ai_feudal_modifier = 10
+		ai_republic_modifier = -10
+		
+		convert_to_city = ct_wall_q_2
+		convert_to_castle = ca_wall_q_2
+		
+		extra_tech_building_start = 2.5
+	}
+	
+}

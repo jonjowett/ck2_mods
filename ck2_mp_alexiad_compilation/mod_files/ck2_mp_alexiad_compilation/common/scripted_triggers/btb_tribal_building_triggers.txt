@@ -1,0 +1,369 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+
+
+
+
+
+##########################################
+#                                        #
+#        Defensive Fortifications        #
+#                                        #
+##########################################
+
+
+
+btb_tribal_defensive_fortifications_can_exist_here_1 = {
+	OR = {
+		btb_tribal_defensive_fortifications_can_be_activated_by_from = yes
+		has_building = tb_defensive_fortifications_1
+		is_building  = tb_defensive_fortifications_1
+	}
+}
+
+btb_tribal_defensive_fortifications_can_exist_here_2 = {
+	OR = {
+		btb_tribal_defensive_fortifications_can_be_activated_by_from = yes
+		has_building = tb_defensive_fortifications_2
+		is_building  = tb_defensive_fortifications_2
+	}
+}
+
+btb_tribal_defensive_fortifications_can_exist_here_3 = {
+	OR = {
+		btb_tribal_defensive_fortifications_can_be_activated_by_from = yes
+		has_building = tb_defensive_fortifications_3
+		is_building  = tb_defensive_fortifications_3
+	}
+}
+
+btb_tribal_defensive_fortifications_can_exist_here_4 = {
+	OR = {
+		btb_tribal_defensive_fortifications_can_be_activated_by_from = yes
+		has_building = tb_defensive_fortifications_4
+		is_building  = tb_defensive_fortifications_4
+	}
+}
+
+btb_tribal_defensive_fortifications_can_be_activated_by_from = {
+	FROM = {
+		OR = {
+			religion_openly_baltic_or_reformed_trigger = yes
+			religion_openly_finnish_or_reformed_trigger = yes
+			religion_openly_slavic_or_reformed_trigger = yes
+			religion_openly_west_african_or_reformed_trigger = yes
+			religion_openly_bon_or_reformed_trigger = yes
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+##########################################
+#                                        #
+#       War Camp / Steppe Barracks       #
+#                                        #
+##########################################
+
+
+
+btb_tribal_war_camp_can_exist_here_1 = {
+	OR = {
+		btb_tribal_war_camp_can_be_activated_by_from = yes
+		has_building = tb_war_camp_1
+		is_building  = tb_war_camp_1
+	}
+}
+
+btb_tribal_war_camp_can_exist_here_2 = {
+	OR = {
+		btb_tribal_war_camp_can_be_activated_by_from = yes
+		has_building = tb_war_camp_2
+		is_building  = tb_war_camp_2
+	}
+}
+
+btb_tribal_war_camp_can_exist_here_3 = {
+	OR = {
+		btb_tribal_war_camp_can_be_activated_by_from = yes
+		has_building = tb_war_camp_3
+		is_building  = tb_war_camp_3
+	}
+}
+
+btb_tribal_war_camp_can_exist_here_4 = {
+	OR = {
+		btb_tribal_war_camp_can_be_activated_by_from = yes
+		has_building = tb_war_camp_4
+		is_building  = tb_war_camp_4
+	}
+}
+
+btb_tribal_war_camp_can_be_activated_by_from = {
+	# Logically: btb_tribal_steppe_barracks_can_be_activated_by_from = no
+	# Rewrite so that the tooltip is more understandable for the user.
+	trigger_if = {
+		limit = { terrain = steppe }
+		FROM = {
+			NOR = {
+				culture_group = altaic
+				culture_group = magyar
+			}
+		}
+	}
+	trigger_else = {
+		always = yes
+	}
+}
+
+btb_tribal_steppe_barracks_can_exist_here_1 = {
+	OR = {
+		btb_tribal_steppe_barracks_can_be_activated_by_from = yes
+		has_building = tb_steppe_barracks_1
+		is_building  = tb_steppe_barracks_1
+	}
+}
+
+btb_tribal_steppe_barracks_can_exist_here_2 = {
+	OR = {
+		btb_tribal_steppe_barracks_can_be_activated_by_from = yes
+		has_building = tb_steppe_barracks_2
+		is_building  = tb_steppe_barracks_2
+	}
+}
+
+btb_tribal_steppe_barracks_can_exist_here_3 = {
+	OR = {
+		btb_tribal_steppe_barracks_can_be_activated_by_from = yes
+		has_building = tb_steppe_barracks_3
+		is_building  = tb_steppe_barracks_3
+	}
+}
+
+btb_tribal_steppe_barracks_can_exist_here_4 = {
+	OR = {
+		btb_tribal_steppe_barracks_can_be_activated_by_from = yes
+		has_building = tb_steppe_barracks_4
+		is_building  = tb_steppe_barracks_4
+	}
+}
+
+btb_tribal_steppe_barracks_can_be_activated_by_from = {
+	trigger_if = {
+		limit = { terrain = steppe }
+		FROM = {
+			OR = {
+				culture_group = altaic
+				culture_group = magyar
+			}
+		}
+	}
+	trigger_else = {
+		terrain = steppe
+	}
+}
+
+
+
+
+
+
+
+
+
+
+##########################################
+#                                        #
+#       Practice Range                   #
+#             / Steppe Stables           #
+#             / Desert Stables           #
+#                                        #
+##########################################
+
+
+
+btb_tribal_practice_range_can_exist_here_1 = {
+	OR = {
+		btb_tribal_practice_range_can_be_activated_by_from = yes
+		has_building = tb_practice_range_1
+		is_building  = tb_practice_range_1
+	}
+}
+
+btb_tribal_practice_range_can_exist_here_2 = {
+	OR = {
+		btb_tribal_practice_range_can_be_activated_by_from = yes
+		has_building = tb_practice_range_2
+		is_building  = tb_practice_range_2
+	}
+}
+
+btb_tribal_practice_range_can_exist_here_3 = {
+	OR = {
+		btb_tribal_practice_range_can_be_activated_by_from = yes
+		has_building = tb_practice_range_3
+		is_building  = tb_practice_range_3
+	}
+}
+
+btb_tribal_practice_range_can_exist_here_4 = {
+	OR = {
+		btb_tribal_practice_range_can_be_activated_by_from = yes
+		has_building = tb_practice_range_4
+		is_building  = tb_practice_range_4
+	}
+}
+
+btb_tribal_practice_range_can_be_activated_by_from = {
+	# Logically:
+	# 	AND = {
+	# 		btb_tribal_steppe_stable_can_be_activated_by_from = no
+	# 		btb_tribal_desert_stable_can_be_activated_by_from = no
+	# 	}
+	# Rewritten to be more understandable for the user
+	trigger_if = {
+		limit = {
+			OR = {
+				terrain = plains
+				terrain = steppe
+			}
+		}
+		FROM = {
+			NOR = {
+				culture = alan
+				culture_group = altaic
+				culture_group = magyar
+			}
+		}
+	}
+	trigger_else_if = {
+		limit = { terrain = desert }
+		FROM = {
+			NOR = {
+				culture_group = east_african
+				culture_group = west_african
+				culture_group = arabic
+				culture_group = iranian
+			}
+		}
+	}
+	trigger_else = {
+		always = yes
+	}
+}
+
+btb_tribal_steppe_stable_can_exist_here_1 = {
+	OR = {
+		btb_tribal_steppe_stable_can_be_activated_by_from = yes
+		has_building = tb_steppe_stable_1
+		is_building  = tb_steppe_stable_1
+	}
+}
+
+btb_tribal_steppe_stable_can_exist_here_2 = {
+	OR = {
+		btb_tribal_steppe_stable_can_be_activated_by_from = yes
+		has_building = tb_steppe_stable_2
+		is_building  = tb_steppe_stable_2
+	}
+}
+
+btb_tribal_steppe_stable_can_exist_here_3 = {
+	OR = {
+		btb_tribal_steppe_stable_can_be_activated_by_from = yes
+		has_building = tb_steppe_stable_3
+		is_building  = tb_steppe_stable_3
+	}
+}
+
+btb_tribal_steppe_stable_can_exist_here_4 = {
+	OR = {
+		btb_tribal_steppe_stable_can_be_activated_by_from = yes
+		has_building = tb_steppe_stable_4
+		is_building  = tb_steppe_stable_4
+	}
+}
+
+btb_tribal_steppe_stable_can_be_activated_by_from = {
+	trigger_if = {
+		limit = {
+			OR = {
+				terrain = plains
+				terrain = steppe
+			}
+		}
+		FROM = {
+			OR = {
+				culture = alan
+				culture_group = altaic
+				culture_group = magyar
+			}
+		}
+	}
+	trigger_else = {
+		OR = {
+			terrain = plains
+			terrain = steppe
+		}
+	}
+}
+
+btb_tribal_desert_stable_can_exist_here_1 = {
+	OR = {
+		btb_tribal_desert_stable_can_be_activated_by_from = yes
+		has_building = tb_desert_stable_1
+		is_building  = tb_desert_stable_1
+	}
+}
+
+btb_tribal_desert_stable_can_exist_here_2 = {
+	OR = {
+		btb_tribal_desert_stable_can_be_activated_by_from = yes
+		has_building = tb_desert_stable_2
+		is_building  = tb_desert_stable_2
+	}
+}
+
+btb_tribal_desert_stable_can_exist_here_3 = {
+	OR = {
+		btb_tribal_desert_stable_can_be_activated_by_from = yes
+		has_building = tb_desert_stable_3
+		is_building  = tb_desert_stable_3
+	}
+}
+
+btb_tribal_desert_stable_can_exist_here_4 = {
+	OR = {
+		btb_tribal_desert_stable_can_be_activated_by_from = yes
+		has_building = tb_desert_stable_4
+		is_building  = tb_desert_stable_4
+	}
+}
+
+btb_tribal_desert_stable_can_be_activated_by_from = {
+	trigger_if = {
+		limit = { terrain = desert }
+		FROM = {
+			OR = {
+				culture_group = east_african
+				culture_group = west_african
+				culture_group = arabic
+				culture_group = iranian
+			}
+		}
+	}
+	trigger_else = {
+		terrain = desert
+	}
+}

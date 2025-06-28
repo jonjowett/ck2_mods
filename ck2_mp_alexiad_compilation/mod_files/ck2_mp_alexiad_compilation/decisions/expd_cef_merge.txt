@@ -423,7 +423,8 @@ decisions = {
 			
 			# Then, inside a hidden_tooltip, perform the actual actions
 			hidden_tooltip = {
-				primary_title = {
+				primary_title = { save_event_target_as = expd_cef_old_primary_title }
+				event_target:expd_cef_old_primary_title = {
 					create_title = {
 						tier = EMPEROR
 						landless = no

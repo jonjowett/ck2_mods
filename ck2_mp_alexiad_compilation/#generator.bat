@@ -41,6 +41,7 @@ xcopy /R /Y /Q /S /E /I %git_mod_folder_location%more_bloodlines_bugfix\referenc
 :: Copy files from git mods which have no significant dependencies
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%ai_reformed_pagans_convert_their_provinces%git_mod_subfolder%ai_reformed_pagans_convert_their_provinces\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%better_slavic_union%git_mod_subfolder%better_slavic_union\ %this_mod_folder_location%
+xcopy /R /Y /Q /S /E /I %git_mod_folder_location%bugfix_tribal_buildings%git_mod_subfolder%bugfix_tribal_buildings\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%even_more_bloodlines%git_mod_subfolder%even_more_bloodlines\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_advanced_tribe%git_mod_subfolder%expanded_decisions_advanced_tribe\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_character_search_helper%git_mod_subfolder%expanded_decisions_character_search_helper\ %this_mod_folder_location%
