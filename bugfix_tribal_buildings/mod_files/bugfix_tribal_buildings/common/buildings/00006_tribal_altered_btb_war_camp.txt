@@ -1,0 +1,83 @@
+ # Triggers are in Province scope. The From Scope contains the settlement holder (character)
+ # start trigger is in title scope.
+
+tribal = {
+	
+	tb_war_camp_1 = {
+		desc = tb_war_camp_desc
+		potential = {
+			btb_tribal_war_camp_can_exist_here = yes
+		}
+		is_active_trigger = {
+			btb_tribal_war_camp_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_INFANTRY = 0 }
+		prestige_cost = 100
+		build_time = 365
+		light_infantry = 40
+		ai_creation_factor = 95
+		
+		extra_tech_building_start = 0.3
+	}
+	
+	tb_war_camp_2 = {
+		desc = tb_war_camp_desc
+		potential = {
+			btb_tribal_war_camp_can_exist_here = yes
+		}
+		is_active_trigger = {
+			btb_tribal_war_camp_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_INFANTRY = 0 }
+		upgrades_from = tb_war_camp_1
+		prestige_cost = 200
+		build_time = 547
+		light_infantry = 40
+		ai_creation_factor = 94
+		
+		convert_to_castle = ca_barracks_1
+		convert_to_city = ct_guard_1
+
+		extra_tech_building_start = 1.5
+	}
+	
+	tb_war_camp_3 = {
+		desc = tb_war_camp_desc
+		potential = {
+			btb_tribal_war_camp_can_exist_here = yes
+		}
+		is_active_trigger = {
+			btb_tribal_war_camp_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_INFANTRY = 0 }
+		upgrades_from = tb_war_camp_2
+		prestige_cost = 300
+		build_time = 730
+		light_infantry = 40
+		ai_creation_factor = 93
+		
+		extra_tech_building_start = 2
+	}
+	
+	tb_war_camp_4 = {
+		desc = tb_war_camp_desc
+		potential = {
+			btb_tribal_war_camp_can_exist_here = yes
+		}
+		is_active_trigger = {
+			btb_tribal_war_camp_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_INFANTRY = 0 }
+		upgrades_from = tb_war_camp_3
+		prestige_cost = 400
+		build_time = 1095
+		light_infantry = 40
+		ai_creation_factor = 92
+		
+		convert_to_castle = ca_barracks_2
+		convert_to_city = ct_guard_2
+		
+		extra_tech_building_start = 2.5
+	}
+	
+}

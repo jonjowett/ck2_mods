@@ -1,0 +1,87 @@
+ # Triggers are in Province scope. The From Scope contains the settlement holder (character)
+ # start trigger is in title scope.
+
+tribal = {
+	
+	tb_steppe_barracks_1 = {
+		desc = ca_steppe_barracks_desc
+		potential = {
+			btb_tribal_steppe_barracks_can_exist_here = yes
+		}
+		is_active_trigger = {
+			btb_tribal_steppe_barracks_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_CAVALRY = 0 }
+		prestige_cost = 100
+		build_time = 365
+		archers = 12
+		light_cavalry = 10
+		ai_creation_factor = 105
+		
+		extra_tech_building_start = 0.3
+	}
+	
+	tb_steppe_barracks_2 = {
+		desc = ca_steppe_barracks_desc
+		potential = {
+			btb_tribal_steppe_barracks_can_exist_here = yes
+		}
+		is_active_trigger = {
+			btb_tribal_steppe_barracks_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_CAVALRY = 0 }
+		upgrades_from = tb_steppe_barracks_1
+		prestige_cost = 200
+		build_time = 547
+		archers = 12
+		light_cavalry = 10
+		ai_creation_factor = 104
+		
+		convert_to_castle = ca_steppe_barracks_1
+		convert_to_city = ct_guard_1
+		
+		extra_tech_building_start = 1.5
+	}
+	
+	tb_steppe_barracks_3 = {
+		desc = ca_steppe_barracks_desc
+		potential = {
+			btb_tribal_steppe_barracks_can_exist_here = yes
+		}
+		is_active_trigger = {
+			btb_tribal_steppe_barracks_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_CAVALRY = 0 }
+		upgrades_from = tb_steppe_barracks_2
+		prestige_cost = 300
+		build_time = 730
+		archers = 12
+		light_cavalry = 10
+		ai_creation_factor = 103
+		
+		extra_tech_building_start = 2
+	}
+	
+	tb_steppe_barracks_4 = {
+		desc = ca_steppe_barracks_desc
+		potential = {
+			btb_tribal_steppe_barracks_can_exist_here = yes
+		}
+		is_active_trigger = {
+			btb_tribal_steppe_barracks_can_be_activated_by_from = yes
+		}
+		trigger = { TECH_CAVALRY = 0 }
+		upgrades_from = tb_steppe_barracks_3
+		prestige_cost = 400
+		build_time = 1095
+		archers = 12
+		light_cavalry = 10
+		ai_creation_factor = 102
+		
+		convert_to_castle = ca_steppe_barracks_2
+		convert_to_city = ct_guard_2
+		
+		extra_tech_building_start = 2.5
+	}
+	
+}

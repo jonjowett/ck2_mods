@@ -1,0 +1,78 @@
+# Audax Validator EnableCommentMetadata
+# Audax Validator "!" Ignore_NEXT
+# Ignore all errors in this file, since the buildings are identical to the base game.
+
+ # Triggers are in Province scope. The From Scope contains the settlement holder (character)
+ # start trigger is in title scope.
+
+tribal = {
+	
+	tb_market_town_1 = {
+		desc = tb_market_town_1_desc
+		trigger = { TECH_CITY_CONSTRUCTION = 0 }
+		gold_cost = 25
+		build_time = 365
+		
+		tax_income = 0.5
+		retinuesize = 20
+		ai_creation_factor = 97
+		ai_feudal_modifier = -10
+		ai_republic_modifier = 10
+		
+		extra_tech_building_start = 0.3
+	}
+	
+	tb_market_town_2 = {
+		desc = tb_market_town_2_desc
+		trigger = { TECH_CITY_CONSTRUCTION = 0 }
+		upgrades_from = tb_market_town_1
+		gold_cost = 50
+		build_time = 365
+		
+		tax_income = 0.5
+		ai_creation_factor = 98
+		ai_feudal_modifier = -10
+		ai_republic_modifier = 10
+		
+		convert_to_castle = ca_town_1
+		convert_to_city = ct_marketplace_1
+		
+		extra_tech_building_start = 1.5
+	}
+	
+	tb_market_town_3 = {
+		desc = tb_market_town_3_desc
+		trigger = { TECH_CITY_CONSTRUCTION = 1 }
+		upgrades_from = tb_market_town_2
+		gold_cost = 75
+		build_time = 365
+		
+		tax_income = 0.5
+		ai_creation_factor = 99
+		ai_feudal_modifier = -10
+		ai_republic_modifier = 10
+		
+		court_size_modifier = 1
+		extra_tech_building_start = 2
+	}
+	
+	tb_market_town_4 = {
+		desc = tb_market_town_4_desc
+		trigger = { TECH_CITY_CONSTRUCTION = 1 }
+		upgrades_from = tb_market_town_3
+		gold_cost = 100
+		build_time = 365
+		
+		tax_income = 0.5
+		ai_creation_factor = 100
+		ai_feudal_modifier = -10
+		ai_republic_modifier = 10
+		
+		convert_to_castle = ca_town_2
+		convert_to_city = ct_marketplace_2
+		
+		court_size_modifier = 1
+		extra_tech_building_start = 2.5
+	}
+	
+}
