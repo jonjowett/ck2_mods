@@ -85,6 +85,17 @@ defined_text = {
 		localisation_key = BCT_InvBlock_TotalBlocker_LesserSpouse
 	}
 	
+	# Courtier of a liege who has a temporary title
+	# Can occasionally be worked-around via marriage/concubinage, but that's *very* niche.
+	#    (Temporary lieges won't sell favors, so you *have* to have intermarriage, or be exact same religion for concubinage.)
+	text = {
+		trigger = {
+			is_ruler = no
+			liege = { primary_title = { temporary = yes } }
+		}
+		localisation_key = BCT_InvBlock_TotalBlocker_LiegeTempTitle
+	}
+	
 	# Consort/concubine - can sometimes be worked-around, eg. by taking them yourself, or by recruiting them
 	# All such workarounds are near-instant, so either you can do them or you can't.
 	text = {
