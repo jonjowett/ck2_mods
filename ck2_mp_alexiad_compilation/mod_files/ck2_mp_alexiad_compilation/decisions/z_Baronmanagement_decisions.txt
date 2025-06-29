@@ -1,0 +1,16 @@
+# Restrict this decision to nomads only, everyone else would have to pause the game to deal with the excess demesne.
+
+decisions = {
+	revoke_all = {
+		ai = no
+		potential = {
+			is_nomadic = yes
+		}
+		effect = {
+			character_event = { id = revoke_all.260001 }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

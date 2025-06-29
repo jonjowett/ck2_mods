@@ -1,0 +1,37 @@
+####################################################################################
+
+namespace = revoke_all
+character_event = {
+	id = revoke_all.260001
+	desc = revoke_all.260001.desc
+	picture = "GFX_revoke_all"
+	is_triggered_only = yes
+
+	##########
+
+	immediate = {
+		any_realm_lord ={
+			limit = {
+				tier = baron
+				NOT = { tier = count }
+				NOT = { dynasty = ROOT }
+				NOT = { is_close_relative = ROOT }
+			}
+			any_demesne_title = {
+				limit = {
+					temporary = no
+					is_capital = no
+				}
+				usurp_title = ROOT
+			}
+		}
+    }
+
+
+	option = {
+		name = revoke_all.260001.opta
+	}
+
+}
+
+####################################################################################

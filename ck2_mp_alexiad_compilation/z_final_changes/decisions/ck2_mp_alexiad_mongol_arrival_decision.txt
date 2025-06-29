@@ -1,0 +1,35 @@
+decisions = {
+	ck2_mp_alexiad_trigger_mongol_invasion = {
+		is_high_prio = yes
+		ai = no
+		potential = {
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+			NOR = {
+				has_global_flag = mongol_empire_arrival
+				has_global_flag = temujin_born
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			k_papal_state = {
+				holder_scope = {
+					narrative_event = { id = 60500 }
+				}
+			}
+			e_mongol_empire = {
+				holder_scope = {
+					character_event = {
+						id = 60510
+						days = 360
+						random = 360
+					}
+				}
+			}
+		}
+	}
+}

@@ -69,6 +69,7 @@ xcopy /R /Y /Q /S /E /I %git_mod_folder_location%normans_can_raid%git_mod_subfol
 
 
 :: Copy files from workshop mods which have no significant dependencies
+xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%baronmanagement\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%hunting_dog_bloodline_fix\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%last_legendary_gathering_time\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location%medieval_trade_routes\ %this_mod_folder_location%
