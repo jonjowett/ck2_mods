@@ -1,0 +1,23 @@
+#####################
+# Fountain of Youth #
+#####################
+#
+# Decision
+expd_herm_drink_from_fountain_of_youth_again;(ED:H) Drink from the Fountain of Youth (again);;;;;;;;;;;;;x
+expd_herm_drink_from_fountain_of_youth_again_desc;By conducting an esoteric and complex series of rituals, I can refill the fountain so that I can drink from it again.;;;;;;;;;;;;;x
+#
+# Modifier
+expd_herm_drink_from_fountain_cooldown;§M(ED:H)§! Drink from the Fountain of Youth (again) - cooldown;;;;;;;;;;;;;x
+expd_herm_drink_from_fountain_cooldown_desc;§M(ED:H)§! While this modifier is active, you will not be able to refill the Fountain of Youth via Hermetic ritual.;;;;;;;;;;;;;x
+#
+# General Tooltips
+expd_herm_drink_from_fountain_has_taken_free_decision_show_free_cooldown_tt;Has recently taken the normal Fountain of Youth decision (cooldown expires §Y[Root.drank_from_fountain_cooldown.GetExpiryDate]§!);;;;;;;;;;;;;x
+expd_herm_drink_from_fountain_has_taken_free_decision_tt;Has recently taken the normal Fountain of Youth decision;;;;;;;;;;;;;x
+expd_herm_drink_from_fountain_cooldown_modifier_is_active_but_shouldnt_be_tt;Has NOT recently refilled the Fountain of Youth via Hermetic ritual (cooldown expires §Y[Root.expd_herm_drink_from_fountain_cooldown.GetExpiryDate]§!);;;;;;;;;;;;;x
+expd_herm_drink_from_fountain_cooldown_modifier_is_not_active_tt;Has NOT recently refilled the Fountain of Youth via Hermetic ritual;;;;;;;;;;;;;x
+expd_herm_drink_from_fountain_is_high_ranking_member_tt;Is a high-ranking member (§YAdept§! or §YMagus§!/§YMaga§!) of the §YHermetic Society§!;;;;;;;;;;;;;x
+#
+# Cost-related Tooltips
+expd_herm_drink_from_fountain_must_have_20_learning_tt;Has at least §Y20 learning§!;;;;;;;;;;;;;x
+expd_herm_drink_from_fountain_logic_error_tt;§R!!!LOGIC ERROR!!!§! If you see this message then something has gone wrong! Please report the issue to the mod developer, including a screenshot and saved game if possible.;;;;;;;;;;;;;x
+expd_herm_drink_from_fountain_info_cost_is_linked_to_learning_tt;§L...INFO: The cost of this decision depends on your learning, starting at §Y3000 Esoteric Knowledge§L with §Y20 learning§L and decreasing by §Y100 per additional learning§L to the minimum cost of §Y1000 Esoteric Knowledge§L with §Y40+ learning§L.;;;;;;;;;;;;;x
