@@ -91,7 +91,10 @@ defined_text = {
 	text = {
 		trigger = {
 			is_ruler = no
-			liege = { primary_title = { temporary = yes } }
+			liege = {
+				primary_title = { temporary = yes }
+				is_landed = yes # Dynamic merc bands are "temporary", but you can invite their courtiers, so we also need to check for landed-ness.
+			}
 		}
 		localisation_key = BCT_InvBlock_TotalBlocker_LiegeTempTitle
 	}
