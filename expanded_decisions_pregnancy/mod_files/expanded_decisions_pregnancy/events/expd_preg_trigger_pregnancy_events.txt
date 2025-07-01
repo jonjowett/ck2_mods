@@ -63,8 +63,13 @@ character_event = {
 		if = {
 			limit = {
 				OR = {
-					any_spouse  = { character = persistent_event_target:expd_preg_triggered_pregnancy_father }
-					any_consort = { character = persistent_event_target:expd_preg_triggered_pregnancy_father }
+					any_spouse  = { character = persistent_event_target:expd_preg_triggered_pregnancy_father }                  # Father is husband of mother
+					any_consort = { character = persistent_event_target:expd_preg_triggered_pregnancy_father }                  # Father is consort of mother
+					persistent_event_target:expd_preg_triggered_pregnancy_father = { any_consort = { character = PREVPREV } }   # Mother is concubine of father
+					AND = {                                                                                                     # Mother is unmarried & not anyone's concubine
+						is_married = no
+						is_consort = no
+					}
 				}
 			}
 			ROOT = { impregnate        = persistent_event_target:expd_preg_triggered_pregnancy_father }
