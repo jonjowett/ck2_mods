@@ -1,0 +1,271 @@
+# Passthrough so the single override line isn't unreasonably long.
+# NB: This data is only shown/evaluated for living characters.
+
+defined_text = {
+	name = BCT_Spacers
+	use_first_valid = yes
+	text = {
+		trigger = { is_alive = yes }
+		localisation_key = BCT_Spacers_Actual
+	}
+}
+
+# The actual spacers
+# NB: We only want to insert a spacer if the condition is false - NOT a ruler, NOT an heir, etc.
+#     So, for brevity, every trigger is actually the inverse of the condition described in the custom loc name.
+
+defined_text = {
+	name = BCT_Spacers_ImportantToYou
+	use_first_valid = yes
+	text = {
+		trigger = {
+			NOR = {
+				dynasty = ROOT
+				is_close_relative = ROOT
+				any_spouse = { character = ROOT }
+				is_consort = ROOT
+				is_friend = ROOT
+				is_lover = ROOT
+				is_rival = ROOT
+			}
+		}
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_ImportantToYou
+	}
+}
+
+defined_text = {
+	name = BCT_Spacers_Ruler
+	use_first_valid = yes
+	text = {
+		trigger = { is_ruler = no }
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_Ruler
+	}
+}
+
+defined_text = {
+	name = BCT_Spacers_DoubleRuler
+	use_first_valid = yes
+	text = {
+		trigger = {
+			NOT = {
+				AND = {
+					is_ruler = yes
+					any_demesne_title = {
+						is_primary_holder_title = no
+						is_primary_holder_title_tier = yes
+					}
+				}
+			}
+		}
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_DoubleRuler
+	}
+}
+
+defined_text = {
+	name = BCT_Spacers_TripleRuler
+	use_first_valid = yes
+	text = {
+		trigger = {
+			NOT = {
+				AND = {
+					is_ruler = yes
+					any_demesne_title = {
+						is_primary_holder_title = no
+						is_primary_holder_title_tier = yes
+						ROOT = {
+							any_demesne_title = {
+								is_primary_holder_title = no
+								is_primary_holder_title_tier = yes
+								NOT = { title = PREVPREV }
+							}
+						}
+					}
+				}
+			}
+		}
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_TripleRuler
+	}
+}
+
+defined_text = {
+	name = BCT_Spacers_MarriedToRuler
+	use_first_valid = yes
+	text = {
+		trigger = {
+			OR = {
+				is_married = no
+				NOT = { any_spouse = { is_ruler = yes } }
+			}
+		}
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_MarriedToRuler
+	}
+}
+
+defined_text = {
+	name = BCT_Spacers_ConsortConcubine
+	use_first_valid = yes
+	text = {
+		trigger = { is_consort = no }
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_ConsortConcubine
+	}
+}
+
+defined_text = {
+	name = BCT_Spacers_Heir
+	use_first_valid = yes
+	text = {
+		trigger = {
+			NOR = {
+				
+				# Most of the time, is_heir works as expected
+				is_heir = yes
+				
+				# is_heir fails for rulers who are due to inherit vassals' titles due to default inheritance rules, so detect those here
+				AND = {
+					is_ruler = yes
+					any_vassal = { any_demesne_title = { current_heir = { character = PREVPREVPREV } } }
+				}
+				
+				# is_heir *sometimes* fails for characters who are due to inherit a title due to elective succession, so explicitly detect *all* of those here
+				# Ruler who is heir to liege's titles (feudal elective, elective gavelkind, etc)
+				AND = {
+					is_ruler = yes
+					independent = no
+					any_liege = { any_demesne_title = { current_heir = { character = PREVPREVPREV } } }
+				}
+				# Someone who is heir to a dynast's or close relative's titles (feudal elective, elective gavelkind, tanistry, etc)
+				AND = {
+					any_dynasty_member = {
+						is_ruler = yes
+						any_demesne_title = { current_heir = { character = PREVPREVPREV } }
+					}
+				}
+				AND = {
+					any_close_relative = {
+						is_ruler = yes
+						any_demesne_title = { current_heir = { character = PREVPREVPREV } }
+					}
+				}
+				# Claimant who is heir to the claimed title (feudal elective, elective gavelkind, imperial elective, etc)
+				any_claim = { current_heir = { character = PREVPREV } }
+				
+			}
+		}
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_Heir
+	}
+}
+
+defined_text = {
+	name = BCT_Spacers_Regent
+	use_first_valid = yes
+	text = {
+		trigger = {
+			OR = {
+				NOT = {
+					AND = {
+						has_minor_title = title_appointed_regent
+						is_voter = no # is_voter includes council members outside the "normal" ones (ie. outside those that have defined job_titles)
+					}
+				}
+				NOT = {
+					AND = {
+						has_minor_title = title_regent
+						OR = {
+							has_job_title = job_chancellor
+							has_job_title = job_marshal
+							has_job_title = job_treasurer
+							has_job_title = job_spymaster
+							has_job_title = job_spiritual
+							has_minor_title = title_councilmember_king
+							has_minor_title = title_councilmember_emperor
+						}
+					}
+				}
+			}
+		}
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_Regent
+	}
+}
+
+defined_text = {
+	name = BCT_Spacers_Councillor
+	use_first_valid = yes
+	text = {
+		trigger = { is_voter = no } # is_voter includes council members outside the "normal" ones (ie. outside those that have defined job_titles)
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_Councillor
+	}
+}
+
+defined_text = {
+	name = BCT_Spacers_Commander
+	use_first_valid = yes
+	text = {
+		trigger = { NOT = { has_minor_title = title_commander } }
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_Commander
+	}
+}
+
+defined_text = {
+	name = BCT_Spacers_OtherMinorTitle
+	use_first_valid = yes
+	text = {
+		trigger = {
+			NOT = {
+				AND = {
+					has_minor_title = yes
+					NOR = {
+						has_minor_title = title_commander
+						has_minor_title = title_regent
+						has_minor_title = title_councilmember_king
+						has_minor_title = title_councilmember_emperor
+					}
+				}
+			}
+		}
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_OtherMinorTitle
+	}
+}
+
+defined_text = {
+	name = BCT_Spacers_Prince
+	use_first_valid = yes
+	text = {
+		trigger = {
+			NOR = {
+				AND = {
+					OR = {
+						father_even_if_dead = { tier = KING is_nomadic = no } # Children of nomads are not styled as "Prince"
+						mother_even_if_dead = { tier = KING is_nomadic = no } # Children of nomads are not styled as "Prince"
+					}
+					OR = {
+						is_ruler = no
+						lower_tier_than = KING
+					}
+				}
+				AND = {
+					OR = {
+						father_even_if_dead = { tier = EMPEROR is_nomadic = no } # Children of nomads are not styled as "Prince"
+						mother_even_if_dead = { tier = EMPEROR is_nomadic = no } # Children of nomads are not styled as "Prince"
+					}
+					OR = {
+						is_ruler = no
+						lower_tier_than = EMPEROR
+					}
+				}
+			}
+		}
+		#localisation_key = BCT_Spacers_SpacerTT
+		localisation_key = BCT_Spacers_SpacerTT_Prince
+	}
+}
