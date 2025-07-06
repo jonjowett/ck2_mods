@@ -1,0 +1,22 @@
+fort = {
+	trigger = {
+		trigger_if = {
+			limit = { FROM = { is_nomadic = yes } }
+			FROM = { is_ruler = yes }
+			ROOT = {
+				OR = {
+					owner = {
+						war_with = FROM
+						FROM = { any_army = { location = { province = ROOT } } }
+					}
+					owner = {
+						top_liege = {
+							war_with = FROM
+							FROM = { any_army = { location = { province = ROOT } } }
+						}
+					}
+				}
+			}
+		}
+	}
+}
