@@ -27,10 +27,11 @@ defined_text = {
 				is_friend = ROOT
 				is_lover = ROOT
 				is_rival = ROOT
+				AND = { is_landed = no liege = { character = ROOT } } # Your courtier
 			}
 		}
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_ImportantToYou
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_ImportantToYou
 	}
 }
 
@@ -39,8 +40,8 @@ defined_text = {
 	use_first_valid = yes
 	text = {
 		trigger = { is_ruler = no }
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_Ruler
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_Ruler
 	}
 }
 
@@ -59,8 +60,8 @@ defined_text = {
 				}
 			}
 		}
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_DoubleRuler
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_DoubleRuler
 	}
 }
 
@@ -86,8 +87,8 @@ defined_text = {
 				}
 			}
 		}
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_TripleRuler
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_TripleRuler
 	}
 }
 
@@ -101,8 +102,8 @@ defined_text = {
 				NOT = { any_spouse = { is_ruler = yes } }
 			}
 		}
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_MarriedToRuler
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_MarriedToRuler
 	}
 }
 
@@ -111,8 +112,8 @@ defined_text = {
 	use_first_valid = yes
 	text = {
 		trigger = { is_consort = no }
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_ConsortConcubine
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_ConsortConcubine
 	}
 }
 
@@ -157,8 +158,8 @@ defined_text = {
 				
 			}
 		}
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_Heir
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_Heir
 	}
 }
 
@@ -178,11 +179,10 @@ defined_text = {
 					AND = {
 						has_minor_title = title_regent
 						OR = {
-							has_job_title = job_chancellor
-							has_job_title = job_marshal
-							has_job_title = job_treasurer
-							has_job_title = job_spymaster
-							has_job_title = job_spiritual
+							# Detects any council member with a job_title, including mod-added council members.
+							is_councillor = yes
+							# Hardcoded list of minor titles which grant a council vote.
+							# Hopefully, there aren't any new minor voter titles added by mods... and, even if there are, it should be possible to keep this list fairly short.
 							has_minor_title = title_councilmember_king
 							has_minor_title = title_councilmember_emperor
 						}
@@ -190,8 +190,8 @@ defined_text = {
 				}
 			}
 		}
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_Regent
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_Regent
 	}
 }
 
@@ -200,8 +200,8 @@ defined_text = {
 	use_first_valid = yes
 	text = {
 		trigger = { is_voter = no } # is_voter includes council members outside the "normal" ones (ie. outside those that have defined job_titles)
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_Councillor
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_Councillor
 	}
 }
 
@@ -210,8 +210,8 @@ defined_text = {
 	use_first_valid = yes
 	text = {
 		trigger = { NOT = { has_minor_title = title_commander } }
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_Commander
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_Commander
 	}
 }
 
@@ -232,8 +232,8 @@ defined_text = {
 				}
 			}
 		}
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_OtherMinorTitle
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_OtherMinorTitle
 	}
 }
 
@@ -265,7 +265,7 @@ defined_text = {
 				}
 			}
 		}
-		#localisation_key = BCT_Spacers_SpacerTT
-		localisation_key = BCT_Spacers_SpacerTT_Prince
+		localisation_key = BCT_Spacers_SpacerTT
+		#localisation_key = BCT_Spacers_SpacerTT_Prince
 	}
 }
