@@ -771,7 +771,7 @@ targetted_decisions = {
 			edmp_this_character_can_take_admin_actions = yes
 		}
 		potential = { always = yes }
-		allow = { age <= 30 }
+		allow = { age >= 26 }
 		effect = {
 			hidden_tooltip = {
 				set_global_flag = edmp_interference_singlechar_younger
