@@ -1,0 +1,1033 @@
+# Audax Validator EnableCommentMetadata
+
+decisions = {
+	edmp_interference_show_targetted_decisions = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			NOT = { has_global_flag = edmp_interference_show }
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_show_targetted_decisions_tt
+				set_global_flag = edmp_interference_show
+			}
+		}
+	}
+	edmp_interference_hide_targetted_decisions = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			has_global_flag = edmp_interference_show
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_hide_targetted_decisions_tt
+				clr_global_flag = edmp_interference_show
+			}
+		}
+	}
+}
+
+targetted_decisions = {
+	
+	edmp_interference_force_end_war_white_peace = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_war = {
+				OR = {
+					attacker = { character = ROOT }
+					defender = { character = ROOT }
+				}
+			}
+		}
+		third_party_potential = {
+			FROMFROM = { is_ruler = yes }
+			ROOT = {
+				any_war = {
+					OR = {
+						AND = {
+							attacker = { character = ROOT }
+							defender = { character = ROOT_FROMFROM }
+						}
+						AND = {
+							attacker = { character = ROOT_FROMFROM }
+							defender = { character = ROOT }
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			any_war = {
+				limit = { 
+					OR = {
+						AND = {
+							attacker = { character = ROOT }
+							defender = { character = ROOT_FROMFROM }
+						}
+						AND = {
+							attacker = { character = ROOT_FROMFROM }
+							defender = { character = ROOT }
+						}
+					}
+				}
+				hidden_tooltip = {
+					save_event_target_as = edmp_interference_force_end_war_white_peace_war
+					attacker = { save_event_target_as = edmp_interference_force_end_war_white_peace_attacker }
+					defender = { save_event_target_as = edmp_interference_force_end_war_white_peace_defender }
+				}
+				hidden_tooltip = { # Send the notification event BEFORE ending the war, so we can access the war name in the event text
+					if = {
+						limit = { multiplayer = yes }
+						ROOT_FROM = {
+							any_player = {
+								limit = { NOT = { character = PREV } }
+								character_event = { id = edmp_ifn.1001 }
+							}
+						}
+					}
+				}
+				end_war = whitepeace
+				if = {
+					limit = { multiplayer = yes }
+					custom_tooltip = { text = edmp_interference_other_players_notified_tt }
+				}
+				hidden_tooltip = {
+					clear_event_target = edmp_interference_force_end_war_white_peace_war
+					clear_event_target = edmp_interference_force_end_war_white_peace_attacker
+					clear_event_target = edmp_interference_force_end_war_white_peace_defender
+				}
+			}
+		}
+	}
+	
+	edmp_interference_cancel_tributary_on_suzerain = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_tributary = { suzerain = { character = ROOT } }
+		}
+		third_party_potential = {
+			FROMFROM = {
+				is_ruler = yes
+				suzerain = { character = ROOT }
+			}
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_cancel_tributary_tributary }
+				ROOT          = { save_event_target_as = edmp_interference_cancel_tributary_suzerain  }
+			}
+			ROOT = { remove_tributary = ROOT_FROMFROM }
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.2001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clear_event_target = edmp_interference_cancel_tributary_tributary
+				clear_event_target = edmp_interference_cancel_tributary_suzerain
+			}
+		}
+	}
+	
+	edmp_interference_cancel_tributary_on_tributary = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			is_tributary = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT          = { save_event_target_as = edmp_interference_cancel_tributary_tributary }
+				suzerain      = { save_event_target_as = edmp_interference_cancel_tributary_suzerain  }
+			}
+			suzerain = { remove_tributary = ROOT }
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.2001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clear_event_target = edmp_interference_cancel_tributary_tributary
+				clear_event_target = edmp_interference_cancel_tributary_suzerain
+			}
+		}
+	}
+	
+	edmp_interference_add_bilateral_10_year_truce_with_third_party = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { edmp_interference_root_is_valid_potential_target = yes }
+		third_party_potential = { edmp_interference_fromfrom_is_likely_to_interact_with_root = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag                        = edmp_interference_bilateral_10_year_truce
+			}
+			custom_tooltip = {
+				text = edmp_interference_create_bilateral_10_year_truce_between_root_and_fromfrom_tt
+				ROOT = {
+					set_truce = {
+						who   = ROOT_FROMFROM
+						years = 10
+					}
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.3001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clear_event_target = edmp_interference_bilateral_party_1
+				clear_event_target = edmp_interference_bilateral_party_2
+				clr_global_flag    = edmp_interference_bilateral_10_year_truce
+			}
+		}
+	}
+	
+	edmp_interference_add_nap_with_third_party = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { edmp_interference_root_is_valid_potential_target = yes }
+		third_party_potential = { edmp_interference_fromfrom_is_likely_to_interact_with_root = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag                        = edmp_interference_bilateral_add_nap
+			}
+			custom_tooltip = {
+				text = edmp_interference_create_bilateral_nap_between_root_and_fromfrom_tt
+				ROOT = {
+					opinion = {
+						name  = edmp_forcibly_added_non_aggression_pact
+						who   = ROOT_FROMFROM
+						years = 100
+						origin_description = edmp_forcibly_added_non_aggression_pact_origin_description
+					}
+				}
+				ROOT_FROM = {
+					opinion = {
+						name  = edmp_forcibly_added_non_aggression_pact
+						who   = ROOT
+						years = 100
+						origin_description = edmp_forcibly_added_non_aggression_pact_origin_description
+					}
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.3001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clear_event_target = edmp_interference_bilateral_party_1
+				clear_event_target = edmp_interference_bilateral_party_2
+				clr_global_flag    = edmp_interference_bilateral_add_nap
+			}
+		}
+	}
+	
+	edmp_interference_break_nap_with_third_party = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_non_aggression_pact_character = { always = yes }
+		}
+		third_party_potential = {
+			ROOT_FROMFROM = { has_non_aggression_pact_with = ROOT }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag                        = edmp_interference_bilateral_break_nap
+			}
+			custom_tooltip = {
+				text = edmp_interference_remove_nap_between_root_and_fromfrom_tt
+				ROOT = {
+					opinion = {
+						name  = edmp_forcibly_removed_non_aggression_pact
+						who   = ROOT_FROMFROM
+						origin_description = edmp_forcibly_removed_non_aggression_pact_origin_description
+					}
+				}
+				ROOT_FROMFROM = {
+					opinion = {
+						name  = edmp_forcibly_removed_non_aggression_pact
+						who   = ROOT
+						origin_description = edmp_forcibly_removed_non_aggression_pact_origin_description
+					}
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.3001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clear_event_target = edmp_interference_bilateral_party_1
+				clear_event_target = edmp_interference_bilateral_party_2
+				clr_global_flag    = edmp_interference_bilateral_break_nap
+			}
+		}
+	}
+	
+	edmp_interference_add_alliance_with_third_party = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_non_aggression_pact_character = { always = yes }
+		}
+		third_party_potential = {
+			ROOT_FROMFROM = { has_non_aggression_pact_with = ROOT }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag                        = edmp_interference_bilateral_add_alliance
+			}
+			ROOT = {
+				show_scope_change = no
+				add_alliance = {
+					who   = ROOT_FROMFROM
+					years = 100
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.3001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clear_event_target = edmp_interference_bilateral_party_1
+				clear_event_target = edmp_interference_bilateral_party_2
+				clr_global_flag    = edmp_interference_bilateral_add_alliance
+			}
+		}
+	}
+	
+	edmp_interference_break_alliance_with_third_party = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_non_aggression_pact_character = { always = yes }
+		}
+		third_party_potential = {
+			ROOT_FROMFROM = { has_non_aggression_pact_with = ROOT }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag                        = edmp_interference_bilateral_break_alliance
+			}
+			ROOT = {
+				show_scope_change = no
+				break_alliance = ROOT_FROMFROM
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.3001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clear_event_target = edmp_interference_bilateral_party_1
+				clear_event_target = edmp_interference_bilateral_party_2
+				clr_global_flag    = edmp_interference_bilateral_break_alliance
+			}
+		}
+	}
+	
+	edmp_interference_imprison_this_ai_by_third_party_player = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { ai = yes }
+		third_party_potential = { ROOT_FROMFROM = { ai = no } }
+		third_party_allow = {
+			ROOT = {
+				show_scope_change = no
+				OR = {
+					prisoner = no
+					AND = {
+						prisoner = yes
+						NOT = { host = { character = ROOT_FROMFROM } }
+					}
+				}
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT          = { save_event_target_as = edmp_interference_aiplayer_ai     }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_aiplayer_player }
+				set_global_flag                        = edmp_interference_aiplayer_imprison
+			}
+			ROOT = { imprison = ROOT_FROMFROM }
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.4001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clear_event_target = edmp_interference_aiplayer_ai
+				clear_event_target = edmp_interference_aiplayer_player
+				clr_global_flag    = edmp_interference_aiplayer_imprison
+			}
+		}
+	}
+	
+	edmp_interference_grant_favor_from_this_ai_to_third_party_player = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { ai = yes }
+		third_party_potential = { ROOT_FROMFROM = { ai = no } }
+		third_party_allow = {
+			OR = {
+				custom_tooltip = {
+					text = edmp_interference_grant_favor_fromfrom_doesnt_have_a_favor_from_root_tt
+					ROOT_FROMFROM = { NOT = { holds_favor_on = ROOT } }
+				}
+				custom_tooltip = {
+					text = edmp_interference_grant_favor_fromfrom_and_root_have_favors_on_each_other_tt
+					# Audax Validator "." Ignore_1001
+					AND = {
+						ROOT_FROMFROM = { holds_favor_on = ROOT }
+						ROOT = { holds_favor_on = ROOT_FROMFROM }
+					}
+				}
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT          = { save_event_target_as = edmp_interference_aiplayer_ai     }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_aiplayer_player }
+				
+			}
+			if = {
+				limit = { ROOT = { holds_favor_on = ROOT_FROMFROM } }
+				hidden_tooltip = { set_global_flag     = edmp_interference_aiplayer_favor_cancelled_ai }
+				ROOT = { remove_favor = ROOT_FROMFROM }
+			}
+			else = {
+				hidden_tooltip = { set_global_flag     = edmp_interference_aiplayer_favor_granted }
+				ROOT = { reverse_add_favor = ROOT_FROMFROM }
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.4001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clear_event_target = edmp_interference_aiplayer_ai
+				clear_event_target = edmp_interference_aiplayer_player
+				clr_global_flag    = edmp_interference_aiplayer_favor_cancelled_ai
+				clr_global_flag    = edmp_interference_aiplayer_favor_granted
+			}
+		}
+	}
+	
+	edmp_interference_move_this_ai_to_third_party_player = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			ai = yes
+			is_ruler = no
+		}
+		third_party_potential = { ROOT_FROMFROM = { ai = no } }
+		third_party_allow = { ROOT_FROMFROM = { NOT = { host = { character = ROOT } } } }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT          = { save_event_target_as = edmp_interference_aiplayer_ai     }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_aiplayer_player }
+				set_global_flag                        = edmp_interference_aiplayer_move
+			}
+			ROOT = { move_character = ROOT_FROMFROM }
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.4001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clear_event_target = edmp_interference_aiplayer_ai
+				clear_event_target = edmp_interference_aiplayer_player
+				clr_global_flag    = edmp_interference_aiplayer_move
+			}
+		}
+	}
+	
+	edmp_interference_kill_this_character = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { is_alive = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_kill
+				set_global_flag = edmp_interference_singlechar_bad
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			# Trigger the notification event before the kill, in case the killed char is a player
+			if = {
+				limit = { multiplayer = yes }
+				hidden_tooltip = {
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.5001 }
+						}
+					}
+				}
+			}
+			ROOT = {
+				death = {
+					death_reason = edmp_interference_death_by_host_reason
+					killer = FROM
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = { text = edmp_interference_other_players_notified_tt }
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singlechar_kill
+				clr_global_flag    = edmp_interference_singlechar_bad
+				clear_event_target = edmp_interference_singlechar_affected
+			}
+		}
+	}
+	
+	edmp_interference_grant_health_to_this_character = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { NOT = { has_character_modifier = edmp_interference_health } }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_health_grant
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				add_character_modifier = {
+					name  = edmp_interference_health
+					years = 3
+					stacking = no
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.5001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singlechar_health_grant
+				clear_event_target = edmp_interference_singlechar_affected
+			}
+		}
+	}
+	
+	edmp_interference_prolong_health_to_this_character = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { has_character_modifier = edmp_interference_health }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_health_prolong
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				hidden_tooltip = { remove_character_modifier = edmp_interference_health }
+				add_character_modifier = {
+					name  = edmp_interference_health
+					years = 3
+					stacking = no
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.5001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singlechar_health_prolong
+				clear_event_target = edmp_interference_singlechar_affected
+			}
+		}
+	}
+	
+	edmp_interference_revoke_health_from_this_character = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { has_character_modifier = edmp_interference_health }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_health_revoke
+				set_global_flag = edmp_interference_singlechar_bad
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				remove_character_modifier = edmp_interference_health
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.5001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singlechar_health_revoke
+				clr_global_flag    = edmp_interference_singlechar_bad
+				clear_event_target = edmp_interference_singlechar_affected
+			}
+		}
+	}
+	
+	edmp_interference_make_this_character_younger = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = { age <= 30 }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_younger
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				add_age = -10
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.5001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singlechar_younger
+				clear_event_target = edmp_interference_singlechar_affected
+			}
+		}
+	}
+	
+	edmp_interference_make_this_character_older = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = { age >= 16 }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_older
+				set_global_flag = edmp_interference_singlechar_bad
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				add_age = 10
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.5001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singlechar_older
+				clr_global_flag    = edmp_interference_singlechar_bad
+				clear_event_target = edmp_interference_singlechar_affected
+			}
+		}
+	}
+	
+	edmp_interference_change_this_characters_sex = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = {
+			is_married = no
+			is_consort = no
+			is_senior_consort_party = no
+		}
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_sexchange
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				set_gender = opposite
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.5001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singlechar_sexchange
+				clear_event_target = edmp_interference_singlechar_affected
+			}
+		}
+	}
+	
+	edmp_interference_wealth_grant_1k = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_wealth_grant_1k
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				wealth = 1000
+				hidden_tooltip = {
+					add_character_modifier = {
+						name = edmp_interference_wealth_record_granted
+						duration = -1
+						stacking = yes
+						inherit = yes
+					}
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.5001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singlechar_wealth_grant_1k
+				clear_event_target = edmp_interference_singlechar_affected
+			}
+		}
+	}
+	
+	edmp_interference_wealth_grant_10k = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_wealth_grant_10k
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				wealth = 10000
+				hidden_tooltip = {
+					set_variable = { which = edmp_interference_wealth_counter value = 0 }
+					while = {
+						limit = { check_variable = { which = edmp_interference_wealth_counter value < 10 } }
+						change_variable = { which = edmp_interference_wealth_counter value = 1 }
+						add_character_modifier = {
+							name = edmp_interference_wealth_record_granted
+							duration = -1
+							stacking = yes
+							inherit = yes
+						}
+					}
+					set_variable = { which = edmp_interference_wealth_counter value = 0 }
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.5001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singlechar_wealth_grant_10k
+				clear_event_target = edmp_interference_singlechar_affected
+			}
+		}
+	}
+	
+	edmp_interference_wealth_remove = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = { wealth >= 1000 }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_wealth_remove
+				set_global_flag = edmp_interference_singlechar_bad
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			custom_tooltip = {
+				text = edmp_interference_wealth_root_loses_all_but_500_tt
+				ROOT = {
+					export_to_variable = { which = edmp_interference_wealth_counter value = wealth }
+					divide_variable = { which = edmp_interference_wealth_counter value = 100 }
+					while = {
+						limit = { check_variable = { which = edmp_interference_wealth_counter value > 5.5 } }
+						change_variable = { which = edmp_interference_wealth_counter value = -1 }
+						add_character_modifier = {
+							name = edmp_interference_wealth_record_removed
+							duration = -1
+							stacking = yes
+							inherit = yes
+						}
+						wealth = -100
+					}
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.5001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singlechar_wealth_remove
+				clr_global_flag    = edmp_interference_singlechar_bad
+				clear_event_target = edmp_interference_singlechar_affected
+			}
+		}
+	}
+	
+	
+}
