@@ -337,34 +337,56 @@ targeted_decisions = {
 			}
 		}
 		effect = {
+			hidden_tooltip = { ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 0 } } }
 			if = {
 				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_1 } }
 				FROM = { wealth = -100 }
 				ROOT = { wealth =  100 }
+				hidden_tooltip = {
+					ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 100 } }
+					FROM = { ROOT = { character_event = { id = ExpdGifts.1000 } } }
+				}
 			}
 			else_if = {
 				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_2 } }
 				FROM = { wealth = -300 }
 				ROOT = { wealth =  300 }
+				hidden_tooltip = {
+					ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 300 } }
+					FROM = { ROOT = { character_event = { id = ExpdGifts.1000 } } }
+				}
 			}
 			else_if = {
 				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_3 } }
 				FROM = { wealth = -1000 }
 				ROOT = { wealth =  1000 }
+				hidden_tooltip = {
+					ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 1000 } }
+					FROM = { ROOT = { character_event = { id = ExpdGifts.1000 } } }
+				}
 			}
 			else_if = {
 				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_4 } }
 				FROM = { wealth = -3000 }
 				ROOT = { wealth =  3000 }
+				hidden_tooltip = {
+					ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 3000 } }
+					FROM = { ROOT = { character_event = { id = ExpdGifts.1000 } } }
+				}
 			}
 			else_if = {
 				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_5 } }
 				FROM = { wealth = -10000 }
 				ROOT = { wealth =  10000 }
+				hidden_tooltip = { 
+					ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 10000 } }
+					FROM = { ROOT = { character_event = { id = ExpdGifts.1000 } } }
+				}
 			}
 			else = {
 				custom_tooltip = { text = expd_g_send_gold_size_logic_error_tt }
 			}
+			hidden_tooltip = { ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 0 } } }
 		}
 	}
 }
