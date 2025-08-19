@@ -153,7 +153,7 @@ edmp_remove_invasion_permission_flag_from_this_character = {
 	# NB: Be sure to keep this limit in-sync with the one below!
 	if = {
 		limit = {
-			multiplayer = yes
+			edmp_this_is_a_multiplayer_game = yes
 			ai = no
 		}
 		custom_tooltip = { text = edmp_invasion_permission_notification_sent_tt }
@@ -196,7 +196,7 @@ edmp_remove_invasion_permission_flag_from_this_character = {
 	hidden_tooltip = {
 		if = {
 			limit = {
-				multiplayer = yes
+				edmp_this_is_a_multiplayer_game = yes
 				ai = no
 			}
 			save_event_target_as = edmp_ipn_character
@@ -301,7 +301,7 @@ edmp_apply_prev_characters_invasion_permission_flag_to_this_title = {
 	# If PREV is a player character in multiplayer, notify all players that the host has given invasion permission.
 	if = {
 		limit = {
-			multiplayer = yes
+			edmp_this_is_a_multiplayer_game = yes
 			PREV = { ai = no }
 		}
 		custom_tooltip = {
@@ -326,7 +326,7 @@ edmp_remove_prev_characters_invasion_permission_flag_from_this_title = {
 	# If PREV is a player character in multiplayer, notify all players that the host has withdrawn invasion permissions.
 	if = {
 		limit = {
-			multiplayer = yes
+			edmp_this_is_a_multiplayer_game = yes
 			PREV = { ai = no }
 		}
 		custom_tooltip = {
