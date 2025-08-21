@@ -17,6 +17,7 @@ decisions = {
 	}
 	edmp_interference_hide_targetted_decisions = {
 		ai = no
+		is_high_prio = yes # Remind the admin to hide the decisions once they're done
 		potential = {
 			edmp_this_character_can_take_admin_actions = yes
 			has_global_flag = edmp_interference_show
@@ -1007,6 +1008,7 @@ targetted_decisions = {
 						}
 						wealth = -100
 					}
+					set_variable = { which = edmp_interference_wealth_counter value = 0 }
 				}
 			}
 			if = {
@@ -1024,6 +1026,67 @@ targetted_decisions = {
 			hidden_tooltip = {
 				clr_global_flag    = edmp_interference_singlechar_wealth_remove
 				clr_global_flag    = edmp_interference_singlechar_bad
+				clear_event_target = edmp_interference_singlechar_affected
+			}
+		}
+	}
+	
+	edmp_interference_wealth_restore = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = { has_character_modifier = edmp_interference_wealth_record_removed }
+		effect = {
+			hidden_tooltip = { # No need for a custom_tooltip, because this process is explained in this decision's _desc 
+				
+				# Store quantity of stacked modifiers in edmp_interference_wealth_record_removed_no_of_stacks
+				set_variable = { which = edmp_interference_wealth_record_removed_no_of_stacks value = 1 }
+				while = {
+					limit = {
+						has_instances_of_character_modifier = {
+							name   = edmp_interference_wealth_record_removed
+							amount > edmp_interference_wealth_record_removed_no_of_stacks
+						}
+					}
+					change_variable = { which = edmp_interference_wealth_record_removed_no_of_stacks value = 1 }
+				}
+				
+				# Restore wealth according to this variable's value
+				set_variable      = { which = edmp_interference_wealth_removed which = edmp_interference_wealth_record_removed_no_of_stacks }
+				multiply_variable = { which = edmp_interference_wealth_removed value = 100 }
+				wealth = edmp_interference_wealth_removed
+				
+				# Remove stacked modifiers, since the wealth has been restored
+				# Amount = 1M should be sufficient in any normal situation, especially as there's a known bug with this command (amount is ignored; always removes all modifiers)
+				remove_character_modifiers = { name = edmp_interference_wealth_record_removed amount = 1000000 }
+				
+				# Cleanup
+				set_variable = { which = edmp_interference_wealth_record_removed_no_of_stacks value = 0 }
+				set_variable = { which = edmp_interference_wealth_removed value = 0 }
+				
+			}
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_wealth_restore
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.5001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singlechar_wealth_restore
 				clear_event_target = edmp_interference_singlechar_affected
 			}
 		}

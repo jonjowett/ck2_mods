@@ -131,13 +131,16 @@ character_event = {
 	}
 	after = {
 		hidden_tooltip = {
+			
 			clear_event_target = edmp_interference_bilateral_party_1
 			clear_event_target = edmp_interference_bilateral_party_1
+			
 			clr_global_flag    = edmp_interference_bilateral_10_year_truce
 			clr_global_flag    = edmp_interference_bilateral_add_nap
 			clr_global_flag    = edmp_interference_bilateral_break_nap
 			clr_global_flag    = edmp_interference_bilateral_add_alliance
 			clr_global_flag    = edmp_interference_bilateral_break_alliance
+			
 		}
 	}
 }
@@ -190,17 +193,24 @@ character_event = {
 	}
 	after = {
 		hidden_tooltip = {
+			
 			clear_event_target = edmp_interference_aiplayer_player
 			clear_event_target = edmp_interference_aiplayer_ai
+			
 			clr_global_flag    = edmp_interference_aiplayer_imprison
 			clr_global_flag    = edmp_interference_aiplayer_favor_cancelled_ai
 			clr_global_flag    = edmp_interference_aiplayer_favor_granted
 			clr_global_flag    = edmp_interference_aiplayer_move
+			
 		}
 	}
 }
 
-# Host takes an action on a single character (AI or player)
+# Host (FROM) takes an action on a single character (AI or player)
+# Expects:
+#  --- One of the edmp_interference_singlechar_ global flags to be set BEFORE the event is called.
+#  --- The target of the action to be saved as event_target:edmp_interference_singlechar_affected
+#  --- If the action is bad for the target, the global flag edmp_interference_singlechar_bad should be set. If not, the flag should not be set.
 character_event = {
 	id    = edmp_ifn.5001
 	title = edmp_ifn_title
@@ -246,6 +256,10 @@ character_event = {
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_wealth_remove }
 		text                        = edmp_ifn_5001_desc_singlechar_wealth_remove
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_wealth_restore }
+		text                        = edmp_ifn_5001_desc_singlechar_wealth_restore
 	}
 	
 	# I am the target: good/bad => excellent/curses
@@ -324,7 +338,9 @@ character_event = {
 	
 	after = {
 		hidden_tooltip = {
+			
 			clear_event_target = edmp_interference_singlechar_affected
+			
 			clr_global_flag    = edmp_interference_singlechar_kill
 			clr_global_flag    = edmp_interference_singlechar_health_grant
 			clr_global_flag    = edmp_interference_singlechar_health_prolong
@@ -335,6 +351,10 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_wealth_grant_1k
 			clr_global_flag    = edmp_interference_singlechar_wealth_grant_10k
 			clr_global_flag    = edmp_interference_singlechar_wealth_remove
+			clr_global_flag    = edmp_interference_singlechar_wealth_restore
+			
+			clr_global_flag    = edmp_interference_singlechar_bad
+			
 		}
 	}
 	
