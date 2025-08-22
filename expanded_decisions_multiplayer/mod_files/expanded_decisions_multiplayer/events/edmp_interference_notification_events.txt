@@ -264,14 +264,18 @@ character_event = {
 	
 	# I am the target: good/bad => excellent/curses
 	option = {
-		trigger = { event_target:edmp_interference_singlechar_affected = { character = ROOT } }
+		trigger = {
+			event_target:edmp_interference_singlechar_affected = {
+				character = ROOT
+			}
+		}
 		tooltip_info = yes
 		name = {
-			trigger = { has_global_flag = edmp_interference_singlechar_bad}
+			trigger = { has_global_flag = edmp_interference_singlechar_bad }
 			text = edmp_ifn_evtopt_curses
 		}
 		name = {
-			trigger = { NOT = { has_global_flag = edmp_interference_singlechar_bad} }
+			trigger = { NOT = { has_global_flag = edmp_interference_singlechar_bad } }
 			text = edmp_ifn_evtopt_excellent
 		}
 	}
@@ -279,42 +283,40 @@ character_event = {
 	# My enemy is the target: good/bad => curses/excellent
 	option = {
 		trigger = {
-			NOT = { event_target:edmp_interference_singlechar_affected = { character = ROOT } }
-			is_foe = ROOT
-		}
-		show_portrait = event_target:edmp_interference_singlechar_affected
-		tooltip_info = yes
-		name = {
-			trigger = { has_global_flag = edmp_interference_singlechar_bad}
-			text = edmp_ifn_evtopt_excellent
-		}
-		name = {
-			trigger = { NOT = { has_global_flag = edmp_interference_singlechar_bad} }
-			text = edmp_ifn_evtopt_curses
-		}
-	}
-	
-	# My non-enemy close relative, dynast, spouse or consort is the target: good/bad => excellent/curses
-	option = {
-		trigger = {
-			NOT = { event_target:edmp_interference_singlechar_affected = { character = ROOT } }
-			NOT = { is_foe = ROOT }
-			OR = {
-				character = ROOT
-				is_close_relative = ROOT
-				dynasty = ROOT
-				is_married = ROOT
-				is_consort = ROOT
+			event_target:edmp_interference_singlechar_affected = {
+				NOT = { character = ROOT }
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour = yes
 			}
 		}
 		show_portrait = event_target:edmp_interference_singlechar_affected
 		tooltip_info = yes
 		name = {
-			trigger = { has_global_flag = edmp_interference_singlechar_bad}
+			trigger = { has_global_flag = edmp_interference_singlechar_bad }
+			text = edmp_ifn_evtopt_excellent
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singlechar_bad } }
+			text = edmp_ifn_evtopt_curses
+		}
+	}
+	
+	# My friend (of some sort) is the target: good/bad => excellent/curses
+	option = {
+		trigger = {
+			event_target:edmp_interference_singlechar_affected = {
+				NOT = { character = ROOT }
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour  = no
+				edmp_ifn_this_character_is_roots_friend_for_notification_flavour = yes
+			}
+		}
+		show_portrait = event_target:edmp_interference_singlechar_affected
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singlechar_bad }
 			text = edmp_ifn_evtopt_curses
 		}
 		name = {
-			trigger = { NOT = { has_global_flag = edmp_interference_singlechar_bad} }
+			trigger = { NOT = { has_global_flag = edmp_interference_singlechar_bad } }
 			text = edmp_ifn_evtopt_excellent
 		}
 	}
@@ -322,14 +324,10 @@ character_event = {
 	# None of the above: OK
 	option = {
 		trigger = {
-			NOT = { event_target:edmp_interference_singlechar_affected = { character = ROOT } }
-			NOT = { is_foe = ROOT }
-			NOR = {
-				character = ROOT
-				is_close_relative = ROOT
-				dynasty = ROOT
-				is_married = ROOT
-				is_consort = ROOT
+			event_target:edmp_interference_singlechar_affected = {
+				NOT = { character = ROOT }
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour  = no
+				edmp_ifn_this_character_is_roots_friend_for_notification_flavour = no
 			}
 		}
 		show_portrait = event_target:edmp_interference_singlechar_affected
@@ -354,6 +352,242 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_wealth_restore
 			
 			clr_global_flag    = edmp_interference_singlechar_bad
+			
+		}
+	}
+	
+}
+
+# Host takes an action relating to a character and a title
+# Expects:
+#  --- One of the edmp_interference_singletitlechar_ global flags to be set BEFORE the event is called.
+#  --- Targeted character is stored as event_target:edmp_interference_singletitlechar_char_affected
+#  --- Targeted title is stored as event_target:edmp_interference_singletitlechar_title_affected
+#  --- If the action is bad for the targeted character, the global flag edmp_interference_singletitlechar_bad should be set. If not, the flag should not be set.
+character_event = {
+	id    = edmp_ifn.6001
+	title = edmp_ifn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitlechar_claim_grant }
+		text                        = edmp_ifn_6001_desc_singletitlechar_claim_grant
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitlechar_claim_remove }
+		text                        = edmp_ifn_6001_desc_singletitlechar_claim_remove
+	}
+	
+	# I am the target: good/bad => excellent/curses
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitlechar_char_affected = { character = ROOT }
+		}
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitlechar_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitlechar_bad } }
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# My title is the target: good/bad => curses/excellent
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitlechar_char_affected = { NOT = { character = ROOT } }
+			event_target:edmp_interference_singletitlechar_title_affected = { edmp_ifn_this_is_roots_title_for_notification_flavour = yes }
+		}
+		show_portrait = event_target:edmp_interference_singletitlechar_char_affected
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitlechar_bad }
+			text = edmp_ifn_evtopt_excellent
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitlechar_bad } }
+			text = edmp_ifn_evtopt_curses
+		}
+	}
+	
+	# My enemy is the target: good/bad => curses/excellent
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitlechar_char_affected = { NOT = { character = ROOT } }
+			event_target:edmp_interference_singletitlechar_title_affected = { edmp_ifn_this_is_roots_title_for_notification_flavour = no }
+			event_target:edmp_interference_singletitlechar_char_affected = {
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour = yes
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitlechar_char_affected
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitlechar_bad }
+			text = edmp_ifn_evtopt_excellent
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitlechar_bad } }
+			text = edmp_ifn_evtopt_curses
+		}
+	}
+	
+	# My friend (of some sort) is the target: good/bad => excellent/curses
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitlechar_char_affected = { NOT = { character = ROOT } }
+			event_target:edmp_interference_singletitlechar_title_affected = { edmp_ifn_this_is_roots_title_for_notification_flavour = no }
+			event_target:edmp_interference_singletitlechar_char_affected = {
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour  = no
+				edmp_ifn_this_character_is_roots_friend_for_notification_flavour = yes
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitlechar_char_affected
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitlechar_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitlechar_bad } }
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# None of the above: OK
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitlechar_char_affected = { NOT = { character = ROOT } }
+			event_target:edmp_interference_singletitlechar_title_affected = { edmp_ifn_this_is_roots_title_for_notification_flavour = no }
+			event_target:edmp_interference_singletitlechar_char_affected = {
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour  = no
+				edmp_ifn_this_character_is_roots_friend_for_notification_flavour = no
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitlechar_char_affected
+		name = edmp_ifn_evtopt_ok_unaffected
+	}
+	
+	after = {
+		hidden_tooltip = {
+			
+			clear_event_target = edmp_interference_singletitlechar_char_affected
+			clear_event_target = edmp_interference_singletitlechar_title_affected
+			
+			clr_global_flag    = edmp_interference_singletitlechar_claim_grant
+			clr_global_flag    = edmp_interference_singletitlechar_claim_remove
+			
+			clr_global_flag    = edmp_interference_singletitlechar_bad
+			
+		}
+	}
+	
+}
+
+# Host takes an action relating to a title, without specifying a targeted character
+# Expects:
+#  --- One of the edmp_interference_singletitle_ global flags to be set BEFORE the event is called.
+#  --- Targeted title is stored as event_target:edmp_interference_singletitle_affected
+#  --- If the action is bad for the title's current holder, the global flag edmp_interference_singletitle_bad should be set. If not, the flag should not be set.
+character_event = {
+	id    = edmp_ifn.7001
+	title = edmp_ifn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_claim_remove_all }
+		text                        = edmp_ifn_7001_desc_singletitle_claim_remove_all
+	}
+	
+	immediate = {
+		# Store the current holder, so we can use them as the portrait for the event options
+		event_target:edmp_interference_singletitle_affected = { holder_scope = { save_event_target_as = edmp_interference_singletitle_affected_holder } }
+	}
+	
+	# This is my title: good/bad => excellent/curses
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitle_affected = {
+				edmp_ifn_this_is_roots_title_for_notification_flavour         = yes
+			}
+		}
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitle_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitle_bad } }
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# This is my enemy's title: good/bad => curses/excellent
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitle_affected = {
+				edmp_ifn_this_is_roots_title_for_notification_flavour         = no
+				edmp_ifn_this_is_roots_enemys_title_for_notification_flavour  = yes
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitle_affected_holder
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitle_bad }
+			text = edmp_ifn_evtopt_excellent
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitle_bad } }
+			text = edmp_ifn_evtopt_curses
+		}
+	}
+	
+	# This is my friend's (of some sort) title: good/bad => excellent/curses
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitle_affected = {
+				edmp_ifn_this_is_roots_title_for_notification_flavour         = no
+				edmp_ifn_this_is_roots_enemys_title_for_notification_flavour  = no
+				edmp_ifn_this_is_roots_friends_title_for_notification_flavour = yes
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitle_affected_holder
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitle_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitle_bad } }
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# None of the above: OK
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitle_affected = {
+				edmp_ifn_this_is_roots_title_for_notification_flavour         = no
+				edmp_ifn_this_is_roots_enemys_title_for_notification_flavour  = no
+				edmp_ifn_this_is_roots_friends_title_for_notification_flavour = no
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitle_affected_holder
+		name = edmp_ifn_evtopt_ok_unaffected
+	}
+	
+	after = {
+		hidden_tooltip = {
+			
+			clear_event_target = edmp_interference_singletitle_affected
+			clear_event_target = edmp_interference_singletitle_affected_holder
+			
+			clr_global_flag    = edmp_interference_singletitle_claim_remove_all
+			
+			clr_global_flag    = edmp_interference_singletitle_bad
 			
 		}
 	}

@@ -612,7 +612,7 @@ targetted_decisions = {
 				set_global_flag = edmp_interference_singlechar_bad
 				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
-			# Trigger the notification event before the kill, in case the killed char is a player
+			# Trigger the notification event before the kill, in case the killed char is a player, and so that the enemy/friend notificcation flavour checks work properly
 			if = {
 				limit = { multiplayer = yes }
 				hidden_tooltip = {
@@ -1092,5 +1092,169 @@ targetted_decisions = {
 		}
 	}
 	
+}
+
+title_decisions = {
+	
+	# ROOT is the targeted title
+	# FROM is the decision-taker
+	# FROMFROM is the third party
+	
+	edmp_interference_add_claim_on_this_title_for_player = {
+		filter = all
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { higher_tier_than = BARON }
+		allow = { always = yes }
+		third_party_potential = { ROOT_FROMFROM = { ai = no } }
+		third_party_allow = {
+			ROOT_FROMFROM = { NOT = { has_strong_pressed_claim = ROOT } }
+			ROOT = { holder_scope = { NOT = { character = ROOT_FROMFROM } } }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_singletitlechar_char_affected  }
+				ROOT          = { save_event_target_as = edmp_interference_singletitlechar_title_affected }
+				set_global_flag = edmp_interference_singletitlechar_claim_grant
+			}
+			ROOT_FROMFROM = { add_pressed_claim = ROOT }
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.6001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singletitlechar_claim_grant
+				clear_event_target = edmp_interference_singletitlechar_char_affected
+				clear_event_target = edmp_interference_singletitlechar_title_affected
+			}
+		}
+	}
+	
+	edmp_interference_remove_claim_on_this_title_single_char = {
+		filter = all
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { higher_tier_than = BARON }
+		allow = { always = yes }
+		third_party_potential = { ROOT_FROMFROM = { has_claim = ROOT } }
+		third_party_allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_singletitlechar_char_affected  }
+				ROOT          = { save_event_target_as = edmp_interference_singletitlechar_title_affected }
+				set_global_flag = edmp_interference_singletitlechar_claim_remove
+				set_global_flag = edmp_interference_singletitlechar_bad
+			}
+			ROOT_FROMFROM = { remove_claim = ROOT }
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = edmp_interference_other_players_notified_tt
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.6001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singletitlechar_claim_remove
+				clr_global_flag    = edmp_interference_singletitlechar_bad
+				clear_event_target = edmp_interference_singletitlechar_char_affected
+				clear_event_target = edmp_interference_singletitlechar_title_affected
+			}
+		}
+	}
+	
+	edmp_interference_remove_claim_on_this_title_all = {
+		filter = all
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { higher_tier_than = BARON }
+		allow = {
+			custom_tooltip = {
+				text = edmp_interference_someone_in_the_world_has_a_claim_on_this_title_tt
+				any_claimant = { always = yes }
+			}
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT = { save_event_target_as = edmp_interference_singletitle_affected }
+				set_global_flag = edmp_interference_singletitle_claim_remove_all
+			}
+			# Show "all players notified" before the individual claim removals, because the list of removals might be quite long!
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = { text = edmp_interference_other_players_notified_tt }
+			}
+			# List the most-important characters whose claims have been removed
+			# Use score_value as a sorting mechanism, to show the most important people whose claims have been removed
+			any_claimant = {
+				show_scope_change = no
+				score_value = {
+					value = 1
+					# Rulers should be shown first, highest-tier to lowest-tier
+					additive_modifier = { is_ruler = yes                value = 100 } # Baron+
+					additive_modifier = { higher_real_tier_than = BARON value =   1 } # Count+
+					additive_modifier = { higher_real_tier_than = COUNT value =   1 } # Duke+
+					additive_modifier = { higher_real_tier_than = DUKE  value =   1 } # King+
+					additive_modifier = { higher_real_tier_than = KING  value =   1 } # Emperor
+					# Non-ruler claimants who are same dynasty as holder should be shown before other non-rulers
+					additive_modifier = {
+						is_ruler = no
+						any_dynasty_member = { ROOT = { holder_scope = { character = PREVPREVPREV } } }
+						value = 1
+					}
+				}
+				count = 30 # Even with graphical expansions, it's unlikely the decision window can fit more than ~10-15 lines, so 30 is a reasonable limit for safety
+				custom_tooltip = {
+					text = edmp_interference_this_characters_claim_on_root_title_is_removed_short_tt
+					remove_claim = ROOT
+				}
+			}
+			# Remove the claim from all other characters
+			# User should never see this line, but ensure it's properly localised just in case
+			custom_tooltip = {
+				text = edmp_interference_all_other_characters_claims_on_root_title_are_removed_tt
+				any_claimant = { remove_claim = ROOT }
+			}
+			# Send the actual notifications
+			if = {
+				limit = { multiplayer = yes }
+				hidden_tooltip = {
+					ROOT_FROM = {
+						any_player = {
+							limit = { NOT = { character = PREV } }
+							character_event = { id = edmp_ifn.7001 }
+						}
+					}
+				}
+			}
+			hidden_tooltip = {
+				clr_global_flag    = edmp_interference_singletitle_claim_remove_all
+				clear_event_target = edmp_interference_singletitle_affected
+			}
+		}
+	}
 	
 }
