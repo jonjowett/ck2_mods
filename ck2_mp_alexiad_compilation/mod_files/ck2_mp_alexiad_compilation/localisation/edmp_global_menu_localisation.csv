@@ -16,21 +16,34 @@ edmp_global_checkmark_checked;X;;;;;;;;;;;;;x
 edmp_global_checkmark_unchecked;§g-§!;;;;;;;;;;;;;x
 #
 # Main/Global menu
-edmp_global_1000_title;Main Menu;;;;;;;;;;;;;x
+edmp_global_1000_title;(ED:MP) Main Menu;;;;;;;;;;;;;x
 edmp_global_1000_desc;Please select the dynamic game rule you wish to manage:;;;;;;;;;;;;;x
 edmp_global_1000_evtopt_cbs;Casus Belli;;;;;;;;;;;;;x
 #
 # CB menu
-edmp_global_2000_title;Casus Belli;;;;;;;;;;;;;x
+edmp_global_2000_title;(ED:MP) Casus Belli;;;;;;;;;;;;;x
 edmp_global_2000_desc;Please select the CB rule you wish to manage:;;;;;;;;;;;;;x
 edmp_global_2000_evtopt_invasions_are_disabled_for_everyone_by_game_rule_exit;Invasions (current: disabled by game rule - EXIT);;;;;;;;;;;;;x
 edmp_global_2000_evtopt_invasions_are_disabled_for_everyone;Invasions (current: disabled for all players);;;;;;;;;;;;;x
 edmp_global_2000_evtopt_invasions_are_enabled_for_everyone;Invasions (current: enabled for all players);;;;;;;;;;;;;x
 edmp_global_2000_evtopt_invasions_are_managed_individually;Invasions (current: players individually managed);;;;;;;;;;;;;x
+edmp_global_2000_evtopt_subjugations_rule_inconsistent;Subjugations (current: INCONSISTENT! Click to reset!);;;;;;;;;;;;;x
+edmp_global_2000_evtopt_subjugations_are_enabled;Subjugations (current: enabled for all players);;;;;;;;;;;;;x
+edmp_global_2000_evtopt_subjugations_of_duke_plus_are_disabled_without_explicit_permission;Subjugations (current: players need permission for duke+);;;;;;;;;;;;;x
+edmp_global_2000_evtopt_subjugations_of_king_plus_are_disabled_without_explicit_permission;Subjugations (current: players need permission for king+);;;;;;;;;;;;;x
+edmp_global_2000_evtopt_subjugations_of_emperor_plus_are_disabled_without_explicit_permission;Subjugations (current: players need permission for emperors);;;;;;;;;;;;;x
 #
 # Invasions menu
-edmp_global_2100_title;Invasions;;;;;;;;;;;;;x
-edmp_global_2100_desc;.\n.\nPotential Invasion Rules ("([edmp_global_checkmark_always_checked])" = current):\n([edmp_global_checkmark_invasions_disabled]) Disabled for all human players\n([edmp_global_checkmark_invasions_managed_individually]) Managed individually for all human players\n([edmp_global_checkmark_invasions_enabled]) Enabled for all human players\n.\nNB1: These rules restrict CBs, they don't grant new ones.\nNB2: For "managed individually", the host must specify which kingdoms each player is permitted to invade.\n.\nPlease select a new invasion rule, or "exit" to return to the previous menu.;;;;;;;;;;;;;x
+edmp_global_2100_title;(ED:MP) Invasions;;;;;;;;;;;;;x
+edmp_global_2100_desc;Potential Invasion Rules ("([edmp_global_checkmark_always_checked])" = current):\n([edmp_global_checkmark_invasions_disabled]) Disabled for all human players\n([edmp_global_checkmark_invasions_managed_individually]) Managed individually for all human players\n([edmp_global_checkmark_invasions_enabled]) Enabled for all human players\n.\nNB1: These rules restrict CBs, they don't grant new ones.\nNB2: For "managed individually", the host must specify which kingdoms each player is permitted to invade.\n.\nPlease select a new invasion rule, or "exit" to return to the previous menu.;;;;;;;;;;;;;x
 edmp_global_2100_evtopt_set_invasions_disabled_for_everyone;Set Invasion Rule: Disabled for all human players;;;;;;;;;;;;;x
 edmp_global_2100_evtopt_set_invasions_managed_individually;Set Invasion Rule: Managed individually for all human players;;;;;;;;;;;;;x
 edmp_global_2100_evtopt_set_invasions_enabled_for_everyone;Set Invasion Rule: Enabled for all human players;;;;;;;;;;;;;x
+#
+# Subjugations menu
+edmp_global_2200_title;(ED:MP) Subjugations;;;;;;;;;;;;;x
+edmp_global_2200_desc;Potential Subjugation Rules ("([edmp_global_checkmark_always_checked])" = current):\n([edmp_global_checkmark_subjugations_enabled]) Enabled for all human players\n([edmp_global_checkmark_subjugations_duke_plus]) Human players need permission to subjugate dukes, kings & emperors\n([edmp_global_checkmark_subjugations_king_plus]) Human players need permission to subjugate kings & emperors\n([edmp_global_checkmark_subjugations_emperor_plus]) Human players need permission to subjugate emperors\n.\nNB1: These rules restrict CBs, they don't grant new ones.\nNB2: For "permission", the host must specify which character(s) each player is permitted to subjugate.\n.\nPlease select a new invasion rule, or "exit" to return to the previous menu.;;;;;;;;;;;;;x
+edmp_global_2200_evtopt_set_subjugations_enabled;Set Subjugation Rule: Enabled for all human players;;;;;;;;;;;;;x
+edmp_global_2200_evtopt_set_duke_plus_disabled_without_explicit_permission;Set Subjugation Rule: Human players need permission to subjugate dukes, kings & emperors;;;;;;;;;;;;;x
+edmp_global_2200_evtopt_set_king_plus_disabled_without_explicit_permission;Set Subjugation Rule: Human players need permission to subjugate kings & emperors;;;;;;;;;;;;;x
+edmp_global_2200_evtopt_set_emperor_plus_disabled_without_explicit_permission;Set Subjugation Rule: Human players need permission to subjugate emperors;;;;;;;;;;;;;x

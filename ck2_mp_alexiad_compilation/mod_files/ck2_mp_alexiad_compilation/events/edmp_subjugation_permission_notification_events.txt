@@ -1,0 +1,99 @@
+namespace = edmp_spn
+
+# Numbering convention:
+#    0-1999 : Unused
+# 2000-2999 : Player-specific permission granted
+# 3000-3999 : Player-specific permission withdrawn
+
+# Notify players that the host has granted ONE subjugation permission to a fellow player.
+# ROOT = player being notified
+# FROM = host (or a random player, if no host can be found for some weird reason)
+# Event targets edmp_spn_target & edmp_spn_character are expected to exist
+character_event = {
+	id    = edmp_spn.2001
+	desc  = edmp_spn_2001_desc
+	title = edmp_spn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	option = {
+		trigger = { event_target:edmp_spn_character = { character = ROOT } }
+		tooltip_info = yes
+		name = edmp_spn_evtopt_excellent_new_cb
+	}
+	option = {
+		trigger = {
+			NOT = { event_target:edmp_spn_character = { character = ROOT } }
+			event_target:edmp_spn_target = { ROOT = { top_liege = { character = PREVPREV } } }
+		}
+		tooltip_info = yes
+		show_portrait = event_target:edmp_spn_character
+		name = edmp_spn_evtopt_curses_threatened
+	}
+	option = {
+		trigger = {
+			NOT = { event_target:edmp_spn_character = { character = ROOT } }
+			NOT = { event_target:edmp_spn_target = { ROOT = { top_liege = { character = PREVPREV } } } }
+		}
+		show_portrait = event_target:edmp_spn_character
+		name = edmp_spn_evtopt_ok_unaffected
+	}
+}
+
+# Notify players that the host has withdrawn ALL subjugation permissions from a fellow player.
+# ROOT = player being notified
+# FROM = host (or a random player, if no host can be found for some weird reason)
+# Event target edmp_spn_character is expected to exist
+character_event = {
+	id    = edmp_spn.3000
+	desc  = edmp_spn_3000_desc
+	title = edmp_spn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	option = {
+		trigger = { event_target:edmp_spn_character = { character = ROOT } }
+		tooltip_info = yes
+		name = edmp_spn_evtopt_curses_cb_lost
+	}
+	option = {
+		trigger = { NOT = { event_target:edmp_spn_character = { character = ROOT } } }
+		show_portrait = event_target:edmp_spn_character
+		name = edmp_spn_evtopt_ok_unaffected
+	}
+}
+
+# Notify players that the host has withdrawn ONE subjugation permission from a fellow player.
+# ROOT = player being notified
+# FROM = host (or a random player, if no host can be found for some weird reason)
+# Event targets edmp_spn_target & edmp_spn_character are expected to exist
+character_event = {
+	id    = edmp_spn.3001
+	desc  = edmp_spn_3001_desc
+	title = edmp_spn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	option = {
+		trigger = { event_target:edmp_spn_character = { character = ROOT } }
+		tooltip_info = yes
+		name = edmp_spn_evtopt_curses_cb_lost
+	}
+	option = {
+		trigger = {
+			NOT = { event_target:edmp_spn_character = { character = ROOT } }
+			event_target:edmp_spn_target = { ROOT = { top_liege = { character = PREVPREV } } }
+		}
+		tooltip_info = yes
+		show_portrait = event_target:edmp_spn_character
+		name = edmp_spn_evtopt_excellent_safe
+	}
+	option = {
+		trigger = {
+			NOT = { event_target:edmp_spn_character = { character = ROOT } }
+			NOT = { event_target:edmp_spn_target = { ROOT = { top_liege = { character = PREVPREV } } } }
+		}
+		show_portrait = event_target:edmp_spn_character
+		name = edmp_spn_evtopt_ok_unaffected
+	}
+}

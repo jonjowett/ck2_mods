@@ -25,3 +25,17 @@ edmp_this_is_not_a_multiplayer_game = {
 		custom_tooltip = { text = edmp_this_is_not_a_multiplayer_game_tt always = yes }
 	}
 }
+
+edmp_this_is_a_multiplayer_game = {
+	trigger_if = {
+		limit = { multiplayer = yes }
+		custom_tooltip = { text = edmp_this_is_a_multiplayer_game_tt always = yes }
+	}
+	trigger_else_if = {
+		limit = { has_global_flag = edmp_multiplayer_simulation_mode }
+		custom_tooltip = { text = edmp_this_is_a_multiplayer_game_success_due_to_simulation_mode_tt always = yes }
+	}
+	trigger_else = {
+		custom_tooltip = { text = edmp_this_is_a_multiplayer_game_tt always = no }
+	}
+}

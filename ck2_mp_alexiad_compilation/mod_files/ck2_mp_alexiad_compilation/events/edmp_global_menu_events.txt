@@ -10,7 +10,7 @@ namespace = edmp_global
 
 # Gateway event for the main/global menu.
 # This should be the ONLY entrance and ONLY exit from the menu.
-narrative_event = {
+character_event = {
 	
 	id      = edmp_global.1000
 	title   = edmp_global_1000_title
@@ -27,7 +27,7 @@ narrative_event = {
 	
 	option = {
 		name = edmp_global_1000_evtopt_cbs
-		hidden_tooltip = { narrative_event = { id = edmp_global.2000 } }
+		hidden_tooltip = { character_event = { id = edmp_global.2000 } }
 	}
 	
 	option = {
@@ -43,7 +43,7 @@ narrative_event = {
 
 # Gateway event for the CB menu.
 # This should be the ONLY entrance and ONLY exit from the CB menu.
-narrative_event = {
+character_event = {
 	
 	id      = edmp_global.2000
 	title   = edmp_global_2000_title
@@ -59,7 +59,7 @@ narrative_event = {
 	option = {
 		name = edmp_global_2000_evtopt_invasions_are_disabled_for_everyone_by_game_rule_exit
 		trigger = { has_game_rule = { name = multiplayer_invasions value = off } }
-		hidden_tooltip = { narrative_event = { id = edmp_global.1000 } }
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
 	}
 	option = {
 		trigger = { NOT = { has_game_rule = { name = multiplayer_invasions value = off } } }
@@ -75,7 +75,34 @@ narrative_event = {
 			text = edmp_global_2000_evtopt_invasions_are_managed_individually
 			trigger = { edmp_global_invasion_permissions_are_managed_individually = yes }
 		}
-		hidden_tooltip = { narrative_event = { id = edmp_global.2100 } }
+		hidden_tooltip = { character_event = { id = edmp_global.2100 } }
+	}
+	
+	
+	
+	# Subjugations
+	option = {
+		name = {
+			text = edmp_global_2000_evtopt_subjugations_rule_inconsistent
+			trigger = { edmp_global_subjugations_rule_inconsistent = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_subjugations_are_enabled
+			trigger = { edmp_global_subjugations_are_enabled = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_subjugations_of_duke_plus_are_disabled_without_explicit_permission
+			trigger = { edmp_global_subjugations_of_duke_plus_are_disabled_without_explicit_permission = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_subjugations_of_king_plus_are_disabled_without_explicit_permission
+			trigger = { edmp_global_subjugations_of_king_plus_are_disabled_without_explicit_permission = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_subjugations_of_emperor_plus_are_disabled_without_explicit_permission
+			trigger = { edmp_global_subjugations_of_emperor_plus_are_disabled_without_explicit_permission = yes }
+		}
+		hidden_tooltip = { character_event = { id = edmp_global.2200 } }
 	}
 	
 	
@@ -83,18 +110,19 @@ narrative_event = {
 	# Exit, back to main menu
 	option = {
 		name = edmp_global_evtopt_exit
-		hidden_tooltip = { narrative_event = { id = edmp_global.1000 } }
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
 	}
 	
 }
 
 # Manage Invasion CB rules
-narrative_event = {
+character_event = {
 	
 	id      = edmp_global.2100
 	title   = edmp_global_2100_title
 	desc    = edmp_global_2100_desc
 	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter
 	
 	is_triggered_only = yes
 	ai = no
@@ -103,27 +131,83 @@ narrative_event = {
 		name = edmp_global_2100_evtopt_set_invasions_disabled_for_everyone
 		trigger = { edmp_global_invasions_are_not_disabled_for_everyone = yes }
 		edmp_global_invasions_set_disabled_for_everyone = yes
-		hidden_tooltip = { narrative_event = { id = edmp_global.2100 } }
+		hidden_tooltip = { character_event = { id = edmp_global.2100 } }
 	}
 	
 	option = {
 		name = edmp_global_2100_evtopt_set_invasions_managed_individually
 		trigger = { edmp_global_invasion_permissions_are_not_managed_individually = yes }
 		edmp_global_invasions_set_permissions_managed_individually = yes
-		hidden_tooltip = { narrative_event = { id = edmp_global.2100 } }
+		hidden_tooltip = { character_event = { id = edmp_global.2100 } }
 	}
 	
 	option = {
 		name = edmp_global_2100_evtopt_set_invasions_enabled_for_everyone
 		trigger = { edmp_global_invasions_are_not_enabled_for_everyone = yes }
 		edmp_global_invasions_set_enabled_for_everyone = yes
-		hidden_tooltip = { narrative_event = { id = edmp_global.2100 } }
+		hidden_tooltip = { character_event = { id = edmp_global.2100 } }
 	}
 	
 	# Exit, back to CB menu
 	option = {
 		name = edmp_global_evtopt_exit
-		hidden_tooltip = { narrative_event = { id = edmp_global.2000 } }
+		hidden_tooltip = { character_event = { id = edmp_global.2000 } }
+	}
+	
+}
+
+# Manage Subjugation CB rules
+character_event = {
+	
+	id      = edmp_global.2200
+	title   = edmp_global_2200_title
+	desc    = edmp_global_2200_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		if = {
+			limit = { edmp_global_subjugations_rule_inconsistent = yes }
+			edmp_global_subjugations_set_enabled_for_everyone_without_notification = yes
+		}
+	}
+	
+	# The user should always only see 3 of these 4 options, because:
+	#  --- The immediate clause above ensures that the setup is ALWAYS internally consistent once this event triggers
+	#  --- Which means that the current setup MUST ALWAYS be one of the 4 possible options
+	#  --- Which means that exactly one of the options below will ALWAYS be disabled
+	option = {
+		name = edmp_global_2200_evtopt_set_subjugations_enabled
+		trigger = { edmp_global_subjugations_are_enabled = no }
+		edmp_global_subjugations_set_enabled_for_everyone = yes
+		hidden_tooltip = { character_event = { id = edmp_global.2200 } }
+	}
+	option = {
+		name = edmp_global_2200_evtopt_set_duke_plus_disabled_without_explicit_permission
+		trigger = { edmp_global_subjugations_of_duke_plus_are_disabled_without_explicit_permission = no }
+		edmp_global_subjugations_set_duke_plus_disabled_without_explicit_permission = yes
+		hidden_tooltip = { character_event = { id = edmp_global.2200 } }
+	}
+	option = {
+		name = edmp_global_2200_evtopt_set_king_plus_disabled_without_explicit_permission
+		trigger = { edmp_global_subjugations_of_king_plus_are_disabled_without_explicit_permission = no }
+		edmp_global_subjugations_set_king_plus_disabled_without_explicit_permission = yes
+		hidden_tooltip = { character_event = { id = edmp_global.2200 } }
+	}
+	option = {
+		name = edmp_global_2200_evtopt_set_emperor_plus_disabled_without_explicit_permission
+		trigger = { edmp_global_subjugations_of_emperor_plus_are_disabled_without_explicit_permission = no }
+		edmp_global_subjugations_set_emperor_plus_disabled_without_explicit_permission = yes
+		hidden_tooltip = { character_event = { id = edmp_global.2200 } }
+	}
+	
+	# Exit, back to CB menu
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { character_event = { id = edmp_global.2000 } }
 	}
 	
 }

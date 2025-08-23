@@ -1,0 +1,65 @@
+namespace = ExpdGifts
+
+# Notify recipient that they have received a gift from someone.
+# ROOT = recipient
+# FROM = sender
+#
+# The variable expd_g_send_gold_amount_received on ROOT is expected to contain the gift size
+# This variable must ONLY be used for localisation (not refunds etc), because of the many potential bugs
+#      if a second large gift is sent while the first event window is still open.
+
+character_event = {
+	
+	id      = ExpdGifts.1000
+	title   = ExpdGifts_1000_Title
+	picture = GFX_evt_relaxed_ruler
+	border  = GFX_event_normal_frame_economy
+	
+	is_triggered_only = yes
+	
+	# Slightly-different flavour text (description & option), depending on the amount of gold received.
+	desc = {
+		trigger = {
+			check_variable = { which = expd_g_send_gold_amount_received value <  1000  }
+		}
+		text = ExpdGifts_1000_Desc_Small
+	}
+	desc = {
+		trigger = {
+			check_variable = { which = expd_g_send_gold_amount_received value >= 1000  }
+			check_variable = { which = expd_g_send_gold_amount_received value <  10000 }
+		}
+		text = ExpdGifts_1000_Desc_Medium
+	}
+	desc = {
+		trigger = {
+			check_variable = { which = expd_g_send_gold_amount_received value >= 10000 }
+		}
+		text = ExpdGifts_1000_Desc_Large
+	}
+	option = {
+		name = {
+			trigger = {
+				check_variable = { which = expd_g_send_gold_amount_received value <  1000  }
+			}
+			text = ExpdGifts_1000_EvtOpt_OK_Small
+		}
+		name = {
+			trigger = {
+				check_variable = { which = expd_g_send_gold_amount_received value >= 1000  }
+				check_variable = { which = expd_g_send_gold_amount_received value <  10000 }
+			}
+			text = ExpdGifts_1000_EvtOpt_OK_Medium
+		}
+		name = {
+			trigger = {
+				check_variable = { which = expd_g_send_gold_amount_received value >= 10000 }
+			}
+			text = ExpdGifts_1000_EvtOpt_OK_Large
+		}
+	}
+	
+	# Probably-unnecessary cleanup (since the decision also resets this variable to zero)
+	after = { hidden_tooltip = { set_variable = { which = expd_g_send_gold_amount_received value = 0 } } }
+	
+}

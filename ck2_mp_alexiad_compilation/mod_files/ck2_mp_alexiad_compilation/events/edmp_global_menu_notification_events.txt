@@ -28,3 +28,32 @@ character_event = {
 	option = { name = edmp_gmn_evtopt_ok }
 	
 }
+
+character_event = {
+	
+	id      = edmp_gmn.2200
+	title   = edmp_gmn_title
+	picture = GFX_evt_camaraderie
+	
+	desc = {
+		trigger = { edmp_global_subjugations_are_enabled = yes }
+		text = edmp_gmn_2200_desc_subjugations_are_enabled
+	}
+	desc = {
+		trigger = { edmp_global_subjugations_of_duke_plus_are_disabled_without_explicit_permission = yes }
+		text = edmp_gmn_2200_desc_subjugations_of_duke_plus_are_disabled_without_explicit_permission
+	}
+	desc = {
+		trigger = { edmp_global_subjugations_of_king_plus_are_disabled_without_explicit_permission = yes }
+		text = edmp_gmn_2200_desc_subjugations_of_king_plus_are_disabled_without_explicit_permission
+	}
+	desc = {
+		trigger = { edmp_global_subjugations_of_emperor_plus_are_disabled_without_explicit_permission = yes }
+		text = edmp_gmn_2200_desc_subjugations_of_emperor_plus_are_disabled_without_explicit_permission
+	}
+	
+	is_triggered_only = yes
+	
+	option = { name = edmp_gmn_evtopt_ok }
+	
+}
