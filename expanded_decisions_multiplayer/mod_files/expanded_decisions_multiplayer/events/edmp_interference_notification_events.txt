@@ -246,6 +246,10 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_sexchange
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_legitimise }
+		text                        = edmp_ifn_5001_desc_singlechar_legitimise
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_wealth_grant_1k }
 		text                        = edmp_ifn_5001_desc_singlechar_wealth_grant_1k
 	}
@@ -260,6 +264,22 @@ character_event = {
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_wealth_restore }
 		text                        = edmp_ifn_5001_desc_singlechar_wealth_restore
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_prestige_grant_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_prestige_grant_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_prestige_remove_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_prestige_remove_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_piety_grant_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_piety_grant_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_piety_remove_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_piety_remove_1k
 	}
 	
 	# I am the target: good/bad => excellent/curses
@@ -346,6 +366,7 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_younger
 			clr_global_flag    = edmp_interference_singlechar_older
 			clr_global_flag    = edmp_interference_singlechar_sexchange
+			clr_global_flag    = edmp_interference_singlechar_legitimise
 			clr_global_flag    = edmp_interference_singlechar_wealth_grant_1k
 			clr_global_flag    = edmp_interference_singlechar_wealth_grant_10k
 			clr_global_flag    = edmp_interference_singlechar_wealth_remove

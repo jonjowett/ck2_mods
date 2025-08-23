@@ -30,6 +30,36 @@ decisions = {
 			}
 		}
 	}
+	edmp_interference_debug_include_me_in_notifications = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			has_global_flag = edmp_interference_show
+			NOT = { has_global_flag = edmp_interference_debug_include_sender_in_notifications }
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_debug_include_me_in_notifications_tt
+				set_global_flag = edmp_interference_debug_include_sender_in_notifications
+			}
+		}
+	}
+	edmp_interference_debug_exclude_me_from_notifications = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			has_global_flag = edmp_interference_show
+			has_global_flag = edmp_interference_debug_include_sender_in_notifications
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_debug_exclude_me_from_notifications_tt
+				clr_global_flag = edmp_interference_debug_include_sender_in_notifications
+			}
+		}
+	}
 }
 
 targetted_decisions = {
@@ -87,27 +117,10 @@ targetted_decisions = {
 					attacker = { save_event_target_as = edmp_interference_force_end_war_white_peace_attacker }
 					defender = { save_event_target_as = edmp_interference_force_end_war_white_peace_defender }
 				}
-				hidden_tooltip = { # Send the notification event BEFORE ending the war, so we can access the war name in the event text
-					if = {
-						limit = { multiplayer = yes }
-						ROOT_FROM = {
-							any_player = {
-								limit = { NOT = { character = PREV } }
-								character_event = { id = edmp_ifn.1001 }
-							}
-						}
-					}
-				}
+				# Send the notification event BEFORE ending the war, so we can access the war name in the event text
+				hidden_tooltip = { edmp_interference_notify_players_force_end_war_white_peace = yes }
 				end_war = whitepeace
-				if = {
-					limit = { multiplayer = yes }
-					custom_tooltip = { text = edmp_interference_other_players_notified_tt }
-				}
-				hidden_tooltip = {
-					clear_event_target = edmp_interference_force_end_war_white_peace_war
-					clear_event_target = edmp_interference_force_end_war_white_peace_attacker
-					clear_event_target = edmp_interference_force_end_war_white_peace_defender
-				}
+				edmp_interference_notify_players_tooltip_only = yes
 			}
 		}
 	}
@@ -136,22 +149,7 @@ targetted_decisions = {
 				ROOT          = { save_event_target_as = edmp_interference_cancel_tributary_suzerain  }
 			}
 			ROOT = { remove_tributary = ROOT_FROMFROM }
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.2001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clear_event_target = edmp_interference_cancel_tributary_tributary
-				clear_event_target = edmp_interference_cancel_tributary_suzerain
-			}
+			edmp_interference_notify_players_tributary_cancel = yes
 		}
 	}
 	
@@ -172,22 +170,7 @@ targetted_decisions = {
 				suzerain      = { save_event_target_as = edmp_interference_cancel_tributary_suzerain  }
 			}
 			suzerain = { remove_tributary = ROOT }
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.2001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clear_event_target = edmp_interference_cancel_tributary_tributary
-				clear_event_target = edmp_interference_cancel_tributary_suzerain
-			}
+			edmp_interference_notify_players_tributary_cancel = yes
 		}
 	}
 	
@@ -216,23 +199,8 @@ targetted_decisions = {
 					}
 				}
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.3001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clear_event_target = edmp_interference_bilateral_party_1
-				clear_event_target = edmp_interference_bilateral_party_2
-				clr_global_flag    = edmp_interference_bilateral_10_year_truce
-			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_10_year_truce }
 		}
 	}
 	
@@ -271,23 +239,8 @@ targetted_decisions = {
 					}
 				}
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.3001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clear_event_target = edmp_interference_bilateral_party_1
-				clear_event_target = edmp_interference_bilateral_party_2
-				clr_global_flag    = edmp_interference_bilateral_add_nap
-			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_add_nap }
 		}
 	}
 	
@@ -329,23 +282,8 @@ targetted_decisions = {
 					}
 				}
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.3001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clear_event_target = edmp_interference_bilateral_party_1
-				clear_event_target = edmp_interference_bilateral_party_2
-				clr_global_flag    = edmp_interference_bilateral_break_nap
-			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_break_nap }
 		}
 	}
 	
@@ -377,23 +315,8 @@ targetted_decisions = {
 					years = 100
 				}
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.3001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clear_event_target = edmp_interference_bilateral_party_1
-				clear_event_target = edmp_interference_bilateral_party_2
-				clr_global_flag    = edmp_interference_bilateral_add_alliance
-			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_add_alliance }
 		}
 	}
 	
@@ -422,23 +345,8 @@ targetted_decisions = {
 				show_scope_change = no
 				break_alliance = ROOT_FROMFROM
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.3001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clear_event_target = edmp_interference_bilateral_party_1
-				clear_event_target = edmp_interference_bilateral_party_2
-				clr_global_flag    = edmp_interference_bilateral_break_alliance
-			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_break_alliance }
 		}
 	}
 	
@@ -472,23 +380,8 @@ targetted_decisions = {
 				set_global_flag                        = edmp_interference_aiplayer_imprison
 			}
 			ROOT = { imprison = ROOT_FROMFROM }
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.4001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clear_event_target = edmp_interference_aiplayer_ai
-				clear_event_target = edmp_interference_aiplayer_player
-				clr_global_flag    = edmp_interference_aiplayer_imprison
-			}
+			edmp_interference_notify_players_aiplayer = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_aiplayer_imprison }
 		}
 	}
 	
@@ -534,23 +427,10 @@ targetted_decisions = {
 				hidden_tooltip = { set_global_flag     = edmp_interference_aiplayer_favor_granted }
 				ROOT = { reverse_add_favor = ROOT_FROMFROM }
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.4001 }
-						}
-					}
-				}
-			}
+			edmp_interference_notify_players_aiplayer = yes
 			hidden_tooltip = {
-				clear_event_target = edmp_interference_aiplayer_ai
-				clear_event_target = edmp_interference_aiplayer_player
-				clr_global_flag    = edmp_interference_aiplayer_favor_cancelled_ai
-				clr_global_flag    = edmp_interference_aiplayer_favor_granted
+				clr_global_flag = edmp_interference_aiplayer_favor_cancelled_ai
+				clr_global_flag = edmp_interference_aiplayer_favor_granted
 			}
 		}
 	}
@@ -577,23 +457,8 @@ targetted_decisions = {
 				set_global_flag                        = edmp_interference_aiplayer_move
 			}
 			ROOT = { move_character = ROOT_FROMFROM }
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.4001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clear_event_target = edmp_interference_aiplayer_ai
-				clear_event_target = edmp_interference_aiplayer_player
-				clr_global_flag    = edmp_interference_aiplayer_move
-			}
+			edmp_interference_notify_players_aiplayer = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_aiplayer_move }
 		}
 	}
 	
@@ -613,32 +478,15 @@ targetted_decisions = {
 				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			# Trigger the notification event before the kill, in case the killed char is a player, and so that the enemy/friend notificcation flavour checks work properly
-			if = {
-				limit = { multiplayer = yes }
-				hidden_tooltip = {
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.5001 }
-						}
-					}
-				}
-			}
+			hidden_tooltip = { edmp_interference_notify_players_singlechar = yes }
 			ROOT = {
 				death = {
 					death_reason = edmp_interference_death_by_host_reason
 					killer = FROM
 				}
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = { text = edmp_interference_other_players_notified_tt }
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singlechar_kill
-				clr_global_flag    = edmp_interference_singlechar_bad
-				clear_event_target = edmp_interference_singlechar_affected
-			}
+			edmp_interference_notify_players_tooltip_only = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_kill }
 		}
 	}
 	
@@ -664,22 +512,8 @@ targetted_decisions = {
 					stacking = no
 				}
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.5001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singlechar_health_grant
-				clear_event_target = edmp_interference_singlechar_affected
-			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_health_grant }
 		}
 	}
 	
@@ -706,22 +540,8 @@ targetted_decisions = {
 					stacking = no
 				}
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.5001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singlechar_health_prolong
-				clear_event_target = edmp_interference_singlechar_affected
-			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_health_prolong }
 		}
 	}
 	
@@ -744,23 +564,8 @@ targetted_decisions = {
 				show_scope_change = no
 				remove_character_modifier = edmp_interference_health
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.5001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singlechar_health_revoke
-				clr_global_flag    = edmp_interference_singlechar_bad
-				clear_event_target = edmp_interference_singlechar_affected
-			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_health_revoke }
 		}
 	}
 	
@@ -782,22 +587,8 @@ targetted_decisions = {
 				show_scope_change = no
 				add_age = -10
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.5001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singlechar_younger
-				clear_event_target = edmp_interference_singlechar_affected
-			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_younger }
 		}
 	}
 	
@@ -820,23 +611,8 @@ targetted_decisions = {
 				show_scope_change = no
 				add_age = 10
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.5001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singlechar_older
-				clr_global_flag    = edmp_interference_singlechar_bad
-				clear_event_target = edmp_interference_singlechar_affected
-			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_older }
 		}
 	}
 	
@@ -862,22 +638,43 @@ targetted_decisions = {
 				show_scope_change = no
 				set_gender = opposite
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.5001 }
-						}
-					}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_sexchange }
+		}
+	}
+	
+	edmp_interference_legitimise_this_character = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			trait = bastard
+			is_alive = yes
+		}
+		allow = {
+			custom_tooltip = {
+				text = edmp_interference_legitimse_this_character_hasnt_already_founded_their_own_dynasty_tt
+				OR = {
+					father_even_if_dead = { dynasty = ROOT }
+					mother_even_if_dead = { dynasty = ROOT }
 				}
 			}
+		}
+		effect = {
 			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singlechar_sexchange
-				clear_event_target = edmp_interference_singlechar_affected
+				set_global_flag = edmp_interference_singlechar_legitimise
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
+			ROOT = {
+				show_scope_change = no
+				remove_trait = bastard
+				add_trait = legit_bastard
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_legitimise }
 		}
 	}
 	
@@ -907,22 +704,8 @@ targetted_decisions = {
 					}
 				}
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.5001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singlechar_wealth_grant_1k
-				clear_event_target = edmp_interference_singlechar_affected
-			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_wealth_grant_1k }
 		}
 	}
 	
@@ -958,22 +741,8 @@ targetted_decisions = {
 					set_variable = { which = edmp_interference_wealth_counter value = 0 }
 				}
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.5001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singlechar_wealth_grant_10k
-				clear_event_target = edmp_interference_singlechar_affected
-			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_wealth_grant_10k }
 		}
 	}
 	
@@ -1011,23 +780,8 @@ targetted_decisions = {
 					set_variable = { which = edmp_interference_wealth_counter value = 0 }
 				}
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.5001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singlechar_wealth_remove
-				clr_global_flag    = edmp_interference_singlechar_bad
-				clear_event_target = edmp_interference_singlechar_affected
-			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_wealth_remove }
 		}
 	}
 	
@@ -1073,24 +827,106 @@ targetted_decisions = {
 				set_global_flag = edmp_interference_singlechar_wealth_restore
 				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.5001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singlechar_wealth_restore
-				clear_event_target = edmp_interference_singlechar_affected
-			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_wealth_restore }
 		}
 	}
+	
+	edmp_interference_prestige_grant_1k = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_prestige_grant_1k
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				prestige = 1000
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_prestige_grant_1k }
+		}
+	}
+	
+	edmp_interference_prestige_remove_1k = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_prestige_remove_1k
+				set_global_flag = edmp_interference_singlechar_bad
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				prestige = -1000
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_prestige_remove_1k }
+		}
+	}
+	
+	edmp_interference_piety_grant_1k = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_piety_grant_1k
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				piety = 1000
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_piety_grant_1k }
+		}
+	}
+	
+	edmp_interference_piety_remove_1k = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_piety_remove_1k
+				set_global_flag = edmp_interference_singlechar_bad
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				piety = 1000
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_piety_remove_1k }
+		}
+	}
+	
+	
 	
 }
 
@@ -1122,23 +958,8 @@ title_decisions = {
 				set_global_flag = edmp_interference_singletitlechar_claim_grant
 			}
 			ROOT_FROMFROM = { add_pressed_claim = ROOT }
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.6001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singletitlechar_claim_grant
-				clear_event_target = edmp_interference_singletitlechar_char_affected
-				clear_event_target = edmp_interference_singletitlechar_title_affected
-			}
+			edmp_interference_notify_players_singletitlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singletitlechar_claim_grant }
 		}
 	}
 	
@@ -1162,24 +983,8 @@ title_decisions = {
 				set_global_flag = edmp_interference_singletitlechar_bad
 			}
 			ROOT_FROMFROM = { remove_claim = ROOT }
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = edmp_interference_other_players_notified_tt
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.6001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singletitlechar_claim_remove
-				clr_global_flag    = edmp_interference_singletitlechar_bad
-				clear_event_target = edmp_interference_singletitlechar_char_affected
-				clear_event_target = edmp_interference_singletitlechar_title_affected
-			}
+			edmp_interference_notify_players_singletitlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singletitlechar_claim_remove }
 		}
 	}
 	
@@ -1201,12 +1006,10 @@ title_decisions = {
 			hidden_tooltip = {
 				ROOT = { save_event_target_as = edmp_interference_singletitle_affected }
 				set_global_flag = edmp_interference_singletitle_claim_remove_all
+				# "bad" for this type of action means "bad for the current holder", so this is NOT "bad".
 			}
 			# Show "all players notified" before the individual claim removals, because the list of removals might be quite long!
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = { text = edmp_interference_other_players_notified_tt }
-			}
+			edmp_interference_notify_players_tooltip_only = yes
 			# List the most-important characters whose claims have been removed
 			# Use score_value as a sorting mechanism, to show the most important people whose claims have been removed
 			any_claimant = {
@@ -1239,21 +1042,8 @@ title_decisions = {
 				any_claimant = { remove_claim = ROOT }
 			}
 			# Send the actual notifications
-			if = {
-				limit = { multiplayer = yes }
-				hidden_tooltip = {
-					ROOT_FROM = {
-						any_player = {
-							limit = { NOT = { character = PREV } }
-							character_event = { id = edmp_ifn.7001 }
-						}
-					}
-				}
-			}
-			hidden_tooltip = {
-				clr_global_flag    = edmp_interference_singletitle_claim_remove_all
-				clear_event_target = edmp_interference_singletitle_affected
-			}
+			hidden_tooltip = { edmp_interference_notify_players_singletitle = yes } # Tooltip was already shown above
+			hidden_tooltip = { clr_global_flag = edmp_interference_singletitle_claim_remove_all }
 		}
 	}
 	
