@@ -91,6 +91,10 @@ character_event = {
 		text                        = edmp_ifn_3001_desc_bilateral_10_year_truce
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_break_truce }
+		text                        = edmp_ifn_3001_desc_bilateral_break_truce
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_bilateral_add_nap }
 		text                        = edmp_ifn_3001_desc_bilateral_add_nap
 	}
@@ -136,6 +140,7 @@ character_event = {
 			clear_event_target = edmp_interference_bilateral_party_1
 			
 			clr_global_flag    = edmp_interference_bilateral_10_year_truce
+			clr_global_flag    = edmp_interference_bilateral_break_truce
 			clr_global_flag    = edmp_interference_bilateral_add_nap
 			clr_global_flag    = edmp_interference_bilateral_break_nap
 			clr_global_flag    = edmp_interference_bilateral_add_alliance
@@ -371,6 +376,10 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_wealth_grant_10k
 			clr_global_flag    = edmp_interference_singlechar_wealth_remove
 			clr_global_flag    = edmp_interference_singlechar_wealth_restore
+			clr_global_flag    = edmp_interference_singlechar_prestige_grant_1k
+			clr_global_flag    = edmp_interference_singlechar_prestige_remove_1k
+			clr_global_flag    = edmp_interference_singlechar_piety_grant_1k
+			clr_global_flag    = edmp_interference_singlechar_piety_remove_1k
 			
 			clr_global_flag    = edmp_interference_singlechar_bad
 			
@@ -398,6 +407,18 @@ character_event = {
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singletitlechar_claim_remove }
 		text                        = edmp_ifn_6001_desc_singletitlechar_claim_remove
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitlechar_title_grant }
+		text                        = edmp_ifn_6001_desc_singletitlechar_title_grant
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitlechar_move_owners_capital }
+		text                        = edmp_ifn_6001_desc_singletitlechar_move_owners_capital
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitlechar_move_owners_primary_title_trad_capital_here }
+		text                        = edmp_ifn_6001_desc_singletitlechar_move_owners_primary_title_trad_capital_here
 	}
 	
 	# I am the target: good/bad => excellent/curses
@@ -499,6 +520,9 @@ character_event = {
 			
 			clr_global_flag    = edmp_interference_singletitlechar_claim_grant
 			clr_global_flag    = edmp_interference_singletitlechar_claim_remove
+			clr_global_flag    = edmp_interference_singletitlechar_title_grant
+			clr_global_flag    = edmp_interference_singletitlechar_move_owners_capital
+			clr_global_flag    = edmp_interference_singletitlechar_move_owners_primary_title_trad_capital_here
 			
 			clr_global_flag    = edmp_interference_singletitlechar_bad
 			
@@ -521,6 +545,26 @@ character_event = {
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singletitle_claim_remove_all }
 		text                        = edmp_ifn_7001_desc_singletitle_claim_remove_all
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_culture_to_owner }
+		text                        = edmp_ifn_7001_desc_singletitle_culture_to_owner
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_religion_to_owner }
+		text                        = edmp_ifn_7001_desc_singletitle_religion_to_owner
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_culture_to_neighbour }
+		text                        = edmp_ifn_7001_desc_singletitle_culture_to_neighbour
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_religion_to_neighbour }
+		text                        = edmp_ifn_7001_desc_singletitle_religion_to_neighbour
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_remove_negative_province_modifiers }
+		text                        = edmp_ifn_7001_desc_singletitle_remove_negative_province_modifiers
 	}
 	
 	immediate = {
@@ -607,6 +651,11 @@ character_event = {
 			clear_event_target = edmp_interference_singletitle_affected_holder
 			
 			clr_global_flag    = edmp_interference_singletitle_claim_remove_all
+			clr_global_flag    = edmp_interference_singletitle_culture_to_owner
+			clr_global_flag    = edmp_interference_singletitle_religion_to_owner
+			clr_global_flag    = edmp_interference_singletitle_culture_to_neighbour
+			clr_global_flag    = edmp_interference_singletitle_religion_to_neighbour
+			clr_global_flag    = edmp_interference_singletitle_remove_negative_province_modifiers
 			
 			clr_global_flag    = edmp_interference_singletitle_bad
 			

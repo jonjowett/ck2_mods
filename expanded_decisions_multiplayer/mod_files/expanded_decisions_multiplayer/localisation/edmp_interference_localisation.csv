@@ -7,10 +7,10 @@ edmp_interference_show_targetted_decisions_tt;All applicable §P(ED:MP:Intf)§! ta
 edmp_interference_hide_targetted_decisions;(ED:MP) Hide Targetted "Interference" Decisions;;;;;;;;;;;;;x
 edmp_interference_hide_targetted_decisions_desc;This mod includes a large number of extremely-powerful targetted decisions, which allow the host a huge amount of control over an ongoing game. These are flagged with the special "§P(ED:MP:Intf)§!" prefix in the right-click menu. Due to the potential for accidental game-ruining error, §Yyou should keep these decisions hidden at all times unless you are actively using them§!.;;;;;;;;;;;;;x
 edmp_interference_hide_targetted_decisions_tt;All §P(ED:MP:Intf)§! targetted decisions will be hidden.;;;;;;;;;;;;;x
-edmp_interference_debug_include_me_in_notifications;(ED:MP) DEBUG: Include me in "Interference" notifications;;;;;;;;;;;;;x
+edmp_interference_debug_include_me_in_notifications;(ED:MP) Debug - Show me "Interference" notifications;;;;;;;;;;;;;x
 edmp_interference_debug_include_me_in_notifications_desc;This mod sends notifications to all current players whenever the host takes an "Interference" action.\n\nNormally, the host (ie. you) is excluded from these notifications. (You don't need a notification to tell you about your most-recent mouse-click.)\n\n§YBy taking this decision, you will include yourself in these notifications§! (eg. for debugging purposes).;;;;;;;;;;;;;x
 edmp_interference_debug_include_me_in_notifications_tt;You WILL receive notifications of future "Interference" actions;;;;;;;;;;;;;x
-edmp_interference_debug_exclude_me_from_notifications;(ED:MP) DEBUG: (Default) Exclude me from "Interference" notifications;;;;;;;;;;;;;x
+edmp_interference_debug_exclude_me_from_notifications;(ED:MP) Debug - (Default) Hide "Interference" notifications;;;;;;;;;;;;;x
 edmp_interference_debug_exclude_me_from_notifications_desc;This mod sends notifications to all current players whenever the host takes an "Interference" action.\n\nNormally, the host (ie. you) is excluded from these notifications. (You don't need a notification to tell you about your most-recent mouse-click.)\n\nCurrently, §Yyou have chosen to receive these notifications§! (eg. for debugging purposes).\n\n§YBy taking this decision, you will revert to the default setup, where you will NOT receive these notifications.§!;;;;;;;;;;;;;x
 edmp_interference_debug_exclude_me_from_notifications_tt;You WILL NOT receive notifications of future "Interference" actions;;;;;;;;;;;;;x
 #
@@ -22,7 +22,9 @@ edmp_interference_cancel_tributary_on_suzerain_desc;Cancel one of [Root.GetTitle
 edmp_interference_cancel_tributary_on_tributary;§P(ED:MP:Intf)§! End Tribute;;;;;;;;;;;;;x
 edmp_interference_cancel_tributary_on_tributary_desc;[Root.GetTitledFirstName] stops paying tribute to [Root.GetHerHis] suzerain.;;;;;;;;;;;;;x
 edmp_interference_add_bilateral_10_year_truce_with_third_party;§P(ED:MP:Intf)§! Create Truce;;;;;;;;;;;;;x
-edmp_interference_add_bilateral_10_year_truce_with_third_party_desc;Create a §Ybilateral§! 10-year truce between [Root.GetTitledFirstName] and another character.\n\n§RWARNING! This mod cannot break truces!§!;;;;;;;;;;;;;x
+edmp_interference_add_bilateral_10_year_truce_with_third_party_desc;Create a §Ybilateral§! 10-year truce between [Root.GetTitledFirstName] and another character.;;;;;;;;;;;;;x
+edmp_interference_break_truce_with_third_party;§P(ED:MP:Intf)§! Break Truce;;;;;;;;;;;;;x
+edmp_interference_break_truce_with_third_party_desc;Break a truce between [Root.GetTitledFirstName] and another character.;;;;;;;;;;;;;x
 edmp_interference_add_nap_with_third_party;§P(ED:MP:Intf)§! Create NAP;;;;;;;;;;;;;x
 edmp_interference_add_nap_with_third_party_desc;Create a non-aggression pact between [Root.GetTitledFirstName] and another character.;;;;;;;;;;;;;x
 edmp_interference_break_nap_with_third_party;§P(ED:MP:Intf)§! Break NAP;;;;;;;;;;;;;x
@@ -39,11 +41,11 @@ edmp_interference_move_this_ai_to_third_party_player;§P(ED:MP:Intf)§! Move;;;;;;
 edmp_interference_move_this_ai_to_third_party_player_desc;[Root.GetTitledFirstName] is moved to a human player's court.;;;;;;;;;;;;;x
 edmp_interference_kill_this_character;§P(ED:MP:Intf)§! Kill;;;;;;;;;;;;;x
 edmp_interference_kill_this_character_desc;[Root.GetTitledFirstName] will die.;;;;;;;;;;;;;x
-edmp_interference_grant_health_to_this_character;§P(ED:MP:Intf)§! Grant Health (§l+20, 3yr§!);;;;;;;;;;;;;x
+edmp_interference_grant_health_to_this_character;§P(ED:MP:Intf)§! Grant Health;;;;;;;;;;;;;x
 edmp_interference_grant_health_to_this_character_desc;[Root.GetTitledFirstName] will be granted §YTemporary Vitality§! (§G+20 Health§!) for §Y3 years§!.;;;;;;;;;;;;;x
-edmp_interference_prolong_health_to_this_character;§P(ED:MP:Intf)§! Prolong Health (§l+3yr§!);;;;;;;;;;;;;x
+edmp_interference_prolong_health_to_this_character;§P(ED:MP:Intf)§! Prolong Health;;;;;;;;;;;;;x
 edmp_interference_prolong_health_to_this_character_desc;[Root.GetTitledFirstName]'s §YTemporary Vitality§! (§G+20 Health§!) will be §Gprolonged§! for §Y3 years§!.;;;;;;;;;;;;;x
-edmp_interference_revoke_health_from_this_character;§P(ED:MP:Intf)§! Revoke Health (§M-20§!);;;;;;;;;;;;;x
+edmp_interference_revoke_health_from_this_character;§P(ED:MP:Intf)§! Revoke Health;;;;;;;;;;;;;x
 edmp_interference_revoke_health_from_this_character_desc;[Root.GetTitledFirstName]'s §YTemporary Vitality§! (§G+20 Health§!) will be §Rrevoked§!.;;;;;;;;;;;;;x
 edmp_interference_make_this_character_younger;§P(ED:MP:Intf)§! Younger (§l-10yr§!);;;;;;;;;;;;;x
 edmp_interference_make_this_character_younger_desc;[Root.GetTitledFirstName] becomes §G10 years younger§!.;;;;;;;;;;;;;x
@@ -71,24 +73,56 @@ edmp_interference_piety_remove_1k;§P(ED:MP:Intf)§! Piety (§M-1k§!);;;;;;;;;;;;;x
 edmp_interference_piety_remove_1k_desc;[Root.GetTitledFirstName] §Rloses 1,000 piety§!.;;;;;;;;;;;;;x
 #
 # Title Decisions
+edmp_interference_grant_this_title_to_player;§P(ED:MP:Intf)§! Grant;;;;;;;;;;;;;x
+edmp_interference_grant_this_title_to_player_desc;Grant the §Y[Root.GetFullBaseName]§! to the specified player.;;;;;;;;;;;;;x
 edmp_interference_add_claim_on_this_title_for_player;§P(ED:MP:Intf)§! Grant Claim;;;;;;;;;;;;;x
 edmp_interference_add_claim_on_this_title_for_player_desc;Grant a strong inheritable claim on the §Y[Root.GetFullBaseName]§! to the specified player.;;;;;;;;;;;;;x
 edmp_interference_remove_claim_on_this_title_single_char;§P(ED:MP:Intf)§! Remove Claim (Single);;;;;;;;;;;;;x
 edmp_interference_remove_claim_on_this_title_single_char_desc;Remove a single character's claim on the §Y[Root.GetFullBaseName]§!.;;;;;;;;;;;;;x
 edmp_interference_remove_claim_on_this_title_all;§P(ED:MP:Intf)§! Remove Claim (All);;;;;;;;;;;;;x
 edmp_interference_remove_claim_on_this_title_all_desc;Remove ALL characters' claims on the §Y[Root.GetFullBaseName]§!.;;;;;;;;;;;;;x
+edmp_interference_move_owners_capital_here;§P(ED:MP:Intf)§! Set as Owner's Capital;;;;;;;;;;;;;x
+edmp_interference_move_owners_capital_here_desc;Move §Y[Root.Holder.GetTitledFirstName]§!'s capital to §Y[Root.Location.GetName]§!.;;;;;;;;;;;;;x
+edmp_interference_move_owners_primary_title_trad_capital_here;§P(ED:MP:Intf)§! Set as Trad Capital;;;;;;;;;;;;;x
+edmp_interference_move_owners_primary_title_trad_capital_here_desc;Move the traditional capital of §Y[Root.Holder.GetTitledFirstName]§!'s primary title (§Y[Root.Holder.PrimaryTitle.GetFullBaseName]§!) to §Y[Root.Location.GetName]§!.;;;;;;;;;;;;;x
+edmp_interference_remove_negative_province_modifiers;§P(ED:MP:Intf)§! Remove Neg Mods;;;;;;;;;;;;;x
+edmp_interference_remove_negative_province_modifiers_desc;Remove common negative province modifiers from §Y[Root.Location.GetName]§!.;;;;;;;;;;;;;x
+edmp_interference_change_province_culture_to_owner;§P(ED:MP:Intf)§! Owner's Culture;;;;;;;;;;;;;x
+edmp_interference_change_province_culture_to_owner_desc;Change the provincial culture of §Y[Root.Location.GetName]§! to that of its owner.;;;;;;;;;;;;;x
+edmp_interference_change_province_religion_to_owner;§P(ED:MP:Intf)§! Owner's Religion;;;;;;;;;;;;;x
+edmp_interference_change_province_religion_to_owner_desc;Change the provincial religion of §Y[Root.Location.GetName]§! to that of its owner.;;;;;;;;;;;;;x
+edmp_interference_change_province_culture_to_neighbour;§P(ED:MP:Intf)§! Neighbour's Culture;;;;;;;;;;;;;x
+edmp_interference_change_province_culture_to_neighbour_desc;Change the provincial culture of §Y[Root.Location.GetName]§! to that of a random neighbouring province.;;;;;;;;;;;;;x
+edmp_interference_change_province_religion_to_neighbour;§P(ED:MP:Intf)§! Neighbour's Religion;;;;;;;;;;;;;x
+edmp_interference_change_province_religion_to_neighbour_desc;Change the provincial religion of §Y[Root.Location.GetName]§! to that of a random neighbouring province.;;;;;;;;;;;;;x
 #
 # Other tooltips
 edmp_interference_create_bilateral_10_year_truce_between_root_and_fromfrom_tt;A §Ybilateral§! 10-year truce is created between [Root.GetTitledFirstName] and [FromFrom.GetTitledFirstName].\n(They will not be able to attack each other for 10 years without suffering the harsh Truce-Breaker penalty.);;;;;;;;;;;;;x
+edmp_interference_this_character_has_a_truce_with_someone_tt;[Root.GetTitledFirstName] has a truce with at least one other character, or another character has a truce with [Root.GetHerHim];;;;;;;;;;;;;x
+edmp_interference_break_truce_between_root_and_fromfrom_tt;The truce between [Root.GetTitledFirstName] and [FromFrom.GetTitledFirstName] is broken!;;;;;;;;;;;;;x
 edmp_interference_create_bilateral_nap_between_root_and_fromfrom_tt;A non-aggression pact is created between [Root.GetTitledFirstName] and [FromFrom.GetTitledFirstName].;;;;;;;;;;;;;x
 edmp_interference_remove_nap_between_root_and_fromfrom_tt;The non-aggression pact between [Root.GetTitledFirstName] and [FromFrom.GetTitledFirstName] is cancelled.;;;;;;;;;;;;;x
 edmp_interference_grant_favor_fromfrom_doesnt_have_a_favor_from_root_tt;[FromFrom.GetTitledFirstName] does NOT have a favor from [Root.GetTitledFirstName];;;;;;;;;;;;;x
 edmp_interference_grant_favor_fromfrom_and_root_have_favors_on_each_other_tt;[FromFrom.GetTitledFirstName] and [Root.GetTitledFirstName] have favors on each other;;;;;;;;;;;;;x
 edmp_interference_wealth_root_loses_all_but_500_tt;[Root.GetTitledFirstName] §Rloses all but 500¤§! of their wealth.;;;;;;;;;;;;;x
+edmp_interference_there_is_a_player_who_does_not_hold_this_title_tt;There is at least one player who does NOT already own the [This.GetFullBaseName];;;;;;;;;;;;;x
+edmp_interference_there_is_a_player_who_does_not_hold_or_claim_this_title_tt;There is at least one player who does NOT already own or claim the [This.GetFullBaseName];;;;;;;;;;;;;x
 edmp_interference_this_characters_claim_on_root_title_is_removed_short_tt;[This.GetTitledFirstName]: Removed;;;;;;;;;;;;;x
 edmp_interference_someone_in_the_world_has_a_claim_on_this_title_tt;There is at least one claimant for the §Y[Root.GetFullBaseName]§!;;;;;;;;;;;;;x
 edmp_interference_all_other_characters_claims_on_root_title_are_removed_tt;§PSomething went wrong - please inform the mod dev!§!\nAll other characters' claims on the §Y[Root.GetFullBaseName]§! are §Rremoved§!.;;;;;;;;;;;;;x
-edmp_interference_legitimse_this_character_hasnt_already_founded_their_own_dynasty_tt;Has NOT already founded [Root.GetHerHis] own dynasty;;;;;;;;;;;;;x
+edmp_interference_legitimise_this_character_hasnt_already_founded_their_own_dynasty_tt;Has NOT already founded [Root.GetHerHis] own dynasty;;;;;;;;;;;;;x
+edmp_interference_this_county_is_not_already_owners_capital_tt;[This.Location.GetName] is NOT [This.Holder.GetTitledFirstName]'s capital;;;;;;;;;;;;;x
+edmp_interference_this_county_is_not_already_owners_primary_title_trad_capital_tt;[This.Location.GetName] is NOT the traditional capital of [This.Holder.GetTitledFirstName]'s primary title ([This.Holder.PrimaryTitle.GetFullBaseName]);;;;;;;;;;;;;x
+edmp_interference_this_county_is_de_jure_part_of_its_holders_primary_title_tt;[This.GetFullBaseName] is de jure part of [This.Holder.GetTitledFirstName]'s primary title ([This.Holder.PrimaryTitle.GetFullBaseName]);;;;;;;;;;;;;x
+edmp_interference_this_county_is_de_jure_part_of_a_kingdom_existing_in_its_holders_realm_tt;[This.GetFullBaseName] is de jure part of a kingdom title existing in [This.Holder.GetTitledFirstName]'s realm;;;;;;;;;;;;;x
+edmp_interference_this_county_doesnt_have_same_culture_as_holder_tt;[This.Location.GetName] does NOT have the same culture as [This.Holder.GetTitledFirstName];;;;;;;;;;;;;x
+edmp_interference_this_county_doesnt_have_same_religion_as_holder_tt;[This.Location.GetName] does NOT have the same religion as [This.Holder.GetTitledFirstName];;;;;;;;;;;;;x
+edmp_interference_this_county_has_a_neighbour_with_different_culture_tt;[This.Location.GetName] has a neighbouring province with different culture;;;;;;;;;;;;;x
+edmp_interference_this_county_has_a_neighbour_with_different_religion_tt;[This.Location.GetName] has a neighbouring province with different religion;;;;;;;;;;;;;x
+edmp_interference_neighbour_is_chosen_randomly_try_again_if_necessary_tt;§YThe neighbour is chosen randomly - try again to see another option.§!;;;;;;;;;;;;;x
+edmp_interference_only_one_valid_neighbour_no_change_tt;§YThere is only one valid neighbour for this decision - you won't see any other options if you try again.§!;;;;;;;;;;;;;x
+#
+edmp_interference_line_break_tt;§g.§!\n;;;;;;;;;;;;;x
 #
 # Opinion Modifiers
 edmp_forcibly_added_non_aggression_pact;§M(ED:MP)§! Non-aggression pact forced by host;;;;;;;;;;;;;x
