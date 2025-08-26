@@ -547,6 +547,10 @@ character_event = {
 		text                        = edmp_ifn_7001_desc_singletitle_claim_remove_all
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_destroy }
+		text                        = edmp_ifn_7001_desc_singletitle_destroy
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singletitle_culture_to_owner }
 		text                        = edmp_ifn_7001_desc_singletitle_culture_to_owner
 	}
@@ -651,6 +655,7 @@ character_event = {
 			clear_event_target = edmp_interference_singletitle_affected_holder
 			
 			clr_global_flag    = edmp_interference_singletitle_claim_remove_all
+			clr_global_flag    = edmp_interference_singletitle_destroy
 			clr_global_flag    = edmp_interference_singletitle_culture_to_owner
 			clr_global_flag    = edmp_interference_singletitle_religion_to_owner
 			clr_global_flag    = edmp_interference_singletitle_culture_to_neighbour

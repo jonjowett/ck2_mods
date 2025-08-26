@@ -1024,6 +1024,7 @@ title_decisions = {
 		}
 		potential = { always = yes }
 		allow = {
+			edmp_interference_this_is_not_some_kind_of_temporary_title = yes
 			custom_tooltip = {
 				text = edmp_interference_there_is_a_player_who_does_not_hold_this_title_tt
 				OR = {
@@ -1074,6 +1075,7 @@ title_decisions = {
 		}
 		potential = { higher_tier_than = BARON }
 		allow = {
+			edmp_interference_this_is_not_some_kind_of_temporary_title = yes
 			custom_tooltip = {
 				text = edmp_interference_there_is_a_player_who_does_not_hold_or_claim_this_title_tt
 				any_player = {
@@ -1209,6 +1211,30 @@ title_decisions = {
 		}
 	}
 	
+	edmp_interference_destroy_this_title = {
+		filter = all
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { higher_tier_than = COUNT }
+		allow = { edmp_interference_this_is_not_some_kind_of_temporary_title = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT = { save_event_target_as = edmp_interference_singletitle_affected }
+				set_global_flag = edmp_interference_singletitle_destroy
+				set_global_flag = edmp_interference_singletitle_bad
+			}
+			# Send the notification before destroying the title, in case the title's non-existence causes some kind of issue
+			hidden_tooltip = { edmp_interference_notify_players_singletitle = yes } # Tooltip was already shown above
+			# Destroy the title, and warn about notifications being sent
+			unsafe_destroy_landed_title = THIS
+			edmp_interference_notify_players_tooltip_only = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singletitle_destroy }
+		}
+	}
+	
 	edmp_interference_move_owners_capital_here = {
 		filter = all
 		ai = no
@@ -1308,6 +1334,8 @@ title_decisions = {
 				OR = {
 					has_province_modifier = nomad_agitation
 					has_province_modifier = burnt_the_land
+					has_province_modifier = recently_burnt_the_land_not_owner
+					has_province_modifier = rampaging_nomads
 					has_province_modifier = thieves_guild
 					has_province_modifier = incompetent_rule
 					has_province_modifier = smugglers_ring
@@ -1326,6 +1354,7 @@ title_decisions = {
 				set_global_flag = edmp_interference_singletitle_remove_negative_province_modifiers
 			}
 			location = {
+				show_scope_change = no
 				if = {
 					limit = { has_province_modifier = nomad_agitation }
 					remove_province_modifier = nomad_agitation
@@ -1333,6 +1362,10 @@ title_decisions = {
 				if = {
 					limit = { has_province_modifier = burnt_the_land }
 					remove_province_modifier = burnt_the_land
+				}
+				if = {
+					limit = { has_province_modifier = recently_burnt_the_land_not_owner }
+					remove_province_modifier = recently_burnt_the_land_not_owner
 				}
 				if = {
 					limit = { has_province_modifier = rampaging_nomads }
@@ -1353,6 +1386,22 @@ title_decisions = {
 				if = {
 					limit = { has_province_modifier = highway_robber_band }
 					remove_province_modifier = highway_robber_band
+				}
+				if = {
+					limit = { has_province_modifier = religious_unrest }
+					remove_province_modifier = religious_unrest
+				}
+				if = {
+					limit = { has_province_modifier = religious_tension }
+					remove_province_modifier = religious_tension
+				}
+				if = {
+					limit = { has_province_modifier = heretic_stronghold }
+					remove_province_modifier = heretic_stronghold
+				}
+				if = {
+					limit = { has_province_modifier = outlawed_guild }
+					remove_province_modifier = outlawed_guild
 				}
 			}
 			edmp_interference_notify_players_singletitle = yes
