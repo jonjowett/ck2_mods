@@ -1,0 +1,54 @@
+#
+# Decisions
+edmp_apply_subjugation_permission_flag_to_this_character_decision;§M(ED:MP)§! Apply Subj Perm Flag;;;;;;;;;;;;;x
+edmp_apply_subjugation_permission_flag_to_this_character_decision_desc;If §Y[This.GetTitledFirstName]§! is a human player, [This.GetHerHis] ability to subjugate will be managed via title flags.;;;;;;;;;;;;;x
+edmp_remove_subjugation_permission_flag_from_this_character_decision;§M(ED:MP)§! Remove Subj Perm Flag;;;;;;;;;;;;;x
+edmp_remove_subjugation_permission_flag_from_this_character_decision_desc;§Y[This.GetTitledFirstName]§! will §Rnot be permitted to subjugate§! (if [This.GetSheHe] is a human player).;;;;;;;;;;;;;x
+edmp_remove_subjugation_permission_flag_from_listed_character_decision;§M(ED:MP)§! Remove Subj Perm Flag (List);;;;;;;;;;;;;x
+edmp_remove_subjugation_permission_flag_from_listed_character_decision_desc;The specified character will §Rnot be permitted to subjugate§! (if they are a human player).;;;;;;;;;;;;;x
+edmp_apply_subjugation_target_flag_to_this_character_decision;§M(ED:MP)§! Apply Subj Targ Flag;;;;;;;;;;;;;x
+edmp_apply_subjugation_target_flag_to_this_character_decision_desc;The specified character will §Gbe permitted to subjugate§! §Y[This.GetFullBaseName]§! (if the specified character is a human player).;;;;;;;;;;;;;x
+edmp_remove_subjugation_target_flag_from_this_character_decision;§M(ED:MP)§! Remove Subj Targ Flag;;;;;;;;;;;;;x
+edmp_remove_subjugation_target_flag_from_this_character_decision_desc;The specified character will §Rnot be permitted to subjugate§! §Y[This.GetFullBaseName]§! (if the specified character is a human player).;;;;;;;;;;;;;x
+#
+# Triggers
+edmp_subjugation_from_is_lower_real_tier_than_duke_tt;§M(ED:MP)§! §Y[From.GetTitledFirstName]§!'s real tier is §YCount§! or lower;;;;;;;;;;;;;x
+edmp_subjugation_from_is_lower_real_tier_than_king_tt;§M(ED:MP)§! §Y[From.GetTitledFirstName]§!'s real tier is §YDuke§! or lower;;;;;;;;;;;;;x
+edmp_subjugation_from_is_lower_real_tier_than_emperor_tt;§M(ED:MP)§! §Y[From.GetTitledFirstName]§!'s real tier is §YKing§! or lower;;;;;;;;;;;;;x
+edmp_this_character_has_no_subjugation_permission_flag_tt;§M(ED:MP)§! Has NO subjugation permission flag;;;;;;;;;;;;;x
+edmp_this_character_has_any_subjugation_permission_flag_tt;§M(ED:MP)§! Has ANY subjugation permission flag;;;;;;;;;;;;;x
+edmp_this_character_has_any_subjugation_target_flag_tt;§M(ED:MP)§! Has ANY subjugation target flag;;;;;;;;;;;;;x
+edmp_all_subjugation_permission_character_flags_have_not_been_issued_tt;§M(ED:MP)§! At least one character subjugation permission flag is available for use;;;;;;;;;;;;;x
+edmp_all_subjugation_permission_character_flags_have_been_issued_tt;§M(ED:MP)§! No character subjugation permission flags are available for use;;;;;;;;;;;;;x
+edmp_root_has_permission_to_subjugate_from_tt;§M(ED:MP)§! §Y[Root.GetTitledFirstName]§! has permission to subjugate §Y[From.GetTitledFirstName]§!;;;;;;;;;;;;;x
+edmp_this_character_has_permission_to_subjugate_prev_character_tt;§M(ED:MP)§! §Y[This.GetTitledFirstName]§! has permission to subjugate §Y[Prev.GetTitledFirstName]§!;;;;;;;;;;;;;x
+edmp_prev_character_has_permission_to_subjugate_this_character_tt;§M(ED:MP)§! §Y[Prev.GetTitledFirstName]§! has permission to subjugate §Y[This.GetTitledFirstName]§!;;;;;;;;;;;;;x
+#
+# Effects
+edmp_apply_subjugation_permission_flag_to_this_character_tt;§Y[This.GetTitledFirstName]§!: Subjugation permission management §Gstarted§!;;;;;;;;;;;;;x
+edmp_remove_subjugation_permission_flag_from_this_character_tt;§Y[This.GetTitledFirstName]§!: Subjugation permission management §Rended§!;;;;;;;;;;;;;x
+edmp_apply_prev_characters_subjugation_target_flag_to_this_character_tt;Permission §Ggranted§!;;;;;;;;;;;;;x
+edmp_remove_prev_characters_subjugation_target_flag_from_this_character_tt;Permission §Rrevoked§!;;;;;;;;;;;;;x
+edmp_warning_no_subjugation_permission_flags_remaining_tt;§RWARNING!§! All subjugation permission flags have been issued, so §Rnothing will happen§!!;;;;;;;;;;;;;x
+#
+# Modifiers
+edmp_subjugation_permission_character_01;Subjugation permission character 01;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_02;Subjugation permission character 02;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_03;Subjugation permission character 03;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_04;Subjugation permission character 04;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_05;Subjugation permission character 05;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_06;Subjugation permission character 06;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_07;Subjugation permission character 07;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_08;Subjugation permission character 08;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_09;Subjugation permission character 09;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_10;Subjugation permission character 10;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_11;Subjugation permission character 11;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_12;Subjugation permission character 12;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_13;Subjugation permission character 13;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_14;Subjugation permission character 14;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_15;Subjugation permission character 15;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_16;Subjugation permission character 16;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_17;Subjugation permission character 17;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_18;Subjugation permission character 18;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_19;Subjugation permission character 19;;;;;;;;;;;;;x
+edmp_subjugation_permission_character_20;Subjugation permission character 20;;;;;;;;;;;;;x

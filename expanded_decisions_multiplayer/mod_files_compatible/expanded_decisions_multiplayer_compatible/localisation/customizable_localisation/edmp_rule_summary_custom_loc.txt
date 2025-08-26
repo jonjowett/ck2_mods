@@ -1,0 +1,57 @@
+defined_text = {
+	name = edmp_rule_summary_invasions
+	use_first_valid = yes
+	text = {
+		trigger = { has_game_rule = { name = multiplayer_invasions value = off } }
+		localisation_key =  edmp_rule_summary_invasions_disabled_for_everyone_by_game_rule
+	}
+	text = {
+		trigger = { edmp_mod_is_active_in_compatibility_mode = yes }
+		localisation_key =  edmp_rule_unchanged_compatibility_mode
+	}
+	text = {
+		trigger = { edmp_invasions_are_disabled_for_everyone = yes }
+		localisation_key =  edmp_rule_summary_invasions_disabled_for_everyone
+	}
+	text = {
+		trigger = { edmp_invasion_permissions_are_managed_individually = yes }
+		localisation_key =  edmp_rule_summary_invasions_permissions_managed_individually
+	}
+	text = {
+		trigger = { edmp_invasions_are_enabled_for_everyone = yes }
+		localisation_key =  edmp_rule_summary_invasions_enabled_for_everyone
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_rule_summary_error
+	}
+}
+
+defined_text = {
+	name = edmp_rule_summary_subjugations
+	use_first_valid = yes
+	text = {
+		trigger = { edmp_mod_is_active_in_compatibility_mode = yes }
+		localisation_key =  edmp_rule_unchanged_compatibility_mode
+	}
+	text = {
+		trigger = { edmp_subjugations_are_enabled = yes }
+		localisation_key =  edmp_rule_summary_subjugations_are_enabled
+	}
+	text = {
+		trigger = { edmp_subjugations_of_duke_plus_are_disabled_without_explicit_permission = yes }
+		localisation_key =  edmp_rule_summary_subjugations_of_duke_plus_are_disabled_without_explicit_permission
+	}
+	text = {
+		trigger = { edmp_subjugations_of_king_plus_are_disabled_without_explicit_permission = yes }
+		localisation_key =  edmp_rule_summary_subjugations_of_king_plus_are_disabled_without_explicit_permission
+	}
+	text = {
+		trigger = { edmp_subjugations_of_emperor_plus_are_disabled_without_explicit_permission = yes }
+		localisation_key =  edmp_rule_summary_subjugations_of_emperor_plus_are_disabled_without_explicit_permission
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_rule_summary_error
+	}
+}

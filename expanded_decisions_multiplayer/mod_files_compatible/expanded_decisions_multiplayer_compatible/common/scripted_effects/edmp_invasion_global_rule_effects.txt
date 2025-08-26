@@ -1,0 +1,53 @@
+edmp_global_invasions_set_disabled_for_everyone = {
+	custom_tooltip = {
+		text = edmp_global_invasions_set_disabled_for_everyone_tt
+		set_global_flag = edmp_global_invasions_disabled_for_everyone
+		clr_global_flag = edmp_global_invasions_permissions_managed_individually
+	}
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_gmn_player_notification_sent_tt
+			any_player = {
+				limit = { NOT = { character = PREV } }
+				character_event = { id = edmp_gmn.2100 }
+			}
+		}
+	}
+}
+
+edmp_global_invasions_set_permissions_managed_individually = {
+	custom_tooltip = {
+		text = edmp_global_invasions_set_permissions_managed_individually_tt
+		clr_global_flag = edmp_global_invasions_disabled_for_everyone
+		set_global_flag = edmp_global_invasions_permissions_managed_individually
+	}
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_gmn_player_notification_sent_tt
+			any_player = {
+				limit = { NOT = { character = PREV } }
+				character_event = { id = edmp_gmn.2100 }
+			}
+		}
+	}
+}
+
+edmp_global_invasions_set_enabled_for_everyone = {
+	custom_tooltip = {
+		text = edmp_global_invasions_set_enabled_for_everyone_tt
+		clr_global_flag = edmp_global_invasions_disabled_for_everyone
+		clr_global_flag = edmp_global_invasions_permissions_managed_individually
+	}
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_gmn_player_notification_sent_tt
+			any_player = {
+				limit = { NOT = { character = PREV } }
+				character_event = { id = edmp_gmn.2100 }
+			}
+		}
+	}
+}

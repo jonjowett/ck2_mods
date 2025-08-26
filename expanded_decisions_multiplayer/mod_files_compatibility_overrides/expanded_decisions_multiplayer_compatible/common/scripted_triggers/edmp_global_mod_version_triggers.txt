@@ -1,0 +1,30 @@
+# Other mods can use this trigger to check whether this mod is active
+edmp_mod_is_active = {
+	custom_tooltip = {
+		text = edmp_mod_is_active_tt
+		always = yes
+	}
+}
+
+# Triggers to detect normal/compatibility mode
+# These two different modes require separate versions of the mod:
+#  --- Normal mode:
+#       --- Set edmp_mod_is_active_in_normal_mode = yes
+#       --- Include overrides
+#  --- Compatibility mode:
+#       --- Set edmp_mod_is_active_in_normal_mode = no
+#       --- Delete all overrides (currently just ...\common\cb_types )
+edmp_mod_is_active_in_normal_mode = {
+	custom_tooltip = {
+		text = edmp_mod_is_active_in_normal_mode_tt
+		always = no
+	}
+}
+
+# In compatibility mode, 
+edmp_mod_is_active_in_compatibility_mode = {
+	custom_tooltip = {
+		text = edmp_mod_is_active_in_compatibility_mode_tt
+		edmp_mod_is_active_in_normal_mode = no
+	}
+}

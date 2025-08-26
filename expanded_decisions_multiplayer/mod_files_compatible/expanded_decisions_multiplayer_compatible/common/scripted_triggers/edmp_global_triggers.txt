@@ -1,0 +1,15 @@
+edmp_this_character_can_take_admin_actions = {
+	ai = no
+	OR = {
+		multiplayer = no
+		is_multiplayer_host_character = yes
+	}
+}
+
+edmp_this_character_could_be_a_human_player = {
+	is_playable = yes
+	OR = {
+		multiplayer = no
+		ai = no
+	}
+}
