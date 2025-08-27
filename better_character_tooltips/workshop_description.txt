@@ -1,0 +1,95 @@
+[h1]Summary:[/h1]
+This mod allows players to view useful character information (eg. wealth, artifacts, childhood education, health, fertility), without clicking-through to the character's profile, and [u]without changing the checksum[/u]. (IE: Usable in MP & ironman.)
+
+[h1]Features:[/h1]
+The following info is added to the character tooltip:
+[list]
+[*] Character ID number
+[*] Childhood traits
+[list]
+[*] This only matters for Conclave-style education.
+[*] Childhood traits are shown even [u]after[/u] the trait has disappeared (ie. has been converted into an adult trait).
+[*] This allows you to pick the best possible education for a character, even if you wait a few years after age 12.
+[/list]
+[*] Approximate wealth
+[list]
+[*] Categories: <0, 0-50, 50-150, 150-500, 500-2000, >2000
+[*] Colour-coded - hot pink is best!
+[/list]
+[*] Wealth Inheritance
+[list]
+[*] Effectively: Will you inherit this character's wealth if they mysteriously die while in your court?
+[/list]
+[*] Artifacts
+[list]
+[*] Listed by quantity and quality (eg. "1 x Q2, 2 x Q1")
+[*] Quality is colour-coded (so better artifacts stand out more)
+[*] Supports modded artifacts with quality higher than 5 (quality higher than 8 is grouped into a "9+" category)
+[/list]
+[*] Invitation blockers
+[list]
+[*] Notifies you of all parameters which will prevent you from inviting this character to your court.
+[*] Colour coded: Yellow = can possibly be worked-around (eg. via favour); Red = probably can't be worked-around.
+[/list]
+[*] Health
+[list]
+[*] If health is close to zero (-0.5 to +0.5), accurate to nearest 0.1
+[*] If health is very large (>10), only accurate to nearest 0.5
+[*] Otherwise, accurate to nearest 0.25
+[*] Colour-coded
+[/list]
+[*] Fertility
+[list]
+[*] Accurate to to nearest 5%, between -100% and +300%
+[*] Colour-coded
+[/list]
+[/list]
+
+Blank lines:
+[list]
+[*] A large number of blank lines are added to the top of the tooltip.
+[*] The aim of these blank lines is that every piece of information always occurs in the same spatial location, which allows you to:
+[list]
+[*] Open the character finder and set filters;
+[*] Keep your mouse pointer fixed in place, on one character's portrait;
+[*] Focus on the tiny area of the screen which contains one thing you care about (eg. fertility);
+[*] Scroll through the list using your mousewheel; and
+[*] Stop whenever this one piece of info hits a good value (eg. when it's hot pink)
+[/list]
+[/list]
+
+Finally, I acknowledge that some of the colours used in the colour-coding are horribly garish. However, the CK2 engine doesn't support many different colours; and several of those are not legible on a black tooltip background; and several more are not easily distinguishable. There wasn't a lot of choice!
+
+[h1]Compatibility/Impact:[/h1]
+The aim of the "Expanded Decisions" mod family is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
+[list]
+[*] Required CK2 version: 3.3.5.1
+[*] Achievement compatible: Yes!
+[*] Safe to add to existing game: Yes
+[*] Safe to remove from existing game: Yes
+[*] Changes to vanilla files: None
+[*] Mod compatibility:
+[list]
+[*] NOT compatible with mods which alter the CHAR_AGE loc string
+[list]
+[*] Eg: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1769825310]Visible Health & Fertility[/url]
+[*] Will [u]probably[/u] still work properly in conjunction with these mods (by overriding any changes they make to the character tooltip), but actual results are unpredictable - do your own testing!
+[/list]
+[*] Should be compatible with all other mods
+[/list]
+[*] Changes to AI behaviour: None
+[*] Decrease in game difficulty: Minor
+[*] Localisation: English only
+[*] Mod development status: Complete, but I'm open to suggestions for new features
+[*] Known bugs/issues:
+[list]
+[*] "Blank lines" feature "fails" (produces the wrong number of blank lines) for about 1% of characters.
+[/list]
+[/list]
+
+[h1]Other Versions / Alternate Download / Reuse:[/h1]
+[list]
+[*] All of my CK2 mods are version-controlled via a [url=https://github.com/jonjowett/ck2_mods]Github repository[/url] (eg. if you want earlier/beta versions of any of my mods). 
+[*] I also publish a [url=https://github.com/jonjowett/ck2_mods/blob/master/better_character_tooltips/packaged_mod/better_character_tooltips.zip]zip version[/url] of this mod on Github.
+[*] All of my mods are published on Github under the MIT license, and I'm following the same logic here on the workshop. Essentially, you're welcome to reuse my mods in any way you wish as long as you provide attribution (eg. credit and/or a link).
+[/list]
