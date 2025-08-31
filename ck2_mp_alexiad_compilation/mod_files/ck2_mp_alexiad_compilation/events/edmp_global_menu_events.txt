@@ -58,11 +58,24 @@ character_event = {
 	# Invasions (only one option will be visible)
 	option = {
 		name = edmp_global_2000_evtopt_invasions_are_disabled_for_everyone_by_game_rule_exit
-		trigger = { has_game_rule = { name = multiplayer_invasions value = off } }
+		trigger = {
+			has_game_rule = { name = multiplayer_invasions value = off }
+		}
 		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
 	}
 	option = {
-		trigger = { NOT = { has_game_rule = { name = multiplayer_invasions value = off } } }
+		name = edmp_global_2000_evtopt_invasions_are_enabled_for_everyone_by_compatibility_exit
+		trigger = {
+			NOT = { has_game_rule = { name = multiplayer_invasions value = off } }
+			edmp_mod_is_active_in_compatibility_mode = yes
+		}
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+	}
+	option = {
+		trigger = {
+			NOT = { has_game_rule = { name = multiplayer_invasions value = off } }
+			edmp_mod_is_active_in_normal_mode = yes
+		}
 		name = {
 			text = edmp_global_2000_evtopt_invasions_are_disabled_for_everyone
 			trigger = { edmp_global_invasions_are_disabled_for_everyone           = yes }
@@ -80,8 +93,14 @@ character_event = {
 	
 	
 	
-	# Subjugations
+	# Subjugations (only one option will be visible)
 	option = {
+		trigger = { edmp_mod_is_active_in_compatibility_mode = yes }
+		name = edmp_global_2000_evtopt_subjugations_are_enabled_for_everyone_by_compatibility_exit
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+	}
+	option = {
+		trigger = { edmp_mod_is_active_in_normal_mode = yes }
 		name = {
 			text = edmp_global_2000_evtopt_subjugations_rule_inconsistent
 			trigger = { edmp_global_subjugations_rule_inconsistent = yes }

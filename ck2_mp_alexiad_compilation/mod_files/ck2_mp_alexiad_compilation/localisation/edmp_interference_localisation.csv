@@ -55,6 +55,8 @@ edmp_interference_change_this_characters_sex;§P(ED:MP:Intf)§! Change Sex;;;;;;;;
 edmp_interference_change_this_characters_sex_desc;[Root.GetTitledFirstName]'s §Ygender is changed§!.;;;;;;;;;;;;;x
 edmp_interference_legitimise_this_character;§P(ED:MP:Intf)§! Legitimise;;;;;;;;;;;;;x
 edmp_interference_legitimise_this_character_desc;[Root.GetTitledFirstName] §Yis legitimised§!.;;;;;;;;;;;;;x
+edmp_interference_refill_all_of_this_characters_levies;§P(ED:MP:Intf)§! Refill Levies;;;;;;;;;;;;;x
+edmp_interference_refill_all_of_this_characters_levies_desc;All of [Root.GetTitledFirstName]'s levies, across all of [Root.GetHerHis] count- and baron-tier holdings, will be §Grefilled§!.;;;;;;;;;;;;;x
 edmp_interference_wealth_grant_1k;§P(ED:MP:Intf)§! Wealth (§l+1k§!);;;;;;;;;;;;;x
 edmp_interference_wealth_grant_1k_desc;[Root.GetTitledFirstName] §Ggains 1,000¤§!.;;;;;;;;;;;;;x
 edmp_interference_wealth_grant_10k;§P(ED:MP:Intf)§! Wealth (§l+10k§!);;;;;;;;;;;;;x
@@ -71,6 +73,10 @@ edmp_interference_piety_grant_1k;§P(ED:MP:Intf)§! Piety (§l+1k§!);;;;;;;;;;;;;x
 edmp_interference_piety_grant_1k_desc;[Root.GetTitledFirstName] §Ggains 1,000 piety§!.;;;;;;;;;;;;;x
 edmp_interference_piety_remove_1k;§P(ED:MP:Intf)§! Piety (§M-1k§!);;;;;;;;;;;;;x
 edmp_interference_piety_remove_1k_desc;[Root.GetTitledFirstName] §Rloses 1,000 piety§!.;;;;;;;;;;;;;x
+edmp_interference_offmap_currency_grant_1k;§P(ED:MP:Intf)§! Offmap (§l+1k§!);;;;;;;;;;;;;x
+edmp_interference_offmap_currency_grant_1k_desc;[Root.GetTitledFirstName] §Ggains 1,000 offmap currency§! with the selected offmap power.;;;;;;;;;;;;;x
+edmp_interference_offmap_currency_remove_1k;§P(ED:MP:Intf)§! Offmap (§M-1k§!);;;;;;;;;;;;;x
+edmp_interference_offmap_currency_remove_1k_desc;[Root.GetTitledFirstName] §Rloses 1,000 offmap currency§! with the selected offmap power.;;;;;;;;;;;;;x
 #
 # Title Decisions
 edmp_interference_grant_this_title_to_player;§P(ED:MP:Intf)§! Grant;;;;;;;;;;;;;x
@@ -81,6 +87,8 @@ edmp_interference_remove_claim_on_this_title_single_char;§P(ED:MP:Intf)§! Remove
 edmp_interference_remove_claim_on_this_title_single_char_desc;Remove a single character's claim on the §Y[Root.GetFullBaseName]§!.;;;;;;;;;;;;;x
 edmp_interference_remove_claim_on_this_title_all;§P(ED:MP:Intf)§! Remove Claim (All);;;;;;;;;;;;;x
 edmp_interference_remove_claim_on_this_title_all_desc;Remove ALL characters' claims on the §Y[Root.GetFullBaseName]§!.;;;;;;;;;;;;;x
+edmp_interference_destroy_this_title;§P(ED:MP:Intf)§! Destroy;;;;;;;;;;;;;x
+edmp_interference_destroy_this_title_desc;Destroy the §Y[Root.GetFullBaseName]§!.;;;;;;;;;;;;;x
 edmp_interference_move_owners_capital_here;§P(ED:MP:Intf)§! Set as Owner's Capital;;;;;;;;;;;;;x
 edmp_interference_move_owners_capital_here_desc;Move §Y[Root.Holder.GetTitledFirstName]§!'s capital to §Y[Root.Location.GetName]§!.;;;;;;;;;;;;;x
 edmp_interference_move_owners_primary_title_trad_capital_here;§P(ED:MP:Intf)§! Set as Trad Capital;;;;;;;;;;;;;x
@@ -110,6 +118,7 @@ edmp_interference_there_is_a_player_who_does_not_hold_or_claim_this_title_tt;The
 edmp_interference_this_characters_claim_on_root_title_is_removed_short_tt;[This.GetTitledFirstName]: Removed;;;;;;;;;;;;;x
 edmp_interference_someone_in_the_world_has_a_claim_on_this_title_tt;There is at least one claimant for the §Y[Root.GetFullBaseName]§!;;;;;;;;;;;;;x
 edmp_interference_all_other_characters_claims_on_root_title_are_removed_tt;§PSomething went wrong - please inform the mod dev!§!\nAll other characters' claims on the §Y[Root.GetFullBaseName]§! are §Rremoved§!.;;;;;;;;;;;;;x
+edmp_interference_this_is_not_some_kind_of_temporary_title_tt;This is NOT some kind of §Yspecial landless title§! (eg. temporary, rebel, adventurer, mercenary, holy order, adventurer);;;;;;;;;;;;;x
 edmp_interference_legitimise_this_character_hasnt_already_founded_their_own_dynasty_tt;Has NOT already founded [Root.GetHerHis] own dynasty;;;;;;;;;;;;;x
 edmp_interference_this_county_is_not_already_owners_capital_tt;[This.Location.GetName] is NOT [This.Holder.GetTitledFirstName]'s capital;;;;;;;;;;;;;x
 edmp_interference_this_county_is_not_already_owners_primary_title_trad_capital_tt;[This.Location.GetName] is NOT the traditional capital of [This.Holder.GetTitledFirstName]'s primary title ([This.Holder.PrimaryTitle.GetFullBaseName]);;;;;;;;;;;;;x
