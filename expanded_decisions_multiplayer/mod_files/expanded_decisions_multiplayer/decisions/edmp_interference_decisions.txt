@@ -758,6 +758,31 @@ targetted_decisions = {
 		}
 	}
 	
+	edmp_interference_refill_all_of_this_characters_levies = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { is_landed = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_refill_all_levies
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			hidden_tooltip = { # Specific tooltip not needed, because it's described in the decision's _desc
+				any_demesne_title = {
+					limit = { lower_real_tier_than = DUKE }
+					refill_holding_levy = yes
+				}
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_refill_all_levies }
+		}
+	}
+	
 	edmp_interference_wealth_grant_1k = {
 		filter = all_including_me
 		ai = no
@@ -1005,6 +1030,86 @@ targetted_decisions = {
 			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_piety_remove_1k }
 		}
 	}
+	
+	edmp_interference_offmap_currency_grant_1k = {
+		# NB: It would be nice if you could set the third-party list to be the offmap ruler,
+		#          but unfortunately this seems to be impossible, so we use the governor instead.
+		filter = all_including_me
+		third_party_filter = independent_rulers
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { any_independent_ruler = { is_offmap_governor = yes } } # Hide decision if there are no offmap powers (eg. total conversion, no JD)
+		allow = { always = yes }
+		third_party_potential = { ROOT_FROMFROM = { is_offmap_governor = yes } }
+		third_party_allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_offmap_currency_grant_1k
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+				ROOT_FROMFROM = { offmap_power = { save_event_target_as = edmp_interference_singlechar_offmap_power } }
+			}
+			ROOT_FROMFROM = {
+				show_scope_change = no
+				offmap_power = { # Selected offmap governor's offmap power
+					show_scope_change = no
+					ROOT = {
+						add_offmap_currency = {
+							# Validator false positive in 1.38.7: PREV is not recognised as a valid OffmapPower
+							# Audax Validator "." Ignore_NEXT
+							offmap = PREV
+							value  = 1000
+						}
+					}
+				}
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_offmap_currency_grant_1k }
+		}
+	}
+	
+	edmp_interference_offmap_currency_remove_1k = {
+		# NB: It would be nice if you could set the third-party list to be the offmap ruler,
+		#          but unfortunately this seems to be impossible, so we use the governor instead.
+		filter = all_including_me
+		third_party_filter = independent_rulers
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { any_independent_ruler = { is_offmap_governor = yes } } # Hide decision if there are no offmap powers (eg. total conversion, no JD)
+		allow = { always = yes }
+		third_party_potential = { ROOT_FROMFROM = { is_offmap_governor = yes } }
+		third_party_allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_offmap_currency_remove_1k
+				set_global_flag = edmp_interference_singlechar_bad
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+				ROOT_FROMFROM = { offmap_power = { save_event_target_as = edmp_interference_singlechar_offmap_power } }
+			}
+			ROOT_FROMFROM = {
+				show_scope_change = no
+				offmap_power = { # Selected offmap governor's offmap power
+					show_scope_change = no
+					ROOT = {
+						add_offmap_currency = {
+							# Validator false positive in 1.38.7: PREV is not recognised as a valid OffmapPower
+							# Audax Validator "." Ignore_NEXT
+							offmap = PREV
+							value  = -1000
+						}
+					}
+				}
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_offmap_currency_remove_1k }
+		}
+	}
+	
 	
 }
 

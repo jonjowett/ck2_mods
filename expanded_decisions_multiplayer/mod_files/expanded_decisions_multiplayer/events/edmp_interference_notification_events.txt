@@ -216,6 +216,7 @@ character_event = {
 #  --- One of the edmp_interference_singlechar_ global flags to be set BEFORE the event is called.
 #  --- The target of the action to be saved as event_target:edmp_interference_singlechar_affected
 #  --- If the action is bad for the target, the global flag edmp_interference_singlechar_bad should be set. If not, the flag should not be set.
+#  --- Optional: event_target:edmp_interference_singlechar_offmap_power , if the action relates to an offmap power. (So that the offmap power name & currency can be correctly localised.)
 character_event = {
 	id    = edmp_ifn.5001
 	title = edmp_ifn_title
@@ -255,6 +256,10 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_legitimise
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_refill_all_levies }
+		text                        = edmp_ifn_5001_desc_singlechar_refill_all_levies
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_wealth_grant_1k }
 		text                        = edmp_ifn_5001_desc_singlechar_wealth_grant_1k
 	}
@@ -285,6 +290,14 @@ character_event = {
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_piety_remove_1k }
 		text                        = edmp_ifn_5001_desc_singlechar_piety_remove_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_offmap_currency_grant_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_offmap_currency_grant_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_offmap_currency_remove_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_offmap_currency_remove_1k
 	}
 	
 	# I am the target: good/bad => excellent/curses
@@ -363,6 +376,7 @@ character_event = {
 		hidden_tooltip = {
 			
 			clear_event_target = edmp_interference_singlechar_affected
+			clear_event_target = edmp_interference_singlechar_offmap_power
 			
 			clr_global_flag    = edmp_interference_singlechar_kill
 			clr_global_flag    = edmp_interference_singlechar_health_grant
@@ -380,6 +394,8 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_prestige_remove_1k
 			clr_global_flag    = edmp_interference_singlechar_piety_grant_1k
 			clr_global_flag    = edmp_interference_singlechar_piety_remove_1k
+			clr_global_flag    = edmp_interference_singlechar_offmap_currency_grant_1k
+			clr_global_flag    = edmp_interference_singlechar_offmap_currency_remove_1k
 			
 			clr_global_flag    = edmp_interference_singlechar_bad
 			
