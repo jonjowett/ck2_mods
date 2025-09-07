@@ -473,7 +473,10 @@ targetted_decisions = {
 			has_global_flag = edmp_interference_show
 			edmp_this_character_can_take_admin_actions = yes
 		}
-		potential = { ai = yes }
+		potential = {
+			has_dlc = "Conclave"
+			ai = yes
+		}
 		allow = { always = yes }
 		third_party_potential = { ROOT_FROMFROM = { ai = no } }
 		third_party_allow = {

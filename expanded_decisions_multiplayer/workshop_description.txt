@@ -1,0 +1,127 @@
+[h1]Summary:[/h1]
+This is a utility mod for multiplayer games, intended to help hosts to resolve almost any issue their players may encounter, preferably without even having to pause the game. For fairness and transparency, all of these host actions are automatically announced to every other player.
+
+It also works in single player - eg. for "save edits" between sessions, testing, and perhaps as an excessively-complex cheat mod.
+
+This mod is only intended for use with a lightly-modded base game (see "compatibility" at the bottom of this description for more details). However, there is also a [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3564023457]compatible version[/url], which has a few features removed so that it can be used with literally any other mod (including all total conversions).
+
+.
+
+[h1]"Interference" decisions:[/h1]
+
+These decisions are intended to allow the host to "fix" almost any problem, hopefully without even having to pause the game.
+
+The host can show/hide the these decisions via an intrigue menu decision. (This avoids clutter and may help to prevent game-ruining mis-clicks.)
+
+[u]Targeted decisions on characters:[/u]
+[list]
+[*] Force targeted character to white peace one of their enemies.
+[*] Cancel tributary relationship (on either suzerain or tributary)
+[*] Create or break truce
+[*] Create or break non-aggression pact
+[*] Create or break alliance
+[*] Force an AI to be imprisoned by a player
+[*] Force an AI to grant a favor to a player [i](hidden if Conclave is inactive)[/i]
+[*] Move an unlanded AI character to a player's court
+[*] Kill a character
+[*] Grant/Prolong/Revoke "Temporary Vitality" (+20 health for 3 years) [i](useful if a player suddenly gets hit by a disease and needs a short period of time to fix their succession)[/i]
+[*] Make a character 10 years older/younger [i](targeted character must be 16+/26+, to avoid ruining education)[/i]
+[*] Change a character's sex [i](intended to fix heirs - character must not be married or consort)[/i]
+[*] Legitimise a character
+[*] Grant/Prolong/Revoke "Temporary Large Demesne" (+1000 Demesne Size for 3 years) [i](useful to avoid pausing if a player needs to hand out titles after a massive conquest)[/i]
+[*] Refill all demesne levies
+[*] Grant 1k/10k gold [i](adds an inheritable modifier to the character, with no mechanical impact other than to record the total amount of "cheated wealth" they have received)[/i]
+[*] Remove all but approx 500 gold [i](adds an inheritable modifier to the character, with no mechanical impact other than to record the total amount of wealth that was removed)[/i] [i](useful to prevent the AI from spending an absent player's wealth unwisely)[/i]
+[*] Restore previously-removed wealth [i](restores all wealth that was removed via the previous decision)[/i]
+[*] Grant/Remove 1k Piety/Prestige
+[*] Grant/Remove 1k Offmap Currency [i](supports all offmap powers that may be present, including all total conversions)[/i]
+[/list]
+
+[u]Targeted decisions on titles:[/u]
+[list]
+[*] Grant this title to a player
+[*] Grant a strong claim on this title to a player
+[*] Remove a single character's claim on this title
+[*] Remove all characters' claims on this title
+[*] Destroy this title
+[*] Move owner's capital to this county
+[*] Move owner's primary title's traditional capital to this county [i](useful for preventing AI from moving or giving away an absent player's capital)[/i]
+[*] Remove common negative province modifiers from this county [i](uses a hardcoded list of modifiers, so this will not work for most total conversions)[/i]
+[*] Change this county's culture/religion to that of its owner
+[*] Change this county's culture/religion to that of a random neighbouring county
+[/list]
+
+.
+
+[h1]Restrictions on powerful Casus Belli[/h1]
+
+Via an intrigue menu decision, the host can change [u]players'[/u] ability to use powerful casus belli. These settings can be dynamically updated while the game is ongoing. AI characters are not restricted in any way.
+
+[u]Invasions:[/u]
+[list]
+[*] This rule affects all invasion CBs: the rare default invasion (eg. William the Conqueror), tribal, nomad, prepared, and muslim.
+[*] If the "Multiplayer Invasions" game rule is "Disabled" then this is respected. (Invasions are disabled for all players, and none of the other settings are available.)
+[*] Otherwise, the following options are available: enabled for all players, disabled for all players, and "managed individually". For "managed individually":
+[list]
+[*] You can assign potential de jure kingdom targets for each individual player (eg. one player is permitted to invade castile, aragon and leon; another is permitted to invade thrace, greece and bulgaria; etc.).
+[*] Invasion permissions are inherited
+[*] Up to 20 players can be assigned individual permissions, and each can be given permission to invade any number of de jure kingdoms.
+[/list]
+[/list]
+
+[u]Subjugations:[/u]
+[list]
+[*] This rule affects all subjugation CBs: pagan, indian, nomad, and caliphal.
+[*] The following options are available:
+[list]
+[*] Enabled for all players
+[*] Subjugations of emperors require permission
+[*] Subjugations of kings and emperors require permission
+[*] Subjugations of dukes, kings and emperors require permission
+[/list]
+[*] The host can grant subjugation permissions between two specific characters, and this permisison only lasts for as long as both parties are alive.
+[list]
+[*] Players should declare war shortly after receiving permission.
+[*] The war will not be invalidated if either party dies while the war is ongoing.
+[/list]
+[/list]
+
+.
+
+[h1]Debug features[/h1]
+
+There are also several useful debugging features... but there's apparently a character limit here and I'm out of space. You'll figure it out, I'm sure.
+
+.
+
+[h1]Compatibility/Impact:[/h1]
+The aim of the "Expanded Decisions" mod family is to be as compatible as possible with vanilla CK2 (and other mods), and to avoid making the game easier.
+[list]
+[*] Required CK2 version: 3.3.5.1
+[*] Achievement compatible: No
+[*] Safe to add to existing game: Yes
+[*] Safe to remove from existing game: Yes
+[*] Changes to vanilla files:
+[list]
+[*] Significant changes to casus belli (specifically ...\common\cb_types\00_cb_types.txt)
+[/list]
+[*] Mod compatibility:
+[list]
+[*] NOT compatible with mods which alter CBs (see above)
+[*] Should be compatible with all other mods
+[/list]
+[*] Changes to AI behaviour: None
+[*] Decrease in game difficulty: Extremely variable, depending on use
+[*] Localisation: English only
+[*] Mod development status: In progress, new features WILL be added
+[*] Known bugs/issues: None
+[/list]
+
+.
+
+[h1]Other Versions / Alternate Download / Reuse:[/h1]
+[list]
+[*] All of my CK2 mods are version-controlled via a [url=https://github.com/jonjowett/ck2_mods]Github repository[/url] (eg. if you want earlier/beta versions of any of my mods). 
+[*] I also publish a [url=https://github.com/jonjowett/ck2_mods/blob/master/expanded_decisions_multiplayer/packaged_mod/expanded_decisions_multiplayer.zip]zip version[/url] of this mod on Github.
+[*] All of my mods are published on Github under the MIT license, and I'm following the same logic here on the workshop. Essentially, you're welcome to reuse my mods in any way you wish as long as you provide attribution (eg. credit and/or a link).
+[/list]
