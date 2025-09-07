@@ -256,6 +256,18 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_legitimise
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_demesne_grant }
+		text                        = edmp_ifn_5001_desc_singlechar_demesne_grant
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_demesne_prolong }
+		text                        = edmp_ifn_5001_desc_singlechar_demesne_prolong
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_demesne_revoke }
+		text                        = edmp_ifn_5001_desc_singlechar_demesne_revoke
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_refill_all_levies }
 		text                        = edmp_ifn_5001_desc_singlechar_refill_all_levies
 	}
@@ -386,6 +398,10 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_older
 			clr_global_flag    = edmp_interference_singlechar_sexchange
 			clr_global_flag    = edmp_interference_singlechar_legitimise
+			clr_global_flag    = edmp_interference_singlechar_demesne_grant
+			clr_global_flag    = edmp_interference_singlechar_demesne_prolong
+			clr_global_flag    = edmp_interference_singlechar_demesne_revoke
+			clr_global_flag    = edmp_interference_singlechar_refill_all_levies
 			clr_global_flag    = edmp_interference_singlechar_wealth_grant_1k
 			clr_global_flag    = edmp_interference_singlechar_wealth_grant_10k
 			clr_global_flag    = edmp_interference_singlechar_wealth_remove
