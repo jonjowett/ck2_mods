@@ -1,0 +1,498 @@
+# Audax Validator EnableCommentMetadata
+# The Validator can't read PDXRPTG (because it's zipped), so individually ignore every line that mentions a PDXRPTG-specific building
+
+tpauto_rebuild_trade_post_buildings_pdxrptg = {
+	if = {
+		limit = { tpauto_allow_tracking_and_rebuild_pdxrptg = yes }
+		tpauto_rebuild_trade_post_buildings_pdxrptg_tr_port = yes
+		tpauto_rebuild_trade_post_buildings_pdxrptg_tr_enclave = yes
+		tpauto_rebuild_trade_post_buildings_pdxrptg_tr_garrison = yes
+		tpauto_rebuild_trade_post_buildings_pdxrptg_tr_barracks = yes
+		tpauto_rebuild_trade_post_buildings_pdxrptg_tr_tavern = yes
+		tpauto_rebuild_trade_post_buildings_pdxrptg_tr_slave = yes
+		tpauto_rebuild_trade_post_buildings_pdxrptg_toll_house_customs_office = yes
+		tpauto_rebuild_trade_post_buildings_pdxrptg_tr_guardpost = yes
+		tpauto_rebuild_trade_post_buildings_pdxrptg_tr_plantation = yes
+		tpauto_rebuild_trade_post_buildings_pdxrptg_singles = yes
+	}
+}
+
+tpauto_rebuild_trade_post_buildings_pdxrptg_tr_port = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_port_0
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_port_0
+				has_province_flag = tpauto_tracking_pdxrptg_tr_port_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_port_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_port_0
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_port_1
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_port_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_port_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_port_1
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_port_2
+			}
+			has_province_flag = tpauto_tracking_pdxrptg_tr_port_2
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_port_2
+		}
+	}
+	
+}
+
+tpauto_rebuild_trade_post_buildings_pdxrptg_tr_enclave = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_enclave_0
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_enclave_0
+				has_province_flag = tpauto_tracking_pdxrptg_tr_enclave_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_enclave_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_enclave_0
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_enclave_1
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_enclave_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_enclave_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_enclave_1
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_enclave_2
+			}
+			has_province_flag = tpauto_tracking_pdxrptg_tr_enclave_2
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_enclave_2
+		}
+	}
+	
+}
+
+tpauto_rebuild_trade_post_buildings_pdxrptg_tr_garrison = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_garrison_0
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_garrison_0
+				has_province_flag = tpauto_tracking_pdxrptg_tr_garrison_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_garrison_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_garrison_0
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_garrison_1
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_garrison_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_garrison_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_garrison_1
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_garrison_2
+			}
+			has_province_flag = tpauto_tracking_pdxrptg_tr_garrison_2
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_garrison_2
+		}
+	}
+	
+}
+
+tpauto_rebuild_trade_post_buildings_pdxrptg_tr_barracks = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_barracks_0
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_barracks_0
+				has_province_flag = tpauto_tracking_pdxrptg_tr_barracks_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_barracks_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_barracks_0
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_barracks_1
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_barracks_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_barracks_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_barracks_1
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_barracks_2
+			}
+			has_province_flag = tpauto_tracking_pdxrptg_tr_barracks_2
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_barracks_2
+		}
+	}
+	
+}
+
+tpauto_rebuild_trade_post_buildings_pdxrptg_tr_tavern = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_tavern_0
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_tavern_0
+				has_province_flag = tpauto_tracking_pdxrptg_tr_tavern_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_tavern_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_tavern_0
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_tavern_1
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_tavern_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_tavern_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_tavern_1
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_tavern_2
+			}
+			has_province_flag = tpauto_tracking_pdxrptg_tr_tavern_2
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_tavern_2
+		}
+	}
+	
+}
+
+tpauto_rebuild_trade_post_buildings_pdxrptg_tr_slave = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_slave_0
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_slave_0
+				has_province_flag = tpauto_tracking_pdxrptg_tr_slave_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_slave_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_slave_0
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_slave_1
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_slave_1
+				has_province_flag = tpauto_tracking_pdxrptg_tr_slave_2
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_slave_1
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_slave_2
+			}
+			has_province_flag = tpauto_tracking_pdxrptg_tr_slave_2
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_slave_2
+		}
+	}
+	
+}
+
+tpauto_rebuild_trade_post_buildings_pdxrptg_toll_house_customs_office = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_toll_house
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_toll_house
+				has_province_flag = tpauto_tracking_pdxrptg_tr_customs_office
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_toll_house
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_customs_office
+			}
+			has_province_flag = tpauto_tracking_pdxrptg_tr_customs_office
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_customs_office
+		}
+	}
+	
+}
+
+tpauto_rebuild_trade_post_buildings_pdxrptg_tr_guardpost = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_guardpost_0
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_guardpost_0
+				has_province_flag = tpauto_tracking_pdxrptg_tr_guardpost_1
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_guardpost_0
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_guardpost_1
+			}
+			has_province_flag = tpauto_tracking_pdxrptg_tr_guardpost_1
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_guardpost_1
+		}
+	}
+	
+}
+
+tpauto_rebuild_trade_post_buildings_pdxrptg_tr_plantation = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_plantation_0
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_pdxrptg_tr_plantation_0
+				has_province_flag = tpauto_tracking_pdxrptg_tr_plantation_1
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_plantation_0
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_plantation_1
+			}
+			has_province_flag = tpauto_tracking_pdxrptg_tr_plantation_1
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_plantation_1
+		}
+	}
+	
+}
+
+tpauto_rebuild_trade_post_buildings_pdxrptg_singles = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_skooma_0
+			}
+			has_province_flag = tpauto_tracking_pdxrptg_tr_skooma_0
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_skooma_0
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_smugglers_0
+			}
+			has_province_flag = tpauto_tracking_pdxrptg_tr_smugglers_0
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_smugglers_0
+		}
+	}
+}

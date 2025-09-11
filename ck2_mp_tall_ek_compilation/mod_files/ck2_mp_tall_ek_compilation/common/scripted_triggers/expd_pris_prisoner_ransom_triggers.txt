@@ -1,0 +1,456 @@
+
+########################
+# Mass Ransom Priority #
+########################
+
+expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = {
+	# ROOT's primary heir
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	is_heir = ROOT
+}
+
+expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = {
+	# Any child of the preferred sex
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	is_child_of = ROOT
+	expd_pris_this_prisoner_is_of_roots_preferred_sex = yes
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = {
+	# Any child of the other sex
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	is_child_of = ROOT
+	expd_pris_this_prisoner_is_of_roots_preferred_sex = no
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = {
+	# Any spouse of ROOT
+	# NB: Spouses are sometimes NOT counted as close relatives and therefore they sometimes use minimum-opinion criteria, but the exact criteria that triggers this alternate reasoning is unclear.
+	#     Therefore, we assume that all spouses use the close relative logic for ransom, even though this may not be correct in some cases.
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	any_spouse = { character = ROOT }
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = {
+	# Any lover of ROOT (not in vanilla, but should be included)
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	is_lover = ROOT
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = {
+	# Any pregnant concubine (because they probably only cost 10 to ransom but their child will cost a lot more after it's born)
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	is_consort = ROOT
+	is_pregnant = yes
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = {
+	# Any friend of ROOT (not in vanilla, but should be included)
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	is_friend = ROOT
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_8th_priority_for_root_to_ransom = {
+	# Any close relative of ROOT (except spouse/aunt/uncle/nibling), of the preferred sex
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	is_close_relative = ROOT
+	NOT = { is_nibling_of = ROOT }
+	NOT = { is_aunt_uncle_of = ROOT }
+	NOT = { any_spouse = { character = ROOT } }
+	expd_pris_this_prisoner_is_of_roots_preferred_sex = yes
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_9th_priority_for_root_to_ransom = {
+	# Any close relative of ROOT (except spouse/aunt/uncle/nibling), of the less-preferred sex
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	is_close_relative = ROOT
+	NOT = { is_nibling_of = ROOT }
+	NOT = { is_aunt_uncle_of = ROOT }
+	NOT = { any_spouse = { character = ROOT } }
+	expd_pris_this_prisoner_is_of_roots_preferred_sex = no
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_8th_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_10th_priority_for_root_to_ransom = {
+	# Any dynast of ROOT, of the preferred sex, who is somewhat liked
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	dynasty = ROOT
+	expd_pris_this_prisoner_is_of_roots_preferred_sex = yes
+	expd_pris_this_prisoner_is_liked_by_root_enough_to_ransom = yes
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_8th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_9th_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_11th_priority_for_root_to_ransom = {
+	# Any dynast of ROOT, of the less-preferred sex, who is somewhat liked
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	dynasty = ROOT
+	expd_pris_this_prisoner_is_of_roots_preferred_sex = no
+	expd_pris_this_prisoner_is_liked_by_root_enough_to_ransom = yes
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_8th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_9th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_10th_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_12th_priority_for_root_to_ransom = {
+	# Any courtier of ROOT, who is strongly liked (NB: Not vanilla behaviour)
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	has_global_flag = expd_pris_ransom_liked_nondynastic_courtiers
+	expd_pris_this_prisoner_is_liked_by_root_75 = yes
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_8th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_9th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_10th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_11th_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_13th_priority_for_root_to_ransom = {
+	# Any courtier of ROOT, who is liked (NB: Not vanilla behaviour)
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	has_global_flag = expd_pris_ransom_liked_nondynastic_courtiers
+	expd_pris_this_prisoner_is_liked_by_root_50 = yes
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_8th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_9th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_10th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_11th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_12th_priority_for_root_to_ransom = no
+}
+
+expd_pris_this_unlanded_prisoner_is_14th_priority_for_root_to_ransom = {
+	# Any courtier of ROOT, who is somewhat liked (NB: Not vanilla behaviour)
+	is_landed = no
+	is_vassal_or_below_of = ROOT
+	has_global_flag = expd_pris_ransom_liked_nondynastic_courtiers
+	expd_pris_this_prisoner_is_liked_by_root_25 = yes
+	expd_pris_this_unlanded_prisoner_is_1st_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_2nd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_3rd_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_4th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_5th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_6th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_7th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_8th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_9th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_10th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_11th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_12th_priority_for_root_to_ransom = no
+	expd_pris_this_unlanded_prisoner_is_13th_priority_for_root_to_ransom = no
+}
+
+
+
+
+
+######################
+# Misc Prisoner Info #
+######################
+
+expd_pris_this_prisoner_is_of_roots_preferred_sex = {
+	OR = {
+		AND = {
+			is_female = no
+			ROOT = { NOT = { has_religion_feature = religion_matriarchal } }
+		}
+		AND = {
+			is_female = yes
+			ROOT = { has_religion_feature = religion_matriarchal }
+		}
+	}
+}
+
+expd_pris_this_prisoner_is_liked_by_root_75 = {
+	ROOT = {
+		opinion = {
+			who = PREV
+			value >= 75
+		}
+	}
+}
+
+expd_pris_this_prisoner_is_liked_by_root_50 = {
+	ROOT = {
+		opinion = {
+			who = PREV
+			value >= 50
+		}
+	}
+}
+
+expd_pris_this_prisoner_is_liked_by_root_25 = {
+	ROOT = {
+		opinion = {
+			who = PREV
+			value >= 25
+		}
+	}
+}
+
+expd_pris_this_prisoner_is_liked_by_root_enough_to_ransom = {
+	ROOT = {
+		opinion = {
+			who = PREV
+			value >= 9 #via trial and error
+		}
+	}
+}
+
+
+
+
+
+########################
+# Ransom Affordability #
+########################
+
+expd_pris_this_landed_prisoner_can_afford_their_own_ransom = {
+	OR = {
+		AND = {
+			wealth >= 385
+			tier = EMPEROR
+		}
+		AND = {
+			wealth >= 250
+			tier = KING
+		}
+		AND = {
+			wealth >= 145
+			tier = DUKE
+		}
+		AND = {
+			wealth >= 70
+			tier = COUNT
+		}
+		AND = {
+			wealth >= 25
+			tier = BARON
+		}
+	}
+}
+
+expd_pris_root_can_afford_to_ransom_this_unlanded_prisoner = {
+	OR = {
+		AND = {
+			ROOT = { wealth >= 110 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_emperor = yes
+		}
+		AND = {
+			ROOT = { wealth >= 74 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_king = yes
+		}
+		AND = {
+			ROOT = { wealth >= 46 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_duke = yes
+		}
+		AND = {
+			ROOT = { wealth >= 26 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_count = yes
+		}
+		AND = {
+			ROOT = { wealth >= 14 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_baron = yes
+		}
+		AND = {
+			ROOT = { wealth >= 10 }
+			expd_pris_this_unlanded_prisoner_is_child_of_living_baron = no
+		}
+	}
+}
+
+expd_pris_this_unlanded_prisoner_can_afford_their_own_ransom = {
+	OR = {
+		AND = {
+			wealth >= 110
+			expd_pris_this_unlanded_prisoner_is_child_of_living_emperor = yes
+		}
+		AND = {
+			wealth >= 74
+			expd_pris_this_unlanded_prisoner_is_child_of_living_king = yes
+		}
+		AND = {
+			wealth >= 46
+			expd_pris_this_unlanded_prisoner_is_child_of_living_duke = yes
+		}
+		AND = {
+			wealth >= 26
+			expd_pris_this_unlanded_prisoner_is_child_of_living_count = yes
+		}
+		AND = {
+			wealth >= 14
+			expd_pris_this_unlanded_prisoner_is_child_of_living_baron = yes
+		}
+		AND = {
+			wealth >= 10
+			expd_pris_this_unlanded_prisoner_is_child_of_living_baron = no
+		}
+	}
+}
+
+
+
+
+
+###################
+# Prisoner status #
+###################
+
+expd_pris_this_unlanded_prisoner_is_child_of_living_emperor = {
+	prisoner = yes
+	is_landed = no
+	OR = {
+		father = {
+			tier = EMPEROR
+			is_alive = yes
+		}
+		mother = {
+			tier = EMPEROR
+			is_alive = yes
+		}
+	}
+}
+
+expd_pris_this_unlanded_prisoner_is_child_of_living_king = {
+	prisoner = yes
+	is_landed = no
+	OR = {
+		father = {
+			tier = KING
+			is_alive = yes
+		}
+		mother = {
+			tier = KING
+			is_alive = yes
+		}
+	}
+	expd_pris_this_unlanded_prisoner_is_child_of_living_emperor = no
+}
+
+expd_pris_this_unlanded_prisoner_is_child_of_living_duke = {
+	prisoner = yes
+	is_landed = no
+	OR = {
+		father = {
+			tier = DUKE
+			is_alive = yes
+		}
+		mother = {
+			tier = DUKE
+			is_alive = yes
+		}
+	}
+	expd_pris_this_unlanded_prisoner_is_child_of_living_emperor = no
+	expd_pris_this_unlanded_prisoner_is_child_of_living_king = no
+}
+
+expd_pris_this_unlanded_prisoner_is_child_of_living_count = {
+	prisoner = yes
+	is_landed = no
+	OR = {
+		father = {
+			tier = COUNT
+			is_alive = yes
+		}
+		mother = {
+			tier = COUNT
+			is_alive = yes
+		}
+	}
+	expd_pris_this_unlanded_prisoner_is_child_of_living_emperor = no
+	expd_pris_this_unlanded_prisoner_is_child_of_living_king = no
+	expd_pris_this_unlanded_prisoner_is_child_of_living_duke = no
+}
+
+expd_pris_this_unlanded_prisoner_is_child_of_living_baron = {
+	prisoner = yes
+	is_landed = no
+	OR = {
+		father = {
+			tier = BARON
+			is_alive = yes
+		}
+		mother = {
+			tier = BARON
+			is_alive = yes
+		}
+	}
+	expd_pris_this_unlanded_prisoner_is_child_of_living_emperor = no
+	expd_pris_this_unlanded_prisoner_is_child_of_living_king = no
+	expd_pris_this_unlanded_prisoner_is_child_of_living_duke = no
+	expd_pris_this_unlanded_prisoner_is_child_of_living_count = no
+}
+
+

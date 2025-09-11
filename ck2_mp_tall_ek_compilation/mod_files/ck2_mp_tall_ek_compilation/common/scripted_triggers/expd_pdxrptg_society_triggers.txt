@@ -1,0 +1,289 @@
+# Audax Validator EnableCommentMetadata
+
+# Standardised triggers controlling whether a character can see/join a society, based on their holdings.
+# Replaces the hardcoded (and many-times-duplicated) triggers that are set for each society in the base mod.
+
+# Criteria:
+#  - Emperors can join if they have any *realm* province in the relevant region.
+#  - Vassal kings and independent characters can join if they have any *demesne* province in the relevant region.
+#  - Other landed characters can join if their *capital* province is in the relevant region.
+#  - Unlanded characters can join if their liege can join.
+
+expd_pdxrtpg_this_character_can_join_akaviri_societies = {
+	
+	trigger_if = {
+		limit = { is_ruler = no }
+		liege = {
+			expd_pdxrtpg_this_character_can_join_akaviri_societies = yes
+		}
+	}
+	
+	trigger_else_if = {
+		limit = { tier = EMPEROR }
+		any_realm_province = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_akavir
+		}
+	}
+	
+	trigger_else_if = {
+		limit = {
+			OR = {
+				independent = yes
+				tier = KING
+			}
+		}
+		any_demesne_province = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_akavir
+		}
+	}
+	
+	trigger_else = {
+		capital_scope = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_akavir
+		}
+	}
+	
+}
+
+expd_pdxrtpg_this_character_can_join_tamrielic_societies = {
+	
+	trigger_if = {
+		limit = { is_ruler = no }
+		liege = {
+			expd_pdxrtpg_this_character_can_join_tamrielic_societies = yes
+		}
+	}
+	
+	trigger_else_if = {
+		limit = { tier = EMPEROR }
+		any_realm_province = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_yokuda
+			}
+		}
+	}
+	
+	trigger_else_if = {
+		limit = {
+			OR = {
+				independent = yes
+				tier = KING
+			}
+		}
+		any_demesne_province = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_yokuda
+			}
+		}
+	}
+	
+	trigger_else = {
+		capital_scope = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_yokuda
+			}
+		}
+	}
+	
+}
+
+expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = {
+	
+	trigger_if = {
+		limit = { is_ruler = no }
+		liege = {
+			expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = yes
+		}
+	}
+	
+	trigger_else_if = {
+		limit = { tier = EMPEROR }
+		any_realm_province = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_tamriel
+		}
+	}
+	
+	trigger_else_if = {
+		limit = {
+			OR = {
+				independent = yes
+				tier = KING
+			}
+		}
+		any_demesne_province = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_tamriel
+		}
+	}
+	
+	trigger_else = {
+		capital_scope = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_tamriel
+		}
+	}
+	
+}
+
+expd_pdxrtpg_this_character_can_join_morrowind_societies = {
+	
+	# Special case: Morrowind societies are in general only open to Dunmer
+	#               (and anyone else who may be living in Morrowind)
+	
+	trigger_if = {
+		limit = { is_ruler = no }
+		liege = {
+			expd_pdxrtpg_this_character_can_join_morrowind_societies = yes
+		}
+	}
+	
+	trigger_else = {
+		capital_scope = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_morrowind
+				AND = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel
+					# Audax Validator "." Ignore_NEXT
+					culture = dunmer
+				}
+			}
+		}
+	}
+	
+}
+
+expd_pdxrtpg_this_character_can_join_skyrim_societies = {
+	
+	trigger_if = {
+		limit = { is_ruler = no }
+		liege = {
+			expd_pdxrtpg_this_character_can_join_skyrim_societies = yes
+		}
+	}
+	
+	trigger_else_if = {
+		limit = { tier = EMPEROR }
+		any_realm_province = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_tamriel_skyrim
+		}
+	}
+	
+	trigger_else_if = {
+		limit = {
+			OR = {
+				independent = yes
+				tier = KING
+			}
+		}
+		any_demesne_province = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_tamriel_skyrim
+		}
+	}
+	
+	trigger_else = {
+		capital_scope = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_tamriel_skyrim
+		}
+	}
+	
+}
+
+expd_pdxrtpg_this_character_can_join_yokudan_societies = {
+	
+	trigger_if = {
+		limit = { is_ruler = no }
+		liege = {
+			expd_pdxrtpg_this_character_can_join_yokudan_societies = yes
+		}
+	}
+	
+	trigger_else_if = {
+		limit = { tier = EMPEROR }
+		any_realm_province = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_hammerfell
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_yokuda
+			}
+		}
+	}
+	
+	trigger_else_if = {
+		limit = {
+			OR = {
+				independent = yes
+				tier = KING
+			}
+		}
+		any_demesne_province = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_hammerfell
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_yokuda
+			}
+		}
+	}
+	
+	trigger_else = {
+		capital_scope = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_hammerfell
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_yokuda
+			}
+		}
+	}
+	
+}
+
+expd_pdxrptg_this_character_satisfies_religiocultural_requirements_for_swordsingers = {
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		religion_group = yokudan_pantheon
+		# Audax Validator "." Ignore_NEXT
+		culture_group = yokudan_group
+		AND = {
+			# Audax Validator "." Ignore_NEXT
+			trait = sympathy_yokudan_pantheon
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				religion_group = human_pantheon
+				# Audax Validator "." Ignore_NEXT
+				religion_group = mer_pantheon
+				# Audax Validator "." Ignore_NEXT
+				religion_group = tribunal
+				# Audax Validator "." Ignore_NEXT
+				religion_group = khajiit_pantheon
+				# Audax Validator "." Ignore_NEXT
+				religion_group = hist_group
+				# Audax Validator "." Ignore_NEXT
+				religion_group = reach_faiths
+				# Audax Validator "." Ignore_NEXT
+				religion_group = atmoran_pantheon
+				# Audax Validator "." Ignore_NEXT
+				religion_group = maormer_religion
+			}
+		}
+	}
+}

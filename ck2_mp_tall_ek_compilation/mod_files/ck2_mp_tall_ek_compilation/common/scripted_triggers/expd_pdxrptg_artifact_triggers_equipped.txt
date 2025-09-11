@@ -1,0 +1,60 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_alessia = {
+	any_artifact = {
+		# Audax Validator "." Ignore_NEXT
+		artifact_type = amulet_of_alessia
+		is_artifact_equipped = yes
+	}
+}
+
+expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_akatosh = {
+	any_artifact = {
+		# Audax Validator "." Ignore_NEXT
+		artifact_type = amulet_of_akatosh
+		is_artifact_equipped = yes
+	}
+}
+
+expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_hagraven = {
+	any_artifact = {
+		# Audax Validator "." Ignore_NEXT
+		artifact_type = amulet_of_hagraven
+		is_artifact_equipped = yes
+	}
+}
+
+expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_julianos = {
+	any_artifact = {
+		# Audax Validator "." Ignore_NEXT
+		artifact_type = amulet_of_julianos
+		is_artifact_equipped = yes
+	}
+}
+
+expd_pdxrptg_this_character_has_artifact_equipped_ring_of_erudite = {
+	any_artifact = {
+		# Audax Validator "." Ignore_NEXT
+		artifact_type = ring_of_erudite
+		is_artifact_equipped = yes
+	}
+}
+
+expd_pdxrptg_this_character_has_artifact_equipped_ring_of_happiness = {
+	any_artifact = {
+		# Audax Validator "." Ignore_NEXT
+		artifact_type = ring_happiness
+		OR = {
+			is_artifact_equipped = yes
+			PREV = { ai = yes }
+		}
+	}
+}
+
+expd_pdxrptg_this_character_has_artifact_equipped_weapon_forkh = {
+	any_artifact = {
+		# Audax Validator "." Ignore_NEXT
+		artifact_type = weapon_forkh
+		is_artifact_equipped = yes
+	}
+}

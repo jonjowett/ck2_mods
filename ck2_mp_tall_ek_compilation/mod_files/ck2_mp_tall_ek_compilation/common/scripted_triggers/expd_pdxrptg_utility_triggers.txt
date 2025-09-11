@@ -1,0 +1,59 @@
+expd_pdxrptg_this_character_has_revocation = {
+	OR = {
+		AND = {
+			has_dlc = "Zeus"
+			any_demesne_title = {
+				OR = { 
+					has_law = revoke_title_law_1
+					has_law = revoke_title_law_2
+				}
+			}
+		}
+		AND = {
+			NOT = { has_dlc = "Zeus" }
+			any_demesne_title = {
+				OR = {
+					has_law = crown_authority_1
+					has_law = crown_authority_2
+					has_law = crown_authority_3
+					has_law = crown_authority_4
+					has_law = tribal_organization_1
+					has_law = tribal_organization_2
+					has_law = tribal_organization_3
+					has_law = tribal_organization_4
+				}
+			}
+		}
+	}
+}
+
+expd_pdxrptg_this_character_has_free_religious_revocation = {
+	OR = {
+		AND = {
+			has_dlc = "Zeus"
+			any_demesne_title = {
+				has_law = revoke_title_law_2
+			}
+		}
+		AND = {
+			NOT = { has_dlc = "Zeus" }
+			any_demesne_title = {
+				OR = {
+					has_law = crown_authority_2
+					has_law = crown_authority_3
+					has_law = crown_authority_4
+					has_law = tribal_organization_2
+					has_law = tribal_organization_3
+					has_law = tribal_organization_4
+				}
+			}
+		}
+	}
+}
+
+expd_pdxrptg_this_character_is_not_inaccessible = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_is_not_inaccessible_tt
+		is_inaccessible_trigger = no
+	}
+}

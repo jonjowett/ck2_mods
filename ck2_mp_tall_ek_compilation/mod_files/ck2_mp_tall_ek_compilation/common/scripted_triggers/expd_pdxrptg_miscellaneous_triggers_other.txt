@@ -1,0 +1,85 @@
+# Audax Validator EnableCommentMetadata
+
+# As these triggers are included unaltered, we don't want to receive any Validator warnings about them.
+# Audax Validator "!" Ignore_NEXT
+
+cb_no_blockers = {
+	ROOT = { # One declaring war
+		trigger_if = {
+			limit = {
+				has_earmarked_regiments = temple_crusaders
+			}
+			custom_tooltip = {
+				text = no_temple_crusaders
+				NOT = {
+					has_earmarked_regiments = temple_crusaders
+				}
+			}
+		}
+	}
+}
+
+# Holy sites controled
+controls_one_holy_sites = {
+	custom_tooltip = {
+		text = CONTROLS_ONE_HOLY_SITES_CT
+		hidden_tooltip = {
+			any_realm_title = {
+				count = 1
+				is_holy_site = ROOT
+			}
+		}
+	}
+}
+controls_two_holy_sites = {
+	custom_tooltip = {
+		text = CONTROLS_TWO_HOLY_SITES_CT
+		hidden_tooltip = {
+			any_realm_title = {
+				count = 2
+				is_holy_site = ROOT
+			}
+		}
+	}
+}
+controls_three_holy_sites = {
+	custom_tooltip = {
+		text = CONTROLS_THREE_HOLY_SITES_CT
+		hidden_tooltip = {
+			any_realm_title = {
+				count = 3
+				is_holy_site = ROOT
+			}
+		}
+	}
+}
+controls_four_holy_sites = {
+	custom_tooltip = {
+		text = CONTROLS_FOUR_HOLY_SITES_CT
+		hidden_tooltip = {
+			any_realm_title = {
+				count = 4
+				is_holy_site = ROOT
+			}
+		}
+	}
+}
+controls_five_holy_sites = {
+	custom_tooltip = {
+		text = CONTROLS_FIVE_HOLY_SITES_CT
+		hidden_tooltip = {
+			any_realm_title = {
+				count = 5
+				is_holy_site = ROOT
+			}
+		}
+	}
+}
+has_dragons_summoned = {
+	OR = {
+		has_earmarked_regiments = dragon_cult_dragon_0
+		has_earmarked_regiments = dragon_cult_dragon_1
+		has_earmarked_regiments = dragon_cult_dragon_2
+		has_earmarked_regiments = dragon_cult_dragon_3
+	}
+}

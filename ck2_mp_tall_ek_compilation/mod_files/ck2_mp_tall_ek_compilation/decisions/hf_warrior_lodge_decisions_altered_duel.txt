@@ -1,0 +1,220 @@
+# Audax Validator EnableCommentMetadata
+
+targeted_decisions = {
+	duel_decision = {
+		only_playable = yes
+		is_high_prio = yes
+		diplomacy_icon = GFX_duel_decision
+		
+		#ai_target_filter = rivals
+		ai_check_interval = 12
+		
+		from_potential = {
+			OR = {
+				AND = {
+					has_focus = focus_war
+					has_dlc = "Way of Life"
+				}
+				AND = {
+					is_member_of_any_warrior_lodge_trigger = yes
+					has_dlc = "Holy Fury"
+				}
+				AND = {
+					OR = {
+						has_game_rule = {
+							name = dueling
+							value = unrestricted
+						}
+						expd_pdxrptg_duel_this_character_has_duelling_potentially_unlocked_by_wonder_bloodworks = yes
+						any_owned_bloodline = { has_bloodline_flag = bloodline_duel }
+					}
+					OR = {
+						has_dlc = "Way of Life"
+						has_dlc = "Holy Fury"
+					}
+				}
+			}
+			is_adult = yes
+			is_incapacitated = no
+			is_inaccessible_trigger = no
+			prisoner = no
+			has_regent = no
+		}
+		
+		potential = {
+			OR = {
+				AND = { #Either you are adult, as well as your target...
+					is_adult = yes
+					FROM = { is_adult = yes }
+				}
+				AND = { #Or you are both children! WEIRD!
+					is_adult = no
+					FROM = { is_adult = no }
+				}
+			}
+			prisoner = no
+			NOT = { character = FROM }
+			is_incapacitated = no
+			is_inaccessible_trigger = no
+		}
+		
+		allow = {
+			trigger_if = { #[Won't show ANY reqs. if you have "Unrestricted" duels...]
+				limit = { #But otherwise: find a target, valid both relationship-, and healthwise...
+					NOT = {
+						has_game_rule = {
+							name = dueling
+							value = unrestricted
+						}
+					}
+				}
+				FROM = {
+					OR = {
+						trigger_if = {
+							limit = { has_dlc = "Way of Life" }
+							has_focus = focus_war
+						}
+						trigger_if = {
+							limit = { has_dlc = "Holy Fury" }
+							custom_tooltip = {
+								text = expd_pdxrptg_duel_this_character_is_a_member_of_a_martial_society_tt
+								is_member_of_any_warrior_lodge_trigger = yes
+							}
+						}
+						trigger_if = {
+							limit = { expd_pdxrptg_duel_this_character_has_duelling_potentially_unlocked_by_wonder_bloodworks = yes }
+							expd_pdxrptg_duel_this_character_has_duelling_allowed_by_wonder_bloodworks = yes
+						}
+						trigger_if = {
+							limit = { any_owned_bloodline = { has_bloodline_flag = bloodline_duel } }
+							custom_tooltip = {
+								text = expd_pdxrtpg_duel_this_character_has_an_active_bloodline_which_enables_duelling_tt
+								any_owned_bloodline = {
+									bloodline_is_active_for = PREV
+									has_bloodline_flag = bloodline_duel
+								}
+							}
+						}
+					}
+				}
+				OR = { # RELATIONSHIP/mission reqs...
+					custom_tooltip = {
+						text = duel_tooltip_rivals
+						is_rival = FROM
+					}
+					custom_tooltip = {
+						text = duel_tooltip_foes
+						is_foe = FROM
+					}
+					trigger_if = {
+						limit = { religion = FROM }
+						custom_tooltip = {
+							text = duel_tooltip_excommunicated
+							FROM = { trait = zealous }
+							trait = excommunicated
+						}
+					}
+					trigger_if = {
+						limit = {
+							# Audax Validator "." Ignore_NEXT
+							is_known_undead = yes
+						}
+						custom_tooltip = {
+							# Audax Validator "." Ignore_NEXT
+							text = duel_tooltip_undead
+							FROM = {
+								# Audax Validator "." Ignore_NEXT
+								is_anti_necromancy_religion = yes
+								trait = zealous
+							}
+						}
+					}
+				}
+			}
+
+			#Both are healthy
+			custom_tooltip = {
+				text = duel_tooltip_sickness
+				FROM = {
+					NOR = { #Not in sickly in bed, but sick if well treated is okay
+						has_character_modifier = bedridden_illness
+						has_character_modifier = severe_illness
+						trait = incapable
+					}
+				}
+				ROOT = {
+					NOR = { #Not in sickly in bed, but sick if well treated is okay
+						has_character_modifier = bedridden_illness
+						has_character_modifier = severe_illness
+						trait = incapable
+					}
+				}
+			}
+			
+			custom_tooltip = {
+				text = duel_tooltip_pregnant
+				FROM = { is_pregnant = no }
+				ROOT = { is_pregnant = no }
+			}
+
+					#Checks gender and some religious stuff... (turned this into apply_any_applicable_harsh_penalties_effect instead)
+
+			####### You won't want to fight someone who is badly injured, and if you are hurt yourself, you will want to wait...
+			custom_tooltip = {
+				text = duel_tooltip_recent_duel
+				hidden_tooltip = {
+					FROM = { NOT = { has_character_modifier = recent_duel_timer } }
+					NOT = { has_character_modifier = recent_duel_timer }
+				}
+			}
+
+			#############################################################################
+
+			custom_tooltip = {
+				text = duel_tooltip_no_war
+				hidden_tooltip = {
+					FROM = { NOT = { war = yes } }
+					NOT = { war = yes }
+				}
+			}
+			
+		}
+		
+		effect = {
+			#REQUIRED event targets for setting up duel evaluation!
+			FROM = { save_event_target_as = combatant_1 } #the person issuing the duel...
+			save_event_target_as = combatant_2 #the target of the duel...
+			
+			# Audax Validator "." Ignore_NEXT
+			apply_degree_of_dishonorable_duel_effect = yes #checks a bunch of age and health statuses...
+			#apply_any_applicable_harsh_penalties_effect = yes
+			
+			FROM = {
+				pacifists_lose_piety_effect = yes
+				add_character_modifier = {
+					modifier = recent_duel_timer
+					duration = 90
+					hidden = yes
+				}
+			}
+			hidden_tooltip = {
+				character_event = { id = HFP.10095 } #Duel evaluation (hidden) + result event as follow-up.
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_character_modifier = declined_prestige_duel_timer #if the target has already declined a duel, AI's won't attempt to duel them while the timer is still
+			}
+			modifier = {
+				factor = 0.1
+			}
+			modifier = {
+				factor = 1.5
+				FROM = { potentially_interested_in_rivaling_root_trigger = yes }
+			}
+		}
+	}
+	
+}

@@ -1,0 +1,48 @@
+# Audax Validator EnableCommentMetadata
+
+# Despite the weird name, this trigger means "is under the effect of an alchemy potion"
+chugged_it_down_innit_bruv = {
+	
+	custom_tooltip = {
+		
+		# Audax Validator "." Ignore_NEXT
+		text = underpotioneffect
+		
+		OR = {
+			
+			# Base mod potions
+			
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_bad_potion
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_potion_of_chameleon
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_potion_of_longevity
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_potion_of_fortify_health
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_potion_of_virility
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_potion_of_fortify_strength
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_potion_of_fortify_personality
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_potion_of_fortify_luck
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_potion_of_fortify_intelligence
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_potion_of_fortify_agility
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_potion_of_regeneration
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = modifier_potion_of_genderswap
+			
+			# Mod-added potions
+			has_character_modifier = modifier_potion_of_fortify_magicka
+			has_character_modifier = modifier_potion_of_magicka_regeneration
+			
+		}
+		
+	}
+	
+}

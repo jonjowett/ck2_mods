@@ -1,0 +1,165 @@
+# Audax Validator EnableCommentMetadata
+
+
+expd_pdxrptg_artifact_theft_this_character_is_in_morrowind = {
+	OR = {
+		location = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_tamriel_morrowind
+		}
+		AND = {
+			is_landed = yes
+			any_demesne_province = {
+				location = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_morrowind
+				}
+			}
+		}
+		AND = {
+			is_landed = no
+			host = {
+				any_demesne_province = {
+					location = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_morrowind
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = {
+	OR = {
+		location = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_tamriel
+		}
+		AND = {
+			is_landed = yes
+			any_demesne_province = {
+				location = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel
+				}
+			}
+		}
+		AND = {
+			is_landed = no
+			host = {
+				any_demesne_province = {
+					location = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel
+					}
+				}
+			}
+		}
+	}
+}
+expd_pdxrptg_artifact_theft_this_character_is_in_akavir = {
+	OR = {
+		location = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_akavir
+		}
+		AND = {
+			is_landed = yes
+			any_demesne_province = {
+				location = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_akavir
+				}
+			}
+		}
+		AND = {
+			is_landed = no
+			host = {
+				any_demesne_province = {
+					location = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_akavir
+					}
+				}
+			}
+		}
+	}
+}
+expd_pdxrptg_artifact_theft_this_character_can_access_morrowind = {
+	OR = {
+		expd_pdxrptg_artifact_theft_this_character_is_in_morrowind = yes
+		AND = {
+			is_landed = yes
+			any_realm_province = {
+				location = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_morrowind
+				}
+			}
+		}
+		AND = {
+			is_landed = no
+			host = {
+				any_realm_province = {
+					location = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_morrowind
+					}
+				}
+			}
+		}
+	}
+}
+expd_pdxrptg_artifact_theft_this_character_can_access_tamriel = {
+	OR = {
+		expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes
+		AND = {
+			is_landed = yes
+			any_realm_province = {
+				location = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel
+				}
+			}
+		}
+		AND = {
+			is_landed = no
+			host = {
+				any_realm_province = {
+					location = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel
+					}
+				}
+			}
+		}
+	}
+}
+expd_pdxrptg_artifact_theft_this_character_can_access_akavir = {
+	OR = {
+		expd_pdxrptg_artifact_theft_this_character_is_in_akavir = yes
+		AND = {
+			is_landed = yes
+			any_realm_province = {
+				location = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_akavir
+				}
+			}
+		}
+		AND = {
+			is_landed = no
+			host = {
+				any_realm_province = {
+					location = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_akavir
+					}
+				}
+			}
+		}
+	}
+}

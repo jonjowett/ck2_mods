@@ -1,0 +1,120 @@
+expd_pdxrptg_this_character_can_be_asked_to_leave_froms_court_using_slightly_more_relaxed_criteria = {
+	
+	# These "slightly more relaxed" criteria are copied from the base game as at the current patch
+	# Includes slight modifications to update it for the PDXRPTG mod
+	
+	NOR = {
+		prisoner = yes
+		trait = incapable
+		is_ruler = yes
+		has_job_title = yes
+		
+		#custom tooltip for minor titles
+		custom_tooltip = {
+			text = is_regent_commander_or_physician_tt
+			OR = {
+				has_minor_title = title_regent
+				has_minor_title = title_appointed_regent
+				has_minor_title = title_commander
+				has_minor_title = title_court_physician
+			}
+		}
+		
+		# Minor titles given by wonders
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_watcher_of_giants
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_skyforge_master
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_portmaster_senchal
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_pok_custodian
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_ic_custodian
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_motalion_overseer
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_guardian_of_the_deep
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_master_shipwright_jyl
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_sacristan_orgnum
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_sexton_cath_bedraud
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_zookeeper_silvarwoad
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_volwesi_governor
+		
+		# Other minor titles that are Very Important
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_court_mage         # Provides spellbook to non-mages
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_court_alchemist    # Discount at the alchemy store
+		has_minor_title = title_teacher            # Court Tutor
+		# Audax Validator "." Ignore_NEXT
+		has_minor_title = title_chief_bureaucrat   # ??? but seems special
+		
+		# Spouse, consort, sibling, or close relative
+		custom_tooltip = {
+			text = is_spouse_consort_or_of_your_dynasty
+			OR = {
+				is_married = FROM
+				is_consort = FROM
+				is_close_relative = FROM
+				sibling = FROM
+			}
+		}
+		
+		# Obviously shouldn't be allowed to send away your primary heir
+		is_primary_heir = yes
+		
+		# Can't send anyone who is in seclusion
+		trigger_if = {
+			limit = { has_dlc = "Reapers"}
+			in_seclusion = yes
+		}
+		
+		# Can't send anyone who is inaccessible
+		custom_tooltip = {
+			text = is_inaccessible_tt
+			OR = {
+				has_character_flag = flag_holding_great_tribal_festival
+				trait = in_hiding
+				trait = on_hajj
+				trait = on_pilgrimage
+				trait = on_indian_pilgrimage
+				trait = kow_tow_travels
+				trait = travelling
+				trait = troubled_pregnancy
+				trait = pregnancy_finishing
+				has_character_modifier = mother_minor_rest
+				has_character_modifier = in_meditation
+				has_character_modifier = doing_penance
+				has_character_modifier = out_traveling
+				is_inaccessible_trigger = yes # Mod-specific inaccessibility check
+			}
+		}
+		
+		# Guardians who have wards who are NOT their own children are ineligible
+		any_ward = { NOT = { is_child_of = PREV } }
+		
+		#Special circumstances
+		custom_tooltip = {
+			text = is_character_in_important_chain_of_events_tt
+			has_character_flag = eternal_life_mystic
+			has_character_flag = immortal_rival
+			has_character_flag = flag_special_event_character
+			has_character_flag = is_death
+			is_immune_to_pruning = yes
+			historical = yes
+		}
+		
+		# Glitterhoof will stay with you always
+		trigger_if = {
+			limit = { trait = horse }
+			trait = horse
+		}
+		
+	}
+}

@@ -1,0 +1,547 @@
+expd_pdxrptg_daedric_favour_this_character_is_not_dragonblood = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_not_dragonblood_tt
+		expd_pdxrptg_this_character_has_trait_dragonblood = no
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_not_already_favoured_by_prev_offmap_power = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_not_already_favoured_by_prev_offmap_power_tt
+		OR = {
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_azura = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_azura }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_boethiah = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_clavicus = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_hermaeus = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_hircine = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_hircine }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_jyggalag = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_malacath = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_malacath }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_mehrunes = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_mephala = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_mephala }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_meridia = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_meridia }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_molag = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_molag }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_namira = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_namira }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_nocturnal = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_peryite = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_peryite }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_sanguine = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_sanguine }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_sheogorath = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_vaermina = yes
+				NOT = { has_character_flag = expd_pdxrptg_daedric_favour_vaermina }
+			}
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offmap_power = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offmap_power_tt
+		OR = {
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_azura = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_azura }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_boethiah = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_boethiah }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_clavicus = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_clavicus }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_hermaeus = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_hermaeus }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_hircine = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_hircine }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_jyggalag = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_jyggalag }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_malacath = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_malacath }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_mehrunes = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_mehrunes }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_mephala = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_mephala }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_meridia = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_meridia }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_molag = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_molag }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_namira = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_namira }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_nocturnal = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_nocturnal }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_peryite = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_peryite }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_sanguine = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_sanguine }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_sheogorath = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_sheogorath }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_vaermina = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_vaermina }
+			}
+		}
+	}
+}
+
+
+
+
+
+##########################################################
+#                                                        #
+#           Detection of Daedric Offmap Powers           #
+#                                                        #
+##########################################################
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_a_daedric_lord = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_a_daedric_lord = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_azura = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_azura = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_boethiah = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_boethiah = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_clavicus = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_clavicus = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_hermaeus = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_hermaeus = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_hircine = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_hircine = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_jyggalag = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_jyggalag = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_malacath = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_malacath = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_mehrunes = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_mehrunes = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_mephala = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_mephala = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_meridia = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_meridia = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_molag = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_molag = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_namira = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_namira = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_nocturnal = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_nocturnal = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_peryite = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_peryite = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_sanguine = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_sanguine = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_sheogorath = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_sheogorath = yes }
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_vaermina = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_vaermina = yes }
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_a_daedric_lord = {
+	OR = {
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_azura      = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_boethiah   = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_clavicus   = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_hermaeus   = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_hircine    = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_jyggalag   = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_malacath   = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_mehrunes   = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_mephala    = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_meridia    = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_molag      = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_namira     = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_nocturnal  = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_peryite    = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_sanguine   = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_sheogorath = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_vaermina   = yes
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_azura = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_azura
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_boethiah = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_boethiah
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_clavicus = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_clavicus
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_hermaeus = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_hermaeus
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_hircine = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_hircine
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_jyggalag = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_jyggalag
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_malacath = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_malacath
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_mehrunes = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_mehrunes
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_mephala = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_mephala
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_meridia = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_meridia
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_molag = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_molag
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_namira = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_namira
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_nocturnal = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_nocturnal
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_peryite = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_peryite
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_sanguine = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_sanguine
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_sheogorath = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_sheogorath
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_vaermina = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_vaermina
+}
+
+
+
+
+
+##########################################################
+#                                                        #
+#         Characters Who Are Favoured By Daedra          #
+#                                                        #
+##########################################################
+
+# This allows characters to activate daedric artifacts without revealing their secret religion.
+# (Because there's a way for a character to permanently activate them even if they don't secretly follow the relevant religion.)
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_azura = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_azura_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_azura
+			has_character_flag = expd_pdxrptg_daedric_favour_azura
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_boethiah = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_boethiah_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_boethiah
+			has_character_flag = expd_pdxrptg_daedric_favour_boethiah
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_clavicus = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_clavicus_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_clavicus
+			has_character_flag = expd_pdxrptg_daedric_favour_clavicus
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_hermaeus = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_hermaeus_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_hermaeus
+			has_character_flag = expd_pdxrptg_daedric_favour_hermaeus
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_hircine = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_hircine_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_hircine
+			has_character_flag = expd_pdxrptg_daedric_favour_hircine
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_jyggalag = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_jyggalag_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_jyggalag
+			has_character_flag = expd_pdxrptg_daedric_favour_jyggalag
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_malacath = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_malacath_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_malacath
+			has_character_flag = expd_pdxrptg_daedric_favour_malacath
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_mehrunes = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_mehrunes_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_mehrunes
+			has_character_flag = expd_pdxrptg_daedric_favour_mehrunes
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_mephala = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_mephala_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_mephala
+			has_character_flag = expd_pdxrptg_daedric_favour_mephala
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_meridia = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_meridia_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_meridia
+			has_character_flag = expd_pdxrptg_daedric_favour_meridia
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_molag = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_molag_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_molag
+			has_character_flag = expd_pdxrptg_daedric_favour_molag
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_namira = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_namira_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_namira
+			has_character_flag = expd_pdxrptg_daedric_favour_namira
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_nocturnal = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_nocturnal_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_nocturnal
+			has_character_flag = expd_pdxrptg_daedric_favour_nocturnal
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_peryite = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_peryite_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_peryite
+			has_character_flag = expd_pdxrptg_daedric_favour_peryite
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_sanguine = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_sanguine_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_sanguine
+			has_character_flag = expd_pdxrptg_daedric_favour_sanguine
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_sheogorath = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_sheogorath_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_sheogorath
+			has_character_flag = expd_pdxrptg_daedric_favour_sheogorath
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_vaermina = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_vaermina_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = daedra_vaermina
+			has_character_flag = expd_pdxrptg_daedric_favour_vaermina
+		}
+	}
+}

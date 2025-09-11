@@ -1,0 +1,212 @@
+namespace = ExpdPdxrptgDaedricArtifactFlags
+
+# On startup, fix all artifacts in the world (by adding tags if necessary).
+# on_startup fires for EVERY character, so we include logic to ensure that most of the logic is only executed ONCE.
+# Further, characters might die on day 1 before unpausing, so we immediately break out into a province event.
+
+character_event = {
+	id = ExpdPdxrptgDaedricArtifactFlags.1
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		NOT = { has_global_flag = expd_pdxrptg_daedric_artifact_flag_fixing_in_progress }
+	}
+	immediate = {
+		set_global_flag = expd_pdxrptg_daedric_artifact_flag_fixing_in_progress
+		random_province = {
+			province_event = { id = ExpdPdxrptgDaedricArtifactFlags.2 }
+		}
+	}
+}
+
+province_event = {
+	id = ExpdPdxrptgDaedricArtifactFlags.2
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		
+		# Schedule the cleanup event
+		province_event = { id = ExpdPdxrptgDaedricArtifactFlags.3 days = 1 }
+		
+		# Fix all artifacts in the world
+		any_character = {
+			any_artifact = {
+				limit = { artifact_type = amulet_of_charitymad }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_sheogorath } }
+					set_artifact_flag = daedric_artifact_sheogorath
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = armor_saviors_hide }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_hircine } }
+					set_artifact_flag = daedric_artifact_hircine
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = armor_ebonymail }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_boethiah } }
+					set_artifact_flag = daedric_artifact_boethiah
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = book_oghma_infinium }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_hermaeus } }
+					set_artifact_flag = daedric_artifact_hermaeus
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = masque_of_clavicus_vile }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_clavicus } }
+					set_artifact_flag = daedric_artifact_clavicus
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = ring_of_hircine }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_hircine } }
+					set_artifact_flag = daedric_artifact_hircine
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = ring_of_khajiiti }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_mephala } }
+					set_artifact_flag = daedric_artifact_mephala
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = ring_of_namira }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_namira } }
+					set_artifact_flag = daedric_artifact_namira
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_mehrunes_razor }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_mehrunes } }
+					set_artifact_flag = daedric_artifact_mehrunes
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_mace_molag }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_molag } }
+					set_artifact_flag = daedric_artifact_molag
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_goldbrand }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_boethiah } }
+					set_artifact_flag = daedric_artifact_boethiah
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_ebonyblade }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_mephala } }
+					set_artifact_flag = daedric_artifact_mephala
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_dawnbreaker }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_meridia } }
+					set_artifact_flag = daedric_artifact_meridia
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_sword_jyggalag }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_jyggalag } }
+					set_artifact_flag = daedric_artifact_jyggalag
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_umbra }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_clavicus } }
+					set_artifact_flag = daedric_artifact_clavicus
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_forkh }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_sheogorath } }
+					set_artifact_flag = daedric_artifact_sheogorath
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_mace_scourge }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_malacath } }
+					set_artifact_flag = daedric_artifact_malacath
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_sanguinerose }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_sanguine } }
+					set_artifact_flag = daedric_artifact_sanguine
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_skull_of_corruption }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_vaermina } }
+					set_artifact_flag = daedric_artifact_vaermina
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_wabbajack }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_sheogorath } }
+					set_artifact_flag = daedric_artifact_sheogorath
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = weapon_volendrung }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_malacath } }
+					set_artifact_flag = daedric_artifact_malacath
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = shield_spellbreaker }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_peryite } }
+					set_artifact_flag = daedric_artifact_peryite
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = azuras_star }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_azura } }
+					set_artifact_flag = daedric_artifact_azura
+				}
+			}
+			any_artifact = {
+				limit = { artifact_type = skeleton_key }
+				if = {
+					limit = { NOT = { has_artifact_flag = daedric_artifact_nocturnal } }
+					set_artifact_flag = daedric_artifact_nocturnal
+				}
+			}
+		}
+	}
+}
+
+province_event = {
+	id = ExpdPdxrptgDaedricArtifactFlags.3
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		clr_global_flag = expd_pdxrptg_daedric_artifact_flag_fixing_in_progress
+	}
+}

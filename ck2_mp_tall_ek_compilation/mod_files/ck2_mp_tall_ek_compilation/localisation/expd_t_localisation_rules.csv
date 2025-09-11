@@ -1,0 +1,35 @@
+#CODE;ENGLISH;FRENCH;GERMAN;;SPANISH;;;;;;;;;x
+#
+# Intrigue menu decision
+expd_t_rules;(ED:T) Rules;;;;;;;;;;;;;x
+expd_t_rules_desc;Show the rules for the "Expanded Decisions: Tributaries" mod.\nIf you are an administrator (ie. in single-player, or the multiplayer host), you will also be able to change them.;;;;;;;;;;;;;x
+expd_t_rules_show_tt;Show the "(ED:T) Rules" window;;;;;;;;;;;;;x
+expd_t_rules_does_not_currently_have_rules_window_open_tt;Does NOT currently have the "(ED:T) Rules" window open;;;;;;;;;;;;;x
+expd_t_rules_has_had_rules_window_open_for_3_months_tt;Has had the "(ED:T) Rules" window open for 3 months (IE: It might be broken);;;;;;;;;;;;;x
+#
+# Show/change rules event
+EDTRules_1000_Title;(ED:T) Rules;;;;;;;;;;;;;x
+EDTRules_1000_Desc_Admin;This event shows you the current rules for tributaries in the "Expanded Decisions: Tributaries" mod.\n\nSince you are an administrator, you may also change those rules, by selecting the relevant option.;;;;;;;;;;;;;x
+EDTRules_1000_Desc_NotAdmin;This event shows you the current rules for tributaries in the "Expanded Decisions: Tributaries" mod.\n\nSince you are NOT an administrator, you may only view these rules (you may not change them).;;;;;;;;;;;;;x
+EDTRules_1000_EvtOpt_AIProtectors_Current_Forbidden;AI Protectors: Forbidden;;;;;;;;;;;;;x
+EDTRules_1000_EvtOpt_AIProtectors_Current_Forbidden_Details;AI Protectors:\nCurrent Rule: §RForbidden§! (AI may NOT Force/Offer Protectorate);;;;;;;;;;;;;x
+EDTRules_1000_EvtOpt_AIProtectors_Current_Allowed;AI Protectors: Allowed;;;;;;;;;;;;;x
+EDTRules_1000_EvtOpt_AIProtectors_Current_Allowed_Details;AI Protectors:\nCurrent Rule: §GAllowed§! (AI may Force/Offer Protectorate);;;;;;;;;;;;;x
+EDTRules_1000_EvtAct_AIProtectors_ChangeTo_Allowed;New Rule: §GAllowed§! (AI may Force/Offer Protectorate);;;;;;;;;;;;;x
+EDTRules_1000_EvtAct_AIProtectors_ChangeTo_Forbidden;New Rule: §RForbidden§! (AI may NOT Force/Offer Protectorate);;;;;;;;;;;;;x
+EDTRules_1000_EvtOpt_ChainableCBs_Current_Enabled;Chainable CBs: Enabled;;;;;;;;;;;;;x
+EDTRules_1000_EvtOpt_ChainableCBs_Current_Enabled_Details;Chainable CBs:\nCurrent Rule: §GEnabled§! (Tributary wars against your tributaries' neighbours are §Genabled§!);;;;;;;;;;;;;x
+EDTRules_1000_EvtOpt_ChainableCBs_Current_Disabled;Chainable CBs: Disabled;;;;;;;;;;;;;x
+EDTRules_1000_EvtOpt_ChainableCBs_Current_Disabled_Details;Chainable CBs:\nCurrent Rule: §RDisabled§! (Tributary wars against your tributaries' neighbours are §Rdisabled§!);;;;;;;;;;;;;x
+EDTRules_1000_EvtAct_ChainableCBs_ChangeTo_Enabled;New Rule: §GEnabled§! (Tributary wars against your tributaries' neighbours are §Genabled§!);;;;;;;;;;;;;x
+EDTRules_1000_EvtAct_ChainableCBs_ChangeTo_Disabled;New Rule: §RDisabled§! (Tributary wars against your tributaries' neighbours are §Rdisabled§!);;;;;;;;;;;;;x
+EDTRules_1000_EvtOpt_Exit;Exit;;;;;;;;;;;;;x
+EDTRules_1000_EvtAct_PlayersNotified;§MAll players will be notified of this change!§!;;;;;;;;;;;;;x
+#
+# Rule change notification events
+EDTRules_2000_Title;(ED:T) Rule Change;;;;;;;;;;;;;x
+EDTRules_2000_EvtOpt_Exit;Exit;;;;;;;;;;;;;x
+EDTRules_2001_Desc_AIProtectors_Forbidden;[From.GetTitledFirstName] (Username: [From.GetHumanName]) has changed the "AI Protectors" rule to "Forbidden" (AI may NOT Force/Offer Protectorate)!;;;;;;;;;;;;;x
+EDTRules_2001_Desc_AIProtectors_Allowed;[From.GetTitledFirstName] (Username: [From.GetHumanName]) has changed the "AI Protectors" rule to "Allowed" (AI may Force/Offer Protectorate)!;;;;;;;;;;;;;x
+EDTRules_2002_Desc_ChainableCBs_Disabled;[From.GetTitledFirstName] (Username: [From.GetHumanName]) has changed the "Chainable CBs" rule to "Disabled" (tributary wars against your tributaries' neighbours are disabled)!;;;;;;;;;;;;;x
+EDTRules_2002_Desc_ChainableCBs_Enabled;[From.GetTitledFirstName] (Username: [From.GetHumanName]) has changed the "Chainable CBs" rule to "Enabled" (tributary wars against your tributaries' neighbours are enabled)!;;;;;;;;;;;;;x

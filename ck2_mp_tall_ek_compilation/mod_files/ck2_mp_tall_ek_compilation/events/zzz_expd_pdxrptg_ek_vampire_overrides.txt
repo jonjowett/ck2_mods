@@ -1,0 +1,693 @@
+# Audax Validator EnableCommentMetadata
+
+# Ignore all Validator errors in this file, because the only change is the insertion of a character flag check in each trigger
+# Audax Validator "!" Ignore_NEXT
+
+namespace = vamp
+
+#Vampire ponders whether or not it's time to admit the truth
+character_event = {
+	id = vamp.250
+	desc = Vamp250
+	picture = GFX_evt_burning_house
+	
+	capable_only = yes
+	
+	trigger = {
+		trait = vampire
+		NOT = { has_character_flag = hunting_vampire }
+		NOT = { trait = known_vampire }
+		NOT = { trait = known_vampire_benevolent }
+		OR = {
+			NOT = { has_character_flag = expd_pdxrptg_vampire_never_reveal }
+			has_character_flag = expd_pdxrptg_vampire_temp_allow_revelations
+		}
+	}
+	
+	mean_time_to_happen = {
+		years = 50
+		
+		modifier = {
+			factor = 0.25
+			trait = honest
+		}
+		modifier = {
+			factor = 0.25
+			is_anti_necromancy_religion = yes
+			trait = zealous
+		}
+		modifier = {
+			factor = 0.5
+			trait = gregarious
+		}
+		modifier = {
+			factor = 0.8
+			trait = kind
+		}
+		modifier = {
+			factor = 0.8
+			trait = charitable
+		}
+		modifier = {
+			factor = 0.8
+			trait = just
+		}
+		modifier = {
+			factor = 0.8
+			trait = humble
+		}
+		modifier = {
+			factor = 0.8
+			trait = brave
+		}
+		modifier = {
+			factor = 1.2
+			trait = stubborn
+		}
+		modifier = {
+			factor = 4
+			trait = craven
+		}
+		modifier = {
+			factor = 4
+			trait = shy
+		}
+		modifier = {
+			factor = 4
+			trait = deceitful
+		}
+		modifier = {
+			factor = 3
+			has_character_modifier = pureblood_vampire
+		}
+	}
+	
+	option = {
+		name = Vamp250Hide
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 5
+				trait = shy
+			}
+			modifier = {
+				factor = 5
+				trait = craven
+			}
+			modifier = {
+				factor = 10
+				trait = deceitful
+			}
+		}
+	}
+	
+	option = {
+		name = Vamp250RevealBenevolent
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 5
+				trait = kind
+			}
+			modifier = {
+				factor = 5
+				trait = just
+			}
+			modifier = {
+				factor = 5
+				trait = temperate
+			}
+			modifier = {
+				factor = 5
+				trait = gregarious
+			}
+			modifier = {
+				factor = 10
+				trait = honest
+			}
+		}
+		add_trait = known_vampire_benevolent
+		if = {
+			limit = {
+				independent = no
+			}
+			liege = {
+				character_event = { id = vamp.255  }
+			}
+		}
+	}
+	
+	option = {
+		name = Vamp250RevealVampire
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 5
+				trait = cruel
+			}
+			modifier = {
+				factor = 5
+				trait = ruthless
+			}
+			modifier = {
+				factor = 5
+				trait = reckless
+			}
+			modifier = {
+				factor = 5
+				trait = greedy
+			}
+			modifier = {
+				factor = 5
+				trait = gluttonous
+			}
+			modifier = {
+				factor = 5
+				trait = gregarious
+			}
+			modifier = {
+				factor = 10
+				trait = honest
+			}
+		}
+		add_trait = known_vampire
+		if = {
+			limit = {
+				independent = no
+			}
+			liege = {
+				character_event = { id = vamp.260  }
+			}
+		}
+	}
+	
+	after = {
+		clr_character_flag = lycan_vamp_reveal_flag
+		clr_character_flag = expd_pdxrptg_vampire_temp_allow_revelations
+	}
+}
+
+#From Vampire to Friend: Confess my condition?
+character_event = {
+	id = vamp.350
+	desc = Vamp350
+	picture = GFX_evt_bad_news
+	
+	capable_only = yes
+	min_age = 16
+	friends = yes
+	prisoner = no
+	
+	trigger = {
+		trait = vampire
+		NOT = { has_character_flag = hunting_vampire }
+		NOT = { trait = known_vampire }
+		NOT = { trait = known_vampire_benevolent }
+		OR = {
+			NOT = { has_character_flag = expd_pdxrptg_vampire_never_reveal }
+			has_character_flag = expd_pdxrptg_vampire_temp_allow_revelations
+		}
+		is_indisposed = no
+		is_inaccessible_trigger = no
+		any_friend = {
+			NOT = { is_lover = ROOT }
+			expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 80
+		
+		modifier = {
+			factor = 0.5
+			trait = honest
+		}
+		modifier = {
+			factor = 0.5
+			is_anti_necromancy_religion = yes
+			trait = zealous
+		}
+		modifier = {
+			factor = 0.75
+			trait = gregarious
+		}
+		modifier = {
+			factor = 0.9
+			trait = kind
+		}
+		modifier = {
+			factor = 0.9
+			trait = charitable
+		}
+		modifier = {
+			factor = 0.9
+			trait = just
+		}
+		modifier = {
+			factor = 0.9
+			trait = humble
+		}
+		modifier = {
+			factor = 0.9
+			trait = brave
+		}
+		modifier = {
+			factor = 1.1
+			trait = stubborn
+		}
+		modifier = {
+			factor = 2
+			trait = craven
+		}
+		modifier = {
+			factor = 2
+			trait = shy
+		}
+		modifier = {
+			factor = 2
+			trait = deceitful
+		}
+		modifier = {
+			factor = 1.5
+			has_character_modifier = pureblood_vampire
+		}
+	}
+	
+	immediate = {
+		random_friend = {
+			limit = {
+				NOT = { is_lover = ROOT }
+				expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+			}
+			save_event_target_as = secret_vampire_friend
+		}
+	}
+	
+	option = { #Tell them
+		name = Vamp350Accept
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 5
+				trait = just
+			}
+			modifier = {
+				factor = 5
+				trait = gregarious
+			}
+			modifier = {
+				factor = 5
+				trait = trusting
+			}
+			modifier = {
+				factor = 10
+				trait = honest
+			}
+			modifier = {
+				factor = 2.5
+				event_target:secret_vampire_friend = {
+					trait = kind
+				}
+			}
+			modifier = {
+				factor = 2.5
+				event_target:secret_vampire_friend = {
+					trait = trusting
+				}
+			}
+		}
+		event_target:secret_vampire_friend = {
+			character_event = { id = vamp.351 }
+		}
+	}
+	
+	option = { #Or don't
+		name = Vamp350Decline
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 5
+				trait = shy
+			}
+			modifier = {
+				factor = 5
+				trait = craven
+			}
+			modifier = {
+				factor = 10
+				trait = deceitful
+			}
+			modifier = {
+				factor = 0.01
+				event_target:secret_vampire_friend = {
+					is_anti_necromancy_religion = yes
+					trait = zealous
+				}
+			}
+		}
+	}
+	
+	after = {
+		clr_character_flag = expd_pdxrptg_vampire_temp_allow_revelations
+	}
+	
+}
+
+#From Vampire to Spouse: Confess my condition?
+character_event = {
+	id = vamp.400
+	desc = Vamp400
+	picture = GFX_evt_bad_news
+	
+	capable_only = yes
+	min_age = 16
+	friends = yes
+	prisoner = no
+	
+	trigger = {
+		trait = vampire
+		NOT = { has_character_flag = hunting_vampire }
+		NOT = { trait = known_vampire }
+		NOT = { trait = known_vampire_benevolent }
+		OR = {
+			NOT = { has_character_flag = expd_pdxrptg_vampire_never_reveal }
+			has_character_flag = expd_pdxrptg_vampire_temp_allow_revelations
+		}
+		is_indisposed = no
+		is_inaccessible_trigger = no
+		any_spouse = {
+			NOR = {
+				is_friend = ROOT
+				is_lover = ROOT 
+				is_rival = ROOT
+			}
+			expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 80
+		
+		modifier = {
+			factor = 0.5
+			trait = honest
+		}
+		modifier = {
+			factor = 0.5
+			is_anti_necromancy_religion = yes
+			trait = zealous
+		}
+		modifier = {
+			factor = 0.75
+			trait = gregarious
+		}
+		modifier = {
+			factor = 0.9
+			trait = kind
+		}
+		modifier = {
+			factor = 0.9
+			trait = charitable
+		}
+		modifier = {
+			factor = 0.9
+			trait = just
+		}
+		modifier = {
+			factor = 0.9
+			trait = humble
+		}
+		modifier = {
+			factor = 0.9
+			trait = brave
+		}
+		modifier = {
+			factor = 1.1
+			trait = stubborn
+		}
+		modifier = {
+			factor = 2
+			trait = craven
+		}
+		modifier = {
+			factor = 2
+			trait = shy
+		}
+		modifier = {
+			factor = 2
+			trait = deceitful
+		}
+		modifier = {
+			factor = 1.5
+			has_character_modifier = pureblood_vampire
+		}
+	}
+	
+	immediate = {
+		random_spouse = {
+			limit = {
+				NOR = {
+					is_friend = ROOT
+					is_lover = ROOT 
+					is_rival = ROOT
+				}
+				expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+			}
+			save_event_target_as = secret_vampire_spouse
+		}
+	}
+	
+	option = { #Tell them
+		name = Vamp400Accept
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 5
+				trait = just
+			}
+			modifier = {
+				factor = 5
+				trait = gregarious
+			}
+			modifier = {
+				factor = 5
+				trait = trusting
+			}
+			modifier = {
+				factor = 10
+				trait = honest
+			}
+			modifier = {
+				factor = 2.5
+				event_target:secret_vampire_spouse = {
+					trait = kind
+				}
+			}
+			modifier = {
+				factor = 2.5
+				event_target:secret_vampire_spouse = {
+					trait = trusting
+				}
+			}
+		}
+		event_target:secret_vampire_spouse = {
+			character_event = { id = vamp.401 }
+		}
+	}
+	
+	option = { #Or don't
+		name = Vamp400Decline
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 5
+				trait = shy
+			}
+			modifier = {
+				factor = 5
+				trait = craven
+			}
+			modifier = {
+				factor = 10
+				trait = deceitful
+			}
+			modifier = {
+				factor = 0.01
+				event_target:secret_vampire_spouse = {
+					is_anti_necromancy_religion = yes
+					trait = zealous
+				}
+			}
+		}
+	}
+	
+	after = {
+		clr_character_flag = expd_pdxrptg_vampire_temp_allow_revelations
+	}
+	
+}
+
+#From Vampire to Lover: Confess my condition?
+character_event = {
+	id = vamp.450
+	desc = Vamp450
+	picture = GFX_evt_bad_news
+	
+	capable_only = yes
+	min_age = 16
+	prisoner = no
+	
+	trigger = {
+		trait = vampire
+		NOT = { has_character_flag = hunting_vampire }
+		NOT = { trait = known_vampire }
+		NOT = { trait = known_vampire_benevolent }
+		OR = {
+			NOT = { has_character_flag = expd_pdxrptg_vampire_never_reveal }
+			has_character_flag = expd_pdxrptg_vampire_temp_allow_revelations
+		}
+		is_indisposed = no
+		is_inaccessible_trigger = no
+		any_lover = {
+			NOT = { is_rival = ROOT }
+			expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 80
+		
+		modifier = {
+			factor = 0.5
+			trait = honest
+		}
+		modifier = {
+			factor = 0.5
+			is_anti_necromancy_religion = yes
+			trait = zealous
+		}
+		modifier = {
+			factor = 0.75
+			trait = gregarious
+		}
+		modifier = {
+			factor = 0.9
+			trait = kind
+		}
+		modifier = {
+			factor = 0.9
+			trait = charitable
+		}
+		modifier = {
+			factor = 0.9
+			trait = just
+		}
+		modifier = {
+			factor = 0.9
+			trait = humble
+		}
+		modifier = {
+			factor = 0.9
+			trait = brave
+		}
+		modifier = {
+			factor = 1.1
+			trait = stubborn
+		}
+		modifier = {
+			factor = 2
+			trait = craven
+		}
+		modifier = {
+			factor = 2
+			trait = shy
+		}
+		modifier = {
+			factor = 2
+			trait = deceitful
+		}
+		modifier = {
+			factor = 1.5
+			has_character_modifier = pureblood_vampire
+		}
+	}
+	
+	immediate = {
+		random_lover = {
+			limit = {
+				NOT = { is_rival = ROOT }
+				expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = yes
+			}
+			save_event_target_as = secret_vampire_lover
+		}
+	}
+	
+	option = { #Tell them
+		name = Vamp450Accept
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 5
+				trait = just
+			}
+			modifier = {
+				factor = 5
+				trait = gregarious
+			}
+			modifier = {
+				factor = 5
+				trait = trusting
+			}
+			modifier = {
+				factor = 10
+				trait = honest
+			}
+			modifier = {
+				factor = 2.5
+				event_target:secret_vampire_lover = {
+					trait = kind
+				}
+			}
+			modifier = {
+				factor = 2.5
+				event_target:secret_vampire_lover = {
+					trait = trusting
+				}
+			}
+		}
+		event_target:secret_vampire_lover = {
+			character_event = { id = vamp.451 }
+		}
+	}
+	
+	option = { #Or don't
+		name = Vamp450Decline
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 5
+				trait = shy
+			}
+			modifier = {
+				factor = 5
+				trait = craven
+			}
+			modifier = {
+				factor = 10
+				trait = deceitful
+			}
+			modifier = {
+				factor = 0.01
+				event_target:secret_vampire_lover = {
+					is_anti_necromancy_religion = yes
+					trait = zealous
+				}
+			}
+		}
+	}
+	
+	after = {
+		clr_character_flag = expd_pdxrptg_vampire_temp_allow_revelations
+	}
+	
+}

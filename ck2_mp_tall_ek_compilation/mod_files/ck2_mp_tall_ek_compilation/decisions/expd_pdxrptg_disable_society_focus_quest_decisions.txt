@@ -1,0 +1,33 @@
+society_decisions = {
+	expd_pdxrptg_disable_focus_quests_decision = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			has_dlc = "Way of Life"
+			NOT = { has_character_flag = expd_pdxrptg_guild_focus_quests_disabled }
+		}
+		allow = {
+			NOT = { has_character_flag = expd_pdxrptg_guild_focus_quests_disabled }
+		}
+		effect = {
+			set_character_flag = expd_pdxrptg_guild_focus_quests_disabled
+		}
+	
+	}
+	expd_pdxrptg_enable_focus_quests_decision = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			has_dlc = "Way of Life"
+			has_character_flag = expd_pdxrptg_guild_focus_quests_disabled
+		}
+		allow = {
+			has_character_flag = expd_pdxrptg_guild_focus_quests_disabled
+		}
+		effect = {
+			clr_character_flag = expd_pdxrptg_guild_focus_quests_disabled
+		}
+	}
+}

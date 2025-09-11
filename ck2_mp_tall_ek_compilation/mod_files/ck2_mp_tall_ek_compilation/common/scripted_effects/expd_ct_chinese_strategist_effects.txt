@@ -1,0 +1,138 @@
+# Performs Chinese commander training in much the same way as the base game
+#  --- The main difference is that the randomisation is weighted 
+#
+# Broken out into a scripted_effect so the same exact process can be used from multiple sources
+#
+# NB:
+#  --- The character being taught is expected to be stored as commander_student
+#  --- The character being taught is expected to be valid ( expd_ct_this_character_is_a_valid_target_for_chinese_training = yes )
+#  --- The Chinese strategist doing the teaching is expected to be stored as commander_teacher
+
+expd_ct_this_character_receives_chinese_training_random = {
+	
+	random_list = {
+		
+		
+		
+		# master_of_flame (Way of the Dragon)
+		25 = {
+			trigger = { NOT = { trait = master_of_flame } }
+			modifier = {
+				factor = 2
+				event_target:commander_teacher = { trait = master_of_flame }
+			}
+			modifier = { # More likely to add a synergistic trait (damage / morale damage)
+				factor = 4
+				OR = {
+					trait = aggressive_leader
+					trait = inspiring_leader
+					trait = war_elephant_leader
+					trait = slavic_leader
+					trait = hellenic_leader
+				}
+			}
+			custom_tooltip = {
+				text = expd_ct_this_character_gains_trait_master_of_flame_tt
+				set_character_flag = give_master_of_flame
+			}
+		}
+		
+		
+		
+		# logistics_expert (Way of the Dog)
+		25 = {
+			trigger = {
+				NOT = { trait = logistics_expert }
+				NOR = { # Cannot add this trait if the commander already has a completely counteracting trait
+					trait = flanker
+					trait = narrow_flank_leader
+				}
+			}
+			modifier = {
+				factor = 2
+				event_target:commander_teacher = { trait = logistics_expert }
+			}
+			modifier = { # More likely to add a synergistic trait (leading the center)
+				factor = 4
+				OR = {
+					trait = experimenter   # Direct leader, ie. leading the center
+					trait = finnish_leader # Winter supply is only useful if leading the center
+					trait = winter_soldier # Winter supply is only useful if leading the center
+				}
+			}
+			modifier = { # More likely to add a trait which synergises with another Chinese trait
+				factor = 2
+				trait = levy_coordinator
+			}
+			custom_tooltip = {
+				text = expd_ct_this_character_gains_trait_logistics_expert_tt
+				set_character_flag = give_logistics_expert
+			}
+		}
+		
+		
+		
+		# levy_coordinator (Way of the Tiger)
+		25 = {
+			trigger = { NOT = { trait = levy_coordinator } }
+			modifier = {
+				factor = 2
+				event_target:commander_teacher = { trait = levy_coordinator }
+			}
+			modifier = { # More likely to add a synergistic trait (movement speed / flanking)
+				factor = 4
+				OR = {
+					trait = organizer
+					trait = flanker
+					trait = narrow_flank_leader
+					trait = zun_leader
+					trait = bon_leader
+					trait = hellenic_leader
+				}
+			}
+			modifier = { # More likely to add a trait which synergises with another Chinese trait
+				factor = 2
+				OR = {
+					trait = logistics_expert
+					trait = sapper
+				}
+			}
+			custom_tooltip = {
+				text = expd_ct_this_character_gains_trait_levy_coordinator_tt
+				set_character_flag = give_levy_coordinator
+			}
+		}
+		
+		
+		# sapper (Way of the Leopard)
+		25 = {
+			trigger = { NOT = { trait = sapper } }
+			modifier = {
+				factor = 2
+				event_target:commander_teacher = { trait = sapper }
+			}
+			modifier = { # More likely to add a synergistic trait (hills / forest / siege)
+				factor = 4
+				OR = {
+					trait = siege_leader
+					trait = rough_terrain_leader
+					trait = baltic_leader
+					trait = zun_leader
+					trait = bon_leader
+				}
+			}
+			modifier = { # More likely to add a trait which synergises with another Chinese trait
+				factor = 2
+				trait = levy_coordinator
+			}
+			custom_tooltip = {
+				text = expd_ct_this_character_gains_trait_sapper_tt
+				set_character_flag = give_sapper
+			}
+		}
+	}
+	
+	# Vanilla event which grants the trait to the specified character
+	hidden_tooltip = { character_event = { id = JD.20042 } }
+	
+}

@@ -1,0 +1,29 @@
+#CODE;ENGLISH;FRENCH;GERMAN;;SPANISH;;;;;;;;;x
+#
+# Intrigue menu decisions
+expd_t_debug_mode_enable;(ED:T) Enable Debug Mode;;;;;;;;;;;;;x
+expd_t_debug_mode_enable_desc;This mod has extensive debugging functionality, which should help you resolve any issues.;;;;;;;;;;;;;x
+expd_t_debug_mode_enable_tt;Debug mode for the "§YExpanded Decisions: Tributaries§!" mod is §Genabled§!.\nAdditional debug decisions are available via targeted and self-targeted decisions.\nOther notable effects: AI will §Yalways accept offers from administrators§! (single-player humans and MP hosts).;;;;;;;;;;;;;x
+expd_t_disable_debug_mode;(ED:T) Disable Debug Mode;;;;;;;;;;;;;x
+expd_t_disable_debug_mode_desc;When you're finished debugging, you should probably disable debug mode.;;;;;;;;;;;;;x
+expd_t_debug_mode_disable_tt;Debug mode for the "§YExpanded Decisions: Tributaries§!" mod is §Rdisabled§!.\nAI behaviour will §Yreturn to normal§!.;;;;;;;;;;;;;x
+#
+# Self-targeted decisions
+expd_t_debug_destroy_all_ai_protectorates;§R(ED:T)§! DEBUG: Destroy AI Protectorates;;;;;;;;;;;;;x
+expd_t_debug_destroy_all_ai_protectorates_desc;Destroy all Protectorates where an AI character is the suzerain.;;;;;;;;;;;;;x
+expd_t_debug_list_all_protectorates;§R(ED:T)§! DEBUG: List all Protectorates;;;;;;;;;;;;;x
+expd_t_debug_list_all_protectorates_desc;The third-party filter contains a list of all Protectorates in the world.;;;;;;;;;;;;;x
+expd_t_debug_list_all_protectors;§R(ED:T)§! DEBUG: List all Protectors;;;;;;;;;;;;;x
+expd_t_debug_list_all_protectors_desc;The third-party filter contains a list of all suzerains of Protectorates in the world.;;;;;;;;;;;;;x
+#
+# Targeted decisions
+expd_t_debug_cancel_all_of_this_suzerains_protectorates;§R(ED:T)§! DEBUG: Cancel All Protectorates;;;;;;;;;;;;;x
+expd_t_debug_cancel_all_of_this_suzerains_protectorates_desc;Destroy all protectorates where [Root.GetTitledFirstName] is the suzerain.;;;;;;;;;;;;;x
+expd_t_debug_cancel_this_protectorate;§R(ED:T)§! DEBUG: Cancel This Protectorate;;;;;;;;;;;;;x
+expd_t_debug_cancel_this_protectorate_desc;Destroy the Protectorate relationship between [Root.GetTitledFirstName] and [Root.GetHerHis] suzerain.;;;;;;;;;;;;;x
+expd_t_debug_force_this_character_to_be_protectorate_of_a_player;§R(ED:T)§! DEBUG: Force Player Protectorate;;;;;;;;;;;;;x
+expd_t_debug_force_this_character_to_be_protectorate_of_a_player_desc;[Root.GetTitledFirstName] becomes a Protectorate of the selected human player.;;;;;;;;;;;;;x
+#
+# Reasons
+EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED;!!! DEBUG MODE IS ENABLED !!!;;;;;;;;;;;;;x
+EXPD_T_REASON_DEBUG_MODE_ENABLED;!!! DEBUG MODE IS ENABLED !!!;;;;;;;;;;;;;x

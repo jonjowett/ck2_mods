@@ -1,0 +1,72 @@
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_max_info_learning
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_max_info_learning_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_max_info_julianos
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_julianos = yes }
+		localisation_key = expd_pdxrptg_magicka_max_info_julianos_y_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_max_info_julianos_n_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_max_info_potion
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { has_character_modifier = modifier_potion_of_fortify_magicka }
+		localisation_key = expd_pdxrptg_magicka_max_info_potion_y_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_max_info_potion_n_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_max_info_forkh
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_artifact_equipped_weapon_forkh = yes }
+		localisation_key = expd_pdxrptg_magicka_max_info_forkh_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_max_info_total
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_max_info_total_tt
+	}
+	
+}

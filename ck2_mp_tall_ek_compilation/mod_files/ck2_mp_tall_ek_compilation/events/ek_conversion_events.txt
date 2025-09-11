@@ -1,0 +1,94 @@
+# Audax Validator EnableCommentMetadata
+
+# This file is fully overridden, because almost everything is changed (even if only slightly)
+
+##### Conversion events #####
+
+namespace = conversion
+
+letter_event = {
+	id = conversion.1
+	# Audax Validator "." Ignore_NEXT
+	desc = Conversion1
+	
+	is_triggered_only = yes
+
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = Conversion1Accept
+		ai_chance = {
+			factor = 50
+			expd_pdxrptg_conversion_ai_acceptance_modifiers = yes
+		}
+		add_character_modifier = {
+			# Audax Validator "." Ignore_NEXT
+			name = request_conversion_timer
+			months = 60
+		}
+		liege = {
+			reverse_religion = ROOT
+			letter_event = { id = conversion.2 }
+		}
+	}
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = Conversion1Decline
+		ai_chance = {
+			factor = 50
+			expd_pdxrptg_conversion_ai_refusal_modifiers = yes
+		}
+		add_character_modifier = {
+			# Audax Validator "." Ignore_NEXT
+			name = request_conversion_timer
+			months = 60
+		}
+		liege = {
+			letter_event = { id = conversion.3 }
+		}
+	}
+	after = {
+		# Clean up the blocking flag on this character, in case something goes wrong
+		character_event = { id = conversion.999 days = 30 }
+	}
+}
+
+letter_event = {
+	id = conversion.2
+	# Audax Validator "." Ignore_NEXT
+	desc = Conversion2
+	
+	is_triggered_only = yes
+
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = Conversion2Acknowledge
+		FROM = {
+			clr_character_flag = conversion_requested
+		}
+	}
+}
+
+letter_event = {
+	id = conversion.3
+	# Audax Validator "." Ignore_NEXT
+	desc = Conversion3
+	
+	is_triggered_only = yes
+
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = Conversion3Acknowledge
+		FROM = {
+			clr_character_flag = conversion_requested
+		}
+	}
+}
+
+character_event = {
+	id = conversion.999
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		clr_character_flag = conversion_requested
+	}
+}

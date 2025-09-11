@@ -1,0 +1,1965 @@
+# Audax Validator EnableCommentMetadata
+# Unfortunately, many MANY ignores are required to get this file a clean bill of health from the Validator...
+
+
+offmap_decisions = {
+	
+	
+	
+	
+	
+	#Azura
+	oblivion_azuras_star = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_azura = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_azura
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_azura = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_azura_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = azuras_star
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = azuras_star
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Boethiah
+	oblivion_armor_ebony_mail = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_boethiah = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_boethiah
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_boethiah = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_boethiah_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = armor_ebonymail
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = armor_ebonymail
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	oblivion_weapon_goldbrand = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_boethiah = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_boethiah
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_boethiah = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_boethiah_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_goldbrand
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_goldbrand
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Clavicus Vile
+	oblivion_masque_of_clavicus_vile = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_clavicus = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_clavicus
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_clavicus = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_clavicus_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = masque_of_clavicus_vile
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = masque_of_clavicus_vile
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	oblivion_weapon_umbra = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_clavicus = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_clavicus
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_clavicus = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_clavicus_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_umbra
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_umbra
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Hermaeus Mora
+	oblivion_book_oghma_infinium = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_hermaeus = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_hermaeus
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_hermaeus = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_hermaeus_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = book_oghma_infinium
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = book_oghma_infinium
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Hircine
+	oblivion_armor_saviors_hide = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_hircine = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_hircine
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_hircine = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_hermaeus_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = armor_saviors_hide
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = armor_saviors_hide
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	oblivion_ring_of_hircine = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_hircine = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_hircine
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_hircine = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_hircine_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = ring_of_hircine
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = ring_of_hircine
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Malacath
+	oblivion_weapon_mace_scourge = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_malacath = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_malacath
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_malacath = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_malacath_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_mace_scourge
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_mace_scourge
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	oblivion_weapon_volendrung = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_malacath = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_malacath
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_malacath_volendrung = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_malacath_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_volendrung
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_volendrung
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Mehrunes Dagon
+	oblivion_weapon_mehrunes_razor = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_mehrunes = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_mehrunes
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_mehrunes = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_mehrunes_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_mehrunes_razor
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_mehrunes_razor
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Mephala
+	oblivion_ring_khajiiti = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_mephala = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_mephala
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_mephala = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_mephala_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = ring_of_khajiiti
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = ring_of_khajiiti
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	oblivion_weapon_ebony_blade = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_mephala = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_mephala
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_mephala = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_mephala_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_ebonyblade
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_ebonyblade
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Meridia
+	oblivion_weapon_dawnbreaker = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_meridia = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_meridia
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_meridia = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_meridia_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_dawnbreaker
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_dawnbreaker
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Molag Bal
+	oblivion_weapon_mace_molag = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_molag = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_molag
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_molag = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_molag_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_mace_molag
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_mace_molag
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Namira
+	oblivion_ring_namira = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_namira = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_namira
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_namira = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_namira_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = ring_of_namira
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = ring_of_namira
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Nocturnal
+	oblivion_skeleton_key = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_nocturnal = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_nocturnal
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_nocturnal = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_nocturnal_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = skeleton_key
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = skeleton_key
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Peryite
+	oblivion_shield_spellbreaker = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_peryite = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_peryite
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_peryite = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_peryite_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = shield_spellbreaker
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = shield_spellbreaker
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Sanguine
+	oblivion_weapon_sanguinerose = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_sanguine = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_sanguine
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_sanguine = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_sanguine_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_sanguinerose
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_sanguinerose
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Sheogorath
+	oblivion_amulet_mad_charity = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_sheogorath = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_sheogorath
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_sheogorath = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_sheogorath_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = amulet_of_charitymad
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = amulet_of_charitymad
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	oblivion_weapon_fork_h = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_sheogorath = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_sheogorath
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_sheogorath = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_sheogorath_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_forkh
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_forkh
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	oblivion_weapon_wabbajack = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_sheogorath = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_sheogorath
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_sheogorath_wabbajack = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_sheogorath_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_wabbajack
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_wabbajack
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	#Vaermina
+	oblivion_weapon_skull_of_corruption = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 12
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_vaermina = yes
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_vaermina
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				expd_pdxrptg_can_activate_daedric_artifact_vaermina = yes
+				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_vaermina_boon_decisions_enabled_trigger = yes
+			ROOT = {
+				expd_pdxrptg_this_daedric_lord_is_not_in_cataclysm = yes
+				offmap_ruler = {
+					# Audax Validator "." Ignore_NEXT
+					has_artifact = weapon_skull_of_corruption
+				}
+			}
+		}
+		
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+			}
+			hidden_effect = {
+				ROOT = {
+					offmap_ruler = {
+						random_artifact = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								artifact_type = weapon_skull_of_corruption
+							}
+							transfer_artifact = {
+								from = PREV
+								to = FROM
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0.05 # Slow down
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes }
+				factor = 2
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_really_wants_a_daedric_artifact = yes }
+				factor = 5
+			}
+			modifier = {
+				FROM = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+				factor = 1000
+			}
+		}
+	}
+}

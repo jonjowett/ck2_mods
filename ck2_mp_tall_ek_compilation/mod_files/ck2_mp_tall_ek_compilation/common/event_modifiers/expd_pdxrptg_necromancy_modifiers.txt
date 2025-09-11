@@ -1,0 +1,21 @@
+# On renouncing necromancy, you keep the learning bonus, but you also keep the general opinion and fertility maluses
+# (The small changes in diplomacy and intrigue are deliberately not included in any of these modifiers.)
+expd_pdxrptg_renounced_necromancy_permanent = {
+	icon = 42 # Red skull
+	general_opinion = -10
+}
+expd_pdxrptg_renounced_necromancy_semi_permanent = {
+	icon = 41 # Green skull
+	learning = 3
+	fertility = -0.1
+}
+
+# Stacking modifiers which are set up to slowly run off over time
+expd_pdxrptg_renounced_necromancy_temporary = {
+	icon = 42 # Red skull
+	general_opinion = -5
+}
+expd_pdxrptg_restarted_necromancy_temporary = {
+	icon = 42 # Red skull
+	general_opinion = -5
+}

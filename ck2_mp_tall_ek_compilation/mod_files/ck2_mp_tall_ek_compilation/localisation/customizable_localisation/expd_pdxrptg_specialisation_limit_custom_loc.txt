@@ -1,0 +1,76 @@
+defined_text = {
+	
+	name = expd_pdxrptg_specialisation_limit_info_quantity
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_can_have_extra_specialisations_3 = yes }
+		localisation_key = expd_pdxrptg_this_character_can_have_5_specialisms_tt
+	}
+	text = {
+		trigger = { expd_pdxrptg_this_character_can_have_extra_specialisations_2 = yes }
+		localisation_key = expd_pdxrptg_this_character_can_have_4_specialisms_tt
+	}
+	text = {
+		trigger = { expd_pdxrptg_this_character_can_have_extra_specialisations_1 = yes }
+		localisation_key = expd_pdxrptg_this_character_can_have_3_specialisms_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_this_character_can_have_2_specialisms_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_specialisation_limit_info_max_education
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { maxed_education = yes }
+		localisation_key = expd_pdxrptg_plus_one_specialism_from_max_education_y_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_plus_one_specialism_from_max_education_n_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_specialisation_limit_info_grandmaster
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_ever_been_grandmaster = yes }
+		localisation_key = expd_pdxrptg_plus_one_specialism_from_grandmaster_y_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_plus_one_specialism_from_grandmaster_n_tt
+	}
+	
+}
+
+
+defined_text = {
+	
+	name = expd_pdxrptg_specialisation_limit_info_dragonborn
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+		localisation_key = expd_pdxrptg_plus_one_specialism_from_dragonborn_y_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_plus_one_specialism_from_dragonborn_n_tt
+	}
+	
+}

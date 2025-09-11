@@ -1,0 +1,375 @@
+
+
+
+
+
+
+
+
+
+
+
+#############################################
+#                                           #
+#             CONTROLLING LOGIC             #
+#                                           #
+#############################################
+
+
+
+expd_artifact_grouping_add_grouping_flags_to_this_characters_artifacts = {
+	
+	# The performance of this script is expected to be high O(n^2) - ie. potentially quite expensive.
+	#     Therefore, it's probably best to only use this for players, and only at infrequent intervals.
+	
+	# The reason for this seemingly-suboptimal algorithm is that is_artifact_same_type_as ONLY works in triggers
+	#     - it DOES NOT WORK AT ALL in limit={} clauses of effect scopes!
+	# Therefore, the logic below explicitly performs pairwise comparisons between every as-yet-ungrouped artifact.
+	
+	# Setup
+	expd_artifact_grouping_clear_all_grouping_flags_from_this_characters_artifacts = yes
+	expd_artifact_grouping_clear_this_characters_variables = yes
+	
+	# Loop until all artifacts owned by this character have at least one grouping flag
+	# Or until the counter reaches 999 (which shouldn't happen in any realistic scenario, as this would indicate >1000 distinct artifact types on a single character)
+	while = {
+		limit = {
+			any_artifact = { expd_artifact_grouping_this_artifact_has_no_grouping_flag = yes }
+			OR = {
+				# Any counter value < 900
+				AND = {
+					check_variable = { which = expd_artifact_grouping_counter_ones value <= 9 }
+					check_variable = { which = expd_artifact_grouping_counter_tens value <= 9 }
+					check_variable = { which = expd_artifact_grouping_counter_hdds value < 9 }
+				}
+				# Any counter value between 900 and 998 inclusive
+				AND = {
+					check_variable = { which = expd_artifact_grouping_counter_hdds value >= 9 }
+					OR = {
+						check_variable = { which = expd_artifact_grouping_counter_ones value < 9 }
+						check_variable = { which = expd_artifact_grouping_counter_tens value < 9 }
+					}
+				}
+			}
+		}
+		
+		# Increment the loop counters
+		if = {
+			limit = { check_variable = { which = expd_artifact_grouping_counter_ones value == 9 } }
+			if = {
+				limit = { check_variable = { which = expd_artifact_grouping_counter_tens value == 9 } }
+				set_variable    = { which = expd_artifact_grouping_counter_ones value = 0 }
+				set_variable    = { which = expd_artifact_grouping_counter_tens value = 0 }
+				change_variable = { which = expd_artifact_grouping_counter_hdds value = 1 }
+			}
+			else = {
+				set_variable    = { which = expd_artifact_grouping_counter_ones value = 0 }
+				change_variable = { which = expd_artifact_grouping_counter_tens value = 1 }
+			}
+		}
+		else = {
+				change_variable = { which = expd_artifact_grouping_counter_ones value = 1 }
+		}
+		
+		# Ensure there are no artifacts with comparison flags
+		expd_artifact_grouping_clear_all_comparison_flags_from_this_characters_artifacts = yes
+		
+		# Pick a random artifact that has no sorting flag
+		random_artifact = {
+			limit = { expd_artifact_grouping_this_artifact_has_no_grouping_flag = yes }
+			
+			# Mark it as the "first" artifact for pairwise comparisons
+			set_artifact_flag = expd_artifact_grouping_comparison_first
+			
+			# Add it to a group, whose index number is derived from the loop counter
+			expd_artifact_grouping_set_this_artifacts_grouping_flag_based_on_its_owners_counter = yes
+			
+			# For every ungrouped & un-"checked" artifact:
+			#  --- Mark the artifact as the "second"
+			#       --- You now have exactly one "first" and exactly one "second" artifact
+			#  --- If the "first" and "second" are of the same type, add the "second" to the same group as the "first"
+			#  --- ALWAYS mark the artifact as "checked"
+			#  --- ALWAYS remove the "second" mark
+			while = {
+				limit = {
+					owner = {
+						any_artifact = {
+							expd_artifact_grouping_this_artifact_has_no_grouping_flag = yes
+							NOT = { has_artifact_flag = expd_artifact_grouping_comparison_first }
+							NOT = { has_artifact_flag = expd_artifact_grouping_comparison_checked }
+						}
+					}
+				}
+				owner = {
+					random_artifact = {
+						limit = {
+							expd_artifact_grouping_this_artifact_has_no_grouping_flag = yes
+							NOT = { has_artifact_flag = expd_artifact_grouping_comparison_first }
+							NOT = { has_artifact_flag = expd_artifact_grouping_comparison_checked }
+						}
+						set_artifact_flag = expd_artifact_grouping_comparison_second
+					}
+				}
+				if = {
+					limit = {
+						owner = {
+							any_artifact = {
+								has_artifact_flag = expd_artifact_grouping_comparison_first
+								owner = {
+									any_artifact = {
+										has_artifact_flag = expd_artifact_grouping_comparison_second
+										is_artifact_same_type_as = PREVPREV
+									}
+								}
+							}
+						}
+					}
+					owner = {
+						any_artifact = {
+							limit = { has_artifact_flag = expd_artifact_grouping_comparison_second }
+							expd_artifact_grouping_set_this_artifacts_grouping_flag_based_on_its_owners_counter = yes
+						}
+					}
+				}
+				owner = {
+					any_artifact = {
+						limit = { has_artifact_flag = expd_artifact_grouping_comparison_second }
+						set_artifact_flag = expd_artifact_grouping_comparison_checked
+						clr_artifact_flag = expd_artifact_grouping_comparison_second
+					}
+				}
+			}
+			
+		}
+		
+	}
+	
+	# Cleanup
+	expd_artifact_grouping_clear_this_characters_variables = yes
+	expd_artifact_grouping_clear_all_comparison_flags_from_this_characters_artifacts = yes
+	
+}
+
+
+
+
+
+
+
+
+
+
+#############################################
+#                                           #
+#            APPLY GROUPING FLAG            #
+#                                           #
+#############################################
+
+
+
+expd_artifact_grouping_set_this_artifacts_grouping_flag_based_on_its_owners_counter = {
+	
+	
+	
+	# Ones
+	if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_ones value == 0 } } }
+		# Zero => no flag
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_ones value == 1 } } }
+		set_artifact_flag = expd_artifact_grouping_1
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_ones value == 2 } } }
+		set_artifact_flag = expd_artifact_grouping_2
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_ones value == 3 } } }
+		set_artifact_flag = expd_artifact_grouping_3
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_ones value == 4 } } }
+		set_artifact_flag = expd_artifact_grouping_4
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_ones value == 5 } } }
+		set_artifact_flag = expd_artifact_grouping_5
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_ones value == 6 } } }
+		set_artifact_flag = expd_artifact_grouping_6
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_ones value == 7 } } }
+		set_artifact_flag = expd_artifact_grouping_7
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_ones value == 8 } } }
+		set_artifact_flag = expd_artifact_grouping_8
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_ones value == 9 } } }
+		set_artifact_flag = expd_artifact_grouping_9
+	}
+	else = {
+		# Error, do nothing
+	}
+	
+	
+	
+	# Tens
+	if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_tens value == 0 } } }
+		# Zero => no flag
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_tens value == 1 } } }
+		set_artifact_flag = expd_artifact_grouping_10
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_tens value == 2 } } }
+		set_artifact_flag = expd_artifact_grouping_20
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_tens value == 3 } } }
+		set_artifact_flag = expd_artifact_grouping_30
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_tens value == 4 } } }
+		set_artifact_flag = expd_artifact_grouping_40
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_tens value == 5 } } }
+		set_artifact_flag = expd_artifact_grouping_50
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_tens value == 6 } } }
+		set_artifact_flag = expd_artifact_grouping_60
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_tens value == 7 } } }
+		set_artifact_flag = expd_artifact_grouping_70
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_tens value == 8 } } }
+		set_artifact_flag = expd_artifact_grouping_80
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_tens value == 9 } } }
+		set_artifact_flag = expd_artifact_grouping_90
+	}
+	else = {
+		# Error, do nothing
+	}
+	
+	
+	
+	# Hundreds
+	if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_hdds value == 0 } } }
+		# Zero => no flag
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_hdds value == 1 } } }
+		set_artifact_flag = expd_artifact_grouping_100
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_hdds value == 2 } } }
+		set_artifact_flag = expd_artifact_grouping_200
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_hdds value == 3 } } }
+		set_artifact_flag = expd_artifact_grouping_300
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_hdds value == 4 } } }
+		set_artifact_flag = expd_artifact_grouping_400
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_hdds value == 5 } } }
+		set_artifact_flag = expd_artifact_grouping_500
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_hdds value == 6 } } }
+		set_artifact_flag = expd_artifact_grouping_600
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_hdds value == 7 } } }
+		set_artifact_flag = expd_artifact_grouping_700
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_hdds value == 8 } } }
+		set_artifact_flag = expd_artifact_grouping_800
+	}
+	else_if = {
+		limit = { owner = { check_variable = { which = expd_artifact_grouping_counter_hdds value == 9 } } }
+		set_artifact_flag = expd_artifact_grouping_900
+	}
+	else = {
+		# Error, do nothing
+	}
+}
+
+
+
+
+
+
+
+
+
+
+#############################################
+#                                           #
+#          CLEAR FLAGS & VARIABLES          #
+#                                           #
+#############################################
+
+
+
+expd_artifact_grouping_clear_all_comparison_flags_from_this_characters_artifacts = {
+	any_artifact = {
+		clr_artifact_flag = expd_artifact_grouping_comparison_first
+		clr_artifact_flag = expd_artifact_grouping_comparison_second
+		clr_artifact_flag = expd_artifact_grouping_comparison_checked
+	}
+}
+
+expd_artifact_grouping_clear_all_grouping_flags_from_this_characters_artifacts = {
+	any_artifact = {
+		clr_artifact_flag = expd_artifact_grouping_1
+		clr_artifact_flag = expd_artifact_grouping_2
+		clr_artifact_flag = expd_artifact_grouping_3
+		clr_artifact_flag = expd_artifact_grouping_4
+		clr_artifact_flag = expd_artifact_grouping_5
+		clr_artifact_flag = expd_artifact_grouping_6
+		clr_artifact_flag = expd_artifact_grouping_7
+		clr_artifact_flag = expd_artifact_grouping_8
+		clr_artifact_flag = expd_artifact_grouping_9
+		clr_artifact_flag = expd_artifact_grouping_10
+		clr_artifact_flag = expd_artifact_grouping_20
+		clr_artifact_flag = expd_artifact_grouping_30
+		clr_artifact_flag = expd_artifact_grouping_40
+		clr_artifact_flag = expd_artifact_grouping_50
+		clr_artifact_flag = expd_artifact_grouping_60
+		clr_artifact_flag = expd_artifact_grouping_70
+		clr_artifact_flag = expd_artifact_grouping_80
+		clr_artifact_flag = expd_artifact_grouping_90
+		clr_artifact_flag = expd_artifact_grouping_100
+		clr_artifact_flag = expd_artifact_grouping_200
+		clr_artifact_flag = expd_artifact_grouping_300
+		clr_artifact_flag = expd_artifact_grouping_400
+		clr_artifact_flag = expd_artifact_grouping_500
+		clr_artifact_flag = expd_artifact_grouping_600
+		clr_artifact_flag = expd_artifact_grouping_700
+		clr_artifact_flag = expd_artifact_grouping_800
+		clr_artifact_flag = expd_artifact_grouping_900
+	}
+}
+
+expd_artifact_grouping_clear_this_characters_variables = {
+	set_variable = { which = expd_artifact_grouping_counter_ones value = 0 }
+	set_variable = { which = expd_artifact_grouping_counter_tens value = 0 }
+	set_variable = { which = expd_artifact_grouping_counter_hdds value = 0 }
+}

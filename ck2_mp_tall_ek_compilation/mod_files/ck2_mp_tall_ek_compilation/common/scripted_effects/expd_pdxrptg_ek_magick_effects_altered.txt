@@ -1,0 +1,63 @@
+# set_magicka is retained for compatibility in case it is used elsewhere in the code
+set_magicka = {
+	set_magicka_to_zero = yes
+}
+
+delete_magicka = {
+	set_variable = { which = magicka_current value = 0 }
+	set_variable = { which = magicka_max     value = 0 }
+}
+
+set_magicka_to_zero = {
+	refresh_max_magicka = yes
+	set_variable = { which = magicka_current value = 0 }
+}
+
+set_magicka_to_max = {
+	refresh_max_magicka = yes
+	if = {
+		limit = { check_variable = { which = magicka_max value >= 0 } }
+		set_variable = { which = magicka_current which = magicka_max }
+	}
+}
+
+# Define the Magicka pool using Learning as the base value, multiplied by 2 ; 1 Learning = 2 Magicka.
+refresh_max_magicka = {
+	
+	set_variable       = { which = magicka_max_from_learning value = 0        }
+	export_to_variable = { which = magicka_max_from_learning value = learning }
+	multiply_variable  = { which = magicka_max_from_learning value = 2        }
+	
+	set_variable = { which = magicka_max which = magicka_max_from_learning }
+	
+	# Potion Bonuses
+	# Fortify Magicka: Increase max magicka by 20 (same as Amulet of Julianos)
+	if = {
+		limit = { has_character_modifier = modifier_potion_of_fortify_magicka }
+		change_variable = { which = magicka_max value = 20 }
+	}
+	
+	# Artifact Bonuses
+	# Amulet of Julianos: Increase max magicka by 20 (increased from 6 in the base mod)
+	if = {
+		limit = { expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_julianos = yes }
+		change_variable = { which = magicka_max value = 20 }
+	}
+	
+	# Artifact Maluses
+	# Don't know how you get this, but kept it in because it's funny...
+	if = {
+		limit = {
+			expd_pdxrptg_this_character_has_artifact_equipped_weapon_forkh = yes
+			check_variable = { which = magicka_max value = 2 }
+		}
+		divide_variable = { which = magicka_max value = 2 }
+	}
+	
+	# Cap current magicka at new max magicka (if necessary)
+	if = {
+		limit = { check_variable = { which = magicka_current which > magicka_max } }
+		set_variable = { which = magicka_current which = magicka_max }
+	}
+	
+}

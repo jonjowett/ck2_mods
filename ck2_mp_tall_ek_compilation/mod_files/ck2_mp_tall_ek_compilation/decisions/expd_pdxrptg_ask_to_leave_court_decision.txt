@@ -1,0 +1,599 @@
+targetted_decisions = {
+	
+	expd_pdxrptg_ask_to_leave_court = {
+		
+		filter = court
+		ai_target_filter = court
+		
+		ai = no
+		
+		
+		
+		
+		
+		from_potential = {
+			has_dlc = "Reapers"
+			NOT = { has_character_flag = spellbook_open }
+		}
+		
+		
+		
+		
+		
+		potential = {
+			liege = { character = FROM }
+		}
+		
+		
+		
+		
+		
+		allow = {
+			trigger_if = {
+				limit = { NOT = { any_playable_ruler = { NOT = { character = FROM } } } }
+				custom_tooltip = {
+					text = expd_pdxrptg_there_is_a_playable_ruler_who_is_not_from_tt
+					always = no
+				}
+			}
+			trigger_else = {
+				is_adult = yes
+				NOT = { trait = incapable }
+				prisoner = no
+				custom_tooltip = {
+					text = expd_pdxrptg_this_character_can_be_asked_to_leave_froms_court_tt
+					expd_pdxrptg_this_character_can_be_asked_to_leave_froms_court_using_slightly_more_relaxed_criteria = yes
+				}
+				trigger_if = {
+					limit = { any_spouse = { always = yes } }
+					custom_tooltip = {
+						text = expd_pdxrptg_all_of_this_characters_spouses_can_be_asked_to_leave_froms_court_tt
+						NOT = {
+							any_spouse = {
+								liege = { character = FROM }
+								OR = {
+									trait = incapable
+									prisoner = yes
+									expd_pdxrptg_this_character_can_be_asked_to_leave_froms_court_using_slightly_more_relaxed_criteria = no
+								}
+							}
+						}
+					}
+				}
+				trigger_if = {
+					limit = { any_consort = { always = yes } }
+					custom_tooltip = {
+						text = expd_pdxrptg_all_of_this_characters_consorts_can_be_asked_to_leave_froms_court_tt
+						NOT = {
+							any_consort = {
+								liege = { character = FROM }
+								OR = {
+									trait = incapable
+									prisoner = yes
+									expd_pdxrptg_this_character_can_be_asked_to_leave_froms_court_using_slightly_more_relaxed_criteria = no
+								}
+							}
+						}
+					}
+				}
+				trigger_if = {
+					limit = { any_child = { is_adult = no } }
+					custom_tooltip = {
+						text = expd_pdxrptg_all_of_this_characters_underage_children_can_be_asked_to_leave_froms_court_tt
+						NOT = {
+							any_child = {
+								liege = { character = FROM }
+								is_adult = no
+								OR = {
+									trait = incapable
+									prisoner = yes
+									expd_pdxrptg_this_character_can_be_asked_to_leave_froms_court_using_slightly_more_relaxed_criteria = no
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		
+		
+		effect = {
+			
+			# As per base game: lose 5 prestige
+			FROM = { prestige = -5 }
+			
+			# Apply -10 opinion for everyone who is moved
+			# Collapse this into a much-smaller tooltip, so 
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_and_their_spouses_consorts_children_gain_opinion_disappointed_of_from_for_ten_years_tt
+				opinion = {
+					modifier = opinion_disappointed
+					who = FROM
+					years = 10
+				}
+				any_spouse = {
+					limit = { liege = { character = FROM } }
+					opinion = {
+						modifier = opinion_disappointed
+						who = FROM
+						years = 10
+					}
+				}
+				any_consort = {
+					limit = { liege = { character = FROM } }
+					opinion = {
+						modifier = opinion_disappointed
+						who = FROM
+						years = 10
+					}
+				}
+				any_child = {
+					limit = {
+						is_adult = no
+						liege = { character = FROM }
+					}
+					opinion = {
+						modifier = opinion_disappointed
+						who = FROM
+						years = 10
+					}
+				}
+			}
+			
+			
+			
+			#1. Move to a landed relative's court
+			#    --- Prefer closer relatives
+			#    --- For distant relatives, prefer those who are in diplo range, have open court slots & high opinion
+			if = {
+				limit = {
+					any_playable_ruler = {
+						# Ensure these conditions are always the same as in the limit below
+						reverse_opinion = { who = ROOT value >= 10 }      # ROOT's opinion of the ruler is >= 10
+						opinion = { who = ROOT value >= 10 }              # Ruler's opinion of ROOT is >= 10
+						NOR = {                                           # Ruler is not the decision-taker, or ROOT's rival/foe
+							character = FROM
+							is_rival = ROOT
+							is_foe = ROOT
+						}
+						OR = {                                            # Ruler is spouse/consort/parent/child/relative of ROOT
+							any_spouse = { character = ROOT }
+							any_consort = { character = ROOT }
+							is_parent_of = ROOT
+							is_child_of = ROOT
+							is_close_relative = ROOT
+							dynasty = ROOT
+						}
+					}
+				}
+				random_playable_ruler = {
+					show_scope_change = no
+					limit = {
+						# Ensure these conditions are always the same as in the limit above
+						reverse_opinion = { who = ROOT value >= 10 }      # ROOT's opinion of the ruler is >= 10
+						opinion = { who = ROOT value >= 5 }               # Ruler's opinion of ROOT is >= 5
+						NOR = {                                           # Ruler is not the decision-taker, or ROOT's rival/foe
+							character = FROM
+							is_rival = ROOT
+							is_foe = ROOT
+						}
+						OR = {                                            # Ruler is spouse/consort/parent/child/relative of ROOT
+							any_spouse = { character = ROOT }
+							any_consort = { character = ROOT }
+							is_parent_of = ROOT
+							is_child_of = ROOT
+							is_close_relative = ROOT
+							dynasty = ROOT
+						}
+					}
+					
+					# Spouse, consort, parent & child - don't care about opinion or anything
+					preferred_limit = { any_spouse = { character = ROOT } }
+					preferred_limit = { any_consort = { character = ROOT } }
+					preferred_limit = { is_parent_of = ROOT }
+					preferred_limit = { is_child_of = ROOT }
+					
+					# Close relatives in diplo range
+					preferred_limit = {
+						is_close_relative = ROOT
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 90 }
+						opinion = { who = ROOT value >= 45 }
+					}
+					preferred_limit = {
+						is_close_relative = ROOT
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 70 }
+						opinion = { who = ROOT value >= 35 }
+					}
+					preferred_limit = {
+						is_close_relative = ROOT
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 50 }
+						opinion = { who = ROOT value >= 25 }
+					}
+					preferred_limit = {
+						is_close_relative = ROOT
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 30 }
+						opinion = { who = ROOT value >= 15 }
+					}
+					preferred_limit = {
+						is_close_relative = ROOT
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+					}
+					
+					# Any dynast in diplo range
+					preferred_limit = {
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 90 }
+						opinion = { who = ROOT value >= 45 }
+					}
+					preferred_limit = {
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 70 }
+						opinion = { who = ROOT value >= 35 }
+					}
+					preferred_limit = {
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 50 }
+						opinion = { who = ROOT value >= 25 }
+					}
+					preferred_limit = {
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 30 }
+						opinion = { who = ROOT value >= 15 }
+					}
+					preferred_limit = {
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+					}
+					
+					# Any relative with free court slots (regardless of range)
+					preferred_limit = {
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 90 }
+						opinion = { who = ROOT value >= 45 }
+					}
+					preferred_limit = {
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 70 }
+						opinion = { who = ROOT value >= 35 }
+					}
+					preferred_limit = {
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 50 }
+						opinion = { who = ROOT value >= 25 }
+					}
+					preferred_limit = {
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 30 }
+						opinion = { who = ROOT value >= 15 }
+					}
+					preferred_limit = {
+						free_court_slots > 0
+					}
+					
+					# Any relative (regardless of court slots or range)
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= 90 }
+						opinion = { who = ROOT value >= 45 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= 70 }
+						opinion = { who = ROOT value >= 35 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= 50 }
+						opinion = { who = ROOT value >= 25 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= 30 }
+						opinion = { who = ROOT value >= 15 }
+					}
+					
+					ROOT = {
+						show_scope_change = no
+						custom_tooltip = {
+							text = expd_pdxrptg_move_this_character_and_all_relatives_in_froms_court_to_a_relatives_court_tt
+							expd_pdxrptg_move_this_character_and_all_relatives_in_froms_court_to_prevs_court = yes
+						}
+					}
+				}
+			}
+			
+			
+			
+			# 2. Move to a court of someone who likes me
+			#     --- Prefer co-religionists
+			#     --- Prefer courts in diplo range, with open court slots, and with high opinion
+			else_if = {
+				limit = {
+					any_playable_ruler = {
+						# Ensure these conditions are always the same as in the limit below
+						NOR = {                                           # Ruler is not the decision-taker, or ROOT's rival/foe
+							character = FROM
+							is_rival = ROOT
+							is_foe = ROOT
+						}
+					}
+				}
+				random_playable_ruler = {
+					show_scope_change = no
+					limit = {
+						# Ensure these conditions are always the same as in the limit above
+						NOR = {                                           # Ruler is not the decision-taker, or ROOT's rival/foe
+							character = FROM
+							is_rival = ROOT
+							is_foe = ROOT
+						}
+					}
+					
+					# Any co-religionist with free court slots in diplo range
+					preferred_limit = {
+						religion = ROOT
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 90 }
+						opinion = { who = ROOT value >= 45 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 70 }
+						opinion = { who = ROOT value >= 35 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 50 }
+						opinion = { who = ROOT value >= 25 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 30 }
+						opinion = { who = ROOT value >= 15 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 10 }
+						opinion = { who = ROOT value >= 5 }
+					}
+					
+					# Any co-religionist with free court slots (regardless of range)
+					preferred_limit = {
+						religion = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 90 }
+						opinion = { who = ROOT value >= 45 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 70 }
+						opinion = { who = ROOT value >= 35 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 50 }
+						opinion = { who = ROOT value >= 25 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 30 }
+						opinion = { who = ROOT value >= 15 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 10 }
+						opinion = { who = ROOT value >= 5 }
+					}
+					
+					# Any co-religionist (regardless of court slots or range)
+					preferred_limit = {
+						religion = ROOT
+						reverse_opinion = { who = ROOT value >= 90 }
+						opinion = { who = ROOT value >= 45 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						reverse_opinion = { who = ROOT value >= 70 }
+						opinion = { who = ROOT value >= 35 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						reverse_opinion = { who = ROOT value >= 50 }
+						opinion = { who = ROOT value >= 25 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						reverse_opinion = { who = ROOT value >= 30 }
+						opinion = { who = ROOT value >= 15 }
+					}
+					preferred_limit = {
+						religion = ROOT
+						reverse_opinion = { who = ROOT value >= 10 }
+						opinion = { who = ROOT value >= 5 }
+					}
+					
+					# Anyone with free court slots in diplo range
+					preferred_limit = {
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 90 }
+						opinion = { who = ROOT value >= 45 }
+					}
+					preferred_limit = {
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 70 }
+						opinion = { who = ROOT value >= 35 }
+					}
+					preferred_limit = {
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 50 }
+						opinion = { who = ROOT value >= 25 }
+					}
+					preferred_limit = {
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 30 }
+						opinion = { who = ROOT value >= 15 }
+					}
+					preferred_limit = {
+						is_within_diplo_range = ROOT
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 10 }
+						opinion = { who = ROOT value >= 5 }
+					}
+					
+					# Anyone with free court slots (regardless of range)
+					preferred_limit = {
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 90 }
+						opinion = { who = ROOT value >= 45 }
+					}
+					preferred_limit = {
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 70 }
+						opinion = { who = ROOT value >= 35 }
+					}
+					preferred_limit = {
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 50 }
+						opinion = { who = ROOT value >= 25 }
+					}
+					preferred_limit = {
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 30 }
+						opinion = { who = ROOT value >= 15 }
+					}
+					preferred_limit = {
+						free_court_slots > 0
+						reverse_opinion = { who = ROOT value >= 10 }
+						opinion = { who = ROOT value >= 5 }
+					}
+					
+					# Anyone (regardless of court slots or range)
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= 90 }
+						opinion = { who = ROOT value >= 45 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= 70 }
+						opinion = { who = ROOT value >= 35 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= 50 }
+						opinion = { who = ROOT value >= 25 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= 30 }
+						opinion = { who = ROOT value >= 15 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= 10 }
+						opinion = { who = ROOT value >= 5 }
+					}
+					
+					ROOT = {
+						show_scope_change = no
+						custom_tooltip = {
+							text = expd_pdxrptg_move_this_character_and_all_relatives_in_froms_court_to_a_coreligionist_or_high_opinion_court_tt
+							expd_pdxrptg_move_this_character_and_all_relatives_in_froms_court_to_prevs_court = yes
+						}
+					}
+				}
+			}
+			
+			
+			
+			# 3. Fallback: Go anywhere but here
+			else = {
+				random_playable_ruler = {
+					show_scope_change = no
+					limit = { NOT = { character = FROM } }
+					preferred_limit = {
+						NOR = { is_rival = ROOT is_foe = ROOT }
+						reverse_opinion = { who = ROOT value >= -20 }
+						opinion = { who = ROOT value >= -20 }
+					}
+					preferred_limit = {
+						NOR = { is_rival = ROOT is_foe = ROOT }
+						reverse_opinion = { who = ROOT value >= -40 }
+						opinion = { who = ROOT value >= -40 }
+					}
+					preferred_limit = {
+						NOR = { is_rival = ROOT is_foe = ROOT }
+						reverse_opinion = { who = ROOT value >= -60 }
+						opinion = { who = ROOT value >= -60 }
+					}
+					preferred_limit = {
+						NOR = { is_rival = ROOT is_foe = ROOT }
+						reverse_opinion = { who = ROOT value >= -80 }
+						opinion = { who = ROOT value >= -80 }
+					}
+					preferred_limit = {
+						NOR = { is_rival = ROOT is_foe = ROOT }
+						reverse_opinion = { who = ROOT value >= -100 }
+						opinion = { who = ROOT value >= -100 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= -20 }
+						opinion = { who = ROOT value >= -20 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= -40 }
+						opinion = { who = ROOT value >= -40 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= -60 }
+						opinion = { who = ROOT value >= -60 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= -80 }
+						opinion = { who = ROOT value >= -80 }
+					}
+					preferred_limit = {
+						reverse_opinion = { who = ROOT value >= -100 }
+						opinion = { who = ROOT value >= -100 }
+					}
+					
+					ROOT = {
+						show_scope_change = no
+						custom_tooltip = {
+							text = expd_pdxrptg_move_this_character_and_all_relatives_in_froms_court_to_a_fallback_court_tt
+							expd_pdxrptg_move_this_character_and_all_relatives_in_froms_court_to_prevs_court = yes
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+		
+	}
+	
+}

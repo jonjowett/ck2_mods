@@ -1,0 +1,44 @@
+decisions = {
+	
+	expd_artifact_grouping_force_refresh_groupings = {
+		
+		# EXTREMELY IMPORTANT! DO NOT LET THE AI TAKE THIS DECISION!
+		ai = no
+		
+		potential = {
+			# Only show the decision if the player has at least one artifact
+			num_of_artifacts > 0
+			# Ensure there's no other reason to hide this decision (eg. some mod's submenu is open)
+			expd_artifact_grouping_hide_force_refresh_groupings_decision = no
+		}
+		
+		# Allow the decision to be taken freely in SP, but impose a cooldown in MP (to avoid trolling).
+		allow = {
+			trigger_if = {
+				limit = { multiplayer = yes }
+				NOT = { has_character_modifier = expd_artifact_grouping_force_refresh_groupings_cooldown }
+			}
+			trigger_else = {
+				always = yes
+			}
+		}
+		
+		# Do the actual force-refresh and, if necessary, add the cooldown modifier
+		effect = {
+			custom_tooltip = {
+				text = expd_artifact_grouping_force_refresh_groupings_effect_tt
+				expd_artifact_grouping_add_grouping_flags_to_this_characters_artifacts = yes
+			}
+			if = {
+				limit = { multiplayer = yes }
+				add_character_modifier = {
+					name  = expd_artifact_grouping_force_refresh_groupings_cooldown
+					years = 1
+				}
+			}
+		}
+		
+		ai_will_do = { factor = 0 }
+		
+	}
+}

@@ -1,0 +1,124 @@
+expd_pdxrptg_notifications_magicka_pre_regen = {
+	# Expected to be called from the character whose magicka pool is being checked, BEFORE any magicka is regenerated.
+	
+	# Only player spellcasters should receive these notifications
+	if = {
+		limit = {
+			ai = no
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+			OR = {
+				has_character_flag = expd_pdxrptg_notification_magicka_full
+				has_character_flag = expd_pdxrptg_notification_magicka_half
+			}
+		}
+		set_variable = {
+			which = expd_pdxrptg_notifications_magicka_amount_pre_regen
+			which = magicka_current
+		}
+	}
+	else = {
+		expd_pdxrptg_notifications_magicka_disable_all = yes
+	}
+	
+}
+
+expd_pdxrptg_notifications_magicka_post_regen = {
+	# Expected to be called from the character whose magicka pool is being checked, AFTER their magicka has been regenerated, so they can receive any relevant notifications.
+	
+	# Only player spellcasters should receive these notifications
+	if = {
+		limit = {
+			ai = no
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+			OR = {
+				has_character_flag = expd_pdxrptg_notification_magicka_full
+				has_character_flag = expd_pdxrptg_notification_magicka_half
+			}
+		}
+		
+		# Check whether the character hit their max magicka on this regen cycle
+		if = {
+			limit = { has_character_flag = expd_pdxrptg_notification_magicka_full }
+			if = {
+				limit = {
+					# Had less than max magicka before regen, and has max magicka after regen
+					check_variable = {
+						which =  expd_pdxrptg_notifications_magicka_amount_pre_regen
+						which <  magicka_max
+					}
+					check_variable = {
+						which =  magicka_current
+						which >= magicka_max
+					}
+				}
+				character_event = { id = ExpdPdxrptgNotifications.1000 }
+			}
+		}
+		
+		# Check whether the character hit half magicka on this regen cycle
+		if = {
+			limit = { has_character_flag = expd_pdxrptg_notification_magicka_half }
+			set_variable = {
+				which = expd_pdxrptg_notifications_magicka_half_value
+				which = magicka_max
+			}
+			divide_variable = {
+				which = expd_pdxrptg_notifications_magicka_half_value
+				value = 2
+			}
+			if = {
+				limit = {
+					# Had less than half magicka before regen, and has more than half magicka after regen
+					check_variable = {
+						which =  expd_pdxrptg_notifications_magicka_amount_pre_regen
+						which <  expd_pdxrptg_notifications_magicka_half_value
+					}
+					check_variable = {
+						which =  magicka_current
+						which >= expd_pdxrptg_notifications_magicka_half_value
+					}
+				}
+				character_event = { id = ExpdPdxrptgNotifications.1100 }
+			}
+			# Cleanup temporary variable
+			set_variable = {
+				which = expd_pdxrptg_notifications_magicka_half_value
+				value = 0
+			}
+		}
+	}
+	else = {
+		expd_pdxrptg_notifications_magicka_disable_all = yes
+	}
+	
+	# Cleanup temporary variable (originally set in the pre_regen trigger)
+	if = {
+		limit = {
+			check_variable = {
+				which = expd_pdxrptg_notifications_magicka_amount_pre_regen
+				value > 0
+			}
+		}
+		set_variable = {
+			which = expd_pdxrptg_notifications_magicka_amount_pre_regen
+			value = 0
+		}
+	}
+}
+
+expd_pdxrptg_notifications_magicka_disable_all = {
+	clr_character_flag = expd_pdxrptg_notification_magicka_full
+	clr_character_flag = expd_pdxrptg_notification_magicka_half
+	if = {
+		limit = {
+			check_variable = {
+				which = expd_pdxrptg_notifications_magicka_amount_pre_regen
+				value > 0
+			}
+		}
+		set_variable = {
+			which = expd_pdxrptg_notifications_magicka_amount_pre_regen
+			value = 0
+		}
+	}
+}

@@ -1,0 +1,333 @@
+# The tooltip is longer than the normal limit (1024 characters),
+#    so it's split into several different sections:
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_base_value
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_base_value_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_good
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_multipliers_good_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_bad
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_multipliers_bad_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_total
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_multipliers_total_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_disclaimer
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_disclaimer_tt
+	}
+	
+}
+
+
+
+
+
+# Individual tooltip items
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_erudite
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_artifact_equipped_ring_of_erudite = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_ring_of_erudite_y_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_ring_of_erudite_n_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_akatosh
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_artifact_equipped_amulet_of_akatosh = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_amulet_of_akatosh_y_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_amulet_of_akatosh_n_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_potion
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { has_character_modifier = modifier_potion_of_magicka_regeneration }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_potion_of_magicka_regeneration_y_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_potion_of_magicka_regeneration_n_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_dragonborn
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_dragonborn = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_dragonborn_tt
+	}
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_dragonborn_descendant = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_dragonborn_descendant_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_dragonborn_n_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_lich
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_lich = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_lich_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_mane
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_mane = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mane_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_smart
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { is_smart_trigger = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_smart_y_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_smart_n_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_mage
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_mage_1 = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_1_tt
+	}
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_mage_2 = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_2_tt
+	}
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_mage_3 = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_3_tt
+	}
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_mage_4 = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_4_tt
+	}
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_mage_5 = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_5_tt
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_mage_n_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_spellcaster
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { highest_spellcaster_specialisation_is_1 = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_spellcaster_1_tt
+	}
+	text = {
+		trigger = { highest_spellcaster_specialisation_is_2 = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_spellcaster_2_tt
+	}
+	text = {
+		trigger = { highest_spellcaster_specialisation_is_3 = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_spellcaster_3_tt
+	}
+	text = {
+		trigger = { highest_spellcaster_specialisation_is_1 = no }
+		localisation_key = expd_pdxrptg_magicka_regen_info_good_multiplier_trait_spellcaster_n_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_dumb
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { is_dumb_trigger = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_dumb_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_mental_disorder
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { has_mental_disorder_trigger = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_mental_disorder_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_skooma_addiction
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_skooma_addiction = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_skooma_addiction_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_disease
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { expd_pdxrptg_this_character_has_trait_chrondiasis = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_chondriasis_tt
+	}
+	text = {
+		trigger = {
+			expd_pdxrptg_this_character_has_trait_chrondiasis = no
+			has_disease_trigger = yes
+		}
+		localisation_key = expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_disease_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = expd_pdxrptg_magicka_regen_info_multipliers_disability
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = { has_severe_disability_trigger = yes }
+		localisation_key = expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_disability_severe_tt
+	}
+	text = {
+		trigger = {
+			has_severe_disability_trigger = no
+			has_medium_disability_trigger = yes
+		}
+		localisation_key = expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_disability_medium_tt
+	}
+	text = {
+		trigger = {
+			has_severe_disability_trigger = no
+			has_medium_disability_trigger = no
+			has_minor_disability_trigger  = yes
+		}
+		localisation_key = expd_pdxrptg_magicka_regen_info_bad_multiplier_trait_disability_minor_tt
+	}
+	
+}

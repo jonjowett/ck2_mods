@@ -1,0 +1,459 @@
+# Audax Validator EnableCommentMetadata
+
+# Massively reworked decision for artifact sacrifice
+# Group similar artifacts together, by:
+#  --- Granting 10000x the base mod's score
+#  --- Adjusting the score by +1,+2,+3,etc for each different type of artifact
+#  --- Awarding grace equal to 1/10000th of the score (rounded down)
+
+offmap_decisions = {
+	
+	# Flagged by the Validator as a duplicate decision, but actually it's a replacement of the base mod decision
+	# Audax Validator "." Ignore_NEXT
+	chinese_grace_offer_artifact = {
+		only_playable = yes
+		button_name = offmap_gifts
+		
+		third_party_filter = artifacts
+		ai_third_party_filter = artifacts
+		third_party = FROM
+		ai_check_interval = 6
+		show_third_party_potential = yes
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+		}
+		
+		potential = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_azura
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_boethiah
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_clavicus
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_hermaeus
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_hircine
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_malacath
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_mehrunes
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_mephala
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_meridia
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_molag
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_namira
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_nocturnal
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_peryite
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_sanguine
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_sheogorath
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_vaermina
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_ideal_masters
+			}
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				prisoner = no
+				NOT = { trait = incapable }
+				expd_pdxrptg_this_character_is_not_inaccessible = yes
+				
+				trigger_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_azura
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_azura = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_boethiah
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_boethiah = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_clavicus
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_clavicus = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_hermaeus
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_hermaeus = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_hircine
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_hircine = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_malacath
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_malacath = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_mehrunes
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_mehrunes = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_mephala
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_mephala = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_meridia
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_meridia = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_molag
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_molag = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_namira
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_namira = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_nocturnal
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_nocturnal = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_sanguine
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_sanguine = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_sheogorath
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_sheogorath = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_vaermina
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_vaermina = yes
+				}
+				trigger_else_if = {
+					limit = {
+						ROOT = {
+							# Audax Validator "." Ignore_NEXT
+							is_offmap_tag = oblivion_ideal_masters
+						}
+					}
+					# Audax Validator "." Ignore_NEXT
+					worships_ideal_masters = yes
+				}
+			}
+			# china_offmap_decisions_enabled_trigger = yes #leave in please, to be used if the tooltip for china_offmap_tribute_decisions_enabled_trigger changes and we need to reference things uniquely again
+			#china_offmap_tribute_decisions_enabled_trigger = yes
+		}
+		
+		third_party_potential = {
+			show_only_failed_conditions = yes
+			FROMFROM = {
+				show_scope_change = no
+				custom_tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					text = send_artifact_potential_tt
+					is_indestructible = no
+					NOR = {
+						has_artifact_flag = unique
+						has_artifact_flag = daedric_artifact
+						has_artifact_flag = aedric_artifact
+						has_artifact_flag = artifact_is_being_destroyed #An artifact being sold or sacrificed is a no-go
+						has_artifact_flag = force_sell #This artifact can only be sold
+						has_artifact_flag = summoned_creature #No more farming cats (or scamps, or what have you!)
+					}
+				}
+			}
+		}
+		
+		third_party_allow = {
+			
+		}
+		
+		third_party_score = {
+			factor = 10000
+			
+			additive_modifier = { value =   5000 FROMFROM = { quality == 2 } }
+			additive_modifier = { value =  10000 FROMFROM = { quality == 3 } }
+			additive_modifier = { value =  20000 FROMFROM = { quality == 4 } }
+			additive_modifier = { value =  30000 FROMFROM = { quality >= 5 } }
+			
+			# Mounts, pets and books are worth a LOT less
+			additive_modifier = { value =  -5000 FROMFROM = { quality == 1 expd_pdxrptg_this_artifact_is_a_mount_pet_or_book = yes } }
+			additive_modifier = { value = -10000 FROMFROM = { quality == 2 expd_pdxrptg_this_artifact_is_a_mount_pet_or_book = yes } }
+			additive_modifier = { value = -15000 FROMFROM = { quality == 3 expd_pdxrptg_this_artifact_is_a_mount_pet_or_book = yes } }
+			additive_modifier = { value = -25000 FROMFROM = { quality == 4 expd_pdxrptg_this_artifact_is_a_mount_pet_or_book = yes } }
+			additive_modifier = { value = -35000 FROMFROM = { quality >= 5 expd_pdxrptg_this_artifact_is_a_mount_pet_or_book = yes } }
+			
+			# Stolen artifacts are also worth less
+			additive_modifier = { value =  -5000 FROMFROM = { has_artifact_flag = stolen_artifact } }
+			
+			# Sorting (supports up to 999 distinct artifact types in the character's inventory)
+			additive_modifier = { value =   1 FROMFROM = { has_artifact_flag = expd_artifact_grouping_1   } }
+			additive_modifier = { value =   2 FROMFROM = { has_artifact_flag = expd_artifact_grouping_2   } }
+			additive_modifier = { value =   3 FROMFROM = { has_artifact_flag = expd_artifact_grouping_3   } }
+			additive_modifier = { value =   4 FROMFROM = { has_artifact_flag = expd_artifact_grouping_4   } }
+			additive_modifier = { value =   5 FROMFROM = { has_artifact_flag = expd_artifact_grouping_5   } }
+			additive_modifier = { value =   6 FROMFROM = { has_artifact_flag = expd_artifact_grouping_6   } }
+			additive_modifier = { value =   7 FROMFROM = { has_artifact_flag = expd_artifact_grouping_7   } }
+			additive_modifier = { value =   8 FROMFROM = { has_artifact_flag = expd_artifact_grouping_8   } }
+			additive_modifier = { value =   9 FROMFROM = { has_artifact_flag = expd_artifact_grouping_9   } }
+			additive_modifier = { value =  10 FROMFROM = { has_artifact_flag = expd_artifact_grouping_10  } }
+			additive_modifier = { value =  20 FROMFROM = { has_artifact_flag = expd_artifact_grouping_20  } }
+			additive_modifier = { value =  30 FROMFROM = { has_artifact_flag = expd_artifact_grouping_30  } }
+			additive_modifier = { value =  40 FROMFROM = { has_artifact_flag = expd_artifact_grouping_40  } }
+			additive_modifier = { value =  50 FROMFROM = { has_artifact_flag = expd_artifact_grouping_50  } }
+			additive_modifier = { value =  60 FROMFROM = { has_artifact_flag = expd_artifact_grouping_60  } }
+			additive_modifier = { value =  70 FROMFROM = { has_artifact_flag = expd_artifact_grouping_70  } }
+			additive_modifier = { value =  80 FROMFROM = { has_artifact_flag = expd_artifact_grouping_80  } }
+			additive_modifier = { value =  90 FROMFROM = { has_artifact_flag = expd_artifact_grouping_90  } }
+			additive_modifier = { value = 100 FROMFROM = { has_artifact_flag = expd_artifact_grouping_100 } }
+			additive_modifier = { value = 200 FROMFROM = { has_artifact_flag = expd_artifact_grouping_200 } }
+			additive_modifier = { value = 300 FROMFROM = { has_artifact_flag = expd_artifact_grouping_300 } }
+			additive_modifier = { value = 400 FROMFROM = { has_artifact_flag = expd_artifact_grouping_400 } }
+			additive_modifier = { value = 500 FROMFROM = { has_artifact_flag = expd_artifact_grouping_500 } }
+			additive_modifier = { value = 600 FROMFROM = { has_artifact_flag = expd_artifact_grouping_600 } }
+			additive_modifier = { value = 700 FROMFROM = { has_artifact_flag = expd_artifact_grouping_700 } }
+			additive_modifier = { value = 800 FROMFROM = { has_artifact_flag = expd_artifact_grouping_800 } }
+			additive_modifier = { value = 900 FROMFROM = { has_artifact_flag = expd_artifact_grouping_900 } }
+			
+		}
+		
+		effect = {
+			FROMFROM = {
+				set_artifact_flag = artifact_is_being_destroyed
+			}
+			
+			# Give the correct amount of offmap currency
+			#  --- Increments of 50: every 5000 points (before sorting) is worth 50 currency
+			#  --- Sorting can add up to 1000 additional points
+			#  --- So: <=6000 => 50 currency; <=11000 => 100 currency; etc
+			#  --- Maximum possible currency grant from the logic above is 400 (Q>=5, not stolen, not book/mount/pet)
+			#  --- Doing this the elegant way (with modular arithmetic) means that the currency granted will not be shown to the player.
+			#       --- So, we do this the *inelegant* way, with a few carefully-crafted if statements.
+			FROM = {
+				show_scope_change = no
+				if = {
+					limit = { check_variable = { which = local_third_party_score value <= 6000 } }
+					add_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = ROOT
+						value = 50
+					}
+				}
+				else_if = {
+					limit = { check_variable = { which = local_third_party_score value <= 11000 } }
+					add_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = ROOT
+						value = 100
+					}
+				}
+				else_if = {
+					limit = { check_variable = { which = local_third_party_score value <= 16000 } }
+					add_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = ROOT
+						value = 150
+					}
+				}
+				else_if = {
+					limit = { check_variable = { which = local_third_party_score value <= 21000 } }
+					add_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = ROOT
+						value = 200
+					}
+				}
+				else_if = {
+					limit = { check_variable = { which = local_third_party_score value <= 26000 } }
+					add_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = ROOT
+						value = 250
+					}
+				}
+				else_if = {
+					limit = { check_variable = { which = local_third_party_score value <= 31000 } }
+					add_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = ROOT
+						value = 300
+					}
+				}
+				else_if = {
+					limit = { check_variable = { which = local_third_party_score value <= 36000 } }
+					add_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = ROOT
+						value = 350
+					}
+				}
+				else_if = {
+					limit = { check_variable = { which = local_third_party_score value <= 41000 } }
+					add_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = ROOT
+						value = 400
+					}
+				}
+				# >400 should be impossible, but just in case...
+				else_if = {
+					limit = { check_variable = { which = local_third_party_score value <= 46000 } }
+					add_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = ROOT
+						value = 450
+					}
+				}
+				else = {
+					add_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = ROOT
+						value = 500
+					}
+				}
+			}
+			
+			hidden_effect = {
+				FROMFROM = { unsafe_destroy_artifact = yes }
+				FROM = {
+					sound_effect = china_grace_gain
+					set_character_flag = jd_gifting_artifact
+					character_event = {
+						# Audax Validator "." Ignore_NEXT
+						id = ekardor.15
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 0
+				FROMFROM = { quality >= 4 }
+			}
+			modifier = { #Super-high quality artifacts don't get offered. Characters also don't offer if they have few artifacts, or if they're bankrupt
+				factor = 0
+				OR = {
+					FROMFROM = {
+						quality > 8
+					}
+					FROMFROM = {
+						has_artifact_flag = force_sell #This artifact must be sold instead
+					}
+					FROMFROM = {
+						has_artifact_flag = mount #AI will not sacrifice mounts
+					}
+					FROMFROM = {
+						has_artifact_flag = pet #AI will not sacrifice pets
+					}
+					FROMFROM = {
+						has_artifact_flag = book #AI will not sacrifice books
+					}
+					num_of_artifacts < 4
+					NOT = { wealth = -25 }
+				}
+			}
+			modifier = {
+				factor = 0.1 # slow down
+			}
+		}
+	}
+	
+}

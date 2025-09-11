@@ -1,0 +1,87 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_root_vampire_can_reveal_status_to_this_character = {
+	custom_tooltip = {
+		text = expd_pdxrptg_root_vampire_can_reveal_status_to_this_character_tt
+		is_adult = yes
+		prisoner = no
+		is_indisposed = no
+		is_inaccessible_trigger = no
+		NOT = { trait = incapable }
+		NOR = {
+			has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_understanding_vampire
+			}
+			has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_not_understanding_vampire
+			}
+			has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_vampire_aware_good
+			}
+			has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_vampire_aware_bad
+			}
+			has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_vamp_depth_child
+			}
+			reverse_has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_vamp_depth_child
+			}
+		}
+	}
+}
+
+expd_pdxrptg_root_lycan_can_reveal_status_to_this_character = {
+	custom_tooltip = {
+		text = expd_pdxrptg_root_lycan_can_reveal_status_to_this_character_tt
+		is_adult = yes
+		prisoner = no
+		is_indisposed = no
+		is_inaccessible_trigger = no
+		NOT = { trait = incapable }
+		NOR = {
+			has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_understanding_lycan
+			}
+			has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_not_understanding_lycan
+			}
+			has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_lycan_aware_good
+			}
+			has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_lycan_aware_bad
+			}
+			has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_lycan_patron
+			}
+			reverse_has_opinion_modifier = {
+				who = ROOT
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_lycan_patron
+			}
+		}
+	}
+}

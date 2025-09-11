@@ -1,0 +1,82 @@
+namespace = ExpdPdxRptgSpecialismLimit
+
+# Triggered by on_character_society_rank_up and on_yearly_pulse
+character_event = {
+	id      = ExpdPdxRptgSpecialismLimit.100
+	title   = ExpdPdxRptgSpecialismLimit_Title
+	desc    = ExpdPdxRptgSpecialismLimit_Grandmaster_Desc
+	picture = GFX_evt_library
+	border  = GFX_event_normal_frame_religion
+	
+	is_in_society = yes # Obviously, only members of societies can be grandmasters
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		is_society_grandmaster = yes
+		NOT = { has_character_flag = expd_pdxrptg_this_character_has_been_a_grandmaster }
+	}
+	
+	option = {
+		name = EXCELLENT
+		custom_tooltip = {
+			text = ExpdPdxRptgSpecialismLimit_Add_One_Specialism_Slot_Grandmaster_tt
+			set_character_flag = expd_pdxrptg_this_character_has_been_a_grandmaster
+		}
+	}
+	
+}
+
+# Triggered by on_yearly_pulse
+character_event = {
+	id      = ExpdPdxRptgSpecialismLimit.200
+	title   = ExpdPdxRptgSpecialismLimit_Title
+	desc    = ExpdPdxRptgSpecialismLimit_Dragonborn_Desc
+	picture = GFX_evt_library
+	border  = GFX_event_normal_frame_religion
+	
+	ai = no # Since this is only a notification, we don't ever need to show it for AI
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		expd_pdxrptg_this_character_has_trait_dragonborn = yes
+		NOT = { has_character_flag = expd_pdxrptg_notified_dragonborn }
+	}
+	
+	option = {
+		name = EXCELLENT
+		custom_tooltip = {
+			text = ExpdPdxRptgSpecialismLimit_Add_One_Specialism_Slot_Dragonborn_tt
+			set_character_flag = expd_pdxrptg_notified_dragonborn
+		}
+	}
+	
+}
+
+# Triggered by on_yearly_pulse
+character_event = {
+	id      = ExpdPdxRptgSpecialismLimit.300
+	title   = ExpdPdxRptgSpecialismLimit_Title
+	desc    = ExpdPdxRptgSpecialismLimit_Education_Desc
+	picture = GFX_evt_library
+	border  = GFX_event_normal_frame_religion
+	
+	ai = no # Since this is only a notification, we don't ever need to show it for AI
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		maxed_education = yes
+		NOT = { has_character_flag = expd_pdxrptg_notified_legendary_education }
+	}
+	
+	option = {
+		name = EXCELLENT
+		custom_tooltip = {
+			text = ExpdPdxRptgSpecialismLimit_Add_One_Specialism_Slot_Education_tt
+			set_character_flag = expd_pdxrptg_notified_legendary_education
+		}
+	}
+	
+}

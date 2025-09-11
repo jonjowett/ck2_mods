@@ -1,0 +1,124 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = eldercouncil
+
+
+
+
+
+# Vote passes - inform Council
+
+# Audax Validator "." Ignore_NEXT
+# Prevent spurious Validator error - triggered only but never called
+
+character_event = {
+	id = eldercouncil.751
+	desc = {
+		# Audax Validator "." Ignore_NEXT
+		text = eldercouncil.751.passed
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			ec_vote_passed = yes
+		}
+	}
+	desc = {
+		# Audax Validator "." Ignore_NEXT
+		text = eldercouncil.751.tied
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			ec_vote_tied = yes
+		}
+	}
+	desc = {
+		# Audax Validator "." Ignore_NEXT
+		text = eldercouncil.751.error
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			ec_vote_failed = yes
+		}
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	picture = GFX_evt_k_eldercouncil
+	
+	# Mod Edit: Set the portrait to be the nominee, not the high chancellor
+	# Audax Validator "." Ignore_NEXT
+	# Prevent spurious error: event target not set
+	portrait = event_target:target_nominee
+	
+	is_triggered_only = yes
+	
+	# Mod Edit: Split yes & no voters into different event options, so the user can check them
+	option = {
+		name = ExpdPdxRptg_ElderCouncilVoteResultAnnouncement_HighChancellor
+		expd_pdxrptg_ec_show_votes_high_chancellor_only = yes
+	}
+	option = {
+		name = ExpdPdxRptg_ElderCouncilVoteResultAnnouncement_YesVoters
+		expd_pdxrptg_ec_show_votes_yes_only_without_high_chancellor = yes
+	}
+	option = {
+		name = ExpdPdxRptg_ElderCouncilVoteResultAnnouncement_NoVoters
+		expd_pdxrptg_ec_show_votes_no_only_without_high_chancellor = yes
+	}
+}
+
+
+
+
+
+# Vote fails - inform Council
+
+# Audax Validator "." Ignore_NEXT
+# Prevent spurious Validator error - triggered only but never called
+
+character_event = {
+	id = eldercouncil.752
+	desc = {
+		# Audax Validator "." Ignore_NEXT
+		text = eldercouncil.752.error
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			ec_vote_passed = yes
+		}
+	}
+	desc = {
+		# Audax Validator "." Ignore_NEXT
+		text = eldercouncil.752.tied
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			ec_vote_tied = yes
+		}
+	}
+	desc = {
+		# Audax Validator "." Ignore_NEXT
+		text = eldercouncil.752.failed
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			ec_vote_failed = yes
+		}
+	}
+	# Audax Validator "." Ignore_NEXT
+	picture = GFX_evt_k_eldercouncil
+	
+	# Mod Edit: Set the portrait to be the nominee, not the high chancellor
+	# Audax Validator "." Ignore_NEXT
+	# Prevent spurious error: event target not set
+	portrait = event_target:target_nominee
+	
+	is_triggered_only = yes
+	
+	# Mod Edit: Split yes & no voters into different event options, so the user can check them
+	option = {
+		name = ExpdPdxRptg_ElderCouncilVoteResultAnnouncement_HighChancellor
+		expd_pdxrptg_ec_show_votes_high_chancellor_only = yes
+	}
+	option = {
+		name = ExpdPdxRptg_ElderCouncilVoteResultAnnouncement_YesVoters
+		expd_pdxrptg_ec_show_votes_yes_only_without_high_chancellor = yes
+	}
+	option = {
+		name = ExpdPdxRptg_ElderCouncilVoteResultAnnouncement_NoVoters
+		expd_pdxrptg_ec_show_votes_no_only_without_high_chancellor = yes
+	}
+}

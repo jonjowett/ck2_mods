@@ -1,0 +1,95 @@
+decisions = {
+	
+	expd_pdxrptg_notification_menu_open = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_submenu_open = no
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				set_character_flag = expd_pdxrptg_notification_submenu_is_open
+			}
+		}
+	}
+	# Use the PDXRPTG close_submenu decision to close it again
+	
+	expd_pdxrptg_notification_magicka_full_toggle = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			if = {
+				limit = { has_character_flag = expd_pdxrptg_notification_magicka_full }
+				custom_tooltip = {
+					text = expd_pdxrptg_notification_magicka_full_will_be_disabled_tt
+					clr_character_flag = expd_pdxrptg_notification_magicka_full
+				}
+			}
+			else = {
+				custom_tooltip = {
+					text = expd_pdxrptg_notification_magicka_full_will_be_enabled_tt
+					set_character_flag = expd_pdxrptg_notification_magicka_full
+				}
+			}
+		}
+	}
+	
+	expd_pdxrptg_notification_magicka_half_toggle = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			if = {
+				limit = { has_character_flag = expd_pdxrptg_notification_magicka_half }
+				custom_tooltip = {
+					text = expd_pdxrptg_notification_magicka_half_will_be_disabled_tt
+					clr_character_flag = expd_pdxrptg_notification_magicka_half
+				}
+			}
+			else = {
+				custom_tooltip = {
+					text = expd_pdxrptg_notification_magicka_half_will_be_enabled_tt
+					set_character_flag = expd_pdxrptg_notification_magicka_half
+				}
+			}
+		}
+	}
+	
+	expd_pdxrptg_notification_potion_effect_ended_toggle = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			if = {
+				limit = { has_character_flag = expd_pdxrptg_notification_potion_effect_ended }
+				expd_pdxrptg_notifications_potion_effect_expiry_stop = yes
+			}
+			else = {
+				expd_pdxrptg_notifications_potion_effect_expiry_start = yes
+			}
+		}
+	}
+	
+	
+}

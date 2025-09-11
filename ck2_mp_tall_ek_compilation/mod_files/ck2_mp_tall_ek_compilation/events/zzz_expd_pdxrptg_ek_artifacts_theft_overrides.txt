@@ -1,0 +1,376 @@
+# Audax Validator EnableCommentMetadata
+
+# Events for decision-based artifact theft
+# Written by Etienne, based on assassination events co-written with jjsfw/jumbi and decision with help from Ratel/Korba
+# 2024: Reworked by jonjowett
+
+namespace = ekthieving
+
+# Prevent the Validator from complaining that this event is_triggered_only but is never called
+# Audax Validator "." Ignore_NEXT
+character_event = {
+	id = ekthieving.1
+	
+	# Audax Validator "." Ignore_NEXT
+	desc = ekthieving1
+	
+	picture = GFX_evt_shadow
+	
+	is_triggered_only = yes
+	
+	
+	
+	
+	immediate = {
+		
+		
+		
+		# Ensure that there's no event target already set
+		clear_event_target = thieves_guild
+		
+		
+		
+		# If you're a member of a thieves guild, and the target isn't a member of the same guild, you can DIY.
+		clr_character_flag = thieves_guild_diy
+		clr_character_flag = thieves_guild_diy_blocked
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				society_member_of = thieves_guild_tamriel
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					event_target:ek_theft_target_owner = {
+						NOT = {
+							# Audax Validator "." Ignore_NEXT
+							society_member_of = thieves_guild_tamriel
+						}
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				thieves_guild_tamriel = {
+					# Audax Validator "." Ignore_NEXT
+					save_event_target_as = thieves_guild
+				}
+				set_character_flag = thieves_guild_diy
+			}
+			else = {
+				set_character_flag = thieves_guild_diy_blocked
+			}
+		}
+		else_if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				society_member_of = camonna_tong_tamriel
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					event_target:ek_theft_target_owner = {
+						NOT = {
+							# Audax Validator "." Ignore_NEXT
+							society_member_of = camonna_tong_tamriel
+						}
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				camonna_tong_tamriel = {
+					# Audax Validator "." Ignore_NEXT
+					save_event_target_as = thieves_guild
+				}
+				set_character_flag = thieves_guild_diy
+			}
+			else = {
+				set_character_flag = thieves_guild_diy_blocked
+			}
+		}
+		else_if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				society_member_of = thieves_guild_akavir
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					event_target:ek_theft_target_owner = {
+						NOT = {
+							# Audax Validator "." Ignore_NEXT
+							society_member_of = thieves_guild_akavir
+						}
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				thieves_guild_akavir = {
+					# Audax Validator "." Ignore_NEXT
+					save_event_target_as = thieves_guild
+				}
+				set_character_flag = thieves_guild_diy
+			}
+			else = {
+				set_character_flag = thieves_guild_diy_blocked
+			}
+		}
+		
+		
+		
+		# If you can't DIY, maybe you can hire a Thieves Guild?
+		# Thieves Guilds will only accept quests from characters who can reach them.
+		#  --- IE: Located in their region, or have a ***realm*** province in their region.
+		# And they will only accept quests to steal from characters in their region.
+		#  --- IE: Located in their region, or have a ***demesne*** province in their region.
+		# Eg: If you are in Tamriel and the target is in Akavir, you need to reach Akavir somehow to hire the Thieves Guild over there.
+		
+		clr_character_flag = thieves_guild_found
+		clr_character_flag = thieves_guild_carmonna_tong_blocked
+		clr_character_flag = thieves_guild_tamriel_blocked
+		clr_character_flag = thieves_guild_akavir_blocked
+		
+		if = {
+			limit = { NOT = { has_character_flag = thieves_guild_diy } }
+			
+			# Test for Carmonna Tong first, since they override the Tamriel Thieves Guild in some circumstances
+			# Will only accept contracts from Dunmer(/Ashlander/Chimer) currently living in Morrowind
+			if = {
+				limit = {
+					expd_pdxrptg_artifact_theft_this_character_can_access_morrowind = yes
+					OR = {
+						# Audax Validator "." Ignore_NEXT
+						culture = dunmer
+						# Audax Validator "." Ignore_NEXT
+						culture = ashlander
+						# Audax Validator "." Ignore_NEXT
+						culture = chimer
+					}
+					event_target:ek_theft_target_owner = { expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes }
+					any_society_member = {
+						society_member_of = camonna_tong_tamriel
+						is_adult = yes
+						prisoner = no
+						is_inaccessible_trigger = no
+						NOT = { trait = incapable }
+						is_society_grandmaster = no
+						has_any_quest = no
+					}
+				}
+				if = {
+					limit = { event_target:ek_theft_target_owner = { NOT = { society_member_of = camonna_tong_tamriel } } }
+					camonna_tong_tamriel = {
+						# Audax Validator "." Ignore_NEXT
+						save_event_target_as = thieves_guild
+					}
+					set_character_flag = thieves_guild_found
+				}
+				else = {
+					set_character_flag = thieves_guild_carmonna_tong_blocked
+				}
+			}
+			
+			# Main Thieves Guild works in all of Tamriel
+			if = {
+				limit = {
+					NOT = { has_character_flag = thieves_guild_found }
+					expd_pdxrptg_artifact_theft_this_character_can_access_tamriel = yes
+					event_target:ek_theft_target_owner = { expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes }
+					any_society_member = {
+						society_member_of = thieves_guild_tamriel
+						is_adult = yes
+						prisoner = no
+						is_inaccessible_trigger = no
+						NOT = { trait = incapable }
+						is_society_grandmaster = no
+						has_any_quest = no
+					}
+				}
+				if = {
+					limit = { event_target:ek_theft_target_owner = { NOT = { society_member_of = thieves_guild_tamriel } } }
+					thieves_guild_tamriel = {
+						# Audax Validator "." Ignore_NEXT
+						save_event_target_as = thieves_guild
+					}
+					set_character_flag = thieves_guild_found
+				}
+				else = {
+					set_character_flag = thieves_guild_tamriel_blocked
+				}
+			}
+			
+			# Silent Moons works in all of Akavir
+			if = {
+				limit = {
+					NOT = { has_character_flag = thieves_guild_found }
+					expd_pdxrptg_artifact_theft_this_character_can_access_akavir = yes
+					event_target:ek_theft_target_owner = { expd_pdxrptg_artifact_theft_this_character_is_in_akavir = yes }
+					any_society_member = {
+						society_member_of = thieves_guild_akavir
+						is_adult = yes
+						prisoner = no
+						is_inaccessible_trigger = no
+						NOT = { trait = incapable }
+						is_society_grandmaster = no
+						has_any_quest = no
+					}
+				}
+				if = {
+					limit = { event_target:ek_theft_target_owner = { NOT = { society_member_of = thieves_guild_akavir } } }
+					thieves_guild_akavir = {
+						# Audax Validator "." Ignore_NEXT
+						save_event_target_as = thieves_guild
+					}
+					set_character_flag = thieves_guild_found
+				}
+				else = {
+					set_character_flag = thieves_guild_akavir_blocked
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+	# DIY
+	option = { # DIY possible!
+		
+		# Audax Validator "." Ignore_NEXT
+		name = ekthieving1optb #As the member of a guild, you can take care of it yourself
+		tooltip_info = yes # Yellow border because this is the best option
+		trigger = { has_character_flag = thieves_guild_diy }
+		ai_chance = { factor = 10 }
+		
+		society_quest_event = {
+			# Audax Validator "." Ignore_NEXT
+			id = ekthieving.250
+		}
+		
+	}
+	
+	option = { # DIY blocked
+		
+		name = ekthieving1optb_blocked # Notify the guild member that they can't DIY because they are in the same guild
+		trigger = { has_character_flag = thieves_guild_diy_blocked }
+		ai_chance = { factor = 0 } # This option is for player info only
+		
+		# Audax Validator "." Ignore_NEXT
+		clear_artifact_theft_flags = yes
+		event_target:ek_theft_target_owner = {
+			character_event = {
+				# Audax Validator "." Ignore_NEXT
+				id = ekthieving.35
+			}
+		}
+		
+	}
+	
+	
+	
+	# Hire a guild
+	option = { # Guild found!
+	
+		# Audax Validator "." Ignore_NEXT
+		name = ekthieving1opta
+		tooltip_info = yes # Yellow border because this is the best option
+		trigger = {
+			NOT = { has_character_flag = thieves_guild_diy }
+			has_character_flag = thieves_guild_found
+		}
+		ai_chance = { factor = 10 }
+		
+		character_event = {
+			# Audax Validator "." Ignore_NEXT
+			id = ekthieving.30
+		}
+		
+	}
+	
+	option = { # Guild hiring blocked
+		
+		name = {
+			text = ekthieving1opta_blocked_fellow_member_carmonna_tong
+			trigger = { has_character_flag = thieves_guild_carmonna_tong_blocked }
+		}
+		name = {
+			text = ekthieving1opta_blocked_fellow_member_tamriel
+			trigger = { has_character_flag = thieves_guild_tamriel_blocked }
+		}
+		name = {
+			text = ekthieving1opta_blocked_fellow_member_akavir
+			trigger = { has_character_flag = thieves_guild_akavir_blocked }
+		}
+		name = {
+			text = ekthieving1opta_blocked_other_reason # Probably because you can't contact a guild in the target's region
+			trigger = {
+				NOR = {
+					has_character_flag = thieves_guild_carmonna_tong_blocked
+					has_character_flag = thieves_guild_tamriel_blocked
+					has_character_flag = thieves_guild_akavir_blocked
+				}
+			}
+		}
+		
+		trigger = {
+			NOT = { has_character_flag = thieves_guild_diy }
+			NOT = { has_character_flag = thieves_guild_found }
+		}
+		ai_chance = { factor = 0 } # This option is for player info only
+		
+		# Audax Validator "." Ignore_NEXT
+		clear_artifact_theft_flags = yes
+		event_target:ek_theft_target_owner = {
+			character_event = {
+				# Audax Validator "." Ignore_NEXT
+				id = ekthieving.35
+			}
+		}
+		
+	}
+	
+	
+	
+	#Hire some goons! - Anyone can do this
+	option = {
+		
+		# Audax Validator "." Ignore_NEXT
+		name = ekthieving1optc
+		ai_chance = { factor = 1 }
+		
+		character_event = {
+			# Audax Validator "." Ignore_NEXT
+			id = ekthieving.90
+		}
+		
+	}
+	
+	
+	
+	# Decline
+	option = {
+		
+		name = ekthieving1decline
+		ai_chance = { factor = 0 } #AI chance handled in decision
+		
+		# Audax Validator "." Ignore_NEXT
+		clear_artifact_theft_flags = yes
+		event_target:ek_theft_target_owner = {
+			character_event = {
+				# Audax Validator "." Ignore_NEXT
+				id = ekthieving.35
+			}
+		}
+		
+	}
+	
+	
+	
+	after = {
+		clr_character_flag = thieves_guild_diy
+		clr_character_flag = thieves_guild_diy_blocked
+		clr_character_flag = thieves_guild_found
+		clr_character_flag = thieves_guild_carmonna_tong_blocked
+		clr_character_flag = thieves_guild_tamriel_blocked
+		clr_character_flag = thieves_guild_akavir_blocked
+	}
+	
+	
+	
+}

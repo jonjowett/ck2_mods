@@ -1,0 +1,322 @@
+namespace = ExpdPdxrptgRingOfHappiness
+
+# If a character has the ring of happiness equipped and STILL manages to acquire stressed/depressed somehow,
+#    then remove stressed/depressed automatically within approx 4 months.
+
+# If a character equips the ring of happiness AFTER aquiring stressed/depressed,
+#    then remove stressed/depressed within at most 2 years 4 months.
+# This distinction is because I can't be bothered to write separate logic to handle this scenario:
+#    2 years is the maximum interval between yearly pulses + 4 months is the max time before the first possible removal
+
+# If a character has stressed/depressed removed by these events, and later unequips the ring,
+#    there is a chance that stressed/depressed is re-applied.
+#    IE: They have become dependent on the ring to protect them from stress.
+
+# This feature is *deliberately* applied to everyone who has the ring equipped - which may include unlanded AI.
+#    IE: We cannot use any pre-filters in these events.
+#    NB: AI are treated as having the ring equipped as long as they have it in their inventory - they don't have to actually equip it.
+
+
+
+
+# Fired from on_yearly_pulse
+character_event = {
+	id = ExpdPdxrptgRingOfHappiness.100
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		expd_pdxrptg_this_character_has_artifact_equipped_ring_of_happiness = yes
+	}
+	immediate = {
+		character_event = { id = ExpdPdxrptgRingOfHappiness.101 days = 30  random = 90 }
+		character_event = { id = ExpdPdxrptgRingOfHappiness.101 days = 150 random = 90 }
+		character_event = { id = ExpdPdxrptgRingOfHappiness.101 days = 270 random = 90 }
+	}
+}
+
+character_event = {
+	id      = ExpdPdxrptgRingOfHappiness.101
+	title   = ExpdPdxrptgRingOfHappiness_DeStress_Title
+	desc    = ExpdPdxrptgRingOfHappiness_DeStress_Desc
+	picture = GFX_evt_relaxed_ruler
+	is_triggered_only = yes
+	trigger = {
+		expd_pdxrptg_this_character_has_artifact_equipped_ring_of_happiness = yes
+		OR = {
+			trait = stressed
+			trait = depressed
+		}
+	}
+	option = {
+		name = ExpdPdxrptgRingOfHappiness_DeStress_Option
+		# NB: Using 'if' clauses here ensures that the player only sees relevant traits being removed
+		#     (If they are stressed and not depressed, they will only see the removal of stressed - depressed will not be mentioned.)
+		if = {
+			limit = { trait = stressed }
+			remove_trait = stressed
+		}
+		if = {
+			limit = { trait = depressed }
+			remove_trait = depressed
+		}
+		expd_pdxrtpg_ring_of_happiness_made_me_happier = yes
+	}
+}
+
+character_event = {
+	id = ExpdPdxrptgRingOfHappiness.200
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		expd_pdxrptg_this_character_has_artifact_equipped_ring_of_happiness = no
+		has_character_flag = expd_pdxrptg_ring_of_happiness_made_me_happier
+		NOT = { has_character_flag = expd_pdxrptg_ring_of_happiness_dependency }
+	}
+	immediate = {
+		
+		# If you take off the ring very shortly after the ring "did something", 50:50 chance of dependency.
+		# Chance of dependency reduces if it's been a long time since the ring "did something".
+		# Zero chance of dependency if it's been 10 years since the ring "did something".
+		
+		random_list = {
+			10 = {
+				# No dependency
+			}
+			10 = {
+				# Dependency
+				set_character_flag = expd_pdxrptg_ring_of_happiness_dependency
+				
+				modifier = {
+					factor = 0.9
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_made_me_happier
+						years >= 2
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_made_me_happier
+						years >= 3
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_made_me_happier
+						years >= 4
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_made_me_happier
+						years >= 5
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_made_me_happier
+						years >= 6
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_made_me_happier
+						years >= 7
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_made_me_happier
+						years >= 8
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_made_me_happier
+						years >= 9
+					}
+				}
+				modifier = {
+					factor = 0
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_made_me_happier
+						years >= 10
+					}
+				}
+			}
+		}
+		
+		clr_character_flag = expd_pdxrptg_ring_of_happiness_made_me_happier
+		
+	}
+}
+
+character_event = {
+	id = ExpdPdxrptgRingOfHappiness.300
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		has_character_flag = expd_pdxrptg_ring_of_happiness_dependency
+	}
+	immediate = {
+		random_list = {
+			10 = { } # Nothing happens this year
+			10 = { # Spontaneous loss of dependency
+				# Chance is reduced significantly the longer you've been dependent
+				# Cannot lose dependency if you have the ring equipped!
+				
+				clr_character_flag = expd_pdxrptg_ring_of_happiness_dependency
+				
+				modifier = {
+					factor = 0
+					expd_pdxrptg_this_character_has_artifact_equipped_ring_of_happiness = yes
+				}
+				
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 3
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 5
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 10
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 15
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 20
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 30
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 40
+					}
+				}
+				modifier = {
+					factor = 0.8
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 50
+					}
+				}
+			}
+			10 = { # Dependency causes depression if ring is not equipped
+				
+				character_event = { id = ExpdPdxrptgRingOfHappiness.301 days = 30 random = 180 }
+				
+				# Chance of dependency being checked increases the longer you have been dependent.
+				# 1.2^8 ~= 4.3, ie. maximum chance that this option will be chosen is approx 4/5 (which occurs if you're been dependent for >= 50 years)
+				modifier = {
+					factor = 1.2
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 3
+					}
+				}
+				modifier = {
+					factor = 1.2
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 5
+					}
+				}
+				modifier = {
+					factor = 1.2
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 10
+					}
+				}
+				modifier = {
+					factor = 1.2
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 15
+					}
+				}
+				modifier = {
+					factor = 1.2
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 20
+					}
+				}
+				modifier = {
+					factor = 1.2
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 30
+					}
+				}
+				modifier = {
+					factor = 1.2
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 40
+					}
+				}
+				modifier = {
+					factor = 1.2
+					had_character_flag = {
+						flag  =  expd_pdxrptg_ring_of_happiness_dependency
+						years >= 50
+					}
+				}
+			}
+		}
+	}
+}
+
+# Because AI are treated as if they have it equipped as long as it's in their inventory,
+#    they will ONLY trigger this event if they somehow lose the ring after becoming dependent.
+character_event = {
+	id      = ExpdPdxrptgRingOfHappiness.301
+	title   = ExpdPdxrptgRingOfHappiness_Dependency_Title
+	desc    = ExpdPdxrptgRingOfHappiness_Dependency_Desc
+	picture = GFX_evt_stressed_ruler
+	is_triggered_only = yes
+	trigger = {
+		expd_pdxrptg_this_character_has_artifact_equipped_ring_of_happiness = no
+		has_character_flag = expd_pdxrptg_ring_of_happiness_dependency
+		NOT = { trait = depressed }
+	}
+	option = {
+		name = ExpdPdxrptgRingOfHappiness_Dependency_Option
+		add_trait = depressed
+	}
+}

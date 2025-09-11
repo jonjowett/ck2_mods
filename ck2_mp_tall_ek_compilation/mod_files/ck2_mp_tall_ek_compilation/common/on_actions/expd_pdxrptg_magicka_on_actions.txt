@@ -1,0 +1,11 @@
+on_yearly_pulse = {
+	events = {
+		magicka.100 # Check that magicka regen system is working and, if not, start it back up again
+	}
+}
+
+on_startup = {
+	events = {
+		magicka.99 # Force restart magicka regen system
+	}
+}

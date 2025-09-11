@@ -1,0 +1,97 @@
+expd_gp_add_slot_to_wonder_in_this_county = {
+	custom_tooltip = {
+		text = expd_gp_add_slot_to_wonder_in_this_county_tt
+		expd_gp_add_slot_to_wonder_in_this_county_no_cost_increase = yes
+		expd_gp_increase_expansion_cost_in_this_county = yes
+	}
+}
+
+expd_gp_remove_slot_from_wonder_in_this_county = {
+	custom_tooltip = {
+		text = expd_gp_remove_slot_from_wonder_in_this_county_tt
+		expd_gp_remove_slot_from_wonder_in_this_county_no_cost_decrease = yes
+		expd_gp_decrease_expansion_cost_in_this_county = yes
+	}
+}
+
+expd_gp_increase_expansion_cost_in_this_county = {
+	custom_tooltip = {
+		text = expd_gp_increase_expansion_cost_in_this_county_tt
+		location = {
+			expd_gp_initialise_wonder_slot_tracking = yes
+			change_variable = { which = expd_gp_wonder_slots_added value = 1 }
+		}
+	}
+}
+
+expd_gp_decrease_expansion_cost_in_this_county = {
+	custom_tooltip = {
+		text = expd_gp_decrease_expansion_cost_in_this_county_tt
+		location = {
+			expd_gp_initialise_wonder_slot_tracking = yes
+			if = {
+				limit = { check_variable = { which = expd_gp_wonder_slots_added value <= 0 } }
+				set_variable = { which = expd_gp_wonder_slots_added value = 0 }
+			}
+			else = {
+				change_variable = { which = expd_gp_wonder_slots_added value = -1 }
+			}
+		}
+	}
+}
+
+expd_gp_add_slot_to_wonder_in_this_county_no_cost_increase = {
+	custom_tooltip = {
+		text = expd_gp_add_slot_to_wonder_in_this_county_no_cost_increase_tt
+		location = { wonder = { add_wonder_upgrade_slots = 1 } }
+	}
+}
+
+expd_gp_remove_slot_from_wonder_in_this_county_no_cost_decrease = {
+	custom_tooltip = {
+		text = expd_gp_remove_slot_from_wonder_in_this_county_no_cost_decrease_tt
+		location = { wonder = { remove_wonder_upgrade_slots = 1 } }
+	}
+}
+
+expd_gp_initialise_wonder_slot_tracking = {
+	if = {
+		limit = { check_variable = { which = expd_gp_wonder_slots_added value <= 0 } }
+		set_variable = { which = expd_gp_wonder_slots_added value = 0 }
+	}
+}
+
+expd_gp_deduct_cost_for_new_slot_in_this_countys_wonder_from_from = {
+	# NB: This must be consistent with the equivalent scripted_trigger
+	if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_1 = yes }
+		FROM = { wealth =   -1000 }
+	}
+	else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_2 = yes }
+		FROM = { wealth =   -2000 }
+	}
+	else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_3 = yes }
+		FROM = { wealth =   -4000 }
+	}
+	else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_4 = yes }
+		FROM = { wealth =   -8000 }
+	}
+	else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_5 = yes }
+		FROM = { wealth =  -16000 }
+	}
+	else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_6 = yes }
+		FROM = { wealth =  -32000 }
+	}
+	else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_7 = yes }
+		FROM = { wealth =  -64000 }
+	}
+	else = {
+		FROM = { wealth = -128000 }
+	}
+}

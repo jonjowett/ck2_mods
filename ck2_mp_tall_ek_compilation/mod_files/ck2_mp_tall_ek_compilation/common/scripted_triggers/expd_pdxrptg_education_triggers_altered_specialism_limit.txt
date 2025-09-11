@@ -1,0 +1,524 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+#################################
+# Base mod replacement triggers #
+#################################
+
+# IMPORTANT: For compatibility with the base mod, this has NOT been renamed.
+#            This trigger should now be understood as "has the maximum allowable number of specialisms".
+has_two_specializations = {
+	
+	trigger_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_3 = yes }
+		expd_pdxrptg_this_character_has_any_level_specialisations_5 = yes
+	}
+	trigger_else_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_2 = yes }
+		expd_pdxrptg_this_character_has_any_level_specialisations_4 = yes
+	}
+	trigger_else_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_1 = yes }
+		expd_pdxrptg_this_character_has_any_level_specialisations_3 = yes
+	}
+	trigger_else = {
+		expd_pdxrptg_this_character_has_any_level_specialisations_2 = yes
+	}
+	
+	# Give the user the relevant info via customisable localisation
+	custom_tooltip = { text = expd_pdxrptg_specialisation_limit_info }
+	
+}
+
+# IMPORTANT: This trigger must NOT be renamed as it's used throughout the base mod
+has_maxed_specializations = {
+	
+	trigger_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_3 = yes }
+		expd_pdxrptg_this_character_has_max_level_specialisations_5 = yes
+	}
+	trigger_else_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_2 = yes }
+		expd_pdxrptg_this_character_has_max_level_specialisations_4 = yes
+	}
+	trigger_else_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_1 = yes }
+		expd_pdxrptg_this_character_has_max_level_specialisations_3 = yes
+	}
+	trigger_else = {
+		expd_pdxrptg_this_character_has_max_level_specialisations_2 = yes
+	}
+	
+	# Give the user the relevant info via customisable localisation
+	custom_tooltip = { text = expd_pdxrptg_specialisation_limit_info }
+	
+}
+
+
+
+
+
+#####################################
+# Allowed number of specialisations #
+#####################################
+
+expd_pdxrptg_this_character_can_have_extra_specialisations_3 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_can_have_extra_specialisations_3_tt
+		calc_true_if = {
+			amount = 3
+			expd_pdxrptg_this_character_has_trait_dragonborn = yes
+			expd_pdxrptg_this_character_has_ever_been_grandmaster = yes
+			maxed_education = yes
+		}
+	}
+}
+
+expd_pdxrptg_this_character_can_have_extra_specialisations_2 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_can_have_extra_specialisations_2_tt
+		calc_true_if = {
+			amount = 2
+			expd_pdxrptg_this_character_has_trait_dragonborn = yes
+			expd_pdxrptg_this_character_has_ever_been_grandmaster = yes
+			maxed_education = yes
+		}
+	}
+}
+
+expd_pdxrptg_this_character_can_have_extra_specialisations_1 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_can_have_extra_specialisations_1_tt
+		calc_true_if = {
+			amount = 1
+			expd_pdxrptg_this_character_has_trait_dragonborn = yes
+			expd_pdxrptg_this_character_has_ever_been_grandmaster = yes
+			maxed_education = yes
+		}
+	}
+}
+
+expd_pdxrptg_this_character_has_ever_been_grandmaster = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_has_ever_been_grandmaster_tt
+		OR = {
+			has_character_flag = expd_pdxrptg_this_character_has_been_a_grandmaster
+			is_society_grandmaster = yes
+		}
+	}
+}
+
+
+
+
+
+##############################################
+# Actual number of MAX LEVEL specialisations #
+##############################################
+
+# NB: Swordsinger & Ansei don't count towards the specialism limit in the base mod, so they also don't count here.
+
+expd_pdxrptg_this_character_has_max_level_specialisations_5 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_has_max_level_specialisations_5_tt
+		calc_true_if = {
+			amount = 5
+			# Audax Validator "." Ignore_NEXT
+			trait = acrobat_3
+			# Audax Validator "." Ignore_NEXT
+			trait = assassin_3
+			# Audax Validator "." Ignore_NEXT
+			trait = barbarian_3
+			# Audax Validator "." Ignore_NEXT
+			trait = bard_3
+			# Audax Validator "." Ignore_NEXT
+			trait = battlemage_3
+			# Audax Validator "." Ignore_NEXT
+			trait = crusader_3
+			# Audax Validator "." Ignore_NEXT
+			trait = healer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = knight_3
+			# Audax Validator "." Ignore_NEXT
+			trait = monk_3
+			# Audax Validator "." Ignore_NEXT
+			trait = nightblade_3
+			# Audax Validator "." Ignore_NEXT
+			trait = priest_3
+			# Audax Validator "." Ignore_NEXT
+			trait = rogue_3
+			# Audax Validator "." Ignore_NEXT
+			trait = savant_3
+			# Audax Validator "." Ignore_NEXT
+			trait = scout_3
+			# Audax Validator "." Ignore_NEXT
+			trait = spellsword_3
+			# Audax Validator "." Ignore_NEXT
+			trait = sorcerer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = thief_3
+			# Audax Validator "." Ignore_NEXT
+			trait = trader_3
+			# Audax Validator "." Ignore_NEXT
+			trait = wayfarer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = witchhunter_3
+		}
+	}
+}
+
+expd_pdxrptg_this_character_has_max_level_specialisations_4 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_has_max_level_specialisations_4_tt
+		calc_true_if = {
+			amount = 4
+			# Audax Validator "." Ignore_NEXT
+			trait = acrobat_3
+			# Audax Validator "." Ignore_NEXT
+			trait = assassin_3
+			# Audax Validator "." Ignore_NEXT
+			trait = barbarian_3
+			# Audax Validator "." Ignore_NEXT
+			trait = bard_3
+			# Audax Validator "." Ignore_NEXT
+			trait = battlemage_3
+			# Audax Validator "." Ignore_NEXT
+			trait = crusader_3
+			# Audax Validator "." Ignore_NEXT
+			trait = healer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = knight_3
+			# Audax Validator "." Ignore_NEXT
+			trait = monk_3
+			# Audax Validator "." Ignore_NEXT
+			trait = nightblade_3
+			# Audax Validator "." Ignore_NEXT
+			trait = priest_3
+			# Audax Validator "." Ignore_NEXT
+			trait = rogue_3
+			# Audax Validator "." Ignore_NEXT
+			trait = savant_3
+			# Audax Validator "." Ignore_NEXT
+			trait = scout_3
+			# Audax Validator "." Ignore_NEXT
+			trait = spellsword_3
+			# Audax Validator "." Ignore_NEXT
+			trait = sorcerer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = thief_3
+			# Audax Validator "." Ignore_NEXT
+			trait = trader_3
+			# Audax Validator "." Ignore_NEXT
+			trait = wayfarer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = witchhunter_3
+		}
+	}
+}
+
+expd_pdxrptg_this_character_has_max_level_specialisations_3 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_has_max_level_specialisations_3_tt
+		calc_true_if = {
+			amount = 3
+			# Audax Validator "." Ignore_NEXT
+			trait = acrobat_3
+			# Audax Validator "." Ignore_NEXT
+			trait = assassin_3
+			# Audax Validator "." Ignore_NEXT
+			trait = barbarian_3
+			# Audax Validator "." Ignore_NEXT
+			trait = bard_3
+			# Audax Validator "." Ignore_NEXT
+			trait = battlemage_3
+			# Audax Validator "." Ignore_NEXT
+			trait = crusader_3
+			# Audax Validator "." Ignore_NEXT
+			trait = healer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = knight_3
+			# Audax Validator "." Ignore_NEXT
+			trait = monk_3
+			# Audax Validator "." Ignore_NEXT
+			trait = nightblade_3
+			# Audax Validator "." Ignore_NEXT
+			trait = priest_3
+			# Audax Validator "." Ignore_NEXT
+			trait = rogue_3
+			# Audax Validator "." Ignore_NEXT
+			trait = savant_3
+			# Audax Validator "." Ignore_NEXT
+			trait = scout_3
+			# Audax Validator "." Ignore_NEXT
+			trait = spellsword_3
+			# Audax Validator "." Ignore_NEXT
+			trait = sorcerer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = thief_3
+			# Audax Validator "." Ignore_NEXT
+			trait = trader_3
+			# Audax Validator "." Ignore_NEXT
+			trait = wayfarer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = witchhunter_3
+		}
+	}
+}
+
+expd_pdxrptg_this_character_has_max_level_specialisations_2 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_has_max_level_specialisations_2_tt
+		calc_true_if = {
+			amount = 2
+			# Audax Validator "." Ignore_NEXT
+			trait = acrobat_3
+			# Audax Validator "." Ignore_NEXT
+			trait = assassin_3
+			# Audax Validator "." Ignore_NEXT
+			trait = barbarian_3
+			# Audax Validator "." Ignore_NEXT
+			trait = bard_3
+			# Audax Validator "." Ignore_NEXT
+			trait = battlemage_3
+			# Audax Validator "." Ignore_NEXT
+			trait = crusader_3
+			# Audax Validator "." Ignore_NEXT
+			trait = healer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = knight_3
+			# Audax Validator "." Ignore_NEXT
+			trait = monk_3
+			# Audax Validator "." Ignore_NEXT
+			trait = nightblade_3
+			# Audax Validator "." Ignore_NEXT
+			trait = priest_3
+			# Audax Validator "." Ignore_NEXT
+			trait = rogue_3
+			# Audax Validator "." Ignore_NEXT
+			trait = savant_3
+			# Audax Validator "." Ignore_NEXT
+			trait = scout_3
+			# Audax Validator "." Ignore_NEXT
+			trait = spellsword_3
+			# Audax Validator "." Ignore_NEXT
+			trait = sorcerer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = thief_3
+			# Audax Validator "." Ignore_NEXT
+			trait = trader_3
+			# Audax Validator "." Ignore_NEXT
+			trait = wayfarer_3
+			# Audax Validator "." Ignore_NEXT
+			trait = witchhunter_3
+		}
+	}
+}
+
+
+
+
+
+##############################################
+# Actual number of ANY LEVEL specialisations #
+##############################################
+
+# NB: Swordsinger & Ansei don't count towards the specialism limit in the base mod, so they also don't count here.
+
+expd_pdxrptg_this_character_has_any_level_specialisations_5 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_has_any_level_specialisations_5_tt
+		calc_true_if = {
+			amount = 5
+			# Audax Validator "." Ignore_NEXT
+			is_acrobat = yes
+			# Audax Validator "." Ignore_NEXT
+			is_assassin = yes
+			# Audax Validator "." Ignore_NEXT
+			is_barbarian = yes
+			# Audax Validator "." Ignore_NEXT
+			is_bard = yes
+			# Audax Validator "." Ignore_NEXT
+			is_battlemage = yes
+			# Audax Validator "." Ignore_NEXT
+			is_crusader = yes
+			# Audax Validator "." Ignore_NEXT
+			is_healer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_knight = yes
+			# Audax Validator "." Ignore_NEXT
+			is_monk_education = yes
+			# Audax Validator "." Ignore_NEXT
+			is_nightblade = yes
+			# Audax Validator "." Ignore_NEXT
+			is_priest_education = yes
+			# Audax Validator "." Ignore_NEXT
+			is_rogue = yes
+			# Audax Validator "." Ignore_NEXT
+			is_savant = yes
+			# Audax Validator "." Ignore_NEXT
+			is_scout = yes
+			# Audax Validator "." Ignore_NEXT
+			is_sorcerer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_spellsword = yes
+			# Audax Validator "." Ignore_NEXT
+			is_thief = yes
+			# Audax Validator "." Ignore_NEXT
+			is_trader = yes
+			# Audax Validator "." Ignore_NEXT
+			is_wayfarer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_witchhunter = yes
+		}
+	}
+}
+
+expd_pdxrptg_this_character_has_any_level_specialisations_4 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_has_any_level_specialisations_4_tt
+		calc_true_if = {
+			amount = 4
+			# Audax Validator "." Ignore_NEXT
+			is_acrobat = yes
+			# Audax Validator "." Ignore_NEXT
+			is_assassin = yes
+			# Audax Validator "." Ignore_NEXT
+			is_barbarian = yes
+			# Audax Validator "." Ignore_NEXT
+			is_bard = yes
+			# Audax Validator "." Ignore_NEXT
+			is_battlemage = yes
+			# Audax Validator "." Ignore_NEXT
+			is_crusader = yes
+			# Audax Validator "." Ignore_NEXT
+			is_healer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_knight = yes
+			# Audax Validator "." Ignore_NEXT
+			is_monk_education = yes
+			# Audax Validator "." Ignore_NEXT
+			is_nightblade = yes
+			# Audax Validator "." Ignore_NEXT
+			is_priest_education = yes
+			# Audax Validator "." Ignore_NEXT
+			is_rogue = yes
+			# Audax Validator "." Ignore_NEXT
+			is_savant = yes
+			# Audax Validator "." Ignore_NEXT
+			is_scout = yes
+			# Audax Validator "." Ignore_NEXT
+			is_sorcerer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_spellsword = yes
+			# Audax Validator "." Ignore_NEXT
+			is_thief = yes
+			# Audax Validator "." Ignore_NEXT
+			is_trader = yes
+			# Audax Validator "." Ignore_NEXT
+			is_wayfarer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_witchhunter = yes
+		}
+	}
+}
+
+expd_pdxrptg_this_character_has_any_level_specialisations_3 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_has_any_level_specialisations_3_tt
+		calc_true_if = {
+			amount = 3
+			# Audax Validator "." Ignore_NEXT
+			is_acrobat = yes
+			# Audax Validator "." Ignore_NEXT
+			is_assassin = yes
+			# Audax Validator "." Ignore_NEXT
+			is_barbarian = yes
+			# Audax Validator "." Ignore_NEXT
+			is_bard = yes
+			# Audax Validator "." Ignore_NEXT
+			is_battlemage = yes
+			# Audax Validator "." Ignore_NEXT
+			is_crusader = yes
+			# Audax Validator "." Ignore_NEXT
+			is_healer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_knight = yes
+			# Audax Validator "." Ignore_NEXT
+			is_monk_education = yes
+			# Audax Validator "." Ignore_NEXT
+			is_nightblade = yes
+			# Audax Validator "." Ignore_NEXT
+			is_priest_education = yes
+			# Audax Validator "." Ignore_NEXT
+			is_rogue = yes
+			# Audax Validator "." Ignore_NEXT
+			is_savant = yes
+			# Audax Validator "." Ignore_NEXT
+			is_scout = yes
+			# Audax Validator "." Ignore_NEXT
+			is_sorcerer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_spellsword = yes
+			# Audax Validator "." Ignore_NEXT
+			is_thief = yes
+			# Audax Validator "." Ignore_NEXT
+			is_trader = yes
+			# Audax Validator "." Ignore_NEXT
+			is_wayfarer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_witchhunter = yes
+		}
+	}
+}
+
+expd_pdxrptg_this_character_has_any_level_specialisations_2 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_has_any_level_specialisations_2_tt
+		calc_true_if = {
+			amount = 2
+			# Audax Validator "." Ignore_NEXT
+			is_acrobat = yes
+			# Audax Validator "." Ignore_NEXT
+			is_assassin = yes
+			# Audax Validator "." Ignore_NEXT
+			is_barbarian = yes
+			# Audax Validator "." Ignore_NEXT
+			is_bard = yes
+			# Audax Validator "." Ignore_NEXT
+			is_battlemage = yes
+			# Audax Validator "." Ignore_NEXT
+			is_crusader = yes
+			# Audax Validator "." Ignore_NEXT
+			is_healer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_knight = yes
+			# Audax Validator "." Ignore_NEXT
+			is_monk_education = yes
+			# Audax Validator "." Ignore_NEXT
+			is_nightblade = yes
+			# Audax Validator "." Ignore_NEXT
+			is_priest_education = yes
+			# Audax Validator "." Ignore_NEXT
+			is_rogue = yes
+			# Audax Validator "." Ignore_NEXT
+			is_savant = yes
+			# Audax Validator "." Ignore_NEXT
+			is_scout = yes
+			# Audax Validator "." Ignore_NEXT
+			is_sorcerer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_spellsword = yes
+			# Audax Validator "." Ignore_NEXT
+			is_thief = yes
+			# Audax Validator "." Ignore_NEXT
+			is_trader = yes
+			# Audax Validator "." Ignore_NEXT
+			is_wayfarer = yes
+			# Audax Validator "." Ignore_NEXT
+			is_witchhunter = yes
+		}
+	}
+}

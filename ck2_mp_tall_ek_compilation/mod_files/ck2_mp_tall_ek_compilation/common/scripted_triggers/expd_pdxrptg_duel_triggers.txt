@@ -1,0 +1,39 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_duel_this_character_has_duelling_potentially_unlocked_by_wonder_bloodworks = {
+	custom_tooltip = {
+		text = expd_pdxrptg_duel_bloodworks_exist_tt
+		independent = yes # Wonder decisions are only available to independent rulers (not vassals)
+		any_realm_province = {
+			# Audax Validator "." Ignore_NEXT
+			has_wonder = wonder_palace_of_kings
+			wonder = {
+				# Audax Validator "." Ignore_NEXT
+				has_wonder_upgrade = upgrade_bloodworks
+			}
+		}
+	}
+}
+
+expd_pdxrptg_duel_this_character_has_duelling_allowed_by_wonder_bloodworks = {
+	expd_pdxrptg_duel_this_character_has_duelling_potentially_unlocked_by_wonder_bloodworks = yes
+	custom_tooltip = {
+		text = expd_pdxrptg_duel_bloodworks_wonder_is_active_tt
+		independent = yes # Wonder decisions are only available to independent rulers (not vassals)
+		any_realm_province = {
+			# Audax Validator "." Ignore_NEXT
+			has_wonder = wonder_palace_of_kings
+			wonder = {
+				is_active = yes
+				# Audax Validator "." Ignore_NEXT
+				has_wonder_upgrade = upgrade_bloodworks
+			}
+		}
+	}
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		trait = ruthless
+		trait = cruel
+		trait = arbitrary
+	}
+}

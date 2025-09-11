@@ -1,0 +1,200 @@
+##########################################
+# Miscellaneous but important conditions #
+##########################################
+
+expd_pris_this_executioner_does_not_need_council_permission = {
+	trigger_if = {
+		limit = { has_dlc = "Zeus" }
+		#limit = { always = no }
+		has_regent = no
+		has_law = execution_voting_power_0
+	}
+	trigger_else = {
+		always = yes
+	}
+}
+
+
+
+
+
+#####################################
+# Availability of execution methods #
+#####################################
+
+expd_pris_this_executioner_can_sacrifice_prisoners = {
+	OR = {
+		has_religion_feature = religion_ritual_sacrifice
+		religion = aztec_pagan
+		religion = aztec_pagan_reformed
+	}
+}
+
+expd_pris_this_executioner_can_use_wonder = {
+	independent = yes
+	OR = {
+		any_realm_wonder = { has_wonder_upgrade = upgrade_spikes     }
+		any_realm_wonder = { has_wonder_upgrade = upgrade_moat_spike }
+		any_realm_wonder = { has_wonder_upgrade = upgrade_moat_pit   }
+		any_realm_wonder = { has_wonder_upgrade = upgrade_moat_water }
+	}
+}
+
+expd_pris_this_executioner_can_crucify_prisoners = {
+	OR = {
+		culture = persian
+		religion_group = muslim
+		culture = roman
+	}
+	NOT = { religion_group = christian }
+}
+
+
+
+
+
+#############################
+# Consequences of execution #
+#############################
+
+expd_pris_from_loses_piety_due_to_executing_this = {
+	religion = ROOT_FROM
+	NOT = { trait = excommunicated }
+}
+
+expd_pris_from_gains_tyranny_due_to_executing_this = {
+	# Tyranny is only gained for unjust execution of people in your subrealm
+	# (This mod blocks execution if the council needs to give permission, so we don't need to consider tyranny caused by executing without permission.)
+	liege = {
+		OR = {
+			character = ROOT_FROM
+			is_vassal_or_below_of = ROOT_FROM
+		}
+	}
+	expd_pris_from_can_freely_execute_this = no
+}
+
+expd_pris_from_gains_kinslayer_due_to_executing_this = {
+	OR = {
+		expd_pris_from_gains_close_kinslayer_due_to_executing_this = yes
+		expd_pris_from_gains_familial_kinslayer_due_to_executing_this = yes
+		expd_pris_from_gains_dynastic_kinslayer_due_to_executing_this = yes
+		expd_pris_from_gains_tribal_kinslayer_due_to_executing_this = yes
+	}
+}
+
+expd_pris_from_gains_close_kinslayer_due_to_executing_this = {
+	ROOT_FROM = {
+		NOT = { religion_group = muslim }
+		NOT = { trait = kinslayer }
+		is_tribal = no
+		OR = {
+			is_ancestor_of = PREV
+			is_descendant_of = PREV
+			sibling = PREV
+		}
+	}
+}
+
+expd_pris_from_gains_familial_kinslayer_due_to_executing_this = {
+	expd_pris_from_gains_close_kinslayer_due_to_executing_this = no
+	ROOT_FROM = {
+		NOT = { religion_group = muslim }
+		NOR = {
+			trait = kinslayer
+			trait = familial_kinslayer
+		}
+		is_tribal = no
+		OR = {
+			is_cousin_of = PREV
+			is_aunt_uncle_of = PREV
+			is_nibling_of = PREV
+		}
+	}
+}
+
+expd_pris_from_gains_dynastic_kinslayer_due_to_executing_this = {
+	expd_pris_from_gains_close_kinslayer_due_to_executing_this = no
+	expd_pris_from_gains_familial_kinslayer_due_to_executing_this = no
+	ROOT_FROM = {
+		NOT = { religion_group = muslim }
+		NOR = {
+			trait = kinslayer
+			trait = familial_kinslayer
+			trait = dynastic_kinslayer
+		}
+		is_tribal = no
+		is_lowborn = no
+		dynasty = PREV
+	}
+}
+
+expd_pris_from_gains_tribal_kinslayer_due_to_executing_this = {
+	ROOT_FROM = {
+		NOT = { religion_group = muslim }
+		NOT = { trait = tribal_kinslayer }
+		is_tribal = yes
+		is_lowborn = no
+		dynasty = PREV
+	}
+}
+
+expd_pris_from_loses_foreign_opinion_due_to_executing_this = {
+	# Foreign opinion is only lost for unjust execution of people that AREN'T in your subrealm, and only if you AREN'T at war with that subrealm
+	liege = {
+		NOR = {
+			character = ROOT_FROM
+			is_vassal_or_below_of = ROOT_FROM
+		}
+	}
+	NOT = { war_with = ROOT_FROM }
+	expd_pris_from_can_freely_execute_this = no
+}
+
+expd_pris_from_can_freely_execute_this = {
+	# Can freely/justly execute lowborns, excommunicated of your religion, and anyone towards whom you have an "execution reason"
+	OR = {
+		expd_pris_from_has_execution_reason_towards_this = yes
+		AND = {
+			religion = ROOT_FROM
+			trait = excommunicated
+		}
+		is_lowborn = yes
+	}
+}
+
+expd_pris_from_has_execution_reason_towards_this = {
+	ROOT_FROM = {
+		OR = { 
+			# Vanilla execution reason opinion modifiers copied from this_has_execution_reason_opinion_trigger in 00_scripted_triggers.txt
+			has_opinion_modifier = { who = PREV modifier = opinion_rebel_traitor }
+			has_opinion_modifier = { who = PREV modifier = opinion_regicide_traitor }
+			has_opinion_modifier = { who = PREV modifier = attempted_murder_of_spouse }
+			has_opinion_modifier = { who = PREV modifier = attempted_murder_of_child }
+			has_opinion_modifier = { who = PREV modifier = attempted_murder_of_parent }
+			has_opinion_modifier = { who = PREV modifier = attempted_murder_of_sibling }
+			has_opinion_modifier = { who = PREV modifier = attempted_murder_of_vassal }
+			has_opinion_modifier = { who = PREV modifier = attempted_murder }
+			has_opinion_modifier = { who = PREV modifier = opinion_spouse_slayer }
+			has_opinion_modifier = { who = PREV modifier = opinion_murder_attempt }
+			has_opinion_modifier = { who = PREV modifier = opinion_killed_close_kin }
+			has_opinion_modifier = { who = PREV modifier = opinion_killed_father }
+			has_opinion_modifier = { who = PREV modifier = opinion_hajj_attempt_murder }
+			has_opinion_modifier = { who = PREV modifier = opinion_castrated_me }
+			has_opinion_modifier = { who = PREV modifier = opinion_blinded_me }
+			has_opinion_modifier = { who = PREV modifier = opinion_witch }
+			has_opinion_modifier = { who = PREV modifier = opinion_takfir }
+			has_opinion_modifier = { who = PREV modifier = opinion_attempted_abduction }
+			has_opinion_modifier = { who = PREV modifier = opinion_unfaithful_wife }
+			has_opinion_modifier = { who = PREV modifier = opinion_unfaithful_husband_crime }
+			has_opinion_modifier = { who = PREV modifier = opinion_cuckolded }
+			has_opinion_modifier = { who = PREV modifier = opinion_charge_dw }
+			has_opinion_modifier = { who = PREV modifier = opinion_tortured_me }
+			has_opinion_modifier = { who = PREV modifier = opinion_mutilated_me }
+			has_opinion_modifier = { who = PREV modifier = opinion_mutilated_family }
+			has_opinion_modifier = { who = PREV modifier = opinion_mutilated_close_kin }
+			has_opinion_modifier = { who = PREV modifier = opinion_outlawed_society }
+			has_opinion_modifier = { who = PREV modifier = opinion_accused_apostate }
+		}
+	}
+}

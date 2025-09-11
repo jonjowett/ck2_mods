@@ -1,0 +1,93 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+# Conditions for changing rules
+
+expd_t_rules_this_character_can_change_rules = {
+	expd_t_this_character_can_perform_admin_actions= yes
+}
+
+
+
+
+
+# Detect religious enemies (eg. for offering protectorate)
+
+expd_t_is_religious_enemy_of_from = {
+	OR = {
+		NOT = { religion_group = FROM }
+		is_heresy_of = FROM
+		is_parent_religion = FROM
+	}
+}
+
+expd_t_is_religious_enemy_of_root = {
+	OR = {
+		NOT = { religion_group = ROOT }
+		is_heresy_of = ROOT
+		is_parent_religion = ROOT
+	}
+}
+
+
+
+
+
+# Detect tributaries that allow for chainable CBs
+
+expd_t_top_liege_is_normal_or_modded_tributary_of_root = {
+	top_liege = {
+		OR = {
+			is_tributary = {
+				type = permanent
+				suzerain = ROOT
+			}
+			is_tributary = {
+				type = default
+				suzerain = ROOT
+			}
+			is_tributary = {
+				type = expd_t_protectorate
+				suzerain = ROOT
+			}
+		}
+	}
+}
+
+
+
+
+
+expd_t_is_modded_tributary_of_from = {
+	is_tributary = {
+		type = expd_t_protectorate
+		suzerain = FROM
+	}
+}
+
+
+
+
+
+# Detect permanent tributaries that should provide retinue size buffs
+
+expd_t_is_normal_or_modded_permanent_tributary_of_root = {
+	suzerain = { character = ROOT }
+	expd_t_is_normal_or_modded_permanent_tributary_of_anyone = yes
+}
+
+expd_t_is_normal_or_modded_permanent_tributary_of_anyone = {
+	OR = {
+		is_tributary = { type = permanent }
+		is_tributary = { type = expd_t_protectorate }
+		
+		# Elder Kings
+		is_tributary = {
+			# Audax Validator "." Ignore_NEXT
+			type = tribunal_temple
+		}
+	}
+}
