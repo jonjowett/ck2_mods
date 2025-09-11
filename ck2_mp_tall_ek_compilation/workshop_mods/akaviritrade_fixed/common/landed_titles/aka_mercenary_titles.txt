@@ -1,0 +1,405 @@
+# Audax Validator EnableCommentMetadata
+
+# Included wholesale, and seem to be working, so no need for detailed Validation.
+# Audax Validator "!" Ignore_NEXT
+
+#########
+#Akaviri
+#########
+
+#Akaviri Mercenaries#
+d_hiashi_champions = {
+	color={ 140 241 25 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		}
+	}
+	capital = 1008
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = gladiator_composition
+	strength_growth_per_century = 0.50
+}
+d_chanubi_blades = {
+	color={ 140 241 24 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		}
+	}
+	capital = 1008
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = medium_mercenary_composition
+	strength_growth_per_century = 0.50
+}
+d_puryosu_guardians = {
+	color={ 140 241 23 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		}
+	}
+	capital = 798
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = medium_mercenary_composition
+	strength_growth_per_century = 0.50
+}
+d_segaji_navigators = {
+	color={ 140 241 22 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		}
+	}
+	capital = 1006
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = akaviri_fleet_composition
+	strength_growth_per_century = 0.50
+}
+
+#Po Tun Mercenaries#
+
+d_desert_wind = {
+	color={ 140 241 21 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		}
+	}
+	capital = 1007
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = gladiator_composition
+	strength_growth_per_century = 0.50
+}
+d_homshing_voyager = {
+	color={ 140 241 20 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		}
+	}
+	capital = 769
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = large_pirates_composition
+	strength_growth_per_century = 0.50
+}
+d_chungzi_company = {
+	color={ 140 241 19 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		}
+	}
+	capital = 760
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = small_mercenary_composition
+	strength_growth_per_century = 0.50
+}
+#Tang Mo Mercenaries#
+d_kansi_free_company = {
+	color={ 140 241 18 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		}
+	}
+	capital = 1249
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = large_pirates_composition
+	strength_growth_per_century = 0.50
+}
+d_burising_navigators = {
+	color={ 140 241 17 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		}
+	}
+	capital = 913
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = akaviri_fleet_composition
+	strength_growth_per_century = 0.50
+}
+d_kangala_freebooter = {
+	color={ 140 241 16 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		} 	
+	}
+	capital = 1248
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = pirates_composition
+	strength_growth_per_century = 0.50
+}
+#Tsaesci Mercenaries
+d_lautah_company = {
+	color={ 140 241 15 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		} 	
+	}
+	capital = 764
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = gladiator_composition
+	strength_growth_per_century = 0.50
+}
+d_meralang_marauders = {
+	color={ 140 241 15 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		} 	
+	}
+	capital = 840
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = small_mercenary_composition
+	strength_growth_per_century = 0.50
+}
+d_volatra_defenders = {
+	color={ 140 241 14 }
+	color2={ 255 255 255 }
+	allow = {
+		NOT = {
+			OR = {
+				culture_group = undead
+				trait = undead
+				d_hiashi_champions = {
+					holder_scope = {
+						OR = {
+							culture_group = undead
+							trait = undead
+						}
+					}
+				}
+			}
+		} 	
+	}
+	capital = 818
+	mercenary = yes
+	title = captain
+	title_female = captain
+	foa = "ahoy_captain"
+	landless = yes
+	primary = yes
+	independent = yes
+	mercenary_type = gladiator_composition
+	strength_growth_per_century = 0.50
+}
