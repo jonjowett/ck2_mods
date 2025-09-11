@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 namespace = MNM
 
 # Explicit override of the base game events MNM.70010 & 70011
@@ -8,7 +10,11 @@ namespace = MNM
 
 # MTTH event: Marshal drills a commander
 character_event = {
+	
+	# Deliberate duplication of ID - replaces the base game event
+	# Audax Validator "." Ignore_NEXT
 	id      = MNM.70010
+	
 	title   = MNM.70010.t
 	desc    = MNM.70010.d
 	picture = GFX_evt_melee
@@ -69,7 +75,11 @@ character_event = {
 }
 
 character_event = {
+	
+	# Deliberate duplication of ID - replaces the base game event
+	# Audax Validator "." Ignore_NEXT
 	id      = MNM.70011
+	
 	title   = MNM.70010.t
 	desc    = MNM.70011.d
 	picture = GFX_evt_melee

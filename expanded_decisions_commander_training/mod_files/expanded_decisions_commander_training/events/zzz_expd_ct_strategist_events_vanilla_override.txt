@@ -1,9 +1,15 @@
+# Audax Validator EnableCommentMetadata
+
 namespace = JD
 
 # Strategist has taught someone else, event for picking commander and trait (hidden)
 # Modified version of vanilla event, allowing commanders to be improved even if they already have 2 traits (eg. warrior lodge commander who is brilliant strategist)
 character_event = {
+	
+	# Deliberate duplication of ID - replaces the base game event
+	# Audax Validator "." Ignore_NEXT
 	id = JD.20041
+	
 	hide_window = yes
 	is_triggered_only = yes
 	
