@@ -36,6 +36,33 @@ character_event = {
 	}
 }
 
+# When a war starts, check if Root (defender) is a permanent tributary that grants retinue cap to their suzerain.
+# If so, check whether their suzerain has joined their defensive war.
+# If not, in a month, check again, and ALSO re-evaluate the suzerain's retinue buff.
+# If the suzerain refuses the call to arms, this will break the tributary relationship,
+#      which ends this cycle of checking, and which also causes the suzerain's retinue cap to decrease.
+character_event = {
+	id = EDTSuzerainBuff.1002
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		if = {
+			limit = { expd_t_is_normal_or_modded_permanent_tributary_of_anyone = yes }
+			# If this character's suzerain hasn't yet joined their defensive war, check back in a month
+			if = {
+				limit = {
+					any_war = {
+						defender = { character = ROOT }
+						NOT = { any_defender = { any_tributary = { character = ROOT } } }
+					}
+				}
+			}
+			suzerain = { character_event = { id = EDTSuzerainBuff.1100 days = 30 } }
+			character_event = { id = EDTSuzerainBuff.1002 days = 30 }
+		}
+	}
+}
+
 # Calculate total realm size of tributaries, and add that many copies of the suzerain buff to this character
 character_event = {
 	id = EDTSuzerainBuff.1100

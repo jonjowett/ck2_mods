@@ -1,7 +1,7 @@
 # Audax Validator EnableCommentMetadata
 
 # Equivalent to "tributary_cb" ("# 55") in 00_cb_types
-# Only can_use has been changegd from the vanilla version
+# Only can_use has been changed from the vanilla version
 
 expd_t_chainable_extort_tributary_cb = {
 	name = CB_NAME_TRIBUTARY
@@ -23,8 +23,12 @@ expd_t_chainable_extort_tributary_cb = {
 	}
 
 	can_use = {
+		
+		# Chainable CBs are enabled (ie. fail early if invalid)
+		expd_t_chainable_cbs_are_enabled = yes
+		
+		# Base game conditions
 		has_dlc = "Horse Lords"
-
 		ROOT = {
 			mercenary = no
 			OR = {

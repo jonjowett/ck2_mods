@@ -1,3 +1,23 @@
+expd_t_this_character_can_see_the_decision_to_make_root_a_protectorate = {
+	independent  = yes
+	is_landed    = yes
+	is_tributary = no
+	OR = {
+		is_within_diplo_range = ROOT
+		expd_t_this_character_can_see_debug_mode_decisions = yes
+	}
+	OR = {
+		ai = no
+		NOT = { has_global_flag = expd_t_rule_no_ai_protectors }
+	}
+}
+
+expd_t_this_character_is_independent_enough_to_become_a_protectorate_by_decision = {
+	independent  = yes
+	is_landed    = yes
+	is_tributary = no
+}
+
 expd_t_root_meets_basic_requirements_to_become_protectorate_of_from_by_decision = {
 	
 	ROOT = {
@@ -60,7 +80,7 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 			
 			# Debug mode!
 			conditional_tooltip = {
-				trigger = { FROM = { expd_t_this_character_can_use_debug_mode = yes } }
+				trigger = { FROM = { expd_t_this_character_can_see_debug_mode_decisions = yes } }
 				custom_tooltip = {
 					text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
 					always = yes
@@ -73,6 +93,12 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 				name = pressed_my_claim
 			}
 			
+			# Granted independence
+			has_opinion_modifier = {
+				who = FROM
+				name = opinion_granted_independence
+			}
+			
 			# Crusade beneficiary
 			has_opinion_modifier = {
 				who = FROM
@@ -83,7 +109,7 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 				name = opinion_granted_crusader_kingdom
 			}
 			
-			# Granted the target their primary title (which either gave them de facto independence, or the decision taker granted independence manually)
+			# Granted the target their primary title (which presumably gave them de facto independence)
 			trigger_if = {
 				limit = { real_tier = DUKE }
 				OR = {

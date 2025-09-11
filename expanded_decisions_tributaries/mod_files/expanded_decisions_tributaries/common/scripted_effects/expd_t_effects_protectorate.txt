@@ -1,0 +1,67 @@
+expd_t_from_makes_root_become_protectorate_of_from = {
+	if = {
+		limit = {
+			multiplayer = yes
+			ROOT_FROM = { expd_t_this_character_can_see_debug_mode_decisions = yes }
+		}
+		custom_tooltip = {
+			text = expd_t_debug_mode_notification_sent_tt
+			ROOT_FROM = { save_event_target_as = expd_t_debug_mode_decision_taker }
+			ROOT      = { save_event_target_as = expd_t_debug_mode_character_affected }
+			ROOT_FROM = {
+				any_player = {
+					limit = { NOT = { character = PREV } }
+					character_event = { id = EDTDebugModeNotification.2000 }
+				}
+			}
+			clear_event_target = expd_t_debug_mode_decision_taker
+			clear_event_target = expd_t_debug_mode_character_affected
+		}
+	}
+	ROOT_FROM = { expd_t_root_becomes_protectorate_of_this_character = yes }
+}
+
+expd_t_from_makes_root_become_protectorate_of_fromfrom = {
+	if = {
+		limit = {
+			multiplayer = yes
+			ROOT_FROM = { expd_t_this_character_can_see_debug_mode_decisions = yes }
+		}
+		custom_tooltip = {
+			text = expd_t_debug_mode_notification_sent_tt
+			ROOT_FROM     = { save_event_target_as = expd_t_debug_mode_decision_taker }
+			ROOT          = { save_event_target_as = expd_t_debug_mode_character_affected }
+			ROOT_FROMFROM = { save_event_target_as = expd_t_debug_mode_character_affected_other }
+			ROOT_FROM = {
+				any_player = {
+					limit = { NOT = { character = PREV } }
+					character_event = { id = EDTDebugModeNotification.1300 }
+				}
+			}
+			clear_event_target = expd_t_debug_mode_decision_taker
+			clear_event_target = expd_t_debug_mode_character_affected
+			clear_event_target = expd_t_debug_mode_character_affected_other
+		}
+	}
+	ROOT_FROMFROM = { expd_t_root_becomes_protectorate_of_this_character = yes }
+}
+
+expd_t_root_becomes_protectorate_of_this_character = {
+	make_tributary = {
+		who = ROOT
+		percentage = 0.2
+		tributary_type = expd_t_protectorate
+	}
+	hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } } # Update root's suzerain's retinue cap
+	if = {
+		limit = { ROOT = { is_primary_war_defender = yes } }
+		ROOT = {
+			show_scope_change = no
+			suzerain = {
+				show_scope_change = no
+				join_defender_wars = ROOT
+			}
+		}
+	}
+
+}

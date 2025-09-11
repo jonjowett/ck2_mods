@@ -13,6 +13,13 @@ on_new_holder_inheritance = {
 }
 
 # From = Attacker, Root = Defender
+on_war_started = {
+	events = {
+		EDTSuzerainBuff.1002
+	}
+}
+
+# From = Attacker, Root = Defender
 on_war_ended_victory = {
 	events = {
 		EDTSuzerainBuff.1000

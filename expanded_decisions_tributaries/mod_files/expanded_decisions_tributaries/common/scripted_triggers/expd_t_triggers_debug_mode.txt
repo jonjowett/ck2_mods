@@ -1,6 +1,10 @@
-expd_t_this_character_can_use_debug_mode = {
-	ai = no
+expd_t_this_character_can_see_debug_mode_decisions = {
+	expd_t_this_character_can_perform_admin_actions = yes
 	has_global_flag = expd_t_debug_mode
+}
+
+expd_t_this_character_can_perform_admin_actions = {
+	ai = no
 	OR = {
 		multiplayer = no
 		is_multiplayer_host_character = yes

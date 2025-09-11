@@ -47,21 +47,22 @@ character_event = {
 }
 
 character_event = {
-	id       = EDTDebugModeNotification.2000
-	desc     = EDTDebugModeNotification_2000_Desc
+	id       = EDTDebugModeNotification.1300
+	desc     = EDTDebugModeNotification_1300_Desc
 	title    = EDTDebugModeNotification_GenericTitle
 	picture  = GFX_evt_camaraderie
 	portrait = event_target:expd_t_debug_mode_decision_taker
 	is_triggered_only = yes
 	option = {
 		show_portrait = event_target:expd_t_debug_mode_character_affected
+		show_portrait = event_target:expd_t_debug_mode_character_affected_other
 		name = OK
 	}
 }
 
 character_event = {
-	id       = EDTDebugModeNotification.3000
-	desc     = EDTDebugModeNotification_3000_Desc
+	id       = EDTDebugModeNotification.2000
+	desc     = EDTDebugModeNotification_2000_Desc
 	title    = EDTDebugModeNotification_GenericTitle
 	picture  = GFX_evt_camaraderie
 	portrait = event_target:expd_t_debug_mode_decision_taker

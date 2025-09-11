@@ -50,8 +50,12 @@ expd_t_chainable_permanent_tributary_cb = { # New8
 	}
 	
 	can_use = {
+		
+		# Chainable CBs are enabled (ie. fail early if invalid)
+		expd_t_chainable_cbs_are_enabled = yes
+		
+		# Base game conditions
 		has_dlc = "Jade Dragon"
-
 		ROOT = {
 			NOT = {
 				has_game_rule = {

@@ -19,26 +19,18 @@ targetted_decisions = {
 		ai_check_interval = 6
 		
 		from_potential = {
-			independent  = yes
-			is_landed    = yes
-			is_tributary = no
-			OR = {
-				is_within_diplo_range = ROOT
-				expd_t_this_character_can_use_debug_mode = yes
-			}
+			expd_t_this_character_can_see_the_decision_to_make_root_a_protectorate = yes
 		}
 		
 		potential = {
-			independent  = yes
-			is_landed    = yes
-			is_tributary = no
+			expd_t_this_character_is_independent_enough_to_become_a_protectorate_by_decision = yes
 		}
 		
 		allow = {
 			
 			# Debug mode bypasses all allow block requirements (if you're a player) (so you can force-protectorise independent rulers)
 			trigger_if = {
-				limit = { FROM = { expd_t_this_character_can_use_debug_mode = yes } }
+				limit = { FROM = { expd_t_this_character_can_see_debug_mode_decisions = yes } }
 				custom_tooltip = {
 					text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
 					always = yes
@@ -54,32 +46,7 @@ targetted_decisions = {
 		}
 		
 		effect = {
-			if = {
-				limit = {
-					multiplayer = yes
-					FROM = { expd_t_this_character_can_use_debug_mode = yes }
-				}
-				custom_tooltip = {
-					text = expd_t_debug_mode_notification_sent_tt
-					FROM = { save_event_target_as = expd_t_debug_mode_decision_taker }
-					ROOT = { save_event_target_as = expd_t_debug_mode_character_affected }
-					FROM = { any_player = { character_event = { id = EDTDebugModeNotification.2000 } } }
-					clear_event_target = expd_t_debug_mode_decision_taker
-					clear_event_target = expd_t_debug_mode_character_affected
-				}
-			}
-			FROM = {
-				make_tributary = {
-					who = ROOT
-					percentage = 0.2
-					tributary_type = expd_t_protectorate
-				}
-			}
-			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
-			if = {
-				limit = { ROOT = { is_primary_war_defender = yes } }
-				FROM = { join_defender_wars = ROOT }
-			}
+			expd_t_from_makes_root_become_protectorate_of_from = yes
 		}
 		
 		ai_will_do = {
@@ -101,26 +68,18 @@ targetted_decisions = {
 		ai_check_interval = 24
 		
 		from_potential = {
-			independent  = yes
-			is_landed    = yes
-			is_tributary = no
-			OR = {
-				is_within_diplo_range = ROOT
-				expd_t_this_character_can_use_debug_mode = yes
-			}
+			expd_t_this_character_can_see_the_decision_to_make_root_a_protectorate = yes
 		}
 		
 		potential = {
-			independent  = yes
-			is_landed    = yes
-			is_tributary = no
+			expd_t_this_character_is_independent_enough_to_become_a_protectorate_by_decision = yes
 		}
 		
 		allow = {
 			
 			# Debug mode bypasses all allow block requirements (if you're a player) (so you can evaluate AI acceptance)
 			trigger_if = {
-				limit = { FROM = { expd_t_this_character_can_use_debug_mode = yes } }
+				limit = { FROM = { expd_t_this_character_can_see_debug_mode_decisions = yes } }
 				custom_tooltip = {
 					text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
 					always = yes
@@ -235,32 +194,7 @@ targetted_decisions = {
 		}
 		
 		effect = {
-			if = {
-				limit = {
-					multiplayer = yes
-					FROM = { expd_t_this_character_can_use_debug_mode = yes }
-				}
-				custom_tooltip = {
-					text = expd_t_debug_mode_notification_sent_tt
-					FROM = { save_event_target_as = expd_t_debug_mode_decision_taker }
-					ROOT = { save_event_target_as = expd_t_debug_mode_character_affected }
-					FROM = { any_player = { character_event = { id = EDTDebugModeNotification.2000 } } }
-					clear_event_target = expd_t_debug_mode_decision_taker
-					clear_event_target = expd_t_debug_mode_character_affected
-				}
-			}
-			FROM = {
-				make_tributary = {
-					who = ROOT
-					percentage = 0.2
-					tributary_type = expd_t_protectorate
-				}
-			}
-			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
-			if = {
-				limit = { ROOT = { is_primary_war_defender = yes } }
-				FROM = { join_defender_wars = ROOT }
-			}
+			expd_t_from_makes_root_become_protectorate_of_from = yes
 		}
 		
 		ai_will_do = {
@@ -723,9 +657,11 @@ targetted_decisions = {
 			# Effect of being a holy order or mercenary band (IE: Can raise their own probably-rather-large band to defend themselves)
 			additive_modifier = {
 				value = -200
-				OR = {
-					holy_order = yes
-					mercenary = yes
+				any_demesne_title = {
+					OR = {
+						holy_order = yes
+						mercenary = yes
+					}
 				}
 			}
 			
@@ -1003,56 +939,56 @@ targetted_decisions = {
 			
 			# Effect of distance (if the protector is further away then they are less likely to be effective)
 			additive_modifier = {
-				value = -50
+				value = -100
 				distance_from_realm = {
 					who = FROM
 					value >= 100
 				}
 			}
 			additive_modifier = {
-				value = -50
+				value = -100
 				distance_from_realm = {
 					who = FROM
 					value >= 200
 				}
 			}
 			additive_modifier = {
-				value = -100
+				value = -150
 				distance_from_realm = {
 					who = FROM
 					value >= 300
 				}
 			}
 			additive_modifier = {
-				value = -100
+				value = -150
 				distance_from_realm = {
 					who = FROM
 					value >= 400
 				}
 			}
 			additive_modifier = {
-				value = -150
+				value = -200
 				distance_from_realm = {
 					who = FROM
 					value >= 500
 				}
 			}
 			additive_modifier = {
-				value = -150
+				value = -200
 				distance_from_realm = {
 					who = FROM
 					value >= 600
 				}
 			}
 			additive_modifier = {
-				value = -200
+				value = -250
 				distance_from_realm = {
 					who = FROM
 					value >= 700
 				}
 			}
 			additive_modifier = {
-				value = -200
+				value = -250
 				distance_from_realm = {
 					who = FROM
 					value >= 800
@@ -1071,98 +1007,11 @@ targetted_decisions = {
 				value = 10000
 				custom_tooltip = {
 					text = EXPD_T_REASON_DEBUG_MODE_ENABLED
-					FROM = { expd_t_this_character_can_use_debug_mode = yes }
+					FROM = { expd_t_this_character_can_see_debug_mode_decisions = yes }
 				}
 			}
 			
 		}
-	}
-	
-	expd_t_change_type_to_protectorate = {
-		# This decision allows players to change permanent tributaries into protectorates
-		# FROM = suzerain; ROOT = tributary
-		
-		only_independent = yes
-		filter = independent_rulers
-		
-		# This decision is only for players!
-		ai_target_filter = none
-		
-		from_potential = {
-			independent  = yes
-			is_landed    = yes
-			is_tributary = no
-			ai           = no
-		}
-		
-		potential = {
-			independent  = yes
-			is_landed    = yes
-			is_tributary = {
-				type = permanent
-				suzerain = FROM
-			}
-		}
-		
-		allow = {
-			always = yes
-		}
-		
-		effect = {
-			FROM = {
-				make_tributary = {
-					who = ROOT
-					percentage = 0.2
-					tributary_type = expd_t_protectorate
-				}
-			}
-			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
-		}
-		
-	}
-	
-	expd_t_change_type_to_vanilla_permanent = {
-		# This decision allows players to change permanent tributaries into protectorates
-		# (Potentially useful for removing the mod from an ongoing save)
-		# FROM = suzerain; ROOT = tributary
-		
-		only_independent = yes
-		filter = independent_rulers
-		
-		# This decision is only for players!
-		ai_target_filter = none
-		
-		from_potential = {
-			independent  = yes
-			is_landed    = yes
-			is_tributary = no
-			ai           = no
-		}
-		
-		potential = {
-			independent  = yes
-			is_landed    = yes
-			is_tributary = {
-				type = expd_t_protectorate
-				suzerain = FROM
-			}
-		}
-		
-		allow = {
-			always = yes
-		}
-		
-		effect = {
-			FROM = {
-				make_tributary = {
-					who = ROOT
-					percentage = 0.2
-					tributary_type = permanent
-				}
-			}
-			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
-		}
-		
 	}
 	
 }
@@ -1200,9 +1049,12 @@ decisions = {
 			
 			OR = {
 				
-				# Get out for free if you're a player in debug mode
+				# Get out for free if you're a player in single-player and are in debug mode
 				trigger_if = {
-					limit = { expd_t_this_character_can_use_debug_mode = yes }
+					limit = {
+						multiplayer = no
+						expd_t_this_character_can_see_debug_mode_decisions = yes
+					}
 					custom_tooltip = {
 						text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
 						always = yes
@@ -1264,20 +1116,7 @@ decisions = {
 			}
 		}
 		effect = {
-			if = {
-				limit = {
-					multiplayer = yes
-					expd_t_this_character_can_use_debug_mode = yes
-				}
-				custom_tooltip = {
-					text = expd_t_debug_mode_notification_sent_tt
-					ROOT     = { save_event_target_as = expd_t_debug_mode_decision_taker }
-					suzerain = { save_event_target_as = expd_t_debug_mode_character_affected }
-					any_player = { character_event = { id = EDTDebugModeNotification.3000 } }
-					clear_event_target = expd_t_debug_mode_decision_taker
-					clear_event_target = expd_t_debug_mode_character_affected
-				}
-			}
+			# No need to notify anyone if you got out due to debug mode, because this is only meaningful in single-player.
 			any_suzerain = {
 				character_event = { id = JD.2200 }
 				remove_tributary = ROOT

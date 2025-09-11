@@ -2,7 +2,7 @@
 
 # Equivalent to "liberate_religion" ("# New6") in 01_cb_types
 # Only can_use and can_use_gui have been changed from the vanilla version
-# DAlso, deleted the duplicate is_valid_title block that's present in vanilla
+# Also, deleted the duplicate is_valid_title block that's present in vanilla
 
 expd_t_religious_liberation_cb = {
 	name = CB_NAME_LIBERATE_RELIGION
@@ -51,6 +51,11 @@ expd_t_religious_liberation_cb = {
 	}
 
 	can_use = {
+		
+		# Chainable CBs are enabled (ie. fail early if invalid)
+		expd_t_chainable_cbs_are_enabled = yes
+		
+		# Base game conditions
 		OR = {
 			has_dlc = "Holy Fury" 
 			has_dlc = "Jade Dragon"
