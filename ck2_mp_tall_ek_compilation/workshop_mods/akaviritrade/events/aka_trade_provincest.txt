@@ -1,0 +1,121 @@
+namespace = zakatrade
+
+#North Akavir Trade Points of Interest
+#Credit to whoever developed the ruin system for this format
+character_event = {
+	id = zakatrade.0
+	hide_window = yes
+	
+	is_triggered_only = yes
+	
+	only_rulers = yes
+	
+	trigger = {
+		OR = {
+			owns = 764 #Lautah
+			owns = 845 #Shingen
+			owns = 786 #Sarcal
+			owns = 792 #Cirat
+			owns = 795 #Chanubi
+			owns = 840 #Meralang
+			owns = 836 #Papraya
+			owns = 833 #Towesi
+			owns = 806 #Cotu
+			owns = 818 #Volatra
+			owns = 860 #Binaiki
+			owns = 805 #Karitu
+			owns = 802 #Gorling
+			owns = 760 #Chungzi
+			owns = 815 #Changzi
+			owns = 1270 #Baobao
+			owns = 780 #Ho Bei
+			owns = 821 #Yichung
+			owns = 847 #Nanchung
+
+		}
+		NOT = { has_global_flag = n_akavir_poi_set }
+	}
+	
+		immediate = {
+		any_demesne_province = {
+			trigger_switch = {
+				on_trigger = province_id
+				764 = {add_province_modifier = { modifier = north_akavir_trade_poi duration = -1}} 
+				845 = {add_province_modifier = { modifier = north_akavir_trade_poi duration = -1}}
+				786 = {add_province_modifier = { modifier = north_akavir_trade_poi duration = -1}}
+				792 = {add_province_modifier = { modifier = north_akavir_trade_poi duration = -1}}
+				795 = {add_province_modifier = { modifier = north_akavir_trade_poi duration = -1}}
+				840 = {add_province_modifier = { modifier = akavir_river_trade_poi duration = -1}}
+				836 = {add_province_modifier = { modifier = akavir_river_trade_poi duration = -1}}
+				833 = {add_province_modifier = { modifier = akavir_river_trade_poi duration = -1}}
+				806 = {add_province_modifier = { modifier = akavir_river_trade_poi duration = -1}}		
+				818 = {add_province_modifier = { modifier = volatra_trade_poi duration = -1}}	
+				860 = {add_province_modifier = { modifier = volatra_trade_poi duration = -1}}	
+				805 = {add_province_modifier = { modifier = volatra_trade_poi duration = -1}}	
+				802 = {add_province_modifier = { modifier = volatra_trade_poi duration = -1}}	
+				760 = {add_province_modifier = { modifier = po_tun_trade_poi duration = -1}}	
+				815 = {add_province_modifier = { modifier = po_tun_trade_poi duration = -1}}	
+				1270 = {add_province_modifier = { modifier = po_tun_trade_poi duration = -1}}	
+				780 = {add_province_modifier = { modifier = po_tun_coastal_trade_poi duration = -1}}
+				821 = {add_province_modifier = { modifier = po_tun_coastal_trade_poi duration = -1}}
+				847 = {add_province_modifier = { modifier = po_tun_trade_poi duration = -1}}					
+			}
+		}
+	}
+	set_global_flag = n_akavir_poi_set	
+}
+
+#Niben River Route Points of Interest
+character_event = {
+	id = zakatrade.2
+	hide_window = yes
+	
+	is_triggered_only = yes
+	
+	only_rulers = yes
+	
+	trigger = {
+		OR = {
+			owns = 1 #Imperial Isle
+			owns = 10 #Bravil
+			owns = 13 #Leyawiin
+			owns = 211
+			owns = 1065
+			owns = 218
+			owns = 102
+			owns = 208
+			owns = 244
+			owns = 222 #Rimmen
+			owns = 595
+			owns = 528
+			owns = 119 #Blackrose
+		}
+		NOT = { has_global_flag = niben_poi_set }
+		
+	}
+	
+	immediate = {
+		any_demesne_province = {
+			trigger_switch = {
+				on_trigger = province_id
+				1 = {
+					add_province_modifier = { modifier = imperial_isle_poi duration = -1}
+					add_province_modifier = { modifier = niben_river_route_poi duration = -1}
+				}
+				10 = {add_province_modifier = { modifier = niben_river_route_poi duration = -1}}
+				13 = {add_province_modifier = { modifier = niben_river_route_poi duration = -1}}
+				211 = {add_province_modifier = { modifier = niben_river_route_poi duration = -1}}
+				1065 = {add_province_modifier = { modifier = niben_river_route_poi duration = -1}}
+				218 = {add_province_modifier = { modifier = niben_river_route_poi duration = -1}}
+				102 = {add_province_modifier = { modifier = niben_river_route_poi duration = -1}}
+				208 = {add_province_modifier = { modifier = niben_river_route_poi duration = -1}}
+				244 = {add_province_modifier = { modifier = niben_river_route_poi duration = -1}}
+				595 = {add_province_modifier = { modifier = niben_river_route_poi duration = -1}}
+				528 = {add_province_modifier = { modifier = niben_river_route_poi duration = -1}}
+				222 = {add_province_modifier = { modifier = niben_river_route_inland_poi duration = -1}}
+				119 = {add_province_modifier = { modifier = niben_river_route_inland_poi duration = -1}}
+			}
+		}
+	}
+	set_global_flag = niben_poi_set	
+}

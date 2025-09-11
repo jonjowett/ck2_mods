@@ -1,0 +1,211 @@
+north_akavir_trade = {
+	wealth = 50
+	trade_post_display_trigger = {
+		OR = {
+			province_id = 764 #Lautah
+			province_id = 845 #Shingen
+			province_id = 786 #Sarcal
+			province_id = 792 #Cirat
+			province_id = 795 #Chanubi
+		}
+	}
+
+	modifier = {	# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.01
+		city_tax_modifier = 0.01
+		temple_tax_modifier = 0.01
+		tribal_tax_modifier = 0.01
+		trade_route_value = 2.5
+		local_movement_speed = 0.025
+		tech_growth_modifier = 0.025
+		icon = 4
+	}
+
+	start = {
+		764 # Lautah
+	}
+	path = { #Lautah - Shingen
+		764 992 845
+	}
+	path = { #Shingen - Kinora
+		845 853 1009 1008
+	}
+	path = { #Kinora - Segaji
+		1008 1158 1006
+	}
+	path = { #Lautah - Sarcal
+		764 777 784 1272 786
+	}
+	path = { #Sarcal - Topara River
+		786 1219 1218 1011
+	}
+	path = { #Lower Topara - Upper Topara 
+		1011 1218 1219
+	}
+	path = { #Upper Topara - Batar
+		1219 789
+	}
+	path = { #Lower Topara - Giru Torat
+		1011 790
+	}
+	path = { #lower Topara - Cirat
+		1011 792
+	}
+	path = { #Cirat - Chanubi
+		792 1259 795
+	}
+	path = { #Chanubi - Mekaya
+		795 797 796 808
+	}
+	path = { #Chanubi - Totoshi
+		795 794
+	}
+}
+		
+akavir_river_trade = {
+	wealth = 40
+	trade_post_display_trigger = {
+		OR = {
+			province_id = 840 # Meralang
+			province_id = 833 # Towesi
+			province_id = 836 # Papraya
+			province_id = 806 # Cotu
+		}
+	}
+
+	modifier = {	# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.01
+		city_tax_modifier = 0.01
+		temple_tax_modifier = 0.01
+		tribal_tax_modifier = 0.01
+		trade_route_value = 2.5
+		local_movement_speed = 0.025
+		tech_growth_modifier = 0.025
+		icon = 4
+	}
+	
+	start = {
+		840 # Meralang
+	}
+	path = { #Meralang - Meratsies River Delta
+		840 1245 1244 1243 
+	}
+	path = { #Meralang - Meratsies Source
+		840 1246
+	}
+	path = { #Meratsies Source - Cotu
+		1246 856 806 
+	}
+	path = { #Meratsies River Delta - Towesi
+		1243 833
+	}
+	path = { #Meratsies River Delta - Kariwesi
+		1243 832
+	}
+	path = { #Kariwesi - Papraya
+		832 836
+	}
+	path = { #Papraya - Pameirra River
+		836 1242
+	}
+	path = {#Pameirra River - Tilang
+		1242 838
+	}
+	path = {#Pameirra River - Focsat
+		1242 837
+	}
+}
+		
+volatra_trade_route = {
+	wealth = 38
+	trade_post_display_trigger = {
+		OR = {
+			province_id = 818 # Volatra
+			province_id = 860 # Binaiki
+			province_id = 805 # Karitu
+			province_id = 802 # Gorling
+		}
+	}
+
+	modifier = {	# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.01
+		city_tax_modifier = 0.01
+		temple_tax_modifier = 0.01
+		tribal_tax_modifier = 0.01
+		trade_route_value = 2.5
+		local_movement_speed = 0.05
+		tech_growth_modifier = 0.025
+		icon = 4
+	}
+	
+	start = {
+		818 # Volatra
+	}
+	path = {#Voltara-Binaiki
+		818 828 860
+	}
+	path = {#Voltara - Volwesi Lagoon
+		818 1241
+	}
+	path = {#Volwesi Lagoon - Manggara
+		1241 1254
+	}
+	path = {#Volwesi Lagoon - Zedaya
+		1241 1266
+	}
+	path = {#Manggara - Karitu
+		1254 805
+	}
+	path = {# Karitu - Gorling
+		805 804 802
+	}
+	path = {#Voltara - Gorling
+		818 817 814 803 841 802
+	}
+	path = {#Binaiki - Sumyaw
+		860 862 863
+	}
+}	
+
+islander_trade = {
+	wealth = 28
+	trade_post_display_trigger = {
+		OR = {
+			province_id = 873 # Pedraha
+			province_id = 735 # Esroniet
+			province_id = 731 # Yneslea
+			province_id = 444 # Quey
+			
+		}
+	}
+
+	modifier = {	# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.01
+		city_tax_modifier = 0.01
+		temple_tax_modifier = 0.01
+		tribal_tax_modifier = 0.01
+		trade_route_value = 2.5
+		local_movement_speed = 0.025
+		tech_growth_modifier = 0.025
+		icon = 4
+	}
+	
+	start = {
+		808 # Mekaya
+	}
+	path = {#Mekaya - Pedraha
+		808 1105 736 1088 873
+	}
+	path = {#Pedraha - Kidal
+		873 872 739 
+	}
+	path = {#Kidal - Esroniet
+		739 735
+	}
+	path = {#Kidal - Yneslea
+		739 1116 731
+	}
+	path = {#Yneslea - Quey
+		731 1055 1173 1047 444
+	}
+}

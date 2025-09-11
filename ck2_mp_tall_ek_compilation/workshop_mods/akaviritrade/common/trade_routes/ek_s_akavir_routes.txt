@@ -1,0 +1,221 @@
+akavir_mountain_trade = {
+	wealth = 20
+	trade_post_display_trigger = {
+		OR = {
+			province_id = 825 #Amalam
+			province_id = 850 #Hawlok
+			province_id = 755 #Panyat
+			province_id = 919 #Puchang
+		}
+	}
+	
+	modifier = {	# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.01
+		city_tax_modifier = 0.01
+		temple_tax_modifier = 0.01
+		tribal_tax_modifier = 0.01
+		trade_route_value = 2.5
+		local_movement_speed = 0.025
+		tech_growth_modifier = 0.025
+		icon = 4
+
+	}
+	
+	start = {
+		825 # Amalam
+	}
+	path = {#Amalam - Darjar
+		825 871 870
+	}
+	path = {#Amalam - Hawlok
+		825 848 850
+	}
+	path = {#Hawlok - Panyat
+		850 823 762 755
+	}
+	path = {#Darjar - Taku
+		870 823
+	}
+	path = {#Taku - Puchang
+		823 919
+	}
+	path = {#Panyat - Puchang
+		755 1217 919
+	}
+}
+		
+kan_so_trade = {
+	wealth = 40
+	trade_post_display_trigger = {
+		OR = {
+			province_id = 1249 #Kansi
+			province_id = 1248 #Kangala
+			province_id = 912 #Chondahan
+			province_id = 913 #Burising
+			province_id = 887 #Mahala
+		}
+	}
+
+	modifier = {	# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.01
+		city_tax_modifier = 0.01
+		temple_tax_modifier = 0.01
+		tribal_tax_modifier = 0.01
+		trade_route_value = 2.5
+		local_movement_speed = 0.025
+		tech_growth_modifier = 0.025
+		icon = 4
+	}
+	
+	start = {
+		1249 # Kan Si
+	}
+	path = {#Kan Si - Upper Kan So
+		1249 1240 1239
+	}
+	path = {#Lower Kan So - Upper Kan So
+		1239 1240
+	}
+	path = {#Upper Kan So - Kankham
+		1240 758
+	}
+	path = {#Lower Kan So - Singalam
+		1239 1260
+	}
+	path = {#Singalam - Tanghet
+		1239 1248 1172
+	}
+	path = {#Lower Kan So - Mahawat
+		1239 888 905
+	}
+	path = {#Mahawat - Lampang
+		905 912
+	}
+	path = {#Mahawat - Burising
+		905 913
+	}
+	path = {#Simian Gulf - Sunken Sea
+		1172 1178 1168 
+	}
+	path = {#Sunken Sea - Chon Ang
+		1168 1005
+	}
+	path = {#Sunken Sea - Sinak
+		1168 887 881
+	}
+}
+
+po_tun_trade = {
+	wealth = 35
+	trade_post_display_trigger = {
+		OR = {
+			province_id = 760 #Chungzi
+			province_id = 815 #Changzi
+			province_id = 1270 #Baobao
+			province_id = 847 #Nanchung
+			province_id = 780 #Ho Bei
+			province_id = 821 #Yichung
+		}
+	}
+
+	modifier = {	# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.01
+		city_tax_modifier = 0.01
+		temple_tax_modifier = 0.01
+		tribal_tax_modifier = 0.01
+		trade_route_value = 2.5
+		local_movement_speed = 0.025
+		tech_growth_modifier = 0.025
+		icon = 4
+	}
+	
+	start = {
+		1262 # Hua Zi
+	}
+	path = {#Hua Zi - Chungzi
+		1262 760
+	}
+	path = {#Hua Zi - Changzi
+		1262 1252 765 1264 815
+	}
+	path = {#Chungzi - Hianwo
+		760 766 767 
+	}
+	path = {#Hianwo - Nanchung
+		767 847
+	}
+	path = {#Hianwo - Baobao
+		767 771 1270
+	}
+	path = {#Hianwo - Far Sea
+		767 769 1164
+		
+	}
+	path = {#Far Sea - Ho Bei
+		1164 780
+	}
+	path = {#Ho Bei - Hengyuan
+		780 773
+	}
+	path = {#Far Sea - Yichung
+		1164 821
+	}
+	path = {#Nanchung - Yichung
+		847 1255 821
+	}
+	path = {#Baobao - Yichung
+		1270 1255 821
+	}
+}
+
+lang_din_trade = {
+	wealth = 40
+	trade_post_display_trigger = {
+		OR = {
+			province_id = 753 #Tang Yala
+			province_id = 750 #Ratchata
+			province_id = 741 #Ang Het
+			province_id = 995 #Siman
+		}
+	}
+
+	modifier = {	# How the trade route modifies the provinces it passes
+		castle_tax_modifier = 0.01
+		city_tax_modifier = 0.01
+		temple_tax_modifier = 0.01
+		tribal_tax_modifier = 0.01
+		trade_route_value = 2.5
+		local_movement_speed = 0.025
+		tech_growth_modifier = 0.025
+		icon = 4
+	}
+	
+	start = {
+		753 # Tang Yala
+		750 # Ratchata
+	}
+	path = {#Tang Yala - Ang Het
+		753 1044 743 741
+	}
+	path = {#Tang Yala - Simian Sea
+		753 1185
+	}
+	path = {#Simian Sea - Ratchasima
+		1185 751
+	} 
+	path = {#Simian Sea - Siman
+		1185 1171 1029 995
+	}
+	path = {#Ratchata - Udon Thani
+		750 1211 1166 938
+	}
+	path = {#Ratchata - Eastern Rim
+		750 1174
+	}
+	path = {#Eastern Rim - Thayala
+		1174 745
+	}
+	path = {#Eastern Rim - Siman
+		1174 742 995
+	}
+}

@@ -1,0 +1,65 @@
+dwemer_group = {
+	has_coa_on_barony_only = yes
+	graphical_culture = muslimgfx
+	crusade_cb = crusade
+	playable = yes
+	hostile_within_group = yes
+	
+	color = { 255 187 0 }
+
+	ai_convert_same_group = 2
+	ai_convert_other_group = 2
+	
+	dwemer_religion = {
+		graphical_culture = muslimgfx
+
+		icon = 82
+		heresy_icon = 82
+		color = { 255 187 0 }
+
+		crusade_name = "Sundering"
+		scripture_name = DivineMetaphysics
+		
+		piety_name = INVENTION
+		
+		high_god_name = MUNDUS
+		
+		god_names = {
+			MUNDUS
+		}
+		evil_god_names = {
+			FALSE_GODS
+		}
+		
+		divine_blood = yes #most knowledge of the Dwemer regards the race as a whole
+		pc_marriage = yes
+		bs_marriage = yes
+		allow_rivermovement = yes
+		uses_jizya_tax = yes
+		allow_looting = yes
+		can_call_crusade = no
+		can_excommunicate = no
+		can_grant_divorce = no
+		can_grant_claim = no
+		priests_can_marry = no
+		investiture = no
+		female_temple_holders = no
+		can_retire_to_monastery = no
+		priests_can_inherit = no
+		short_reign_opinion_year_mult = 4 # The default is 2
+		feminist = yes
+		intermarry = nine_divines
+		intermarry = eight_divines
+		intermarry = auriel
+		intermarry = elrang
+		aggression = 2.0
+		has_heir_designation = yes
+		
+		character_modifier = {
+			tech_growth_modifier = 0.3
+			economy_techpoints = 0.05
+			military_techpoints = 0.05
+			culture_techpoints = 0.05
+		}
+	}
+}
