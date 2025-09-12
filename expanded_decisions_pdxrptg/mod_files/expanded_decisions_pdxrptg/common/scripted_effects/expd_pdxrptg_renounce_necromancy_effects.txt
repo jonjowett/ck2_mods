@@ -1,0 +1,158 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_this_character_renounces_necromancy = {
+	
+	# Audax Validator "." Ignore_NEXT
+	remove_trait = necromancer
+	custom_tooltip = { text = expd_pdxrptg_necromancy_separator_tt }
+	
+	add_character_modifier = {
+		name     = expd_pdxrptg_renounced_necromancy_permanent
+		duration = -1
+	}
+	custom_tooltip = { text = expd_pdxrptg_renounced_necromancy_permanent_added_tt }
+	custom_tooltip = { text = expd_pdxrptg_necromancy_separator_tt }
+	
+	add_character_modifier = {
+		name     = expd_pdxrptg_renounced_necromancy_semi_permanent
+		duration = -1
+	}
+	custom_tooltip = { text = expd_pdxrptg_renounced_necromancy_semi_permanent_added_tt }
+	custom_tooltip = { text = expd_pdxrptg_necromancy_separator_tt }
+	
+	custom_tooltip = {
+		text = expd_pdxrptg_renounced_necromancy_temporary_summary_tt
+		remove_character_modifiers = {
+			name     = expd_pdxrptg_renounced_necromancy_temporary
+			amount   = 999
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_renounced_necromancy_temporary
+			years    = 5
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_renounced_necromancy_temporary
+			years    = 10
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_renounced_necromancy_temporary
+			years    = 15
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_renounced_necromancy_temporary
+			years    = 20
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_renounced_necromancy_temporary
+			years    = 25
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_renounced_necromancy_temporary
+			years    = 30
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_renounced_necromancy_temporary
+			years    = 40
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_renounced_necromancy_temporary
+			years    = 50
+			stacking = yes
+		}
+	}
+	
+}
+
+expd_pdxrptg_this_character_restarts_necromancy = {
+	
+	# First, show a prominent warning if resuming necromancy will get you kicked out of your guild.
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					society_member_of = mages_guild_tamriel
+					has_global_flag = mages_tamriel_necromancy_banned
+				}
+				AND = {
+					society_member_of = mages_guild_akavir
+					has_global_flag = mages_akavir_necromancy_banned
+				}
+			}
+		}
+		custom_tooltip = { text = expd_pdxrptg_necromancy_warning_banned_in_your_mages_guild_tt }
+		custom_tooltip = { text = expd_pdxrptg_necromancy_separator_tt }
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	add_trait = necromancer
+	custom_tooltip = { text = expd_pdxrptg_necromancy_separator_tt }
+	
+	remove_character_modifier = expd_pdxrptg_renounced_necromancy_semi_permanent
+	custom_tooltip = { text = expd_pdxrptg_necromancy_separator_tt }
+	
+	custom_tooltip = {
+		text = expd_pdxrptg_restarted_necromancy_temporary_summary_tt
+		remove_character_modifiers = {
+			name   = expd_pdxrptg_restarted_necromancy_temporary
+			amount = 999
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_restarted_necromancy_temporary
+			years    = 10
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_restarted_necromancy_temporary
+			years    = 20
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_restarted_necromancy_temporary
+			years    = 30
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_restarted_necromancy_temporary
+			years    = 40
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_restarted_necromancy_temporary
+			years    = 50
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_restarted_necromancy_temporary
+			years    = 60
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_restarted_necromancy_temporary
+			years    = 70
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_restarted_necromancy_temporary
+			years    = 80
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_restarted_necromancy_temporary
+			years    = 90
+			stacking = yes
+		}
+		add_character_modifier = {
+			name     = expd_pdxrptg_restarted_necromancy_temporary
+			years    = 100
+			stacking = yes
+		}
+	}
+	
+}

@@ -1,0 +1,64 @@
+# Audax Validator EnableCommentMetadata
+# Audax Validator "!" Ignore_NEXT
+
+### Character lifespan
+# Regular (0-100)
+is_short_lived = {
+	custom_tooltip = {
+		text = is_short_lived_text
+		hidden_tooltip = {
+			NOT = { is_immortal = yes }
+			NOT = { should_receive_elven_immortality = yes }
+		}
+	}
+}
+# Elven (0-400)
+is_long_lived = {
+	custom_tooltip = {
+		text = is_long_lived_text
+		hidden_tooltip = {
+			NOT = { is_immortal = yes }
+			
+			should_receive_elven_immortality = yes
+		}
+	}
+}
+should_receive_elven_immortality = {
+	OR = {
+		is_altmer = yes
+		is_ayleid = yes
+		is_bosmer = yes
+		is_chimer = yes
+		is_dunmer = yes
+		is_maormer = yes
+		is_falmer = yes
+		is_dwemer = yes
+		is_tsaesci = yes #Included as theoretically descended from Mer and maintain immortality
+		trait = dremora #Included as Dremora will be functionally identical to Mer
+		
+		has_character_modifier = immortality_pseudo_long_lived
+	}
+}
+# Immortal (0-infinity)
+is_immortal = {
+	custom_tooltip = {
+		text = is_immortal_text
+		hidden_tooltip = {
+			OR = {
+				is_undead = yes
+				
+				trait = clone
+				trait = dremora
+				trait = hagraven
+				trait = immortal
+				trait = sload # Added for consistency, because Sload have immortality in their racial trait
+				trait = soulless_clavicus
+				is_dragon = yes
+				
+				trait = the_ideal_masters
+				is_almsivi_god = yes
+				is_daedric_prince = yes
+			}
+		}
+	}
+}

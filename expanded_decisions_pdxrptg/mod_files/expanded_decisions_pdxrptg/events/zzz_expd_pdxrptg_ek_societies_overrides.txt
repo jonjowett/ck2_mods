@@ -1,0 +1,105 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = eksocieties
+
+# When your grandmaster threatens to kick you out due to being a necromancer, you can drop your necromancy using the decision in this mod.
+
+# Prevent false-positive in Validator (event is_triggered_only but is never called)
+# Audax Validator "." Ignore_NEXT
+letter_event = {
+	
+	id = eksocieties.220
+	
+	# Audax Validator "." Ignore_NEXT
+	desc = EKSocieties220
+	
+	# Bugfix: Letter events may not have a picture
+	#picture = GFX_evt_scandal
+	
+	is_in_society = yes
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		# Audax Validator "." Ignore_NEXT
+		trait = necromancer
+		OR = {
+			AND = {
+				society_member_of = mages_guild_tamriel
+				has_global_flag = mages_tamriel_necromancy_banned
+			}
+			AND = {
+				society_member_of = mages_guild_akavir
+				has_global_flag = mages_akavir_necromancy_banned
+			}
+		}
+	}
+	
+	# Renounce necromancy
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = EKSocieties220OptA
+		ai_chance = {
+			factor = 10
+			modifier = { #No one who worships an necromancy religion will do this
+				factor = 0
+				true_religion_scope = {
+					# Audax Validator "." Ignore_NEXT
+					is_necromancy_religion = yes
+				}
+			}
+			modifier = { #Undead characters have a stake in undead not being persecuted
+				factor = 0.5
+				# Audax Validator "." Ignore_NEXT
+				is_undead = yes
+			}
+		}
+		expd_pdxrptg_this_character_renounces_necromancy = yes
+		# Audax Validator "." Ignore_NEXT
+		FROM = {
+			letter_event = {
+				# Audax Validator "." Ignore_NEXT
+				id = eksocieties.221
+			}
+		}
+	}
+	
+	# Stay necromancer and be kicked out
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = EKSocieties220OptB
+		ai_chance = {
+			factor = 10
+			modifier = { #No one who worships an anti-necromancy religion will do this
+				factor = 0
+				true_religion_scope = {
+					# Audax Validator "." Ignore_NEXT
+					is_anti_necromancy_religion = yes
+				}
+			}
+		}
+		if = {
+			limit = { society_member_of = mages_guild_tamriel }
+			custom_tooltip = {
+				text = expd_pdxrptg_necromancy_warning_cannot_rejoin_mages_guild_tamriel_while_necromancy_is_banned_tt
+				set_character_flag = quit_mages_tamriel_necromancy_banned
+			}
+			if = { limit = { is_in_society = yes } leave_society = yes }
+		}
+		if = {
+			limit = { society_member_of = mages_guild_akavir }
+			custom_tooltip = {
+				text = expd_pdxrptg_necromancy_warning_cannot_rejoin_mages_guild_akavir_while_necromancy_is_banned_tt
+				set_character_flag = quit_mages_akavir_necromancy_banned
+			}
+			if = { limit = { is_in_society = yes } leave_society = yes }
+		}
+		# Audax Validator "." Ignore_NEXT
+		FROM = {
+			letter_event = {
+				# Audax Validator "." Ignore_NEXT
+				id = eksocieties.222
+			}
+		}
+	}
+}
