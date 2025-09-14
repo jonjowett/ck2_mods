@@ -1,7 +1,10 @@
 decisions = {
 	expd_t_rules = {
 		ai = no
-		potential = { ai = no }
+		potential = {
+			ai = no
+			expd_t_another_mod_wants_to_suppress_this_decision = no
+		}
 		allow = {
 			OR = {
 				custom_tooltip = {
