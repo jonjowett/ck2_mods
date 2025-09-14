@@ -3,6 +3,7 @@ namespace = edmp_global
 # Numbering convention:
 # 1000      = Main gateway event (sole entrance & exit from the menu)
 # 2000-2999 = Casus Belli rules
+# 3000-3999 = Realm Size rules
 
 
 
@@ -31,11 +32,21 @@ character_event = {
 	}
 	
 	option = {
+		name = edmp_global_1000_evtopt_realm_size
+		hidden_tooltip = { character_event = { id = edmp_global.3000 } }
+	}
+	
+	option = {
 		name = edmp_global_evtopt_exit
 		hidden_tooltip = { clr_global_flag = edmp_global_menu_open }
 	}
 	
 }
+
+
+
+
+
 
 
 
@@ -227,6 +238,280 @@ character_event = {
 	option = {
 		name = edmp_global_evtopt_exit
 		hidden_tooltip = { character_event = { id = edmp_global.2000 } }
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+# Gateway event for the Realm Size menu.
+# This should be the ONLY entrance and ONLY exit from the Realm Size menu.
+character_event = {
+	
+	id      = edmp_global.3000
+	title   = edmp_global_3000_title
+	desc    = edmp_global_3000_desc
+	picture = GFX_evt_camaraderie
+	
+	is_triggered_only = yes
+	ai = no
+	
+	
+	
+	# Realm Size rule toggle (only one option will be visible)
+	option = {
+		name = edmp_global_3000_evtopt_realm_size_is_limited_for_players_toggle
+		trigger = { edmp_realm_size_is_limited_for_players = yes }
+		edmp_realm_size_change_to_not_limited_for_players = yes
+		hidden_tooltip = { character_event = { id = edmp_global.3000 } }
+	}
+	option = {
+		name = edmp_global_3000_evtopt_realm_size_is_not_limited_for_players_toggle
+		trigger = { edmp_realm_size_is_not_limited_for_players = yes }
+		edmp_realm_size_change_to_limited_for_players = yes
+		hidden_tooltip = { character_event = { id = edmp_global.3000 } }
+	}
+	
+	
+	
+	# Change limit button (only visible if realm size is limited)
+	option = {
+		name = edmp_global_3000_evtopt_realm_size_change
+		trigger = { edmp_realm_size_is_limited_for_players = yes }
+		hidden_tooltip = { character_event = { id = edmp_global.3100 } }
+	}
+	
+	
+	
+	# Exit, back to main menu
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+	}
+	
+}
+
+# Change the Realm Size Limit
+character_event = {
+	
+	id      = edmp_global.3100
+	title   = edmp_global_3100_title
+	desc    = edmp_global_3100_desc
+	picture = GFX_evt_camaraderie
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		if = {
+			limit = { check_variable = { which = edmp_new_realm_size_limit value == 0 } }
+			set_variable = { which = global_edmp_realm_size_limit_new which = global_edmp_realm_size_limit }
+		}
+	}
+	
+	# Increase
+	option = {
+		name = edmp_global_3100_evtopt_realm_size_increase
+		hidden_tooltip = { character_event = { id = edmp_global.3101 } }
+	}
+	
+	# Decrease
+	option = {
+		name = edmp_global_3100_evtopt_realm_size_decrease
+		hidden_tooltip = { character_event = { id = edmp_global.3102 } }
+	}
+	
+	# Cancel & Exit
+	option = {
+		name = {
+			trigger = {
+				OR = {
+					check_variable = { which = global_edmp_realm_size_limit_new which < global_edmp_realm_size_limit }
+					check_variable = { which = global_edmp_realm_size_limit_new which > global_edmp_realm_size_limit }
+				}
+			}
+			text = edmp_global_3100_evtopt_realm_size_cancel_and_exit
+		}
+		name = {
+			trigger = { check_variable = { which = global_edmp_realm_size_limit_new which == global_edmp_realm_size_limit } }
+			text = edmp_global_3100_evtopt_realm_size_exit_no_change
+		}
+		custom_tooltip = { text = edmp_global_realm_size_is_not_changed_tt }
+		hidden_tooltip = { set_variable = { which = global_edmp_realm_size_limit_new value = 0 } }
+		hidden_tooltip = { character_event = { id = edmp_global.3000 } }
+	}
+	
+	# Save & Exit
+	# Only show this button if the new limit is different to the old
+	option = {
+		name = edmp_global_3100_evtopt_realm_size_save_and_exit
+		trigger = {
+			OR = {
+				check_variable = { which = global_edmp_realm_size_limit_new which < global_edmp_realm_size_limit }
+				check_variable = { which = global_edmp_realm_size_limit_new which > global_edmp_realm_size_limit }
+			}
+		}
+		if = {
+			limit = { check_variable = { which = global_edmp_realm_size_limit_new value < 0 } }
+			custom_tooltip = {
+				text = edmp_global_realm_size_error_changed_to_zero_tt
+				set_variable = { which = global_edmp_realm_size_limit     value = 0                                }
+				set_variable = { which = global_edmp_realm_size_limit_new value = 0                                }
+			}
+		} else = {
+			custom_tooltip = {
+				text = edmp_global_realm_size_changed_to_new_value_tt
+				set_variable = { which = global_edmp_realm_size_limit     which = global_edmp_realm_size_limit_new }
+				set_variable = { which = global_edmp_realm_size_limit_new value = 0                                }
+			}
+		}
+		# TODO: Force an update of all players' realm sizes
+		if = {
+			limit = { edmp_this_is_a_multiplayer_game = yes }
+			custom_tooltip = {
+				text = edmp_gmn_player_notification_sent_tt
+				any_player = {
+					limit = { NOT = { character = PREV } }
+					character_event = { id = edmp_gmn.3100 }
+				}
+			}
+		}
+		hidden_tooltip = { character_event = { id = edmp_global.3000 } }
+	}
+	
+}
+
+# Increase
+character_event = {
+	
+	id      = edmp_global.3101
+	title   = edmp_global_3101_title
+	desc    = edmp_global_3101_desc
+	picture = GFX_evt_camaraderie
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		# Set up helper variables (used in localisation only)
+		set_variable = { which = edmp_realm_size_limit_new_value_1 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_2 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_3 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_4 which = global_edmp_realm_size_limit_new }
+		change_variable = { which = edmp_realm_size_limit_new_value_1 value =   5 }
+		change_variable = { which = edmp_realm_size_limit_new_value_2 value =  10 }
+		change_variable = { which = edmp_realm_size_limit_new_value_3 value =  25 }
+		change_variable = { which = edmp_realm_size_limit_new_value_4 value = 100 }
+	}
+	
+	option = {
+		name = edmp_global_3101_evtopt_increase_5
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =   5 } }
+	}
+	
+	option = {
+		name = edmp_global_3101_evtopt_increase_10
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =  10 } }
+	}
+	
+	option = {
+		name = edmp_global_3101_evtopt_increase_25
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =  25 } }
+	}
+	
+	option = {
+		name = edmp_global_3101_evtopt_increase_100
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value = 100 } }
+	}
+	
+	after = {
+		hidden_tooltip = {
+			# Clean up helper variables
+			set_variable = { which = edmp_realm_size_limit_new_value_1 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_2 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_3 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_4 value = 0 }
+			# Back to main realm size menu
+			character_event = { id = edmp_global.3100 }
+		}
+	}
+	
+}
+
+# Decrease
+character_event = {
+	
+	id      = edmp_global.3102
+	title   = edmp_global_3102_title
+	desc    = edmp_global_3102_desc
+	picture = GFX_evt_camaraderie
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		# Set up helper variables (used in localisation only)
+		set_variable = { which = edmp_realm_size_limit_new_value_1 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_2 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_3 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_4 which = global_edmp_realm_size_limit_new }
+		change_variable = { which = edmp_realm_size_limit_new_value_1 value =   -5 }
+		change_variable = { which = edmp_realm_size_limit_new_value_2 value =  -10 }
+		change_variable = { which = edmp_realm_size_limit_new_value_3 value =  -25 }
+		change_variable = { which = edmp_realm_size_limit_new_value_4 value = -100 }
+	}
+	
+	# NB: Don't show options if they would make the realm size limit negative, as this is nonsensical.
+	#     Also, don't show them if they would make the realm size exactly zero, since we have a special zeroisation option for this.
+	option = {
+		name = edmp_global_3102_evtopt_decrease_5
+		trigger = { check_variable = { which = global_edmp_realm_size_limit_new value > 5 } }
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =   -5 } }
+	}
+	
+	option = {
+		name = edmp_global_3102_evtopt_decrease_10
+		trigger = { check_variable = { which = global_edmp_realm_size_limit_new value > 10 } }
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =  -10 } }
+	}
+	
+	option = {
+		name = edmp_global_3102_evtopt_decrease_25
+		trigger = { check_variable = { which = global_edmp_realm_size_limit_new value > 25 } }
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =  -25 } }
+	}
+	
+	option = {
+		name = edmp_global_3102_evtopt_decrease_100
+		trigger = { check_variable = { which = global_edmp_realm_size_limit_new value > 100 } }
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value = -100 } }
+	}
+	
+	# Due to the limit on number of options in an event, we can only show this if at least one other option is not visible.
+	# So, to ensure this is visible in the most possible situations, show when the -100 option is not visible.
+	option = {
+		name = edmp_global_3102_evtopt_decrease_to_zero
+		trigger = { check_variable = { which = global_edmp_realm_size_limit_new value <= 100 } }
+		hidden_tooltip = { set_variable = { which = global_edmp_realm_size_limit_new value = 0 } }
+	}
+	
+	after = {
+		hidden_tooltip = {
+			# Clean up helper variables
+			set_variable = { which = edmp_realm_size_limit_new_value_1 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_2 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_3 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_4 value = 0 }
+			# Back to main realm size menu
+			character_event = { id = edmp_global.3100 }
+		}
 	}
 	
 }

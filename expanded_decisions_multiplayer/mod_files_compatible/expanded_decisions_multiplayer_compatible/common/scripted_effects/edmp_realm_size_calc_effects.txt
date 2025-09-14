@@ -1,0 +1,426 @@
+edmp_realm_size_calculate_for_all_relevant_characters = {
+	custom_tooltip = {
+		text = edmp_realm_size_calculate_for_all_relevant_characters_tt
+		
+		if = {
+			limit = { edmp_realm_size_is_limited_for_players = yes }
+			
+			# Unflag all unplayable characters who are flagged as human
+			# And remove all of their realm size modifiers
+			any_character = {
+				limit = { edmp_this_character_is_an_absent_human_player = yes }
+				if = {
+					limit = { is_playable = no }
+					edmp_playerflag_remove_flag_from_this_character = yes
+					edmp_realm_size_remove_all_modifiers_from_this_character = yes
+				}
+			}
+			
+			# Remove all realm size modifiers from characters who aren't human or absent players
+			any_character = {
+				limit = {
+					edmp_this_character_is_a_current_or_absent_human_player = no
+					edmp_this_character_has_any_realm_size_modifier = yes
+				}
+				edmp_realm_size_remove_all_modifiers_from_this_character = yes
+			}
+			
+			# Run the calculation for all human or absent players who do NOT have human or absent lieges.
+			# (Because running the calc on those lieges will ALSO run the calc on all of their vassals.)
+			any_playable_ruler = {
+				limit = {
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					OR = {
+						independent = yes
+						NOT = { any_liege = { edmp_this_character_is_a_current_or_absent_human_player = yes } }
+					}
+				}
+				edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
+			}
+			
+		}
+		else = {
+			# Realm size is unlimited for everyone
+			# Remove all realm size modifiers from everyone
+			any_character = {
+				limit = { edmp_this_character_has_any_realm_size_modifier = yes }
+				edmp_realm_size_remove_all_modifiers_from_this_character = yes
+			}
+		}
+		
+	}
+}
+
+edmp_realm_size_remove_all_modifiers_from_this_character = {
+	edmp_realm_size_remove_all_dynamic_modifiers_from_this_character = yes
+	edmp_realm_size_remove_all_permanent_extra_limit_modifiers_from_this_character = yes
+	edmp_realm_size_remove_all_temporary_extra_limit_modifiers_from_this_character = yes
+}
+
+edmp_realm_size_remove_all_permanent_extra_limit_modifiers_from_this_character = {
+	if = {
+		limit = { has_character_modifier = edmp_realm_size_extra_limit_stackable_permanent }
+		custom_tooltip = {
+			text = edmp_realm_size_remove_all_permanent_extra_limit_modifiers_from_this_character_tt
+			remove_character_modifiers = { name = edmp_realm_size_extra_limit_stackable_permanent amount = 100000 }
+		}
+	}
+}
+
+edmp_realm_size_remove_all_temporary_extra_limit_modifiers_from_this_character = {
+	if = {
+		limit = { has_character_modifier = edmp_realm_size_extra_limit_stackable_temporary }
+		custom_tooltip = {
+			text = edmp_realm_size_remove_all_temporary_extra_limit_modifiers_from_this_character_tt
+			remove_character_modifiers = { name = edmp_realm_size_extra_limit_stackable_temporary amount = 100000 }
+		}
+	}
+}
+
+edmp_realm_size_remove_all_dynamic_modifiers_from_this_character = {
+	edmp_realm_size_remove_all_variables_from_this_character = yes
+	remove_character_modifier = edmp_realm_size_under_limit_ai_no_effect
+	remove_character_modifier = edmp_realm_size_under_limit_player_no_effect
+	remove_character_modifier = edmp_realm_size_over_limit_ai_no_effect
+	remove_character_modifier = edmp_realm_size_recently_forced_recalculation
+	custom_tooltip = {
+		text = edmp_realm_size_remove_all_over_limit_player_stackable_modifiers_from_this_character_tt
+		remove_character_modifiers = { name = edmp_realm_size_over_limit_player_stackable amount = 100000 }
+	}
+}
+
+edmp_realm_size_remove_all_variables_from_this_character = {
+	hidden_tooltip = {
+		set_variable = { which = edmp_realm_size_total_holdings             value = 0 }
+		set_variable = { which = edmp_realm_size_total_empty                value = 0 }
+		set_variable = { which = edmp_realm_size_total_empty_temp           value = 0 }
+		set_variable = { which = edmp_realm_size_total_player_vassals       value = 0 }
+		set_variable = { which = edmp_realm_size_total_extra                value = 0 }
+		set_variable = { which = edmp_realm_size_total_extra_no_of_stacks   value = 0 }
+		set_variable = { which = edmp_realm_size_total_extra_player_vassals value = 0 }
+		set_variable = { which = edmp_realm_size_total                      value = 0 }
+		set_variable = { which = edmp_realm_size_excess                     value = 0 }
+	}
+}
+
+edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = {
+	edmp_realm_size_clear_calculated_today_flags_from_this_character_and_all_vassals = yes
+	edmp_realm_size_calculate_and_add_modifiers_to_this_character = yes
+}
+
+edmp_realm_size_clear_calculated_today_flags_from_this_character_and_all_vassals = {
+	hidden_tooltip = {
+		clr_character_flag = edmp_realm_size_calc_this_character_was_calculated_today
+		any_vassal = {
+			limit = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+			clr_character_flag = edmp_realm_size_calc_this_character_was_calculated_today
+		}
+	}
+}
+
+edmp_realm_size_calculate_and_add_modifiers_to_this_character = {
+	if = {
+		limit = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+		custom_tooltip = {
+			text = edmp_realm_size_calculate_and_add_modifiers_to_this_character_tt
+			any_vassal = {
+				limit = {
+					lower_real_tier_than = PREV
+					real_tier = BARON
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					NOT = { has_character_flag = edmp_realm_size_calc_this_character_was_calculated_today }
+				}
+				edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = yes
+				PREV = { clr_character_flag = edmp_realm_size_calc_this_character_was_calculated_today } # Vassal was recalced, so this char needs to be recalced
+			}
+			any_vassal = {
+				limit = {
+					lower_real_tier_than = PREV
+					real_tier = COUNT
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					NOT = { has_character_flag = edmp_realm_size_calc_this_character_was_calculated_today }
+				}
+				edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = yes
+				PREV = { clr_character_flag = edmp_realm_size_calc_this_character_was_calculated_today } # Vassal was recalced, so this char needs to be recalced
+			}
+			any_vassal = {
+				limit = {
+					lower_real_tier_than = PREV
+					real_tier = DUKE
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					NOT = { has_character_flag = edmp_realm_size_calc_this_character_was_calculated_today }
+				}
+				edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = yes
+				PREV = { clr_character_flag = edmp_realm_size_calc_this_character_was_calculated_today } # Vassal was recalced, so this char needs to be recalced
+			}
+			any_vassal = {
+				limit = {
+					lower_real_tier_than = PREV
+					real_tier = KING
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					NOT = { has_character_flag = edmp_realm_size_calc_this_character_was_calculated_today }
+				}
+				edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = yes
+				PREV = { clr_character_flag = edmp_realm_size_calc_this_character_was_calculated_today } # Vassal was recalced, so this char needs to be recalced
+			}
+			if = {
+				limit = { NOT = { has_character_flag = edmp_realm_size_calc_this_character_was_calculated_today } }
+				edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = yes
+			}
+		}
+	}
+	else = {
+		edmp_realm_size_remove_all_modifiers_from_this_character = yes
+	}
+}
+
+edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
+	
+	save_event_target_as = edmp_realm_size_character_being_calculated
+	
+	# Store this character's realm size excess prior to calculation, for notifications
+	set_variable = { which = edmp_realm_size_excess_before value = 0 }
+	if = {
+		limit = { has_character_flag = edmp_realm_size_calc_force_notification }
+		clr_character_flag = edmp_realm_size_calc_force_notification
+	}
+	if = {
+		limit = { check_variable = { which = edmp_realm_size_total value == 0 } } # No value was stored
+		set_variable = { which = edmp_realm_size_excess_before value = -987654321 } # Dummy number
+		set_character_flag = edmp_realm_size_calc_force_notification
+	}
+	else = {
+		set_variable = { which = edmp_realm_size_excess_before which = edmp_realm_size_excess }
+		# Human character with AI modifiers (ie. rejoined after absence)
+		if = {
+			limit = {
+				ai = no
+				OR = {
+					has_character_modifier = edmp_realm_size_under_limit_ai_no_effect
+					has_character_modifier = edmp_realm_size_over_limit_ai_no_effect
+				}
+			}
+			set_character_flag = edmp_realm_size_calc_force_notification
+		}
+	}
+	
+	# Remove all dynamic modifiers from the character
+	edmp_realm_size_remove_all_dynamic_modifiers_from_this_character = yes
+	
+	# Calculate & record: Total number of holdings in realm
+	export_to_variable = { which = edmp_realm_size_total_holdings value = realm_size }
+	
+	# Calculate & record: Total number of empty holding slots in tribal/nomadic counties
+	set_variable = { which = edmp_realm_size_total_empty value = 0 }
+	any_title_under = {
+		limit = {
+			tier = COUNT
+			holder_scope = {
+				OR = {
+					is_tribal = yes
+					is_nomadic = yes
+				}
+			}
+		}
+		event_target:edmp_realm_size_character_being_calculated = {
+			export_to_variable = {
+				which = edmp_realm_size_total_empty_temp
+				value = num_of_empty_holdings
+				who   = PREV
+			}
+			change_variable = {
+				which = edmp_realm_size_total_empty
+				which = edmp_realm_size_total_empty_temp
+			}
+		}
+	}
+	set_variable = { which = edmp_realm_size_total_empty_temp value = 0 }
+	
+	# Calculate & record: Total number of holdings in player vassals
+	# Calculate & record: Total extra realm size granted to player vassals
+	set_variable = { which = edmp_realm_size_total_player_vassals       value = 0 }
+	set_variable = { which = edmp_realm_size_total_extra_player_vassals value = 0 }
+	any_vassal = {
+		limit = {
+			lower_real_tier_than = PREV
+			is_ruler = yes
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+		}
+		# Copy vassal's variables into global variables
+		set_variable = { which = global_edmp_realm_size_temp_player_vassal_total       which = edmp_realm_size_total       }
+		set_variable = { which = global_edmp_realm_size_temp_player_vassal_total_extra which = edmp_realm_size_total_extra }
+		# Subtract the vassal's variables from the relevant variables of the char being calculated
+		event_target:edmp_realm_size_character_being_calculated = {
+			subtract_variable = {
+				which = edmp_realm_size_total_player_vassals
+				which = global_edmp_realm_size_temp_player_vassal_total # This is expected to be POSITIVE, and we want the variable on this character to be NEGATIVE (or zero), so we want to SUBTRACT
+			}
+			change_variable = {
+				which = edmp_realm_size_total_extra_player_vassals
+				which = global_edmp_realm_size_temp_player_vassal_total_extra # This is expected to be NEGATIVE (or zero), and we want the variable on this character to be NEGATIVE (or zero), so we want to ADD
+			}
+		}
+		# Destroy the temporary global variables
+		set_variable = { which = global_edmp_realm_size_temp_player_vassal_total       value = 0 }
+		set_variable = { which = global_edmp_realm_size_temp_player_vassal_total_extra value = 0 }
+	}
+	
+	# Calculate & record: Total extra realm size granted to this character
+	set_variable = { which = edmp_realm_size_total_extra              value = 0 }
+	set_variable = { which = edmp_realm_size_total_extra_no_of_stacks value = 0 }
+	while = {
+		limit = {
+			has_instances_of_character_modifier = {
+				name   = edmp_realm_size_extra_limit_stackable_permanent
+				amount > edmp_realm_size_total_extra_no_of_stacks
+			}
+		}
+		change_variable = { which = edmp_realm_size_total_extra_no_of_stacks value = 1 }
+	}
+	while = {
+		limit = {
+			has_instances_of_character_modifier = {
+				name   = edmp_realm_size_extra_limit_stackable_temporary
+				amount > edmp_realm_size_total_extra_no_of_stacks
+			}
+		}
+		change_variable = { which = edmp_realm_size_total_extra_no_of_stacks value = 1 }
+	}
+	set_variable      = { which = edmp_realm_size_total_extra which = edmp_realm_size_total_extra_no_of_stacks }
+	multiply_variable = { which = edmp_realm_size_total_extra value = -10 } # Each instance of the modifier grants 10 extra realm size limit
+	set_variable = { which = edmp_realm_size_total_extra_no_of_stacks value = 0 }
+	
+	# Calculate & record: Total realm size of this character
+	set_variable    = { which = edmp_realm_size_total value = 0 }
+	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_holdings }
+	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_empty }
+	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_extra }
+	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_player_vassals }
+	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_extra_player_vassals }
+	
+	# Calculate & record: Excess realm size of this character above the limit
+	set_variable      = { which = edmp_realm_size_excess which = edmp_realm_size_total }
+	subtract_variable = { which = edmp_realm_size_excess which = global_edmp_realm_size_limit }
+	
+	# Apply the appropriate modifier(s) to this character
+	if = {
+		limit = { check_variable = { which = edmp_realm_size_excess value <= 0 } } # Under or equal to the limit
+		if = {
+			limit = { ai = no }
+			add_character_modifier = {
+				name     = edmp_realm_size_under_limit_player_no_effect
+				duration = -1
+				inherit  = yes
+			}
+		}
+		else = {
+			add_character_modifier = {
+				name     = edmp_realm_size_under_limit_ai_no_effect
+				duration = -1
+				inherit  = yes
+			}
+		}
+	}
+	else = { # Over the limit
+		if = {
+			limit = { ai = yes }
+			add_character_modifier = {
+				name     = edmp_realm_size_over_limit_ai_no_effect
+				duration = -1
+				inherit  = yes
+			}
+		}
+		else = {
+			set_variable = { which = edmp_realm_size_excess_modifiers_added value = 0 }
+			while = {
+				limit = { check_variable = { which = edmp_realm_size_excess_modifiers_added which < edmp_realm_size_excess } }
+				add_character_modifier = {
+					name     = edmp_realm_size_over_limit_player_stackable
+					duration = -1
+					inherit  = yes
+					stacking = yes
+				}
+				change_variable = { which = edmp_realm_size_excess_modifiers_added value = 1 }
+			}
+			set_variable = { which = edmp_realm_size_excess_modifiers_added value = 0 }
+		}
+	}
+	
+	# Notify the character of any important change
+	set_variable      = { which = edmp_realm_size_excess_increase which = edmp_realm_size_excess        }
+	subtract_variable = { which = edmp_realm_size_excess_increase which = edmp_realm_size_excess_before }
+	if = {
+		limit = {
+			ai = no # Only ever notify humans
+			OR = {
+				# Notification forced for some reason
+				has_character_flag = edmp_realm_size_calc_force_notification
+				has_global_flag    = edmp_realm_size_calc_force_notify_all_players
+				# Realm size excess changed from negative (good) to positive (bad)
+				AND = {
+					check_variable = { which = edmp_realm_size_excess_before   value <= 0 }
+					check_variable = { which = edmp_realm_size_excess          value >  0 }
+				}
+				# Realm size excess changed from positive (bad) to negative (good)
+				AND = {
+					check_variable = { which = edmp_realm_size_excess_before   value >  0 }
+					check_variable = { which = edmp_realm_size_excess          value <= 0 }
+				}
+				# Realm size excess is >5 and has increased by at least 5 since last calc
+				AND = {
+					check_variable = { which = edmp_realm_size_excess          value >  5 }
+					check_variable = { which = edmp_realm_size_excess_increase value >= 5 }
+				}
+			}
+		}
+		
+		character_event = { id = EDMPRealmSize.2000 }
+		
+	}
+	
+	# Record the fact that this character has been calculated today, and schedule the removal of that record tomorrow
+	set_character_flag = edmp_realm_size_calc_this_character_was_calculated_today
+	character_event = { id = EDMPRealmSize.1101 days = 1 }
+	
+	# Cleanup
+	set_variable = { which = edmp_realm_size_excess_before value = 0 }
+	set_variable = { which = edmp_realm_size_excess_increase value = 0 }
+	clr_character_flag = edmp_realm_size_calc_force_notification
+	clear_event_target = edmp_realm_size_character_being_calculated
+	
+}
+
+edmp_realm_size_refresh_this_characters_stackable_extra_limit_temporary_modifiers = {
+	if = {
+		limit = { has_character_modifier = edmp_realm_size_extra_limit_stackable_temporary }
+		custom_tooltip = {
+			text = edmp_realm_size_refresh_this_characters_stackable_extra_limit_temporary_modifiers_tt
+			set_variable = { which = edmp_realm_size_extra_temp value = 0 }
+			while = {
+				limit = {
+					has_instances_of_character_modifier = {
+						name   = edmp_realm_size_extra_limit_stackable_temporary
+						amount > edmp_realm_size_extra_temp
+					}
+				}
+				change_variable = { which = edmp_realm_size_extra_temp value = 1 }
+			}
+			edmp_realm_size_remove_all_temporary_extra_limit_modifiers_from_this_character = yes
+			while = {
+				limit = {
+					has_instances_of_character_modifier = {
+						name   = edmp_realm_size_extra_limit_stackable_temporary
+						amount < edmp_realm_size_extra_temp
+					}
+				}
+				add_character_modifier = {
+					name     = edmp_realm_size_extra_limit_stackable_temporary
+					years    = 3
+					inherit  = yes
+					stacking = yes
+				}
+			}
+			set_variable = { which = edmp_realm_size_extra_temp value = 0 }
+		}
+	}
+}

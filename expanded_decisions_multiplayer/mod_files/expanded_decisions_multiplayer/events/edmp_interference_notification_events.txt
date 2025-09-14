@@ -311,6 +311,30 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_offmap_currency_remove_1k }
 		text                        = edmp_ifn_5001_desc_singlechar_offmap_currency_remove_1k
 	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_grant_10_perm }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_grant_10_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_grant_100_perm }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_grant_100_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_grant_10_temp }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_grant_10_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_grant_100_temp }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_grant_100_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_prolong_temp }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_prolong_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_revoke_all }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_revoke_all
+	}
 	
 	# I am the target: good/bad => excellent/curses
 	option = {
@@ -412,6 +436,12 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_piety_remove_1k
 			clr_global_flag    = edmp_interference_singlechar_offmap_currency_grant_1k
 			clr_global_flag    = edmp_interference_singlechar_offmap_currency_remove_1k
+			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_10_perm
+			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_100_perm
+			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_10_temp
+			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_100_temp
+			clr_global_flag    = edmp_interference_singlechar_realm_size_prolong_temp
+			clr_global_flag    = edmp_interference_singlechar_realm_size_revoke_all
 			
 			clr_global_flag    = edmp_interference_singlechar_bad
 			

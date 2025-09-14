@@ -1,0 +1,51 @@
+edmp_realm_size_is_limited_for_players = {
+	custom_tooltip = {
+		text = edmp_realm_size_is_limited_for_players_tt
+		has_global_flag = edmp_realm_size_limited
+	}
+}
+
+edmp_realm_size_is_not_limited_for_players = {
+	custom_tooltip = {
+		text = edmp_realm_size_is_not_limited_for_players_tt
+		NOT = { has_global_flag = edmp_realm_size_limited }
+	}
+}
+
+edmp_this_character_has_any_realm_size_modifier = {
+	custom_tooltip = {
+		text = edmp_this_character_has_any_realm_size_modifier_tt
+		OR = {
+			has_character_modifier = edmp_realm_size_under_limit_ai_no_effect
+			has_character_modifier = edmp_realm_size_under_limit_player_no_effect
+			has_character_modifier = edmp_realm_size_over_limit_ai_no_effect
+			has_character_modifier = edmp_realm_size_over_limit_player_stackable
+			has_character_modifier = edmp_realm_size_recently_forced_recalculation
+			edmp_this_character_has_at_least_one_extra_limit_modifier = yes
+		}
+	}
+}
+
+edmp_this_character_has_at_least_one_extra_limit_modifier = {
+	custom_tooltip = {
+		text = edmp_this_character_has_at_least_one_extra_limit_modifier_tt
+		OR = {
+			edmp_this_character_has_at_least_one_temporary_extra_limit_modifier = yes
+			edmp_this_character_has_at_least_one_permanent_extra_limit_modifier = yes
+		}
+	}
+}
+
+edmp_this_character_has_at_least_one_temporary_extra_limit_modifier = {
+	custom_tooltip = {
+		text = edmp_this_character_has_at_least_one_temporary_extra_limit_modifier_tt
+		has_character_modifier = edmp_realm_size_extra_limit_stackable_temporary
+	}
+}
+
+edmp_this_character_has_at_least_one_permanent_extra_limit_modifier = {
+	custom_tooltip = {
+		text = edmp_this_character_has_at_least_one_permanent_extra_limit_modifier_tt
+		has_character_modifier = edmp_realm_size_extra_limit_stackable_permanent
+	}
+}

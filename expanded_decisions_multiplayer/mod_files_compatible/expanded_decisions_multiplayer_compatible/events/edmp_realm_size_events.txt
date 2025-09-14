@@ -1,0 +1,123 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = EDMPRealmSize
+
+# on_startup : Recalc this character's realm size
+character_event = {
+	id = EDMPRealmSize.1000
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		edmp_realm_size_is_limited_for_players = yes
+		OR = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+			edmp_this_character_has_any_realm_size_modifier = yes
+		}
+	}
+	immediate = {
+		
+		# Turn on forced notifications
+		if = {
+			limit = { NOT = { has_global_flag = edmp_realm_size_calc_force_notify_all_players } }
+			set_global_flag = edmp_realm_size_calc_force_notify_all_players
+		}
+		
+		# Trigger the normal recalc process for this character
+		character_event = { id = EDMPRealmSize.1100 }
+		
+		# If there are no current or absent human players who have not been recalculated
+		#    IE: If   ALL current or absent human players     HAVE     been recalculated
+		# Then disable the global forced notification
+		if = {
+			limit = {
+				NOT = {
+					any_character = {
+						edmp_this_character_is_a_current_or_absent_human_player = yes
+						NOT = { has_character_flag = edmp_realm_size_calc_this_character_was_calculated_today }
+					}
+				}
+			}
+			clr_global_flag = edmp_realm_size_calc_force_notify_all_players
+		}
+		
+	}
+}
+
+
+
+
+
+# on_yearly_pulse (and from above) : Recalc this character's realm size
+character_event = {
+	id = EDMPRealmSize.1100
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		edmp_realm_size_is_limited_for_players = yes
+		OR = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+			edmp_this_character_has_any_realm_size_modifier = yes
+		}
+	}
+	immediate = {
+		edmp_realm_size_calculate_and_add_modifiers_to_this_character = yes
+	}
+}
+character_event = {
+	id = EDMPRealmSize.1101
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		clr_character_flag = edmp_realm_size_calc_this_character_was_calculated_today
+	}
+}
+
+
+
+
+
+# Notify this character of their newly calculated realm size
+character_event = {
+	id = EDMPRealmSize.2000
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	immediate = {
+		if = {
+			limit = { check_variable = { which = edmp_realm_size_excess value <= 0 } }
+			character_event = { id = EDMPRealmSize.2001 } # Good
+		}
+		else = {
+			character_event = { id = EDMPRealmSize.2002 } # Bad
+		}
+	}
+}
+character_event = {
+	id      = EDMPRealmSize.2001
+	title   = EDMPRealmSize_2000_Title
+	desc    = EDMPRealmSize_2000_Desc_Good
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
+	# Validator thinks long frame is incorrect; it's not.
+	# Audax Validator "." Ignore_NEXT
+	border  = GFX_event_long_frame_economy # Green frame (good)
+	is_triggered_only = yes
+	option  = {
+		name = EDMPRealmSize_2000_EvtOpt_OK
+	}
+}
+character_event = {
+	id      = EDMPRealmSize.2002
+	title   = EDMPRealmSize_2000_Title
+	desc    = EDMPRealmSize_2000_Desc_Bad
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
+	# Validator thinks long frame is incorrect; it's not.
+	# Audax Validator "." Ignore_NEXT
+	border  = GFX_event_long_frame_war     # Red frame (bad)
+	is_triggered_only = yes
+	option  = {
+		name = EDMPRealmSize_2000_EvtOpt_Curses
+		tooltip_info = yes
+	}
+}

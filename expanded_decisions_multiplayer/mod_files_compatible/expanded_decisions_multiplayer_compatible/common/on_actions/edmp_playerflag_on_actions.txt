@@ -1,0 +1,23 @@
+# Automatically flag all human players
+on_startup = {
+	events = {
+		EDMPPlayerFlag.1000
+	}
+}
+
+# Inherit player flag on abdication
+on_new_holder = {
+	events = {
+		EDMPPlayerFlag.2000
+	}
+}
+on_new_holder_inheritance = {
+	events = {
+		EDMPPlayerFlag.2000
+	}
+} 
+on_new_holder_usurpation = {
+	events = {
+		EDMPPlayerFlag.2000
+	}
+}

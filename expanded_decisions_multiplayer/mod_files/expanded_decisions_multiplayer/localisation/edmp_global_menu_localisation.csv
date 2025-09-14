@@ -19,6 +19,11 @@ edmp_global_checkmark_unchecked;§g-§!;;;;;;;;;;;;;x
 edmp_global_1000_title;(ED:MP) Main Menu;;;;;;;;;;;;;x
 edmp_global_1000_desc;Please select the dynamic game rule you wish to manage:;;;;;;;;;;;;;x
 edmp_global_1000_evtopt_cbs;Casus Belli;;;;;;;;;;;;;x
+edmp_global_1000_evtopt_realm_size;Realm Size (currently: [edmp_global_realm_size_limit_status]);;;;;;;;;;;;;x
+#
+#
+#
+#
 #
 # CB menu
 edmp_global_2000_title;(ED:MP) Casus Belli;;;;;;;;;;;;;x
@@ -49,3 +54,48 @@ edmp_global_2200_evtopt_set_subjugations_enabled;Set Subjugation Rule: Enabled f
 edmp_global_2200_evtopt_set_duke_plus_disabled_without_explicit_permission;Set Subjugation Rule: Human players need permission to subjugate dukes, kings & emperors;;;;;;;;;;;;;x
 edmp_global_2200_evtopt_set_king_plus_disabled_without_explicit_permission;Set Subjugation Rule: Human players need permission to subjugate kings & emperors;;;;;;;;;;;;;x
 edmp_global_2200_evtopt_set_emperor_plus_disabled_without_explicit_permission;Set Subjugation Rule: Human players need permission to subjugate emperors;;;;;;;;;;;;;x
+#
+#
+#
+#
+#
+#
+# Realm Size Menu
+edmp_global_3000_title;(ED:MP) Realm Size Limit;;;;;;;;;;;;;x
+edmp_global_3000_desc;The "Realm Size Limit" is a feature designed to encourage tall play: human players receive escalating penalties if their realm size exceeds this limit.\nIn this context, "realm size" is the total number of holdings (as normal), plus the total number of empty holding slots in tribal and nomadic counties.\nCurrent status: [edmp_global_realm_size_limit_status];;;;;;;;;;;;;x
+edmp_global_3000_evtopt_realm_size_is_limited_for_players_toggle;Current: Limited --- Change to: Not Limited;;;;;;;;;;;;;x
+edmp_global_3000_evtopt_realm_size_is_not_limited_for_players_toggle;Current: Not Limited --- Change to: Limited;;;;;;;;;;;;;x
+edmp_global_3000_evtopt_realm_size_change;Change Limit (Current Limit: [Root.global_edmp_realm_size_limit.GetValue]);;;;;;;;;;;;;x
+#
+# Realm Size Rule Summary (via custom loc)
+edmp_global_realm_size_limit_status_disabled;Not limited;;;;;;;;;;;;;x
+edmp_global_realm_size_limit_status_enabled;Limited to [Root.global_edmp_realm_size_limit.GetValue] for human players;;;;;;;;;;;;;x
+#
+# Change Realm Size Limit
+edmp_global_3100_title;(ED:MP) Change Realm Size Limit;;;;;;;;;;;;;x
+edmp_global_3100_desc;The new realm size limit is ONLY applied if you click "Save and Exit" below. (This button will only be visible if the new limit is different to the old.) Until then, you may freely adjust the "new limit", and there will be no gameplay impact.\nOld Limit = [global_edmp_realm_size_limit.GetValue]\nNew Limit = [global_edmp_realm_size_limit_new.GetValue];;;;;;;;;;;;;x
+edmp_global_3100_evtopt_realm_size_increase;Increase;;;;;;;;;;;;;x
+edmp_global_3100_evtopt_realm_size_decrease;Decrease;;;;;;;;;;;;;x
+edmp_global_3100_evtopt_realm_size_exit_no_change;Exit (without making any changes);;;;;;;;;;;;;x
+edmp_global_3100_evtopt_realm_size_cancel_and_exit;Cancel & Exit;;;;;;;;;;;;;x
+edmp_global_realm_size_is_not_changed_tt;The realm size limit is NOT changed.\n(The limit remains at §Y[Root.global_edmp_realm_size_limit.GetValue]§!, and players are NOT notified.);;;;;;;;;;;;;x
+edmp_global_3100_evtopt_realm_size_save_and_exit;Save & Exit;;;;;;;;;;;;;x
+edmp_global_realm_size_error_changed_to_zero_tt;§RERROR!§! New realm size limit is invalid! Realm size limit will change to §Yzero§!.;;;;;;;;;;;;;x
+edmp_global_realm_size_changed_to_new_value_tt;Realm size limit changes from §Y[Root.global_edmp_realm_size_limit.GetValue]§! to §Y[Root.global_edmp_realm_size_limit_new.GetValue]§!;;;;;;;;;;;;;x
+#
+# Increase
+edmp_global_3101_title;(ED:MP) Increase Realm Size Limit;;;;;;;;;;;;;x
+edmp_global_3101_desc;Choose the size of the increase.\nNB: This change will not be finalised until you click "Save & Exit" on the main menu.;;;;;;;;;;;;;x
+edmp_global_3101_evtopt_increase_5;+5 (New limit: [Root.edmp_realm_size_limit_new_value_1.GetValue]);;;;;;;;;;;;;x
+edmp_global_3101_evtopt_increase_10;+10 (New limit: [Root.edmp_realm_size_limit_new_value_2.GetValue]);;;;;;;;;;;;;x
+edmp_global_3101_evtopt_increase_25;+25 (New limit: [Root.edmp_realm_size_limit_new_value_3.GetValue]);;;;;;;;;;;;;x
+edmp_global_3101_evtopt_increase_100;+100 (New limit: [Root.edmp_realm_size_limit_new_value_4.GetValue]);;;;;;;;;;;;;x
+#
+# Decrease
+edmp_global_3102_title;(ED:MP) Decrease Realm Size Limit;;;;;;;;;;;;;x
+edmp_global_3102_desc;Choose the size of the decrease.\nNB: This change will not be finalised until you click "Save & Exit" on the main menu.;;;;;;;;;;;;;x
+edmp_global_3102_evtopt_decrease_5;-5 (New limit: [Root.edmp_realm_size_limit_new_value_1.GetValue]);;;;;;;;;;;;;x
+edmp_global_3102_evtopt_decrease_10;-10 (New limit: [Root.edmp_realm_size_limit_new_value_2.GetValue]);;;;;;;;;;;;;x
+edmp_global_3102_evtopt_decrease_25;-25 (New limit: [Root.edmp_realm_size_limit_new_value_3.GetValue]);;;;;;;;;;;;;x
+edmp_global_3102_evtopt_decrease_100;-100 (New limit: [Root.edmp_realm_size_limit_new_value_4.GetValue]);;;;;;;;;;;;;x
+edmp_global_3102_evtopt_decrease_to_zero;Decrease to zero;;;;;;;;;;;;;x

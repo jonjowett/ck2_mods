@@ -1,0 +1,45 @@
+edmp_realm_size_change_to_limited_for_players = {
+	custom_tooltip = {
+		text = edmp_realm_size_change_to_limited_for_players_tt
+		clr_global_flag = edmp_realm_size_limited
+		set_global_flag = edmp_realm_size_limited
+	}
+	if = {
+		limit = { check_variable = { which = global_edmp_realm_size_limit value == 0 } }
+		custom_tooltip = {
+			text = edmp_realm_size_limit_set_to_default_50_tt
+			set_variable = { which = global_edmp_realm_size_limit value = 50 }
+		}
+	}
+	else = {
+		custom_tooltip = { text = edmp_realm_size_limit_set_to_previous_value_tt }
+	}
+	edmp_realm_size_calculate_for_all_relevant_characters = yes
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_gmn_player_notification_sent_tt
+			any_player = {
+				limit = { NOT = { character = PREV } }
+				character_event = { id = edmp_gmn.2200 }
+			}
+		}
+	}
+}
+
+edmp_realm_size_change_to_not_limited_for_players = {
+	custom_tooltip = {
+		text = edmp_realm_size_change_to_not_limited_for_players_tt
+		clr_global_flag = edmp_realm_size_limited
+	}
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_gmn_player_notification_sent_tt
+			any_player = {
+				limit = { NOT = { character = PREV } }
+				character_event = { id = edmp_gmn.3000 }
+			}
+		}
+	}
+}

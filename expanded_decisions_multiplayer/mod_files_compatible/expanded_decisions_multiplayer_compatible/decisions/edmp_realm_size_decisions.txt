@@ -1,0 +1,37 @@
+decisions = {
+	
+	edmp_realm_size_recalc_all = {
+		ai = no
+		potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_realm_size_is_limited_for_players = yes
+		}
+		allow = { always = yes }
+		effect = { edmp_realm_size_calculate_for_all_relevant_characters = yes }
+	}
+	
+	edmp_realm_size_recalc_mine = {
+		ai = no
+		potential = {
+			edmp_realm_size_is_limited_for_players = yes
+		}
+		allow = {
+			custom_tooltip = {
+				text = edmp_realm_size_has_not_recently_recalculated_realm_size_tt
+				NOT = { has_character_modifier = edmp_realm_size_recently_forced_recalculation }
+			}
+		}
+		effect = {
+			hidden_tooltip = { set_global_flag = edmp_realm_size_calc_force_notify_all_players }
+			edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
+			hidden_tooltip = { clr_global_flag = edmp_realm_size_calc_force_notify_all_players }
+			# Add the modifier AFTER forcing the recalc, because otherwise it will be removed during the process.
+			add_character_modifier = {
+				name   = edmp_realm_size_recently_forced_recalculation
+				months = 3
+			}
+		}
+	}
+	
+}

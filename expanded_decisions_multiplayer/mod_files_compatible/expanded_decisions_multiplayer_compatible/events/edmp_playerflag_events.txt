@@ -1,0 +1,183 @@
+namespace = EDMPPlayerFlag
+
+# Called by on_startup
+# If in MP and this character is the MP host, perform the necessary administrative actions
+character_event = {
+	
+	id = EDMPPlayerFlag.1000
+	is_triggered_only = yes
+	hide_window = yes
+	
+	ai = no
+	
+	trigger = {
+		multiplayer = yes
+		is_multiplayer_host_character = yes
+	}
+	
+	immediate = {
+		character_event = { id = EDMPPlayerFlag.1001 }
+		character_event = { id = EDMPPlayerFlag.1002 }
+	}
+}
+
+# Add a player flag to every player character
+character_event = {
+	
+	id = EDMPPlayerFlag.1001
+	is_triggered_only = yes
+	hide_window = yes
+	
+	ai = no
+	
+	immediate = {
+		any_player = {
+			edmp_playerflag_add_flag_to_this_character = yes
+		}
+	}
+	
+}
+
+# Notify the host of all characters flagged as absent players
+character_event = {
+	
+	id      = EDMPPlayerFlag.1002
+	title   = EDMPPlayerFlag_1002_Title
+	picture = GFX_evt_camaraderie
+	
+	desc = {
+		trigger = { check_variable = { which = edmp_playerflag_absent_human_count value <= 9 } }
+		text = EDMPPlayerFlag_1002_Desc_AllShown
+	}
+	desc = {
+		trigger = { check_variable = { which = edmp_playerflag_absent_human_count value >  9 } }
+		text = EDMPPlayerFlag_1002_Desc_First9Shown
+	}
+	
+	hide_from = yes
+	is_triggered_only = yes
+	
+	ai = no
+	
+	trigger = {
+		any_character = { edmp_this_character_is_an_absent_human_player = yes }
+	}
+	
+	immediate = {
+		set_variable = { which = edmp_playerflag_absent_human_count value = 0 }
+		clear_event_target = edmp_playerflag_absent_human_1
+		clear_event_target = edmp_playerflag_absent_human_2
+		clear_event_target = edmp_playerflag_absent_human_3
+		clear_event_target = edmp_playerflag_absent_human_4
+		clear_event_target = edmp_playerflag_absent_human_5
+		clear_event_target = edmp_playerflag_absent_human_6
+		clear_event_target = edmp_playerflag_absent_human_7
+		clear_event_target = edmp_playerflag_absent_human_8
+		clear_event_target = edmp_playerflag_absent_human_9
+		any_character = {
+			limit = { edmp_this_character_is_an_absent_human_player = yes }
+			ROOT = { change_variable = { which = edmp_playerflag_absent_human_count value = 1 } }
+			if = {
+				limit = { ROOT = { check_variable = { which = edmp_playerflag_absent_human_count value == 1 } } }
+				save_event_target_as = edmp_playerflag_absent_human_1
+			}
+			else_if = {
+				limit = { ROOT = { check_variable = { which = edmp_playerflag_absent_human_count value == 2 } } }
+				save_event_target_as = edmp_playerflag_absent_human_2
+			}
+			else_if = {
+				limit = { ROOT = { check_variable = { which = edmp_playerflag_absent_human_count value == 3 } } }
+				save_event_target_as = edmp_playerflag_absent_human_3
+			}
+			else_if = {
+				limit = { ROOT = { check_variable = { which = edmp_playerflag_absent_human_count value == 4 } } }
+				save_event_target_as = edmp_playerflag_absent_human_4
+			}
+			else_if = {
+				limit = { ROOT = { check_variable = { which = edmp_playerflag_absent_human_count value == 5 } } }
+				save_event_target_as = edmp_playerflag_absent_human_5
+			}
+			else_if = {
+				limit = { ROOT = { check_variable = { which = edmp_playerflag_absent_human_count value == 6 } } }
+				save_event_target_as = edmp_playerflag_absent_human_6
+			}
+			else_if = {
+				limit = { ROOT = { check_variable = { which = edmp_playerflag_absent_human_count value == 7 } } }
+				save_event_target_as = edmp_playerflag_absent_human_7
+			}
+			else_if = {
+				limit = { ROOT = { check_variable = { which = edmp_playerflag_absent_human_count value == 8 } } }
+				save_event_target_as = edmp_playerflag_absent_human_8
+			}
+			else_if = {
+				limit = { ROOT = { check_variable = { which = edmp_playerflag_absent_human_count value == 9 } } }
+				save_event_target_as = edmp_playerflag_absent_human_9
+			}
+			else = {
+				# Can't show more than 9 portraits - do nothing
+			}
+		}
+	}
+	
+	option = {
+		name = EDMPPlayerFlag_1002_EvtOpt_OK
+		show_portrait = event_target:edmp_playerflag_absent_human_1
+		show_portrait = event_target:edmp_playerflag_absent_human_2
+		show_portrait = event_target:edmp_playerflag_absent_human_3
+		show_portrait = event_target:edmp_playerflag_absent_human_4
+		show_portrait = event_target:edmp_playerflag_absent_human_5
+		show_portrait = event_target:edmp_playerflag_absent_human_6
+		show_portrait = event_target:edmp_playerflag_absent_human_7
+		show_portrait = event_target:edmp_playerflag_absent_human_8
+		show_portrait = event_target:edmp_playerflag_absent_human_9
+	}
+	
+	after = {
+		hidden_tooltip = {
+			set_variable = { which = edmp_playerflag_absent_human_count value = 0 }
+			clear_event_target = edmp_playerflag_absent_human_1
+			clear_event_target = edmp_playerflag_absent_human_2
+			clear_event_target = edmp_playerflag_absent_human_3
+			clear_event_target = edmp_playerflag_absent_human_4
+			clear_event_target = edmp_playerflag_absent_human_5
+			clear_event_target = edmp_playerflag_absent_human_6
+			clear_event_target = edmp_playerflag_absent_human_7
+			clear_event_target = edmp_playerflag_absent_human_8
+			clear_event_target = edmp_playerflag_absent_human_9
+		}
+	}
+}
+
+
+
+
+
+
+# In the event of abdication (or, extremely rarely, total usurpation), transfer the player flag to the new ruler.
+#  --- Because "inherited" modifiers are actually ONLY inherited from rulers.
+#
+# Called from all 3 on_new_holder* on_actions
+#  --- ROOT is the new holder
+#  --- FROM is the title
+#  --- FROMFROM is the old holder
+#
+
+character_event = {
+	
+	id = EDMPPlayerFlag.2000
+	hide_window = yes
+	is_triggered_only = yes
+	
+	trigger = {
+		FROMFROM = {
+			is_alive = yes
+			is_ruler = no
+			edmp_this_character_is_an_absent_human_player = yes
+		}
+	}
+	
+	immediate = {
+		ROOT     = { edmp_playerflag_add_flag_to_this_character      = yes }
+		FROMFROM = { edmp_playerflag_remove_flag_from_this_character = yes }
+	}
+}
