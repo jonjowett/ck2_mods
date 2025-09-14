@@ -10,7 +10,11 @@ targetted_decisions = {
 		ai = no
 		filter = all_including_me
 		
-		from_potential = { edmp_this_character_can_take_admin_actions = yes }
+		from_potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_global_invasion_permissions_are_managed_individually = yes
+			edmp_mod_is_active_in_normal_mode = yes
+		}
 		
 		# Only allow potential-humans to be flagged
 		potential = {
@@ -33,7 +37,11 @@ targetted_decisions = {
 		ai = no
 		filter = all_including_me
 		
-		from_potential = { edmp_this_character_can_take_admin_actions = yes }
+		from_potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_global_invasion_permissions_are_managed_individually = yes
+			edmp_mod_is_active_in_normal_mode = yes
+		}
 		
 		# Any character with a flag can be manually unflagged (player or not)
 		potential = { edmp_this_character_has_any_invasion_permission_flag = yes }
@@ -62,7 +70,11 @@ targetted_decisions = {
 		# Non-functional in self-targeted decisions
 		from_potential = { always = yes }
 		
-		potential = { edmp_this_character_can_take_admin_actions = yes }
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_global_invasion_permissions_are_managed_individually = yes
+			edmp_mod_is_active_in_normal_mode = yes
+		}
 		
 		# Only allow the decision to be taken if there will be someone in the third-party list
 		allow = {                 any_character = { edmp_this_character_has_any_invasion_permission_flag = yes } }
@@ -108,7 +120,11 @@ title_decisions = {
 		# Since there's no filter, this probably doesn't matter, but let's use FROM (decision-taker) just to be safe.
 		third_party = FROM
 		
-		from_potential = { edmp_this_character_can_take_admin_actions = yes }
+		from_potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_global_invasion_permissions_are_managed_individually = yes
+			edmp_mod_is_active_in_normal_mode = yes
+		}
 		
 		# Invasion permission can only be given at kingdom level, and only to kingdoms that have de jure vassals.
 		# Further, only show this decision if there is someone who could be given permission.
@@ -159,7 +175,11 @@ title_decisions = {
 		# Since there's no filter, this probably doesn't matter, but let's use FROM (decision-taker) just to be safe.
 		third_party = FROM
 		
-		from_potential = { edmp_this_character_can_take_admin_actions = yes }
+		from_potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_global_invasion_permissions_are_managed_individually = yes
+			edmp_mod_is_active_in_normal_mode = yes
+		}
 		
 		# Invasion permission can only be given at kingdom level, and only to kingdoms that have de jure vassals.
 		# Further, only show this decision if there is someone who could have permission revoked.

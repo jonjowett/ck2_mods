@@ -10,7 +10,7 @@ edmp_rule_summary_popup_event_tt;Opens the §M(ED:MP)§! Rule Summary;;;;;;;;;;;;;
 #
 # Event
 edmp_rs_1000_title;(ED:MP) Rule Summary;;;;;;;;;;;;;x
-edmp_rs_1000_desc;Casus Belli Rules:\nInvasions: [edmp_rule_summary_invasions]\nSubjugations: [edmp_rule_summary_subjugations];;;;;;;;;;;;;x
+edmp_rs_1000_desc;Casus Belli Rules:\n- Invasions: [edmp_rule_summary_invasions]\n- Subjugations: [edmp_rule_summary_subjugations]\n\nRealm Size:[edmp_rule_summary_realm_size];;;;;;;;;;;;;x
 edmp_rs_1000_evtopt_exit;Exit;;;;;;;;;;;;;x
 #
 # Custom loc - General
@@ -28,3 +28,7 @@ edmp_rule_summary_subjugations_are_enabled;Enabled for human players and AI;;;;;
 edmp_rule_summary_subjugations_of_duke_plus_are_disabled_without_explicit_permission;Human players require host permission to subjugate dukes, kings and emperors;;;;;;;;;;;;;x
 edmp_rule_summary_subjugations_of_king_plus_are_disabled_without_explicit_permission;Human players require host permission to subjugate kings and emperors;;;;;;;;;;;;;x
 edmp_rule_summary_subjugations_of_emperor_plus_are_disabled_without_explicit_permission;Human players require host permission to subjugate emperors;;;;;;;;;;;;;x
+#
+# Custom loc - Realm Size
+edmp_rule_summary_realm_size_enabled;\n- Status: Limited for Human Players\n- Realm Size Limit: [Root.global_edmp_realm_size_limit.GetValue];;;;;;;;;;;;;x
+edmp_rule_summary_realm_size_disabled;\n- Status: Not Limited;;;;;;;;;;;;;x
