@@ -1,0 +1,51 @@
+namespace = EDMPDebug
+
+character_event = {
+	
+	id      = EDMPDebug.9001
+	desc    = EDMPDebug_DisabledDueToMP_Desc_AISimulation
+	title   = EDMPDebug_DisabledDueToMP_Title
+	picture = GFX_evt_camaraderie
+	
+	ai = no
+	has_global_flag = edmp_ai_simulation_mode
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		multiplayer = yes
+		is_multiplayer_host_character = yes
+	}
+	
+	immediate = {
+		clr_global_flag = edmp_ai_simulation_mode
+	}
+	
+	option = { name = EDMPDebug_EvtOpt_OK }
+	
+}
+
+character_event = {
+	
+	id      = EDMPDebug.9002
+	desc    = EDMPDebug_DisabledDueToMP_Desc_MPSimulation
+	title   = EDMPDebug_DisabledDueToMP_Title
+	picture = GFX_evt_camaraderie
+	
+	ai = no
+	has_global_flag = edmp_multiplayer_simulation_mode
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		multiplayer = yes
+		is_multiplayer_host_character = yes
+	}
+	
+	immediate = {
+		clr_global_flag = edmp_multiplayer_simulation_mode
+	}
+	
+	option = { name = EDMPDebug_EvtOpt_OK }
+	
+}

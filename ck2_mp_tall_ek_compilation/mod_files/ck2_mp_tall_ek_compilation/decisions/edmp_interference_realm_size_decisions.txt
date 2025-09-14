@@ -1,0 +1,202 @@
+# Audax Validator EnableCommentMetadata
+
+targetted_decisions = {
+	
+	edmp_interference_grant_realm_size_10_perm = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_realm_size_is_limited_for_players = yes
+		}
+		potential = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_grant_realm_size_10_perm_tt
+				add_character_modifier = {
+					name     = edmp_realm_size_extra_limit_stackable_permanent
+					duration = -1
+					inherit  = yes
+					stacking = yes
+				}
+			}
+			hidden_tooltip = { set_global_flag = edmp_interference_singlechar_realm_size_grant_10_perm }
+			hidden_tooltip = { ROOT = { save_event_target_as = edmp_interference_singlechar_affected } }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_realm_size_grant_10_perm }
+			edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
+		}
+	}
+	
+	edmp_interference_grant_realm_size_100_perm = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_realm_size_is_limited_for_players = yes
+		}
+		potential = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_grant_realm_size_100_perm_tt
+				set_variable = { which = edmp_realm_size_extra_temp value = 0 }
+				while = {
+					limit = { check_variable = { which = edmp_realm_size_extra_temp value < 10 } }
+					add_character_modifier = {
+						name     = edmp_realm_size_extra_limit_stackable_permanent
+						duration = -1
+						inherit  = yes
+						stacking = yes
+					}
+					change_variable = { which = edmp_realm_size_extra_temp value = 1 }
+				}
+			}
+			hidden_tooltip = { set_global_flag = edmp_interference_singlechar_realm_size_grant_100_perm }
+			hidden_tooltip = { ROOT = { save_event_target_as = edmp_interference_singlechar_affected } }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_realm_size_grant_100_perm }
+			edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
+		}
+	}
+	
+	edmp_interference_grant_realm_size_10_temp = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_realm_size_is_limited_for_players = yes
+		}
+		potential = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+		}
+		allow = { always = yes }
+		effect = {
+			edmp_realm_size_refresh_this_characters_stackable_extra_limit_temporary_modifiers = yes
+			custom_tooltip = {
+				text = edmp_interference_grant_realm_size_10_temp_tt
+				add_character_modifier = {
+					name     = edmp_realm_size_extra_limit_stackable_temporary
+					duration = -1
+					inherit  = yes
+					stacking = yes
+				}
+			}
+			hidden_tooltip = { set_global_flag = edmp_interference_singlechar_realm_size_grant_10_temp }
+			hidden_tooltip = { ROOT = { save_event_target_as = edmp_interference_singlechar_affected } }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_realm_size_grant_10_temp }
+			edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
+		}
+	}
+	
+	edmp_interference_grant_realm_size_100_temp = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_realm_size_is_limited_for_players = yes
+		}
+		potential = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+		}
+		allow = { always = yes }
+		effect = {
+			edmp_realm_size_refresh_this_characters_stackable_extra_limit_temporary_modifiers = yes
+			custom_tooltip = {
+				text = edmp_interference_grant_realm_size_100_perm_tt
+				set_variable = { which = edmp_realm_size_extra_temp value = 0 }
+				while = {
+					limit = { check_variable = { which = edmp_realm_size_extra_temp value < 10 } }
+					add_character_modifier = {
+						name     = edmp_realm_size_extra_limit_stackable_temporary
+						duration = -1
+						inherit  = yes
+						stacking = yes
+					}
+					change_variable = { which = edmp_realm_size_extra_temp value = 1 }
+				}
+				set_variable = { which = edmp_realm_size_extra_temp value = 0 }
+			}
+			hidden_tooltip = { set_global_flag = edmp_interference_singlechar_realm_size_grant_100_temp }
+			hidden_tooltip = { ROOT = { save_event_target_as = edmp_interference_singlechar_affected } }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_realm_size_grant_100_temp }
+			edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
+		}
+	}
+	
+	edmp_interference_prolong_realm_size_temp = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_realm_size_is_limited_for_players = yes
+		}
+		potential = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+			edmp_this_character_has_at_least_one_temporary_extra_limit_modifier = yes
+		}
+		allow = { always = yes }
+		effect = {
+			edmp_realm_size_refresh_this_characters_stackable_extra_limit_temporary_modifiers = yes
+			hidden_tooltip = { set_global_flag = edmp_interference_singlechar_realm_size_prolong_temp }
+			hidden_tooltip = { ROOT = { save_event_target_as = edmp_interference_singlechar_affected } }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_realm_size_prolong_temp }
+			edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
+		}
+	}
+	
+	edmp_interference_revoke_realm_size = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_realm_size_is_limited_for_players = yes
+		}
+		potential = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+			edmp_this_character_has_at_least_one_extra_limit_modifier = yes
+		}
+		allow = { always = yes }
+		effect = {
+			edmp_realm_size_remove_all_permanent_extra_limit_modifiers_from_this_character = yes
+			edmp_realm_size_remove_all_temporary_extra_limit_modifiers_from_this_character = yes
+			hidden_tooltip = { set_global_flag = edmp_interference_singlechar_realm_size_revoke_all }
+			hidden_tooltip = { set_global_flag = edmp_interference_singlechar_bad }
+			hidden_tooltip = { ROOT = { save_event_target_as = edmp_interference_singlechar_affected } }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_realm_size_revoke_all }
+			edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
+		}
+	}
+	
+	edmp_interference_recalc_realm_size = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			edmp_realm_size_is_limited_for_players = yes
+		}
+		potential = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+		}
+		allow = { always = yes }
+		effect = {
+			edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
+		}
+	}
+	
+}

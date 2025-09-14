@@ -1,0 +1,46 @@
+edmp_interference_root_is_valid_potential_target = {
+	ROOT = {
+		is_ruler = yes
+		OR = {
+			is_landed = yes
+			mercenary = no
+			ai = no
+		}
+	}
+}
+
+edmp_interference_fromfrom_is_likely_to_interact_with_root = {
+	ROOT_FROMFROM = {
+		is_ruler = yes
+		OR = {
+			is_landed = yes
+			mercenary = no
+			ai = no
+		}
+		OR = {
+			is_within_diplo_range = ROOT
+			ai = no
+		}
+		OR = {
+			AND = {                                                    # Both ROOT and FROMFROM are independent
+				independent = yes
+				ROOT = { independent = yes }
+			}
+			liege = { character = ROOT }                               # ROOT is FROMFROM's liege
+			any_vassal = { character = ROOT }                          # ROOT is FROMFROM's vassal
+			liege = { ROOT = { liege = { character = PREVPREV } } }    # ROOT and FROMFROM have the same de facto liege
+		}
+	}
+}
+
+edmp_interference_this_is_not_some_kind_of_temporary_title = {
+	custom_tooltip = {
+		text = edmp_interference_this_is_not_some_kind_of_temporary_title_tt
+		temporary              = no
+		adventurer             = no
+		mercenary              = no
+		holy_order             = no
+		rebel                  = no
+		is_landless_type_title = no
+	}
+}

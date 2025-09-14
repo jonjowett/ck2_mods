@@ -1,0 +1,98 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = ExpdPdxrptgSocietyJoin
+
+# Called from on_character_join_society
+#  --- ROOT is character
+#  --- FROM is society
+# On joining the Mages Guild, Sload Necromancers:
+#  --- Sacrifice 2000 Ideal Master currency to the Guild
+#  --- Change the Guild to allow necromancy
+character_event = {
+	id = ExpdPdxrptgSocietyJoin.1
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		ROOT_FROM = {
+			OR = {
+				is_society = mages_guild_tamriel
+				is_society = mages_guild_akavir
+			}
+		}
+		ROOT = {
+			# Audax Validator "." Ignore_NEXT
+			trait = sload
+			# Audax Validator "." Ignore_NEXT
+			trait = necromancer
+		}
+	}
+	immediate = {
+		ROOT = {
+			add_offmap_currency = {
+				# Audax Validator "." Ignore_NEXT
+				offmap = oblivion_ideal_masters
+				value  = -2000
+			}
+		}
+		if = {
+			limit = { ROOT_FROM = { is_society = mages_guild_tamriel } }
+			# Block the current leader from making a change in the future
+			ROOT_FROM = {
+				leader = {
+					clr_character_flag = mages_tamriel_necromancy_law_set
+					set_character_flag = mages_tamriel_necromancy_law_set
+				}
+			}
+			# If necessary, change the law to enable necromancy
+			if = {
+				limit = {
+					OR = {
+						has_global_flag = mages_tamriel_necromancy_banned
+						NOT = { has_global_flag = mages_tamriel_necromancy_allowed }
+					}
+				}
+				clr_global_flag = mages_tamriel_necromancy_banned
+				clr_global_flag = mages_tamriel_necromancy_allowed
+				set_global_flag = mages_tamriel_necromancy_allowed
+				ROOT_FROM = {
+					leader = {
+						narrative_event = {
+							# Audax Validator "." Ignore_NEXT
+							id = eksocieties.200
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = { ROOT_FROM = { is_society = mages_guild_akavir } }
+			# Block the current leader from making a change in the future
+			ROOT_FROM = {
+				leader = {
+					clr_character_flag = mages_akavir_necromancy_law_set
+					set_character_flag = mages_akavir_necromancy_law_set
+				}
+			}
+			# If necessary, change the law to enable necromancy
+			if = {
+				limit = {
+					OR = {
+						has_global_flag = mages_akavir_necromancy_banned
+						NOT = { has_global_flag = mages_akavir_necromancy_allowed }
+					}
+				}
+				clr_global_flag = mages_akavir_necromancy_banned
+				clr_global_flag = mages_akavir_necromancy_allowed
+				set_global_flag = mages_akavir_necromancy_allowed
+				ROOT_FROM = {
+					leader = {
+						narrative_event = {
+							# Audax Validator "." Ignore_NEXT
+							id = eksocieties.205
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,56 @@
+targetted_decisions = {
+	
+	mp_tallek_parrot_add = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { NOT = { has_character_modifier = pet_parrot } }
+		allow = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+		effect = {
+			add_character_modifier = {
+				name = pet_parrot
+				duration = -1
+			}
+		}
+	}
+	
+	mp_tallek_parrot_remove = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { has_character_modifier = pet_parrot }
+		allow = { always = yes }
+		effect = { remove_character_modifier = pet_parrot }
+	}
+	
+	mp_tallek_pirate_add = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { NOT = { trait = pirate } }
+		allow = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+		effect = { add_trait = pirate }
+	}
+	
+	mp_tallek_pirate_remove = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { trait = pirate }
+		allow = { always = yes }
+		effect = { remove_trait = pirate }
+	}
+	
+}

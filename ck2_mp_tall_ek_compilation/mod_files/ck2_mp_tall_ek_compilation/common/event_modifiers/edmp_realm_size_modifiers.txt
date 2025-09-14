@@ -1,0 +1,49 @@
+edmp_realm_size_under_limit_ai_no_effect = {
+	icon = 9 # Green crowned shield
+}
+
+edmp_realm_size_under_limit_player_no_effect = {
+	icon = 9 # Green crowned shield
+}
+
+edmp_realm_size_over_limit_ai_no_effect = {
+	icon = 27 # Red crowned shield
+}
+
+edmp_realm_size_over_limit_player_stackable = {
+	
+	icon = 27 # Red crowned shield
+	
+	# -1 to all stats
+	diplomacy   = -1
+	martial     = -1
+	stewardship = -1
+	intrigue    = -1
+	learning    = -1
+	
+	combat_rating = -5
+	
+	general_opinion = -2
+	
+	#+0.2% global revolt risk
+	global_revolt_risk = 0.002
+	
+	#-1% global levy size
+	global_levy_size = -0.01
+	
+	#-1% retinue size
+	retinuesize_perc = -0.01
+	
+}
+
+# Each instance of this modifier grants 10 extra realm size limit
+edmp_realm_size_extra_limit_stackable_permanent = {
+	icon = 9 # Green crowned shield
+}
+edmp_realm_size_extra_limit_stackable_temporary = {
+	icon = 9 # Green crowned shield
+}
+
+edmp_realm_size_recently_forced_recalculation = {
+	icon = 84 # Red test tubes
+}

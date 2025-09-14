@@ -1,0 +1,107 @@
+namespace = edmp_ifoa
+
+# In the event of abdication (or, extremely rarely, total usurpation), transfer wealth records to the new ruler.
+#  --- Because "inherited" modifiers are actually ONLY inherited from rulers.
+#
+# Called from all 3 on_new_holder* on_actions
+#  --- ROOT is the new holder
+#  --- FROM is the title
+#  --- FROMFROM is the old holder
+#
+
+character_event = {
+	
+	id = edmp_ifoa.1000
+	
+	hide_window = yes
+	
+	is_triggered_only = yes
+	
+	
+	
+	trigger = {
+		FROMFROM = {
+			is_alive = yes
+			is_ruler = no
+			OR = {
+				has_character_modifier = edmp_interference_wealth_record_granted
+				has_character_modifier = edmp_interference_wealth_record_removed
+			}
+		}
+	}
+	
+	
+	
+	immediate = {
+		
+		# Calculate number of stacks of each modifier on FROMFROM
+		# Store these values in global modifiers, because this is the only way to copy the value from FROMFROM to ROOT
+		set_variable = { which = global_edmp_interference_wealth_record_removed_no_of_stacks value = 0 }
+		set_variable = { which = global_edmp_interference_wealth_record_granted_no_of_stacks value = 0 }
+		FROMFROM = {
+			while = {
+				limit = {
+					has_instances_of_character_modifier = {
+						name   =        edmp_interference_wealth_record_removed
+						amount > global_edmp_interference_wealth_record_removed_no_of_stacks
+					}
+				}
+				change_variable = { which = global_edmp_interference_wealth_record_removed_no_of_stacks value = 1 }
+			}
+			while = {
+				limit = {
+					has_instances_of_character_modifier = {
+						name   =        edmp_interference_wealth_record_granted
+						amount > global_edmp_interference_wealth_record_granted_no_of_stacks
+					}
+				}
+				change_variable = { which = global_edmp_interference_wealth_record_granted_no_of_stacks value = 1 }
+			}
+		}
+		
+		# Apply the calculated number of stacks of modifiers to ROOT
+		if = {
+			limit = { check_variable = { which = global_edmp_interference_wealth_record_removed_no_of_stacks value > 0 } }
+			ROOT = {
+				while = {
+					limit = {
+						has_instances_of_character_modifier = {
+							name   =        edmp_interference_wealth_record_removed
+							amount < global_edmp_interference_wealth_record_removed_no_of_stacks
+						}
+					}
+					add_character_modifier = {
+						name     = edmp_interference_wealth_record_removed
+						duration = -1
+						stacking = yes
+						inherit  = yes
+					}
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = { which = global_edmp_interference_wealth_record_granted_no_of_stacks value > 0 } }
+			ROOT = {
+				while = {
+					limit = {
+						has_instances_of_character_modifier = {
+							name   =        edmp_interference_wealth_record_granted
+							amount < global_edmp_interference_wealth_record_granted_no_of_stacks
+						}
+					}
+					add_character_modifier = {
+						name     = edmp_interference_wealth_record_granted
+						duration = -1
+						stacking = yes
+						inherit  = yes
+					}
+				}
+			}
+		}
+		
+		# Cleanup
+		set_variable = { which = global_edmp_interference_wealth_record_removed_no_of_stacks value = 0 }
+		set_variable = { which = global_edmp_interference_wealth_record_granted_no_of_stacks value = 0 }
+		
+	}
+}

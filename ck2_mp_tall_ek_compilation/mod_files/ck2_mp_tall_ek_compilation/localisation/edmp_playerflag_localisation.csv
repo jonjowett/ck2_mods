@@ -1,0 +1,31 @@
+#
+# Modifier
+edmp_playerflag;§M(ED:MP)§! Player;;;;;;;;;;;;;x
+edmp_playerflag_desc;This character is an §Yactive or absent human player§! and, as such, receives special treatment from some aspects of the §M(ED:MP)§! mod.\n\nThis §Yinheritable§! flag is automatically added to all human players on game load.\n\nIt can also be added to or removed from arbitrary AI characters by an administrator (multiplayer host, or the human character in single-player).;;;;;;;;;;;;;x
+#
+# Intrigue Menu decisions
+edmp_playerflag_show_decisions;(ED:MP) Show "Player Flag" decisions;;;;;;;;;;;;;x
+edmp_playerflag_show_decisions_desc;This mod includes a feature whereby absent players are flagged so that they can be treated differently to other AI characters.\nThe "Player Flag" decisions (both targetted and self-targetted) allow you to manage these flags.;;;;;;;;;;;;;x
+edmp_playerflag_show_decisions_tt;The "Player Flag" targetted decisions will now be visible;;;;;;;;;;;;;x
+edmp_playerflag_hide_decisions;(ED:MP) Hide "Player Flag" decisions;;;;;;;;;;;;;x
+edmp_playerflag_hide_decisions_desc;To avoid clutter and/or mis-clicks, you may wish to hide the "Player Flag" decisions;;;;;;;;;;;;;x
+edmp_playerflag_hide_decisions_tt;The "Player Flag" targetted decisions will now be hidden;;;;;;;;;;;;;x
+#
+# Targeted decisions
+edmp_playerflag_flag_this_ai_character_as_a_player;§P(ED:MP:PF)§! Flag As Player;;;;;;;;;;;;;x
+edmp_playerflag_flag_this_ai_character_as_a_player_desc;[Root.GetTitledFirstName] (and [Root.GetHerHis] successors) is flagged as an absent human player.;;;;;;;;;;;;;x
+edmp_playerflag_unflag_this_ai_character;§P(ED:MP:PF)§! Unflag As Player;;;;;;;;;;;;;x
+edmp_playerflag_unflag_this_ai_character_desc;[Root.GetTitledFirstName] is no longer flagged as an absent human player.;;;;;;;;;;;;;x
+edmp_playerflag_unflag_thirdparty_character;§P(ED:MP:PF)§! Unflag An AI;;;;;;;;;;;;;x
+edmp_playerflag_unflag_thirdparty_character_desc;The selected AI character is no longer flagged as an absent human player.;;;;;;;;;;;;;x
+edmp_playerflag_unflag_all_ai_characters;§P(ED:MP:PF)§! Unflag All AI;;;;;;;;;;;;;x
+edmp_playerflag_unflag_all_ai_characters_desc;All AI characters are no longer flagged as absent human players.;;;;;;;;;;;;;x
+#
+# Events
+EDMPPlayerFlag_1002_Title;(ED:MP) Absent Players;;;;;;;;;;;;;x
+EDMPPlayerFlag_1002_Desc_AllShown;[edmp_playerflag_absent_human_count.GetValue] characters have been detected as absent human players.\nTheir portraits are shown in the option below, in case you wish to review them.\nYou may also change these player flags at any time during the game via the special (ED:MP:PF) targeteed decisions, which can be shown/hidden via an intrigue menu decision.;;;;;;;;;;;;;x
+EDMPPlayerFlag_1002_Desc_First9Shown;[edmp_playerflag_absent_human_count.GetValue] characters have been detected as absent human players.\n9 of their portraits (chosen pseudo-randomly) are shown in the option below, in case you wish to review them.\nYou may also change these player flags at any time during the game via the special (ED:MP:PF) targeteed decisions, which can be shown/hidden via an intrigue menu decision.;;;;;;;;;;;;;x
+EDMPPlayerFlag_1002_EvtOpt_OK;OK;;;;;;;;;;;;;x
+#
+# Tooltips
+edmp_playerflag_remove_flag_from_this_character_short_tt;Unflagged;;;;;;;;;;;;;x
