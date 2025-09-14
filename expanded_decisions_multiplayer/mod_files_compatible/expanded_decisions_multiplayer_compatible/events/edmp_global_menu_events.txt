@@ -311,7 +311,7 @@ character_event = {
 	
 	immediate = {
 		if = {
-			limit = { check_variable = { which = edmp_new_realm_size_limit value == 0 } }
+			limit = { check_variable = { which = global_edmp_realm_size_limit_new value == 0 } }
 			set_variable = { which = global_edmp_realm_size_limit_new which = global_edmp_realm_size_limit }
 		}
 	}
@@ -372,7 +372,7 @@ character_event = {
 				set_variable = { which = global_edmp_realm_size_limit_new value = 0                                }
 			}
 		}
-		# TODO: Force an update of all players' realm sizes
+		edmp_realm_size_calculate_for_all_relevant_characters = yes
 		if = {
 			limit = { edmp_this_is_a_multiplayer_game = yes }
 			custom_tooltip = {
