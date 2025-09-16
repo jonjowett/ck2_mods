@@ -3,19 +3,37 @@ decisions = {
 	edmp_realm_size_recalc_all = {
 		ai = no
 		potential = {
-			has_global_flag = edmp_interference_show
 			edmp_this_character_can_take_admin_actions = yes
 			edmp_realm_size_is_limited_for_players = yes
 			edmp_another_mod_wants_to_suppress_this_decision = no
 		}
 		allow = { always = yes }
-		effect = { edmp_realm_size_calculate_for_all_relevant_characters = yes }
+		effect = {
+			
+			# Recalculate for everyone, and forcibly show a notification
+			hidden_tooltip = { set_global_flag = edmp_realm_size_calc_force_notify_all_players }
+			edmp_realm_size_calculate_for_all_relevant_characters = yes
+			hidden_tooltip = { clr_global_flag = edmp_realm_size_calc_force_notify_all_players }
+			
+			custom_tooltip = { text = edmp_realm_size_everyone_is_notified_of_recalc_tt }
+			
+			# If host clicked this after loading and before unpausing, don't do another forced recalc tomorrow
+			if = {
+				limit = { has_global_flag = edmp_realm_size_calculate_all_on_startup_has_not_been_forced }
+				custom_tooltip = {
+					text = edmp_realm_size_tomorrows_forced_recalc_is_cancelled_tt
+					clr_global_flag = edmp_realm_size_calculate_all_on_startup_has_not_been_forced
+				}
+			}
+			
+		}
 	}
 	
 	edmp_realm_size_recalc_mine = {
 		ai = no
 		potential = {
 			edmp_realm_size_is_limited_for_players = yes
+			edmp_this_is_a_multiplayer_game = yes # Hide this decision in single-player mode - you can use "recalc all" (above) instead
 			edmp_another_mod_wants_to_suppress_this_decision = no
 		}
 		allow = {
