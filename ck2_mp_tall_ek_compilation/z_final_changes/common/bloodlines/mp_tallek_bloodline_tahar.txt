@@ -1,0 +1,47 @@
+# Audax Validator EnableCommentMetadata
+
+mp_tallek_bloodline_tahar = {
+	
+	martial = 1
+	
+	monthly_character_prestige = 0.1
+	
+	# Audax Validator "." Ignore_NEXT
+	khajiit_opinion = 20  # Net +10 Khajiit     opinion
+	
+	general_opinion = -10 # Net -10 Non-Khajiit opinion
+	
+	# Audax Validator "." Ignore_NEXT
+	pirate_opinion = 10   # Flavour only, unlikely to have any gameplay impact
+	
+	mp_tallek_bloodline_effect_reaver = 1         # 3 lines in the UI
+	mp_tallek_bloodline_effect_blank_line_1 = 1   # +1 blank line (in practice, this is placed at the bottom of the LHS?!)
+	mp_tallek_bloodline_effect_blank_line_2 = 1   # +1 blank line
+	
+	inheritance = all_descendants
+	matrilineal_override = yes
+	allow_bastards = yes
+	
+	picture = GFX_bloodlines_symbol_longship
+	
+	flags = {
+		mp_tallek_bloodline_tahar
+		mp_tallek_bloodline_reward
+		khajiit_bloodline
+		bloodline_reaver # The actual reaver effect (siege event checks for this flag)
+	}
+	active = {
+		# Audax Validator "." Ignore_NEXT
+		trait = khajiit
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			culture_group = khajiit
+			# Audax Validator "." Ignore_NEXT
+			trait = pirate
+			# Audax Validator "." Ignore_NEXT
+			has_landed_title = c_hobei
+			# Audax Validator "." Ignore_NEXT
+			has_landed_title = d_hobei
+		}
+	}
+}
