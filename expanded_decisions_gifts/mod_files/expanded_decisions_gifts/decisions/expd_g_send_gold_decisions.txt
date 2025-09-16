@@ -303,7 +303,21 @@ targeted_decisions = {
 				}
 			}
 			trigger_if = {
-				limit = { FROM = { has_character_modifier = expd_g_send_gold_size_0 } }
+				limit = {
+					FROM = {
+						OR = {
+							has_character_modifier = expd_g_send_gold_size_0
+							NOR = {
+								has_character_modifier = expd_g_send_gold_size_0
+								has_character_modifier = expd_g_send_gold_size_1
+								has_character_modifier = expd_g_send_gold_size_2
+								has_character_modifier = expd_g_send_gold_size_3
+								has_character_modifier = expd_g_send_gold_size_4
+								has_character_modifier = expd_g_send_gold_size_5
+							}
+						}
+					}
+				}
 				custom_tooltip = {
 					text = expd_g_send_gold_is_not_disabled_tt
 					always = no
