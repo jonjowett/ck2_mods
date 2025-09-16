@@ -224,15 +224,17 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 				}
 			}
 		}
-		event_target:edmp_realm_size_character_being_calculated = {
-			export_to_variable = {
-				which = edmp_realm_size_total_empty_temp
-				value = num_of_empty_holdings
-				who   = PREV
-			}
-			change_variable = {
-				which = edmp_realm_size_total_empty
-				which = edmp_realm_size_total_empty_temp
+		location = {
+			event_target:edmp_realm_size_character_being_calculated = {
+				export_to_variable = {
+					which = edmp_realm_size_total_empty_temp
+					value = num_of_empty_holdings
+					who   = PREV
+				}
+				change_variable = {
+					which = edmp_realm_size_total_empty
+					which = edmp_realm_size_total_empty_temp
+				}
 			}
 		}
 	}
