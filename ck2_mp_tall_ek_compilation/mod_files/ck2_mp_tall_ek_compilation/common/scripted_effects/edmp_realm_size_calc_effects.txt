@@ -8,12 +8,12 @@ edmp_realm_size_calculate_for_all_relevant_characters = {
 			# Unflag all unplayable characters who are flagged as human
 			# And remove all of their realm size modifiers
 			any_character = {
-				limit = { edmp_this_character_is_an_absent_human_player = yes }
-				if = {
-					limit = { is_playable = no }
-					edmp_playerflag_remove_flag_from_this_character = yes
-					edmp_realm_size_remove_all_modifiers_from_this_character = yes
+				limit = {
+					edmp_this_character_is_an_absent_human_player = yes
+					is_playable = no
 				}
+				edmp_playerflag_remove_flag_from_this_character = yes
+				edmp_realm_size_remove_all_modifiers_from_this_character = yes
 			}
 			
 			# Remove all realm size modifiers from characters who aren't human or absent players
@@ -26,10 +26,12 @@ edmp_realm_size_calculate_for_all_relevant_characters = {
 			}
 			
 			# Run the calculation for all human or absent players who do NOT have human or absent lieges.
-			# (Because running the calc on those lieges will ALSO run the calc on all of their vassals.)
-			any_playable_ruler = {
+			#    (Because running the calc on those lieges will ALSO run the calc on all of their human/absent vassals.)
+			# NB: any_playable_ruler does NOT include ROOT, and ROOT is probably a character we need to evaluate, so we MUST use the less-efficient any_character scope
+			any_character = {
 				limit = {
 					edmp_this_character_is_a_current_or_absent_human_player = yes
+					is_playable = yes
 					OR = {
 						independent = yes
 						NOT = { any_liege = { edmp_this_character_is_a_current_or_absent_human_player = yes } }
@@ -186,7 +188,7 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 	}
 	if = {
 		limit = { check_variable = { which = edmp_realm_size_total value == 0 } } # No value was stored
-		set_variable = { which = edmp_realm_size_excess_before value = -987654321 } # Dummy number
+		set_variable = { which = edmp_realm_size_excess_before value = -999 } # Obvious dummy number
 		set_character_flag = edmp_realm_size_calc_force_notification
 	}
 	else = {
@@ -222,15 +224,17 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 				}
 			}
 		}
-		event_target:edmp_realm_size_character_being_calculated = {
-			export_to_variable = {
-				which = edmp_realm_size_total_empty_temp
-				value = num_of_empty_holdings
-				who   = PREV
-			}
-			change_variable = {
-				which = edmp_realm_size_total_empty
-				which = edmp_realm_size_total_empty_temp
+		location = {
+			event_target:edmp_realm_size_character_being_calculated = {
+				export_to_variable = {
+					which = edmp_realm_size_total_empty_temp
+					value = num_of_empty_holdings
+					who   = PREV
+				}
+				change_variable = {
+					which = edmp_realm_size_total_empty
+					which = edmp_realm_size_total_empty_temp
+				}
 			}
 		}
 	}

@@ -5,6 +5,7 @@ decisions = {
 		potential = {
 			expd_t_this_character_can_perform_admin_actions = yes
 			expd_t_this_character_can_see_debug_mode_decisions = no
+			expd_t_another_mod_wants_to_suppress_this_decision = no
 		}
 		allow = { always = yes }
 		effect = {
@@ -18,7 +19,10 @@ decisions = {
 	expd_t_debug_mode_disable = {
 		ai = no
 		is_high_prio = yes
-		potential = { expd_t_this_character_can_see_debug_mode_decisions = yes }
+		potential = {
+			expd_t_this_character_can_see_debug_mode_decisions = yes
+			expd_t_another_mod_wants_to_suppress_this_decision = no
+		}
 		allow = { always = yes }
 		effect = {
 			custom_tooltip = {
