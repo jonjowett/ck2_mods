@@ -10,3 +10,16 @@ defined_text = {
 		localisation_key =  edmp_global_realm_size_limit_status_disabled
 	}
 }
+
+defined_text = {
+	name = edmp_global_realm_size_limit_status_one_line
+	use_first_valid = yes
+	text = {
+		trigger = { edmp_realm_size_is_limited_for_players = yes }
+		localisation_key =  edmp_global_realm_size_limit_status_one_line_enabled
+	}
+	text = {
+		trigger = { edmp_realm_size_is_not_limited_for_players = yes }
+		localisation_key =  edmp_global_realm_size_limit_status_one_line_disabled
+	}
+}

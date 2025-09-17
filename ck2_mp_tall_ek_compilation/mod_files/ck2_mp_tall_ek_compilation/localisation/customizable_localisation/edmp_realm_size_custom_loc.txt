@@ -6,3 +6,190 @@ defined_text = {
 		localisation_key =  edmp_realm_size_display_calculation_actual
 	}
 }
+
+
+
+
+
+# Parts of the main tooltip (split up to work around loc line length limit)
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_part1
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_realm_size_display_calculation_part1_actual
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_part2
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_realm_size_display_calculation_part2_actual
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_part3
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_realm_size_display_calculation_part3_actual
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_part4
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_realm_size_display_calculation_part4_actual
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_part5
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_realm_size_display_calculation_part5_actual
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_part6
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_realm_size_display_calculation_part6_actual
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_part7
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_realm_size_display_calculation_part7_actual
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_part8
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_realm_size_display_calculation_part8_actual
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_part9
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_realm_size_display_calculation_part9_actual
+	}
+}
+
+
+
+
+
+# Colour choices in specific parts
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_colour_goodbad_part5a
+	use_first_valid = yes
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_total_player_vassals value <  0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_good
+	}
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_total_player_vassals value == 0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_neutral
+	}
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_total_player_vassals value >  0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_bad
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_colour_goodbad_part5b
+	use_first_valid = yes
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_total_extra_player_vassals value <  0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_good
+	}
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_total_extra_player_vassals value == 0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_neutral
+	}
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_total_extra_player_vassals value >  0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_bad
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_colour_goodbad_part6
+	use_first_valid = yes
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_total_extra value <  0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_good
+	}
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_total_extra value == 0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_neutral
+	}
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_total_extra value >  0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_bad
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_colour_goodbad_part8
+	use_first_valid = yes
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_excess value <  0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_good
+	}
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_excess value == 0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_neutral
+	}
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_excess value >  0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_bad
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_colour_goodbad_part9a
+	use_first_valid = yes
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_excess_close value <= 0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_good
+	}
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_excess_close value >  0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_bad
+	}
+}
+
+defined_text = {
+	name = edmp_realm_size_display_calculation_colour_goodbad_part9b
+	use_first_valid = yes
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_excess_significant value <= 0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_good
+	}
+	text = {
+		trigger = { check_variable = { which = edmp_realm_size_excess_significant value >  0 } }
+		localisation_key =  edmp_realm_size_display_calculation_colour_bad
+	}
+}
