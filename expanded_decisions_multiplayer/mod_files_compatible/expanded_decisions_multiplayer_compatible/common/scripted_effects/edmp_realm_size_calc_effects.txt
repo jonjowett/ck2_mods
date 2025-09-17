@@ -87,21 +87,34 @@ edmp_realm_size_remove_all_dynamic_modifiers_from_this_character = {
 	remove_character_modifier = edmp_realm_size_recently_forced_recalculation
 	custom_tooltip = {
 		text = edmp_realm_size_remove_all_over_limit_player_stackable_modifiers_from_this_character_tt
-		remove_character_modifiers = { name = edmp_realm_size_over_limit_player_stackable amount = 100000 }
+		remove_character_modifiers = { name = edmp_realm_size_over_limit_close_player_stackable       amount = 100000 }
+		remove_character_modifiers = { name = edmp_realm_size_over_limit_significant_player_stackable amount = 100000 }
 	}
 }
 
 edmp_realm_size_remove_all_variables_from_this_character = {
 	hidden_tooltip = {
-		set_variable = { which = edmp_realm_size_total_holdings             value = 0 }
-		set_variable = { which = edmp_realm_size_total_empty                value = 0 }
-		set_variable = { which = edmp_realm_size_total_empty_temp           value = 0 }
-		set_variable = { which = edmp_realm_size_total_player_vassals       value = 0 }
-		set_variable = { which = edmp_realm_size_total_extra                value = 0 }
-		set_variable = { which = edmp_realm_size_total_extra_no_of_stacks   value = 0 }
-		set_variable = { which = edmp_realm_size_total_extra_player_vassals value = 0 }
-		set_variable = { which = edmp_realm_size_total                      value = 0 }
-		set_variable = { which = edmp_realm_size_excess                     value = 0 }
+		set_variable = { which = edmp_realm_size_total_holdings                                   value = 0 }
+		set_variable = { which = edmp_realm_size_total_tribal_counties                            value = 0 }
+		set_variable = { which = edmp_realm_size_total_tribal_empty_holdings                      value = 0 }
+		set_variable = { which = edmp_realm_size_total_tribal_empty_realm_size                    value = 0 }
+		set_variable = { which = edmp_realm_size_total_tribal_empty_realm_size_rounding_helper    value = 0 }
+		set_variable = { which = edmp_realm_size_total_nomadic_counties                           value = 0 }
+		set_variable = { which = edmp_realm_size_total_nomadic_empty_holdings                     value = 0 }
+		set_variable = { which = edmp_realm_size_total_nomadic_empty_realm_size                   value = 0 }
+		set_variable = { which = edmp_realm_size_total_nomadic_empty_realm_size_rounding_helper   value = 0 }
+		set_variable = { which = edmp_realm_size_total_empty_temp                                 value = 0 }
+		set_variable = { which = edmp_realm_size_total_player_vassals_quantity                    value = 0 }
+		set_variable = { which = edmp_realm_size_total_player_vassals                             value = 0 }
+		set_variable = { which = edmp_realm_size_total_extra                                      value = 0 }
+		set_variable = { which = edmp_realm_size_total_extra_no_of_stacks                         value = 0 }
+		set_variable = { which = edmp_realm_size_total_extra_player_vassals                       value = 0 }
+		set_variable = { which = edmp_realm_size_total                                            value = 0 }
+		set_variable = { which = edmp_realm_size_excess                                           value = 0 }
+		set_variable = { which = edmp_realm_size_excess_close                                     value = 0 }
+		set_variable = { which = edmp_realm_size_excess_close_threshold                           value = 0 }
+		set_variable = { which = edmp_realm_size_excess_close_threshold_rounding_helper           value = 0 }
+		set_variable = { which = edmp_realm_size_excess_significant                               value = 0 }
 	}
 }
 
@@ -178,7 +191,12 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character = {
 
 edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 	
+	
+	
+	# Store a reference to this character, so we can set variables on them even when we're deep within another scope
 	save_event_target_as = edmp_realm_size_character_being_calculated
+	
+	
 	
 	# Store this character's realm size excess prior to calculation, for notifications
 	set_variable = { which = edmp_realm_size_excess_before value = 0 }
@@ -206,50 +224,129 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 		}
 	}
 	
+	
+	
 	# Remove all dynamic modifiers from the character
 	edmp_realm_size_remove_all_dynamic_modifiers_from_this_character = yes
+	
+	
 	
 	# Calculate & record: Total number of holdings in realm
 	export_to_variable = { which = edmp_realm_size_total_holdings value = realm_size }
 	
-	# Calculate & record: Total number of empty holding slots in tribal/nomadic counties
-	set_variable = { which = edmp_realm_size_total_empty value = 0 }
+	
+	
+	# Calculate & record: Realm size contribution of empty holding slots in tribal counties
+	set_variable = { which = edmp_realm_size_total_tribal_counties         value = 0 }
+	set_variable = { which = edmp_realm_size_total_tribal_empty_holdings   value = 0 }
+	set_variable = { which = edmp_realm_size_total_tribal_empty_realm_size value = 0 }
 	any_title_under = {
 		limit = {
 			tier = COUNT
-			holder_scope = {
-				OR = {
-					is_tribal = yes
-					is_nomadic = yes
-				}
-			}
+			holder_scope = { is_tribal = yes }
 		}
 		location = {
 			event_target:edmp_realm_size_character_being_calculated = {
+				change_variable = {
+					which = edmp_realm_size_total_tribal_counties
+					value = 1
+				}
 				export_to_variable = {
-					which = edmp_realm_size_total_empty_temp
+					which = edmp_realm_size_total_empty_temp # Set this variable on the character we're calculating
+					who   = PREV                             # Get the value to set from the single province we're looking at right now
 					value = num_of_empty_holdings
-					who   = PREV
 				}
 				change_variable = {
-					which = edmp_realm_size_total_empty
+					which = edmp_realm_size_total_tribal_empty_holdings
 					which = edmp_realm_size_total_empty_temp
 				}
 			}
 		}
 	}
-	set_variable = { which = edmp_realm_size_total_empty_temp value = 0 }
+	# Realm size contribution of empty holdings = realm size contribution of 1 empty holding * number of empty holdings
+	set_variable      = { which = edmp_realm_size_total_tribal_empty_realm_size which = edmp_realm_size_total_tribal_empty_holdings }
+	multiply_variable = { which = edmp_realm_size_total_tribal_empty_realm_size which = global_edmp_realm_size_empty_holdings_tribal }
+	# Round the result to the nearest integer (since the realm size contribution of empty holdings may not be an integer)
+	# Rounding is not explicitly supported by CK2 scripting, so we follow this procedure:
+	#  --- Let x be the (possibly fractional) result
+	#  --- Let y be the value of x rounded to the nearest integer (ie. the value we want to calculate)
+	#  --- Let z be the fractional part of x
+	#  --- Then z = x modulo 1
+	#  --- If z <  0.5: y = x - z
+	#  --- If z >= 0.5: y = x - z + 1
+	#  --- This is simplified below as follows: y = x - z + if(z>=0.5,1,0)
+	set_variable      = { which = edmp_realm_size_total_tribal_empty_realm_size_rounding_helper which = edmp_realm_size_total_tribal_empty_realm_size                 }
+	modulo_variable   = { which = edmp_realm_size_total_tribal_empty_realm_size_rounding_helper value = 1                                                             }
+	subtract_variable = { which = edmp_realm_size_total_tribal_empty_realm_size                 which = edmp_realm_size_total_tribal_empty_realm_size_rounding_helper }
+	if = {
+		limit = { check_variable = { which = edmp_realm_size_total_tribal_empty_realm_size_rounding_helper value >= 0.5 } }
+		change_variable = { which = edmp_realm_size_total_tribal_empty_realm_size value = 1 }
+	}
 	
-	# Calculate & record: Total number of holdings in player vassals
+	
+	
+	# Calculate & record: Realm size contribution of empty holding slots in nomadic counties
+	set_variable = { which = edmp_realm_size_total_nomadic_counties                         value = 0 }
+	set_variable = { which = edmp_realm_size_total_nomadic_empty_holdings                   value = 0 }
+	set_variable = { which = edmp_realm_size_total_nomadic_empty_realm_size                 value = 0 }
+	set_variable = { which = edmp_realm_size_total_nomadic_empty_realm_size_rounding_helper value = 0 }
+	any_title_under = {
+		limit = {
+			tier = COUNT
+			holder_scope = { is_nomadic = yes }
+		}
+		location = {
+			event_target:edmp_realm_size_character_being_calculated = {
+				change_variable = {
+					which = edmp_realm_size_total_nomadic_counties
+					value = 1
+				}
+				export_to_variable = {
+					which = edmp_realm_size_total_empty_temp # Set this variable on the character we're calculating
+					who   = PREV                             # Get the value to set from the single province we're looking at right now
+					value = num_of_empty_holdings
+				}
+				change_variable = {
+					which = edmp_realm_size_total_nomadic_empty_holdings
+					which = edmp_realm_size_total_empty_temp
+				}
+			}
+		}
+	}
+	# Realm size contribution of empty holdings = realm size contribution of 1 empty holding * number of empty holdings
+	set_variable      = { which = edmp_realm_size_total_nomadic_empty_realm_size                 which = edmp_realm_size_total_nomadic_empty_holdings   }
+	multiply_variable = { which = edmp_realm_size_total_nomadic_empty_realm_size                 which = global_edmp_realm_size_empty_holdings_nomadic  }
+	# Round the result to the nearest integer (since the realm size contribution of empty holdings may not be an integer)
+	# (See above for explanation)
+	set_variable      = { which = edmp_realm_size_total_nomadic_empty_realm_size_rounding_helper which = edmp_realm_size_total_nomadic_empty_realm_size                 }
+	modulo_variable   = { which = edmp_realm_size_total_nomadic_empty_realm_size_rounding_helper value = 1                                                              }
+	subtract_variable = { which = edmp_realm_size_total_nomadic_empty_realm_size                 which = edmp_realm_size_total_nomadic_empty_realm_size_rounding_helper }
+	if = {
+		limit = { check_variable = { which = edmp_realm_size_total_nomadic_empty_realm_size_rounding_helper value >= 0.5 } }
+		change_variable = { which = edmp_realm_size_total_nomadic_empty_realm_size value = 1 }
+	}
+	
+	
+	
+	# Cleanup after empty holding slot calc
+	set_variable = { which = edmp_realm_size_total_empty_temp                               value = 0 }
+	set_variable = { which = edmp_realm_size_total_tribal_empty_realm_size_rounding_helper  value = 0 }
+	set_variable = { which = edmp_realm_size_total_nomadic_empty_realm_size_rounding_helper value = 0 }
+	
+	
+	
+	# Calculate & record: Total realm size of player vassals
 	# Calculate & record: Total extra realm size granted to player vassals
-	set_variable = { which = edmp_realm_size_total_player_vassals       value = 0 }
-	set_variable = { which = edmp_realm_size_total_extra_player_vassals value = 0 }
+	set_variable = { which = edmp_realm_size_total_player_vassals_quantity value = 0 }
+	set_variable = { which = edmp_realm_size_total_player_vassals          value = 0 }
+	set_variable = { which = edmp_realm_size_total_extra_player_vassals    value = 0 }
 	any_vassal = {
 		limit = {
 			lower_real_tier_than = PREV
 			is_ruler = yes
 			edmp_this_character_is_a_current_or_absent_human_player = yes
 		}
+		change_variable = { which = edmp_realm_size_total_player_vassals_quantity value = 1 }
 		# Copy vassal's variables into global variables
 		set_variable = { which = global_edmp_realm_size_temp_player_vassal_total       which = edmp_realm_size_total       }
 		set_variable = { which = global_edmp_realm_size_temp_player_vassal_total_extra which = edmp_realm_size_total_extra }
@@ -268,6 +365,8 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 		set_variable = { which = global_edmp_realm_size_temp_player_vassal_total       value = 0 }
 		set_variable = { which = global_edmp_realm_size_temp_player_vassal_total_extra value = 0 }
 	}
+	
+	
 	
 	# Calculate & record: Total extra realm size granted to this character
 	set_variable = { which = edmp_realm_size_total_extra              value = 0 }
@@ -290,21 +389,65 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 		}
 		change_variable = { which = edmp_realm_size_total_extra_no_of_stacks value = 1 }
 	}
-	set_variable      = { which = edmp_realm_size_total_extra which = edmp_realm_size_total_extra_no_of_stacks }
-	multiply_variable = { which = edmp_realm_size_total_extra value = -10 } # Each instance of the modifier grants 10 extra realm size limit
-	set_variable = { which = edmp_realm_size_total_extra_no_of_stacks value = 0 }
+	set_variable      = { which = edmp_realm_size_total_extra              which = edmp_realm_size_total_extra_no_of_stacks }
+	multiply_variable = { which = edmp_realm_size_total_extra              value = -10 } # Each instance of the modifier grants 10 extra realm size limit
+	
+	
+	
+	# Clean up after extra realm size calcs
+	set_variable      = { which = edmp_realm_size_total_extra_no_of_stacks value = 0 }
+	
+	
 	
 	# Calculate & record: Total realm size of this character
 	set_variable    = { which = edmp_realm_size_total value = 0 }
 	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_holdings }
-	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_empty }
 	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_extra }
+	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_tribal_empty_realm_size }
+	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_nomadic_empty_realm_size }
 	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_player_vassals }
 	change_variable = { which = edmp_realm_size_total which = edmp_realm_size_total_extra_player_vassals }
 	
+	
+	
 	# Calculate & record: Excess realm size of this character above the limit
-	set_variable      = { which = edmp_realm_size_excess which = edmp_realm_size_total }
-	subtract_variable = { which = edmp_realm_size_excess which = global_edmp_realm_size_limit }
+	set_variable      = { which = edmp_realm_size_excess                                 which = edmp_realm_size_total                                  }
+	subtract_variable = { which = edmp_realm_size_excess                                 which = global_edmp_realm_size_limit                           }
+	# Calculate the threshold value for "close to the limit" (=20% of current global limit)
+	set_variable      = { which = edmp_realm_size_excess_close_threshold                 which = global_edmp_realm_size_limit                           }
+	multiply_variable = { which = edmp_realm_size_excess_close_threshold                 which = global_edmp_realm_size_excess_close_threshold_frac     }
+	# Round the threshold value to the nearest integer (see rounding explanation above)
+	set_variable      = { which = edmp_realm_size_excess_close_threshold_rounding_helper which = edmp_realm_size_excess_close_threshold                 }
+	modulo_variable   = { which = edmp_realm_size_excess_close_threshold_rounding_helper value = 1                                                      }
+	subtract_variable = { which = edmp_realm_size_excess_close_threshold                 which = edmp_realm_size_excess_close_threshold_rounding_helper }
+	if = {
+		limit = { check_variable = { which = edmp_realm_size_excess_close_threshold_rounding_helper value >= 0.5 } }
+		change_variable = { which = edmp_realm_size_excess_close_threshold value = 1 }
+	}
+	set_variable      = { which = edmp_realm_size_excess_close_threshold_rounding_helper value = 0                                                      }
+	# Ensure that the threshold value is no less than 10
+	if = {
+		limit = { check_variable = { which = edmp_realm_size_excess_close_threshold value < 10 } }
+		set_variable = { which = edmp_realm_size_excess_close_threshold value = 10 }
+	}
+	# Calculate the quantity of this character's excess which is "close to" or "significantly above" the limit
+	if = {
+		limit = { check_variable = { which = edmp_realm_size_excess value <= 0 } }
+		set_variable      = { which = edmp_realm_size_excess_close       value = 0                                      }
+		set_variable      = { which = edmp_realm_size_excess_significant value = 0                                      }
+	}
+	else_if = {
+		limit = { check_variable = { which = edmp_realm_size_excess which <= edmp_realm_size_excess_close_threshold } }
+		set_variable      = { which = edmp_realm_size_excess_close       which = edmp_realm_size_excess                 }
+		set_variable      = { which = edmp_realm_size_excess_significant value = 0                                      }
+	}
+	else = {
+		set_variable      = { which = edmp_realm_size_excess_close       which = edmp_realm_size_excess_close_threshold }
+		set_variable      = { which = edmp_realm_size_excess_significant which = edmp_realm_size_excess                 }
+		subtract_variable = { which = edmp_realm_size_excess_significant which = edmp_realm_size_excess_close_threshold }
+	}
+	
+	
 	
 	# Apply the appropriate modifier(s) to this character
 	if = {
@@ -337,9 +480,20 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 		else = {
 			set_variable = { which = edmp_realm_size_excess_modifiers_added value = 0 }
 			while = {
-				limit = { check_variable = { which = edmp_realm_size_excess_modifiers_added which < edmp_realm_size_excess } }
+				limit = { check_variable = { which = edmp_realm_size_excess_modifiers_added which < edmp_realm_size_excess_close } }
 				add_character_modifier = {
-					name     = edmp_realm_size_over_limit_player_stackable
+					name     = edmp_realm_size_over_limit_close_player_stackable
+					duration = -1
+					inherit  = yes
+					stacking = yes
+				}
+				change_variable = { which = edmp_realm_size_excess_modifiers_added value = 1 }
+			}
+			set_variable = { which = edmp_realm_size_excess_modifiers_added value = 0 }
+			while = {
+				limit = { check_variable = { which = edmp_realm_size_excess_modifiers_added which < edmp_realm_size_excess_significant } }
+				add_character_modifier = {
+					name     = edmp_realm_size_over_limit_significant_player_stackable
 					duration = -1
 					inherit  = yes
 					stacking = yes
@@ -349,6 +503,8 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 			set_variable = { which = edmp_realm_size_excess_modifiers_added value = 0 }
 		}
 	}
+	
+	
 	
 	# Notify the character of any important change
 	set_variable      = { which = edmp_realm_size_excess_increase which = edmp_realm_size_excess        }
@@ -375,6 +531,11 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 					check_variable = { which = edmp_realm_size_excess          value >  5 }
 					check_variable = { which = edmp_realm_size_excess_increase value >= 5 }
 				}
+				# Realm size excess changed from "close" to "significant"
+				AND = {
+					check_variable = { which = edmp_realm_size_excess_before   which <= edmp_realm_size_excess_close_threshold }
+					check_variable = { which = edmp_realm_size_excess          which >  edmp_realm_size_excess_close_threshold }
+				}
 			}
 		}
 		
@@ -382,15 +543,21 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 		
 	}
 	
+	
+	
 	# Record the fact that this character has been calculated today, and schedule the removal of that record tomorrow
 	set_character_flag = edmp_realm_size_calc_this_character_was_calculated_today
 	character_event = { id = EDMPRealmSize.1101 days = 1 }
+	
+	
 	
 	# Cleanup
 	set_variable = { which = edmp_realm_size_excess_before value = 0 }
 	set_variable = { which = edmp_realm_size_excess_increase value = 0 }
 	clr_character_flag = edmp_realm_size_calc_force_notification
 	clear_event_target = edmp_realm_size_character_being_calculated
+	
+	
 	
 }
 

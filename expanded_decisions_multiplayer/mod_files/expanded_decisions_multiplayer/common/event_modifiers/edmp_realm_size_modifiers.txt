@@ -10,29 +10,75 @@ edmp_realm_size_over_limit_ai_no_effect = {
 	icon = 27 # Red crowned shield
 }
 
-edmp_realm_size_over_limit_player_stackable = {
+edmp_realm_size_over_limit_close_player_stackable = {
+	
+	icon = 27 # Red crowned shield
+	
+	# Derived from the "significant" modifier below:
+	#  --- No personal stat impact
+	#  --- Other effects are halved
+	general_opinion    = -1
+	global_revolt_risk = 0.001
+	global_levy_size   = -0.01
+	retinuesize_perc   = -0.005
+	
+}
+
+edmp_realm_size_over_limit_significant_player_stackable = {
 	
 	icon = 27 # Red crowned shield
 	
 	# -1 to all stats
+	# Rationale:
+	#  --- Most player characters will have 10-20 in all stats. Possibly 30+ in 1-2 stats.
+	#  --- At  10 stacks:  -10 (annoying but manageable)
+	#  --- At  30 stacks:  -30 (all but your best stats will be zeroised - possibly manageable, eg. via permanent regency)
+	#  --- At 100 stacks: -100 (all stats zeroised - possibly manageable, eg. via permanent regency)
 	diplomacy   = -1
 	martial     = -1
 	stewardship = -1
 	intrigue    = -1
 	learning    = -1
 	
+	# -5 to PCS
+	# Rationale:
+	#  --- Most player characters will have >100 PCS, and PCS is an optional stat (you almost never *have* to duel).
+	#  --- At  10 stacks:  -50 (annoying but manageable)
+	#  --- At  30 stacks: -150 (probably zeroised - manageable by avoiding duelling)
+	#  --- At 100 stacks: -500 (zeroised - manageable by avoiding duelling)
 	combat_rating = -5
 	
+	# -2 general opinion
+	# Rationale:
+	#  --- Factions are more likely, Vassals give fewer levies and less tax, characters tend to refuse your requests
+	#  --- At  10 stacks:  -20 (annoying but manageable)
+	#  --- At  30 stacks:  -60 (very annoying but still potentially manageable)
+	#  --- At 100 stacks: -200 (most characters will have -100 opinion of you - potentially manageable, eg. via permanent regency)
 	general_opinion = -2
 	
-	#+0.2% global revolt risk
+	# +0.2% global revolt risk
+	# Rationale:
+	#  --- NB: This is ADDITIVE with other revolt risk modifiers, and -5% in all provinces is fairly common.
+	#  --- At  10 stacks:  +2% (annoying but manageable)
+	#  --- At  30 stacks:  +6% (very annoying but still potentially manageable)
+	#  --- At 100 stacks: +20% (probably unmanageable)
 	global_revolt_risk = 0.002
 	
-	#-1% global levy size
-	global_levy_size = -0.01
+	# -2% global levy size
+	# Rationale:
+	#  --- NB: This is ADDITIVE with the MANY other levy size modifiers (often well over +100% for a high-martial character)
+	#  --- At  10 stacks:  -20% (annoying but manageable)
+	#  --- At  30 stacks:  -60% (very annoying but still potentially manageable)
+	#  --- At 100 stacks: -200% (levies probably zeroised everywhere - probably unmanageable)
+	global_levy_size   = -0.02
 	
-	#-1% retinue size
-	retinuesize_perc = -0.01
+	# -1% retinue size
+	# Rationale:
+	#  --- NB: This is MULTIPLICATIVE, after bonuses from tech have been applied.
+	#  --- At  10 stacks:  -10% (annoying but manageable)
+	#  --- At  30 stacks:  -30% (very annoying but still potentially manageable)
+	#  --- At 100 stacks: -100% (zeroised)
+	retinuesize_perc   = -0.01
 	
 }
 

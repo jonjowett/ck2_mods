@@ -12,6 +12,9 @@ edmp_global_menu_open_flag_removed_tt;§M(ED:MP)§! "Global Menu Open" flag §Gclea
 #
 # Generic event text
 edmp_global_evtopt_exit;Exit;;;;;;;;;;;;;x
+edmp_global_evtopt_exit_no_change;Exit (without making any changes);;;;;;;;;;;;;x
+edmp_global_evtopt_cancel_and_exit;Cancel & Exit;;;;;;;;;;;;;x
+edmp_global_evtopt_save_and_exit;Save & Exit;;;;;;;;;;;;;x
 edmp_global_checkmark_checked;X;;;;;;;;;;;;;x
 edmp_global_checkmark_unchecked;§g-§!;;;;;;;;;;;;;x
 #
@@ -19,7 +22,7 @@ edmp_global_checkmark_unchecked;§g-§!;;;;;;;;;;;;;x
 edmp_global_1000_title;(ED:MP) Main Menu;;;;;;;;;;;;;x
 edmp_global_1000_desc;Please select the dynamic game rule you wish to manage:;;;;;;;;;;;;;x
 edmp_global_1000_evtopt_cbs;Casus Belli;;;;;;;;;;;;;x
-edmp_global_1000_evtopt_realm_size;Realm Size (currently: [edmp_global_realm_size_limit_status]);;;;;;;;;;;;;x
+edmp_global_1000_evtopt_realm_size;Realm Size (Currently: [edmp_global_realm_size_limit_status_one_line]);;;;;;;;;;;;;x
 #
 #
 #
@@ -62,40 +65,65 @@ edmp_global_2200_evtopt_set_emperor_plus_disabled_without_explicit_permission;Se
 #
 # Realm Size Menu
 edmp_global_3000_title;(ED:MP) Realm Size Limit;;;;;;;;;;;;;x
-edmp_global_3000_desc;The "Realm Size Limit" is a feature designed to encourage tall play: human players receive escalating penalties if their realm size exceeds this limit.\nIn this context, "realm size" is the total number of holdings (as normal), plus the total number of empty holding slots in tribal and nomadic counties.\nCurrent status: [edmp_global_realm_size_limit_status];;;;;;;;;;;;;x
+edmp_global_3000_desc;The "Realm Size Limit" is a feature designed to encourage tall play: humans receive escalating penalties if their realm size exceeds this limit.\nIn this context, "realm size" is the total number of holdings (as normal), plus some fraction of the total number of empty holding slots in tribal and nomadic counties.\n[edmp_global_realm_size_limit_status];;;;;;;;;;;;;x
 edmp_global_3000_evtopt_realm_size_is_limited_for_players_toggle;Current: Limited --- Change to: Not Limited;;;;;;;;;;;;;x
 edmp_global_3000_evtopt_realm_size_is_not_limited_for_players_toggle;Current: Not Limited --- Change to: Limited;;;;;;;;;;;;;x
-edmp_global_3000_evtopt_realm_size_change;Change Limit (Current Limit: [Root.global_edmp_realm_size_limit.GetValue]);;;;;;;;;;;;;x
+edmp_global_3000_evtopt_realm_size_change_parameters;Change Numeric Parameters;;;;;;;;;;;;;x
+#
+# Realm Size Menu - Tooltips on changing the rule from not limited to limited
+edmp_realm_size_change_to_limited_for_players_tt;§M(ED:MP)§! Realm Size will be §Ylimited§! for §Yhuman players§!;;;;;;;;;;;;;x
+edmp_realm_size_change_to_not_limited_for_players_tt;§M(ED:MP)§! Realm Size will §YNOT§! be §Ylimited§!;;;;;;;;;;;;;x
+edmp_realm_size_inform_user_of_parameter_initialisation_tt;All numeric parameters are initialised to their §Ydefault§! values:;;;;;;;;;;;;;x
+edmp_realm_size_limit_set_to_previous_value_tt;§YRealm Size Limit§! is changed to its §Yprevious§! value: §Y[Root.global_edmp_realm_size_limit.GetValue]§!\n§YTribal Empty Holding Slot Contribution§! is changed to its §Yprevious§! value: §Y[Root.global_edmp_realm_size_empty_holdings_tribal.GetValue]§!\n§YNomadic Empty Holding Slot Contribution§! is changed to its §Yprevious§! value: §Y[Root.global_edmp_realm_size_empty_holdings_nomadic.GetValue]§!\n§YMaximum Excess Realm Size Fraction for "Close" Penalties§! is changed to its §Yprevious§! value: §Y[Root.global_edmp_realm_size_excess_close_threshold_frac.GetValue]§!;;;;;;;;;;;;;x
+edmp_realm_size_limit_set_to_default_50_tt;§YRealm Size Limit§! is changed to its §Ydefault§! value: §Y50§!;;;;;;;;;;;;;x
+edmp_realm_size_tribal_empty_holding_contribution_set_to_default_half_tt;§YTribal Empty Holding Slot Contribution§! is changed to its §Ydefault§! value: §Y0.5§!;;;;;;;;;;;;;x
+edmp_realm_size_nomadic_empty_holding_contribution_set_to_default_quarter_tt;§YNomadic Empty Holding Slot Contribution§! is changed to its §Ydefault§! value: §Y0.25§!;;;;;;;;;;;;;x
+edmp_realm_size_excess_close_threshold_frac_set_to_default_fifth_tt;§YMaximum Excess Realm Size Fraction for "Close" Penalties§! is changed to its §Ydefault§! value: §Y0.2§!;;;;;;;;;;;;;x
 #
 # Realm Size Rule Summary (via custom loc)
-edmp_global_realm_size_limit_status_disabled;Not limited;;;;;;;;;;;;;x
-edmp_global_realm_size_limit_status_enabled;Limited to [Root.global_edmp_realm_size_limit.GetValue] for human players;;;;;;;;;;;;;x
+edmp_global_realm_size_limit_status_disabled;Current status: Not limited;;;;;;;;;;;;;x
+edmp_global_realm_size_limit_status_enabled;Current status:\n- Limited to [Root.global_edmp_realm_size_limit.GetValue] for human players\n- Each tribal empty holding contributes [Root.global_edmp_realm_size_empty_holdings_tribal.GetValue] realm size\n- Each nomadic empty holding contributes [Root.global_edmp_realm_size_empty_holdings_nomadic.GetValue] realm size;;;;;;;;;;;;;x
+edmp_global_realm_size_limit_status_one_line_disabled;Not limited;;;;;;;;;;;;;x
+edmp_global_realm_size_limit_status_one_line_enabled;Limited to [Root.global_edmp_realm_size_limit.GetValue] for humans;;;;;;;;;;;;;x
 #
-# Change Realm Size Limit
-edmp_global_3100_title;(ED:MP) Change Realm Size Limit;;;;;;;;;;;;;x
-edmp_global_3100_desc;The new realm size limit is ONLY applied if you click "Save and Exit" below. (This button will only be visible if the new limit is different to the old.) Until then, you may freely adjust the "new limit", and there will be no gameplay impact.\nOld Limit = [global_edmp_realm_size_limit.GetValue]\nNew Limit = [global_edmp_realm_size_limit_new.GetValue];;;;;;;;;;;;;x
+# Change Numeric Parameters (interstitial event)
+edmp_global_3001_title;(ED:MP) Realm Size Limit - Change Params;;;;;;;;;;;;;x
+edmp_global_3001_desc;Choose which parameters you wish to change.\n\n[edmp_global_realm_size_limit_status];;;;;;;;;;;;;x
+edmp_global_3001_evtopt_realm_size_change_limit;Realm Size Limit (Current: [Root.global_edmp_realm_size_limit.GetValue]);;;;;;;;;;;;;x
+edmp_global_3001_evtopt_realm_size_change_empty_holdings;Tribal / Nomadic Empty Holdings Contribution (Current: [Root.global_edmp_realm_size_empty_holdings_tribal.GetValue] / [Root.global_edmp_realm_size_empty_holdings_nomadic.GetValue]);;;;;;;;;;;;;x
+#
+# Change Realm Size Limit - Main
+edmp_global_3100_title;(ED:MP) Realm Size Limit - Change;;;;;;;;;;;;;x
+edmp_global_3100_desc;The new realm size limit is ONLY applied if you click "Save and Exit" below. (This button will only be visible if the new limit is different to the old.) Until then, you may freely adjust the "new limit", and there will be no gameplay impact.\n\nOld Limit = [Root.global_edmp_realm_size_limit.GetValue]\nNew Limit = [Root.global_edmp_realm_size_limit_new.GetValue];;;;;;;;;;;;;x
 edmp_global_3100_evtopt_realm_size_increase;Increase;;;;;;;;;;;;;x
 edmp_global_3100_evtopt_realm_size_decrease;Decrease;;;;;;;;;;;;;x
-edmp_global_3100_evtopt_realm_size_exit_no_change;Exit (without making any changes);;;;;;;;;;;;;x
-edmp_global_3100_evtopt_realm_size_cancel_and_exit;Cancel & Exit;;;;;;;;;;;;;x
 edmp_global_realm_size_is_not_changed_tt;The realm size limit is NOT changed.\n(The limit remains at §Y[Root.global_edmp_realm_size_limit.GetValue]§!, and players are NOT notified.);;;;;;;;;;;;;x
-edmp_global_3100_evtopt_realm_size_save_and_exit;Save & Exit;;;;;;;;;;;;;x
 edmp_global_realm_size_error_changed_to_zero_tt;§RERROR!§! New realm size limit is invalid! Realm size limit will change to §Yzero§!.;;;;;;;;;;;;;x
-edmp_global_realm_size_changed_to_new_value_tt;Realm size limit changes from §Y[Root.global_edmp_realm_size_limit.GetValue]§! to §Y[Root.global_edmp_realm_size_limit_new.GetValue]§!;;;;;;;;;;;;;x
+edmp_global_realm_size_changed_to_new_value_tt;Realm size limit changes from §Y[Root.global_edmp_realm_size_limit.GetValue]§! to §Y[Root.global_edmp_realm_size_limit_new.GetValue]§!.;;;;;;;;;;;;;x
 #
-# Increase
-edmp_global_3101_title;(ED:MP) Increase Realm Size Limit;;;;;;;;;;;;;x
-edmp_global_3101_desc;Choose the size of the increase.\nNB: This change will not be finalised until you click "Save & Exit" on the main menu.;;;;;;;;;;;;;x
+# Change Realm Size Limit - Submenu - Increase
+edmp_global_3101_title;(ED:MP) Realm Size Limit - Increase;;;;;;;;;;;;;x
+edmp_global_3101_desc;Choose the size of the increase.\n\nNB: This change will not be finalised until you click "Save & Exit" on the main menu.;;;;;;;;;;;;;x
 edmp_global_3101_evtopt_increase_5;+5 (New limit: [Root.edmp_realm_size_limit_new_value_1.GetValue]);;;;;;;;;;;;;x
 edmp_global_3101_evtopt_increase_10;+10 (New limit: [Root.edmp_realm_size_limit_new_value_2.GetValue]);;;;;;;;;;;;;x
 edmp_global_3101_evtopt_increase_25;+25 (New limit: [Root.edmp_realm_size_limit_new_value_3.GetValue]);;;;;;;;;;;;;x
 edmp_global_3101_evtopt_increase_100;+100 (New limit: [Root.edmp_realm_size_limit_new_value_4.GetValue]);;;;;;;;;;;;;x
 #
-# Decrease
-edmp_global_3102_title;(ED:MP) Decrease Realm Size Limit;;;;;;;;;;;;;x
-edmp_global_3102_desc;Choose the size of the decrease.\nNB: This change will not be finalised until you click "Save & Exit" on the main menu.;;;;;;;;;;;;;x
+# Change Realm Size Limit - Submenu - Decrease
+edmp_global_3102_title;(ED:MP) Realm Size Limit - Decrease;;;;;;;;;;;;;x
+edmp_global_3102_desc;Choose the size of the decrease.\n\nNB: This change will not be finalised until you click "Save & Exit" on the main menu.;;;;;;;;;;;;;x
 edmp_global_3102_evtopt_decrease_5;-5 (New limit: [Root.edmp_realm_size_limit_new_value_1.GetValue]);;;;;;;;;;;;;x
 edmp_global_3102_evtopt_decrease_10;-10 (New limit: [Root.edmp_realm_size_limit_new_value_2.GetValue]);;;;;;;;;;;;;x
 edmp_global_3102_evtopt_decrease_25;-25 (New limit: [Root.edmp_realm_size_limit_new_value_3.GetValue]);;;;;;;;;;;;;x
 edmp_global_3102_evtopt_decrease_100;-100 (New limit: [Root.edmp_realm_size_limit_new_value_4.GetValue]);;;;;;;;;;;;;x
 edmp_global_3102_evtopt_decrease_to_zero;Decrease to zero;;;;;;;;;;;;;x
+#
+# Change Empty Holdings
+edmp_global_3200_title;(ED:MP) Realm Size Limit - Empty Holdings;;;;;;;;;;;;;x
+edmp_global_3200_desc;Empty holding slots, where the county title is held by a tribal or nomadic character, may be included in a player character's calculated Realm Size. This menu allows you to adjust the weighting of these empty holding slots.\n\nNB: The potential values for each parameter are on a cycle:\n1, 3/4, 2/3, 1/2, 1/3, 1/4, 1/8, 0.\n\nTribal Empty Holding Slot Contr: Old = [Root.global_edmp_realm_size_empty_holdings_tribal.GetValue] , New = [Root.global_edmp_realm_size_empty_holdings_tribal_new.GetValue]\nNomadic Empty Holding Slot Contr: Old = [Root.global_edmp_realm_size_empty_holdings_nomadic.GetValue], New = [Root.global_edmp_realm_size_empty_holdings_nomadic_new.GetValue];;;;;;;;;;;;;x
+edmp_global_3200_evtopt_realm_size_empty_holdings_tribal_cycle_value;Change New Tribal Empty Holding Slot Contribution to [Root.global_edmp_realm_size_empty_holdings_tribal_next.GetValue];;;;;;;;;;;;;x
+edmp_global_3200_evtopt_realm_size_empty_holdings_nomadic_cycle_value;Change New Nomadic Empty Holding Slot Contribution to [Root.global_edmp_realm_size_empty_holdings_nomadic_next.GetValue];;;;;;;;;;;;;x
+edmp_global_realm_size_empty_holding_tribal_parameter_not_changed_tt;The Tribal Empty Holding Slot Contribution is NOT changed.\n(The Tribal Empty Holding Slot Contribution remains at §Y[Root.global_edmp_realm_size_empty_holdings_tribal.GetValue]§!.);;;;;;;;;;;;;x
+edmp_global_realm_size_empty_holding_nomadic_parameter_not_changed_tt;The Nomadic Empty Holding Slot Contribution is NOT changed.\n(The Nomadic Empty Holding Slot Contribution remains at §Y[Root.global_edmp_realm_size_empty_holdings_nomadic.GetValue]§!.);;;;;;;;;;;;;x
+edmp_global_realm_size_empty_holding_tribal_parameter_changed_tt;The Tribal Empty Holding Slot Contribution changes from §Y[Root.global_edmp_realm_size_empty_holdings_tribal.GetValue]§! to §Y[Root.global_edmp_realm_size_empty_holdings_tribal_new.GetValue]§!.;;;;;;;;;;;;;x
+edmp_global_realm_size_empty_holding_nomadic_parameter_changed_tt;The Nomadic Empty Holding Slot Contribution changes from §Y[Root.global_edmp_realm_size_empty_holdings_nomadic.GetValue]§! to §Y[Root.global_edmp_realm_size_empty_holdings_nomadic_new.GetValue]§!.;;;;;;;;;;;;;x

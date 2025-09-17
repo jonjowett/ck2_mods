@@ -82,8 +82,12 @@ character_event = {
 			limit = { check_variable = { which = edmp_realm_size_excess value <= 0 } }
 			character_event = { id = EDMPRealmSize.2001 } # Good
 		}
-		else = {
+		else_if = {
+			limit = { check_variable = { which = edmp_realm_size_excess which <= edmp_realm_size_excess_close_threshold } }
 			character_event = { id = EDMPRealmSize.2002 } # Bad
+		}
+		else = {
+			character_event = { id = EDMPRealmSize.2003 } # Very Bad
 		}
 	}
 }
@@ -105,6 +109,21 @@ character_event = {
 	id      = EDMPRealmSize.2002
 	title   = EDMPRealmSize_2000_Title
 	desc    = EDMPRealmSize_2000_Desc_Bad
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
+	# Validator thinks long frame is incorrect; it's not.
+	# Audax Validator "." Ignore_NEXT
+	border  = GFX_event_long_frame_war     # Red frame (bad)
+	is_triggered_only = yes
+	option  = {
+		name = EDMPRealmSize_2000_EvtOpt_Curses
+		tooltip_info = yes
+	}
+}
+character_event = {
+	id      = EDMPRealmSize.2003
+	title   = EDMPRealmSize_2000_Title
+	desc    = EDMPRealmSize_2000_Desc_VeryBad
 	picture = GFX_evt_camaraderie
 	window  = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
 	# Validator thinks long frame is incorrect; it's not.
