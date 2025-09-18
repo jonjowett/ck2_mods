@@ -10,6 +10,8 @@ namespace = ExpdGifts
 
 character_event = {
 	
+	
+	
 	id      = ExpdGifts.1000
 	title   = ExpdGifts_1000_Title
 	picture = GFX_evt_relaxed_ruler
@@ -17,35 +19,66 @@ character_event = {
 	
 	is_triggered_only = yes
 	
-	# Slightly-different flavour text (description & option), depending on the amount of gold received.
+	
+	
+	# Slightly-different flavour text (description & option), depending on the amount of gold or quality of artifact received.
 	desc = {
 		trigger = {
+			has_character_flag = expd_g_received_gold
 			check_variable = { which = expd_g_send_gold_amount_received value <  1000  }
 		}
-		text = ExpdGifts_1000_Desc_Small
+		text = ExpdGifts_1000_Desc_Gold_Small
 	}
 	desc = {
 		trigger = {
+			has_character_flag = expd_g_received_gold
 			check_variable = { which = expd_g_send_gold_amount_received value >= 1000  }
 			check_variable = { which = expd_g_send_gold_amount_received value <  10000 }
 		}
-		text = ExpdGifts_1000_Desc_Medium
+		text = ExpdGifts_1000_Desc_Gold_Medium
 	}
 	desc = {
 		trigger = {
+			has_character_flag = expd_g_received_gold
 			check_variable = { which = expd_g_send_gold_amount_received value >= 10000 }
 		}
-		text = ExpdGifts_1000_Desc_Large
+		text = ExpdGifts_1000_Desc_Gold_Large
 	}
+	desc = {
+		trigger = {
+			has_character_flag = expd_g_received_artifact
+			event_target:expd_g_artifact_sent = { quality <= 2 }
+		}
+		text = ExpdGifts_1000_Desc_Artifact_Q1_Q2
+	}
+	desc = {
+		trigger = {
+			has_character_flag = expd_g_received_artifact
+			event_target:expd_g_artifact_sent = { OR = { quality == 3 quality == 4 } }
+		}
+		text = ExpdGifts_1000_Desc_Artifact_Q3_Q4
+	}
+	desc = {
+		trigger = {
+			has_character_flag = expd_g_received_artifact
+			event_target:expd_g_artifact_sent = { quality >= 5 }
+		}
+		text = ExpdGifts_1000_Desc_Artifact_Q5plus
+	}
+	
+	
+	
 	option = {
 		name = {
 			trigger = {
+				has_character_flag = expd_g_received_gold
 				check_variable = { which = expd_g_send_gold_amount_received value <  1000  }
 			}
 			text = ExpdGifts_1000_EvtOpt_OK_Small
 		}
 		name = {
 			trigger = {
+				has_character_flag = expd_g_received_gold
 				check_variable = { which = expd_g_send_gold_amount_received value >= 1000  }
 				check_variable = { which = expd_g_send_gold_amount_received value <  10000 }
 			}
@@ -53,13 +86,131 @@ character_event = {
 		}
 		name = {
 			trigger = {
+				has_character_flag = expd_g_received_gold
 				check_variable = { which = expd_g_send_gold_amount_received value >= 10000 }
 			}
 			text = ExpdGifts_1000_EvtOpt_OK_Large
 		}
+		name = {
+			trigger = {
+				has_character_flag = expd_g_received_artifact
+				event_target:expd_g_artifact_sent = { quality <= 2 }
+			}
+			text = ExpdGifts_1000_EvtOpt_OK_Small
+		}
+		name = {
+			trigger = {
+				has_character_flag = expd_g_received_artifact
+				event_target:expd_g_artifact_sent = { OR = { quality == 3 quality == 4 } }
+			}
+			text = ExpdGifts_1000_EvtOpt_OK_Medium
+		}
+		name = {
+			trigger = {
+				has_character_flag = expd_g_received_artifact
+				event_target:expd_g_artifact_sent = { quality >= 5 }
+			}
+			text = ExpdGifts_1000_EvtOpt_OK_Large
+		}
+		if = {
+			limit = { has_character_flag = expd_g_received_gold }
+			custom_tooltip = { text = expd_g_gifted_gold_has_already_been_added_to_treasury_tt }
+		}
+		if = {
+			limit = { has_character_flag = expd_g_received_artifact }
+			custom_tooltip = { text = expd_g_gifted_artifact_has_already_been_added_to_treasury_tt }
+		}
 	}
 	
-	# Probably-unnecessary cleanup (since the decision also resets this variable to zero)
-	after = { hidden_tooltip = { set_variable = { which = expd_g_send_gold_amount_received value = 0 } } }
+	
+	
+	option = {
+		name = ExpdGifts_1000_EvtOpt_Refuse
+		# AI cannot refuse
+		trigger = { ai = no }
+		ai_chance = { factor = 0 }
+		# If refusing gold, refund it. If refusing an artifact, return it.
+		if = {
+			limit = { has_character_flag = expd_g_received_gold }
+			custom_tooltip = {
+				text = expd_g_root_returns_gold_to_from_tt
+				set_variable      = { which = expd_g_send_gold_amount_received_negative value = 0 }
+				subtract_variable = { which = expd_g_send_gold_amount_received_negative which = expd_g_send_gold_amount_received }
+				set_variable      = { which = global_expd_g_gold_refund_amount_temp     which = expd_g_send_gold_amount_received }
+				ROOT = { wealth = expd_g_send_gold_amount_received_negative }
+				ROOT_FROM = {
+					set_variable = { which = expd_g_gold_refund_amount which = global_expd_g_gold_refund_amount_temp }
+					wealth = expd_g_gold_refund_amount
+					character_event = { id = ExpdGifts.1001 }
+				}
+				set_variable = { which = global_expd_g_gold_refund_amount_temp value = 0 }
+			}
+		}
+		if = {
+			limit = { has_character_flag = expd_g_received_artifact }
+			hidden_tooltip = { event_target:expd_g_artifact_sent = { save_event_target_as = expd_g_artifact_returned } }
+			event_target:expd_g_artifact_returned = { transfer_artifact = { from = ROOT to = ROOT_FROM } }
+			character_event = { id = ExpdGifts.1002 }
+		}
+	}
+	
+	# Cleanup
+	after = {
+		hidden_tooltip = {
+			clr_character_flag = expd_g_received_gold
+			clr_character_flag = expd_g_received_artifact
+			set_variable = { which = expd_g_send_gold_amount_received          value = 0 }
+			set_variable = { which = expd_g_send_gold_amount_received_negative value = 0 }
+			clear_event_target = expd_g_artifact_sent
+		}
+	}
+	
+}
+
+# Returned gift: gold
+character_event = {
+	
+	id      = ExpdGifts.1001
+	title   = ExpdGifts_1001_1002_Title
+	desc    = ExpdGifts_1001_Desc
+	picture = GFX_evt_relaxed_ruler
+	border  = GFX_event_normal_frame_economy
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ExpdGifts_1001_1002_EvtOpt_OK
+		custom_tooltip = { text = expd_g_returned_gold_already_added_to_treasury_tt }
+	}
+	
+	# Cleanup
+	after = {
+		hidden_tooltip = {
+			set_variable = { which = expd_g_gold_refund_amount value = 0 }
+		}
+	}
+	
+}
+
+# Returned gift: gold
+character_event = {
+	
+	id      = ExpdGifts.1002
+	title   = ExpdGifts_1001_1002_Title
+	desc    = ExpdGifts_1002_Desc
+	picture = GFX_evt_relaxed_ruler
+	border  = GFX_event_normal_frame_economy
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ExpdGifts_1001_1002_EvtOpt_OK
+		custom_tooltip = { text = expd_g_returned_artifact_already_added_to_treasury_tt }
+	}
+	
+	# Cleanup
+	after = {
+		clear_event_target = expd_g_artifact_returned
+	}
 	
 }
