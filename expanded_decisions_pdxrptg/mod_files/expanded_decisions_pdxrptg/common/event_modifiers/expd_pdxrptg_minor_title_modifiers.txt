@@ -3,7 +3,8 @@ expd_pdxrptg_employing_architect = {
 	icon = 101 # Green pagoda
 	
 	# Counterbalance (flavoured as "employing lots of support staff")
-	global_tax_modifier        = -0.025
+	# NB: -5% global tax has a much smaller effect than it seems, because characters in this mod frequently have +150-200% in total.
+	global_tax_modifier        = -0.050
 	
 	# All build costs reduced by 5%
 	build_cost_modifier        = -0.050
