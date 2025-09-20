@@ -15,7 +15,7 @@ ek changes
     - figure out why hermaeus.70 decline option always goes bad despite theoretically only having 20% chance of going bad
     - add trait icons for the army boost spells (morale, damage)
     - investigate and fix lack of raid traits
-       - pirate trait exists, and has custom picture, but can only be granted to historical characters.
+       - pirate trait exists, and has custom picture, but is only granted to historical characters.
        - pirate trait is commented-out of many events.
        - ravager & sea king/queen traits exist, but have vanilla pictures - not ideal for consistency.
        - relabel "viking" as "pirate", and grant viking/ravager/seaking/seaqueen as normal? NB: Will also need to edit the relevant events.
@@ -37,11 +37,14 @@ ek changes
     - suppress event VIETScarboroughFair.100 (references to Zoroastrianism)
     - suppress event 3020 (reference to the Pope)
     - ekruins.40 should have a follow-up event telling you if the ruin repairs succeeded or failed (so you can go there and fix it)
-    - customise send gold amount & mod tools decisions are visible in submenus (they shouldn't be)
+    X customise send gold amount & mod tools decisions are visible in submenus (they shouldn't be)
     X unable to cast spells on atmora from realm based in skyrim
     X check the decision to form orsinium - maybe it doesn't require independence (or direct vassal of an emperor)?
     - restore_d_pyandoneiac decision is bugged - doesn't actually restore the title!
     - allow undead govt to grant titles to undead characters (eg. via title decision with third-party filter to undead unlanded characters in realm)
+    - event-based theft & assassination (vs AI) should resolve instantly (no need to unpause for a day)
+       - would need to rewrite the whole event chain - v painful!
+       - or could add a decision which manually clears the flags, but there may be odd consequences after.
  - convenience features (no decrease in difficulty):
     X ability to stop all events asking if I want to reveal my vampirism / lycanthropy (vamp.350, .450)
     X decision to reveal vampirism / lycanthropy to spouses/friends/lovers (eg. in case the event is disabled by the previous point)
@@ -60,6 +63,7 @@ ek changes
     - improve the "skillsimprove" tooltip (for veterancy increase due to battle events)
     - incorrect localisation in one of the swordsinger proficiency gain events - possibly only if guild leader? Option button is "EKGuildFlavorAcceptLeader".
     - allow cancellation of nickname
+    - allow human liege to override their AI vassals' province culture conversion choices (eg. an extra settlement_decision)
  - improvement features (minor):
     X ability to have more specialisms (eg. dragonborn (NOT dragonblood) => +1; tier 5 education => +1; has ever been grandmaster of a society => +1)
     X boost magicka regen based on learning stat
@@ -86,7 +90,7 @@ ek changes
        X Done, as a side-effect of the updated regional restrictions
     - "heal mind" spell should first remove slow/dull, and only grant perceptive if the target has neither slow nor dull.
     X option to disallow yourself from receiving "set a specific focus" society missions
-    - title_chief_architect gives a small improvement in build cost & time & also for wonders (based on their skill?)
+    X title_chief_architect gives a small improvement in build cost & time & also for wonders (based on their skill?)
     - spellcaster specialisms should allow you to cast relevant spells even if you aren't a mage
     - if you were ever grandmaster of the greybeards in the past, you can recruit tongue retinues for the rest of your life.
     - add tongue retinues of size 100
