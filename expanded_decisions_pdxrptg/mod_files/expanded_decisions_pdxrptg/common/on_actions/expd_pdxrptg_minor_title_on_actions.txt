@@ -1,0 +1,45 @@
+# Status checks on modified minor titles
+# Backup for important checks, in case any of the minor title gain/lose effects don't fire for some reason
+
+on_startup = {
+	events = {
+		ExpdPdxrptgMinorTitle.1000
+	}
+}
+
+on_yearly_pulse = {
+	events = {
+		ExpdPdxrptgMinorTitle.1000
+	}
+}
+
+on_new_holder = {
+	events = {
+		ExpdPdxrptgMinorTitle.1001
+	}
+}
+
+on_new_holder_inheritance = {
+	events = {
+		ExpdPdxrptgMinorTitle.1001
+	}
+}
+
+on_new_holder_usurpation = {
+	events = {
+		ExpdPdxrptgMinorTitle.1001
+	}
+}
+
+
+
+
+
+# Force the AI to give out important minor titles, if it's possible to do so
+
+on_five_year_pulse = {
+	events = {
+		ExpdPdxrptgMinorTitle.1300
+		ExpdPdxrptgMinorTitle.2300
+	}
+}

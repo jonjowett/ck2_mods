@@ -1,0 +1,23 @@
+# Audax Validator EnableCommentMetadata
+
+title_court_alchemist = { # Master Alchemist
+	attribute = learning
+	dignity = 2
+	grant_limit = 1
+	opinion_effect = 10
+	monthly_salary = 0.2
+	monthly_prestige = 0.1
+	
+	is_high_prio = yes # Grants a discount in the market!
+	
+	allowed_to_grant = { expd_pdxrptg_this_character_can_grant_title_master_alchemist = yes }
+	allowed_to_hold  = { expd_pdxrptg_this_character_can_hold_title_master_alchemist = yes  }
+	
+	gain_effect   = { }
+	lose_effect   = { hidden_tooltip = { FROM = { character_event = { id = ExpdPdxrptgMinorTitle.2200 } } } }
+	retire_effect = { hidden_tooltip = { FROM = { character_event = { id = ExpdPdxrptgMinorTitle.2200 } } } }
+	death_effect  = { hidden_tooltip = { FROM = { character_event = { id = ExpdPdxrptgMinorTitle.2200 } } } }
+	
+	message = yes
+	
+}
