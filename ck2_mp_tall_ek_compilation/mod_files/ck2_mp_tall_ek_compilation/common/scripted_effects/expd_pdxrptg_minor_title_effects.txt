@@ -1,0 +1,34 @@
+expd_pdxrptg_this_character_auto_appoints_new_chief_architect = {
+	random_courtier_or_vassal = {
+		limit = {
+			expd_pdxrptg_this_character_can_hold_title_chief_architect = yes
+			liege = { character = PREVPREV }
+		}
+		preferred_limit = { stewardship = 50 }
+		preferred_limit = { stewardship = 40 }
+		preferred_limit = { stewardship = 30 }
+		preferred_limit = { stewardship = 20 }
+		preferred_limit = { stewardship = 10 }
+		give_minor_title = title_chief_architect_expd_pdxrptg
+	}
+}
+
+expd_pdxrptg_this_character_auto_appoints_new_master_alchemist = {
+	random_courtier_or_vassal = {
+		limit = {
+			expd_pdxrptg_this_character_can_hold_title_master_alchemist = yes
+			liege = { character = PREVPREV }
+		}
+		preferred_limit = { learning = 50 expd_pdxrptg_this_character_is_an_alchemist = yes }
+		preferred_limit = { learning = 40 expd_pdxrptg_this_character_is_an_alchemist = yes }
+		preferred_limit = { learning = 30 expd_pdxrptg_this_character_is_an_alchemist = yes }
+		preferred_limit = { learning = 20 expd_pdxrptg_this_character_is_an_alchemist = yes }
+		preferred_limit = { learning = 10 expd_pdxrptg_this_character_is_an_alchemist = yes }
+		preferred_limit = { learning = 50 }
+		preferred_limit = { learning = 40 }
+		preferred_limit = { learning = 30 }
+		preferred_limit = { learning = 20 }
+		preferred_limit = { learning = 10 }
+		give_minor_title = title_court_alchemist
+	}
+}
