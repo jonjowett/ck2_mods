@@ -1,0 +1,46 @@
+# Audax Validator EnableCommentMetadata
+
+# Downgrade the masks' stats to something more normal for Q3, especially since they use a slot that's otherwise unavailable
+# Unchanged from the base mod, except for a few stats, so ignore all errors
+# Audax Validator "!" Ignore_NEXT
+
+crown_african_mask_1 = { #Top tier Mask - Inspiring
+	monthly_character_piety = 0.25
+	martial = 3
+	combat_rating = 10
+	tribal_opinion = 10
+	quality = 3
+	command_modifier = { ######################################### MOD ALTERATION
+		#morale_defence = 0.2
+		morale_defence = 0.1
+		#center = 0.05
+		center = 0.025
+	}
+	active = {
+		is_adult = yes
+	}
+	flags = { mask african_fetish }
+	stacking = no
+	picture = "GFX_crown_african_mask_1"
+	slot = mask
+}
+crown_african_mask_2 = { #Top tier Mask - Terrifying
+	monthly_character_prestige = 0.5
+	martial = 3
+	combat_rating = 10
+	tribal_opinion = 10
+	quality = 3
+	command_modifier = { ######################################### MOD ALTERATION
+		#morale_offence = 0.2
+		morale_offence = 0.1
+		#pursue = 0.05
+		pursue = 0.025
+	}
+	active = {
+		is_adult = yes
+	}
+	flags = { mask african_fetish }
+	stacking = no
+	picture = "GFX_crown_african_mask_2"
+	slot = mask
+}

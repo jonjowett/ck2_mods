@@ -1,0 +1,43 @@
+# Audax Validator EnableCommentMetadata
+
+# Downgrade shield_eleidon so it's NOT better than spellbreaker (!)
+# Unchanged from the base mod, except for a few stats, so ignore all errors
+# Audax Validator "!" Ignore_NEXT
+
+shield_eleidon = {
+	monthly_character_prestige = 0.1
+	health = 2
+	combat_rating = 8
+	
+	command_modifier = {
+		#morale_defence = 0.10
+		morale_defence = 0.05 ############################# MOD ALTERATION
+	}
+	
+	picture = "GFX_shield_eleidon"
+	stacking = no
+	slot = shield
+	indestructible = yes
+	
+	quality = 3
+	
+	flags = {
+		shield
+		unique
+		theft_dr_extreme
+		quality_legendary
+	}
+	active = {
+		custom_tooltip = { text = shield_equip_tt }
+		hidden_tooltip = {
+			NOT = {
+				any_artifact = {
+					AND = {
+						is_artifact_equipped = yes
+						has_artifact_flag = no_shield
+					}
+				}
+			}
+		}
+	}
+}
