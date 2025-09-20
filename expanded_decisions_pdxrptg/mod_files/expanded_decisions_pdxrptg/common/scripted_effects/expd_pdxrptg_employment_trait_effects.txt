@@ -1,0 +1,621 @@
+# Audax Validator EnableCommentMetadata
+
+# Pretty much every line in this file is going to cause an error, so let's ignore them all
+# Audax Validator "!" Ignore_NEXT
+
+expd_pdxrptg_remove_this_characters_lifestyles = {
+	
+	# Special non-blocking
+	remove_trait = poet
+	remove_trait = falconer
+	remove_trait = pirate
+	remove_trait = necromancer
+	
+	# Special
+	remove_trait = adventurer
+	
+	# Normal (society / WoL focus)
+	# Diplomacy
+	remove_trait = hedonist
+	remove_trait = socializer
+	remove_trait = gamer
+	remove_trait = painter
+	remove_trait = musician
+	remove_trait = gambler
+	# Martial
+	remove_trait = duelist
+	remove_trait = hunter
+	remove_trait = strategist
+	remove_trait = gladiator
+	remove_trait = equestrian
+	# Stewardship
+	remove_trait = gardener
+	remove_trait = administrator
+	remove_trait = architect
+	remove_trait = blacksmith
+	remove_trait = engineer
+	# Intrigue
+	remove_trait = impaler
+	remove_trait = seducer
+	remove_trait = seductress
+	remove_trait = schemer
+	remove_trait = smuggler
+	remove_trait = saboteur
+	# Learning
+	remove_trait = mystic
+	remove_trait = scholar
+	remove_trait = theologian
+	remove_trait = alchemist
+	remove_trait = magician
+	
+}
+
+expd_pdxrptg_remove_this_characters_specialisms = {
+	
+	remove_trait = bard_1
+	remove_trait = bard_2
+	remove_trait = bard_3
+	remove_trait = wayfarer_1
+	remove_trait = wayfarer_2
+	remove_trait = wayfarer_3
+	remove_trait = savant_1
+	remove_trait = savant_2
+	remove_trait = savant_3
+	remove_trait = rogue_1
+	remove_trait = rogue_2
+	remove_trait = rogue_3
+	
+	remove_trait = knight_1
+	remove_trait = knight_2
+	remove_trait = knight_3
+	remove_trait = crusader_1
+	remove_trait = crusader_2
+	remove_trait = crusader_3
+	remove_trait = barbarian_1
+	remove_trait = barbarian_2
+	remove_trait = barbarian_3
+	remove_trait = spellsword_1
+	remove_trait = spellsword_2
+	remove_trait = spellsword_3
+	
+	remove_trait = priest_1
+	remove_trait = priest_2
+	remove_trait = priest_3
+	remove_trait = witchhunter_1
+	remove_trait = witchhunter_2
+	remove_trait = witchhunter_3
+	remove_trait = battlemage_1
+	remove_trait = battlemage_2
+	remove_trait = battlemage_3
+	remove_trait = sorcerer_1
+	remove_trait = sorcerer_2
+	remove_trait = sorcerer_3
+	
+	remove_trait = trader_1
+	remove_trait = trader_2
+	remove_trait = trader_3
+	remove_trait = monk_1
+	remove_trait = monk_2
+	remove_trait = monk_3
+	remove_trait = scout_1
+	remove_trait = scout_2
+	remove_trait = scout_3
+	remove_trait = healer_1
+	remove_trait = healer_2
+	remove_trait = healer_3
+	
+	remove_trait = acrobat_1
+	remove_trait = acrobat_2
+	remove_trait = acrobat_3
+	remove_trait = thief_1
+	remove_trait = thief_2
+	remove_trait = thief_3
+	remove_trait = assassin_1
+	remove_trait = assassin_2
+	remove_trait = assassin_3
+	remove_trait = nightblade_1
+	remove_trait = nightblade_2
+	remove_trait = nightblade_3
+	
+}
+
+expd_pdxrptg_remove_this_characters_genetics = {
+	
+	remove_trait = fair
+	remove_trait = groomed
+	
+	remove_trait = genius
+	remove_trait = quick
+	remove_trait = shrewd
+	
+	remove_trait = strong
+	remove_trait = robust
+	remove_trait = sturdy
+	
+}
+
+expd_pdxrptg_remove_this_characters_leaderships = {
+	
+	remove_trait = light_foot_leader
+	remove_trait = light_foot_leader_2
+	remove_trait = light_foot_leader_3
+	remove_trait = heavy_infantry_leader
+	remove_trait = heavy_infantry_leader_2
+	remove_trait = heavy_infantry_leader_3
+	remove_trait = cavalry_leader
+	remove_trait = cavalry_leader_2
+	remove_trait = cavalry_leader_3
+	remove_trait = inspiring_leader
+	remove_trait = inspiring_leader_2
+	remove_trait = inspiring_leader_3
+	remove_trait = trickster
+	remove_trait = trickster_2
+	remove_trait = trickster_3
+	remove_trait = organizer
+	remove_trait = organizer_2
+	remove_trait = organizer_3
+	remove_trait = defensive_leader
+	remove_trait = defensive_leader_2
+	remove_trait = defensive_leader_3
+	remove_trait = experimenter
+	remove_trait = experimenter_2
+	remove_trait = experimenter_3
+	remove_trait = flanker
+	remove_trait = flanker_2
+	remove_trait = flanker_3
+	remove_trait = aggressive_leader
+	remove_trait = aggressive_leader_2
+	remove_trait = aggressive_leader_3
+	remove_trait = siege_leader
+	remove_trait = siege_leader_2
+	remove_trait = siege_leader_3
+	remove_trait = narrow_flank_leader
+	remove_trait = narrow_flank_leader_2
+	remove_trait = narrow_flank_leader_3
+	
+	remove_trait = veteran_leader_1
+	remove_trait = veteran_leader_2
+	remove_trait = veteran_leader_3
+	remove_trait = veteran_leader_4
+	remove_trait = veteran_leader_5
+	
+	remove_trait = holy_warrior
+	remove_trait = unyielding_leader
+	remove_trait = winter_soldier
+	remove_trait = lead_from_rear
+	remove_trait = lead_from_fore
+	remove_trait = bloody_commander
+	remove_trait = master_of_flame
+	remove_trait = logistics_expert
+	remove_trait = levy_coordinator
+	remove_trait = sapper
+	
+	remove_trait = flat_terrain_leader
+	remove_trait = rough_terrain_leader
+	remove_trait = mountain_terrain_leader
+	remove_trait = desert_terrain_leader
+	remove_trait = jungle_terrain_leader
+	remove_trait = swamp_terrain_leader
+	remove_trait = extreme_terrain_leader
+	
+}
+
+expd_pdxrptg_improve_this_characters_genetics_attractiveness = {
+	
+	if = {
+		limit = { trait = inbred }
+		remove_trait = inbred
+	}
+	else_if = {
+		limit = { trait = ugly }
+		remove_trait = ugly
+	}
+	else_if = {
+		limit = { trait = uncouth }
+		remove_trait = uncouth
+	}
+	else_if = {
+		limit = { NOR = { trait = groomed trait = fair } }
+		add_trait = groomed
+	}
+	else_if = {
+		limit = { trait = groomed NOT = { trait = fair } }
+		add_trait = fair
+	}
+	else = {
+		# Maxed-out - do nothing
+	}
+	
+}
+
+expd_pdxrptg_improve_this_characters_genetics_strength = {
+	
+	if = {
+		limit = { trait = inbred }
+		remove_trait = inbred
+	}
+	else_if = {
+		limit = { trait = weak }
+		remove_trait = weak
+	}
+	else_if = {
+		limit = { trait = feeble }
+		remove_trait = feeble
+	}
+	else_if = {
+		limit = { NOR = { trait = sturdy trait = robust trait = strong } }
+		add_trait = sturdy
+	}
+	else_if = {
+		limit = { trait = sturdy }
+		remove_trait = sturdy
+		add_trait = robust
+	}
+	else_if = {
+		limit = { trait = robust }
+		remove_trait = robust
+		add_trait = strong
+	}
+	else = {
+		# Maxed-out - do nothing
+	}
+	
+}
+
+expd_pdxrptg_improve_this_characters_genetics_intelligence = {
+	
+	if = {
+		limit = { trait = inbred }
+		remove_trait = inbred
+	}
+	else_if = {
+		limit = { trait = slow }
+		remove_trait = slow
+	}
+	else_if = {
+		limit = { trait = dull }
+		remove_trait = dull
+	}
+	else_if = {
+		limit = { NOR = { trait = shrewd trait = quick trait = genius } }
+		add_trait = shrewd
+	}
+	else_if = {
+		limit = { trait = shrewd }
+		remove_trait = shrewd
+		add_trait = quick
+	}
+	else_if = {
+		limit = { trait = quick }
+		remove_trait = quick
+		add_trait = genius
+	}
+	else = {
+		# Maxed-out - do nothing
+	}
+	
+}
+
+expd_pdxrptg_improve_this_characters_personality_traits_diligence = {
+	if = {
+		limit = { OR = { trait = slothful trait = slovenly trait = drunkard } }
+		random_list = {
+			33 = {
+				remove_trait = slothful
+				mult_modifier = { factor = 0 NOT = { trait = slothful } }
+			}
+			33 = {
+				remove_trait = slovenly
+				mult_modifier = { factor = 0 NOT = { trait = slovenly } }
+			}
+			33 = {
+				remove_trait = drunkard
+				mult_modifier = { factor = 0 NOT = { trait = drunkard } }
+			}
+		}
+	}
+	else_if = {
+		limit = { NOT = { trait = diligent } }
+		add_trait = diligent
+	}
+	else = {
+		expd_pdxrptg_grant_one_random_base_stat = yes
+		expd_pdxrptg_grant_one_random_base_stat = yes
+	}
+}
+
+expd_pdxrptg_improve_this_characters_personality_traits_ambition = {
+	if = {
+		limit = { OR = { trait = slothful trait = content } }
+		random_list = {
+			50 = {
+				remove_trait = slothful
+				mult_modifier = { factor = 0 NOT = { trait = slothful } }
+			}
+			50 = {
+				remove_trait = content
+				mult_modifier = { factor = 0 NOT = { trait = content } }
+			}
+		}
+	}
+	else_if = {
+		limit = { NOT = { trait = ambitious } }
+		add_trait = ambitious
+	}
+	else = {
+		expd_pdxrptg_grant_one_random_base_stat = yes
+		expd_pdxrptg_grant_one_random_base_stat = yes
+	}
+}
+
+expd_pdxrptg_improve_this_characters_personality_traits_patience = {
+	if = {
+		limit = { OR = { trait = wroth trait = reckless } }
+		random_list = {
+			50 = {
+				remove_trait = wroth
+				mult_modifier = { factor = 0 NOT = { trait = wroth } }
+			}
+			50 = {
+				remove_trait = reckless
+				mult_modifier = { factor = 0 NOT = { trait = reckless } }
+			}
+		}
+	}
+	else_if = {
+		limit = { NOT = { trait = patient } }
+		add_trait = patient
+	}
+	else = {
+		expd_pdxrptg_grant_one_random_base_stat = yes
+		expd_pdxrptg_grant_one_random_base_stat = yes
+	}
+}
+
+expd_pdxrptg_improve_this_characters_personality_traits_fertility = {
+	# Always remove celibacy
+	if = {
+		limit = { trait = celibate}
+		remove_trait = celibate
+	}
+	# Remove chaste, then homosexual, then randomly add lustful/hedonist/fertility
+	if = {
+		limit = { trait = chaste }
+		remove_trait = chaste
+	}
+	else_if = {
+		limit = { trait = homosexual }
+		remove_trait = homosexual
+	}
+	else = {
+		random_list = {
+			25 = {
+				add_trait = lustful
+				mult_modifier = { factor = 0 trait = lustful }
+			}
+			25 = {
+				add_trait = hedonist
+				mult_modifier = { factor = 0 trait = hedonist }
+			}
+			50 = {
+				expd_pdxrptg_improve_this_characters_fertility = yes
+			}
+		}
+	}
+}
+
+expd_pdxrptg_grant_one_random_base_stat = {
+	random_list = {
+		20 = { change_diplomacy = 1 }
+		20 = { change_stewardship = 1 }
+		20 = { change_martial = 1 }
+		20 = { change_intrigue = 1 }
+		20 = { change_learning = 1 }
+	}
+}
+
+expd_pdxrptg_improve_this_characters_fertility = {
+	random_list = {
+		60 = { fertility = 0.05 }
+		25 = { fertility = 0.10 }
+		10 = { fertility = 0.15 }
+		5  = { fertility = 0.20 }
+	}
+}
+
+expd_pdxrptg_give_this_character_tiered_command_trait = {
+	random_list = {
+		9 = { add_trait = light_foot_leader       mult_modifier = { factor = 0 is_light_foot_leader     = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = light_foot_leader_2     mult_modifier = { factor = 0 is_light_foot_leader     = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = light_foot_leader_3     mult_modifier = { factor = 0 is_light_foot_leader     = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+		9 = { add_trait = heavy_infantry_leader   mult_modifier = { factor = 0 is_heavy_infantry_leader = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = heavy_infantry_leader_2 mult_modifier = { factor = 0 is_heavy_infantry_leader = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = heavy_infantry_leader_3 mult_modifier = { factor = 0 is_heavy_infantry_leader = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+		9 = { add_trait = cavalry_leader          mult_modifier = { factor = 0 is_cavalry_leader        = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = cavalry_leader_2        mult_modifier = { factor = 0 is_cavalry_leader        = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = cavalry_leader_3        mult_modifier = { factor = 0 is_cavalry_leader        = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+		9 = { add_trait = inspiring_leader        mult_modifier = { factor = 0 is_inspiring_leader      = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = inspiring_leader_2      mult_modifier = { factor = 0 is_inspiring_leader      = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = inspiring_leader_3      mult_modifier = { factor = 0 is_inspiring_leader      = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+		9 = { add_trait = trickster               mult_modifier = { factor = 0 is_trickster             = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = trickster_2             mult_modifier = { factor = 0 is_trickster             = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = trickster_3             mult_modifier = { factor = 0 is_trickster             = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+		9 = { add_trait = organizer               mult_modifier = { factor = 0 is_organizer             = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = organizer_2             mult_modifier = { factor = 0 is_organizer             = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = organizer_3             mult_modifier = { factor = 0 is_organizer             = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+		9 = { add_trait = defensive_leader        mult_modifier = { factor = 0 is_defensive_leader      = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = defensive_leader_2      mult_modifier = { factor = 0 is_defensive_leader      = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = defensive_leader_3      mult_modifier = { factor = 0 is_defensive_leader      = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+		9 = { add_trait = experimenter            mult_modifier = { factor = 0 is_experimenter          = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = experimenter_2          mult_modifier = { factor = 0 is_experimenter          = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = experimenter_3          mult_modifier = { factor = 0 is_experimenter          = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+		9 = { add_trait = flanker                 mult_modifier = { factor = 0 is_flanker               = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = flanker_2               mult_modifier = { factor = 0 is_flanker               = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = flanker_3               mult_modifier = { factor = 0 is_flanker               = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+		9 = { add_trait = aggressive_leader       mult_modifier = { factor = 0 is_aggressive_leader     = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = aggressive_leader_2     mult_modifier = { factor = 0 is_aggressive_leader     = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = aggressive_leader_3     mult_modifier = { factor = 0 is_aggressive_leader     = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+		9 = { add_trait = siege_leader            mult_modifier = { factor = 0 is_siege_leader          = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = siege_leader_2          mult_modifier = { factor = 0 is_siege_leader          = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = siege_leader_3          mult_modifier = { factor = 0 is_siege_leader          = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+		9 = { add_trait = narrow_flank_leader     mult_modifier = { factor = 0 is_narrow_flank_leader   = yes } mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		5 = { add_trait = narrow_flank_leader_2   mult_modifier = { factor = 0 is_narrow_flank_leader   = yes } mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		1 = { add_trait = narrow_flank_leader_3   mult_modifier = { factor = 0 is_narrow_flank_leader   = yes }                                                 mult_modifier = { factor = 0.10 martial <= 30 } }
+	}
+}
+
+expd_pdxrptg_give_this_character_terrain_trait = {
+	random_list = {
+		1 = { add_trait = flat_terrain_leader     }
+		1 = { add_trait = rough_terrain_leader    }
+		1 = { add_trait = mountain_terrain_leader }
+		1 = { add_trait = desert_terrain_leader   }
+		1 = { add_trait = jungle_terrain_leader   }
+		1 = { add_trait = swamp_terrain_leader    }
+		1 = { add_trait = extreme_terrain_leader  }
+	}
+}
+
+expd_pdxrptg_give_this_character_tiered_veteran_trait = {
+	random_list = {
+		5 = { add_trait = veteran_leader_1 mult_modifier = { factor = 0.10 martial >= 20 }                                                 }
+		4 = { add_trait = veteran_leader_2 mult_modifier = { factor = 0.10 martial >= 25 } mult_modifier = { factor = 0.10 martial <= 20 } }
+		3 = { add_trait = veteran_leader_3 mult_modifier = { factor = 0.10 martial >= 30 } mult_modifier = { factor = 0.10 martial <= 25 } }
+		2 = { add_trait = veteran_leader_4 mult_modifier = { factor = 0.10 martial >= 35 } mult_modifier = { factor = 0.10 martial <= 30 } }
+		1 = { add_trait = veteran_leader_5                                                 mult_modifier = { factor = 0.10 martial <= 35 } }
+	}
+}
+
+expd_pdxrptg_give_this_character_a_lifestyle_trait_dip = {
+	random_list = {
+		1 = { add_trait = hedonist   }
+		1 = { add_trait = socializer }
+		1 = { add_trait = gamer      }
+		1 = { add_trait = painter    }
+		1 = { add_trait = musician   }
+		1 = { add_trait = gambler    }
+	}
+}
+
+expd_pdxrptg_give_this_character_a_lifestyle_trait_mar = {
+	random_list = {
+		1 = { add_trait = duelist    }
+		1 = { add_trait = hunter     }
+		1 = { add_trait = strategist }
+		1 = { add_trait = gladiator  }
+		1 = { add_trait = equestrian }
+	}
+}
+
+expd_pdxrptg_give_this_character_a_lifestyle_trait_ste = {
+	random_list = {
+		1 = { add_trait = gardener      }
+		1 = { add_trait = administrator }
+		1 = { add_trait = architect     }
+		1 = { add_trait = blacksmith    }
+		1 = { add_trait = engineer      }
+	}
+}
+
+expd_pdxrptg_give_this_character_a_lifestyle_trait_int = {
+	random_list = {
+		1 = { add_trait = impaler    }
+		1 = { add_trait = seducer    mult_modifier = { factor = 0 is_female = yes } }
+		1 = { add_trait = seductress mult_modifier = { factor = 0 is_female = no  } }
+		1 = { add_trait = schemer    }
+		1 = { add_trait = smuggler   }
+		1 = { add_trait = saboteur   }
+	}
+}
+
+expd_pdxrptg_give_this_character_a_lifestyle_trait_lea = {
+	random_list = {
+		1 = { add_trait = mystic     }
+		1 = { add_trait = scholar    }
+		1 = { add_trait = theologian }
+		1 = { add_trait = alchemist  }
+		1 = { add_trait = magician   }
+	}
+}
+
+expd_pdxrptg_give_this_character_a_lifestyle_trait_extra = {
+	random_list = {
+		1 = { add_trait = poet        mult_modifier = { factor = 2 is_diplomat = yes } }
+		1 = { add_trait = falconer    mult_modifier = { factor = 2 is_warrior  = yes } }
+		1 = { add_trait = pirate      mult_modifier = { factor = 0 is_warrior  = no  } }
+		1 = { add_trait = necromancer mult_modifier = { factor = 0 is_mage     = no  } }
+		1 = { add_trait = adventurer  mult_modifier = { factor = 2 is_warrior  = yes } }
+	}
+}
+
+expd_pdxrptg_give_this_character_a_specialism = {
+	random_list = {
+		
+		# Education 1-2 => Probably Tier 1
+		10 = { add_trait = bard_1        mult_modifier = { factor = 0 is_bard             = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_agent      = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = wayfarer_1    mult_modifier = { factor = 0 is_wayfarer         = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_magistrate = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = savant_1      mult_modifier = { factor = 0 is_savant           = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_mage       = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = rogue_1       mult_modifier = { factor = 0 is_rogue            = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_warrior    = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = knight_1      mult_modifier = { factor = 0 is_knight           = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_diplomat   = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = crusader_1    mult_modifier = { factor = 0 is_crusader         = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_agent      = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = barbarian_1   mult_modifier = { factor = 0 is_barbarian        = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_magistrate = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = spellsword_1  mult_modifier = { factor = 0 is_spellsword       = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_mage       = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = priest_1      mult_modifier = { factor = 0 is_priest_education = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_diplomat   = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = witchhunter_1 mult_modifier = { factor = 0 is_witchhunter      = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_agent      = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = battlemage_1  mult_modifier = { factor = 0 is_battlemage       = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_warrior    = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = sorcerer_1    mult_modifier = { factor = 0 is_sorcerer         = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_magistrate = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = trader_1      mult_modifier = { factor = 0 is_trader           = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_diplomat   = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = monk_1        mult_modifier = { factor = 0 is_monk_education   = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_agent      = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = scout_1       mult_modifier = { factor = 0 is_scout            = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_warrior    = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = healer_1      mult_modifier = { factor = 0 is_healer           = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_mage       = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = acrobat_1     mult_modifier = { factor = 0 is_acrobat          = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_magistrate = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = thief_1       mult_modifier = { factor = 0 is_thief            = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_diplomat   = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = assassin_1    mult_modifier = { factor = 0 is_assassin         = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_warrior    = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		10 = { add_trait = nightblade_1  mult_modifier = { factor = 0 is_nightblade       = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_mage       = yes } }                                                                       mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = yes } }
+		
+		# Education 2-3 => Probably Tier 2
+		10 = { add_trait = bard_2        mult_modifier = { factor = 0 is_bard             = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_agent      = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = wayfarer_2    mult_modifier = { factor = 0 is_wayfarer         = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_magistrate = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = savant_2      mult_modifier = { factor = 0 is_savant           = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_mage       = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = rogue_2       mult_modifier = { factor = 0 is_rogue            = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_warrior    = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = knight_2      mult_modifier = { factor = 0 is_knight           = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_diplomat   = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = crusader_2    mult_modifier = { factor = 0 is_crusader         = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_agent      = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = barbarian_2   mult_modifier = { factor = 0 is_barbarian        = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_magistrate = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = spellsword_2  mult_modifier = { factor = 0 is_spellsword       = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_mage       = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = priest_2      mult_modifier = { factor = 0 is_priest_education = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_diplomat   = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = witchhunter_2 mult_modifier = { factor = 0 is_witchhunter      = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_agent      = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = battlemage_2  mult_modifier = { factor = 0 is_battlemage       = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_warrior    = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = sorcerer_2    mult_modifier = { factor = 0 is_sorcerer         = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_magistrate = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = trader_2      mult_modifier = { factor = 0 is_trader           = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_diplomat   = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = monk_2        mult_modifier = { factor = 0 is_monk_education   = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_agent      = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = scout_2       mult_modifier = { factor = 0 is_scout            = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_warrior    = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = healer_2      mult_modifier = { factor = 0 is_healer           = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_mage       = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = acrobat_2     mult_modifier = { factor = 0 is_acrobat          = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_magistrate = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = thief_2       mult_modifier = { factor = 0 is_thief            = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_diplomat   = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = assassin_2    mult_modifier = { factor = 0 is_assassin         = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_warrior    = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		10 = { add_trait = nightblade_2  mult_modifier = { factor = 0 is_nightblade       = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_mage       = yes } } mult_modifier = { factor = 0.1 has_at_least_2nd_tier_education = no } mult_modifier = { factor = 0.1 has_at_least_top_tier_education = yes } }
+		
+		# Education 3-5 => Probably Tier 3
+		10 = { add_trait = bard_3        mult_modifier = { factor = 0 is_bard             = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_agent      = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = wayfarer_3    mult_modifier = { factor = 0 is_wayfarer         = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_magistrate = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = savant_3      mult_modifier = { factor = 0 is_savant           = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_mage       = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = rogue_3       mult_modifier = { factor = 0 is_rogue            = yes } mult_modifier = { factor = 0 NOR = { is_diplomat   = yes is_warrior    = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = knight_3      mult_modifier = { factor = 0 is_knight           = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_diplomat   = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = crusader_3    mult_modifier = { factor = 0 is_crusader         = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_agent      = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = barbarian_3   mult_modifier = { factor = 0 is_barbarian        = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_magistrate = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = spellsword_3  mult_modifier = { factor = 0 is_spellsword       = yes } mult_modifier = { factor = 0 NOR = { is_warrior    = yes is_mage       = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = priest_3      mult_modifier = { factor = 0 is_priest_education = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_diplomat   = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = witchhunter_3 mult_modifier = { factor = 0 is_witchhunter      = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_agent      = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = battlemage_3  mult_modifier = { factor = 0 is_battlemage       = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_warrior    = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = sorcerer_3    mult_modifier = { factor = 0 is_sorcerer         = yes } mult_modifier = { factor = 0 NOR = { is_mage       = yes is_magistrate = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = trader_3      mult_modifier = { factor = 0 is_trader           = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_diplomat   = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = monk_3        mult_modifier = { factor = 0 is_monk_education   = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_agent      = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = scout_3       mult_modifier = { factor = 0 is_scout            = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_warrior    = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = healer_3      mult_modifier = { factor = 0 is_healer           = yes } mult_modifier = { factor = 0 NOR = { is_magistrate = yes is_mage       = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = acrobat_3     mult_modifier = { factor = 0 is_acrobat          = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_magistrate = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = thief_3       mult_modifier = { factor = 0 is_thief            = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_diplomat   = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = assassin_3    mult_modifier = { factor = 0 is_assassin         = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_warrior    = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		10 = { add_trait = nightblade_3  mult_modifier = { factor = 0 is_nightblade       = yes } mult_modifier = { factor = 0 NOR = { is_agent      = yes is_mage       = yes } } mult_modifier = { factor = 0.1 has_at_least_3rd_tier_education = no }                                                                        }
+		
+	}
+}

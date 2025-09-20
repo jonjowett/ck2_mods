@@ -1,0 +1,78 @@
+namespace = ExpdPdxrptgEmployment
+
+# Expected to be sent from the inviting character to the invitee.
+# IE:
+#  --- FROM is the ruler doing the inviting
+#  --- ROOT is the invitee
+#
+# Ping back to the inviter
+character_event = {
+	id = ExpdPdxrptgEmployment.1000
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		FROM = { character_event = { id = ExpdPdxrptgEmployment.1001 } }
+	}
+}
+
+# Expected to be sent from the invitee, to the character inviting them.
+# IE:
+#  --- ROOT is the ruler doing the inviting
+#  --- FROM is the invitee
+character_event = {
+	
+	id      = ExpdPdxrptgEmployment.1001
+	title   = ExpdPdxrptgEmployment_1000_Title
+	desc    = ExpdPdxrptgEmployment_1000_Desc
+	picture = GFX_evt_emissary
+	
+	is_triggered_only = yes
+	
+	immediate = { 
+		clear_event_target = invited_character
+	}
+	
+	option = {
+		name = ExpdPdxrptgEmployment_1000_EvtOpt_Accept
+		show_portrait = ROOT_FROM
+		custom_tooltip = { text = ExpdPdxrptgEmployment_1000_EvtOpt_Accept_TT }
+	}
+	option = {
+		name = ExpdPdxrptgEmployment_1000_EvtOpt_Reject
+		show_portrait = ROOT_FROM
+		custom_tooltip = {
+			text = ExpdPdxrptgEmployment_1000_EvtOpt_Reject_TT
+			ROOT_FROM = { death = { death_reason = death_missing } }
+		}
+	}
+	
+}
+
+# on_startup : Add a global flag, for just over a month, so we can be sure employment costs are calculated correctly
+character_event = {
+	id = ExpdPdxrptgEmployment.2000
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	trigger = {
+		ai = no
+		OR = {
+			multiplayer = no
+			is_multiplayer_host_character = yes
+		}
+	}
+	immediate = {
+		set_global_flag = expd_pdxrptg_employment_start_of_game
+		any_province    = { clear_delayed_event = { id = ExpdPdxrptgEmployment.2001           } }
+		random_province = { province_event      = { id = ExpdPdxrptgEmployment.2001 days = 32 } } # 32 days is the minimum needed to be sure that every character will have had at least one monthly income
+	}
+}
+
+province_event = {
+	id = ExpdPdxrptgEmployment.2001
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		clr_global_flag = expd_pdxrptg_employment_start_of_game
+	}
+}

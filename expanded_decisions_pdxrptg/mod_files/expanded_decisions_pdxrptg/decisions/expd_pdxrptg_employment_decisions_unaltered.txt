@@ -1,0 +1,159 @@
+# Audax Validator EnableCommentMetadata
+
+# All base mod employment_* decisions removed (superseded).
+# All remaining decisions are unaltered, so we want to ignore any Validator errors.
+# Audax Validator "!" Ignore_NEXT
+
+
+
+decisions = {
+	
+	adopt_orphan = {
+		potential = {
+			is_ruler = yes
+			is_feudal = yes
+			has_character_flag = employment_open
+			NOT = { culture_group = aldmeris }
+			NOT = { culture_group = chimeris }
+			NOT = { culture_group = undead }
+			NOT = { trait = undead }
+			ai = no
+			OR = {
+				num_of_children < 1
+				NOT = { any_child = { is_alive = yes } }
+			}
+		}
+		allow = {
+			age = 40
+			wealth = 100
+			prestige = 250
+			NOT = { current_heir = { dynasty = ROOT } }
+			NOT = { trait = incapable }
+			NOT = { trait = kinslayer }
+			NOT = { trait = pregnant }
+			NOT = { any_spouse = { trait = pregnant } }
+			NOT = {
+				has_character_modifier = in_seclusion
+			}
+		}
+		effect = {
+			wealth = -100
+			prestige = -250
+			create_character = {
+				random_traits = yes
+				trait = adopted
+				dynasty = ROOT
+				religion = ROOT
+				age = 5
+				female = 50
+			}
+			hidden_tooltip = {
+				new_character = {
+					#assign_birthsign = yes
+					#assign_racial_trait = yes
+					character_event = { id = eknotify.10 }
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { is_female = yes }
+				}
+				new_character = {
+					set_mother = ROOT
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { is_female = no }
+				}
+				new_character = {
+					set_father = ROOT
+				}
+			}
+			recalc_succession = yes
+			hidden_tooltip = {
+				random = {
+					chance = 50
+					remove_trait = proud
+				}
+			}
+		}
+
+		ai_will_do = { factor = 0 }
+	}
+	adopt_orphan_immortal = {
+		potential = {
+			is_ruler = yes
+			is_feudal = yes
+			has_character_flag = employment_open
+			OR = {
+				culture_group = aldmeris
+				culture_group = chimeris
+			}
+			NOT = { culture_group = undead }
+			NOT = { trait = undead }
+			ai = no
+			OR = {
+				num_of_children < 1
+				NOT = { any_child = { is_alive = yes } }
+			}
+		}
+		allow = {
+			age = 100
+			wealth = 100
+			prestige = 250
+			NOT = { current_heir = { dynasty = ROOT } }
+			NOT = { trait = incapable }
+			NOT = { trait = kinslayer }
+			NOT = { trait = pregnant }
+			NOT = { any_spouse = { trait = pregnant } }
+			NOT = {
+				has_character_modifier = in_seclusion
+			}
+		}
+		effect = {
+			wealth = -100
+			prestige = -250
+			create_character = {
+				random_traits = yes
+				trait = adopted
+				dynasty = ROOT
+				religion = ROOT
+				age = 5
+				female = 50
+			}
+			hidden_tooltip = {
+				new_character = {
+					#assign_birthsign = yes
+					#assign_racial_trait = yes
+					#character_event = { id = knotify.5002 }
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { is_female = yes }
+				}
+				new_character = {
+					set_mother = ROOT
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { is_female = no }
+				}
+				new_character = {
+					set_father = ROOT
+				}
+			}
+			recalc_succession = yes
+			hidden_tooltip = {
+				random = {
+					chance = 50
+					remove_trait = proud
+				}
+			}
+		}
+
+		ai_will_do = { factor = 0 }
+	}
+}
