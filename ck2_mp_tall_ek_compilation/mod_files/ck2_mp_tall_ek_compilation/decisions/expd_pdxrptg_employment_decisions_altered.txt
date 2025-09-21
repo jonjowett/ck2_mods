@@ -1,0 +1,219 @@
+# Audax Validator EnableCommentMetadata
+
+decisions = {
+	
+	
+	
+	
+	
+	# Debug Mode
+	
+	expd_pdxrptg_employ_debug_mode_enable = {
+		ai = no
+		potential = {
+			expd_pdxrptg_this_character_can_see_employment_decisions = yes
+			multiplayer = no # Can only enable debug mode in single-player (you shouldn't be debugging in multiplayer)
+			NOT = { has_global_flag = expd_pdxrptg_employment_debug }
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_employ_debug_mode_enable_tt
+				set_global_flag = expd_pdxrptg_employment_debug
+			}
+		}
+	}
+	
+	expd_pdxrptg_employ_debug_mode_disable = {
+		ai = no
+		is_high_prio = yes
+		potential = {
+			OR = {
+				# Can disable debug mode in single-player, if in employment submenu
+				AND = {
+					multiplayer = no
+					expd_pdxrptg_this_character_can_see_employment_decisions = yes
+				}
+				# And can also disable debug mode in multiplayer, if you're the host character (and you'll see this decision everywhere!)
+				AND = {
+					multiplayer = yes
+					is_multiplayer_host_character = yes
+				}
+			}
+			has_global_flag = expd_pdxrptg_employment_debug
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_employ_debug_mode_disable_tt
+				clr_global_flag = expd_pdxrptg_employment_debug
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	# Basic
+	
+	expd_pdxrptg_employ_councillor_decision_basic_dip = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_basic = yes }
+		effect    = { expd_pdxrptg_employ_councillor_basic_dip = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_basic_mar = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_basic = yes }
+		effect    = { expd_pdxrptg_employ_councillor_basic_mar = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_basic_ste = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_basic = yes }
+		effect    = { expd_pdxrptg_employ_councillor_basic_ste = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_basic_int = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_basic = yes }
+		effect    = { expd_pdxrptg_employ_councillor_basic_int = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_basic_lea = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_basic = yes }
+		effect    = { expd_pdxrptg_employ_councillor_basic_lea = yes }
+	}
+	
+	expd_pdxrptg_employ_debutante_decision_basic = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_basic = yes }
+		effect    = { expd_pdxrptg_employ_debutante_basic = yes }
+	}
+	
+	expd_pdxrptg_employ_beau_decision_basic = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_basic = yes }
+		effect    = { expd_pdxrptg_employ_beau_basic = yes }
+	}
+	
+	
+	
+	
+	
+	# Advanced
+	
+	expd_pdxrptg_employ_councillor_decision_advanced_dip = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_advanced = yes }
+		effect    = { expd_pdxrptg_employ_councillor_advanced_dip = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_advanced_mar = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_advanced = yes }
+		effect    = { expd_pdxrptg_employ_councillor_advanced_mar = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_advanced_ste = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_advanced = yes }
+		effect    = { expd_pdxrptg_employ_councillor_advanced_ste = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_advanced_int = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_advanced = yes }
+		effect    = { expd_pdxrptg_employ_councillor_advanced_int = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_advanced_lea = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_advanced = yes }
+		effect    = { expd_pdxrptg_employ_councillor_advanced_lea = yes }
+	}
+	
+	expd_pdxrptg_employ_debutante_decision_advanced = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_advanced = yes }
+		effect    = { expd_pdxrptg_employ_debutante_advanced = yes }
+	}
+	
+	expd_pdxrptg_employ_beau_decision_advanced = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_advanced = yes }
+		effect    = { expd_pdxrptg_employ_beau_advanced = yes }
+	}
+	
+	
+	
+	
+	
+	# Superb
+	
+	expd_pdxrptg_employ_councillor_decision_superb_dip = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_superb = yes }
+		effect    = { expd_pdxrptg_employ_councillor_superb_dip = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_superb_mar = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_superb = yes }
+		effect    = { expd_pdxrptg_employ_councillor_superb_mar = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_superb_ste = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_superb = yes }
+		effect    = { expd_pdxrptg_employ_councillor_superb_ste = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_superb_int = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_superb = yes }
+		effect    = { expd_pdxrptg_employ_councillor_superb_int = yes }
+	}
+	
+	expd_pdxrptg_employ_councillor_decision_superb_lea = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_superb = yes }
+		effect    = { expd_pdxrptg_employ_councillor_superb_lea = yes }
+	}
+	
+	expd_pdxrptg_employ_debutante_decision_superb = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_superb = yes }
+		effect    = { expd_pdxrptg_employ_debutante_superb = yes }
+	}
+	
+	expd_pdxrptg_employ_beau_decision_superb = {
+		ai = no
+		potential = { expd_pdxrptg_this_character_can_see_employment_decisions = yes }
+		allow     = { expd_pdxrptg_this_character_can_take_an_employment_decision_superb = yes }
+		effect    = { expd_pdxrptg_employ_beau_superb = yes }
+	}
+	
+}

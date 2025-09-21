@@ -1,0 +1,103 @@
+# Audax Validator EnableCommentMetadata
+#
+#key;;;;;;;;;;;;;;x
+#key;ENGLISH;;;;;;;;;;;;;x
+#
+#
+#
+# Decisions
+expd_pdxrptg_employ_councillor_decision_basic_dip;Employ Chancellor (Basic);;;;;;;;;;;;;x
+expd_pdxrptg_employ_councillor_decision_basic_mar;Employ Marshal (Basic);;;;;;;;;;;;;x
+expd_pdxrptg_employ_councillor_decision_basic_ste;Employ Steward (Basic);;;;;;;;;;;;;x
+expd_pdxrptg_employ_councillor_decision_basic_int;Employ Spymaster (Basic);;;;;;;;;;;;;x
+expd_pdxrptg_employ_councillor_decision_basic_lea;Employ Mage (Basic);;;;;;;;;;;;;x
+expd_pdxrptg_employ_councillor_decision_advanced_dip;Employ Chancellor (Superior);;;;;;;;
+expd_pdxrptg_employ_councillor_decision_advanced_mar;Employ Marshal (Superior);;;;;;;;;;;
+expd_pdxrptg_employ_councillor_decision_advanced_ste;Employ Steward (Superior);;;;;;;;;;;
+expd_pdxrptg_employ_councillor_decision_advanced_int;Employ Spymaster (Superior);;;;;;;;;
+expd_pdxrptg_employ_councillor_decision_advanced_lea;Employ Mage (Superior);;;;;;;;;;;;;x
+expd_pdxrptg_employ_councillor_decision_superb_dip;Employ Chancellor (Superb);;;;;;;;
+expd_pdxrptg_employ_councillor_decision_superb_mar;Employ Marshal (Superb);;;;;;;;;;;
+expd_pdxrptg_employ_councillor_decision_superb_ste;Employ Steward (Superb);;;;;;;;;;;
+expd_pdxrptg_employ_councillor_decision_superb_int;Employ Spymaster (Superb);;;;;;;;;
+expd_pdxrptg_employ_councillor_decision_superb_lea;Employ Mage (Superb);;;;;;;;;;;;;x
+expd_pdxrptg_employ_debutante_decision_basic;Present Debutante (Basic);;;;;;;;;;;;;x
+expd_pdxrptg_employ_debutante_decision_advanced;Present Debutante (Superior);;;;;;;;;;;;;x
+expd_pdxrptg_employ_debutante_decision_superb;Present Debutante (Superb);;;;;;;;;;;;;x
+expd_pdxrptg_employ_beau_decision_basic;Present Beau (Basic);;;;;;;;;;;;;x
+expd_pdxrptg_employ_beau_decision_advanced;Present Beau (Superior);;;;;;;;;;;;;x
+expd_pdxrptg_employ_beau_decision_superb;Present Beau (Superb);;;;;;;;;;;;;x
+#
+#
+#
+# Debug Mode
+expd_pdxrptg_employ_debug_mode_enable;Enable Debug Mode;;;;;;;;;;;;;x
+expd_pdxrptg_employ_debug_mode_enable_tt;Debug mode will be §Yenabled§! (§Yzero cost§! for all employment decisions);;;;;;;;;;;;;x
+expd_pdxrptg_employ_debug_mode_disable;Disable Debug Mode;;;;;;;;;;;;;x
+expd_pdxrptg_employ_debug_mode_disable_tt;Debug mode will be §Ydisabled§! (§Ynormal cost§! for all employment decisions);;;;;;;;;;;;;x
+expd_pdxrptg_employment_debug_tt;§R!!! DEBUG MODE !!!§!;;;;;;;;;;;;;x
+#
+#
+#
+# Scripted Triggers
+expd_pdxrptg_it_has_been_more_than_one_month_since_game_startup_tt;It has been §Ymore than 1 month§! since the game started;;;;;;;;;;;;;x
+expd_pdxrptg_it_has_been_less_than_one_month_since_game_startup_tt;It has been §Yless than 1 month§! since the game started;;;;;;;;;;;;;x
+expd_pdxrptg_employment_scaled_wealth_required_has_been_calculated_tt;The scaled wealth required to take this decision has been calculated (requires 1 month);;;;;;;;;;;;;x
+#
+#
+#
+# Scripted Effects
+#
+expd_pdxrptg_warning_close_to_game_start_costs_are_maximum_tt;§g-§!\n§RWARNING!§! It has been §Yless than a month§! since the game started, which means scaled costs cannot be properly calculated, so all employment costs have been set to their §Rmaximum possible values§!!\n§g(You might want to wait 1 month before taking this decision...)§!\n§g-§!;;;;;;;;;;;;;x
+#
+expd_pdxrptg_create_councillor_shared_will_be_of_this_characters_culture_religion_tt;The character will be §Y[This.Culture.GetName]§! culture and §Y[This.Religion.GetName]§! religion;;;;;;;;;;;;;x
+expd_pdxrptg_create_debutante_shared_will_be_of_this_characters_culture_religion_tt;The character will be §Y[This.Culture.GetName]§! culture and §Y[This.Religion.GetName]§! religion;;;;;;;;;;;;;x
+expd_pdxrptg_create_councillor_shared_male_tt;The character will be §Ymale§!;;;;;;;;;;;;;x
+expd_pdxrptg_create_councillor_shared_female_35_tt;The character has §Y35% chance of being female§! §g(and 65% of being male)§!;;;;;;;;;;;;;x
+expd_pdxrptg_create_councillor_shared_female_45_tt;The character has §Y45% chance of being female§! §g(and 55% of being male)§!;;;;;;;;;;;;;x
+expd_pdxrptg_create_councillor_shared_female_50_tt;The character has §Y50% chance of being female§! §g(and 50% of being male)§!;;;;;;;;;;;;;x
+expd_pdxrptg_create_councillor_shared_female_65_tt;The character has §Y65% chance of being female§! §g(and 35% of being male)§!;;;;;;;;;;;;;x
+expd_pdxrptg_create_councillor_shared_female_tt;The character will be §Yfemale§!;;;;;;;;;;;;;x
+expd_pdxrptg_create_debutante_shared_will_be_young_female_tt;The character will be §Yyoung§! and §Yfemale§!;;;;;;;;;;;;;x
+expd_pdxrptg_create_debutante_shared_will_be_young_male_tt;The character will be §Yyoung§! and §Ymale§!;;;;;;;;;;;;;x
+#
+expd_pdxrptg_improve_new_character_general_tt;§YPotentially improve§!: base stats, personality, health, fertility and/or genetics;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_base_stats_tt;§GImprove§! all base stats §g(by a random amount)§!;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_dip_tt;§GImprove§! base Diplomacy §g(by a random amount)§!;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_mar_tt;§GImprove§! base Martial §g(by a random amount)§!;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_ste_tt;§GImprove§! base Stewardship §g(by a random amount)§!;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_int_tt;§GImprove§! base Intrigue §g(by a random amount)§!;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_lea_tt;§GImprove§! base Learning §g(by a random amount)§!;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_personality_traits_tt;§YPotentially improve§! personality traits;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_fertility_traits_tt;§YPotentially improve§! fertility traits;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_health_tt;§GImprove§! health §g(by a random amount)§!;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_fertility_tt;§GImprove§! fertility §g(by a random amount)§!;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_genetics_tt;§YPotentially improve§! genetic traits;;;;;;;;;;;;;x
+expd_pdxrptg_this_wonder_improves_new_character_learning_and_intelligence_tt;§Y[This.GetName]§! §Gimproves§! base Learning and §Ypotentially improves§! intelligence;;;;;;;;;;;;;x
+expd_pdxrptg_this_wonder_improves_new_character_intelligence_tt;§Y[This.GetName]§! §Ypotentially improves§! intelligence;;;;;;;;;;;;;x
+expd_pdxrptg_give_new_character_tiered_command_trait_tt;§GGain§! a troop leader trait §g(quality depends on stats & traits)§!;;;;;;;;;;;;;x
+expd_pdxrptg_give_new_character_tiered_veteran_trait_tt;§GGain§! a veteran leader trait §g(quality depends on stats & traits)§!;;;;;;;;;;;;;x
+expd_pdxrptg_give_new_character_terrain_trait_tt;§GGain§! a terrain leader trait;;;;;;;;;;;;;x
+expd_pdxrptg_improve_new_character_command_traits_tt;§GImprove§! random commander traits;;;;;;;;;;;;;x
+#
+expd_pdxrptg_set_new_character_education_dip_tt;Becomes a §YDiplomat§! §g(quality depends on stats & traits)§!;;;;;;;;;;;;;x
+expd_pdxrptg_set_new_character_education_mar_tt;Becomes a §YWarrior§! §g(quality depends on stats & traits)§!;;;;;;;;;;;;;x
+expd_pdxrptg_set_new_character_education_ste_tt;Becomes a §YMagistrate§! §g(quality depends on stats & traits)§!;;;;;;;;;;;;;x
+expd_pdxrptg_set_new_character_education_int_tt;Becomes an §YAgent§! §g(quality depends on stats & traits)§!;;;;;;;;;;;;;x
+expd_pdxrptg_set_new_character_education_lea_tt;Becomes a §YMage§! §g(quality depends on stats & traits)§!;;;;;;;;;;;;;x
+expd_pdxrptg_set_new_character_education_weighted_random_tt;Gains a §Yweighted random education§! §g(quality depends on stats & traits)§!;;;;;;;;;;;;;x
+#
+expd_pdxrptg_set_new_character_lifestyle_tt;§YPotentially gains§! one or more Lifestyles §g(depending on stats & traits)§!;;;;;;;;;;;;;x
+expd_pdxrptg_set_new_character_specialisms_tt;§YPotentially gains§! one or more Specialisms §g(depending on stats & traits)§!;;;;;;;;;;;;;x
+#
+expd_pdxrptg_popup_event_to_confirm_character_shared_tt;§g-§!\nAn §Yevent occurs§!, where you can choose to accept or reject the character.\n§RIf you reject, costs are not refunded!§!;;;;;;;;;;;;;x
+#
+#
+#
+# Events
+ExpdPdxrptgEmployment_1000_Title;A New Courtier Arrives;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_Desc;The [GetRootFromCompliment] [From.GetBestName] has arrived at my court, in answer to my summons.;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Accept;You're exactly what I was looking for, please stay!;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Reject;You're NOT what I was looking for, please leave!;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Accept_TT;[From.GetBestName] §Gjoins§! [Root.GetTitledFirstName]'s court;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Reject_TT;[From.GetBestName] §Rleaves§!, and is §Rnever seen again§!;;;;;;;;;;;;;x

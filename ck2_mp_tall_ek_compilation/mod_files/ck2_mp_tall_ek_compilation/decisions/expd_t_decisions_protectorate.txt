@@ -100,11 +100,20 @@ targetted_decisions = {
 				
 				expd_t_root_meets_basic_requirements_to_become_protectorate_of_from_by_decision = yes
 				
+				# The target must vaguely like the decision taker
+				opinion = {
+					who = FROM
+					value >= 0
+				}
+				
 				# Cannot offer protection to someone who hates you (either rival or crime)
 				NOT = { is_foe = FROM }
 				
 				# Cannot offer protection to a human player (because they have no chance to refuse)
-				ai = yes
+				conditional_tooltip = {
+					trigger = { ai = no }
+					ai = yes
+				}
 				
 				# The potential suzerain must be either a lot stronger or a lot more prestigious than the potential tributary
 				

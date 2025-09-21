@@ -1,0 +1,129 @@
+# Audax Validator EnableCommentMetadata
+
+# Fixed:
+#  --- These decisions are no longer visible while in a submenu
+#  --- Moved ai = no into pre-filter, for performance
+
+decisions = {
+	
+	# Validator thinks the decision doesn't have localisation, because it's in the base mod
+	# Audax Validator "." Ignore_NEXT
+	DMsend_gold = {
+		is_high_prio = yes
+		ai = no
+		potential = {
+			NOT = { has_character_flag = customize_gold }
+			has_submenu_open = no
+		}
+		allow = { always = yes }
+		effect = { set_character_flag = customize_gold }
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	Dsend_gold = {
+		is_high_prio = yes
+		ai = no
+		potential = { has_character_flag = customize_gold }
+		allow = { always = yes }
+		effect = {
+			set_character_flag = send_25
+			clr_character_flag = send_50
+			clr_character_flag = send_100
+			clr_character_flag = send_250
+			clr_character_flag = send_1000
+			clr_character_flag = send_500
+		}
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	Dsend_gold50 = {
+		is_high_prio = yes
+		ai = no
+		potential = { has_character_flag = customize_gold }
+		allow = { always = yes }
+		effect = {
+			set_character_flag = send_50
+			clr_character_flag = send_1000
+			clr_character_flag = send_25
+			clr_character_flag = send_100
+			clr_character_flag = send_500
+			clr_character_flag = send_250
+		}
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	Dsend_gold100 = {
+		is_high_prio = yes
+		ai = no
+		potential = { has_character_flag = customize_gold }
+		allow = { always = yes }
+		effect = {
+			set_character_flag = send_100
+			clr_character_flag = send_25
+			clr_character_flag = send_50
+			clr_character_flag = send_250
+			clr_character_flag = send_500
+			clr_character_flag = send_1000
+		}
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	Dsend_gold250 = {
+		is_high_prio = yes
+		ai = no
+		potential = { has_character_flag = customize_gold }
+		allow = { always = yes }
+		effect = {
+			set_character_flag = send_250
+			clr_character_flag = send_100
+			clr_character_flag = send_500
+			clr_character_flag = send_1000
+			clr_character_flag = send_50
+			clr_character_flag = send_25
+		}
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	Dsend_gold500 = {
+		is_high_prio = yes
+		ai = no
+		potential = { has_character_flag = customize_gold }
+		allow = { always = yes }
+		effect = {
+			set_character_flag = send_500
+			clr_character_flag = send_1000
+			clr_character_flag = send_25
+			clr_character_flag = send_50
+			clr_character_flag = send_100
+			clr_character_flag = send_250
+		}
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	Dsend_gold1000 = {
+		is_high_prio = yes
+		ai = no
+		potential = { has_character_flag = customize_gold }
+		allow = { always = yes }
+		effect = {
+			set_character_flag = send_1000
+			clr_character_flag = send_500
+			clr_character_flag = send_250
+			clr_character_flag = send_100
+			clr_character_flag = send_50
+			clr_character_flag = send_25
+		}
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	close_send = {
+		is_high_prio = yes
+		ai = no
+		potential = { has_character_flag = customize_gold }
+		allow = { always = yes }
+		effect = {
+			clr_character_flag = customize_gold
+		}
+	}
+	
+}

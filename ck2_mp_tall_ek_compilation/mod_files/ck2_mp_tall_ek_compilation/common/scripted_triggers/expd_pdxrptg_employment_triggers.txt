@@ -1,0 +1,114 @@
+expd_pdxrptg_this_character_can_see_employment_decisions = {
+	ai = no
+	has_character_flag = employment_open
+}
+
+expd_pdxrptg_this_character_can_take_an_employment_decision_shared = {
+	NOT = { has_character_modifier = in_seclusion }
+}
+
+expd_pdxrptg_this_character_can_take_an_employment_decision_basic = {
+	trigger_if = {
+		limit = { has_global_flag = expd_pdxrptg_employment_debug }
+		custom_tooltip = { text = expd_pdxrptg_employment_debug_tt always = yes }
+	}
+	trigger_else = {
+		expd_pdxrptg_this_character_can_take_an_employment_decision_shared = yes
+		higher_real_tier_than = BARON
+		prestige = 10
+		OR = {
+			AND = {
+				custom_tooltip = {
+					text = expd_pdxrptg_it_has_been_less_than_one_month_since_game_startup_tt
+					has_global_flag = expd_pdxrptg_employment_start_of_game
+				}
+				wealth = 100
+			}
+			AND = {
+				custom_tooltip = {
+					text = expd_pdxrptg_it_has_been_more_than_one_month_since_game_startup_tt
+					NOT = { has_global_flag = expd_pdxrptg_employment_start_of_game }
+				}
+				trigger_if = {
+					limit = { NOT = { has_global_flag = expd_pdxrptg_employment_start_of_game } }
+					scaled_wealth = { value = 0.25 min = 10 max = 100 }
+				}
+				trigger_else = {
+					custom_tooltip = {
+						text = expd_pdxrptg_employment_scaled_wealth_required_has_been_calculated_tt
+						always = no
+					}
+				}
+			}
+		}
+	}
+}
+
+expd_pdxrptg_this_character_can_take_an_employment_decision_advanced = {
+	trigger_if = {
+		limit = { has_global_flag = expd_pdxrptg_employment_debug }
+		custom_tooltip = { text = expd_pdxrptg_employment_debug_tt always = yes }
+	}
+	trigger_else = {
+		expd_pdxrptg_this_character_can_take_an_employment_decision_shared = yes
+		higher_real_tier_than = COUNT
+		prestige = 100
+		OR = {
+			AND = {
+				custom_tooltip = {
+					text = expd_pdxrptg_it_has_been_less_than_one_month_since_game_startup_tt
+					has_global_flag = expd_pdxrptg_employment_start_of_game
+				}
+				wealth = 250
+			}
+			AND = {
+				custom_tooltip = {
+					text = expd_pdxrptg_it_has_been_more_than_one_month_since_game_startup_tt
+					NOT = { has_global_flag = expd_pdxrptg_employment_start_of_game }
+				}
+				trigger_if = {
+					limit = { NOT = { has_global_flag = expd_pdxrptg_employment_start_of_game } }
+					scaled_wealth = { value = 0.50 min = 25 max = 250 }
+				}
+				trigger_else = {
+					custom_tooltip = {
+						text = expd_pdxrptg_employment_scaled_wealth_required_has_been_calculated_tt
+						always = no
+					}
+				}
+			}
+		}
+	}
+}
+
+expd_pdxrptg_this_character_can_take_an_employment_decision_superb = {
+	trigger_if = {
+		limit = { has_global_flag = expd_pdxrptg_employment_debug }
+		custom_tooltip = { text = expd_pdxrptg_employment_debug_tt always = yes }
+	}
+	trigger_else = {
+		expd_pdxrptg_this_character_can_take_an_employment_decision_shared = yes
+		higher_real_tier_than = DUKE
+		prestige = 1000
+		OR = {
+			wealth = 500
+			AND = {
+				custom_tooltip = {
+					text = expd_pdxrptg_it_has_been_more_than_one_month_since_game_startup_tt
+					NOT = { has_global_flag = expd_pdxrptg_employment_start_of_game }
+				}
+				trigger_if = {
+					limit = { NOT = { has_global_flag = expd_pdxrptg_employment_start_of_game } }
+					scaled_wealth = { value = 1.00 min = 50 max = 500 }
+				}
+				trigger_else = {
+					custom_tooltip = {
+						text = expd_pdxrptg_employment_scaled_wealth_required_has_been_calculated_tt
+						always = no
+					}
+				}
+			}
+		}
+		
+	}
+}

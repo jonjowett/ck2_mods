@@ -1,0 +1,66 @@
+# Audax Validator EnableCommentMetadata
+
+# Disable the base mod's chief architect (which is only used for flavour)
+title_chief_architect = {
+	dignity = 0.03
+	realm_in_name = yes
+	grant_limit = 1
+	opinion_effect = 5
+	allowed_to_grant = { always = no }
+	allowed_to_hold  = { always = no }
+}
+
+# Add a new version of the chief architect title, specific to this mod
+#  - This is, in part, a workaround for spurious Validator warnings
+title_chief_architect_expd_pdxrptg = {
+	attribute = stewardship
+	dignity = 0.03
+	realm_in_name = yes
+	grant_limit = 1
+	opinion_effect = 5
+	
+	monthly_salary = 0.02
+	monthly_prestige = 0.08
+	
+	is_unique = yes
+	is_high_prio = yes # Grants a nice character modifier!
+	
+	allowed_to_grant = { expd_pdxrptg_this_character_can_grant_title_chief_architect = yes }
+	allowed_to_hold  = { expd_pdxrptg_this_character_can_hold_title_chief_architect = yes  }
+	
+	gain_effect = {
+		FROM = {
+			custom_tooltip = {
+				text = expd_pdxrptg_employing_architect_added_present_tt
+				character_event = { id = ExpdPdxrptgMinorTitle.1100 }
+			}
+		}
+	}
+	lose_effect = {
+		FROM = {
+			custom_tooltip = {
+				text = expd_pdxrptg_employing_architect_removed_present_tt
+				character_event = { id = ExpdPdxrptgMinorTitle.1200 }
+			}
+		}
+	}
+	retire_effect = {
+		FROM = {
+			custom_tooltip = {
+				text = expd_pdxrptg_employing_architect_removed_present_tt
+				character_event = { id = ExpdPdxrptgMinorTitle.1200 }
+			}
+		}
+	}
+	death_effect = {
+		FROM = {
+			custom_tooltip = {
+				text = expd_pdxrptg_employing_architect_removed_present_tt
+				character_event = { id = ExpdPdxrptgMinorTitle.1200 }
+			}
+		}
+	}
+	
+	message = yes
+	
+}

@@ -1,0 +1,38 @@
+# Audax Validator EnableCommentMetadata
+#
+#key;;;;;;;;;;;;;;x
+#key;ENGLISH;;;;;;;;;;;;;x
+#
+# Titles
+title_chief_architect_expd_pdxrptg;Chief Architect;;;;;;;;;;;;;x
+title_chief_architect_expd_pdxrptg_desc;The Chief Architect is responsible for designing and overseeing the construction of palaces and grand monuments.\n\n§gINFO: Having a Chief Architect will §Gdecrease build cost and build time§g, for both normal buildings and wonders, at the cost of a §Rslight reduction in tax income§g.§!;;;;;;;;;;;;;x
+title_court_alchemist;Master Alchemist;;;;;;;;;x
+title_court_alchemist_desc;The Master Alchemist serves their liege in the study of Alchemy. Having a Master Alchemist on your payroll allows for cheaper creation of potions and access to more advanced concoctions.\n\n§gINFO: Having a Master Alchemist (or being an Alchemist yourself) grants a §Gsubstantial discount§g on potion purchases in the Marketplace.§!;;;;;;;;;x
+#
+# Modifiers
+expd_pdxrptg_employing_architect;Employing Chief Architect;;;;;;;;;;;;;x
+expd_pdxrptg_employing_architect_desc;This character has employed a Chief Architect, who §Gdecreases build cost and build time§!, for both normal buildings and wonders. This architect's natural tendency for unnecessary extravagance in their designs has been counterbalanced by also §Rhiring a substantial staff§! of engineers and administrators, who constantly fight to keep the architect's worst inclinations in check.;;;;;;;;;;;;;x
+expd_pdxrptg_employing_architect_added_present_tt;The "§YEmploying Chief Architect§!" modifier is §Gadded§!;;;;;;;;;;;;;x
+expd_pdxrptg_employing_architect_added_future_tt;The "§YEmploying Chief Architect§!" modifier will be §Gadded§!;;;;;;;;;;;;;x
+expd_pdxrptg_employing_architect_removed_present_tt;The "§YEmploying Chief Architect§!" modifier is §Rremoved§!;;;;;;;;;;;;;x
+expd_pdxrptg_employing_architect_removed_past_tt;The "§YEmploying Chief Architect§!" modifier has been §Rremoved§!;;;;;;;;;;;;;x
+#
+# Events - Chief Architect
+ExpdPdxrptgMinorTitle_1200_Title;Chief Architect Lost!;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_1200_Desc;I have lost the services of my Chief Architect! Despite their many flaws, they provided a certain efficiency of construction which will be sorely missed.;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_1200_EvtOpt_SearchForNew;Perhaps I should search for a new Chief Architect?;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_1200_EvtOpt_CannotGrantNew;Unfortunately, I am unable to appoint a new Chief Architect;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_1200_EvtOpt_AutoAppointNew;You can be my new Chief Architect!;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_1200_EvtOpt_AutoAppointNew_TTInfo;This option is available because you have a courtier or vassal who can hold the Chief Architect title.;;;;;;;;;;;;;x
+#
+# Events - Master Alchemist
+ExpdPdxrptgMinorTitle_2200_Title;Master Alchemist Lost!;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_2200_Desc;I have lost the services of my Master Alchemist, who was invaluable in providing me with a consistant supply of potions.;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_2200_EvtOpt_SearchForNew;Perhaps I should search for a new Master Alchemist?;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_2200_EvtOpt_CannotGrantNew;Unfortunately, I am unable to appoint a new Master Alchemist;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_2200_EvtOpt_NotMyProblem_Alchemist;I can brew my own potions from now on;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_2200_EvtOpt_AutoAppointNew;You can be my new Master Alchemist!;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_2200_EvtOpt_AutoAppointNew_TTInfo;This option is available because you have a courtier or vassal who can hold the Master Alchemist title.;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_2200_MarketDiscountLost_TT;Without a Master Alchemist, your have §Rlost§! your §Ydiscount§! on potions from the Marketplace;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_2200_MarketDiscountRemains_TT;As an alchemist yourself, your §Ydiscount§! on potions from the Marketplace is §Gunaffected§!.;;;;;;;;;;;;;x
+ExpdPdxrptgMinorTitle_2200_MarketDiscountRegained_TT;After appointing a new Master Alchemist, your §Ydiscount§! on potions from the Marketplace will be §Greinstated§!.;;;;;;;;;;;;;x

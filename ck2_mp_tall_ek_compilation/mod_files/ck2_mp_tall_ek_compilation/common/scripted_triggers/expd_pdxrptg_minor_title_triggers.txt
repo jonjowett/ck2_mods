@@ -1,0 +1,96 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+# Chief Architect
+
+expd_pdxrptg_this_character_can_grant_title_chief_architect = {
+	OR = {
+		is_feudal = yes
+		is_tribal = yes
+	}
+	primary_title = { higher_tier_than = baron }
+}
+
+expd_pdxrptg_this_character_can_hold_title_chief_architect = {
+	custom_tooltip = {
+		text = court_physician_tooltip_1
+		NOT = { primary_title = { temporary = yes } }
+	}
+	trait = architect
+	is_adult = yes
+	prisoner = no
+	NOT = { trait = in_hiding }
+	NOT = { trait = incapable }
+	hidden_tooltip = { is_alive = yes }
+}
+
+expd_pdxrptg_this_character_has_a_chief_architect = {
+	any_courtier_or_vassal = {
+		has_minor_title = title_chief_architect_expd_pdxrptg
+		liege = { character = PREVPREV }
+	}
+}
+
+expd_pdxrptg_this_character_has_a_chief_architect_candidate = {
+	any_courtier_or_vassal = {
+		expd_pdxrptg_this_character_can_hold_title_chief_architect = yes
+		liege = { character = PREVPREV }
+	}
+}
+
+
+
+
+
+# Master Alchemist
+
+expd_pdxrptg_this_character_can_grant_title_master_alchemist = {
+	OR = {
+		higher_tier_than = BARON
+		is_patrician = yes
+	}
+}
+
+expd_pdxrptg_this_character_can_hold_title_master_alchemist = {
+	custom_tooltip = {
+		text = court_physician_tooltip_1
+		NOT = {  primary_title = { temporary = yes } }
+	}
+	OR = {
+		AND = {
+			learning = 20
+			expd_pdxrptg_this_character_is_an_alchemist = yes
+		}
+		AND = {
+			learning = 35
+			NOT = { expd_pdxrptg_this_character_is_an_alchemist = yes }
+		}
+	}
+	is_adult = yes
+	prisoner = no
+	NOT = { trait = in_hiding }
+	NOT = { trait = incapable }
+	hidden_tooltip = { is_alive = yes }
+}
+
+expd_pdxrptg_this_character_has_a_master_alchemist = {
+	any_courtier_or_vassal = {
+		has_minor_title = title_court_alchemist
+		liege = { character = PREVPREV }
+	}
+}
+
+expd_pdxrptg_this_character_has_a_master_alchemist_candidate = {
+	any_courtier_or_vassal = {
+		expd_pdxrptg_this_character_can_hold_title_master_alchemist = yes
+		liege = { character = PREVPREV }
+	}
+}
+
+expd_pdxrptg_this_character_is_an_alchemist = {
+	# Audax Validator "." Ignore_NEXT
+	trait = alchemist
+}

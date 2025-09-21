@@ -1,0 +1,2069 @@
+# Audax Validator EnableCommentMetadata
+
+# Fixed the mod tools decision showing up in submenus (1-line change, immediately below).
+# Everything else can stay as-is, it's not worth the time to fix.
+# Audax Validator "!" Ignore_NEXT
+
+#Life is pain
+decisions = {
+	
+	open_unit_spawn_decisions = {
+	 	is_high_prio = yes
+	 	ai = no
+		potential = {
+			#should be visible in singleplayer but not multiplayer
+			is_multiplayer_host_character = yes
+			multiplayer = no
+			not = { has_character_flag = unit_spawning_enabled }
+			has_submenu_open = no ###################################### Mod added
+		}
+		allow = {
+			#should be visible in singleplayer but not multiplayer
+			is_multiplayer_host_character = yes
+			multiplayer = no
+			not = { has_character_flag = unit_spawning_enabled }
+		}
+		effect = {
+			set_character_flag = unit_spawning_enabled
+			set_character_flag = unit_1000_amount
+			set_character_flag = unit_disband_attrition_maintenance
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	close_unit_spawn_decisions = {
+	 	is_high_prio = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		potential = {
+			has_character_flag = unit_spawning_enabled
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+		effect = {
+			clr_character_flag = unit_spawning_enabled
+
+			#clear other flags from these decisions.
+			clr_character_flag = unit_1000_amount
+			clr_character_flag = unit_10000_amount
+			clr_character_flag = unit_disband_attrition_maintenance
+			clr_character_flag = unit_disband_n_attrition_n_maintenance
+			clr_character_flag = unit_n_disband_attrition_maintenance
+			clr_character_flag = unit_n_disband_attrition_n_maintenance
+		}
+	}
+	
+	set_unit_attributes = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+		effect = {
+			character_event = { id = pdxrp.10 }
+		}
+	}
+
+	select_1000_unit_spawn_amount = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_10000_amount
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_10000_amount
+		}
+		effect = {
+			clr_character_flag = unit_10000_amount
+			set_character_flag = unit_1000_amount
+		}
+	}
+
+	select_10000_unit_spawn_amount = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_1000_amount
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_1000_amount
+		}
+		effect = {
+			clr_character_flag = unit_1000_amount
+			set_character_flag = unit_10000_amount
+		}
+	}
+
+	spawn_light_infantry = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+
+		effect = {
+		if = {
+			limit = { has_character_flag = unit_1000_amount }
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_infantry = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_infantry = { 1000 1000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_infantry = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_infantry = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = unit_10000_amount}
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_infantry = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_infantry = { 10000 10000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_infantry = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_infantry = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+	}
+	}	#End of light inf decision
+
+
+
+	spawn_heavy_infantry = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+
+		effect = {
+		if = {
+			limit = { has_character_flag = unit_1000_amount }
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {heavy_infantry = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {heavy_infantry = { 1000 1000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {heavy_infantry = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {heavy_infantry = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = unit_10000_amount}
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {heavy_infantry = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {heavy_infantry = { 10000 10000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {heavy_infantry = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {heavy_infantry = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+	}
+	}	#End of heavy inf decision
+
+	spawn_heavy_cavalry = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+
+		effect = {
+		if = {
+			limit = { has_character_flag = unit_1000_amount }
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {knights = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {knights = { 1000 1000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {knights = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {knights = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = unit_10000_amount}
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {knights = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {knights = { 10000 10000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {knights = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {knights = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+	}
+	}	#End of heavy cav decision
+
+	spawn_light_cavalry = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+
+		effect = {
+		if = {
+			limit = { has_character_flag = unit_1000_amount }
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_cavalry = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_cavalry = { 1000 1000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_cavalry = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_cavalry = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = unit_10000_amount}
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_cavalry = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_cavalry = { 10000 10000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_cavalry = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {light_cavalry = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+	}
+	}	#End of light cav decision
+
+	spawn_archers = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+
+		effect = {
+		if = {
+			limit = { has_character_flag = unit_1000_amount }
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {archers = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {archers = { 1000 1000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {archers = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {archers = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = unit_10000_amount}
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {archers = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {archers = { 10000 10000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {archers = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {archers = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+	}
+	}	#End of archers decision
+
+
+	spawn_pikemen = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+
+		effect = {
+		if = {
+			limit = { has_character_flag = unit_1000_amount }
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {pikemen = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {pikemen = { 1000 1000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {pikemen = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {pikemen = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = unit_10000_amount}
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {pikemen = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {pikemen = { 10000 10000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {pikemen = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {pikemen = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+	}
+	}	#End of pikemen decision
+
+
+	spawn_horse_archers = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+
+		effect = {
+		if = {
+			limit = { has_character_flag = unit_1000_amount }
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {horse_archers = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {horse_archers = { 1000 1000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {horse_archers = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {horse_archers = { 1000 1000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = unit_10000_amount}
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {horse_archers = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {horse_archers = { 10000 10000 }}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {horse_archers = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {horse_archers = { 10000 10000 }}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+	}
+	}	#End of horse archers decision
+
+	spawn_peasant_army = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+
+		effect = {
+		if = {
+			limit = { has_character_flag = unit_1000_amount }
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 600 600 }
+							heavy_infantry = { 100 100 }
+							archers = { 200 200 }
+							light_cavalry = { 100 100 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 600 600 }
+							heavy_infantry = { 100 100 }
+							archers = { 200 200 }
+							light_cavalry = { 100 100 }
+							}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 600 600 }
+							heavy_infantry = { 100 100 }
+							archers = { 200 200 }
+							light_cavalry = { 100 100 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 600 600 }
+							heavy_infantry = { 100 100 }
+							archers = { 200 200 }
+							light_cavalry = { 100 100 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = unit_10000_amount}
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 6000 6000 }
+							heavy_infantry = { 1000 1000 }
+							archers = { 2000 2000 }
+							light_cavalry = { 1000 1000 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 6000 6000 }
+							heavy_infantry = { 1000 1000 }
+							archers = { 2000 2000 }
+							light_cavalry = { 1000 1000 }
+							}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 6000 6000 }
+							heavy_infantry = { 1000 1000 }
+							archers = { 2000 2000 }
+							light_cavalry = { 1000 1000 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 6000 6000 }
+							heavy_infantry = { 1000 1000 }
+							archers = { 2000 2000 }
+							light_cavalry = { 1000 1000 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+	}
+	}	#End of peasants decision
+
+	spawn_barbarian_army = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+
+		effect = {
+		if = {
+			limit = { has_character_flag = unit_1000_amount }
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 300 300 }
+							heavy_infantry = { 300 300 }
+							archers = { 150 150 }
+							pikemen = { 50 50 }
+							light_cavalry = { 150 150 }
+							knights = { 50 50 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 300 300 }
+							heavy_infantry = { 300 300 }
+							archers = { 150 150 }
+							pikemen = { 50 50 }
+							light_cavalry = { 150 150 }
+							knights = { 50 50 }
+							}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 300 300 }
+							heavy_infantry = { 300 300 }
+							archers = { 150 150 }
+							pikemen = { 50 50 }
+							light_cavalry = { 150 150 }
+							knights = { 50 50 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 300 300 }
+							heavy_infantry = { 300 300 }
+							archers = { 150 150 }
+							pikemen = { 50 50 }
+							light_cavalry = { 150 150 }
+							knights = { 50 50 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = unit_10000_amount}
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 3000 3000 }
+							heavy_infantry = { 3000 3000 }
+							archers = { 1500 1500 }
+							pikemen = { 500 500 }
+							light_cavalry = { 1500 1500 }
+							knights = { 500 500 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 3000 3000 }
+							heavy_infantry = { 3000 3000 }
+							archers = { 1500 1500 }
+							pikemen = { 500 500 }
+							light_cavalry = { 1500 1500 }
+							knights = { 500 500 }
+							}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 3000 3000 }
+							heavy_infantry = { 3000 3000 }
+							archers = { 1500 1500 }
+							pikemen = { 500 500 }
+							light_cavalry = { 1500 1500 }
+							knights = { 500 500 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 3000 3000 }
+							heavy_infantry = { 3000 3000 }
+							archers = { 1500 1500 }
+							pikemen = { 500 500 }
+							light_cavalry = { 1500 1500 }
+							knights = { 500 500 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+	}
+	}	#End of barbarians decision
+
+	spawn_sassanid_army = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+
+		effect = {
+		if = {
+			limit = { has_character_flag = unit_1000_amount }
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 200 200 }
+							heavy_infantry = { 300 300 }
+							archers = { 100 100 }
+							pikemen = { 100 100 }
+							light_cavalry = { 150 150 }
+							knights = { 150 150 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 200 200 }
+							heavy_infantry = { 300 300 }
+							archers = { 100 100 }
+							pikemen = { 100 100 }
+							light_cavalry = { 150 150 }
+							knights = { 150 150 }
+							}
+
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 200 200 }
+							heavy_infantry = { 300 300 }
+							archers = { 100 100 }
+							pikemen = { 100 100 }
+							light_cavalry = { 150 150 }
+							knights = { 150 150 }
+							}
+
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 200 200 }
+							heavy_infantry = { 300 300 }
+							archers = { 100 100 }
+							pikemen = { 100 100 }
+							light_cavalry = { 150 150 }
+							knights = { 150 150 }
+							}
+
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = unit_10000_amount}
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 2000 2000 }
+							heavy_infantry = { 3000 3000 }
+							archers = { 1000 1000 }
+							pikemen = { 1000 1000 }
+							light_cavalry = { 1500 1500 }
+							knights = { 1500 1500 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 2000 2000 }
+							heavy_infantry = { 3000 3000 }
+							archers = { 1000 1000 }
+							pikemen = { 1000 1000 }
+							light_cavalry = { 1500 1500 }
+							knights = { 1500 1500 }
+							}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 2000 2000 }
+							heavy_infantry = { 3000 3000 }
+							archers = { 1000 1000 }
+							pikemen = { 1000 1000 }
+							light_cavalry = { 1500 1500 }
+							knights = { 1500 1500 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 2000 2000 }
+							heavy_infantry = { 3000 3000 }
+							archers = { 1000 1000 }
+							pikemen = { 1000 1000 }
+							light_cavalry = { 1500 1500 }
+							knights = { 1500 1500 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+	}
+	}	#End of sassanids decision
+
+	spawn_roman_army = {
+	 	is_high_prio = yes
+		ai = no
+		
+		potential = {
+			has_character_flag = unit_spawning_enabled
+			is_multiplayer_host_character = yes
+			multiplayer = no
+		}
+		allow = {
+			has_character_flag = unit_spawning_enabled
+		}
+
+		effect = {
+		if = {
+			limit = { has_character_flag = unit_1000_amount }
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 100 100 }
+							heavy_infantry = { 400 400 }
+							archers = { 200 200 }
+							pikemen = { 150 150 }
+							light_cavalry = { 100 100 }
+							knights = { 50 50 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 100 100 }
+							heavy_infantry = { 400 400 }
+							archers = { 200 200 }
+							pikemen = { 150 150 }
+							light_cavalry = { 100 100 }
+							knights = { 50 50 }
+							}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 100 100 }
+							heavy_infantry = { 400 400 }
+							archers = { 200 200 }
+							pikemen = { 150 150 }
+							light_cavalry = { 100 100 }
+							knights = { 50 50 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 100 100 }
+							heavy_infantry = { 400 400 }
+							archers = { 200 200 }
+							pikemen = { 150 150 }
+							light_cavalry = { 100 100 }
+							knights = { 50 50 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = unit_10000_amount}
+			if = {
+				limit = {has_character_flag = unit_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 1000 1000 }
+							heavy_infantry = { 4000 4000 }
+							archers = { 2000 2000 }
+							pikemen = { 1500 1500 }
+							light_cavalry = { 1000 1000 }
+							knights = { 500 500 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = no
+							disband_on_peace = yes							
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_disband_n_attrition_n_maintenance }
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 1000 1000 }
+							heavy_infantry = { 4000 4000 }
+							archers = { 2000 2000 }
+							pikemen = { 1500 1500 }
+							light_cavalry = { 1000 1000 }
+							knights = { 500 500 }
+							}
+							attrition = 0.0
+							maintenance_multiplier = 0.0
+							reinforces = no
+							disband_on_peace = yes
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 1000 1000 }
+							heavy_infantry = { 4000 4000 }
+							archers = { 2000 2000 }
+							pikemen = { 1500 1500 }
+							light_cavalry = { 1000 1000 }
+							knights = { 500 500 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 1.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {has_character_flag = unit_n_disband_attrition_n_maintenance}
+				capital_scope = {
+					ROOT = {
+						spawn_unit = {
+							province = PREV
+							owner = ROOT
+							troops = {
+							light_infantry = { 1000 1000 }
+							heavy_infantry = { 4000 4000 }
+							archers = { 2000 2000 }
+							pikemen = { 1500 1500 }
+							light_cavalry = { 1000 1000 }
+							knights = { 500 500 }
+							}
+							attrition = 1.0
+							maintenance_multiplier = 0.0
+							reinforces = yes
+							disband_on_peace = no
+						}
+					}
+				}
+			}
+		}
+	}
+	}	#End of romans decision
+
+
+}

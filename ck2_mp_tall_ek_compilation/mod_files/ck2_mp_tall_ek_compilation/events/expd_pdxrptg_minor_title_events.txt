@@ -1,0 +1,291 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = ExpdPdxrptgMinorTitle
+
+# ID key:
+#    1000 - 1999 : Architect
+#    2000 - 2999 : Alchemist
+#
+# Within each ID range:
+#       0 -   99 : Checks on title status
+#     100 -  199 : Title granted
+#     200 -  299 : Title lost
+#     300 -  399 : Auto-grant logic for AI rulers
+
+
+
+
+
+
+
+
+
+
+#########################################
+#                                       #
+#            Chief Architect            #
+#             (1000 - 1999)             #
+#                                       #
+#########################################
+
+
+
+# on_yearly_pulse: Check Chief Architect
+character_event = {
+	id = ExpdPdxrptgMinorTitle.1000
+	is_triggered_only = yes
+	hide_window = yes
+	
+	only_rulers = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_character_modifier = expd_pdxrptg_employing_architect }
+				expd_pdxrptg_this_character_has_a_chief_architect = yes
+			}
+			character_event = { id = ExpdPdxrptgMinorTitle.1100 }
+		}
+		else_if = {
+			limit = {
+				has_character_modifier = expd_pdxrptg_employing_architect
+				expd_pdxrptg_this_character_has_a_chief_architect = no
+			}
+			character_event = { id = ExpdPdxrptgMinorTitle.1200 }
+		}
+		else = {
+			# Consistent - do nothing
+		}
+	}
+}
+
+# on_new_holder* : Check Chief Architect for both the previous & new holder
+#  --- ROOT is the character
+#  --- FROM is the title
+#  --- FROMFROM is the old holder
+character_event = {
+	id = ExpdPdxrptgMinorTitle.1001
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		# New holder is guaranteed to be a living ruler, so we can simply directly check their status
+		character_event = { id = ExpdPdxrptgMinorTitle.1000 }
+		# Check previous holder, with shortcuts for dead/non-ruler
+		FROMFROM = {
+			if = {
+				limit = { is_alive = no }
+				# Dead - Do nothing
+			}
+			else_if = {
+				limit = { is_ruler = no }
+				# Not a ruler - remove the modifier
+				remove_character_modifier = expd_pdxrptg_employing_architect
+			}
+			else = {
+				# Living ruler - run the usual check
+				character_event = { id = ExpdPdxrptgMinorTitle.1000 }
+			}
+		}
+	}
+}
+
+# Gain Chief Architect
+#  --- Hidden for now, because notifying the player of this would probably be annoying.
+character_event = {
+	id = ExpdPdxrptgMinorTitle.1100
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		add_character_modifier = {
+			name     = expd_pdxrptg_employing_architect
+			duration = -1
+			inherit  = yes
+		}
+	}
+}
+
+# Lose Chief Architect (triggered by minor_title effects, or by yearly pulse status check)
+#  --- Immediately remove the character modifier
+#  --- Wait until tomorrow before notifying the ruler
+#       --- This is so that the auto-reassignment doesn't choose the dead/imprisoned/otherwise-invalid ex-architect
+character_event = {
+	id = ExpdPdxrptgMinorTitle.1200
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		remove_character_modifier = expd_pdxrptg_employing_architect
+		character_event = { id = ExpdPdxrptgMinorTitle.1201 days = 1 }
+	}
+}
+character_event = {
+	
+	id       = ExpdPdxrptgMinorTitle.1201
+	title    = ExpdPdxrptgMinorTitle_1200_Title
+	desc     = ExpdPdxrptgMinorTitle_1200_Desc
+	picture  = GFX_evt_construction_site
+	
+	show_from_from = yes # If FROMFROM is available, it's the ex-architect
+	
+	is_triggered_only = yes
+	
+	# Suppress this notification if the character has already appointed a new architect
+	trigger = { expd_pdxrptg_this_character_has_a_chief_architect = no }
+	
+	option = {
+		name = {
+			text    = ExpdPdxrptgMinorTitle_1200_EvtOpt_SearchForNew
+			trigger = { expd_pdxrptg_this_character_can_grant_title_chief_architect = yes }
+		}
+		name = {
+			text    = ExpdPdxrptgMinorTitle_1200_EvtOpt_CannotGrantNew
+			trigger = { expd_pdxrptg_this_character_can_grant_title_chief_architect = no }
+		}
+		custom_tooltip = { text = expd_pdxrptg_employing_architect_removed_past_tt }
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		name = ExpdPdxrptgMinorTitle_1200_EvtOpt_AutoAppointNew
+		trigger = { expd_pdxrptg_this_character_has_a_chief_architect_candidate = yes }
+		tooltip_info_custom = ExpdPdxrptgMinorTitle_1200_EvtOpt_AutoAppointNew_TTInfo
+		custom_tooltip = { text = expd_pdxrptg_employing_architect_removed_past_tt }
+		expd_pdxrptg_this_character_auto_appoints_new_chief_architect = yes
+		custom_tooltip = { text = expd_pdxrptg_employing_architect_added_future_tt }
+		ai_chance = { factor = 1000 }
+	}
+	
+}
+
+# on_five_year_pulse: AI ruler autogrants chief architect to a courtier
+character_event = {
+	id = ExpdPdxrptgMinorTitle.1300
+	is_triggered_only = yes
+	hide_window = yes
+	ai = yes
+	only_rulers = yes
+	trigger = {
+		expd_pdxrptg_this_character_can_grant_title_chief_architect = yes
+		expd_pdxrptg_this_character_has_a_chief_architect = no
+		expd_pdxrptg_this_character_has_a_chief_architect_candidate = yes
+	}
+	immediate = {
+		expd_pdxrptg_this_character_auto_appoints_new_chief_architect = yes
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+#########################################
+#                                       #
+#            Master Alchemist           #
+#             (2000 - 2999)             #
+#                                       #
+#########################################
+
+
+
+# Event 2000 reserved for Check Master Alchemist (not required atm)
+# Event 2100 reserved for Gain Master Alchemist  (not required atm)
+
+# Lose Master Alchemist
+#  --- Wait a day before notifying, so the auto-appointment logic doesn't re-appoint a dead person (etc)
+character_event = {
+	id = ExpdPdxrptgMinorTitle.2200
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = { character_event = { id = ExpdPdxrptgMinorTitle.2201 days = 1 } }
+}
+character_event = {
+	
+	id      = ExpdPdxrptgMinorTitle.2201
+	title   = ExpdPdxrptgMinorTitle_2200_Title
+	desc    = ExpdPdxrptgMinorTitle_2200_Desc
+	picture = GFX_evt_experiment
+	
+	is_triggered_only = yes
+	
+	show_from_from = yes # If FROMFROM is available, it's the ex-alchemist
+	
+	# Suppress this notification if the character has already appointed a new alchemist
+	trigger = { expd_pdxrptg_this_character_has_a_master_alchemist = no }
+	
+	option = {
+		name = {
+			text    = ExpdPdxrptgMinorTitle_2200_EvtOpt_SearchForNew
+			trigger = { expd_pdxrptg_this_character_can_grant_title_master_alchemist = yes }
+		}
+		name = {
+			text    = ExpdPdxrptgMinorTitle_2200_EvtOpt_CannotGrantNew
+			trigger = { expd_pdxrptg_this_character_can_grant_title_master_alchemist = no }
+		}
+		trigger = { expd_pdxrptg_this_character_is_an_alchemist = no }
+		custom_tooltip = { text = ExpdPdxrptgMinorTitle_2200_MarketDiscountLost_TT }
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		name = ExpdPdxrptgMinorTitle_2200_EvtOpt_NotMyProblem_Alchemist
+		trigger = { expd_pdxrptg_this_character_is_an_alchemist = yes }
+		# Audax Validator "." Ignore_NEXT
+		tooltip_info = alchemist
+		custom_tooltip = { text = ExpdPdxrptgMinorTitle_2200_MarketDiscountRemains_TT }
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		name = ExpdPdxrptgMinorTitle_2200_EvtOpt_AutoAppointNew
+		trigger = {
+			expd_pdxrptg_this_character_can_grant_title_master_alchemist = yes
+			any_courtier_or_vassal = {
+				expd_pdxrptg_this_character_can_hold_title_master_alchemist = yes
+				liege = { character = PREVPREV }
+			}
+		}
+		tooltip_info_custom = ExpdPdxrptgMinorTitle_2200_EvtOpt_AutoAppointNew_TTInfo
+		if = {
+			limit = { expd_pdxrptg_this_character_is_an_alchemist = no }
+			custom_tooltip = { text = ExpdPdxrptgMinorTitle_2200_MarketDiscountLost_TT }
+		}
+		else = {
+			custom_tooltip = { text = ExpdPdxrptgMinorTitle_2200_MarketDiscountRemains_TT }
+		}
+		expd_pdxrptg_this_character_auto_appoints_new_master_alchemist = yes
+		if = {
+			limit = { expd_pdxrptg_this_character_is_an_alchemist = no }
+			custom_tooltip = { text = ExpdPdxrptgMinorTitle_2200_MarketDiscountRegained_TT }
+		}
+		ai_chance = {
+			factor = 10000
+			modifier = {
+				factor = 0
+				expd_pdxrptg_this_character_is_an_alchemist = yes
+			}
+		}
+	}
+	
+}
+
+# on_five_year_pulse: AI ruler autogrants master alchemist to a courtier
+character_event = {
+	id = ExpdPdxrptgMinorTitle.2300
+	is_triggered_only = yes
+	hide_window = yes
+	ai = yes
+	only_rulers = yes
+	trigger = {
+		expd_pdxrptg_this_character_can_grant_title_master_alchemist = yes
+		expd_pdxrptg_this_character_has_a_master_alchemist = no
+		expd_pdxrptg_this_character_has_a_master_alchemist_candidate = yes
+	}
+	immediate = {
+		expd_pdxrptg_this_character_auto_appoints_new_master_alchemist = yes
+	}
+}

@@ -268,6 +268,10 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_demesne_revoke
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_trade_post_grant }
+		text                        = edmp_ifn_5001_desc_singlechar_trade_post_grant
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_refill_all_levies }
 		text                        = edmp_ifn_5001_desc_singlechar_refill_all_levies
 	}
@@ -425,6 +429,7 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_demesne_grant
 			clr_global_flag    = edmp_interference_singlechar_demesne_prolong
 			clr_global_flag    = edmp_interference_singlechar_demesne_revoke
+			clr_global_flag    = edmp_interference_singlechar_trade_post_grant
 			clr_global_flag    = edmp_interference_singlechar_refill_all_levies
 			clr_global_flag    = edmp_interference_singlechar_wealth_grant_1k
 			clr_global_flag    = edmp_interference_singlechar_wealth_grant_10k

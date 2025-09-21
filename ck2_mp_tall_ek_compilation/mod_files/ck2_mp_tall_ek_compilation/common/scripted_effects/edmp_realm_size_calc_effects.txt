@@ -536,6 +536,11 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 					check_variable = { which = edmp_realm_size_excess_before   which <= edmp_realm_size_excess_close_threshold }
 					check_variable = { which = edmp_realm_size_excess          which >  edmp_realm_size_excess_close_threshold }
 				}
+				# Realm size excess changed from "significant" to "close"
+				AND = {
+					check_variable = { which = edmp_realm_size_excess_before   which >  edmp_realm_size_excess_close_threshold }
+					check_variable = { which = edmp_realm_size_excess          which <= edmp_realm_size_excess_close_threshold }
+				}
 			}
 		}
 		

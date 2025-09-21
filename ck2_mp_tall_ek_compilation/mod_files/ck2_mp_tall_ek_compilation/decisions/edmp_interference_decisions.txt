@@ -844,6 +844,77 @@ targetted_decisions = {
 		}
 	}
 	
+	edmp_interference_grant_more_trade_posts_to_this_character = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { always = yes }
+		allow = {
+			higher_real_tier_than = BARON
+			custom_tooltip = {
+				text = edmp_interference_this_character_does_not_already_have_a_special_grant_tp_building_in_their_realm_tt
+				NOT = {
+					any_realm_province = {
+						any_province_holding = {
+							OR = {
+								has_building = edmp_interference_grant_tp_ca
+								has_building = edmp_interference_grant_tp_ct
+								has_building = edmp_interference_grant_tp_tp
+								has_building = edmp_interference_grant_tp_tb
+								has_building = edmp_interference_grant_tp_no
+							}
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_trade_post_grant
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				# Trade post limit can ONLY be increased via a BUILDING modifier.
+				# So, we create a special building in the target's capital, and auto-destroy it after a short period of time.
+				capital_holding = {
+					if = {
+						limit = { holding_type = castle }
+						add_building = edmp_interference_grant_tp_ca
+					}
+					else_if = {
+						limit = { holding_type = city }
+						add_building = edmp_interference_grant_tp_ct
+					}
+					else_if = {
+						limit = { holding_type = temple }
+						add_building = edmp_interference_grant_tp_tp
+					}
+					else_if = {
+						limit = { holding_type = tribal }
+						add_building = edmp_interference_grant_tp_tb
+					}
+					else_if = {
+						limit = { holding_type = nomad }
+						add_building = edmp_interference_grant_tp_no
+					}
+					custom_tooltip = {
+						text = edmp_interference_grant_tp_building_will_be_destroyed_in_3_months_tt
+						location = {
+							add_province_modifier = { name = edmp_interference_grant_tp_building_destruction_countdown months = 3 }
+							province_event = { id = edmp_gtpc.1000 months = 3 }
+						}
+					}
+				}
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_trade_post_grant }
+		}
+	}
+	
 	edmp_interference_refill_all_of_this_characters_levies = {
 		filter = all_including_me
 		ai = no
