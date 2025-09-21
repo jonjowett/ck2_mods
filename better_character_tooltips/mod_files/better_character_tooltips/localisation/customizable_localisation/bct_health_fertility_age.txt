@@ -23,6 +23,21 @@ defined_text = {
 
 
 defined_text = {
+	name = BCT_Gender
+	use_first_valid = yes
+	text = {
+		trigger = { is_female = no }
+		localisation_key = BCT_Gender_Male
+	}
+	text = {
+		trigger = { is_female = yes }
+		localisation_key = BCT_Gender_Female
+	}
+}
+
+
+
+defined_text = {
 	
 	name = BCT_Health
 	use_first_valid = yes
