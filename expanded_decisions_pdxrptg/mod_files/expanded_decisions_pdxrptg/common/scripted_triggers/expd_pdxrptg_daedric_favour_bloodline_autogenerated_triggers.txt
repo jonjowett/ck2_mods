@@ -1,0 +1,843 @@
+# Return true if the character has at least N of the daedric favour flags.
+# Done by auto-generating every possible combination, so that the effect logic is properly visible to the user.
+
+expd_pdxrptg_daedric_favour_this_character_has_at_least_2 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_has_at_least_2_tt
+		OR = {
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+expd_pdxrptg_daedric_favour_this_character_has_at_least_3 = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_has_at_least_3_tt
+		OR = {
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_azura      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_hircine    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_malacath   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_mephala    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_meridia    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_molag      has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_namira     has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal  has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_peryite    has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+			AND = { has_character_flag = expd_pdxrptg_daedric_favour_sanguine   has_character_flag = expd_pdxrptg_daedric_favour_sheogorath has_character_flag = expd_pdxrptg_daedric_favour_vaermina   }
+		}
+	}
+}

@@ -1,11 +1,60 @@
+#
 # Decisions
+#
+# Gain Daedric favour
 expd_pdxrptg_daedric_favour_gain;Become Favoured by [Root.Offmap.GetName];;;;;;;;;;;;;x
 expd_pdxrptg_daedric_favour_gain_desc;By investing a large amount of §YArdor§!, I can persuade [Root.Offmap.GetName] to continue to look upon me favourably, even if I am no longer directly worshipping them.;;;;;;;;;;;;;x
-# Decision criteria tooltips
+# Tooltips
 expd_pdxrptg_daedric_favour_this_character_is_not_dragonblood_tt;Is NOT Dragon-Blooded §g(Dragon-Blooded characters are favoured by default)§!;;;;;;;;;;;;;x
 expd_pdxrptg_daedric_favour_this_character_is_not_already_favoured_by_prev_offmap_power_tt;Is NOT already §YFavoured by [Prev.Offmap.GetName]§!;;;;;;;;;;;;;x
 expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offmap_power_tt;Owns one of [Prev.Offmap.GetName]'s artifacts;;;;;;;;;;;;;x
+#
+# Secret conversion via Daedric favour - Decisions
+expd_daedric_favour_secret_conversion_azura;Daedric Favour: Secretly Convert to Azura;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_boethiah;Daedric Favour: Secretly Convert to Boethiah;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_clavicus;Daedric Favour: Secretly Convert to Clavicus Vile;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_hermaeus;Daedric Favour: Secretly Convert to Hermaeus Mora;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_hircine;Daedric Favour: Secretly Convert to Hircine;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_jyggalag;Daedric Favour: Secretly Convert to Jyggalag;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_malacath;Daedric Favour: Secretly Convert to Malacath;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_mehrunes;Daedric Favour: Secretly Convert to Mehrunes Dagon;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_mephala;Daedric Favour: Secretly Convert to Mephala;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_meridia;Daedric Favour: Secretly Convert to Meridia;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_molag;Daedric Favour: Secretly Convert to Molag Bal;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_namira;Daedric Favour: Secretly Convert to Namira;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_nocturnal;Daedric Favour: Secretly Convert to Nocturnal;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_peryite;Daedric Favour: Secretly Convert to Peryite;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_sanguine;Daedric Favour: Secretly Convert to Sanguine;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_sheogorath;Daedric Favour: Secretly Convert to Sheogorath;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_vaermina;Daedric Favour: Secretly Convert to Vaermina;;;;;;;;;;;;;x
+#
+# Secret conversion via Daedric favour - Decision descriptions
+expd_daedric_favour_secret_conversion_azura_desc;Because I am §YFavoured by Azura§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_boethiah_desc;Because I am §YFavoured by Boethiah§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_clavicus_desc;Because I am §YFavoured by Clavicus Vile§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_hermaeus_desc;Because I am §YFavoured by Hermaeus Mora§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_hircine_desc;Because I am §YFavoured by Hircine§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_jyggalag_desc;Because I am §YFavoured by Jyggalag§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_malacath_desc;Because I am §YFavoured by Malacath§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_mehrunes_desc;Because I am §YFavoured by Mehrunes Dagon§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_mephala_desc;Because I am §YFavoured by Mephala§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_meridia_desc;Because I am §YFavoured by Meridia§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_molag_desc;Because I am §YFavoured by Molag Bal§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_namira_desc;Because I am §YFavoured by Namira§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_nocturnal_desc;Because I am §YFavoured by Nocturnal§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_peryite_desc;Because I am §YFavoured by Peryite§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_sanguine_desc;Because I am §YFavoured by Sanguine§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_sheogorath_desc;Because I am §YFavoured by Sheogorath§!, I can freely convert to their religion;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_vaermina_desc;Because I am §YFavoured by Vaermina§!, I can freely convert to their religion;;;;;;;;;;;;;x
+# Tooltips
+expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt;§g-§!\n§RWARNING!§! [This.GetTitledFirstName]'s current secret religion (§Y[This.SecretReligion.GetName]§!) will be §Rlost§!!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_unlock_offmap_tt;§g-§!\nINFO: The offmap power associated with the new secret religion will be visible in a few days' time.;;;;;;;;;;;;;x
+#
+#
+#
 # Triggers
+#
+# Current favour
 expd_pdxrptg_daedric_favour_this_character_is_favoured_by_azura_tt;Is §YFavoured by Azura§! - either because [This.GetSheHe] worships them in secret, or simply due to the inscrutable whims of the Daedric Lord;;;;;;;;;;;;;x
 expd_pdxrptg_daedric_favour_this_character_is_favoured_by_boethiah_tt;Is §YFavoured by Boethiah§! - either because [This.GetSheHe] worships them in secret, or simply due to the inscrutable whims of the Daedric Lord;;;;;;;;;;;;;x
 expd_pdxrptg_daedric_favour_this_character_is_favoured_by_clavicus_tt;Is §YFavoured by Clavicus Vile§! - either because [This.GetSheHe] worships them in secret, or simply due to the inscrutable whims of the Daedric Lord;;;;;;;;;;;;;x
@@ -23,7 +72,31 @@ expd_pdxrptg_daedric_favour_this_character_is_favoured_by_peryite_tt;Is §YFavour
 expd_pdxrptg_daedric_favour_this_character_is_favoured_by_sanguine_tt;Is §YFavoured by Sanguine§! - either because [This.GetSheHe] worships them in secret, or simply due to the inscrutable whims of the Daedric Lord;;;;;;;;;;;;;x
 expd_pdxrptg_daedric_favour_this_character_is_favoured_by_sheogorath_tt;Is §YFavoured by Sheogorath§! - either because [This.GetSheHe] worships them in secret, or simply due to the inscrutable whims of the Daedric Lord;;;;;;;;;;;;;x
 expd_pdxrptg_daedric_favour_this_character_is_favoured_by_vaermina_tt;Is §YFavoured by Vaermina§! - either because [This.GetSheHe] worships them in secret, or simply due to the inscrutable whims of the Daedric Lord;;;;;;;;;;;;;x
+#
+# Worship
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_azura_tt;Does NOT publicly or privately worship §YAzura§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_boethiah_tt;Does NOT publicly or privately worship §YBoethiah§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_clavicus_tt;Does NOT publicly or privately worship §YClavicus Vile§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_hermaeus_tt;Does NOT publicly or privately worship §YHermaeus Mora§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_hircine_tt;Does NOT publicly or privately worship §YHircine§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_jyggalag_tt;Does NOT publicly or privately worship §YJyggalag§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_malacath_tt;Does NOT publicly or privately worship §YMalacath§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_mehrunes_tt;Does NOT publicly or privately worship §YMehrunes Dagon§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_mephala_tt;Does NOT publicly or privately worship §YMephala§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_meridia_tt;Does NOT publicly or privately worship §YMeridia§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_molag_tt;Does NOT publicly or privately worship §YMolag Bal§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_namira_tt;Does NOT publicly or privately worship §YNamira§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_nocturnal_tt;Does NOT publicly or privately worship §YNocturnal§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_peryite_tt;Does NOT publicly or privately worship §YPeryite§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_sanguine_tt;Does NOT publicly or privately worship §YSanguine§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_sheogorath_tt;Does NOT publicly or privately worship §YSheogorath§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_vaermina_tt;Does NOT publicly or privately worship §YVaermina§!;;;;;;;;;;;;;x
+#
+#
+#
 # Effects
+#
+# Become favoured
 expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_azura_tt;[This.GetTitledFirstName] becomes §YFavoured by Azura§! (ie. can always activate Azura's artifacts);;;;;;;;;;;;;x
 expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_boethiah_tt;[This.GetTitledFirstName] becomes §YFavoured by Boethiah§! (ie. can always activate Boethiah's artifacts);;;;;;;;;;;;;x
 expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_clavicus_tt;[This.GetTitledFirstName] becomes §YFavoured by Clavicus Vile§! (ie. can always activate Clavicus Vile's artifacts);;;;;;;;;;;;;x
@@ -41,5 +114,65 @@ expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_peryite_tt;[This.
 expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_sanguine_tt;[This.GetTitledFirstName] becomes §YFavoured by Sanguine§! (ie. can always activate Sanguine's artifacts);;;;;;;;;;;;;x
 expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_sheogorath_tt;[This.GetTitledFirstName] becomes §YFavoured by Sheogorath§! (ie. can always activate Sheogorath's artifacts);;;;;;;;;;;;;x
 expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_vaermina_tt;[This.GetTitledFirstName] becomes §YFavoured by Vaermina§! (ie. can always activate Vaermina's artifacts);;;;;;;;;;;;;x
+#
+# Secretly convert
+expd_daedric_favour_secret_conversion_azura_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Azura§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_boethiah_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Boethiah§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_clavicus_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Clavicus Vile§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_hermaeus_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Hermaeus Mora§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_hircine_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Hircine§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_jyggalag_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Jyggalag§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_malacath_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Malacath§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_mehrunes_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Mehrunes Dagon§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_mephala_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Mephala§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_meridia_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Meridia§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_molag_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Molag Bal§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_namira_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Namira§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_nocturnal_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Nocturnal§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_peryite_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Peryite§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_sanguine_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Sanguine§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_sheogorath_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Sheogorath§!;;;;;;;;;;;;;x
+expd_daedric_favour_secret_conversion_vaermina_tt;[This.GetTitledFirstName] secretly converts to the §YCult of Vaermina§!;;;;;;;;;;;;;x
+#
 # Errors
 expd_pdxrptg_daedric_favour_error_tt;§RERROR! Nothing will happen!§! Please report this error to the §YED:PDXRPTG§! developer. (NOT the developer of the main mod!);;;;;;;;;;;;;x
+#
+#
+#
+# Bloodline
+#
+# Visible descriptions
+expd_pdxrptg_bloodline_oblivion_touched;Oblivion-Touched Blood;;;;;;;;;;;;;x
+expd_pdxrptg_bloodline_oblivion_touched_desc;[Root.GetBestName] is known to have made many successful deals with several of the major entities in the planes of Oblivion. This highly-unusual achievement means that those entities have taken an interest in [Root.GetTitledFirstName] and [Root.GetHerHis] descendants...;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merge_into_bloodline;Any §YDaedric Favour§! gained by any dynasty member will be §Ymerged§! into this bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_granted_to_bloodline_member;§YFavoured by:§! [GetBloodlineFavour_Azura][GetBloodlineFavour_Azura_Sep][GetBloodlineFavour_Boethiah][GetBloodlineFavour_Boethiah_Sep][GetBloodlineFavour_Clavicus][GetBloodlineFavour_Clavicus_Sep][GetBloodlineFavour_Hermaeus][GetBloodlineFavour_Hermaeus_Sep][GetBloodlineFavour_Hircine][GetBloodlineFavour_Hircine_Sep][GetBloodlineFavour_Jyggalag][GetBloodlineFavour_Jyggalag_Sep][GetBloodlineFavour_Malacath][GetBloodlineFavour_Malacath_Sep][GetBloodlineFavour_Mehrunes][GetBloodlineFavour_Mehrunes_Sep][GetBloodlineFavour_Mephala][GetBloodlineFavour_Mephala_Sep][GetBloodlineFavour_Meridia][GetBloodlineFavour_Meridia_Sep][GetBloodlineFavour_Molag][GetBloodlineFavour_Molag_Sep][GetBloodlineFavour_Namira][GetBloodlineFavour_Namira_Sep][GetBloodlineFavour_Nocturnal][GetBloodlineFavour_Nocturnal_Sep][GetBloodlineFavour_Peryite][GetBloodlineFavour_Peryite_Sep][GetBloodlineFavour_Sanguine][GetBloodlineFavour_Sanguine_Sep][GetBloodlineFavour_Sheogorath][GetBloodlineFavour_Sheogorath_Sep][GetBloodlineFavour_Vaermina][GetBloodlineFavour_Vaermina_Sep];;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep;, ;;;;;;;;;;;;;x
+#
+# Scripted Triggers
+expd_pdxrptg_daedric_favour_this_character_has_at_least_2_tt;[This.GetTitledFirstName] is §YFavoured by at least 2 Daedric Princes§!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_has_at_least_3_tt;[This.GetTitledFirstName] is §YFavoured by at least 3 Daedric Princes§!;;;;;;;;;;;;;x
+#
+# Scripted Effects - Misc
+expd_pdxrptg_daedric_favour_this_character_has_2_others_forges_bloodline_tt;§g-§!\n[This.GetTitledFirstName] is now §YFavoured by at least 3 Daedric Princes§!, so [This.GetSheHe] forges an §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+#expd_pdxrptg_daedric_favour_this_character_has_3_favors_should_never_see_this_tt;§g-§!\n§RLOGIC ERROR!§! You should never see this text - something has gone wrong! Please report this error to the mod developer!;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_this_character_does_not_yet_have_3_nothing_happens_tt;§g-§!\n[This.GetTitledFirstName] is NOT yet §YFavoured by 3 Daedric Princes§!, so §Yno bloodline is created§!;;;;;;;;;;;;;x
+#
+# Scripted Effects - Merge favour into bloodline
+expd_pdxrptg_daedric_favour_prev_characters_new_favour_added_to_this_bloodline_tt;Updated;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_azura_tt;§g-§!\n§YAzura's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_boethiah_tt;§g-§!\n§YBoethiah's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_clavicus_tt;§g-§!\n§YClavicus Vile's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_hermaeus_tt;§g-§!\n§YHermaeus Mora's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_hircine_tt;§g-§!\n§YHircine's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_jyggalag_tt;§g-§!\n§YJyggalag's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_malacath_tt;§g-§!\n§YMalacath's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_mehrunes_tt;§g-§!\n§YMehrunes Dagon's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_mephala_tt;§g-§!\n§YMephala's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_meridia_tt;§g-§!\n§YMeridia's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_molag_tt;§g-§!\n§YMolag Bal's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_namira_tt;§g-§!\n§YNamira's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_nocturnal_tt;§g-§!\n§YNocturnal's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_peryite_tt;§g-§!\n§YPeryite's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_sanguine_tt;§g-§!\n§YSanguine's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_sheogorath_tt;§g-§!\n§YSheogorath's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x
+expd_pdxrptg_daedric_favour_merged_into_bloodline_vaermina_tt;§g-§!\n§YVaermina's Favour§! is added to [This.GetTitledFirstName]'s §YOblivion-Touched§! bloodline;;;;;;;;;;;;;x

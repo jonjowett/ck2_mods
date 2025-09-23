@@ -1,0 +1,718 @@
+# Audax Validator EnableCommentMetadata
+
+# All of these are expected to be called from within the "Oblivion-Touched" bloodline description.
+# IE: ROOT should *always* be the bloodline founder.
+# Further, because founding multiple such bloodlines should be impossible,
+#      it's safe to simply check whether the Oblivion-Touched bloodline has the relevant daedric prince's flag.
+
+defined_text = {
+	name = GetBloodlineFavour_Azura
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_azura
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = azura_azura
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Azura_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_azura
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_boethiah
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_clavicus
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_hermaeus
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Boethiah
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_boethiah
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = boethiah_boethiah
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Boethiah_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_boethiah
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_clavicus
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_hermaeus
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Clavicus
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_clavicus
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = clavicus_clavicus
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Clavicus_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_clavicus
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_hermaeus
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Hermaeus
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_hermaeus
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = hermaeus_hermaeus
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Hermaeus_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_hermaeus
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Hircine
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = hircine_hircine
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Hircine_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Jyggalag
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = jyggalag_jyggalag
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Jyggalag_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Malacath
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = malacath_malacath
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Malacath_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Mehrunes
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = mehrunes_mehrunes
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Mehrunes_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Mephala
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = mephala_mephala
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Mephala_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Meridia
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = meridia_meridia
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Meridia_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Molag
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = molag_molag
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Molag_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Namira
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = namira_namira
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Namira_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Nocturnal
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = nocturnal_nocturnal
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Nocturnal_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Peryite
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = peryite_peryite
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Peryite_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Sanguine
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = sanguine_sanguine
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Sanguine_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Sheogorath
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = sheogorath_sheogorath
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Sheogorath_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+					# Second-last in the list: Only show a separator if they also have the last
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_Vaermina
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = vaermina_vaermina
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_Vaermina_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					# Last in the list - never show a separator
+					always = no
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}

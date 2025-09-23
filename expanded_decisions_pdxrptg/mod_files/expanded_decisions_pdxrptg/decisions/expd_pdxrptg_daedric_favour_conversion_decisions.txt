@@ -1,0 +1,397 @@
+# Audax Validator EnableCommentMetadata
+
+# Inside the "Ruler decisions" submenu, show options for immediate free secret conversion to any favoured religion.
+decisions = {
+	
+	expd_daedric_favour_secret_conversion_azura = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_azura_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_azura = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_azura_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_azura
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_boethiah = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_boethiah_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_boethiah = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_boethiah_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_boethiah
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_clavicus = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_clavicus_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_clavicus = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_clavicus_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_clavicus
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_hermaeus = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_hermaeus_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_hermaeus = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_hermaeus_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_hermaeus
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_hircine = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_hircine_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_hircine = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_hircine_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_hircine
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_jyggalag = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_jyggalag_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_jyggalag = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_jyggalag_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_jyggalag
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_malacath = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_malacath_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_malacath = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_malacath_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_malacath
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_mehrunes = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_mehrunes_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_mehrunes = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_mehrunes_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_mehrunes
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_mephala = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_mephala_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_mephala = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_mephala_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_mephala
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_meridia = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_meridia_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_meridia = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_meridia_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_meridia
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_molag = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_molag_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_molag = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_molag_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_molag
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_namira = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_namira_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_namira = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_namira_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_namira
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_nocturnal = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_nocturnal_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_nocturnal = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_nocturnal_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_nocturnal
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_peryite = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_peryite_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_peryite = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_peryite_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_peryite
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_sanguine = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_sanguine_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_sanguine = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_sanguine_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_sanguine
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_sheogorath = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_sheogorath_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_sheogorath = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_sheogorath_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_sheogorath
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+	expd_daedric_favour_secret_conversion_vaermina = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_vaermina_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_vaermina = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_vaermina_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = daedra_vaermina
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
+}

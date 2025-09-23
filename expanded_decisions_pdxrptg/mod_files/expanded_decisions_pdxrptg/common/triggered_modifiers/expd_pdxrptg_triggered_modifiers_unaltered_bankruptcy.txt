@@ -1,0 +1,27 @@
+# Audax Validator EnableCommentMetadata
+
+# Unchanged from the base mod, so ignore all errors in this file.
+# Audax Validator "!" Ignore_NEXT
+
+##################################################
+#
+# STRATEGIC EFFECTS - A.K.A. "TRIGGERED MODIFIERS"
+#
+##################################################
+
+# Bankruptcy
+negative_money = {
+	potential = {
+		always = no
+	}
+	
+	trigger = {
+		NOT = { wealth = 0 }
+	}
+	
+	icon = 24
+	
+	land_morale = -0.25
+	
+	active = no
+}

@@ -1,0 +1,217 @@
+expd_pdxrptg_daedric_favour_update_this_characters_bloodline = {
+	if = {
+		limit = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = expd_pdxrptg_daedric_favour_merge
+			}
+		}
+		random_owned_bloodline = {
+			limit = {
+				bloodline_is_active_for = PREV
+				has_bloodline_flag = expd_pdxrptg_daedric_favour_merge
+			}
+			preferred_limit = { founder = { character = PREVPREV } }
+			preferred_limit = { founder = { dynasty = PREVPREV is_parent_of = PREVPREV } }
+			preferred_limit = { founder = { dynasty = PREVPREV is_grandparent_of = PREVPREV } }
+			preferred_limit = { founder = { dynasty = PREVPREV } }
+			preferred_limit = { founder = { is_parent_of = PREVPREV } }
+			preferred_limit = { founder = { is_grandparent_of = PREVPREV } }
+			show_scope_change = no
+			custom_tooltip = {
+				text = expd_pdxrptg_daedric_favour_prev_characters_new_favour_added_to_this_bloodline_tt
+				expd_pdxrptg_daedric_favour_add_prev_characters_favour_to_this_bloodline = yes
+			}
+		}
+	}
+	else = {
+		# If the character already has 2 daedric favour, this will be their third, so they will forge a bloodline
+		if = {
+			limit = { expd_pdxrptg_daedric_favour_this_character_has_at_least_2 = yes }
+			custom_tooltip = {
+				text = expd_pdxrptg_daedric_favour_this_character_has_2_others_forges_bloodline_tt
+				create_bloodline = { type = expd_pdxrptg_bloodline_oblivion_touched }
+				new_bloodline = {
+					show_scope_change = no
+					expd_pdxrptg_daedric_favour_add_prev_characters_favour_to_this_bloodline = yes
+				}
+			}
+		}
+		else = {
+			custom_tooltip = { text = expd_pdxrptg_daedric_favour_this_character_does_not_yet_have_3_nothing_happens_tt }
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_add_prev_characters_favour_to_this_bloodline = {
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_azura }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_azura }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_azura_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_azura
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_boethiah }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_boethiah }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_boethiah_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_boethiah
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_clavicus }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_clavicus }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_clavicus_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_clavicus
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_hermaeus }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_hermaeus }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_hermaeus_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_hermaeus
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_hircine }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_hircine_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_jyggalag_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_malacath }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_malacath_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_mehrunes }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_mehrunes_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_mephala }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_mephala_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_meridia }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_meridia_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_molag }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_molag }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_molag_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_namira }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_namira }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_namira_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_nocturnal }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_nocturnal_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_peryite }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_peryite_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_sanguine }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_sanguine_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_sheogorath }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_sheogorath_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+		}
+	}
+	if = {
+		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_vaermina }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_vaermina_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+		}
+	}
+}
