@@ -5,7 +5,7 @@ edmp_another_mod_wants_to_suppress_this_decision = {
 	# PDXRPTG & ED:PDXRPTG submod
 	# Audax Validator "." Ignore_NEXT
 	AND = {
-		edmp_pdxrptg_mod_is_active = yes
+		edmp_ek_mod_is_active = yes
 		NOT = {
 			# Audax Validator "." Ignore_NEXT
 			has_submenu_open = no
@@ -14,7 +14,17 @@ edmp_another_mod_wants_to_suppress_this_decision = {
 	
 }
 
-edmp_pdxrptg_mod_is_active = {
+edmp_currently_running_a_mod_which_has_its_own_close_submenu_button_supporting_edmp = {
+	edmp_ek_mod_is_active = yes
+	edmp_ed_pdxrptg_mod_is_active = yes
+}
+
+edmp_currently_running_a_mod_which_puts_edmp_decisions_in_an_isolated_submenu = {
+	edmp_ek_mod_is_active = yes
+	edmp_ed_pdxrptg_mod_is_active = yes
+}
+
+edmp_ek_mod_is_active = {
 	# Based on ...\events\ek_startup.txt , event startup.0
 	# It's a rather primitive test, but it should be effective!
 	#  --- All of these flags seem very EK-specific, so they shouldn't be created in any other context.
@@ -25,5 +35,12 @@ edmp_pdxrptg_mod_is_active = {
 		has_global_flag = mages_akavir_necromancy_banned
 		has_global_flag = house_veloth_extinct
 		has_global_flag = house_sul_extinct
+	}
+}
+
+edmp_ed_pdxrptg_mod_is_active = {
+	1 = {
+		# Audax Validator "." Ignore_NEXT
+		has_province_modifier = expd_pdxrptg_detectability
 	}
 }

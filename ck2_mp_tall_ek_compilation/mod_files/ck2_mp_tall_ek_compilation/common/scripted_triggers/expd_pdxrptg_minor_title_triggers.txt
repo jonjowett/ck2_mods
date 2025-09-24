@@ -24,7 +24,14 @@ expd_pdxrptg_this_character_can_hold_title_chief_architect = {
 	prisoner = no
 	NOT = { trait = in_hiding }
 	NOT = { trait = incapable }
-	hidden_tooltip = { is_alive = yes }
+	hidden_tooltip = {
+		is_alive = yes                    # Must be alive (workaround for some weird edge-case bugs)
+		NOT = {                           # A liege can't give the title to himself...
+			# Ignore Validator false positive
+			# Audax Validator "." Ignore_NEXT
+			character = ROOT_FROM
+		}
+	}
 }
 
 expd_pdxrptg_this_character_has_a_chief_architect = {
@@ -73,7 +80,14 @@ expd_pdxrptg_this_character_can_hold_title_master_alchemist = {
 	prisoner = no
 	NOT = { trait = in_hiding }
 	NOT = { trait = incapable }
-	hidden_tooltip = { is_alive = yes }
+	hidden_tooltip = {
+		is_alive = yes                    # Must be alive (workaround for some weird edge-case bugs)
+		NOT = {                           # A liege can't give the title to himself...
+			# Ignore Validator false positive
+			# Audax Validator "." Ignore_NEXT
+			character = ROOT_FROM
+		}
+	}
 }
 
 expd_pdxrptg_this_character_has_a_master_alchemist = {

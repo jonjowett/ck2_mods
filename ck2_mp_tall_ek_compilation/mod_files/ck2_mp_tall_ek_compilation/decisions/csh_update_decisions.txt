@@ -6,11 +6,8 @@ decisions = {
 		ai = no
 		potential = {
 			NOT = { has_global_flag = csh_updates_disabled }
-			csh_another_mod_wants_to_suppress_this_decision = no
-			OR = {
-				multiplayer = no
-				is_multiplayer_host_character = yes
-			}
+			csh_main_decisions_are_visible_for_this_character = yes
+			csh_this_character_can_take_admin_actions = yes
 		}
 		allow = { always = yes }
 		effect = {
@@ -25,11 +22,8 @@ decisions = {
 		ai = no
 		potential = {
 			NOT = { has_global_flag = csh_updates_disabled }
-			csh_another_mod_wants_to_suppress_this_decision = no
-			OR = {
-				multiplayer = no
-				is_multiplayer_host_character = yes
-			}
+			csh_main_decisions_are_visible_for_this_character = yes
+			csh_this_character_can_take_admin_actions = yes
 		}
 		allow = { always = yes }
 		effect = {
@@ -52,11 +46,8 @@ decisions = {
 		ai = no
 		potential = {
 			has_global_flag = csh_updates_disabled
-			csh_another_mod_wants_to_suppress_this_decision = no
-			OR = {
-				multiplayer = no
-				is_multiplayer_host_character = yes
-			}
+			csh_main_decisions_are_visible_for_this_character = yes
+			csh_this_character_can_take_admin_actions = yes
 		}
 		allow = { always = yes }
 		effect = {

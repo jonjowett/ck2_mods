@@ -6,7 +6,7 @@ decisions = {
 		potential = {
 			edmp_this_character_can_take_admin_actions = yes
 			NOT = { has_global_flag = edmp_interference_show }
-			edmp_another_mod_wants_to_suppress_this_decision = no
+			has_character_flag = edmp_admin_submenu_is_open
 		}
 		allow = { always = yes }
 		effect = {
@@ -16,13 +16,38 @@ decisions = {
 			}
 		}
 	}
-	edmp_interference_hide_targetted_decisions = {
+	edmp_interference_hide_targetted_decisions_high_prio = {
 		ai = no
 		is_high_prio = yes # Remind the admin to hide the decisions once they're done
 		potential = {
 			edmp_this_character_can_take_admin_actions = yes
 			has_global_flag = edmp_interference_show
-			edmp_another_mod_wants_to_suppress_this_decision = no
+			OR = {
+				# Forgot to turn this off before exiting the submenu - oops!
+				NOT = { has_character_flag = edmp_admin_submenu_is_open }
+				# Submenu is open but not isolated
+				AND = {
+					has_character_flag = edmp_admin_submenu_is_open
+					edmp_currently_running_a_mod_which_puts_edmp_decisions_in_an_isolated_submenu = no
+				}
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_hide_targetted_decisions_tt
+				clr_global_flag = edmp_interference_show
+			}
+		}
+	}
+	edmp_interference_hide_targetted_decisions_low_prio = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			has_global_flag = edmp_interference_show
+			# Submenu is open and isolated
+			has_character_flag = edmp_admin_submenu_is_open
+			edmp_currently_running_a_mod_which_puts_edmp_decisions_in_an_isolated_submenu = yes
 		}
 		allow = { always = yes }
 		effect = {
@@ -38,7 +63,7 @@ decisions = {
 			edmp_this_character_can_take_admin_actions = yes
 			has_global_flag = edmp_interference_show
 			NOT = { has_global_flag = edmp_interference_debug_include_sender_in_notifications }
-			edmp_another_mod_wants_to_suppress_this_decision = no
+			has_character_flag = edmp_admin_submenu_is_open
 		}
 		allow = { always = yes }
 		effect = {
@@ -54,7 +79,7 @@ decisions = {
 			edmp_this_character_can_take_admin_actions = yes
 			has_global_flag = edmp_interference_show
 			has_global_flag = edmp_interference_debug_include_sender_in_notifications
-			edmp_another_mod_wants_to_suppress_this_decision = no
+			has_character_flag = edmp_admin_submenu_is_open
 		}
 		allow = { always = yes }
 		effect = {

@@ -90,14 +90,21 @@ expd_pdxrptg_set_new_character_education_weighted_random_tt;Gains a §Yweighted r
 expd_pdxrptg_set_new_character_lifestyle_tt;§YPotentially gains§! one or more Lifestyles §g(depending on stats & traits)§!;;;;;;;;;;;;;x
 expd_pdxrptg_set_new_character_specialisms_tt;§YPotentially gains§! one or more Specialisms §g(depending on stats & traits)§!;;;;;;;;;;;;;x
 #
-expd_pdxrptg_popup_event_to_confirm_character_shared_tt;§g-§!\nAn §Yevent occurs§!, where you can choose to accept or reject the character.\n§RIf you reject, costs are not refunded!§!;;;;;;;;;;;;;x
+expd_pdxrptg_employ_generate_a_second_using_same_method_tt;§g-§!\nA §Ysecond character§! is generated, following the same process as above.;;;;;;;;;;;;;x
+#
+expd_pdxrptg_popup_event_to_confirm_character_shared_tt;§g-§!\nAn §Yevent occurs§!, where you can choose to accept or reject either character.\n- If you §Yaccept one§! and §Yreject one§!, there are §Gno additional costs§!.\n- If you §Yaccept both§!, §Rcosts are doubled§!.\n- If you §Yreject both§!, §Rcosts are not refunded§!.;;;;;;;;;;;;;x
 #
 #
 #
 # Events
-ExpdPdxrptgEmployment_1000_Title;A New Courtier Arrives;;;;;;;;;;;;;x
-ExpdPdxrptgEmployment_1000_Desc;The [GetRootFromCompliment] [From.GetBestName] has arrived at my court, in answer to my summons.;;;;;;;;;;;;;x
-ExpdPdxrptgEmployment_1000_EvtOpt_Accept;You're exactly what I was looking for, please stay!;;;;;;;;;;;;;x
-ExpdPdxrptgEmployment_1000_EvtOpt_Reject;You're NOT what I was looking for, please leave!;;;;;;;;;;;;;x
-ExpdPdxrptgEmployment_1000_EvtOpt_Accept_TT;[From.GetBestName] §Gjoins§! [Root.GetTitledFirstName]'s court;;;;;;;;;;;;;x
-ExpdPdxrptgEmployment_1000_EvtOpt_Reject_TT;[From.GetBestName] §Rleaves§!, and is §Rnever seen again§!;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_Title;New Courtiers Arrive;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_Desc;Two people have answered my invitation:\nthe [GetRootFromCompliment] [From.GetBestName], and\nthe [GetRootFromFromCompliment] [FromFrom.GetBestName];;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Accept_1;[From.GetBestName], you're exactly what I was looking for!;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Accept_2;[FromFrom.GetBestName], you're exactly what I was looking for!;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Accept_Both;Actually, I'd like BOTH of you to stay!;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Reject_Both;I don't want either of you, please leave!;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Accept_1_TT;[From.GetBestName] §Gjoins§! [Root.GetTitledFirstName]'s court;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Accept_2_TT;[FromFrom.GetBestName] §Gjoins§! [Root.GetTitledFirstName]'s court;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Reject_1_TT;[From.GetBestName] §Rleaves§!, and is §Rnever seen again§!;;;;;;;;;;;;;x
+ExpdPdxrptgEmployment_1000_EvtOpt_Reject_2_TT;[FromFrom.GetBestName] §Rleaves§!, and is §Rnever seen again§!;;;;;;;;;;;;;x
+expd_pdxrptg_employment_error_bad_setup_max_cost_deducted_tt;§g-§!\n§RERROR!§! Something went wrong in the setup of these characters - their original cost can not be detected! §RMaximum cost will be deducted!§!\n§PPlease report this error to the mod developer!§!\n§g-§!;;;;;;;;;;;;;x

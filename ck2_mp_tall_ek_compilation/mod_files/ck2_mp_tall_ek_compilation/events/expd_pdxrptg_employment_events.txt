@@ -1,54 +1,195 @@
 namespace = ExpdPdxrptgEmployment
 
-# Expected to be sent from the inviting character to the invitee.
-# IE:
-#  --- FROM is the ruler doing the inviting
-#  --- ROOT is the invitee
+
+
+
+
+
+
+
+
+
+##############################################
+#                                            #
+#           Inviter chooses which            #
+#        invitee(s) they wish to keep        #
+#                                            #
+##############################################
+
+
+
+# Expected to be called on the inviting character, with no FROM or FROMFROM setup.
+# For the eventual visible event (.1003), we want:
+#  --- ROOT     to be event_target:inviting_character
+#  --- FROM     to be event_target:invited_character_1
+#  --- FROMFROM to be event_target:invited_character_2
+#  --- Ping around to get this set up
 #
-# Ping back to the inviter
+# On inviting_character, ping to char 2
 character_event = {
 	id = ExpdPdxrptgEmployment.1000
 	is_triggered_only = yes
 	hide_window = yes
 	immediate = {
-		FROM = { character_event = { id = ExpdPdxrptgEmployment.1001 } }
+		event_target:invited_character_2 = { character_event = { id = ExpdPdxrptgEmployment.1001 } }
 	}
 }
-
-# Expected to be sent from the invitee, to the character inviting them.
-# IE:
-#  --- ROOT is the ruler doing the inviting
-#  --- FROM is the invitee
+# On char 2, ping to char 1
+character_event = {
+	id = ExpdPdxrptgEmployment.1001
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		event_target:invited_character_1 = { character_event = { id = ExpdPdxrptgEmployment.1002 } }
+	}
+}
+# On char 1, ping to inviting_character for the visible event
+character_event = {
+	id = ExpdPdxrptgEmployment.1002
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		event_target:inviting_character = { character_event = { id = ExpdPdxrptgEmployment.1003 } }
+	}
+}
+# Visible event, where the inviting_character can choose between their two invitees.
+#  --- ROOT     is event_target:inviting_character
+#  --- FROM     is event_target:invited_character_1
+#  --- FROMFROM is event_target:invited_character_2
 character_event = {
 	
-	id      = ExpdPdxrptgEmployment.1001
+	id      = ExpdPdxrptgEmployment.1003
 	title   = ExpdPdxrptgEmployment_1000_Title
 	desc    = ExpdPdxrptgEmployment_1000_Desc
 	picture = GFX_evt_emissary
 	
+	portrait = none # We can't show both invitees' portraits so, to avoid confusion, show neither.
+	
 	is_triggered_only = yes
 	
-	immediate = { 
-		clear_event_target = invited_character
+	immediate = {
+		# Ensure all tracking flags are cleared
+		clr_character_flag = expd_pdxrptg_employment_1_accept
+		clr_character_flag = expd_pdxrptg_employment_2_accept
+		clr_character_flag = expd_pdxrptg_employment_1_reject
+		clr_character_flag = expd_pdxrptg_employment_2_reject
 	}
 	
 	option = {
-		name = ExpdPdxrptgEmployment_1000_EvtOpt_Accept
-		show_portrait = ROOT_FROM
-		custom_tooltip = { text = ExpdPdxrptgEmployment_1000_EvtOpt_Accept_TT }
-	}
-	option = {
-		name = ExpdPdxrptgEmployment_1000_EvtOpt_Reject
+		name = ExpdPdxrptgEmployment_1000_EvtOpt_Accept_1
 		show_portrait = ROOT_FROM
 		custom_tooltip = {
-			text = ExpdPdxrptgEmployment_1000_EvtOpt_Reject_TT
-			ROOT_FROM = { death = { death_reason = death_missing } }
+			text = ExpdPdxrptgEmployment_1000_EvtOpt_Accept_1_TT
+			set_character_flag = expd_pdxrptg_employment_1_accept
+		}
+		custom_tooltip = {
+			text = ExpdPdxrptgEmployment_1000_EvtOpt_Reject_2_TT
+			set_character_flag = expd_pdxrptg_employment_2_reject
+		}
+	}
+	option = {
+		name = ExpdPdxrptgEmployment_1000_EvtOpt_Accept_2
+		show_portrait = ROOT_FROMFROM
+		custom_tooltip = {
+			text = ExpdPdxrptgEmployment_1000_EvtOpt_Reject_1_TT
+			set_character_flag = expd_pdxrptg_employment_1_reject
+		}
+		custom_tooltip = {
+			text = ExpdPdxrptgEmployment_1000_EvtOpt_Accept_2_TT
+			set_character_flag = expd_pdxrptg_employment_2_accept
+		}
+	}
+	option = {
+		name = ExpdPdxrptgEmployment_1000_EvtOpt_Accept_Both
+		show_portrait = ROOT_FROM
+		show_portrait = ROOT_FROMFROM
+		if = {
+			limit = { ROOT_FROM = { has_character_flag = invited_basic } }
+			expd_pdxrptg_employ_character_basic_deduct_cost = yes
+		}
+		else_if = {
+			limit = { ROOT_FROM = { has_character_flag = invited_advanced } }
+			expd_pdxrptg_employ_character_advanced_deduct_cost = yes
+		}
+		else_if = {
+			limit = { ROOT_FROM = { has_character_flag = invited_superb } }
+			expd_pdxrptg_employ_character_superb_deduct_cost = yes
+		}
+		else = {
+			custom_tooltip = { text = expd_pdxrptg_employment_error_bad_setup_max_cost_deducted_tt }
+			expd_pdxrptg_employ_character_superb_deduct_cost = yes
+		}
+		custom_tooltip = {
+			text = ExpdPdxrptgEmployment_1000_EvtOpt_Accept_1_TT
+			set_character_flag = expd_pdxrptg_employment_1_accept
+		}
+		custom_tooltip = {
+			text = ExpdPdxrptgEmployment_1000_EvtOpt_Accept_2_TT
+			set_character_flag = expd_pdxrptg_employment_2_accept
+		}
+	}
+	option = {
+		name = ExpdPdxrptgEmployment_1000_EvtOpt_Reject_Both
+		show_portrait = ROOT_FROM
+		show_portrait = ROOT_FROMFROM
+		custom_tooltip = {
+			text = ExpdPdxrptgEmployment_1000_EvtOpt_Reject_1_TT
+			set_character_flag = expd_pdxrptg_employment_1_reject
+		}
+		custom_tooltip = {
+			text = ExpdPdxrptgEmployment_1000_EvtOpt_Reject_2_TT
+			set_character_flag = expd_pdxrptg_employment_2_reject
+		}
+	}
+	
+	after = {
+		hidden_tooltip = {
+			# Kill any rejected characters
+			# (Has to be done "after", because otherwise both characters' portraits would be shown on every option, which would be confusing.)
+			if = {
+				limit = { has_character_flag = expd_pdxrptg_employment_1_reject }
+				ROOT_FROM     = { death = { death_reason = death_missing } }
+			}
+			if = {
+				limit = { has_character_flag = expd_pdxrptg_employment_2_reject }
+				ROOT_FROMFROM = { death = { death_reason = death_missing } }
+			}
+			# Cleanup temporary flags
+			clr_character_flag = expd_pdxrptg_employment_1_accept
+			clr_character_flag = expd_pdxrptg_employment_2_accept
+			clr_character_flag = expd_pdxrptg_employment_1_reject
+			clr_character_flag = expd_pdxrptg_employment_2_reject
+			# Cleanup event targets
+			clear_event_target = inviting_character
+			clear_event_target = invited_character_1
+			clear_event_target = invited_character_2
 		}
 	}
 	
 }
 
-# on_startup : Add a global flag, for just over a month, so we can be sure employment costs are calculated correctly
+
+
+
+
+
+
+
+
+
+##############################################
+#                                            #
+#            Ensure scaled_wealth            #
+#       costs are calculated correctly       #
+#                                            #
+##############################################
+
+
+
+# on_startup, for the sole human player or MP host:
+#  --- Add a global flag, which will persist for just over a month.
+#  --- In the "deduct_cost" scripted_effect, the existence of this flag causes the cost to be maximised (instead of scaled).
+
 character_event = {
 	id = ExpdPdxrptgEmployment.2000
 	is_triggered_only = yes

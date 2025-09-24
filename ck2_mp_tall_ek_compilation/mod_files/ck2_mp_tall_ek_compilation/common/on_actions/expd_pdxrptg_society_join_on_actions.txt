@@ -3,6 +3,12 @@
 # FROM is society
 on_character_join_society = {
 	events = {
-		ExpdPdxrptgSocietyJoin.1 # Sload joins Mages - deduct IM currency & allow necromancy
+		ExpdPdxrptgSocietyJoin.1000 # Sload joins Mages - deduct IM currency & allow necromancy
+	}
+}
+
+on_yearly_pulse = {
+	events = {
+		ExpdPdxrptgSocietyJoin.2000 # AI character may join an appropriate society
 	}
 }

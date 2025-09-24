@@ -11,6 +11,282 @@
 
 ##############################################
 #                                            #
+#            Create 2 characters             #
+#           so player has a choice           #
+#                                            #
+##############################################
+
+
+
+# Basic
+
+expd_pdxrptg_employ_councillor_basic_dip = {
+	expd_pdxrptg_employ_character_basic_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_basic_dip_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_basic_dip_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_basic_mar = {
+	expd_pdxrptg_employ_character_basic_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_basic_mar_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_basic_mar_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_basic_ste = {
+	expd_pdxrptg_employ_character_basic_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_basic_ste_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_basic_ste_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_basic_int = {
+	expd_pdxrptg_employ_character_basic_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_basic_int_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_basic_int_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_basic_lea = {
+	expd_pdxrptg_employ_character_basic_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_basic_lea_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_basic_lea_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_debutante_basic = {
+	expd_pdxrptg_employ_character_basic_deduct_cost = yes
+	expd_pdxrptg_employ_debutante_basic_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_debutante_basic_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_beau_basic = {
+	expd_pdxrptg_employ_character_basic_deduct_cost = yes
+	expd_pdxrptg_employ_beau_basic_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_beau_basic_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+# Advanced
+
+expd_pdxrptg_employ_councillor_advanced_dip = {
+	expd_pdxrptg_employ_character_advanced_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_advanced_dip_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_advanced_dip_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_advanced_mar = {
+	expd_pdxrptg_employ_character_advanced_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_advanced_mar_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_advanced_mar_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_advanced_ste = {
+	expd_pdxrptg_employ_character_advanced_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_advanced_ste_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_advanced_ste_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_advanced_int = {
+	expd_pdxrptg_employ_character_advanced_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_advanced_int_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_advanced_int_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_advanced_lea = {
+	expd_pdxrptg_employ_character_advanced_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_advanced_lea_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_advanced_lea_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_debutante_advanced = {
+	expd_pdxrptg_employ_character_advanced_deduct_cost = yes
+	expd_pdxrptg_employ_debutante_advanced_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_debutante_advanced_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_beau_advanced = {
+	expd_pdxrptg_employ_character_advanced_deduct_cost = yes
+	expd_pdxrptg_employ_beau_advanced_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_beau_advanced_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+# Superb
+
+expd_pdxrptg_employ_councillor_superb_dip = {
+	expd_pdxrptg_employ_character_superb_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_superb_dip_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_superb_dip_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_superb_mar = {
+	expd_pdxrptg_employ_character_superb_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_superb_mar_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_superb_mar_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_superb_ste = {
+	expd_pdxrptg_employ_character_superb_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_superb_ste_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_superb_ste_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_superb_int = {
+	expd_pdxrptg_employ_character_superb_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_superb_int_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_superb_int_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_councillor_superb_lea = {
+	expd_pdxrptg_employ_character_superb_deduct_cost = yes
+	expd_pdxrptg_employ_councillor_superb_lea_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_councillor_superb_lea_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_debutante_superb = {
+	expd_pdxrptg_employ_character_superb_deduct_cost = yes
+	expd_pdxrptg_employ_debutante_superb_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_debutante_superb_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+expd_pdxrptg_employ_beau_superb = {
+	expd_pdxrptg_employ_character_superb_deduct_cost = yes
+	expd_pdxrptg_employ_beau_superb_actual = yes
+	hidden_tooltip = { event_target:invited_character = { save_event_target_as = invited_character_1 } }
+	custom_tooltip = {
+		text = expd_pdxrptg_employ_generate_a_second_using_same_method_tt
+		expd_pdxrptg_employ_beau_superb_actual = yes
+		event_target:invited_character = { save_event_target_as = invited_character_2 }
+	}
+	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
+}
+
+
+
+
+
+
+
+
+
+
+##############################################
+#                                            #
 #            Top-Level Character             #
 #              Creation Scripts              #
 #                                            #
@@ -20,8 +296,7 @@
 
 # Basic
 
-expd_pdxrptg_employ_councillor_basic_dip = {
-	expd_pdxrptg_employ_character_basic_shared = yes
+expd_pdxrptg_employ_councillor_basic_dip_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_dip = yes
@@ -30,10 +305,8 @@ expd_pdxrptg_employ_councillor_basic_dip = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_basic = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_basic_mar = {
-	expd_pdxrptg_employ_character_basic_shared = yes
+expd_pdxrptg_employ_councillor_basic_mar_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_mar = yes
@@ -45,10 +318,8 @@ expd_pdxrptg_employ_councillor_basic_mar = {
 	expd_pdxrptg_give_new_character_terrain_trait = yes
 	expd_pdxrptg_give_new_character_tiered_veteran_trait = yes
 	expd_pdxrptg_update_character_flags_basic = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_basic_ste = {
-	expd_pdxrptg_employ_character_basic_shared = yes
+expd_pdxrptg_employ_councillor_basic_ste_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_ste = yes
@@ -57,10 +328,8 @@ expd_pdxrptg_employ_councillor_basic_ste = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_basic = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_basic_int = {
-	expd_pdxrptg_employ_character_basic_shared = yes
+expd_pdxrptg_employ_councillor_basic_int_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_int = yes
@@ -69,10 +338,8 @@ expd_pdxrptg_employ_councillor_basic_int = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_basic = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_basic_lea = {
-	expd_pdxrptg_employ_character_basic_shared = yes
+expd_pdxrptg_employ_councillor_basic_lea_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_lea = yes
@@ -81,10 +348,8 @@ expd_pdxrptg_employ_councillor_basic_lea = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_basic = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_debutante_basic = {
-	expd_pdxrptg_employ_character_basic_shared = yes
+expd_pdxrptg_employ_debutante_basic_actual = {
 	expd_pdxrptg_create_debutante_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_set_new_character_education_weighted_random = yes
@@ -92,10 +357,8 @@ expd_pdxrptg_employ_debutante_basic = {
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_improve_new_character_fertility_traits = yes
 	expd_pdxrptg_update_character_flags_basic = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_beau_basic = {
-	expd_pdxrptg_employ_character_basic_shared = yes
+expd_pdxrptg_employ_beau_basic_actual = {
 	expd_pdxrptg_create_beau_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_set_new_character_education_weighted_random = yes
@@ -103,15 +366,13 @@ expd_pdxrptg_employ_beau_basic = {
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_improve_new_character_fertility_traits = yes
 	expd_pdxrptg_update_character_flags_basic = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
 
 
 
 # Advanced
 
-expd_pdxrptg_employ_councillor_advanced_dip = {
-	expd_pdxrptg_employ_character_advanced_shared = yes
+expd_pdxrptg_employ_councillor_advanced_dip_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
@@ -123,10 +384,8 @@ expd_pdxrptg_employ_councillor_advanced_dip = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_advanced = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_advanced_mar = {
-	expd_pdxrptg_employ_character_advanced_shared = yes
+expd_pdxrptg_employ_councillor_advanced_mar_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
@@ -143,10 +402,8 @@ expd_pdxrptg_employ_councillor_advanced_mar = {
 	expd_pdxrptg_improve_new_character_command_traits = yes
 	expd_pdxrptg_improve_new_character_command_traits = yes
 	expd_pdxrptg_update_character_flags_advanced = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_advanced_ste = {
-	expd_pdxrptg_employ_character_advanced_shared = yes
+expd_pdxrptg_employ_councillor_advanced_ste_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
@@ -158,10 +415,8 @@ expd_pdxrptg_employ_councillor_advanced_ste = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_advanced = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_advanced_int = {
-	expd_pdxrptg_employ_character_advanced_shared = yes
+expd_pdxrptg_employ_councillor_advanced_int_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
@@ -173,10 +428,8 @@ expd_pdxrptg_employ_councillor_advanced_int = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_advanced = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_advanced_lea = {
-	expd_pdxrptg_employ_character_advanced_shared = yes
+expd_pdxrptg_employ_councillor_advanced_lea_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
@@ -188,43 +441,39 @@ expd_pdxrptg_employ_councillor_advanced_lea = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_advanced = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_debutante_advanced = {
-	expd_pdxrptg_employ_character_advanced_shared = yes
+expd_pdxrptg_employ_debutante_advanced_actual = {
 	expd_pdxrptg_create_debutante_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
 	expd_pdxrptg_improve_new_character_base_stats = yes
+	expd_pdxrptg_improve_new_character_genetics = yes
 	expd_pdxrptg_set_new_character_education_weighted_random = yes
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_improve_new_character_fertility_traits = yes
 	expd_pdxrptg_improve_new_character_fertility_traits = yes
 	expd_pdxrptg_update_character_flags_advanced = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_beau_advanced = {
-	expd_pdxrptg_employ_character_advanced_shared = yes
+expd_pdxrptg_employ_beau_advanced_actual = {
 	expd_pdxrptg_create_beau_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
 	expd_pdxrptg_improve_new_character_base_stats = yes
+	expd_pdxrptg_improve_new_character_genetics = yes
 	expd_pdxrptg_set_new_character_education_weighted_random = yes
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_improve_new_character_fertility_traits = yes
 	expd_pdxrptg_improve_new_character_fertility_traits = yes
 	expd_pdxrptg_update_character_flags_advanced = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
 
 
 
 # Superb
 
-expd_pdxrptg_employ_councillor_superb_dip = {
-	expd_pdxrptg_employ_character_superb_shared = yes
+expd_pdxrptg_employ_councillor_superb_dip_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
@@ -239,10 +488,8 @@ expd_pdxrptg_employ_councillor_superb_dip = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_superb = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_superb_mar = {
-	expd_pdxrptg_employ_character_superb_shared = yes
+expd_pdxrptg_employ_councillor_superb_mar_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
@@ -266,10 +513,8 @@ expd_pdxrptg_employ_councillor_superb_mar = {
 	expd_pdxrptg_improve_new_character_command_traits = yes
 	expd_pdxrptg_improve_new_character_command_traits = yes
 	expd_pdxrptg_update_character_flags_superb = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_superb_ste = {
-	expd_pdxrptg_employ_character_superb_shared = yes
+expd_pdxrptg_employ_councillor_superb_ste_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
@@ -284,10 +529,8 @@ expd_pdxrptg_employ_councillor_superb_ste = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_superb = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_superb_int = {
-	expd_pdxrptg_employ_character_superb_shared = yes
+expd_pdxrptg_employ_councillor_superb_int_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
@@ -302,10 +545,8 @@ expd_pdxrptg_employ_councillor_superb_int = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_superb = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_councillor_superb_lea = {
-	expd_pdxrptg_employ_character_superb_shared = yes
+expd_pdxrptg_employ_councillor_superb_lea_actual = {
 	expd_pdxrptg_create_councillor_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
@@ -320,16 +561,16 @@ expd_pdxrptg_employ_councillor_superb_lea = {
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
 	expd_pdxrptg_update_character_flags_superb = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_debutante_superb = {
-	expd_pdxrptg_employ_character_superb_shared = yes
+expd_pdxrptg_employ_debutante_superb_actual = {
 	expd_pdxrptg_create_debutante_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
 	expd_pdxrptg_improve_new_character_superb = yes
 	expd_pdxrptg_improve_new_character_base_stats = yes
 	expd_pdxrptg_improve_new_character_base_stats = yes
+	expd_pdxrptg_improve_new_character_genetics = yes
+	expd_pdxrptg_improve_new_character_genetics = yes
 	expd_pdxrptg_set_new_character_education_weighted_random = yes
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
@@ -338,16 +579,16 @@ expd_pdxrptg_employ_debutante_superb = {
 	expd_pdxrptg_improve_new_character_fertility_traits = yes
 	expd_pdxrptg_improve_new_character_fertility_traits = yes
 	expd_pdxrptg_update_character_flags_superb = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
-expd_pdxrptg_employ_beau_superb = {
-	expd_pdxrptg_employ_character_superb_shared = yes
+expd_pdxrptg_employ_beau_superb_actual = {
 	expd_pdxrptg_create_beau_shared = yes
 	expd_pdxrptg_improve_new_character_basic = yes
 	expd_pdxrptg_improve_new_character_advanced = yes
 	expd_pdxrptg_improve_new_character_superb = yes
 	expd_pdxrptg_improve_new_character_base_stats = yes
 	expd_pdxrptg_improve_new_character_base_stats = yes
+	expd_pdxrptg_improve_new_character_genetics = yes
+	expd_pdxrptg_improve_new_character_genetics = yes
 	expd_pdxrptg_set_new_character_education_weighted_random = yes
 	expd_pdxrptg_set_new_character_lifestyle = yes
 	expd_pdxrptg_set_new_character_specialisms = yes
@@ -356,7 +597,6 @@ expd_pdxrptg_employ_beau_superb = {
 	expd_pdxrptg_improve_new_character_fertility_traits = yes
 	expd_pdxrptg_improve_new_character_fertility_traits = yes
 	expd_pdxrptg_update_character_flags_superb = yes
-	expd_pdxrptg_popup_event_to_confirm_character_shared = yes
 }
 
 
@@ -376,34 +616,34 @@ expd_pdxrptg_employ_beau_superb = {
 
 
 
-expd_pdxrptg_employ_character_basic_shared = {
+expd_pdxrptg_employ_character_basic_deduct_cost = {
 	if = {
 		limit = { has_global_flag = expd_pdxrptg_employment_debug }
 		custom_tooltip = { text = expd_pdxrptg_employment_debug_tt }
 	}
 	else = {
-		expd_pdxrptg_employment_deduct_wealth_basic = yes
 		expd_pdxrptg_employment_deduct_prestige_basic = yes
+		expd_pdxrptg_employment_deduct_wealth_basic = yes
 	}
 }
-expd_pdxrptg_employ_character_advanced_shared = {
+expd_pdxrptg_employ_character_advanced_deduct_cost = {
 	if = {
 		limit = { has_global_flag = expd_pdxrptg_employment_debug }
 		custom_tooltip = { text = expd_pdxrptg_employment_debug_tt }
 	}
 	else = {
-		expd_pdxrptg_employment_deduct_wealth_basic = yes
-		expd_pdxrptg_employment_deduct_prestige_basic = yes
+		expd_pdxrptg_employment_deduct_prestige_advanced = yes
+		expd_pdxrptg_employment_deduct_wealth_advanced = yes
 	}
 }
-expd_pdxrptg_employ_character_superb_shared = {
+expd_pdxrptg_employ_character_superb_deduct_cost = {
 	if = {
 		limit = { has_global_flag = expd_pdxrptg_employment_debug }
 		custom_tooltip = { text = expd_pdxrptg_employment_debug_tt }
 	}
 	else = {
-		expd_pdxrptg_employment_deduct_wealth_basic = yes
-		expd_pdxrptg_employment_deduct_prestige_basic = yes
+		expd_pdxrptg_employment_deduct_prestige_superb = yes
+		expd_pdxrptg_employment_deduct_wealth_superb = yes
 	}
 }
 expd_pdxrptg_employment_deduct_wealth_basic = {
@@ -529,9 +769,8 @@ expd_pdxrptg_update_character_flags_education = {
 expd_pdxrptg_popup_event_to_confirm_character_shared = {
 	custom_tooltip = {
 		text = expd_pdxrptg_popup_event_to_confirm_character_shared_tt
-		event_target:invited_character = {
-			character_event = { id = ExpdPdxrptgEmployment.1000 }
-		}
+		save_event_target_as = inviting_character
+		character_event = { id = ExpdPdxrptgEmployment.1000 }
 	}
 }
 
@@ -1002,10 +1241,24 @@ expd_pdxrptg_improve_new_character_genetics = {
 		text = expd_pdxrptg_improve_new_character_genetics_tt
 		event_target:invited_character = {
 			random_list = {
-				55 = {  }
-				15 = { expd_pdxrptg_improve_this_characters_genetics_attractiveness = yes }
-				15 = { expd_pdxrptg_improve_this_characters_genetics_strength       = yes }
-				15 = { expd_pdxrptg_improve_this_characters_genetics_intelligence   = yes }
+				50 = {  }
+				# 50% chance of any improvement
+				# For councillor:     intelligence   30% > strength     15% > attractiveness 5%
+				# For beau/debutante: attractiveness 30% > intelligence 15% > strength       5%
+				# (If character flags are missing, 47.5% chance of improvement, equally distributed.)
+				15 = {
+					expd_pdxrptg_improve_this_characters_genetics_attractiveness = yes
+					mult_modifier = { factor = 2.0000 OR = { has_character_flag = invited_beau       has_character_flag = invited_debutante } }
+					mult_modifier = { factor = 0.3333        has_character_flag = invited_councillor                                          }
+				}
+				15 = {
+					expd_pdxrptg_improve_this_characters_genetics_strength       = yes
+					mult_modifier = { factor = 0.3333 OR = { has_character_flag = invited_beau       has_character_flag = invited_debutante } }
+				}
+				15 = {
+					expd_pdxrptg_improve_this_characters_genetics_intelligence   = yes
+					mult_modifier = { factor = 2.0000        has_character_flag = invited_councillor                                          }
+				}
 			}
 		}
 	}

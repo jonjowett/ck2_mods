@@ -2,6 +2,24 @@
 
 namespace = ExpdPdxrptgSocietyJoin
 
+
+
+
+
+
+
+
+
+
+##############################################
+#                                            #
+#          Sload Necromancer bribes          #
+#         their way into Mages Guild         #
+#                                            #
+##############################################
+
+
+
 # Called from on_character_join_society
 #  --- ROOT is character
 #  --- FROM is society
@@ -9,7 +27,7 @@ namespace = ExpdPdxrptgSocietyJoin
 #  --- Sacrifice 2000 Ideal Master currency to the Guild
 #  --- Change the Guild to allow necromancy
 character_event = {
-	id = ExpdPdxrptgSocietyJoin.1
+	id = ExpdPdxrptgSocietyJoin.1000
 	hide_window = yes
 	is_triggered_only = yes
 	trigger = {
@@ -94,5 +112,568 @@ character_event = {
 				}
 			}
 		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+##############################################
+#                                            #
+#         AI character tries to join         #
+#           an appropriate society           #
+#                                            #
+##############################################
+
+
+
+# on_yearly_pulse: This AI character MIGHT try to join a society (up to 5 times in total).
+character_event = {
+	
+	id = ExpdPdxrptgSocietyJoin.2000
+	
+	hide_window = yes
+	is_triggered_only = yes
+	
+	ai = yes
+	only_capable = yes
+	min_age = 16
+	is_in_society = no
+	prisoner = no
+	
+	trigger = {
+		# Has not already chosen "don't join" 5 times
+		NOT = { has_character_flag = expd_pdxrptg_society_autojoin_5 }
+		# Is not "interested" in a secret society
+		is_interested_in_any_society = no
+	}
+	immediate = {
+		
+		random_list = {
+			80 = {
+				# Does not join a society
+				# Decreased by higher-tier education, by higher-tier title, and by having an important job
+				mult_modifier = {
+					factor = 0.5
+					OR = {
+						is_on_council_trigger = yes
+						has_minor_title = title_chief_architect_expd_pdxrptg
+						has_minor_title = title_court_alchemist
+						has_minor_title = title_commander
+						has_minor_title = title_regent
+						has_minor_title = title_appointed_regent
+					}
+				}
+				mult_modifier = { factor = 0.9 has_at_least_2nd_tier_education = yes }
+				mult_modifier = { factor = 0.8 has_at_least_3rd_tier_education = yes }
+				mult_modifier = { factor = 0.7 has_at_least_top_tier_education = yes }
+				mult_modifier = { factor = 0.5 maxed_education                 = yes }
+			}
+			20 = {
+				# Attempts to join a society
+				# 5x chance of joining an exclusive (usually racial) society
+				random_list = {
+					
+					# Exclusive societies
+					#  --- 5x chance of joining, compared with open societies
+					
+					50 = {
+						secret_religious_cult = { ROOT = { join_society = PREV } }
+						mult_modifier = {
+							factor = 0
+							has_secret_religion = no
+						}
+						mult_modifier = {
+							factor = 0
+							secret_religious_cult = {
+								OR = {
+									society_is_active = no
+									num_of_society_members <= 10
+									NOT = { any_society_member = { is_within_diplo_range = ROOT } }
+									ROOT = { NOT = { can_join_society = PREV } }
+								}
+							}
+						}
+					}
+					50 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = clan_mothers
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = clan_mothers
+							}
+						}
+					}
+					50 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = ansei_guild_tamriel
+						mult_modifier = { factor = 0 is_warrior = no } # Only AI warriors should join the Ansei
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = ansei_guild_tamriel
+							}
+						}
+					}
+					50 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = house_dagoth_council
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = house_dagoth_council
+							}
+						}
+						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+					}
+					50 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = house_dres_council
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = house_dres_council
+							}
+						}
+						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+					}
+					50 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = house_hlaalu_council
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = house_hlaalu_council
+							}
+						}
+						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+					}
+					50 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = house_indoril_council
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = house_indoril_council
+							}
+						}
+						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+					}
+					50 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = house_redoran_council
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = house_redoran_council
+							}
+						}
+						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+					}
+					50 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = house_sadras_council
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = house_sadras_council
+							}
+						}
+						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+					}
+					50 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = house_sul_council
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = house_sul_council
+							}
+						}
+						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+					}
+					50 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = house_telvanni_council
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = house_telvanni_council
+							}
+						}
+						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+					}
+					50 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = house_veloth_council
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = house_veloth_council
+							}
+						}
+						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+					}
+					
+					# Open societies, with education preferences
+					#  --- Chance of joining reduced by 90% if education doesn't match
+					
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = fighters_guild_tamriel
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = fighters_guild_tamriel
+							}
+						}
+						mult_modifier = { factor = 0.1 is_warrior = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = fighters_guild_akavir
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = fighters_guild_akavir
+							}
+						}
+						mult_modifier = { factor = 0.1 is_warrior = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = mages_guild_tamriel
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = mages_guild_tamriel
+							}
+						}
+						mult_modifier = { factor = 0.1 is_mage = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = mages_guild_akavir
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = mages_guild_akavir
+							}
+						}
+						mult_modifier = { factor = 0.1 is_mage = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = mercantile_guild_tamriel
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = mercantile_guild_tamriel
+							}
+						}
+						mult_modifier = { factor = 0.1 is_magistrate = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = mercantile_guild_akavir
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = mercantile_guild_akavir
+							}
+						}
+						mult_modifier = { factor = 0.1 is_magistrate = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = scenarist_guild_tamriel
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = scenarist_guild_tamriel
+							}
+						}
+						mult_modifier = { factor = 0.1 is_diplomat = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = scenarist_guild_akavir
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = scenarist_guild_akavir
+							}
+						}
+						mult_modifier = { factor = 0.1 is_diplomat = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = companions_tamriel
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = companions_tamriel
+							}
+						}
+						mult_modifier = { # Can only autojoin if in Skyrim
+							factor = 0
+							NOT = {
+								location = {
+									# Audax Validator "." Ignore_NEXT
+									region = nirn_tamriel_skyrim
+								}
+							}
+						}
+						mult_modifier = { factor = 0.1 is_warrior = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = dark_brotherhood_tamriel
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = dark_brotherhood_tamriel
+							}
+						}
+						mult_modifier = { # Cannot join if Morag Tong is available
+							factor = 0
+							# Audax Validator "." Ignore_NEXT
+							can_join_society = morag_tong_tamriel
+						}
+						mult_modifier = { factor = 0.1 is_agent = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = assassin_guild_akavir
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = assassin_guild_akavir
+							}
+						}
+						mult_modifier = { # Cannot join if Morag Tong is available
+							factor = 0
+							# Audax Validator "." Ignore_NEXT
+							can_join_society = morag_tong_tamriel
+						}
+						mult_modifier = { factor = 0.1 is_agent = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = morag_tong_tamriel
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = morag_tong_tamriel
+							}
+						}
+						mult_modifier = { factor = 0.1 is_agent = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = thieves_guild_tamriel
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = thieves_guild_tamriel
+							}
+						}
+						mult_modifier = { # Cannot join if Camonna Tong is available
+							factor = 0
+							# Audax Validator "." Ignore_NEXT
+							can_join_society = camonna_tong_tamriel
+						}
+						mult_modifier = { factor = 0.1 is_agent = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = thieves_guild_akavir
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = thieves_guild_akavir
+							}
+						}
+						mult_modifier = { # Cannot join if Camonna Tong is available
+							factor = 0
+							# Audax Validator "." Ignore_NEXT
+							can_join_society = camonna_tong_tamriel
+						}
+						mult_modifier = { factor = 0.1 is_agent = no }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = camonna_tong_tamriel
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = camonna_tong_tamriel
+							}
+						}
+						mult_modifier = { factor = 0.1 is_agent = no }
+					}
+					
+					# Open societies without education preferences
+					#  --- Unlikely to be chosen by characters with bottom- or top-tier educations
+					
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = greybeards_tamriel
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = greybeards_tamriel
+							}
+						}
+						mult_modifier = { # Can only autojoin if in Skyrim
+							factor = 0
+							NOT = {
+								location = {
+									# Audax Validator "." Ignore_NEXT
+									region = nirn_tamriel_skyrim
+								}
+							}
+						}
+						mult_modifier = { factor = 0.05 has_bottom_tier_education_trait_trigger = yes }
+						mult_modifier = { factor = 0.10 has_2nd_tier_education_trait_trigger    = yes }
+						mult_modifier = { factor = 0.25 has_3rd_tier_education_trait_trigger    = yes }
+						mult_modifier = { factor = 0.10 has_top_tier_education_trait_trigger    = yes }
+						mult_modifier = { factor = 0.05 maxed_education                         = yes }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = moth_priests_tamriel
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = moth_priests_tamriel
+							}
+						}
+						mult_modifier = { # Can only autojoin if in Skyrim
+							factor = 0
+							NOT = {
+								location = {
+									# Audax Validator "." Ignore_NEXT
+									region = nirn_tamriel_skyrim
+								}
+							}
+						}
+						mult_modifier = { factor = 0.05 has_bottom_tier_education_trait_trigger = yes }
+						mult_modifier = { factor = 0.10 has_2nd_tier_education_trait_trigger    = yes }
+						mult_modifier = { factor = 0.25 has_3rd_tier_education_trait_trigger    = yes }
+						mult_modifier = { factor = 0.10 has_top_tier_education_trait_trigger    = yes }
+						mult_modifier = { factor = 0.05 maxed_education                         = yes }
+					}
+					10 = {
+						# Audax Validator "." Ignore_NEXT
+						join_society = elder_council
+						mult_modifier = {
+							factor = 0
+							NOT = {
+								# Audax Validator "." Ignore_NEXT
+								can_join_society = elder_council
+							}
+						}
+						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+						mult_modifier = { factor = 0.05 has_bottom_tier_education_trait_trigger = yes }
+						mult_modifier = { factor = 0.10 has_2nd_tier_education_trait_trigger    = yes }
+						mult_modifier = { factor = 0.25 has_3rd_tier_education_trait_trigger    = yes }
+						mult_modifier = { factor = 0.10 has_top_tier_education_trait_trigger    = yes }
+						mult_modifier = { factor = 0.05 maxed_education                         = yes }
+					}
+					
+				}
+			}
+		}
+	}
+	
+	
+	
+	after = {
+		
+		
+		# Record number of autojoin attempts
+		if = {
+			limit = {
+				NOR = {
+					has_character_flag = expd_pdxrptg_society_autojoin_1
+					has_character_flag = expd_pdxrptg_society_autojoin_2
+					has_character_flag = expd_pdxrptg_society_autojoin_3
+					has_character_flag = expd_pdxrptg_society_autojoin_4
+					has_character_flag = expd_pdxrptg_society_autojoin_5
+				}
+			}
+			set_character_flag = expd_pdxrptg_society_autojoin_1
+		}
+		else_if = {
+			limit = { has_character_flag = expd_pdxrptg_society_autojoin_1 }
+			clr_character_flag = expd_pdxrptg_society_autojoin_1
+			set_character_flag = expd_pdxrptg_society_autojoin_2
+			clr_character_flag = expd_pdxrptg_society_autojoin_3
+			clr_character_flag = expd_pdxrptg_society_autojoin_4
+			clr_character_flag = expd_pdxrptg_society_autojoin_5
+			
+		}
+		else_if = {
+			limit = { has_character_flag = expd_pdxrptg_society_autojoin_2 }
+			clr_character_flag = expd_pdxrptg_society_autojoin_1
+			clr_character_flag = expd_pdxrptg_society_autojoin_2
+			set_character_flag = expd_pdxrptg_society_autojoin_3
+			clr_character_flag = expd_pdxrptg_society_autojoin_4
+			clr_character_flag = expd_pdxrptg_society_autojoin_5
+			
+		}
+		else_if = {
+			limit = { has_character_flag = expd_pdxrptg_society_autojoin_3 }
+			clr_character_flag = expd_pdxrptg_society_autojoin_1
+			clr_character_flag = expd_pdxrptg_society_autojoin_2
+			set_character_flag = expd_pdxrptg_society_autojoin_3
+			clr_character_flag = expd_pdxrptg_society_autojoin_4
+			clr_character_flag = expd_pdxrptg_society_autojoin_5
+			
+		}
+		else = {
+			clr_character_flag = expd_pdxrptg_society_autojoin_1
+			clr_character_flag = expd_pdxrptg_society_autojoin_2
+			clr_character_flag = expd_pdxrptg_society_autojoin_3
+			clr_character_flag = expd_pdxrptg_society_autojoin_4
+			set_character_flag = expd_pdxrptg_society_autojoin_5
+		}
+		
 	}
 }

@@ -19,6 +19,12 @@ has_submenu_open = {
 		has_character_flag = customize_gold
 		has_character_flag = unit_spawning_enabled
 		
+		# Integration with ED:MP (treat interference intrigue menu decisions as a submenu, to reduce clutter)
+		has_character_flag = edmp_admin_submenu_is_open
+		
+		# Integration with ED:CSH (treat all CSH decisions as a submenu, to reduce clutter)
+		has_character_flag = csh_submenu_is_open
+		
 		# Submod added
 		has_character_flag = expd_pdxrptg_notification_submenu_is_open
 		

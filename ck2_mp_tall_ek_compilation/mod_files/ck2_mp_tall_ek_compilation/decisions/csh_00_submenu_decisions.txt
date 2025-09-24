@@ -1,0 +1,31 @@
+decisions = {
+	csh_open_submenu = {
+		ai = no
+		potential = {
+			NOT = { has_character_flag = csh_submenu_is_open }
+			csh_another_mod_wants_to_suppress_this_decision = no
+		}
+		allow = { always = yes }
+		effect = { hidden_tooltip = { set_character_flag = csh_submenu_is_open } }
+	}
+	csh_close_submenu_high_prio = {
+		is_high_prio = yes
+		ai = no
+		potential = {
+			has_character_flag = csh_submenu_is_open
+			always = no # Not currently needed
+		}
+		allow = { always = yes }
+		effect = { hidden_tooltip = { clr_character_flag = csh_submenu_is_open } }
+	}
+	csh_close_submenu_low_prio = {
+		ai = no
+		potential = {
+			has_character_flag = csh_submenu_is_open
+			# Only show this decision if we're NOT in a mod which supports having CSH decisions in a submenu
+			csh_currently_running_a_mod_which_has_its_own_close_submenu_button_supporting_csh = no
+		}
+		allow = { always = yes }
+		effect = { hidden_tooltip = { clr_character_flag = csh_submenu_is_open } }
+	}
+}

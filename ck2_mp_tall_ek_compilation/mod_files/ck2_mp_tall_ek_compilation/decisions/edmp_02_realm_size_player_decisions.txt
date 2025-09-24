@@ -1,0 +1,28 @@
+decisions = {
+	
+	edmp_realm_size_recalc_mine = {
+		ai = no
+		potential = {
+			edmp_realm_size_is_limited_for_players = yes
+			edmp_another_mod_wants_to_suppress_this_decision = no
+		}
+		allow = {
+			custom_tooltip = {
+				text = edmp_realm_size_has_not_recently_recalculated_realm_size_tt
+				NOT = { has_character_modifier = edmp_realm_size_recently_forced_recalculation }
+			}
+		}
+		effect = {
+			hidden_tooltip = { set_global_flag = edmp_realm_size_calc_force_notify_all_players }
+			edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
+			hidden_tooltip = { clr_global_flag = edmp_realm_size_calc_force_notify_all_players }
+			# Add the modifier AFTER forcing the recalc, because otherwise it will be removed during the process.
+			custom_tooltip = { text = edmp_realm_size_recalc_mine_cooldown_warning_tt }
+			add_character_modifier = {
+				name   = edmp_realm_size_recently_forced_recalculation
+				months = 3
+			}
+		}
+	}
+	
+}

@@ -6,9 +6,9 @@ decisions = {
 		
 		potential = {
 			edmp_this_character_can_take_admin_actions = yes
+			has_character_flag = edmp_admin_submenu_is_open
 			multiplayer = no # Always hide this decision in multiplayer
 			NOT = { has_global_flag = edmp_ai_simulation_mode }
-			edmp_another_mod_wants_to_suppress_this_decision = no
 		}
 		
 		allow = { always = yes }
@@ -28,8 +28,8 @@ decisions = {
 		
 		potential = {
 			edmp_this_character_can_take_admin_actions = yes
+			has_character_flag = edmp_admin_submenu_is_open
 			has_global_flag = edmp_ai_simulation_mode
-			edmp_another_mod_wants_to_suppress_this_decision = no
 		}
 		
 		allow = { always = yes }
@@ -49,9 +49,9 @@ decisions = {
 		
 		potential = {
 			edmp_this_character_can_take_admin_actions = yes
+			has_character_flag = edmp_admin_submenu_is_open
 			multiplayer = no # Always hide this decision in multiplayer
 			NOT = { has_global_flag = edmp_multiplayer_simulation_mode }
-			edmp_another_mod_wants_to_suppress_this_decision = no
 		}
 		
 		allow = { always = yes }
@@ -71,8 +71,8 @@ decisions = {
 		
 		potential = {
 			edmp_this_character_can_take_admin_actions = yes
+			has_character_flag = edmp_admin_submenu_is_open
 			has_global_flag = edmp_multiplayer_simulation_mode
-			edmp_another_mod_wants_to_suppress_this_decision = no
 		}
 		
 		allow = { always = yes }
