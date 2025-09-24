@@ -1,0 +1,30 @@
+namespace = ExpdPdxrptgDetectability
+
+character_event = {
+	id = ExpdPdxrptgDetectability.1000
+	hide_window = yes
+	is_triggered_only = yes
+	ai = no
+	immediate = {
+		if = {
+			limit = {
+				ai = no
+				OR = {
+					multiplayer = no
+					is_multiplayer_host_character = yes
+				}
+			}
+			any_province = {
+				limit = { has_province_modifier = expd_pdxrptg_detectability }
+				remove_province_modifier = expd_pdxrptg_detectability
+			}
+			1 = { # Province #1 must always exist
+				add_province_modifier = {
+					name     = expd_pdxrptg_detectability
+					duration = -1
+					hidden   = yes
+				}
+			}
+		}
+	}
+}

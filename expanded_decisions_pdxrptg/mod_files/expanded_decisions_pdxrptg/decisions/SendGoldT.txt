@@ -1,0 +1,134 @@
+# Audax Validator EnableCommentMetadata
+
+targetted_decisions = {
+	send_gold = {
+		filter = all
+		ai = no
+		from_potential = {
+			is_ruler = yes
+			OR = {
+				has_character_flag = send_25
+				has_character_flag = send_50
+				has_character_flag = send_100
+				has_character_flag = send_250
+				has_character_flag = send_500
+				has_character_flag = send_1000
+			}
+		}
+		allow = {
+			# Has enough wealth
+			trigger_if = {
+				limit = { has_character_flag = send_25 }
+				FROM = { wealth = 25 }
+			}
+			trigger_else_if = {
+				limit = { has_character_flag = send_50 }
+				FROM = { wealth = 50 }
+			}
+			trigger_else_if = {
+				limit = { has_character_flag = send_100 }
+				FROM = { wealth = 100 }
+			}
+			trigger_else_if = {
+				limit = { has_character_flag = send_250 }
+				FROM = { wealth = 250 }
+			}
+			trigger_else_if = {
+				limit = { has_character_flag = send_500 }
+				FROM = { wealth = 500 }
+			}
+			trigger_else_if = {
+				limit = { has_character_flag = send_1000 }
+				FROM = { wealth = 1000 }
+			}
+			trigger_else = {
+				always = no # Logic error!
+			}
+			
+			# ED: Gifts won't have a conflict
+			trigger_if = {
+				limit = {
+					expd_pdxrptg_edgifts_is_active = yes
+					multiplayer = yes
+				}
+				custom_tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					text = expd_g_root_is_not_a_human_currently_processing_another_gift_tt
+					ROOT = {
+						NOT = {
+							AND = {
+								ai = no
+								OR = {
+									has_character_flag = expd_g_received_gold
+									has_character_flag = expd_g_received_artifact
+								}
+							}
+						}
+					}
+				}
+			}
+			
+		}
+		effect = {
+			if = {
+				limit = { FROM = { has_character_flag = send_25 } }
+				FROM = { wealth = -25 }
+				ROOT = { wealth =  25 }
+				hidden_tooltip = { ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 25 } } }
+			}
+			else_if = {
+				limit = { FROM = { has_character_flag = send_50 } }
+				FROM = { wealth = -50 }
+				ROOT = { wealth =  50 }
+				hidden_tooltip = { ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 50 } } }
+			}
+			else_if = {
+				limit = { FROM = { has_character_flag = send_100 } }
+				FROM = { wealth = -100 }
+				ROOT = { wealth =  100 }
+				hidden_tooltip = { ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 100 } } }
+			}
+			else_if = {
+				limit = { FROM = { has_character_flag = send_250 } }
+				FROM = { wealth = -250 }
+				ROOT = { wealth =  250 }
+				hidden_tooltip = { ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 250 } } }
+			}
+			else_if = {
+				limit = { FROM = { has_character_flag = send_500 } }
+				FROM = { wealth = -500 }
+				ROOT = { wealth =  500 }
+				hidden_tooltip = { ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 500 } } }
+			}
+			else_if = {
+				limit = { FROM = { has_character_flag = send_1000 } }
+				FROM = { wealth = -1000 }
+				ROOT = { wealth =  1000 }
+				hidden_tooltip = { ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 1000 } } }
+			}
+			else = {
+				# Logic error! Do nothing
+			}
+			
+			# ED: Gifts integration:
+			#  - Notify recipient of the gift
+			#  - Recipient can refuse
+			if = {
+				limit = { expd_pdxrptg_edgifts_is_active = yes }
+				hidden_tooltip = {
+					ROOT = {
+						set_character_flag = expd_g_received_gold
+						character_event = { id = ExpdGifts.1000 }
+					}
+				}
+			}
+			else = {
+				hidden_tooltip = { ROOT = { set_variable = { which = expd_g_send_gold_amount_received value = 0 } } }
+			}
+			
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

@@ -14,7 +14,7 @@ decisions = {
 			#should be visible in singleplayer but not multiplayer
 			is_multiplayer_host_character = yes
 			multiplayer = no
-			not = { has_character_flag = unit_spawning_enabled }
+			NOT = { has_character_flag = unit_spawning_enabled }
 			has_submenu_open = no ###################################### Mod added
 		}
 		allow = {
@@ -30,32 +30,6 @@ decisions = {
 		}
 		ai_will_do = {
 			factor = 0
-		}
-	}
-	
-	close_unit_spawn_decisions = {
-	 	is_high_prio = yes
-
-		ai_will_do = {
-			factor = 100
-		}
-
-		potential = {
-			has_character_flag = unit_spawning_enabled
-		}
-		allow = {
-			has_character_flag = unit_spawning_enabled
-		}
-		effect = {
-			clr_character_flag = unit_spawning_enabled
-
-			#clear other flags from these decisions.
-			clr_character_flag = unit_1000_amount
-			clr_character_flag = unit_10000_amount
-			clr_character_flag = unit_disband_attrition_maintenance
-			clr_character_flag = unit_disband_n_attrition_n_maintenance
-			clr_character_flag = unit_n_disband_attrition_maintenance
-			clr_character_flag = unit_n_disband_attrition_n_maintenance
 		}
 	}
 	
