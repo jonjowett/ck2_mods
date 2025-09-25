@@ -1,0 +1,26 @@
+# Audax Validator EnableCommentMetadata
+
+# Ignore all errors arising from this file, because the only change is a single line inserted below
+# Audax Validator "!" Ignore_NEXT
+
+is_member_society_4_ranks = {
+	custom_tooltip = {
+		text = IS_MEMBER_SOCIETY_4_RANKS_CT
+		OR = {
+			society_member_of = elder_council
+			society_member_of = companions_tamriel
+			society_member_of = mages_guild_akavir
+			society_member_of = scenarist_guild_akavir
+			society_member_of = scenarist_guild_tamriel
+			society_member_of = mercantile_guild_akavir
+			society_member_of = mercantile_guild_tamriel
+			society_member_of = assassin_guild_akavir
+			society_member_of = camonna_tong_tamriel
+			society_member_of = thieves_guild_akavir # ED:PDXRPTG bugfix
+			society_member_of = morag_tong_tamriel
+			society_member_of = greybeards_tamriel
+			society_member_of = moth_priests_tamriel
+			society_member_of = secret_religious_cult
+		}
+	}
+}
