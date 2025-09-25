@@ -46,24 +46,24 @@ expd_g_send_gold_size_5;§M(ED:G)§! Large gifts of wealth are §Y1,0000¤§!;;;;;;;;
 #
 # Notification event on receipt of a large gift
 ExpdGifts_1000_Title;(ED:G) Large Gift Received!;;;;;;;;;;;;;x
-ExpdGifts_1000_Desc_Gold_Small;The generous [From.GetTitledFirstName] has sent us a pouch containing [Root.expd_g_send_gold_amount_received] gold pieces!;;;;;;;;;;;;;x
-ExpdGifts_1000_Desc_Gold_Medium;The generous [From.GetTitledFirstName] has sent us a large chest containing [Root.expd_g_send_gold_amount_received] gold pieces!;;;;;;;;;;;;;x
-ExpdGifts_1000_Desc_Gold_Large;The generous [From.GetTitledFirstName] has sent us a wagon containing a truly staggering amount of wealth - [Root.expd_g_send_gold_amount_received] gold pieces in total!;;;;;;;;;;;;;x
-ExpdGifts_1000_Desc_Artifact_Q1_Q2;The generous [From.GetTitledFirstName] has sent us a delightful box containing a small token of [From.GetHerHis] appreciation: a "[expd_g_artifact_sent.GetName]"!;;;;;;;;;;;;;x
-ExpdGifts_1000_Desc_Artifact_Q3_Q4;The generous [From.GetTitledFirstName] has sent us an elegantly-wrapped package containing a magnificent gift: a "[expd_g_artifact_sent.GetName]"!;;;;;;;;;;;;;x
-ExpdGifts_1000_Desc_Artifact_Q5plus;The generous [From.GetTitledFirstName] has sent us a beautifully-carved box inlaid with gold leaf. Inside, an extraordinary artifact is revealed: a "[expd_g_artifact_sent.GetName]"!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Gold_Small;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us a pouch containing [expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue] gold pieces!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Gold_Medium;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us a large chest containing [expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue] gold pieces!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Gold_Large;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us a wagon containing a truly staggering amount of wealth - [expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue] gold pieces in total!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Artifact_Q1_Q2;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us a delightful box containing a small token of [expd_g_send_gold_sender.GetHerHis] appreciation: a "[expd_g_artifact_sent.GetName]"!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Artifact_Q3_Q4;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us an elegantly-wrapped package containing a magnificent gift: a "[expd_g_artifact_sent.GetName]"!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Artifact_Q5plus;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us a beautifully-carved box inlaid with gold leaf. Inside, an extraordinary artifact is revealed: a "[expd_g_artifact_sent.GetName]"!;;;;;;;;;;;;;x
 ExpdGifts_1000_EvtOpt_OK_Small;How unexpected! I graciously accept.;;;;;;;;;;;;;x
-ExpdGifts_1000_EvtOpt_OK_Medium;I am impressed by [From.GetHerHis] generosity.;;;;;;;;;;;;;x
+ExpdGifts_1000_EvtOpt_OK_Medium;I am impressed by [expd_g_send_gold_sender.GetHerHis] generosity.;;;;;;;;;;;;;x
 ExpdGifts_1000_EvtOpt_OK_Large;I am overwhelmed with gratitude.;;;;;;;;;;;;;x
 ExpdGifts_1000_EvtOpt_Refuse;I gracefully refuse;;;;;;;;;;;;;x
-expd_g_gifted_gold_has_already_been_added_to_treasury_tt;§YINFO:§! The §Y[Root.expd_g_send_gold_amount_received]¤§! has already been added to your treasury.;;;;;;;;;;;;;x
-expd_g_gifted_artifact_has_already_been_added_to_treasury_tt;§YINFO:§! The "§Y[expd_g_artifact_sent.GetName]§!" has already been added to your inventory.;;;;;;;;;;;;;x
-expd_g_root_returns_gold_to_from_tt;Lose §R[Root.expd_g_gold_refund_amount]¤§!\n[Root_From.GetTitledFirstName] gains §G[Root.expd_g_gold_refund_amount]¤§!;;;;;;;;;;;;;x
+expd_g_gifted_gold_has_already_been_added_to_treasury_tt;§YINFO:§! The §Y[expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue]¤§! has already been added to your treasury.;;;;;;;;;;;;;x
+expd_g_gifted_artifact_has_already_been_added_to_treasury_tt;§YINFO:§! The "§Y[expd_g_artifact_sent.GetName]§!" has already been added to your treasury.;;;;;;;;;;;;;x
+expd_g_root_returns_gold_to_from_tt;Lose §R[expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue]¤§!\n[expd_g_send_gold_sender.GetTitledFirstName] gains §G[expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue]¤§!;;;;;;;;;;;;;x
 #
 # Notification event on gift refused & returned
 ExpdGifts_1001_1002_Title;(ED:G) Large Gift Returned!;;;;;;;;;;;;;x
-ExpdGifts_1001_Desc;[From.GetTitledFirstName] has graciously refused my gift of [Root.expd_g_gold_refund_amount] gold.;;;;;;;;;;;;;x
-ExpdGifts_1002_Desc;[From.GetTitledFirstName] has graciously refused my gift of a "[expd_g_artifact_returned.GetName]".;;;;;;;;;;;;;x
-expd_g_returned_gold_already_added_to_treasury_tt;§YINFO:§! The §Y[Root.expd_g_gold_refund_amount]¤§! has already been added to your treasury.;;;;;;;;;;;;;x
+ExpdGifts_1001_Desc;[expd_g_send_gold_recipient.GetTitledFirstName] has graciously refused my gift of [expd_g_send_gold_sender.expd_g_gold_refund_amount.GetValue] gold.;;;;;;;;;;;;;x
+ExpdGifts_1002_Desc;[expd_g_send_gold_recipient.GetTitledFirstName] has graciously refused my gift of a "[expd_g_artifact_returned.GetName]".;;;;;;;;;;;;;x
+expd_g_returned_gold_already_added_to_treasury_tt;§YINFO:§! The §Y[expd_g_send_gold_sender.expd_g_gold_refund_amount.GetValue]¤§! has already been added to your treasury.;;;;;;;;;;;;;x
 expd_g_returned_artifact_already_added_to_treasury_tt;§YINFO:§! The "§Y[expd_g_artifact_returned.GetName]§!" has already been added to your inventory.;;;;;;;;;;;;;x
 ExpdGifts_1001_1002_EvtOpt_OK;Disappointing, but understandable;;;;;;;;;;;;;x
