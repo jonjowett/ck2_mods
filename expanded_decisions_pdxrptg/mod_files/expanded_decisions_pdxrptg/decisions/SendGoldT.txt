@@ -18,27 +18,27 @@ targetted_decisions = {
 		allow = {
 			# Has enough wealth
 			trigger_if = {
-				limit = { has_character_flag = send_25 }
+				limit = { FROM = { has_character_flag = send_25 } }
 				FROM = { wealth = 25 }
 			}
 			trigger_else_if = {
-				limit = { has_character_flag = send_50 }
+				limit = { FROM = { has_character_flag = send_50 } }
 				FROM = { wealth = 50 }
 			}
 			trigger_else_if = {
-				limit = { has_character_flag = send_100 }
+				limit = { FROM = { has_character_flag = send_100 } }
 				FROM = { wealth = 100 }
 			}
 			trigger_else_if = {
-				limit = { has_character_flag = send_250 }
+				limit = { FROM = { has_character_flag = send_250 } }
 				FROM = { wealth = 250 }
 			}
 			trigger_else_if = {
-				limit = { has_character_flag = send_500 }
+				limit = { FROM = { has_character_flag = send_500 } }
 				FROM = { wealth = 500 }
 			}
 			trigger_else_if = {
-				limit = { has_character_flag = send_1000 }
+				limit = { FROM = { has_character_flag = send_1000 } }
 				FROM = { wealth = 1000 }
 			}
 			trigger_else = {
@@ -116,9 +116,10 @@ targetted_decisions = {
 			if = {
 				limit = { expd_pdxrptg_edgifts_is_active = yes }
 				hidden_tooltip = {
-					ROOT = {
-						set_character_flag = expd_g_received_gold
-						character_event = { id = ExpdGifts.1000 }
+					set_character_flag = expd_g_received_gold
+					character_event = {
+						# Audax Validator "." Ignore_NEXT
+						id = ExpdGifts.1000
 					}
 				}
 			}
