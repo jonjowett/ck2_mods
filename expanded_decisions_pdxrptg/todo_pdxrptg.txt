@@ -30,7 +30,7 @@ ek changes
     - change the MTTH-1-day event which removes magic commander traits to something more performant.
     X reinstate something like ekartifacts.103 (removes stressed/depressed if you have ring of happiness), as a backup in case stressed/depressed is applied by an event when it shouldn't be
     - ?? mane loses artifacts and/or gold on inheritance (possibly only AI mane?)
-    - some troop types (camel cav, tongues, ...more?...) are not impacted by military tech (and they should be)
+    X some troop types (camel cav, tongues, ...more?...) are not impacted by military tech (and they should be)
     X fertility is incorrectly zeroised after a character has become immortal (eg. vampirism) (very noticeable for women who become immortal when younger than 45)
     X should not be able to spam "request religious conversion" to get a near-guaranteed conversion (even one success is enough)
     - suppress event VIETmisc.8285 (references to China)
@@ -47,6 +47,7 @@ ek changes
        - or could add a decision which manually clears the flags, but there may be odd consequences after.
     X alchemist/architect minor title should exclude the ruler themselves!
     X employment decisions all cost only 100
+    - alchemist/architect minor titles should NOT appear at the top of the list (?!?!!???)
  - convenience features (no decrease in difficulty):
     X ability to stop all events asking if I want to reveal my vampirism / lycanthropy (vamp.350, .450)
     X decision to reveal vampirism / lycanthropy to spouses/friends/lovers (eg. in case the event is disabled by the previous point)
@@ -69,6 +70,7 @@ ek changes
     - requisition decision needs a variant to spawn the boats *here* instead of *at ruler location*
     - make player-owned artifacts unstealable, including after they have been given to others (possibly as a game rule?)
     - Hide "Deactivate Tower" decision unless you are the leader of a Daedric Invasion
+       - It's visible to any with daedric public/secret religion... maybe that's for the best?
     - Move "Study Necromancy" decision into Ruler submenu
  - improvement features (minor):
     X ability to have more specialisms (eg. dragonborn (NOT dragonblood) => +1; tier 5 education => +1; has ever been grandmaster of a society => +1)
@@ -90,7 +92,7 @@ ek changes
     X employment decision costs should be capped (100 gold)
     X new employment decisions, double cost for better stats (200 gold)
     - legendary mage cosmetic surgery should also be able to fix scars
-    - every society which allows purchasing techpoints should allow more purchasing at exponentially increased cost (as a sink for excess society currency points)
+    X every society which allows purchasing techpoints should allow more purchasing at exponentially increased cost (as a sink for excess society currency points)
     - remove soft cap on number of personality traits (~5 in base game)
     - sanguine should only offer special brews which you haven't currently tasted
     X companions society should allow the owner of INACTIVE jorrvaskr to join (otherwise, what's the point in enabling jorrvaskr if the owner is a member?!)
@@ -127,6 +129,8 @@ ek changes
     - ability for master swordsingers to gain ansei traits (with difficulty)
     - Dwemer https://steamcommunity.com/sharedfiles/filedetails/?id=2145741418&searchtext=dwemer
     - Dragon cult https://forum.paradoxplaza.com/forum/threads/submod-dragon-cult-expanded-elder-kings-svn-by-the-cappuccino-crew.1342936/
+    - artifact sets (so a player can easily switch between eg. peace, war, builder) (must be inheritable!)
+       - BUT you can't force-equip an artifact... transfer all out, transfer the desired set back, transfer all others back?
 
 general ideas
  - get AI to treat themselves if the first treatment expires
