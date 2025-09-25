@@ -1,0 +1,300 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = eksocieties
+
+### Exchanging society currency for tech points
+# MAGES ARE EXCLUDED. They're OP enough as it is.
+# Moth Priests can get tech points through reading the Elder Scrolls, so again, not included
+# Agent guilds (Assassins & Thieves) get a random outcome among:
+	# Random tech points
+	# Random tech boost in the capital
+character_event = {
+	
+	id = eksocieties.250
+	
+	# Audax Validator "." Ignore_NEXT
+	desc = eksocieties.250.d
+	
+	is_triggered_only = yes
+	
+	picture = GFX_evt_library
+	
+	
+	
+	# Buy military tech points, full
+	option = {
+		
+		trigger = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				is_member_of_fighters_guild = yes
+				# Audax Validator "." Ignore_NEXT
+				society_member_of = companions_tamriel
+			}
+		}
+		
+		# Audax Validator "." Ignore_NEXT
+		name = eksocieties.250.mil
+		
+		military_techpoints = 50
+		
+	}
+	
+	
+	
+	# Buy economic tech points, full
+	option = {
+		
+		trigger = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				is_member_of_mercantile_guild = yes
+				# Audax Validator "." Ignore_NEXT
+				society_member_of = elder_council
+			}
+		}
+		
+		# Audax Validator "." Ignore_NEXT
+		name = eksocieties.250.eco
+		
+		economy_techpoints = 50
+		
+	}
+	
+	
+	
+	# Buy cultural tech points, full
+	option = {
+		
+		trigger = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				is_member_of_scenarist_guild = yes
+				# Audax Validator "." Ignore_NEXT
+				society_member_of = greybeards_tamriel
+			}
+		}
+		
+		# Audax Validator "." Ignore_NEXT
+		name = eksocieties.250.cul
+		
+		culture_techpoints = 50
+		
+	}
+	
+	
+	
+	# Buy military & cultural, full
+	option = {
+		
+		trigger = {
+				# Audax Validator "." Ignore_NEXT
+			society_member_of = ansei_guild_tamriel
+		}
+		
+		# Audax Validator "." Ignore_NEXT
+		name = eksocieties.250.milcul
+		
+		military_techpoints = 25
+		culture_techpoints = 25
+		
+	}
+	
+	
+	
+	# Agent bordering a province with better tech
+	option = {
+		
+		trigger = {
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				is_member_of_assassins_guild = yes
+				# Audax Validator "." Ignore_NEXT
+				is_member_of_thieves_guild = yes
+			}
+			
+			any_realm_province = {
+				any_neighbor_province = {
+					has_higher_tech_than = ROOT
+					NOT = { owner = { character = ROOT } }
+					NOT = { owner = { any_liege = { character = ROOT } } }
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						has_province_modifier = sabotage_research
+					}
+				}
+			}
+		}
+		
+		# Audax Validator "." Ignore_NEXT
+		name = eksocieties.250.agentBetterTech
+		
+		random_list = {
+			33 = { military_techpoints = 50 }
+			33 = { economy_techpoints  = 50 }
+			33 = { culture_techpoints  = 50 }
+		}
+		
+		random_realm_province = {
+			limit = {
+				any_neighbor_province = {
+					has_higher_tech_than = ROOT
+					NOT = { owner = { character = ROOT } }
+					NOT = { owner = { any_liege = { character = ROOT } } }
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						has_province_modifier = sabotage_research
+					}
+				}
+			}
+			random_neighbor_province = {
+				limit = {
+					has_higher_tech_than = ROOT
+					NOT = { owner = { character = ROOT } }
+					NOT = { owner = { any_liege = { character = ROOT } } }
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						has_province_modifier = sabotage_research
+					}
+				}
+				
+				add_province_modifier = {
+					# Audax Validator "." Ignore_NEXT
+					name = sabotage_research
+					duration = 1800
+				}
+			}
+		}
+	}
+	
+	
+	
+	# Agent not bordering a province with better tech
+	option = {
+		trigger = {
+			
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				is_member_of_assassins_guild = yes
+				# Audax Validator "." Ignore_NEXT
+				is_member_of_thieves_guild = yes
+			}
+			
+			NOT = {
+				any_realm_province = {
+					any_neighbor_province = {
+						has_higher_tech_than = ROOT
+						NOT = { owner = { character = ROOT } }
+						NOT = { owner = { any_liege = { character = ROOT } } }
+						NOT = {
+							# Audax Validator "." Ignore_NEXT
+							has_province_modifier = sabotage_research
+						}
+					}
+				}
+			}
+			
+		}
+		
+		# Audax Validator "." Ignore_NEXT
+		name = eksocieties.250.agent
+		
+		random_list = {
+			33 = { military_techpoints = 30 }
+			33 = { economy_techpoints  = 30 }
+			33 = { culture_techpoints  = 30 }
+		}
+		
+	}
+	
+	
+	
+	# Nevermind
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = eksocieties.250.cancel
+		clr_character_flag = exchanging_influence_for_tech
+	}
+	
+	
+	
+	after = {
+		# Apply the modifier
+		hidden_tooltip = {
+			if = {
+				limit = { has_character_flag = exchanging_influence_for_tech }
+				clr_character_flag = exchanging_influence_for_tech
+				if = {
+					limit = {
+						NOT = {
+							# Audax Validator "." Ignore_NEXT
+							has_character_modifier = society_advancements_purchased
+						}
+					}
+					# Base mod
+					add_character_modifier = {
+						# Audax Validator "." Ignore_NEXT
+						name = society_advancements_purchased
+						duration = 3650
+					}
+					# Audax Validator "." Ignore_NEXT
+					detract_society_currency_major_effect_scaling = yes
+				}
+				else = {
+					# ED:PDXRPTG added
+					if = {
+						limit = {
+							NOR = {
+								has_character_modifier = society_advancements_purchased_2
+								has_character_modifier = society_advancements_purchased_3
+							}
+						}
+						add_character_modifier = {
+							name = society_advancements_purchased_2
+							duration = 3650
+						}
+						# Audax Validator "." Ignore_NEXT
+						detract_society_currency_large_effect_scaling = yes
+					}
+					else = {
+						if = {
+							limit = {
+								NOT = { has_character_modifier = society_advancements_purchased_2 }
+								        has_character_modifier = society_advancements_purchased_3
+							}
+							add_character_modifier = {
+								name = society_advancements_purchased_2
+								duration = 3650
+							}
+						}
+						else_if = {
+							limit = {
+								        has_character_modifier = society_advancements_purchased_2
+								NOT = { has_character_modifier = society_advancements_purchased_3 }
+							}
+							add_character_modifier = {
+								name = society_advancements_purchased_3
+								duration = 3650
+							}
+						}
+						else = {
+							# Fail-safe
+							remove_character_modifier = society_advancements_purchased_2
+							remove_character_modifier = society_advancements_purchased_3
+							add_character_modifier = {
+								name = society_advancements_purchased_2
+								duration = 3650
+							}
+							add_character_modifier = {
+								name = society_advancements_purchased_3
+								duration = 3650
+							}
+						}
+						# Audax Validator "." Ignore_NEXT
+						detract_society_currency_gigantic_effect_scaling = yes
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,199 @@
+# Audax Validator EnableCommentMetadata
+
+society_decisions = {
+	
+	expd_pdxrptg_purchase_more_techpoints_decision = {
+		
+		only_playable = yes
+		ai_check_interval = 84 # Check every 7 years (AI will rarely check this at the same time as the base mod's 10-year decision)
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_decision_potential = purchase_techpoints_decision
+		}
+		
+		
+		allow = {
+			
+			# Allow this decision if you have taken the base mod's society tech-purchase decision,
+			#      and if you have not recently taken this decision twice.
+			
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = society_advancements_purchased
+			OR = {
+				AND = {
+					NOT = { has_character_modifier = society_advancements_purchased_2 }
+					NOT = { has_character_modifier = society_advancements_purchased_3 }
+					# Audax Validator "." Ignore_NEXT
+					has_society_currency_large_trigger_scaling = yes
+				}
+				AND = {
+					        has_character_modifier = society_advancements_purchased_2
+					NOT = { has_character_modifier = society_advancements_purchased_3 }
+					# Audax Validator "." Ignore_NEXT
+					has_society_currency_gigantic_trigger_scaling = yes
+				}
+				AND = {
+					NOT = { has_character_modifier = society_advancements_purchased_2 }
+					        has_character_modifier = society_advancements_purchased_3
+					# Audax Validator "." Ignore_NEXT
+					has_society_currency_gigantic_trigger_scaling = yes
+				}
+			}
+			
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					        has_character_modifier = society_advancements_purchased
+					NOT = { has_character_modifier = society_advancements_purchased_2 }
+					NOT = { has_character_modifier = society_advancements_purchased_3 }
+				}
+				tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					detract_society_currency_large_effect_scaling = yes
+				}
+				custom_tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					text = reimbursed_if_cancelled
+					set_character_flag = exchanging_influence_for_tech
+					character_event = { id = eksocieties.250 }
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						AND = {
+							# Audax Validator "." Ignore_NEXT
+							        has_character_modifier = society_advancements_purchased
+							        has_character_modifier = society_advancements_purchased_2
+							NOT = { has_character_modifier = society_advancements_purchased_3 }
+						}
+						AND = {
+							# Audax Validator "." Ignore_NEXT
+							        has_character_modifier = society_advancements_purchased
+							NOT = { has_character_modifier = society_advancements_purchased_2 }
+							        has_character_modifier = society_advancements_purchased_3
+						}
+					}
+				}
+				tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					detract_society_currency_gigantic_effect_scaling = yes
+				}
+				custom_tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					text = reimbursed_if_cancelled
+					set_character_flag = exchanging_influence_for_tech
+					character_event = { id = eksocieties.250 }
+				}
+			}
+			else_if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_character_modifier = society_advancements_purchased
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+				}
+				custom_tooltip = { text = expd_pdxrptg_societies_purchase_more_techpoints_impossible_already_bought_3_tt }
+			}
+			else = {
+				# Haven't used the base mod's decision, so this is unavailable.
+				# Show the effect that would happen if you took that decision.
+				tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					detract_society_currency_large_effect_scaling = yes
+				}
+				custom_tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					text = reimbursed_if_cancelled
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 0.1
+			}
+			
+			# Large purchase
+			# 100% chance if AI would have >2000 points left after the purchase
+			modifier = {
+				factor = 10
+				is_long_lived = no
+				NOR = {
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+				}
+				society_currency >= 2500
+			}
+			modifier = {
+				factor = 10
+				is_long_lived = yes
+				is_immortal = no
+				NOR = {
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+				}
+				society_currency >= 3000
+			}
+			modifier = {
+				factor = 10
+				is_immortal = yes
+				NOR = {
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+				}
+				society_currency >= 3500
+			}
+			
+			# Gigantic purchase
+			# 100% chance if AI would have >2000 points left after the purchase
+			modifier = {
+				factor = 10
+				is_long_lived = no
+				OR = {
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+				}
+				NAND = {
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+				}
+				society_currency >= 4000
+			}
+			modifier = {
+				factor = 10
+				is_long_lived = yes
+				is_immortal = no
+				OR = {
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+				}
+				NAND = {
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+				}
+				society_currency >= 6000
+			}
+			modifier = {
+				factor = 10
+				is_immortal = yes
+				OR = {
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+				}
+				NAND = {
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+				}
+				society_currency >= 7000
+			}
+			
+		}
+	}
+	
+}
