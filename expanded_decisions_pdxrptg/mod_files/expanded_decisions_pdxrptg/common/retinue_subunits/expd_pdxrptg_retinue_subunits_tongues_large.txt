@@ -1,0 +1,44 @@
+# Audax Validator EnableCommentMetadata
+
+Imperial_T = { #  5x larger Tongue regiment (to minimise carpal tunnel...)
+	first_type = 6
+	first_amount = 100
+	
+	# Audax Validator "." Ignore_NEXT
+	special_troops = tongues
+	potential = {
+		is_nomadic = no
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			is_undead = no
+			# Audax Validator "." Ignore_NEXT
+			is_vampire = yes
+			# Audax Validator "." Ignore_NEXT
+			trait = lich
+			# Audax Validator "." Ignore_NEXT
+			trait = briarheart
+		}
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			is_dragonblood = yes
+			AND = {
+				# Audax Validator "." Ignore_NEXT
+				society_member_of = greybeards_tamriel #TODO: Akavir Thu'um society?
+				society_rank = 2 #TODO: Tooltip for this society rank.
+				any_demesne_province = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = ca_greybeards_0
+				}
+			}
+		}
+	}
+	
+	modifier = {
+		# Audax Validator "." Ignore_NEXT
+		tongues_morale = 0.2
+		# Audax Validator "." Ignore_NEXT
+		tongues_offensive = 0.2
+		# Audax Validator "." Ignore_NEXT
+		tongues_defensive = 0.2
+	}
+}
