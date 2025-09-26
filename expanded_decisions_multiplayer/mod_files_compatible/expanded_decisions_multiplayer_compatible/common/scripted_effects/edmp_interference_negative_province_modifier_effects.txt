@@ -1,0 +1,171 @@
+# Audax Validator EnableCommentMetadata
+
+edmp_interference_remove_negative_province_modifiers_from_this_province = {
+	edmp_interference_remove_negative_province_modifiers_from_this_province_base_game = yes
+	edmp_interference_remove_negative_province_modifiers_from_this_province_ek        = yes
+}
+
+edmp_interference_remove_negative_province_modifiers_from_this_province_base_game = {
+	if = {
+		limit = { has_province_modifier = burnt_the_land }
+		remove_province_modifier = burnt_the_land
+	}
+	if = {
+		limit = { has_province_modifier = heretic_stronghold }
+		remove_province_modifier = heretic_stronghold
+	}
+	if = {
+		limit = { has_province_modifier = highway_robber_band }
+		remove_province_modifier = highway_robber_band
+	}
+	if = {
+		limit = { has_province_modifier = incompetent_rule }
+		remove_province_modifier = incompetent_rule
+	}
+	if = {
+		limit = { has_province_modifier = nomad_agitation }
+		remove_province_modifier = nomad_agitation
+	}
+	if = {
+		limit = { has_province_modifier = outlawed_guild }
+		remove_province_modifier = outlawed_guild
+	}
+	if = {
+		limit = { has_province_modifier = peasant_unrest }
+		remove_province_modifier = peasant_unrest
+	}
+	if = {
+		limit = { has_province_modifier = rampaging_nomads }
+		remove_province_modifier = rampaging_nomads
+	}
+	if = {
+		limit = { has_province_modifier = recently_burnt_the_land_not_owner }
+		remove_province_modifier = recently_burnt_the_land_not_owner
+	}
+	if = {
+		limit = { has_province_modifier = religious_tension }
+		remove_province_modifier = religious_tension
+	}
+	if = {
+		limit = { has_province_modifier = religious_unrest }
+		remove_province_modifier = religious_unrest
+	}
+	if = {
+		limit = { has_province_modifier = smugglers_ring }
+		remove_province_modifier = smugglers_ring
+	}
+	if = {
+		limit = { has_province_modifier = thieves_guild }
+		remove_province_modifier = thieves_guild
+	}
+}
+
+edmp_interference_remove_negative_province_modifiers_from_this_province_ek = {
+	if = {
+		limit = { edmp_ek_mod_is_active = yes }
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = adventurers
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = adventurers
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = falmer_infestation
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = falmer_infestation
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = giants
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = giants
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = goblin_infestation
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = goblin_infestation
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = harbour_the_homeless
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = harbour_the_homeless
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = kwama_infestation
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = kwama_infestation
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = lycan_infestation
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = lycan_infestation
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = magical_anomalies
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = magical_anomalies
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = propagandist
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = propagandist
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = skeever_infestation
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = skeever_infestation
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = trolls
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = trolls
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = undead_infestation
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = undead_infestation
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = vampire_infestation
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = vampire_infestation
+		}
+	}
+}
