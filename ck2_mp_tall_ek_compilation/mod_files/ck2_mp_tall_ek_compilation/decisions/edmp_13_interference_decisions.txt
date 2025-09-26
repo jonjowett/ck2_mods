@@ -1617,23 +1617,7 @@ title_decisions = {
 		}
 		potential = { tier = COUNT }
 		allow = {
-			location = {
-				OR = {
-					has_province_modifier = nomad_agitation
-					has_province_modifier = burnt_the_land
-					has_province_modifier = recently_burnt_the_land_not_owner
-					has_province_modifier = rampaging_nomads
-					has_province_modifier = thieves_guild
-					has_province_modifier = incompetent_rule
-					has_province_modifier = smugglers_ring
-					has_province_modifier = highway_robber_band
-					has_province_modifier = religious_unrest
-					has_province_modifier = religious_tension
-					has_province_modifier = heretic_stronghold
-					has_province_modifier = peasant_unrest
-					has_province_modifier = outlawed_guild
-				}
-			}
+			location = { edmp_interference_this_province_has_a_negative_modifier = yes }
 		}
 		effect = {
 			hidden_tooltip = {
@@ -1642,54 +1626,7 @@ title_decisions = {
 			}
 			location = {
 				show_scope_change = no
-				if = {
-					limit = { has_province_modifier = nomad_agitation }
-					remove_province_modifier = nomad_agitation
-				}
-				if = {
-					limit = { has_province_modifier = burnt_the_land }
-					remove_province_modifier = burnt_the_land
-				}
-				if = {
-					limit = { has_province_modifier = recently_burnt_the_land_not_owner }
-					remove_province_modifier = recently_burnt_the_land_not_owner
-				}
-				if = {
-					limit = { has_province_modifier = rampaging_nomads }
-					remove_province_modifier = rampaging_nomads
-				}
-				if = {
-					limit = { has_province_modifier = thieves_guild }
-					remove_province_modifier = thieves_guild
-				}
-				if = {
-					limit = { has_province_modifier = incompetent_rule }
-					remove_province_modifier = incompetent_rule
-				}
-				if = {
-					limit = { has_province_modifier = smugglers_ring }
-					remove_province_modifier = smugglers_ring
-				}
-				if = {
-					limit = { has_province_modifier = highway_robber_band }
-					remove_province_modifier = highway_robber_band
-				}
-				if = {
-					limit = { has_province_modifier = religious_unrest }
-					remove_province_modifier = religious_unrest
-				}
-				if = {
-					limit = { has_province_modifier = religious_tension }
-					remove_province_modifier = religious_tension
-				}
-				if = {
-					limit = { has_province_modifier = heretic_stronghold }
-					remove_province_modifier = heretic_stronghold
-				}
-				if = {
-					limit = { has_province_modifier = outlawed_guild }
-					remove_province_modifier = outlawed_guild
-				}
+				edmp_interference_remove_negative_province_modifiers_from_this_province = yes
 			}
 			edmp_interference_notify_players_singletitle = yes
 			hidden_tooltip = { clr_global_flag = edmp_interference_singletitle_remove_negative_province_modifiers }

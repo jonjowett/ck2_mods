@@ -1,0 +1,172 @@
+decisions = {
+	expd_pdxrptg_remove_my_nickname = {
+		ai = no
+		potential = {
+			ai = no
+			has_character_flag = title_open
+		}
+		allow = {
+			has_nickname = yes
+			trigger_if = {
+				limit = { OR = { is_ruler = no real_tier = BARON real_tier = COUNT } }
+				prestige = 250
+			}
+			trigger_else_if = {
+				limit = { real_tier = DUKE }
+				prestige = 500
+			}
+			trigger_else = { # King or emperor
+				prestige = 1000 # No extra mark-up for emperors, feels unfair
+			}
+		}
+		effect = {
+			if = {
+				limit = { OR = { real_tier = COUNT real_tier = BARON } }
+				prestige = -250
+			}
+			else_if = {
+				limit = { real_tier = DUKE }
+				prestige = -500
+			}
+			else = { # King or emperor
+				prestige = -1000 # No extra mark-up for emperors, feels unfair
+			}
+			remove_nickname = yes
+		}
+	}
+	expd_pdxrptg_enable_targetted_remove_nickname_decisions = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			NOT = { has_character_flag = expd_pdxrptg_show_targetted_remove_nickname_decisions }
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { set_character_flag = expd_pdxrptg_show_targetted_remove_nickname_decisions }
+		}
+	}
+	expd_pdxrptg_disable_targetted_remove_nickname_decisions = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			has_character_flag = expd_pdxrptg_show_targetted_remove_nickname_decisions
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { clr_character_flag = expd_pdxrptg_show_targetted_remove_nickname_decisions }
+		}
+	}
+}
+
+targetted_decisions = {
+	expd_pdxrptg_remove_this_characters_nickname = {
+		ai = no
+		filter = all
+		from_potential = {
+			ai = no
+			has_character_flag = expd_pdxrptg_show_targetted_remove_nickname_decisions
+		}
+		potential = {
+			NOT = { character = ROOT_FROM }
+			has_nickname = yes
+		}
+		allow = {
+			
+			# Tell the player why this decision is visible (and how to disable it)
+			custom_tooltip = {
+				text = expd_pdxrptg_targetted_remove_nickname_decisions_are_visible_for_from_tt
+				FROM = { has_character_flag = expd_pdxrptg_show_targetted_remove_nickname_decisions }
+			}
+			
+			# Only show the "must be AI" tooltip if a player tries to use this on another player
+			trigger_if = {
+				limit = { ai = no }
+				custom_tooltip = {
+					text = expd_pdxrptg_targetted_remove_nickname_decisions_can_only_be_used_on_ai_tt
+					always = no
+				}
+			}
+			
+			# Players can only remove their vassals' nicknames (direct or indirect)
+			custom_tooltip = {
+				text = expd_pdxrptg_root_is_a_direct_or_indirect_vassal_of_from_tt
+				any_liege = { character = ROOT_FROM }
+			}
+			
+			# If they like you, they'll let you spend their prestige to remove their nickname.
+			# Otherwise, you have to spend yours.
+			# Prestige amount required is half that of a player removing their own nickname (above).
+			trigger_if = {
+				limit = { OR = { is_ruler = no real_tier = BARON real_tier = COUNT } }
+				OR = {
+					ROOT_FROM = { prestige >= 100 }
+					AND = {
+						opinion = { who = ROOT_FROM value >= 50 }
+						prestige >= 100
+					}
+				}
+			}
+			trigger_else_if = {
+				limit = { real_tier = DUKE }
+				OR = {
+					ROOT_FROM = { prestige >= 250 }
+					AND = {
+						opinion = { who = ROOT_FROM value >= 50 }
+						prestige >= 250
+					}
+				}
+			}
+			trigger_else = { # King (cannot be emperor due to vassal condition above)
+				OR = {
+					ROOT_FROM = { prestige >= 500 }
+					AND = {
+						opinion = { who = ROOT_FROM value >= 50 }
+						prestige >= 500
+					}
+				}
+			}
+			
+		}
+		effect = {
+			if = {
+				limit = { OR = { is_ruler = no real_tier = BARON real_tier = COUNT } }
+				if = {
+					limit = {
+						opinion = { who = ROOT_FROM value >= 50 }
+						prestige >= 100
+					}
+					prestige = -100
+				}
+				else = {
+					ROOT_FROM = { prestige = -100 }
+				}
+			}
+			else_if = {
+				limit = { real_tier = DUKE }
+				if = {
+					limit = {
+						opinion = { who = ROOT_FROM value >= 50 }
+						prestige >= 250
+					}
+					prestige = -250
+				}
+				else = {
+					ROOT_FROM = { prestige = -250 }
+				}
+			}
+			else = { # King (cannot be emperor due to vassal condition above)
+				if = {
+					limit = {
+						opinion = { who = ROOT_FROM value >= 50 }
+						prestige >= 500
+					}
+					prestige = -500
+				}
+				else = {
+					ROOT_FROM = { prestige = -500 }
+				}
+			}
+			ROOT = { remove_nickname = yes }
+		}
+	}
+}
