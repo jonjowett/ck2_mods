@@ -1,0 +1,99 @@
+# Audax Validator EnableCommentMetadata
+
+settlement_decisions = {
+	
+	expd_pdxrptg_requisition_fishing_boats_here = {
+		# Modified version of the base mod's requisition_fishing_boats decision:
+		#  --- The boats spawn adjacent to this province (instead of in the closest sea zone to FROM's location)
+		#  --- Limited to humans only
+		#  --- Otherwise, costs and consequences are identical
+		
+		ai = no # AI can use the base mod's decision
+		
+		filter = vassal_owned
+		is_high_prio = yes
+		
+		from_potential = {
+			is_playable = yes
+			is_feudal = yes
+			higher_tier_than = BARON
+			war = yes
+		}
+		potential = {
+			holding_type = city
+			location = { port = yes }
+		}
+		allow = {
+			FROM = {
+				war = yes
+				wealth = 15
+			}
+			custom_tooltip = {
+				# Audax Validator "." Ignore_NEXT
+				text = rfsct
+				hidden_tooltip = {
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						has_holding_modifier = requisitioned_fishing_ships_cooldown_timer
+					}
+				}
+			}
+			owner = {
+				OR = {
+					character = FROM
+					is_liege_or_above = FROM
+				}
+			}
+		}
+		
+		effect = {
+			FROM = { wealth = -15 }
+			location = {
+				show_scope_change = no
+				# This mess is a workaround for the lack of any way to find the specific sea zone which has this province's port.
+				random_province = {
+					limit = {
+						any_neighbor_province = { province = PREVPREV }
+						is_land = no
+					}
+					preferred_limit = { distance = { where = PREV value <   5 } }
+					preferred_limit = { distance = { where = PREV value <  10 } }
+					preferred_limit = { distance = { where = PREV value <  20 } }
+					preferred_limit = { distance = { where = PREV value <  30 } }
+					preferred_limit = { distance = { where = PREV value <  40 } }
+					preferred_limit = { distance = { where = PREV value <  50 } }
+					preferred_limit = { distance = { where = PREV value <  60 } }
+					preferred_limit = { distance = { where = PREV value <  70 } }
+					preferred_limit = { distance = { where = PREV value <  80 } }
+					preferred_limit = { distance = { where = PREV value <  90 } }
+					preferred_limit = { distance = { where = PREV value < 100 } }
+					ROOT_FROM = {
+						show_scope_change = no
+						spawn_fleet = {
+							province = PREV
+							owner = THIS
+							disband_on_peace = yes
+							troops = { galleys = { 10 10 } }
+						}
+					}
+				}
+			}
+			location = {
+				add_province_modifier = {
+					# Audax Validator "." Ignore_NEXT
+					name = requisitioned_fishing_ships
+					duration = 1095
+					stacking = yes
+				}
+			}
+			hidden_tooltip = {
+				add_holding_modifier = {
+					# Audax Validator "." Ignore_NEXT
+					name = requisitioned_fishing_ships_cooldown_timer
+					duration = 180
+					#hidden = yes
+				}
+			}
+		}
+	}
+}
