@@ -31,6 +31,10 @@ edmp_interference_remove_negative_province_modifiers_from_this_province_base_gam
 		remove_province_modifier = outlawed_guild
 	}
 	if = {
+		limit = { has_province_modifier = peasant_crisis }
+		remove_province_modifier = peasant_crisis
+	}
+	if = {
 		limit = { has_province_modifier = peasant_unrest }
 		remove_province_modifier = peasant_unrest
 	}
@@ -130,6 +134,14 @@ edmp_interference_remove_negative_province_modifiers_from_this_province_ek = {
 		if = {
 			limit = {
 				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = VIET_province_death_of_several_officials
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = VIET_province_death_of_several_officials
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
 				has_province_modifier = propagandist
 			}
 			# Audax Validator "." Ignore_NEXT
@@ -166,6 +178,14 @@ edmp_interference_remove_negative_province_modifiers_from_this_province_ek = {
 			}
 			# Audax Validator "." Ignore_NEXT
 			remove_province_modifier = vampire_infestation
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_province_modifier = vaermina_provincial_nightmares
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = vaermina_provincial_nightmares
 		}
 	}
 }
