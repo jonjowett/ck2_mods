@@ -3,21 +3,21 @@ has_submenu_open = {
 	OR = {
 		
 		# Base mod
-		has_character_flag = employment_open
-		has_character_flag = spellbook_open
-		has_character_flag = title_open
-		has_character_flag = marketplace_open
-		has_character_flag = society_open
-		has_character_flag = adventuring_open
-		has_character_flag = alchemist_open
-		has_character_flag = news_open
+		has_character_flag = employment_open               # Employment submenu
+		has_character_flag = spellbook_open                # Spellbook submenu (also targetted_decisions submenu)
+		has_character_flag = title_open                    # Ruler decisions submenu
+		has_character_flag = marketplace_open              # Marketplace submenu
+		has_character_flag = society_open                  # Guild Hall submenu
+		has_character_flag = adventuring_open              # ?
+		has_character_flag = alchemist_open                # Marketplace > Alchemist submenu
+		has_character_flag = news_open                     # ?
 		#has_character_flag = minor_title_open
 		#has_character_flag = prisoners_open
-		has_character_flag = supernatural_open
+		has_character_flag = supernatural_open             # Supernatural submenu (vampire/werewolf stuff) (magic isn't "supernatural" enough?!)
 		
 		# Base mod bugfixes
-		has_character_flag = customize_gold
-		has_character_flag = unit_spawning_enabled
+		has_character_flag = customize_gold                # Send gold amount submenu
+		has_character_flag = unit_spawning_enabled         # Mod tools submenu
 		
 		# Integration with ED:MP (treat interference intrigue menu decisions as a submenu, to reduce clutter)
 		has_character_flag = edmp_admin_submenu_is_open
