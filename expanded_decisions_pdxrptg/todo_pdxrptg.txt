@@ -21,7 +21,7 @@ ek changes
        - relabel "viking" as "pirate", and grant viking/ravager/seaking/seaqueen as normal? NB: Will also need to edit the relevant events.
     X allow secret religious conversion if you don't own the county but either {own the baron-tier bishopric personally} or {are the direct liege of the character who owns the baron-tier bishopric} (this is bugged in ek_secret_religion_conversions.txt because a title can't be both COUNT and BARON tier)
     - acquisition of commander traits seems broken - characters can only gain 1 trait (if they start with none), but chars can spawn with 3-4 traits
-    - smithing level (tier 2) and smithing section (tier 3) are the wrong way round in the localisation (level > section)
+    X smithing level (tier 2) and smithing section (tier 3) are the wrong way round in the localisation (level > section)
     X check the coding of the "ask to leave court" decision (can't send away distant descendants?!)
        X EK version of decision is using what looks like an old can_be_asked_to_leave_court_trigger
        X Add new separate decision, much the same as the other, except it allows different people to be sent away
@@ -47,7 +47,7 @@ ek changes
        - or could add a decision which manually clears the flags, but there may be odd consequences after.
     X alchemist/architect minor title should exclude the ruler themselves!
     X employment decisions all cost only 100
-    - alchemist/architect minor titles should NOT appear at the top of the list (?!?!!???)
+    X alchemist/architect minor titles should NOT appear at the top of the list (?!?!!???)
  - convenience features (no decrease in difficulty):
     X ability to stop all events asking if I want to reveal my vampirism / lycanthropy (vamp.350, .450)
     X decision to reveal vampirism / lycanthropy to spouses/friends/lovers (eg. in case the event is disabled by the previous point)
@@ -113,10 +113,10 @@ ek changes
     X option to drop/regain necromancer trait (with appropriate penalties) (because *practising* necromancy blocks you from joining societies, but long-lived/immortal characters should be allowed to renounce the practice so they can partake in normal society... as long as they stick to their vow...)
     - ability to call in scenarists/fighters/etc to resolve province modifiers
        - ...\events\ek_province_events.txt, need to create a copy of this logic which can trigger the same guild quests, but as a character_event rather than a province_event.
-    - add artifact decisions to ideal masters:
-       - skeletal steed like the unicorn (there is a pic for this!)
-       - an (invented) summoned sword (as per the bound sword spell) (which does extra damage to NON-undead?)
-    - add the ideal masters to the daedric favour system
+    X add artifact decisions to ideal masters:
+       X skeletal steed like the unicorn (there is a pic for this!)
+       X an (invented) summoned sword (as per the bound sword spell) (which does extra damage to NON-undead?)
+    X add the ideal masters to the daedric favour system
     - reinstate the nickname hierarchy system (BIG JOB, for little gain...)
  - improvement features (major):
     - trade routes need rebalancing (some are much more profitable than others - too many sources?)
