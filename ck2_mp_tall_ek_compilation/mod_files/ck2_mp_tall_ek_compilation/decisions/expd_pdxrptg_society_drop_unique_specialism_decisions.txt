@@ -1,0 +1,133 @@
+# Audax Validator EnableCommentMetadata
+
+society_decisions = {
+	
+	# Members of the Swordsingers can drop the Thu'um
+	#  --- Thu'um masters (rank 3) get Swordsinging 1 instantly (due to prior experience)
+	expd_pdxrptg_drop_specialism_decision_thuum = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			# Audax Validator "." Ignore_NEXT
+			society_member_of = ansei_guild_tamriel
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = thuum_1
+				# Audax Validator "." Ignore_NEXT
+				trait = thuum_2
+				# Audax Validator "." Ignore_NEXT
+				trait = thuum_3
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = thuum_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = thuum_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = thuum_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = thuum_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = thuum_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = thuum_3
+				# Audax Validator "." Ignore_NEXT
+				add_trait    = swordsinger_1
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	# Members of the Greybeards can drop Swordsinging
+	#  --- Swordsinging masters (rank 3) get Thu'um 1 instantly (due to prior experience)
+	#  --- Ansei CANNOT drop swordsinging, since this is MUCH better than even Thu'um master.
+	expd_pdxrptg_drop_specialism_decision_swordsinging = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			# Audax Validator "." Ignore_NEXT
+			society_member_of = greybeards_tamriel
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = swordsinger_1
+				# Audax Validator "." Ignore_NEXT
+				trait = swordsinger_2
+				# Audax Validator "." Ignore_NEXT
+				trait = swordsinger_3
+			}
+		}
+		allow = {
+			trigger_if = {
+				limit = {
+					OR = {
+						# Audax Validator "." Ignore_NEXT
+						trait = ansei_1
+						# Audax Validator "." Ignore_NEXT
+						trait = ansei_2
+						# Audax Validator "." Ignore_NEXT
+						trait = ansei_3
+					}
+				}
+				NOR = {
+					# Audax Validator "." Ignore_NEXT
+					trait = ansei_1
+					# Audax Validator "." Ignore_NEXT
+					trait = ansei_2
+					# Audax Validator "." Ignore_NEXT
+					trait = ansei_3
+				}
+			}
+			trigger_else = {
+				always = yes
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = swordsinger_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = swordsinger_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = swordsinger_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = swordsinger_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = swordsinger_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = swordsinger_3
+				# Audax Validator "." Ignore_NEXT
+				add_trait    = thuum_1
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	
+}

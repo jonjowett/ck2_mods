@@ -1,0 +1,1327 @@
+# Audax Validator EnableCommentMetadata
+
+# This file is VERY copy/paste - take the top decision (acrobat), copy 20 times, replace with each specialism in turn
+
+society_decisions = {
+	
+	expd_pdxrptg_drop_specialism_decision_acrobat = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_acrobat = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_acrobat
+							has_character_flag = mages_guild_acrobat
+							has_character_flag = mercantile_guild_acrobat
+							has_character_flag = scenarist_guild_acrobat
+							has_character_flag = thieves_guild_acrobat
+							has_character_flag = assassins_guild_acrobat
+							has_character_flag = monastic_order_acrobat
+							has_character_flag = house_dagoth_acrobat
+							has_character_flag = house_dres_acrobat
+							has_character_flag = house_hlaalu_acrobat
+							has_character_flag = house_indoril_acrobat
+							has_character_flag = house_redoran_acrobat
+							has_character_flag = house_telvanni_acrobat
+							has_character_flag = house_sadras_acrobat
+							has_character_flag = house_sul_acrobat
+							has_character_flag = house_veloth_acrobat
+							has_character_flag = elder_council_acrobat
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = acrobat_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = acrobat_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = acrobat_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = acrobat_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = acrobat_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = acrobat_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_assassin = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_assassin = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_assassin
+							has_character_flag = mages_guild_assassin
+							has_character_flag = mercantile_guild_assassin
+							has_character_flag = scenarist_guild_assassin
+							has_character_flag = thieves_guild_assassin
+							has_character_flag = assassins_guild_assassin
+							has_character_flag = monastic_order_assassin
+							has_character_flag = house_dagoth_assassin
+							has_character_flag = house_dres_assassin
+							has_character_flag = house_hlaalu_assassin
+							has_character_flag = house_indoril_assassin
+							has_character_flag = house_redoran_assassin
+							has_character_flag = house_telvanni_assassin
+							has_character_flag = house_sadras_assassin
+							has_character_flag = house_sul_assassin
+							has_character_flag = house_veloth_assassin
+							has_character_flag = elder_council_assassin
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = assassin_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = assassin_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = assassin_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = assassin_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = assassin_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = assassin_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_barbarian = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_barbarian = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_barbarian
+							has_character_flag = mages_guild_barbarian
+							has_character_flag = mercantile_guild_barbarian
+							has_character_flag = scenarist_guild_barbarian
+							has_character_flag = thieves_guild_barbarian
+							has_character_flag = assassins_guild_barbarian
+							has_character_flag = monastic_order_barbarian
+							has_character_flag = house_dagoth_barbarian
+							has_character_flag = house_dres_barbarian
+							has_character_flag = house_hlaalu_barbarian
+							has_character_flag = house_indoril_barbarian
+							has_character_flag = house_redoran_barbarian
+							has_character_flag = house_telvanni_barbarian
+							has_character_flag = house_sadras_barbarian
+							has_character_flag = house_sul_barbarian
+							has_character_flag = house_veloth_barbarian
+							has_character_flag = elder_council_barbarian
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = barbarian_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = barbarian_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = barbarian_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = barbarian_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = barbarian_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = barbarian_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_bard = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_bard = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_bard
+							has_character_flag = mages_guild_bard
+							has_character_flag = mercantile_guild_bard
+							has_character_flag = scenarist_guild_bard
+							has_character_flag = thieves_guild_bard
+							has_character_flag = assassins_guild_bard
+							has_character_flag = monastic_order_bard
+							has_character_flag = house_dagoth_bard
+							has_character_flag = house_dres_bard
+							has_character_flag = house_hlaalu_bard
+							has_character_flag = house_indoril_bard
+							has_character_flag = house_redoran_bard
+							has_character_flag = house_telvanni_bard
+							has_character_flag = house_sadras_bard
+							has_character_flag = house_sul_bard
+							has_character_flag = house_veloth_bard
+							has_character_flag = elder_council_bard
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = bard_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = bard_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = bard_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = bard_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = bard_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = bard_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_battlemage = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_battlemage = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_battlemage
+							has_character_flag = mages_guild_battlemage
+							has_character_flag = mercantile_guild_battlemage
+							has_character_flag = scenarist_guild_battlemage
+							has_character_flag = thieves_guild_battlemage
+							has_character_flag = assassins_guild_battlemage
+							has_character_flag = monastic_order_battlemage
+							has_character_flag = house_dagoth_battlemage
+							has_character_flag = house_dres_battlemage
+							has_character_flag = house_hlaalu_battlemage
+							has_character_flag = house_indoril_battlemage
+							has_character_flag = house_redoran_battlemage
+							has_character_flag = house_telvanni_battlemage
+							has_character_flag = house_sadras_battlemage
+							has_character_flag = house_sul_battlemage
+							has_character_flag = house_veloth_battlemage
+							has_character_flag = elder_council_battlemage
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = battlemage_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = battlemage_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = battlemage_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = battlemage_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = battlemage_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = battlemage_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_crusader = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_crusader = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_crusader
+							has_character_flag = mages_guild_crusader
+							has_character_flag = mercantile_guild_crusader
+							has_character_flag = scenarist_guild_crusader
+							has_character_flag = thieves_guild_crusader
+							has_character_flag = assassins_guild_crusader
+							has_character_flag = monastic_order_crusader
+							has_character_flag = house_dagoth_crusader
+							has_character_flag = house_dres_crusader
+							has_character_flag = house_hlaalu_crusader
+							has_character_flag = house_indoril_crusader
+							has_character_flag = house_redoran_crusader
+							has_character_flag = house_telvanni_crusader
+							has_character_flag = house_sadras_crusader
+							has_character_flag = house_sul_crusader
+							has_character_flag = house_veloth_crusader
+							has_character_flag = elder_council_crusader
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = crusader_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = crusader_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = crusader_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = crusader_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = crusader_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = crusader_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_healer = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_healer = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_healer
+							has_character_flag = mages_guild_healer
+							has_character_flag = mercantile_guild_healer
+							has_character_flag = scenarist_guild_healer
+							has_character_flag = thieves_guild_healer
+							has_character_flag = assassins_guild_healer
+							has_character_flag = monastic_order_healer
+							has_character_flag = house_dagoth_healer
+							has_character_flag = house_dres_healer
+							has_character_flag = house_hlaalu_healer
+							has_character_flag = house_indoril_healer
+							has_character_flag = house_redoran_healer
+							has_character_flag = house_telvanni_healer
+							has_character_flag = house_sadras_healer
+							has_character_flag = house_sul_healer
+							has_character_flag = house_veloth_healer
+							has_character_flag = elder_council_healer
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = healer_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = healer_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = healer_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = healer_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = healer_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = healer_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_knight = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_knight = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_knight
+							has_character_flag = mages_guild_knight
+							has_character_flag = mercantile_guild_knight
+							has_character_flag = scenarist_guild_knight
+							has_character_flag = thieves_guild_knight
+							has_character_flag = assassins_guild_knight
+							has_character_flag = monastic_order_knight
+							has_character_flag = house_dagoth_knight
+							has_character_flag = house_dres_knight
+							has_character_flag = house_hlaalu_knight
+							has_character_flag = house_indoril_knight
+							has_character_flag = house_redoran_knight
+							has_character_flag = house_telvanni_knight
+							has_character_flag = house_sadras_knight
+							has_character_flag = house_sul_knight
+							has_character_flag = house_veloth_knight
+							has_character_flag = elder_council_knight
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = knight_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = knight_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = knight_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = knight_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = knight_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = knight_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_monk = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_monk_education = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_monk
+							has_character_flag = mages_guild_monk
+							has_character_flag = mercantile_guild_monk
+							has_character_flag = scenarist_guild_monk
+							has_character_flag = thieves_guild_monk
+							has_character_flag = assassins_guild_monk
+							has_character_flag = monastic_order_monk
+							has_character_flag = house_dagoth_monk
+							has_character_flag = house_dres_monk
+							has_character_flag = house_hlaalu_monk
+							has_character_flag = house_indoril_monk
+							has_character_flag = house_redoran_monk
+							has_character_flag = house_telvanni_monk
+							has_character_flag = house_sadras_monk
+							has_character_flag = house_sul_monk
+							has_character_flag = house_veloth_monk
+							has_character_flag = elder_council_monk
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = monk_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = monk_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = monk_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = monk_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = monk_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = monk_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_nightblade = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_nightblade = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_nightblade
+							has_character_flag = mages_guild_nightblade
+							has_character_flag = mercantile_guild_nightblade
+							has_character_flag = scenarist_guild_nightblade
+							has_character_flag = thieves_guild_nightblade
+							has_character_flag = assassins_guild_nightblade
+							has_character_flag = monastic_order_nightblade
+							has_character_flag = house_dagoth_nightblade
+							has_character_flag = house_dres_nightblade
+							has_character_flag = house_hlaalu_nightblade
+							has_character_flag = house_indoril_nightblade
+							has_character_flag = house_redoran_nightblade
+							has_character_flag = house_telvanni_nightblade
+							has_character_flag = house_sadras_nightblade
+							has_character_flag = house_sul_nightblade
+							has_character_flag = house_veloth_nightblade
+							has_character_flag = elder_council_nightblade
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = nightblade_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = nightblade_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = nightblade_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = nightblade_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = nightblade_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = nightblade_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_priest = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_priest = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_priest
+							has_character_flag = mages_guild_priest
+							has_character_flag = mercantile_guild_priest
+							has_character_flag = scenarist_guild_priest
+							has_character_flag = thieves_guild_priest
+							has_character_flag = assassins_guild_priest
+							has_character_flag = monastic_order_priest
+							has_character_flag = house_dagoth_priest
+							has_character_flag = house_dres_priest
+							has_character_flag = house_hlaalu_priest
+							has_character_flag = house_indoril_priest
+							has_character_flag = house_redoran_priest
+							has_character_flag = house_telvanni_priest
+							has_character_flag = house_sadras_priest
+							has_character_flag = house_sul_priest
+							has_character_flag = house_veloth_priest
+							has_character_flag = elder_council_priest
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = priest_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = priest_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = priest_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = priest_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = priest_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = priest_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_rogue = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_rogue = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_rogue
+							has_character_flag = mages_guild_rogue
+							has_character_flag = mercantile_guild_rogue
+							has_character_flag = scenarist_guild_rogue
+							has_character_flag = thieves_guild_rogue
+							has_character_flag = assassins_guild_rogue
+							has_character_flag = monastic_order_rogue
+							has_character_flag = house_dagoth_rogue
+							has_character_flag = house_dres_rogue
+							has_character_flag = house_hlaalu_rogue
+							has_character_flag = house_indoril_rogue
+							has_character_flag = house_redoran_rogue
+							has_character_flag = house_telvanni_rogue
+							has_character_flag = house_sadras_rogue
+							has_character_flag = house_sul_rogue
+							has_character_flag = house_veloth_rogue
+							has_character_flag = elder_council_rogue
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = rogue_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = rogue_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = rogue_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = rogue_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = rogue_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = rogue_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_savant = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_savant = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_savant
+							has_character_flag = mages_guild_savant
+							has_character_flag = mercantile_guild_savant
+							has_character_flag = scenarist_guild_savant
+							has_character_flag = thieves_guild_savant
+							has_character_flag = assassins_guild_savant
+							has_character_flag = monastic_order_savant
+							has_character_flag = house_dagoth_savant
+							has_character_flag = house_dres_savant
+							has_character_flag = house_hlaalu_savant
+							has_character_flag = house_indoril_savant
+							has_character_flag = house_redoran_savant
+							has_character_flag = house_telvanni_savant
+							has_character_flag = house_sadras_savant
+							has_character_flag = house_sul_savant
+							has_character_flag = house_veloth_savant
+							has_character_flag = elder_council_savant
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = savant_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = savant_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = savant_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = savant_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = savant_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = savant_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_scout = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_scout = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_scout
+							has_character_flag = mages_guild_scout
+							has_character_flag = mercantile_guild_scout
+							has_character_flag = scenarist_guild_scout
+							has_character_flag = thieves_guild_scout
+							has_character_flag = assassins_guild_scout
+							has_character_flag = monastic_order_scout
+							has_character_flag = house_dagoth_scout
+							has_character_flag = house_dres_scout
+							has_character_flag = house_hlaalu_scout
+							has_character_flag = house_indoril_scout
+							has_character_flag = house_redoran_scout
+							has_character_flag = house_telvanni_scout
+							has_character_flag = house_sadras_scout
+							has_character_flag = house_sul_scout
+							has_character_flag = house_veloth_scout
+							has_character_flag = elder_council_scout
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = scout_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = scout_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = scout_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = scout_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = scout_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = scout_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_sorcerer = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_sorcerer = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_sorcerer
+							has_character_flag = mages_guild_sorcerer
+							has_character_flag = mercantile_guild_sorcerer
+							has_character_flag = scenarist_guild_sorcerer
+							has_character_flag = thieves_guild_sorcerer
+							has_character_flag = assassins_guild_sorcerer
+							has_character_flag = monastic_order_sorcerer
+							has_character_flag = house_dagoth_sorcerer
+							has_character_flag = house_dres_sorcerer
+							has_character_flag = house_hlaalu_sorcerer
+							has_character_flag = house_indoril_sorcerer
+							has_character_flag = house_redoran_sorcerer
+							has_character_flag = house_telvanni_sorcerer
+							has_character_flag = house_sadras_sorcerer
+							has_character_flag = house_sul_sorcerer
+							has_character_flag = house_veloth_sorcerer
+							has_character_flag = elder_council_sorcerer
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = sorcerer_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = sorcerer_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = sorcerer_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = sorcerer_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = sorcerer_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = sorcerer_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_spellsword = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_spellsword = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_spellsword
+							has_character_flag = mages_guild_spellsword
+							has_character_flag = mercantile_guild_spellsword
+							has_character_flag = scenarist_guild_spellsword
+							has_character_flag = thieves_guild_spellsword
+							has_character_flag = assassins_guild_spellsword
+							has_character_flag = monastic_order_spellsword
+							has_character_flag = house_dagoth_spellsword
+							has_character_flag = house_dres_spellsword
+							has_character_flag = house_hlaalu_spellsword
+							has_character_flag = house_indoril_spellsword
+							has_character_flag = house_redoran_spellsword
+							has_character_flag = house_telvanni_spellsword
+							has_character_flag = house_sadras_spellsword
+							has_character_flag = house_sul_spellsword
+							has_character_flag = house_veloth_spellsword
+							has_character_flag = elder_council_spellsword
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = spellsword_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = spellsword_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = spellsword_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = spellsword_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = spellsword_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = spellsword_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_thief = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_thief = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_thief
+							has_character_flag = mages_guild_thief
+							has_character_flag = mercantile_guild_thief
+							has_character_flag = scenarist_guild_thief
+							has_character_flag = thieves_guild_thief
+							has_character_flag = assassins_guild_thief
+							has_character_flag = monastic_order_thief
+							has_character_flag = house_dagoth_thief
+							has_character_flag = house_dres_thief
+							has_character_flag = house_hlaalu_thief
+							has_character_flag = house_indoril_thief
+							has_character_flag = house_redoran_thief
+							has_character_flag = house_telvanni_thief
+							has_character_flag = house_sadras_thief
+							has_character_flag = house_sul_thief
+							has_character_flag = house_veloth_thief
+							has_character_flag = elder_council_thief
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = thief_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = thief_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = thief_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = thief_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = thief_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = thief_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_trader = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_trader = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_trader
+							has_character_flag = mages_guild_trader
+							has_character_flag = mercantile_guild_trader
+							has_character_flag = scenarist_guild_trader
+							has_character_flag = thieves_guild_trader
+							has_character_flag = assassins_guild_trader
+							has_character_flag = monastic_order_trader
+							has_character_flag = house_dagoth_trader
+							has_character_flag = house_dres_trader
+							has_character_flag = house_hlaalu_trader
+							has_character_flag = house_indoril_trader
+							has_character_flag = house_redoran_trader
+							has_character_flag = house_telvanni_trader
+							has_character_flag = house_sadras_trader
+							has_character_flag = house_sul_trader
+							has_character_flag = house_veloth_trader
+							has_character_flag = elder_council_trader
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = trader_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = trader_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = trader_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = trader_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = trader_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = trader_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_wayfarer = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_wayfarer = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_wayfarer
+							has_character_flag = mages_guild_wayfarer
+							has_character_flag = mercantile_guild_wayfarer
+							has_character_flag = scenarist_guild_wayfarer
+							has_character_flag = thieves_guild_wayfarer
+							has_character_flag = assassins_guild_wayfarer
+							has_character_flag = monastic_order_wayfarer
+							has_character_flag = house_dagoth_wayfarer
+							has_character_flag = house_dres_wayfarer
+							has_character_flag = house_hlaalu_wayfarer
+							has_character_flag = house_indoril_wayfarer
+							has_character_flag = house_redoran_wayfarer
+							has_character_flag = house_telvanni_wayfarer
+							has_character_flag = house_sadras_wayfarer
+							has_character_flag = house_sul_wayfarer
+							has_character_flag = house_veloth_wayfarer
+							has_character_flag = elder_council_wayfarer
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = wayfarer_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = wayfarer_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = wayfarer_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = wayfarer_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = wayfarer_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = wayfarer_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+	expd_pdxrptg_drop_specialism_decision_witchhunter = {
+		ai = no
+		potential = {
+			has_character_flag = society_open
+			is_in_society = yes
+			is_witchhunter = yes
+		}
+		allow = {
+			has_maxed_specializations = yes
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_not_currently_studying_this_exact_specialism_tt
+				NOT = {
+					AND = {
+						has_character_flag = guild_specialization_ongoing
+						OR = {
+							has_character_flag = fighters_guild_witchhunter
+							has_character_flag = mages_guild_witchhunter
+							has_character_flag = mercantile_guild_witchhunter
+							has_character_flag = scenarist_guild_witchhunter
+							has_character_flag = thieves_guild_witchhunter
+							has_character_flag = assassins_guild_witchhunter
+							has_character_flag = monastic_order_witchhunter
+							has_character_flag = house_dagoth_witchhunter
+							has_character_flag = house_dres_witchhunter
+							has_character_flag = house_hlaalu_witchhunter
+							has_character_flag = house_indoril_witchhunter
+							has_character_flag = house_redoran_witchhunter
+							has_character_flag = house_telvanni_witchhunter
+							has_character_flag = house_sadras_witchhunter
+							has_character_flag = house_sul_witchhunter
+							has_character_flag = house_veloth_witchhunter
+							has_character_flag = elder_council_witchhunter
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = witchhunter_1
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = witchhunter_1
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = witchhunter_2
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = witchhunter_2
+			}
+			if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					trait = witchhunter_3
+				}
+				# Audax Validator "." Ignore_NEXT
+				remove_trait = witchhunter_3
+			}
+			custom_tooltip = { text = expd_pdxrptg_drop_specialism_warning_this_cannot_be_undone_tt }
+		}
+	}
+	
+}

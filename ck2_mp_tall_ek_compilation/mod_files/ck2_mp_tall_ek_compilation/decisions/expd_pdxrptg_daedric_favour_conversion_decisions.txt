@@ -118,6 +118,29 @@ decisions = {
 		}
 	}
 	
+	expd_daedric_favour_secret_conversion_ideal_masters = {
+		ai = no
+		potential = {
+			has_character_flag = title_open
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_ideal_masters_not_secret_religion_internal_use_only = yes
+		}
+		allow = {
+			expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_ideal_masters = yes
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_daedric_favour_secret_conversion_ideal_masters_tt
+				# Audax Validator "." Ignore_NEXT
+				set_secret_religion = ideal_masters
+			}
+			if = {
+				limit = { has_secret_religion = yes }
+				custom_tooltip = { text = expd_daedric_favour_secret_conversion_warning_current_secret_religion_lost_tt }
+			}
+			custom_tooltip = { text = expd_daedric_favour_secret_conversion_unlock_offmap_tt }
+		}
+	}
+	
 	expd_daedric_favour_secret_conversion_jyggalag = {
 		ai = no
 		potential = {

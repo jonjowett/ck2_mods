@@ -1,0 +1,137 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+
+
+
+
+
+# Better version of the base mod's (normally-unobtainable) skeletal horse
+#  --- Upgraded from Q2 to Q4
+#  --- Summonable via Ideal Masters
+
+mount_horse_skeletal = {
+	
+	# +4 stats, as per unicorn
+	martial  = 2
+	learning = 2 # It's a mage summon
+	
+	combat_rating = 8 # As per unicorn
+	
+	# Extra necromantic charge (loc only)
+	# Audax Validator "." Ignore_NEXT
+	gives_necromantic_charge = 1
+	
+	quality = 4 # As per unicorn
+	
+	command_modifier = {
+		
+		# Unicorn stats (for comparison)
+		#speed = 0.125
+		#pursue = 0.075
+		#retreat = 0.075
+		#flank = 0.05
+		#cavalry = 0.035
+		#center = 0.05
+		#morale_defence = 0.075
+		
+		# Much slower than a unicorn
+		speed   = 0.050
+		pursue  = 0.025
+		retreat = 0.025
+		flank   = 0.010
+		center  = 0.010
+		
+		# Normal cavalry probably isn't a huge fan of a weird skeletal horse
+		# Give bonuses to undead instead (info: necro amulet gives 0.5)
+		# Audax Validator "." Ignore_NEXT
+		undead_troop_offensive = 0.25
+		# Audax Validator "." Ignore_NEXT
+		undead_troop_defensive = 0.25
+		
+		# Offence focus
+		damage = 0.05
+		morale_offence = 0.1 # Scary!
+		
+	}
+	
+	active = {
+		expd_pdxrptg_can_activate_daedric_artifact_ideal_masters = yes
+	}
+	
+	picture = "GFX_mount_horse_undead"
+	stacking = no
+	# Audax Validator "." Ignore_NEXT
+	slot = mount
+	indestructible = yes
+	
+	flags = {
+		mount
+		horse
+		immortal
+		no_theft
+		no_inherit
+		necromantic_artifact
+		necromantic_artifact_necro_charge # Extra necromantic charge (actual feature)
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+# Better version of the base mod's (normally-unobtainable) "Souldrinker" dagger
+
+weapon_dagger_souldrink = {
+	
+	monthly_character_prestige = 0.35 # Standard for Daedric artifacts
+	
+	martial = 2
+	intrigue = 2
+	learning = 2
+	
+	combat_rating = 25 # Upgraded to Daedric level
+	
+	# Extra necromantic charge (loc only)
+	# Audax Validator "." Ignore_NEXT
+	gives_necromantic_charge = 1
+	
+	command_modifier = { # Slight upgrade
+		damage = 0.05
+		morale_offence = 0.05
+	}
+	
+	active = {
+		# Audax Validator "." Ignore_NEXT
+		can_use_daggers = yes
+		expd_pdxrptg_can_activate_daedric_artifact_ideal_masters = yes
+	}
+	
+	#TODO Increase assassination success chance. Soultrap.
+	
+	picture = "GFX_weapon_dagger_souldrink"
+	stacking = no
+	slot = weapon
+	quality = 10 # Daedric artifact
+	flags = {
+		unique
+		daedric_artifact
+		daedric_artifact_ideal_masters
+		combat_weapon
+		dagger
+		no_theft
+		no_inherit
+		necromantic_artifact
+		necromantic_artifact_necro_charge # Extra necromantic charge (actual feature)
+	}
+	
+}

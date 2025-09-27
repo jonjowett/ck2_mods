@@ -22,6 +22,10 @@ expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_prev_offmap_power
 		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_hircine = yes
 	}
 	else_if = {
+		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_ideal_masters = yes }
+		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_ideal_masters = yes
+	}
+	else_if = {
 		limit = { expd_pdxrptg_daedric_favour_prev_offmap_power_is_jyggalag = yes }
 		expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_jyggalag = yes
 	}
@@ -107,6 +111,13 @@ expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_hircine = {
 	custom_tooltip = {
 		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_hircine_tt
 		set_character_flag = expd_pdxrptg_daedric_favour_hircine
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_ideal_masters = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_ideal_masters_tt
+		set_character_flag = expd_pdxrptg_daedric_favour_ideal_masters
 	}
 }
 
