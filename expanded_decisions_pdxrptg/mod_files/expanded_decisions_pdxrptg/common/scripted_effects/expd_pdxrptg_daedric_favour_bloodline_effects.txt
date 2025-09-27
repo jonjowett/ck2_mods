@@ -96,6 +96,16 @@ expd_pdxrptg_daedric_favour_add_prev_characters_favour_to_this_bloodline = {
 	}
 	if = {
 		limit = {
+			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_ideal_masters }
+			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_ideal_masters }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_daedric_favour_merged_into_bloodline_ideal_masters_tt
+			set_bloodline_flag = expd_pdxrptg_daedric_favour_ideal_masters
+		}
+	}
+	if = {
+		limit = {
 			PREV = { has_character_flag = expd_pdxrptg_daedric_favour_jyggalag }
 			NOT  = { has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag }
 		}

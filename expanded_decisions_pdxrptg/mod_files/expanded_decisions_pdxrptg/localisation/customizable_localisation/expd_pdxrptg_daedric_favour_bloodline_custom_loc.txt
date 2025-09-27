@@ -1,5 +1,27 @@
 # Audax Validator EnableCommentMetadata
 
+
+
+# Split the loc text into 2 parts, otherwise it's too long
+defined_text = {
+	name = GetBloodlineFavour_part1
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_part1
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_part2
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_part2
+	}
+}
+
+
+
 # All of these are expected to be called from within the "Oblivion-Touched" bloodline description.
 # IE: ROOT should *always* be the bloodline founder.
 # Further, because founding multiple such bloodlines should be impossible,
@@ -35,6 +57,7 @@ defined_text = {
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_clavicus
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_hermaeus
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_ideal_masters
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
@@ -84,6 +107,7 @@ defined_text = {
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_clavicus
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_hermaeus
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_ideal_masters
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
@@ -132,6 +156,7 @@ defined_text = {
 					OR = {
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_hermaeus
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_ideal_masters
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
@@ -179,6 +204,7 @@ defined_text = {
 					has_bloodline_flag = expd_pdxrptg_daedric_favour_hermaeus
 					OR = {
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_ideal_masters
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
@@ -224,6 +250,53 @@ defined_text = {
 				any_owned_bloodline = {
 					has_bloodline_flag = expd_pdxrptg_oblivion_touched
 					has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine
+					OR = {
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_ideal_masters
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mehrunes
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_mephala
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_meridia
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_molag
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_namira
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_nocturnal
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_peryite
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sanguine
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_sheogorath
+						has_bloodline_flag = expd_pdxrptg_daedric_favour_vaermina
+					}
+				}
+			}
+		}
+		localisation_key = expd_pdxrptg_daedric_favour_granted_to_bloodline_member_sep
+	}
+}
+
+defined_text = {
+	name = GetBloodlineFavour_IdealMasters
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_ideal_masters
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		localisation_key = ideal_masters_offmap_full
+	}
+}
+defined_text = {
+	name = GetBloodlineFavour_IdealMasters_Sep
+	use_first_valid = yes
+	text = {
+		trigger = {
+			ROOT = {
+				any_owned_bloodline = {
+					has_bloodline_flag = expd_pdxrptg_oblivion_touched
+					has_bloodline_flag = expd_pdxrptg_daedric_favour_ideal_masters
 					OR = {
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_jyggalag
 						has_bloodline_flag = expd_pdxrptg_daedric_favour_malacath

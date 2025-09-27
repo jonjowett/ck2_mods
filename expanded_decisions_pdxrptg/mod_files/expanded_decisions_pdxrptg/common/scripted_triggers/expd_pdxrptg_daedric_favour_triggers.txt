@@ -32,6 +32,10 @@ expd_pdxrptg_daedric_favour_this_character_is_not_already_favoured_by_prev_offma
 				expd_pdxrptg_daedric_favour_this_character_is_favoured_by_hircine_not_secret_religion_internal_use_only = no
 			}
 			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_ideal_masters = yes
+				expd_pdxrptg_daedric_favour_this_character_is_favoured_by_ideal_masters_not_secret_religion_internal_use_only = no
+			}
+			AND = {
 				expd_pdxrptg_daedric_favour_prev_offmap_power_is_jyggalag = yes
 				expd_pdxrptg_daedric_favour_this_character_is_favoured_by_jyggalag_not_secret_religion_internal_use_only = no
 			}
@@ -106,6 +110,10 @@ expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offm
 			AND = {
 				expd_pdxrptg_daedric_favour_prev_offmap_power_is_hircine = yes
 				any_artifact = { has_artifact_flag = daedric_artifact_hircine }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_ideal_masters = yes
+				any_artifact = { has_artifact_flag = daedric_artifact_ideal_masters }
 			}
 			AND = {
 				expd_pdxrptg_daedric_favour_prev_offmap_power_is_jyggalag = yes
@@ -193,6 +201,10 @@ expd_pdxrptg_daedric_favour_prev_offmap_power_is_hircine = {
 	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_hircine = yes }
 }
 
+expd_pdxrptg_daedric_favour_prev_offmap_power_is_ideal_masters = {
+	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_ideal_masters = yes }
+}
+
 expd_pdxrptg_daedric_favour_prev_offmap_power_is_jyggalag = {
 	PREV = { expd_pdxrptg_daedric_favour_this_offmap_power_is_jyggalag = yes }
 }
@@ -243,23 +255,24 @@ expd_pdxrptg_daedric_favour_prev_offmap_power_is_vaermina = {
 
 expd_pdxrptg_daedric_favour_this_offmap_power_is_a_daedric_lord = {
 	OR = {
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_azura      = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_boethiah   = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_clavicus   = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_hermaeus   = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_hircine    = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_jyggalag   = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_malacath   = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_mehrunes   = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_mephala    = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_meridia    = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_molag      = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_namira     = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_nocturnal  = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_peryite    = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_sanguine   = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_sheogorath = yes
-		expd_pdxrptg_daedric_favour_this_offmap_power_is_vaermina   = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_azura         = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_boethiah      = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_clavicus      = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_hermaeus      = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_hircine       = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_ideal_masters = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_jyggalag      = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_malacath      = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_mehrunes      = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_mephala       = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_meridia       = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_molag         = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_namira        = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_nocturnal     = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_peryite       = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_sanguine      = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_sheogorath    = yes
+		expd_pdxrptg_daedric_favour_this_offmap_power_is_vaermina      = yes
 	}
 }
 
@@ -286,6 +299,11 @@ expd_pdxrptg_daedric_favour_this_offmap_power_is_hermaeus = {
 expd_pdxrptg_daedric_favour_this_offmap_power_is_hircine = {
 	# Audax Validator "." Ignore_NEXT
 	is_offmap_tag = oblivion_hircine
+}
+
+expd_pdxrptg_daedric_favour_this_offmap_power_is_ideal_masters = {
+	# Audax Validator "." Ignore_NEXT
+	is_offmap_tag = oblivion_ideal_masters
 }
 
 expd_pdxrptg_daedric_favour_this_offmap_power_is_jyggalag = {
@@ -457,6 +475,36 @@ expd_pdxrptg_daedric_favour_this_character_is_favoured_by_hircine_not_secret_rel
 		OR = {
 			has_character_flag = expd_pdxrptg_daedric_favour_hircine
 			any_owned_bloodline = { bloodline_is_active_for = PREV has_bloodline_flag = expd_pdxrptg_daedric_favour_hircine }
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_ideal_masters = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_ideal_masters_tt
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			secret_religion = ideal_masters
+			AND = {
+				# Audax Validator "." Ignore_NEXT
+				trait = necromancer
+				OR = {
+					# Audax Validator "." Ignore_NEXT
+					secret_religion = king_of_worms_cult
+					# Audax Validator "." Ignore_NEXT
+					secret_religion = winter_wind
+				}
+			}
+			expd_pdxrptg_daedric_favour_this_character_is_favoured_by_ideal_masters_not_secret_religion_internal_use_only = yes
+		}
+	}
+}
+expd_pdxrptg_daedric_favour_this_character_is_favoured_by_ideal_masters_not_secret_religion_internal_use_only = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_is_favoured_by_ideal_masters_tt
+		OR = {
+			has_character_flag = expd_pdxrptg_daedric_favour_ideal_masters
+			any_owned_bloodline = { bloodline_is_active_for = PREV has_bloodline_flag = expd_pdxrptg_daedric_favour_ideal_masters }
 		}
 	}
 }
@@ -748,6 +796,14 @@ expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worshi
 		text = expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_hircine_tt
 		# Audax Validator "." Ignore_NEXT
 		worships_hircine = no
+	}
+}
+
+expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_ideal_masters = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_does_not_publicly_or_privately_worship_ideal_masters_tt
+		# Audax Validator "." Ignore_NEXT
+		worships_ideal_masters = no
 	}
 }
 

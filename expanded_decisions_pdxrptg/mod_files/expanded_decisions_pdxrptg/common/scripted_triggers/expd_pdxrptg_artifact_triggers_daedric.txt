@@ -59,6 +59,25 @@ expd_pdxrptg_can_activate_daedric_artifact_hircine = {
 	}
 }
 
+expd_pdxrptg_can_activate_daedric_artifact_ideal_masters = {
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		religion = ideal_masters
+		AND = {
+			# Audax Validator "." Ignore_NEXT
+			trait = necromancer
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				religion = king_of_worms_cult
+				# Audax Validator "." Ignore_NEXT
+				religion = winter_wind
+			}
+		}
+		expd_pdxrptg_this_character_has_trait_dragonblood = yes
+		expd_pdxrptg_daedric_favour_this_character_is_favoured_by_ideal_masters = yes
+	}
+}
+
 expd_pdxrptg_can_activate_daedric_artifact_jyggalag = {
 	OR = {
 		# Audax Validator "." Ignore_NEXT

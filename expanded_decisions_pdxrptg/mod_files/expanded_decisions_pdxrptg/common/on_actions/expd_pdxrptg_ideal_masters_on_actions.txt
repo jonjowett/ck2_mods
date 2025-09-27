@@ -1,0 +1,11 @@
+on_startup = {
+	events = {
+		ExpdPdxrptgIdealMasters.1000 # Spawn Souldrinker for the Ideal Masters (if it doesn't already exist in the world)
+	}
+}
+
+on_death = {
+	events = {
+		ExpdPdxrptgIdealMasters.9000 # Souldrinker returns to the Ideal Masters
+	}
+}

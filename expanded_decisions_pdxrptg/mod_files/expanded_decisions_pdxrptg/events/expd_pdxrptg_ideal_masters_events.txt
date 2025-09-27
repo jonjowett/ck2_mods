@@ -1,0 +1,94 @@
+namespace = ExpdPdxrptgIdealMasters
+
+
+# Create Souldrinker, if it doesn't already exist
+character_event = {
+	
+	id = ExpdPdxrptgIdealMasters.1000
+	
+	is_triggered_only = yes
+	hide_window = yes
+	
+	ai = no
+	has_dlc = "Jade Dragon" # Without JD, the artifact is created out of thin air
+	
+	trigger = {
+		OR = {
+			multiplayer = no
+			is_multiplayer_host_character = yes
+		}
+	}
+	
+	immediate = {
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				offmap_ideal_masters = {
+					offmap_ruler = {
+						any_artifact = {
+							owner = { character = PREVPREV }
+							artifact_type = weapon_dagger_souldrink
+						}
+					}
+				}
+			}
+			# Ideal Masters have it - do nothing
+		}
+		else_if = {
+			limit = { any_character = { any_artifact = { artifact_type = weapon_dagger_souldrink } } }
+			# Someone in the world has it - do nothing
+		}
+		else = {
+			# No-one has it - spawn it for the Ideal Masters
+			# Audax Validator "." Ignore_NEXT
+			oblivion_ideal_masters = {
+				offmap_ruler = {
+					add_artifact = weapon_dagger_souldrink
+					random_artifact = {
+						limit = { artifact_type = weapon_dagger_souldrink }
+						set_creation_date  = -1
+					}
+				}
+			}
+		}
+	}
+}
+
+
+# on_death, Souldrinker returns to the Ideal Masters
+character_event = {
+	
+	id = ExpdPdxrptgIdealMasters.9000
+	
+	is_triggered_only = yes
+	hide_window = yes
+	
+	trigger = {
+		has_artifact = weapon_dagger_souldrink
+	}
+	
+	immediate = {
+		if = {
+			limit = { has_dlc = "Jade Dragon" }
+			# Audax Validator "." Ignore_NEXT
+			oblivion_ideal_masters = {
+				offmap_ruler = {
+					save_event_target_as = ek_artifact_return_ideal_masters
+				}
+			}
+			random_artifact = {
+				limit = { artifact_type = weapon_dagger_souldrink }
+				transfer_artifact = {
+					from = ROOT
+					# Audax Validator "." Ignore_NEXT
+					to = event_target:ek_artifact_return_ideal_masters
+				}
+			}
+		}
+		else = {
+			unsafe_destroy_artifact = weapon_dagger_souldrink
+			clr_global_flag = weapon_dagger_souldrink_granted
+		}
+	}
+	
+}
