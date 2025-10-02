@@ -1,0 +1,336 @@
+# Audax Validator EnableCommentMetadata
+
+# Copied from base game (except for renaming of loc, to avoid unstoppable validator warnings), ignore everything
+# Audax Validator "!" Ignore_NEXT
+
+namespace = HF
+
+character_event = {
+	id = HF.24107
+	desc = mp_tallek_EVTDESCHF24107
+	picture = GFX_evt_meeting_hf
+	border = GFX_event_normal_frame_intrigue
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = EVTOPTAHF24107
+		trigger = {
+			OR = {
+				trait = kinslayer
+				trait = familial_kinslayer
+				trait = dynastic_kinslayer
+				trait = tribal_kinslayer
+			}
+		}
+		if = {
+			limit = {
+				intrigue = 15
+			}
+			if = {
+				limit = {
+					trait = kinslayer
+				}
+				prestige = -500
+				remove_trait = kinslayer
+			}
+			if = {
+				limit = {
+					trait = familial_kinslayer
+				}
+				prestige = -250
+				remove_trait = familial_kinslayer
+			}
+			if = {
+				limit = {
+					trait = dynastic_kinslayer
+				}
+				prestige = -150
+				remove_trait = dynastic_kinslayer
+			}
+			if = {
+				limit = {
+					trait = tribal_kinslayer
+				}
+				prestige = -150
+				remove_trait = tribal_kinslayer
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					trait = kinslayer
+				}
+				prestige = -1000
+				remove_trait = kinslayer
+			}
+			if = {
+				limit = {
+					trait = familial_kinslayer
+				}
+				prestige = -500
+				remove_trait = familial_kinslayer
+			}
+			if = {
+				limit = {
+					trait = dynastic_kinslayer
+				}
+				prestige = -300
+				remove_trait = dynastic_kinslayer
+			}
+			if = {
+				limit = {
+					trait = tribal_kinslayer
+				}
+				prestige = -300
+				remove_trait = tribal_kinslayer
+			}
+		}
+	}
+	option = {
+		name = mp_tallek_EVTOPTBHF24107
+		trigger = {
+			has_character_modifier = known_murderer
+		}
+		if = {
+			limit = {
+				intrigue = 15
+			}
+			prestige = -500
+			remove_character_modifier = known_murderer
+		}
+		else = {
+			prestige = -750
+			remove_character_modifier = known_murderer
+		}
+	}
+	option = {
+		name = mp_tallek_EVTOPTCHF24107
+		trigger = {
+			OR = {
+				has_character_modifier = vicious_rumors
+				has_character_modifier = vicious_rumors_2
+			}
+		}
+		if = {
+			limit = {
+				intrigue = 15
+			}
+			if = {
+				limit = {
+					has_character_modifier = vicious_rumors_2
+				}
+				prestige = -250
+				remove_character_modifier = vicious_rumors_2
+			}
+			if = {
+				limit = {
+					has_character_modifier = vicious_rumors
+				}
+				prestige = -150
+				remove_character_modifier = vicious_rumors
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					has_character_modifier = vicious_rumors_2
+				}
+				prestige = -500
+				remove_character_modifier = vicious_rumors_2
+			}
+			if = {
+				limit = {
+					has_character_modifier = vicious_rumors
+				}
+				prestige = -300
+				remove_character_modifier = vicious_rumors
+			}
+		}
+	}
+	option = {
+		name = mp_tallek_EVTOPTDHF24107
+		hidden_tooltip = {
+			remove_character_modifier = deflection_decision_cooldown
+		}
+		break = yes
+	}
+	after = { #After-effects
+		hidden_tooltip = {
+			random_list = {
+				#Stress
+				#Paranoia
+				#Deceit
+				#Cruelty
+				#Lunacy
+				250 = {}
+				10 = {
+					trigger = {
+						NOT = {
+							trait = stressed
+						}
+					}
+					character_event = { id = HF.24108 days = 25 random = 25 }
+				}
+				10 = {
+					trigger = {
+						NOT = {
+							trait = paranoid
+						}
+					}
+					character_event = { id = HF.24109 days = 25 random = 25 }
+				}
+				10 = {
+					trigger = {
+						NOT = {
+							trait = deceitful
+						}
+					}
+					character_event = { id = HF.24110 days = 25 random = 25 }
+				}
+				10 = {
+					trigger = {
+						NOT = {
+							trait = cruel
+						}
+					}
+					character_event = { id = HF.24111 days = 25 random = 25 }
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							trait = lunatic
+						}
+					}
+					character_event = { id = HF.24112 days = 25 random = 25 }
+				}
+			}
+		}
+	}
+}
+
+#Ruler beomes stressed.
+character_event = {
+	id = HF.24108
+	desc = mp_tallek_EVTDESCHF24108
+	picture = GFX_evt_bad_news
+	border = GFX_event_normal_frame_intrigue
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = mp_tallek_EVTOPTAHF24108
+		if = {
+			limit = {
+				trait = stressed
+			}
+			health = -0.5
+		}
+		else_if = {
+			limit = {
+				NOT = { trait = stressed }
+			}
+			add_trait = stressed
+		}
+	}
+}
+#Ruler beomes paranoid.
+character_event = {
+	id = HF.24109
+	desc = mp_tallek_EVTDESCHF24109
+	picture = GFX_evt_bad_news
+	border = GFX_event_normal_frame_intrigue
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = mp_tallek_EVTOPTAHF24109
+		if = {
+			limit = {
+				trait = paranoid
+			}
+			health = -0.5
+		}
+		else_if = {
+			limit = {
+				NOT = { trait = paranoid }
+			}
+			add_trait = paranoid
+		}
+	}
+}
+#Ruler beomes deceitful.
+character_event = {
+	id = HF.24110
+	desc = mp_tallek_EVTDESCHF24110
+	picture = GFX_evt_bad_news
+	border = GFX_event_normal_frame_intrigue
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = mp_tallek_EVTOPTAHF24110
+		if = {
+			limit = {
+				trait = deceitful
+			}
+			change_intrigue = 1
+		}
+		else_if = {
+			limit = {
+				NOT = { trait = deceitful }
+			}
+			add_trait = deceitful
+		}
+	}
+}
+#Ruler beomes cruel.
+character_event = {
+	id = HF.24111
+	desc = mp_tallek_EVTDESCHF24111
+	picture = GFX_evt_bad_news
+	border = GFX_event_normal_frame_intrigue
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = mp_tallek_EVTOPTAHF24111
+		if = {
+			limit = {
+				trait = cruel
+			}
+			change_intrigue = 1
+		}
+		else_if = {
+			limit = {
+				NOT = { trait = cruel }
+			}
+			add_trait = cruel
+		}
+	}
+}
+#Ruler beomes lunatic.
+character_event = {
+	id = HF.24112
+	desc = mp_tallek_EVTDESCHF24112
+	picture = GFX_evt_bad_news
+	border = GFX_event_normal_frame_intrigue
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = mp_tallek_EVTOPTAHF24112
+		if = {
+			limit = {
+				trait = lunatic
+			}
+			health = -0.5
+		}
+		else_if = {
+			limit = {
+				NOT = { trait = lunatic }
+			}
+			add_trait = lunatic
+		}
+	}
+}
