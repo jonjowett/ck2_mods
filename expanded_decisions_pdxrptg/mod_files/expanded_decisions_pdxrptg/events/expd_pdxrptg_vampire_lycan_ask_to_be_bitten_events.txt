@@ -1,0 +1,43 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = ExpdPdxrptgVampireLycanAskToBeBitten
+
+# Ping event so the base mod's event chain has its scopes set up correctly
+character_event = {
+	id = ExpdPdxrptgVampireLycanAskToBeBitten.1
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		event_target:expd_pdxrptg_ask_to_be_bitten_requestor = {
+			set_character_flag = vampirism_requested
+			character_event = {
+				# Audax Validator "." Ignore_NEXT
+				id = vamp.325
+				days = 3
+			}
+		}
+	}
+	after = {
+		clear_event_target = expd_pdxrptg_ask_to_be_bitten_requestor
+	}
+}
+
+# Ping event so the base mod's event chain has its scopes set up correctly
+character_event = {
+	id = ExpdPdxrptgVampireLycanAskToBeBitten.2
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		event_target:expd_pdxrptg_ask_to_be_bitten_requestor = {
+			set_character_flag = lycanthropy_requested
+			character_event = {
+				# Audax Validator "." Ignore_NEXT
+				id = lycan.325
+				days = 3
+			}
+		}
+	}
+	after = {
+		clear_event_target = expd_pdxrptg_ask_to_be_bitten_requestor
+	}
+}

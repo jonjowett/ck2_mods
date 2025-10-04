@@ -1,0 +1,80 @@
+defined_text = {
+	name = EDPTAtbB_GetRG_FriendOfFrom
+	use_first_valid = yes
+	text = {
+		trigger = { is_friend = FROM }
+		localisation_key = EDPTAtbB_GetRG_G
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EDPTAtbB_GetRG_R
+	}
+}
+
+defined_text = {
+	name = EDPTAtbB_GetRG_LoverOfFrom
+	use_first_valid = yes
+	text = {
+		trigger = { is_lover = FROM }
+		localisation_key = EDPTAtbB_GetRG_G
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EDPTAtbB_GetRG_R
+	}
+}
+
+defined_text = {
+	name = EDPTAtbB_GetRG_ConsortOfFrom
+	use_first_valid = yes
+	text = {
+		trigger = { is_consort = FROM }
+		localisation_key = EDPTAtbB_GetRG_G
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EDPTAtbB_GetRG_R
+	}
+}
+
+defined_text = {
+	name = EDPTAtbB_GetRG_SpouseOfFrom
+	use_first_valid = yes
+	text = {
+		trigger = { is_married = FROM }
+		localisation_key = EDPTAtbB_GetRG_G
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EDPTAtbB_GetRG_R
+	}
+}
+
+defined_text = {
+	name = EDPTAtbB_GetRG_PrisonerOfFrom
+	use_first_valid = yes
+	text = {
+		trigger = {
+			prisoner = yes
+			host = { character = FROM }
+		}
+		localisation_key = EDPTAtbB_GetRG_G
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EDPTAtbB_GetRG_R
+	}
+}
+
+defined_text = {
+	name = EDPTAtbB_GetRG_100OpinionOfFrom
+	use_first_valid = yes
+	text = {
+		trigger = { opinion = { who = FROM value = 100 } }
+		localisation_key = EDPTAtbB_GetRG_G
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EDPTAtbB_GetRG_R
+	}
+}

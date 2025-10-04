@@ -1,0 +1,243 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+targetted_decisions = {
+	
+	
+	
+	
+	
+	expd_pdxrptg_ask_to_be_bitten_vampire = {
+		
+		ai = no
+		
+		filter = all
+		
+		from_potential = {
+			ai = no
+			NOT = { has_character_flag = spellbook_open }
+			# Audax Validator "." Ignore_NEXT
+			is_disease_immune = no                                # Hide decision for all disease-immune decision-takers (including vampires & lycans)
+			NOT = { has_character_flag = vampirism_requested }    # Hide decision immediately after it has been taken
+		}
+		
+		potential = {
+			# Only show the decision for people who FROM knows are vampires
+			# For hidden vampires: require the vampire trait,
+			#     and require FROM to have an opinion modifier which makes the trait visible.
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = known_vampire
+				# Audax Validator "." Ignore_NEXT
+				trait = known_vampire_benevolent
+				AND = {
+					# Audax Validator "." Ignore_NEXT
+					trait = vampire
+					ROOT_FROM = {
+						OR = {
+							has_opinion_modifier = {
+								who = ROOT
+								# Audax Validator "." Ignore_NEXT
+								modifier = opinion_vampire_aware_good
+							}
+							has_opinion_modifier = {
+								who = ROOT
+								# Audax Validator "." Ignore_NEXT
+								modifier = opinion_vampire_aware_bad
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		allow = {
+			FROM = {
+				is_adult = yes
+				prisoner = no
+				expd_pdxrptg_this_character_is_not_indisposed = yes
+				custom_tooltip = {
+					text = expd_pdxrptg_ask_to_be_bitten_this_character_has_50_opinion_of_root_tt
+					opinion = { who = ROOT value = 50 }
+				}
+				custom_tooltip = {
+					text = expd_pdxrptg_ask_to_be_bitten_this_character_is_not_horrified_by_roots_vampirism_tt
+					NOT = {
+						has_opinion_modifier = {
+							# Audax Validator "." Ignore_NEXT
+							modifier = opinion_horrified_vampire
+							who = ROOT
+						}
+					}
+				}
+			}
+			ROOT = {
+				is_adult = yes
+				is_within_diplo_range = FROM
+				ai = yes
+				OR = {
+					prisoner = no
+					custom_tooltip = {
+						text = expd_pdxrptg_ask_to_be_bitten_this_character_is_a_prisoner_of_from_tt
+						# Audax Validator "." Ignore_1001
+						AND = {
+							prisoner = yes
+							host = { character = FROM }
+						}
+					}
+				}
+				expd_pdxrptg_this_character_is_not_indisposed = yes
+				custom_tooltip = {
+					text = expd_pdxrptg_ask_to_be_bitten_this_character_has_50_opinion_of_from_tt
+					opinion = { who = FROM value = 50 }
+				}
+				custom_tooltip = {
+					text = expd_pdxrptg_ask_to_be_bitten_this_character_is_friend_lover_consort_spouse_prisoner_or_100opinion_of_from_tt
+					OR = {
+						is_friend = FROM
+						is_lover = FROM
+						is_consort = FROM
+						is_married = FROM
+						AND = {
+							prisoner = yes
+							host = { character = FROM }
+						}
+						opinion = { who = FROM value = 100 }
+					}
+				}
+			}
+			expd_pdxrptg_root_and_from_are_not_secluded_or_are_secluded_together = yes
+		}
+		
+		effect = {
+			hidden_tooltip = {
+				FROM = { save_event_target_as = expd_pdxrptg_ask_to_be_bitten_requestor }
+				character_event = { id = ExpdPdxrptgVampireLycanAskToBeBitten.1 }
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	
+	expd_pdxrptg_ask_to_be_bitten_lycan = {
+		
+		ai = no
+		
+		filter = all
+		
+		from_potential = {
+			ai = no
+			NOT = { has_character_flag = spellbook_open }
+			# Audax Validator "." Ignore_NEXT
+			is_disease_immune = no                                # Hide decision for all disease-immune decision-takers (including vampires & lycans)
+			NOT = { has_character_flag = lycanthropy_requested }  # Hide decision immediately after it has been taken
+		}
+		
+		potential = {
+			# Only show the decision for people who FROM knows are lycans.
+			# For hidden vampires: require the lycan trait,
+			#     and require FROM to have an opinion modifier which makes the trait visible.
+			OR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = known_lycan
+				# Audax Validator "." Ignore_NEXT
+				trait = known_lycan_benevolent
+				AND = {
+					# Audax Validator "." Ignore_NEXT
+					trait = lycan
+					ROOT_FROM = {
+						OR = {
+							has_opinion_modifier = {
+								who = ROOT
+								# Audax Validator "." Ignore_NEXT
+								modifier = opinion_lycan_aware_good
+							}
+							has_opinion_modifier = {
+								who = ROOT
+								# Audax Validator "." Ignore_NEXT
+								modifier = opinion_lycan_aware_bad
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		allow = {
+			FROM = {
+				is_adult = yes
+				prisoner = no
+				expd_pdxrptg_this_character_is_not_indisposed = yes
+				custom_tooltip = {
+					text = expd_pdxrptg_ask_to_be_bitten_this_character_has_50_opinion_of_root_tt
+					opinion = { who = ROOT value = 50 }
+				}
+				custom_tooltip = {
+					text = expd_pdxrptg_ask_to_be_bitten_this_character_is_not_horrified_by_roots_lycanthropy_tt
+					NOT = {
+						has_opinion_modifier = {
+							# Audax Validator "." Ignore_NEXT
+							modifier = opinion_horrified_lycan
+							who = ROOT
+						}
+					}
+				}
+			}
+			ROOT = {
+				custom_tooltip = {
+					text = expd_pdxrptg_this_character_has_full_control_of_their_lycanthropy_tt
+					has_character_flag = lycan_level_10
+				}
+				is_adult = yes
+				is_within_diplo_range = FROM
+				ai = yes
+				OR = {
+					prisoner = no
+					custom_tooltip = {
+						text = expd_pdxrptg_ask_to_be_bitten_this_character_is_a_prisoner_of_from_tt
+						# Audax Validator "." Ignore_1001
+						AND = {
+							prisoner = yes
+							host = { character = FROM }
+						}
+					}
+				}
+				expd_pdxrptg_this_character_is_not_indisposed = yes
+				custom_tooltip = {
+					text = expd_pdxrptg_ask_to_be_bitten_this_character_has_50_opinion_of_from_tt
+					opinion = { who = FROM value = 50 }
+				}
+				custom_tooltip = {
+					text = expd_pdxrptg_ask_to_be_bitten_this_character_is_friend_lover_consort_spouse_prisoner_or_100opinion_of_from_tt
+					OR = {
+						is_friend = FROM
+						is_lover = FROM
+						is_consort = FROM
+						is_married = FROM
+						AND = {
+							prisoner = yes
+							host = { character = FROM }
+						}
+						opinion = { who = FROM value = 100 }
+					}
+				}
+			}
+			expd_pdxrptg_root_and_from_are_not_secluded_or_are_secluded_together = yes
+		}
+		
+		effect = {
+			hidden_tooltip = {
+				FROM = { save_event_target_as = expd_pdxrptg_ask_to_be_bitten_requestor }
+				character_event = { id = ExpdPdxrptgVampireLycanAskToBeBitten.2 }
+			}
+		}
+		
+	}
+	
+}
