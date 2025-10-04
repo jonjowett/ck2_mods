@@ -1,0 +1,94 @@
+# Audax Validator EnableCommentMetadata
+
+targetted_decisions = {
+	
+	# Audax Validator "." Ignore_NEXT
+	enable_prisoner_transfering = {
+		ai = no
+		filter = self
+		diplomacy_icon = GFX_break_non_aggression_pact
+		potential = { NOT = { has_character_flag = selectingprisonersttt } }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_character_flag = selectingprisonersttt
+				any_courtier = { clr_character_flag = selectedprisoner }
+			}
+		}
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	disable_prisoner_transfering = {
+		ai = no
+		filter = self
+		diplomacy_icon = GFX_break_non_aggression_pact
+		potential = { has_character_flag = selectingprisonersttt }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				clr_character_flag = selectingprisonersttt
+				any_courtier = { clr_character_flag = selectedprisoner }
+			}
+		}
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	select_prisoner = {
+		ai = no
+		filter = court
+		diplomacy_icon = GFX_break_non_aggression_pact
+		from_potential = { has_character_flag = selectingprisonersttt }
+		potential = {
+			host = { character = FROM }
+			prisoner = yes
+			NOT = { has_character_flag = selectedprisoner }
+		}
+		allow = { always = yes }
+		effect = { hidden_tooltip = { ROOT = { set_character_flag = selectedprisoner } } }
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	deselect_prisoner = {
+		ai = no
+		filter = court
+		diplomacy_icon = GFX_break_non_aggression_pact
+		from_potential = { has_character_flag = selectingprisonersttt }
+		potential = {
+			host = { character = FROM }
+			prisoner = yes
+			has_character_flag = selectedprisoner
+		}
+		allow = { always = yes }
+		effect = { hidden_tooltip = { ROOT = { clr_character_flag = selectedprisoner } } }
+	}
+	
+	# Audax Validator "." Ignore_NEXT
+	handover_prisoner = {
+		ai = no
+		filter = all
+		diplomacy_icon = GFX_break_non_aggression_pact
+		from_potential = {
+			has_character_flag = selectingprisonersttt
+			any_courtier = {
+				prisoner = yes
+				has_character_flag = selectedprisoner
+			}
+		}
+		potential = { is_ruler = yes }
+		allow = { always = yes }
+		effect = {
+			any_courtier = {
+				limit = {
+					prisoner = yes
+					has_character_flag = selectedprisoner
+				}
+				custom_tooltip = { text = expd_pdxrptg_giveprisoner_this_character_will_be_transferred_to_root_tt }
+			}
+			hidden_tooltip = {
+				FROM = { save_event_target_as = sender_of_selected_prisoners }
+				ROOT = { character_event = { id = tttbg.1 } }
+			}
+		}
+	}
+	
+}
