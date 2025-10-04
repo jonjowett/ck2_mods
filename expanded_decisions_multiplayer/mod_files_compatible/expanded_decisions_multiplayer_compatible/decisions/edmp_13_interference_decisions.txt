@@ -488,7 +488,16 @@ targetted_decisions = {
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_aiplayer_player }
 				set_global_flag                        = edmp_interference_aiplayer_imprison
 			}
-			ROOT = { imprison = ROOT_FROMFROM }
+			custom_tooltip = {
+				text = edmp_interference_imprison_this_ai_by_third_party_player_tt
+				ROOT = {
+					if = {
+						limit = { prisoner = yes }
+						imprison = no
+					}
+					imprison = ROOT_FROMFROM
+				}
+			}
 			edmp_interference_notify_players_aiplayer = yes
 			hidden_tooltip = { clr_global_flag = edmp_interference_aiplayer_imprison }
 		}
