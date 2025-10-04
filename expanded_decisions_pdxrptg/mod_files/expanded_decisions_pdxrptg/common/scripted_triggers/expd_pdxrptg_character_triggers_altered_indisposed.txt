@@ -1,0 +1,32 @@
+# Audax Validator EnableCommentMetadata
+
+is_indisposed = {
+	expd_pdxrptg_this_character_is_indisposed = yes
+}
+expd_pdxrptg_this_character_is_indisposed = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_is_indisposed_tt
+		OR = {
+			trait = in_hiding
+			# Audax Validator "." Ignore_NEXT
+			trait = on_adventure
+			# Audax Validator "." Ignore_NEXT
+			trait = on_assassination
+			# Audax Validator "." Ignore_NEXT
+			trait = on_diplomatic
+			# Audax Validator "." Ignore_NEXT
+			trait = on_tour
+			# Audax Validator "." Ignore_NEXT
+			trait = on_guild
+			# Audax Validator "." Ignore_NEXT
+			trait = on_mission
+			trait = on_pilgrimage
+		}
+	}
+}
+expd_pdxrptg_this_character_is_not_indisposed = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_is_not_indisposed_tt
+		is_indisposed = no
+	}
+}
