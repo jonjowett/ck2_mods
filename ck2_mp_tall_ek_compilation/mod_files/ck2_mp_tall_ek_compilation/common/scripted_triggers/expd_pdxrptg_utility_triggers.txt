@@ -57,3 +57,38 @@ expd_pdxrptg_this_character_is_not_inaccessible = {
 		is_inaccessible_trigger = no
 	}
 }
+
+expd_pdxrptg_root_and_from_are_not_secluded_or_are_secluded_together = {
+	OR = {
+		custom_tooltip = {
+			text = expd_pdxrptg_root_and_from_are_not_secluded_tt
+			ROOT      = { in_seclusion = no }
+			ROOT_FROM = { in_seclusion = no }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_root_and_from_are_in_seclusion_together_tt
+			OR = {
+				ROOT = {
+					in_seclusion = yes
+					prisoner = no
+					is_ruler = no
+					host = {
+						character = ROOT_FROM
+						in_seclusion = yes
+						prisoner = no
+					}
+				}
+				ROOT_FROM = {
+					in_seclusion = yes
+					prisoner = no
+					is_ruler = no
+					host = {
+						character = ROOT
+						
+						prisoner = no
+					}
+				}
+			}
+		}
+	}
+}

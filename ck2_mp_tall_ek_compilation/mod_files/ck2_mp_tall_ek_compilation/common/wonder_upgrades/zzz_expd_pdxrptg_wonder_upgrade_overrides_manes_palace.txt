@@ -1,0 +1,111 @@
+# Audax Validator EnableCommentMetadata
+
+# Ignore all errors from this file, because its only purpose is to disable Mane-specific palace upgrades for non-Manes.
+# Audax Validator "!" Ignore_NEXT
+
+upgrade_statue_mane = {
+	picture = GFX_upgrade_icon_cathead
+	potential = {}
+	
+	############################### BEGIN MOD EDIT ###############################
+	allow = {
+		religion = riddlethar
+		controls_religion = yes
+	}
+	active = {
+		religion = riddlethar
+		controls_religion = yes
+	}
+	############################### END OF MOD EDIT ###############################
+	
+	flags = {
+		is_singular
+		decorative
+		statues
+		contemplative
+	}
+	build_time = 24
+	gold_cost_flat = 350
+	gold_cost_ticking = 1
+	
+	local_modifier = {
+	}
+	owner_modifier = {
+		monthly_character_prestige = 0.05
+		same_religion_opinion = 3
+		zealous_opinion = 3
+	}
+}
+
+upgrade_lunar_lattice = {
+	picture = GFX_upgrade_icon_moons
+	potential = {}
+	
+	############################### BEGIN MOD EDIT ###############################
+	allow = {
+		religion = riddlethar
+		controls_religion = yes
+	}
+	active = {
+		religion = riddlethar
+		controls_religion = yes
+	}
+	############################### END OF MOD EDIT ###############################
+	
+	flags = {
+		is_singular
+		decorative
+		mural
+		valuable
+		holy
+		contemplative
+	}
+	build_time = 36
+	gold_cost_flat = 600
+	gold_cost_ticking = 1
+	
+	local_modifier = {
+		culture_techpoints = 0.05
+	}
+	owner_modifier = {
+		scholar_opinion = 2
+		theologian_opinion = 2
+		khajiit_opinion = 3
+		monthly_character_piety = 0.05
+		monthly_character_prestige = 0.05
+	}
+}
+upgrade_inner_sanctuary_mane = {
+	picture = GFX_upgrade_icon_doorway
+	potential = {}
+	
+	############################### BEGIN MOD EDIT ###############################
+	allow = {
+		religion = riddlethar
+		controls_religion = yes
+	}
+	active = {
+		religion = riddlethar
+		controls_religion = yes
+	}
+	############################### END OF MOD EDIT ###############################
+	
+	flags = {
+		is_singular
+		secluded
+		room
+		contemplative
+		inner_sanctuary
+	}
+	build_time = 36
+	gold_cost_flat = 450
+	gold_cost_ticking = 1
+	
+	local_modifier = {}
+	owner_modifier = {
+		intrigue = 1
+		court_size_modifier = 3
+		custom_modifier_text = unlock_meditative_retreat_tt #Unlocks Meditative Retreat.
+		custom_modifier_text = private_talk_possible_modifier_tt
+	}
+}

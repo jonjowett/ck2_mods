@@ -1,0 +1,106 @@
+# Audax Validator EnableCommentMetadata
+
+targetted_decisions = {
+	
+	# Audax Validator "." Ignore_NEXT
+	mp_tallek_murder_deflection_decision = {
+		only_playable = yes
+		filter = self
+		ai_target_filter = self
+		ai_check_interval = 75
+		diplomacy_icon = GFX_special_bloodline_decision
+		potential = {
+			has_dlc = "Holy Fury"
+			is_playable = yes
+			is_adult = yes
+			prisoner = no
+			NOT = { trait = incapable }
+			any_owned_bloodline = {
+				has_bloodline_flag = bloodline_murder_deflection 
+				bloodline_is_active_for = PREV
+			}
+		}
+		allow = {
+			intrigue = 8
+			OR = {  
+				trait = kinslayer
+				trait = familial_kinslayer
+				trait = dynastic_kinslayer
+				trait = tribal_kinslayer
+				has_character_modifier = known_murderer
+				has_character_modifier = vicious_rumors
+				has_character_modifier = vicious_rumors_2
+			}
+			custom_tooltip = {
+				text = mp_tallek_tooltip_deflection_cooldown  
+				hidden_tooltip = { NOT = { has_character_modifier = deflection_decision_cooldown } }
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = mp_tallek_tooltip_murder_deflection_decision
+				hidden_tooltip = { 
+					character_event = { id = HF.24107 }
+					add_character_modifier = { 
+						name = deflection_decision_cooldown
+						duration = 3650
+						hidden = yes
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.1
+			
+			modifier = {
+				factor = 0
+				OR = {
+					reverse_opinion = { who = FROM value = 40 }
+					FROM = { NOT = { piety = 100 } }
+					FROM = { liege = { dynasty = ROOT } }
+				}
+			}
+			modifier = {
+				factor = 0
+				FROM = {
+					NOR = {
+						trait = cruel
+						trait = impaler
+						trait = wroth
+						is_rival = ROOT
+						trait = arbitrary
+						trait = paranoid
+						trait = deceitful
+						trait = proud
+						trait = lunatic
+						trait = possessed
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				FROM = {
+					OR = {
+						trait = kind
+						trait = just
+						trait = patient
+						trait = shy
+						trait = greedy
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				FROM = {
+					OR = {
+						trait = cruel
+						trait = impaler
+						trait = wroth
+						is_rival = ROOT
+						trait = arbitrary
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,34 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = tttbg
+
+character_event = {
+	id = tttbg.1
+	# Audax Validator "." Ignore_NEXT
+	desc = desctttbg.1
+	is_triggered_only = yes
+	portrait = event_target:sender_of_selected_prisoners
+	
+	option = {
+		ai_chance = { factor = 100 }
+		name = "Take the prisoners in."
+		event_target:sender_of_selected_prisoners = {
+			show_scope_change = no
+			any_courtier = {
+				limit = {
+					prisoner = yes
+					has_character_flag = selectedprisoner
+				}
+				imprison = no
+				imprison = ROOT
+			}
+		}
+	}
+	option = {
+		ai_chance = { factor = 0 }
+		name = "We don't need them."
+	}
+	after = {
+		clear_event_target = sender_of_selected_prisoners
+	}
+}

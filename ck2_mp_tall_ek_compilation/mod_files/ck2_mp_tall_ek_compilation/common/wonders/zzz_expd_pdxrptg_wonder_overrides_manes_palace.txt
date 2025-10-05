@@ -1,0 +1,191 @@
+# Audax Validator EnableCommentMetadata
+
+# Ignore all errors from this file, because its only purpose is to enable the palace for characters who are not the Mane.
+# Audax Validator "!" Ignore_NEXT
+
+####Mane's Palace
+wonder_mane_palace = { #Palace of the Mane
+	picture = GFX_wonder_strip_hindu_temple
+	show_model = no
+	allow_construction = no
+	potential = {
+		always = no
+	}
+	active = {
+		ROOT = {
+			
+			############################### BEGIN MOD EDIT ###############################
+			OR = {
+				AND = {
+					religion = riddlethar
+					controls_religion = yes
+				}
+				AND = {
+					NOT = { religion = riddlethar }
+					OR = {
+						religion_group = khajiit_pantheon
+						culture_group = khajiit
+					}
+				}
+			}
+			############################### END OF MOD EDIT ###############################
+			
+			trigger_if = {
+				limit = { has_game_rule = { name = great_work_limit value = any } }
+				has_game_rule = { name = great_work_limit value = any }
+			}
+			
+			trigger_else = {
+				OR = {
+					trigger_if = {
+						limit = { has_game_rule = { name = great_work_limit value = capital } }
+						has_game_rule = { name = great_work_limit value = capital }
+						custom_tooltip = {
+							text = WONDER_IN_CAPITAL_CT
+							FROMFROM = { location = { ROOT = { capital_scope = { province = PREVPREV } } } }
+						}
+					}
+					
+					trigger_else_if = {
+						limit = { has_game_rule = { name = great_work_limit value = demesne } }
+						has_game_rule = { name = great_work_limit value = demesne }
+						custom_tooltip = {
+							text = WONDER_IN_DEMESNE_CT
+							FROMFROM = { location = { ROOT = { any_demesne_province = { province = PREVPREV } } } }
+						}
+					}
+				}
+			}
+		}
+	}
+	flags = {
+		is_historical
+		is_destructible
+		holy_building
+		inspires_piety
+		inspires_contentedness
+		inspires_relaxing
+		cost_high
+		is_mane_palace
+	}
+	available_upgrades = {
+		upgrade_moonsugar_gardens
+		upgrade_statue_mane
+		upgrade_retinue_mane
+		upgrade_lunar_lattice
+		upgrade_relic_tomb
+		upgrade_inner_sanctuary_mane
+		upgrade_moonsugar_distillery
+		upgrade_spikes
+		upgrade_torture_chamber
+		upgrade_roads
+		upgrade_road_tolls
+		upgrade_watchtower_network
+		upgrade_tower
+		upgrade_historical_mural
+		
+		#Cultural/Religion/Regional/Special Global Upgrades
+		#upgrade_runestones
+		upgrade_necromancer_retinue
+		upgrade_brewery
+		upgrade_meadery
+		upgrade_vineyard
+		upgrade_rice_field
+		upgrade_coconut_orchard
+		upgrade_dairy_brewer
+		#upgrade_drainage_channels
+		#upgrade_tree_plantation
+		#upgrade_hypocausts
+		#upgrade_heating_pipes
+		upgrade_aqueduct_system
+		upgrade_freshwater_fountains
+		upgrade_sewers
+		upgrade_investment_logging
+		#upgrade_investment_quarry
+	}
+	
+	stage = {
+		allow = {
+		}
+		build_time = 325
+		gold_cost_flat = 2000
+		gold_cost_ticking = 5
+		restore_time = 150
+		loot_time = 12
+		restore_cost_flat = 400
+		restore_cost_ticking = 2
+		upgrade_slots = 3
+		local_modifier = {
+			local_tax_modifier = 0.025
+			tech_growth_modifier_culture = 0.01
+		}
+		owner_modifier = {
+			monthly_character_prestige = 0.1
+			monthly_character_piety = 0.05
+			court_size_modifier = 3
+		}
+	}
+	stage = {
+		allow = {
+		}
+		build_time = 375
+		gold_cost_flat = 2200
+		gold_cost_ticking = 5
+		restore_time = 200
+		loot_time = 12
+		restore_cost_flat = 500
+		restore_cost_ticking = 2
+		upgrade_slots = 2
+		local_modifier = {
+			local_tax_modifier = 0.025
+			tech_growth_modifier_culture = 0.01
+		}
+		owner_modifier = {
+			monthly_character_prestige = 0.1
+			monthly_character_piety = 0.05
+			court_size_maintenance_cost_modifier = -0.05
+		}
+	}
+	stage = {
+		allow = {
+		}
+		build_time = 375
+		gold_cost_flat = 2400
+		gold_cost_ticking = 5
+		restore_time = 200
+		loot_time = 12
+		restore_cost_flat = 500
+		restore_cost_ticking = 2
+		upgrade_slots = 2
+		local_modifier = {
+			local_tax_modifier = 0.05
+			tech_growth_modifier_culture = 0.01
+		}
+		owner_modifier = {
+			monthly_character_prestige = 0.1
+			monthly_character_piety = 0.05
+			court_size_modifier = 3
+		}
+	}
+	stage = {
+		allow = {
+		}
+		build_time = 325
+		gold_cost_flat = 2600
+		gold_cost_ticking = 5
+		restore_time = 200
+		loot_time = 2
+		restore_cost_flat = 500
+		restore_cost_ticking = 2
+		upgrade_slots = 3
+		local_modifier = {
+			local_tax_modifier = 0.025
+			tech_growth_modifier_culture = 0.01
+		}
+		owner_modifier = {
+			monthly_character_prestige = 0.1
+			monthly_character_piety = 0.05
+			court_size_maintenance_cost_modifier = -0.05
+		}
+	}
+}

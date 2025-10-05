@@ -7,7 +7,8 @@ mp_tallek_bloodline_tahar = {
 	monthly_character_prestige = 0.1
 	
 	# Audax Validator "." Ignore_NEXT
-	khajiit_opinion = 20  # Net +10 Khajiit     opinion
+	khajiit_opinion = 10  # Net +10 Khajiit     opinion (because in reality this is applied twice - once for khajiit trait, once for khajiit culture group!)
+	mp_tallek_bloodline_effect_khajiit_culture_opinion_10 = 1
 	
 	general_opinion = -10 # Net -10 Non-Khajiit opinion
 	
@@ -15,8 +16,7 @@ mp_tallek_bloodline_tahar = {
 	pirate_opinion = 10   # Flavour only, unlikely to have any gameplay impact
 	
 	mp_tallek_bloodline_effect_reaver = 1         # 3 lines in the UI
-	mp_tallek_bloodline_effect_blank_line_1 = 1   # +1 blank line (in practice, this is placed at the bottom of the LHS?!)
-	mp_tallek_bloodline_effect_blank_line_2 = 1   # +1 blank line
+	mp_tallek_bloodline_effect_blank_line_1 = 1   # +1 blank line
 	
 	inheritance = all_descendants
 	matrilineal_override = yes

@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 namespace = ExpdGifts
 
 # Notify recipient that they have received a gift from someone.
@@ -74,20 +76,47 @@ character_event = {
 		# Workaround for scope weirdness: Look back in the event chain,
 		#      the first character who isn't ROOT is the sender.
 		#      (Sometimes it's FROM, sometimes it's FROMFROM?!??!!!)
+		# NB: The Validator warnings about FROMFROMFROM etc possibly not being correct are actually valid!
+		#     But this is a hacky workaround, so we suppress them to avoid confusion.
 		ROOT = { save_event_target_as = expd_g_send_gold_recipient }
 		if = {
-			limit = { NOT = { FROM = { character = ROOT } } }
+			limit = {
+				NOT = {
+					# Audax Validator "." Ignore_NEXT
+					FROM = {
+						character = ROOT
+					}
+				}
+			}
+			# Audax Validator "." Ignore_NEXT
 			FROM = { save_event_target_as = expd_g_send_gold_sender }
 		}
 		else_if = {
-			limit = { NOT = { FROMFROM = { character = ROOT } } }
+			limit = {
+				NOT = {
+					# Audax Validator "." Ignore_NEXT
+					FROMFROM = {
+						character = ROOT
+					}
+				}
+			}
+			# Audax Validator "." Ignore_NEXT
 			FROMFROM = { save_event_target_as = expd_g_send_gold_sender }
 		}
 		else_if = {
-			limit = { NOT = { FROMFROMFROM = { character = ROOT } } }
+			limit = {
+				NOT = {
+					# Audax Validator "." Ignore_NEXT
+					FROMFROMFROM = {
+						character = ROOT
+					}
+				}
+			}
+			# Audax Validator "." Ignore_NEXT
 			FROMFROMFROM = { save_event_target_as = expd_g_send_gold_sender }
 		}
 		else = {
+			# Audax Validator "." Ignore_NEXT
 			FROMFROMFROMFROM = { save_event_target_as = expd_g_send_gold_sender }
 		}
 	}
