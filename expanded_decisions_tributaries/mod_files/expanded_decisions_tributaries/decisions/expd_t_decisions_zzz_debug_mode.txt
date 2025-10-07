@@ -166,26 +166,7 @@ targetted_decisions = {
 		}
 		third_party_allow = { always = yes } # Since this is a debug mode operation, we don't bother to check whether the protectorate can instantly break free
 		effect = {
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = expd_t_debug_mode_notification_sent_tt
-					FROM          = { save_event_target_as = expd_t_debug_mode_decision_taker }
-					ROOT          = { save_event_target_as = expd_t_debug_mode_character_affected }
-					ROOT_FROMFROM = { save_event_target_as = expd_t_debug_mode_character_affected_other }
-					FROM = { any_player = { character_event = { id = EDTDebugModeNotification.1300 } } }
-					clear_event_target = expd_t_debug_mode_decision_taker
-					clear_event_target = expd_t_debug_mode_character_affected
-					clear_event_target = expd_t_debug_mode_character_affected_other
-				}
-			}
-			FROM = {
-				make_tributary = {
-					who = ROOT
-					percentage = 0.2
-					tributary_type = expd_t_protectorate
-				}
-			}
+			expd_t_from_makes_root_become_protectorate_of_fromfrom = yes
 		}
 	}
 	
