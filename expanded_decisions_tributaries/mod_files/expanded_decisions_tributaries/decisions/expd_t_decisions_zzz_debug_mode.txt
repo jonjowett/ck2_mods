@@ -88,7 +88,7 @@ targetted_decisions = {
 			any_character = {
 				limit = {
 					expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes
-					suzerain = { ai = yes }
+					suzerain = { expd_t_this_character_should_be_treated_as_an_ai = yes }
 				}
 				suzerain = { remove_tributary = PREV }
 			}
@@ -157,7 +157,7 @@ targetted_decisions = {
 		allow = { always = yes }
 		third_party_potential = {
 			ROOT_FROMFROM = {
-				ai = no
+				expd_t_this_character_should_be_treated_as_a_player = yes
 				independent = yes
 				NOT = { any_tributary = { character = ROOT } }
 			}

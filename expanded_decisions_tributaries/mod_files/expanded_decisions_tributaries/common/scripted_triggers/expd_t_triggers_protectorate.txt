@@ -66,8 +66,8 @@ expd_t_from_can_instantly_force_root_to_be_protectorate = {
 		
 		# Only AI can be forced to be protectorates
 		conditional_tooltip = {
-			trigger = { ai = no }
-			ai = yes
+			trigger = { expd_t_this_character_should_be_treated_as_a_player = yes }
+			expd_t_this_character_should_be_treated_as_an_ai = yes
 		}
 		
 		OR = {
