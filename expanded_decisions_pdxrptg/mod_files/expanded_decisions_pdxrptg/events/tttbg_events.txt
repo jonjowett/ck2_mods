@@ -3,14 +3,21 @@
 namespace = tttbg
 
 character_event = {
+	
 	id = tttbg.1
+	
+	is_triggered_only = yes
+	
 	# Audax Validator "." Ignore_NEXT
 	desc = desctttbg.1
-	is_triggered_only = yes
+	
+	picture = GFX_evt_prisoner_hf
+	
 	portrait = event_target:sender_of_selected_prisoners
 	
 	option = {
 		ai_chance = { factor = 100 }
+		# Audax Validator "." Ignore_NEXT
 		name = "Take the prisoners in."
 		event_target:sender_of_selected_prisoners = {
 			show_scope_change = no
@@ -24,11 +31,15 @@ character_event = {
 			}
 		}
 	}
+	
 	option = {
 		ai_chance = { factor = 0 }
+		# Audax Validator "." Ignore_NEXT
 		name = "We don't need them."
 	}
+	
 	after = {
 		clear_event_target = sender_of_selected_prisoners
 	}
+	
 }
