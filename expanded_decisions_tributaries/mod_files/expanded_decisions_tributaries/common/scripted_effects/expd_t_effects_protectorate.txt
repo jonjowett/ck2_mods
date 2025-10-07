@@ -47,16 +47,39 @@ expd_t_from_makes_root_become_protectorate_of_fromfrom = {
 }
 
 expd_t_root_becomes_protectorate_of_this_character = {
+	
+	# Remove any previous tributary (to be sure that a character doesn't end up as a double-tributary)
 	if = {
-		limit = { ROOT = { is_tributary = yes } }
+		limit = {
+			ROOT = {
+				is_tributary = yes
+				suzerain = { NOT = { character = PREVPREV } }
+			}
+		}
 		ROOT = { suzerain = { remove_tributary = ROOT } }
 	}
-	make_tributary = {
-		who = ROOT
-		percentage = 0.2
-		tributary_type = expd_t_protectorate
+	
+	# Make ROOT the correct type of protectorate of this character
+	if = {
+		limit = { has_global_flag = expd_t_rule_protectorate_infighting_no_interference }
+		make_tributary = {
+			who = ROOT
+			percentage = 0.2
+			tributary_type = expd_t_protectorate_with_infighting
+		}
 	}
-	hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } } # Update root's suzerain's retinue cap
+	else = {
+		make_tributary = {
+			who = ROOT
+			percentage = 0.2
+			tributary_type = expd_t_protectorate
+		}
+	}
+	
+	# Update ROOT's suzerain's  (ie. this character's) retinue cap
+	hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
+	
+	# ROOT's suzerain (ie. this character) joins ROOT's defensive wars
 	if = {
 		limit = { ROOT = { is_primary_war_defender = yes } }
 		ROOT = {
@@ -67,5 +90,5 @@ expd_t_root_becomes_protectorate_of_this_character = {
 			}
 		}
 	}
-
+	
 }

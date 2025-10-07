@@ -45,9 +45,7 @@ targetted_decisions = {
 		third_party_potential = {
 			FROMFROM = {
 				any_tributary = {
-					is_tributary = {
-						type = expd_t_protectorate
-					}
+					expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes
 				}
 			}
 		}
@@ -64,7 +62,7 @@ targetted_decisions = {
 		potential = { expd_t_this_character_can_see_debug_mode_decisions = yes }
 		allow = { always = yes }
 		third_party_potential = {
-			FROMFROM = { is_tributary = { type = expd_t_protectorate } }
+			FROMFROM = { expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes }
 		}
 		third_party_allow = { always = no }
 		effect = {
@@ -89,7 +87,7 @@ targetted_decisions = {
 			}
 			any_character = {
 				limit = {
-					is_tributary = { type = expd_t_protectorate }
+					expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes
 					suzerain = { ai = yes }
 				}
 				suzerain = { remove_tributary = PREV }
@@ -117,7 +115,7 @@ targetted_decisions = {
 				}
 			}
 			any_tributary = {
-				limit = { is_tributary = { type = expd_t_protectorate } }
+				limit = { expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes }
 				suzerain = { remove_tributary = PREV }
 			}
 		}
@@ -128,7 +126,7 @@ targetted_decisions = {
 		filter = independent_rulers_including_me
 		ai = no
 		from_potential = { expd_t_this_character_can_see_debug_mode_decisions = yes }
-		potential = { is_tributary = { type = expd_t_protectorate } }
+		potential = { expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes }
 		allow = { always = yes }
 		effect = {
 			if = {

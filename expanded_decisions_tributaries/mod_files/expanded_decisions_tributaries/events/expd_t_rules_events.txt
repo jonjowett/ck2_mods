@@ -115,6 +115,90 @@ character_event = {
 		}
 	}
 	
+	option = {
+		name = {
+			text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_Current_Disabled
+			trigger = { NOT = { has_global_flag = expd_t_rule_protectorate_infighting_no_interference } }
+		}
+		name = {
+			text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_Current_Enabled
+			trigger = {         has_global_flag = expd_t_rule_protectorate_infighting_no_interference   }
+		}
+		if = {
+			limit = { has_global_flag = expd_t_rule_protectorate_infighting_no_interference }
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_Current_Disabled_Details }
+		}
+		else = {
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_Current_Enabled_Details }
+		}
+		if = {
+			limit = { expd_t_rules_this_character_can_change_rules = yes }
+			# Administrator: Change the rule and reopen this window
+			if = {
+				limit = { has_global_flag = expd_t_rule_protectorate_infighting_no_interference }
+				custom_tooltip = {
+					text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_ChangeTo_Disabled
+					clr_global_flag = expd_t_rule_protectorate_infighting_no_interference
+				}
+				custom_tooltip = {
+					text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_ChangeAllProtectorates
+					any_character = {
+						limit = {
+							is_ruler = yes
+							is_tributary = { type = expd_t_protectorate_with_infighting }
+						}
+						suzerain = {
+							remove_tributary = PREV
+							make_tributary = {
+								who = ROOT
+								percentage = 0.2
+								tributary_type = expd_t_protectorate
+							}
+						}
+					}
+				}
+			}
+			else = {
+				custom_tooltip = {
+					text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_ChangeTo_Enabled
+					set_global_flag = expd_t_rule_protectorate_infighting_no_interference
+				}
+				custom_tooltip = {
+					text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_ChangeAllProtectorates
+					any_character = {
+						limit = {
+							is_ruler = yes
+							is_tributary = { type = expd_t_protectorate }
+						}
+						suzerain = {
+							remove_tributary = PREV
+							make_tributary = {
+								who = ROOT
+								percentage = 0.2
+								tributary_type = expd_t_protectorate_with_infighting
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = EDTRules_1000_EvtAct_PlayersNotified
+					any_player = {
+						limit = { NOT = { character = PREV } }
+						character_event = { id = EDTRules.2003 }
+					}
+				}
+			}
+			hidden_tooltip = { character_event = { id = EDTRules.1000 } }
+		}
+		else = {
+			# Non-Administrator: Exit
+			hidden_tooltip = { clr_character_flag = expd_t_rules_window_open }
+		}
+	}
+	
 	# Administrator: Special additional exit option (so they can get out of the otherwise-infinite loop without changing rules)
 	option = {
 		name = EDTRules_1000_EvtOpt_Exit
@@ -154,6 +238,22 @@ character_event = {
 	desc = {
 		trigger = { NOT = { has_global_flag = expd_t_rule_no_chainable_cbs } }
 		text = EDTRules_2002_Desc_ChainableCBs_Enabled
+	}
+	option = { name = EDTRules_2000_EvtOpt_Exit }
+}
+
+character_event = {
+	id      = EDTRules.2003
+	title   = EDTRules_2000_Title
+	picture = GFX_evt_camaraderie
+	is_triggered_only = yes
+	desc = {
+		trigger = {         has_global_flag = expd_t_rule_protectorate_infighting_no_interference   }
+		text = EDTRules_2003_Desc_ProtectorateInfightingNoInterference_Enabled
+	}
+	desc = {
+		trigger = { NOT = { has_global_flag = expd_t_rule_protectorate_infighting_no_interference } }
+		text = EDTRules_2003_Desc_ProtectorateInfightingNoInterference_Disabled
 	}
 	option = { name = EDTRules_2000_EvtOpt_Exit }
 }
