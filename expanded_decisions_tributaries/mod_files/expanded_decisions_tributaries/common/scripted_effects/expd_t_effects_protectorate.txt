@@ -47,6 +47,10 @@ expd_t_from_makes_root_become_protectorate_of_fromfrom = {
 }
 
 expd_t_root_becomes_protectorate_of_this_character = {
+	if = {
+		limit = { ROOT = { is_tributary = yes } }
+		ROOT = { suzerain = { remove_tributary = ROOT } }
+	}
 	make_tributary = {
 		who = ROOT
 		percentage = 0.2
