@@ -117,40 +117,41 @@ character_event = {
 	
 	option = {
 		name = {
-			text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_Current_Disabled
-			trigger = { NOT = { has_global_flag = expd_t_rule_protectorate_infighting_no_interference } }
+			text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Current_Enabled
+			trigger = {         has_global_flag = expd_t_rule_protectorate_no_infighting   }
 		}
 		name = {
-			text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_Current_Enabled
-			trigger = {         has_global_flag = expd_t_rule_protectorate_infighting_no_interference   }
+			text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Current_Disabled
+			trigger = { NOT = { has_global_flag = expd_t_rule_protectorate_no_infighting } }
 		}
 		if = {
-			limit = { has_global_flag = expd_t_rule_protectorate_infighting_no_interference }
-			custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_Current_Disabled_Details }
+			limit = { has_global_flag = expd_t_rule_protectorate_no_infighting }
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Current_Enabled_Details }
 		}
 		else = {
-			custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_Current_Enabled_Details }
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Current_Disabled_Details }
 		}
 		if = {
 			limit = { expd_t_rules_this_character_can_change_rules = yes }
 			# Administrator: Change the rule and reopen this window
 			if = {
-				limit = { has_global_flag = expd_t_rule_protectorate_infighting_no_interference }
+				limit = { has_global_flag = expd_t_rule_protectorate_no_infighting }
 				custom_tooltip = {
-					text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_ChangeTo_Disabled
-					clr_global_flag = expd_t_rule_protectorate_infighting_no_interference
+					text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_ChangeTo_Disabled
+					clr_global_flag = expd_t_rule_protectorate_no_infighting
 				}
+				custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Caveats }
 				custom_tooltip = {
-					text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_ChangeAllProtectorates
+					text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_ChangeAllProtectorates
 					any_character = {
 						limit = {
 							is_ruler = yes
-							is_tributary = { type = expd_t_protectorate_with_infighting }
+							is_tributary = { type = expd_t_protectorate_without_infighting }
 						}
 						suzerain = {
 							remove_tributary = PREV
 							make_tributary = {
-								who = ROOT
+								who = PREV
 								percentage = 0.2
 								tributary_type = expd_t_protectorate
 							}
@@ -160,11 +161,12 @@ character_event = {
 			}
 			else = {
 				custom_tooltip = {
-					text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_ChangeTo_Enabled
-					set_global_flag = expd_t_rule_protectorate_infighting_no_interference
+					text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_ChangeTo_Enabled
+					set_global_flag = expd_t_rule_protectorate_no_infighting
 				}
+				custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Caveats }
 				custom_tooltip = {
-					text = EDTRules_1000_EvtOpt_ProtectorateInfightingNoInterference_ChangeAllProtectorates
+					text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_ChangeAllProtectorates
 					any_character = {
 						limit = {
 							is_ruler = yes
@@ -173,9 +175,9 @@ character_event = {
 						suzerain = {
 							remove_tributary = PREV
 							make_tributary = {
-								who = ROOT
+								who = PREV
 								percentage = 0.2
-								tributary_type = expd_t_protectorate_with_infighting
+								tributary_type = expd_t_protectorate_without_infighting
 							}
 						}
 					}
@@ -195,6 +197,7 @@ character_event = {
 		}
 		else = {
 			# Non-Administrator: Exit
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Caveats }
 			hidden_tooltip = { clr_character_flag = expd_t_rules_window_open }
 		}
 	}
@@ -248,12 +251,12 @@ character_event = {
 	picture = GFX_evt_camaraderie
 	is_triggered_only = yes
 	desc = {
-		trigger = {         has_global_flag = expd_t_rule_protectorate_infighting_no_interference   }
-		text = EDTRules_2003_Desc_ProtectorateInfightingNoInterference_Enabled
+		trigger = {         has_global_flag = expd_t_rule_protectorate_no_infighting   }
+		text = EDTRules_2003_Desc_ProtectorateNoInfighting_Enabled
 	}
 	desc = {
-		trigger = { NOT = { has_global_flag = expd_t_rule_protectorate_infighting_no_interference } }
-		text = EDTRules_2003_Desc_ProtectorateInfightingNoInterference_Disabled
+		trigger = { NOT = { has_global_flag = expd_t_rule_protectorate_no_infighting } }
+		text = EDTRules_2003_Desc_ProtectorateNoInfighting_Disabled
 	}
 	option = { name = EDTRules_2000_EvtOpt_Exit }
 }

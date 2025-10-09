@@ -1,7 +1,7 @@
 # Note the existence of expd_t_protectorate - only one of these two should be present in any game (depending on game rule).
-# Direct copy of expd_t_protectorate, except that suzerain_can_join_infighting = no.
+# Direct copy of expd_t_protectorate, except that tributaries_can_infight = no.
 
-expd_t_protectorate_with_infighting = {
+expd_t_protectorate_without_infighting = {
 	
 	# Very similar to a permanent tributary.
 	# The reason for the difference is that this type of tributary can't be auto-released if the suzerain is smaller.
@@ -13,7 +13,7 @@ expd_t_protectorate_with_infighting = {
 	tribute_name = TRIBUTARY_DEFAULT_TRIBUTE
 	breaks_at_suzerain_death = no
 	suzerain_must_defend = yes
-	suzerain_can_join_infighting = no
+	tributaries_can_infight = no
 	tributary_can_be_summoned = no
 	tributary_must_defend = no
 	tributaries_can_unite = yes

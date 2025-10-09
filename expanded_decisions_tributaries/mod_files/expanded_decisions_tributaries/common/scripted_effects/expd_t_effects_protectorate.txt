@@ -61,11 +61,11 @@ expd_t_root_becomes_protectorate_of_this_character = {
 	
 	# Make ROOT the correct type of protectorate of this character
 	if = {
-		limit = { has_global_flag = expd_t_rule_protectorate_infighting_no_interference }
+		limit = { has_global_flag = expd_t_rule_protectorate_no_infighting }
 		make_tributary = {
 			who = ROOT
 			percentage = 0.2
-			tributary_type = expd_t_protectorate_with_infighting
+			tributary_type = expd_t_protectorate_without_infighting
 		}
 	}
 	else = {
