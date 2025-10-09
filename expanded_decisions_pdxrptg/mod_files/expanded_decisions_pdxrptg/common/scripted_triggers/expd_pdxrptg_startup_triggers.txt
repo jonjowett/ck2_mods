@@ -1,0 +1,9 @@
+expd_pdxrptg_startup_more_than_1_month_elapsed = {
+	custom_tooltip = {
+		text = expd_pdxrptg_startup_more_than_1_month_elapsed_tt
+		OR = {
+			NOT = { has_global_flag  = expd_pdxrptg_startup_1_month_timer }
+			had_global_flag = { flag = expd_pdxrptg_startup_1_month_timer days >= 32 }
+		}
+	}
+}
