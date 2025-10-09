@@ -1,0 +1,64 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = ExpdPdxrptgExtraCannon
+
+# After finishing searching for a refurbishable cannon, add "found cannon" modifier, inform wonder owner
+province_event = {
+	id = ExpdPdxrptgExtraCannon.1000
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		expd_pdxrptg_extra_cannon_remove_province_effects_from_this_province = yes
+		add_province_modifier = {
+			name     = expd_pdxrptg_extra_cannon_found
+			duration = -1
+		}
+		owner = { top_liege = { character_event = { id = ExpdPdxrptgExtraCannon.1001 days = 1 } } }
+	}
+}
+character_event = {
+	id       = ExpdPdxrptgExtraCannon.1001
+	title    = ExpdPdxrptgExtraCannon_1001_Title
+	desc     = ExpdPdxrptgExtraCannon_1001_Desc
+	picture  = GFX_evt_loot
+	portrait = none
+	is_triggered_only = yes
+	option = { name = ExpdPdxrptgExtraCannon_EvtOpt_Excellent }
+}
+
+# After finishing creating the cannon, add cooldown to the province, grant artifact to wonder owner
+province_event = {
+	id = ExpdPdxrptgExtraCannon.2000
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		expd_pdxrptg_extra_cannon_remove_province_effects_from_this_province = yes
+		if = {
+			limit = { has_global_flag = expd_pdxrptg_extra_cannon_debug }
+			add_province_modifier = {
+				name = expd_pdxrptg_extra_cannon_cooldown
+				days = 10
+			}
+		}
+		else = {
+			add_province_modifier = {
+				name  = expd_pdxrptg_extra_cannon_cooldown
+				years = 10
+			}
+		}
+		owner = { top_liege = { character_event = { id = ExpdPdxrptgExtraCannon.2001 days = 1 } } }
+	}
+}
+character_event = {
+	id       = ExpdPdxrptgExtraCannon.2001
+	title    = ExpdPdxrptgExtraCannon_2001_Title
+	desc     = ExpdPdxrptgExtraCannon_2001_Desc
+	picture  = GFX_evt_loot
+	portrait = none
+	is_triggered_only = yes
+	option = {
+		name = ExpdPdxrptgExtraCannon_EvtOpt_Excellent
+		# Audax Validator "." Ignore_NEXT
+		add_artifact = dwemer_carronade_artifact
+	}
+}

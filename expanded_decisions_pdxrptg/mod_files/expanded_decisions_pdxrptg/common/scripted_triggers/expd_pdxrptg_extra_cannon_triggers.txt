@@ -1,0 +1,173 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+# Make this decision high-prio in MP (other players might want one?)
+#      and if the player doesn't have a carronade (lost/stolen/destroyed/etc).
+expd_pdxrptg_extra_cannon_high_prio_potential = {
+	OR = {
+		multiplayer = yes
+		NOT = {
+			any_artifact = {
+				# Audax Validator "." Ignore_NEXT
+				artifact_type = dwemer_carronade_artifact
+			}
+		}
+	}
+}
+
+
+
+
+
+# Shared triggers
+
+expd_pdxrptg_extra_cannon_shared_potential = {
+	independent = yes
+	ai = no
+	has_submenu_open = no
+	148 = { # Markarth
+		owner = { top_liege = { character = ROOT } }
+		wonder = {
+			# Audax Validator "." Ignore_NEXT
+			has_wonder = wonder_understone
+			any_upgrade_on_wonder = {
+				# Audax Validator "." Ignore_NEXT
+				has_wonder_upgrade = upgrade_dwemer_cannon
+			}
+		}
+	}
+}
+
+expd_pdxrptg_extra_cannon_this_province_has_active_cannon_upgrade = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_province_contains_understone_tt
+		# Audax Validator "." Ignore_NEXT
+		has_wonder = wonder_understone
+	}
+	custom_tooltip = {
+		text = expd_pdxrptg_this_province_contains_active_understone_tt
+		# Audax Validator "." Ignore_NEXT
+		has_wonder = wonder_understone
+		wonder = { is_active = yes }
+	}
+	custom_tooltip = {
+		text = expd_pdxrptg_this_province_contains_understone_with_10_year_old_cannon_upgrade_tt
+		# Audax Validator "." Ignore_NEXT
+		has_wonder = wonder_understone
+		wonder = {
+			any_upgrade_on_wonder = {
+				# Audax Validator "." Ignore_NEXT
+				has_wonder_upgrade = upgrade_dwemer_cannon
+				wonder_upgrade_age >= 10
+			}
+		}
+	}
+	custom_tooltip = {
+		text = expd_pdxrptg_this_province_contains_understone_with_active_cannon_upgrade_tt
+		# Audax Validator "." Ignore_NEXT
+		has_wonder = wonder_understone
+		wonder = {
+			any_upgrade_on_wonder = {
+				# Audax Validator "." Ignore_NEXT
+				has_wonder_upgrade = upgrade_dwemer_cannon
+				is_active = yes
+			}
+		}
+	}
+}
+
+expd_pdxrptg_extra_cannon_province_modifiers_inconsistent = {
+	OR = {
+		# Has more than one province modifier
+		AND = {
+			has_province_modifier = expd_pdxrptg_extra_cannon_cooldown
+			OR = {
+				has_province_modifier = expd_pdxrptg_extra_cannon_searching
+				has_province_modifier = expd_pdxrptg_extra_cannon_found
+				has_province_modifier = expd_pdxrptg_extra_cannon_creating
+			}
+		}
+		AND = {
+			has_province_modifier = expd_pdxrptg_extra_cannon_searching
+			OR = {
+				has_province_modifier = expd_pdxrptg_extra_cannon_found
+				has_province_modifier = expd_pdxrptg_extra_cannon_creating
+			}
+		}
+		AND = {
+			has_province_modifier = expd_pdxrptg_extra_cannon_found
+			has_province_modifier = expd_pdxrptg_extra_cannon_creating
+		}
+	}
+}
+
+
+
+
+
+# Search for cannon decision
+
+expd_pdxrptg_extra_cannon_search_potential = {
+	expd_pdxrptg_extra_cannon_shared_potential = yes
+	148 = { # Markarth
+		OR = {
+			has_province_modifier = expd_pdxrptg_extra_cannon_cooldown
+			NOR = {
+				has_province_modifier = expd_pdxrptg_extra_cannon_searching
+				has_province_modifier = expd_pdxrptg_extra_cannon_found
+				has_province_modifier = expd_pdxrptg_extra_cannon_creating
+			}
+		}
+	}
+}
+
+expd_pdxrptg_extra_cannon_search_allow = {
+	148 = { # Markarth
+		expd_pdxrptg_extra_cannon_this_province_has_active_cannon_upgrade = yes
+		trigger_if = {
+			limit = { has_province_modifier = expd_pdxrptg_extra_cannon_cooldown }
+			NOT = { has_province_modifier = expd_pdxrptg_extra_cannon_cooldown }
+		}
+		trigger_if = {
+			limit = { has_province_modifier = expd_pdxrptg_extra_cannon_searching }
+			NOT = { has_province_modifier = expd_pdxrptg_extra_cannon_searching }
+		}
+		trigger_if = {
+			limit = { has_province_modifier = expd_pdxrptg_extra_cannon_found }
+			NOT = { has_province_modifier = expd_pdxrptg_extra_cannon_found }
+		}
+		trigger_if = {
+			limit = { has_province_modifier = expd_pdxrptg_extra_cannon_creating }
+			NOT = { has_province_modifier = expd_pdxrptg_extra_cannon_creating }
+		}
+	}
+}
+
+
+
+
+
+# Create cannon decision
+
+expd_pdxrptg_extra_cannon_create_potential = {
+	expd_pdxrptg_extra_cannon_shared_potential = yes
+	148 = { #Markarth
+		NOT = { has_province_modifier = expd_pdxrptg_extra_cannon_cooldown }
+		OR = {
+			has_province_modifier = expd_pdxrptg_extra_cannon_searching
+			has_province_modifier = expd_pdxrptg_extra_cannon_found
+		}
+	}
+}
+
+expd_pdxrptg_extra_cannon_create_allow = {
+	148 = { #Markarth
+		expd_pdxrptg_extra_cannon_this_province_has_active_cannon_upgrade = yes
+		has_province_modifier = expd_pdxrptg_extra_cannon_found
+	}
+	expd_pdxrptg_startup_more_than_1_month_elapsed = yes
+	scaled_wealth = { value = 5 min = 500 max = 5000 }
+}
