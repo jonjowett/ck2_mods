@@ -1,0 +1,154 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = ekruins
+namespace = ExpdPdxrptgRuins
+
+province_event = { #Ruins damaged!
+	id = ekruins.40
+	# Audax Validator "." Ignore_NEXT
+	desc = ekruins40desc
+	picture = GFX_evt_ayleid
+	
+	trigger = {
+		owner = { ai = no }
+		# Audax Validator "." Ignore_NEXT
+		has_ruins_not_level_0 = yes
+		NOR = {
+			# Audax Validator "." Ignore_NEXT
+			has_province_modifier = ruins_construction
+			owner = {
+				# Audax Validator "." Ignore_NEXT
+				has_character_modifier = ruin_neglect_timer
+			}
+			owner = { has_character_flag = ekruins_40_in_progress }
+		}
+	}
+	mean_time_to_happen = {
+		years = 100
+		modifier = {
+			factor = 0.7
+			owner = {
+				job_treasurer = {
+					stewardship <= 12
+				}
+			}
+		}
+		modifier = {
+			factor = 0.6
+			owner = {
+				job_treasurer = {
+					stewardship <= 8
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			owner = {
+				job_treasurer = {
+					stewardship <= 4
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		save_event_target_as = ekruins_40_province
+		owner = {
+			save_event_target_as = ekruins_40_owner
+			set_character_flag   = ekruins_40_in_progress
+		}
+	}
+	
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = ekruins40opta
+		# Audax Validator "." Ignore_NEXT
+		downgrade_ruins = yes
+		event_target:ekruins_40_owner = {
+			prestige = -10
+		}
+		add_province_modifier = {
+			# Audax Validator "." Ignore_NEXT
+			name = ruins_construction
+			duration = 1825
+		}
+	}
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = ekruins40optc
+		event_target:ekruins_40_owner = { wealth = -50 } #Not using a wealth trigger for this event because if somebody wants to go into debt to save their ruins, that's their prerogative I suppose.
+		random_list = {
+			50 = { #Emergency repairs succeed
+				custom_tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					text = ekruins40optcsuccesstt
+					event_target:ekruins_40_owner = { character_event = { id = ExpdPdxrptgRuins.401 } }
+				}
+			}
+			50 = { #Emergency repairs fail
+				custom_tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					text = ekruins40optcfailurett
+					event_target:ekruins_40_owner = { character_event = { id = ExpdPdxrptgRuins.402 } }
+				}
+			}
+		}
+	}
+	#Todo: Second option to imprison the Steward. Need to look into opinion modifier modding when it's not 2 AM. Modding's alright, Pillow's alright, just feel a little tired... BUT DON'T BACKSPACE YOUR CODE AWAY
+}
+
+character_event = {
+	id      = ExpdPdxrptgRuins.401
+	title   = ExpdPdxrptgRuins_401_Title
+	desc    = ExpdPdxrptgRuins_401_Desc
+	picture = GFX_evt_ayleid
+	is_triggered_only = yes
+	option = {
+		name = ExpdPdxrptgRuins_401_EvtOpt_Excellent
+		prestige = 20
+	}
+	after = {
+		hidden_tooltip = { character_event = { id = ExpdPdxrptgRuins.410 } }
+	}
+}
+
+character_event = {
+	id      = ExpdPdxrptgRuins.402
+	title   = ExpdPdxrptgRuins_402_Title
+	desc    = ExpdPdxrptgRuins_402_Desc
+	picture = GFX_evt_ayleid
+	is_triggered_only = yes
+	option = {
+		name = ExpdPdxrptgRuins_402_EvtOpt_Curses
+		event_target:ekruins_40_province = {
+			# Audax Validator "." Ignore_NEXT
+			downgrade_ruins = yes
+			add_province_modifier = {
+				# Audax Validator "." Ignore_NEXT
+				name = ruins_construction
+				duration = 1825
+			}
+		}
+		prestige = -10
+	}
+	after = {
+		hidden_tooltip = { character_event = { id = ExpdPdxrptgRuins.410 } }
+	}
+}
+
+character_event = {
+	id = ExpdPdxrptgRuins.410
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		clr_character_flag = ekruins_40_in_progress
+		add_character_modifier = {
+			# Audax Validator "." Ignore_NEXT
+			name = ruin_neglect_timer
+			duration = 3650 #10 years between possible firing on any of the owner's provinces
+			hidden = yes
+		}
+		clear_event_target = ekruins_40_province
+		clear_event_target = ekruins_40_owner
+	}
+}
