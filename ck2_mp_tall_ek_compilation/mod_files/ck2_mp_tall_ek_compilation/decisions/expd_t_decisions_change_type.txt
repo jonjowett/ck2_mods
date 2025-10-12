@@ -31,14 +31,7 @@ targetted_decisions = {
 		}
 		
 		effect = {
-			FROM = {
-				make_tributary = {
-					who = ROOT
-					percentage = 0.2
-					tributary_type = expd_t_protectorate
-				}
-			}
-			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
+			FROM = { expd_t_root_becomes_protectorate_of_this_character = yes }
 		}
 		
 	}
@@ -64,10 +57,7 @@ targetted_decisions = {
 		potential = {
 			independent  = yes
 			is_landed    = yes
-			is_tributary = {
-				type = expd_t_protectorate
-				suzerain = FROM
-			}
+			expd_t_is_this_mod_tributary_of_from = yes
 		}
 		
 		allow = {

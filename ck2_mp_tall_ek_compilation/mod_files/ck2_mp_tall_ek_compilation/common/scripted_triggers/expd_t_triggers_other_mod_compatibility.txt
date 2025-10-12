@@ -27,3 +27,39 @@ expd_t_pdxrptg_mod_is_active = {
 		has_global_flag = house_sul_extinct
 	}
 }
+
+expd_t_this_character_should_be_treated_as_an_ai = {
+	trigger_if = {
+		limit = { expd_t_edmp_mod_is_active = no }
+		ai = yes
+	}
+	trigger_else = {
+		ai = yes
+		NOT = {
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = edmp_playerflag
+		}
+	}
+}
+
+expd_t_this_character_should_be_treated_as_a_player = {
+	trigger_if = {
+		limit = { expd_t_edmp_mod_is_active = no }
+		ai = no
+	}
+	trigger_else = {
+		OR = {
+			ai = no
+			AND = {
+				ai = yes
+				# Audax Validator "." Ignore_NEXT
+				has_character_modifier = edmp_playerflag
+			}
+		}
+	}
+}
+
+expd_t_edmp_mod_is_active = {
+	# Audax Validator "." Ignore_NEXT
+	edmp_mod_is_active = yes
+}

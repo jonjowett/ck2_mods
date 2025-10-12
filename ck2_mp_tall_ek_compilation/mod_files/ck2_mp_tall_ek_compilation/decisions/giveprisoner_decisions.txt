@@ -6,7 +6,6 @@ targetted_decisions = {
 	enable_prisoner_transfering = {
 		ai = no
 		filter = self
-		diplomacy_icon = GFX_break_non_aggression_pact
 		potential = { NOT = { has_character_flag = selectingprisonersttt } }
 		allow = { always = yes }
 		effect = {
@@ -21,7 +20,6 @@ targetted_decisions = {
 	disable_prisoner_transfering = {
 		ai = no
 		filter = self
-		diplomacy_icon = GFX_break_non_aggression_pact
 		potential = { has_character_flag = selectingprisonersttt }
 		allow = { always = yes }
 		effect = {
@@ -36,7 +34,6 @@ targetted_decisions = {
 	select_prisoner = {
 		ai = no
 		filter = court
-		diplomacy_icon = GFX_break_non_aggression_pact
 		from_potential = { has_character_flag = selectingprisonersttt }
 		potential = {
 			host = { character = FROM }
@@ -51,7 +48,6 @@ targetted_decisions = {
 	deselect_prisoner = {
 		ai = no
 		filter = court
-		diplomacy_icon = GFX_break_non_aggression_pact
 		from_potential = { has_character_flag = selectingprisonersttt }
 		potential = {
 			host = { character = FROM }
@@ -66,7 +62,6 @@ targetted_decisions = {
 	handover_prisoner = {
 		ai = no
 		filter = all
-		diplomacy_icon = GFX_break_non_aggression_pact
 		from_potential = {
 			has_character_flag = selectingprisonersttt
 			any_courtier = {

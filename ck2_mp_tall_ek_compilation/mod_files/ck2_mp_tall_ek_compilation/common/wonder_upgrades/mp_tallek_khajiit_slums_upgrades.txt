@@ -1,0 +1,165 @@
+upgrade_khajiit_slums_infantry_1 = {
+	
+	picture = GFX_upgrade_icon_khajiit_slums_infantry_1
+	
+	# Upgrade X is only allowed if the wonder is at stage X
+	potential = { }
+	allow = { FROMFROM = { wonder_stage >= 1 } }
+	
+	# Cost & time copied from great walls upgrades (eg. upgrade_gatehouse_forts)
+	build_time = 24
+	gold_cost_flat = 400
+	gold_cost_ticking = 1
+	
+	# 150 base LI per upgrade
+	local_modifier = { light_infantry = 150 }
+	
+	owner_modifier = { } # None
+	flags = { }
+	active = { } # IE: always
+	
+}
+
+upgrade_khajiit_slums_infantry_2 = {
+	
+	picture = GFX_upgrade_icon_khajiit_slums_infantry_2
+	
+	# Upgrade X is only allowed if the wonder is at stage X
+	potential = { }
+	allow = { FROMFROM = { wonder_stage >= 2 } }
+	
+	# Cost & time copied from great walls upgrades (eg. upgrade_gatehouse_forts)
+	build_time = 24
+	gold_cost_flat = 400
+	gold_cost_ticking = 1
+	
+	# 150 base LI per upgrade
+	local_modifier = { light_infantry = 150 }
+	
+	owner_modifier = { } # None
+	flags = { }
+	active = { } # IE: always
+	
+}
+
+upgrade_khajiit_slums_infantry_3 = {
+	
+	picture = GFX_upgrade_icon_khajiit_slums_infantry_3
+	
+	# Upgrade X is only allowed if the wonder is at stage X
+	potential = { }
+	allow = { FROMFROM = { wonder_stage >= 3 } }
+	
+	# Cost & time copied from great walls upgrades (eg. upgrade_gatehouse_forts)
+	build_time = 24
+	gold_cost_flat = 400
+	gold_cost_ticking = 1
+	
+	# 150 base LI per upgrade
+	local_modifier = { light_infantry = 150 }
+	
+	owner_modifier = { } # None
+	flags = { }
+	active = { } # IE: always
+	
+}
+
+upgrade_khajiit_slums_infantry_4 = {
+	
+	picture = GFX_upgrade_icon_khajiit_slums_infantry_4
+	
+	# Upgrade X is only allowed if the wonder is at stage X
+	potential = { }
+	allow = { FROMFROM = { wonder_stage >= 4 } }
+	
+	# Cost & time copied from great walls upgrades (eg. upgrade_gatehouse_forts)
+	build_time = 24
+	gold_cost_flat = 400
+	gold_cost_ticking = 1
+	
+	# 150 base LI per upgrade
+	local_modifier = { light_infantry = 150 }
+	
+	owner_modifier = { } # None
+	flags = { }
+	active = { } # IE: always
+	
+}
+
+upgrade_khajiit_slums_tech_mil = {
+	
+	picture = GFX_upgrade_icon_khajiit_slums_lantern_red
+	
+	potential = { }
+	allow = { }
+	
+	# Cost & time copied from university upgrades (eg. upgrade_wing_of_diplomacy)
+	build_time = 24
+	gold_cost_flat = 450
+	gold_cost_ticking = 1
+	
+	# University upgrades grant +0.05 tech & +1 relevant stat
+	#  --- For some unknown reason, any tech granted here is multiplied by 3, as well as the ruler-tier multiplier of 1.0/1.2/1.4.
+	#  --- For some unknown reason, the equivalent upgrade in the university only has a mystery multiplier of 2.
+	#  --- So, grant ONLY +0.05 techpoints, as this will give slightly more tech than the equivalent university wing, which is reasonable because the owner doesn't get a stat modifier.
+	local_modifier = {
+		military_techpoints = 0.05
+	}
+	
+	owner_modifier = { } # None
+	flags = { }
+	active = { } # IE: always
+	
+}
+
+upgrade_khajiit_slums_tech_eco = {
+	
+	picture = GFX_upgrade_icon_khajiit_slums_lantern_green
+	
+	potential = { }
+	allow = { }
+	
+	# Cost & time copied from university upgrades (eg. upgrade_wing_of_diplomacy)
+	build_time = 24
+	gold_cost_flat = 450
+	gold_cost_ticking = 1
+	
+	# University upgrades grant +0.05 tech & +1 relevant stat
+	#  --- For some unknown reason, any tech granted here is multiplied by 3, as well as the ruler-tier multiplier of 1.0/1.2/1.4.
+	#  --- For some unknown reason, the equivalent upgrade in the university only has a mystery multiplier of 2.
+	#  --- So, grant ONLY +0.05 techpoints, as this will give slightly more tech than the equivalent university wing, which is reasonable because the owner doesn't get a stat modifier.
+	local_modifier = {
+		economy_techpoints = 0.05
+	}
+	
+	owner_modifier = { } # None
+	flags = { }
+	active = { } # IE: always
+	
+}
+
+upgrade_khajiit_slums_tech_cul = {
+	
+	picture = GFX_upgrade_icon_khajiit_slums_lantern_purple
+	
+	potential = { }
+	allow = { }
+	
+	# Cost & time copied from university upgrades (eg. upgrade_wing_of_diplomacy)
+	build_time = 24
+	gold_cost_flat = 450
+	gold_cost_ticking = 1
+	
+	# University upgrades grant +0.05 tech & +1 relevant stat
+	#  --- For some unknown reason, any tech granted here is multiplied by 3, as well as the ruler-tier multiplier of 1.0/1.2/1.4.
+	#  --- For some unknown reason, the equivalent upgrade in the university only has a mystery multiplier of 2.
+	#  --- So, grant ONLY +0.05 techpoints, as this will give slightly more tech than the equivalent university wing, which is reasonable because the owner doesn't get a stat modifier.
+	local_modifier = {
+		culture_techpoints = 0.05
+	}
+	
+	owner_modifier = { } # None
+	flags = { }
+	active = { } # IE: always
+	
+}

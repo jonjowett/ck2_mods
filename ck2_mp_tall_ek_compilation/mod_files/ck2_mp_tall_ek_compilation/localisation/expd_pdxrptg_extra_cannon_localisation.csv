@@ -1,0 +1,42 @@
+#
+# Decisions - Search
+expd_pdxrptg_extra_cannon_search;(ED:PT) Search for Refurbishable Dwemer Carronade;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_search_desc;Surely it would be possible to refurbish one of the damaged §YDwemer Carronades§! in storage at §YUnderstone Keep§!?!;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_search_high_prio;(ED:PT) Search for Refurbishable Dwemer Carronade;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_search_high_prio_desc;Surely it would be possible to refurbish one of the damaged §YDwemer Carronades§! in storage at §YUnderstone Keep§!?!;;;;;;;;;;;;;x
+# Decisions - Create
+expd_pdxrptg_extra_cannon_create;(ED:PT) Refurbish Dwemer Carronade;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_create_desc;By investing a great deal of time and wealth, I can refurbish another one of the §YDwemer Carronades§! in storage at §YUnderstone Keep§!.;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_create_high_prio;(ED:PT) Refurbish Dwemer Carronade;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_create_high_prio_desc;By investing a great deal of time and wealth, I can refurbish another one of the §YDwemer Carronades§! in storage at §YUnderstone Keep§!.;;;;;;;;;;;;;x
+# Decisions - Debug
+expd_pdxrptg_extra_cannon_debug_reset_chain;(ED:PT) Debug - Reset Dwemer Carronade Chain;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_debug_reset_chain_desc;Something seems to have gone wrong with this event chain. By taking this decision, all ongoing modifiers and events will be cancelled, so you can try again.;;;;;;;;;;;;;x
+#
+# Scripted_triggers
+expd_pdxrptg_this_province_contains_understone_tt;Contains the §YUnderstone Keep§! wonder;;;;;;;;;;;;;x
+expd_pdxrptg_this_province_contains_active_understone_tt;The §YUnderstone Keep§! is §Yactive§!;;;;;;;;;;;;;x
+expd_pdxrptg_this_province_contains_understone_with_10_year_old_cannon_upgrade_tt;The §YUnderstone Keep§! has a §YDwemer Artillery§! upgrade, which is §Yat least 10 years old§!;;;;;;;;;;;;;x
+expd_pdxrptg_this_province_contains_understone_with_active_cannon_upgrade_tt;The §YUnderstone Keep§! has a §YDwemer Artillery§! upgrade, which is §Yactive§!;;;;;;;;;;;;;x
+#
+# Scripted_effects
+expd_pdxrptg_extra_cannon_after_search_complete_can_build_cannon_tt;Researchers will carefully perform a new inventory of the carronades in the vault. Then, they will select the least-damaged carronade and produce a detailed plan for its refurbishment. Once this lengthy process is complete, you will be able to buy all of the materials and employ all of the craftsmen necessary to refurbish a new §YDwemer Carronade§!.;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_granted_to_top_liege_of_province_owner_in_3_years_tt;In §Y3 years' time§!, a §YDwemer Carronade§! will be granted to the §Ytop liege§! of [This.GetName] (currently: [This.Holder.TopLiege.GetBestName]).;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_grant_warning_tt;§g.§!\n§RWARNING!§! If you are NOT top liege of [This.GetName] when the timer expires, you will NOT receive the carronade you paid for!;;;;;;;;;;;;;x
+#
+# Province modifiers
+expd_pdxrptg_extra_cannon_cooldown;§M(ED:PT)§Y Refurbish Dwemer Carronade - Cooldown§!;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_cooldown_desc;The people of this province toiled for years on a grand project to refurbish a single §YDwemer Carronades§!. They are unwilling to start another such project so soon after the last one.;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_searching;§M(ED:PT)§Y Searching for a refurbishable Dwemer Carronade§!;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_searching_desc;While there are many §YDwemer Carronades§! in the vault at §YUnderstone Keep§!, every single one of them is severely damaged, and their mechanisms are far beyond our understanding. It will take a long time for our researchers to create a detailed refurbishment plan for another of these ancient artifacts.;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_found;§M(ED:PT)§Y Has refurbishable Dwemer Carronade§!;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_found_desc;Researchers have created a detailed plan for the refurbishment of one of the §YDwemer Carronades§! stored in this province. This project may be commenced by the top liege of the province owner, at any time.;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_creating;§M(ED:PT)§Y Refurbishing Dwemer Carronade§!;;;;;;;;;;;;;x
+expd_pdxrptg_extra_cannon_creating_desc;Craftsmen, historians and mages have been gathered at §YUnderstone Keep§! to refurbish one of the §YDwemer Carronades§! that was discovered in an ancient vault. The diversion of so many skilled workers has caused widespread inefficiencies in construction and taxation - but concentrating their focus has improved local trade and research.;;;;;;;;;;;;;x
+#
+# Events
+ExpdPdxrptgExtraCannon_1001_Title;Refurbishable Carronade Located!;;;;;;;;;;;;;x
+ExpdPdxrptgExtraCannon_1001_Desc;After performing a detailed inventory of the carronades stored in Understone Keep, our researchers have produced a detailed plan that would allow us to restore one of them to its former glory. This restoration would take even more time, and it would be ruinously expensive, but the resulting Carronade would be both priceless and irreplaceable.;;;;;;;;;;;;;x
+ExpdPdxrptgExtraCannon_2001_Title;Carronade Refurbished!;;;;;;;;;;;;;x
+ExpdPdxrptgExtraCannon_2001_Desc;After years of late nights and hard work, the foreman of our carronade project has announced that the restoration is finally complete.;;;;;;;;;;;;;x
+ExpdPdxrptgExtraCannon_EvtOpt_Excellent;Excellent;;;;;;;;;;;;;x

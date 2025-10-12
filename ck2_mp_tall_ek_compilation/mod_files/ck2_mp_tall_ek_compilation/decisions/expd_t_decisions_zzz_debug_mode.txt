@@ -45,9 +45,7 @@ targetted_decisions = {
 		third_party_potential = {
 			FROMFROM = {
 				any_tributary = {
-					is_tributary = {
-						type = expd_t_protectorate
-					}
+					expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes
 				}
 			}
 		}
@@ -64,7 +62,7 @@ targetted_decisions = {
 		potential = { expd_t_this_character_can_see_debug_mode_decisions = yes }
 		allow = { always = yes }
 		third_party_potential = {
-			FROMFROM = { is_tributary = { type = expd_t_protectorate } }
+			FROMFROM = { expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes }
 		}
 		third_party_allow = { always = no }
 		effect = {
@@ -89,8 +87,8 @@ targetted_decisions = {
 			}
 			any_character = {
 				limit = {
-					is_tributary = { type = expd_t_protectorate }
-					suzerain = { ai = yes }
+					expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes
+					suzerain = { expd_t_this_character_should_be_treated_as_an_ai = yes }
 				}
 				suzerain = { remove_tributary = PREV }
 			}
@@ -117,7 +115,7 @@ targetted_decisions = {
 				}
 			}
 			any_tributary = {
-				limit = { is_tributary = { type = expd_t_protectorate } }
+				limit = { expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes }
 				suzerain = { remove_tributary = PREV }
 			}
 		}
@@ -128,7 +126,7 @@ targetted_decisions = {
 		filter = independent_rulers_including_me
 		ai = no
 		from_potential = { expd_t_this_character_can_see_debug_mode_decisions = yes }
-		potential = { is_tributary = { type = expd_t_protectorate } }
+		potential = { expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes }
 		allow = { always = yes }
 		effect = {
 			if = {
@@ -159,33 +157,14 @@ targetted_decisions = {
 		allow = { always = yes }
 		third_party_potential = {
 			ROOT_FROMFROM = {
-				ai = no
+				expd_t_this_character_should_be_treated_as_a_player = yes
 				independent = yes
 				NOT = { any_tributary = { character = ROOT } }
 			}
 		}
 		third_party_allow = { always = yes } # Since this is a debug mode operation, we don't bother to check whether the protectorate can instantly break free
 		effect = {
-			if = {
-				limit = { multiplayer = yes }
-				custom_tooltip = {
-					text = expd_t_debug_mode_notification_sent_tt
-					FROM          = { save_event_target_as = expd_t_debug_mode_decision_taker }
-					ROOT          = { save_event_target_as = expd_t_debug_mode_character_affected }
-					ROOT_FROMFROM = { save_event_target_as = expd_t_debug_mode_character_affected_other }
-					FROM = { any_player = { character_event = { id = EDTDebugModeNotification.1300 } } }
-					clear_event_target = expd_t_debug_mode_decision_taker
-					clear_event_target = expd_t_debug_mode_character_affected
-					clear_event_target = expd_t_debug_mode_character_affected_other
-				}
-			}
-			FROM = {
-				make_tributary = {
-					who = ROOT
-					percentage = 0.2
-					tributary_type = expd_t_protectorate
-				}
-			}
+			expd_t_from_makes_root_become_protectorate_of_fromfrom = yes
 		}
 	}
 	

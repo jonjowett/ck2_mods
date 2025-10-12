@@ -1,0 +1,344 @@
+# Audax Validator EnableCommentMetadata
+
+# The only change is to the abort={} clause, and even that is a very small change,
+#      so we can safely ignore all errors arising from this file.
+# Audax Validator "!" Ignore_NEXT
+
+obj_warlord = {
+	type = character
+
+	can_cancel = no
+
+	potential = {
+		is_adult = yes
+		is_playable = yes
+		is_landed = yes
+		independent = yes
+		higher_tier_than = COUNT
+		OR = {
+			lower_tier_than = EMPEROR
+			has_landed_title = e_tamriel
+			# Heroes and Dragonborns should still be able to use it
+			trait = hero
+			trait = dragonborn
+		}
+		#NOT = {
+		#	any_heir_title = {
+		#		higher_tier_than = KING
+		#	}
+		#}
+		NOT = { trait = warlord }
+		NOT = { trait = mane }
+	}
+	
+	allow = {
+		#Traits that prohibit you from becoming a Warlord
+		NOT = { trait = incapable }
+		NOT = { trait = greybeard }
+		
+		NOT = { trait = content }
+		NOT = { trait = craven }
+		NOT = { trait = humble }
+		NOT = { trait = kind }
+		NOT = { trait = slothful }
+		
+		#Age Restriction for Warlords, Depending on Culture  (Essentially Race)
+		OR = {
+			NOT = { age = 70 }			
+			AND = {
+				NOT = { age = 200 }
+				is_immortal = no
+				is_long_lived = yes
+			}
+			AND = {
+				NOT = { age = 500 }
+				is_immortal = yes
+			}
+		}
+		#Undead may never become Warlords
+		NOT = { culture_group = undead }
+		
+		prestige = 500
+	}
+	
+	chance = {
+		factor = 90
+		
+		modifier = {
+			factor = 5
+			has_character_flag = demon_child_non_pagan
+		}
+		modifier = {
+			factor = 4
+			trait = ambitious
+		}
+		modifier = {
+			factor = 2.5
+			OR = {
+				culture = kamal
+				culture = orsimer
+			}
+		}
+		modifier = {
+			factor = 2
+			culture_group = nedic
+		}
+		modifier = {
+			factor = 1.5
+			culture_group = yokudan_group
+		}
+		modifier = {
+			factor = 3
+			trait = ruthless
+		}
+		modifier = {
+			factor = 1.5
+			trait = wroth
+		}
+		modifier = {
+			factor = 2
+			trait = envious
+		}
+		modifier = {
+			factor = 1.5
+			trait = greedy
+		}
+		modifier = {
+			factor = 2
+			trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			trait = quey
+		}
+		modifier = {
+			factor = 5
+			trait = dragonborn
+		}
+		modifier = {
+			factor = 3
+			trait = hero
+		}
+		modifier = {
+			factor = 3
+			is_dragonblood = yes
+			NOT = { trait = dragonborn }
+		}
+		modifier = {
+			factor = 2
+			trait = lich
+		}
+		modifier = {
+			factor = 2
+			trait = zealous
+		}
+		modifier = {
+			factor = 0.0
+			trait = blinded
+		}
+		modifier = {
+			factor = 0.1
+			trait = blind
+		}
+		modifier = {
+			factor = 0.1
+			trait = blind_moth
+		}
+		modifier = {
+			factor = 0.1
+			trait = mute
+		}
+		modifier = {
+			factor = 0.1
+			trait = deaf
+		}
+		modifier = {
+			factor = 0.1
+			trait = depressed
+		}
+		modifier = {
+			factor = 0.25
+			trait = stressed
+		}
+		modifier = {
+			factor = 0.5
+			trait = drunkard
+		}
+		modifier = {
+			factor = 0.5
+			trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			trait = weak
+		}
+		modifier = {
+			factor = 0.25
+			trait = sickly
+		}
+		modifier = {
+			factor = 1.25
+			trait = strong
+		}
+		modifier = {
+			factor = 0.5
+			trait = imbecile
+		}
+		modifier = {
+			factor = 0.75
+			trait = slow
+		}
+		modifier = {
+			factor = 1.25
+			trait = powerful_voice
+		}
+		modifier = {
+			factor = 0.8
+			trait = clubfooted
+		}
+		modifier = {
+			factor = 0.7
+			trait = harelip
+		}
+		modifier = {
+			factor = 0.9
+			trait = stutter
+		}
+		modifier = {
+			factor = 0.9
+			trait = lisp
+		}
+		modifier = {
+			factor = 0.5
+			trait = hunchback
+		}
+		modifier = {
+			factor = 0.5
+			trait = dwarf
+		}
+		modifier = {
+			factor = 0.5
+			trait = inbred
+		}
+		modifier = {
+			factor = 0.75
+			trait = cynical
+		}
+		modifier = {
+			factor = 0.75
+			trait = charitable
+		}
+		modifier = {
+			factor = 2
+			trait = proud
+		}
+		modifier = {
+			factor = 0.8
+			trait = just
+		}
+		modifier = {
+			factor = 0.75
+			trait = shy
+		}
+		modifier = {
+			factor = 0.8
+			trait = temperate
+		}
+		modifier = {
+			factor = 0.8
+			trait = chaste
+		}
+		modifier = {
+			factor = 0.75
+			trait = kind
+		}
+		modifier = {
+			factor = 0.8
+			trait = slovenly
+		}
+		modifier = {
+			factor = 0.5
+			trait = humble
+		}
+		modifier = {
+			factor = 0.5
+			trait = wounded
+		}
+		modifier = {
+			factor = 0.1
+			trait = absent_minded
+		}
+		modifier = {
+			factor = 0.5
+			tier = KING
+		}
+		modifier = {
+			factor = 1.25
+			NOT = { year = 3800 }
+		}
+		modifier = {
+			factor = 0.5
+			year = 3830
+		}
+		modifier = {
+			factor = 0.75
+			e_tamriel = { has_holder = yes }
+		}
+		modifier = {
+			factor = 2
+			e_tamriel = {
+				holder_scope = {
+					OR = {
+						NOT = { age = 17 }
+						trait = incapable
+						trait = infirm
+						trait = inbred
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			top_liege = {
+				tier = emperor
+				NOT = { has_landed_title = e_tamriel }
+			}
+		}
+	}
+	
+	abort = {
+		OR = {
+			
+			# Incapable/monk
+			trait = incapable
+			trait = greybeard
+			
+			# Not playable independent
+			is_playable = no
+			independent = no
+			
+			# Is emperor, but not of Tamriel (except for special cases)
+			AND = {
+				higher_tier_than = KING
+				NOT = { has_landed_title = e_tamriel }
+				NOT = { trait = hero }
+				NOT = { trait = dragonborn }
+			}
+			
+		}
+	}
+	
+	success = {
+		custom_tooltip = {
+			text = OBJ_WARLORD_SUCCESS_CT
+			
+			hidden_tooltip = {
+				has_character_flag = warlord_flg
+			}
+		}
+	}
+	
+	effect = {
+		add_trait = warlord
+	}
+}

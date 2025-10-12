@@ -111,8 +111,8 @@ targetted_decisions = {
 				
 				# Cannot offer protection to a human player (because they have no chance to refuse)
 				conditional_tooltip = {
-					trigger = { ai = no }
-					ai = yes
+					trigger = { expd_t_this_character_should_be_treated_as_a_player = yes }
+					expd_t_this_character_should_be_treated_as_an_ai = yes
 				}
 				
 				# The potential suzerain must be either a lot stronger or a lot more prestigious than the potential tributary
@@ -1049,9 +1049,7 @@ decisions = {
 		ai_check_interval = 6
 		
 		potential = {
-			is_tributary = {
-				type = expd_t_protectorate
-			}
+			expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes
 			expd_t_another_mod_wants_to_suppress_this_decision = no
 		}
 		

@@ -1,0 +1,47 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_extra_cannon_searching = {
+	icon = 104 # Red firework
+	
+	# Researchers are busy trying to figure out how to refurbish another.
+	# This modifier is intended to last for 10y, compared with 3y of "creating" (above),
+	#      and the magnitude of the deduction here is less than 3/10 of the addition during "creating",
+	#      so the net long term effect on owner's tech is slightly positive.
+	military_techpoints = -0.02
+	culture_techpoints  = -0.02
+	economy_techpoints  = -0.02
+	
+	# Less tax
+	local_tax_modifier = -0.10
+	
+}
+
+expd_pdxrptg_extra_cannon_creating = {
+	
+	icon = 104 # Red firework
+	
+	# Much less tax
+	local_tax_modifier = -0.25
+	
+	# Building stuff is much harder
+	local_build_cost_modifier = 0.25
+	local_build_time_modifier = 0.50
+	# Wonder build cost/time doesn't work here
+	#local_wonder_build_cost_modifier = 0.25
+	#local_wonder_build_time_modifier = 0.50
+	
+	# But you get trade and tech
+	trade_route_wealth = 20
+	military_techpoints = 0.10
+	culture_techpoints  = 0.10
+	economy_techpoints  = 0.10
+	
+}
+
+expd_pdxrptg_extra_cannon_found = {
+	icon = 103 # Green firework
+}
+
+expd_pdxrptg_extra_cannon_cooldown = {
+	icon = 104 # Red firework
+}

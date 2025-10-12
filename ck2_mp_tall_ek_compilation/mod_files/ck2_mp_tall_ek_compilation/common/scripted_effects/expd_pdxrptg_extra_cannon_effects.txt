@@ -1,0 +1,76 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_extra_cannon_remove_province_effects_from_this_province = {
+	if = {
+		limit = { has_province_modifier = expd_pdxrptg_extra_cannon_cooldown }
+		remove_province_modifier = expd_pdxrptg_extra_cannon_cooldown
+	}
+	if = {
+		limit = { has_province_modifier = expd_pdxrptg_extra_cannon_searching }
+		remove_province_modifier = expd_pdxrptg_extra_cannon_searching
+	}
+	if = {
+		limit = { has_province_modifier = expd_pdxrptg_extra_cannon_found }
+		remove_province_modifier = expd_pdxrptg_extra_cannon_found
+	}
+	if = {
+		limit = { has_province_modifier = expd_pdxrptg_extra_cannon_creating }
+		remove_province_modifier = expd_pdxrptg_extra_cannon_creating
+	}
+}
+
+expd_pdxrptg_extra_cannon_search_effect = {
+	148 = { # Markarth
+		expd_pdxrptg_extra_cannon_remove_province_effects_from_this_province = yes
+		if = {
+			limit = { has_global_flag = expd_pdxrptg_extra_cannon_debug }
+			add_province_modifier = {
+				name  = expd_pdxrptg_extra_cannon_searching
+				days  = 10
+			}
+			custom_tooltip = {
+				text = expd_pdxrptg_extra_cannon_after_search_complete_can_build_cannon_tt
+				province_event = { id = ExpdPdxrptgExtraCannon.1000 days = 10 }
+			}
+		}
+		else = {
+			add_province_modifier = {
+				name  = expd_pdxrptg_extra_cannon_searching
+				years = 10
+			}
+			custom_tooltip = {
+				text = expd_pdxrptg_extra_cannon_after_search_complete_can_build_cannon_tt
+				province_event = { id = ExpdPdxrptgExtraCannon.1000 years = 10 }
+			}
+		}
+	}
+}
+
+expd_pdxrptg_extra_cannon_create_effect = {
+	scaled_wealth = { value = -5 min = -500 max = -5000 }
+	148 = { # Markarth
+		expd_pdxrptg_extra_cannon_remove_province_effects_from_this_province = yes
+		if = {
+			limit = { has_global_flag = expd_pdxrptg_extra_cannon_debug }
+			add_province_modifier = {
+				name  = expd_pdxrptg_extra_cannon_creating
+				days  = 3
+			}
+			custom_tooltip = {
+				text = expd_pdxrptg_extra_cannon_granted_to_top_liege_of_province_owner_in_3_years_tt
+				province_event = { id = ExpdPdxrptgExtraCannon.2000 days = 3 }
+			}
+		}
+		else = {
+			add_province_modifier = {
+				name  = expd_pdxrptg_extra_cannon_creating
+				years = 3
+			}
+			custom_tooltip = {
+				text = expd_pdxrptg_extra_cannon_granted_to_top_liege_of_province_owner_in_3_years_tt
+				province_event = { id = ExpdPdxrptgExtraCannon.2000 years = 3 }
+			}
+		}
+		custom_tooltip = { text = expd_pdxrptg_extra_cannon_grant_warning_tt }
+	}
+}

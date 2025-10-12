@@ -87,6 +87,13 @@ expd_pdxrptg_daedric_favour_this_character_is_not_already_favoured_by_prev_offma
 	}
 }
 
+expd_pdxrptg_daedric_favour_this_character_does_not_have_a_daedric_artifact_from_prev_offmap_power = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_this_character_does_not_have_a_daedric_artifact_from_prev_offmap_power_tt
+		expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offmap_power = no
+	}
+}
+
 expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offmap_power = {
 	custom_tooltip = {
 		text = expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offmap_power_tt
@@ -162,6 +169,93 @@ expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offm
 			AND = {
 				expd_pdxrptg_daedric_favour_prev_offmap_power_is_vaermina = yes
 				any_artifact = { has_artifact_flag = daedric_artifact_vaermina }
+			}
+		}
+	}
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_has_none_of_their_daedric_artifacts = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_prev_offmap_power_has_none_of_their_daedric_artifacts_tt
+		expd_pdxrptg_daedric_favour_prev_offmap_power_has_one_of_their_daedric_artifacts = no
+	}
+}
+
+expd_pdxrptg_daedric_favour_prev_offmap_power_has_one_of_their_daedric_artifacts = {
+	custom_tooltip = {
+		text = expd_pdxrptg_daedric_favour_prev_offmap_power_has_one_of_their_daedric_artifacts_tt
+		OR = {
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_azura = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_azura } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_boethiah = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_boethiah } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_clavicus = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_clavicus } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_hermaeus = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_hermaeus } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_hircine = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_hircine } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_ideal_masters = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_ideal_masters } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_jyggalag = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_jyggalag } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_malacath = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_malacath } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_mehrunes = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_mehrunes } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_mephala = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_mephala } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_meridia = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_meridia } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_molag = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_molag } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_namira = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_namira } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_nocturnal = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_nocturnal } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_peryite = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_peryite } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_sanguine = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_sanguine } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_sheogorath = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_sheogorath } }
+			}
+			AND = {
+				expd_pdxrptg_daedric_favour_prev_offmap_power_is_vaermina = yes
+				PREV = { any_artifact = { has_artifact_flag = daedric_artifact_vaermina } }
 			}
 		}
 	}

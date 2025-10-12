@@ -1,0 +1,62 @@
+# Audax Validator EnableCommentMetadata
+
+decisions = {
+	
+	expd_pdxrptg_extra_cannon_search_high_prio = {
+		only_independent = yes
+		ai = no
+		is_high_prio = yes
+		potential = {
+			expd_pdxrptg_extra_cannon_search_potential = yes
+			expd_pdxrptg_extra_cannon_high_prio_potential = yes
+		}
+		allow  = { expd_pdxrptg_extra_cannon_search_allow = yes }
+		effect = { expd_pdxrptg_extra_cannon_search_effect = yes }
+	}
+	
+	expd_pdxrptg_extra_cannon_search = {
+		only_independent = yes
+		ai = no
+		potential = {
+			expd_pdxrptg_extra_cannon_search_potential = yes
+			expd_pdxrptg_extra_cannon_high_prio_potential = no
+		}
+		allow  = { expd_pdxrptg_extra_cannon_search_allow = yes }
+		effect = { expd_pdxrptg_extra_cannon_search_effect = yes }
+	}
+	
+	expd_pdxrptg_extra_cannon_create_high_prio = {
+		only_independent = yes
+		ai = no
+		is_high_prio = yes
+		potential = {
+			expd_pdxrptg_extra_cannon_create_potential = yes
+			expd_pdxrptg_extra_cannon_high_prio_potential = yes
+		}
+		allow  = { expd_pdxrptg_extra_cannon_create_allow = yes  }
+		effect = { expd_pdxrptg_extra_cannon_create_effect = yes }
+	}
+	
+	expd_pdxrptg_extra_cannon_create = {
+		only_independent = yes
+		ai = no
+		potential = {
+			expd_pdxrptg_extra_cannon_create_potential = yes
+			expd_pdxrptg_extra_cannon_high_prio_potential = no
+		}
+		allow  = { expd_pdxrptg_extra_cannon_create_allow = yes  }
+		effect = { expd_pdxrptg_extra_cannon_create_effect = yes }
+	}
+	
+	expd_pdxrptg_extra_cannon_debug_reset_chain = {
+		ai = no
+		is_high_prio = yes
+		potential = {
+			expd_pdxrptg_extra_cannon_shared_potential = yes
+			148 = { expd_pdxrptg_extra_cannon_province_modifiers_inconsistent = yes }
+		}
+		allow = { always = yes }
+		effect = { 148 = { expd_pdxrptg_extra_cannon_remove_province_effects_from_this_province = yes } }
+	}
+	
+}

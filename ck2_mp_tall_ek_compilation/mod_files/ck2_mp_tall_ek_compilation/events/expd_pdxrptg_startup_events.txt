@@ -1,0 +1,30 @@
+namespace = ExpdPdxrptgStartup
+
+# Called on_startup, for the single player or MP host
+# Sets a global flag for the first 1 month after startup, 
+character_event = {
+	id = ExpdPdxrptgStartup.1000
+	ai = no
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		ai = no
+		OR = {
+			multiplayer = no
+			is_multiplayer_host_character = yes
+		}
+	}
+	immediate = {
+		clr_global_flag = expd_pdxrptg_startup_1_month_timer
+		set_global_flag = expd_pdxrptg_startup_1_month_timer
+		random_province = { province_event = { id = ExpdPdxrptgStartup.1001 days = 32 } }
+	}
+}
+province_event = {
+	id = ExpdPdxrptgStartup.1001
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		clr_global_flag = expd_pdxrptg_startup_1_month_timer
+	}
+}

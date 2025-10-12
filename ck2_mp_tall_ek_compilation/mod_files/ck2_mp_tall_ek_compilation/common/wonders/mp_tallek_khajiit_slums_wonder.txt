@@ -1,0 +1,183 @@
+# Audax Validator EnableCommentMetadata
+
+# Start with EK version of great walls (wonder_wall)
+#  --- Change picture
+#  --- Remove tech requirement
+#  --- Add province requirement
+#  --- Copy costs & times for each stage from Mane's Palace (wonder_mane_palace)
+#  --- Change stage benefits to defensiveness, garrison and tech growth.
+#  --- Remove "unique" great wall upgrades (you can't really have defensive walls around a slum)
+#  --- Add selected improvements from generic port (wonder_harbor) (you can have a port in a slum, I guess)
+#  --- Add unique improvements created for this specific wonder
+
+wonder_khajiit_slums = {
+	picture = GFX_wonder_strip_motalion
+	show_model = no
+	potential = {
+		FROMFROMFROM = {
+			county = {
+				# Audax Validator "." Ignore_NEXT
+				title = c_quinrawl
+			}
+		}
+	}
+	active = {
+		FROMFROMFROM = { is_capital = no }
+	}
+	flags = {
+		defensive
+		is_destructible
+		cost_high
+	}
+	available_upgrades = {
+		
+		# Unique upgrades created specifically for this wonder
+		upgrade_khajiit_slums_infantry_1
+		upgrade_khajiit_slums_infantry_2
+		upgrade_khajiit_slums_infantry_3
+		upgrade_khajiit_slums_infantry_4
+		upgrade_khajiit_slums_tech_mil
+		upgrade_khajiit_slums_tech_eco
+		upgrade_khajiit_slums_tech_cul
+		
+		# From EK's wonder_harbor
+		upgrade_piers
+		upgrade_office_harbor
+		upgrade_lighthouse
+		
+		# OTHER:
+		upgrade_roads
+		upgrade_road_tolls
+		upgrade_watchtower_network
+		upgrade_spikes
+		upgrade_retinue
+		upgrade_tavern
+		
+		#Cultural/Religion/Regional/Special Global Upgrades
+		# Audax Validator "." Ignore_NEXT
+		upgrade_runestones
+		# Audax Validator "." Ignore_NEXT
+		upgrade_necromancer_retinue
+		# Audax Validator "." Ignore_NEXT
+		upgrade_brewery
+		# Audax Validator "." Ignore_NEXT
+		upgrade_meadery
+		# Audax Validator "." Ignore_NEXT
+		upgrade_vineyard
+		# Audax Validator "." Ignore_NEXT
+		upgrade_rice_field
+		# Audax Validator "." Ignore_NEXT
+		upgrade_coconut_orchard
+		# Audax Validator "." Ignore_NEXT
+		upgrade_dairy_brewer
+		# Audax Validator "." Ignore_NEXT
+		upgrade_drainage_channels
+		# Audax Validator "." Ignore_NEXT
+		upgrade_tree_plantation
+		# Audax Validator "." Ignore_NEXT
+		upgrade_hypocausts
+		# Audax Validator "." Ignore_NEXT
+		upgrade_heating_pipes
+		# Audax Validator "." Ignore_NEXT
+		upgrade_aqueduct_system
+		# Audax Validator "." Ignore_NEXT
+		upgrade_freshwater_fountains
+		# Audax Validator "." Ignore_NEXT
+		upgrade_sewers
+		# Audax Validator "." Ignore_NEXT
+		upgrade_investment_logging
+		# Audax Validator "." Ignore_NEXT
+		upgrade_investment_quarry
+		
+	}
+	stage = {
+		allow = {
+		}
+		build_time = 325
+		gold_cost_flat = 2000
+		gold_cost_ticking = 5
+		restore_time = 150
+		loot_time = 12
+		restore_cost_flat = 400
+		restore_cost_ticking = 2
+		upgrade_slots = 2
+		local_modifier = {
+			# All modifiers are several times higher than those of a "normal" GW, because no owner modifiers.
+			siege_defence = 0.1 # It's a warren
+			garrison_size = 0.25 # Urban guerilla warfare
+			tech_growth_modifier = 0.25 # They quickly learn (ie. steal) nearby tech.
+			light_infantry = 25 # Get a small amount of base troops, without having to build the special improvement
+		}
+		owner_modifier = {
+			# None.
+		}
+	}
+	stage = {
+		allow = {
+		}
+		build_time = 375
+		gold_cost_flat = 2200
+		gold_cost_ticking = 5
+		restore_time = 200
+		loot_time = 12
+		restore_cost_flat = 500
+		restore_cost_ticking = 2
+		upgrade_slots = 2
+		local_modifier = {
+			# As per stage 1
+			siege_defence = 0.1
+			garrison_size = 0.25
+			tech_growth_modifier = 0.25
+			light_infantry = 25
+		}
+		owner_modifier = {
+			# None.
+		}
+	}
+	stage = {
+		allow = {
+		}
+		build_time = 375
+		gold_cost_flat = 2400
+		gold_cost_ticking = 5
+		restore_time = 200
+		loot_time = 12
+		restore_cost_flat = 500
+		restore_cost_ticking = 2
+		upgrade_slots = 2
+		local_modifier = {
+			# As per stage 1
+			siege_defence = 0.1
+			garrison_size = 0.25
+			tech_growth_modifier = 0.25
+			# More LI for stages 3 & 4
+			light_infantry = 50
+		}
+		owner_modifier = {
+			# None.
+		}
+	}
+	stage = {
+		allow = {
+		}
+		build_time = 325
+		gold_cost_flat = 2600
+		gold_cost_ticking = 5
+		restore_time = 200
+		loot_time = 2
+		restore_cost_flat = 500
+		restore_cost_ticking = 2
+		upgrade_slots = 2
+		local_modifier = {
+			# As per stage 1
+			siege_defence = 0.1
+			garrison_size = 0.25
+			tech_growth_modifier = 0.25
+			# More LI for stages 3 & 4
+			light_infantry = 50
+		}
+		owner_modifier = {
+			# None.
+		}
+	}
+}
