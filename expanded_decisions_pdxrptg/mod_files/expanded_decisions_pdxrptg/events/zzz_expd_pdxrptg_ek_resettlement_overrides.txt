@@ -1,0 +1,185 @@
+# Audax Validator EnableCommentMetadata
+
+# Basically unchanged from the base mod, except for the inclusion of caps in every scaled_wealth trigger/command.
+# So, we can safely ignore all errors arising from this file.
+# Audax Validator "!" Ignore_NEXT
+
+# scaled_wealth = -0.5  -> scaled_wealth = { value = -0.5  min = -20 max = -200 }
+# scaled_wealth = -0.75 -> scaled_wealth = { value = -0.75 min = -30 max = -300 }
+# scaled_wealth = -1.0  -> scaled_wealth = { value = -1.0  min = -40 max = -400 }
+
+# scaled_wealth = 0.5   -> scaled_wealth = { value = 0.5  min = 20 max = 200 }
+# scaled_wealth = 0.75  -> scaled_wealth = { value = 0.75 min = 30 max = 300 }
+# scaled_wealth = 1.0   -> scaled_wealth = { value = 1.0  min = 40 max = 400 }
+# scaled_wealth = 1.25  -> scaled_wealth = { value = 1.25 min = 50 max = 500 }
+# scaled_wealth = 1.5   -> scaled_wealth = { value = 1.5  min = 60 max = 600 }
+
+namespace = ekresettlement
+
+province_event = { #Base-Resettle
+	id = ekresettlement.50
+	desc = ekresettlement50desc
+	is_triggered_only = yes
+	picture = GFX_evt_sparse
+	
+	option = { #Minor
+		name = ekresettlement50opta
+		trigger = {
+			FROMFROM = { #decision-taker
+				scaled_wealth = { value = 0.5  min = 20 max = 200 }
+			}
+		}
+		ai_chance = { #AI less likely to do it if it doesn't have a lot of money.
+			factor = 1
+			modifier = {
+				factor = 0.8
+				FROMFROM = { NOT = { scaled_wealth = { value = 1.0  min = 40 max = 400 } } }
+			}
+			modifier = {
+				factor = 0.6
+				FROMFROM = { NOT = { scaled_wealth = { value = 0.75 min = 30 max = 300 } } }
+			}
+		}
+		FROMFROM = { province_event = { id = ekresettlement.60 } }
+	}
+	option = { #Middling
+		name = ekresettlement50optb
+		trigger = {
+			FROMFROM = {
+				scaled_wealth = { value = 0.75 min = 30 max = 300 }
+			}
+		}
+		ai_chance = {
+			factor = 0.75
+			modifier = {
+				factor = 0.8
+				FROMFROM = { NOT = { scaled_wealth = { value = 1.25 min = 50 max = 500 } } }
+			}
+			modifier = {
+				factor = 0.6
+				FROMFROM = { NOT = { scaled_wealth = { value = 1.0  min = 40 max = 400 } } }
+			}		
+		}
+		FROMFROM = { province_event = { id = ekresettlement.70 } }
+	}
+	option = { #Major
+		name = ekresettlement50optc
+		trigger = {
+			FROMFROM = {
+				scaled_wealth = { value = 1.0  min = 40 max = 400 }
+			}
+		}
+		ai_chance = {
+			factor = 0.5
+			modifier = {
+				factor = 0.8
+				FROMFROM = { NOT = { scaled_wealth = { value = 1.5  min = 60 max = 600 } } }
+			}
+			modifier = {
+				factor = 0.6
+				FROMFROM = { NOT = { scaled_wealth = { value = 1.25 min = 50 max = 500 } } }
+			}
+		}
+		FROMFROM = { province_event = { id = ekresettlement.80 } }
+	}
+	option = { #Natural resettlement
+		name = ekresettlement50optd
+		ai_chance = {
+			factor = 0.25
+			modifier = {
+				factor = 1.25
+				FROMFROM = { NOT = { scaled_wealth = { value = 1.0  min = 40 max = 400 } } }
+			}
+			modifier = {
+				factor = 1.5
+				FROMFROM = { NOT = { scaled_wealth = { value = 0.75 min = 30 max = 300 } } }
+			}
+			modifier = {
+				factor = 1.75
+				FROMFROM = { NOT = { scaled_wealth = { value = 0.5  min = 20 max = 200 } } }
+			}
+		}
+		remove_province_modifier = resettlement
+	}
+}
+
+province_event = { #Minor efforts
+	id = ekresettlement.60
+	desc = ekresettlement60desc
+	is_triggered_only = yes
+	picture = GFX_evt_sparse
+
+	option = { #Resettle
+		name = ekresettlement60opta
+		FROM = {
+			add_province_modifier = {
+				name = minor_repopulation
+				duration = -1
+			}
+		}
+		ROOT = { scaled_wealth = { value = -0.5  min = -20 max = -200 } }
+	}
+	option = { #Nevermind
+		name = nevermind
+		trigger = {
+			ai = no
+		}
+		FROM = {
+			remove_province_modifier = resettlement
+		}
+	}
+}
+
+province_event = { #Middling efforts
+	id = ekresettlement.70
+	desc = ekresettlement70desc
+	is_triggered_only = yes
+	picture = GFX_evt_sparse
+
+	option = { #Resettle
+		name = ekresettlement70opta
+		FROM = {
+			add_province_modifier = {
+				name = moderate_repopulation
+				duration = -1
+			}
+		}
+		ROOT = { scaled_wealth = { value = -0.75 min = -30 max = -300 } }
+	}
+	option = { #Nevermind
+		name = nevermind
+		trigger = {
+			ai = no
+		}
+		FROM = {
+			remove_province_modifier = resettlement
+		}
+	}
+}
+
+province_event = { #Major efforts
+	id = ekresettlement.80
+	desc = ekresettlement80desc
+	is_triggered_only = yes
+	picture = GFX_evt_sparse
+
+	option = { #Resettle
+		name = ekresettlement80opta
+		FROM = {
+			add_province_modifier = {
+				name = major_repopulation
+				duration = -1
+			}
+		}
+		ROOT = { scaled_wealth = { value = -1.0  min = -40 max = -400 } }
+	}
+	option = { #Nevermind
+		name = nevermind
+		trigger = {
+			ai = no
+		}
+		FROM = {
+			remove_province_modifier = resettlement
+		}
+	}
+}
