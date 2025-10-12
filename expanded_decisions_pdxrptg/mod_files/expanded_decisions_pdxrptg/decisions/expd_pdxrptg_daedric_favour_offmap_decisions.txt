@@ -24,17 +24,28 @@ offmap_decisions = {
 			FROM = {
 				show_scope_change = no
 				
-				expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
-				
 				prisoner = no
 				NOT = { trait = incapable }
 				expd_pdxrptg_this_character_is_not_inaccessible = yes
 				
-				expd_pdxrptg_daedric_favour_this_character_is_not_dragonblood = yes
+				trigger_if = {
+					limit = { ai = yes }
+					expd_pdxrptg_daedric_favour_this_character_is_not_dragonblood = yes
+				}
 				
 				expd_pdxrptg_daedric_favour_this_character_is_not_already_favoured_by_prev_offmap_power = yes
 				
-				expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offmap_power = yes
+				OR = {
+					AND = {
+						expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offmap_power = yes
+						expd_pdxrptg_this_character_has_enough_offmap_currency_to_purchase_daedric_artifact_from_root = yes
+					}
+					AND = {
+						expd_pdxrptg_daedric_favour_this_character_does_not_have_a_daedric_artifact_from_prev_offmap_power = yes
+						expd_pdxrptg_daedric_favour_prev_offmap_power_has_none_of_their_daedric_artifacts = yes
+						expd_pdxrptg_this_character_has_double_the_offmap_currency_needed_to_purchase_daedric_artifact_from_root = yes
+					}
+				}
 				
 			}
 			# Audax Validator "." Ignore_NEXT
@@ -45,7 +56,17 @@ offmap_decisions = {
 			FROM = {
 				show_scope_change = no
 				sound_effect = china_grace_spend
-				expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+				if = {
+					limit = { expd_pdxrptg_daedric_favour_this_character_is_not_dragonblood = no }
+					custom_tooltip = { text = expd_pdxrptg_daedric_favour_warning_not_necessary_for_dragonblood_tt }
+				}
+				if = {
+					limit = { expd_pdxrptg_daedric_favour_this_character_has_a_daedric_artifact_from_prev_offmap_power = yes }
+					expd_pdxrptg_subtract_offmap_currency_to_purchase_daedric_artifact = yes
+				}
+				else = {
+					expd_pdxrptg_subtract_double_offmap_currency_to_purchase_daedric_artifact = yes
+				}
 				expd_pdxrptg_daedric_favour_this_character_becomes_favoured_by_prev_offmap_power = yes
 			}
 		}
