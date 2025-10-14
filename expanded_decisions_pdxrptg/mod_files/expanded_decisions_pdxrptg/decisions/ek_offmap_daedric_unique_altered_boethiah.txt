@@ -1,0 +1,85 @@
+# Audax Validator EnableCommentMetadata
+
+offmap_decisions = {
+	
+	# Boethiah: Gain a command trait
+	
+	# Audax Validator "." Ignore_NEXT
+	oblivion_boethiah_martial_expertise = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 60
+		
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_boethiah = yes
+			NOT = { has_character_flag = boethiah_deal }
+		}
+		
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_boethiah
+		}
+		
+		allow = {
+			show_only_failed_conditions = yes
+			FROM = {
+				show_scope_change = no
+				ROOT = {
+					# Audax Validator "." Ignore_NEXT
+					is_offmap_tag = oblivion_boethiah
+				}
+				has_offmap_currency = {
+					# Audax Validator "." Ignore_NEXT
+					offmap = oblivion_boethiah
+					value = 750
+				}
+				prisoner = no
+				NOT = { trait = incapable }
+				is_inaccessible_trigger = no
+				expd_pdxrptg_leadership_traits_not_maxed = yes
+			}
+			ROOT = {
+				# Audax Validator "." Ignore_NEXT
+				is_offmap_tag = oblivion_boethiah
+			}
+			# Audax Validator "." Ignore_NEXT
+			oblivion_boethiah_boon_decisions_enabled_trigger = yes
+		}
+
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				add_offmap_currency = {
+					# Audax Validator "." Ignore_NEXT
+					offmap = oblivion_boethiah
+					value = -750
+				}
+			}
+			hidden_effect = {
+				FROM = {
+					#set_china_boon_cd_effect = yes
+					set_character_flag = boethiah_deal
+					character_event = {
+						# Audax Validator "." Ignore_NEXT
+						id = boethiah.50
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.1 # slow down
+			}
+		}
+	}
+	
+}
