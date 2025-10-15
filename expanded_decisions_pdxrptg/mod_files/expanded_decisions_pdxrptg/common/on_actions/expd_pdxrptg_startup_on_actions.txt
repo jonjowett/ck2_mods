@@ -1,5 +1,6 @@
 on_startup = {
 	events = {
-		ExpdPdxrptgStartup.1000
+		ExpdPdxrptgStartup.1000 # Set global flag for first 1 month after startup
+		ExpdPdxrptgStartup.2000 # Close all submenus
 	}
 }
