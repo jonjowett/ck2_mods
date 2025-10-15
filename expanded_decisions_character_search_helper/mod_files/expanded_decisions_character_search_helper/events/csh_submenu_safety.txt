@@ -1,0 +1,28 @@
+namespace = CSHSubmenuSafety
+
+# on_startup - ensure all characters have exited the submenu.
+# Run on the SP human player or MP host, then scope to all characters.
+character_event = {
+	
+	id = CSHSubmenuSafety.1000
+	hide_window = yes
+	is_triggered_only = yes
+	
+	ai = no
+	
+	trigger = {
+		ai = no
+		OR = {
+			multiplayer = no
+			is_multiplayer_host_character = yes
+		}
+	}
+	
+	immediate = {
+		any_character = {
+			limit = { has_character_flag = csh_submenu_is_open }
+			clr_character_flag = csh_submenu_is_open
+		}
+	}
+	
+}
