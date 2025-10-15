@@ -237,7 +237,7 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 	any_title_under = {
 		limit = {
 			tier = BARON # NB: County capitals (if they exist) count as baronies
-			NOT = { holding_type = FAMILY_PALACE }
+			NOT = { holding_type = family_palace }
 		}
 		event_target:edmp_realm_size_character_being_calculated = {
 			change_variable = { which = edmp_realm_size_total_holdings value = 1 }

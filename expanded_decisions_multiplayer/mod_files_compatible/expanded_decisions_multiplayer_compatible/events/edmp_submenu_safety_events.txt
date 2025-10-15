@@ -1,0 +1,24 @@
+namespace = EDMPSubmenuSafety
+
+# on_startup - ensure all characters have exited the admin submenu.
+# Run on the SP human player or MP host, then scope to all characters.
+character_event = {
+	
+	id = EDMPSubmenuSafety.1000
+	hide_window = yes
+	is_triggered_only = yes
+	
+	ai = no
+	
+	trigger = {
+		edmp_this_character_can_take_admin_actions = yes
+	}
+	
+	immediate = {
+		any_character = {
+			limit = { has_character_flag = edmp_admin_submenu_is_open }
+			clr_character_flag = edmp_admin_submenu_is_open
+		}
+	}
+	
+}
