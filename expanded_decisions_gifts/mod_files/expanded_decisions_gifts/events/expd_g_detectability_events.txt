@@ -1,5 +1,12 @@
 namespace = ExpdGiftsDetectability
 
+# on_startup & on_yearly_pulse, for SP human or MP host, add a special modifier to province #1, for slightly more than 2 years
+#  --- Province #1 must always exist
+#  --- If this mod is active in the current game, then this special modifier will definitely be present (because the maximum interval between renewals is 2 years).
+#  --- If this mod has NEVER been active in the current game, then this special modifier will definitely NOT be present.
+#  --- If this mod was previously active but has since been removed, then one of these two will happen:
+#       --- Best case: The special modifier will NOT be present (removed by the game engine because it's not defined).
+#       --- Worst case: The special modifier will expire after 2 years of game time, meaning that this mod will be erroneously detected for only a short period of in-game time.
 character_event = {
 	id = ExpdGiftsDetectability.1000
 	hide_window = yes
@@ -18,11 +25,11 @@ character_event = {
 				limit = { has_province_modifier = expd_g_detectability }
 				remove_province_modifier = expd_g_detectability
 			}
-			1 = { # Province #1 must always exist
+			1 = {
 				add_province_modifier = {
-					name     = expd_g_detectability
-					duration = -1
-					hidden   = yes
+					name   = expd_g_detectability
+					days   = 735 # = 365*2 + 5 = slightly more than 2 years
+					hidden = yes
 				}
 			}
 		}
