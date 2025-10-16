@@ -1,0 +1,22 @@
+on_startup = {
+	events = {
+		ExpdPdxrptgNotifications.9000   # Upgrade any notifications to the new modifier-based system
+	}
+}
+
+# On abdication, transfer notification preferences to the new character
+on_new_holder = {
+	events = {
+		ExpdPdxrptgNotifications.9100
+	}
+}
+on_new_holder_inheritance = {
+	events = {
+		ExpdPdxrptgNotifications.9100
+	}
+}
+on_new_holder_usurpation = {
+	events = {
+		ExpdPdxrptgNotifications.9100
+	}
+}

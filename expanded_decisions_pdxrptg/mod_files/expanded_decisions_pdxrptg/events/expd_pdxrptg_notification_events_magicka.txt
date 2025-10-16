@@ -1,7 +1,8 @@
 namespace = ExpdPdxrptgNotifications
 
-# Magicka notifications use events 1000-1999
-# Potions notifications use events 2000-2999
+# Magicka notifications use IDs 1000-1999
+# Potions notifications use IDs 2000-2999
+# Administrative events use IDs 9000-9999
 
 character_event = {
 	
@@ -23,7 +24,7 @@ character_event = {
 		name = ExpdPdxrptgNotifications_Option_DisableThisNotification
 		custom_tooltip = {
 			text = expd_pdxrptg_notification_magicka_full_will_be_disabled_tt
-			clr_character_flag = expd_pdxrptg_notification_magicka_full
+			remove_character_modifier = expd_pdxrptg_notification_magicka_full
 		}
 		ai_chance = { factor = 0 }
 	}
@@ -50,7 +51,7 @@ character_event = {
 		name = ExpdPdxrptgNotifications_Option_DisableThisNotification
 		custom_tooltip = {
 			text = expd_pdxrptg_notification_magicka_half_will_be_disabled_tt
-			clr_character_flag = expd_pdxrptg_notification_magicka_half
+			remove_character_modifier = expd_pdxrptg_notification_magicka_half
 		}
 		ai_chance = { factor = 0 }
 	}

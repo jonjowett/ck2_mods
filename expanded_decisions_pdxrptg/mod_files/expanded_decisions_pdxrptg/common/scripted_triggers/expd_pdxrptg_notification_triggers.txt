@@ -1,0 +1,24 @@
+expd_pdxrptg_notification_any_is_enabled = {
+	OR = {
+		expd_pdxrptg_notification_magicka_half_is_enabled = yes
+		expd_pdxrptg_notification_magicka_full_is_enabled = yes
+		expd_pdxrptg_notification_potion_effect_ended_is_enabled = yes
+	}
+}
+
+expd_pdxrptg_notification_magicka_any_is_enabled = {
+	OR = {
+		expd_pdxrptg_notification_magicka_half_is_enabled = yes
+		expd_pdxrptg_notification_magicka_full_is_enabled = yes
+	}
+}
+
+expd_pdxrptg_notification_magicka_half_is_enabled = {
+	has_character_modifier = expd_pdxrptg_notification_magicka_half
+}
+expd_pdxrptg_notification_magicka_full_is_enabled = {
+	has_character_modifier = expd_pdxrptg_notification_magicka_full
+}
+expd_pdxrptg_notification_potion_effect_ended_is_enabled = {
+	has_character_modifier = expd_pdxrptg_notification_potion_effect_ended
+}

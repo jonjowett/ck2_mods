@@ -26,14 +26,14 @@ decisions = {
 		ai = no
 		potential = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
-			NOT = { has_character_flag = expd_pdxrptg_notification_magicka_full }
+			expd_pdxrptg_notification_magicka_full_is_enabled = no
 		}
 		allow = {
-			always = yes
+			# Notification can only be toggled on for spellcasters
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
 		}
 		effect = {
-			hidden_tooltip = { set_character_flag = expd_pdxrptg_notification_magicka_full }
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_full_start = yes }
 		}
 	}
 	expd_pdxrptg_notification_magicka_full_toggle_off = {
@@ -41,14 +41,14 @@ decisions = {
 		ai = no
 		potential = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
-			has_character_flag = expd_pdxrptg_notification_magicka_full
+			expd_pdxrptg_notification_magicka_full_is_enabled = yes
 		}
 		allow = {
+			# Notification can always be toggled off
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = { clr_character_flag = expd_pdxrptg_notification_magicka_full }
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_full_stop = yes }
 		}
 	}
 	
@@ -59,14 +59,14 @@ decisions = {
 		ai = no
 		potential = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
-			NOT = { has_character_flag = expd_pdxrptg_notification_magicka_half }
+			expd_pdxrptg_notification_magicka_half_is_enabled = no
 		}
 		allow = {
-			always = yes
+			# Notification can only be toggled on for spellcasters
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
 		}
 		effect = {
-			hidden_tooltip = { set_character_flag = expd_pdxrptg_notification_magicka_half }
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_half_start = yes }
 		}
 	}
 	expd_pdxrptg_notification_magicka_half_toggle_off = {
@@ -74,14 +74,14 @@ decisions = {
 		ai = no
 		potential = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
-			has_character_flag = expd_pdxrptg_notification_magicka_half
+			expd_pdxrptg_notification_magicka_half_is_enabled = yes
 		}
 		allow = {
+			# Notification can always be toggled off
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = { clr_character_flag = expd_pdxrptg_notification_magicka_half }
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_half_stop = yes }
 		}
 	}
 	
@@ -92,13 +92,13 @@ decisions = {
 		ai = no
 		potential = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			NOT = { has_character_flag = expd_pdxrptg_notification_potion_effect_ended }
+			expd_pdxrptg_notification_potion_effect_ended_is_enabled = no
 		}
 		allow = {
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = { expd_pdxrptg_notifications_potion_effect_expiry_start = yes }
+			hidden_tooltip = { expd_pdxrptg_notifications_potion_effect_ended_start = yes }
 		}
 	}
 	expd_pdxrptg_notification_potion_effect_ended_toggle_off = {
@@ -106,13 +106,13 @@ decisions = {
 		ai = no
 		potential = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			has_character_flag = expd_pdxrptg_notification_potion_effect_ended
+			expd_pdxrptg_notification_potion_effect_ended_is_enabled = yes
 		}
 		allow = {
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = { expd_pdxrptg_notifications_potion_effect_expiry_stop = yes }
+			hidden_tooltip = { expd_pdxrptg_notifications_potion_effect_ended_stop = yes }
 		}
 	}
 	

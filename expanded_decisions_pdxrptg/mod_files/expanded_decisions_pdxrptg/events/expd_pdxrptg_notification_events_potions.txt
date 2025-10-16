@@ -2,8 +2,9 @@
 
 namespace = ExpdPdxrptgNotifications
 
-# Magicka notifications use events 1000-1999
-# Potions notifications use events 2000-2999
+# Magicka notifications use IDs 1000-1999
+# Potions notifications use IDs 2000-2999
+# Administrative events use IDs 9000-9999
 
 # Potion tracking cycle
 character_event = {
@@ -13,7 +14,7 @@ character_event = {
 	ai = no
 	trigger = {
 		# Only execute this event if the character has the potion effect notification turned on
-		has_character_flag = expd_pdxrptg_notification_potion_effect_ended
+		expd_pdxrptg_notification_potion_effect_ended_is_enabled = yes
 	}
 	immediate = {
 		
@@ -71,7 +72,7 @@ character_event = {
 	
 	option = {
 		name = ExpdPdxrptgNotifications_Option_DisableThisNotification
-		expd_pdxrptg_notifications_potion_effect_expiry_stop = yes
+		expd_pdxrptg_notifications_potion_effect_ended_stop = yes
 		ai_chance = { factor = 0 }
 	}
 	

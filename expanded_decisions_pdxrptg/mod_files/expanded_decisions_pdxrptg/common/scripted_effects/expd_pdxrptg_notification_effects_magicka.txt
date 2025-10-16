@@ -7,8 +7,8 @@ expd_pdxrptg_notifications_magicka_pre_regen = {
 			ai = no
 			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
 			OR = {
-				has_character_flag = expd_pdxrptg_notification_magicka_full
-				has_character_flag = expd_pdxrptg_notification_magicka_half
+				has_character_modifier = expd_pdxrptg_notification_magicka_full
+				has_character_modifier = expd_pdxrptg_notification_magicka_half
 			}
 		}
 		set_variable = {
@@ -31,14 +31,14 @@ expd_pdxrptg_notifications_magicka_post_regen = {
 			ai = no
 			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
 			OR = {
-				has_character_flag = expd_pdxrptg_notification_magicka_full
-				has_character_flag = expd_pdxrptg_notification_magicka_half
+				has_character_modifier = expd_pdxrptg_notification_magicka_full
+				has_character_modifier = expd_pdxrptg_notification_magicka_half
 			}
 		}
 		
 		# Check whether the character hit their max magicka on this regen cycle
 		if = {
-			limit = { has_character_flag = expd_pdxrptg_notification_magicka_full }
+			limit = { has_character_modifier = expd_pdxrptg_notification_magicka_full }
 			if = {
 				limit = {
 					# Had less than max magicka before regen, and has max magicka after regen
@@ -57,7 +57,7 @@ expd_pdxrptg_notifications_magicka_post_regen = {
 		
 		# Check whether the character hit half magicka on this regen cycle
 		if = {
-			limit = { has_character_flag = expd_pdxrptg_notification_magicka_half }
+			limit = { has_character_modifier = expd_pdxrptg_notification_magicka_half }
 			set_variable = {
 				which = expd_pdxrptg_notifications_magicka_half_value
 				which = magicka_max
@@ -106,19 +106,48 @@ expd_pdxrptg_notifications_magicka_post_regen = {
 	}
 }
 
+expd_pdxrptg_notification_magicka_half_start = {
+	remove_character_modifier       = expd_pdxrptg_notification_magicka_half
+	add_character_modifier = { name = expd_pdxrptg_notification_magicka_half duration = -1 hidden = yes inherit = yes }
+}
+
+expd_pdxrptg_notification_magicka_half_stop = {
+	remove_character_modifier       = expd_pdxrptg_notification_magicka_half
+	expd_pdxrptg_notification_magicka_cleanup = yes
+}
+
+expd_pdxrptg_notification_magicka_full_start = {
+	remove_character_modifier       = expd_pdxrptg_notification_magicka_full
+	add_character_modifier = { name = expd_pdxrptg_notification_magicka_full duration = -1 hidden = yes inherit = yes }
+}
+
+expd_pdxrptg_notification_magicka_full_stop = {
+	remove_character_modifier       = expd_pdxrptg_notification_magicka_full
+	expd_pdxrptg_notification_magicka_cleanup = yes
+}
+
 expd_pdxrptg_notifications_magicka_disable_all = {
-	clr_character_flag = expd_pdxrptg_notification_magicka_full
-	clr_character_flag = expd_pdxrptg_notification_magicka_half
+	expd_pdxrptg_notification_magicka_half_stop = yes
+	expd_pdxrptg_notification_magicka_full_stop = yes
+}
+
+expd_pdxrptg_notification_magicka_cleanup = {
 	if = {
 		limit = {
-			check_variable = {
-				which = expd_pdxrptg_notifications_magicka_amount_pre_regen
-				value > 0
-			}
+			expd_pdxrptg_notification_magicka_half_is_enabled = no
+			expd_pdxrptg_notification_magicka_full_is_enabled = no
 		}
-		set_variable = {
-			which = expd_pdxrptg_notifications_magicka_amount_pre_regen
-			value = 0
+		if = {
+			limit = {
+				check_variable = {
+					which = expd_pdxrptg_notifications_magicka_amount_pre_regen
+					value > 0
+				}
+			}
+			set_variable = {
+				which = expd_pdxrptg_notifications_magicka_amount_pre_regen
+				value = 0
+			}
 		}
 	}
 }
