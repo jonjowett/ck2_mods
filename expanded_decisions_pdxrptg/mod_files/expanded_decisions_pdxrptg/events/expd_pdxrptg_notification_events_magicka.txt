@@ -11,8 +11,8 @@ character_event = {
 	desc         = ExpdPdxrptgNotifications_MagickaFull_Desc
 	border       = GFX_event_normal_frame_religion
 	picture      = GFX_evt_tome
-	portrait     = none
-	#notification = yes # In case players want to make these appear in the high/low prio queue
+	show_root    = yes
+	notification = yes # In case players want to make these appear in the high/low prio queue
 	
 	is_triggered_only = yes
 	
@@ -24,11 +24,10 @@ character_event = {
 		name = ExpdPdxrptgNotifications_Option_DisableThisNotification
 		custom_tooltip = {
 			text = expd_pdxrptg_notification_magicka_full_will_be_disabled_tt
-			remove_character_modifier = expd_pdxrptg_notification_magicka_full
+			expd_pdxrptg_notification_magicka_full_stop = yes
 		}
 		ai_chance = { factor = 0 }
 	}
-	
 	
 }
 
@@ -39,7 +38,8 @@ character_event = {
 	desc         = ExpdPdxrptgNotifications_MagickaHalf_Desc
 	border       = GFX_event_normal_frame_religion
 	picture      = GFX_evt_library
-	portrait     = none
+	show_root    = yes
+	notification = yes # In case players want to make these appear in the high/low prio queue
 	
 	is_triggered_only = yes
 	
@@ -51,10 +51,82 @@ character_event = {
 		name = ExpdPdxrptgNotifications_Option_DisableThisNotification
 		custom_tooltip = {
 			text = expd_pdxrptg_notification_magicka_half_will_be_disabled_tt
-			remove_character_modifier = expd_pdxrptg_notification_magicka_half
+			expd_pdxrptg_notification_magicka_half_stop = yes
 		}
 		ai_chance = { factor = 0 }
 	}
 	
+}
+
+character_event = {
+	
+	id           = ExpdPdxrptgNotifications.1200
+	title        = ExpdPdxrptgNotifications_MagickaUnused_Title
+	border       = GFX_event_normal_frame_religion
+	picture      = GFX_evt_mage
+	show_root    = yes
+	notification = yes # In case players want to make these appear in the high/low prio queue
+	
+	desc = {
+		trigger = {
+			expd_pdxrptg_notification_magicka_unused_1year_is_enabled = yes
+			expd_pdxrptg_notification_magicka_unused_3year_is_enabled = no
+			expd_pdxrptg_notification_magicka_unused_5year_is_enabled = no
+		}
+		text = ExpdPdxrptgNotifications_MagickaUnused_Desc_1Year
+	}
+	desc = {
+		trigger = {
+			expd_pdxrptg_notification_magicka_unused_1year_is_enabled = no
+			expd_pdxrptg_notification_magicka_unused_3year_is_enabled = yes
+			expd_pdxrptg_notification_magicka_unused_5year_is_enabled = no
+		}
+		text = ExpdPdxrptgNotifications_MagickaUnused_Desc_3Year
+	}
+	desc = {
+		trigger = {
+			expd_pdxrptg_notification_magicka_unused_1year_is_enabled = no
+			expd_pdxrptg_notification_magicka_unused_3year_is_enabled = no
+			expd_pdxrptg_notification_magicka_unused_5year_is_enabled = yes
+		}
+		text = ExpdPdxrptgNotifications_MagickaUnused_Desc_5Year
+	}
+	desc = {
+		trigger = { # None of the 3 conditions above are true
+			NOR = {
+				AND = {
+					expd_pdxrptg_notification_magicka_unused_1year_is_enabled = yes
+					expd_pdxrptg_notification_magicka_unused_3year_is_enabled = no
+					expd_pdxrptg_notification_magicka_unused_5year_is_enabled = no
+				}
+				AND = {
+					expd_pdxrptg_notification_magicka_unused_1year_is_enabled = no
+					expd_pdxrptg_notification_magicka_unused_3year_is_enabled = yes
+					expd_pdxrptg_notification_magicka_unused_5year_is_enabled = no
+				}
+				AND = {
+					expd_pdxrptg_notification_magicka_unused_1year_is_enabled = no
+					expd_pdxrptg_notification_magicka_unused_3year_is_enabled = no
+					expd_pdxrptg_notification_magicka_unused_5year_is_enabled = yes
+				}
+			}
+		}
+		text = ExpdPdxrptgNotifications_MagickaUnused_Desc_Fallback
+	}
+	
+	is_triggered_only = yes
+	
+	ai = no
+	
+	option = { name = OK }
+	
+	option = {
+		name = ExpdPdxrptgNotifications_Option_DisableThisNotification
+		custom_tooltip = {
+			text = expd_pdxrptg_notification_magicka_unused_will_be_disabled_tt
+			expd_pdxrptg_notification_magicka_unused_stop = yes
+		}
+		ai_chance = { factor = 0 }
+	}
 	
 }

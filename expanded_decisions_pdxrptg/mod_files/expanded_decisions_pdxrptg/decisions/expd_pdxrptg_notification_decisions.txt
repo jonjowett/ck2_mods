@@ -87,6 +87,120 @@ decisions = {
 	
 	
 	
+	expd_pdxrptg_notification_magicka_unused_off_to_1year = { # For everyone
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_magicka_unused_any_is_enabled = no
+		}
+		allow = {
+			# Notification can only be toggled on for spellcasters
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_1year_start = yes }
+		}
+	}
+	expd_pdxrptg_notification_magicka_unused_1year_to_3year = { # Only for spellcasters
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_magicka_unused_1year_is_enabled = yes
+			expd_pdxrptg_notification_magicka_unused_too_many_enabled = no
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_3year_start = yes }
+		}
+	}
+	expd_pdxrptg_notification_magicka_unused_1year_to_off_non_spellcaster = { # Only for non-spellcasters
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_magicka_unused_1year_is_enabled = yes
+			expd_pdxrptg_notification_magicka_unused_too_many_enabled = no
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = no
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_stop = yes }
+		}
+	}
+	expd_pdxrptg_notification_magicka_unused_3year_to_5year = { # Only for spellcasters
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_magicka_unused_3year_is_enabled = yes
+			expd_pdxrptg_notification_magicka_unused_too_many_enabled = no
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_5year_start = yes }
+		}
+	}
+	expd_pdxrptg_notification_magicka_unused_3year_to_off_non_spellcaster = { # Only for non-spellcasters
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_magicka_unused_3year_is_enabled = yes
+			expd_pdxrptg_notification_magicka_unused_too_many_enabled = no
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = no
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_stop = yes }
+		}
+	}
+	expd_pdxrptg_notification_magicka_unused_5year_to_off = { # Only for spellcasters
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_magicka_unused_5year_is_enabled = yes
+			expd_pdxrptg_notification_magicka_unused_too_many_enabled = no
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_stop = yes }
+		}
+	}
+	expd_pdxrptg_notification_magicka_unused_5year_to_off_non_spellcaster = { # Only for non-spellcasters
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_magicka_unused_5year_is_enabled = yes
+			expd_pdxrptg_notification_magicka_unused_too_many_enabled = no
+			expd_pdxrptg_is_spellcaster_with_magicka_enabled = no
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_stop = yes }
+		}
+	}
+	expd_pdxrptg_notification_magicka_unused_toomany_to_off = { # For everyone
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_magicka_unused_too_many_enabled = yes
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_stop = yes }
+		}
+	}
+	
+	
+	
 	expd_pdxrptg_notification_potion_effect_ended_toggle_on = {
 		is_high_prio = no
 		ai = no

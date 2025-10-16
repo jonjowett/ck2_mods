@@ -1,3 +1,22 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+
+
+
+
+##############################################
+#                                            #
+#              CALCULATE / SHOW              #
+#               NOTIFICATIONS                #
+#                                            #
+##############################################
+
+
+
 expd_pdxrptg_notifications_magicka_pre_regen = {
 	# Expected to be called from the character whose magicka pool is being checked, BEFORE any magicka is regenerated.
 	
@@ -6,10 +25,7 @@ expd_pdxrptg_notifications_magicka_pre_regen = {
 		limit = {
 			ai = no
 			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
-			OR = {
-				has_character_modifier = expd_pdxrptg_notification_magicka_full
-				has_character_modifier = expd_pdxrptg_notification_magicka_half
-			}
+			expd_pdxrptg_notification_magicka_any_is_enabled = yes
 		}
 		set_variable = {
 			which = expd_pdxrptg_notifications_magicka_amount_pre_regen
@@ -17,7 +33,7 @@ expd_pdxrptg_notifications_magicka_pre_regen = {
 		}
 	}
 	else = {
-		expd_pdxrptg_notifications_magicka_disable_all = yes
+		expd_pdxrptg_notifications_magicka_all_stop = yes
 	}
 	
 }
@@ -25,47 +41,38 @@ expd_pdxrptg_notifications_magicka_pre_regen = {
 expd_pdxrptg_notifications_magicka_post_regen = {
 	# Expected to be called from the character whose magicka pool is being checked, AFTER their magicka has been regenerated, so they can receive any relevant notifications.
 	
+	
+	
 	# Only player spellcasters should receive these notifications
 	if = {
 		limit = {
 			ai = no
 			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
-			OR = {
-				has_character_modifier = expd_pdxrptg_notification_magicka_full
-				has_character_modifier = expd_pdxrptg_notification_magicka_half
-			}
+			expd_pdxrptg_notification_magicka_any_is_enabled = yes
 		}
+		
+		
 		
 		# Check whether the character hit their max magicka on this regen cycle
 		if = {
-			limit = { has_character_modifier = expd_pdxrptg_notification_magicka_full }
+			limit = { expd_pdxrptg_notification_magicka_full_is_enabled = yes }
 			if = {
 				limit = {
 					# Had less than max magicka before regen, and has max magicka after regen
-					check_variable = {
-						which =  expd_pdxrptg_notifications_magicka_amount_pre_regen
-						which <  magicka_max
-					}
-					check_variable = {
-						which =  magicka_current
-						which >= magicka_max
-					}
+					check_variable = { which = expd_pdxrptg_notifications_magicka_amount_pre_regen which <  magicka_max }
+					check_variable = { which = magicka_current                                     which >= magicka_max }
 				}
 				character_event = { id = ExpdPdxrptgNotifications.1000 }
 			}
 		}
 		
+		
+		
 		# Check whether the character hit half magicka on this regen cycle
 		if = {
-			limit = { has_character_modifier = expd_pdxrptg_notification_magicka_half }
-			set_variable = {
-				which = expd_pdxrptg_notifications_magicka_half_value
-				which = magicka_max
-			}
-			divide_variable = {
-				which = expd_pdxrptg_notifications_magicka_half_value
-				value = 2
-			}
+			limit = { expd_pdxrptg_notification_magicka_half_is_enabled = yes }
+			set_variable    = { which = expd_pdxrptg_notifications_magicka_half_value which = magicka_max }
+			divide_variable = { which = expd_pdxrptg_notifications_magicka_half_value value = 2           }
 			if = {
 				limit = {
 					# Had less than half magicka before regen, and has more than half magicka after regen
@@ -86,31 +93,136 @@ expd_pdxrptg_notifications_magicka_post_regen = {
 				value = 0
 			}
 		}
-	}
-	else = {
-		expd_pdxrptg_notifications_magicka_disable_all = yes
+		
+		
+		
+		# Check whether the character needs to be warned about unused (ie. wasted) magicka.
+		# Warn iff the character has hit their maximum and afterwards has maintained >= 90% of max magicka for the specified duration.
+		if = {
+			limit = { expd_pdxrptg_notification_magicka_unused_any_is_enabled = yes }
+			
+			# Create temporary variable storing value of "90% of max magicka"
+			set_variable      = { which = expd_pdxrptg_notifications_magicka_90pc_value which = magicka_max }
+			multiply_variable = { which = expd_pdxrptg_notifications_magicka_90pc_value value = 0.9         }
+			
+			# If at max magicka, initialise the "months at max" variable to 1, or increment it by 1 if already initialised.
+			# If at >=90% of max magicka and "months at max" variable is >= 1, increment it by 1.
+			# (At >=90% of max with "months at max" = 0 means that magicka is still being regained, ie. do nothing.)
+			# If <90% of max magicka, set "months at max" variable to 0.
+			if = {
+				limit = { check_variable = { which = magicka_current which >= magicka_max } }
+				if = {
+					limit = { check_variable = { which = expd_pdxrptg_notification_magicka_unused_months value == 0 } }
+					set_variable    = { which = expd_pdxrptg_notification_magicka_unused_months value = 1 }
+				}
+				else = {
+					change_variable = { which = expd_pdxrptg_notification_magicka_unused_months value = 1 }
+				}
+			}
+			else_if = {
+				limit = { check_variable = { which = magicka_current which >= expd_pdxrptg_notifications_magicka_90pc_value } }
+				if = {
+					limit = { check_variable = { which = expd_pdxrptg_notification_magicka_unused_months value >= 1 } }
+					change_variable = { which = expd_pdxrptg_notification_magicka_unused_months value = 1 }
+				}
+				else = {
+					# Magicka is still being regained - do nothing
+				}
+			}
+			else = {
+				set_variable = { which = expd_pdxrptg_notification_magicka_unused_months value = 0 }
+			}
+			
+			# Check the "months at max" modifier in conjunction with the character's notification preferences,
+			#      and show a notification if the two match.
+			if = {
+				limit = {
+					check_variable = { which = expd_pdxrptg_notification_magicka_unused_months value > 0 } # Sanity check - should never be true if variable is uninitialised
+					OR = {
+						AND = {
+							check_variable = { which = expd_pdxrptg_notification_magicka_unused_months value == 12 }
+							expd_pdxrptg_notification_magicka_unused_1year_is_enabled = yes
+						}
+						AND = {
+							check_variable = { which = expd_pdxrptg_notification_magicka_unused_months value == 36 }
+							expd_pdxrptg_notification_magicka_unused_3year_is_enabled = yes
+						}
+						AND = {
+							check_variable = { which = expd_pdxrptg_notification_magicka_unused_months value == 60 }
+							expd_pdxrptg_notification_magicka_unused_5year_is_enabled = yes
+						}
+					}
+				}
+				# Variable is at a defined threshold - show notification
+				set_variable = { which = expd_pdxrptg_notification_magicka_unused_months value = 0 }
+				character_event = { id = ExpdPdxrptgNotifications.1200 }
+			}
+			else = {
+				# Variable is not at any of the defined thresholds for notification - do nothing
+			}
+			
+			# Cleanup temporary variable
+			set_variable = { which = expd_pdxrptg_notifications_magicka_90pc_value value = 0 }
+			
+		}
 	}
 	
-	# Cleanup temporary variable (originally set in the pre_regen trigger)
-	if = {
-		limit = {
-			check_variable = {
-				which = expd_pdxrptg_notifications_magicka_amount_pre_regen
-				value > 0
-			}
-		}
-		set_variable = {
-			which = expd_pdxrptg_notifications_magicka_amount_pre_regen
-			value = 0
-		}
+	
+	
+	else_if = {
+		limit = { expd_pdxrptg_this_character_is_an_absentee_player = yes }
+		# Is an absentee player - do nothing
 	}
+	
+	
+	
+	else = {
+		# Not an absentee player, and not a player spellcaster with any magicka notification enabled.
+		# Having notifications in this situation seems like an error, so stop them all.
+		expd_pdxrptg_notifications_magicka_all_stop = yes
+	}
+	
+	
+	
+	# Cleanup temporary variable (originally set in the pre_regen effect, above)
+	if = {
+		limit = { check_variable = { which = expd_pdxrptg_notifications_magicka_amount_pre_regen value > 0 } }
+		set_variable = {             which = expd_pdxrptg_notifications_magicka_amount_pre_regen value = 0 }
+	}
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+##############################################
+#                                            #
+#                START / STOP                #
+#               NOTIFICATIONS                #
+#                                            #
+##############################################
+
+
+
+expd_pdxrptg_notifications_magicka_all_stop = {
+	expd_pdxrptg_notification_magicka_half_stop = yes
+	expd_pdxrptg_notification_magicka_full_stop = yes
+	expd_pdxrptg_notification_magicka_unused_stop = yes
+}
+
+
 
 expd_pdxrptg_notification_magicka_half_start = {
 	remove_character_modifier       = expd_pdxrptg_notification_magicka_half
 	add_character_modifier = { name = expd_pdxrptg_notification_magicka_half duration = -1 hidden = yes inherit = yes }
 }
-
 expd_pdxrptg_notification_magicka_half_stop = {
 	remove_character_modifier       = expd_pdxrptg_notification_magicka_half
 	expd_pdxrptg_notification_magicka_cleanup = yes
@@ -120,16 +232,36 @@ expd_pdxrptg_notification_magicka_full_start = {
 	remove_character_modifier       = expd_pdxrptg_notification_magicka_full
 	add_character_modifier = { name = expd_pdxrptg_notification_magicka_full duration = -1 hidden = yes inherit = yes }
 }
-
 expd_pdxrptg_notification_magicka_full_stop = {
 	remove_character_modifier       = expd_pdxrptg_notification_magicka_full
 	expd_pdxrptg_notification_magicka_cleanup = yes
 }
 
-expd_pdxrptg_notifications_magicka_disable_all = {
-	expd_pdxrptg_notification_magicka_half_stop = yes
-	expd_pdxrptg_notification_magicka_full_stop = yes
+
+
+expd_pdxrptg_notification_magicka_unused_1year_start = {
+	expd_pdxrptg_notification_magicka_unused_stop_nocleanup = yes
+	add_character_modifier = { name = expd_pdxrptg_notification_magicka_unused_1year duration = -1 hidden = yes inherit = yes }
 }
+expd_pdxrptg_notification_magicka_unused_3year_start = {
+	expd_pdxrptg_notification_magicka_unused_stop_nocleanup = yes
+	add_character_modifier = { name = expd_pdxrptg_notification_magicka_unused_3year duration = -1 hidden = yes inherit = yes }
+}
+expd_pdxrptg_notification_magicka_unused_5year_start = {
+	expd_pdxrptg_notification_magicka_unused_stop_nocleanup = yes
+	add_character_modifier = { name = expd_pdxrptg_notification_magicka_unused_5year duration = -1 hidden = yes inherit = yes }
+}
+expd_pdxrptg_notification_magicka_unused_stop_nocleanup = {
+	remove_character_modifier       = expd_pdxrptg_notification_magicka_unused_1year
+	remove_character_modifier       = expd_pdxrptg_notification_magicka_unused_3year
+	remove_character_modifier       = expd_pdxrptg_notification_magicka_unused_5year
+}
+expd_pdxrptg_notification_magicka_unused_stop = {
+	expd_pdxrptg_notification_magicka_unused_stop_nocleanup = yes
+	expd_pdxrptg_notification_magicka_cleanup = yes
+}
+
+
 
 expd_pdxrptg_notification_magicka_cleanup = {
 	if = {
@@ -139,15 +271,24 @@ expd_pdxrptg_notification_magicka_cleanup = {
 		}
 		if = {
 			limit = {
-				check_variable = {
-					which = expd_pdxrptg_notifications_magicka_amount_pre_regen
-					value > 0
+				OR = {
+					check_variable = { which = expd_pdxrptg_notifications_magicka_amount_pre_regen value > 0 }
+					check_variable = { which = expd_pdxrptg_notifications_magicka_amount_pre_regen value < 0 }
 				}
 			}
-			set_variable = {
-				which = expd_pdxrptg_notifications_magicka_amount_pre_regen
-				value = 0
+			set_variable = { which = expd_pdxrptg_notifications_magicka_amount_pre_regen value = 0 }
+		}
+	}
+	if = {
+		limit = { expd_pdxrptg_notification_magicka_unused_any_is_enabled = no }
+		if = {
+			limit = {
+				OR = {
+					check_variable = { which = expd_pdxrptg_notification_magicka_unused_months value > 0 }
+					check_variable = { which = expd_pdxrptg_notification_magicka_unused_months value < 0 }
+				}
 			}
+			set_variable = { which = expd_pdxrptg_notification_magicka_unused_months value = 0 }
 		}
 	}
 }

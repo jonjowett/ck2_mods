@@ -77,6 +77,21 @@ character_event = {
 			ROOT     = { expd_pdxrptg_notification_magicka_full_start = yes }
 		}
 		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_magicka_unused_1year_is_enabled = yes } }
+			FROMFROM = { expd_pdxrptg_notification_magicka_unused_stop        = yes }
+			ROOT     = { expd_pdxrptg_notification_magicka_unused_1year_start = yes }
+		}
+		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_magicka_unused_3year_is_enabled = yes } }
+			FROMFROM = { expd_pdxrptg_notification_magicka_unused_stop        = yes }
+			ROOT     = { expd_pdxrptg_notification_magicka_unused_3year_start = yes }
+		}
+		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_magicka_unused_5year_is_enabled = yes } }
+			FROMFROM = { expd_pdxrptg_notification_magicka_unused_stop        = yes }
+			ROOT     = { expd_pdxrptg_notification_magicka_unused_5year_start = yes }
+		}
+		if = {
 			limit = { FROMFROM = { expd_pdxrptg_notification_potion_effect_ended_is_enabled = yes } }
 			FROMFROM = { expd_pdxrptg_notifications_potion_effect_ended_stop  = yes }
 			ROOT     = { expd_pdxrptg_notifications_potion_effect_ended_start = yes }
