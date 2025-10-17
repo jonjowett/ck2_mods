@@ -1,8 +1,9 @@
 namespace = ExpdPdxrptgNotifications
 
-# Magicka notifications use IDs 1000-1999
-# Potions notifications use IDs 2000-2999
-# Administrative events use IDs 9000-9999
+# Magicka       notifications use IDs 1000-1999
+# Potions       notifications use IDs 2000-2999
+# Purchase Tech notifications use IDs 3000-3999
+# Administrative events       use IDs 9000-9999
 
 character_event = {
 	
@@ -12,7 +13,6 @@ character_event = {
 	border       = GFX_event_normal_frame_religion
 	picture      = GFX_evt_tome
 	show_root    = yes
-	notification = yes # In case players want to make these appear in the high/low prio queue
 	
 	is_triggered_only = yes
 	
@@ -39,7 +39,6 @@ character_event = {
 	border       = GFX_event_normal_frame_religion
 	picture      = GFX_evt_library
 	show_root    = yes
-	notification = yes # In case players want to make these appear in the high/low prio queue
 	
 	is_triggered_only = yes
 	
@@ -65,7 +64,6 @@ character_event = {
 	border       = GFX_event_normal_frame_religion
 	picture      = GFX_evt_mage
 	show_root    = yes
-	notification = yes # In case players want to make these appear in the high/low prio queue
 	
 	desc = {
 		trigger = {

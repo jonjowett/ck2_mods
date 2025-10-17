@@ -1,0 +1,122 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = ExpdPdxrptgNotifications
+
+# Magicka       notifications use IDs 1000-1999
+# Potions       notifications use IDs 2000-2999
+# Purchase Tech notifications use IDs 3000-3999
+# Administrative events       use IDs 9000-9999
+
+# on_yearly_pulse:
+#  --- Check whether this character can use any decision to purchase tech
+#  --- If yes, check whether this is a new development or if they have been continually able to take a decision for 5 years
+#  --- If yes, notify them
+character_event = {
+	
+	id = ExpdPdxrptgNotifications.3000
+	is_triggered_only = yes
+	hide_window = yes
+	
+	ai = no
+	
+	trigger = {
+		expd_pdxrptg_notification_purchase_tech_is_enabled = yes
+	}
+	
+	immediate = {
+		
+		# Ensure the "show the notification this time" flag does NOT exist on this character
+		clr_character_flag = expd_pdxrptg_notification_purchase_tech_notification_needed
+		
+		# Ensure the society submenu is open
+		if = {
+			limit = { has_character_flag = society_open }
+			set_character_flag = expd_pdxrptg_notification_purchase_tech_had_submenu_open_before
+		}
+		else = {
+			clr_character_flag = expd_pdxrptg_notification_purchase_tech_had_submenu_open_before
+			set_character_flag = society_open
+		}
+		
+		# Check whether any purchase techpoints decision can be taken
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						# Audax Validator "." Ignore_NEXT
+						is_decision_potential = purchase_techpoints_decision
+						# Audax Validator "." Ignore_NEXT
+						is_decision_allowed   = purchase_techpoints_decision
+					}
+					AND = {
+						is_decision_potential = expd_pdxrptg_purchase_more_techpoints_decision
+						is_decision_allowed   = expd_pdxrptg_purchase_more_techpoints_decision
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						NOT = { has_character_flag  = expd_pdxrptg_notification_purchase_tech_notification_shown }
+						had_character_flag = { flag = expd_pdxrptg_notification_purchase_tech_notification_shown years >= 5 }
+					}
+				}
+				# Can take a purchase tech decision, and this is either a new development,
+				#      or a reminder after having been continually able to take the decision for 5 years.
+				set_character_flag = expd_pdxrptg_notification_purchase_tech_notification_needed
+			}
+			else = {
+				# Has been able to take a purchase tech decision for several years, but not yet 5 years - do nothing.
+			}
+		}
+		else = {
+			# No purchase tech decision available - clear the "notification shown" flag.
+			# (So that the player receives the notification on the first check after the decision becomes available.)
+			clr_character_flag = expd_pdxrptg_notification_purchase_tech_notification_shown
+		}
+		
+		# If necessary, close the society submenu
+		if = {
+			limit = { NOT = { has_character_flag = expd_pdxrptg_notification_purchase_tech_had_submenu_open_before } }
+			clr_character_flag = society_open
+		}
+		clr_character_flag = expd_pdxrptg_notification_purchase_tech_had_submenu_open_before
+		
+		# If necessary, show the notification
+		if = {
+			limit = { has_character_flag = expd_pdxrptg_notification_purchase_tech_notification_needed }
+			clr_character_flag = expd_pdxrptg_notification_purchase_tech_notification_needed
+			clr_character_flag = expd_pdxrptg_notification_purchase_tech_notification_shown
+			set_character_flag = expd_pdxrptg_notification_purchase_tech_notification_shown
+			character_event = { id = ExpdPdxrptgNotifications.3001 }
+		}
+		
+	}
+	
+}
+
+character_event = {
+	
+	id           = ExpdPdxrptgNotifications.3001
+	title        = ExpdPdxrptgNotifications_PurchaseTech_Title
+	desc         = ExpdPdxrptgNotifications_PurchaseTech_Desc
+	border       = GFX_event_normal_frame_religion
+	picture      = GFX_evt_mage
+	show_root    = yes
+	
+	is_triggered_only = yes
+	
+	ai = no
+	
+	option = { name = OK }
+	
+	option = {
+		name = ExpdPdxrptgNotifications_Option_DisableThisNotification
+		custom_tooltip = {
+			text = expd_pdxrptg_notification_purchase_tech_will_be_disabled_tt
+			expd_pdxrptg_notification_purchase_tech_stop = yes
+		}
+		ai_chance = { factor = 0 }
+	}
+	
+}

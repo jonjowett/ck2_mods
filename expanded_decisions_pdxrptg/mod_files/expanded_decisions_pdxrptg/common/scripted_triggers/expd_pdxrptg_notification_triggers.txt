@@ -2,6 +2,8 @@ expd_pdxrptg_notification_any_is_enabled = {
 	OR = {
 		expd_pdxrptg_notification_magicka_any_is_enabled = yes
 		expd_pdxrptg_notification_potion_effect_ended_is_enabled = yes
+		expd_pdxrptg_notification_potion_none_is_enabled = yes
+		expd_pdxrptg_notification_purchase_tech_is_enabled = yes
 	}
 }
 
@@ -67,4 +69,17 @@ expd_pdxrptg_notification_magicka_unused_5year_is_enabled = {
 
 expd_pdxrptg_notification_potion_effect_ended_is_enabled = {
 	has_character_modifier = expd_pdxrptg_notification_potion_effect_ended
+}
+expd_pdxrptg_notification_potion_none_is_enabled = {
+	has_character_modifier = expd_pdxrptg_notification_potion_none
+}
+
+
+
+
+
+# Purchase tech
+
+expd_pdxrptg_notification_purchase_tech_is_enabled = {
+	has_character_modifier = expd_pdxrptg_notification_purchase_tech
 }

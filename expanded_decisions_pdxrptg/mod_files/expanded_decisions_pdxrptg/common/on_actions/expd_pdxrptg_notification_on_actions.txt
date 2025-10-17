@@ -5,6 +5,8 @@ on_startup = {
 	}
 }
 
+
+
 # On abdication, transfer notification preferences to the new character
 on_new_holder = {
 	events = {
@@ -19,5 +21,15 @@ on_new_holder_inheritance = {
 on_new_holder_usurpation = {
 	events = {
 		ExpdPdxrptgNotifications.9100
+	}
+}
+
+
+
+on_yearly_pulse = {
+	events = {
+		ExpdPdxrptgNotifications.2002 # "Potion Effect Ended" notification wanted, but scheduled checks haven't been set up (eg. due to succession)
+		ExpdPdxrptgNotifications.2100 # "No Potion" regular check
+		ExpdPdxrptgNotifications.3000 # "Can Purchase Tech" regular check
 	}
 }

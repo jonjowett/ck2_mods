@@ -1,0 +1,9 @@
+expd_pdxrptg_notification_purchase_tech_start = {
+	expd_pdxrptg_notification_purchase_tech_stop = yes
+	add_character_modifier = { name = expd_pdxrptg_notification_purchase_tech duration = -1 hidden = yes inherit = yes }
+}
+
+expd_pdxrptg_notification_purchase_tech_stop = {
+	clr_character_flag = expd_pdxrptg_notification_purchase_tech_notification_shown
+	remove_character_modifier = expd_pdxrptg_notification_purchase_tech
+}

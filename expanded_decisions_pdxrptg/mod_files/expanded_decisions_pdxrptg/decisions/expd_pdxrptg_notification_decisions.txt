@@ -252,7 +252,7 @@ decisions = {
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = { expd_pdxrptg_notifications_potion_effect_ended_start = yes }
+			hidden_tooltip = { expd_pdxrptg_notification_potion_effect_ended_start = yes }
 		}
 	}
 	expd_pdxrptg_notification_potion_effect_ended_toggle_off = {
@@ -266,9 +266,95 @@ decisions = {
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = { expd_pdxrptg_notifications_potion_effect_ended_stop = yes }
+			hidden_tooltip = { expd_pdxrptg_notification_potion_effect_ended_stop = yes }
 		}
 	}
+	
+	
+	
+	
+	
+	############################################################
+	#                                                          #
+	#                     NO POTION EFFECT                     #
+	#                                                          #
+	############################################################
+	
+	
+	
+	expd_pdxrptg_notification_potion_none_toggle_on = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_potion_none_is_enabled = no
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_potion_none_start = yes }
+		}
+	}
+	expd_pdxrptg_notification_potion_none_toggle_off = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_potion_none_is_enabled = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_potion_none_stop = yes }
+		}
+	}
+	
+	
+	
+	
+	
+	############################################################
+	#                                                          #
+	#                      PURCHASE TECH                       #
+	#                                                          #
+	############################################################
+	
+	
+	
+	expd_pdxrptg_notification_purchase_tech_toggle_on = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_purchase_tech_is_enabled = no
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_purchase_tech_start = yes }
+		}
+	}
+	expd_pdxrptg_notification_purchase_tech_toggle_off = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_purchase_tech_is_enabled = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_purchase_tech_stop = yes }
+		}
+	}
+	
+	
+	
+	
 	
 	
 }
