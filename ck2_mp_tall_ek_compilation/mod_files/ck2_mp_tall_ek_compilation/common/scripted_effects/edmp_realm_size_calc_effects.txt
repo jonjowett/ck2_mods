@@ -232,7 +232,17 @@ edmp_realm_size_calculate_and_add_modifiers_to_this_character_actual = {
 	
 	
 	# Calculate & record: Total number of holdings in realm
-	export_to_variable = { which = edmp_realm_size_total_holdings value = realm_size }
+	# Exclude family palaces - they are included in the exported "realm size", but not in the in-game-visible realm size.
+	set_variable = { which = edmp_realm_size_total_holdings value = 0 }
+	any_title_under = {
+		limit = {
+			tier = BARON # NB: County capitals (if they exist) count as baronies
+			NOT = { holding_type = family_palace }
+		}
+		event_target:edmp_realm_size_character_being_calculated = {
+			change_variable = { which = edmp_realm_size_total_holdings value = 1 }
+		}
+	}
 	
 	
 	

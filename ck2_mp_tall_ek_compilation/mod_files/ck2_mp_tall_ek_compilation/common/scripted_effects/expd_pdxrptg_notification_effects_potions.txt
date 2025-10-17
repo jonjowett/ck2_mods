@@ -1,17 +1,33 @@
-expd_pdxrptg_notifications_potion_effect_expiry_start = {
+expd_pdxrptg_notification_potion_effect_ended_start = {
 	custom_tooltip = {
 		text = expd_pdxrptg_notification_potion_effect_ended_will_be_enabled_tt
-		expd_pdxrptg_notifications_potion_effect_expiry_stop = yes
-		set_character_flag = expd_pdxrptg_notification_potion_effect_ended
+		expd_pdxrptg_notification_potion_effect_ended_stop = yes
+		add_character_modifier = { name = expd_pdxrptg_notification_potion_effect_ended duration = -1 hidden = yes inherit = yes }
 		character_event = { id = ExpdPdxrptgNotifications.2000 }
 	}
 }
 
-expd_pdxrptg_notifications_potion_effect_expiry_stop = {
+expd_pdxrptg_notification_potion_effect_ended_stop = {
 	custom_tooltip = {
 		text = expd_pdxrptg_notification_potion_effect_ended_will_be_disabled_tt
-		clr_character_flag = expd_pdxrptg_notification_potion_effect_ended
+		remove_character_modifier = expd_pdxrptg_notification_potion_effect_ended
 		clear_delayed_event = { id = ExpdPdxrptgNotifications.2000 }
-		clr_character_flag  = expd_pdxrptg_notification_potion_effect_exists
+		clr_character_flag = expd_pdxrptg_notification_potion_effect_ended_scheduled_events_exist
+		clr_character_flag = expd_pdxrptg_notification_potion_effect_exists
+	}
+}
+
+expd_pdxrptg_notification_potion_none_start = {
+	custom_tooltip = {
+		text = expd_pdxrptg_notification_potion_none_will_be_enabled_tt
+		expd_pdxrptg_notification_potion_none_stop = yes
+		add_character_modifier = { name = expd_pdxrptg_notification_potion_none duration = -1 hidden = yes inherit = yes }
+	}
+}
+
+expd_pdxrptg_notification_potion_none_stop = {
+	custom_tooltip = {
+		text = expd_pdxrptg_notification_potion_none_will_be_disabled_tt
+		remove_character_modifier = expd_pdxrptg_notification_potion_none 
 	}
 }

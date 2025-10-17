@@ -1,7 +1,7 @@
 namespace = ExpdPdxrptgStartup
 
 # Called on_startup, for the single player or MP host
-# Sets a global flag for the first 1 month after startup, 
+# Sets a global flag for the first 1 month after startup, eg. so that scaled_wealth decisions can be blocked until monthly income has been calculated
 character_event = {
 	id = ExpdPdxrptgStartup.1000
 	ai = no
@@ -27,4 +27,31 @@ province_event = {
 	immediate = {
 		clr_global_flag = expd_pdxrptg_startup_1_month_timer
 	}
+}
+
+# on_startup - ensure all characters have exited all submenus.
+# Run on the SP human player or MP host, then scope to all characters.
+character_event = {
+	
+	id = ExpdPdxrptgStartup.2000
+	hide_window = yes
+	is_triggered_only = yes
+	
+	ai = no
+	
+	trigger = {
+		ai = no
+		OR = {
+			multiplayer = no
+			is_multiplayer_host_character = yes
+		}
+	}
+	
+	immediate = {
+		any_character = {
+			limit = { has_submenu_open = yes }
+			close_submenu = yes
+		}
+	}
+	
 }

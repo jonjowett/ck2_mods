@@ -1,0 +1,65 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_leadership_traits_not_maxed = {
+	trigger_if = {
+		limit = { is_mage = yes }
+		is_mage = yes
+		leader_traits < 0
+		custom_tooltip = { text = expd_pdxrptg_leadership_traits_max_depends_on_education_tt }
+	}
+	trigger_else_if = {
+		limit = { is_diplomat = yes }
+		is_diplomat = yes
+		leader_traits < 1
+		custom_tooltip = { text = expd_pdxrptg_leadership_traits_max_depends_on_education_tt }
+	}
+	trigger_else_if = {
+		limit = { is_magistrate = yes }
+		is_magistrate = yes
+		leader_traits < 2
+		custom_tooltip = { text = expd_pdxrptg_leadership_traits_max_depends_on_education_tt }
+	}
+	trigger_else_if = {
+		limit = { is_agent = yes }
+		is_agent = yes
+		leader_traits < 3
+		custom_tooltip = { text = expd_pdxrptg_leadership_traits_max_depends_on_education_tt }
+	}
+	trigger_else_if = {
+		limit = { is_warrior = yes }
+		OR = {
+			AND = {
+				# Audax Validator "." Ignore_NEXT
+				trait = warrior_1
+				leader_traits < 3
+			}
+			AND = {
+				# Audax Validator "." Ignore_NEXT
+				trait = warrior_2
+				leader_traits < 4
+			}
+			AND = {
+				# Audax Validator "." Ignore_NEXT
+				trait = warrior_3
+				leader_traits < 5
+			}
+			AND = {
+				# Audax Validator "." Ignore_NEXT
+				trait = warrior_4
+				leader_traits < 6
+			}
+			AND = {
+				# Audax Validator "." Ignore_NEXT
+				trait = warrior_5
+				leader_traits < 7
+			}
+		}
+		custom_tooltip = { text = expd_pdxrptg_leadership_traits_max_depends_on_education_tt }
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = expd_pdxrptg_leadership_traits_error_education_type_not_recognised_tt
+			always = no
+		}
+	}
+}

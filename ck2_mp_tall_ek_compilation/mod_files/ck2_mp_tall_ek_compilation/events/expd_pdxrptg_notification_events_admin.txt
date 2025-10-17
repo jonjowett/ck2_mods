@@ -1,0 +1,111 @@
+namespace = ExpdPdxrptgNotifications
+
+# Magicka       notifications use IDs 1000-1999
+# Potions       notifications use IDs 2000-2999
+# Purchase Tech notifications use IDs 3000-3999
+# Administrative events       use IDs 9000-9999
+
+# on_startup: Check whether this player character was using the old flag-based notification system and, if yes, upgrade them to the new modifier-based system.
+character_event = {
+	id = ExpdPdxrptgNotifications.9000
+	hide_window = yes
+	is_triggered_only = yes
+	ai = no
+	trigger = {
+		OR = {
+			has_character_flag              = expd_pdxrptg_notification_magicka_half
+			has_character_flag              = expd_pdxrptg_notification_magicka_full
+			has_character_flag              = expd_pdxrptg_notification_potion_effect_ended
+		}
+	}
+	immediate = {
+		if = {
+			limit = { has_character_flag    = expd_pdxrptg_notification_magicka_half }
+			clr_character_flag              = expd_pdxrptg_notification_magicka_half
+			expd_pdxrptg_notification_magicka_half_start = yes
+		}
+		if = {
+			limit = { has_character_flag    = expd_pdxrptg_notification_magicka_full }
+			clr_character_flag              = expd_pdxrptg_notification_magicka_full
+			expd_pdxrptg_notification_magicka_full_start = yes
+		}
+		if = {
+			limit = { has_character_flag    = expd_pdxrptg_notification_potion_effect_ended }
+			clr_character_flag              = expd_pdxrptg_notification_potion_effect_ended
+			expd_pdxrptg_notification_potion_effect_ended_start = yes
+		}
+	}
+}
+
+# on_new_holder*: Check if this was an abdication and, if so, transfer notification prefs to the new character.
+#  --- ROOT is the new holder
+#  --- FROM is the title
+#  --- FROMFROM is the old holder
+character_event = {
+	id = ExpdPdxrptgNotifications.9100
+	hide_window = yes
+	is_triggered_only = yes
+	only_playable = yes # Notifications are only for players (including absentees), so there's no point in triggering this event for unplayable characters.
+	trigger = {
+		# Old holder must be non-ruler, alive, and have a notification enabled
+		# Since notifications can only be enabled for players,
+		#      and players are rarely completely defeated,
+		#      and notifications are a strictly optional feature,
+		#      we can safely ignore the situation that this is a player (or absentee) who completely lost a conquest war.
+		FROMFROM = {
+			is_ruler = no
+			is_alive = yes
+			expd_pdxrptg_notification_any_is_enabled = yes
+		}
+		# New holder must be playable (see pre-filter above) and have NO notifications enabled
+		# The latter is necessary because, if this new holder already has notifications enabled,
+		#      that means that they were being played by a human before this on_new_holder* event occurred,
+		#      and we shouldn't override a player's existing notification preferences.
+		ROOT = {
+			is_playable = yes
+			expd_pdxrptg_notification_any_is_enabled = no
+		}
+	}
+	immediate = {
+		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_magicka_half_is_enabled = yes } }
+			FROMFROM           = { expd_pdxrptg_notification_magicka_half_stop       = yes }
+			ROOT               = { expd_pdxrptg_notification_magicka_half_start      = yes }
+		}
+		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_magicka_full_is_enabled = yes } }
+			FROMFROM           = { expd_pdxrptg_notification_magicka_full_stop       = yes }
+			ROOT               = { expd_pdxrptg_notification_magicka_full_start      = yes }
+		}
+		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_magicka_unused_1year_is_enabled = yes } }
+			FROMFROM           = { expd_pdxrptg_notification_magicka_unused_stop             = yes }
+			ROOT               = { expd_pdxrptg_notification_magicka_unused_1year_start      = yes }
+		}
+		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_magicka_unused_3year_is_enabled = yes } }
+			FROMFROM           = { expd_pdxrptg_notification_magicka_unused_stop             = yes }
+			ROOT               = { expd_pdxrptg_notification_magicka_unused_3year_start      = yes }
+		}
+		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_magicka_unused_5year_is_enabled = yes } }
+			FROMFROM           = { expd_pdxrptg_notification_magicka_unused_stop             = yes }
+			ROOT               = { expd_pdxrptg_notification_magicka_unused_5year_start      = yes }
+		}
+		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_potion_effect_ended_is_enabled = yes } }
+			FROMFROM           = { expd_pdxrptg_notification_potion_effect_ended_stop       = yes }
+			ROOT               = { expd_pdxrptg_notification_potion_effect_ended_start      = yes }
+		}
+		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_potion_none_is_enabled = yes } }
+			FROMFROM           = { expd_pdxrptg_notification_potion_none_stop       = yes }
+			ROOT               = { expd_pdxrptg_notification_potion_none_start      = yes }
+		}
+		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_purchase_tech_is_enabled = yes } }
+			FROMFROM           = { expd_pdxrptg_notification_purchase_tech_stop       = yes }
+			ROOT               = { expd_pdxrptg_notification_purchase_tech_start      = yes }
+		}
+	}
+}

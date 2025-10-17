@@ -1,0 +1,35 @@
+# Upgrade any notifications to the new modifier-based system
+on_startup = {
+	events = {
+		ExpdPdxrptgNotifications.9000
+	}
+}
+
+
+
+# On abdication, transfer notification preferences to the new character
+on_new_holder = {
+	events = {
+		ExpdPdxrptgNotifications.9100
+	}
+}
+on_new_holder_inheritance = {
+	events = {
+		ExpdPdxrptgNotifications.9100
+	}
+}
+on_new_holder_usurpation = {
+	events = {
+		ExpdPdxrptgNotifications.9100
+	}
+}
+
+
+
+on_yearly_pulse = {
+	events = {
+		ExpdPdxrptgNotifications.2002 # "Potion Effect Ended" notification wanted, but scheduled checks haven't been set up (eg. due to succession)
+		ExpdPdxrptgNotifications.2100 # "No Potion" regular check
+		ExpdPdxrptgNotifications.3000 # "Can Purchase Tech" regular check
+	}
+}
