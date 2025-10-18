@@ -1,0 +1,683 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = ExpdPdxrptgConversionDisbandDragons
+
+
+
+
+
+
+
+
+
+
+######################################################
+#                                                    #
+#         TRIGGER EVENT CHAIN VIA ON_ACTIONS         #
+#                                                    #
+######################################################
+
+
+
+# on_character_convert_religion: Converting character has dragons not allowed by their new religion => start the departure chain.
+# ROOT is the character after conversion
+# FROM is the old religion.
+character_event = {
+	id = ExpdPdxrptgConversionDisbandDragons.1000
+	is_triggered_only = yes
+	hide_window = yes
+	only_rulers = yes
+	trigger = {
+		expd_pdxrptg_this_character_has_summoned_dragons = yes
+		expd_pdxrptg_this_character_can_summon_dragons   = no
+		# Converting to another random religion while the event chain is already ongoing does NOT reset the timer
+		NOT = { has_character_modifier = expd_pdxrptg_conversion_disband_dragons_timer }
+	}
+	immediate = {
+		# Clear out the event chain
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.9999 }
+		# Save dragon religion
+		if = {
+			limit = { FROM = { expd_pdxrptg_this_religion_can_summon_dragons = yes } }
+			ROOT = { set_character_flag = expd_pdxrptg_conversion_disband_dragons_reconversion_religion_exists }
+			FROM = {
+				# False positive: Validator erroneously thinks FROM is not a religion
+				# Audax Validator "." Ignore_NEXT
+				save_event_target_as = expd_pdxrptg_conversion_disband_dragons_reconversion_religion
+			}
+		}
+		# Start the event chain
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.2000 }
+	}
+}
+
+# on_new_holder*: New title holder has dragons not allowed by their religion (eg. inherited) => start the departure chain.
+# ROOT is the character
+# FROM is the title
+# FROMFROM is the old holder
+character_event = {
+	id = ExpdPdxrptgConversionDisbandDragons.1100
+	is_triggered_only = yes
+	hide_window = yes
+	only_rulers = yes
+	trigger = {
+		expd_pdxrptg_this_character_has_summoned_dragons = yes
+		expd_pdxrptg_this_character_can_summon_dragons   = no
+		# Inheriting dragons while the event chain is already ongoing does NOT reset the timer.
+		NOT = { has_character_modifier = expd_pdxrptg_conversion_disband_dragons_timer }
+	}
+	immediate = {
+		# Clear out the event chain
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.9999 }
+		# Save dragon religion
+		if = {
+			limit = { FROMFROM = { religion_scope = { expd_pdxrptg_this_religion_can_summon_dragons = yes } } }
+			ROOT = { set_character_flag = expd_pdxrptg_conversion_disband_dragons_reconversion_religion_exists }
+			FROMFROM = { religion_scope = { save_event_target_as = expd_pdxrptg_conversion_disband_dragons_reconversion_religion } }
+		}
+		# Start the event chain
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.2000 }
+	}
+}
+
+# on_character_convert_religion: Departure chain is in progress and this character manually converted => cancel the departure chain.
+# ROOT is the character after conversion
+# FROM is the old religion.
+character_event = {
+	
+	id        = ExpdPdxrptgConversionDisbandDragons.1200
+	title     = ExpdPdxrptgConversionDisbandDragons_DragonsStay_Title
+	desc      = ExpdPdxrptgConversionDisbandDragons_DragonsStay_Desc
+	picture   = GFX_evt_dragon_mountain
+	border    = GFX_event_normal_frame_war
+	show_root = yes
+	
+	only_rulers = yes
+	is_triggered_only = yes
+	
+	trigger = {
+		expd_pdxrptg_this_character_has_summoned_dragons = yes
+		expd_pdxrptg_this_character_can_summon_dragons   = yes
+		has_character_modifier = expd_pdxrptg_conversion_disband_dragons_timer
+	}
+	immediate = {
+		# Cancel event chain
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.9999 }
+	}
+	option = { name = ExpdPdxrptgConversionDisbandDragons_DragonsStay_EvtOpt_Excellent }
+}
+
+# on_five_year_pulse: Character has dragons not permitted by their religion => start the departure chain.
+character_event = {
+	id = ExpdPdxrptgConversionDisbandDragons.1300
+	is_triggered_only = yes
+	hide_window = yes
+	only_rulers = yes
+	trigger = {
+		expd_pdxrptg_this_character_has_summoned_dragons = yes
+		expd_pdxrptg_this_character_can_summon_dragons   = no
+		# Pulse occurring while the event chain is already ongoing does NOT reset the timer
+		NOT = { has_character_modifier = expd_pdxrptg_conversion_disband_dragons_timer }
+	}
+	immediate = {
+		# Clear out the event chain
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.9999 }
+		# Start the event chain
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.2000 }
+	}
+}
+
+
+
+
+
+
+
+
+
+
+######################################################
+#                                                    #
+#                SETUP DEPARTURE CHAIN               #
+#                                                    #
+######################################################
+
+
+
+# Start of Dragon Departure chain
+# ROOT may have flag expd_pdxrptg_conversion_disband_dragons_reconversion_religion_exists
+#  --- If so, event_target expd_pdxrptg_conversion_disband_dragons_reconversion_religion (religion followed by the dragons' previous owner) should exist
+character_event = {
+	id = ExpdPdxrptgConversionDisbandDragons.2000
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		
+		# Check that the reconversion flag and event_target are consistent
+		if = {
+			limit = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_reconversion_religion_exists }
+			if = {
+				limit = {
+					NOT = {
+						event_target:expd_pdxrptg_conversion_disband_dragons_reconversion_religion = {
+							expd_pdxrptg_this_religion_can_summon_dragons = yes
+						}
+					}
+				}
+				clr_character_flag = expd_pdxrptg_conversion_disband_dragons_reconversion_religion_exists
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					event_target:expd_pdxrptg_conversion_disband_dragons_reconversion_religion = {
+						expd_pdxrptg_this_religion_can_summon_dragons = yes
+					}
+				}
+				set_character_flag = expd_pdxrptg_conversion_disband_dragons_reconversion_religion_exists
+			}
+		}
+		
+		# Select first religion for conversion options
+		clear_event_target = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1
+		clr_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1_is_reconversion
+		if = {
+			limit = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_reconversion_religion_exists }
+			event_target:expd_pdxrptg_conversion_disband_dragons_reconversion_religion = {
+				save_event_target_as = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1
+			}
+			set_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1_is_reconversion
+		}
+		else = {
+			if = {
+				limit = {
+					capital_scope = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_akavir
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				kapotun_pantheon = {
+					save_event_target_as = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1
+				}
+			}
+			else_if = {
+				limit = {
+					capital_scope = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_pyandonea
+					}
+					has_global_flag = dragon_worship_pyandoneaic_pantheon
+				}
+				# Audax Validator "." Ignore_NEXT
+				pyandoneaic = {
+					save_event_target_as = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1
+				}
+			}
+			else = {
+				# Audax Validator "." Ignore_NEXT
+				dragon_cult = {
+					save_event_target_as = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1
+				}
+			}
+		}
+		
+		# Select second religion for conversion options
+		clear_event_target = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2
+		clr_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2_exists
+		if = {
+			limit = {
+				capital_scope = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_akavir
+				}
+			}
+			# In Akavir: Choose Kapotun then Black Dragon
+			if = {
+				limit = {
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						event_target:expd_pdxrptg_conversion_disband_dragons_conversion_religion_1 = {
+							# Audax Validator "." Ignore_NEXT
+							religion = kapotun_pantheon
+						}
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				kapotun_pantheon = {
+					save_event_target_as = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2
+				}
+			}
+			else = {
+				# Audax Validator "." Ignore_NEXT
+				black_dragon = {
+					save_event_target_as = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2
+				}
+			}
+			set_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2_exists
+		}
+		else_if = {
+			limit = {
+				capital_scope = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_pyandonea
+				}
+				has_global_flag = dragon_worship_pyandoneaic_pantheon
+			}
+			# In Pyandonea with dragon-worshipping Pyandoneaic - Choose Pyandoneaic then Dragon Cult
+			if = {
+				limit = {
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						event_target:expd_pdxrptg_conversion_disband_dragons_conversion_religion_1 = {
+							# Audax Validator "." Ignore_NEXT
+							religion = pyandoneaic
+						}
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				pyandoneaic = {
+					save_event_target_as = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2
+				}
+			}
+			else = {
+				# Audax Validator "." Ignore_NEXT
+				dragon_cult = {
+					save_event_target_as = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2
+				}
+			}
+			set_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2_exists
+		}
+		else = {
+			# In Tamriel outside Pyandonea - Choose Dragon cult, then Dragon-worshipping Pyandoneaic, then nothing
+			if = {
+				limit = {
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						event_target:expd_pdxrptg_conversion_disband_dragons_conversion_religion_1 = {
+							# Audax Validator "." Ignore_NEXT
+							religion = dragon_cult
+						}
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				dragon_cult = {
+					save_event_target_as = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2
+				}
+				set_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2_exists
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						event_target:expd_pdxrptg_conversion_disband_dragons_conversion_religion_1 = {
+							# Audax Validator "." Ignore_NEXT
+							religion = pyandoneaic
+						}
+					}
+					has_global_flag = dragon_worship_pyandoneaic_pantheon
+				}
+				# Audax Validator "." Ignore_NEXT
+				pyandoneaic = {
+					save_event_target_as = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2
+				}
+				set_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2_exists
+			}
+			else = {
+				clr_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2_exists
+			}
+		}
+		
+		# Add cosmetic departure timer on this character
+		add_character_modifier = { name = expd_pdxrptg_conversion_disband_dragons_timer months = 6 }
+		
+		# Schedule 3 month warning, 1 month warning & departure
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.3000 months = 3 }
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.3000 months = 5 }
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.3000 months = 6 }
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.3200 months = 7 } # Just in case
+		
+		# Show 6 month warning now
+		set_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.3000 }
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+######################################################
+#                                                    #
+#               REGULAR VISIBLE EVENTS               #
+#                                                    #
+######################################################
+
+
+
+# At each warning interval, check the current status of the character's religion & hired dragons, and trigger the appropriate event.
+character_event = {
+	
+	id = ExpdPdxrptgConversionDisbandDragons.3000
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		
+		if = {
+			limit = { expd_pdxrptg_this_character_has_summoned_dragons = yes }
+			if = {
+				limit = { expd_pdxrptg_this_character_can_summon_dragons = yes }
+				# Has dragons and is allowed to have them.
+				#  --- Religion changed but wasn't detected somehow?
+				# Manually trigger event 1200 (dragons stay & cancel chain).
+				character_event = { id = ExpdPdxrptgConversionDisbandDragons.1200 }
+			}
+			else = {
+				# Has dragons while not allowed.
+				if = {
+					limit = {
+						OR = {
+							has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before
+							has_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before
+							has_character_flag = expd_pdxrptg_conversion_disband_dragons_1mo_before
+						}
+					}
+					# At least one notification remains to be shown - show it.
+					character_event = { id = ExpdPdxrptgConversionDisbandDragons.3100 }
+					# After showing the notification, progress to the next one.
+					if = {
+						limit = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before }
+						clr_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before
+						set_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before
+					}
+					else_if = {
+						limit = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before }
+						clr_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before
+						set_character_flag = expd_pdxrptg_conversion_disband_dragons_1mo_before
+					}
+					else_if = {
+						limit = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_1mo_before }
+						clr_character_flag = expd_pdxrptg_conversion_disband_dragons_1mo_before
+					}
+				}
+				else = {
+					# No warnings remaining - dragons depart
+					character_event = { id = ExpdPdxrptgConversionDisbandDragons.3200 }
+				}
+			}
+		}
+		else = {
+			# Dragons were manually dismissed - Show user that this has been noticed
+			character_event = { id = ExpdPdxrptgConversionDisbandDragons.3200 }
+		}
+	}
+}
+
+# Unified character event for all warnings & eventual dragon departure
+character_event = {
+	
+	
+	
+	id        = ExpdPdxrptgConversionDisbandDragons.3100
+	picture   = GFX_evt_dragon_mountain
+	border    = GFX_event_normal_frame_war
+	show_root = yes
+	
+	is_triggered_only = yes
+	
+	
+	
+	# Title & Desc depends on which specific warning this is
+	
+	title = {
+		trigger = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before }
+		text = ExpdPdxrptgConversionDisbandDragons_6MonthBefore_Title
+	}
+	desc = {
+		trigger = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before }
+		text = ExpdPdxrptgConversionDisbandDragons_6MonthBefore_Desc
+	}
+	
+	title = {
+		trigger = {
+			NOT = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before }
+			        has_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before
+		}
+		text = ExpdPdxrptgConversionDisbandDragons_3MonthBefore_Title
+	}
+	desc = {
+		trigger = {
+			NOT = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before }
+			        has_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before
+		}
+		text = ExpdPdxrptgConversionDisbandDragons_3MonthBefore_Desc
+	}
+	
+	title = {
+		trigger = {
+			NOT = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before }
+			NOT = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before }
+			        has_character_flag = expd_pdxrptg_conversion_disband_dragons_1mo_before
+		}
+		text = ExpdPdxrptgConversionDisbandDragons_1MonthBefore_Title
+	}
+	desc = {
+		trigger = {
+			NOT = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before }
+			NOT = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before }
+			        has_character_flag = expd_pdxrptg_conversion_disband_dragons_1mo_before
+		}
+		text = ExpdPdxrptgConversionDisbandDragons_1MonthBefore_Desc
+	}
+	
+	title = {
+		trigger = {
+			NOR = {
+				has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before
+				has_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before
+				has_character_flag = expd_pdxrptg_conversion_disband_dragons_1mo_before
+			}
+		}
+		text = ExpdPdxrptgConversionDisbandDragons_Fallback_Title
+	}
+	desc = {
+		trigger = {
+			NOR = {
+				has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before
+				has_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before
+				has_character_flag = expd_pdxrptg_conversion_disband_dragons_1mo_before
+			}
+		}
+		text = ExpdPdxrptgConversionDisbandDragons_Fallback_Desc
+	}
+	
+	
+	
+	# Option 1: Deferral.
+	option = {
+		trigger = {
+			OR = {
+				has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before
+				has_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before
+				has_character_flag = expd_pdxrptg_conversion_disband_dragons_1mo_before
+			}
+		}
+		name = {
+			trigger = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before }
+			text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_Defer_6moBefore
+		}
+		name = {
+			trigger = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before }
+			text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_Defer_3moBefore
+		}
+		name = {
+			trigger = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_1mo_before }
+			text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_Defer_1moBefore
+		}
+		ai_chance = { factor = 0 }
+		if = {
+			limit = { expd_pdxrptg_this_character_has_summoned_dragons = yes }
+			custom_tooltip = { text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_Defer_Warning_TT }
+		}
+		else = {
+			custom_tooltip = { text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_TooLate_TT }
+		}
+	}
+	
+	
+	
+	# Option 2: Conversion
+	# NB: Event 1200 will be automatically triggered via on_action on clicking this option.
+	option = {
+		name = {
+			trigger = {         has_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1_is_reconversion   }
+			text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_ExpensiveConvert_1_Reconversion
+		}
+		name = {
+			trigger = { NOT = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1_is_reconversion } }
+			text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_ExpensiveConvert_1
+		}
+		ai_chance = { factor = 0 }
+		if = {
+			limit = { expd_pdxrptg_this_character_has_summoned_dragons = yes }
+			prestige = -1000
+			piety    =  -500
+			# Audax Validator "." Ignore_NEXT
+			religion = event_target:expd_pdxrptg_conversion_disband_dragons_conversion_religion_1
+		}
+		else = {
+			custom_tooltip = { text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_TooLate_TT }
+		}
+	}
+	
+	# Option 3: Conversion
+	# NB: Event 1200 will be automatically triggered via on_action on clicking this option.
+	option = {
+		trigger = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2_exists }
+		name = {
+			trigger = {         has_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1_is_reconversion   }
+			text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_ExpensiveConvert_2_1IsReconversion
+		}
+		name = {
+			trigger = { NOT = { has_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1_is_reconversion } }
+			text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_ExpensiveConvert_2_1IsNotReconversion
+		}
+		ai_chance = { factor = 0 }
+		if = {
+			limit = { expd_pdxrptg_this_character_has_summoned_dragons = yes }
+			prestige = -1000
+			piety    =  -500
+			# Audax Validator "." Ignore_NEXT
+			religion = event_target:expd_pdxrptg_conversion_disband_dragons_conversion_religion_2
+		}
+		else = {
+			custom_tooltip = { text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_TooLate_TT }
+		}
+	}
+	
+	
+	
+	# Option 4: Manually dismiss the dragons (and cancel the chain).
+	option = {
+		name = ExpdPdxrptgConversionDisbandDragons_EvtOpt_ManualDisbandViaEvtOpt
+		ai_chance = { factor = 100 }
+		if = {
+			limit = { expd_pdxrptg_this_character_has_summoned_dragons = yes }
+			custom_tooltip = {
+				text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_ManualDisbandViaEvtOpt_TT
+				character_event = { id = ExpdPdxrptgConversionDisbandDragons.3200 }
+			}
+		}
+		else = {
+			custom_tooltip = { text = ExpdPdxrptgConversionDisbandDragons_EvtOpt_TooLate_TT }
+		}
+	}
+	
+	
+	
+}
+
+# Event chain ended by manually/automatically dismissing all dragon units
+character_event = {
+	id        = ExpdPdxrptgConversionDisbandDragons.3200
+	title     = ExpdPdxrptgConversionDisbandDragons_DragonsDisbanded_Title
+	desc      = ExpdPdxrptgConversionDisbandDragons_DragonsDisbanded_Desc
+	picture   = GFX_evt_dragon_mountain
+	border    = GFX_event_normal_frame_war
+	show_root = yes
+	is_triggered_only = yes
+	trigger = {
+		expd_pdxrptg_this_character_has_summoned_dragons = yes
+		expd_pdxrptg_this_character_can_summon_dragons   = no
+	}
+	immediate = {
+		# Audax Validator "." Ignore_NEXT
+		disband_religious_event_troops = yes
+		character_event = { id = ExpdPdxrptgConversionDisbandDragons.9999 }
+	}
+	option = {
+		name = {
+			trigger = { is_immortal = no }
+			text = ExpdPdxrptgConversionDisbandDragons_DragonsDisbanded_EvtOpt_Mortal
+		}
+		name = {
+			trigger = { is_immortal = yes }
+			text = ExpdPdxrptgConversionDisbandDragons_DragonsDisbanded_EvtOpt_Immortal
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+######################################################
+#                                                    #
+#            CANCEL & CLEANUP EVENT CHAIN            #
+#                                                    #
+######################################################
+
+
+
+character_event = {
+	
+	id = ExpdPdxrptgConversionDisbandDragons.9999
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		
+		remove_character_modifier = expd_pdxrptg_conversion_disband_dragons_timer
+		
+		clear_event_target = expd_pdxrptg_conversion_disband_dragons_reconversion_religion
+		clr_character_flag = expd_pdxrptg_conversion_disband_dragons_reconversion_religion_exists
+		
+		clear_event_target = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1
+		clr_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_1_is_reconversion
+		
+		clear_event_target = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2
+		clr_character_flag = expd_pdxrptg_conversion_disband_dragons_conversion_religion_2_exists
+		
+		clr_character_flag = expd_pdxrptg_conversion_disband_dragons_6mo_before
+		clr_character_flag = expd_pdxrptg_conversion_disband_dragons_3mo_before
+		clr_character_flag = expd_pdxrptg_conversion_disband_dragons_1mo_before
+		
+		clear_delayed_event = { id = ExpdPdxrptgConversionDisbandDragons.3000 }
+		clear_delayed_event = { id = ExpdPdxrptgConversionDisbandDragons.3200 }
+		
+	}
+	
+}

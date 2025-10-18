@@ -1,0 +1,37 @@
+#Key§;;;;;;;;;;;;;;x
+#
+# Character Modifier
+expd_pdxrptg_conversion_disband_dragons_timer;§M(ED:PT)§Y Dragons Departing§!;;;;;;;;;;;;;x
+expd_pdxrptg_conversion_disband_dragons_timer_desc;[Root.GetBestName] has dragons in [Root.GetHerHis] army, but they will only obey the orders of rulers who venerate them as part of their religion. If [Root.GetBestName] does NOT convert to a dragon-worshipping religion before this timer runs out, then §Rthe dragons will depart§!!;;;;;;;;;;;;;x
+#
+# Minor Event - Dragons stay
+ExpdPdxrptgConversionDisbandDragons_DragonsStay_Title;The Dragons Will Remain;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_DragonsStay_Desc;I have resumed the righteous worship of our mighty Dragons, so they have agreed to continue to aid me with my military conquests.;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_DragonsStay_EvtOpt_Excellent;The age of Dragons continues;;;;;;;;;;;;;x
+#
+# Minor Event - Dragons disbanded
+ExpdPdxrptgConversionDisbandDragons_DragonsDisbanded_Title;The Dragons Have Departed;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_DragonsDisbanded_Desc;As the Dragons fly away, returning to their mysterious inaccessible eyries high in the mountains, I marvel at their immense power and grace. Finally, when they are nothing but specks in the distance, I turn away and continue with my realm's everyday affairs.;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_DragonsDisbanded_EvtOpt_Mortal;The age of Dragons has ended - the world belongs to mortals now!;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_DragonsDisbanded_EvtOpt_Immortal;The age of Dragons has ended - the world belongs to me now!;;;;;;;;;;;;;x
+#
+# Main Event - Reminders
+ExpdPdxrptgConversionDisbandDragons_6MonthBefore_Title;The Dragons Are Suspicious;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_3MonthBefore_Title;The Dragons Are Offended;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_1MonthBefore_Title;The Dragons Are Departing;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_Fallback_Title;The Dragons Are Departing (Fallback);;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_6MonthBefore_Desc;The Dragons in my army have noticed a lack of appropriate worship from myself and my regular troops.\n\nDue to their pride, they have not yet taken any overt action, but we cannot hide the situation from them for long.;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_3MonthBefore_Desc;The Dragons in my army are offended by the fact that we have ceased to worship their divine majesty.\n\nIf we do not rectify this insult, they will surely withdraw their support for our military endeavours!;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_1MonthBefore_Desc;The Dragons in my army are openly preparing to leave, because we have ceased to provide them with the worship they deserve.\n\nThey have declared one final ultimatum: convert within a month, or they will all depart.;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_Fallback_Desc;(Fallback due to error.) The Dragons attached to our army are departing immediately, because we have ceased to worship their divine greatness.;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_EvtOpt_Defer_6moBefore;Hide the situation for as long as we can;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_EvtOpt_Defer_3moBefore;Respond with empty platitudes;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_EvtOpt_Defer_1moBefore;Silence is the best response;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_EvtOpt_Defer_Warning_TT;§RWARNING!§! The §YDragons§! will leave on §Y[Root.expd_pdxrptg_conversion_disband_dragons_timer.GetExpiryDate]§! if nothing changes!;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_EvtOpt_ExpensiveConvert_1_Reconversion;I will convert back to [expd_pdxrptg_conversion_disband_dragons_conversion_religion_1.GetName];;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_EvtOpt_ExpensiveConvert_1;I will convert to a local Dragon-worshipping religion: [expd_pdxrptg_conversion_disband_dragons_conversion_religion_1.GetName];;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_EvtOpt_ExpensiveConvert_2_1IsReconversion;I will convert to a local Dragon-worshipping religion: [expd_pdxrptg_conversion_disband_dragons_conversion_religion_2.GetName];;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_EvtOpt_ExpensiveConvert_2_1IsNotReconversion;I will convert to a different local Dragon-worshipping religion: [expd_pdxrptg_conversion_disband_dragons_conversion_religion_2.GetName];;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_EvtOpt_ManualDisbandViaEvtOpt;Regretfully, their services are no longer required;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_EvtOpt_ManualDisbandViaEvtOpt_TT;All §YDragon units§! will be §Rdisbanded§!;;;;;;;;;;;;;x
+ExpdPdxrptgConversionDisbandDragons_EvtOpt_TooLate_TT;§RIt is too late - the Dragons have already departed!§!;;;;;;;;;;;;;x
