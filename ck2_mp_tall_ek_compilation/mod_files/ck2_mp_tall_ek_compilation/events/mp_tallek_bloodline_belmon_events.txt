@@ -1,0 +1,75 @@
+namespace = MPTallEKBloodlineBelmon
+
+# on_startup & on_yearly_pulse: Loop over all demesne counties, resetting galley modifiers
+character_event = {
+	id = MPTallEKBloodlineBelmon.1000
+	hide_window = yes
+	is_triggered_only = yes
+	only_rulers = yes
+	trigger = {
+		any_demesne_title = { real_tier = COUNT } # Only characters who directly own provinces (no unlanded merc dukes, etc)
+	}
+	immediate = {
+		if = {
+			limit = {
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					has_bloodline_flag = mp_tallek_bloodline_belmon_more_galleys_flag
+				}
+			}
+			# Bloodline member: Ensure province modifier is present in all owned provinces
+			any_demesne_title = {
+				limit = { real_tier = COUNT }
+				location = {
+					remove_province_modifier       = mp_tallek_bloodline_belmon_more_galleys_provmod
+					add_province_modifier = { name = mp_tallek_bloodline_belmon_more_galleys_provmod duration = -1 }
+				}
+			}
+		}
+		else = {
+			# Not bloodline member: Ensure no province modifier in any owned province
+			any_demesne_title = {
+				limit = {
+					real_tier = COUNT
+					location = { has_province_modifier = mp_tallek_bloodline_belmon_more_galleys_provmod }
+				}
+				location = { remove_province_modifier = mp_tallek_bloodline_belmon_more_galleys_provmod }
+			}
+		}
+	}
+}
+
+# on_new_holder*: Add "more galleys" modifier to newly-gained provinces, remove it from lost/granted lands
+# ROOT is the character
+# FROM is the title
+# FROMFROM is the old holder
+character_event = {
+	id = MPTallEKBloodlineBelmon.2000
+	hide_window = yes
+	is_triggered_only = yes
+	only_rulers = yes
+	trigger = {
+		FROM = { real_tier = COUNT }
+	}
+	immediate = {
+		if = {
+			limit = {
+				        FROM = { location = { has_province_modifier = mp_tallek_bloodline_belmon_more_galleys_provmod } }
+				NOT = { ROOT = { any_owned_bloodline = { bloodline_is_active_for = PREV has_bloodline_flag = mp_tallek_bloodline_belmon_more_galleys_flag } } }
+			}
+			# Province with modifier gained by non-member - remove modifier
+			FROM = { location = { remove_province_modifier = mp_tallek_bloodline_belmon_more_galleys_provmod } }
+		}
+		else_if = {
+			limit = {
+				NOT = { FROM = { location = { has_province_modifier = mp_tallek_bloodline_belmon_more_galleys_provmod } } }
+				        ROOT = { any_owned_bloodline = { bloodline_is_active_for = PREV has_bloodline_flag = mp_tallek_bloodline_belmon_more_galleys_flag } }
+			}
+			# Province without modifier gained by member - add modifier
+			FROM = { location = { add_province_modifier = { name = mp_tallek_bloodline_belmon_more_galleys_provmod duration = -1 } } }
+		}
+		else = {
+			# Irrelevant, do nothing
+		}
+	}
+}

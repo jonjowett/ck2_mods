@@ -1,0 +1,28 @@
+on_character_convert_religion = {
+	events = {
+		ExpdPdxrptgConversionDisbandDragons.1000 # Convert to non-dragon religion while having dragons => start departure event chain
+		ExpdPdxrptgConversionDisbandDragons.1200 # Convert to dragon religion while departure event chain is in progress => cancel departure event chain
+	}
+}
+
+on_new_holder = {
+	events = {
+		ExpdPdxrptgConversionDisbandDragons.1100 # Inherit dragons as non-dragon religion => start departure event chain
+	}
+}
+on_new_holder_inheritance = {
+	events = {
+		ExpdPdxrptgConversionDisbandDragons.1100 # Inherit dragons as non-dragon religion => start departure event chain
+	}
+}
+on_new_holder_usurpation = {
+	events = {
+		ExpdPdxrptgConversionDisbandDragons.1100 # Inherit dragons as non-dragon religion => start departure event chain
+	}
+}
+
+on_five_year_pulse = {
+	events = {
+		ExpdPdxrptgConversionDisbandDragons.1300 # Has dragons as non-dragon religion  => start departure event chain
+	}
+}

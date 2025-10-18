@@ -1,0 +1,23 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_this_character_has_summoned_dragons = {
+	# Audax Validator "." Ignore_NEXT
+	has_dragons_summoned = yes
+}
+
+expd_pdxrptg_this_character_can_summon_dragons = {
+	OR = {
+		religion_scope = { expd_pdxrptg_this_religion_can_summon_dragons = yes }
+		AND = {
+			# Audax Validator "." Ignore_NEXT
+			trait = dragonborn
+			# Audax Validator "." Ignore_NEXT
+			trait = thuum_3
+		}
+	}
+}
+
+expd_pdxrptg_this_religion_can_summon_dragons = {
+	# Audax Validator "." Ignore_NEXT
+	religion_can_summon_dragons = yes
+}
