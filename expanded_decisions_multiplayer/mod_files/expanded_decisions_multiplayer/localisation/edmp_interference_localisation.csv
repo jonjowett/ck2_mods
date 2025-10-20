@@ -57,6 +57,10 @@ edmp_interference_change_this_characters_sex;§P(ED:MP:Intf)§! Change Sex;;;;;;;;
 edmp_interference_change_this_characters_sex_desc;[Root.GetTitledFirstName]'s §Ygender is changed§!.;;;;;;;;;;;;;x
 edmp_interference_legitimise_this_character;§P(ED:MP:Intf)§! Legitimise;;;;;;;;;;;;;x
 edmp_interference_legitimise_this_character_desc;[Root.GetTitledFirstName] §Yis legitimised§!.;;;;;;;;;;;;;x
+edmp_interference_artifact_flag_as_unique;§P(ED:MP:Intf)§! Artifact: Protect;;;;;;;;;;;;;x
+edmp_interference_artifact_flag_as_unique_desc;Flag one of [Root.GetTitledFirstName]'s artifacts so that it §Ywill not be destroyed§! by most/all events.;;;;;;;;;;;;;x
+edmp_interference_artifact_unflag_as_unique;§P(ED:MP:Intf)§! Artifact: Unprotect;;;;;;;;;;;;;x
+edmp_interference_artifact_unflag_as_unique_desc;Remove the §Yprotection flag§! from one of [Root.GetTitledFirstName]'s artifacts, meaning it is §Yno longer protected from event-based destruction§!.;;;;;;;;;;;;;x
 edmp_interference_grant_larger_demesne_to_this_character;§P(ED:MP:Intf)§! Grant Demesne;;;;;;;;;;;;;x
 edmp_interference_grant_larger_demesne_to_this_character_desc;[Root.GetTitledFirstName] will be granted §YTemporary Large Demesne§! (§G+1000 Demesne Limit§!) for §Y3 years§!.;;;;;;;;;;;;;x
 edmp_interference_prolong_larger_demesne_to_this_character;§P(ED:MP:Intf)§! Prolong Demesne;;;;;;;;;;;;;x
@@ -130,6 +134,12 @@ edmp_interference_someone_in_the_world_has_a_claim_on_this_title_tt;There is at 
 edmp_interference_all_other_characters_claims_on_root_title_are_removed_tt;§PSomething went wrong - please inform the mod dev!§!\nAll other characters' claims on the §Y[Root.GetFullBaseName]§! are §Rremoved§!.;;;;;;;;;;;;;x
 edmp_interference_this_is_not_some_kind_of_temporary_title_tt;This is NOT some kind of §Yspecial landless title§! (eg. temporary, rebel, adventurer, mercenary, holy order, adventurer);;;;;;;;;;;;;x
 edmp_interference_legitimise_this_character_hasnt_already_founded_their_own_dynasty_tt;Has NOT already founded [Root.GetHerHis] own dynasty;;;;;;;;;;;;;x
+edmp_interference_artifact_has_at_least_one_non_unique_tt;Has at least one "unprotected" artifact;;;;;;;;;;;;;x
+edmp_interference_artifact_has_at_least_one_unique_tt;Has at least one "protected" artifact;;;;;;;;;;;;;x
+edmp_interference_supported_total_conversion_mod_is_active_tt;Is running a total conversion mod which supports flag-based artifact protection (eg: Elder Kings);;;;;;;;;;;;;x
+edmp_interference_error_no_supported_total_conversion_mod_tt;§RERROR! No supported total conversion mod detected!§!\n\nIf you can see this message then there is an inconsistency in the mod code. Please report this issue to the mod developer.;;;;;;;;;;;;;x
+edmp_interference_artifact_fromfrom_flagged_as_unique_tt;§Y[FromFrom.GetName]§!: Protected;;;;;;;;;;;;;x
+edmp_interference_artifact_fromfrom_unflagged_as_unique_tt;§Y[FromFrom.GetName]§!: Unprotected;;;;;;;;;;;;;x
 edmp_interference_this_county_is_not_already_owners_capital_tt;[This.Location.GetName] is NOT [This.Holder.GetTitledFirstName]'s capital;;;;;;;;;;;;;x
 edmp_interference_this_county_is_not_already_owners_primary_title_trad_capital_tt;[This.Location.GetName] is NOT the traditional capital of [This.Holder.GetTitledFirstName]'s primary title ([This.Holder.PrimaryTitle.GetFullBaseName]);;;;;;;;;;;;;x
 edmp_interference_this_county_is_de_jure_part_of_its_holders_primary_title_tt;[This.GetFullBaseName] is de jure part of [This.Holder.GetTitledFirstName]'s primary title ([This.Holder.PrimaryTitle.GetFullBaseName]);;;;;;;;;;;;;x
