@@ -137,6 +137,102 @@ defined_text = {
 	
 }
 
+defined_text = {
+	
+	name = ReviledByCivilisedSocietyReason
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			trait = sload
+		}
+		localisation_key = expd_pdxrptg_reviled_reason_sload_tt
+	}
+	
+	text = {
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			trait = known_vampire
+		}
+		localisation_key = expd_pdxrptg_reviled_reason_known_vampire_tt
+	}
+	
+	text = {
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			trait = known_vampire_benevolent
+		}
+		localisation_key = expd_pdxrptg_reviled_reason_benevolent_vampire_tt
+	}
+	
+	text = {
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			trait = briarheart
+		}
+		localisation_key = expd_pdxrptg_reviled_reason_briarheart_tt
+	}
+	
+	text = {
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			trait = lich
+		}
+		localisation_key = expd_pdxrptg_reviled_reason_lich_tt
+	}
+	
+	text = {
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			trait = undead
+		}
+		localisation_key = expd_pdxrptg_reviled_reason_undead_tt
+	}
+	
+}
+
+defined_text = {
+	
+	name = ReviledByAssassinsReason
+	
+	use_first_valid = yes
+	
+	text = {
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			trait = sload
+		}
+		localisation_key = expd_pdxrptg_reviled_reason_sload_tt
+	}
+	
+	text = {
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			trait = briarheart
+		}
+		localisation_key = expd_pdxrptg_reviled_reason_briarheart_tt
+	}
+	
+	text = {
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			trait = lich
+		}
+		localisation_key = expd_pdxrptg_reviled_reason_lich_tt
+	}
+	
+	text = {
+		trigger = {
+			# Audax Validator "." Ignore_NEXT
+			trait = undead
+		}
+		localisation_key = expd_pdxrptg_reviled_reason_undead_tt
+	}
+	
+}
+
 
 
 
@@ -273,13 +369,13 @@ defined_text = {
 
 defined_text = {
 	
-	name = IsAmazinglySkilledColour_Dip_50
+	name = IsAmazinglySkilledColour_Dip_40
 	
 	use_first_valid = yes
 	
 	text = {
 		trigger = {
-			diplomacy >= 50
+			diplomacy >= 40
 		}
 		localisation_key = expd_pdxrptg_is_amazingly_skilled_colour_y
 	}
@@ -292,13 +388,13 @@ defined_text = {
 
 defined_text = {
 	
-	name = IsAmazinglySkilledColour_Mar_50
+	name = IsAmazinglySkilledColour_Mar_40
 	
 	use_first_valid = yes
 	
 	text = {
 		trigger = {
-			martial >= 50
+			martial >= 40
 		}
 		localisation_key = expd_pdxrptg_is_amazingly_skilled_colour_y
 	}
@@ -311,13 +407,13 @@ defined_text = {
 
 defined_text = {
 	
-	name = IsAmazinglySkilledColour_Ste_50
+	name = IsAmazinglySkilledColour_Ste_40
 	
 	use_first_valid = yes
 	
 	text = {
 		trigger = {
-			stewardship >= 50
+			stewardship >= 40
 		}
 		localisation_key = expd_pdxrptg_is_amazingly_skilled_colour_y
 	}
@@ -330,13 +426,13 @@ defined_text = {
 
 defined_text = {
 	
-	name = IsAmazinglySkilledColour_Int_50
+	name = IsAmazinglySkilledColour_Int_40
 	
 	use_first_valid = yes
 	
 	text = {
 		trigger = {
-			intrigue >= 50
+			intrigue >= 40
 		}
 		localisation_key = expd_pdxrptg_is_amazingly_skilled_colour_y
 	}
@@ -349,13 +445,13 @@ defined_text = {
 
 defined_text = {
 	
-	name = IsAmazinglySkilledColour_Lea_50
+	name = IsAmazinglySkilledColour_Lea_40
 	
 	use_first_valid = yes
 	
 	text = {
 		trigger = {
-			learning >= 50
+			learning >= 40
 		}
 		localisation_key = expd_pdxrptg_is_amazingly_skilled_colour_y
 	}
@@ -410,16 +506,7 @@ defined_text = {
 	
 	text = {
 		trigger = {
-			OR = {
-				# Audax Validator "." Ignore_NEXT
-				trait = sload
-				# Audax Validator "." Ignore_NEXT
-				trait = briarheart
-				# Audax Validator "." Ignore_NEXT
-				trait = undead
-				# Audax Validator "." Ignore_NEXT
-				trait = lich
-			}
+			expd_pdxrptg_this_character_is_not_blocked_due_to_species_vampires_allowed = no
 		}
 		localisation_key = expd_pdxrptg_amazing_skill_blocked_species_warning_tt
 	}

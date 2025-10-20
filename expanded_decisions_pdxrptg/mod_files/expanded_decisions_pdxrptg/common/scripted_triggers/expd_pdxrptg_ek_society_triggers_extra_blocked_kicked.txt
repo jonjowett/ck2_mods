@@ -37,6 +37,35 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = {
 	}
 }
 
+expd_pdxrptg_this_character_is_not_blocked_due_to_species_vampires_allowed = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_is_not_blocked_due_to_species_vampires_allowed_tt
+		NOR = {
+			# Audax Validator "." Ignore_NEXT
+			trait = sload
+			# Audax Validator "." Ignore_NEXT
+			trait = briarheart
+			# Audax Validator "." Ignore_NEXT
+			trait = undead
+			# Audax Validator "." Ignore_NEXT
+			trait = lich
+		}
+	}
+}
+
+expd_pdxrptg_this_character_is_reviled_for_currency_gain_and_member_score_general = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_is_reviled_for_currency_gain_and_member_score_general_tt
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = no
+	}
+}
+expd_pdxrptg_this_character_is_reviled_for_currency_gain_and_member_score_vampires_allowed = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_is_reviled_for_currency_gain_and_member_score_vampires_allowed_tt
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_vampires_allowed = no
+	}
+}
+
 expd_pdxrptg_this_character_is_not_blocked_due_to_species_monastic = {
 	expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
 }
@@ -50,7 +79,7 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_scenarist = {
 		custom_tooltip = {
 			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_diplomat_tt
 			OR = {
-				diplomacy >= 50
+				diplomacy >= 40
 				# Audax Validator "." Ignore_NEXT
 				trait = diplomat_5
 			}
@@ -60,9 +89,10 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_scenarist = {
 expd_pdxrptg_this_character_is_not_kicked_due_to_species_scenarist = {
 	OR = {
 		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
-		diplomacy >= 40 # Allow small loss of skill before kicking
+		diplomacy >= 30 # Allow small loss of skill before kicking
 		# Audax Validator "." Ignore_NEXT
 		trait = diplomat_5
+		is_society_grandmaster = yes
 	}
 }
 
@@ -73,7 +103,7 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_fighter = {
 		custom_tooltip = {
 			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_warrior_tt
 			OR = {
-				martial >= 50
+				martial >= 40
 				# Audax Validator "." Ignore_NEXT
 				trait = warrior_5
 			}
@@ -83,9 +113,10 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_fighter = {
 expd_pdxrptg_this_character_is_not_kicked_due_to_species_fighter = {
 	OR = {
 		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
-		martial >= 40 # Allow small loss of skill before kicking
+		martial >= 30 # Allow small loss of skill before kicking
 		# Audax Validator "." Ignore_NEXT
 		trait = warrior_5
+		is_society_grandmaster = yes
 	}
 }
 
@@ -95,7 +126,7 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_mercantile = {
 		custom_tooltip = {
 			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_magistrate_tt
 			OR = {
-				stewardship >= 50
+				stewardship >= 40
 				# Audax Validator "." Ignore_NEXT
 				trait = magistrate_5
 			}
@@ -105,31 +136,20 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_mercantile = {
 expd_pdxrptg_this_character_is_not_kicked_due_to_species_mercantile = {
 	OR = {
 		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
-		stewardship >= 40 # Allow small loss of skill before kicking
+		stewardship >= 30 # Allow small loss of skill before kicking
 		# Audax Validator "." Ignore_NEXT
 		trait = magistrate_5
+		is_society_grandmaster = yes
 	}
 }
 
 expd_pdxrptg_this_character_is_not_blocked_due_to_species_assassins = {
 	OR = {
-		custom_tooltip = {
-			text = expd_pdxrptg_this_character_is_not_blocked_due_to_species_assassins_tt
-			NOR = {
-				# Audax Validator "." Ignore_NEXT
-				trait = sload
-				# Audax Validator "." Ignore_NEXT
-				trait = briarheart
-				# Audax Validator "." Ignore_NEXT
-				trait = undead
-				# Audax Validator "." Ignore_NEXT
-				trait = lich
-			}
-		}
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_vampires_allowed = yes
 		custom_tooltip = {
 			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_agent_assassins_tt
 			OR = {
-				intrigue >= 50
+				intrigue >= 40
 				# Audax Validator "." Ignore_NEXT
 				trait = agent_5
 			}
@@ -138,19 +158,11 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_assassins = {
 }
 expd_pdxrptg_this_character_is_not_kicked_due_to_species_assassins = {
 	OR = {
-		NOR = {
-			# Audax Validator "." Ignore_NEXT
-			trait = sload
-			# Audax Validator "." Ignore_NEXT
-			trait = briarheart
-			# Audax Validator "." Ignore_NEXT
-			trait = undead
-			# Audax Validator "." Ignore_NEXT
-			trait = lich
-		}
-		intrigue >= 40 # Allow small loss of skill before kicking
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_vampires_allowed = yes
+		intrigue >= 30 # Allow small loss of skill before kicking
 		# Audax Validator "." Ignore_NEXT
 		trait = agent_5
+		is_society_grandmaster = yes
 	}
 }
 
@@ -168,7 +180,7 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_thieves = {
 		custom_tooltip = {
 			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_agent_thieves_tt
 			OR = {
-				intrigue >= 50
+				intrigue >= 40
 				# Audax Validator "." Ignore_NEXT
 				trait = agent_5
 			}
@@ -178,9 +190,10 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_thieves = {
 expd_pdxrptg_this_character_is_not_kicked_due_to_species_thieves = {
 	OR = {
 		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
-		intrigue >= 40 # Allow small loss of skill before kicking
+		intrigue >= 30 # Allow small loss of skill before kicking
 		# Audax Validator "." Ignore_NEXT
 		trait = agent_5
+		is_society_grandmaster = yes
 	}
 }
 
@@ -190,7 +203,7 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_mage = {
 		custom_tooltip = {
 			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_mage_tt
 			OR = {
-				learning >= 50
+				learning >= 40
 				# Audax Validator "." Ignore_NEXT
 				trait = mage_5
 			}
@@ -200,9 +213,10 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_species_mage = {
 expd_pdxrptg_this_character_is_not_kicked_due_to_species_mage = {
 	OR = {
 		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
-		learning >= 40 # Allow small loss of skill before kicking
+		learning >= 30 # Allow small loss of skill before kicking
 		# Audax Validator "." Ignore_NEXT
 		trait = mage_5
+		is_society_grandmaster = yes
 	}
 }
 
@@ -231,9 +245,12 @@ expd_pdxrptg_this_character_is_not_blocked_due_to_necromancy_ansei_moth = {
 	}
 }
 expd_pdxrptg_this_character_is_not_kicked_due_to_necromancy_ansei_moth = {
-	NOT = {
-		# Audax Validator "." Ignore_NEXT
-		trait = necromancer
+	OR = {
+		NOT = {
+			# Audax Validator "." Ignore_NEXT
+			trait = necromancer
+		}
+		is_society_grandmaster = yes
 	}
 }
 
@@ -370,5 +387,6 @@ expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = {
 		controls_religion = no
 		ai = no
 		expd_pdxrptg_this_character_is_an_absentee_player = yes
+		is_society_grandmaster = yes
 	}
 }
