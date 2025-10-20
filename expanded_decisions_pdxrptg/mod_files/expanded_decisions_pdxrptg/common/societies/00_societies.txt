@@ -24,6 +24,7 @@ fighters_guild_tamriel = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = fighters_guild_tamriel
 					rank = 1
@@ -39,7 +40,6 @@ fighters_guild_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		martial = 8
 		OR = {
 			is_warrior = yes
@@ -63,12 +63,12 @@ fighters_guild_tamriel = {
 		
 		expd_pdxrtpg_this_character_can_join_tamrielic_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_fighter = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -84,10 +84,6 @@ fighters_guild_tamriel = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -96,7 +92,8 @@ fighters_guild_tamriel = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_fighter = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
 	}
 	
 	#Associate > Protector > Defender > Warder > Guardian > Champion > Master
@@ -521,6 +518,7 @@ fighters_guild_akavir = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = fighters_guild_akavir
 					rank = 1
@@ -536,7 +534,6 @@ fighters_guild_akavir = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		martial = 8
 		OR = {
 			is_warrior = yes
@@ -560,12 +557,12 @@ fighters_guild_akavir = {
 		
 		expd_pdxrtpg_this_character_can_join_akaviri_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_fighter = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -581,10 +578,6 @@ fighters_guild_akavir = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -593,7 +586,8 @@ fighters_guild_akavir = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_fighter = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
 	}
 	
 	#Associate > Protector > Defender > Warder > Guardian > Champion > Master
@@ -1011,6 +1005,7 @@ companions_tamriel = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = companions_tamriel
 					rank = 1
@@ -1026,7 +1021,6 @@ companions_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		martial = 12
 		OR = {
 			is_warrior = yes
@@ -1050,12 +1044,12 @@ companions_tamriel = {
 		
 		expd_pdxrtpg_this_character_can_join_skyrim_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_monastic = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -1071,10 +1065,6 @@ companions_tamriel = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -1083,7 +1073,8 @@ companions_tamriel = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_monastic = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
 	}
 	
 	society_rank = {
@@ -1494,6 +1485,7 @@ mages_guild_tamriel = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = mages_guild_tamriel
 					rank = 1
@@ -1509,28 +1501,18 @@ mages_guild_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		learning = 10
 		
 		expd_pdxrtpg_this_character_can_join_tamrielic_societies = yes
 		
-		OR = {
-			NOT = { trait = sload }
-			AND = {
-				trait = sload
-				trait = necromancer
-				has_offmap_currency = {
-					offmap = oblivion_ideal_masters
-					value >= 2000
-				}
-			}
-		}
-		
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_mage = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_necromancy_tamriel = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -1546,10 +1528,6 @@ mages_guild_tamriel = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -1558,7 +1536,9 @@ mages_guild_tamriel = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_mage = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_necromancy_tamriel = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
 	}
 	
 	society_rank = {
@@ -1837,6 +1817,7 @@ mages_guild_akavir = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = mages_guild_akavir
 					rank = 1
@@ -1852,28 +1833,18 @@ mages_guild_akavir = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		learning = 10
 		
 		expd_pdxrtpg_this_character_can_join_akaviri_societies = yes
 		
-		OR = {
-			NOT = { trait = sload }
-			AND = {
-				trait = sload
-				trait = necromancer
-				has_offmap_currency = {
-					offmap = oblivion_ideal_masters
-					value >= 2000
-				}
-			}
-		}
-		
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_mage = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_necromancy_akavir = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -1889,10 +1860,6 @@ mages_guild_akavir = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -1901,7 +1868,9 @@ mages_guild_akavir = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_mage = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_necromancy_akavir = yes
 	}
 	
 	society_rank = {
@@ -2153,6 +2122,7 @@ mercantile_guild_tamriel = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = mercantile_guild_tamriel
 					rank = 1
@@ -2168,17 +2138,16 @@ mercantile_guild_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		stewardship = 10
 		
 		expd_pdxrtpg_this_character_can_join_tamrielic_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_mercantile = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -2194,10 +2163,6 @@ mercantile_guild_tamriel = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -2206,7 +2171,8 @@ mercantile_guild_tamriel = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_mercantile = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
 	}
 	
 	society_rank = {
@@ -2464,6 +2430,7 @@ mercantile_guild_akavir = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = mercantile_guild_akavir
 					rank = 1
@@ -2479,17 +2446,16 @@ mercantile_guild_akavir = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		stewardship = 10
 		
 		expd_pdxrtpg_this_character_can_join_akaviri_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_mercantile = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -2505,10 +2471,6 @@ mercantile_guild_akavir = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -2517,7 +2479,8 @@ mercantile_guild_akavir = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_mercantile = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
 	}
 	
 	society_rank = {
@@ -2769,6 +2732,7 @@ scenarist_guild_tamriel = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = scenarist_guild_tamriel
 					rank = 1
@@ -2784,17 +2748,16 @@ scenarist_guild_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		diplomacy = 10
 		
 		expd_pdxrtpg_this_character_can_join_tamrielic_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_scenarist = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -2810,10 +2773,6 @@ scenarist_guild_tamriel = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -2822,7 +2781,8 @@ scenarist_guild_tamriel = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_scenarist = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
 	}
 	
 	society_rank = {
@@ -3080,6 +3040,7 @@ scenarist_guild_akavir = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = scenarist_guild_akavir
 					rank = 1
@@ -3095,17 +3056,16 @@ scenarist_guild_akavir = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		diplomacy = 10
 		
 		expd_pdxrtpg_this_character_can_join_akaviri_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_scenarist = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -3121,10 +3081,6 @@ scenarist_guild_akavir = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -3133,7 +3089,8 @@ scenarist_guild_akavir = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_scenarist = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
 	}
 	
 	society_rank = {
@@ -3385,6 +3342,7 @@ greybeards_tamriel = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = greybeards_tamriel
 					rank = 1
@@ -3400,7 +3358,6 @@ greybeards_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		OR = {
 			religion_group = human_pantheon
 			religion_group = mer_pantheon
@@ -3415,12 +3372,12 @@ greybeards_tamriel = {
 		
 		expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_monastic = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -3445,10 +3402,6 @@ greybeards_tamriel = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -3457,7 +3410,6 @@ greybeards_tamriel = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
 		OR = {
 			religion_group = human_pantheon
 			religion_group = mer_pantheon
@@ -3465,7 +3417,8 @@ greybeards_tamriel = {
 			religion = anuic_skaal
 			is_dragonblood = yes
 		}
-		expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = yes
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_monastic = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
 	}
 	
 	society_rank = {
@@ -3820,6 +3773,7 @@ moth_priests_tamriel = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = moth_priests_tamriel
 					rank = 1
@@ -3854,7 +3808,6 @@ moth_priests_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		religion_group = human_pantheon
 		custom_tooltip = {
 			text = did_not_betray_society
@@ -3863,12 +3816,14 @@ moth_priests_tamriel = {
 		
 		expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_necromancy_ansei_moth = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -3887,10 +3842,6 @@ moth_priests_tamriel = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -3899,9 +3850,10 @@ moth_priests_tamriel = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
 		religion_group = human_pantheon
-		expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = yes
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_necromancy_ansei_moth = yes
 	}
 	
 	society_rank = {
@@ -4193,6 +4145,7 @@ dark_brotherhood_tamriel = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = dark_brotherhood_tamriel
 					rank = 1
@@ -4208,17 +4161,19 @@ dark_brotherhood_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		intrigue = 10
 		OR = {
 			religion_group = hist_group
 			religion_group = void_religions
 			has_character_modifier = known_murderer
-			has_character_flag = brotherhood_qualified
 			trait = shadowscale
 			intrigue = 20
 			combat_rating = 30
 			trait = impaler
+			custom_tooltip = {
+				text = expd_pdxrptg_has_qualified_to_join_brotherhood_tt
+				has_character_flag = brotherhood_qualified
+			}
 		}
 		NOR = {
 			religion_group = tribunal
@@ -4227,15 +4182,12 @@ dark_brotherhood_tamriel = {
 		
 		expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			AND = {
-				is_undead = yes
-				trait = vampire
-			}
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_assassins = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -4249,6 +4201,7 @@ dark_brotherhood_tamriel = {
 					religion_group = hist_group
 					religion_group = void_religions
 					has_character_modifier = known_murderer
+					has_character_flag = brotherhood_qualified
 					trait = shadowscale
 					intrigue = 20
 					combat_rating = 30
@@ -4260,13 +4213,6 @@ dark_brotherhood_tamriel = {
 				}
 				age = 16
 				expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = yes
-				OR = {
-					is_not_undead = yes
-					AND = {
-						is_undead = yes
-						trait = vampire
-					}
-				}
 			}
 		}
 	}
@@ -4282,14 +4228,8 @@ dark_brotherhood_tamriel = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
-		OR = {
-			is_not_undead = yes
-			AND = {
-				is_undead = yes
-				trait = vampire
-			}
-		}
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_assassins = yes
 	}
 	
 	#Murderer
@@ -4655,6 +4595,7 @@ assassin_guild_akavir = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = assassin_guild_akavir
 					rank = 1
@@ -4670,7 +4611,6 @@ assassin_guild_akavir = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		intrigue = 10
 		OR = {
 			has_character_modifier = known_murderer
@@ -4681,15 +4621,12 @@ assassin_guild_akavir = {
 		
 		expd_pdxrtpg_this_character_can_join_akaviri_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			AND = {
-				is_undead = yes
-				trait = vampire
-			}
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_assassins = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -4707,13 +4644,6 @@ assassin_guild_akavir = {
 				}
 				age = 16
 				expd_pdxrtpg_this_character_can_join_akaviri_societies = yes
-				OR = {
-					is_not_undead = yes
-					AND = {
-						is_undead = yes
-						trait = vampire
-					}
-				}
 			}
 		}
 	}
@@ -4729,14 +4659,8 @@ assassin_guild_akavir = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
-		OR = {
-			is_not_undead = yes
-			AND = {
-				is_undead = yes
-				trait = vampire
-			}
-		}
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_assassins = yes
 	}
 	
 	#Murderer
@@ -5070,6 +4994,7 @@ morag_tong_tamriel = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = morag_tong_tamriel
 					rank = 1
@@ -5085,7 +5010,6 @@ morag_tong_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		intrigue = 10
 		OR = {
 			religion_group = tribunal
@@ -5100,12 +5024,12 @@ morag_tong_tamriel = {
 		
 		expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_morag_tong = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -5127,10 +5051,6 @@ morag_tong_tamriel = {
 				}
 				age = 16
 				expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = yes
-				OR = {
-					is_not_undead = yes
-					is_unknown_vampire = yes
-				}
 			}
 		}
 	}
@@ -5138,10 +5058,6 @@ morag_tong_tamriel = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -5150,7 +5066,8 @@ morag_tong_tamriel = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_morag_tong = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
 	}
 
 	society_rank = {
@@ -5499,6 +5416,7 @@ thieves_guild_tamriel = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = thieves_guild_tamriel
 					rank = 1
@@ -5514,15 +5432,16 @@ thieves_guild_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		intrigue = 10
+		
 		expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = yes
-		NOT = { trait = sload }
+		
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_thieves = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -5535,10 +5454,6 @@ thieves_guild_tamriel = {
 				intrigue = 10
 				age = 16
 				expd_pdxrtpg_this_character_can_join_tamrielic_non_yokuda_societies = yes
-				OR = {
-					is_not_undead = yes
-					is_unknown_vampire = yes
-				}
 			}
 		}
 	}
@@ -5554,11 +5469,8 @@ thieves_guild_tamriel = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_thieves = yes
 	}
 	
 	#Toad
@@ -5938,6 +5850,7 @@ camonna_tong_tamriel = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = camonna_tong_tamriel
 					rank = 1
@@ -5953,17 +5866,16 @@ camonna_tong_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		intrigue = 10
 		
 		expd_pdxrtpg_this_character_can_join_morrowind_societies = yes
 		
-		NOT = { trait = sload }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_thieves = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -5976,10 +5888,6 @@ camonna_tong_tamriel = {
 				intrigue = 10
 				age = 16
 				expd_pdxrtpg_this_character_can_join_morrowind_societies = yes
-				OR = {
-					is_not_undead = yes
-					is_unknown_vampire = yes
-				}
 			}
 		}
 	}
@@ -5995,11 +5903,8 @@ camonna_tong_tamriel = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_thieves = yes
 	}
 	
 	#Tough
@@ -6360,8 +6265,9 @@ thieves_guild_akavir = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
-					society = thieves_guild_tamriel
+					society = thieves_guild_akavir
 					rank = 1
 				}
 				liege = {
@@ -6375,15 +6281,16 @@ thieves_guild_akavir = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		intrigue = 10
+		
 		expd_pdxrtpg_this_character_can_join_akaviri_societies = yes
-		NOT = { trait = sload }
+		
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_thieves = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -6396,10 +6303,6 @@ thieves_guild_akavir = {
 				intrigue = 10
 				age = 16
 				expd_pdxrtpg_this_character_can_join_akaviri_societies = yes
-				OR = {
-					is_not_undead = yes
-					is_unknown_vampire = yes
-				}
 			}
 		}
 	}
@@ -6415,11 +6318,8 @@ thieves_guild_akavir = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_thieves = yes
 	}
 	
 	#Tough
@@ -6777,6 +6677,7 @@ secret_religious_society_template = {
 		hidden_trigger = {
 			NAND = {
 				ai = yes
+				NOT = { has_character_flag = expd_pdxrptg_society_autojoin_in_progress }
 				is_society_rank_full = {
 					society = FROM
 					rank = 1
@@ -6792,19 +6693,13 @@ secret_religious_society_template = {
 			}
 		}
 		age = 16
-		controls_religion = no
+		controls_religion = no # Religious heads cannot not ever be members of secret religious societies
 		any_society_member = { society_member_of = FROM }
 		secret_religion = FROM
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
-		OR = {
-			is_not_undead = yes
-			AND = {
-				is_undead = yes
-				trait = vampire
-			}
-		}
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_monastic = yes
 	}
 
 	show_society = {
@@ -6824,14 +6719,8 @@ secret_religious_society_template = {
 			mercenary = yes
 			trait = clone
 		}
-		controls_religion = no
-		OR = {
-			is_not_undead = yes
-			AND = {
-				is_undead = yes
-				trait = vampire
-			}
-		}
+		controls_religion = no # Religious heads cannot not ever be members of secret religious societies
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_monastic = yes
 	}
 	
 	society_rank = {

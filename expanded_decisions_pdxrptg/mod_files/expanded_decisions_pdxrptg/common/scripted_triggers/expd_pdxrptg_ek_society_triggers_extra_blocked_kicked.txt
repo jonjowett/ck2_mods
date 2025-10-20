@@ -1,0 +1,374 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#                SPECIES BLOCKERS                #
+#                                                #
+##################################################
+
+
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_is_not_blocked_due_to_species_general_tt
+		NOR = {
+			# Audax Validator "." Ignore_NEXT
+			trait = sload
+			# Audax Validator "." Ignore_NEXT
+			trait = known_vampire
+			# Audax Validator "." Ignore_NEXT
+			trait = known_vampire_benevolent
+			# Audax Validator "." Ignore_NEXT
+			trait = briarheart
+			# Audax Validator "." Ignore_NEXT
+			trait = undead
+			# Audax Validator "." Ignore_NEXT
+			trait = lich
+		}
+	}
+}
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_species_monastic = {
+	expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_species_monastic = {
+	expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+}
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_species_scenarist = {
+	OR = {
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_diplomat_tt
+			OR = {
+				diplomacy >= 50
+				# Audax Validator "." Ignore_NEXT
+				trait = diplomat_5
+			}
+		}
+	}
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_species_scenarist = {
+	OR = {
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		diplomacy >= 40 # Allow small loss of skill before kicking
+		# Audax Validator "." Ignore_NEXT
+		trait = diplomat_5
+	}
+}
+
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_species_fighter = {
+	OR = {
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_warrior_tt
+			OR = {
+				martial >= 50
+				# Audax Validator "." Ignore_NEXT
+				trait = warrior_5
+			}
+		}
+	}
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_species_fighter = {
+	OR = {
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		martial >= 40 # Allow small loss of skill before kicking
+		# Audax Validator "." Ignore_NEXT
+		trait = warrior_5
+	}
+}
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_species_mercantile = {
+	OR = {
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_magistrate_tt
+			OR = {
+				stewardship >= 50
+				# Audax Validator "." Ignore_NEXT
+				trait = magistrate_5
+			}
+		}
+	}
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_species_mercantile = {
+	OR = {
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		stewardship >= 40 # Allow small loss of skill before kicking
+		# Audax Validator "." Ignore_NEXT
+		trait = magistrate_5
+	}
+}
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_species_assassins = {
+	OR = {
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_is_not_blocked_due_to_species_assassins_tt
+			NOR = {
+				# Audax Validator "." Ignore_NEXT
+				trait = sload
+				# Audax Validator "." Ignore_NEXT
+				trait = briarheart
+				# Audax Validator "." Ignore_NEXT
+				trait = undead
+				# Audax Validator "." Ignore_NEXT
+				trait = lich
+			}
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_agent_assassins_tt
+			OR = {
+				intrigue >= 50
+				# Audax Validator "." Ignore_NEXT
+				trait = agent_5
+			}
+		}
+	}
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_species_assassins = {
+	OR = {
+		NOR = {
+			# Audax Validator "." Ignore_NEXT
+			trait = sload
+			# Audax Validator "." Ignore_NEXT
+			trait = briarheart
+			# Audax Validator "." Ignore_NEXT
+			trait = undead
+			# Audax Validator "." Ignore_NEXT
+			trait = lich
+		}
+		intrigue >= 40 # Allow small loss of skill before kicking
+		# Audax Validator "." Ignore_NEXT
+		trait = agent_5
+	}
+}
+
+# Morag Tong doesn't normally allow known vampires, ie. functionally identical to thieves
+expd_pdxrptg_this_character_is_not_blocked_due_to_species_morag_tong = {
+	expd_pdxrptg_this_character_is_not_blocked_due_to_species_thieves = yes
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_species_morag_tong = {
+	expd_pdxrptg_this_character_is_not_kicked_due_to_species_thieves = yes
+}
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_species_thieves = {
+	OR = {
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_agent_thieves_tt
+			OR = {
+				intrigue >= 50
+				# Audax Validator "." Ignore_NEXT
+				trait = agent_5
+			}
+		}
+	}
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_species_thieves = {
+	OR = {
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		intrigue >= 40 # Allow small loss of skill before kicking
+		# Audax Validator "." Ignore_NEXT
+		trait = agent_5
+	}
+}
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_species_mage = {
+	OR = {
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_is_not_blocked_because_amazing_mage_tt
+			OR = {
+				learning >= 50
+				# Audax Validator "." Ignore_NEXT
+				trait = mage_5
+			}
+		}
+	}
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_species_mage = {
+	OR = {
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+		learning >= 40 # Allow small loss of skill before kicking
+		# Audax Validator "." Ignore_NEXT
+		trait = mage_5
+	}
+}
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#              NECROMANCY BLOCKERS               #
+#                                                #
+##################################################
+
+
+
+# Greybeards, Companions, and all other non-mage societies don't care about necromancers (they care about results).
+expd_pdxrptg_this_character_is_not_blocked_due_to_necromancy_ansei_moth = {
+	NOT = {
+		# Audax Validator "." Ignore_NEXT
+		trait = necromancer
+	}
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_necromancy_ansei_moth = {
+	NOT = {
+		# Audax Validator "." Ignore_NEXT
+		trait = necromancer
+	}
+}
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_necromancy_tamriel = {
+	OR = {
+		custom_tooltip = {
+			text = expd_pdxrptg_necromancy_permitted_tt
+			NOT = { has_global_flag = mages_tamriel_necromancy_banned }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_necromancy_banned_and_not_necromancer_tt
+			# Audax Validator "." Ignore_1001
+			AND = {
+				has_global_flag = mages_tamriel_necromancy_banned
+				NOT = {
+					# Audax Validator "." Ignore_NEXT
+					trait = necromancer
+				}
+			}
+		}
+		trigger_if = {
+			limit = { has_global_flag = mages_tamriel_necromancy_banned }
+			custom_tooltip = {
+				text = expd_pdxrptg_necromancy_banned_and_necromancer_with_2000_IM_currency_tt
+				# Audax Validator "." Ignore_1001
+				AND = {
+					hidden_tooltip = { ai = no }
+					has_global_flag = mages_tamriel_necromancy_banned
+					# Audax Validator "." Ignore_NEXT
+					trait = necromancer
+					has_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = oblivion_ideal_masters
+						value  = 2000
+					}
+				}
+			}
+		}
+	}
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_necromancy_tamriel = {
+	# Mages are never auto-kicked from their society due to being necromancers.
+	# Instead they get an event allowing them to drop necromancy.
+	always = yes
+}
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_necromancy_akavir = {
+	OR = {
+		custom_tooltip = {
+			text = expd_pdxrptg_necromancy_permitted_tt
+			NOT = { has_global_flag = mages_akavir_necromancy_banned }
+		}
+		custom_tooltip = {
+			text = expd_pdxrptg_necromancy_banned_and_not_necromancer_tt
+			# Audax Validator "." Ignore_1001
+			AND = {
+				has_global_flag = mages_akavir_necromancy_banned
+				NOT = {
+					# Audax Validator "." Ignore_NEXT
+					trait = necromancer
+				}
+			}
+		}
+		trigger_if = {
+			limit = { has_global_flag = mages_akavir_necromancy_banned }
+			custom_tooltip = {
+				text = expd_pdxrptg_necromancy_banned_and_necromancer_with_2000_IM_currency_tt
+				# Audax Validator "." Ignore_1001
+				AND = {
+					hidden_tooltip = { ai = no }
+					has_global_flag = mages_akavir_necromancy_banned
+					# Audax Validator "." Ignore_NEXT
+					trait = necromancer
+					has_offmap_currency = {
+						# Audax Validator "." Ignore_NEXT
+						offmap = oblivion_ideal_masters
+						value  = 2000
+					}
+				}
+			}
+		}
+	}
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_necromancy_akavir = {
+	# Mages are never auto-kicked from their society due to being necromancers.
+	# Instead they get an event allowing them to drop necromancy.
+	always = yes
+}
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#            RELIGIOUS HEAD BLOCKERS             #
+#                                                #
+##################################################
+
+# Player religious heads are permitted to be society members, other religious heads are not.
+#  --- This probably only applies to Orgnum
+
+
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = {
+	trigger_if = {
+		limit = { expd_pdxrptd_edmp_is_active = yes }
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion_incl_edmp_tt
+			OR = {
+				controls_religion = no
+				ai = no
+			}
+		}
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion_excl_edmp_tt
+			OR = {
+				controls_religion = no
+				ai = no
+			}
+		}
+	}
+}
+
+expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = {
+	OR = {
+		controls_religion = no
+		ai = no
+		expd_pdxrptg_this_character_is_an_absentee_player = yes
+	}
+}
