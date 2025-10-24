@@ -160,7 +160,7 @@ character_event = {
 		# Has not already chosen "don't join" 5 times
 		NOT = { has_character_flag = expd_pdxrptg_society_autojoin_5 }
 		# Is not "interested" in a secret society
-		is_interested_in_any_society = no
+		NOT = { is_interested_in_any_society = yes } # NB: is_interested_in_any_society = no doesn't work properly (returns same result as =yes)
 	}
 	immediate = {
 		
