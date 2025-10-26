@@ -799,6 +799,127 @@ targetted_decisions = {
 		}
 	}
 	
+	edmp_interference_artifact_flag_as_unique = {
+		filter = all_including_me
+		third_party_filter = artifacts
+		third_party = ROOT # Look for artifacts in ROOT's inventory
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+			# Adding an artifact flag to prevent destruction only works for certain total-conversion mods
+			edmp_ek_mod_is_active = yes # EK mod: "unique" flag
+		}
+		potential = {
+			num_of_artifacts >= 1
+		}
+		allow = {
+			trigger_if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				custom_tooltip = {
+					text = edmp_interference_artifact_has_at_least_one_non_unique_tt
+					any_artifact = { NOT = { has_artifact_flag = unique } }
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = edmp_interference_supported_total_conversion_mod_is_active_tt
+					always = no
+				}
+			}
+		}
+		third_party_potential = {
+			trigger_if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				ROOT_FROMFROM = { NOT = { has_artifact_flag = unique } }
+			}
+			trigger_else = {
+				always = no
+			}
+		}
+		third_party_allow = { always = yes }
+		effect = {
+			if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				hidden_tooltip = {
+					set_global_flag = edmp_interference_singlechar_artifact_flag_as_unique
+					ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+					ROOT_FROMFROM = { save_event_target_as = edmp_interference_singlechar_artifact }
+				}
+				custom_tooltip = {
+					text = edmp_interference_artifact_fromfrom_flagged_as_unique_tt
+					ROOT_FROMFROM = { set_artifact_flag = unique }
+				}
+				edmp_interference_notify_players_singlechar = yes
+				hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_artifact_flag_as_unique }
+			}
+			else = {
+				custom_tooltip = { text = edmp_interference_error_no_supported_total_conversion_mod_tt }
+			}
+		}
+	}
+	
+	edmp_interference_artifact_unflag_as_unique = {
+		filter = all_including_me
+		third_party_filter = artifacts
+		third_party = ROOT # Look for artifacts in ROOT's inventory
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+			# Adding an artifact flag to prevent destruction only works for certain total-conversion mods
+			edmp_ek_mod_is_active = yes # EK mod: "unique" flag
+		}
+		potential = {
+			num_of_artifacts >= 1
+		}
+		allow = {
+			trigger_if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				custom_tooltip = {
+					text = edmp_interference_artifact_has_at_least_one_unique_tt
+					any_artifact = { has_artifact_flag = unique }
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = edmp_interference_supported_total_conversion_mod_is_active_tt
+					always = no
+				}
+			}
+		}
+		third_party_potential = {
+			trigger_if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				ROOT_FROMFROM = { has_artifact_flag = unique }
+			}
+			trigger_else = {
+				always = no
+			}
+		}
+		third_party_allow = { always = yes }
+		effect = {
+			if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				hidden_tooltip = {
+					set_global_flag = edmp_interference_singlechar_artifact_unflag_as_unique
+					set_global_flag = edmp_interference_singlechar_bad
+					ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+					ROOT_FROMFROM = { save_event_target_as = edmp_interference_singlechar_artifact }
+				}
+				custom_tooltip = {
+					text = edmp_interference_artifact_fromfrom_unflagged_as_unique_tt
+					ROOT_FROMFROM = { clr_artifact_flag = unique }
+				}
+				edmp_interference_notify_players_singlechar = yes
+				hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_artifact_unflag_as_unique }
+			}
+			else = {
+				custom_tooltip = { text = edmp_interference_error_no_supported_total_conversion_mod_tt }
+			}
+		}
+	}
+	
 	edmp_interference_grant_larger_demesne_to_this_character = {
 		filter = all_including_me
 		ai = no

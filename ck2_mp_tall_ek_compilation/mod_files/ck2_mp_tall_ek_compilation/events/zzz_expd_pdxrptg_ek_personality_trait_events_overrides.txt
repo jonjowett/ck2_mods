@@ -1,0 +1,57 @@
+# Audax Validator EnableCommentMetadata
+
+#Remove Absent Minded
+character_event = {
+	id = 1061
+	# Audax Validator "." Ignore_NEXT
+	desc = "EVTDESC1061"
+	picture = "GFX_evt_family"
+	
+	min_age = 16
+	only_capable = yes
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		personality_traits = 6
+		# Audax Validator "." Ignore_NEXT
+		trait = absent_minded
+	}
+	
+	weight_multiplier = {
+		days = 1
+		
+		modifier = {
+			factor = 2
+			personality_traits > 6
+		}
+	}
+	
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = "EVTDESC1061Accept"
+		# Audax Validator "." Ignore_NEXT
+		remove_trait = absent_minded
+		random = {
+			chance = 50
+			if = {
+				limit = { NOT = { trait = stressed } }
+				add_stressed = yes
+			}
+			else = {
+				prestige = -25
+			}
+			random_artifact = {
+				limit = {
+					is_indestructible = no
+					NOT = { has_artifact_flag = unique }
+				}
+				destroy_artifact = yes
+			}
+		}
+	}
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = EVTDESC1061Refuse
+	}
+}

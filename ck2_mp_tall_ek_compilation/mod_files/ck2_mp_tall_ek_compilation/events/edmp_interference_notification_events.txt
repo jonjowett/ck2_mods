@@ -217,6 +217,7 @@ character_event = {
 #  --- The target of the action to be saved as event_target:edmp_interference_singlechar_affected
 #  --- If the action is bad for the target, the global flag edmp_interference_singlechar_bad should be set. If not, the flag should not be set.
 #  --- Optional: event_target:edmp_interference_singlechar_offmap_power , if the action relates to an offmap power. (So that the offmap power name & currency can be correctly localised.)
+#  --- Optional: event_target:edmp_interference_singlechar_artifact , if the action relates to an artifact. (So that the artifact name can be correctly localised.)
 character_event = {
 	id    = edmp_ifn.5001
 	title = edmp_ifn_title
@@ -254,6 +255,14 @@ character_event = {
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_legitimise }
 		text                        = edmp_ifn_5001_desc_singlechar_legitimise
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_artifact_flag_as_unique }
+		text                        = edmp_ifn_5001_desc_singlechar_artifact_flag_as_unique
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_artifact_unflag_as_unique }
+		text                        = edmp_ifn_5001_desc_singlechar_artifact_unflag_as_unique
 	}
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_demesne_grant }
@@ -417,6 +426,7 @@ character_event = {
 			
 			clear_event_target = edmp_interference_singlechar_affected
 			clear_event_target = edmp_interference_singlechar_offmap_power
+			clear_event_target = edmp_interference_singlechar_artifact
 			
 			clr_global_flag    = edmp_interference_singlechar_kill
 			clr_global_flag    = edmp_interference_singlechar_health_grant
@@ -426,6 +436,8 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_older
 			clr_global_flag    = edmp_interference_singlechar_sexchange
 			clr_global_flag    = edmp_interference_singlechar_legitimise
+			clr_global_flag    = edmp_interference_singlechar_artifact_flag_as_unique
+			clr_global_flag    = edmp_interference_singlechar_artifact_unflag_as_unique
 			clr_global_flag    = edmp_interference_singlechar_demesne_grant
 			clr_global_flag    = edmp_interference_singlechar_demesne_prolong
 			clr_global_flag    = edmp_interference_singlechar_demesne_revoke

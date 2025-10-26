@@ -23,7 +23,7 @@ namespace = ExpdPdxrptgSocietyJoin
 # Called from on_character_join_society
 #  --- ROOT is character
 #  --- FROM is society
-# On joining the Mages Guild, Sload Necromancers:
+# On joining the Mages Guild, Necromancers who would otherwise not be permitted to join:
 #  --- Sacrifice 2000 Ideal Master currency to the Guild
 #  --- Change the Guild to allow necromancy
 character_event = {
@@ -33,15 +33,24 @@ character_event = {
 	trigger = {
 		ROOT_FROM = {
 			OR = {
-				is_society = mages_guild_tamriel
-				is_society = mages_guild_akavir
+				AND = {
+					is_society = mages_guild_tamriel
+					has_global_flag = mages_tamriel_necromancy_banned
+				}
+				AND = {
+					is_society = mages_guild_akavir
+					has_global_flag = mages_akavir_necromancy_banned
+				}
 			}
 		}
 		ROOT = {
 			# Audax Validator "." Ignore_NEXT
-			trait = sload
-			# Audax Validator "." Ignore_NEXT
 			trait = necromancer
+			has_offmap_currency = {
+				# Audax Validator "." Ignore_NEXT
+				offmap = oblivion_ideal_masters
+				value  = 2000
+			}
 		}
 	}
 	immediate = {
@@ -151,13 +160,20 @@ character_event = {
 		# Has not already chosen "don't join" 5 times
 		NOT = { has_character_flag = expd_pdxrptg_society_autojoin_5 }
 		# Is not "interested" in a secret society
-		is_interested_in_any_society = no
+		NOT = { is_interested_in_any_society = yes } # NB: is_interested_in_any_society = no doesn't work properly (returns same result as =yes)
 	}
 	immediate = {
 		
+		# Allow AI to join societies regardless of rank 1 fullness
+		set_character_flag = expd_pdxrptg_society_autojoin_in_progress
+		
 		random_list = {
-			80 = {
-				# Does not join a society
+			
+			# Does not join a society
+			# Approx 80% base weight before modifiers
+			#  => (from below) base weight for this option should be 120 * (0.8/0.2) = 480
+			480 = {
+				
 				# Decreased by higher-tier education, by higher-tier title, and by having an important job
 				mult_modifier = {
 					factor = 0.5
@@ -174,23 +190,120 @@ character_event = {
 				mult_modifier = { factor = 0.8 has_at_least_3rd_tier_education = yes }
 				mult_modifier = { factor = 0.7 has_at_least_top_tier_education = yes }
 				mult_modifier = { factor = 0.5 maxed_education                 = yes }
-			}
-			20 = {
-				# Attempts to join a society
-				# 5x chance of joining an exclusive (usually racial) society
-				random_list = {
+				
+				# Decreased by being a landed ruler (higher tier is better)
+				mult_modifier = { factor = 0.9 is_landed = yes higher_real_tier_than = BARON }
+				mult_modifier = { factor = 0.9 is_landed = yes higher_real_tier_than = COUNT }
+				mult_modifier = { factor = 0.9 is_landed = yes higher_real_tier_than = DUKE  }
+				mult_modifier = { factor = 0.9 is_landed = yes higher_real_tier_than = KING  }
+				
+				# Decreased by having a landed close relative of higher tier (higher tier is better)
+				mult_modifier = { factor = 0.9 any_close_relative = { is_landed = yes                               OR = { ROOT = { is_landed = no} higher_real_tier_than = ROOT } } }
+				mult_modifier = { factor = 0.9 any_close_relative = { is_landed = yes higher_real_tier_than = BARON OR = { ROOT = { is_landed = no} higher_real_tier_than = ROOT } } }
+				mult_modifier = { factor = 0.9 any_close_relative = { is_landed = yes higher_real_tier_than = COUNT OR = { ROOT = { is_landed = no} higher_real_tier_than = ROOT } } }
+				mult_modifier = { factor = 0.9 any_close_relative = { is_landed = yes higher_real_tier_than = DUKE  OR = { ROOT = { is_landed = no} higher_real_tier_than = ROOT } } }
+				mult_modifier = { factor = 0.9 any_close_relative = { is_landed = yes higher_real_tier_than = KING  OR = { ROOT = { is_landed = no} higher_real_tier_than = ROOT } } }
+				
+				# Decrease by being heir to a higher-tier title
+				mult_modifier = { factor = 0.9 is_landed = no                    any_heir_title = { always = yes                  } }
+				mult_modifier = { factor = 0.9 is_landed = yes real_tier = BARON any_heir_title = { higher_real_tier_than = BARON } }
+				mult_modifier = { factor = 0.9 is_landed = yes real_tier = BARON any_heir_title = { higher_real_tier_than = COUNT } }
+				mult_modifier = { factor = 0.9 is_landed = yes real_tier = BARON any_heir_title = { higher_real_tier_than = DUKE  } }
+				mult_modifier = { factor = 0.9 is_landed = yes real_tier = BARON any_heir_title = { higher_real_tier_than = KING  } }
+				mult_modifier = { factor = 0.9 is_landed = yes real_tier = COUNT any_heir_title = { higher_real_tier_than = COUNT } }
+				mult_modifier = { factor = 0.9 is_landed = yes real_tier = COUNT any_heir_title = { higher_real_tier_than = DUKE  } }
+				mult_modifier = { factor = 0.9 is_landed = yes real_tier = COUNT any_heir_title = { higher_real_tier_than = KING  } }
+				mult_modifier = { factor = 0.9 is_landed = yes real_tier = DUKE  any_heir_title = { higher_real_tier_than = DUKE  } }
+				mult_modifier = { factor = 0.9 is_landed = yes real_tier = DUKE  any_heir_title = { higher_real_tier_than = KING  } }
+				mult_modifier = { factor = 0.9 is_landed = yes real_tier = KING  any_heir_title = { higher_real_tier_than = KING  } }
+				
+				# Rebase if ineligible for *any* exclusive society
+				mult_modifier = {
 					
-					# Exclusive societies
-					#  --- 5x chance of joining, compared with open societies
+					# Reduce base factor from 480 to 80
+					#  --- Expected base weight from open societies is 20
+					#  --- Want this option to have 80% of total base weight
+					#  --- (x/(x+20)) = 0.8 => x = 80
+					#  --- 480 * y = x      => y = 1/6 = 0.1666666667
 					
-					50 = {
-						secret_religious_cult = { ROOT = { join_society = PREV } }
-						mult_modifier = {
-							factor = 0
-							has_secret_religion = no
+					factor = 0.1666666667
+					
+					# Not eligible to autojoin secret religious society
+					OR = {
+						has_secret_religion = no
+						secret_religious_cult = {
+							OR = {
+								society_is_active = no
+								num_of_society_members <= 10
+								NOT = { any_society_member = { is_within_diplo_range = ROOT } }
+								ROOT = { NOT = { can_join_society = PREV } }
+							}
 						}
-						mult_modifier = {
-							factor = 0
+					}
+					
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = clan_mothers
+					}
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = ansei_guild_tamriel
+					}
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_dagoth_council
+					}
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_dres_council
+					}
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_hlaalu_council
+					}
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_indoril_council
+					}
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_redoran_council
+					}
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_sadras_council
+					}
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_sul_council
+					}
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_telvanni_council
+					}
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_veloth_council
+					}
+				}
+				
+				# Rebase if only eligible for *exactly one* exclusive society
+				mult_modifier = {
+					
+					# Reduce base factor from 480 to 280
+					#  --- Expected base weight from open societies is 20
+					#  --- Want this option to have 80% of total base weight
+					#  --- (x/(x+70)) = 0.8 => x = 280
+					#  --- 480 * y = x      => y = 0.5833333333
+					
+					factor = 0.5833333333 # Reduces 480 to 280
+					
+					calc_true_if = {
+						amount == 1
+						
+						# Is eligible to autojoin secret religious society
+						NOR = {
+							has_secret_religion = no
 							secret_religious_cult = {
 								OR = {
 									society_is_active = no
@@ -200,426 +313,1232 @@ character_event = {
 								}
 							}
 						}
-					}
-					50 = {
+						
 						# Audax Validator "." Ignore_NEXT
-						join_society = clan_mothers
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = clan_mothers
-							}
+						can_join_society = clan_mothers
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = ansei_guild_tamriel
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_dagoth_council
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_dres_council
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_hlaalu_council
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_indoril_council
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_redoran_council
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_sadras_council
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_sul_council
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_telvanni_council
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_veloth_council
+					}
+				}
+				
+			}
+			
+			# Attempts to join a society
+			# 12x exclusive (racial/cultural) societies, with 5x chance of joining
+			#  --- But most characters will only be eligible for at most 2
+			#  --- Note that "does not join" weight above is adjusted if a character is only eligible for 0 or 1.
+			# 18x open societies, with normal chance of joining
+			#  --- But most characters will only be eligible for at most 2 (1.4 education-based & maaaaybe 1 other)
+			# => approx (2*50 + 2*10) = 120 base weight
+			
+			# Exclusive societies
+			#  --- 5x chance of joining, compared with open societies
+			
+			50 = {
+				secret_religious_cult = { ROOT = { join_society = PREV } }
+				mult_modifier = {
+					factor = 0
+					has_secret_religion = no
+				}
+				mult_modifier = {
+					factor = 0
+					secret_religious_cult = {
+						OR = {
+							society_is_active = no
+							num_of_society_members <= 10
+							NOT = { any_society_member = { is_within_diplo_range = ROOT } }
+							ROOT = { NOT = { can_join_society = PREV } }
 						}
 					}
-					50 = {
-						# Audax Validator "." Ignore_NEXT
-						join_society = ansei_guild_tamriel
-						mult_modifier = { factor = 0 is_warrior = no } # Only AI warriors should join the Ansei
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = ansei_guild_tamriel
-							}
-						}
+				}
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						society = secret_religious_cult
+						rank = 1
 					}
-					50 = {
-						# Audax Validator "." Ignore_NEXT
-						join_society = house_dagoth_council
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = house_dagoth_council
-							}
-						}
-						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						society = secret_religious_cult
+						rank = 2
 					}
-					50 = {
-						# Audax Validator "." Ignore_NEXT
-						join_society = house_dres_council
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = house_dres_council
-							}
-						}
-						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						society = secret_religious_cult
+						rank = 3
 					}
-					50 = {
+				}
+			}
+			50 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = clan_mothers
+				mult_modifier = {
+					factor = 0
+					NOT = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = house_hlaalu_council
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = house_hlaalu_council
-							}
-						}
-						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+						can_join_society = clan_mothers
 					}
-					50 = {
+				}
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = house_indoril_council
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = house_indoril_council
-							}
-						}
-						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+						society = clan_mothers
+						rank = 1
 					}
-					50 = {
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = house_redoran_council
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = house_redoran_council
-							}
-						}
-						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+						society = clan_mothers
+						rank = 2
 					}
-					50 = {
+				}
+			}
+			50 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = ansei_guild_tamriel
+				mult_modifier = { factor = 0 is_warrior = no } # Only AI warriors should join the Ansei
+				mult_modifier = {
+					factor = 0
+					NOT = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = house_sadras_council
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = house_sadras_council
-							}
-						}
-						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+						can_join_society = ansei_guild_tamriel
 					}
-					50 = {
+				}
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = house_sul_council
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = house_sul_council
-							}
-						}
-						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+						society = ansei_guild_tamriel
+						rank = 1
 					}
-					50 = {
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = house_telvanni_council
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = house_telvanni_council
-							}
-						}
-						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+						society = ansei_guild_tamriel
+						rank = 2
 					}
-					50 = {
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = house_veloth_council
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = house_veloth_council
-							}
-						}
-						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
+						society = ansei_guild_tamriel
+						rank = 3
 					}
-					
-					# Open societies, with education preferences
-					#  --- Chance of joining reduced by 90% if education doesn't match
-					
-					10 = {
+				}
+			}
+			50 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = house_dagoth_council
+				mult_modifier = {
+					factor = 0
+					NOT = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = fighters_guild_tamriel
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = fighters_guild_tamriel
-							}
-						}
-						mult_modifier = { factor = 0.1 is_warrior = no }
+						can_join_society = house_dagoth_council
 					}
-					10 = {
+				}
+				# Non-rulers don't really care about joining
+				mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = fighters_guild_akavir
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = fighters_guild_akavir
-							}
-						}
-						mult_modifier = { factor = 0.1 is_warrior = no }
+						society = house_dagoth_council
+						rank = 1
 					}
-					10 = {
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = mages_guild_tamriel
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = mages_guild_tamriel
-							}
-						}
-						mult_modifier = { factor = 0.1 is_mage = no }
+						society = house_dagoth_council
+						rank = 2
 					}
-					10 = {
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = mages_guild_akavir
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = mages_guild_akavir
-							}
-						}
-						mult_modifier = { factor = 0.1 is_mage = no }
+						society = house_dagoth_council
+						rank = 3
 					}
-					10 = {
+				}
+			}
+			50 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = house_dres_council
+				mult_modifier = {
+					factor = 0
+					NOT = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = mercantile_guild_tamriel
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = mercantile_guild_tamriel
-							}
-						}
-						mult_modifier = { factor = 0.1 is_magistrate = no }
+						can_join_society = house_dres_council
 					}
-					10 = {
+				}
+				# Non-rulers don't really care about joining
+				mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = mercantile_guild_akavir
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = mercantile_guild_akavir
-							}
-						}
-						mult_modifier = { factor = 0.1 is_magistrate = no }
+						society = house_dres_council
+						rank = 1
 					}
-					10 = {
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = scenarist_guild_tamriel
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = scenarist_guild_tamriel
-							}
-						}
-						mult_modifier = { factor = 0.1 is_diplomat = no }
+						society = house_dres_council
+						rank = 2
 					}
-					10 = {
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = scenarist_guild_akavir
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = scenarist_guild_akavir
-							}
-						}
-						mult_modifier = { factor = 0.1 is_diplomat = no }
+						society = house_dres_council
+						rank = 3
 					}
-					10 = {
+				}
+			}
+			50 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = house_hlaalu_council
+				mult_modifier = {
+					factor = 0
+					NOT = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = companions_tamriel
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = companions_tamriel
-							}
-						}
-						mult_modifier = { # Can only autojoin if in Skyrim
-							factor = 0
-							NOT = {
-								location = {
-									# Audax Validator "." Ignore_NEXT
-									region = nirn_tamriel_skyrim
-								}
-							}
-						}
-						mult_modifier = { factor = 0.1 is_warrior = no }
+						can_join_society = house_hlaalu_council
 					}
-					10 = {
+				}
+				# Non-rulers don't really care about joining
+				mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = dark_brotherhood_tamriel
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = dark_brotherhood_tamriel
-							}
-						}
-						mult_modifier = { # Cannot join if Morag Tong is available
-							factor = 0
+						society = house_hlaalu_council
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_hlaalu_council
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_hlaalu_council
+						rank = 3
+					}
+				}
+			}
+			50 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = house_indoril_council
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_indoril_council
+					}
+				}
+				# Non-rulers don't really care about joining
+				mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_indoril_council
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_indoril_council
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_indoril_council
+						rank = 3
+					}
+				}
+			}
+			50 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = house_redoran_council
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_redoran_council
+					}
+				}
+				# Non-rulers don't really care about joining
+				mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_redoran_council
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_redoran_council
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_redoran_council
+						rank = 3
+					}
+				}
+			}
+			50 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = house_sadras_council
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_sadras_council
+					}
+				}
+				# Non-rulers don't really care about joining
+				mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_sadras_council
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_sadras_council
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_sadras_council
+						rank = 3
+					}
+				}
+			}
+			50 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = house_sul_council
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_sul_council
+					}
+				}
+				# Non-rulers don't really care about joining
+				mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_sul_council
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_sul_council
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_sul_council
+						rank = 3
+					}
+				}
+			}
+			50 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = house_telvanni_council
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_telvanni_council
+					}
+				}
+				# Non-rulers don't really care about joining
+				mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_telvanni_council
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_telvanni_council
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_telvanni_council
+						rank = 3
+					}
+				}
+			}
+			50 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = house_veloth_council
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = house_veloth_council
+					}
+				}
+				# Non-rulers don't really care about joining
+				mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_veloth_council
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_veloth_council
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = house_veloth_council
+						rank = 3
+					}
+				}
+			}
+			
+			# Open societies, with education preferences
+			#  --- Chance of joining reduced by 90% if education doesn't match
+			
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = fighters_guild_tamriel
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = fighters_guild_tamriel
+					}
+				}
+				mult_modifier = { factor = 0.1 is_warrior = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = fighters_guild_tamriel
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = fighters_guild_tamriel
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = fighters_guild_tamriel
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = fighters_guild_akavir
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = fighters_guild_akavir
+					}
+				}
+				mult_modifier = { factor = 0.1 is_warrior = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = fighters_guild_akavir
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = fighters_guild_akavir
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = fighters_guild_akavir
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = mages_guild_tamriel
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = mages_guild_tamriel
+					}
+				}
+				mult_modifier = { factor = 0.1 is_mage = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mages_guild_tamriel
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mages_guild_tamriel
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mages_guild_tamriel
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = mages_guild_akavir
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = mages_guild_akavir
+					}
+				}
+				mult_modifier = { factor = 0.1 is_mage = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mages_guild_akavir
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mages_guild_akavir
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mages_guild_akavir
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = mercantile_guild_tamriel
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = mercantile_guild_tamriel
+					}
+				}
+				mult_modifier = { factor = 0.1 is_magistrate = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mercantile_guild_tamriel
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mercantile_guild_tamriel
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mercantile_guild_tamriel
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = mercantile_guild_akavir
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = mercantile_guild_akavir
+					}
+				}
+				mult_modifier = { factor = 0.1 is_magistrate = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mercantile_guild_akavir
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mercantile_guild_akavir
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = mercantile_guild_akavir
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = scenarist_guild_tamriel
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = scenarist_guild_tamriel
+					}
+				}
+				mult_modifier = { factor = 0.1 is_diplomat = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = scenarist_guild_tamriel
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = scenarist_guild_tamriel
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = scenarist_guild_tamriel
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = scenarist_guild_akavir
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = scenarist_guild_akavir
+					}
+				}
+				mult_modifier = { factor = 0.1 is_diplomat = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = scenarist_guild_akavir
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = scenarist_guild_akavir
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = scenarist_guild_akavir
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = companions_tamriel
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = companions_tamriel
+					}
+				}
+				mult_modifier = { # Can only autojoin if in Skyrim
+					factor = 0
+					NOT = {
+						location = {
 							# Audax Validator "." Ignore_NEXT
-							can_join_society = morag_tong_tamriel
+							region = nirn_tamriel_skyrim
 						}
-						mult_modifier = { factor = 0.1 is_agent = no }
 					}
-					10 = {
+				}
+				mult_modifier = { factor = 0.1 is_warrior = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = assassin_guild_akavir
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = assassin_guild_akavir
-							}
-						}
-						mult_modifier = { # Cannot join if Morag Tong is available
-							factor = 0
+						society = companions_tamriel
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = companions_tamriel
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = companions_tamriel
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = dark_brotherhood_tamriel
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = dark_brotherhood_tamriel
+					}
+				}
+				mult_modifier = { # Cannot join if Morag Tong is available
+					factor = 0
+					# Audax Validator "." Ignore_NEXT
+					can_join_society = morag_tong_tamriel
+				}
+				mult_modifier = { factor = 0.1 is_agent = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = dark_brotherhood_tamriel
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = dark_brotherhood_tamriel
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = dark_brotherhood_tamriel
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = assassin_guild_akavir
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = assassin_guild_akavir
+					}
+				}
+				mult_modifier = { # Cannot join if Morag Tong is available
+					factor = 0
+					# Audax Validator "." Ignore_NEXT
+					can_join_society = morag_tong_tamriel
+				}
+				mult_modifier = { factor = 0.1 is_agent = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = assassin_guild_akavir
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = assassin_guild_akavir
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = assassin_guild_akavir
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = morag_tong_tamriel
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = morag_tong_tamriel
+					}
+				}
+				mult_modifier = { factor = 0.1 is_agent = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = morag_tong_tamriel
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = morag_tong_tamriel
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = morag_tong_tamriel
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = thieves_guild_tamriel
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = thieves_guild_tamriel
+					}
+				}
+				mult_modifier = { # Cannot join if Camonna Tong is available
+					factor = 0
+					# Audax Validator "." Ignore_NEXT
+					can_join_society = camonna_tong_tamriel
+				}
+				mult_modifier = { factor = 0.1 is_agent = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = thieves_guild_tamriel
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = thieves_guild_tamriel
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = thieves_guild_tamriel
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = thieves_guild_akavir
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = thieves_guild_akavir
+					}
+				}
+				mult_modifier = { # Cannot join if Camonna Tong is available
+					factor = 0
+					# Audax Validator "." Ignore_NEXT
+					can_join_society = camonna_tong_tamriel
+				}
+				mult_modifier = { factor = 0.1 is_agent = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = thieves_guild_akavir
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = thieves_guild_akavir
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = thieves_guild_akavir
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = camonna_tong_tamriel
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = camonna_tong_tamriel
+					}
+				}
+				mult_modifier = { factor = 0.1 is_agent = no }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = camonna_tong_tamriel
+						rank = 1
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = camonna_tong_tamriel
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = camonna_tong_tamriel
+						rank = 3
+					}
+				}
+			}
+			
+			# Open societies without education preferences
+			#  --- Unlikely to be chosen by characters with bottom- or top-tier educations
+			
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = greybeards_tamriel
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = greybeards_tamriel
+					}
+				}
+				mult_modifier = { # Can only autojoin if in Skyrim
+					factor = 0
+					NOT = {
+						location = {
 							# Audax Validator "." Ignore_NEXT
-							can_join_society = morag_tong_tamriel
+							region = nirn_tamriel_skyrim
 						}
-						mult_modifier = { factor = 0.1 is_agent = no }
 					}
-					10 = {
+				}
+				mult_modifier = { factor = 0.05 has_bottom_tier_education_trait_trigger = yes }
+				mult_modifier = { factor = 0.10 has_2nd_tier_education_trait_trigger    = yes }
+				mult_modifier = { factor = 0.25 has_3rd_tier_education_trait_trigger    = yes }
+				mult_modifier = { factor = 0.10 has_top_tier_education_trait_trigger    = yes }
+				mult_modifier = { factor = 0.05 maxed_education                         = yes }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = morag_tong_tamriel
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = morag_tong_tamriel
-							}
-						}
-						mult_modifier = { factor = 0.1 is_agent = no }
+						society = greybeards_tamriel
+						rank = 1
 					}
-					10 = {
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = thieves_guild_tamriel
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = thieves_guild_tamriel
-							}
-						}
-						mult_modifier = { # Cannot join if Camonna Tong is available
-							factor = 0
+						society = greybeards_tamriel
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = greybeards_tamriel
+						rank = 3
+					}
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = moth_priests_tamriel
+				mult_modifier = {
+					factor = 0
+					NOT = {
+						# Audax Validator "." Ignore_NEXT
+						can_join_society = moth_priests_tamriel
+					}
+				}
+				mult_modifier = { # Can only autojoin if in Skyrim
+					factor = 0
+					NOT = {
+						location = {
 							# Audax Validator "." Ignore_NEXT
-							can_join_society = camonna_tong_tamriel
+							region = nirn_tamriel_skyrim
 						}
-						mult_modifier = { factor = 0.1 is_agent = no }
 					}
-					10 = {
+				}
+				mult_modifier = { factor = 0.05 has_bottom_tier_education_trait_trigger = yes }
+				mult_modifier = { factor = 0.10 has_2nd_tier_education_trait_trigger    = yes }
+				mult_modifier = { factor = 0.25 has_3rd_tier_education_trait_trigger    = yes }
+				mult_modifier = { factor = 0.10 has_top_tier_education_trait_trigger    = yes }
+				mult_modifier = { factor = 0.05 maxed_education                         = yes }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = thieves_guild_akavir
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = thieves_guild_akavir
-							}
-						}
-						mult_modifier = { # Cannot join if Camonna Tong is available
-							factor = 0
-							# Audax Validator "." Ignore_NEXT
-							can_join_society = camonna_tong_tamriel
-						}
-						mult_modifier = { factor = 0.1 is_agent = no }
+						society = moth_priests_tamriel
+						rank = 1
 					}
-					10 = {
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = camonna_tong_tamriel
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = camonna_tong_tamriel
-							}
-						}
-						mult_modifier = { factor = 0.1 is_agent = no }
+						society = moth_priests_tamriel
+						rank = 2
 					}
-					
-					# Open societies without education preferences
-					#  --- Unlikely to be chosen by characters with bottom- or top-tier educations
-					
-					10 = {
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = greybeards_tamriel
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = greybeards_tamriel
-							}
-						}
-						mult_modifier = { # Can only autojoin if in Skyrim
-							factor = 0
-							NOT = {
-								location = {
-									# Audax Validator "." Ignore_NEXT
-									region = nirn_tamriel_skyrim
-								}
-							}
-						}
-						mult_modifier = { factor = 0.05 has_bottom_tier_education_trait_trigger = yes }
-						mult_modifier = { factor = 0.10 has_2nd_tier_education_trait_trigger    = yes }
-						mult_modifier = { factor = 0.25 has_3rd_tier_education_trait_trigger    = yes }
-						mult_modifier = { factor = 0.10 has_top_tier_education_trait_trigger    = yes }
-						mult_modifier = { factor = 0.05 maxed_education                         = yes }
+						society = moth_priests_tamriel
+						rank = 3
 					}
-					10 = {
+				}
+			}
+			10 = {
+				# Audax Validator "." Ignore_NEXT
+				join_society = elder_council
+				mult_modifier = {
+					factor = 0
+					NOT = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = moth_priests_tamriel
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = moth_priests_tamriel
-							}
-						}
-						mult_modifier = { # Can only autojoin if in Skyrim
-							factor = 0
-							NOT = {
-								location = {
-									# Audax Validator "." Ignore_NEXT
-									region = nirn_tamriel_skyrim
-								}
-							}
-						}
-						mult_modifier = { factor = 0.05 has_bottom_tier_education_trait_trigger = yes }
-						mult_modifier = { factor = 0.10 has_2nd_tier_education_trait_trigger    = yes }
-						mult_modifier = { factor = 0.25 has_3rd_tier_education_trait_trigger    = yes }
-						mult_modifier = { factor = 0.10 has_top_tier_education_trait_trigger    = yes }
-						mult_modifier = { factor = 0.05 maxed_education                         = yes }
+						can_join_society = elder_council
 					}
-					10 = {
+				}
+				mult_modifier = { factor = 0.05 has_bottom_tier_education_trait_trigger = yes }
+				mult_modifier = { factor = 0.10 has_2nd_tier_education_trait_trigger    = yes }
+				mult_modifier = { factor = 0.25 has_3rd_tier_education_trait_trigger    = yes }
+				mult_modifier = { factor = 0.10 has_top_tier_education_trait_trigger    = yes }
+				mult_modifier = { factor = 0.05 maxed_education                         = yes }
+				# Non-rulers don't really care about joining
+				mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } }
+				# Slow down if low ranks are full
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
 						# Audax Validator "." Ignore_NEXT
-						join_society = elder_council
-						mult_modifier = {
-							factor = 0
-							NOT = {
-								# Audax Validator "." Ignore_NEXT
-								can_join_society = elder_council
-							}
-						}
-						mult_modifier = { factor = 0.1 is_ruler = no is_heir = no any_close_relative = { is_ruler = no } } # Non-rulers don't really care about joining
-						mult_modifier = { factor = 0.05 has_bottom_tier_education_trait_trigger = yes }
-						mult_modifier = { factor = 0.10 has_2nd_tier_education_trait_trigger    = yes }
-						mult_modifier = { factor = 0.25 has_3rd_tier_education_trait_trigger    = yes }
-						mult_modifier = { factor = 0.10 has_top_tier_education_trait_trigger    = yes }
-						mult_modifier = { factor = 0.05 maxed_education                         = yes }
+						society = elder_council
+						rank = 1
 					}
-					
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = elder_council
+						rank = 2
+					}
+				}
+				mult_modifier = {
+					factor = 0.8
+					is_society_rank_full = {
+						# Audax Validator "." Ignore_NEXT
+						society = elder_council
+						rank = 3
+					}
 				}
 			}
 		}
+		
+		# Revert the character flag allowing AI to join societies regardless of rank 1 fullness
+		clr_character_flag = expd_pdxrptg_society_autojoin_in_progress
+		
 	}
 	
 	

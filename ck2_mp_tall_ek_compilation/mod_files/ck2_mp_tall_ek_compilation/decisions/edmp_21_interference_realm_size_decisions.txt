@@ -85,7 +85,7 @@ targetted_decisions = {
 				text = edmp_interference_grant_realm_size_10_temp_tt
 				add_character_modifier = {
 					name     = edmp_realm_size_extra_limit_stackable_temporary
-					duration = -1
+					years    = 3
 					inherit  = yes
 					stacking = yes
 				}
@@ -119,7 +119,7 @@ targetted_decisions = {
 					limit = { check_variable = { which = edmp_realm_size_extra_temp value < 10 } }
 					add_character_modifier = {
 						name     = edmp_realm_size_extra_limit_stackable_temporary
-						duration = -1
+						years    = 3
 						inherit  = yes
 						stacking = yes
 					}

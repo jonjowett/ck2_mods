@@ -1,0 +1,128 @@
+# Audax Validator EnableCommentMetadata
+
+upgrade_dragonstone_troops_dragons_1 = {
+	
+	picture = GFX_upgrade_icon_cave
+	
+	# Always available but only active if you follow dragon religion, or recently converted and dragons haven't yet finally left
+	potential = { }
+	allow  = {
+		FROMFROM = { has_wonder_upgrade = upgrade_dragonstone_troops_cultists }
+		expd_pdxrptg_this_characters_religion_can_summon_dragons = yes
+	}
+	active = {
+		OR = {
+			expd_pdxrptg_this_characters_religion_can_summon_dragons = yes
+			has_character_modifier = expd_pdxrptg_conversion_disband_dragons_timer
+		}
+	}
+	
+	# Cost higher than great walls heavy infantry upgrade
+	# Time same as     great walls heavy infantry upgrade
+	build_time = 60
+	gold_cost_flat = 1000
+	gold_cost_ticking = 1
+	
+	# 150 base LI (and nothing else) is reasonable for a single improvement
+	# Dragons compared with LI @ tech 4:
+	#  --- 3.5x morale
+	#  --- attack: 2.7x skirmish, 4.2x melee, 2.7x pursue => 3x attack
+	#  --- defence: 2.3x s/m/p => 2.3x defence
+	#  --- 3.5 * 3 * 2.3 = 24.15x better than LI
+	#  --- BUT zero improvement from tech (, and no special combat tactics, and an opportunity cost (limited improvement slots)
+	#  --- So: Assume dragons are 15x better than LI => 1 wonder improvement grants 10 dragons (ie. 1/80th of a legendary dragon)
+	local_modifier = {
+		# Audax Validator "." Ignore_NEXT
+		#dragon = 10
+		#upgrade_dragonstone_troops_dragons_1_effect = 1
+		upgrade_dragonstone_summon_dragons_piety_cost_modifier = -0.2
+	}
+	
+	owner_modifier = { } # None
+	flags = { }
+	
+}
+
+upgrade_dragonstone_troops_dragons_2 = {
+	# Different flavour, but same stats as above
+	# Only available if you have all other custom upgrades
+	
+	picture = GFX_upgrade_icon_dark_cave
+	
+	potential = { }
+	allow  = {
+		FROMFROM = {
+			has_wonder_upgrade = upgrade_dragonstone_troops_cultists
+			has_wonder_upgrade = upgrade_dragonstone_troops_guards
+			has_wonder_upgrade = upgrade_dragonstone_troops_dragons_1
+		}
+		expd_pdxrptg_this_characters_religion_can_summon_dragons = yes
+	}
+	active = {
+		OR = {
+			expd_pdxrptg_this_characters_religion_can_summon_dragons = yes
+			has_character_modifier = expd_pdxrptg_conversion_disband_dragons_timer
+		}
+	}
+	
+	build_time = 60
+	gold_cost_flat = 1000
+	gold_cost_ticking = 1
+	
+	local_modifier = {
+		# Audax Validator "." Ignore_NEXT
+		#dragon = 10
+		#upgrade_dragonstone_troops_dragons_2_effect = 1
+		upgrade_dragonstone_summon_dragons_piety_cost_modifier = -0.2
+	}
+	
+	owner_modifier = { } # None
+	flags = { }
+	
+}
+
+upgrade_dragonstone_troops_guards = {
+	# Essentially the same as the great walls heavy infantry improvement (but different flavour)
+	
+	picture = GFX_upgrade_icon_guard_helmet3
+	
+	potential = { }
+	allow  = { } # Always
+	active = { } # Always
+	
+	build_time = 60
+	gold_cost_flat = 500
+	gold_cost_ticking = 1
+	
+	local_modifier = {
+		heavy_infantry = 100
+		siege_defence = 0.05
+	}
+	
+	owner_modifier = { } # None
+	flags = { }
+	
+}
+
+upgrade_dragonstone_troops_cultists = {
+	# Essentially the same as Ragiol's LI improvements
+	
+	picture = GFX_upgrade_icon_altar
+	
+	potential = { }
+	allow  = { } # Always
+	active = { } # Always
+	
+	build_time = 24
+	gold_cost_flat = 400
+	gold_cost_ticking = 1
+	
+	local_modifier = {
+		light_infantry = 100
+		archers = 50
+	}
+	
+	owner_modifier = { } # None
+	flags = { }
+	
+}

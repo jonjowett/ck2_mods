@@ -1,9 +1,12 @@
+# Audax Validator EnableCommentMetadata
+
 # Triggers from base mod, cleaned-up and integrated into the wider ring of happiness functitonality
 
 add_stressed = {
 	if = {
 		limit = { expd_pdxrptg_this_character_has_artifact_equipped_ring_of_happiness = yes }
 		custom_tooltip = {
+			# Audax Validator "." Ignore_NEXT
 			text = ROH_PROTECTION_TT
 			expd_pdxrtpg_ring_of_happiness_made_me_happier = yes
 		}
@@ -16,6 +19,7 @@ add_depressed = {
 	if = {
 		limit = { expd_pdxrptg_this_character_has_artifact_equipped_ring_of_happiness = yes }
 		custom_tooltip = {
+			# Audax Validator "." Ignore_NEXT
 			text = ROH_PROTECTION_TT
 			expd_pdxrtpg_ring_of_happiness_made_me_happier = yes
 		}
@@ -27,6 +31,7 @@ add_depressed = {
 
 ring_happiness_effect = {
 	custom_tooltip = {
+		# Audax Validator "." Ignore_NEXT
 		text = ringhappinesseffect
 		hidden_tooltip = {
 			remove_trait = stressed

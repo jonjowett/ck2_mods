@@ -38,7 +38,6 @@ ansei_guild_tamriel = {
 			}
 		}
 		age = 16
-		controls_religion = no
 		expd_pdxrptg_this_character_satisfies_religiocultural_requirements_for_swordsingers = yes
 		martial = 8
 		OR = {
@@ -63,13 +62,14 @@ ansei_guild_tamriel = {
 		
 		expd_pdxrtpg_this_character_can_join_yokudan_societies = yes
 		
-		NOT = { trait = sload }
-		NOT = { trait = necromancer }
 		expd_pdxrptg_this_character_is_not_inaccessible = yes
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_necromancy_ansei_moth = yes
+		
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_monastic = yes
+		
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -88,10 +88,6 @@ ansei_guild_tamriel = {
 	potential = {
 		general_society_join_conditions = yes
 		age = 16
-		OR = {
-			is_not_undead = yes
-			is_unknown_vampire = yes
-		}
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
@@ -101,8 +97,9 @@ ansei_guild_tamriel = {
 			trait = clone
 		}
 		expd_pdxrptg_this_character_satisfies_religiocultural_requirements_for_swordsingers = yes
-		NOT = { trait = necromancer }
-		controls_religion = no
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_monastic = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_necromancy_ansei_moth = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_controlling_religion = yes
 	}
 	
 	#Initiate/Student of the Sword/Sword-Singer/Sword Master/Grand Master

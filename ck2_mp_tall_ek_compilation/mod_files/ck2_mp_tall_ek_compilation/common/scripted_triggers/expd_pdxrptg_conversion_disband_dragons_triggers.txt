@@ -7,7 +7,7 @@ expd_pdxrptg_this_character_has_summoned_dragons = {
 
 expd_pdxrptg_this_character_can_summon_dragons = {
 	OR = {
-		religion_scope = { expd_pdxrptg_this_religion_can_summon_dragons = yes }
+		expd_pdxrptg_this_characters_religion_can_summon_dragons = yes
 		AND = {
 			# Audax Validator "." Ignore_NEXT
 			trait = dragonborn
@@ -20,4 +20,11 @@ expd_pdxrptg_this_character_can_summon_dragons = {
 expd_pdxrptg_this_religion_can_summon_dragons = {
 	# Audax Validator "." Ignore_NEXT
 	religion_can_summon_dragons = yes
+}
+
+expd_pdxrptg_this_characters_religion_can_summon_dragons = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_characters_religion_can_summon_dragons_tt
+		religion_scope = { expd_pdxrptg_this_religion_can_summon_dragons = yes }
+	}
 }
