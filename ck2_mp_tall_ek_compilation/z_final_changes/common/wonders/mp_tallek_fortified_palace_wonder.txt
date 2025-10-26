@@ -2,8 +2,7 @@
 
 # Start with EK version of Royal Palace (wonder_palace)
 #  --- Add province requirement
-#  --- Remove 6 (of 7) palace improvements (all but royal custodian)
-#  --- Add 8 (of 10) wall improvements (troops + max-walls + hidden gates)
+#  --- Add 6 (of 10) wall improvements (troops + hidden gates + sea walls)
 
 wonder_fortified_palace = {
 	allow_coastal = yes
@@ -25,7 +24,7 @@ wonder_fortified_palace = {
 	}
 	available_upgrades = {
 		
-		# Unique wall improvements (granting troops) - 8/10 added
+		# Unique wall improvements (granting troops) - 6/10 added
 		upgrade_walls_sea
 		upgrade_studded_bastions
 		#upgrade_strategic_exclaves # Excluded because it doesn't actually upgrade any walls
@@ -33,19 +32,22 @@ wonder_fortified_palace = {
 		upgrade_hidden_gates
 		upgrade_gatehouse_forts
 		upgrade_killing_fields
-		upgrade_deep_defense_architecture
-		upgrade_artificial_islands
-		#upgrade_wall_walker
+		#upgrade_deep_defense_architecture
+		#upgrade_artificial_islands
+		#upgrade_wall_walker # Excluded because you already have royal custodian and castellan, no need for a 3rd
 		
-		# Unique palace improvements - 6/7 removed
+		# Unique palace improvements - all included because there is soft limit on slots
 		# UNIQUE:
-		#upgrade_throne_fancy
-		#upgrade_trap_door
-		#upgrade_royal_bedchamber
-		#upgrade_skull_throne
-		#upgrade_golden_throne
+		upgrade_throne_fancy
+		upgrade_trap_door
+		upgrade_royal_bedchamber
+		upgrade_skull_throne
+		upgrade_golden_throne
 		upgrade_royal_custodian
-		#upgrade_dueling_room
+		upgrade_dueling_room
+		
+		# Also include the torture chamber, by special request
+		upgrade_torture_chamber
 		
 		# OTHER:
 		upgrade_roads
@@ -90,6 +92,7 @@ wonder_fortified_palace = {
 		upgrade_investment_logging
 		# Audax Validator "." Ignore_NEXT
 		upgrade_investment_quarry
+		
 	}
 	stage = {
 		allow = {
