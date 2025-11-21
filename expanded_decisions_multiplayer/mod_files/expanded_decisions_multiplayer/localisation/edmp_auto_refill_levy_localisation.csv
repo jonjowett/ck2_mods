@@ -1,0 +1,42 @@
+# Template;§M(ED:MP)§!;;;;;;;;;;;;;x
+#
+# Decisions
+edmp_manual_refill_levy;(ED:MP) Refill all levies;;;;;;;;;;;;;x
+edmp_manual_refill_levy_desc;Choose this decision if you wish to manually refill all levies - either for all players or for all characters.;;;;;;;;;;;;;x
+edmp_auto_refill_levy_on_startup_enable;(ED:MP) Refill levies on startup: DISABLED. Enable?;;;;;;;;;;;;;x
+edmp_auto_refill_levy_on_startup_enable_desc;This mod can automatically prompt the host to refill all levies, 45 in-game days after starting a session. This feature is currently §Rdisabled§!, ie. this prompt will NOT be automatically shown. Click this decision to re-enable the prompt.\n\nNB: The manual decision (above) will always be available, regardless of the status of this feature.;;;;;;;;;;;;;x
+edmp_auto_refill_levy_on_startup_disable;(ED:MP) Refill levies on startup: ENABLED. Disable?;;;;;;;;;;;;;x
+edmp_auto_refill_levy_on_startup_disable_desc;This mod §Gwill currently§! automatically prompt the host to refill all levies, 45 in-game days after starting a session. Click this decision to disable the feature.\n\nNB: The manual decision (above) will always be available, regardless of the status of this feature.;;;;;;;;;;;;;x
+#
+# Decision tooltips
+edmp_manual_refill_levy_tt;An event will pop up, allowing you to choose who will receive the refill.;;;;;;;;;;;;;x
+edmp_auto_refill_levy_on_startup_enable_tt;The "Auto Refill Levies" prompt §GWILL§! be shown when sessions are started in the future;;;;;;;;;;;;;x
+edmp_auto_refill_levy_on_startup_disable_tt;The "Auto Refill Levies" prompt §RWILL NOT§! be shown when sessions are started in the future;;;;;;;;;;;;;x
+#
+# Event shown immediately on startup, for the admin
+edmp_auto_refill_levy_2000_title;(ED:MP) Auto Refill Levies;;;;;;;;;;;;;x
+edmp_auto_refill_levy_2000_desc;Due to issues with CK2 saves (see below for details), characters' levies may be significantly depleted on game load for no good reason. This is particularly noticeable and penalising in multiplayer.\nDETAILS: Some modifiers which affect max levy size are NOT stored in the save game file. So, on load, max levies are artificially low. This is recalc'd about 1 month later, but the quantity of available levies is NOT restored. IE: Affected characters require many years to refill their levies, for no good reason.\nWORKAROUND: Refill levies 1.5 months after session start.;;;;;;;;;;;;;x
+edmp_auto_refill_levy_2000_evtopt_ok;OK;;;;;;;;;;;;;x
+edmp_auto_refill_levy_2000_evtopt_ok_tt;You §GWILL§! be prompted to refill everyone's levies in 45 days' time;;;;;;;;;;;;;x
+edmp_auto_refill_levy_2000_evtopt_disable;Disable this feature;;;;;;;;;;;;;x
+edmp_auto_refill_levy_2000_evtopt_disable_tt;You §RWILL NOT§! be prompted to refill everyone's levies in 45 days' time;;;;;;;;;;;;;x
+#
+# Event for the admin, where they can choose to refill levies (or not)
+edmp_auto_refill_levy_3001_title;(ED:MP) Auto Refill Levies;;;;;;;;;;;;;x
+edmp_auto_refill_levy_3001_desc_post_startup;As described in the startup event, this event allows you to manually refill all characters'/players' levies, as a workaround for an issue with max levies in saved games.\nNB1: If a character has raised their levies (eg. war, raiding), then refilling them may give them an unfair advantage. But this is probably only material in a competitive PVP game.\nNB2: In case you don't want to refill everyone's levies, there is a targeted "interference" decision which allows you to refill the levies for one particular character.;;;;;;;;;;;;;x
+edmp_auto_refill_levy_3001_desc_manual;This event allows you to manually refill all characters'/players' levies.\nNB1: This is the same event which automatically runs on new session start (if you have the feature enabled).\nNB2: If a character has raised their levies (eg. war, raiding), then refilling them may give them an unfair advantage. But this is probably only material in a competitive PVP game.\nNB3: In case you don't want to refill everyone's levies, there is a targeted "interference" decision which allows you to refill the levies for one particular character.;;;;;;;;;;;;;x
+edmp_auto_refill_levy_3001_evtopt_refill_all_levies;Refill ALL levies (human and AI);;;;;;;;;;;;;x
+edmp_auto_refill_levy_3001_evtopt_refill_all_levies_tt;All levies for all characters are refilled;;;;;;;;;;;;;x
+edmp_auto_refill_levy_3001_evtopt_refill_player_levies;Refill player levies only;;;;;;;;;;;;;x
+edmp_auto_refill_levy_3001_evtopt_refill_player_levies_tt;All levies for all players (including absent players) are refilled;;;;;;;;;;;;;x
+edmp_auto_refill_levy_3001_evtopt_refill_player_levies_not_all_portraits_shown_tt;NB: Due to the limit on visible portraits in event options, not all affected characters' portraits are shown.;;;;;;;;;;;;;x
+edmp_auto_refill_levy_3001_evtopt_do_nothing;Do nothing;;;;;;;;;;;;;x
+edmp_auto_refill_levy_3001_evtopt_do_nothing_tt;Nothing will happen (no levies will be refilled);;;;;;;;;;;;;x
+edmp_auto_refill_levy_3001_evtopt_do_nothing_and_disable;Do nothing, and disable this feature;;;;;;;;;;;;;x
+#
+# Notification event for players
+edmp_auto_refill_levy_3100_title;(ED:MP) Levies Refilled;;;;;;;;;;;;;x
+edmp_auto_refill_levy_3100_desc_everyone;[From.GetBestName] (Username: [From.GetHumanName]) has refilled the levies for all characters in the game (both humans and AI)!;;;;;;;;;;;;;x
+edmp_auto_refill_levy_3100_desc_players;[From.GetBestName] (Username: [From.GetHumanName]) has refilled the levies for all human characters in the game (including any that are absent)!;;;;;;;;;;;;;x
+edmp_auto_refill_levy_3100_desc_fallback;ERROR! Something went wrong, and the scope of the refill could not be properly detected!\n[From.GetBestName] (Username: [From.GetHumanName]) has refilled some characters' levies! (Either all characters' or all human players'. In both cases, your levies should have been refilled.);;;;;;;;;;;;;x
+edmp_auto_refill_levy_3100_evtopt_ok;Excellent!;;;;;;;;;;;;;x
