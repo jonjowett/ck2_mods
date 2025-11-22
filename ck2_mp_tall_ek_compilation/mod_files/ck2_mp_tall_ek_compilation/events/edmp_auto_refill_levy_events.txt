@@ -1,0 +1,290 @@
+namespace = edmp_auto_refill_levy
+
+# on_startup:
+#  --- cancel any delayed events on province #1
+#  --- if in multiplayer & this option is NOT disabled in admin menu :
+#       --- pop up an event on the host, informing them that they will be given the opportunity to refill all levies in ~2 months
+#       --- schedule an event on province #1, in 2 months' time, which redirects to the host, so they can refill all levies
+character_event = {
+	
+	id = edmp_auto_refill_levy.1000
+	
+	hide_window = yes
+	is_triggered_only = yes
+	
+	ai = no
+	trigger = {
+		edmp_this_character_can_take_admin_actions = yes
+	}
+	
+	immediate = {
+		1 = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
+		if = {
+			limit = {
+				edmp_this_is_a_multiplayer_game = yes
+				NOT = { has_global_flag = edmp_auto_refill_levy_on_startup_is_disabled }
+			}
+			character_event = { id = edmp_auto_refill_levy.2000 }
+			1 = { province_event = { id = edmp_auto_refill_levy.3000 days = 45 } }
+		}
+	}
+	
+}
+
+
+
+# Explanation for the admin of what "auto refill levies" does in practice, and option to disable
+character_event = {
+	
+	id      = edmp_auto_refill_levy.2000
+	title   = edmp_auto_refill_levy_2000_title
+	desc    = edmp_auto_refill_levy_2000_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = edmp_auto_refill_levy_2000_evtopt_ok
+		custom_tooltip = { text = edmp_auto_refill_levy_2000_evtopt_ok_tt }
+	}
+	
+	option = {
+		name = edmp_auto_refill_levy_2000_evtopt_disable
+		custom_tooltip = {
+			text = edmp_auto_refill_levy_on_startup_disable_tt
+			set_global_flag = edmp_auto_refill_levy_on_startup_is_disabled
+			1 = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
+		}
+		custom_tooltip = { text = edmp_auto_refill_levy_2000_evtopt_disable_tt }
+	}
+	
+}
+
+
+
+# Event which actually causes the "refill all levies" effect
+province_event = {
+	id = edmp_auto_refill_levy.3000
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = { NOT = { has_global_flag = edmp_auto_refill_levy_on_startup_is_disabled } }
+			any_player = {
+				limit = { edmp_this_character_can_take_admin_actions = yes }
+				set_global_flag = edmp_auto_refill_levy_was_triggered_from_startup
+				character_event = { id = edmp_auto_refill_levy.3001 }
+			}
+		}
+		else = {
+			# Somehow, auto-refill has been disabled without clearing this scheduled event. Do nothing.
+		}
+	}
+}
+character_event = {
+	
+	id      = edmp_auto_refill_levy.3001
+	title   = edmp_auto_refill_levy_3001_title
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter
+	
+	is_triggered_only = yes
+	
+	desc = {
+		trigger = {         has_global_flag = edmp_auto_refill_levy_was_triggered_from_startup   }
+		text = edmp_auto_refill_levy_3001_desc_post_startup
+	}
+	desc = {
+		trigger = { NOT = { has_global_flag = edmp_auto_refill_levy_was_triggered_from_startup } }
+		text = edmp_auto_refill_levy_3001_desc_manual
+	}
+	
+	immediate = {
+		clr_global_flag = edmp_auto_refill_levy_occurred_everyone
+		clr_global_flag = edmp_auto_refill_levy_occurred_players
+	}
+	
+	option = {
+		name = edmp_auto_refill_levy_3001_evtopt_refill_all_levies
+		custom_tooltip = {
+			text = edmp_auto_refill_levy_3001_evtopt_refill_all_levies_tt
+			any_independent_ruler = {
+				any_demesne_title = {
+					limit = { lower_real_tier_than = DUKE }
+					refill_holding_levy = yes
+				}
+				any_realm_character = {
+					limit = { is_ruler = yes }
+					any_demesne_title = {
+						limit = { lower_real_tier_than = DUKE }
+						refill_holding_levy = yes
+					}
+				}
+			}
+			# any_independent_ruler always excludes ROOT.
+			# So, if ROOT is independent, then we ALSO need to do the same thing for them.
+			if = {
+				limit = { ROOT = { independent = yes } }
+				ROOT = {
+					any_demesne_title = {
+						limit = { lower_real_tier_than = DUKE }
+						refill_holding_levy = yes
+					}
+					any_realm_character = {
+						limit = { is_ruler = yes }
+						any_demesne_title = {
+							limit = { lower_real_tier_than = DUKE }
+							refill_holding_levy = yes
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = { edmp_this_is_a_multiplayer_game = yes }
+			custom_tooltip = {
+				text = edmp_interference_other_players_notified_tt
+				set_global_flag = edmp_auto_refill_levy_occurred_everyone
+				any_player = {
+					limit = {
+						OR = {
+							NOT = { character = PREV }
+							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+						}
+					}
+					character_event = { id = edmp_auto_refill_levy.3100 }
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = edmp_auto_refill_levy_3001_evtopt_refill_player_levies
+		show_portrait = ROOT # Otherwise, ROOT's portrait won't be shown
+		custom_tooltip = {
+			text = edmp_auto_refill_levy_3001_evtopt_refill_player_levies_tt
+			any_playable_ruler = {
+				limit = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+				any_demesne_title = {
+					limit = { lower_real_tier_than = DUKE }
+					refill_holding_levy = yes
+				}
+			}
+			# any_playable_ruler always excludes ROOT, and they are playable by definition (because they are a human).
+			# So, we ALSO need to do the same thing for ROOT.
+			ROOT = {
+				any_demesne_title = {
+					limit = { lower_real_tier_than = DUKE }
+					refill_holding_levy = yes
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_playable_ruler = {
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					count = 9
+				}
+			}
+			custom_tooltip = { text = edmp_auto_refill_levy_3001_evtopt_refill_player_levies_not_all_portraits_shown_tt }
+		}
+		if = {
+			limit = { edmp_this_is_a_multiplayer_game = yes }
+			custom_tooltip = {
+				text = edmp_interference_other_players_notified_tt
+				set_global_flag = edmp_auto_refill_levy_occurred_players
+				any_player = {
+					limit = {
+						OR = {
+							NOT = { character = PREV }
+							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+						}
+					}
+					character_event = { id = edmp_auto_refill_levy.3100 }
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = edmp_auto_refill_levy_3001_evtopt_do_nothing
+		custom_tooltip = { text = edmp_auto_refill_levy_3001_evtopt_do_nothing_tt }
+	}
+	
+	# If this event was triggered via event chain on startup, give the admin another option to disable it.
+	option = {
+		name = edmp_auto_refill_levy_3001_evtopt_do_nothing_and_disable
+		trigger = {
+			has_global_flag = edmp_auto_refill_levy_was_triggered_from_startup
+			NOT = { has_global_flag = edmp_auto_refill_levy_on_startup_is_disabled }
+		}
+		custom_tooltip = { text = edmp_auto_refill_levy_3001_evtopt_do_nothing_tt }
+		custom_tooltip = {
+			text = edmp_auto_refill_levy_on_startup_disable_tt
+			set_global_flag = edmp_auto_refill_levy_on_startup_is_disabled
+			1 = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
+		}
+	}
+	
+	after = {
+		hidden_tooltip = { clr_global_flag = edmp_auto_refill_levy_was_triggered_from_startup }
+	}
+	
+}
+
+
+
+# Notification for players that levies have been refilled (either for all characters or for all players)
+character_event = {
+	
+	id      = edmp_auto_refill_levy.3100
+	title   = edmp_auto_refill_levy_3100_title
+	picture = GFX_evt_camaraderie
+	
+	is_triggered_only = yes
+	
+	desc = {
+		trigger = {
+			        has_global_flag = edmp_auto_refill_levy_occurred_everyone
+			NOT = { has_global_flag = edmp_auto_refill_levy_occurred_players  }
+		}
+		text = edmp_auto_refill_levy_3100_desc_everyone
+	}
+	
+	desc = {
+		trigger = {
+			NOT = { has_global_flag = edmp_auto_refill_levy_occurred_everyone }
+			        has_global_flag = edmp_auto_refill_levy_occurred_players
+		}
+		text = edmp_auto_refill_levy_3100_desc_players
+	}
+	
+	desc = {
+		trigger = {
+			NOR = {
+				AND = {
+					        has_global_flag = edmp_auto_refill_levy_occurred_everyone
+					NOT = { has_global_flag = edmp_auto_refill_levy_occurred_players  }
+				}
+				AND = {
+					NOT = { has_global_flag = edmp_auto_refill_levy_occurred_everyone }
+					        has_global_flag = edmp_auto_refill_levy_occurred_players
+				}
+			}
+		}
+		text = edmp_auto_refill_levy_3100_desc_fallback
+	}
+	
+	option = {
+		name = edmp_auto_refill_levy_3100_evtopt_ok
+	}
+	
+	after = {
+		hidden_tooltip = {
+			clr_global_flag = edmp_auto_refill_levy_occurred_everyone
+			clr_global_flag = edmp_auto_refill_levy_occurred_players
+		}
+	}
+	
+}

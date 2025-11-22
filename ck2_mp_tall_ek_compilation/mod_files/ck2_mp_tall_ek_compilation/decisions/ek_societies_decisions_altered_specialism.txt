@@ -1,0 +1,85 @@
+# Audax Validator EnableCommentMetadata
+
+# The ONLY change is to delete the "not known undead" requirement for these decisions, so we can safely ignore ALL errors arising from this file.
+# Audax Validator "!" Ignore_NEXT
+
+society_decisions = {
+	
+	study_specialization = {
+		is_high_prio = yes #There's really no reason a person who could be studying a specialization shouldn't be studying a specialization.
+		ai_check_interval = 12
+		
+		potential = {
+			is_in_society_allows_specialisation = yes
+			has_maxed_specializations = no
+			is_indisposed = no
+			block_general_event_trigger = no
+			OR = {
+				has_character_flag = society_open
+				ai = yes
+			}
+			NOT = { has_character_flag = soul_sold }
+			NOT = { has_character_flag = guild_specialization_ongoing }
+			NOT = { has_character_modifier = denied_specialization_timer }
+			# MOD EDIT - "Not known undead" requirement removed (you'll be kicked out if you're undead and don't meet the necessary stat criteria)
+		}
+		effect = {
+			set_character_flag = guild_specialization_ongoing
+			if = {
+				limit = { ai = no }
+				character_event = { id = eksocieties.50 }
+			}
+			if = {
+				limit = { ai = yes }
+				character_event = { id = eksocieties.55 }
+			}
+		}
+	}
+	
+	cancel_specialization = {
+		ai_check_interval = 6000
+		
+		potential = {
+			ai = no
+			OR = {
+				society_member_of = fighters_guild_tamriel
+				society_member_of = fighters_guild_akavir
+				# society_member_of = fighters_guild_atmora
+				society_member_of = companions_tamriel
+				society_member_of = ansei_guild_tamriel
+				society_member_of = mages_guild_tamriel
+				society_member_of = mages_guild_akavir
+				society_member_of = mercantile_guild_tamriel
+				society_member_of = mercantile_guild_akavir
+				society_member_of = scenarist_guild_tamriel
+				society_member_of = scenarist_guild_akavir
+				society_member_of = thieves_guild_tamriel
+				society_member_of = camonna_tong_tamriel
+				society_member_of = dark_brotherhood_tamriel
+				society_member_of = morag_tong_tamriel
+				society_member_of = greybeards_tamriel
+				society_member_of = moth_priests_tamriel
+				society_member_of = house_dres_council
+				society_member_of = house_hlaalu_council
+				society_member_of = house_indoril_council
+				society_member_of = house_redoran_council
+				society_member_of = house_telvanni_council
+				society_member_of = house_sadras_council
+				society_member_of = house_sul_council
+				society_member_of = house_veloth_council
+				society_member_of = house_dagoth_council
+				society_member_of = elder_council
+			}
+			has_character_flag = guild_specialization_ongoing
+			is_indisposed = no
+			block_general_event_trigger = no
+			has_character_flag = society_open
+			NOT = { has_character_flag = soul_sold }
+			# MOD EDIT - "Not known undead" requirement removed (you'll be kicked out if you're undead and don't meet the necessary stat criteria)
+		}
+		effect = {
+			character_event = { id = eksocieties.70 }
+		}
+	}
+	
+}

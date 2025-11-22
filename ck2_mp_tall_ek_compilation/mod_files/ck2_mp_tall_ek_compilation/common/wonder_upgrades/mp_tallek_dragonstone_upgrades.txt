@@ -4,18 +4,12 @@ upgrade_dragonstone_troops_dragons_1 = {
 	
 	picture = GFX_upgrade_icon_cave
 	
-	# Always available but only active if you follow dragon religion, or recently converted and dragons haven't yet finally left
 	potential = { }
 	allow  = {
 		FROMFROM = { has_wonder_upgrade = upgrade_dragonstone_troops_cultists }
 		expd_pdxrptg_this_characters_religion_can_summon_dragons = yes
 	}
-	active = {
-		OR = {
-			expd_pdxrptg_this_characters_religion_can_summon_dragons = yes
-			has_character_modifier = expd_pdxrptg_conversion_disband_dragons_timer
-		}
-	}
+	active = { } # Always (since it has no effect unless the owner follows a dragon religion)
 	
 	# Cost higher than great walls heavy infantry upgrade
 	# Time same as     great walls heavy infantry upgrade
@@ -23,18 +17,11 @@ upgrade_dragonstone_troops_dragons_1 = {
 	gold_cost_flat = 1000
 	gold_cost_ticking = 1
 	
-	# 150 base LI (and nothing else) is reasonable for a single improvement
-	# Dragons compared with LI @ tech 4:
-	#  --- 3.5x morale
-	#  --- attack: 2.7x skirmish, 4.2x melee, 2.7x pursue => 3x attack
-	#  --- defence: 2.3x s/m/p => 2.3x defence
-	#  --- 3.5 * 3 * 2.3 = 24.15x better than LI
-	#  --- BUT zero improvement from tech (, and no special combat tactics, and an opportunity cost (limited improvement slots)
-	#  --- So: Assume dragons are 15x better than LI => 1 wonder improvement grants 10 dragons (ie. 1/80th of a legendary dragon)
 	local_modifier = {
+		# Custom modifier, which does nothing except display "-20%".
+		# (The actual cost adjustment is in the decisions file.)
+		# Unfortunately, the Validator erroneously thinks this is an error...
 		# Audax Validator "." Ignore_NEXT
-		#dragon = 10
-		#upgrade_dragonstone_troops_dragons_1_effect = 1
 		upgrade_dragonstone_summon_dragons_piety_cost_modifier = -0.2
 	}
 	
@@ -45,7 +32,6 @@ upgrade_dragonstone_troops_dragons_1 = {
 
 upgrade_dragonstone_troops_dragons_2 = {
 	# Different flavour, but same stats as above
-	# Only available if you have all other custom upgrades
 	
 	picture = GFX_upgrade_icon_dark_cave
 	
@@ -58,21 +44,15 @@ upgrade_dragonstone_troops_dragons_2 = {
 		}
 		expd_pdxrptg_this_characters_religion_can_summon_dragons = yes
 	}
-	active = {
-		OR = {
-			expd_pdxrptg_this_characters_religion_can_summon_dragons = yes
-			has_character_modifier = expd_pdxrptg_conversion_disband_dragons_timer
-		}
-	}
+	active = { } # Always (since it has no effect unless the owner follows a dragon religion)
 	
 	build_time = 60
 	gold_cost_flat = 1000
 	gold_cost_ticking = 1
 	
 	local_modifier = {
+		# Unfortunately, the Validator erroneously thinks this is an error...
 		# Audax Validator "." Ignore_NEXT
-		#dragon = 10
-		#upgrade_dragonstone_troops_dragons_2_effect = 1
 		upgrade_dragonstone_summon_dragons_piety_cost_modifier = -0.2
 	}
 	

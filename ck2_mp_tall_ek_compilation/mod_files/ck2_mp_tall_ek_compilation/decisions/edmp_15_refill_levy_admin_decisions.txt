@@ -1,0 +1,51 @@
+decisions = {
+	
+	edmp_manual_refill_levy = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_manual_refill_levy_tt
+				character_event = { id = edmp_auto_refill_levy.3001 }
+			}
+		}
+	}
+	
+	edmp_auto_refill_levy_on_startup_enable = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			has_character_flag = edmp_admin_submenu_is_open
+			has_global_flag = edmp_auto_refill_levy_on_startup_is_disabled
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_auto_refill_levy_on_startup_enable_tt
+				clr_global_flag = edmp_auto_refill_levy_on_startup_is_disabled
+			}
+		}
+	}
+	
+	edmp_auto_refill_levy_on_startup_disable = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			has_character_flag = edmp_admin_submenu_is_open
+			NOT = { has_global_flag = edmp_auto_refill_levy_on_startup_is_disabled }
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_auto_refill_levy_on_startup_disable_tt
+				set_global_flag = edmp_auto_refill_levy_on_startup_is_disabled
+				1 = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
+			}
+		}
+	}
+	
+}

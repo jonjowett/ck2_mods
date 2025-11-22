@@ -1,0 +1,70 @@
+detract_society_currency_titanic_effect = {
+	if = {
+		limit = { is_in_society = yes }
+		if = {
+			limit = { is_immortal = yes }
+			change_society_currency = -10000
+		}
+		else_if = {
+			limit = { is_long_lived = yes }
+			change_society_currency = -8000
+		}
+		else_if = {
+			limit = { is_long_lived = no }
+			change_society_currency = -4000
+		}
+	}
+}
+
+detract_society_currency_titanic_effect_scaling = {
+	if = {
+		limit = { is_in_society = yes }
+		if = {
+			limit = { is_immortal = yes }
+			change_society_currency = { value = -10000 scaled_by_influence = yes }
+		}
+		else_if = {
+			limit = { is_long_lived = yes }
+			change_society_currency = { value = -8000 scaled_by_influence = yes }
+		}
+		else_if = {
+			limit = { is_long_lived = no }
+			change_society_currency = { value = -4000 scaled_by_influence = yes }
+		}
+	}
+}
+detract_society_currency_colossal_effect = {
+	if = {
+		limit = { is_in_society = yes }
+		if = {
+			limit = { is_immortal = yes }
+			change_society_currency = -20000
+		}
+		else_if = {
+			limit = { is_long_lived = yes }
+			change_society_currency = -16000
+		}
+		else_if = {
+			limit = { is_long_lived = no }
+			change_society_currency = -8000
+		}
+	}
+}
+
+detract_society_currency_colossal_effect_scaling = {
+	if = {
+		limit = { is_in_society = yes }
+		if = {
+			limit = { is_immortal = yes }
+			change_society_currency = { value = -20000 scaled_by_influence = yes }
+		}
+		else_if = {
+			limit = { is_long_lived = yes }
+			change_society_currency = { value = -16000 scaled_by_influence = yes }
+		}
+		else_if = {
+			limit = { is_long_lived = no }
+			change_society_currency = { value = -8000 scaled_by_influence = yes }
+		}
+	}
+}

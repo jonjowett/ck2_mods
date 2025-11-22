@@ -20,39 +20,90 @@ society_decisions = {
 			
 			# Audax Validator "." Ignore_NEXT
 			has_character_modifier = society_advancements_purchased
-			OR = {
-				AND = {
-					NOT = { has_character_modifier = society_advancements_purchased_2 }
-					NOT = { has_character_modifier = society_advancements_purchased_3 }
-					# Audax Validator "." Ignore_NEXT
-					has_society_currency_large_trigger_scaling = yes
+			trigger_if = {
+				limit = {
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+					has_character_modifier = society_advancements_purchased_4
+					has_character_modifier = society_advancements_purchased_5
 				}
-				AND = {
-					        has_character_modifier = society_advancements_purchased_2
-					NOT = { has_character_modifier = society_advancements_purchased_3 }
-					# Audax Validator "." Ignore_NEXT
-					has_society_currency_gigantic_trigger_scaling = yes
-				}
-				AND = {
-					NOT = { has_character_modifier = society_advancements_purchased_2 }
-					        has_character_modifier = society_advancements_purchased_3
-					# Audax Validator "." Ignore_NEXT
-					has_society_currency_gigantic_trigger_scaling = yes
+				# Show the user why this decision is not possible
+				NAND = {
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+					has_character_modifier = society_advancements_purchased_4
+					has_character_modifier = society_advancements_purchased_5
 				}
 			}
-			
+			trigger_else_if = {
+				limit = {
+					calc_true_if = {
+						amount >= 3
+						has_character_modifier = society_advancements_purchased_2
+						has_character_modifier = society_advancements_purchased_3
+						has_character_modifier = society_advancements_purchased_4
+						has_character_modifier = society_advancements_purchased_5
+					}
+				}
+				has_society_currency_colossal_trigger_scaling = yes
+			}
+			trigger_else_if = {
+				limit = {
+					calc_true_if = {
+						amount >= 2
+						has_character_modifier = society_advancements_purchased_2
+						has_character_modifier = society_advancements_purchased_3
+						has_character_modifier = society_advancements_purchased_4
+						has_character_modifier = society_advancements_purchased_5
+					}
+				}
+				has_society_currency_titanic_trigger_scaling = yes
+			}
+			trigger_else_if = {
+				limit = {
+					calc_true_if = {
+						amount >= 1
+						has_character_modifier = society_advancements_purchased_2
+						has_character_modifier = society_advancements_purchased_3
+						has_character_modifier = society_advancements_purchased_4
+						has_character_modifier = society_advancements_purchased_5
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				has_society_currency_gigantic_trigger_scaling = yes
+			}
+			trigger_else = {
+				# Has NONE of the extra modifiers
+				# Audax Validator "." Ignore_NEXT
+				has_society_currency_large_trigger_scaling = yes
+			}
 		}
 		effect = {
 			if = {
 				limit = {
 					# Audax Validator "." Ignore_NEXT
-					        has_character_modifier = society_advancements_purchased
-					NOT = { has_character_modifier = society_advancements_purchased_2 }
-					NOT = { has_character_modifier = society_advancements_purchased_3 }
+					has_character_modifier = society_advancements_purchased
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+					has_character_modifier = society_advancements_purchased_4
+					has_character_modifier = society_advancements_purchased_5
+				}
+				custom_tooltip = { text = expd_pdxrptg_societies_purchase_more_techpoints_impossible_already_bought_5_tt }
+			}
+			else_if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_character_modifier = society_advancements_purchased
+					calc_true_if = {
+						amount >= 3
+						has_character_modifier = society_advancements_purchased_2
+						has_character_modifier = society_advancements_purchased_3
+						has_character_modifier = society_advancements_purchased_4
+						has_character_modifier = society_advancements_purchased_5
+					}
 				}
 				tooltip = {
-					# Audax Validator "." Ignore_NEXT
-					detract_society_currency_large_effect_scaling = yes
+					detract_society_currency_colossal_effect_scaling = yes
 				}
 				custom_tooltip = {
 					# Audax Validator "." Ignore_NEXT
@@ -63,19 +114,36 @@ society_decisions = {
 			}
 			else_if = {
 				limit = {
-					OR = {
-						AND = {
-							# Audax Validator "." Ignore_NEXT
-							        has_character_modifier = society_advancements_purchased
-							        has_character_modifier = society_advancements_purchased_2
-							NOT = { has_character_modifier = society_advancements_purchased_3 }
-						}
-						AND = {
-							# Audax Validator "." Ignore_NEXT
-							        has_character_modifier = society_advancements_purchased
-							NOT = { has_character_modifier = society_advancements_purchased_2 }
-							        has_character_modifier = society_advancements_purchased_3
-						}
+					# Audax Validator "." Ignore_NEXT
+					has_character_modifier = society_advancements_purchased
+					calc_true_if = {
+						amount >= 2
+						has_character_modifier = society_advancements_purchased_2
+						has_character_modifier = society_advancements_purchased_3
+						has_character_modifier = society_advancements_purchased_4
+						has_character_modifier = society_advancements_purchased_5
+					}
+				}
+				tooltip = {
+					detract_society_currency_titanic_effect_scaling = yes
+				}
+				custom_tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					text = reimbursed_if_cancelled
+					set_character_flag = exchanging_influence_for_tech
+					character_event = { id = eksocieties.250 }
+				}
+			}
+			else_if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_character_modifier = society_advancements_purchased
+					calc_true_if = {
+						amount >= 1
+						has_character_modifier = society_advancements_purchased_2
+						has_character_modifier = society_advancements_purchased_3
+						has_character_modifier = society_advancements_purchased_4
+						has_character_modifier = society_advancements_purchased_5
 					}
 				}
 				tooltip = {
@@ -93,13 +161,26 @@ society_decisions = {
 				limit = {
 					# Audax Validator "." Ignore_NEXT
 					has_character_modifier = society_advancements_purchased
-					has_character_modifier = society_advancements_purchased_2
-					has_character_modifier = society_advancements_purchased_3
+					NOR = {
+						has_character_modifier = society_advancements_purchased_2
+						has_character_modifier = society_advancements_purchased_3
+						has_character_modifier = society_advancements_purchased_4
+						has_character_modifier = society_advancements_purchased_5
+					}
 				}
-				custom_tooltip = { text = expd_pdxrptg_societies_purchase_more_techpoints_impossible_already_bought_3_tt }
+				tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					detract_society_currency_large_effect_scaling = yes
+				}
+				custom_tooltip = {
+					# Audax Validator "." Ignore_NEXT
+					text = reimbursed_if_cancelled
+					set_character_flag = exchanging_influence_for_tech
+					character_event = { id = eksocieties.250 }
+				}
 			}
 			else = {
-				# Haven't used the base mod's decision, so this is unavailable.
+				# Haven't used the base mod's decision, so this decision is unavailable.
 				# Show the effect that would happen if you took that decision.
 				tooltip = {
 					# Audax Validator "." Ignore_NEXT
@@ -111,7 +192,7 @@ society_decisions = {
 				}
 			}
 		}
-
+		
 		ai_will_do = {
 			factor = 1
 			
@@ -127,6 +208,8 @@ society_decisions = {
 				NOR = {
 					has_character_modifier = society_advancements_purchased_2
 					has_character_modifier = society_advancements_purchased_3
+					has_character_modifier = society_advancements_purchased_4
+					has_character_modifier = society_advancements_purchased_5
 				}
 				society_currency >= 2500
 			}
@@ -137,6 +220,8 @@ society_decisions = {
 				NOR = {
 					has_character_modifier = society_advancements_purchased_2
 					has_character_modifier = society_advancements_purchased_3
+					has_character_modifier = society_advancements_purchased_4
+					has_character_modifier = society_advancements_purchased_5
 				}
 				society_currency >= 3000
 			}
@@ -146,6 +231,8 @@ society_decisions = {
 				NOR = {
 					has_character_modifier = society_advancements_purchased_2
 					has_character_modifier = society_advancements_purchased_3
+					has_character_modifier = society_advancements_purchased_4
+					has_character_modifier = society_advancements_purchased_5
 				}
 				society_currency >= 3500
 			}
@@ -155,13 +242,12 @@ society_decisions = {
 			modifier = {
 				factor = 10
 				is_long_lived = no
-				OR = {
+				calc_true_if = {
+					amount == 1
 					has_character_modifier = society_advancements_purchased_2
 					has_character_modifier = society_advancements_purchased_3
-				}
-				NAND = {
-					has_character_modifier = society_advancements_purchased_2
-					has_character_modifier = society_advancements_purchased_3
+					has_character_modifier = society_advancements_purchased_4
+					has_character_modifier = society_advancements_purchased_5
 				}
 				society_currency >= 4000
 			}
@@ -169,28 +255,38 @@ society_decisions = {
 				factor = 10
 				is_long_lived = yes
 				is_immortal = no
-				OR = {
+				calc_true_if = {
+					amount == 1
 					has_character_modifier = society_advancements_purchased_2
 					has_character_modifier = society_advancements_purchased_3
-				}
-				NAND = {
-					has_character_modifier = society_advancements_purchased_2
-					has_character_modifier = society_advancements_purchased_3
+					has_character_modifier = society_advancements_purchased_4
+					has_character_modifier = society_advancements_purchased_5
 				}
 				society_currency >= 6000
 			}
 			modifier = {
 				factor = 10
 				is_immortal = yes
-				OR = {
+				calc_true_if = {
+					amount == 1
 					has_character_modifier = society_advancements_purchased_2
 					has_character_modifier = society_advancements_purchased_3
-				}
-				NAND = {
-					has_character_modifier = society_advancements_purchased_2
-					has_character_modifier = society_advancements_purchased_3
+					has_character_modifier = society_advancements_purchased_4
+					has_character_modifier = society_advancements_purchased_5
 				}
 				society_currency >= 7000
+			}
+			
+			# Titanic/Colossal purchases: Never
+			modifier = {
+				factor = 0
+				calc_true_if = {
+					amount >= 2
+					has_character_modifier = society_advancements_purchased_2
+					has_character_modifier = society_advancements_purchased_3
+					has_character_modifier = society_advancements_purchased_4
+					has_character_modifier = society_advancements_purchased_5
+				}
 			}
 			
 		}
