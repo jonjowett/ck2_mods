@@ -4,7 +4,11 @@ decisions = {
 		potential = {
 			ai = no
 			multiplayer = no # Can only alter this setting in single-player
-			expd_pdxrptg_daedric_favour_is_permitted_by_game_rules = yes
+			expd_pdxrptg_daedric_favour_is_permitted_by_game_rules = no
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				has_submenu_open = yes
+			}
 		}
 		allow = { always = yes }
 		effect = {
@@ -16,7 +20,11 @@ decisions = {
 		potential = {
 			ai = no
 			multiplayer = no # Can only alter this setting in single-player
-			expd_pdxrptg_daedric_favour_is_permitted_by_game_rules = no
+			expd_pdxrptg_daedric_favour_is_permitted_by_game_rules = yes
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				has_submenu_open = yes
+			}
 		}
 		allow = { always = yes }
 		effect = {
