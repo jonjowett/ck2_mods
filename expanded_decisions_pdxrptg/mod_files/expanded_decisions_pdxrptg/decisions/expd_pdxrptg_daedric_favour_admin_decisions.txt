@@ -1,0 +1,26 @@
+decisions = {
+	expd_pdxrptg_daedric_favour_admin_enable = {
+		ai = no
+		potential = {
+			ai = no
+			multiplayer = no # Can only alter this setting in single-player
+			expd_pdxrptg_daedric_favour_is_permitted_by_game_rules = yes
+		}
+		allow = { always = yes }
+		effect = {
+			clr_global_flag = expd_pdxrptd_daedric_favour_disabled
+		}
+	}
+	expd_pdxrptg_daedric_favour_admin_disable = {
+		ai = no
+		potential = {
+			ai = no
+			multiplayer = no # Can only alter this setting in single-player
+			expd_pdxrptg_daedric_favour_is_permitted_by_game_rules = no
+		}
+		allow = { always = yes }
+		effect = {
+			set_global_flag = expd_pdxrptd_daedric_favour_disabled
+		}
+	}
+}
