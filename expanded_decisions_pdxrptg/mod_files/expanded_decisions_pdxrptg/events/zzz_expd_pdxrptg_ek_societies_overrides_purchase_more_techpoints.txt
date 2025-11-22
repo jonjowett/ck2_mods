@@ -244,54 +244,72 @@ character_event = {
 					# ED:PDXRPTG added
 					if = {
 						limit = {
-							NOR = {
+							calc_true_if = {
+								amount >= 3
 								has_character_modifier = society_advancements_purchased_2
 								has_character_modifier = society_advancements_purchased_3
+								has_character_modifier = society_advancements_purchased_4
+								has_character_modifier = society_advancements_purchased_5
 							}
 						}
-						add_character_modifier = {
-							name = society_advancements_purchased_2
-							duration = 3650
-						}
-						# Audax Validator "." Ignore_NEXT
-						detract_society_currency_large_effect_scaling = yes
+						detract_society_currency_colossal_effect_scaling = yes
 					}
-					else = {
-						if = {
-							limit = {
-								NOT = { has_character_modifier = society_advancements_purchased_2 }
-								        has_character_modifier = society_advancements_purchased_3
-							}
-							add_character_modifier = {
-								name = society_advancements_purchased_2
-								duration = 3650
-							}
-						}
-						else_if = {
-							limit = {
-								        has_character_modifier = society_advancements_purchased_2
-								NOT = { has_character_modifier = society_advancements_purchased_3 }
-							}
-							add_character_modifier = {
-								name = society_advancements_purchased_3
-								duration = 3650
+					else_if = {
+						limit = {
+							calc_true_if = {
+								amount >= 2
+								has_character_modifier = society_advancements_purchased_2
+								has_character_modifier = society_advancements_purchased_3
+								has_character_modifier = society_advancements_purchased_4
+								has_character_modifier = society_advancements_purchased_5
 							}
 						}
-						else = {
-							# Fail-safe
-							remove_character_modifier = society_advancements_purchased_2
-							remove_character_modifier = society_advancements_purchased_3
-							add_character_modifier = {
-								name = society_advancements_purchased_2
-								duration = 3650
-							}
-							add_character_modifier = {
-								name = society_advancements_purchased_3
-								duration = 3650
+						detract_society_currency_titanic_effect_scaling = yes
+					}
+					else_if = {
+						limit = {
+							calc_true_if = {
+								amount >= 1
+								has_character_modifier = society_advancements_purchased_2
+								has_character_modifier = society_advancements_purchased_3
+								has_character_modifier = society_advancements_purchased_4
+								has_character_modifier = society_advancements_purchased_5
 							}
 						}
 						# Audax Validator "." Ignore_NEXT
 						detract_society_currency_gigantic_effect_scaling = yes
+					}
+					else = {
+						# Audax Validator "." Ignore_NEXT
+						detract_society_currency_large_effect_scaling = yes
+					}
+					# Add an extra 10-year modifier, so the next purchase is more expensive
+					if = {
+						limit = { NOT = { has_character_modifier = society_advancements_purchased_2 } }
+						add_character_modifier = {          name = society_advancements_purchased_2 duration = 3650 }
+					}
+					else_if = {
+						limit = { NOT = { has_character_modifier = society_advancements_purchased_3 } }
+						add_character_modifier = {          name = society_advancements_purchased_3 duration = 3650 }
+					}
+					else_if = {
+						limit = { NOT = { has_character_modifier = society_advancements_purchased_4 } }
+						add_character_modifier = {          name = society_advancements_purchased_4 duration = 3650 }
+					}
+					else_if = {
+						limit = { NOT = { has_character_modifier = society_advancements_purchased_5 } }
+						add_character_modifier = {          name = society_advancements_purchased_5 duration = 3650 }
+					}
+					else = {
+						# Congratulations, you somehow managed to make this error out. Block everything for 10 years.
+						remove_character_modifier =                society_advancements_purchased_2
+						remove_character_modifier =                society_advancements_purchased_3
+						remove_character_modifier =                society_advancements_purchased_4
+						remove_character_modifier =                society_advancements_purchased_5
+						add_character_modifier = {          name = society_advancements_purchased_2 duration = 3650 }
+						add_character_modifier = {          name = society_advancements_purchased_3 duration = 3650 }
+						add_character_modifier = {          name = society_advancements_purchased_4 duration = 3650 }
+						add_character_modifier = {          name = society_advancements_purchased_5 duration = 3650 }
 					}
 				}
 			}

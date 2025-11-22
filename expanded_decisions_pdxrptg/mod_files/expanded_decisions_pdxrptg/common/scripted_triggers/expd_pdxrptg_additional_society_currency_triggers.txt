@@ -1,0 +1,82 @@
+# Audax Validator EnableCommentMetadata
+
+# Base mod:
+# Major    =   625 /   500 /   250
+# Large    =  1250 /  1000 /   500 (x2)
+# Gigantic =  5000 /  4000 /  2000 (x4) (?!)
+#
+# Added:
+# Titanic  = 10000 /  8000 /  4000 (x2)
+# Colossal = 20000 / 16000 /  8000 (x2)
+
+has_society_currency_titanic_trigger = {
+	trigger_if = {
+		limit = { is_immortal = yes }
+		society_currency >= 10000
+	}
+	trigger_else_if = {
+		limit = { is_long_lived = yes }
+		society_currency >= 8000
+	}
+	trigger_else_if = {
+		limit = { is_long_lived = no }
+		society_currency >= 4000
+	}
+}
+
+has_society_currency_titanic_trigger_scaling = {
+	trigger_if = {
+		limit = { is_immortal = yes }
+		# Validator doesn't know about the scaled_by_influence format
+		# Audax Validator "." Ignore_NEXT
+		society_currency = { value >= 10000 scaled_by_influence = yes }
+	}
+	trigger_else_if = {
+		limit = { is_long_lived = yes }
+		# Validator doesn't know about the scaled_by_influence format
+		# Audax Validator "." Ignore_NEXT
+		society_currency = { value >= 8000 scaled_by_influence = yes }
+	}
+	trigger_else_if = {
+		limit = { is_long_lived = no }
+		# Validator doesn't know about the scaled_by_influence format
+		# Audax Validator "." Ignore_NEXT
+		society_currency = { value >= 4000 scaled_by_influence = yes }
+	}
+}
+
+has_society_currency_colossal_trigger = {
+	trigger_if = {
+		limit = { is_immortal = yes }
+		society_currency >= 20000
+	}
+	trigger_else_if = {
+		limit = { is_long_lived = yes }
+		society_currency >= 16000
+	}
+	trigger_else_if = {
+		limit = { is_long_lived = no }
+		society_currency >= 8000
+	}
+}
+
+has_society_currency_colossal_trigger_scaling = {
+	trigger_if = {
+		limit = { is_immortal = yes }
+		# Validator doesn't know about the scaled_by_influence format
+		# Audax Validator "." Ignore_NEXT
+		society_currency = { value >= 20000 scaled_by_influence = yes }
+	}
+	trigger_else_if = {
+		limit = { is_long_lived = yes }
+		# Validator doesn't know about the scaled_by_influence format
+		# Audax Validator "." Ignore_NEXT
+		society_currency = { value >= 16000 scaled_by_influence = yes }
+	}
+	trigger_else_if = {
+		limit = { is_long_lived = no }
+		# Validator doesn't know about the scaled_by_influence format
+		# Audax Validator "." Ignore_NEXT
+		society_currency = { value >= 8000 scaled_by_influence = yes }
+	}
+}
