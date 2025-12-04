@@ -1,0 +1,40 @@
+decisions = {
+	expd_pdxrptg_daedric_no_mount_pet_farming_enable = {
+		ai = no
+		potential = {
+			ai = no
+			multiplayer = no # Can only alter this setting in single-player
+			NOT = { has_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming }
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				has_submenu_open = yes
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_daedric_no_mount_pet_farming_enable_tt
+				set_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming
+			}
+		}
+	}
+	expd_pdxrptg_daedric_no_mount_pet_farming_disable = {
+		ai = no
+		potential = {
+			ai = no
+			multiplayer = no # Can only alter this setting in single-player
+			has_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				has_submenu_open = yes
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_daedric_no_mount_pet_farming_disable_tt
+				clr_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming
+			}
+		}
+	}
+}
