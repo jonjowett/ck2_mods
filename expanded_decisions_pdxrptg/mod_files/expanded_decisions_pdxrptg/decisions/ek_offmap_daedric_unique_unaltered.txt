@@ -341,72 +341,8 @@ offmap_decisions = {
 	}
 	
 	
-	#Hermaeus Mora: Black Books
-	oblivion_hermaeus_black_book = {
-		only_playable = yes
-		button_name = offmap_boons
-		ai_check_interval = 60
-
-		from_potential = {
-			has_dlc = "Jade Dragon"
-			mercenary = no
-			holy_order = no
-			is_landed = yes
-			is_indisposed = no
-			is_adult = yes
-			worships_hermaeus = yes
-			NOT = { has_character_modifier = hermaeus_cooldown }
-			NOT = { has_character_flag = black_book }
-		}
-
-		potential = {
-			is_offmap_tag = oblivion_hermaeus
-		}
+	##################################### MOD EDIT: Hermaeus black book removed for alteration
 	
-		allow = {
-			show_only_failed_conditions = yes
-			FROM = {
-				show_scope_change = no
-				ROOT = {
-					is_offmap_tag = oblivion_hermaeus
-				}
-				has_offmap_currency = { offmap = oblivion_hermaeus value = 1500 }
-				prisoner = no
-				NOT = { trait = incapable }
-				is_inaccessible_trigger = no
-				check_variable = { which = black_books_read value < 8 }
-			}
-			ROOT = { is_offmap_tag = oblivion_hermaeus }
-			oblivion_hermaeus_boon_decisions_enabled_trigger = yes
-		}
-
-		effect = {
-			FROM = {
-				show_scope_change = no
-				sound_effect = china_grace_spend
-				add_offmap_currency = {
-					offmap = oblivion_hermaeus
-					value = -1500
-				}
-			}
-			hidden_effect = {
-				FROM = {
-					#set_china_boon_cd_effect = yes
-					set_character_flag = black_book
-					long_character_event = { id = hermaeus.1 }
-				}
-			}
-		}
-
-
-
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 0.1 # slow down
-			}
-		}
-	}
 	
 	#Hircine: Lycanthropy
 	oblivion_hircine_lycanthropy = {
