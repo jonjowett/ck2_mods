@@ -1,0 +1,18 @@
+decisions = {
+	expd_pdxrptg_admin_submenu_open = {
+		ai = no
+		potential = {
+			has_submenu_open = no
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+			NOT = { has_character_flag = expd_pdxrptg_admin_submenu_is_open }
+		}
+		allow = { always = yes }
+		effect = {
+			set_character_flag = expd_pdxrptg_admin_submenu_is_open
+		}
+	}
+}

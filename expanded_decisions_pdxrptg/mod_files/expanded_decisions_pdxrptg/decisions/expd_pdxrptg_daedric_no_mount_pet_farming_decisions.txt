@@ -3,14 +3,16 @@ decisions = {
 		ai = no
 		potential = {
 			ai = no
-			multiplayer = no # Can only alter this setting in single-player
-			NOT = { has_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming }
-			NOT = {
-				# Audax Validator "." Ignore_NEXT
-				has_submenu_open = yes
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
 			}
+			has_character_flag = expd_pdxrptg_admin_submenu_is_open
+			NOT = { has_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming }
 		}
-		allow = { always = yes }
+		allow = {
+			multiplayer = no # Can only alter this setting in single-player
+		}
 		effect = {
 			custom_tooltip = {
 				text = expd_pdxrptg_daedric_no_mount_pet_farming_enable_tt
@@ -22,14 +24,16 @@ decisions = {
 		ai = no
 		potential = {
 			ai = no
-			multiplayer = no # Can only alter this setting in single-player
-			has_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming
-			NOT = {
-				# Audax Validator "." Ignore_NEXT
-				has_submenu_open = yes
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
 			}
+			has_character_flag = expd_pdxrptg_admin_submenu_is_open
+			has_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming
 		}
-		allow = { always = yes }
+		allow = {
+			multiplayer = no # Can only alter this setting in single-player
+		}
 		effect = {
 			custom_tooltip = {
 				text = expd_pdxrptg_daedric_no_mount_pet_farming_disable_tt
