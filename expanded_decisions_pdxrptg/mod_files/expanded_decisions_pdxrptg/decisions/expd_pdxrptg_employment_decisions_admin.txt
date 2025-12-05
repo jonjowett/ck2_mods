@@ -1,0 +1,77 @@
+decisions = {
+	
+	expd_pdxrptg_employment_advanced_enable = {
+		ai = no
+		potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+			has_character_flag = expd_pdxrptg_admin_submenu_is_open
+			has_global_flag = expd_pdxrptg_employment_advanced_decisions_are_disabled
+		}
+		allow = {
+			multiplayer = no # Can only alter this setting in single-player mode
+		}
+		effect = {
+			clr_global_flag = expd_pdxrptg_employment_advanced_decisions_are_disabled
+		}
+	}
+	expd_pdxrptg_employment_advanced_disable = {
+		ai = no
+		potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+			has_character_flag = expd_pdxrptg_admin_submenu_is_open
+			NOT = { has_global_flag = expd_pdxrptg_employment_advanced_decisions_are_disabled }
+		}
+		allow = {
+			multiplayer = no # Can only alter this setting in single-player mode
+		}
+		effect = {
+			set_global_flag = expd_pdxrptg_employment_advanced_decisions_are_disabled
+		}
+	}
+	
+	expd_pdxrptg_employment_superb_enable = {
+		ai = no
+		potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+			has_character_flag = expd_pdxrptg_admin_submenu_is_open
+			has_global_flag = expd_pdxrptg_employment_superb_decisions_are_disabled
+		}
+		allow = {
+			multiplayer = no # Can only alter this setting in single-player mode
+		}
+		effect = {
+			clr_global_flag = expd_pdxrptg_employment_superb_decisions_are_disabled
+		}
+	}
+	expd_pdxrptg_employment_superb_disable = {
+		ai = no
+		potential = {
+			ai = no
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+			has_character_flag = expd_pdxrptg_admin_submenu_is_open
+			NOT = { has_global_flag = expd_pdxrptg_employment_superb_decisions_are_disabled }
+		}
+		allow = {
+			multiplayer = no # Can only alter this setting in single-player mode
+		}
+		effect = {
+			set_global_flag = expd_pdxrptg_employment_superb_decisions_are_disabled
+		}
+	}
+	
+}

@@ -217,3 +217,36 @@ province_event = {
 		clr_global_flag = expd_pdxrptg_employment_start_of_game
 	}
 }
+
+
+
+
+
+
+
+
+
+
+##############################################
+#                                            #
+#            Ensure debug mode is            #
+#          NOT active in multiplayer         #
+#                                            #
+##############################################
+
+
+
+character_event = {
+	id = ExpdPdxrptgEmployment.9000
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	trigger = {
+		multiplayer = yes
+		is_multiplayer_host_character = yes
+		has_global_flag = expd_pdxrptg_employment_debug
+	}
+	immediate = {
+		clr_global_flag = expd_pdxrptg_employment_debug
+	}
+}

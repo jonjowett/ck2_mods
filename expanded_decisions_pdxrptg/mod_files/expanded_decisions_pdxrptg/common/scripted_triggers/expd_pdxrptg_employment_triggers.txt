@@ -1,4 +1,30 @@
-expd_pdxrptg_this_character_can_see_employment_decisions = {
+expd_pdxrptg_this_character_can_see_employment_decisions_basic = {
+	expd_pdxrptg_this_character_can_see_employment_decisions_shared = yes
+}
+
+expd_pdxrptg_this_character_can_see_employment_decisions_advanced = {
+	expd_pdxrptg_this_character_can_see_employment_decisions_shared = yes
+	OR = {
+		NOT = { has_global_flag = expd_pdxrptg_employment_advanced_decisions_are_disabled }
+		AND = {
+			multiplayer = no
+			has_global_flag = expd_pdxrptg_employment_debug
+		}
+	}
+}
+
+expd_pdxrptg_this_character_can_see_employment_decisions_superb = {
+	expd_pdxrptg_this_character_can_see_employment_decisions_shared = yes
+	OR = {
+		NOT = { has_global_flag = expd_pdxrptg_employment_superb_decisions_are_disabled }
+		AND = {
+			multiplayer = no
+			has_global_flag = expd_pdxrptg_employment_debug
+		}
+	}
+}
+
+expd_pdxrptg_this_character_can_see_employment_decisions_shared = {
 	ai = no
 	has_character_flag = employment_open
 }
