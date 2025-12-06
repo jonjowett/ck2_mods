@@ -37,6 +37,87 @@ decisions = {
 	
 	############################################################
 	#                                                          #
+	#               WEREWOLF BEAST FORM TRAINING               #
+	#                                                          #
+	############################################################
+	
+	
+	
+	expd_pdxrptg_notification_lycan_training_toggle_on = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_lycan_training_is_enabled = no
+		}
+		allow = {
+			# Audax Validator "." Ignore_NEXT
+			trait = lycan
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_lycan_training_start = yes }
+		}
+	}
+	expd_pdxrptg_notification_lycan_training_toggle_off = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_lycan_training_is_enabled = yes
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_lycan_training_stop = yes }
+		}
+	}
+	
+	
+	
+	
+	
+	############################################################
+	#                                                          #
+	#                      PURCHASE TECH                       #
+	#                                                          #
+	############################################################
+	
+	
+	
+	expd_pdxrptg_notification_purchase_tech_toggle_on = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_purchase_tech_is_enabled = no
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_purchase_tech_start = yes }
+		}
+	}
+	expd_pdxrptg_notification_purchase_tech_toggle_off = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_purchase_tech_is_enabled = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_purchase_tech_stop = yes }
+		}
+	}
+	
+	
+	
+	
+	
+	############################################################
+	#                                                          #
 	#                   MAGICKA HALF / FULL                    #
 	#                                                          #
 	############################################################
@@ -234,47 +315,6 @@ decisions = {
 	
 	############################################################
 	#                                                          #
-	#                  POTION EFFECT EXPIRED                   #
-	#                                                          #
-	############################################################
-	
-	
-	
-	expd_pdxrptg_notification_potion_effect_ended_toggle_on = {
-		is_high_prio = no
-		ai = no
-		potential = {
-			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_notification_potion_effect_ended_is_enabled = no
-		}
-		allow = {
-			always = yes
-		}
-		effect = {
-			hidden_tooltip = { expd_pdxrptg_notification_potion_effect_ended_start = yes }
-		}
-	}
-	expd_pdxrptg_notification_potion_effect_ended_toggle_off = {
-		is_high_prio = no
-		ai = no
-		potential = {
-			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_notification_potion_effect_ended_is_enabled = yes
-		}
-		allow = {
-			always = yes
-		}
-		effect = {
-			hidden_tooltip = { expd_pdxrptg_notification_potion_effect_ended_stop = yes }
-		}
-	}
-	
-	
-	
-	
-	
-	############################################################
-	#                                                          #
 	#                     NO POTION EFFECT                     #
 	#                                                          #
 	############################################################
@@ -316,78 +356,38 @@ decisions = {
 	
 	############################################################
 	#                                                          #
-	#                      PURCHASE TECH                       #
+	#                  POTION EFFECT EXPIRED                   #
 	#                                                          #
 	############################################################
 	
 	
 	
-	expd_pdxrptg_notification_purchase_tech_toggle_on = {
+	expd_pdxrptg_notification_potion_effect_ended_toggle_on = {
 		is_high_prio = no
 		ai = no
 		potential = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_notification_purchase_tech_is_enabled = no
+			expd_pdxrptg_notification_potion_effect_ended_is_enabled = no
 		}
 		allow = {
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = { expd_pdxrptg_notification_purchase_tech_start = yes }
+			hidden_tooltip = { expd_pdxrptg_notification_potion_effect_ended_start = yes }
 		}
 	}
-	expd_pdxrptg_notification_purchase_tech_toggle_off = {
+	expd_pdxrptg_notification_potion_effect_ended_toggle_off = {
 		is_high_prio = no
 		ai = no
 		potential = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_notification_purchase_tech_is_enabled = yes
+			expd_pdxrptg_notification_potion_effect_ended_is_enabled = yes
 		}
 		allow = {
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = { expd_pdxrptg_notification_purchase_tech_stop = yes }
-		}
-	}
-	
-	
-	
-	
-	
-	############################################################
-	#                                                          #
-	#               WEREWOLF BEAST FORM TRAINING               #
-	#                                                          #
-	############################################################
-	
-	
-	
-	expd_pdxrptg_notification_lycan_training_toggle_on = {
-		is_high_prio = no
-		ai = no
-		potential = {
-			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_notification_lycan_training_is_enabled = no
-		}
-		allow = {
-			# Audax Validator "." Ignore_NEXT
-			trait = lycan
-		}
-		effect = {
-			hidden_tooltip = { expd_pdxrptg_notification_lycan_training_start = yes }
-		}
-	}
-	expd_pdxrptg_notification_lycan_training_toggle_off = {
-		is_high_prio = no
-		ai = no
-		potential = {
-			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_notification_lycan_training_is_enabled = yes
-		}
-		allow = { always = yes }
-		effect = {
-			hidden_tooltip = { expd_pdxrptg_notification_lycan_training_stop = yes }
+			hidden_tooltip = { expd_pdxrptg_notification_potion_effect_ended_stop = yes }
 		}
 	}
 	
