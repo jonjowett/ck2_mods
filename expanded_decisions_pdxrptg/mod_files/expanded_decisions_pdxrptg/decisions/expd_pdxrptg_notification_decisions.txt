@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 decisions = {
 	
 	
@@ -346,6 +348,46 @@ decisions = {
 		}
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_purchase_tech_stop = yes }
+		}
+	}
+	
+	
+	
+	
+	
+	############################################################
+	#                                                          #
+	#               WEREWOLF BEAST FORM TRAINING               #
+	#                                                          #
+	############################################################
+	
+	
+	
+	expd_pdxrptg_notification_lycan_training_toggle_on = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_lycan_training_is_enabled = no
+		}
+		allow = {
+			# Audax Validator "." Ignore_NEXT
+			trait = lycan
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_lycan_training_start = yes }
+		}
+	}
+	expd_pdxrptg_notification_lycan_training_toggle_off = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_lycan_training_is_enabled = yes
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_lycan_training_stop = yes }
 		}
 	}
 	

@@ -1,0 +1,117 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = ExpdPdxrptgNotifications
+
+# Magicka        notifications use IDs 1000-1999
+# Potions        notifications use IDs 2000-2999
+# Purchase Tech  notifications use IDs 3000-3999
+# Lycan Training notifications use IDs 4000-4999
+# Administrative events        use IDs 9000-9999
+
+# on_yearly_pulse:
+#  --- Check whether this character can use the lycan training decision
+#  --- If yes, check whether this is a new development or if they have been continually able to take a decision for 5 years
+#  --- If yes, notify them
+character_event = {
+	
+	id = ExpdPdxrptgNotifications.4000
+	is_triggered_only = yes
+	hide_window = yes
+	
+	ai = no
+	
+	trigger = {
+		expd_pdxrptg_notification_lycan_training_is_enabled = yes
+		# Audax Validator "." Ignore_NEXT
+		trait = lycan
+	}
+	
+	immediate = {
+		
+		# Ensure the "show the notification this time" flag does NOT exist on this character
+		clr_character_flag = expd_pdxrptg_notification_lycan_training_notification_needed
+		
+		# Ensure the society submenu is open
+		if = {
+			limit = { has_character_flag = supernatural_open }
+			set_character_flag = expd_pdxrptg_notification_lycan_training_had_submenu_open_before
+		}
+		else = {
+			clr_character_flag = expd_pdxrptg_notification_lycan_training_had_submenu_open_before
+			set_character_flag = supernatural_open
+		}
+		
+		# Check whether the lycan training decision can be taken
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				is_decision_potential = lycan_training
+				# Audax Validator "." Ignore_NEXT
+				is_decision_allowed   = lycan_training
+			}
+			if = {
+				limit = {
+					OR = {
+						NOT = { has_character_flag  = expd_pdxrptg_notification_lycan_training_notification_shown }
+						had_character_flag = { flag = expd_pdxrptg_notification_lycan_training_notification_shown years >= 5 }
+					}
+				}
+				# Can take the lycan training decision, and this is either a new development,
+				#      or a reminder after having been continually able to take the decision for 5 years.
+				set_character_flag = expd_pdxrptg_notification_lycan_training_notification_needed
+			}
+			else = {
+				# Has been able to take a lycan training decision for several years, but not yet 5 years - do nothing.
+			}
+		}
+		else = {
+			# No lycan training decision available - clear the "notification shown" flag.
+			# (So that the player receives the notification on the first check after the decision becomes available.)
+			clr_character_flag = expd_pdxrptg_notification_lycan_training_notification_shown
+		}
+		
+		# If necessary, close the supernatural submenu
+		if = {
+			limit = { NOT = { has_character_flag = expd_pdxrptg_notification_lycan_training_had_submenu_open_before } }
+			clr_character_flag = supernatural_open
+		}
+		clr_character_flag = expd_pdxrptg_notification_lycan_training_had_submenu_open_before
+		
+		# If necessary, show the notification
+		if = {
+			limit = { has_character_flag = expd_pdxrptg_notification_lycan_training_notification_needed }
+			clr_character_flag = expd_pdxrptg_notification_lycan_training_notification_needed
+			clr_character_flag = expd_pdxrptg_notification_lycan_training_notification_shown
+			set_character_flag = expd_pdxrptg_notification_lycan_training_notification_shown
+			character_event = { id = ExpdPdxrptgNotifications.4001 }
+		}
+		
+	}
+	
+}
+
+character_event = {
+	
+	id           = ExpdPdxrptgNotifications.4001
+	title        = ExpdPdxrptgNotifications_LycanTraining_Title
+	desc         = ExpdPdxrptgNotifications_LycanTraining_Desc
+	border       = GFX_event_normal_frame_war
+	picture      = GFX_evt_werewolf
+	show_root    = yes
+	
+	is_triggered_only = yes
+	
+	ai = no
+	
+	option = { name = OK }
+	
+	option = {
+		name = ExpdPdxrptgNotifications_Option_DisableThisNotification
+		custom_tooltip = {
+			text = expd_pdxrptg_notification_lycan_training_will_be_disabled_tt
+			expd_pdxrptg_notification_lycan_training_stop = yes
+		}
+		ai_chance = { factor = 0 }
+	}
+	
+}
