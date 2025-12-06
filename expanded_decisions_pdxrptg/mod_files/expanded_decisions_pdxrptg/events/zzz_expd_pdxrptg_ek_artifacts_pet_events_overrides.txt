@@ -1,0 +1,175 @@
+# Audax Validator EnableCommentMetadata
+
+# The only change is altering all destroy_artifact to unsafe_destroy_artifact, so we can safely ignore all Validator errors.
+#  --- unsafe_destroy_artifact is needed because some mounts/pets are defined to be indestructible, but they clearly are intended to be destroyed by this event chain.
+# Audax Validator "!" Ignore_NEXT
+
+#Pet dies - based on vanilla Cat dying event
+character_event = {
+	id = ekpets.15
+	desc = EKPets15
+	picture = GFX_evt_garden
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = { #Send this event if the player has WoL to clear flags
+				has_dlc = "Way of Life"
+				event_target:ek_dead_pet = {
+					artifact_type = pet_dog_masterless
+				}
+			}
+			character_event = { id = WoL.5291 }
+		}
+	}
+	
+	option = {
+		name = EKPets15OptA
+		event_target:ek_dead_pet = {
+			unsafe_destroy_artifact = yes
+		}
+	}
+	option = {
+		name = EKPets15OptB
+		trigger = { scaled_wealth = 0.6 }
+		event_target:ek_dead_pet = {
+			unsafe_destroy_artifact = yes
+		}
+		scaled_wealth = -0.6
+		if = {
+			limit = { 
+				NOR = { 
+					trait = greedy
+					trait = charitable
+				}
+			}
+			random = {
+				chance = 20
+				add_trait = charitable
+			}
+		}
+		if = {
+			limit = { trait = greedy }
+			random = {
+				chance = 25
+				remove_trait = greedy
+			}
+		}
+	}
+	option = {
+		name = EKPets15OptC
+		trigger = {
+			scaled_wealth = 0.25
+			OR = {
+				trait = hunter
+				is_batshit_crazy = yes
+			}
+		}
+		event_target:ek_dead_pet = {
+			unsafe_destroy_artifact = yes
+		}
+		scaled_wealth = -0.25
+		prestige = 30
+		if = {
+			limit = {
+				has_nickname = no
+			}
+			random = {
+				chance = 20
+				give_nickname = nick_the_keeper
+			}
+		}
+	}
+	option = {
+		name = EKPets15OptD
+		trigger = {
+			has_dlc = "Reapers"
+			has_character_modifier = in_seclusion
+			is_ruler = yes
+			event_target:ek_dead_pet = {
+				has_artifact_flag = mount
+				NOR = { #Otherwise people will be eating Khajiits. Implications...*unpleasant.*
+					artifact_type = mount_senche
+					artifact_type = mount_pahmar
+				}
+			}
+		}
+		event_target:ek_dead_pet = {
+			unsafe_destroy_artifact = yes
+		}
+		change_variable = { which = remaining_food value = 2 }
+	}
+}
+
+character_event = {
+	id = ekpets.20
+	desc = EKPets20
+	picture = GFX_evt_garden
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = EKPets20OptA
+		event_target:ek_dead_pet = {
+			unsafe_destroy_artifact = yes
+		}
+	}
+	option = {
+		name = EKPets20OptB
+		trigger = { scaled_wealth = 0.6 }
+		event_target:ek_dead_pet = {
+			unsafe_destroy_artifact = yes
+		}
+		scaled_wealth = -0.6
+		if = {
+			limit = { 
+				NOT = { 
+					trait = greedy
+					trait = charitable
+				}
+			}
+			add_trait = charitable
+		}
+		if = {
+			limit = { trait = greedy }
+			remove_trait = greedy
+		}
+	}
+	option = {
+		name = EKPets20OptC
+		trigger = {
+			scaled_wealth = 0.25
+			is_batshit_crazy = yes
+		}
+		event_target:ek_dead_pet = {
+			unsafe_destroy_artifact = yes
+		}
+		scaled_wealth = -0.25
+		prestige = 30
+		if = {
+			limit = {
+				has_nickname = no
+			}
+			random = {
+				chance = 20
+				give_nickname = nick_the_keeper
+			}
+		}
+	}
+}
+
+character_event = {
+	id = ekpets.25
+	desc = EKPets25
+	picture = GFX_evt_garden
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = EKPets25Accept
+		event_target:ek_dead_pet = {
+			unsafe_destroy_artifact = yes
+		}
+	}
+}
