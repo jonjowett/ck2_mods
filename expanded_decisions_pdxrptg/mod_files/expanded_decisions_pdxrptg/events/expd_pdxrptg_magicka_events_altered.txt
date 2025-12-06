@@ -50,11 +50,16 @@ character_event = {
 				refresh_max_magicka = yes
 			}
 		}
-		else = { # Actively remove magicka for characters that have ceased to be spellcasters
+		else = {
+			# Actively remove magicka for characters that have ceased to be spellcasters
 			# Audax Validator "." Ignore_NEXT
 			remove_character_modifier = magicka_counter
 			delete_magicka = yes
-			expd_pdxrptg_notification_magicka_all_stop = yes
+			# Cleanup: If this is an AI, disable all magicka notifications
+			if = {
+				limit = { expd_pdxrptg_this_character_is_a_present_or_absentee_player = no }
+				expd_pdxrptg_notification_magicka_all_stop = yes
+			}
 		}
 	}
 }
