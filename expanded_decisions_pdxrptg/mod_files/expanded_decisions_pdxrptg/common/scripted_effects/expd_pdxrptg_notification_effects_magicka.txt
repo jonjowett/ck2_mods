@@ -296,3 +296,10 @@ expd_pdxrptg_notification_magicka_cleanup = {
 		}
 	}
 }
+
+expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = {
+	if = {
+		limit = { expd_pdxrptg_is_spellcaster_with_magicka_enabled = no }
+		custom_tooltip = { text = expd_pdxrptg_notification_magicka_warning_you_are_not_a_spellcaster_tt }
+	}
+}
