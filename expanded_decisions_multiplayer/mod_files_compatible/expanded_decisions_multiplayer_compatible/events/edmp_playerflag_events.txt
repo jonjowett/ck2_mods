@@ -18,6 +18,7 @@ character_event = {
 	immediate = {
 		character_event = { id = EDMPPlayerFlag.1001 }
 		character_event = { id = EDMPPlayerFlag.1002 }
+		character_event = { id = EDMPPlayerFlag.1003 }
 	}
 }
 
@@ -144,6 +145,26 @@ character_event = {
 			clear_event_target = edmp_playerflag_absent_human_7
 			clear_event_target = edmp_playerflag_absent_human_8
 			clear_event_target = edmp_playerflag_absent_human_9
+		}
+	}
+}
+
+# Ensure that all absent players have the edmp_absent_human_player trait, and that no other character has this trait.
+character_event = {
+	id = EDMPPlayerFlag.1003
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		any_character = {
+			limit = { trait = edmp_absent_human_player }
+			remove_trait = edmp_absent_human_player
+		}
+		any_character = {
+			limit = {
+				edmp_this_character_is_an_absent_human_player = yes
+				NOT = { trait = edmp_absent_human_player }
+			}
+			add_trait = edmp_absent_human_player
 		}
 	}
 }
