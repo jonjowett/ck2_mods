@@ -1,0 +1,133 @@
+# Audax Validator EnableCommentMetadata
+
+offmap_decisions = {
+	#Hermaeus Mora: Black Books
+	oblivion_hermaeus_black_book = {
+		only_playable = yes
+		button_name = offmap_boons
+		ai_check_interval = 60
+		from_potential = {
+			has_dlc = "Jade Dragon"
+			mercenary = no
+			holy_order = no
+			is_landed = yes
+			is_adult = yes
+			# Audax Validator "." Ignore_NEXT
+			worships_hermaeus = yes
+		}
+		potential = {
+			# Audax Validator "." Ignore_NEXT
+			is_offmap_tag = oblivion_hermaeus
+		}
+		allow = {
+			FROM = {
+				show_scope_change = no
+				
+				has_offmap_currency = {
+					# Audax Validator "." Ignore_NEXT
+					offmap = oblivion_hermaeus
+					value = 1500
+				}
+				
+				# Only show inaccessibility conditions if they fail
+				trigger_if = {
+					limit = { prisoner = yes }
+					prisoner = no
+				}
+				trigger_if = {
+					limit = { trait = incapable }
+					NOT = { trait = incapable }
+				}
+				trigger_if = {
+					limit = { is_inaccessible_trigger = yes }
+					is_inaccessible_trigger = no
+				}
+				trigger_if = {
+					limit = { is_indisposed = yes }
+					custom_tooltip = {
+						text = expd_pdxrptg_black_book_this_character_is_not_indisposed_tt
+						always = no
+					}
+				}
+				
+				# Must not have read all 8 black books
+				# Show number of books read so far
+				custom_tooltip = {
+					text = expd_pdxrptg_black_book_this_character_has_not_read_8_tt
+					check_variable = { which = black_books_read value < 8 }
+				}
+				
+				# Is not currently reading (moved from potential)
+				# Only show this condition if it fails (because this criterion should be obvious to the user)
+				trigger_if = {
+					limit = { has_character_flag = black_book }
+					custom_tooltip = {
+						text = expd_pdxrptg_black_book_this_character_is_not_currently_reading_tt
+						always = no
+					}
+				}
+				
+				# Has not recently read (moved from potential)
+				# In addition, if the decision-taker HAS recently read, show cooldown expiry
+				trigger_if = {
+					limit = {
+						NOT = {
+							# Audax Validator "." Ignore_NEXT
+							has_character_modifier = hermaeus_cooldown
+						}
+					}
+					custom_tooltip = {
+						text = expd_pdxrptg_black_book_this_character_has_not_recently_read_no_timer_tt
+						always = yes
+					}
+				}
+				trigger_else = {
+					custom_tooltip = {
+						text = expd_pdxrptg_black_book_this_character_has_not_recently_read_with_timer_tt
+						always = no
+					}
+				}
+				
+			}
+			
+			# Use the built-in better version of the "Can get Hermaeus boon" trigger - same conditions, better tooltip
+			# Only show the trigger if it fails
+			trigger_if = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					can_get_boon_from_daedra = no
+				}
+				# Audax Validator "." Ignore_NEXT
+				can_get_boon_from_daedra = yes
+			}
+			
+		}
+		effect = {
+			FROM = {
+				show_scope_change = no
+				sound_effect = china_grace_spend
+				add_offmap_currency = {
+					# Audax Validator "." Ignore_NEXT
+					offmap = oblivion_hermaeus
+					value = -1500
+				}
+			}
+			hidden_effect = {
+				FROM = {
+					#set_china_boon_cd_effect = yes
+					set_character_flag = black_book
+					long_character_event = {
+						# Audax Validator "." Ignore_NEXT
+						id = hermaeus.1
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.1 # slow down
+			}
+		}
+	}
+}

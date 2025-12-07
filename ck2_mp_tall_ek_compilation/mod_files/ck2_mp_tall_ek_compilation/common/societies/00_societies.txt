@@ -6879,7 +6879,7 @@ secret_religious_society_template = {
 		hidden_trigger = {
 			NOT = { has_character_flag = society_join_block }
 		}
-		expd_pdxrptg_this_character_is_not_blocked_due_to_species_monastic = yes
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_secret_religion = yes
 	}
 
 	show_society = {
@@ -6900,7 +6900,7 @@ secret_religious_society_template = {
 			trait = clone
 		}
 		controls_religion = no # Religious heads cannot not ever be members of secret religious societies
-		expd_pdxrptg_this_character_is_not_kicked_due_to_species_monastic = yes
+		expd_pdxrptg_this_character_is_not_kicked_due_to_species_secret_religion = yes
 	}
 	
 	society_rank = {
@@ -7038,6 +7038,26 @@ secret_religious_society_template = {
 			rank = 4
 			value = 10
 		}
+		triggered_gain = {
+			desc = expd_pdxrptg_this_character_is_celebrated_for_currency_gain_undead_tt
+			trigger = { expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_undead = yes }
+			value = 10
+		}
+		triggered_gain = {
+			desc = expd_pdxrptg_this_character_is_celebrated_for_currency_gain_vampire_tt
+			trigger = { expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_vampire = yes }
+			value = 10
+		}
+		triggered_gain = {
+			desc = expd_pdxrptg_this_character_is_celebrated_for_currency_gain_lycan_tt
+			trigger = { expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_lycan = yes }
+			value = 10
+		}
+		triggered_gain = {
+			desc = expd_pdxrptg_this_character_is_celebrated_for_currency_gain_necromancer_tt
+			trigger = { expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_necromancer = yes }
+			value = 3
+		}
 	}
 
 	member_score_per_attribute = 2
@@ -7049,6 +7069,34 @@ secret_religious_society_template = {
 		modifier = {
 			factor = 0.33
 			is_long_lived = yes
+		}
+		modifier = {
+			factor = 5
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_celebrated_for_member_score_undead_tt
+				expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_undead = yes
+			}
+		}
+		modifier = {
+			factor = 5
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_celebrated_for_member_score_vampire_tt
+				expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_vampire = yes
+			}
+		}
+		modifier = {
+			factor = 5
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_celebrated_for_member_score_lycan_tt
+				expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_lycan = yes
+			}
+		}
+		modifier = {
+			factor = 1.5
+			custom_tooltip = {
+				text = expd_pdxrptg_this_character_is_celebrated_for_member_score_necromancer_tt
+				expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_necromancer = yes
+			}
 		}
 		modifier = {
 			trait = zealous

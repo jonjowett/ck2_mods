@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 decisions = {
 	
 	
@@ -35,6 +37,87 @@ decisions = {
 	
 	############################################################
 	#                                                          #
+	#               WEREWOLF BEAST FORM TRAINING               #
+	#                                                          #
+	############################################################
+	
+	
+	
+	expd_pdxrptg_notification_lycan_training_toggle_on = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_lycan_training_is_enabled = no
+		}
+		allow = {
+			# Audax Validator "." Ignore_NEXT
+			trait = lycan
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_lycan_training_start = yes }
+		}
+	}
+	expd_pdxrptg_notification_lycan_training_toggle_off = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_lycan_training_is_enabled = yes
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_lycan_training_stop = yes }
+		}
+	}
+	
+	
+	
+	
+	
+	############################################################
+	#                                                          #
+	#                      PURCHASE TECH                       #
+	#                                                          #
+	############################################################
+	
+	
+	
+	expd_pdxrptg_notification_purchase_tech_toggle_on = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_purchase_tech_is_enabled = no
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_purchase_tech_start = yes }
+		}
+	}
+	expd_pdxrptg_notification_purchase_tech_toggle_off = {
+		is_high_prio = no
+		ai = no
+		potential = {
+			has_character_flag = expd_pdxrptg_notification_submenu_is_open
+			expd_pdxrptg_notification_purchase_tech_is_enabled = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = { expd_pdxrptg_notification_purchase_tech_stop = yes }
+		}
+	}
+	
+	
+	
+	
+	
+	############################################################
+	#                                                          #
 	#                   MAGICKA HALF / FULL                    #
 	#                                                          #
 	############################################################
@@ -48,12 +131,10 @@ decisions = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
 			expd_pdxrptg_notification_magicka_full_is_enabled = no
 		}
-		allow = {
-			# Notification can only be toggled on for spellcasters
-			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
-		}
+		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_full_start = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	expd_pdxrptg_notification_magicka_full_toggle_off = {
@@ -63,12 +144,10 @@ decisions = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
 			expd_pdxrptg_notification_magicka_full_is_enabled = yes
 		}
-		allow = {
-			# Notification can always be toggled off
-			always = yes
-		}
+		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_full_stop = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	
@@ -81,12 +160,10 @@ decisions = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
 			expd_pdxrptg_notification_magicka_half_is_enabled = no
 		}
-		allow = {
-			# Notification can only be toggled on for spellcasters
-			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
-		}
+		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_half_start = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	expd_pdxrptg_notification_magicka_half_toggle_off = {
@@ -96,12 +173,10 @@ decisions = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
 			expd_pdxrptg_notification_magicka_half_is_enabled = yes
 		}
-		allow = {
-			# Notification can always be toggled off
-			always = yes
-		}
+		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_half_stop = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	
@@ -124,12 +199,10 @@ decisions = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
 			expd_pdxrptg_notification_magicka_unused_any_is_enabled = no
 		}
-		allow = {
-			# Notification can only be toggled on for spellcasters
-			expd_pdxrptg_is_spellcaster_with_magicka_enabled = yes
-		}
+		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_1year_start = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	expd_pdxrptg_notification_magicka_unused_1year_to_3year = { # Only for spellcasters
@@ -144,6 +217,7 @@ decisions = {
 		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_3year_start = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	expd_pdxrptg_notification_magicka_unused_1year_to_off_non_spellcaster = { # Only for non-spellcasters
@@ -158,6 +232,7 @@ decisions = {
 		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_stop = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	expd_pdxrptg_notification_magicka_unused_3year_to_5year = { # Only for spellcasters
@@ -172,6 +247,7 @@ decisions = {
 		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_5year_start = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	expd_pdxrptg_notification_magicka_unused_3year_to_off_non_spellcaster = { # Only for non-spellcasters
@@ -186,6 +262,7 @@ decisions = {
 		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_stop = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	expd_pdxrptg_notification_magicka_unused_5year_to_off = { # Only for spellcasters
@@ -200,6 +277,7 @@ decisions = {
 		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_stop = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	expd_pdxrptg_notification_magicka_unused_5year_to_off_non_spellcaster = { # Only for non-spellcasters
@@ -214,6 +292,7 @@ decisions = {
 		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_stop = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	expd_pdxrptg_notification_magicka_unused_toomany_to_off = { # For everyone
@@ -226,47 +305,7 @@ decisions = {
 		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { expd_pdxrptg_notification_magicka_unused_stop = yes }
-		}
-	}
-	
-	
-	
-	
-	
-	############################################################
-	#                                                          #
-	#                  POTION EFFECT EXPIRED                   #
-	#                                                          #
-	############################################################
-	
-	
-	
-	expd_pdxrptg_notification_potion_effect_ended_toggle_on = {
-		is_high_prio = no
-		ai = no
-		potential = {
-			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_notification_potion_effect_ended_is_enabled = no
-		}
-		allow = {
-			always = yes
-		}
-		effect = {
-			hidden_tooltip = { expd_pdxrptg_notification_potion_effect_ended_start = yes }
-		}
-	}
-	expd_pdxrptg_notification_potion_effect_ended_toggle_off = {
-		is_high_prio = no
-		ai = no
-		potential = {
-			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_notification_potion_effect_ended_is_enabled = yes
-		}
-		allow = {
-			always = yes
-		}
-		effect = {
-			hidden_tooltip = { expd_pdxrptg_notification_potion_effect_ended_stop = yes }
+			expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = yes
 		}
 	}
 	
@@ -317,38 +356,38 @@ decisions = {
 	
 	############################################################
 	#                                                          #
-	#                      PURCHASE TECH                       #
+	#                  POTION EFFECT EXPIRED                   #
 	#                                                          #
 	############################################################
 	
 	
 	
-	expd_pdxrptg_notification_purchase_tech_toggle_on = {
+	expd_pdxrptg_notification_potion_effect_ended_toggle_on = {
 		is_high_prio = no
 		ai = no
 		potential = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_notification_purchase_tech_is_enabled = no
+			expd_pdxrptg_notification_potion_effect_ended_is_enabled = no
 		}
 		allow = {
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = { expd_pdxrptg_notification_purchase_tech_start = yes }
+			hidden_tooltip = { expd_pdxrptg_notification_potion_effect_ended_start = yes }
 		}
 	}
-	expd_pdxrptg_notification_purchase_tech_toggle_off = {
+	expd_pdxrptg_notification_potion_effect_ended_toggle_off = {
 		is_high_prio = no
 		ai = no
 		potential = {
 			has_character_flag = expd_pdxrptg_notification_submenu_is_open
-			expd_pdxrptg_notification_purchase_tech_is_enabled = yes
+			expd_pdxrptg_notification_potion_effect_ended_is_enabled = yes
 		}
 		allow = {
 			always = yes
 		}
 		effect = {
-			hidden_tooltip = { expd_pdxrptg_notification_purchase_tech_stop = yes }
+			hidden_tooltip = { expd_pdxrptg_notification_potion_effect_ended_stop = yes }
 		}
 	}
 	

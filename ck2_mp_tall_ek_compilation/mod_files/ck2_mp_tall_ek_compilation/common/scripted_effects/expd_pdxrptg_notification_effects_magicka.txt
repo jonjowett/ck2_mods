@@ -32,6 +32,10 @@ expd_pdxrptg_notification_magicka_pre_regen = {
 			which = magicka_current
 		}
 	}
+	else_if = {
+		limit = { expd_pdxrptg_this_character_is_a_present_or_absentee_player = yes }
+		# Do nothing for non-spellcaster present/absent players - they may re-acquire magicka later
+	}
 	else = {
 		expd_pdxrptg_notification_magicka_all_stop = yes
 	}
@@ -170,14 +174,14 @@ expd_pdxrptg_notification_magicka_post_regen = {
 	
 	
 	else_if = {
-		limit = { expd_pdxrptg_this_character_is_an_absentee_player = yes }
-		# Is an absentee player - do nothing
+		limit = { expd_pdxrptg_this_character_is_a_present_or_absentee_player = yes }
+		# Is a non-magic or absentee player - do nothing
 	}
 	
 	
 	
 	else = {
-		# Not an absentee player, and not a player spellcaster with any magicka notification enabled.
+		# Not a present or absentee player, ie. must be an AI.
 		# Having notifications in this situation seems like an error, so stop them all.
 		expd_pdxrptg_notification_magicka_all_stop = yes
 	}
@@ -290,5 +294,12 @@ expd_pdxrptg_notification_magicka_cleanup = {
 			}
 			set_variable = { which = expd_pdxrptg_notification_magicka_unused_months value = 0 }
 		}
+	}
+}
+
+expd_pdxrptg_notification_magicka_show_inactive_warning_for_non_spellcasters = {
+	if = {
+		limit = { expd_pdxrptg_is_spellcaster_with_magicka_enabled = no }
+		custom_tooltip = { text = expd_pdxrptg_notification_magicka_warning_you_are_not_a_spellcaster_tt }
 	}
 }

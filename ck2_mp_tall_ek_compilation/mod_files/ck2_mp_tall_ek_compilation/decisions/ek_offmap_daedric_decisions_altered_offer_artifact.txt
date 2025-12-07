@@ -261,7 +261,35 @@ offmap_decisions = {
 		}
 		
 		third_party_allow = {
-			
+			trigger_if = {
+				limit = { NOT = { has_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming } }
+				# No restrictions
+				always = yes
+			}
+			trigger_else = {
+				# Can only sacrifice other people's mounts/pets
+				OR = {
+					custom_tooltip = {
+						text = expd_pdxrptg_daedric_no_mount_pet_farming_fromfrom_is_not_mount_or_pet_tt
+						FROMFROM = {
+							NOR = {
+								has_artifact_flag = mount
+								has_artifact_flag = pet
+							}
+						}
+					}
+					custom_tooltip = {
+						text = expd_pdxrptg_daedric_no_mount_pet_farming_fromfrom_is_someone_elses_mount_or_pet_tt
+						FROMFROM = {
+							OR = {
+								has_artifact_flag = mount
+								has_artifact_flag = pet
+							}
+							original_artifact_owner = { NOT = { character = ROOT_FROM } }
+						}
+					}
+				}
+			}
 		}
 		
 		third_party_score = {

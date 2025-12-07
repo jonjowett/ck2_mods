@@ -66,11 +66,103 @@ expd_pdxrptg_this_character_is_reviled_for_currency_gain_and_member_score_vampir
 	}
 }
 
+expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_undead = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_undead_tt
+		secret_religion_scope = {
+			# Audax Validator "." Ignore_NEXT
+			is_necromancy_religion = yes
+		}
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			trait = known_vampire
+			# Audax Validator "." Ignore_NEXT
+			trait = known_vampire_benevolent
+			# Audax Validator "." Ignore_NEXT
+			trait = briarheart
+			# Audax Validator "." Ignore_NEXT
+			trait = undead
+			# Audax Validator "." Ignore_NEXT
+			trait = lich
+		}
+	}
+}
+expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_vampire = {
+	# Special case for pro-vampire religions which are not pro-necromancy in general (eg. Nocturnal)
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_vampire_tt
+		secret_religion_scope = {
+			# Audax Validator "." Ignore_NEXT
+			is_necromancy_religion = no
+			# Audax Validator "." Ignore_NEXT
+			is_vampire_religion = yes
+		}
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			trait = known_vampire
+			# Audax Validator "." Ignore_NEXT
+			trait = known_vampire_benevolent
+		}
+	}
+}
+expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_necromancer = {
+	# Necromancers in pro-necromancy religions get a bonus which stacks with the one from undeath/lycanthropy
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_necromancer_tt
+		secret_religion_scope = {
+			# Audax Validator "." Ignore_NEXT
+			is_necromancy_religion = yes
+		}
+		# Audax Validator "." Ignore_NEXT
+		trait = necromancer
+	}
+}
+expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_lycan = {
+	custom_tooltip = {
+		text = expd_pdxrptg_this_character_is_celebrated_for_currency_gain_and_member_score_secret_religion_lycan_tt
+		secret_religion_scope = {
+			# Audax Validator "." Ignore_NEXT
+			is_werewolf_religion = yes
+		}
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			trait = known_lycan
+			# Audax Validator "." Ignore_NEXT
+			trait = known_lycan_benevolent
+		}
+	}
+}
+
 expd_pdxrptg_this_character_is_not_blocked_due_to_species_monastic = {
 	expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
 }
 expd_pdxrptg_this_character_is_not_kicked_due_to_species_monastic = {
 	expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+}
+
+expd_pdxrptg_this_character_is_not_blocked_due_to_species_secret_religion = {
+	trigger_if = {
+		limit = {
+			secret_religion_scope = {
+				# Audax Validator "." Ignore_NEXT
+				is_anti_necromancy_religion = yes
+			}
+		}
+		# Anti-necromancy religion => blocked if sload or undead
+		# No exceptions for high stats, because that is only for secular societies, whereas this is a religious society
+		expd_pdxrptg_this_character_is_not_blocked_due_to_species_general = yes
+	}
+	trigger_else = {
+		# Not anti-necromancy religion => only blocked if sload
+		# No exceptions for high stats, because that is only for secular societies, whereas this is a religious society
+		NOT = {
+			# Audax Validator "." Ignore_NEXT
+			trait = sload
+		}
+	}
+}
+expd_pdxrptg_this_character_is_not_kicked_due_to_species_secret_religion = {
+	expd_pdxrptg_this_character_is_not_blocked_due_to_species_secret_religion = yes
 }
 
 expd_pdxrptg_this_character_is_not_blocked_due_to_species_scenarist = {
@@ -362,7 +454,7 @@ expd_pdxrptg_this_character_is_not_kicked_due_to_necromancy_akavir = {
 
 expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion = {
 	trigger_if = {
-		limit = { expd_pdxrptd_edmp_is_active = yes }
+		limit = { expd_pdxrptg_edmp_is_active = yes }
 		custom_tooltip = {
 			text = expd_pdxrptg_this_character_is_not_blocked_due_to_controlling_religion_incl_edmp_tt
 			OR = {

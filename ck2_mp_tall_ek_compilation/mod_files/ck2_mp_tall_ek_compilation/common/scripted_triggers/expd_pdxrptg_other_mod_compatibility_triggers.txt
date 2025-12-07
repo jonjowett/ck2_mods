@@ -7,15 +7,22 @@ expd_pdxrptg_edgifts_is_active = {
 	}
 }
 
-expd_pdxrptd_edmp_is_active = {
+expd_pdxrptg_edmp_is_active = {
 	1 = {
 		# Audax Validator "." Ignore_NEXT
 		has_province_modifier = edmp_detectability
 	}
 }
 
+expd_pdxrptg_this_character_is_a_present_or_absentee_player = {
+	OR = {
+		ai = no
+		expd_pdxrptg_this_character_is_an_absentee_player = yes
+	}
+}
+
 expd_pdxrptg_this_character_is_an_absentee_player = {
-	expd_pdxrptd_edmp_is_active = yes
+	expd_pdxrptg_edmp_is_active = yes
 	ai = yes
 	# Audax Validator "." Ignore_NEXT
 	has_character_modifier = edmp_playerflag

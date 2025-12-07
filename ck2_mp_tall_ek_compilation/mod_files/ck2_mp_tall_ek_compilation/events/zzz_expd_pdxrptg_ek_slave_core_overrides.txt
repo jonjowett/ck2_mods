@@ -1,0 +1,134 @@
+# Audax Validator EnableCommentMetadata
+
+# Ignore all validator errors, because the only changes are:
+# (1) Disabling the first option for AI
+# (2) Decreasing the chance of failure, depending on province infrastructure and existence of a fort
+# Audax Validator "!" Ignore_NEXT
+
+namespace = slaves
+
+## Pirates raided our coast!
+province_event = {
+	id = slaves.210
+	picture = GFX_evt_burning_house
+	
+	desc = {
+		trigger = { NOT = {
+				province_has_slaves = yes
+			}
+		}
+		text = slaves.210.d.enslaved
+	}
+	
+	desc = {
+		trigger = { province_has_slaves = yes }
+		text = slaves.210.d.slavesStolen
+	}
+	
+	trigger = {
+		port = yes
+		OR = {
+			province_has_slaves = yes
+			province_can_be_enslaved = yes
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 600
+		
+		modifier = { factor = 1.1 AND = { has_province_modifier = infrastructure_1 has_damaged_infrastructure = no } }
+		modifier = { factor = 1.2 AND = { has_province_modifier = infrastructure_2 has_damaged_infrastructure = no } }
+		modifier = { factor = 1.3 AND = { has_province_modifier = infrastructure_3 has_damaged_infrastructure = no } }
+		modifier = { factor = 1.4 AND = { has_province_modifier = infrastructure_4 has_damaged_infrastructure = no } }
+		
+		modifier = { factor = 5 has_fort = yes }
+		
+	}
+	
+	option = {
+		name = slaves.210.optA
+		
+		# MOD ADDED: This option is only available for players, because AI should always try to get their slaves back (since it's free).
+		trigger = { owner = { ai = no } }
+		
+		if = {
+			limit = { province_has_slaves = yes }
+			liberate_province = yes
+		}
+		
+		else = {
+			save_event_target_as = target_province_enslaved
+			enslave_province = yes
+		}
+		
+	}
+	
+	option = {
+		name = slaves.210.optB
+		
+		if = {
+			limit = { ai = no }
+			owner = { scaled_wealth = { value = -0.25 min = -10 max = -100 } }
+		}
+		
+		random_list = {
+			# The pirates manage to flee with the slaves
+			33 = {
+				custom_tooltip = {
+					text = PIRATES_FLEE_CT
+					province_event = { id = slaves.211 days = 3 random = 2 }
+				}
+				
+				# MOD ADDED: Pirates are less likely to successfully raid provinces with high infra and/or fort
+				mult_modifier = {
+					factor = 0.9
+					AND = { has_province_modifier = infrastructure_1 has_damaged_infrastructure = no }
+				}
+				mult_modifier = {
+					factor = 0.8
+					AND = { has_province_modifier = infrastructure_2 has_damaged_infrastructure = no }
+				}
+				mult_modifier = {
+					factor = 0.7
+					AND = { has_province_modifier = infrastructure_3 has_damaged_infrastructure = no }
+				}
+				mult_modifier = {
+					factor = 0.6
+					AND = { has_province_modifier = infrastructure_4 has_damaged_infrastructure = no }
+				}
+				mult_modifier = {
+					factor = 0.2
+					has_fort = yes
+				}
+			}
+			# You intercept the pirates and get the captured people back to their province
+			33 = {
+				custom_tooltip = {
+					text = PIRATES_KILLED_CT
+					province_event = { id = slaves.212 days = 3 random = 2 }
+				}
+			}
+			# You capture the pirates and their fleet!
+			33 = {
+				custom_tooltip = {
+					text = PIRATES_CAPTURED_CT
+					province_event = { id = slaves.213 days = 3 random = 2 }
+				}
+			}
+		}
+		
+	}
+	
+	after = {
+		if = {
+			limit = { owner = { ai = yes } }
+			county = { create_fort = location }
+		}
+		
+		else = {
+			custom_tooltip = {
+				text = BUILD_FORT_REDUCES_CHANCES_RAID_CT
+			}
+		}
+	}
+}

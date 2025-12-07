@@ -1,0 +1,39 @@
+decisions = {
+	
+	expd_pdxrptg_no_family_baronies_enable = {
+		ai = no
+		potential = {
+			ai = no
+			has_character_flag = title_open
+			NOT = { has_character_modifier = expd_pdxrptg_no_family_baronies }
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_no_family_baronies_enable_tt
+				add_character_modifier = {
+					name     = expd_pdxrptg_no_family_baronies
+					duration = -1
+					hidden   = yes
+					inherit  = yes
+				}
+			}
+		}
+	}
+	expd_pdxrptg_no_family_baronies_disable = {
+		ai = no
+		potential = {
+			ai = no
+			has_character_flag = title_open
+			has_character_modifier = expd_pdxrptg_no_family_baronies
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_pdxrptg_no_family_baronies_disable_tt
+				remove_character_modifier = expd_pdxrptg_no_family_baronies
+			}
+		}
+	}
+	
+}

@@ -3,55 +3,64 @@
 expd_pdxrptg_notification_menu_open;(ED:PT) Open Notifications Submenu;;;;;;;;;;;;;x
 expd_pdxrptg_notification_menu_open_desc;The notifications submenu allows you to receive alerts when your character fulfils certain conditions - ie. when you might want to take a beneficial in-game action that you might not otherwise have noticed.;;;;;;;;;;;;;x
 #
+# Generic notification for non-spellcasters using magic notifications
+expd_pdxrptg_notification_magicka_warning_you_are_not_a_spellcaster_tt;You are NOT (currently) a spellcaster, so this notification will NOT (currently) have any effect!;;;;;;;;;;;;;x
+#
 # Intrigue Menu Decisions - Magicka Full/Half
-expd_pdxrptg_notification_magicka_full_toggle_on;(ED:PT) Magicka Full: DISABLED - Toggle on?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_full_toggle_on;Magicka Full: DISABLED - Toggle on?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_full_toggle_on_desc;You are NOT currently being notified when your Magicka is completely refilled. Click this decision to enable the notification.;;;;;;;;;;;;;x
-expd_pdxrptg_notification_magicka_full_toggle_off;(ED:PT) Magicka Full: ENABLED - Toggle off?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_full_toggle_off;Magicka Full: ENABLED - Toggle off?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_full_toggle_off_desc;You ARE currently being notified when your Magicka is completely refilled. Click this decision to disable the notification.;;;;;;;;;;;;;x
-expd_pdxrptg_notification_magicka_half_toggle_on;(ED:PT) Magicka Half-Full: DISABLED - Toggle on?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_half_toggle_on;Magicka Half-Full: DISABLED - Toggle on?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_half_toggle_on_desc;You are NOT currently being notified when your Magicka is refilled to half-full. Click this decision to enable the notification.;;;;;;;;;;;;;x
-expd_pdxrptg_notification_magicka_half_toggle_off;(ED:PT) Magicka Half-Full: ENABLED - Toggle off?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_half_toggle_off;Magicka Half-Full: ENABLED - Toggle off?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_half_toggle_off_desc;You ARE currently being notified when your Magicka is refilled to half-full. Click this decision to disable the notification.;;;;;;;;;;;;;x
 #
 # Intrigue Menu Decisions - Magicka Unused - Spellcaster
-expd_pdxrptg_notification_magicka_unused_off_to_1year;(ED:PT) Magicka Unused: DISABLED - Toggle on (1y)?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_unused_off_to_1year;Magicka Unused: DISABLED - Toggle on (1y)?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_unused_off_to_1year_desc;You are NOT currently being notified when your Magicka seems to be unused (ie. is 90% or more of the maximum) for a long period of time.\n§g...INFO: Available options for the notification interval are: off, 1 year, 3 years, and 5 years.§!\nClick this decision to be notified if your Magicka is unused for §Y1 year§!.;;;;;;;;;;;;;x
-expd_pdxrptg_notification_magicka_unused_1year_to_3year;(ED:PT) Magicka Unused: ENABLED (1y) - Toggle 3y?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_unused_1year_to_3year;Magicka Unused: ENABLED (1y) - Toggle 3y?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_unused_1year_to_3year_desc;You ARE currently being notified when your Magicka seems to be unused (ie. is 90% or more of the maximum) for §Y1 year§!.\n§g...INFO: Available options for the notification interval are: off, 1 year, 3 years, and 5 years.§!\nClick this decision to be notified if your Magicka is unused for §Y3 years§!.;;;;;;;;;;;;;x
-expd_pdxrptg_notification_magicka_unused_3year_to_5year;(ED:PT) Magicka Unused: ENABLED (3y) - Toggle 5y?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_unused_3year_to_5year;Magicka Unused: ENABLED (3y) - Toggle 5y?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_unused_3year_to_5year_desc;You ARE currently being notified when your Magicka seems to be unused (ie. is 90% or more of the maximum) for §Y3 years§!.\n§g...INFO: Available options for the notification interval are: off, 1 year, 3 years, and 5 years.§!\nClick this decision to be notified if your Magicka is unused for §Y5 years§!.;;;;;;;;;;;;;x
-expd_pdxrptg_notification_magicka_unused_5year_to_off;(ED:PT) Magicka Unused: ENABLED (5y) - Toggle off?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_unused_5year_to_off;Magicka Unused: ENABLED (5y) - Toggle off?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_unused_5year_to_off_desc;You ARE currently being notified when your Magicka seems to be unused (ie. is 90% or more of the maximum) for §Y5 years§!.\n§g...INFO: Available options for the notification interval are: off, 1 year, 3 years, and 5 years.§!\nClick this decision to §Rdisable§! all Magicka Unused notifications.;;;;;;;;;;;;;x
 #
 # Intrigue Menu Decisions - Magicka Unused - Non-Spellcaster
-expd_pdxrptg_notification_magicka_unused_1year_to_off_non_spellcaster;(ED:PT) Magicka Unused: ENABLED (1y) but POINTLESS - Toggle off?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_unused_1year_to_off_non_spellcaster;Magicka Unused: ENABLED (1y) but POINTLESS - Toggle off?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_unused_1year_to_off_non_spellcaster_desc;You ARE currently being notified when your Magicka seems to be unused (ie. is 90% or more of the maximum) for §Y1 year§!.\n§g...INFO: Available options for the notification interval are: off, 1 year, 3 years, and 5 years.§!\nHowever, this is §Ypointless§! because §Yyou do NOT currently have access to Magicka§!, so you will never actually receive a notification!\nClick this decision to §Rdisable§! all Magicka Unused notifications.;;;;;;;;;;;;;x
-expd_pdxrptg_notification_magicka_unused_3year_to_off_non_spellcaster;(ED:PT) Magicka Unused: ENABLED (3y) but POINTLESS - Toggle off?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_unused_3year_to_off_non_spellcaster;Magicka Unused: ENABLED (3y) but POINTLESS - Toggle off?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_unused_3year_to_off_non_spellcaster_desc;You ARE currently being notified when your Magicka seems to be unused (ie. is 90% or more of the maximum) for §Y3 years§!.\n§g...INFO: Available options for the notification interval are: off, 1 year, 3 years, and 5 years.§!\nHowever, this is §Ypointless§! because §Yyou do NOT currently have access to Magicka§!, so you will never actually receive a notification!\nClick this decision to §Rdisable§! all Magicka Unused notifications.;;;;;;;;;;;;;x
-expd_pdxrptg_notification_magicka_unused_5year_to_off_non_spellcaster;(ED:PT) Magicka Unused: ENABLED (5y) but POINTLESS - Toggle off?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_unused_5year_to_off_non_spellcaster;Magicka Unused: ENABLED (5y) but POINTLESS - Toggle off?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_unused_5year_to_off_non_spellcaster_desc;You ARE currently being notified when your Magicka seems to be unused (ie. is 90% or more of the maximum) for §Y5 years§!.\n§g...INFO: Available options for the notification interval are: off, 1 year, 3 years, and 5 years.§!\nHowever, this is §Ypointless§! because §Yyou do NOT currently have access to Magicka§!, so you will never actually receive a notification!\nClick this decision to §Rdisable§! all Magicka Unused notifications.;;;;;;;;;;;;;x
 #
 # Intrigue Menu Decisions - Magicka Unused - Bugged
-expd_pdxrptg_notification_magicka_unused_toomany_to_off;(ED:PT) Magicka Unused: BUGGED - Toggle off to fix?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_magicka_unused_toomany_to_off;Magicka Unused: BUGGED - Toggle off to fix?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_magicka_unused_toomany_to_off_desc;Somehow, your Magicka Unused notification settings have become bugged. Please turn them off (using this decision) to fix the issue.;;;;;;;;;;;;;x
 #
 # Intrigue Menu Decisions - Potion Effect Ended
-expd_pdxrptg_notification_potion_effect_ended_toggle_on;(ED:PT) Potion Effect Ended: DISABLED - Toggle on?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_potion_effect_ended_toggle_on;Potion Effect Ended: DISABLED - Toggle on?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_potion_effect_ended_toggle_on_desc;You are NOT currently being notified when your current potion effect expires. Click this decision to enable the notification.;;;;;;;;;;;;;x
-expd_pdxrptg_notification_potion_effect_ended_toggle_off;(ED:PT) Potion Effect Ended: ENABLED - Toggle off?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_potion_effect_ended_toggle_off;Potion Effect Ended: ENABLED - Toggle off?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_potion_effect_ended_toggle_off_desc;You ARE currently being notified when your current potion effect expires. Click this decision to disable the notification.;;;;;;;;;;;;;x
 #
 # Intrigue Menu Decisions - No Potion
-expd_pdxrptg_notification_potion_none_toggle_on;(ED:PT) No Potion: DISABLED - Toggle on?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_potion_none_toggle_on;No Potion: DISABLED - Toggle on?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_potion_none_toggle_on_desc;You are NOT currently being notified when you have had no active alchemical potion for a couple of years. Click this decision to enable the notification.;;;;;;;;;;;;;x
-expd_pdxrptg_notification_potion_none_toggle_off;(ED:PT) No Potion: ENABLED - Toggle off?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_potion_none_toggle_off;No Potion: ENABLED - Toggle off?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_potion_none_toggle_off_desc;You ARE currently being notified when you have had no active alchemical potion for a couple of years. Click this decision to disable the notification.;;;;;;;;;;;;;x
 #
 # Intrigue Menu Decisions - Purchase Tech
-expd_pdxrptg_notification_purchase_tech_toggle_on;(ED:PT) Can Purchase Tech: DISABLED - Toggle on?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_purchase_tech_toggle_on;Can Purchase Tech: DISABLED - Toggle on?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_purchase_tech_toggle_on_desc;You are NOT currently being notified when you can purchase techpoints from your society. Click this decision to enable the notification.;;;;;;;;;;;;;x
-expd_pdxrptg_notification_purchase_tech_toggle_off;(ED:PT) Can Purchase Tech: ENABLED - Toggle off?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_purchase_tech_toggle_off;Can Purchase Tech: ENABLED - Toggle off?;;;;;;;;;;;;;x
 expd_pdxrptg_notification_purchase_tech_toggle_off_desc;You ARE currently being notified when you can purchase techpoints from your society. Click this decision to disable the notification.;;;;;;;;;;;;;x
+#
+# Intrigue Menu Decisions - Lycan Training
+expd_pdxrptg_notification_lycan_training_toggle_on;Can Control Beast Form: DISABLED - Toggle on?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_lycan_training_toggle_on_desc;You are NOT currently being notified when you can attempt to control your beast form. Click this decision to enable the notification.;;;;;;;;;;;;;x
+expd_pdxrptg_notification_lycan_training_toggle_off;Can Control Beast Form: ENABLED - Toggle off?;;;;;;;;;;;;;x
+expd_pdxrptg_notification_lycan_training_toggle_off_desc;You ARE currently being notified when you can attempt to control your beast form. Click this decision to disable the notification.;;;;;;;;;;;;;x
 #
 #
 #
@@ -71,6 +80,8 @@ ExpdPdxrptgNotifications_NoPotion_Title;No recent Alchemical potion!;;;;;;;;;;;;
 ExpdPdxrptgNotifications_NoPotion_Desc;I woke up this morning and realised that I haven't bought a potion from the marketplace for quite some time.\n\nPerhaps I should return to buy another?;;;;;;;;;;;;;x
 ExpdPdxrptgNotifications_PurchaseTech_Title;Can Purchase Techpoints!;;;;;;;;;;;;;x
 ExpdPdxrptgNotifications_PurchaseTech_Desc;I have sufficient reputation with the [Root.Society.GetName] to ask for their aid with my technological progress.;;;;;;;;;;;;;x
+ExpdPdxrptgNotifications_LycanTraining_Title;Can Control Beast Form!;;;;;;;;;;;;;x
+ExpdPdxrptgNotifications_LycanTraining_Desc;It has been long enough since my last attempt that I can once again try to control my beast form.;;;;;;;;;;;;;x
 ExpdPdxrptgNotifications_Option_DisableThisNotification;Disable this notification;;;;;;;;;;;;;x
 #
 #
@@ -84,6 +95,7 @@ expd_pdxrptg_notification_potion_effect_ended_will_be_disabled_tt;The §YPotion E
 expd_pdxrptg_notification_potion_none_will_be_enabled_tt;The §YNo Potion§! notification will be §Genabled§!;;;;;;;;;;;;;x
 expd_pdxrptg_notification_potion_none_will_be_disabled_tt;The §YNo Potion§! notification will be §Rdisabled§!;;;;;;;;;;;;;x
 expd_pdxrptg_notification_purchase_tech_will_be_disabled_tt;The §YCan Purchase Tech§! notification will be §Rdisabled§!;;;;;;;;;;;;;x
+expd_pdxrptg_notification_lycan_training_will_be_disabled_tt;The §YCan Control Beast Form§! notification will be §Rdisabled§!;;;;;;;;;;;;;x
 #
 #
 #
@@ -104,3 +116,5 @@ expd_pdxrptg_notification_potion_none;§M(ED:PT)§! Notification Enabled - No Poti
 expd_pdxrptg_notification_potion_none_desc;The presence of this modifier on a character indicates that the §YNo Potion§! notification is §Genabled§!.;;;;;;;;;;;;;x
 expd_pdxrptg_notification_purchase_tech;§M(ED:PT)§! Notification Enabled - Can Purchase Tech;;;;;;;;;;;;;x
 expd_pdxrptg_notification_purchase_tech_desc;The presence of this modifier on a character indicates that the §YCan Purchase Tech§! notification is §Genabled§!.;;;;;;;;;;;;;x
+expd_pdxrptg_notification_lycan_training;§M(ED:PT)§! Notification Enabled - Can Control Beast Form;;;;;;;;;;;;;x
+expd_pdxrptg_notification_lycan_training_desc;The presence of this modifier on a character indicates that the §YCan Control Beast Form§! notification is §Genabled§!.;;;;;;;;;;;;;x

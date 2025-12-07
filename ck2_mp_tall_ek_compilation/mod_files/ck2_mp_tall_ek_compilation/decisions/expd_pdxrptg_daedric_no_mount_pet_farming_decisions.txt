@@ -1,5 +1,5 @@
 decisions = {
-	expd_pdxrptg_daedric_favour_admin_enable = {
+	expd_pdxrptg_daedric_no_mount_pet_farming_enable = {
 		ai = no
 		potential = {
 			ai = no
@@ -8,16 +8,19 @@ decisions = {
 				is_multiplayer_host_character = yes
 			}
 			has_character_flag = expd_pdxrptg_admin_submenu_is_open
-			expd_pdxrptg_daedric_favour_is_permitted_by_game_rules = no
+			NOT = { has_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming }
 		}
 		allow = {
 			multiplayer = no # Can only alter this setting in single-player
 		}
 		effect = {
-			clr_global_flag = expd_pdxrptd_daedric_favour_disabled
+			custom_tooltip = {
+				text = expd_pdxrptg_daedric_no_mount_pet_farming_enable_tt
+				set_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming
+			}
 		}
 	}
-	expd_pdxrptg_daedric_favour_admin_disable = {
+	expd_pdxrptg_daedric_no_mount_pet_farming_disable = {
 		ai = no
 		potential = {
 			ai = no
@@ -26,13 +29,16 @@ decisions = {
 				is_multiplayer_host_character = yes
 			}
 			has_character_flag = expd_pdxrptg_admin_submenu_is_open
-			expd_pdxrptg_daedric_favour_is_permitted_by_game_rules = yes
+			has_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming
 		}
 		allow = {
 			multiplayer = no # Can only alter this setting in single-player
 		}
 		effect = {
-			set_global_flag = expd_pdxrptd_daedric_favour_disabled
+			custom_tooltip = {
+				text = expd_pdxrptg_daedric_no_mount_pet_farming_disable_tt
+				clr_global_flag = expd_pdxrptg_daedric_no_mount_pet_farming
+			}
 		}
 	}
 }

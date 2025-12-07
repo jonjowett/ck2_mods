@@ -1,9 +1,10 @@
 namespace = ExpdPdxrptgNotifications
 
-# Magicka       notifications use IDs 1000-1999
-# Potions       notifications use IDs 2000-2999
-# Purchase Tech notifications use IDs 3000-3999
-# Administrative events       use IDs 9000-9999
+# Magicka        notifications use IDs 1000-1999
+# Potions        notifications use IDs 2000-2999
+# Purchase Tech  notifications use IDs 3000-3999
+# Lycan Training notifications use IDs 4000-4999
+# Administrative events        use IDs 9000-9999
 
 # on_startup: Check whether this player character was using the old flag-based notification system and, if yes, upgrade them to the new modifier-based system.
 character_event = {
@@ -106,6 +107,11 @@ character_event = {
 			limit = { FROMFROM = { expd_pdxrptg_notification_purchase_tech_is_enabled = yes } }
 			FROMFROM           = { expd_pdxrptg_notification_purchase_tech_stop       = yes }
 			ROOT               = { expd_pdxrptg_notification_purchase_tech_start      = yes }
+		}
+		if = {
+			limit = { FROMFROM = { expd_pdxrptg_notification_lycan_training_is_enabled = yes } }
+			FROMFROM           = { expd_pdxrptg_notification_lycan_training_stop       = yes }
+			ROOT               = { expd_pdxrptg_notification_lycan_training_start      = yes }
 		}
 	}
 }

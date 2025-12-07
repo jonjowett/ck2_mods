@@ -4,8 +4,10 @@ edmp_playerflag_add_flag_to_this_character = {
 		duration = -1
 		inherit  = yes
 	}
+	hidden_tooltip = { add_trait = edmp_absent_human_player }
 }
 
 edmp_playerflag_remove_flag_from_this_character = {
 	remove_character_modifier = edmp_playerflag
+	hidden_tooltip = { remove_trait = edmp_absent_human_player }
 }

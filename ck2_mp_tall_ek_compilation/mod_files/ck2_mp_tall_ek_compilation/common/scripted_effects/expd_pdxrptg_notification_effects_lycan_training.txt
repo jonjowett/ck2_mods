@@ -1,0 +1,11 @@
+expd_pdxrptg_notification_lycan_training_start = {
+	add_character_modifier = {
+		name     = expd_pdxrptg_notification_lycan_training
+		duration = -1
+		hidden   = yes
+		inherit  = yes
+	}
+}
+expd_pdxrptg_notification_lycan_training_stop = {
+	remove_character_modifier = expd_pdxrptg_notification_lycan_training
+}

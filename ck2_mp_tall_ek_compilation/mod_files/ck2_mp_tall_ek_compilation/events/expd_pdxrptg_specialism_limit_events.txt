@@ -1,3 +1,5 @@
+# Audax Validator EnableCommentMetadata
+
 namespace = ExpdPdxRptgSpecialismLimit
 
 # Triggered by on_character_society_rank_up and on_yearly_pulse
@@ -17,12 +19,44 @@ character_event = {
 		NOT = { has_character_flag = expd_pdxrptg_this_character_has_been_a_grandmaster }
 	}
 	
+	immediate = {
+		# If this character has the specialism timeout for any reason, cancel it.
+		#    (So it's not blocking them from starting studying immediately.)
+		# Audax Validator "." Ignore_NEXT
+		remove_character_modifier = denied_specialization_timer
+	}
+	
 	option = {
-		name = EXCELLENT
+		name = ExpdPdxRptgSpecialismLimit_EvtOpt_Excellent
 		custom_tooltip = {
 			text = ExpdPdxRptgSpecialismLimit_Add_One_Specialism_Slot_Grandmaster_tt
 			set_character_flag = expd_pdxrptg_this_character_has_been_a_grandmaster
 		}
+		# AI will not choose this option if the other one is available
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				expd_pdxrptg_this_character_has_potentially_bugged_specialisation_study_on_gain_new_slot = yes
+			}
+		}
+	}
+	
+	option = {
+		name = ExpdPdxRptgSpecialismLimit_EvtOpt_Excellent_And_Cancel_Study
+		trigger = { expd_pdxrptg_this_character_has_potentially_bugged_specialisation_study_on_gain_new_slot = yes }
+		tooltip_info_custom = ExpdPdxRptgSpecialismLimit_EvtOptTTInfo_Potentially_Bugged_Specialisation_Study_tt
+		custom_tooltip = {
+			text = ExpdPdxRptgSpecialismLimit_Add_One_Specialism_Slot_Grandmaster_tt
+			set_character_flag = expd_pdxrptg_this_character_has_been_a_grandmaster
+		}
+		custom_tooltip = {
+			text = ExpdPdxRptgSpecialismLimit_Cancel_Specialism_Study_With_Warning_tt
+			clr_character_flag = guild_specialization_ongoing
+			# Audax Validator "." Ignore_NEXT
+			clear_specialization_flags = yes
+		}
+		ai_chance = { factor = 10 }
 	}
 	
 }
@@ -44,12 +78,44 @@ character_event = {
 		NOT = { has_character_flag = expd_pdxrptg_notified_dragonborn }
 	}
 	
+	immediate = {
+		# If this character has the specialism timeout for any reason, cancel it.
+		#    (So it's not blocking them from starting studying immediately.)
+		# Audax Validator "." Ignore_NEXT
+		remove_character_modifier = denied_specialization_timer
+	}
+	
 	option = {
-		name = EXCELLENT
+		name = ExpdPdxRptgSpecialismLimit_EvtOpt_Excellent
 		custom_tooltip = {
 			text = ExpdPdxRptgSpecialismLimit_Add_One_Specialism_Slot_Dragonborn_tt
 			set_character_flag = expd_pdxrptg_notified_dragonborn
 		}
+		# AI will not choose this option if the other one is available
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				expd_pdxrptg_this_character_has_potentially_bugged_specialisation_study_on_gain_new_slot = yes
+			}
+		}
+	}
+	
+	option = {
+		name = ExpdPdxRptgSpecialismLimit_EvtOpt_Excellent_And_Cancel_Study
+		trigger = { expd_pdxrptg_this_character_has_potentially_bugged_specialisation_study_on_gain_new_slot = yes }
+		tooltip_info_custom = ExpdPdxRptgSpecialismLimit_EvtOptTTInfo_Potentially_Bugged_Specialisation_Study_tt
+		custom_tooltip = {
+			text = ExpdPdxRptgSpecialismLimit_Add_One_Specialism_Slot_Dragonborn_tt
+			set_character_flag = expd_pdxrptg_notified_dragonborn
+		}
+		custom_tooltip = {
+			text = ExpdPdxRptgSpecialismLimit_Cancel_Specialism_Study_With_Warning_tt
+			clr_character_flag = guild_specialization_ongoing
+			# Audax Validator "." Ignore_NEXT
+			clear_specialization_flags = yes
+		}
+		ai_chance = { factor = 10 }
 	}
 	
 }
@@ -71,12 +137,73 @@ character_event = {
 		NOT = { has_character_flag = expd_pdxrptg_notified_legendary_education }
 	}
 	
+	immediate = {
+		# If this character has the specialism timeout for any reason, cancel it.
+		#    (So it's not blocking them from starting studying immediately.)
+		# Audax Validator "." Ignore_NEXT
+		remove_character_modifier = denied_specialization_timer
+	}
+	
 	option = {
-		name = EXCELLENT
+		name = ExpdPdxRptgSpecialismLimit_EvtOpt_Excellent
 		custom_tooltip = {
 			text = ExpdPdxRptgSpecialismLimit_Add_One_Specialism_Slot_Education_tt
 			set_character_flag = expd_pdxrptg_notified_legendary_education
 		}
+		# AI will not choose this option if the other one is available
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				expd_pdxrptg_this_character_has_potentially_bugged_specialisation_study_on_gain_new_slot = yes
+			}
+		}
 	}
 	
+	option = {
+		name = ExpdPdxRptgSpecialismLimit_EvtOpt_Excellent_And_Cancel_Study
+		trigger = { expd_pdxrptg_this_character_has_potentially_bugged_specialisation_study_on_gain_new_slot = yes }
+		tooltip_info_custom = ExpdPdxRptgSpecialismLimit_EvtOptTTInfo_Potentially_Bugged_Specialisation_Study_tt
+		custom_tooltip = {
+			text = ExpdPdxRptgSpecialismLimit_Add_One_Specialism_Slot_Education_tt
+			set_character_flag = expd_pdxrptg_notified_legendary_education
+		}
+		custom_tooltip = {
+			text = ExpdPdxRptgSpecialismLimit_Cancel_Specialism_Study_With_Warning_tt
+			clr_character_flag = guild_specialization_ongoing
+			# Audax Validator "." Ignore_NEXT
+			clear_specialization_flags = yes
+		}
+		ai_chance = { factor = 10 }
+	}
+	
+}
+
+# Cleanup event:
+#  --- If a character either has maxed their specialisms or is not in a society
+#  --- But they are somehow still studying a specialism
+#  --- Then cancel the study with no penalty
+# Triggered by on_yearly_pulse & on_character_kicked_from_society & on_character_leave_society
+character_event = {
+	id = ExpdPdxRptgSpecialismLimit.900
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			has_character_flag = guild_specialization_ongoing
+			# Audax Validator "." Ignore_NEXT
+			has_character_modifier = denied_specialization_timer
+		}
+		OR = {
+			has_maxed_specializations = yes
+			is_in_society = no
+		}
+	}
+	immediate = {
+		# Audax Validator "." Ignore_NEXT
+		remove_character_modifier = denied_specialization_timer
+		clr_character_flag = guild_specialization_ongoing
+		# Audax Validator "." Ignore_NEXT
+		clear_specialization_flags = yes
+	}
 }
