@@ -51,4 +51,8 @@ xcopy /R /Y /Q /S /E /I %final_overrides_folder_location% %this_mod_folder_locat
 
 :: Cleanup: Delete all files in the root mod folder
 del /F /Q %this_mod_folder_location%*
+
+:: Reinsert the preview pic
+xcopy /R /Y /Q %base_mod_folder_location%EKPreview0.jpg %this_mod_folder_location%
+
 ::pause
