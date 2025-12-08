@@ -2,7 +2,7 @@
 
 ::Constants
 set ck_mod_folder=.\..\..\..\Parado~1\Crusad~1\mod\
-set mod_name=ck2_mp_pdxrptg_12_2025_compilation
+set mod_name=ck2_mp_pdxrptg_2026_compilation
 set modfiles_folder=.\mod_files\
 
 ::Set locations of files

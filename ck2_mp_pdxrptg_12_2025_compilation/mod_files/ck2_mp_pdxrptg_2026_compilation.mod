@@ -1,6 +1,5 @@
-name="CK2 MP: PDXRPTG 12-2025 Compilation"
-path="mod/ck2_mp_pdxrptg_12_2025_compilation"
-
+name="CK2 MP: PDXRPTG 2026 Compilation"
+path="mod/ck2_mp_pdxrptg_2026_compilation"
 replace_path="common"
 replace_path="common/alternate_start"
 replace_path="common/artifacts"

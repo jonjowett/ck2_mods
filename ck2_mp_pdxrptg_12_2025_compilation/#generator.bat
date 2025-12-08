@@ -5,7 +5,7 @@
 
 
 :: Constants
-set this_mod_folder_location=.\mod_files\ck2_mp_pdxrptg_12_2025_compilation\
+set this_mod_folder_location=.\mod_files\ck2_mp_pdxrptg_2026_compilation\
 set git_mod_folder_location=.\..\
 set git_mod_subfolder=\mod_files\
 set base_mod_folder_location=.\source_files\1_base_mod\
