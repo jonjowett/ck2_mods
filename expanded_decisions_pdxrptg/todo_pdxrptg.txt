@@ -81,6 +81,11 @@ ek changes
     - Dragon cult https://forum.paradoxplaza.com/forum/threads/submod-dragon-cult-expanded-elder-kings-svn-by-the-cappuccino-crew.1342936/
     - artifact sets (so a player can easily switch between eg. peace, war, builder) (must be inheritable!)
        - BUT you can't force-equip an artifact... transfer all out, transfer the desired set back, transfer all others back?
+    - compress images for smaller overall filesize
+       - use imagemagick for bulk image alteration
+       - compare size before & after
+       - character portrait .dds - BC3/DXT5, **no mipmaps**
+       - CoAs (incl title CoAs) .tga - try auto-detect (24-bit?) **with** RLE compresison
 
 general ideas
  - get AI to treat themselves if the first treatment expires
