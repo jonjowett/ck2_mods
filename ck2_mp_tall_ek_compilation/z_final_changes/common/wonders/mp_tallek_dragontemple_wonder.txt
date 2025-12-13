@@ -1,0 +1,182 @@
+# Based on Palace of the Mane, with some improvements copied from other temples
+#  - Limit to province of Baobao
+#  - Include moonsugar distillery, and nothing else
+#  - Include mosque & pagan temple features (mosque: because they're cool, pagan: default for black dragon)
+#  - Include generic features
+
+wonder_dragontemple = {
+	picture = GFX_wonder_strip_hindu_temple
+	potential = {
+		FROMFROMFROM = {
+			county = {
+				# Audax Validator "." Ignore_NEXT
+				title = c_baobao
+			}
+		}
+	}
+	active = {
+		ROOT = { religion = black_dragon }
+		FROMFROMFROM = { religion = black_dragon }
+	}
+	flags = {
+		is_destructible
+		holy_building
+		inspires_piety
+		inspires_contentedness
+		inspires_relaxing
+		cost_high
+		burial_ground # Added from "pagan temple" (default temple for black dragon)
+	}
+	available_upgrades = {
+		
+		# Unique feature copied from Palace of the Mane (because we are also khajiit)
+		upgrade_moonsugar_distillery
+		
+		# Default mosque features
+		upgrade_minaret
+		upgrade_open_courtyard
+		upgrade_dome
+		upgrade_lamps_hanging
+		upgrade_soup_kitchen
+		upgrade_school_mosque
+		
+		# Default pagan temple features
+		upgrade_statue_god
+		upgrade_temple_guards
+		upgrade_sacrificial_altar
+		upgrade_sacred_grove
+		upgrade_prophecy_rooms
+		upgrade_temple_precinct
+		upgrade_inner_sanctuary
+		
+		# OTHER:
+	 	upgrade_roads
+		upgrade_watchtower_network
+		upgrade_spikes
+		upgrade_retinue
+		upgrade_road_tolls
+		upgrade_tavern
+		
+		#Cultural/Religion/Regional/Special Global Upgrades
+		# Audax Validator "." Ignore_NEXT
+		upgrade_runestones
+		# Audax Validator "." Ignore_NEXT
+		upgrade_necromancer_retinue
+		# Audax Validator "." Ignore_NEXT
+		upgrade_brewery
+		# Audax Validator "." Ignore_NEXT
+		upgrade_meadery
+		# Audax Validator "." Ignore_NEXT
+		upgrade_vineyard
+		# Audax Validator "." Ignore_NEXT
+		upgrade_rice_field
+		# Audax Validator "." Ignore_NEXT
+		upgrade_coconut_orchard
+		# Audax Validator "." Ignore_NEXT
+		upgrade_dairy_brewer
+		# Audax Validator "." Ignore_NEXT
+		upgrade_drainage_channels
+		# Audax Validator "." Ignore_NEXT
+		upgrade_tree_plantation
+		# Audax Validator "." Ignore_NEXT
+		upgrade_hypocausts
+		# Audax Validator "." Ignore_NEXT
+		upgrade_heating_pipes
+		# Audax Validator "." Ignore_NEXT
+		upgrade_aqueduct_system
+		# Audax Validator "." Ignore_NEXT
+		upgrade_freshwater_fountains
+		# Audax Validator "." Ignore_NEXT
+		upgrade_sewers
+		# Audax Validator "." Ignore_NEXT
+		upgrade_investment_logging
+		# Audax Validator "." Ignore_NEXT
+		upgrade_investment_quarry
+		
+	}
+	
+	stage = {
+		allow = {
+		}
+		build_time = 325
+		gold_cost_flat = 2000
+		gold_cost_ticking = 5
+		restore_time = 150
+		loot_time = 12
+		restore_cost_flat = 400
+		restore_cost_ticking = 2
+		upgrade_slots = 3
+		local_modifier = {
+			local_tax_modifier = 0.025
+			culture_techpoints = 0.025
+			economy_techpoints = 0.025
+		}
+		owner_modifier = {
+			monthly_character_prestige = 0.1
+			monthly_character_piety = 0.1
+		}
+	}
+	stage = {
+		allow = {
+		}
+		build_time = 375
+		gold_cost_flat = 2200
+		gold_cost_ticking = 5
+		restore_time = 200
+		loot_time = 12
+		restore_cost_flat = 500
+		restore_cost_ticking = 2
+		upgrade_slots = 2
+		local_modifier = {
+			local_tax_modifier = 0.025
+			culture_techpoints = 0.025
+			economy_techpoints = 0.025
+		}
+		owner_modifier = {
+			monthly_character_prestige = 0.1
+			monthly_character_piety = 0.1
+		}
+	}
+	stage = {
+		allow = {
+		}
+		build_time = 375
+		gold_cost_flat = 2400
+		gold_cost_ticking = 5
+		restore_time = 200
+		loot_time = 12
+		restore_cost_flat = 500
+		restore_cost_ticking = 2
+		upgrade_slots = 2
+		local_modifier = {
+			local_tax_modifier = 0.05
+			culture_techpoints = 0.025
+			economy_techpoints = 0.025
+		}
+		owner_modifier = {
+			monthly_character_prestige = 0.1
+			monthly_character_piety = 0.1
+		}
+	}
+	stage = {
+		allow = {
+		}
+		build_time = 325
+		gold_cost_flat = 2600
+		gold_cost_ticking = 5
+		restore_time = 200
+		loot_time = 2
+		restore_cost_flat = 500
+		restore_cost_ticking = 2
+		upgrade_slots = 3
+		local_modifier = {
+			local_tax_modifier = 0.1
+			culture_techpoints = 0.025
+			economy_techpoints = 0.025
+		}
+		owner_modifier = {
+			monthly_character_prestige = 0.2
+			monthly_character_piety = 0.2
+		}
+	}
+}
