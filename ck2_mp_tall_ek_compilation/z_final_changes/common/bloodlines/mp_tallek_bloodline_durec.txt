@@ -1,0 +1,69 @@
+# Audax Validator EnableCommentMetadata
+
+mp_tallek_bloodline_durec = {
+	
+	
+	
+	# First column of modifiers
+	
+	diplomacy = 1
+	martial = 1
+	
+	monthly_character_prestige = 0.5
+	
+	# Special effect: councillors tend to be loyal
+	mp_tallek_bloodline_effect_loyal_councilors = 1            # 2 lines in the UI
+	
+	
+	
+	# Second column of modifiers
+	
+	# Audax Validator "." Ignore_NEXT
+	quey_opinion = 10                                          # NB: Double-counted: +10 quey culture, +10 quey race
+	mp_tallek_bloodline_effect_quey_culture_opinion_10 = 1     # Cosmetic notification of the double-counting
+	
+	# Special effect: more likely to steal artifacts and imprison people
+	mp_tallek_bloodline_effect_reaver = 1                      # 3 lines in the UI
+	
+	
+	
+	inheritance = all_descendants
+	matrilineal_override = yes
+	allow_bastards = yes
+	
+	picture = GFX_ek_bloodlines_dragonshead_symbol
+	
+	flags = {
+		mp_tallek_bloodline_durec
+		mp_tallek_bloodline_reward
+		quey_bloodline
+		bloodline_reaver   # The actual reaver effect (siege event checks for this flag)
+		bloodline_loyalist # The actual loyalist effect (checked for in common\council_positions\00_loyalist.txt)
+	}
+	
+	active = {
+		OR = {
+			custom_tooltip = {
+				text = is_bloodline_founder
+				FROM = { founder = { character = ROOT } }
+			}
+			# Audax Validator "." Ignore_NEXT
+			trait = quey
+			# Audax Validator "." Ignore_NEXT
+			trait = pirate
+		}
+		OR = {
+			custom_tooltip = {
+				text = is_bloodline_founder
+				FROM = { founder = { character = ROOT } }
+			}
+			# Audax Validator "." Ignore_NEXT
+			culture = quey
+			# Audax Validator "." Ignore_NEXT
+			has_landed_title = c_cathnoquey
+			# Audax Validator "." Ignore_NEXT
+			has_landed_title = d_cathnoquey
+		}
+	}
+	
+}
