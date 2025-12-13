@@ -1,0 +1,260 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = MP_TallEK_Bloodline_Dahari
+
+###################
+
+#Technology Bloodline.
+# Bards/Scholars/Mystics arriving at court.
+# Very slightly modified from HF.24236-9
+character_event = { 
+	id = MP_TallEK_Bloodline_Dahari.24236
+	hide_window = yes
+	
+	is_triggered_only = yes
+	
+	only_playable = yes
+	only_capable = yes
+	prisoner = no
+	min_age = 16
+
+	trigger = {
+		piety = 0
+		any_owned_bloodline = {
+			has_bloodline_flag = bloodline_wandering_artists
+			bloodline_is_active_for = PREV
+		}
+	}
+	
+	immediate = {
+		random_list = {
+			60 = { #Bard
+				character_event = { id = MP_TallEK_Bloodline_Dahari.24237 }
+			}
+			30 = { #Scholar
+				character_event = { id = MP_TallEK_Bloodline_Dahari.24238 }
+			}
+			10 = { #Mystic
+				character_event = { id = MP_TallEK_Bloodline_Dahari.24239 }
+			}
+			60 = {
+				modifier = {
+					factor = 3
+					ai = yes
+				}
+				modifier = {
+					factor = 1.35
+					NOT = {
+						higher_tier_than = COUNT
+					}
+				}
+				modifier = {
+					factor = 1.35
+					NOT = {
+						higher_tier_than = DUKE
+					}
+				}
+				modifier = {
+					factor = 1.7
+					NOT = {
+						learning = 4
+					}
+				}
+				modifier = {
+					factor = 1.5
+					NOT = {
+						learning = 8
+					}
+				}
+				modifier = {
+					factor = 1.35
+					NOT = {
+						learning = 12
+					}
+				}
+				modifier = {
+					factor = 1.75
+					is_evil_trigger = yes
+				}
+				modifier = {
+					factor = 0.65
+					is_benevolent_trigger = yes
+				}
+			}
+		}
+	}
+}
+
+character_event = { # Bard character arrives
+	id = MP_TallEK_Bloodline_Dahari.24237
+	desc = EVTDESCHF24237
+	picture = GFX_evt_open_book_hf
+	border = GFX_event_normal_frame_diplomacy
+
+	is_triggered_only = yes
+	
+	only_playable = yes
+	only_capable = yes
+	prisoner = no
+	
+	immediate = {
+		expd_pdxrptg_employ_councillor_superb_dip_actual = yes
+		event_target:invited_character = {
+			# Audax Validator "." Ignore_NEXT
+			remove_trait = bard_1
+			# Audax Validator "." Ignore_NEXT
+			remove_trait = bard_2
+			# Audax Validator "." Ignore_NEXT
+			remove_trait = bard_3
+			# Audax Validator "." Ignore_NEXT
+			add_trait = bard_3
+			random_list = {
+				1 = {
+					# Audax Validator "." Ignore_NEXT
+					add_trait = poet
+				}
+				1 = {
+					# Audax Validator "." Ignore_NEXT
+					add_trait = painter
+				}
+				1 = {
+					# Audax Validator "." Ignore_NEXT
+					add_trait = musician
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = EVTOPTAHF24237
+		scaled_wealth = { value = -0.1 min = -5 max = -100 }
+		tiered_prestige_reward_effect = yes
+		event_target:invited_character = {
+			opinion = {
+				modifier = opinion_loyal_servant
+				who = ROOT
+				years = 100
+			}
+		}
+	}
+	option = {
+		name = EVTOPTBHF24237
+		
+		hidden_tooltip = {
+			event_target:invited_character = { 
+				death = {
+					death_reason = death_missing
+				}
+			}
+		}
+	}
+}
+
+character_event = { # Scholar character arrives
+	id = MP_TallEK_Bloodline_Dahari.24238
+	desc = EVTDESCHF24238
+	picture = GFX_evt_open_book_hf
+	border = GFX_event_normal_frame_diplomacy
+
+	is_triggered_only = yes
+	
+	only_playable = yes
+	only_capable = yes
+	prisoner = no
+	
+	immediate = {
+		expd_pdxrptg_employ_councillor_superb_lea_actual = yes
+		event_target:invited_character = {
+			add_trait = scholar
+		}
+	}
+	
+	option = {
+		name = EVTOPTAHF24238
+		scaled_wealth = { value = -0.1 min = -5 max = -100 }
+		tiered_piety_reward_effect = yes
+		event_target:invited_character = {
+			opinion = {
+				modifier = opinion_loyal_servant
+				who = ROOT
+				years = 100
+			}
+		}
+	}
+	option = {
+		name = EVTOPTBHF24238
+		
+		hidden_tooltip = {
+			event_target:invited_character = { 
+				death = {
+					death_reason = death_missing
+				}
+			}
+		}
+	}
+}
+
+character_event = { # Mystic character arrives
+	id = MP_TallEK_Bloodline_Dahari.24239
+	desc = { 
+		trigger = { 
+			ROOT = { 
+				is_female = no
+			} 
+		} 
+		picture = GFX_evt_hooded_figure_hf
+		text = EVTDESCHFA24239
+	}
+	desc = { 
+		trigger = { 
+			ROOT = { 
+				is_female = yes
+			} 
+		} 
+		picture = GFX_evt_woman_at_window_hf
+		text = EVTDESCHFB24239
+	}
+	picture = GFX_evt_hooded_figure_hf
+	border = GFX_event_normal_frame_diplomacy
+
+	is_triggered_only = yes
+	
+	only_playable = yes
+	only_capable = yes
+	prisoner = no
+	
+	immediate = {
+		expd_pdxrptg_employ_councillor_superb_lea_actual = yes
+		event_target:invited_character = {
+			add_trait = mystic
+			change_intrigue = 12
+			remove_trait = honest
+			remove_trait = trusting
+			remove_trait = kind
+			remove_trait = humble
+		}
+	}
+	
+	option = {
+		name = EVTOPTAHF24239
+		tiered_piety_negative_effect = yes
+		event_target:invited_character = {
+			opinion = {
+				modifier = opinion_loyal_servant
+				who = ROOT
+				years = 100
+			}
+		}
+	}
+	option = {
+		name = EVTOPTBHF24239
+		
+		hidden_tooltip = {
+			event_target:invited_character = { 
+				death = {
+					death_reason = death_missing
+				}
+			}
+		}
+	}
+}
