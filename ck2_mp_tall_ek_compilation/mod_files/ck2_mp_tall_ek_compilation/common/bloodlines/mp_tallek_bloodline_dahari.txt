@@ -1,0 +1,66 @@
+# Audax Validator EnableCommentMetadata
+
+mp_tallek_bloodline_dahari = {
+	
+	
+	
+	# First column of effects
+	
+	learning = 1
+	
+	monthly_character_prestige = 0.1
+	
+	mp_tallek_bloodline_effect_wandering_artists = 1
+	
+	mp_tallek_bloodline_effect_blank_line_1 = 1          # +1 blank line
+	mp_tallek_bloodline_effect_blank_line_2 = 1          # +1 blank line
+	
+	
+	
+	# Second column of effects
+	
+	# NB: There doesn't seem to be any way to get "Mage Opinion +5" other than to list each one individually.
+	#     In particular, hiding these (and replacing them with a cosmetic modifier) doesn't work.
+	
+	# Audax Validator "." Ignore_NEXT
+	mage_1_opinion = 5
+	# Audax Validator "." Ignore_NEXT
+	mage_2_opinion = 5
+	# Audax Validator "." Ignore_NEXT
+	mage_3_opinion = 5
+	# Audax Validator "." Ignore_NEXT
+	mage_4_opinion = 5
+	# Audax Validator "." Ignore_NEXT
+	mage_5_opinion = 5
+	
+	
+	
+	inheritance = all_descendants
+	matrilineal_override = yes
+	allow_bastards = yes
+	
+	picture = GFX_bloodlines_symbol_zun_sun
+	
+	flags = {
+		mp_tallek_bloodline_dahari
+		mp_tallek_bloodline_reward
+		khajiit_bloodline
+		bloodline_wandering_artists # The actual spawn artist effect
+	}
+	active = {
+		# Audax Validator "." Ignore_NEXT
+		trait = khajiit
+		OR = {
+			# Audax Validator "." Ignore_NEXT
+			culture_group = khajiit
+			# Audax Validator "." Ignore_NEXT
+			trait = mage_4
+			# Audax Validator "." Ignore_NEXT
+			trait = mage_5
+			# Audax Validator "." Ignore_NEXT
+			has_landed_title = c_hobei
+			# Audax Validator "." Ignore_NEXT
+			has_landed_title = d_hobei
+		}
+	}
+}
