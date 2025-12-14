@@ -86,6 +86,12 @@ ek changes
        - compare size before & after
        - character portrait .dds - BC3/DXT5, **no mipmaps**
        - CoAs (incl title CoAs) .tga - try auto-detect (24-bit?) **with** RLE compresison
+    - epic quests for characters with legendary education
+       - mage: ??? reward: ???
+       - warrior: ??? reward: ???
+       - diplomat: ??? reward: bloodline ability to intervene in wars
+       - agent: ??? reward: bloodline ability to personally assassinate or steal
+       - magistrate: ??? reward: ???
 
 general ideas
  - get AI to treat themselves if the first treatment expires
@@ -96,6 +102,13 @@ general ideas
  - nobles' responses to feast invitations need more nuanced decision-making (not just "lol random!")
  - ability to change trad capital of a title
 
+standalone mod, with dynamic event chain for religious head inheritance:
+ - on accession, religious head is given a (hidden) trait that makes them immortal
+ - religious head death event chain is started at random (weighted by health, disease, age, etc)
+    - if they somehow manage to die despite being immortal (execution, duel, etc), the randomly-generated head is assumed to be a temporary caretaker, we start the same event chain.
+    - actually, ideally, I think it'd be better to always have a temporary no-name no-portrait incapable caretaker (installed by the "about to die" on_action), and their function is simply to hold the title until the next head is "elected" (via event chain).
+ - during the event chain, liege can propose a candidate (perhaps with a pseudo-election mechanic where they have to pay to forcibly install an unsuitable sycophant, and the ability to postpone for a few weeks to sort things out)
+ - once the candidate is finalised, kill the previous head and install the new one
 
 
 
