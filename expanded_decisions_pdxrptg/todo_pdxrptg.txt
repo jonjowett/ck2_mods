@@ -29,6 +29,13 @@ ek changes
     - event-based theft & assassination (vs AI) should resolve instantly (no need to unpause for a day)
        - would need to rewrite the whole event chain - v painful!
        - or could add a decision which manually clears the flags, but there may be odd consequences after.
+    - companions techpoints decision is invisible
+    - ek_on_pregnancy script allows Mer to have kids with anyone (bad ordering in if/else clause)
+    X allow undead (trait) to purchase mounts & pets
+    - on change patron deity decision (change_patron_deity), don't remove the trait before the event, and add an even option at the end to cancel and refund the 110 piety
+    X ability to drop specialisations if your existing specialisations are at level 1-3 (instead of the existing logic, which requires all at level 3)
+    - ??? greenpact people who cannibalise people get diseases as a result, but they shouldn't ???
+    - Hiring other-continent assassins/thieves doesn't actually work
  - convenience features (no decrease in difficulty):
     - alert/event for magickal effect expiry (hard!)
        - notification of magic province effects expiring (demesne/realm/designated provinces)
@@ -68,6 +75,7 @@ ek changes
     - ability to call in scenarists/fighters/etc to resolve province modifiers
        - ...\events\ek_province_events.txt, need to create a copy of this logic which can trigger the same guild quests, but as a character_event rather than a province_event.
     - reinstate the nickname hierarchy system (BIG JOB, for little gain...)
+    - mages guild currency can be used to replenish magicka
  - improvement features (major):
     - trade routes need rebalancing (some are much more profitable than others - too many sources?)
     - some way of decreasing the cost of buildings (eg. game rule adds permanent local_build_cost_modifier=-0.2 to all provinces; maybe wonder_build_cost_modifier=-0.2 as well?)
@@ -102,13 +110,8 @@ general ideas
  - nobles' responses to feast invitations need more nuanced decision-making (not just "lol random!")
  - ability to change trad capital of a title
 
-standalone mod, with dynamic event chain for religious head inheritance:
- - on accession, religious head is given a (hidden) trait that makes them immortal
- - religious head death event chain is started at random (weighted by health, disease, age, etc)
-    - if they somehow manage to die despite being immortal (execution, duel, etc), the randomly-generated head is assumed to be a temporary caretaker, we start the same event chain.
-    - actually, ideally, I think it'd be better to always have a temporary no-name no-portrait incapable caretaker (installed by the "about to die" on_action), and their function is simply to hold the title until the next head is "elected" (via event chain).
- - during the event chain, liege can propose a candidate (perhaps with a pseudo-election mechanic where they have to pay to forcibly install an unsuitable sycophant, and the ability to postpone for a few weeks to sort things out)
- - once the candidate is finalised, kill the previous head and install the new one
+
+    - companions techpoints decision is invisible
 
 
 
