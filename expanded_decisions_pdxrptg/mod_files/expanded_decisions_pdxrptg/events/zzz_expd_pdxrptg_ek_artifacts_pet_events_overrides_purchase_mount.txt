@@ -1,0 +1,900 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = ekpets
+
+##########################################
+#                                        #
+#            PURCHASE A MOUNT            #
+#                                        #
+##########################################
+
+# Reworked so players can't bypass the intended restrictions by continually spamming the event until the desired mount randomly appears.
+# Now, instead of randomness, all mounts are available, and the **cost** is altered based on the character's capital & realm.
+
+# For humans, there is an initial page 0 with two subsequent branches:
+#  --- Pages 1-8, a continuous loop of all possible options
+#  --- Page 9 (the same random 3 as per AI logic below), followed by page 10 (go to page 1 or exit)
+
+# Human option buttons:
+#  --- Page 0: "Full list" (ie. go to page 1) + "Random3" (ie. go to page 9) + Exit
+#  --- Pages 1-7: 2-3 real options + 0-1 placeholder + 1 "next page" button
+#  --- Page 8: Restart (ie. back to page 1) + Exit
+#  --- Page 9: 3 random options (see AI logic below) + 1 "something else" (ie. go to page 10)
+#  --- Page 10: "Full list" (ie. back to page 1) + Exit
+
+# For AI:
+#  --- The first 3 options are randomly chosen, weighted according to their relative discount/surcharge.
+#  --- The 4th option is exit
+#  --- They will choose one of these 4 at random.
+#       --- NB: If they can't afford one of the 3 randomly-chosen options, the event reloads with the exact same options, so they can try again.
+
+# If an AI gets the human interface, or a human gets the AI interface, it should always be possible to pick an option... or exit and retry.
+
+
+
+character_event = {
+	
+	id = ekpets.100
+	
+	picture = GFX_evt_garden
+	
+	desc = { text = EKPets100_AI     trigger = { NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }                                                          } }
+	desc = { text = EKPets100_Page0  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  0 } } }
+	desc = { text = EKPets100_Page1  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  1 } } }
+	desc = { text = EKPets100_Page2  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  2 } } }
+	desc = { text = EKPets100_Page3  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  3 } } }
+	desc = { text = EKPets100_Page4  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  4 } } }
+	desc = { text = EKPets100_Page5  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  5 } } }
+	desc = { text = EKPets100_Page6  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  6 } } }
+	desc = { text = EKPets100_Page7  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  7 } } }
+	desc = { text = EKPets100_Page8  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  8 } } }
+	desc = { text = EKPets100_Page9  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  9 } } }
+	desc = { text = EKPets100_Page10 trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value == 10 } } }
+	
+	is_triggered_only = yes
+	
+	
+	
+	
+	immediate = {
+		expd_pdxrptg_purchase_mounts_initialise = yes
+	}
+	
+	
+	
+	# Page 0 : Intro page (for humans only)
+	
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_mounts_human
+			check_variable = { which = mount_page_no value == 0 }
+		}
+		name = EKPets100OptRandom3
+		hidden_tooltip = {
+			set_variable = { which = mount_page_no value = 9 }
+			character_event = { id = ekpets.100 }
+		}
+	}
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_mounts_human
+			check_variable = { which = mount_page_no value == 0 }
+		}
+		name = EKPets100OptFullList
+		hidden_tooltip = {
+			set_variable = { which = mount_page_no value = 1 }
+			character_event = { id = ekpets.100 }
+		}
+	}
+	
+	
+	
+	# Page 1 : Horses 1
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 1 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_rouncey_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_rouncey_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptATamriel              trigger = { wealth >= mount_rouncey_cost } }
+		name = { text = EKPets100OptATamriel_TooExpensive trigger = { wealth <  mount_rouncey_cost } }
+		if = {
+			limit = { wealth >= mount_rouncey_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_rouncey_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_horse_rouncey
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 1 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_cerigyn_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_cerigyn_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptAAkavir              trigger = { wealth >= mount_cerigyn_cost } }
+		name = { text = EKPets100OptAAkavir_TooExpensive trigger = { wealth <  mount_cerigyn_cost } }
+		if = {
+			limit = { wealth >= mount_cerigyn_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_cerigyn_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_horse_cerigyn
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 1 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_jennet_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_jennet_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptJennet              trigger = { wealth >= mount_jennet_cost } }
+		name = { text = EKPets100OptJennet_TooExpensive trigger = { wealth <  mount_jennet_cost } }
+		if = {
+			limit = { wealth >= mount_jennet_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_jennet_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_horse_jennet
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 2 : Horses 2
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 2 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_mountain_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_mountain_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptMountain              trigger = { wealth >= mount_mountain_cost } }
+		name = { text = EKPets100OptMountain_TooExpensive trigger = { wealth <  mount_mountain_cost } }
+		if = {
+			limit = { wealth >= mount_mountain_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_mountain_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_horse_mountain
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 2 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_destrier_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_destrier_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptDestrier              trigger = { wealth >= mount_destrier_cost } }
+		name = { text = EKPets100OptDestrier_TooExpensive trigger = { wealth <  mount_destrier_cost } }
+		if = {
+			limit = { wealth >= mount_destrier_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_destrier_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_horse_destrier
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 2 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_courser_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_courser_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptCourser              trigger = { wealth >= mount_courser_cost } }
+		name = { text = EKPets100OptCourser_TooExpensive trigger = { wealth <  mount_courser_cost } }
+		if = {
+			limit = { wealth >= mount_courser_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_courser_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_horse_courser
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 3 : Horses 3
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 3 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_palfrey_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_palfrey_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptPalfrey              trigger = { wealth >= mount_palfrey_cost } }
+		name = { text = EKPets100OptPalfrey_TooExpensive trigger = { wealth <  mount_palfrey_cost } }
+		if = {
+			limit = { wealth >= mount_palfrey_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_palfrey_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_horse_palfrey
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 3 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_hobbeye_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_hobbeye_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptHobbeye              trigger = { wealth >= mount_hobbeye_cost } }
+		name = { text = EKPets100OptHobbeye_TooExpensive trigger = { wealth <  mount_hobbeye_cost } }
+		if = {
+			limit = { wealth >= mount_hobbeye_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_hobbeye_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_horse_hobbeye
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 3 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_mijako_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_mijako_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptMijako              trigger = { wealth >= mount_mijako_cost } }
+		name = { text = EKPets100OptMijako_TooExpensive trigger = { wealth <  mount_mijako_cost } }
+		if = {
+			limit = { wealth >= mount_mijako_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_mijako_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_horse_mijako
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 4 : Camels
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 4 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_camel_h_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_camel_h_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptHammerfellCamel              trigger = { wealth >= mount_camel_h_cost } }
+		name = { text = EKPets100OptHammerfellCamel_TooExpensive trigger = { wealth <  mount_camel_h_cost } }
+		if = {
+			limit = { wealth >= mount_camel_h_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_camel_h_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_camel_hammerfell
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 4 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_camel_p_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_camel_p_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptPotunCamel              trigger = { wealth >= mount_camel_p_cost } }
+		name = { text = EKPets100OptPotunCamel_TooExpensive trigger = { wealth <  mount_camel_p_cost } }
+		if = {
+			limit = { wealth >= mount_camel_p_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_camel_p_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_camel_potun
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 5 : Morrowind
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 5 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_guar_c_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_guar_c_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptGuarCharger              trigger = { wealth >= mount_guar_c_cost } }
+		name = { text = EKPets100OptGuarCharger_TooExpensive trigger = { wealth <  mount_guar_c_cost } }
+		if = {
+			limit = { wealth >= mount_guar_c_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_guar_c_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_guar_charger
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 5 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_guar_s_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_guar_s_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptGuarSnapper              trigger = { wealth >= mount_guar_s_cost } }
+		name = { text = EKPets100OptGuarSnapper_TooExpensive trigger = { wealth <  mount_guar_s_cost } }
+		if = {
+			limit = { wealth >= mount_guar_s_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_guar_s_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_guar_snapper
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 5 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_kagouti_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_kagouti_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptKagouti              trigger = { wealth >= mount_kagouti_cost } }
+		name = { text = EKPets100OptKagouti_TooExpensive trigger = { wealth <  mount_kagouti_cost } }
+		if = {
+			limit = { wealth >= mount_kagouti_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_kagouti_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_guar_kagouti
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 6 : Black Marsh
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 6 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_guar_f_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_guar_f_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptGuarFlanker              trigger = { wealth >= mount_guar_f_cost } }
+		name = { text = EKPets100OptGuarFlanker_TooExpensive trigger = { wealth <  mount_guar_f_cost } }
+		if = {
+			limit = { wealth >= mount_guar_f_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_guar_f_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_guar_flanker
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 6 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_shellback_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_shellback_for_ai
+				}
+			}
+		}
+		name = { text = EKPets100OptShellback              trigger = { wealth >= mount_shellback_cost } }
+		name = { text = EKPets100OptShellback_TooExpensive trigger = { wealth <  mount_shellback_cost } }
+		if = {
+			limit = { wealth >= mount_shellback_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_shellback_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_argonian_shellback
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 7 : Khajiit
+	
+	# Pahmar : Only one of these 2
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 7 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_pahmar_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_pahmar_for_ai
+				}
+			}
+			# Audax Validator "." Ignore_NEXT
+			trait = khajiit
+		}
+		name = { text = EKPets100OptPahmar              trigger = { wealth >= mount_pahmar_cost } }
+		name = { text = EKPets100OptPahmar_TooExpensive trigger = { wealth <  mount_pahmar_cost } }
+		if = {
+			limit = { wealth >= mount_pahmar_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_pahmar_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_pahmar
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 7 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_pahmar_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_pahmar_for_ai
+				}
+			}
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trait = khajiit
+			}
+		}
+		name = EKPets100OptPahmar_NotKhajiit
+		hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		ai_chance = { factor = 1 }
+	}
+	
+	# Senche : Only one of these 2
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 7 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_senche_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_senche_for_ai
+				}
+			}
+			# Audax Validator "." Ignore_NEXT
+			trait = khajiit
+		}
+		name = { text = EKPets100OptSenche              trigger = { wealth >= mount_senche_cost } }
+		name = { text = EKPets100OptSenche_TooExpensive trigger = { wealth <  mount_senche_cost } }
+		if = {
+			limit = { wealth >= mount_senche_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = mount_senche_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = mount_senche
+			expd_pdxrptg_purchase_mounts_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 7 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					check_variable = { which = mount_page_no value == 9 }
+					has_character_flag = mount_senche_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+					has_character_flag = mount_senche_for_ai
+				}
+			}
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trait = khajiit
+			}
+		}
+		name = EKPets100OptSenche_NotKhajiit
+		hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Pages 1-7 : Placeholder (for human players only: 3rd option for pages where there are only 2 real options)
+	
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_mounts_human
+			OR = {
+				check_variable = { which = mount_page_no value == 4 }
+				check_variable = { which = mount_page_no value == 6 }
+				check_variable = { which = mount_page_no value == 7 }
+			}
+		}
+		name = EKPets100OptNullPlaceholder
+		hidden_tooltip = { character_event = { id = ekpets.100 } } # Do nothing, reload event in exact same state
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Pages 1-7 : Next (for human players only: 1st option on page 0, 4th option on pages 1-7)
+	
+	option =  {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_mounts_human
+			check_variable = { which = mount_page_no value >= 1 }
+			check_variable = { which = mount_page_no value <= 7 }
+		}
+		name = EKPets100OptNext
+		hidden_tooltip = {
+			change_variable = { which = mount_page_no value = 1 }
+			character_event = { id = ekpets.100 }
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 8 : Restart (for human players only: 1st option on page 8)
+	
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_mounts_human
+			check_variable = { which = mount_page_no value == 8 }
+		}
+		name = EKPets100OptBackToStart
+		hidden_tooltip = {
+			set_variable = { which = mount_page_no value = 1 }
+			character_event = { id = ekpets.100 }
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 9 : Actually something else
+	
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_mounts_human
+			check_variable = { which = mount_page_no value == 9 }
+		}
+		name = EKPets100OptActuallySomethingElse
+		hidden_tooltip = {
+			set_variable = { which = mount_page_no value = 10 }
+			character_event = { id = ekpets.100 }
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 10 : Show me the full list (for human players only: 1st option)
+	
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_mounts_human
+			check_variable = { which = mount_page_no value == 10 }
+		}
+		name = EKPets100OptFullList
+		hidden_tooltip = {
+			set_variable = { which = mount_page_no value = 1 }
+			character_event = { id = ekpets.100 }
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Pages {{AI}} & 0 & 8 & 10 : Exit (for human players: 2nd option on pages 0 & 8; for AI: always the 4th option)
+	
+	option = {
+		trigger = {
+			OR = {
+				NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_mounts_human
+					OR = {
+						check_variable = { which = mount_page_no value ==  0 }
+						check_variable = { which = mount_page_no value ==  8 }
+						check_variable = { which = mount_page_no value == 10 }
+					}
+				}
+			}
+		}
+		name = EKPets100OptDecline
+		hidden_tooltip = { expd_pdxrptg_purchase_mounts_clear_everything = yes }
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+}
