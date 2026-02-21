@@ -1,165 +1,336 @@
 # Audax Validator EnableCommentMetadata
 
 
+
+
+
+
+
+
+
+
+############################################
+#                                          #
+#            CHARACTER LOCATION            #
+#                                          #
+############################################
+
+
+
 expd_pdxrptg_artifact_theft_this_character_is_in_morrowind = {
 	OR = {
-		location = {
-			# Audax Validator "." Ignore_NEXT
-			region = nirn_tamriel_morrowind
-		}
+		location = { expd_pdxrptg_artifact_theft_this_province_is_in_morrowind = yes }
 		AND = {
 			is_landed = yes
-			any_demesne_province = {
-				location = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_morrowind
-				}
-			}
+			any_demesne_province = { expd_pdxrptg_artifact_theft_this_province_is_in_morrowind = yes }
 		}
 		AND = {
 			is_landed = no
-			host = {
-				any_demesne_province = {
-					location = {
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_tamriel_morrowind
-					}
-				}
-			}
+			host = { any_demesne_province = { expd_pdxrptg_artifact_theft_this_province_is_in_morrowind = yes } }
 		}
 	}
 }
-
-
 
 expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = {
 	OR = {
-		location = {
-			# Audax Validator "." Ignore_NEXT
-			region = nirn_tamriel
-		}
+		location = { expd_pdxrptg_artifact_theft_this_province_is_in_tamriel = yes }
 		AND = {
 			is_landed = yes
-			any_demesne_province = {
-				location = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel
-				}
-			}
+			any_demesne_province = { expd_pdxrptg_artifact_theft_this_province_is_in_tamriel = yes }
 		}
 		AND = {
 			is_landed = no
-			host = {
-				any_demesne_province = {
-					location = {
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_tamriel
-					}
-				}
-			}
+			host = { any_demesne_province = { expd_pdxrptg_artifact_theft_this_province_is_in_tamriel = yes } }
 		}
 	}
 }
+
 expd_pdxrptg_artifact_theft_this_character_is_in_akavir = {
 	OR = {
-		location = {
-			# Audax Validator "." Ignore_NEXT
-			region = nirn_akavir
-		}
+		location = { expd_pdxrptg_artifact_theft_this_province_is_in_akavir = yes }
 		AND = {
 			is_landed = yes
-			any_demesne_province = {
-				location = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_akavir
-				}
-			}
+			any_demesne_province = { expd_pdxrptg_artifact_theft_this_province_is_in_akavir = yes }
 		}
 		AND = {
 			is_landed = no
-			host = {
-				any_demesne_province = {
-					location = {
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_akavir
-					}
-				}
-			}
+			host = { any_demesne_province = { expd_pdxrptg_artifact_theft_this_province_is_in_akavir = yes } }
 		}
 	}
 }
+
+expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = { # NB: May return true if a character is "in" Akavir/Tamriel
+	OR = {
+		location = { expd_pdxrptg_artifact_theft_this_province_is_in_atmora_roscrea = yes }
+		AND = {
+			is_landed = yes
+			any_demesne_province = { expd_pdxrptg_artifact_theft_this_province_is_in_atmora_roscrea = yes }
+		}
+		AND = {
+			is_landed = no
+			host = { any_demesne_province = { expd_pdxrptg_artifact_theft_this_province_is_in_atmora_roscrea = yes } }
+		}
+	}
+}
+
+expd_pdxrptg_artifact_theft_this_character_is_in_yokuda = { # NB: May return true if a character is "in" Akavir/Tamriel
+	OR = {
+		location = { expd_pdxrptg_artifact_theft_this_province_is_in_yokuda = yes }
+		AND = {
+			is_landed = yes
+			any_demesne_province = { expd_pdxrptg_artifact_theft_this_province_is_in_yokuda = yes }
+		}
+		AND = {
+			is_landed = no
+			host = { any_demesne_province = { expd_pdxrptg_artifact_theft_this_province_is_in_yokuda = yes } }
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+############################################
+#                                          #
+#          CHARACTER GUILD ACCESS          #
+#                                          #
+############################################
+
+
+
 expd_pdxrptg_artifact_theft_this_character_can_access_morrowind = {
 	OR = {
 		expd_pdxrptg_artifact_theft_this_character_is_in_morrowind = yes
 		AND = {
 			is_landed = yes
-			any_realm_province = {
-				location = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_morrowind
-				}
+			OR = {
+				any_realm_province = { expd_pdxrptg_artifact_theft_this_province_is_near_morrowind = yes }
+				any_tributary = { any_realm_province = {expd_pdxrptg_artifact_theft_this_province_is_near_morrowind = yes } }
 			}
 		}
 		AND = {
 			is_landed = no
 			host = {
-				any_realm_province = {
-					location = {
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_tamriel_morrowind
-					}
+				OR = {
+					any_realm_province = { expd_pdxrptg_artifact_theft_this_province_is_near_morrowind = yes }
+					any_tributary = { any_realm_province = {expd_pdxrptg_artifact_theft_this_province_is_near_morrowind = yes } }
 				}
 			}
 		}
 	}
 }
+
 expd_pdxrptg_artifact_theft_this_character_can_access_tamriel = {
 	OR = {
 		expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes
 		AND = {
 			is_landed = yes
-			any_realm_province = {
-				location = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel
-				}
+			OR = {
+				any_realm_province = { expd_pdxrptg_artifact_theft_this_province_is_near_tamriel = yes }
+				any_tributary = { any_realm_province = {expd_pdxrptg_artifact_theft_this_province_is_near_tamriel = yes } }
 			}
 		}
 		AND = {
 			is_landed = no
 			host = {
-				any_realm_province = {
-					location = {
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_tamriel
-					}
+				OR = {
+					any_realm_province = { expd_pdxrptg_artifact_theft_this_province_is_near_tamriel = yes }
+					any_tributary = { any_realm_province = {expd_pdxrptg_artifact_theft_this_province_is_near_tamriel = yes } }
 				}
 			}
 		}
 	}
 }
+
 expd_pdxrptg_artifact_theft_this_character_can_access_akavir = {
 	OR = {
 		expd_pdxrptg_artifact_theft_this_character_is_in_akavir = yes
 		AND = {
 			is_landed = yes
-			any_realm_province = {
-				location = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_akavir
-				}
+			OR = {
+				any_realm_province = { expd_pdxrptg_artifact_theft_this_province_is_near_akavir = yes }
+				any_tributary = { any_realm_province = {expd_pdxrptg_artifact_theft_this_province_is_near_akavir = yes } }
 			}
 		}
 		AND = {
 			is_landed = no
 			host = {
-				any_realm_province = {
-					location = {
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_akavir
-					}
+				OR = {
+					any_realm_province = { expd_pdxrptg_artifact_theft_this_province_is_near_akavir = yes }
+					any_tributary = { any_realm_province = {expd_pdxrptg_artifact_theft_this_province_is_near_akavir = yes } }
 				}
 			}
 		}
 	}
+}
+
+expd_pdxrptg_artifact_theft_this_character_can_access_atmora_roscrea = {
+	OR = {
+		expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+		AND = {
+			is_landed = yes
+			OR = {
+				any_realm_province = { expd_pdxrptg_artifact_theft_this_province_is_near_atmora_roscrea = yes }
+				any_tributary = { any_realm_province = {expd_pdxrptg_artifact_theft_this_province_is_near_atmora_roscrea = yes } }
+			}
+		}
+		AND = {
+			is_landed = no
+			host = {
+				OR = {
+					any_realm_province = { expd_pdxrptg_artifact_theft_this_province_is_near_atmora_roscrea = yes }
+					any_tributary = { any_realm_province = {expd_pdxrptg_artifact_theft_this_province_is_near_atmora_roscrea = yes } }
+				}
+			}
+		}
+	}
+}
+
+expd_pdxrptg_artifact_theft_this_character_can_access_yokuda = {
+	OR = {
+		expd_pdxrptg_artifact_theft_this_character_is_in_yokuda = yes
+		AND = {
+			is_landed = yes
+			OR = {
+				any_realm_province = { expd_pdxrptg_artifact_theft_this_province_is_near_yokuda = yes }
+				any_tributary = { any_realm_province = {expd_pdxrptg_artifact_theft_this_province_is_near_yokuda = yes } }
+			}
+		}
+		AND = {
+			is_landed = no
+			host = {
+				OR = {
+					any_realm_province = { expd_pdxrptg_artifact_theft_this_province_is_near_yokuda = yes }
+					any_tributary = { any_realm_province = {expd_pdxrptg_artifact_theft_this_province_is_near_yokuda = yes } }
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+############################################
+#                                          #
+#            PROVINCE GEOGRAPHY            #
+#                                          #
+############################################
+
+
+
+# "Near" means one of the following:
+#  --- Within 2 provinces (overland or by sea)
+#  --- By directly traversing 2 sea zones (IE: the province is a port, and it is 1 or 2 sea zones from a port in {target_region})
+expd_pdxrptg_artifact_theft_this_province_is_near_morrowind = {
+	OR = {
+		expd_pdxrptg_artifact_theft_this_province_is_in_morrowind = yes
+		any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_morrowind = yes }
+		any_neighbor_province = { any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_morrowind = yes } }
+		any_neighbor_province = {
+			is_land = no
+			any_neighbor_province = {
+				is_land = no
+				any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_morrowind = yes }
+			}
+		}
+	}
+}
+expd_pdxrptg_artifact_theft_this_province_is_near_tamriel = {
+	OR = {
+		expd_pdxrptg_artifact_theft_this_province_is_in_tamriel = yes
+		any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_tamriel = yes }
+		any_neighbor_province = { any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_tamriel = yes } }
+		any_neighbor_province = {
+			is_land = no
+			any_neighbor_province = {
+				is_land = no
+				any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_tamriel = yes }
+			}
+		}
+	}
+}
+expd_pdxrptg_artifact_theft_this_province_is_near_akavir = {
+	OR = {
+		expd_pdxrptg_artifact_theft_this_province_is_in_akavir = yes
+		any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_akavir = yes }
+		any_neighbor_province = { any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_akavir = yes } }
+		any_neighbor_province = {
+			is_land = no
+			any_neighbor_province = {
+				is_land = no
+				any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_akavir = yes }
+			}
+		}
+	}
+}
+expd_pdxrptg_artifact_theft_this_province_is_near_atmora_roscrea = {
+	OR = {
+		expd_pdxrptg_artifact_theft_this_province_is_in_atmora_roscrea = yes
+		any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_atmora_roscrea = yes }
+		any_neighbor_province = { any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_atmora_roscrea = yes } }
+		any_neighbor_province = {
+			is_land = no
+			any_neighbor_province = {
+				is_land = no
+				any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_atmora_roscrea = yes }
+			}
+		}
+	}
+}
+expd_pdxrptg_artifact_theft_this_province_is_near_yokuda = {
+	OR = {
+		expd_pdxrptg_artifact_theft_this_province_is_in_yokuda = yes
+		any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_yokuda = yes }
+		any_neighbor_province = { any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_yokuda = yes } }
+		any_neighbor_province = {
+			is_land = no
+			any_neighbor_province = {
+				is_land = no
+				any_neighbor_province = { expd_pdxrptg_artifact_theft_this_province_is_in_yokuda = yes }
+			}
+		}
+	}
+}
+
+
+expd_pdxrptg_artifact_theft_this_province_is_in_morrowind = {
+	# Audax Validator "." Ignore_NEXT
+	region = nirn_tamriel_morrowind
+}
+
+expd_pdxrptg_artifact_theft_this_province_is_in_tamriel = {
+	# Audax Validator "." Ignore_NEXT
+	region = nirn_tamriel
+}
+
+expd_pdxrptg_artifact_theft_this_province_is_in_akavir = {
+	# Audax Validator "." Ignore_NEXT
+	region = nirn_akavir
+}
+
+expd_pdxrptg_artifact_theft_this_province_is_in_atmora_roscrea = {
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_roscrea
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_atmora
+	}
+}
+
+expd_pdxrptg_artifact_theft_this_province_is_in_yokuda = {
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_yokuda
 }

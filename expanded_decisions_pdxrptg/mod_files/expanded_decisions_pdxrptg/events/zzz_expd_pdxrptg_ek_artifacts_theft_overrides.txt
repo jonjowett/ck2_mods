@@ -30,9 +30,24 @@ character_event = {
 		
 		
 		
+		# Store a version of ek_theft_target_owner, for internal use
+		# Audax Validator "." Ignore_NEXT
+		event_target:ek_theft_target_owner = {
+			ROOT = {
+				PREV = {
+					save_event_target_as = expd_pdxrptg_artifact_theft_owner_for_tt_only
+				}
+			}
+		}
+		
+		
+		
+		
 		# If you're a member of a thieves guild, and the target isn't a member of the same guild, you can DIY.
 		clr_character_flag = thieves_guild_diy
 		clr_character_flag = thieves_guild_diy_blocked
+		clr_character_flag = thieves_guild_diy_surcharge_subcontinent
+		clr_character_flag = thieves_guild_diy_surcharge_continent
 		if = {
 			limit = {
 				# Audax Validator "." Ignore_NEXT
@@ -114,6 +129,71 @@ character_event = {
 		
 		
 		
+		# If you can DIY, you might still need to pay for intercontinental or subcontinental transport
+		if = {
+			limit = { has_character_flag = thieves_guild_diy }
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							# Audax Validator "." Ignore_NEXT
+							event_target:ek_theft_target_owner = { expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes }
+							expd_pdxrptg_artifact_theft_this_character_can_access_tamriel = yes
+						}
+						AND = {
+							# Audax Validator "." Ignore_NEXT
+							event_target:ek_theft_target_owner = { expd_pdxrptg_artifact_theft_this_character_is_in_akavir = yes }
+							expd_pdxrptg_artifact_theft_this_character_can_access_akavir = yes
+						}
+						AND = {
+							# Audax Validator "." Ignore_NEXT
+							event_target:ek_theft_target_owner = { expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes }
+							expd_pdxrptg_artifact_theft_this_character_can_access_atmora_roscrea = yes
+						}
+						AND = {
+							# Audax Validator "." Ignore_NEXT
+							event_target:ek_theft_target_owner = { expd_pdxrptg_artifact_theft_this_character_is_in_yokuda = yes }
+							expd_pdxrptg_artifact_theft_this_character_can_access_yokuda = yes
+						}
+					}
+				}
+				# DIY-er has direct access to the same continent/subcontinent as the target - no problem!
+			}
+			else_if = {
+				limit = {
+					OR = {
+						AND = {
+							# Audax Validator "." Ignore_NEXT
+							event_target:ek_theft_target_owner = {
+								expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = no
+								OR = {
+									expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+									expd_pdxrptg_artifact_theft_this_character_is_in_yokuda         = yes
+								}
+							}
+							expd_pdxrptg_artifact_theft_this_character_can_access_tamriel = yes
+						}
+						AND = {
+							# Audax Validator "." Ignore_NEXT
+							event_target:ek_theft_target_owner = {
+								expd_pdxrptg_artifact_theft_this_character_is_in_akavir = no
+								expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+							}
+							expd_pdxrptg_artifact_theft_this_character_can_access_akavir = yes
+						}
+					}
+				}
+				# DIY-er only needs subcontinental transport to get to the target
+				set_character_flag = thieves_guild_diy_surcharge_subcontinent
+			}
+			else = {
+				# DIY-er needs intercontinental transport to get to the target
+				set_character_flag = thieves_guild_diy_surcharge_continent
+			}
+		}
+		
+		
+		
 		# If you can't DIY, maybe you can hire a Thieves Guild?
 		# Thieves Guilds will only accept quests from characters who can reach them.
 		#  --- IE: Located in their region, or have a ***realm*** province in their region.
@@ -122,18 +202,28 @@ character_event = {
 		# Eg: If you are in Tamriel and the target is in Akavir, you need to reach Akavir somehow to hire the Thieves Guild over there.
 		
 		clr_character_flag = thieves_guild_found
+		clr_character_flag = thieves_guild_found_surcharge_subcontinent
 		clr_character_flag = thieves_guild_carmonna_tong_blocked
+		clr_character_flag = thieves_guild_carmonna_tong_blocked_member
+		clr_character_flag = thieves_guild_carmonna_tong_blocked_unavailable
+		clr_character_flag = thieves_guild_carmonna_tong_blocked_out_of_range
+		clr_character_flag = thieves_guild_carmonna_tong_blocked_not_dunmer
 		clr_character_flag = thieves_guild_tamriel_blocked
+		clr_character_flag = thieves_guild_tamriel_blocked_member
+		clr_character_flag = thieves_guild_tamriel_blocked_unavailable
+		clr_character_flag = thieves_guild_tamriel_blocked_out_of_range
 		clr_character_flag = thieves_guild_akavir_blocked
+		clr_character_flag = thieves_guild_akavir_blocked_member
+		clr_character_flag = thieves_guild_akavir_blocked_unavailable
+		clr_character_flag = thieves_guild_akavir_blocked_out_of_range
 		
 		if = {
 			limit = { NOT = { has_character_flag = thieves_guild_diy } }
 			
 			# Test for Carmonna Tong first, since they override the Tamriel Thieves Guild in some circumstances
-			# Will only accept contracts from Dunmer(/Ashlander/Chimer) currently living in Morrowind
+			# Will only accept contracts from Dunmer(/Ashlander/Chimer) currently living in/near Morrowind
 			if = {
 				limit = {
-					expd_pdxrptg_artifact_theft_this_character_can_access_morrowind = yes
 					OR = {
 						# Audax Validator "." Ignore_NEXT
 						culture = dunmer
@@ -141,29 +231,80 @@ character_event = {
 						culture = ashlander
 						# Audax Validator "." Ignore_NEXT
 						culture = chimer
-					}
-					event_target:ek_theft_target_owner = { expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes }
-					any_society_member = {
-						society_member_of = camonna_tong_tamriel
-						is_adult = yes
-						prisoner = no
-						is_inaccessible_trigger = no
-						NOT = { trait = incapable }
-						is_society_grandmaster = no
-						has_any_quest = no
+						# Audax Validator "." Ignore_NEXT
+						trait = dunmer
+						# Audax Validator "." Ignore_NEXT
+						trait = chimer
+						# Audax Validator "." Ignore_NEXT
+						religion_group = tribunal
 					}
 				}
 				if = {
-					limit = { event_target:ek_theft_target_owner = { NOT = { society_member_of = camonna_tong_tamriel } } }
-					camonna_tong_tamriel = {
+					limit = {
+						expd_pdxrptg_artifact_theft_this_character_can_access_morrowind = yes
 						# Audax Validator "." Ignore_NEXT
-						save_event_target_as = thieves_guild
+						event_target:ek_theft_target_owner = {
+							# Camonna Tong will go anywhere in Tamriel, Atmora and Roscrea. Will NOT go to Yokuda or Akavir.
+							OR = {
+								expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes
+								expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+							}
+						}
 					}
-					set_character_flag = thieves_guild_found
+					if = {
+						limit = {
+							any_society_member = {
+								society_member_of = camonna_tong_tamriel
+								is_adult = yes
+								prisoner = no
+								is_inaccessible_trigger = no
+								NOT = { trait = incapable }
+								is_society_grandmaster = no
+								has_any_quest = no
+							}
+						}
+						if = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								event_target:ek_theft_target_owner = { NOT = { society_member_of = camonna_tong_tamriel } }
+							}
+							camonna_tong_tamriel = {
+								# Audax Validator "." Ignore_NEXT
+								save_event_target_as = thieves_guild
+							}
+							set_character_flag = thieves_guild_found
+							if = {
+								limit = {
+									# Audax Validator "." Ignore_NEXT
+									event_target:ek_theft_target_owner = {
+										expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = no
+										expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+									}
+								}
+								set_character_flag = thieves_guild_found_surcharge_subcontinent
+							}
+							else = {
+								# Target is in Tamriel - no surcharge
+							}
+						}
+						else = {
+							set_character_flag = thieves_guild_carmonna_tong_blocked
+							set_character_flag = thieves_guild_carmonna_tong_blocked_member
+						}
+					}
+					else = {
+						set_character_flag = thieves_guild_carmonna_tong_blocked
+						set_character_flag = thieves_guild_carmonna_tong_blocked_unavailable
+					}
 				}
 				else = {
 					set_character_flag = thieves_guild_carmonna_tong_blocked
+					set_character_flag = thieves_guild_carmonna_tong_blocked_out_of_range
 				}
+			}
+			else = {
+				set_character_flag = thieves_guild_carmonna_tong_blocked
+				set_character_flag = thieves_guild_carmonna_tong_blocked_not_dunmer
 			}
 			
 			# Main Thieves Guild works in all of Tamriel
@@ -171,28 +312,68 @@ character_event = {
 				limit = {
 					NOT = { has_character_flag = thieves_guild_found }
 					expd_pdxrptg_artifact_theft_this_character_can_access_tamriel = yes
-					event_target:ek_theft_target_owner = { expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes }
-					any_society_member = {
-						society_member_of = thieves_guild_tamriel
-						is_adult = yes
-						prisoner = no
-						is_inaccessible_trigger = no
-						NOT = { trait = incapable }
-						is_society_grandmaster = no
-						has_any_quest = no
+					# Audax Validator "." Ignore_NEXT
+					event_target:ek_theft_target_owner = {
+						# Thieves Guild will go anywhere in Tamriel, Yokuda, Atmora and Roscrea. Will NOT go to Akavir.
+						OR = {
+							expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes
+							expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+							expd_pdxrptg_artifact_theft_this_character_is_in_yokuda = yes
+						}
 					}
 				}
 				if = {
-					limit = { event_target:ek_theft_target_owner = { NOT = { society_member_of = thieves_guild_tamriel } } }
-					thieves_guild_tamriel = {
-						# Audax Validator "." Ignore_NEXT
-						save_event_target_as = thieves_guild
+					limit = {
+						any_society_member = {
+							society_member_of = thieves_guild_tamriel
+							is_adult = yes
+							prisoner = no
+							is_inaccessible_trigger = no
+							NOT = { trait = incapable }
+							is_society_grandmaster = no
+							has_any_quest = no
+						}
 					}
-					set_character_flag = thieves_guild_found
+					if = {
+						limit = {
+							# Audax Validator "." Ignore_NEXT
+							event_target:ek_theft_target_owner = { NOT = { society_member_of = thieves_guild_tamriel } }
+						}
+						thieves_guild_tamriel = {
+							# Audax Validator "." Ignore_NEXT
+							save_event_target_as = thieves_guild
+						}
+						set_character_flag = thieves_guild_found
+						if = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								event_target:ek_theft_target_owner = {
+									expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = no
+									OR = {
+										expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+										expd_pdxrptg_artifact_theft_this_character_is_in_yokuda = yes
+									}
+								}
+							}
+							set_character_flag = thieves_guild_found_surcharge_subcontinent
+						}
+						else = {
+							# Target is in Tamriel - no surcharge
+						}
+					}
+					else = {
+						set_character_flag = thieves_guild_tamriel_blocked
+						set_character_flag = thieves_guild_tamriel_blocked_member
+					}
 				}
 				else = {
 					set_character_flag = thieves_guild_tamriel_blocked
+					set_character_flag = thieves_guild_tamriel_blocked_unavailable
 				}
+			}
+			else = {
+				set_character_flag = thieves_guild_tamriel_blocked
+				set_character_flag = thieves_guild_tamriel_blocked_out_of_range
 			}
 			
 			# Silent Moons works in all of Akavir
@@ -200,28 +381,64 @@ character_event = {
 				limit = {
 					NOT = { has_character_flag = thieves_guild_found }
 					expd_pdxrptg_artifact_theft_this_character_can_access_akavir = yes
-					event_target:ek_theft_target_owner = { expd_pdxrptg_artifact_theft_this_character_is_in_akavir = yes }
-					any_society_member = {
-						society_member_of = thieves_guild_akavir
-						is_adult = yes
-						prisoner = no
-						is_inaccessible_trigger = no
-						NOT = { trait = incapable }
-						is_society_grandmaster = no
-						has_any_quest = no
+					# Audax Validator "." Ignore_NEXT
+					event_target:ek_theft_target_owner = {
+						# Silent Moons will go anywhere in Akavir, Atmora and Roscrea. Will NOT go to Tamriel or Yokuda.
+						OR = {
+							expd_pdxrptg_artifact_theft_this_character_is_in_akavir = yes
+							expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+						}
 					}
 				}
 				if = {
-					limit = { event_target:ek_theft_target_owner = { NOT = { society_member_of = thieves_guild_akavir } } }
-					thieves_guild_akavir = {
-						# Audax Validator "." Ignore_NEXT
-						save_event_target_as = thieves_guild
+					limit = {
+						any_society_member = {
+							society_member_of = thieves_guild_akavir
+							is_adult = yes
+							prisoner = no
+							is_inaccessible_trigger = no
+							NOT = { trait = incapable }
+							is_society_grandmaster = no
+							has_any_quest = no
+						}
 					}
-					set_character_flag = thieves_guild_found
+					if = {
+						limit = {
+							# Audax Validator "." Ignore_NEXT
+							event_target:ek_theft_target_owner = { NOT = { society_member_of = thieves_guild_akavir } }
+						}
+						thieves_guild_akavir = {
+							# Audax Validator "." Ignore_NEXT
+							save_event_target_as = thieves_guild
+						}
+						set_character_flag = thieves_guild_found
+						if = {
+							limit = {
+								# Audax Validator "." Ignore_NEXT
+								event_target:ek_theft_target_owner = {
+									expd_pdxrptg_artifact_theft_this_character_is_in_akavir = no
+									expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+								}
+							}
+							set_character_flag = thieves_guild_found_surcharge_subcontinent
+						}
+						else = {
+							# Target is in Akavir - no surcharge
+						}
+					}
+					else = {
+						set_character_flag = thieves_guild_akavir_blocked
+						set_character_flag = thieves_guild_akavir_blocked_member
+					}
 				}
 				else = {
 					set_character_flag = thieves_guild_akavir_blocked
+					set_character_flag = thieves_guild_akavir_blocked_unavailable
 				}
+			}
+			else = {
+				set_character_flag = thieves_guild_akavir_blocked
+				set_character_flag = thieves_guild_akavir_blocked_out_of_range
 			}
 		}
 		
@@ -234,13 +451,13 @@ character_event = {
 		
 		# Audax Validator "." Ignore_NEXT
 		name = ekthieving1optb #As the member of a guild, you can take care of it yourself
-		tooltip_info = yes # Yellow border because this is the best option
+		tooltip_info = yes # Yellow border because this is probably the best option
 		trigger = { has_character_flag = thieves_guild_diy }
 		ai_chance = { factor = 10 }
-		
-		society_quest_event = {
-			# Audax Validator "." Ignore_NEXT
-			id = ekthieving.250
+		custom_tooltip = {
+			text = ekthieving1optb_can_still_cancel
+			society_quest_event = { id = ekthieving.250 }
+			# NB: Surcharge flags are cleared after event 250
 		}
 		
 	}
@@ -251,13 +468,20 @@ character_event = {
 		trigger = { has_character_flag = thieves_guild_diy_blocked }
 		ai_chance = { factor = 0 } # This option is for player info only
 		
-		# Audax Validator "." Ignore_NEXT
-		clear_artifact_theft_flags = yes
-		event_target:ek_theft_target_owner = {
-			character_event = {
-				# Audax Validator "." Ignore_NEXT
-				id = ekthieving.35
+		hidden_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			clear_artifact_theft_flags = yes
+			# Audax Validator "." Ignore_NEXT
+			event_target:ek_theft_target_owner = {
+				character_event = {
+					# Audax Validator "." Ignore_NEXT
+					id = ekthieving.35
+				}
 			}
+			clr_character_flag = thieves_guild_found_surcharge_subcontinent
+			clr_character_flag = thieves_guild_diy_surcharge_continent
+			clr_character_flag = thieves_guild_diy_surcharge_subcontinent
+			clear_event_target = expd_pdxrptg_artifact_theft_owner_for_tt_only
 		}
 		
 	}
@@ -276,51 +500,109 @@ character_event = {
 		}
 		ai_chance = { factor = 10 }
 		
-		character_event = {
-			# Audax Validator "." Ignore_NEXT
-			id = ekthieving.30
+		custom_tooltip = {
+			text = ekthieving1opta_can_still_cancel
+			character_event = { id = ekthieving.30 }
+			# NB: Surcharge flags are cleared after event 30
 		}
 		
 	}
 	
 	option = { # Guild hiring blocked
 		
-		name = {
-			text = ekthieving1opta_blocked_fellow_member_carmonna_tong
-			trigger = { has_character_flag = thieves_guild_carmonna_tong_blocked }
-		}
-		name = {
-			text = ekthieving1opta_blocked_fellow_member_tamriel
-			trigger = { has_character_flag = thieves_guild_tamriel_blocked }
-		}
-		name = {
-			text = ekthieving1opta_blocked_fellow_member_akavir
-			trigger = { has_character_flag = thieves_guild_akavir_blocked }
-		}
-		name = {
-			text = ekthieving1opta_blocked_other_reason # Probably because you can't contact a guild in the target's region
-			trigger = {
-				NOR = {
-					has_character_flag = thieves_guild_carmonna_tong_blocked
-					has_character_flag = thieves_guild_tamriel_blocked
-					has_character_flag = thieves_guild_akavir_blocked
-				}
-			}
-		}
-		
 		trigger = {
 			NOT = { has_character_flag = thieves_guild_diy }
 			NOT = { has_character_flag = thieves_guild_found }
 		}
+		
+		name = ekthieving1opta_blocked
+		
 		ai_chance = { factor = 0 } # This option is for player info only
 		
-		# Audax Validator "." Ignore_NEXT
-		clear_artifact_theft_flags = yes
-		event_target:ek_theft_target_owner = {
-			character_event = {
-				# Audax Validator "." Ignore_NEXT
-				id = ekthieving.35
+		if = {
+			limit = { has_character_flag = thieves_guild_carmonna_tong_blocked }
+			if = {
+				limit = { has_character_flag = thieves_guild_carmonna_tong_blocked_member }
+				custom_tooltip = { text    = ekthieving1opta_carmonna_tong_blocked_member }
 			}
+			else_if = {
+				limit = { has_character_flag = thieves_guild_carmonna_tong_blocked_out_of_range }
+				custom_tooltip = { text    = ekthieving1opta_carmonna_tong_blocked_out_of_range }
+			}
+			else_if = {
+				limit = { has_character_flag = thieves_guild_carmonna_tong_blocked_not_dunmer }
+				custom_tooltip = { text    = ekthieving1opta_carmonna_tong_blocked_not_dunmer }
+			}
+			else_if = {
+				limit = { has_character_flag = thieves_guild_carmonna_tong_blocked_unavailable }
+				custom_tooltip = { text    = ekthieving1opta_carmonna_tong_blocked_unavailable }
+			}
+			else = {
+				custom_tooltip = { text    = ekthieving1opta_carmonna_tong_blocked_unknown_reason }
+			}
+		}
+		else = {
+			custom_tooltip         = { text    = ekthieving1opta_carmonna_tong_blocked_unknown_reason }
+		}
+		
+		if = {
+			limit = { has_character_flag = thieves_guild_tamriel_blocked }
+			if = {
+				limit = { has_character_flag = thieves_guild_tamriel_blocked_member }
+				custom_tooltip = { text    = ekthieving1opta_tamriel_blocked_member }
+			}
+			else_if = {
+				limit = { has_character_flag = thieves_guild_tamriel_blocked_out_of_range }
+				custom_tooltip = { text    = ekthieving1opta_tamriel_blocked_out_of_range }
+			}
+			else_if = {
+				limit = { has_character_flag = thieves_guild_tamriel_blocked_unavailable }
+				custom_tooltip = { text    = ekthieving1opta_tamriel_blocked_unavailable }
+			}
+			else = {
+				custom_tooltip = { text    = ekthieving1opta_tamriel_blocked_unknown_reason }
+			}
+		}
+		else = {
+			custom_tooltip         = { text    = ekthieving1opta_tamriel_blocked_unknown_reason }
+		}
+		
+		if = {
+			limit = { has_character_flag = thieves_guild_akavir_blocked }
+			if = {
+				limit = { has_character_flag = thieves_guild_akavir_blocked_member }
+				custom_tooltip = { text    = ekthieving1opta_akavir_blocked_member }
+			}
+			else_if = {
+				limit = { has_character_flag = thieves_guild_akavir_blocked_out_of_range }
+				custom_tooltip = { text    = ekthieving1opta_akavir_blocked_out_of_range }
+			}
+			else_if = {
+				limit = { has_character_flag = thieves_guild_akavir_blocked_unavailable }
+				custom_tooltip = { text    = ekthieving1opta_akavir_blocked_unavailable }
+			}
+			else = {
+				custom_tooltip = { text    = ekthieving1opta_akavir_blocked_unknown_reason }
+			}
+		}
+		else = {
+			custom_tooltip         = { text    = ekthieving1opta_akavir_blocked_unknown_reason }
+		}
+		
+		hidden_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			clear_artifact_theft_flags = yes
+			# Audax Validator "." Ignore_NEXT
+			event_target:ek_theft_target_owner = {
+				character_event = {
+					# Audax Validator "." Ignore_NEXT
+					id = ekthieving.35
+				}
+			}
+			clr_character_flag = thieves_guild_found_surcharge_subcontinent
+			clr_character_flag = thieves_guild_diy_surcharge_continent
+			clr_character_flag = thieves_guild_diy_surcharge_subcontinent
+			clear_event_target = expd_pdxrptg_artifact_theft_owner_for_tt_only
 		}
 		
 	}
@@ -334,9 +616,15 @@ character_event = {
 		name = ekthieving1optc
 		ai_chance = { factor = 1 }
 		
-		character_event = {
-			# Audax Validator "." Ignore_NEXT
-			id = ekthieving.90
+		hidden_tooltip = {
+			character_event = {
+				# Audax Validator "." Ignore_NEXT
+				id = ekthieving.90
+			}
+			clr_character_flag = thieves_guild_found_surcharge_subcontinent
+			clr_character_flag = thieves_guild_diy_surcharge_continent
+			clr_character_flag = thieves_guild_diy_surcharge_subcontinent
+			clear_event_target = expd_pdxrptg_artifact_theft_owner_for_tt_only
 		}
 		
 	}
@@ -349,13 +637,20 @@ character_event = {
 		name = ekthieving1decline
 		ai_chance = { factor = 0 } #AI chance handled in decision
 		
-		# Audax Validator "." Ignore_NEXT
-		clear_artifact_theft_flags = yes
-		event_target:ek_theft_target_owner = {
-			character_event = {
-				# Audax Validator "." Ignore_NEXT
-				id = ekthieving.35
+		hidden_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			clear_artifact_theft_flags = yes
+			# Audax Validator "." Ignore_NEXT
+			event_target:ek_theft_target_owner = {
+				character_event = {
+					# Audax Validator "." Ignore_NEXT
+					id = ekthieving.35
+				}
 			}
+			clr_character_flag = thieves_guild_found_surcharge_subcontinent
+			clr_character_flag = thieves_guild_diy_surcharge_continent
+			clr_character_flag = thieves_guild_diy_surcharge_subcontinent
+			clear_event_target = expd_pdxrptg_artifact_theft_owner_for_tt_only
 		}
 		
 	}
@@ -363,14 +658,222 @@ character_event = {
 	
 	
 	after = {
+		
 		clr_character_flag = thieves_guild_diy
 		clr_character_flag = thieves_guild_diy_blocked
 		clr_character_flag = thieves_guild_found
 		clr_character_flag = thieves_guild_carmonna_tong_blocked
+		clr_character_flag = thieves_guild_carmonna_tong_blocked_member
+		clr_character_flag = thieves_guild_carmonna_tong_blocked_unavailable
+		clr_character_flag = thieves_guild_carmonna_tong_blocked_out_of_range
+		clr_character_flag = thieves_guild_carmonna_tong_blocked_not_dunmer
 		clr_character_flag = thieves_guild_tamriel_blocked
+		clr_character_flag = thieves_guild_tamriel_blocked_member
+		clr_character_flag = thieves_guild_tamriel_blocked_unavailable
+		clr_character_flag = thieves_guild_tamriel_blocked_out_of_range
 		clr_character_flag = thieves_guild_akavir_blocked
+		clr_character_flag = thieves_guild_akavir_blocked_member
+		clr_character_flag = thieves_guild_akavir_blocked_unavailable
+		clr_character_flag = thieves_guild_akavir_blocked_out_of_range
+		
 	}
 	
 	
 	
+}
+
+#Thieves Guild awaits your command!
+character_event = {
+	id = ekthieving.30
+	# Audax Validator "." Ignore_NEXT
+	desc = ekthieving30
+	picture = GFX_evt_shadow
+	
+	is_triggered_only = yes
+	
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = ekthieving30opta
+		
+		if = {
+			limit = {
+				OR = {
+					has_character_flag = wants_easy_artifact
+					NOR = {
+						has_character_flag = wants_easy_artifact
+						has_character_flag = wants_average_artifact
+						has_character_flag = wants_hard_artifact
+						has_character_flag = wants_extreme_artifact
+					}
+				}
+			}
+			scaled_wealth = { value = -1 min = -25 max = -50 }
+		}
+		if = {
+			limit = {
+				has_character_flag = wants_average_artifact
+			}
+			scaled_wealth = { value = -1 min = -75 max = -150 }
+		}
+		if = {
+			limit = {
+				has_character_flag = wants_hard_artifact
+			}
+			scaled_wealth = { value = -1 min = -150 max = -250 }
+		}
+		if = {
+			limit = {
+				has_character_flag = wants_extreme_artifact
+			}
+			scaled_wealth = { value = -1 min = -500 max = -750 }
+		}
+		# Audax Validator "." Ignore_NEXT
+		save_event_target_as = ek_theft_client
+		
+		if = {
+			limit = { has_character_flag = thieves_guild_found_surcharge_subcontinent }
+			custom_tooltip = { text = ekthieving30opta_surcharge_subcontinent }
+			wealth = -200
+		}
+		
+		hidden_tooltip = {
+			random_society_member = {
+				limit = {
+					society_member_of = event_target:thieves_guild
+					is_adult = yes
+					prisoner = no
+					is_inaccessible_trigger = no
+					NOT = { trait = incapable }
+					is_society_grandmaster = no
+				}
+				society_quest_event = {
+					# Audax Validator "." Ignore_NEXT
+					id = ekthieving.200
+				}
+			}
+		}
+	}
+	option = { #Don't hire TG
+		# Audax Validator "." Ignore_NEXT
+		name = ekthieving30optb
+		ai_chance = { factor = 0 } #AI chance handled in decision
+		hidden_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			clear_artifact_theft_flags = yes
+			# Audax Validator "." Ignore_NEXT
+			event_target:ek_theft_target_owner = {
+				character_event = {
+					# Audax Validator "." Ignore_NEXT
+					id = ekthieving.35
+				}
+			}
+		}
+	}
+	after = {
+		clr_character_flag = thieves_guild_found_surcharge_subcontinent
+		clr_character_flag = thieves_guild_diy_surcharge_continent
+		clr_character_flag = thieves_guild_diy_surcharge_subcontinent
+		clear_event_target = expd_pdxrptg_artifact_theft_owner_for_tt_only
+	}
+}
+
+#####Thieves Guild Personal Theft######
+society_quest_event = {
+	id = ekthieving.250
+	# Audax Validator "." Ignore_NEXT
+	title = quest_tg_personal_theft
+	# Audax Validator "." Ignore_NEXT
+	desc = ekthieving250
+	picture = GFX_evt_two_moon_aurora
+	
+	is_triggered_only = yes
+	
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = ekthieving250accept
+		ai_chance = { factor = 1 }
+		if = {
+			limit = {
+				OR = {
+					has_character_flag = wants_easy_artifact
+					NOR = {
+						has_character_flag = wants_easy_artifact
+						has_character_flag = wants_average_artifact
+						has_character_flag = wants_hard_artifact
+						has_character_flag = wants_extreme_artifact
+					}
+				}
+			}
+			scaled_wealth = { value = -1 min = -25 max = -50 }
+		}
+		if = {
+			limit = {
+				has_character_flag = wants_average_artifact
+			}
+			scaled_wealth = { value = -1 min = -75 max = -150 }
+		}
+		if = {
+			limit = {
+				has_character_flag = wants_hard_artifact
+			}
+			scaled_wealth = { value = -1 min = -150 max = -250 }
+		}
+		if = {
+			limit = {
+				has_character_flag = wants_extreme_artifact
+			}
+			scaled_wealth = { value = -1 min = -500 max = -750 }
+		}
+		
+		
+		if = {
+			limit = { has_character_flag = thieves_guild_diy_surcharge_continent }
+			custom_tooltip = { text = ekthieving250accept_surcharge_continent }
+			wealth = -200
+		}
+		else_if = {
+			limit = { has_character_flag = thieves_guild_diy_surcharge_subcontinent }
+			custom_tooltip = { text = ekthieving250accept_surcharge_subcontinent }
+			wealth = -100
+		}
+		
+		# Audax Validator "." Ignore_NEXT
+		event_target:ek_theft_target_owner = {
+			set_quest_target = {
+				# Audax Validator "." Ignore_NEXT
+				id = quest_tg_personal_theft
+				holder = ROOT
+			}
+			hidden_effect = {
+				character_event = {
+					# Audax Validator "." Ignore_NEXT
+					id = ekthieving.255
+					days = 10
+				}
+			}
+		}
+	}
+	
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = ekthieving250decline
+		ai_chance = { factor = 0 }
+		# Audax Validator "." Ignore_NEXT
+		clear_artifact_theft_flags = yes
+		# Audax Validator "." Ignore_NEXT
+		event_target:ek_theft_target_owner = {
+			hidden_effect = {
+				character_event = {
+					# Audax Validator "." Ignore_NEXT
+					id = ekthieving.252
+				}
+			}
+		}
+	}
+	after = {
+		clr_character_flag = thieves_guild_found_surcharge_subcontinent
+		clr_character_flag = thieves_guild_diy_surcharge_continent
+		clr_character_flag = thieves_guild_diy_surcharge_subcontinent
+		clear_event_target = expd_pdxrptg_artifact_theft_owner_for_tt_only
+	}
 }
