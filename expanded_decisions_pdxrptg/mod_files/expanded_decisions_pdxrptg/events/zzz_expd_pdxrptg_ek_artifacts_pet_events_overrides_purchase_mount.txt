@@ -38,6 +38,8 @@ character_event = {
 	
 	picture = GFX_evt_garden
 	
+	border = GFX_event_normal_frame_intrigue
+	
 	desc = { text = EKPets100_AI     trigger = { NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_human }                                                          } }
 	desc = { text = EKPets100_Page0  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  0 } } }
 	desc = { text = EKPets100_Page1  trigger = {         has_character_flag = expd_pdxrptg_purchase_mounts_human     check_variable = { which = mount_page_no value ==  1 } } }
@@ -805,7 +807,7 @@ character_event = {
 	
 	
 	
-	# Pages 1-7 : Next (for human players only: 1st option on page 0, 4th option on pages 1-7)
+	# Pages 1-7 : Next (for human players only: 4th option)
 	
 	option =  {
 		trigger = {
@@ -823,7 +825,7 @@ character_event = {
 	
 	
 	
-	# Page 8 : Restart (for human players only: 1st option on page 8)
+	# Page 8 : Restart (for human players only: 1st option)
 	
 	option = {
 		trigger = {
@@ -840,7 +842,7 @@ character_event = {
 	
 	
 	
-	# Page 9 : Actually something else
+	# Page 9 : Actually something else (for human players only: 4th option, after the 3 random options selected for AI)
 	
 	option = {
 		trigger = {
@@ -874,7 +876,7 @@ character_event = {
 	
 	
 	
-	# Pages {{AI}} & 0 & 8 & 10 : Exit (for human players: 2nd option on pages 0 & 8; for AI: always the 4th option)
+	# Pages {{AI}} & 0 & 8 & 10 : Exit (for human players: 3rd option on page 0; 2nd option on pages 8 & 10; for AI: always the 4th option)
 	
 	option = {
 		trigger = {

@@ -1,0 +1,1085 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+
+
+
+
+
+
+###########################################
+#                                         #
+#        INITIALISATION & CLEANUP         #
+#                                         #
+###########################################
+
+
+
+expd_pdxrptg_purchase_pet_initialise = {
+	if = {
+		limit = {
+			OR = {
+				NOT = { has_character_flag = expd_pdxrptg_purchase_pets_initialised }
+				had_character_flag = { flag = expd_pdxrptg_purchase_pets_initialised months >= 1 } # Fallback in case something gets stuck...
+			}
+		}
+		
+		expd_pdxrptg_purchase_pets_clear_everything_except_decision_suppression = yes
+		
+		expd_pdxrptg_purchase_pets_setup_costs_for_this_character = yes
+		
+		expd_pdxrptg_purchase_pets_ai_choice_select_3 = yes
+		
+		if = {
+			limit = {
+				ai = no
+				NOT = { has_global_flag = expd_pdxrptg_purchase_pets_debug_ai }
+			}
+			set_character_flag = expd_pdxrptg_purchase_pets_human
+			set_variable = { which = pet_page_no value = 0 }
+		}
+		
+		set_character_flag = expd_pdxrptg_purchase_pets_initialised
+		
+	}
+}
+
+expd_pdxrptg_purchase_pets_clear_everything = {
+	hidden_tooltip = {
+		expd_pdxrptg_purchase_pets_clear_everything_except_decision_suppression = yes
+		clr_character_flag = buying_a_pet
+	}
+}
+
+expd_pdxrptg_purchase_pets_clear_everything_except_decision_suppression = {
+	
+	clr_character_flag = expd_pdxrptg_purchase_pets_initialised
+	
+	expd_pdxrptg_purchase_pets_clear_cost_variables = yes
+	expd_pdxrptg_purchase_mount_pet_clear_regional_cost_multipliers = yes
+	expd_pdxrptg_purchase_mount_pet_clear_continent_cost_multipliers = yes
+	
+	expd_pdxrptg_purchase_pets_ai_choice_clear_flags = yes
+	
+	clr_character_flag = expd_pdxrptg_purchase_pets_human
+	set_variable = { which = pet_page_no value = 0 }
+	
+}
+
+
+
+
+
+
+
+
+
+
+###########################################
+#                                         #
+#                  COSTS                  #
+#                                         #
+###########################################
+
+
+
+expd_pdxrptg_purchase_pets_setup_costs_for_this_character = {
+	expd_pdxrptg_purchase_pets_clear_cost_variables = yes
+	expd_pdxrptg_purchase_pets_setup_costs_for_this_character_base = yes
+	expd_pdxrptg_purchase_pets_setup_cost_mults_for_this_character_continent = yes
+	expd_pdxrptg_purchase_pets_setup_cost_mults_for_this_character_region = yes
+	expd_pdxrptg_purchase_pets_setup_costs_for_this_character_final = yes
+}
+
+
+
+expd_pdxrptg_purchase_pets_clear_cost_variables = {
+	
+	set_variable = { which = pet_cat_cost                       value = 0 }
+	set_variable = { which = pet_raven_cost                     value = 0 }
+	set_variable = { which = pet_goose_cost                     value = 0 }
+	set_variable = { which = pet_mudcrab_cost                   value = 0 }
+	set_variable = { which = pet_skeever_cost                   value = 0 }
+	set_variable = { which = pet_guineapig_cost                 value = 0 }
+	set_variable = { which = pet_rabbit_cost                    value = 0 }
+	set_variable = { which = pet_badger_cost                    value = 0 }
+	set_variable = { which = pet_snake_cost                     value = 0 }
+	set_variable = { which = pet_vulture_cost                   value = 0 }
+	set_variable = { which = pet_monkey_cost                    value = 0 }
+	set_variable = { which = pet_capybara_cost                  value = 0 }
+	set_variable = { which = pet_horker_cost                    value = 0 }
+	set_variable = { which = pet_lungshark_cost                 value = 0 }
+	set_variable = { which = pet_dog_masterless_cost            value = 0 }
+	set_variable = { which = pet_dog_beardog_cost               value = 0 }
+	set_variable = { which = pet_dog_dunehound_cost             value = 0 }
+	set_variable = { which = pet_dog_shepard_cost               value = 0 }
+	set_variable = { which = pet_dog_wolfhound_cost             value = 0 }
+	set_variable = { which = pet_dog_house_cost                 value = 0 }
+	set_variable = { which = pet_dog_retriever_cost             value = 0 }
+	set_variable = { which = pet_dog_warhound_cost              value = 0 }
+	set_variable = { which = pet_dog_wolf_cost                  value = 0 }
+	set_variable = { which = pet_dog_fox_cost                   value = 0 }
+	set_variable = { which = pet_dog_fennec_cost                value = 0 }
+	
+	set_variable = { which = pet_cat_cost_mult                  value = 0 }
+	set_variable = { which = pet_raven_cost_mult                value = 0 }
+	set_variable = { which = pet_goose_cost_mult                value = 0 }
+	set_variable = { which = pet_mudcrab_cost_mult              value = 0 }
+	set_variable = { which = pet_skeever_cost_mult              value = 0 }
+	set_variable = { which = pet_guineapig_cost_mult            value = 0 }
+	set_variable = { which = pet_rabbit_cost_mult               value = 0 }
+	set_variable = { which = pet_badger_cost_mult               value = 0 }
+	set_variable = { which = pet_snake_cost_mult                value = 0 }
+	set_variable = { which = pet_vulture_cost_mult              value = 0 }
+	set_variable = { which = pet_monkey_cost_mult               value = 0 }
+	set_variable = { which = pet_capybara_cost_mult             value = 0 }
+	set_variable = { which = pet_horker_cost_mult               value = 0 }
+	set_variable = { which = pet_lungshark_cost_mult            value = 0 }
+	set_variable = { which = pet_dog_masterless_cost_mult       value = 0 }
+	set_variable = { which = pet_dog_beardog_cost_mult          value = 0 }
+	set_variable = { which = pet_dog_dunehound_cost_mult        value = 0 }
+	set_variable = { which = pet_dog_shepard_cost_mult          value = 0 }
+	set_variable = { which = pet_dog_wolfhound_cost_mult        value = 0 }
+	set_variable = { which = pet_dog_house_cost_mult            value = 0 }
+	set_variable = { which = pet_dog_retriever_cost_mult        value = 0 }
+	set_variable = { which = pet_dog_warhound_cost_mult         value = 0 }
+	set_variable = { which = pet_dog_wolf_cost_mult             value = 0 }
+	set_variable = { which = pet_dog_fox_cost_mult              value = 0 }
+	set_variable = { which = pet_dog_fennec_cost_mult           value = 0 }
+	
+	set_variable = { which = pet_cat_cost_negative              value = 0 }
+	set_variable = { which = pet_raven_cost_negative            value = 0 }
+	set_variable = { which = pet_goose_cost_negative            value = 0 }
+	set_variable = { which = pet_mudcrab_cost_negative          value = 0 }
+	set_variable = { which = pet_skeever_cost_negative          value = 0 }
+	set_variable = { which = pet_guineapig_cost_negative        value = 0 }
+	set_variable = { which = pet_rabbit_cost_negative           value = 0 }
+	set_variable = { which = pet_badger_cost_negative           value = 0 }
+	set_variable = { which = pet_snake_cost_negative            value = 0 }
+	set_variable = { which = pet_vulture_cost_negative          value = 0 }
+	set_variable = { which = pet_monkey_cost_negative           value = 0 }
+	set_variable = { which = pet_capybara_cost_negative         value = 0 }
+	set_variable = { which = pet_horker_cost_negative           value = 0 }
+	set_variable = { which = pet_lungshark_cost_negative        value = 0 }
+	set_variable = { which = pet_dog_masterless_cost_negative   value = 0 }
+	set_variable = { which = pet_dog_beardog_cost_negative      value = 0 }
+	set_variable = { which = pet_dog_dunehound_cost_negative    value = 0 }
+	set_variable = { which = pet_dog_shepard_cost_negative      value = 0 }
+	set_variable = { which = pet_dog_wolfhound_cost_negative    value = 0 }
+	set_variable = { which = pet_dog_house_cost_negative        value = 0 }
+	set_variable = { which = pet_dog_retriever_cost_negative    value = 0 }
+	set_variable = { which = pet_dog_warhound_cost_negative     value = 0 }
+	set_variable = { which = pet_dog_wolf_cost_negative         value = 0 }
+	set_variable = { which = pet_dog_fox_cost_negative          value = 0 }
+	set_variable = { which = pet_dog_fennec_cost_negative       value = 0 }
+	
+	set_variable = { which = pet_cost_final_to_round            value = 0 }
+	set_variable = { which = pet_cost_final_to_round_remainder  value = 0 }
+	
+}
+
+
+
+expd_pdxrptg_purchase_pets_setup_costs_for_this_character_base = {
+	
+	set_variable = { which = pet_cat_cost                       value =  50 }
+	set_variable = { which = pet_raven_cost                     value =  50 }
+	set_variable = { which = pet_goose_cost                     value =  50 }
+	set_variable = { which = pet_mudcrab_cost                   value =  50 }
+	set_variable = { which = pet_skeever_cost                   value =  25 }
+	set_variable = { which = pet_guineapig_cost                 value =  50 }
+	set_variable = { which = pet_rabbit_cost                    value =  50 }
+	set_variable = { which = pet_badger_cost                    value =  75 }
+	set_variable = { which = pet_snake_cost                     value =  50 }
+	set_variable = { which = pet_vulture_cost                   value =  50 }
+	set_variable = { which = pet_monkey_cost                    value = 100 }
+	set_variable = { which = pet_capybara_cost                  value = 100 }
+	set_variable = { which = pet_horker_cost                    value = 100 }
+	set_variable = { which = pet_lungshark_cost                 value = 200 }
+	set_variable = { which = pet_dog_masterless_cost            value =  25 }
+	set_variable = { which = pet_dog_beardog_cost               value =  50 }
+	set_variable = { which = pet_dog_dunehound_cost             value =  50 }
+	set_variable = { which = pet_dog_shepard_cost               value =  50 }
+	set_variable = { which = pet_dog_wolfhound_cost             value =  50 }
+	set_variable = { which = pet_dog_house_cost                 value =  50 }
+	set_variable = { which = pet_dog_retriever_cost             value =  50 }
+	set_variable = { which = pet_dog_warhound_cost              value = 125 }
+	set_variable = { which = pet_dog_wolf_cost                  value =  75 }
+	set_variable = { which = pet_dog_fox_cost                   value =  75 }
+	set_variable = { which = pet_dog_fennec_cost                value =  75 }
+	
+	set_variable = { which = pet_cat_cost_mult                  value =   1 }
+	set_variable = { which = pet_raven_cost_mult                value =   1 }
+	set_variable = { which = pet_goose_cost_mult                value =   1 }
+	set_variable = { which = pet_mudcrab_cost_mult              value =   1 }
+	set_variable = { which = pet_skeever_cost_mult              value =   1 }
+	set_variable = { which = pet_guineapig_cost_mult            value =   1 }
+	set_variable = { which = pet_rabbit_cost_mult               value =   1 }
+	set_variable = { which = pet_badger_cost_mult               value =   1 }
+	set_variable = { which = pet_snake_cost_mult                value =   1 }
+	set_variable = { which = pet_vulture_cost_mult              value =   1 }
+	set_variable = { which = pet_monkey_cost_mult               value =   1 }
+	set_variable = { which = pet_capybara_cost_mult             value =   1 }
+	set_variable = { which = pet_horker_cost_mult               value =   1 }
+	set_variable = { which = pet_lungshark_cost_mult            value =   1 }
+	set_variable = { which = pet_dog_masterless_cost_mult       value =   1 }
+	set_variable = { which = pet_dog_beardog_cost_mult          value =   1 }
+	set_variable = { which = pet_dog_dunehound_cost_mult        value =   1 }
+	set_variable = { which = pet_dog_shepard_cost_mult          value =   1 }
+	set_variable = { which = pet_dog_wolfhound_cost_mult        value =   1 }
+	set_variable = { which = pet_dog_house_cost_mult            value =   1 }
+	set_variable = { which = pet_dog_retriever_cost_mult        value =   1 }
+	set_variable = { which = pet_dog_warhound_cost_mult         value =   1 }
+	set_variable = { which = pet_dog_wolf_cost_mult             value =   1 }
+	set_variable = { which = pet_dog_fox_cost_mult              value =   1 }
+	set_variable = { which = pet_dog_fennec_cost_mult           value =   1 }
+	
+}
+
+
+
+expd_pdxrptg_purchase_pets_setup_cost_mults_for_this_character_continent = {
+	
+	expd_pdxrptg_purchase_mount_pet_setup_cost_multipliers_for_this_character_continent = yes
+	
+	# NB: For ubiquitous animals, value = 0
+	
+	change_variable = { which = pet_cat_cost_mult                  value = 0 }
+	change_variable = { which = pet_raven_cost_mult                value = 0 }
+	change_variable = { which = pet_goose_cost_mult                value = 0 }
+	change_variable = { which = pet_mudcrab_cost_mult              value = 0 }
+	change_variable = { which = pet_skeever_cost_mult              value = 0 }
+	change_variable = { which = pet_guineapig_cost_mult            which = mount_pet_akavir_cost_tiny_mult    }        # Native to Akavir in item desc & base mod logic
+	change_variable = { which = pet_rabbit_cost_mult               which = mount_pet_tamriel_cost_tiny_mult   }        # Native to Tamriel in base mod logic
+	change_variable = { which = pet_badger_cost_mult               which = mount_pet_tamriel_cost_small_mult  }        # Native to Tamriel in base mod logic
+	change_variable = { which = pet_snake_cost_mult                value = 0 }
+	change_variable = { which = pet_vulture_cost_mult              value = 0 }
+	change_variable = { which = pet_monkey_cost_mult               which = mount_pet_tamriel_cost_small_mult  }        # Assumed native to Tamriel, since we have monkey-PEOPLE in Akavir
+	change_variable = { which = pet_capybara_cost_mult             which = mount_pet_akavir_cost_medium_mult  }        # Native to Akavir in item desc & base mod logic
+	change_variable = { which = pet_horker_cost_mult               which = mount_pet_tamriel_cost_large_mult  }        # Native to Skyrim in item desc; Medium -> Large due to (likely?) transport difficulty
+	change_variable = { which = pet_lungshark_cost_mult            which = mount_pet_akavir_cost_huge_mult    }        # Native to Kamal in item desc; Large -> Huge due to extreme inconvenience of transporting a (water-breathing) shark intercontinentally!
+	change_variable = { which = pet_dog_masterless_cost_mult       value = 0 }
+	change_variable = { which = pet_dog_beardog_cost_mult          which = mount_pet_tamriel_cost_small_mult  }        # All dog breeds are native to some particular region of Tamriel
+	change_variable = { which = pet_dog_dunehound_cost_mult        which = mount_pet_tamriel_cost_small_mult  }        # All dog breeds are native to some particular region of Tamriel
+	change_variable = { which = pet_dog_shepard_cost_mult          which = mount_pet_tamriel_cost_small_mult  }        # All dog breeds are native to some particular region of Tamriel
+	change_variable = { which = pet_dog_wolfhound_cost_mult        which = mount_pet_tamriel_cost_medium_mult }        # All dog breeds are native to some particular region of Tamriel
+	change_variable = { which = pet_dog_house_cost_mult            which = mount_pet_tamriel_cost_tiny_mult   }        # All dog breeds are native to some particular region of Tamriel
+	change_variable = { which = pet_dog_retriever_cost_mult        which = mount_pet_tamriel_cost_small_mult  }        # All dog breeds are native to some particular region of Tamriel
+	change_variable = { which = pet_dog_warhound_cost_mult         which = mount_pet_tamriel_cost_medium_mult }        # All dog breeds are native to some particular region of Tamriel
+	change_variable = { which = pet_dog_wolf_cost_mult             value = 0 }
+	change_variable = { which = pet_dog_fox_cost_mult              value = 0 }
+	change_variable = { which = pet_dog_fennec_cost_mult           which = mount_pet_tamriel_cost_tiny_mult   }        # Assumed native to Hammerfell deserts
+	
+}
+
+
+
+expd_pdxrptg_purchase_pets_setup_cost_mults_for_this_character_region = {
+	
+	expd_pdxrptg_purchase_mount_pet_setup_cost_multipliers_for_this_character_region = yes
+	
+	# NB: For ubiquitous animals, and animals which are widespread across a whole continent, value = 0
+	
+	change_variable = { which = pet_cat_cost_mult                  value = 0 }
+	change_variable = { which = pet_raven_cost_mult                value = 0 }
+	change_variable = { which = pet_goose_cost_mult                value = 0 }
+	change_variable = { which = pet_mudcrab_cost_mult              which = mount_pet_mud_cost_mult }                   # Native to muddy terrain in base mod logic
+	change_variable = { which = pet_skeever_cost_mult              value = 0 }
+	change_variable = { which = pet_guineapig_cost_mult            which = mount_pet_tsaesci_cost_mult }               # Assumed to be native to specifically Tsaesci region of Akavir
+	change_variable = { which = pet_rabbit_cost_mult               value = 0 }
+	change_variable = { which = pet_badger_cost_mult               which = mount_pet_cyrodiil_cost_mult }              # Native to Cyrodiil in base mod logic & item desc
+	change_variable = { which = pet_snake_cost_mult                which = mount_pet_not_cold_cost_mult }              # Native to non-cold terrain in base mod logic
+	change_variable = { which = pet_vulture_cost_mult              which = mount_pet_not_cold_cost_mult }              # Native to non-cold terrain in base mod logic
+	change_variable = { which = pet_monkey_cost_mult               which = mount_pet_not_cold_cost_mult }              # Native to non-cold terrain in base mod logic
+	change_variable = { which = pet_capybara_cost_mult             which = mount_pet_not_cold_cost_mult }              # Native to non-cold terrain in base mod logic
+	change_variable = { which = pet_horker_cost_mult               which = mount_pet_atmora_arctic_cost_mult }         # Native to Arctic regions in base mod logic & item desc
+	change_variable = { which = pet_lungshark_cost_mult            which = mount_pet_kamal_cost_mult }                 # Native to Kamal in item desc
+	change_variable = { which = pet_dog_masterless_cost_mult       value = 0 }
+	change_variable = { which = pet_dog_beardog_cost_mult          which = mount_pet_reach_cost_mult }                 # Native to The Reach in base mod logic & item desc
+	change_variable = { which = pet_dog_dunehound_cost_mult        which = mount_pet_hammerfell_cost_mult }            # Native to Hammerfell in base mod logic & item desc
+	change_variable = { which = pet_dog_shepard_cost_mult          which = mount_pet_highrock_cost_mult }              # Native to High Rock in base mod logic & item desc
+	change_variable = { which = pet_dog_wolfhound_cost_mult        which = mount_pet_skyrim_cost_mult }                # Native to Skyrim in base mod logic & item desc
+	change_variable = { which = pet_dog_house_cost_mult            which = mount_pet_cyrodiil_cost_mult }              # Native to Cyrodiil in base mod logic & item desc
+	change_variable = { which = pet_dog_retriever_cost_mult        which = mount_pet_cyrodiil_cost_mult }              # Native to Cyrodiil in base mod logic & item desc
+	change_variable = { which = pet_dog_warhound_cost_mult         which = mount_pet_cyrodiil_cost_mult }              # Native to Cyrodiil in base mod logic & item desc
+	change_variable = { which = pet_dog_wolf_cost_mult             which = mount_pet_forest_cost_mult }                # Native to forested areas worldwide in base mod logic
+	change_variable = { which = pet_dog_fox_cost_mult              value = 0 }
+	change_variable = { which = pet_dog_fennec_cost_mult           which = mount_pet_hammerfell_desert_cost_mult }     # Native to Hammerfell deserts in item desc
+	
+}
+
+
+
+expd_pdxrptg_purchase_pets_setup_costs_for_this_character_final = {
+	
+	
+	
+	
+	
+	# Final cost = Base cost * (1 + Sum of mult modifiers)
+	
+	multiply_variable = { which = pet_cat_cost                       which = pet_cat_cost_mult            }
+	multiply_variable = { which = pet_raven_cost                     which = pet_raven_cost_mult          }
+	multiply_variable = { which = pet_goose_cost                     which = pet_goose_cost_mult          }
+	multiply_variable = { which = pet_mudcrab_cost                   which = pet_mudcrab_cost_mult        }
+	multiply_variable = { which = pet_skeever_cost                   which = pet_skeever_cost_mult        }
+	multiply_variable = { which = pet_guineapig_cost                 which = pet_guineapig_cost_mult      }
+	multiply_variable = { which = pet_rabbit_cost                    which = pet_rabbit_cost_mult         }
+	multiply_variable = { which = pet_badger_cost                    which = pet_badger_cost_mult         }
+	multiply_variable = { which = pet_snake_cost                     which = pet_snake_cost_mult          }
+	multiply_variable = { which = pet_vulture_cost                   which = pet_vulture_cost_mult        }
+	multiply_variable = { which = pet_monkey_cost                    which = pet_monkey_cost_mult         }
+	multiply_variable = { which = pet_capybara_cost                  which = pet_capybara_cost_mult       }
+	multiply_variable = { which = pet_horker_cost                    which = pet_horker_cost_mult         }
+	multiply_variable = { which = pet_lungshark_cost                 which = pet_lungshark_cost_mult      }
+	multiply_variable = { which = pet_dog_masterless_cost            which = pet_dog_masterless_cost_mult }
+	multiply_variable = { which = pet_dog_beardog_cost               which = pet_dog_beardog_cost_mult    }
+	multiply_variable = { which = pet_dog_dunehound_cost             which = pet_dog_dunehound_cost_mult  }
+	multiply_variable = { which = pet_dog_shepard_cost               which = pet_dog_shepard_cost_mult    }
+	multiply_variable = { which = pet_dog_wolfhound_cost             which = pet_dog_wolfhound_cost_mult  }
+	multiply_variable = { which = pet_dog_house_cost                 which = pet_dog_house_cost_mult      }
+	multiply_variable = { which = pet_dog_retriever_cost             which = pet_dog_retriever_cost_mult  }
+	multiply_variable = { which = pet_dog_warhound_cost              which = pet_dog_warhound_cost_mult   }
+	multiply_variable = { which = pet_dog_wolf_cost                  which = pet_dog_wolf_cost_mult       }
+	multiply_variable = { which = pet_dog_fox_cost                   which = pet_dog_fox_cost_mult        }
+	multiply_variable = { which = pet_dog_fennec_cost                which = pet_dog_fennec_cost_mult     }
+	
+	
+	
+	
+	
+	# Round the final cost
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_cat_cost                 }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_cat_cost                       which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_raven_cost               }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_raven_cost                     which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_goose_cost               }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_goose_cost                     which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_mudcrab_cost             }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_mudcrab_cost                   which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_skeever_cost             }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_skeever_cost                   which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_guineapig_cost           }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_guineapig_cost                 which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_rabbit_cost              }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_rabbit_cost                    which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_badger_cost              }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_badger_cost                    which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_snake_cost               }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_snake_cost                     which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_vulture_cost_cost        }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_vulture_cost_cost              which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_monkey_cost              }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_monkey_cost                    which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_capybara_cost            }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_capybara_cost                  which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_horker_cost              }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_horker_cost                    which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_lungshark_cost           }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_lungshark_cost                 which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_dog_masterless_cost      }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_dog_masterless_cost            which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_dog_beardog_cost         }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_dog_beardog_cost               which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_dog_dunehound_cost       }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_dog_dunehound_cost             which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_dog_shepard_cost         }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_dog_shepard_cost               which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_dog_wolfhound_cost       }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_dog_wolfhound_cost             which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_dog_house_cost           }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_dog_house_cost                 which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_dog_retriever_cost       }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_dog_retriever_cost             which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_dog_warhound_cost        }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_dog_warhound_cost              which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_dog_wolf_cost            }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_dog_wolf_cost                  which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_dog_fox_cost             }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_dog_fox_cost                   which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            which = pet_dog_fennec_cost          }
+	expd_pdxrpt_purchase_pet_round_final_cost = yes
+	set_variable      = { which = pet_dog_fennec_cost                which = pet_cost_final_to_round      }
+	
+	set_variable      = { which = pet_cost_final_to_round            value = 0 }
+	set_variable      = { which = pet_cost_final_to_round_remainder  value = 0 }
+	
+	
+	
+	
+	# Negative cost = Final cost * -1
+	
+	set_variable      = { which = pet_cat_cost_negative              which = pet_cat_cost            }
+	set_variable      = { which = pet_raven_cost_negative            which = pet_raven_cost          }
+	set_variable      = { which = pet_goose_cost_negative            which = pet_goose_cost          }
+	set_variable      = { which = pet_mudcrab_cost_negative          which = pet_mudcrab_cost        }
+	set_variable      = { which = pet_skeever_cost_negative          which = pet_skeever_cost        }
+	set_variable      = { which = pet_guineapig_cost_negative        which = pet_guineapig_cost      }
+	set_variable      = { which = pet_rabbit_cost_negative           which = pet_rabbit_cost         }
+	set_variable      = { which = pet_badger_cost_negative           which = pet_badger_cost         }
+	set_variable      = { which = pet_snake_cost_negative            which = pet_snake_cost          }
+	set_variable      = { which = pet_vulture_cost_negative          which = pet_vulture_cost        }
+	set_variable      = { which = pet_monkey_cost_negative           which = pet_monkey_cost         }
+	set_variable      = { which = pet_capybara_cost_negative         which = pet_capybara_cost       }
+	set_variable      = { which = pet_horker_cost_negative           which = pet_horker_cost         }
+	set_variable      = { which = pet_lungshark_cost_negative        which = pet_lungshark_cost      }
+	set_variable      = { which = pet_dog_masterless_cost_negative   which = pet_dog_masterless_cost }
+	set_variable      = { which = pet_dog_beardog_cost_negative      which = pet_dog_beardog_cost    }
+	set_variable      = { which = pet_dog_dunehound_cost_negative    which = pet_dog_dunehound_cost  }
+	set_variable      = { which = pet_dog_shepard_cost_negative      which = pet_dog_shepard_cost    }
+	set_variable      = { which = pet_dog_wolfhound_cost_negative    which = pet_dog_wolfhound_cost  }
+	set_variable      = { which = pet_dog_house_cost_negative        which = pet_dog_house_cost      }
+	set_variable      = { which = pet_dog_retriever_cost_negative    which = pet_dog_retriever_cost  }
+	set_variable      = { which = pet_dog_warhound_cost_negative     which = pet_dog_warhound_cost   }
+	set_variable      = { which = pet_dog_wolf_cost_negative         which = pet_dog_wolf_cost       }
+	set_variable      = { which = pet_dog_fox_cost_negative          which = pet_dog_fox_cost        }
+	set_variable      = { which = pet_dog_fennec_cost_negative       which = pet_dog_fennec_cost     }
+	
+	multiply_variable = { which = pet_cat_cost_negative              value = -1 }
+	multiply_variable = { which = pet_raven_cost_negative            value = -1 }
+	multiply_variable = { which = pet_goose_cost_negative            value = -1 }
+	multiply_variable = { which = pet_mudcrab_cost_negative          value = -1 }
+	multiply_variable = { which = pet_skeever_cost_negative          value = -1 }
+	multiply_variable = { which = pet_guineapig_cost_negative        value = -1 }
+	multiply_variable = { which = pet_rabbit_cost_negative           value = -1 }
+	multiply_variable = { which = pet_badger_cost_negative           value = -1 }
+	multiply_variable = { which = pet_snake_cost_negative            value = -1 }
+	multiply_variable = { which = pet_vulture_cost_negative          value = -1 }
+	multiply_variable = { which = pet_monkey_cost_negative           value = -1 }
+	multiply_variable = { which = pet_capybara_cost_negative         value = -1 }
+	multiply_variable = { which = pet_horker_cost_negative           value = -1 }
+	multiply_variable = { which = pet_lungshark_cost_negative        value = -1 }
+	multiply_variable = { which = pet_dog_masterless_cost_negative   value = -1 }
+	multiply_variable = { which = pet_dog_beardog_cost_negative      value = -1 }
+	multiply_variable = { which = pet_dog_dunehound_cost_negative    value = -1 }
+	multiply_variable = { which = pet_dog_shepard_cost_negative      value = -1 }
+	multiply_variable = { which = pet_dog_wolfhound_cost_negative    value = -1 }
+	multiply_variable = { which = pet_dog_house_cost_negative        value = -1 }
+	multiply_variable = { which = pet_dog_retriever_cost_negative    value = -1 }
+	multiply_variable = { which = pet_dog_warhound_cost_negative     value = -1 }
+	multiply_variable = { which = pet_dog_wolf_cost_negative         value = -1 }
+	multiply_variable = { which = pet_dog_fox_cost_negative          value = -1 }
+	multiply_variable = { which = pet_dog_fennec_cost_negative       value = -1 }
+	
+	
+	
+}
+
+expd_pdxrpt_purchase_pet_round_final_cost = {
+	# remainder(x) = x mod 1
+	# if remainder(x) >= 0.5, we want to round up,   ie. round(x) = x + 1 - remainder(x)
+	# else,                   we want to round down, ie. round(x) = x     - remainder(x)
+	set_variable    = { which = pet_cost_final_to_round_remainder which = pet_cost_final_to_round }
+	modulo_variable = { which = pet_cost_final_to_round_remainder value = 1 }
+	if = {
+		limit = { check_variable = { which = pet_cost_final_to_round_remainder value >= 0.5 } }
+		change_variable = { which = pet_cost_final_to_round value = 1 }
+	}
+	subtract_variable = { which = pet_cost_final_to_round which = pet_cost_final_to_round_remainder }
+}
+
+
+
+
+
+
+
+
+
+
+###########################################
+#                                         #
+#               AI CHOICES                #
+#                                         #
+###########################################
+
+
+
+expd_pdxrptg_purchase_pets_ai_choice_select_3 = {
+	expd_pdxrptg_purchase_pets_ai_choice_select_1 = yes
+	expd_pdxrptg_purchase_pets_ai_choice_select_1 = yes
+	expd_pdxrptg_purchase_pets_ai_choice_select_1 = yes
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_clear_flags = {
+	clr_character_flag = pet_cat_for_ai
+	clr_character_flag = pet_raven_for_ai
+	clr_character_flag = pet_goose_for_ai
+	clr_character_flag = pet_mudcrab_for_ai
+	clr_character_flag = pet_skeever_for_ai
+	clr_character_flag = pet_guineapig_for_ai
+	clr_character_flag = pet_rabbit_for_ai
+	clr_character_flag = pet_badger_for_ai
+	clr_character_flag = pet_snake_for_ai
+	clr_character_flag = pet_vulture_for_ai
+	clr_character_flag = pet_monkey_for_ai
+	clr_character_flag = pet_capybara_for_ai
+	clr_character_flag = pet_horker_for_ai
+	clr_character_flag = pet_lungshark_for_ai
+	clr_character_flag = pet_dog_masterless_for_ai
+	clr_character_flag = pet_dog_beardog_for_ai
+	clr_character_flag = pet_dog_dunehound_for_ai
+	clr_character_flag = pet_dog_shepard_for_ai
+	clr_character_flag = pet_dog_wolfhound_for_ai
+	clr_character_flag = pet_dog_house_for_ai
+	clr_character_flag = pet_dog_retriever_for_ai
+	clr_character_flag = pet_dog_warhound_for_ai
+	clr_character_flag = pet_dog_wolf_for_ai
+	clr_character_flag = pet_dog_fox_for_ai
+	clr_character_flag = pet_dog_fennec_for_ai
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_select_1 = {
+	# Base weight = 3 (generic), or 10 (non-generic), or 30 (unusually high quality)
+	# High multiplier => Non-native => Less likely to choose
+	# High absolute cost => Probably have better things to spend money on => Less likely to choose
+	# Finally, any special effects from culture/traits/etc
+	random_list = {
+		3 = { # Generic
+			set_character_flag = pet_cat_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_cat_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_cat_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_cat_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_cat_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_cat_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_cat_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_cat_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_cat_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_cat_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_cat_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_cat_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_cat_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = yes }
+			# Strong impact on opinion
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances = yes }
+			# Cute (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_likes_cute = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_dislikes_cute = yes }
+			mult_modifier = { factor = 0.10 expd_pdxrptg_purchase_pets_ai_choice_has_selected_cute = yes }
+		}
+		3 = { # Generic
+			set_character_flag = pet_raven_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_raven_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_raven_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_raven_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_raven_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_raven_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_raven_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_raven_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_raven_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_raven_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_raven_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_raven_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_raven_cost }
+			mult_modifier = { factor = 2.00 OR = { expd_pdxrptg_purchase_pets_ai_choice_is_agent = yes expd_pdxrptg_purchase_pets_ai_choice_is_mage = yes } }
+		}
+		3 = { # Generic
+			set_character_flag = pet_goose_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_goose_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_goose_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_goose_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_goose_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_goose_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_goose_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_goose_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_goose_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_goose_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_goose_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_goose_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_goose_cost }
+			# Quite bad - except for their extra plot power defence!
+			mult_modifier = { factor = 0.20 NOT = { trait = paranoid } OR = { expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = yes expd_pdxrptg_purchase_pets_ai_choice_is_agent = yes } }
+			mult_modifier = { factor = 5.00         trait = paranoid   }
+			# Strong impact on opinion
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances = yes }
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances = yes }
+			# Disgusting (try to pick only one)
+			mult_modifier = { factor = 0.10 expd_pdxrptg_purchase_pets_ai_choice_has_selected_disgusting = yes }
+		}
+		3 = { # Generic
+			set_character_flag = pet_mudcrab_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_mudcrab_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_mudcrab_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_mudcrab_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_mudcrab_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_mudcrab_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_mudcrab_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_mudcrab_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_mudcrab_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_mudcrab_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_mudcrab_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_mudcrab_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_mudcrab_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+			# Strong impact on opinion
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances = yes }
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances = yes }
+			# Disgusting (try to pick only one)
+			mult_modifier = { factor = 0.10 expd_pdxrptg_purchase_pets_ai_choice_has_selected_disgusting = yes }
+		}
+		3 = { # Generic
+			set_character_flag = pet_skeever_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_skeever_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_skeever_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_skeever_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_skeever_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_skeever_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_skeever_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_skeever_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_skeever_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_skeever_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_skeever_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_skeever_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_skeever_cost }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = yes }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes  }
+			# Strong impact on opinion
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances = yes }
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances = yes }
+			# Disgusting (try to pick only one)
+			mult_modifier = { factor = 0.10 expd_pdxrptg_purchase_pets_ai_choice_has_selected_disgusting = yes }
+		}
+		3 = { # Generic
+			set_character_flag = pet_guineapig_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_guineapig_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_guineapig_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_guineapig_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_guineapig_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_guineapig_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_guineapig_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_guineapig_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_guineapig_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_guineapig_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_guineapig_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_guineapig_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_guineapig_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = yes }
+			# Strong impact on opinion
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances = yes }
+			# Cute (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_likes_cute = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_dislikes_cute = yes }
+			mult_modifier = { factor = 0.10 expd_pdxrptg_purchase_pets_ai_choice_has_selected_cute = yes }
+		}
+		3 = { # Generic
+			set_character_flag = pet_rabbit_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_rabbit_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_rabbit_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_rabbit_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_rabbit_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_rabbit_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_rabbit_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_rabbit_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_rabbit_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_rabbit_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_rabbit_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_rabbit_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_rabbit_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = yes }
+			# Strong impact on opinion
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances = yes }
+			# Cute (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_likes_cute = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_dislikes_cute = yes }
+			mult_modifier = { factor = 0.10 expd_pdxrptg_purchase_pets_ai_choice_has_selected_cute = yes }
+		}
+		3 = { # Generic
+			set_character_flag = pet_badger_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_badger_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_badger_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_badger_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_badger_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_badger_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_badger_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_badger_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_badger_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_badger_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_badger_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_badger_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_badger_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+		}
+		3 = { # Generic
+			set_character_flag = pet_snake_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_snake_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_snake_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_snake_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_snake_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_snake_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_snake_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_snake_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_snake_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_snake_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_snake_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_snake_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_snake_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_agent = yes }
+		}
+		3 = { # Generic
+			set_character_flag = pet_vulture_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_vulture_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_vulture_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_vulture_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_vulture_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_vulture_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_vulture_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_vulture_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_vulture_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_vulture_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_vulture_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_vulture_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_vulture_cost }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = yes }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_agent = yes }
+			# Strong impact on opinion (Special extra logic!)
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_dislikes_scavengers = yes }
+			mult_modifier = { factor = 9.99 expd_pdxrptg_purchase_pets_ai_choice_likes_scavengers = yes }
+			# Disgusting (try to pick only one)
+			mult_modifier = { factor = 0.10 expd_pdxrptg_purchase_pets_ai_choice_has_selected_disgusting = yes }
+		}
+		3 = { # Generic
+			set_character_flag = pet_monkey_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_monkey_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_monkey_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_monkey_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_monkey_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_monkey_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_monkey_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_monkey_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_monkey_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_monkey_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_monkey_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_monkey_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_monkey_cost }
+			mult_modifier = { factor = 2.00 OR = { expd_pdxrptg_purchase_pets_ai_choice_is_agent = yes expd_pdxrptg_purchase_pets_ai_choice_is_magistrate = yes } }
+		}
+		3 = { # Generic
+			set_character_flag = pet_capybara_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_capybara_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_capybara_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_capybara_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_capybara_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_capybara_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_capybara_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_capybara_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_capybara_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_capybara_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_capybara_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_capybara_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_capybara_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = yes }
+			# Strong impact on opinion
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances = yes }
+			# Cute (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_likes_cute = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_dislikes_cute = yes }
+			mult_modifier = { factor = 0.10 expd_pdxrptg_purchase_pets_ai_choice_has_selected_cute = yes }
+		}
+		10 = { # Non-Generic
+			set_character_flag = pet_horker_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_horker_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_horker_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_horker_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_horker_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_horker_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_horker_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_horker_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_horker_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_horker_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_horker_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_horker_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_horker_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = yes }
+		}
+		30 = { # Unusually high-quality
+			set_character_flag = pet_lungshark_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_lungshark_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_lungshark_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_lungshark_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_lungshark_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_lungshark_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_lungshark_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_lungshark_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_lungshark_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_lungshark_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_lungshark_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_lungshark_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_lungshark_cost }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = yes }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+		}
+		3 = { # Generic
+			set_character_flag = pet_dog_masterless_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_dog_masterless_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_dog_masterless_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_dog_masterless_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_dog_masterless_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_masterless_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_dog_masterless_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_dog_masterless_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_masterless_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_dog_masterless_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_masterless_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_masterless_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_dog_masterless_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+			# Dog (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = no  }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = yes }
+		}
+		10 = { # Non-Generic
+			set_character_flag = pet_dog_beardog_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_dog_beardog_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_dog_beardog_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_dog_beardog_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_dog_beardog_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_beardog_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_dog_beardog_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_dog_beardog_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_beardog_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_dog_beardog_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_beardog_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_beardog_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_dog_beardog_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+			# Dog (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = no  }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = yes }
+		}
+		10 = { # Non-Generic
+			set_character_flag = pet_dog_dunehound_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_dog_dunehound_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_dog_dunehound_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_dog_dunehound_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_dog_dunehound_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_dunehound_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_dog_dunehound_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_dog_dunehound_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_dunehound_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_dog_dunehound_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_dunehound_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_dunehound_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_dog_dunehound_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+			# Dog (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = no  }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = yes }
+		}
+		10 = { # Non-Generic
+			set_character_flag = pet_dog_shepard_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_dog_shepard_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_dog_shepard_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_dog_shepard_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_dog_shepard_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_shepard_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_dog_shepard_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_dog_shepard_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_shepard_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_dog_shepard_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_shepard_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_shepard_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_dog_shepard_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+			# Dog (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = no  }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = yes }
+		}
+		10 = { # Non-Generic
+			set_character_flag = pet_dog_wolfhound_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_dog_wolfhound_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_dog_wolfhound_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_dog_wolfhound_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_dog_wolfhound_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_wolfhound_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_dog_wolfhound_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_dog_wolfhound_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_wolfhound_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_dog_wolfhound_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_wolfhound_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_wolfhound_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_dog_wolfhound_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+			# Dog (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = no  }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = yes }
+		}
+		10 = { # Non-Generic
+			set_character_flag = pet_dog_house_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_dog_house_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_dog_house_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_dog_house_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_dog_house_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_house_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_dog_house_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_dog_house_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_house_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_dog_house_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_house_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_house_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_dog_house_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+			# Dog (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = no  }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = yes }
+		}
+		10 = { # Non-Generic
+			set_character_flag = pet_dog_retriever_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_dog_retriever_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_dog_retriever_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_dog_retriever_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_dog_retriever_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_retriever_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_dog_retriever_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_dog_retriever_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_retriever_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_dog_retriever_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_retriever_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_retriever_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_dog_retriever_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+			# Dog (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = no  }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = yes }
+		}
+		30 = { # Unusually high-quality
+			set_character_flag = pet_dog_warhound_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_dog_warhound_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_dog_warhound_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_dog_warhound_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_dog_warhound_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_warhound_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_dog_warhound_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_dog_warhound_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_warhound_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_dog_warhound_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_warhound_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_warhound_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_dog_warhound_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+			# Dog (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = no  }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = yes }
+		}
+		10 = { # Non-Generic
+			set_character_flag = pet_dog_wolf_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_dog_wolf_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_dog_wolf_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_dog_wolf_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_dog_wolf_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_wolf_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_dog_wolf_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_dog_wolf_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_wolf_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_dog_wolf_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_wolf_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_wolf_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_dog_wolf_cost }
+			mult_modifier = { factor = 2.00 expd_pdxrptg_purchase_pets_ai_choice_is_warrior = yes }
+			# Dog (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = no  }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = yes }
+		}
+		3 = { # Generic
+			set_character_flag = pet_dog_fox_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_dog_fox_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_dog_fox_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_dog_fox_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_dog_fox_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_fox_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_dog_fox_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_dog_fox_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_fox_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_dog_fox_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_fox_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_fox_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_dog_fox_cost }
+			mult_modifier = { factor = 2.00 OR = { expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = yes expd_pdxrptg_purchase_pets_ai_choice_is_agent = yes } }
+			# Strong impact on opinion
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances = yes }
+			# Cute (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_likes_cute = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_dislikes_cute = yes }
+			mult_modifier = { factor = 0.10 expd_pdxrptg_purchase_pets_ai_choice_has_selected_cute = yes }
+		}
+		30 = { # Unusually high-quality
+			set_character_flag = pet_dog_fennec_for_ai
+			mult_modifier = { factor = 0    has_character_flag = pet_dog_fennec_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = pet_dog_fennec_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = pet_dog_fennec_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = pet_dog_fennec_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_fennec_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = pet_dog_fennec_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = pet_dog_fennec_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_fennec_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = pet_dog_fennec_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = pet_dog_fennec_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = pet_dog_fennec_cost      value >= 1000   } }
+			mult_modifier = { factor = 0.01 wealth < pet_dog_fennec_cost }
+			mult_modifier = { factor = 2.00 OR = { expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = yes expd_pdxrptg_purchase_pets_ai_choice_is_agent = yes } }
+			# Strong impact on opinion
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances = yes }
+			# Cute (try to pick only one)
+			mult_modifier = { factor = 5.00 expd_pdxrptg_purchase_pets_ai_choice_likes_cute = yes }
+			mult_modifier = { factor = 0.20 expd_pdxrptg_purchase_pets_ai_choice_dislikes_cute = yes }
+			mult_modifier = { factor = 0.10 expd_pdxrptg_purchase_pets_ai_choice_has_selected_cute = yes }
+		}
+	}
+}

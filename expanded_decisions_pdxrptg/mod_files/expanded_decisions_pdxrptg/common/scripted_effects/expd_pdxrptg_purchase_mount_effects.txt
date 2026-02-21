@@ -20,15 +20,18 @@
 
 expd_pdxrptg_purchase_mounts_initialise = {
 	if = {
-		limit = { NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_initialised } }
+		limit = {
+			OR = {
+				NOT = { has_character_flag = expd_pdxrptg_purchase_mounts_initialised }
+				had_character_flag = { flag = expd_pdxrptg_purchase_mounts_initialised months >= 1 } # Fallback in case something gets stuck...
+			}
+		}
 		
 		expd_pdxrptg_purchase_mounts_clear_everything_except_decision_suppression = yes
 		
 		expd_pdxrptg_purchase_mounts_setup_costs_for_this_character = yes
 		
 		expd_pdxrptg_purchase_mounts_ai_choice_select_3 = yes
-		
-		expd_pdxrptg_purchase_mounts_create_negative_costs = yes
 		
 		if = {
 			limit = {
@@ -56,6 +59,8 @@ expd_pdxrptg_purchase_mounts_clear_everything_except_decision_suppression = {
 	clr_character_flag = expd_pdxrptg_purchase_mounts_initialised
 	
 	expd_pdxrptg_purchase_mounts_clear_cost_variables = yes
+	expd_pdxrptg_purchase_mount_pet_clear_regional_cost_multipliers = yes
+	expd_pdxrptg_purchase_mount_pet_clear_continent_cost_multipliers = yes
 	
 	expd_pdxrptg_purchase_mounts_ai_choice_clear_flags = yes
 	
@@ -83,702 +88,344 @@ expd_pdxrptg_purchase_mounts_clear_everything_except_decision_suppression = {
 
 expd_pdxrptg_purchase_mounts_setup_costs_for_this_character = {
 	expd_pdxrptg_purchase_mounts_setup_costs_for_this_character_base = yes
-	expd_pdxrptg_purchase_mounts_setup_costs_for_this_character_continent = yes
-	expd_pdxrptg_purchase_mounts_setup_costs_for_this_character_capital = yes
-	expd_pdxrptg_purchase_mounts_setup_costs_for_this_character_culture = yes
+	expd_pdxrptg_purchase_mounts_setup_cost_mults_for_this_character_continent = yes
+	expd_pdxrptg_purchase_mounts_setup_cost_mults_for_this_character_region = yes
+	expd_pdxrptg_purchase_mounts_setup_costs_for_this_character_final = yes
 }
+
+
 
 expd_pdxrptg_purchase_mounts_clear_cost_variables = {
 	
-	set_variable = { which = mount_rouncey_cost      value = 0 }
-	set_variable = { which = mount_cerigyn_cost      value = 0 }
-	set_variable = { which = mount_jennet_cost       value = 0 }
-	set_variable = { which = mount_mountain_cost     value = 0 }
-	set_variable = { which = mount_destrier_cost     value = 0 }
-	set_variable = { which = mount_courser_cost      value = 0 }
-	set_variable = { which = mount_palfrey_cost      value = 0 }
-	set_variable = { which = mount_hobbeye_cost      value = 0 }
-	set_variable = { which = mount_mijako_cost       value = 0 }
-	set_variable = { which = mount_camel_h_cost      value = 0 }
-	set_variable = { which = mount_camel_p_cost      value = 0 }
-	set_variable = { which = mount_guar_c_cost       value = 0 }
-	set_variable = { which = mount_guar_f_cost       value = 0 }
-	set_variable = { which = mount_guar_s_cost       value = 0 }
-	set_variable = { which = mount_kagouti_cost      value = 0 }
-	set_variable = { which = mount_shellback_cost    value = 0 }
-	set_variable = { which = mount_pahmar_cost       value = 0 }
-	set_variable = { which = mount_senche_cost       value = 0 }
+	set_variable      = { which = mount_rouncey_cost                    value = 0 }
+	set_variable      = { which = mount_cerigyn_cost                    value = 0 }
+	set_variable      = { which = mount_jennet_cost                     value = 0 }
+	set_variable      = { which = mount_mountain_cost                   value = 0 }
+	set_variable      = { which = mount_destrier_cost                   value = 0 }
+	set_variable      = { which = mount_courser_cost                    value = 0 }
+	set_variable      = { which = mount_palfrey_cost                    value = 0 }
+	set_variable      = { which = mount_hobbeye_cost                    value = 0 }
+	set_variable      = { which = mount_mijako_cost                     value = 0 }
+	set_variable      = { which = mount_camel_h_cost                    value = 0 }
+	set_variable      = { which = mount_camel_p_cost                    value = 0 }
+	set_variable      = { which = mount_guar_c_cost                     value = 0 }
+	set_variable      = { which = mount_guar_f_cost                     value = 0 }
+	set_variable      = { which = mount_guar_s_cost                     value = 0 }
+	set_variable      = { which = mount_kagouti_cost                    value = 0 }
+	set_variable      = { which = mount_shellback_cost                  value = 0 }
+	set_variable      = { which = mount_pahmar_cost                     value = 0 }
+	set_variable      = { which = mount_senche_cost                     value = 0 }
 	
-	set_variable = { which = mount_tamriel_cost_mult value = 0 }
-	set_variable = { which = mount_akavir_cost_mult  value = 0 }
+	set_variable      = { which = mount_rouncey_cost_mult               value = 0 }
+	set_variable      = { which = mount_cerigyn_cost_mult               value = 0 }
+	set_variable      = { which = mount_jennet_cost_mult                value = 0 }
+	set_variable      = { which = mount_mountain_cost_mult              value = 0 }
+	set_variable      = { which = mount_destrier_cost_mult              value = 0 }
+	set_variable      = { which = mount_courser_cost_mult               value = 0 }
+	set_variable      = { which = mount_palfrey_cost_mult               value = 0 }
+	set_variable      = { which = mount_hobbeye_cost_mult               value = 0 }
+	set_variable      = { which = mount_mijako_cost_mult                value = 0 }
+	set_variable      = { which = mount_camel_h_cost_mult               value = 0 }
+	set_variable      = { which = mount_camel_p_cost_mult               value = 0 }
+	set_variable      = { which = mount_guar_c_cost_mult                value = 0 }
+	set_variable      = { which = mount_guar_f_cost_mult                value = 0 }
+	set_variable      = { which = mount_guar_s_cost_mult                value = 0 }
+	set_variable      = { which = mount_kagouti_cost_mult               value = 0 }
+	set_variable      = { which = mount_shellback_cost_mult             value = 0 }
+	set_variable      = { which = mount_pahmar_cost_mult                value = 0 }
+	set_variable      = { which = mount_senche_cost_mult                value = 0 }
 	
-	set_variable = { which = mount_rouncey_cost_negative      value = 0 }
-	set_variable = { which = mount_cerigyn_cost_negative      value = 0 }
-	set_variable = { which = mount_jennet_cost_negative       value = 0 }
-	set_variable = { which = mount_mountain_cost_negative     value = 0 }
-	set_variable = { which = mount_destrier_cost_negative     value = 0 }
-	set_variable = { which = mount_courser_cost_negative      value = 0 }
-	set_variable = { which = mount_palfrey_cost_negative      value = 0 }
-	set_variable = { which = mount_hobbeye_cost_negative      value = 0 }
-	set_variable = { which = mount_mijako_cost_negative       value = 0 }
-	set_variable = { which = mount_camel_h_cost_negative      value = 0 }
-	set_variable = { which = mount_camel_p_cost_negative      value = 0 }
-	set_variable = { which = mount_guar_c_cost_negative       value = 0 }
-	set_variable = { which = mount_guar_f_cost_negative       value = 0 }
-	set_variable = { which = mount_guar_s_cost_negative       value = 0 }
-	set_variable = { which = mount_kagouti_cost_negative      value = 0 }
-	set_variable = { which = mount_shellback_cost_negative    value = 0 }
-	set_variable = { which = mount_pahmar_cost_negative       value = 0 }
-	set_variable = { which = mount_senche_cost_negative       value = 0 }
+	set_variable      = { which = mount_rouncey_cost_negative           value = 0 }
+	set_variable      = { which = mount_cerigyn_cost_negative           value = 0 }
+	set_variable      = { which = mount_jennet_cost_negative            value = 0 }
+	set_variable      = { which = mount_mountain_cost_negative          value = 0 }
+	set_variable      = { which = mount_destrier_cost_negative          value = 0 }
+	set_variable      = { which = mount_courser_cost_negative           value = 0 }
+	set_variable      = { which = mount_palfrey_cost_negative           value = 0 }
+	set_variable      = { which = mount_hobbeye_cost_negative           value = 0 }
+	set_variable      = { which = mount_mijako_cost_negative            value = 0 }
+	set_variable      = { which = mount_camel_h_cost_negative           value = 0 }
+	set_variable      = { which = mount_camel_p_cost_negative           value = 0 }
+	set_variable      = { which = mount_guar_c_cost_negative            value = 0 }
+	set_variable      = { which = mount_guar_f_cost_negative            value = 0 }
+	set_variable      = { which = mount_guar_s_cost_negative            value = 0 }
+	set_variable      = { which = mount_kagouti_cost_negative           value = 0 }
+	set_variable      = { which = mount_shellback_cost_negative         value = 0 }
+	set_variable      = { which = mount_pahmar_cost_negative            value = 0 }
+	set_variable      = { which = mount_senche_cost_negative            value = 0 }
+	
+	set_variable      = { which = mount_cost_final_to_round             value = 0 }
+	set_variable      = { which = mount_cost_final_to_round_remainder   value = 0 }
 	
 }
+
+
 
 expd_pdxrptg_purchase_mounts_setup_costs_for_this_character_base = {
 	
-	set_variable = { which = mount_rouncey_cost     value = 100 }
-	set_variable = { which = mount_cerigyn_cost     value = 100 }
-	set_variable = { which = mount_jennet_cost      value = 100 }
-	set_variable = { which = mount_mountain_cost    value = 100 }
-	set_variable = { which = mount_destrier_cost    value = 200 }
-	set_variable = { which = mount_courser_cost     value = 100 }
-	set_variable = { which = mount_palfrey_cost     value = 100 }
-	set_variable = { which = mount_hobbeye_cost     value = 100 }
-	set_variable = { which = mount_mijako_cost      value = 100 }
-	set_variable = { which = mount_camel_h_cost     value = 100 }
-	set_variable = { which = mount_camel_p_cost     value = 100 }
-	set_variable = { which = mount_guar_c_cost      value = 100 }
-	set_variable = { which = mount_guar_f_cost      value = 100 }
-	set_variable = { which = mount_guar_s_cost      value = 100 }
-	set_variable = { which = mount_kagouti_cost     value = 200 }
-	set_variable = { which = mount_shellback_cost   value = 200 }
-	set_variable = { which = mount_pahmar_cost      value = 100 }
-	set_variable = { which = mount_senche_cost      value = 200 }
+	set_variable      = { which = mount_rouncey_cost                    value = 100 }
+	set_variable      = { which = mount_cerigyn_cost                    value = 100 }
+	set_variable      = { which = mount_jennet_cost                     value = 100 }
+	set_variable      = { which = mount_mountain_cost                   value = 100 }
+	set_variable      = { which = mount_destrier_cost                   value = 200 }
+	set_variable      = { which = mount_courser_cost                    value = 100 }
+	set_variable      = { which = mount_palfrey_cost                    value = 100 }
+	set_variable      = { which = mount_hobbeye_cost                    value = 100 }
+	set_variable      = { which = mount_mijako_cost                     value = 100 }
+	set_variable      = { which = mount_camel_h_cost                    value = 100 }
+	set_variable      = { which = mount_camel_p_cost                    value = 100 }
+	set_variable      = { which = mount_guar_c_cost                     value = 100 }
+	set_variable      = { which = mount_guar_f_cost                     value = 100 }
+	set_variable      = { which = mount_guar_s_cost                     value = 100 }
+	set_variable      = { which = mount_kagouti_cost                    value = 200 }
+	set_variable      = { which = mount_shellback_cost                  value = 200 }
+	set_variable      = { which = mount_pahmar_cost                     value = 100 }
+	set_variable      = { which = mount_senche_cost                     value = 200 }
+	
+	set_variable      = { which = mount_rouncey_cost_mult               value =   1 }
+	set_variable      = { which = mount_cerigyn_cost_mult               value =   1 }
+	set_variable      = { which = mount_jennet_cost_mult                value =   1 }
+	set_variable      = { which = mount_mountain_cost_mult              value =   1 }
+	set_variable      = { which = mount_destrier_cost_mult              value =   1 }
+	set_variable      = { which = mount_courser_cost_mult               value =   1 }
+	set_variable      = { which = mount_palfrey_cost_mult               value =   1 }
+	set_variable      = { which = mount_hobbeye_cost_mult               value =   1 }
+	set_variable      = { which = mount_mijako_cost_mult                value =   1 }
+	set_variable      = { which = mount_camel_h_cost_mult               value =   1 }
+	set_variable      = { which = mount_camel_p_cost_mult               value =   1 }
+	set_variable      = { which = mount_guar_c_cost_mult                value =   1 }
+	set_variable      = { which = mount_guar_f_cost_mult                value =   1 }
+	set_variable      = { which = mount_guar_s_cost_mult                value =   1 }
+	set_variable      = { which = mount_kagouti_cost_mult               value =   1 }
+	set_variable      = { which = mount_shellback_cost_mult             value =   1 }
+	set_variable      = { which = mount_pahmar_cost_mult                value =   1 }
+	set_variable      = { which = mount_senche_cost_mult                value =   1 }
 	
 }
 
 
 
-
-
-expd_pdxrptg_purchase_mounts_setup_costs_for_this_character_continent = {
+expd_pdxrptg_purchase_mounts_setup_cost_mults_for_this_character_continent = {
 	
-	# Increase cost significantly if mount is not from your continent
+	expd_pdxrptg_purchase_mount_pet_setup_cost_multipliers_for_this_character_continent = yes
 	
-	
-	
-	
-	
-	# Tamriel
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_tamriel
-			}
-		}
-		# Capital is in Tamriel => No surcharge
-		set_variable = { which = mount_tamriel_cost_mult value = 1 }
-	}
-	else_if = {
-		limit = {
-			any_demesne_province = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_tamriel
-			}
-		}
-		# Capital is NOT in Tamriel, but a demesne province is => small surcharge
-		set_variable = { which = mount_tamriel_cost_mult value = 2 }
-	}
-	else_if = {
-		limit = {
-			any_realm_province = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_tamriel
-			}
-		}
-		# Capital is NOT in Tamriel, but a subrealm province is => medium surcharge
-		set_variable = { which = mount_tamriel_cost_mult value = 3 }
-	}
-	else_if = {
-		limit = {
-			top_liege = {
-				any_realm_province = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel
-				}
-			}
-		}
-		# No subrealm province is in Tamriel, but your top liege's realm has one => large surcharge
-		set_variable = { which = mount_tamriel_cost_mult value = 5 }
-	}
-	else_if = {
-		limit = {
-			top_liege = {
-				any_realm_province = {
-					OR = {
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_yokuda
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_atmora
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_akavir_cathnoquey
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_roscrea
-					}
-				}
-			}
-		}
-		# Nearest top liege realm province is in an adjacent subcontinent to Tamriel => very large surcharge
-		set_variable = { which = mount_tamriel_cost_mult value = 10 }
-	}
-	else = {
-		# Nearest top liege realm province is NOT in an adjacent subcontinent to Tamriel => extremely large surcharge
-		set_variable = { which = mount_tamriel_cost_mult value = 20 }
-	}
-	multiply_variable = { which = mount_rouncey_cost     which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_jennet_cost      which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_mountain_cost    which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_destrier_cost    which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_courser_cost     which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_palfrey_cost     which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_hobbeye_cost     which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_camel_h_cost     which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_guar_c_cost      which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_guar_f_cost      which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_guar_s_cost      which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_kagouti_cost     which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_shellback_cost   which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_pahmar_cost      which = mount_tamriel_cost_mult }
-	multiply_variable = { which = mount_senche_cost      which = mount_tamriel_cost_mult }
-	
-	
-	
-	
-	
-	# Akavir
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_akavir
-			}
-		}
-		# Capital is in Akavir => No surcharge
-		set_variable = { which = mount_akavir_cost_mult value = 1 }
-	}
-	else_if = {
-		limit = {
-			any_demesne_province = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_akavir
-			}
-		}
-		# Capital is NOT in Akavir, but a demesne province is => small surcharge
-		set_variable = { which = mount_akavir_cost_mult value = 2 }
-	}
-	else_if = {
-		limit = {
-			any_realm_province = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_akavir
-			}
-		}
-		# Capital is NOT in Akavir, but a subrealm province is => medium surcharge
-		set_variable = { which = mount_akavir_cost_mult value = 3 }
-	}
-	else_if = {
-		limit = {
-			top_liege = {
-				any_realm_province = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_akavir
-				}
-			}
-		}
-		# No subrealm province is in Akavir, but your top liege's realm has one => large surcharge
-		set_variable = { which = mount_akavir_cost_mult value = 5 }
-	}
-	else_if = {
-		limit = {
-			top_liege = {
-				any_realm_province = {
-					OR = {
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_atmora
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_roscrea
-					}
-				}
-			}
-		}
-		# Nearest top liege realm province is in an adjacent subcontinent to Akavir => very large surcharge
-		set_variable = { which = mount_akavir_cost_mult value = 10 }
-	}
-	else = {
-		# Nearest top liege realm province is NOT in an adjacent subcontinent to Akavir => extremely large surcharge
-		set_variable = { which = mount_akavir_cost_mult value = 20 }
-	}
-	multiply_variable = { which = mount_cerigyn_cost     which = mount_akavir_cost_mult }
-	multiply_variable = { which = mount_mijako_cost      which = mount_akavir_cost_mult }
-	multiply_variable = { which = mount_camel_p_cost     which = mount_akavir_cost_mult }
+	change_variable   = { which = mount_rouncey_cost_mult               which = mount_pet_tamriel_cost_medium_mult        }
+	change_variable   = { which = mount_cerigyn_cost_mult               which = mount_pet_akavir_cost_medium_mult         }
+	change_variable   = { which = mount_jennet_cost_mult                which = mount_pet_tamriel_cost_medium_mult        }
+	change_variable   = { which = mount_mountain_cost_mult              which = mount_pet_tamriel_cost_medium_mult        }
+	change_variable   = { which = mount_destrier_cost_mult              which = mount_pet_tamriel_cost_medium_mult        }
+	change_variable   = { which = mount_courser_cost_mult               which = mount_pet_tamriel_yokuda_cost_medium_mult }
+	change_variable   = { which = mount_palfrey_cost_mult               which = mount_pet_tamriel_yokuda_cost_medium_mult }
+	change_variable   = { which = mount_hobbeye_cost_mult               which = mount_pet_tamriel_yokuda_cost_medium_mult }
+	change_variable   = { which = mount_mijako_cost_mult                which = mount_pet_akavir_cost_medium_mult         }
+	change_variable   = { which = mount_camel_h_cost_mult               which = mount_pet_tamriel_cost_large_mult         } # Medium->Large because camels are famously hard to transport across oceans
+	change_variable   = { which = mount_camel_p_cost_mult               which = mount_pet_akavir_cost_large_mult          } # Medium->Large because camels are famously hard to transport across oceans
+	change_variable   = { which = mount_guar_c_cost_mult                which = mount_pet_tamriel_cost_large_mult         } # Medium->Large because very large reptiles are probably also very hard to transport across oceans
+	change_variable   = { which = mount_guar_f_cost_mult                which = mount_pet_tamriel_cost_large_mult         } # Medium->Large because very large reptiles are probably also very hard to transport across oceans
+	change_variable   = { which = mount_guar_s_cost_mult                which = mount_pet_tamriel_cost_large_mult         } # Medium->Large because very large reptiles are probably also very hard to transport across oceans
+	change_variable   = { which = mount_kagouti_cost_mult               which = mount_pet_tamriel_cost_large_mult         } # Medium->Large because very large reptiles are probably also very hard to transport across oceans
+	change_variable   = { which = mount_shellback_cost_mult             which = mount_pet_tamriel_cost_huge_mult          } # Huge because there's enough void space inside to fit the contents of a carriage!
+	change_variable   = { which = mount_pahmar_cost_mult                which = mount_pet_tamriel_cost_large_mult         } # Medium->Large because they are sentient and demand better conditions during transport
+	change_variable   = { which = mount_senche_cost_mult                which = mount_pet_tamriel_cost_large_mult         } # Medium->Large because they are sentient and demand better conditions during transport
 	
 }
 
 
 
-
-
-expd_pdxrptg_purchase_mounts_setup_costs_for_this_character_capital = {
+expd_pdxrptg_purchase_mounts_setup_cost_mults_for_this_character_region = {
 	
-	# Increase cost of specific mount if that mount is NOT local to your capital
+	expd_pdxrptg_purchase_mount_pet_setup_cost_multipliers_for_this_character_region = yes
 	
+	# NB: For ubiquitous animals, and animals which are widespread across a whole continent, value = 0
 	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_tamriel_summerset
-			}
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_jennet_cost      value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_tamriel_skyrim
-			}
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_mountain_cost    value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_tamriel_cyrodiil
-			}
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_destrier_cost    value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				OR = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_highrock
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_hammerfell
-				}
-			}
-		}
-		# No surcharge
-	}
-	else_if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_yokuda
-			}
-		}
-		# Coursers & Palfreys are native to Yokuda as well as Tamriel - no surcharge & negate all distance penalties
-		divide_variable   = { which = mount_courser_cost     which = mount_tamriel_cost_mult }
-		divide_variable   = { which = mount_palfrey_cost     which = mount_tamriel_cost_mult }
-	}
-	else = {
-		multiply_variable = { which = mount_courser_cost     value = 1.5 }
-		multiply_variable = { which = mount_palfrey_cost     value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				OR = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_westernreach
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_thereach
-				}
-			}
-		}
-		# No surcharge
-	}
-	else_if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_yokuda
-			}
-		}
-		# Hobbeye is native to Yokuda as well as Tamriel - no surcharge & negate all distance penalties
-		divide_variable   = { which = mount_hobbeye_cost     which = mount_tamriel_cost_mult }
-	}
-	else = {
-		multiply_variable = { which = mount_hobbeye_cost     value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_tamriel
-			}
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_rouncey_cost     value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_akavir_tsaesci
-			}
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_cerigyn_cost     value = 1.5 }
-		multiply_variable = { which = mount_mijako_cost      value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_akavir_potun
-			}
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_camel_p_cost     value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_tamriel_hammerfell
-			}
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_camel_h_cost     value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_tamriel_morrowind
-			}
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_guar_c_cost      value = 1.5 }
-		multiply_variable = { which = mount_guar_s_cost      value = 1.5 }
-		multiply_variable = { which = mount_kagouti_cost     value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_tamriel_argonia
-			}
-		}
-		# Small discount, since it's very highly-weighted in base mod
-		multiply_variable = { which = mount_shellback_cost   value = 0.9 }
-	}
-	else = {
-		multiply_variable = { which = mount_guar_f_cost      value = 1.5 } # Flanker moved from Morrowind to Argonia
-		multiply_variable = { which = mount_shellback_cost   value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			capital_scope = {
-				# Audax Validator "." Ignore_NEXT
-				region = nirn_tamriel_elsweyr
-			}
-		}
-		# Small discount, since it's very highly-weighted in base mod
-		multiply_variable = { which = mount_pahmar_cost      value = 0.9 }
-		multiply_variable = { which = mount_senche_cost      value = 0.9 }
-	}
-	else = {
-		multiply_variable = { which = mount_pahmar_cost      value = 1.5 }
-		multiply_variable = { which = mount_senche_cost      value = 1.5 }
-	}
-	
-	
+	change_variable   = { which = mount_rouncey_cost_mult               value = 0 }
+	change_variable   = { which = mount_cerigyn_cost_mult               which = mount_pet_tsaesci_cost_mult                    }
+	change_variable   = { which = mount_jennet_cost_mult                which = mount_pet_summerset_cost_mult                  }
+	change_variable   = { which = mount_mountain_cost_mult              which = mount_pet_skyrim_cost_mult                     }
+	change_variable   = { which = mount_destrier_cost_mult              which = mount_pet_cyrodiil_cost_mult                   }
+	change_variable   = { which = mount_courser_cost_mult               which = mount_pet_highrock_hammerfell_yokuda_cost_mult }
+	change_variable   = { which = mount_palfrey_cost_mult               which = mount_pet_highrock_hammerfell_yokuda_cost_mult }
+	change_variable   = { which = mount_hobbeye_cost_mult               which = mount_pet_reach_yokuda_cost_mult               }
+	change_variable   = { which = mount_mijako_cost_mult                which = mount_pet_tsaesci_cost_mult                    }
+	change_variable   = { which = mount_camel_h_cost_mult               which = mount_pet_hammerfell_cost_mult                 }
+	change_variable   = { which = mount_camel_p_cost_mult               which = mount_pet_potun_cost_mult                      }
+	change_variable   = { which = mount_guar_c_cost_mult                which = mount_pet_morrowind_cost_mult                  }
+	change_variable   = { which = mount_guar_f_cost_mult                which = mount_pet_argonia_cost_mult                    }
+	change_variable   = { which = mount_guar_s_cost_mult                which = mount_pet_morrowind_cost_mult                  }
+	change_variable   = { which = mount_kagouti_cost_mult               which = mount_pet_morrowind_cost_mult                  }
+	change_variable   = { which = mount_shellback_cost_mult             which = mount_pet_argonia_cost_mult                    }
+	change_variable   = { which = mount_pahmar_cost_mult                which = mount_pet_elsweyr_cost_mult                    }
+	change_variable   = { which = mount_senche_cost_mult                which = mount_pet_elsweyr_cost_mult                    }
 	
 }
 
 
 
-
-
-expd_pdxrptg_purchase_mounts_setup_costs_for_this_character_culture = {
-	
-	# Increase cost of specific mount if that mount is NOT local to your culture
-	# NB: No culture cost adjustment for Rouncey or Cerigyn
+expd_pdxrptg_purchase_mounts_setup_costs_for_this_character_final = {
 	
 	
 	
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			culture = altmer
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_jennet_cost      value = 1.5 }
-	}
+	
+	
+	# Final cost = Base cost * (1 + sum of multipliers)
+	
+	multiply_variable = { which = mount_rouncey_cost                    which = mount_rouncey_cost_mult   }
+	multiply_variable = { which = mount_cerigyn_cost                    which = mount_cerigyn_cost_mult   }
+	multiply_variable = { which = mount_jennet_cost                     which = mount_jennet_cost_mult    }
+	multiply_variable = { which = mount_mountain_cost                   which = mount_mountain_cost_mult  }
+	multiply_variable = { which = mount_destrier_cost                   which = mount_destrier_cost_mult  }
+	multiply_variable = { which = mount_courser_cost                    which = mount_courser_cost_mult   }
+	multiply_variable = { which = mount_palfrey_cost                    which = mount_palfrey_cost_mult   }
+	multiply_variable = { which = mount_hobbeye_cost                    which = mount_hobbeye_cost_mult   }
+	multiply_variable = { which = mount_mijako_cost                     which = mount_mijako_cost_mult    }
+	multiply_variable = { which = mount_camel_h_cost                    which = mount_camel_h_cost_mult   }
+	multiply_variable = { which = mount_camel_p_cost                    which = mount_camel_p_cost_mult   }
+	multiply_variable = { which = mount_guar_c_cost                     which = mount_guar_c_cost_mult    }
+	multiply_variable = { which = mount_guar_f_cost                     which = mount_guar_f_cost_mult    }
+	multiply_variable = { which = mount_guar_s_cost                     which = mount_guar_s_cost_mult    }
+	multiply_variable = { which = mount_kagouti_cost                    which = mount_kagouti_cost_mult   }
+	multiply_variable = { which = mount_shellback_cost                  which = mount_shellback_cost_mult }
+	multiply_variable = { which = mount_pahmar_cost                     which = mount_pahmar_cost_mult    }
+	multiply_variable = { which = mount_senche_cost                     which = mount_senche_cost_mult    }
 	
 	
 	
-	if = {
-		limit = {
-			OR = {
-				# Audax Validator "." Ignore_NEXT
-				culture = atmoran
-				# Audax Validator "." Ignore_NEXT
-				culture = nord
-				# Audax Validator "." Ignore_NEXT
-				culture = skaal
-			}
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_mountain_cost    value = 1.5 }
-	}
+	
+	# Round final cost to nearest integer
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_rouncey_cost        }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_rouncey_cost                    which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_cerigyn_cost        }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_cerigyn_cost                    which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_jennet_cost         }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_jennet_cost                     which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_mountain_cost       }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_mountain_cost                   which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_destrier_cost       }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_destrier_cost                   which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_courser_cost        }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_courser_cost                    which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_palfrey_cost        }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_palfrey_cost                    which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_hobbeye_cost        }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_hobbeye_cost                    which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_mijako_cost         }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_mijako_cost                     which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_camel_h_cost        }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_camel_h_cost                    which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_camel_p_cost        }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_camel_p_cost                    which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_guar_c_cost         }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_guar_c_cost                     which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_guar_f_cost         }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_guar_f_cost                     which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_guar_s_cost         }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_guar_s_cost                     which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_kagouti_cost        }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_kagouti_cost                    which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_shellback_cost      }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_shellback_cost                  which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_pahmar_cost         }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_pahmar_cost                     which = mount_cost_final_to_round }
+	
+	set_variable      = { which = mount_cost_final_to_round             which = mount_senche_cost         }
+	expd_pdxrpt_purchase_mount_round_final_cost = yes
+	set_variable      = { which = mount_senche_cost                     which = mount_cost_final_to_round }
 	
 	
 	
-	if = {
-		limit = {
-			OR = {
-				# Audax Validator "." Ignore_NEXT
-				culture = colovian
-				# Audax Validator "." Ignore_NEXT
-				culture = imperial
-				# Audax Validator "." Ignore_NEXT
-				culture = nibenean
-			}
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_destrier_cost    value = 1.5 }
-	}
 	
 	
+	# Negative final cost = Final cost * -1
 	
-	if = {
-		limit = {
-			OR = {
-				# Audax Validator "." Ignore_NEXT
-				culture = breton
-				# Audax Validator "." Ignore_NEXT
-				culture_group = yokudan_group
-			}
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_courser_cost     value = 1.5 }
-		multiply_variable = { which = mount_palfrey_cost     value = 1.5 }
-	}
+	set_variable      = { which = mount_rouncey_cost_negative           which = mount_rouncey_cost        }
+	set_variable      = { which = mount_cerigyn_cost_negative           which = mount_cerigyn_cost        }
+	set_variable      = { which = mount_jennet_cost_negative            which = mount_jennet_cost         }
+	set_variable      = { which = mount_mountain_cost_negative          which = mount_mountain_cost       }
+	set_variable      = { which = mount_destrier_cost_negative          which = mount_destrier_cost       }
+	set_variable      = { which = mount_courser_cost_negative           which = mount_courser_cost        }
+	set_variable      = { which = mount_palfrey_cost_negative           which = mount_palfrey_cost        }
+	set_variable      = { which = mount_hobbeye_cost_negative           which = mount_hobbeye_cost        }
+	set_variable      = { which = mount_mijako_cost_negative            which = mount_mijako_cost         }
+	set_variable      = { which = mount_camel_h_cost_negative           which = mount_camel_h_cost        }
+	set_variable      = { which = mount_camel_p_cost_negative           which = mount_camel_p_cost        }
+	set_variable      = { which = mount_guar_c_cost_negative            which = mount_guar_c_cost         }
+	set_variable      = { which = mount_guar_f_cost_negative            which = mount_guar_f_cost         }
+	set_variable      = { which = mount_guar_s_cost_negative            which = mount_guar_s_cost         }
+	set_variable      = { which = mount_kagouti_cost_negative           which = mount_kagouti_cost        }
+	set_variable      = { which = mount_shellback_cost_negative         which = mount_shellback_cost      }
+	set_variable      = { which = mount_pahmar_cost_negative            which = mount_pahmar_cost         }
+	set_variable      = { which = mount_senche_cost_negative            which = mount_senche_cost         }
 	
-	
-	
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			culture = reachmen
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_hobbeye_cost     value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			culture = tsaesci
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_mijako_cost      value = 1.5 }
-	}
+	multiply_variable = { which = mount_rouncey_cost_negative           value = -1 }
+	multiply_variable = { which = mount_cerigyn_cost_negative           value = -1 }
+	multiply_variable = { which = mount_jennet_cost_negative            value = -1 }
+	multiply_variable = { which = mount_mountain_cost_negative          value = -1 }
+	multiply_variable = { which = mount_destrier_cost_negative          value = -1 }
+	multiply_variable = { which = mount_courser_cost_negative           value = -1 }
+	multiply_variable = { which = mount_palfrey_cost_negative           value = -1 }
+	multiply_variable = { which = mount_hobbeye_cost_negative           value = -1 }
+	multiply_variable = { which = mount_mijako_cost_negative            value = -1 }
+	multiply_variable = { which = mount_camel_h_cost_negative           value = -1 }
+	multiply_variable = { which = mount_camel_p_cost_negative           value = -1 }
+	multiply_variable = { which = mount_guar_c_cost_negative            value = -1 }
+	multiply_variable = { which = mount_guar_f_cost_negative            value = -1 }
+	multiply_variable = { which = mount_guar_s_cost_negative            value = -1 }
+	multiply_variable = { which = mount_kagouti_cost_negative           value = -1 }
+	multiply_variable = { which = mount_shellback_cost_negative         value = -1 }
+	multiply_variable = { which = mount_pahmar_cost_negative            value = -1 }
+	multiply_variable = { which = mount_senche_cost_negative            value = -1 }
 	
 	
-	
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			culture_group = yokudan_group
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_camel_h_cost     value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			culture = potun
-		}
-		# No surcharge
-	}
-	else = {
-		multiply_variable = { which = mount_camel_p_cost     value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			OR = {
-				# Audax Validator "." Ignore_NEXT
-				culture = ashlander
-				# Audax Validator "." Ignore_NEXT
-				culture = chimer
-				# Audax Validator "." Ignore_NEXT
-				culture = dunmer
-			}
-		}
-		multiply_variable = { which = mount_guar_c_cost      value = 1.5 }
-		multiply_variable = { which = mount_guar_s_cost      value = 1.5 }
-		multiply_variable = { which = mount_kagouti_cost     value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			culture_group = argonian
-		}
-		# Small discount, since it's very highly-weighted in base mod
-		multiply_variable = { which = mount_shellback_cost   value = 0.9 }
-	}
-	else = {
-		multiply_variable = { which = mount_guar_f_cost      value = 1.5 } # Flanker moved from Morrowind to Argonia
-		multiply_variable = { which = mount_shellback_cost   value = 1.5 }
-	}
-	
-	
-	
-	if = {
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			culture_group = khajiit
-		}
-		# Small discount, since it's very highly-weighted in base mod
-		multiply_variable = { which = mount_pahmar_cost      value = 0.9 }
-		multiply_variable = { which = mount_senche_cost      value = 0.9 }
-	}
-	else = {
-		multiply_variable = { which = mount_pahmar_cost      value = 1.5 }
-		multiply_variable = { which = mount_senche_cost      value = 1.5 }
-	}
 	
 	
 	
 }
 
-expd_pdxrptg_purchase_mounts_create_negative_costs = {
-	
-	set_variable = { which = mount_rouncey_cost_negative     which = mount_rouncey_cost      }
-	set_variable = { which = mount_cerigyn_cost_negative     which = mount_cerigyn_cost      }
-	set_variable = { which = mount_jennet_cost_negative      which = mount_jennet_cost       }
-	set_variable = { which = mount_mountain_cost_negative    which = mount_mountain_cost     }
-	set_variable = { which = mount_destrier_cost_negative    which = mount_destrier_cost     }
-	set_variable = { which = mount_courser_cost_negative     which = mount_courser_cost      }
-	set_variable = { which = mount_palfrey_cost_negative     which = mount_palfrey_cost      }
-	set_variable = { which = mount_hobbeye_cost_negative     which = mount_hobbeye_cost      }
-	set_variable = { which = mount_mijako_cost_negative      which = mount_mijako_cost       }
-	set_variable = { which = mount_camel_h_cost_negative     which = mount_camel_h_cost      }
-	set_variable = { which = mount_camel_p_cost_negative     which = mount_camel_p_cost      }
-	set_variable = { which = mount_guar_c_cost_negative      which = mount_guar_c_cost       }
-	set_variable = { which = mount_guar_f_cost_negative      which = mount_guar_f_cost       }
-	set_variable = { which = mount_guar_s_cost_negative      which = mount_guar_s_cost       }
-	set_variable = { which = mount_kagouti_cost_negative     which = mount_kagouti_cost      }
-	set_variable = { which = mount_shellback_cost_negative   which = mount_shellback_cost    }
-	set_variable = { which = mount_pahmar_cost_negative      which = mount_pahmar_cost       }
-	set_variable = { which = mount_senche_cost_negative      which = mount_senche_cost       }
-	
-	multiply_variable = { which = mount_rouncey_cost_negative     value = -1 }
-	multiply_variable = { which = mount_cerigyn_cost_negative     value = -1 }
-	multiply_variable = { which = mount_jennet_cost_negative      value = -1 }
-	multiply_variable = { which = mount_mountain_cost_negative    value = -1 }
-	multiply_variable = { which = mount_destrier_cost_negative    value = -1 }
-	multiply_variable = { which = mount_courser_cost_negative     value = -1 }
-	multiply_variable = { which = mount_palfrey_cost_negative     value = -1 }
-	multiply_variable = { which = mount_hobbeye_cost_negative     value = -1 }
-	multiply_variable = { which = mount_mijako_cost_negative      value = -1 }
-	multiply_variable = { which = mount_camel_h_cost_negative     value = -1 }
-	multiply_variable = { which = mount_camel_p_cost_negative     value = -1 }
-	multiply_variable = { which = mount_guar_c_cost_negative      value = -1 }
-	multiply_variable = { which = mount_guar_f_cost_negative      value = -1 }
-	multiply_variable = { which = mount_guar_s_cost_negative      value = -1 }
-	multiply_variable = { which = mount_kagouti_cost_negative     value = -1 }
-	multiply_variable = { which = mount_shellback_cost_negative   value = -1 }
-	multiply_variable = { which = mount_pahmar_cost_negative      value = -1 }
-	multiply_variable = { which = mount_senche_cost_negative      value = -1 }
-	
+expd_pdxrpt_purchase_mount_round_final_cost = {
+	# remainder(x) = x mod 1
+	# if remainder(x) >= 0.5, we want to round up,   ie. round(x) = x + 1 - remainder(x)
+	# else,                   we want to round down, ie. round(x) = x     - remainder(x)
+	set_variable    = { which = mount_cost_final_to_round_remainder which = mount_cost_final_to_round }
+	modulo_variable = { which = mount_cost_final_to_round_remainder value = 1 }
+	if = {
+		limit = { check_variable = { which = mount_cost_final_to_round_remainder value >= 0.5 } }
+		change_variable = { which = mount_cost_final_to_round value = 1 }
+	}
+	subtract_variable = { which = mount_cost_final_to_round which = mount_cost_final_to_round_remainder }
 }
 
 
@@ -826,87 +473,79 @@ expd_pdxrptg_purchase_mounts_ai_choice_clear_flags = {
 }
 
 expd_pdxrptg_purchase_mounts_ai_choice_select_1 = {
+	# Base weight = 3 (mediocre), or 10 (good), or 30 (very good)
+	# High multiplier => Non-native => Less likely to choose
+	# High absolute cost => Probably have better things to spend money on => Less likely to choose
+	# Finally, any special effects from culture/traits/etc
 	random_list = {
-		10 = {
+		3 = {
 			set_character_flag = mount_rouncey_for_ai
-			mult_modifier = { factor = 0    has_character_flag = mount_rouncey_for_ai } 
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_rouncey_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_rouncey_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_rouncey_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_rouncey_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_rouncey_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_rouncey_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_rouncey_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_rouncey_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_rouncey_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_rouncey_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_rouncey_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_rouncey_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_rouncey_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_rouncey_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_rouncey_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_rouncey_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_rouncey_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_rouncey_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_rouncey_cost }
 		}
 		10 = {
 			set_character_flag = mount_cerigyn_for_ai
 			mult_modifier = { factor = 0    has_character_flag = mount_cerigyn_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_cerigyn_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_cerigyn_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_cerigyn_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_cerigyn_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_cerigyn_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_cerigyn_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_cerigyn_cost value >= 1000 } }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_cerigyn_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_cerigyn_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_cerigyn_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_cerigyn_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_cerigyn_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_cerigyn_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_cerigyn_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_cerigyn_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_cerigyn_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_cerigyn_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_cerigyn_cost }
-			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_akavir_tsaesci
-				}
-			}
-			mult_modifier = {
-				factor = 2
-				# Audax Validator "." Ignore_NEXT
-				culture = akaviri
-			}
+			# Steppe specialisation
+			mult_modifier = { factor = 5.00 top_liege = { any_realm_province = { count >= 3 terrain = steppe } } }
 		}
-		10 = {
+		3 = {
 			set_character_flag = mount_jennet_for_ai
 			mult_modifier = { factor = 0    has_character_flag = mount_jennet_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_jennet_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_jennet_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_jennet_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_jennet_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_jennet_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_jennet_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_jennet_cost value >= 1000 } }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_jennet_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_jennet_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_jennet_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_jennet_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_jennet_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_jennet_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_jennet_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_jennet_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_jennet_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_jennet_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_jennet_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_summerset
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				# Audax Validator "." Ignore_NEXT
 				culture = altmer
 			}
 		}
 		10 = {
 			set_character_flag = mount_mountain_for_ai
-			mult_modifier = { factor = 0   has_character_flag = mount_mountain_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_mountain_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_mountain_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_mountain_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_mountain_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_mountain_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_mountain_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_mountain_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_mountain_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_mountain_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_mountain_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_mountain_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_mountain_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_mountain_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_mountain_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_mountain_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_mountain_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_mountain_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_mountain_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_mountain_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_skyrim
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				OR = {
 					# Audax Validator "." Ignore_NEXT
 					culture = atmoran
@@ -916,27 +555,25 @@ expd_pdxrptg_purchase_mounts_ai_choice_select_1 = {
 					culture = skaal
 				}
 			}
+			# Mountain specialisation
+			mult_modifier = { factor = 5.00 top_liege = { any_realm_province = { count >= 3 terrain = mountain } } }
 		}
 		10 = {
-			set_character_flag = mount_destrier_for_ai ####################### NB: Double base cost! #######################
-			mult_modifier = { factor = 0   has_character_flag = mount_destrier_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_destrier_cost value <   180 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_destrier_cost value <   200 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_destrier_cost value >=  300 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_destrier_cost value >=  400 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_destrier_cost value >=  600 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_destrier_cost value >= 1000 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_destrier_cost value >= 2000 } }
+			set_character_flag = mount_destrier_for_ai
+			mult_modifier = { factor = 0    has_character_flag = mount_destrier_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_destrier_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_destrier_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_destrier_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_destrier_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_destrier_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_destrier_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_destrier_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_destrier_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_destrier_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_destrier_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_destrier_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_cyrodiil
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				OR = {
 					# Audax Validator "." Ignore_NEXT
 					culture = colovian
@@ -949,186 +586,165 @@ expd_pdxrptg_purchase_mounts_ai_choice_select_1 = {
 		}
 		10 = {
 			set_character_flag = mount_courser_for_ai
-			mult_modifier = { factor = 0   has_character_flag = mount_courser_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_courser_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_courser_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_courser_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_courser_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_courser_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_courser_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_courser_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_courser_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_courser_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_courser_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_courser_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_courser_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_courser_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_courser_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_courser_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_courser_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_courser_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_courser_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_courser_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					OR = {
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_tamriel_highrock
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_tamriel_hammerfell
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_yokuda
-					}
+				factor = 5.00
+				OR = {
+					# Audax Validator "." Ignore_NEXT
+					culture = breton
+					# Audax Validator "." Ignore_NEXT
+					culture_group = yokudan_group
 				}
-			}
-			mult_modifier = {
-				factor = 2
-				# Audax Validator "." Ignore_NEXT
-				culture = yokudan_group
 			}
 		}
-		10 = {
+		3 = {
 			set_character_flag = mount_palfrey_for_ai
-			mult_modifier = { factor = 0   has_character_flag = mount_palfrey_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_palfrey_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_palfrey_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_palfrey_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_palfrey_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_palfrey_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_palfrey_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_palfrey_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_palfrey_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_palfrey_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_palfrey_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_palfrey_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_palfrey_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_palfrey_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_palfrey_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_palfrey_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_palfrey_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_palfrey_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_palfrey_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_palfrey_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					OR = {
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_tamriel_highrock
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_tamriel_hammerfell
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_yokuda
-					}
+				factor = 5.00
+				OR = {
+					# Audax Validator "." Ignore_NEXT
+					culture = breton
+					# Audax Validator "." Ignore_NEXT
+					culture_group = yokudan_group
 				}
-			}
-			mult_modifier = {
-				factor = 2
-				# Audax Validator "." Ignore_NEXT
-				culture = breton
 			}
 		}
 		10 = {
 			set_character_flag = mount_hobbeye_for_ai
-			mult_modifier = { factor = 0   has_character_flag = mount_hobbeye_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_hobbeye_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_hobbeye_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_hobbeye_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_hobbeye_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_hobbeye_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_hobbeye_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_hobbeye_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_hobbeye_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_hobbeye_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_hobbeye_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_hobbeye_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_hobbeye_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_hobbeye_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_hobbeye_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_hobbeye_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_hobbeye_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_hobbeye_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_hobbeye_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_hobbeye_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					OR = {
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_tamriel_westernreach
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_tamriel_thereach
-						# Audax Validator "." Ignore_NEXT
-						region = nirn_yokuda
-					}
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				# Audax Validator "." Ignore_NEXT
 				culture = reachmen
 			}
+			# Hill specialisation
+			mult_modifier = { factor = 5.00 top_liege = { any_realm_province = { count >= 3 terrain = hills } } }
 		}
 		10 = {
 			set_character_flag = mount_mijako_for_ai
-			mult_modifier = { factor = 0   has_character_flag = mount_mijako_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_mijako_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_mijako_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_mijako_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_mijako_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_mijako_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_mijako_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_mijako_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_mijako_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_mijako_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_mijako_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_mijako_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_mijako_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_mijako_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_mijako_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_mijako_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_mijako_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_mijako_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_mijako_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_mijako_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_akavir_tsaesci
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				# Audax Validator "." Ignore_NEXT
 				culture = tsaesci
 			}
 		}
 		10 = {
 			set_character_flag = mount_camel_h_for_ai
-			mult_modifier = { factor = 0   has_character_flag = mount_camel_h_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_camel_h_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_camel_h_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_camel_h_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_camel_h_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_camel_h_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_camel_h_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_camel_h_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_camel_h_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_camel_h_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_camel_h_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_camel_h_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_camel_h_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_camel_h_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_camel_h_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_camel_h_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_camel_h_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_camel_h_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_camel_h_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_camel_h_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_hammerfell
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				# Audax Validator "." Ignore_NEXT
 				culture_group = yokudan_group
+			}
+			# Alik'r desert specialisation (rare terrain - only check own realm, not top liege)
+			mult_modifier = {
+				factor = 5.00
+				any_realm_province = {
+					# Audax Validator "." Ignore_NEXT
+					terrain = alikr_desert
+				}
 			}
 		}
 		10 = {
 			set_character_flag = mount_camel_p_for_ai
-			mult_modifier = { factor = 0   has_character_flag = mount_camel_p_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_camel_p_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_camel_p_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_camel_p_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_camel_p_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_camel_p_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_camel_p_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_camel_p_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_camel_p_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_camel_p_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_camel_p_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_camel_p_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_camel_p_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_camel_p_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_camel_p_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_camel_p_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_camel_p_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_camel_p_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_camel_p_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_camel_p_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_akavir_potun
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				# Audax Validator "." Ignore_NEXT
 				culture = potun
+			}
+			# Non-Alik'r desert specialisation (rare terrain - only check own realm, not top liege)
+			mult_modifier = {
+				factor = 5.00
+				any_realm_province = {
+					terrain = desert
+				}
 			}
 		}
 		10 = {
 			set_character_flag = mount_guar_c_for_ai
-			mult_modifier = { factor = 0   has_character_flag = mount_guar_c_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_guar_c_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_guar_c_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_guar_c_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_guar_c_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_guar_c_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_guar_c_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_guar_c_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_guar_c_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_guar_c_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_guar_c_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_guar_c_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_guar_c_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_guar_c_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_guar_c_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_guar_c_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_guar_c_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_guar_c_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_guar_c_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_guar_c_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_morrowind
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				OR = {
 					# Audax Validator "." Ignore_NEXT
 					culture = ashlander
@@ -1141,48 +757,40 @@ expd_pdxrptg_purchase_mounts_ai_choice_select_1 = {
 		}
 		10 = {
 			set_character_flag = mount_guar_f_for_ai
-			mult_modifier = { factor = 0   has_character_flag = mount_guar_f_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_guar_f_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_guar_f_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_guar_f_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_guar_f_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_guar_f_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_guar_f_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_guar_f_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_guar_f_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_guar_f_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_guar_f_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_guar_f_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_guar_f_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_guar_f_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_guar_f_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_guar_f_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_guar_f_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_guar_f_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_guar_f_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_guar_f_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_argonia
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				# Audax Validator "." Ignore_NEXT
 				culture_group = argonian
 			}
 		}
-		10 = {
+		3 = {
 			set_character_flag = mount_guar_s_for_ai
-			mult_modifier = { factor = 0   has_character_flag = mount_guar_s_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_guar_s_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_guar_s_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_guar_s_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_guar_s_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_guar_s_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_guar_s_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_guar_s_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_guar_s_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_guar_s_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_guar_s_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_guar_s_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_guar_s_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_guar_s_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_guar_s_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_guar_s_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_guar_s_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_guar_s_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_guar_s_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_guar_s_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_morrowind
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				OR = {
 					# Audax Validator "." Ignore_NEXT
 					culture = ashlander
@@ -1192,27 +800,31 @@ expd_pdxrptg_purchase_mounts_ai_choice_select_1 = {
 					culture = dunmer
 				}
 			}
+			# Ashland specialisation (rare terrain - only check own realm, not top liege)
+			mult_modifier = {
+				factor = 15.00 # = 5*3, because ashland terrain specialisation makes up for this mount's otherwise-poor stats
+				any_realm_province = {
+					# Audax Validator "." Ignore_NEXT
+					terrain = ashlands
+				}
+			}
 		}
 		10 = {
-			set_character_flag = mount_kagouti_for_ai ####################### NB: Double base cost! #######################
-			mult_modifier = { factor = 0   has_character_flag = mount_kagouti_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_kagouti_cost value <   180 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_kagouti_cost value <   200 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_kagouti_cost value >=  300 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_kagouti_cost value >=  400 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_kagouti_cost value >=  600 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_kagouti_cost value >= 1000 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_kagouti_cost value >= 2000 } }
+			set_character_flag = mount_kagouti_for_ai
+			mult_modifier = { factor = 0    has_character_flag = mount_kagouti_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_kagouti_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_kagouti_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_kagouti_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_kagouti_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_kagouti_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_kagouti_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_kagouti_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_kagouti_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_kagouti_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_kagouti_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_kagouti_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_morrowind
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				OR = {
 					# Audax Validator "." Ignore_NEXT
 					culture = ashlander
@@ -1223,55 +835,49 @@ expd_pdxrptg_purchase_mounts_ai_choice_select_1 = {
 				}
 			}
 		}
-		10 = {
-			set_character_flag = mount_shellback_for_ai ####################### NB: Double base cost! #######################
-			mult_modifier = { factor = 0   has_character_flag = mount_shellback_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_shellback_cost value <   180 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_shellback_cost value <   200 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_shellback_cost value >=  300 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_shellback_cost value >=  400 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_shellback_cost value >=  600 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_shellback_cost value >= 1000 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_shellback_cost value >= 2000 } }
+		30 = {
+			set_character_flag = mount_shellback_for_ai
+			mult_modifier = { factor = 0    has_character_flag = mount_shellback_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_shellback_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_shellback_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_shellback_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_shellback_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_shellback_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_shellback_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_shellback_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_shellback_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_shellback_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_shellback_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_shellback_cost }
 			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_argonia
-				}
-			}
-			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				# Audax Validator "." Ignore_NEXT
 				culture_group = argonian
+			}
+			# Black Marsh specialisation (rare terrain - only check own realm, not top liege)
+			mult_modifier = {
+				factor = 5.00
+				any_realm_province = {
+					# Audax Validator "." Ignore_NEXT
+					terrain = argonia
+				}
 			}
 		}
 		10 = {
 			set_character_flag = mount_pahmar_for_ai
-			mult_modifier = { factor = 0   has_character_flag = mount_pahmar_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_pahmar_cost value <    90 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_pahmar_cost value <   100 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_pahmar_cost value >=  150 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_pahmar_cost value >=  200 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_pahmar_cost value >=  300 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_pahmar_cost value >=  500 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_pahmar_cost value >= 1000 } }
+			mult_modifier = { factor = 0    has_character_flag = mount_pahmar_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_pahmar_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_pahmar_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_pahmar_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_pahmar_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_pahmar_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_pahmar_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_pahmar_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_pahmar_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_pahmar_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_pahmar_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_pahmar_cost }
-			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_elsweyr
-				}
-			}
-			mult_modifier = {
-				factor = 2
-				# Audax Validator "." Ignore_NEXT
-				culture_group = khajiit
-			}
-			# Only rideable by khajiit, and preferred by them
-			mult_modifier = {
+			mult_modifier = { # Only rideable by khajiit
 				factor = 0
 				NOT = {
 					# Audax Validator "." Ignore_NEXT
@@ -1279,36 +885,26 @@ expd_pdxrptg_purchase_mounts_ai_choice_select_1 = {
 				}
 			}
 			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				# Audax Validator "." Ignore_NEXT
-				trait = khajiit
+				culture_group = khajiit
 			}
 		}
-		10 = {
-			set_character_flag = mount_senche_for_ai ####################### NB: Double base cost! #######################
-			mult_modifier = { factor = 0   has_character_flag = mount_senche_for_ai }
-			mult_modifier = { factor = 2.00 check_variable = { which = mount_senche_cost value <   180 } }
-			mult_modifier = { factor = 1.50 check_variable = { which = mount_senche_cost value <   200 } }
-			mult_modifier = { factor = 0.50 check_variable = { which = mount_senche_cost value >=  300 } }
-			mult_modifier = { factor = 0.40 check_variable = { which = mount_senche_cost value >=  400 } }
-			mult_modifier = { factor = 0.30 check_variable = { which = mount_senche_cost value >=  600 } }
-			mult_modifier = { factor = 0.20 check_variable = { which = mount_senche_cost value >= 1000 } }
-			mult_modifier = { factor = 0.10 check_variable = { which = mount_senche_cost value >= 2000 } }
+		30 = {
+			set_character_flag = mount_senche_for_ai
+			mult_modifier = { factor = 0    has_character_flag = mount_senche_for_ai }
+			mult_modifier = { factor = 3.00 check_variable = { which = mount_senche_cost_mult value <=    1.1 } }
+			mult_modifier = { factor = 2.00 check_variable = { which = mount_senche_cost_mult value <=    1.3 } }
+			mult_modifier = { factor = 1.50 check_variable = { which = mount_senche_cost_mult value <=    1.5 } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_senche_cost_mult value >=    2.0 } }
+			mult_modifier = { factor = 0.30 check_variable = { which = mount_senche_cost_mult value >=    3.0 } }
+			mult_modifier = { factor = 0.20 check_variable = { which = mount_senche_cost_mult value >=    5.0 } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_senche_cost_mult value >=   10.0 } }
+			mult_modifier = { factor = 0.80 check_variable = { which = mount_senche_cost      value >=  300   } }
+			mult_modifier = { factor = 0.50 check_variable = { which = mount_senche_cost      value >=  500   } }
+			mult_modifier = { factor = 0.10 check_variable = { which = mount_senche_cost      value >= 1000   } }
 			mult_modifier = { factor = 0.01 wealth < mount_senche_cost }
-			mult_modifier = {
-				factor = 2
-				capital_scope = {
-					# Audax Validator "." Ignore_NEXT
-					region = nirn_tamriel_elsweyr
-				}
-			}
-			mult_modifier = {
-				factor = 2
-				# Audax Validator "." Ignore_NEXT
-				culture_group = khajiit
-			}
-			# Only rideable by khajiit, and preferred by them
-			mult_modifier = {
+			mult_modifier = { # Only rideable by khajiit
 				factor = 0
 				NOT = {
 					# Audax Validator "." Ignore_NEXT
@@ -1316,9 +912,9 @@ expd_pdxrptg_purchase_mounts_ai_choice_select_1 = {
 				}
 			}
 			mult_modifier = {
-				factor = 2
+				factor = 5.00
 				# Audax Validator "." Ignore_NEXT
-				trait = khajiit
+				culture_group = khajiit
 			}
 		}
 	}

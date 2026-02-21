@@ -1,0 +1,1097 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = ekpets
+
+##########################################
+#                                        #
+#            PURCHASE A PET              #
+#                                        #
+##########################################
+
+# Reworked so players can't bypass the intended restrictions by continually spamming the event until the desired pet randomly appears.
+# Now, instead of randomness, all pets are available, and the **cost** is altered based on the character's capital & realm.
+
+# For humans, there is a complex branching system:
+#  --- Initial page 0, with two subsequent branches:
+#       --- Pages 1-11, a continuous loop of all possible options
+#       --- Page 12 (showing the same random 3 options as per AI logic below), followed by page 13 (go to page 1 or exit)
+
+# Human option buttons:
+#  --- Page  0    : "Full list" (ie. go to page 1) + "Random3" (ie. go to page 11) + Exit
+#  --- Pages 1-10 : 2-3 real options + 0-1 placeholder + 1 "next page" button
+#  --- Page  11   : Restart (ie. back to page 1) + Exit
+#  --- Page  12   : 3 random options (see AI logic below) + 1 "something else" (ie. go to page 10)
+#  --- Page  13   : "Full list" (ie. back to page 1) + Exit
+
+# For AI:
+#  --- The first 3 options are randomly chosen, weighted according to their relative discount/surcharge.
+#  --- The 4th option is exit
+#  --- They will choose one of these 4 at random.
+#       --- NB: If they can't afford one of the 3 randomly-chosen options, the event reloads with the exact same options, so they can try again.
+
+# If an AI gets the human interface, or a human gets the AI interface, it should always be possible to pick an option... or exit and retry.
+
+
+
+character_event = {
+	
+	id = ekpets.110
+	
+	picture = GFX_evt_garden
+	
+	border = GFX_event_normal_frame_intrigue
+	
+	desc = { text = EKPets110_AI     trigger = { NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }                                                        } }
+	desc = { text = EKPets110_Page0  trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value ==  0 } } }
+	desc = { text = EKPets110_Page1  trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value ==  1 } } }
+	desc = { text = EKPets110_Page2  trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value ==  2 } } }
+	desc = { text = EKPets110_Page3  trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value ==  3 } } }
+	desc = { text = EKPets110_Page4  trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value ==  4 } } }
+	desc = { text = EKPets110_Page5  trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value ==  5 } } }
+	desc = { text = EKPets110_Page6  trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value ==  6 } } }
+	desc = { text = EKPets110_Page7  trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value ==  7 } } }
+	desc = { text = EKPets110_Page8  trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value ==  8 } } }
+	desc = { text = EKPets110_Page9  trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value ==  9 } } }
+	desc = { text = EKPets110_Page10 trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value == 10 } } }
+	desc = { text = EKPets110_Page11 trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value == 11 } } }
+	desc = { text = EKPets110_Page12 trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value == 12 } } }
+	desc = { text = EKPets110_Page13 trigger = {         has_character_flag = expd_pdxrptg_purchase_pets_human     check_variable = { which = pet_page_no value == 13 } } }
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		expd_pdxrptg_purchase_pet_initialise = yes
+	}
+	
+	
+	
+	# Page 0 : Intro page (for humans only)
+	
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_pets_human
+			check_variable = { which = pet_page_no value == 0 }
+		}
+		name = EKPets100OptRandom3
+		hidden_tooltip = {
+			set_variable = { which = pet_page_no value = 12 }
+			character_event = { id = ekpets.110 }
+		}
+	}
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_pets_human
+			check_variable = { which = pet_page_no value == 0 }
+		}
+		name = EKPets100OptFullList
+		hidden_tooltip = {
+			set_variable = { which = pet_page_no value = 1 }
+			character_event = { id = ekpets.110 }
+		}
+	}
+	
+	
+	
+	# Page 1 : Common 1
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 1 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_cat_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_cat_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptCat              trigger = { wealth >= pet_cat_cost } }
+		name = { text = EKPets110OptCat_TooExpensive trigger = { wealth <  pet_cat_cost } }
+		if = {
+			limit = { wealth >= pet_cat_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_cat_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_cat
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 1 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_raven_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_raven_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptRaven              trigger = { wealth >= pet_raven_cost } }
+		name = { text = EKPets110OptRaven_TooExpensive trigger = { wealth <  pet_raven_cost } }
+		if = {
+			limit = { wealth >= pet_raven_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_raven_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_raven
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 2 : Common 2
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 2 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_goose_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_goose_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptGoose              trigger = { wealth >= pet_goose_cost } }
+		name = { text = EKPets110OptGoose_TooExpensive trigger = { wealth <  pet_goose_cost } }
+		if = {
+			limit = { wealth >= pet_goose_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_goose_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_goose
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 2 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_mudcrab_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_mudcrab_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptMudcrab              trigger = { wealth >= pet_mudcrab_cost } }
+		name = { text = EKPets110OptMudcrab_TooExpensive trigger = { wealth <  pet_mudcrab_cost } }
+		if = {
+			limit = { wealth >= pet_mudcrab_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_mudcrab_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_mudcrab
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 2 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_skeever_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_skeever_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptSkeever              trigger = { wealth >= pet_skeever_cost } }
+		name = { text = EKPets110OptSkeever_TooExpensive trigger = { wealth <  pet_skeever_cost } }
+		if = {
+			limit = { wealth >= pet_skeever_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_skeever_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_skeever
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 3 : Regional
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 3 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_guineapig_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_guineapig_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptGuineaPig              trigger = { wealth >= pet_guineapig_cost } }
+		name = { text = EKPets110OptGuineaPig_TooExpensive trigger = { wealth <  pet_guineapig_cost } }
+		if = {
+			limit = { wealth >= pet_guineapig_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_guineapig_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_guineapig
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 3 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_rabbit_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_rabbit_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptRabbit              trigger = { wealth >= pet_rabbit_cost } }
+		name = { text = EKPets110OptRabbit_TooExpensive trigger = { wealth <  pet_rabbit_cost } }
+		if = {
+			limit = { wealth >= pet_rabbit_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_rabbit_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_rabbit
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 3 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_badger_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_badger_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptBadger              trigger = { wealth >= pet_badger_cost } }
+		name = { text = EKPets110OptBadger_TooExpensive trigger = { wealth <  pet_badger_cost } }
+		if = {
+			limit = { wealth >= pet_badger_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_badger_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_badger
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 4 : Heat-loving 1
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 4 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_snake_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_snake_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptSnake              trigger = { wealth >= pet_snake_cost } }
+		name = { text = EKPets110OptSnake_TooExpensive trigger = { wealth <  pet_snake_cost } }
+		if = {
+			limit = { wealth >= pet_snake_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_snake_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_snake
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 4 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_vulture_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_vulture_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptVulture              trigger = { wealth >= pet_vulture_cost } }
+		name = { text = EKPets110OptVulture_TooExpensive trigger = { wealth <  pet_vulture_cost } }
+		if = {
+			limit = { wealth >= pet_vulture_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_vulture_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_vulture
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 5 : Heat-loving 2
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 5 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_monkey_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_monkey_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptMonkey              trigger = { wealth >= pet_monkey_cost } }
+		name = { text = EKPets110OptMonkey_TooExpensive trigger = { wealth <  pet_monkey_cost } }
+		if = {
+			limit = { wealth >= pet_monkey_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_monkey_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_monkey
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 5 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_capybara_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_capybara_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptCapybara              trigger = { wealth >= pet_capybara_cost } }
+		name = { text = EKPets110OptCapybara_TooExpensive trigger = { wealth <  pet_capybara_cost } }
+		if = {
+			limit = { wealth >= pet_capybara_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_capybara_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_capybara
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 6 : Cold-loving
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 6 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_horker_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_horker_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptHorker              trigger = { wealth >= pet_horker_cost } }
+		name = { text = EKPets110OptHorker_TooExpensive trigger = { wealth <  pet_horker_cost } }
+		if = {
+			limit = { wealth >= pet_horker_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_horker_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_horker
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 6 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_lungshark_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_lungshark_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptLungshark              trigger = { wealth >= pet_lungshark_cost } }
+		name = { text = EKPets110OptLungshark_TooExpensive trigger = { wealth <  pet_lungshark_cost } }
+		if = {
+			limit = { wealth >= pet_lungshark_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_lungshark_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_lungshark
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 7 : Dogs 1
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 7 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_dog_masterless_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_dog_masterless_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptMutt              trigger = { wealth >= pet_dog_masterless_cost } }
+		name = { text = EKPets110OptMutt_TooExpensive trigger = { wealth <  pet_dog_masterless_cost } }
+		if = {
+			limit = { wealth >= pet_dog_masterless_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_dog_masterless_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_dog_masterless
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 7 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_dog_beardog_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_dog_beardog_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptBeardog              trigger = { wealth >= pet_dog_beardog_cost } }
+		name = { text = EKPets110OptBeardog_TooExpensive trigger = { wealth <  pet_dog_beardog_cost } }
+		if = {
+			limit = { wealth >= pet_dog_beardog_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_dog_beardog_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_dog_beardog
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 7 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_dog_dunehound_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_dog_dunehound_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptDunehound              trigger = { wealth >= pet_dog_dunehound_cost } }
+		name = { text = EKPets110OptDunehound_TooExpensive trigger = { wealth <  pet_dog_dunehound_cost } }
+		if = {
+			limit = { wealth >= pet_dog_dunehound_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_dog_dunehound_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_dog_dunehound
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 8 : Dogs 2
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 8 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_dog_shepard_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_dog_shepard_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptShepherd              trigger = { wealth >= pet_dog_shepard_cost } }
+		name = { text = EKPets110OptShepherd_TooExpensive trigger = { wealth <  pet_dog_shepard_cost } }
+		if = {
+			limit = { wealth >= pet_dog_shepard_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_dog_shepard_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_dog_shepard
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 8 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_dog_wolfhound_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_dog_wolfhound_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptWolfhound              trigger = { wealth >= pet_dog_wolfhound_cost } }
+		name = { text = EKPets110OptWolfhound_TooExpensive trigger = { wealth <  pet_dog_wolfhound_cost } }
+		if = {
+			limit = { wealth >= pet_dog_wolfhound_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_dog_wolfhound_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_dog_wolfhound
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 9 : Dogs 3 (Cyrodiil)
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 9 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_dog_house_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_dog_house_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptTerrier              trigger = { wealth >= pet_dog_house_cost } }
+		name = { text = EKPets110OptTerrier_TooExpensive trigger = { wealth <  pet_dog_house_cost } }
+		if = {
+			limit = { wealth >= pet_dog_house_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_dog_house_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_dog_house
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 9 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_dog_retriever_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_dog_retriever_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptRetriever              trigger = { wealth >= pet_dog_retriever_cost } }
+		name = { text = EKPets110OptRetriever_TooExpensive trigger = { wealth <  pet_dog_retriever_cost } }
+		if = {
+			limit = { wealth >= pet_dog_retriever_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_dog_retriever_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_dog_retriever
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 9 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_dog_warhound_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_dog_warhound_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptWarhound              trigger = { wealth >= pet_dog_warhound_cost } }
+		name = { text = EKPets110OptWarhound_TooExpensive trigger = { wealth <  pet_dog_warhound_cost } }
+		if = {
+			limit = { wealth >= pet_dog_warhound_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_dog_warhound_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_dog_warhound
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 10 : Dogs 4 (Exotic)
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 10 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_dog_wolf_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_dog_wolf_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptWolf              trigger = { wealth >= pet_dog_wolf_cost } }
+		name = { text = EKPets110OptWolf_TooExpensive trigger = { wealth <  pet_dog_wolf_cost } }
+		if = {
+			limit = { wealth >= pet_dog_wolf_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_dog_wolf_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_dog_wolf
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 10 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_dog_fox_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_dog_fox_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptFox              trigger = { wealth >= pet_dog_fox_cost } }
+		name = { text = EKPets110OptFox_TooExpensive trigger = { wealth <  pet_dog_fox_cost } }
+		if = {
+			limit = { wealth >= pet_dog_fox_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_dog_fox_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_dog_fox
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 10 }
+				}
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					check_variable = { which = pet_page_no value == 12 }
+					has_character_flag = pet_dog_fennec_for_ai
+				}
+				AND = {
+					NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+					has_character_flag = pet_dog_fennec_for_ai
+				}
+			}
+		}
+		name = { text = EKPets110OptFennec              trigger = { wealth >= pet_dog_fennec_cost } }
+		name = { text = EKPets110OptFennec_TooExpensive trigger = { wealth <  pet_dog_fennec_cost } }
+		if = {
+			limit = { wealth >= pet_dog_fennec_cost }
+			# Audax Validator "." Ignore_NEXT
+			wealth = pet_dog_fennec_cost_negative
+			# Audax Validator "." Ignore_NEXT
+			add_artifact = pet_dog_fennec
+			expd_pdxrptg_purchase_pets_clear_everything = yes
+		}
+		else = {
+			hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Pages 1-10 : Placeholder (for human players only: 3rd option for pages where there are only 2 real options)
+	
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_pets_human
+			OR = {
+				check_variable = { which = pet_page_no value == 1 }
+				check_variable = { which = pet_page_no value == 4 }
+				check_variable = { which = pet_page_no value == 5 }
+				check_variable = { which = pet_page_no value == 6 }
+				check_variable = { which = pet_page_no value == 8 }
+			}
+		}
+		name = EKPets110OptNullPlaceholder
+		hidden_tooltip = { character_event = { id = ekpets.110 } } # Do nothing, reload event in exact same state
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Pages 1-10 : Next (for human players only: 4th option)
+	
+	option =  {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_pets_human
+			check_variable = { which = pet_page_no value >=  1 }
+			check_variable = { which = pet_page_no value <= 10 }
+		}
+		name = EKPets110OptNext
+		hidden_tooltip = {
+			change_variable = { which = pet_page_no value = 1 }
+			character_event = { id = ekpets.110 }
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 11 : Restart (for human players only: 1st option)
+	
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_pets_human
+			check_variable = { which = pet_page_no value == 11 }
+		}
+		name = EKPets110OptBackToStart
+		hidden_tooltip = {
+			set_variable = { which = pet_page_no value = 1 }
+			character_event = { id = ekpets.110 }
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 12 : Actually something else (for human players only: 4th option, after the 3 random options selected for AI)
+	
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_pets_human
+			check_variable = { which = pet_page_no value == 12 }
+		}
+		name = EKPets110OptActuallySomethingElse
+		hidden_tooltip = {
+			set_variable = { which = pet_page_no value = 13 }
+			character_event = { id = ekpets.110 }
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Page 13 : Show me the full list (for human players only: 1st option)
+	
+	option = {
+		trigger = {
+			has_character_flag = expd_pdxrptg_purchase_pets_human
+			check_variable = { which = pet_page_no value == 13 }
+		}
+		name = EKPets110OptFullList
+		hidden_tooltip = {
+			set_variable = { which = pet_page_no value = 1 }
+			character_event = { id = ekpets.110 }
+		}
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+	# Pages {{AI}} & 0 & 11 & 13 : Exit (for human players: 3rd option on page 0; 2nd option on pages 11 & 13; for AI: always the 4th option)
+	
+	option = {
+		trigger = {
+			OR = {
+				NOT = { has_character_flag = expd_pdxrptg_purchase_pets_human }
+				AND = {
+					has_character_flag = expd_pdxrptg_purchase_pets_human
+					OR = {
+						check_variable = { which = pet_page_no value ==  0 }
+						check_variable = { which = pet_page_no value == 11 }
+						check_variable = { which = pet_page_no value == 13 }
+					}
+				}
+			}
+		}
+		name = EKPets110OptDecline
+		hidden_tooltip = { expd_pdxrptg_purchase_pets_clear_everything = yes }
+		ai_chance = { factor = 1 }
+	}
+	
+	
+	
+}

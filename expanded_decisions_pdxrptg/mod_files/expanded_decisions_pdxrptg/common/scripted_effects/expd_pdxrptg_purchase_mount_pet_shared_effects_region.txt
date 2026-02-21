@@ -1,0 +1,1539 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+# IMPORTANT NOTE!
+#
+# These "multiplicative" modifiers are intended for use in a "Paradox-math" style of calculation, ie:
+#    {Final cost} = {Base cost} * (1 + {Sum of all "multiplicative" modifiers} )
+# Eg:
+#  --- For no effect, the "multiplicative" modifier should be 0
+#  --- For +50%     , the "multiplicative" modifier should be 0.5
+#  --- For +100%    , the "multiplicative" modifier should be 1
+#  --- etc
+
+
+
+
+
+
+
+
+
+
+#############################################################
+#                                                           #
+#                  REGIONAL TRANSPORTATION                  #
+#                                                           #
+#############################################################
+
+# If an animal is native to a specific region, everyone without a tie to that region needs to pay a little more.
+
+expd_pdxrptg_purchase_mount_pet_clear_regional_cost_multipliers = {
+	set_variable = { which = mount_pet_summerset_cost_mult                     value = 0 }
+	set_variable = { which = mount_pet_skyrim_cost_mult                        value = 0 }
+	set_variable = { which = mount_pet_cyrodiil_cost_mult                      value = 0 }
+	set_variable = { which = mount_pet_highrock_cost_mult                      value = 0 }
+	set_variable = { which = mount_pet_hammerfell_cost_mult                    value = 0 }
+	set_variable = { which = mount_pet_highrock_hammerfell_cost_mult           value = 0 }
+	set_variable = { which = mount_pet_highrock_hammerfell_yokuda_cost_mult    value = 0 }
+	set_variable = { which = mount_pet_morrowind_cost_mult                     value = 0 }
+	set_variable = { which = mount_pet_argonia_cost_mult                       value = 0 }
+	set_variable = { which = mount_pet_elsweyr_cost_mult                       value = 0 }
+	set_variable = { which = mount_pet_reach_cost_mult                         value = 0 }
+	set_variable = { which = mount_pet_reach_yokuda_cost_mult                  value = 0 }
+	set_variable = { which = mount_pet_atmora_arctic_cost_mult                 value = 0 }
+	set_variable = { which = mount_pet_tsaesci_cost_mult                       value = 0 }
+	set_variable = { which = mount_pet_potun_cost_mult                         value = 0 }
+	set_variable = { which = mount_pet_kamal_cost_mult                         value = 0 }
+	set_variable = { which = mount_pet_mud_cost_mult                           value = 0 }
+	set_variable = { which = mount_pet_not_cold_cost_mult                      value = 0 }
+	set_variable = { which = mount_pet_forest_cost_mult                        value = 0 }
+	set_variable = { which = mount_pet_hammerfell_desert_cost_mult             value = 0 }
+}
+
+expd_pdxrptg_purchase_mount_pet_setup_cost_multipliers_for_this_character_region = {
+	
+	
+	
+	expd_pdxrptg_purchase_mount_pet_clear_regional_cost_multipliers = yes
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_summerset
+			}
+		}
+		set_variable = { which = mount_pet_summerset_cost_mult                    value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_summerset
+			}
+		}
+		set_variable = { which = mount_pet_summerset_cost_mult                    value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_summerset
+				}
+			}
+		}
+		set_variable = { which = mount_pet_summerset_cost_mult                    value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_summerset
+					}
+					any_tributary = {
+						any_realm_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_summerset
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_summerset_cost_mult                    value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_summerset
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								# Audax Validator "." Ignore_NEXT
+								region = nirn_tamriel_summerset
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_summerset_cost_mult                    value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_summerset_cost_mult                    value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_skyrim
+			}
+		}
+		set_variable = { which = mount_pet_skyrim_cost_mult                       value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_skyrim
+			}
+		}
+		set_variable = { which = mount_pet_skyrim_cost_mult                       value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_skyrim
+				}
+			}
+		}
+		set_variable = { which = mount_pet_skyrim_cost_mult                       value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_skyrim
+					}
+					any_tributary = {
+						any_realm_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_skyrim
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_skyrim_cost_mult                       value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_skyrim
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								# Audax Validator "." Ignore_NEXT
+								region = nirn_tamriel_skyrim
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_skyrim_cost_mult                       value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_skyrim_cost_mult                       value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_cyrodiil
+			}
+		}
+		set_variable = { which = mount_pet_cyrodiil_cost_mult                     value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_cyrodiil
+			}
+		}
+		set_variable = { which = mount_pet_cyrodiil_cost_mult                     value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_cyrodiil
+				}
+			}
+		}
+		set_variable = { which = mount_pet_cyrodiil_cost_mult                     value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_cyrodiil
+					}
+					any_tributary = {
+						any_realm_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_cyrodiil
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_cyrodiil_cost_mult                     value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_cyrodiil
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								# Audax Validator "." Ignore_NEXT
+								region = nirn_tamriel_cyrodiil
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_cyrodiil_cost_mult                     value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_cyrodiil_cost_mult                     value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_highrock
+			}
+		}
+		set_variable = { which = mount_pet_highrock_cost_mult                     value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_highrock
+			}
+		}
+		set_variable = { which = mount_pet_highrock_cost_mult                     value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_highrock
+				}
+			}
+		}
+		set_variable = { which = mount_pet_highrock_cost_mult                     value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_highrock
+					}
+					any_tributary = {
+						any_realm_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_highrock
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_highrock_cost_mult                     value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_highrock
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								# Audax Validator "." Ignore_NEXT
+								region = nirn_tamriel_highrock
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_highrock_cost_mult                     value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_highrock_cost_mult                     value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_hammerfell
+			}
+		}
+		set_variable = { which = mount_pet_hammerfell_cost_mult                   value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_hammerfell
+			}
+		}
+		set_variable = { which = mount_pet_hammerfell_cost_mult                   value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_hammerfell
+				}
+			}
+		}
+		set_variable = { which = mount_pet_hammerfell_cost_mult                   value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_hammerfell
+					}
+					any_tributary = {
+						any_realm_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_hammerfell
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_hammerfell_cost_mult                   value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_hammerfell
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								# Audax Validator "." Ignore_NEXT
+								region = nirn_tamriel_hammerfell
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_hammerfell_cost_mult                   value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_hammerfell_cost_mult                   value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell = yes
+			}
+		}
+		set_variable = { which = mount_pet_highrock_hammerfell_cost_mult          value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell = yes
+			}
+		}
+		set_variable = { which = mount_pet_highrock_hammerfell_cost_mult          value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell = yes
+				}
+			}
+		}
+		set_variable = { which = mount_pet_highrock_hammerfell_cost_mult          value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell = yes
+					}
+					any_tributary = {
+						any_realm_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell = yes
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_highrock_hammerfell_cost_mult          value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell = yes
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_highrock_hammerfell_cost_mult          value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_highrock_hammerfell_cost_mult          value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell_yokuda = yes
+			}
+		}
+		set_variable = { which = mount_pet_highrock_hammerfell_yokuda_cost_mult   value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell_yokuda = yes
+			}
+		}
+		set_variable = { which = mount_pet_highrock_hammerfell_yokuda_cost_mult   value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell_yokuda = yes
+				}
+			}
+		}
+		set_variable = { which = mount_pet_highrock_hammerfell_yokuda_cost_mult   value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell_yokuda = yes
+					}
+					any_tributary = {
+						any_realm_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell_yokuda = yes
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_highrock_hammerfell_yokuda_cost_mult   value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell_yokuda = yes
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell_yokuda = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_highrock_hammerfell_yokuda_cost_mult   value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_highrock_hammerfell_yokuda_cost_mult   value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_morrowind
+			}
+		}
+		set_variable = { which = mount_pet_morrowind_cost_mult                    value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_morrowind
+			}
+		}
+		set_variable = { which = mount_pet_morrowind_cost_mult                    value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_morrowind
+				}
+			}
+		}
+		set_variable = { which = mount_pet_morrowind_cost_mult                    value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_morrowind
+					}
+					any_tributary = {
+						any_realm_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_morrowind
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_morrowind_cost_mult                    value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_morrowind
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								# Audax Validator "." Ignore_NEXT
+								region = nirn_tamriel_morrowind
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_morrowind_cost_mult                    value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_morrowind_cost_mult                    value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_argonia
+			}
+		}
+		set_variable = { which = mount_pet_argonia_cost_mult                      value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_argonia
+			}
+		}
+		set_variable = { which = mount_pet_argonia_cost_mult                      value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_argonia
+				}
+			}
+		}
+		set_variable = { which = mount_pet_argonia_cost_mult                      value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_argonia
+					}
+					any_tributary = {
+						any_realm_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_argonia
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_argonia_cost_mult                      value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_argonia
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								# Audax Validator "." Ignore_NEXT
+								region = nirn_tamriel_argonia
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_argonia_cost_mult                      value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_argonia_cost_mult                      value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_elsweyr
+			}
+		}
+		set_variable = { which = mount_pet_elsweyr_cost_mult                      value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_elsweyr
+			}
+		}
+		set_variable = { which = mount_pet_elsweyr_cost_mult                      value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_elsweyr
+				}
+			}
+		}
+		set_variable = { which = mount_pet_elsweyr_cost_mult                      value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_elsweyr
+					}
+					any_tributary = {
+						any_realm_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_elsweyr
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_elsweyr_cost_mult                      value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_elsweyr
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								# Audax Validator "." Ignore_NEXT
+								region = nirn_tamriel_elsweyr
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_elsweyr_cost_mult                      value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_elsweyr_cost_mult                      value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				expd_pdxrptg_purchase_mount_pet_province_is_reach = yes
+			}
+		}
+		set_variable = { which = mount_pet_reach_cost_mult                        value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				expd_pdxrptg_purchase_mount_pet_province_is_reach = yes
+			}
+		}
+		set_variable = { which = mount_pet_reach_cost_mult                        value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					expd_pdxrptg_purchase_mount_pet_province_is_reach = yes
+				}
+			}
+		}
+		set_variable = { which = mount_pet_reach_cost_mult                        value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						expd_pdxrptg_purchase_mount_pet_province_is_reach = yes
+					}
+					any_tributary = {
+						any_realm_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_reach = yes
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_reach_cost_mult                        value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_reach = yes
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								expd_pdxrptg_purchase_mount_pet_province_is_reach = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_reach_cost_mult                        value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_reach_cost_mult                        value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				expd_pdxrptg_purchase_mount_pet_province_is_reach_yokuda = yes
+			}
+		}
+		set_variable = { which = mount_pet_reach_yokuda_cost_mult                 value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				expd_pdxrptg_purchase_mount_pet_province_is_reach_yokuda = yes
+			}
+		}
+		set_variable = { which = mount_pet_reach_yokuda_cost_mult                 value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					expd_pdxrptg_purchase_mount_pet_province_is_reach_yokuda = yes
+				}
+			}
+		}
+		set_variable = { which = mount_pet_reach_yokuda_cost_mult                 value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						expd_pdxrptg_purchase_mount_pet_province_is_reach_yokuda = yes
+					}
+					any_tributary = {
+						any_realm_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_reach_yokuda = yes
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_reach_yokuda_cost_mult                 value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_reach_yokuda = yes
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								expd_pdxrptg_purchase_mount_pet_province_is_reach_yokuda = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_reach_yokuda_cost_mult                 value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_reach_yokuda_cost_mult                 value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				expd_pdxrptg_purchase_mount_pet_province_is_atmora_arctic = yes
+			}
+		}
+		set_variable = { which = mount_pet_atmora_arctic_cost_mult                value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				expd_pdxrptg_purchase_mount_pet_province_is_atmora_arctic = yes
+			}
+		}
+		set_variable = { which = mount_pet_atmora_arctic_cost_mult                value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					expd_pdxrptg_purchase_mount_pet_province_is_atmora_arctic = yes
+				}
+			}
+		}
+		set_variable = { which = mount_pet_atmora_arctic_cost_mult                value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						expd_pdxrptg_purchase_mount_pet_province_is_atmora_arctic = yes
+					}
+					any_tributary = {
+						any_realm_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_atmora_arctic = yes
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_atmora_arctic_cost_mult                value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_atmora_arctic = yes
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								expd_pdxrptg_purchase_mount_pet_province_is_atmora_arctic = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_atmora_arctic_cost_mult                value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_atmora_arctic_cost_mult                value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_akavir_tsaesci
+			}
+		}
+		set_variable = { which = mount_pet_tsaesci_cost_mult                       value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_akavir_tsaesci
+			}
+		}
+		set_variable = { which = mount_pet_tsaesci_cost_mult                       value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_akavir_tsaesci
+				}
+			}
+		}
+		set_variable = { which = mount_pet_tsaesci_cost_mult                       value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_akavir_tsaesci
+					}
+					any_tributary = {
+						any_realm_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_akavir_tsaesci
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_tsaesci_cost_mult                       value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_akavir_tsaesci
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								# Audax Validator "." Ignore_NEXT
+								region = nirn_akavir_tsaesci
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_tsaesci_cost_mult                       value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_tsaesci_cost_mult                       value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_akavir_potun
+			}
+		}
+		set_variable = { which = mount_pet_potun_cost_mult                        value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_akavir_potun
+			}
+		}
+		set_variable = { which = mount_pet_potun_cost_mult                        value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_akavir_potun
+				}
+			}
+		}
+		set_variable = { which = mount_pet_potun_cost_mult                        value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_akavir_potun
+					}
+					any_tributary = {
+						any_realm_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_akavir_potun
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_potun_cost_mult                        value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_akavir_potun
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								# Audax Validator "." Ignore_NEXT
+								region = nirn_akavir_potun
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_potun_cost_mult                        value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_potun_cost_mult                        value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_akavir_kamal
+			}
+		}
+		set_variable = { which = mount_pet_kamal_cost_mult                        value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_akavir_kamal
+			}
+		}
+		set_variable = { which = mount_pet_kamal_cost_mult                        value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_akavir_kamal
+				}
+			}
+		}
+		set_variable = { which = mount_pet_kamal_cost_mult                        value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_akavir_kamal
+					}
+					any_tributary = {
+						any_realm_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_akavir_kamal
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_kamal_cost_mult                        value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_akavir_kamal
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								# Audax Validator "." Ignore_NEXT
+								region = nirn_akavir_kamal
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_kamal_cost_mult                        value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_kamal_cost_mult                        value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				expd_pdxrptg_purchase_mount_pet_province_is_mud = yes
+			}
+		}
+		set_variable = { which = mount_pet_mud_cost_mult                          value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				expd_pdxrptg_purchase_mount_pet_province_is_mud = yes
+			}
+		}
+		set_variable = { which = mount_pet_mud_cost_mult                          value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					expd_pdxrptg_purchase_mount_pet_province_is_mud = yes
+				}
+			}
+		}
+		set_variable = { which = mount_pet_mud_cost_mult                          value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						expd_pdxrptg_purchase_mount_pet_province_is_mud = yes
+					}
+					any_tributary = {
+						any_realm_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_mud = yes
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_mud_cost_mult                          value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_mud = yes
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								expd_pdxrptg_purchase_mount_pet_province_is_mud = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_mud_cost_mult                          value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_mud_cost_mult                          value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				expd_pdxrptg_purchase_mount_pet_province_is_not_cold = yes
+			}
+		}
+		set_variable = { which = mount_pet_not_cold_cost_mult                     value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				expd_pdxrptg_purchase_mount_pet_province_is_not_cold = yes
+			}
+		}
+		set_variable = { which = mount_pet_not_cold_cost_mult                     value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					expd_pdxrptg_purchase_mount_pet_province_is_not_cold = yes
+				}
+			}
+		}
+		set_variable = { which = mount_pet_not_cold_cost_mult                     value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						expd_pdxrptg_purchase_mount_pet_province_is_not_cold = yes
+					}
+					any_tributary = {
+						any_realm_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_not_cold = yes
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_not_cold_cost_mult                     value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_not_cold = yes
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								expd_pdxrptg_purchase_mount_pet_province_is_not_cold = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_not_cold_cost_mult                     value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_not_cold_cost_mult                     value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				expd_pdxrptg_purchase_mount_pet_province_is_forest = yes
+			}
+		}
+		set_variable = { which = mount_pet_forest_cost_mult                       value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				expd_pdxrptg_purchase_mount_pet_province_is_forest = yes
+			}
+		}
+		set_variable = { which = mount_pet_forest_cost_mult                       value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					expd_pdxrptg_purchase_mount_pet_province_is_forest = yes
+				}
+			}
+		}
+		set_variable = { which = mount_pet_forest_cost_mult                       value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						expd_pdxrptg_purchase_mount_pet_province_is_forest = yes
+					}
+					any_tributary = {
+						any_realm_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_forest = yes
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_forest_cost_mult                       value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_forest = yes
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								expd_pdxrptg_purchase_mount_pet_province_is_forest = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_forest_cost_mult                       value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_forest_cost_mult                       value = 0.5 }
+	}
+	
+	
+	
+	if = {
+		limit = {
+			capital_scope = {
+				expd_pdxrptg_purchase_mount_pet_province_is_hammerfell_desert = yes
+			}
+		}
+		set_variable = { which = mount_pet_hammerfell_desert_cost_mult            value = 0.0 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				expd_pdxrptg_purchase_mount_pet_province_is_hammerfell_desert = yes
+			}
+		}
+		set_variable = { which = mount_pet_hammerfell_desert_cost_mult            value = 0.1 }
+	}
+	else_if = {
+		limit = {
+			any_demesne_province = {
+				any_neighbor_province = {
+					expd_pdxrptg_purchase_mount_pet_province_is_hammerfell_desert = yes
+				}
+			}
+		}
+		set_variable = { which = mount_pet_hammerfell_desert_cost_mult             value = 0.2 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						expd_pdxrptg_purchase_mount_pet_province_is_hammerfell_desert = yes
+					}
+					any_tributary = {
+						any_realm_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_hammerfell_desert = yes
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_hammerfell_desert_cost_mult            value = 0.3 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = {
+						any_neighbor_province = {
+							expd_pdxrptg_purchase_mount_pet_province_is_hammerfell_desert = yes
+						}
+					}
+					any_tributary = {
+						any_realm_province = {
+							any_neighbor_province = {
+								expd_pdxrptg_purchase_mount_pet_province_is_hammerfell_desert = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		set_variable = { which = mount_pet_hammerfell_desert_cost_mult            value = 0.4 }
+	}
+	else = {
+		set_variable = { which = mount_pet_hammerfell_desert_cost_mult            value = 0.5 }
+	}
+	
+}

@@ -1,0 +1,196 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_purchase_pets_ai_choice_is_diplomat = {
+	OR = {
+		diplomacy = 20
+		has_job_title = job_chancellor
+		# Audax Validator "." Ignore_NEXT
+		is_diplomat = yes
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = scenarist_guild_tamriel
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = scenarist_guild_akavir
+	}
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_is_warrior = {
+	OR = {
+		martial = 20
+		has_job_title = job_marshal
+		# Audax Validator "." Ignore_NEXT
+		is_warrior = yes
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = fighters_guild_tamriel
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = fighters_guild_akavir
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = companions_tamriel
+		# Commander & war focus => battles/duels => war pets preferred
+		has_minor_title = title_commander
+		has_focus = focus_war
+	}
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_is_magistrate = {
+	OR = {
+		stewardship = 20
+		has_job_title = job_treasurer
+		# Audax Validator "." Ignore_NEXT
+		is_magistrate = yes
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = mercantile_guild_tamriel
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = mercantile_guild_akavir
+	}
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_is_agent = {
+	OR = {
+		intrigue = 20
+		has_job_title = job_spymaster
+		# Audax Validator "." Ignore_NEXT
+		is_agent = yes
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = dark_brotherhood_tamriel
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = assassin_guild_akavir
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = morag_tong_tamriel
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = thieves_guild_tamriel
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = camonna_tong_tamriel
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = thieves_guild_akavir
+	}
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_is_mage = {
+	OR = {
+		learning = 20
+		has_job_title = job_spiritual
+		# Audax Validator "." Ignore_NEXT
+		is_mage = yes
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = mages_guild_tamriel
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = mages_guild_akavir
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = greybeards_tamriel
+		# Audax Validator "." Ignore_NEXT
+		society_member_of = moth_priests_tamriel
+	}
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_has_selected_dog = {
+	OR = {
+		has_character_flag = pet_dog_masterless_for_ai
+		has_character_flag = pet_dog_beardog_for_ai
+		has_character_flag = pet_dog_dunehound_for_ai
+		has_character_flag = pet_dog_shepard_for_ai
+		has_character_flag = pet_dog_wolfhound_for_ai
+		has_character_flag = pet_dog_house_for_ai
+		has_character_flag = pet_dog_retriever_for_ai
+		has_character_flag = pet_dog_warhound_for_ai
+		has_character_flag = pet_dog_wolf_for_ai
+		has_character_flag = pet_dog_fox_for_ai
+		has_character_flag = pet_dog_fennec_for_ai
+	}
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_likes_cute = {
+	expd_pdxrptg_purchase_pets_ai_choice_dislikes_cute_raw = no
+	expd_pdxrptg_purchase_pets_ai_choice_likes_cute_raw = yes
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_dislikes_cute = {
+	expd_pdxrptg_purchase_pets_ai_choice_likes_cute_raw = no
+	expd_pdxrptg_purchase_pets_ai_choice_dislikes_cute_raw = yes
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_likes_cute_raw = {
+	OR = {
+		trait = kind
+		trait = charitable
+		trait = humble
+		trait = content
+		trait = trusting
+		trait = shy
+		trait = gregarious
+		trait = lustful # Might help me approach lovers...
+	}
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_dislikes_cute_raw = {
+	OR = {
+		trait = wroth
+		trait = envious
+		trait = cruel
+		trait = cynical
+		trait = deceitful
+		trait = paranoid
+		trait = zealous
+	}
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_has_selected_cute = {
+	OR = {
+		has_character_flag = pet_cat_for_ai
+		has_character_flag = pet_guineapig_for_ai
+		has_character_flag = pet_rabbit_for_ai
+		has_character_flag = pet_capybara_for_ai
+		has_character_flag = pet_dog_fox_for_ai
+		has_character_flag = pet_dog_fennec_for_ai
+	}
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances = {
+	expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances_raw = yes
+	expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances_raw = no
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances = {
+	expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances_raw = no
+	expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances_raw = yes
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances_raw = {
+	OR = {
+		trait = groomed
+		# Audax Validator "." Ignore_NEXT
+		trait = vain
+	}
+}
+
+
+expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances_raw = {
+	OR = {
+		trait = slothful
+		# Audax Validator "." Ignore_NEXT
+		trait = slovenly
+	}
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_likes_scavengers = {
+	OR = {
+		expd_pdxrptg_purchase_pets_ai_choice_doesnt_care_about_appearances = yes
+		# Audax Validator "." Ignore_NEXT
+		worships_meridia = yes
+		# Audax Validator "." Ignore_NEXT
+		worships_namira = yes
+	}
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_dislikes_scavengers = {
+	expd_pdxrptg_purchase_pets_ai_choice_cares_about_appearances = yes
+	expd_pdxrptg_purchase_pets_ai_choice_likes_scavengers = no
+}
+
+expd_pdxrptg_purchase_pets_ai_choice_has_selected_disgusting = {
+	OR = {
+		has_character_flag = pet_goose_for_ai
+		has_character_flag = pet_mudcrab_for_ai
+		has_character_flag = pet_skeever_for_ai
+		has_character_flag = pet_vulture_for_ai
+	}
+}
