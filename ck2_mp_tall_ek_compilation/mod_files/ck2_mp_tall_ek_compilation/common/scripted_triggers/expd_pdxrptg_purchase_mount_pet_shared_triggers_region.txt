@@ -1,0 +1,159 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell = {
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_tamriel_highrock
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_tamriel_hammerfell
+	}
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell_yokuda = {
+	OR = {
+		expd_pdxrptg_purchase_mount_pet_province_is_highrock_hammerfell = yes
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_yokuda
+	}
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_reach = {
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_tamriel_westernreach
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_tamriel_thereach
+	}
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_reach_yokuda = {
+	OR = {
+		expd_pdxrptg_purchase_mount_pet_province_is_reach = yes
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_yokuda
+	}
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_atmora_arctic = {
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_atmora
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_roscrea
+		AND = {
+			# Audax Validator "." Ignore_NEXT
+			region = nirn_tamriel
+			terrain = arctic
+		}
+	}
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_not_cold = {
+	NOR = { 
+		expd_pdxrptg_purchase_mount_pet_province_is_atmora_arctic = yes
+		terrain = arctic
+		terrain = mountain
+		# Audax Validator "." Ignore_NEXT
+		terrain = ashlands
+		# Audax Validator "." Ignore_NEXT
+		terrain = wasteland
+	}
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_mud = {
+	OR = {
+		port = yes
+		terrain = jungle
+		terrain = marsh
+		# Audax Validator "." Ignore_NEXT
+		terrain = islander_terrain
+		# Audax Validator "." Ignore_NEXT
+		terrain = argonia
+		# Audax Validator "." Ignore_NEXT
+		terrain = mangrove_swamp
+		# Audax Validator "." Ignore_NEXT
+		terrain = valen_woods
+	}
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_forest = {
+	OR = {
+		terrain = forest
+		terrain = hills
+		terrain = woods
+	}
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_hammerfell_desert = {
+	# Is the special Alikr desert, or is a desert province continuously connected to Hammerfell deserts
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		terrain = alikr_desert
+		AND = {
+			terrain = desert
+			any_neighbor_province = {
+				# Audax Validator "." Ignore_NEXT
+				region = nirn_tamriel_hammerfell
+				OR = {
+					terrain = desert
+					# Audax Validator "." Ignore_NEXT
+					terrain = alikr_desert
+				}
+			}
+		}
+		AND = {
+			terrain = desert
+			any_neighbor_province = {
+				terrain = desert
+				any_neighbor_province = {
+					# Audax Validator "." Ignore_NEXT
+					region = nirn_tamriel_hammerfell
+					OR = {
+						terrain = desert
+						# Audax Validator "." Ignore_NEXT
+						terrain = alikr_desert
+					}
+				}
+			}
+		}
+		AND = {
+			terrain = desert
+			any_neighbor_province = {
+				terrain = desert
+				any_neighbor_province = {
+					terrain = desert
+					any_neighbor_province = {
+						# Audax Validator "." Ignore_NEXT
+						region = nirn_tamriel_hammerfell
+						OR = {
+							terrain = desert
+							# Audax Validator "." Ignore_NEXT
+							terrain = alikr_desert
+						}
+					}
+				}
+			}
+		}
+		AND = {
+			terrain = desert
+			any_neighbor_province = {
+				terrain = desert
+				any_neighbor_province = {
+					terrain = desert
+					any_neighbor_province = {
+						terrain = desert
+						any_neighbor_province = {
+							# Audax Validator "." Ignore_NEXT
+							region = nirn_tamriel_hammerfell
+							OR = {
+								terrain = desert
+								# Audax Validator "." Ignore_NEXT
+								terrain = alikr_desert
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,53 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pdxrptg_purchase_mount_pet_province_is_tamriel = {
+	# Audax Validator "." Ignore_NEXT
+	region = nirn_tamriel
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_tamriel_adjacent = {
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_yokuda
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_atmora
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_akavir_cathnoquey
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_roscrea
+	}
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_tamriel_yokuda = {
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_tamriel
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_yokuda
+	}
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_tamriel_yokuda_adjacent = {
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_atmora
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_akavir_cathnoquey
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_roscrea
+	}
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_akavir = {
+	# Audax Validator "." Ignore_NEXT
+	region = nirn_akavir
+}
+
+expd_pdxrptg_purchase_mount_pet_province_is_akavir_adjacent = {
+	OR = {
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_atmora
+		# Audax Validator "." Ignore_NEXT
+		region = nirn_roscrea
+	}
+}

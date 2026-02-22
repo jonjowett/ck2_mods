@@ -1,0 +1,302 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+# IMPORTANT NOTE!
+#
+# These "multiplicative" modifiers are intended for use in a "Paradox-math" style of calculation, ie:
+#    {Final cost} = {Base cost} * (1 + {Sum of all "multiplicative" modifiers} )
+# Eg:
+#  --- For no effect, the "multiplicative" modifier should be 0
+#  --- For +50%     , the "multiplicative" modifier should be 0.5
+#  --- For +100%    , the "multiplicative" modifier should be 1
+#  --- etc
+
+
+
+
+
+
+
+
+
+
+#############################################################
+#                                                           #
+#              INTERCONTINENTAL TRANSPORTATION              #
+#                                                           #
+#############################################################
+
+# If an animal is native to a completely different continent, bringing it to your capital for purchase is probably quite expensive.
+
+# Thought process about animal sizes:
+#  --- Tiny   = Easy to hold in hand
+#  --- Small  = Average-size dog
+#  --- Medium = Average-size mount
+#  --- Large  = Unusually large mount
+#  --- Huge   = Elephant?!
+# Then, upgrade/downgrade one level if an animal is unusually hard/easy to transport.
+
+expd_pdxrptg_purchase_mount_pet_clear_continent_cost_multipliers = {
+	set_variable = { which = mount_pet_tamriel_cost_tiny_mult            value = 0 }
+	set_variable = { which = mount_pet_tamriel_cost_small_mult           value = 0 }
+	set_variable = { which = mount_pet_tamriel_cost_medium_mult          value = 0 }
+	set_variable = { which = mount_pet_tamriel_cost_large_mult           value = 0 }
+	set_variable = { which = mount_pet_tamriel_cost_huge_mult            value = 0 }
+	set_variable = { which = mount_pet_tamriel_yokuda_cost_tiny_mult     value = 0 }
+	set_variable = { which = mount_pet_tamriel_yokuda_cost_small_mult    value = 0 }
+	set_variable = { which = mount_pet_tamriel_yokuda_cost_medium_mult   value = 0 }
+	set_variable = { which = mount_pet_tamriel_yokuda_cost_large_mult    value = 0 }
+	set_variable = { which = mount_pet_tamriel_yokuda_cost_huge_mult     value = 0 }
+	set_variable = { which = mount_pet_akavir_cost_tiny_mult             value = 0 }
+	set_variable = { which = mount_pet_akavir_cost_small_mult            value = 0 }
+	set_variable = { which = mount_pet_akavir_cost_medium_mult           value = 0 }
+	set_variable = { which = mount_pet_akavir_cost_large_mult            value = 0 }
+	set_variable = { which = mount_pet_akavir_cost_huge_mult             value = 0 }
+}
+
+expd_pdxrptg_purchase_mount_pet_setup_cost_multipliers_for_this_character_continent = {
+	
+	
+	
+	expd_pdxrptg_purchase_mount_pet_clear_continent_cost_multipliers = yes
+	
+	
+	
+	
+	
+	# Tamriel
+	
+	if = {
+		limit = { capital_scope = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel = yes } }
+		# Capital is in Tamriel => No surcharge
+		set_variable = { which = mount_pet_tamriel_cost_tiny_mult            value =  0.00 }
+		set_variable = { which = mount_pet_tamriel_cost_small_mult           value =  0.00 }
+		set_variable = { which = mount_pet_tamriel_cost_medium_mult          value =  0.00 }
+		set_variable = { which = mount_pet_tamriel_cost_large_mult           value =  0.00 }
+		set_variable = { which = mount_pet_tamriel_cost_huge_mult            value =  0.00 }
+	}
+	else_if = {
+		limit = { any_demesne_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel = yes } }
+		# Capital is NOT in Tamriel, but a demesne province is => small surcharge
+		set_variable = { which = mount_pet_tamriel_cost_tiny_mult            value =  0.10 }
+		set_variable = { which = mount_pet_tamriel_cost_small_mult           value =  0.25 }
+		set_variable = { which = mount_pet_tamriel_cost_medium_mult          value =  0.50 }
+		set_variable = { which = mount_pet_tamriel_cost_large_mult           value =  1.00 }
+		set_variable = { which = mount_pet_tamriel_cost_huge_mult            value =  2.00 }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel = yes }
+				any_tributary = { any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel = yes } }
+			}
+		}
+		# Capital is NOT in Tamriel, but a subrealm (or tributary) province is => medium surcharge
+		set_variable = { which = mount_pet_tamriel_cost_tiny_mult            value =  0.25 }
+		set_variable = { which = mount_pet_tamriel_cost_small_mult           value =  0.50 }
+		set_variable = { which = mount_pet_tamriel_cost_medium_mult          value =  1.50 }
+		set_variable = { which = mount_pet_tamriel_cost_large_mult           value =  2.50 }
+		set_variable = { which = mount_pet_tamriel_cost_huge_mult            value =  5.00 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel = yes }
+					any_tributary = { any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel = yes } }
+				}
+			}
+		}
+		# No subrealm province is in Tamriel, but your top liege's (or top liege tributary's) realm has one => large surcharge
+		set_variable = { which = mount_pet_tamriel_cost_tiny_mult            value =  1.00 }
+		set_variable = { which = mount_pet_tamriel_cost_small_mult           value =  1.50 }
+		set_variable = { which = mount_pet_tamriel_cost_medium_mult          value =  4.00 }
+		set_variable = { which = mount_pet_tamriel_cost_large_mult           value =  6.50 }
+		set_variable = { which = mount_pet_tamriel_cost_huge_mult            value =  9.00 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel_adjacent = yes }
+					any_tributary = { any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel_adjacent = yes } }
+				}
+			}
+		}
+		# Nearest top liege (or top liege tributary) realm province is in an adjacent subcontinent to Tamriel => very large surcharge
+		set_variable = { which = mount_pet_tamriel_cost_tiny_mult            value =  2.00 }
+		set_variable = { which = mount_pet_tamriel_cost_small_mult           value =  4.00 }
+		set_variable = { which = mount_pet_tamriel_cost_medium_mult          value =  6.50 }
+		set_variable = { which = mount_pet_tamriel_cost_large_mult           value =  9.00 }
+		set_variable = { which = mount_pet_tamriel_cost_huge_mult            value = 14.00 }
+	}
+	else = {
+		# Nearest top liege (or top liege tributary) realm province is NOT in an adjacent subcontinent to Tamriel => extremely large surcharge
+		set_variable = { which = mount_pet_tamriel_cost_tiny_mult            value =  4.00 }
+		set_variable = { which = mount_pet_tamriel_cost_small_mult           value =  6.50 }
+		set_variable = { which = mount_pet_tamriel_cost_medium_mult          value =  9.00 }
+		set_variable = { which = mount_pet_tamriel_cost_large_mult           value = 14.00 }
+		set_variable = { which = mount_pet_tamriel_cost_huge_mult            value = 19.00 }
+	}
+	
+	
+	
+	
+	
+	# Tamriel & Yokuda
+	
+	if = {
+		limit = { capital_scope = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel_yokuda = yes } }
+		# Capital is in Tamriel => No surcharge
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_tiny_mult     value =  0.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_small_mult    value =  0.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_medium_mult   value =  0.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_large_mult    value =  0.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_huge_mult     value =  0.00 }
+	}
+	else_if = {
+		limit = { any_demesne_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel_yokuda = yes } }
+		# Capital is NOT in Tamriel, but a demesne province is => small surcharge
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_tiny_mult     value =  0.10 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_small_mult    value =  0.25 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_medium_mult   value =  0.50 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_large_mult    value =  1.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_huge_mult     value =  2.00 }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel_yokuda = yes }
+				any_tributary = { any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel_yokuda = yes } }
+			}
+		}
+		# Capital is NOT in Tamriel, but a subrealm (or tributary) province is => medium surcharge
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_tiny_mult     value =  0.25 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_small_mult    value =  0.50 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_medium_mult   value =  1.50 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_large_mult    value =  2.50 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_huge_mult     value =  5.00 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel_yokuda = yes }
+					any_tributary = { any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel_yokuda = yes } }
+				}
+			}
+		}
+		# No subrealm province is in Tamriel, but your top liege's (or top liege tributary's) realm has one => large surcharge
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_tiny_mult     value =  1.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_small_mult    value =  1.50 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_medium_mult   value =  4.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_large_mult    value =  6.50 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_huge_mult     value =  9.00 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel_yokuda_adjacent = yes }
+					any_tributary = { any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_tamriel_yokuda_adjacent = yes } }
+				}
+			}
+		}
+		# Nearest top liege (or top liege tributary) realm province is in an adjacent subcontinent to Tamriel => very large surcharge
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_tiny_mult     value =  2.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_small_mult    value =  4.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_medium_mult   value =  6.50 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_large_mult    value =  9.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_huge_mult     value = 14.00 }
+	}
+	else = {
+		# Nearest top liege (or top liege tributary) realm province is NOT in an adjacent subcontinent to Tamriel => extremely large surcharge
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_tiny_mult     value =  4.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_small_mult    value =  6.50 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_medium_mult   value =  9.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_large_mult    value = 14.00 }
+		set_variable = { which = mount_pet_tamriel_yokuda_cost_huge_mult     value = 19.00 }
+	}
+	
+	
+	
+	
+	
+	# Akavir
+	
+	if = {
+		limit = { capital_scope = { expd_pdxrptg_purchase_mount_pet_province_is_akavir = yes } }
+		# Capital is in Akavir => No surcharge
+		set_variable = { which = mount_pet_akavir_cost_tiny_mult             value =  0.00 }
+		set_variable = { which = mount_pet_akavir_cost_small_mult            value =  0.00 }
+		set_variable = { which = mount_pet_akavir_cost_medium_mult           value =  0.00 }
+		set_variable = { which = mount_pet_akavir_cost_large_mult            value =  0.00 }
+		set_variable = { which = mount_pet_akavir_cost_huge_mult             value =  0.00 }
+	}
+	else_if = {
+		limit = { any_demesne_province = { expd_pdxrptg_purchase_mount_pet_province_is_akavir = yes } }
+		# Capital is NOT in Akavir, but a demesne province is => small surcharge
+		set_variable = { which = mount_pet_akavir_cost_tiny_mult             value =  0.10 }
+		set_variable = { which = mount_pet_akavir_cost_small_mult            value =  0.25 }
+		set_variable = { which = mount_pet_akavir_cost_medium_mult           value =  0.50 }
+		set_variable = { which = mount_pet_akavir_cost_large_mult            value =  1.00 }
+		set_variable = { which = mount_pet_akavir_cost_huge_mult             value =  2.00 }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_akavir = yes }
+				any_tributary = { any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_akavir = yes } }
+			}
+		}
+		# Capital is NOT in Akavir, but a subrealm (or tributary) province is => medium surcharge
+		set_variable = { which = mount_pet_akavir_cost_tiny_mult             value =  0.25 }
+		set_variable = { which = mount_pet_akavir_cost_small_mult            value =  0.50 }
+		set_variable = { which = mount_pet_akavir_cost_medium_mult           value =  1.50 }
+		set_variable = { which = mount_pet_akavir_cost_large_mult            value =  2.50 }
+		set_variable = { which = mount_pet_akavir_cost_huge_mult             value =  4.00 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_akavir = yes }
+					any_tributary = { any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_akavir = yes } }
+				}
+			}
+		}
+		# No subrealm province is in Akavir, but your top liege's (or top liege tributary's) realm has one => large surcharge
+		set_variable = { which = mount_pet_akavir_cost_tiny_mult             value =  1.00 }
+		set_variable = { which = mount_pet_akavir_cost_small_mult            value =  1.50 }
+		set_variable = { which = mount_pet_akavir_cost_medium_mult           value =  4.00 }
+		set_variable = { which = mount_pet_akavir_cost_large_mult            value =  6.50 }
+		set_variable = { which = mount_pet_akavir_cost_huge_mult             value =  9.00 }
+	}
+	else_if = {
+		limit = {
+			top_liege = {
+				OR = {
+					any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_akavir_adjacent = yes }
+					any_tributary = { any_realm_province = { expd_pdxrptg_purchase_mount_pet_province_is_akavir_adjacent = yes } }
+				}
+			}
+		}
+		# Nearest top liege (or top liege tributary) realm province is in an adjacent subcontinent to Akavir => very large surcharge
+		set_variable = { which = mount_pet_akavir_cost_tiny_mult             value =  2.00 }
+		set_variable = { which = mount_pet_akavir_cost_small_mult            value =  4.00 }
+		set_variable = { which = mount_pet_akavir_cost_medium_mult           value =  6.50 }
+		set_variable = { which = mount_pet_akavir_cost_large_mult            value =  9.00 }
+		set_variable = { which = mount_pet_akavir_cost_huge_mult             value = 14.00 }
+	}
+	else = {
+		# Nearest top liege (or top liege tributary) realm province is NOT in an adjacent subcontinent to Akavir => extremely large surcharge
+		set_variable = { which = mount_pet_akavir_cost_tiny_mult             value =  4.00 }
+		set_variable = { which = mount_pet_akavir_cost_small_mult            value =  6.50 }
+		set_variable = { which = mount_pet_akavir_cost_medium_mult           value =  9.00 }
+		set_variable = { which = mount_pet_akavir_cost_large_mult            value = 14.00 }
+		set_variable = { which = mount_pet_akavir_cost_huge_mult             value = 19.00 }
+	}
+	
+}

@@ -1,0 +1,38 @@
+# Audax Validator EnableCommentMetadata
+
+# Suppress spurious warning about duplicate ID
+# Audax Validator "." Ignore_NEXT
+upgrade_strategic_exclaves = { # Strategic Exclaves
+	#A city is nothing without its countryside, and this city takes that seriously. Vital local townships are now guarded by their own fortifications, paid for and maintained by the capital-settlement, and the closest are even connected by short walls to form a single, defensible sprawl.
+	#Extend the defenses to nearby local townships, forming a huge fortified complex.
+	picture = GFX_upgrade_icon_stones
+
+	potential = {
+		always = no ############################# Crash prevention!
+	}
+	allow = {
+
+	}
+	
+	build_time = 120
+	gold_cost_flat = 1000
+	gold_cost_ticking = 5
+
+	owner_modifier = {
+ 		town_opinion = 3
+		#" * Immediately gain maximum walls & fortification buildings in all currently-built baronies in the county (irrelevant of technology or other construction concerns, because wonder).
+ 		custom_modifier_text = holdings_walls_upgrade_custom_modifier_tt
+	}
+	
+	
+	local_modifier = {
+		local_tax_modifier = 0.05
+	}
+	
+	flags = {
+
+	}
+	active = {
+		#always
+	}
+}

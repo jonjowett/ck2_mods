@@ -469,7 +469,7 @@ targetted_decisions = {
 		}
 		potential = { ai = yes }
 		allow = { always = yes }
-		third_party_potential = { ROOT_FROMFROM = { ai = no } }
+		third_party_potential = { ROOT_FROMFROM = { edmp_this_character_is_a_current_or_absent_human_player = yes } }
 		third_party_allow = {
 			ROOT = {
 				show_scope_change = no
@@ -516,7 +516,7 @@ targetted_decisions = {
 			ai = yes
 		}
 		allow = { always = yes }
-		third_party_potential = { ROOT_FROMFROM = { ai = no } }
+		third_party_potential = { ROOT_FROMFROM = { edmp_this_character_is_a_current_or_absent_human_player = yes } }
 		third_party_allow = {
 			OR = {
 				custom_tooltip = {
@@ -569,7 +569,7 @@ targetted_decisions = {
 			is_ruler = no
 		}
 		allow = { always = yes }
-		third_party_potential = { ROOT_FROMFROM = { ai = no } }
+		third_party_potential = { ROOT_FROMFROM = { edmp_this_character_is_a_current_or_absent_human_player = yes } }
 		third_party_allow = { ROOT_FROMFROM = { NOT = { host = { character = ROOT } } } }
 		effect = {
 			hidden_tooltip = {
@@ -1422,6 +1422,146 @@ targetted_decisions = {
 		}
 	}
 	
+	edmp_interference_techpoints_grant_1k_mil = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { is_playable = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_techpoints_grant_1k_mil
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			hidden_tooltip = {
+				# Effect is already described in decision description, no need for duplication
+				ROOT = { military_techpoints = 1000 }
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_techpoints_grant_1k_mil }
+		}
+	}
+	
+	edmp_interference_techpoints_grant_1k_eco = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { is_playable = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_techpoints_grant_1k_eco
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			hidden_tooltip = {
+				# Effect is already described in decision description, no need for duplication
+				ROOT = { economy_techpoints = 1000 }
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_techpoints_grant_1k_eco }
+		}
+	}
+	
+	edmp_interference_techpoints_grant_1k_cul = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { is_playable = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_techpoints_grant_1k_cul
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			hidden_tooltip = {
+				# Effect is already described in decision description, no need for duplication
+				ROOT = { culture_techpoints = 1000 }
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_techpoints_grant_1k_cul }
+		}
+	}
+	
+	edmp_interference_techpoints_remove_1k_mil = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { is_playable = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_techpoints_remove_1k_mil
+				set_global_flag = edmp_interference_singlechar_bad
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			hidden_tooltip = {
+				# Effect is already described in decision description, no need for duplication
+				ROOT = { military_techpoints = -1000 }
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_techpoints_remove_1k_mil }
+		}
+	}
+	
+	edmp_interference_techpoints_remove_1k_eco = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { is_playable = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_techpoints_remove_1k_eco
+				set_global_flag = edmp_interference_singlechar_bad
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			hidden_tooltip = {
+				# Effect is already described in decision description, no need for duplication
+				ROOT = { economy_techpoints = -1000 }
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_techpoints_remove_1k_eco }
+		}
+	}
+	
+	edmp_interference_techpoints_remove_1k_cul = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_global_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = { is_playable = yes }
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_techpoints_remove_1k_cul
+				set_global_flag = edmp_interference_singlechar_bad
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			hidden_tooltip = {
+				# Effect is already described in decision description, no need for duplication
+				ROOT = { culture_techpoints = -1000 }
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_techpoints_remove_1k_cul }
+		}
+	}
 	
 }
 
@@ -1445,13 +1585,18 @@ title_decisions = {
 			custom_tooltip = {
 				text = edmp_interference_there_is_a_player_who_does_not_hold_this_title_tt
 				OR = {
-					holder_scope = { any_player = { NOT = { character = PREV } } }
+					holder_scope = {
+						any_playable_ruler = {
+							edmp_this_character_is_a_current_or_absent_human_player = yes
+							NOT = { character = PREV }
+						}
+					}
 					has_holder = no
 				}
 			}
 		}
 		third_party_potential = {
-			ROOT_FROMFROM = { ai = no }
+			ROOT_FROMFROM = { edmp_this_character_is_a_current_or_absent_human_player = yes }
 			ROOT = {
 				OR = {
 					holder_scope = { NOT = { character = ROOT_FROMFROM } }
@@ -1495,7 +1640,8 @@ title_decisions = {
 			edmp_interference_this_is_not_some_kind_of_temporary_title = yes
 			custom_tooltip = {
 				text = edmp_interference_there_is_a_player_who_does_not_hold_or_claim_this_title_tt
-				any_player = {
+				any_playable_ruler = {
+					edmp_this_character_is_a_current_or_absent_human_player = yes
 					NOT = { has_strong_claim = ROOT }
 					ROOT = {
 						OR = {
@@ -1508,7 +1654,7 @@ title_decisions = {
 		}
 		third_party_potential = {
 			ROOT_FROMFROM = {
-				ai = no
+				edmp_this_character_is_a_current_or_absent_human_player = yes
 				NOT = { has_strong_claim = ROOT }
 				ROOT = {
 					OR = {

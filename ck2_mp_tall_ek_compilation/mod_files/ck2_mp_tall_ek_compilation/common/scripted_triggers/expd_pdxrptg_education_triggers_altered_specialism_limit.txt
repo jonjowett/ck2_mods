@@ -8,53 +8,16 @@
 # Base mod replacement triggers #
 #################################
 
-# IMPORTANT: For compatibility with the base mod, this has NOT been renamed.
+# IMPORTANT: For compatibility with the base mod, this has NOT been renamed, despite the name being potentially confusing.
 #            This trigger should now be understood as "has the maximum allowable number of specialisms".
 has_two_specializations = {
-	
-	trigger_if = {
-		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_3 = yes }
-		expd_pdxrptg_this_character_has_any_level_specialisations_5 = yes
-	}
-	trigger_else_if = {
-		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_2 = yes }
-		expd_pdxrptg_this_character_has_any_level_specialisations_4 = yes
-	}
-	trigger_else_if = {
-		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_1 = yes }
-		expd_pdxrptg_this_character_has_any_level_specialisations_3 = yes
-	}
-	trigger_else = {
-		expd_pdxrptg_this_character_has_any_level_specialisations_2 = yes
-	}
-	
-	# Give the user the relevant info via customisable localisation
-	custom_tooltip = { text = expd_pdxrptg_specialisation_limit_info }
-	
+	expd_pdxrptg_this_character_has_max_quantity_of_specialisms_at_any_level = yes
 }
 
-# IMPORTANT: This trigger must NOT be renamed as it's used throughout the base mod
+# IMPORTANT: For compatibility with the base mod, this has NOT been renamed.
+#            This trigger should now be understood as "has all possible specialisms at max level".
 has_maxed_specializations = {
-	
-	trigger_if = {
-		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_3 = yes }
-		expd_pdxrptg_this_character_has_max_level_specialisations_5 = yes
-	}
-	trigger_else_if = {
-		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_2 = yes }
-		expd_pdxrptg_this_character_has_max_level_specialisations_4 = yes
-	}
-	trigger_else_if = {
-		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_1 = yes }
-		expd_pdxrptg_this_character_has_max_level_specialisations_3 = yes
-	}
-	trigger_else = {
-		expd_pdxrptg_this_character_has_max_level_specialisations_2 = yes
-	}
-	
-	# Give the user the relevant info via customisable localisation
-	custom_tooltip = { text = expd_pdxrptg_specialisation_limit_info }
-	
+	expd_pdxrptg_this_character_has_max_quantity_of_specialisms_all_at_max_level = yes
 }
 
 
@@ -68,7 +31,7 @@ expd_pdxrptg_this_character_has_potentially_bugged_specialisation_study_on_gain_
 	has_character_flag = guild_specialization_ongoing
 	is_in_society = yes
 	OR = {
-		has_maxed_specializations = yes
+		expd_pdxrptg_this_character_has_max_quantity_of_specialisms_all_at_max_level = yes
 		AND = {
 			expd_pdxrptg_this_character_has_one_less_than_max_specialisations = yes
 			expd_pdxrptg_this_character_has_no_non_max_specialisations = yes
@@ -122,6 +85,81 @@ expd_pdxrptg_this_character_has_no_non_max_specialisations = {
 #####################################
 # Allowed number of specialisations #
 #####################################
+
+# Returns true if the character has all possible specialisms, at any level of proficiency.
+#          (IE: Cannot learn new specialisms, but could theoretically develop existing ones if they're in a compatible society.)
+# NB: Since the "has_max_level" triggers return true for >=N, we don't need separate logic
+#          to account for the possibility that a character has more than the maximum possible number of specialisms
+#          (eg. by discarding their legendary education via Oghma Infinium)
+expd_pdxrptg_this_character_has_max_quantity_of_specialisms_at_any_level = {
+	
+	trigger_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_3 = yes }
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_has_any_level_specialisations_5_showing_available_extra_specialisation_slots_tt
+			expd_pdxrptg_this_character_has_any_level_specialisations_5 = yes
+		}
+	}
+	trigger_else_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_2 = yes }
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_has_any_level_specialisations_4_showing_available_extra_specialisation_slots_tt
+			expd_pdxrptg_this_character_has_any_level_specialisations_4 = yes
+		}
+	}
+	trigger_else_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_1 = yes }
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_has_any_level_specialisations_3_showing_available_extra_specialisation_slots_tt
+			expd_pdxrptg_this_character_has_any_level_specialisations_3 = yes
+		}
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_has_any_level_specialisations_2_showing_available_extra_specialisation_slots_tt
+			expd_pdxrptg_this_character_has_any_level_specialisations_2 = yes
+		}
+	}
+	
+}
+
+
+# Returns true if the character has all possible specialisms, all at max level of proficiency.
+#          (IE: Cannot learn new specialisms and cannot develop existing ones any further.)
+# NB: Since the "has_max_level" triggers return true for >=N, we don't need separate logic
+#          to account for the possibility that a character has more than the maximum possible number of specialisms
+#          (eg. by discarding their legendary education via Oghma Infinium)
+expd_pdxrptg_this_character_has_max_quantity_of_specialisms_all_at_max_level = {
+	
+	trigger_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_3 = yes }
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_has_max_level_specialisations_5_showing_available_extra_specialisation_slots_tt
+			expd_pdxrptg_this_character_has_max_level_specialisations_5 = yes
+		}
+	}
+	trigger_else_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_2 = yes }
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_has_max_level_specialisations_4_showing_available_extra_specialisation_slots_tt
+			expd_pdxrptg_this_character_has_max_level_specialisations_4 = yes
+		}
+	}
+	trigger_else_if = {
+		limit = { expd_pdxrptg_this_character_can_have_extra_specialisations_1 = yes }
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_has_max_level_specialisations_3_showing_available_extra_specialisation_slots_tt
+			expd_pdxrptg_this_character_has_max_level_specialisations_3 = yes
+		}
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = expd_pdxrptg_this_character_has_max_level_specialisations_2_showing_available_extra_specialisation_slots_tt
+			expd_pdxrptg_this_character_has_max_level_specialisations_2 = yes
+		}
+	}
+	
+}
 
 expd_pdxrptg_this_character_can_have_extra_specialisations_3 = {
 	custom_tooltip = {
@@ -177,7 +215,8 @@ expd_pdxrptg_this_character_has_ever_been_grandmaster = {
 # Actual number of MAX LEVEL specialisations #
 ##############################################
 
-# NB: Swordsinger & Ansei don't count towards the specialism limit in the base mod, so they also don't count here.
+# NB1: Swordsinger & Ansei don't count towards the specialism limit in the base mod, so they also don't count here.
+# NB2: These triggers return true if the number of max level specialisations is *** greater than or equal to *** N.
 
 expd_pdxrptg_this_character_has_max_level_specialisations_5 = {
 	custom_tooltip = {

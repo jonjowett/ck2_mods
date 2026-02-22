@@ -67,52 +67,68 @@ csh_artifact_filters_are_visible_for_this_character = {
 	has_character_flag = csh_show_artifact_filters
 }
 
+
+
+
+
+# The purpose of these artifact-type-specific filters is to ensure that ONLY filters
+#    relating to the current total conversion are visible (eg. only show mount filter in Elder Kings).
+# Since these are intended to be very broad categories, it should be good enough to check
+#    whether the player or any playable ruler has that particular type of artifact.
+
 csh_artifact_filter_armor_is_visible_for_this_character = {
 	csh_artifact_filters_are_visible_for_this_character = yes
 	OR = {
-		any_artifact = { csh_this_artifact_is_armor = yes }
+		any_artifact                        = { csh_this_artifact_is_armor          = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_armor          = yes } }
 		has_character_flag = csh_artifact_filter_no_armor
 	}
 }
 csh_artifact_filter_book_is_visible_for_this_character = {
 	csh_artifact_filters_are_visible_for_this_character = yes
 	OR = {
-		any_artifact = { csh_this_artifact_is_book = yes }
+		any_artifact                        = { csh_this_artifact_is_book           = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_book           = yes } }
 		has_character_flag = csh_artifact_filter_no_books
 	}
 }
 csh_artifact_filter_clutter_is_visible_for_this_character = {
 	csh_artifact_filters_are_visible_for_this_character = yes
 	OR = {
-		any_artifact = { csh_this_artifact_is_clutter = yes }
+		any_artifact                        = { csh_this_artifact_is_clutter        = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_clutter        = yes } }
 		has_character_flag = csh_artifact_filter_no_clutter
 	}
 }
 csh_artifact_filter_mount_or_pet_is_visible_for_this_character = {
 	csh_artifact_filters_are_visible_for_this_character = yes
 	OR = {
-		any_artifact = { csh_this_artifact_is_mount_or_pet = yes }
+		any_artifact                        = { csh_this_artifact_is_mount_or_pet   = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_mount_or_pet   = yes } }
 		has_character_flag = csh_artifact_filter_no_mounts_or_pets
 	}
 }
 csh_artifact_filter_necklace_is_visible_for_this_character = {
 	csh_artifact_filters_are_visible_for_this_character = yes
 	OR = {
-		any_artifact = { csh_this_artifact_is_necklace = yes }
+		any_artifact                        = { csh_this_artifact_is_necklace       = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_necklace       = yes } }
 		has_character_flag = csh_artifact_filter_no_necklaces
 	}
 }
 csh_artifact_filter_ring_is_visible_for_this_character = {
 	csh_artifact_filters_are_visible_for_this_character = yes
 	OR = {
-		any_artifact = { csh_this_artifact_is_ring = yes }
+		any_artifact                        = { csh_this_artifact_is_ring           = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_ring           = yes } }
 		has_character_flag = csh_artifact_filter_no_rings
 	}
 }
 csh_artifact_filter_weapon_is_visible_for_this_character = {
 	csh_artifact_filters_are_visible_for_this_character = yes
 	OR = {
-		any_artifact = { csh_this_artifact_is_weapon = yes }
+		any_artifact                        = { csh_this_artifact_is_weapon         = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_weapon         = yes } }
 		has_character_flag = csh_artifact_filter_no_weapons
 	}
 }

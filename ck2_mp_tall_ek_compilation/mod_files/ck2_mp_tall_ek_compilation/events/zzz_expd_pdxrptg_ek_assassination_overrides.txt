@@ -1,0 +1,594 @@
+# Audax Validator EnableCommentMetadata
+
+# Events dealing with the sending of various types of assassins to stamp out those who oppose you
+# Written by jjsfw/jumbi and Etienne
+# 2026: Reworked by jonjowett
+
+namespace = assassination
+
+# Prevent the Validator from complaining that this event is_triggered_only but is never called
+# Audax Validator "." Ignore_NEXT
+character_event = {
+	##### Assassination Selection - Pick your Poison #####
+	
+	id = assassination.1
+	
+	# Audax Validator "." Ignore_NEXT
+	desc = assassination.desc.1
+	
+	picture = GFX_evt_shadow
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		
+		save_event_target_as = murder_client
+		
+		# Stop the Validator from complaining about no setters for murder_target
+		save_event_target_as = murder_target
+		clear_event_target   = murder_target
+		
+		# Audax Validator "." Ignore_NEXT
+		FROM = { save_event_target_as = murder_target }
+		
+		##### Which assassin guild can be used?
+		##### At any given time, only ONE assassin guild can be contracted (religious and region blocks)
+		##### So we can just pick the one here and roll with it for the rest of the event chain!
+		
+		clr_character_flag = murder_guild_found
+		
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						event_target:murder_client = {
+							# Audax Validator "." Ignore_NEXT
+							society_member_of = morag_tong_tamriel
+						}
+						event_target:murder_target = {
+							NOR = {
+								# Audax Validator "." Ignore_NEXT
+								society_member_of = morag_tong_tamriel
+								has_character_flag = defeated_mt_5
+							}
+						}
+					}
+					AND = {
+						event_target:murder_client = {
+							# Audax Validator "." Ignore_NEXT
+							society_member_of = dark_brotherhood_tamriel
+						}
+						event_target:murder_target = {
+							NOR = {
+								# Audax Validator "." Ignore_NEXT
+								society_member_of = dark_brotherhood_tamriel
+								has_character_flag = defeated_db_5
+							}
+						}
+					}
+					AND = {
+						event_target:murder_client = {
+							# Audax Validator "." Ignore_NEXT
+							society_member_of = assassin_guild_akavir
+						}
+						event_target:murder_target = {
+							NOR = {
+								# Audax Validator "." Ignore_NEXT
+								society_member_of = assassin_guild_akavir
+								has_character_flag = defeated_opm_5
+							}
+						}
+					}
+				}
+			}
+			event_target:murder_client = { society = { save_event_target_as = murder_guild } }
+			set_character_flag = murder_guild_found
+		}
+		
+		### Morag Tong?
+		if = {
+			limit = {
+				
+				NOT = { has_character_flag = murder_guild_found }
+				
+				OR = {
+					# Audax Validator "." Ignore_NEXT
+					religion = almsivi
+					# Audax Validator "." Ignore_NEXT
+					religion = nerevarine
+					# Audax Validator "." Ignore_NEXT
+					religion = almsivi_old_velothi
+					# Audax Validator "." Ignore_NEXT
+					religion = reclamationist
+					# Audax Validator "." Ignore_NEXT
+					religion = daedra_mephala
+					# Audax Validator "." Ignore_NEXT
+					religion = sixth_house
+					# Audax Validator "." Ignore_NEXT
+					is_dunmer_great_house = yes
+				}
+				
+				# No MT abroad
+				expd_pdxrptg_artifact_theft_this_character_can_access_morrowind = yes
+				
+				# No MT abroad, can't be in the MT, and can't exceed assassination threshold
+				event_target:murder_target = {
+					OR = {
+						expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes
+						expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+					}
+					NOR = { 
+						# Audax Validator "." Ignore_NEXT
+						society_member_of = morag_tong_tamriel
+						has_character_flag = defeated_mt_5
+					}
+				}
+				
+				any_society_member = {
+					# Audax Validator "." Ignore_NEXT
+					society_member_of = morag_tong_tamriel
+					is_adult = yes
+					prisoner = no
+					is_inaccessible_trigger = no
+					NOT = { trait = incapable }
+					is_society_grandmaster = no
+					has_any_quest = no
+				}
+			}
+			
+			# Audax Validator "." Ignore_NEXT
+			morag_tong_tamriel = { save_event_target_as = murder_guild }
+			set_character_flag = murder_guild_found
+			
+		}
+		
+		### Dark Brotherhood?
+		if = {
+			limit = {
+				
+				NOT = { has_character_flag = murder_guild_found }
+				
+				# No DB abroad
+				expd_pdxrptg_artifact_theft_this_character_can_access_tamriel = yes
+				
+				# No DB abroad, can't be in the DB, and can't exceed assassination threshold
+				event_target:murder_target = {
+					OR = {
+						expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes
+						expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+						expd_pdxrptg_artifact_theft_this_character_is_in_yokuda = yes
+					}
+					NOR = {
+						# Audax Validator "." Ignore_NEXT
+						society_member_of = dark_brotherhood_tamriel
+						has_character_flag = defeated_db_5
+					}
+				}
+				
+				any_society_member = {
+					# Audax Validator "." Ignore_NEXT
+					society_member_of = dark_brotherhood_tamriel
+					is_adult = yes
+					prisoner = no
+					is_inaccessible_trigger = no
+					NOT = { trait = incapable }
+					is_society_grandmaster = no
+					has_any_quest = no
+				}
+			}
+			
+			# Audax Validator "." Ignore_NEXT
+			dark_brotherhood_tamriel = { save_event_target_as = murder_guild }
+			set_character_flag = murder_guild_found
+			
+		}
+		
+		### Order of the Pale Mist?
+		if = {
+			limit = {
+				
+				NOT = { has_character_flag = murder_guild_found }
+				
+				# No OPM abroad
+				expd_pdxrptg_artifact_theft_this_character_can_access_akavir = yes
+				
+				# No OPM abroad, can't be in the OPM, and can't exceed assassination threshold
+				event_target:murder_target = { 
+					OR = {
+						expd_pdxrptg_artifact_theft_this_character_is_in_akavir = yes
+						expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+					}
+					NOR = { 
+						# Audax Validator "." Ignore_NEXT
+						society_member_of = assassin_guild_akavir
+						has_character_flag = defeated_opm_5
+					}
+				}
+				any_society_member = {
+					# Audax Validator "." Ignore_NEXT
+					society_member_of = assassin_guild_akavir
+					is_adult = yes
+					prisoner = no
+					is_inaccessible_trigger = no
+					NOT = { trait = incapable }
+					is_society_grandmaster = no
+					has_any_quest = no
+				}
+			}
+			
+			# Audax Validator "." Ignore_NEXT
+			assassin_guild_akavir = { save_event_target_as = murder_guild }
+			set_character_flag = murder_guild_found
+			
+		}
+		
+		##### Calculate the cost
+		### Base due to the rank of the target
+		# Personal rank
+		if = {
+			limit = { event_target:murder_target = { is_landed = yes } }
+			event_target:murder_target = {
+				trigger_switch = {
+					on_trigger = tier
+					emperor = { event_target:murder_client = { set_variable = { which = local_assassination_price value = 1250 } } }
+					king    = { event_target:murder_client = { set_variable = { which = local_assassination_price value = 1000 } } }
+					duke    = { event_target:murder_client = { set_variable = { which = local_assassination_price value =  750 } } }
+					count   = { event_target:murder_client = { set_variable = { which = local_assassination_price value =  500 } } }
+					count   = { event_target:murder_client = { set_variable = { which = local_assassination_price value =  250 } } }
+					baron   = { event_target:murder_client = { set_variable = { which = local_assassination_price value =  200 } } }
+				}
+			}
+		}
+		
+		# Highest rank of a close relative
+		else_if = {
+			limit = {
+				event_target:murder_target = {
+					# Audax Validator "." Ignore_NEXT
+					highest_ranked_relative = {
+						is_landed = yes
+					}
+				}
+			}
+			event_target:murder_target = {
+				# Audax Validator "." Ignore_NEXT
+				highest_ranked_relative = {
+					trigger_switch = {
+						on_trigger = tier
+						emperor = { event_target:murder_client = { set_variable = { which = local_assassination_price value = 1000 } } }
+						king    = { event_target:murder_client = { set_variable = { which = local_assassination_price value =  800 } } }
+						duke    = { event_target:murder_client = { set_variable = { which = local_assassination_price value =  600 } } }
+						count   = { event_target:murder_client = { set_variable = { which = local_assassination_price value =  400 } } }
+						count   = { event_target:murder_client = { set_variable = { which = local_assassination_price value =  200 } } }
+						baron   = { event_target:murder_client = { set_variable = { which = local_assassination_price value =  160 } } }
+					}
+				}
+			}
+		}
+		
+		# If unlanded, quite cheap
+		else = {
+			event_target:murder_client = { set_variable = { which = local_assassination_price value = 150 } }
+		}
+		
+		### The cost is then adjusted due to the client's religion and the guild contracted (only in tooltip)
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						event_target:murder_client = {
+							# Audax Validator "." Ignore_NEXT
+							religion = sithis
+						}
+						event_target:murder_guild = {
+							# Audax Validator "." Ignore_NEXT
+							is_society = dark_brotherhood_tamriel
+						}
+					}
+					
+					AND = {
+						event_target:murder_client = {
+							# Audax Validator "." Ignore_NEXT
+							religion = daedra_mephala
+						}
+						event_target:murder_guild = {
+							# Audax Validator "." Ignore_NEXT
+							is_society = morag_tong_tamriel
+						}
+					}
+				}
+			}
+			multiply_variable = { which = local_assassination_price value = 0.8 }
+		}
+		
+		### Discount for doing it yourself
+		set_variable = { which = local_assassination_price_self which = local_assassination_price }
+		multiply_variable = { which = local_assassination_price_self value = 0.24 }
+		
+		### Discount for hiring goons
+		set_variable = { which = local_assassination_price_goons which = local_assassination_price }
+		multiply_variable = { which = local_assassination_price_goons value = 0.5 }
+		
+		### Surcharge for ocean transport - subcontinent
+		if = {
+			limit = {
+				event_target:murder_target = {
+					expd_pdxrptg_artifact_theft_this_character_is_in_akavir = no
+					expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = no
+					OR = {
+						expd_pdxrptg_artifact_theft_this_character_is_in_atmora_roscrea = yes
+						expd_pdxrptg_artifact_theft_this_character_is_in_yokuda = yes
+					}
+				}
+			}
+			change_variable = { which = local_assassination_price       value = 200 }
+			change_variable = { which = local_assassination_price_goons value = 100 }
+			change_variable = { which = local_assassination_price_self  value = 100 }
+			set_character_flag = murder_surcharge_subcontinent
+		}
+		
+		### Surcharge for ocean transport - intercontinental
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						event_target:murder_target = {
+							expd_pdxrptg_artifact_theft_this_character_is_in_akavir = no
+							OR = {
+								expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = yes
+								expd_pdxrptg_artifact_theft_this_character_is_in_yokuda = yes
+							}
+						}
+						event_target:murder_client = {
+							expd_pdxrptg_artifact_theft_this_character_can_access_tamriel = no
+						}
+					}
+					AND = {
+						event_target:murder_target = {
+							expd_pdxrptg_artifact_theft_this_character_is_in_tamriel = no
+							expd_pdxrptg_artifact_theft_this_character_is_in_akavir = yes
+						}
+						event_target:murder_client = {
+							expd_pdxrptg_artifact_theft_this_character_can_access_akavir = no
+						}
+					}
+				}
+			}
+			change_variable = { which = local_assassination_price       value = 400 }
+			change_variable = { which = local_assassination_price_self  value = 200 }
+			change_variable = { which = local_assassination_price_goons value = 200 }
+			set_character_flag = murder_surcharge_continent
+		}
+		
+	}
+	
+	option = {
+		
+		# Audax Validator "." Ignore_NEXT
+		name = assassination.1.opta #Hire the assassin guild
+		
+		trigger = {
+			event_target:murder_guild = {
+				society_is_active = yes
+				NOT = { event_target:murder_client = { society_member_of = PREV } }
+			}
+			
+			wealth = local_assassination_price
+		}
+		
+		ai_chance = { factor = 10 }
+		
+		custom_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			text = ASSASSINATION_COST_GUILD_CT
+		}
+		
+		if = {
+			limit = { has_character_flag = murder_surcharge_continent }
+			custom_tooltip = { text = murder_surcharge_continent_400_others_tt }
+		}
+		if = {
+			limit = { has_character_flag = murder_surcharge_subcontinent }
+			custom_tooltip = { text = murder_surcharge_subcontinent_200_others_tt }
+		}
+		
+		character_event = {
+			# Audax Validator "." Ignore_NEXT
+			id = assassination.30
+		}
+		
+	}
+	
+	option = {
+		
+		# Audax Validator "." Ignore_NEXT
+		name = assassination.1.opta2 #When you want things done right...do them yourself! Part of the assassin guild
+		
+		trigger = {
+			event_target:murder_guild = {
+				society_is_active = yes
+				event_target:murder_client = { society_member_of = PREV }
+			}
+			
+			wealth = local_assassination_price_self
+		}
+		
+		ai_chance = { factor = 10 }
+		
+		custom_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			text = ASSASSINATION_COST_YOURSELF_CT
+		}
+		
+		if = {
+			limit = { has_character_flag = murder_surcharge_continent }
+			custom_tooltip = { text = murder_surcharge_continent_200_self_tt }
+		}
+		if = {
+			limit = { has_character_flag = murder_surcharge_subcontinent }
+			custom_tooltip = { text = murder_surcharge_subcontinent_100_self_tt }
+		}
+		
+		society_quest_event = {
+			# Audax Validator "." Ignore_NEXT
+			id = assassination.350
+		}
+		
+	}
+	
+	option = {
+		
+		# Audax Validator "." Ignore_NEXT
+		name = assassination.1.optOther #Hire some goons! - Anyone can do this
+		
+		trigger = {
+			wealth = local_assassination_price_goons
+		}
+		
+		ai_chance = { factor = 1 }
+		
+		custom_tooltip = {
+			# Audax Validator "." Ignore_NEXT
+			text = ASSASSINATION_COST_GOONS_CT
+		}
+		
+		if = {
+			limit = { has_character_flag = murder_surcharge_continent }
+			custom_tooltip = { text = murder_surcharge_continent_200_others_tt }
+		}
+		if = {
+			limit = { has_character_flag = murder_surcharge_subcontinent }
+			custom_tooltip = { text = murder_surcharge_subcontinent_100_others_tt }
+		}
+		
+		character_event = {
+			# Audax Validator "." Ignore_NEXT
+			id = assassination.90
+		}
+		
+	}
+	
+	option = {
+		
+		# Audax Validator "." Ignore_NEXT
+		name = assassination.2.decline
+		
+		ai_chance = { factor = 0 } #AI chance handled in decision
+		
+		hidden_effect = {
+			remove_opinion = {
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_employed_assassins_against
+				who = event_target:murder_target
+			}
+		}
+		
+		clr_character_flag = ek_assassins_hired
+		
+	}
+	
+	after = {
+		clr_character_flag = murder_guild_found
+		clr_character_flag = murder_surcharge_continent
+		clr_character_flag = murder_surcharge_subcontinent
+	}
+}
+
+#The assassin guild awaits your command!
+character_event = {
+	id = assassination.30
+	picture = GFX_evt_shadow
+	
+	desc = {
+		trigger = {
+			event_target:murder_guild = {
+				# Audax Validator "." Ignore_NEXT
+				is_society = dark_brotherhood_tamriel
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		text = assassination.30.descDB
+	}
+	
+	desc = {
+		trigger = {
+			event_target:murder_guild = {
+				NOT = {
+					# Audax Validator "." Ignore_NEXT
+					is_society = dark_brotherhood_tamriel
+				}
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		text = assassination.30.descOther
+	}
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		multiply_variable = { which = local_assassination_price value = -1 }
+	}
+	
+	# Hire the assassins!
+	option = {
+		name = {
+			# Audax Validator "." Ignore_NEXT
+			text = assassination.aDB.30
+			trigger = {
+				event_target:murder_guild = {
+					# Audax Validator "." Ignore_NEXT
+					is_society = dark_brotherhood_tamriel
+				}
+			}
+		}
+		
+		name = {
+			# Audax Validator "." Ignore_NEXT
+			text = assassination.aOther.30
+			trigger = {
+				NOT = {
+					event_target:murder_guild = {
+						# Audax Validator "." Ignore_NEXT
+						is_society = dark_brotherhood_tamriel
+					}
+				}
+			}
+		}
+		
+		event_target:murder_client = { wealth = local_assassination_price }
+		
+		hidden_tooltip = {
+			random_society_member = {
+				limit = {
+					society_member_of = event_target:murder_guild
+					is_adult = yes
+					prisoner = no
+					is_inaccessible_trigger = no
+					NOT = { trait = incapable }
+					is_society_grandmaster = no
+					has_any_quest = no
+				}
+				society_quest_event = {
+					# Audax Validator "." Ignore_NEXT
+					id = assassination.300
+				}
+			}
+		}
+		clr_character_flag = ek_assassins_hired
+	}
+	
+	# Actually, no
+	option = {
+		# Audax Validator "." Ignore_NEXT
+		name = assassination.b.30
+		ai_chance = { factor = 0 } #AI chance handled in decision
+		hidden_effect = {
+			remove_opinion = {
+				# Audax Validator "." Ignore_NEXT
+				modifier = opinion_employed_assassins_against
+				who = event_target:murder_target
+			}
+		}
+		clr_character_flag = ek_assassins_hired
+	}
+}
