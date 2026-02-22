@@ -1,0 +1,20 @@
+# Audax Validator EnableCommentMetadata
+
+# The only change is to add the antitheft_medium flag, so that the chest helps to prevent EK's special artifact theft decisions/plots/etc, as per its description.
+# Audax Validator "!" Ignore_NEXT
+
+VIET_secure_chest = {
+	intrigue = 2
+	assassinate_chance_modifier = 0.02
+	arrest_chance_modifier = 0.02
+	plot_power_modifier = 0.04
+	defensive_plot_power_modifier = 0.04
+	quality = 3
+	stacking = no
+	flags = {
+		VIET_clutter_flag
+		antitheft_medium
+	}
+	picture = "GFX_VIET_secure_chest"
+	slot = VIET_clutter
+}
