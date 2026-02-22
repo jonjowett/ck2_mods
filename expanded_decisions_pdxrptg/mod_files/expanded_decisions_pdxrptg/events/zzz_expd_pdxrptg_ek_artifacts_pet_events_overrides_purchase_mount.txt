@@ -9,28 +9,6 @@
 
 
 
-###############################################################################################################
-#
-# !!!!!WARNING!!!!!
-#
-# The Validator (v1.38.9) produces an excessive number of false positives from this file.
-# Therefore, ALL warnings from this file are suppressed (by the line below).
-#
-# Audax Validator "!" Ignore_NEXT
-#
-# If you edit this file, you MUST temporarily remove the line above so you can validate this file properly.
-#
-###############################################################################################################
-
-
-
-
-
-
-
-
-
-
 namespace = ekpets
 
 ##########################################
@@ -90,7 +68,30 @@ character_event = {
 	
 	
 	immediate = {
+		
 		expd_pdxrptg_purchase_mounts_initialise = yes
+		
+		# Do a little bit of meaningless "playing around" with these variables, so the Validator doesn't freak out and produce >100 false positives.
+		# NB: While false positives in script can be suppressed, those in localisation CANNOT.
+		change_variable = { which = mount_rouncey_cost   value = 0 }
+		change_variable = { which = mount_cerigyn_cost   value = 0 }
+		change_variable = { which = mount_jennet_cost    value = 0 }
+		change_variable = { which = mount_mountain_cost  value = 0 }
+		change_variable = { which = mount_destrier_cost  value = 0 }
+		change_variable = { which = mount_courser_cost   value = 0 }
+		change_variable = { which = mount_palfrey_cost   value = 0 }
+		change_variable = { which = mount_hobbeye_cost   value = 0 }
+		change_variable = { which = mount_mijako_cost    value = 0 }
+		change_variable = { which = mount_camel_h_cost   value = 0 }
+		change_variable = { which = mount_camel_p_cost   value = 0 }
+		change_variable = { which = mount_guar_c_cost    value = 0 }
+		change_variable = { which = mount_guar_f_cost    value = 0 }
+		change_variable = { which = mount_guar_s_cost    value = 0 }
+		change_variable = { which = mount_kagouti_cost   value = 0 }
+		change_variable = { which = mount_shellback_cost value = 0 }
+		change_variable = { which = mount_pahmar_cost    value = 0 }
+		change_variable = { which = mount_senche_cost    value = 0 }
+		
 	}
 	
 	

@@ -9,28 +9,6 @@
 
 
 
-###############################################################################################################
-#
-# !!!!!WARNING!!!!!
-#
-# The Validator (v1.38.9) produces an excessive number of false positives from this file.
-# Therefore, ALL warnings from this file are suppressed (by the line below).
-#
-# Audax Validator "!" Ignore_NEXT
-#
-# If you edit this file, you MUST temporarily remove the line above so you can validate this file properly.
-#
-###############################################################################################################
-
-
-
-
-
-
-
-
-
-
 namespace = ekpets
 
 ##########################################
@@ -91,7 +69,37 @@ character_event = {
 	is_triggered_only = yes
 	
 	immediate = {
+		
 		expd_pdxrptg_purchase_pet_initialise = yes
+		
+		# Do a little bit of meaningless "playing around" with these variables, so the Validator doesn't freak out and produce >100 false positives.
+		# NB: While false positives in script can be suppressed, those in localisation CANNOT.
+		change_variable = { which = pet_cat_cost            value = 0 }
+		change_variable = { which = pet_raven_cost          value = 0 }
+		change_variable = { which = pet_goose_cost          value = 0 }
+		change_variable = { which = pet_mudcrab_cost        value = 0 }
+		change_variable = { which = pet_skeever_cost        value = 0 }
+		change_variable = { which = pet_guineapig_cost      value = 0 }
+		change_variable = { which = pet_rabbit_cost         value = 0 }
+		change_variable = { which = pet_badger_cost         value = 0 }
+		change_variable = { which = pet_snake_cost          value = 0 }
+		change_variable = { which = pet_vulture_cost        value = 0 }
+		change_variable = { which = pet_monkey_cost         value = 0 }
+		change_variable = { which = pet_capybara_cost       value = 0 }
+		change_variable = { which = pet_horker_cost         value = 0 }
+		change_variable = { which = pet_lungshark_cost      value = 0 }
+		change_variable = { which = pet_dog_masterless_cost value = 0 }
+		change_variable = { which = pet_dog_beardog_cost    value = 0 }
+		change_variable = { which = pet_dog_dunehound_cost  value = 0 }
+		change_variable = { which = pet_dog_shepard_cost    value = 0 }
+		change_variable = { which = pet_dog_wolfhound_cost  value = 0 }
+		change_variable = { which = pet_dog_house_cost      value = 0 }
+		change_variable = { which = pet_dog_retriever_cost  value = 0 }
+		change_variable = { which = pet_dog_warhound_cost   value = 0 }
+		change_variable = { which = pet_dog_wolf_cost       value = 0 }
+		change_variable = { which = pet_dog_fox_cost        value = 0 }
+		change_variable = { which = pet_dog_fennec_cost     value = 0 }
+		
 	}
 	
 	
