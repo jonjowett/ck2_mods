@@ -325,6 +325,30 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_offmap_currency_remove_1k
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_grant_1k_mil }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_grant_1k_mil
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_grant_1k_eco }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_grant_1k_eco
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_grant_1k_cul }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_grant_1k_cul
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_remove_1k_mil }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_remove_1k_mil
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_remove_1k_eco }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_remove_1k_eco
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_remove_1k_cul }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_remove_1k_cul
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_grant_10_perm }
 		text                        = edmp_ifn_5001_desc_singlechar_realm_size_grant_10_perm
 	}
@@ -453,6 +477,12 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_piety_remove_1k
 			clr_global_flag    = edmp_interference_singlechar_offmap_currency_grant_1k
 			clr_global_flag    = edmp_interference_singlechar_offmap_currency_remove_1k
+			clr_global_flag    = edmp_interference_singlechar_techpoints_grant_1k_mil
+			clr_global_flag    = edmp_interference_singlechar_techpoints_grant_1k_eco
+			clr_global_flag    = edmp_interference_singlechar_techpoints_grant_1k_cul
+			clr_global_flag    = edmp_interference_singlechar_techpoints_remove_1k_mil
+			clr_global_flag    = edmp_interference_singlechar_techpoints_remove_1k_eco
+			clr_global_flag    = edmp_interference_singlechar_techpoints_remove_1k_cul
 			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_10_perm
 			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_100_perm
 			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_10_temp
