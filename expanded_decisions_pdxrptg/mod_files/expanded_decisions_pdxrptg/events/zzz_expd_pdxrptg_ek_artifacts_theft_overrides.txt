@@ -30,15 +30,13 @@ character_event = {
 		
 		
 		
+		# Stop the Validator from complaining about no setters for expd_pdxrptg_artifact_theft_owner_for_tt_only
+		save_event_target_as = expd_pdxrptg_artifact_theft_owner_for_tt_only
+		clear_event_target   = expd_pdxrptg_artifact_theft_owner_for_tt_only
+		
 		# Store a version of ek_theft_target_owner, for internal use
 		# Audax Validator "." Ignore_NEXT
-		event_target:ek_theft_target_owner = {
-			ROOT = {
-				PREV = {
-					save_event_target_as = expd_pdxrptg_artifact_theft_owner_for_tt_only
-				}
-			}
-		}
+		event_target:ek_theft_target_owner = { save_event_target_as = expd_pdxrptg_artifact_theft_owner_for_tt_only }
 		
 		
 		
