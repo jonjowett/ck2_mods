@@ -14,7 +14,7 @@ character_event = {
 	
 	ai = no
 	trigger = {
-		edmp_this_character_can_take_admin_actions = yes
+		edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) should receive this event
 	}
 	
 	immediate = {
@@ -72,7 +72,7 @@ province_event = {
 		if = {
 			limit = { NOT = { has_global_flag = edmp_auto_refill_levy_on_startup_is_disabled } }
 			any_player = {
-				limit = { edmp_this_character_can_take_admin_actions = yes }
+				limit = { edmp_this_character_can_take_admin_actions = yes } # Only the top admin (ie. the host) should receive this event
 				set_global_flag = edmp_auto_refill_levy_was_triggered_from_startup
 				character_event = { id = edmp_auto_refill_levy.3001 }
 			}

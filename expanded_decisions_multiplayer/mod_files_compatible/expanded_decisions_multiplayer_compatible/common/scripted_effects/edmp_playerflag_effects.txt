@@ -1,13 +1,86 @@
 edmp_playerflag_add_flag_to_this_character = {
-	add_character_modifier = {
-		name     = edmp_playerflag
-		duration = -1
-		inherit  = yes
+	custom_tooltip = {
+		text = edmp_playerflag_add_flag_to_this_character_tt
+		add_character_modifier = {
+			name     = edmp_playerflag
+			duration = -1
+			inherit  = yes
+		}
+		add_trait = edmp_absent_human_player # Ensures AI rationality, honor & lack of ambition
 	}
-	hidden_tooltip = { add_trait = edmp_absent_human_player }
 }
 
 edmp_playerflag_remove_flag_from_this_character = {
-	remove_character_modifier = edmp_playerflag
-	hidden_tooltip = { remove_trait = edmp_absent_human_player }
+	custom_tooltip = {
+		text = edmp_playerflag_remove_flag_from_this_character_tt
+		remove_character_modifier = edmp_playerflag
+		remove_trait = edmp_absent_human_player
+	}
+}
+
+
+
+
+
+edmp_playerflag_add_admin_flag_to_this_character = {
+	custom_tooltip = {
+		text = edmp_playerflag_add_admin_flag_to_this_character_tt
+		add_character_modifier = {
+			name     = edmp_admin
+			duration = -1
+			inherit  = yes
+		}
+	}
+}
+
+edmp_playerflag_remove_admin_flag_from_this_character = {
+	custom_tooltip = {
+		text = edmp_playerflag_remove_admin_flag_from_this_character_tt
+		remove_character_modifier = edmp_admin
+		clr_character_flag = edmp_admin_submenu_is_open
+		clr_character_flag = edmp_playerflag_show
+		clr_character_flag = edmp_interference_show
+	}
+}
+
+
+
+
+
+edmp_playerflag_add_adminhelper_flag_to_this_character = {
+	custom_tooltip = {
+		text = edmp_playerflag_add_adminhelper_flag_to_this_character_tt
+		add_character_modifier = {
+			name     = edmp_admin_helper
+			duration = -1
+			inherit  = yes
+		}
+	}
+}
+
+edmp_playerflag_remove_adminhelper_flag_from_this_character = {
+	custom_tooltip = {
+		text = edmp_playerflag_remove_adminhelper_flag_from_this_character_tt
+		remove_character_modifier = edmp_admin_helper
+		clr_character_flag = edmp_admin_submenu_is_open
+		clr_character_flag = edmp_playerflag_show
+		clr_character_flag = edmp_interference_show
+	}
+}
+
+
+
+
+
+edmp_playerflag_adminhelpers_pause_effect = {
+	custom_tooltip = {
+		text = edmp_playerflag_adminhelpers_pause_effect_tt
+		set_global_flag = edmp_admin_helper_pause
+	}
+}
+edmp_playerflag_adminhelpers_unpause_effect = {
+	custom_tooltip = {
+		text = edmp_playerflag_adminhelpers_unpause_effect_tt
+		clr_global_flag = edmp_admin_helper_pause
+	}
 }

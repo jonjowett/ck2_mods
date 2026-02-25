@@ -9,7 +9,7 @@ character_event = {
 	hide_window = yes
 	ai = no
 	trigger = {
-		edmp_this_character_can_take_admin_actions = yes
+		edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) should receive this event
 	}
 	immediate = {
 		set_global_flag = edmp_realm_size_calculate_all_on_startup_has_not_been_forced

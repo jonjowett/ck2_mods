@@ -1,11 +1,11 @@
-# Automatically flag all human players
 on_startup = {
 	events = {
-		EDMPPlayerFlag.1000
+		EDMPPlayerFlag.1000 # Automatically flag all human players
+		EDMPPlayerFlag.3000 # Check & if necessary re-apply admin & adminhelper flags
 	}
 }
 
-# Inherit player flag on abdication
+# Inherit player/admin/adminhelper flag on abdication
 on_new_holder = {
 	events = {
 		EDMPPlayerFlag.2000

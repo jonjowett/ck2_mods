@@ -5,7 +5,7 @@ decisions = {
 		ai = no
 		
 		potential = {
-			edmp_this_character_can_take_admin_actions = yes
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can take debugging decisions
 			has_character_flag = edmp_admin_submenu_is_open
 			multiplayer = no # Always hide this decision in multiplayer
 			NOT = { has_global_flag = edmp_ai_simulation_mode }
@@ -27,7 +27,7 @@ decisions = {
 		ai = no
 		
 		potential = {
-			edmp_this_character_can_take_admin_actions = yes
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can take debugging decisions
 			has_character_flag = edmp_admin_submenu_is_open
 			has_global_flag = edmp_ai_simulation_mode
 		}
@@ -48,7 +48,7 @@ decisions = {
 		ai = no
 		
 		potential = {
-			edmp_this_character_can_take_admin_actions = yes
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can take debugging decisions
 			has_character_flag = edmp_admin_submenu_is_open
 			multiplayer = no # Always hide this decision in multiplayer
 			NOT = { has_global_flag = edmp_multiplayer_simulation_mode }
@@ -70,7 +70,7 @@ decisions = {
 		ai = no
 		
 		potential = {
-			edmp_this_character_can_take_admin_actions = yes
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can take debugging decisions
 			has_character_flag = edmp_admin_submenu_is_open
 			has_global_flag = edmp_multiplayer_simulation_mode
 		}

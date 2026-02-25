@@ -3,7 +3,7 @@ decisions = {
 	edmp_manual_refill_levy = {
 		ai = no
 		potential = {
-			edmp_this_character_can_take_admin_actions = yes
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can refill everyone's levies
 			has_character_flag = edmp_admin_submenu_is_open
 		}
 		allow = { always = yes }
@@ -18,7 +18,7 @@ decisions = {
 	edmp_auto_refill_levy_on_startup_enable = {
 		ai = no
 		potential = {
-			edmp_this_character_can_take_admin_actions = yes
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can change the auto-refill behaviour
 			has_character_flag = edmp_admin_submenu_is_open
 			has_global_flag = edmp_auto_refill_levy_on_startup_is_disabled
 		}
@@ -34,7 +34,7 @@ decisions = {
 	edmp_auto_refill_levy_on_startup_disable = {
 		ai = no
 		potential = {
-			edmp_this_character_can_take_admin_actions = yes
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can change the auto-refill behaviour
 			has_character_flag = edmp_admin_submenu_is_open
 			NOT = { has_global_flag = edmp_auto_refill_levy_on_startup_is_disabled }
 		}

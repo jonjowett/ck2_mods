@@ -2,35 +2,83 @@
 # Modifier
 edmp_playerflag;§M(ED:MP)§! Player;;;;;;;;;;;;;x
 edmp_playerflag_desc;This character is an §Yactive or absent human player§! and, as such, receives special treatment from some aspects of the §M(ED:MP)§! mod.\n\nThis §Yinheritable§! flag is automatically added to all human players on game load.\n\nIt can also be added to or removed from arbitrary AI characters by an administrator (multiplayer host, or the human character in single-player).;;;;;;;;;;;;;x
+edmp_admin;§M(ED:MP)§! Administrator;;;;;;;;;;;;;x
+edmp_admin_desc;This character is the current §Yadministrator§! (the only single-player human, or the host character in multiplayer).\n\nThis flag doesn't grant any special privileges in the §M(ED:MP)§! mod - it is §Ypurely cosmetic§!.\n\nThis §Yinheritable§! flag is automatically added to the relevant character on game load, and it cannot be changed while the game is in progress.;;;;;;;;;;;;;x
+edmp_admin_helper;§M(ED:MP)§! Admin Helper;;;;;;;;;;;;;x
+edmp_admin_helper_desc;This character has been granted special privileges by the current §M(ED:MP)§! §YAdministrator§!, meaning that they can perform many of the powerful "interference" actions added by the §M(ED:MP)§! mod.\n\nThis §Yinheritable§! flag must be approved by the §YAdministrator§! on game load, and it can be added or removed by the §YAdministrator§! at any time.;;;;;;;;;;;;;x
 #
 # Intrigue Menu decisions
 edmp_playerflag_show_decisions;(ED:MP) Show "Player Flag" decisions;;;;;;;;;;;;;x
-edmp_playerflag_show_decisions_desc;This mod includes a feature whereby absent players are flagged so that they can be treated differently to other AI characters.\nThe "Player Flag" decisions (both targetted and self-targetted) allow you to manage these flags.;;;;;;;;;;;;;x
-edmp_playerflag_show_decisions_tt;The "Player Flag" targetted decisions will now be visible;;;;;;;;;;;;;x
+edmp_playerflag_show_decisions_desc;This mod includes a feature whereby §YAbsent Players§! are flagged, so that they can be treated differently to other AI characters.\n\nIt also allows human characters to be designated as §YAdmin Helpers§!, so that they can help the §YAdministrator§! (you) to resolve in-game issues.\n\nThe various "Player Flag" §P(ED:MP:PF)§! decisions (both targetted and self-targetted) allow you to manage these §YAbsent Player§! and §YAdmin Helper§! flags.;;;;;;;;;;;;;x
+edmp_playerflag_show_decisions_tt;The §P(ED:MP:PF)§! targetted and self-targetted decisions will now be visible;;;;;;;;;;;;;x
 edmp_playerflag_hide_decisions_high_prio;(ED:MP) Hide "Player Flag" decisions;;;;;;;;;;;;;x
 edmp_playerflag_hide_decisions_high_prio_desc;To avoid clutter and/or mis-clicks, you may wish to hide the "Player Flag" decisions;;;;;;;;;;;;;x
 edmp_playerflag_hide_decisions_low_prio;(ED:MP) Hide "Player Flag" decisions;;;;;;;;;;;;;x
 edmp_playerflag_hide_decisions_low_prio_desc;To avoid clutter and/or mis-clicks, you may wish to hide the "Player Flag" decisions;;;;;;;;;;;;;x
-edmp_playerflag_hide_decisions_tt;The "Player Flag" targetted decisions will now be hidden;;;;;;;;;;;;;x
+edmp_playerflag_hide_decisions_tt;The §P(ED:MP:PF)§! targetted and self-targetted decisions will now be hidden;;;;;;;;;;;;;x
+edmp_playerflag_adminhelpers_pause;(ED:MP) "Admin Helper" privileges ENABLED - Disable them?;;;;;;;;;;;;;x
+edmp_playerflag_adminhelpers_pause_desc;This mod includes a feature whereby the §YAdministrator§! (single-player human or multiplayer host) can designate other playable characters as §YAdmin Helpers§!.\n\nIn a multiplayer game, these §YAdmin Helpers§! are granted §Yspecial incredibly-powerful privileges§!, which enable them to resolve most issues instead of the §YAdministrator§!.\n\nThis decision allows the §YAdministrator§! to suspend and re-enable §Yall Admin Helper privileges§!.;;;;;;;;;;;;;x
+edmp_playerflag_adminhelpers_unpause;(ED:MP) "Admin Helper" privileges DISABLED - Enable them?;;;;;;;;;;;;;x
+edmp_playerflag_adminhelpers_unpause_desc;This mod includes a feature whereby the §YAdministrator§! (single-player human or multiplayer host) can designate other playable characters as §YAdmin Helpers§!.\n\nIn a multiplayer game, these §YAdmin Helpers§! are granted §Yspecial incredibly-powerful privileges§!, which enable them to resolve most issues instead of the §YAdministrator§!.\n\nThis decision allows the §YAdministrator§! to suspend and re-enable §Yall Admin Helper privileges§!.;;;;;;;;;;;;;x
+edmp_admin_helper_startup_event_is_not_visible_tt;The §Y(ED:MP) Check Admin Helpers§! event is NOT visible, or it has been visible for 6 in-game months;;;;;;;;;;;;;x
 #
 # Targeted decisions
-edmp_playerflag_flag_this_ai_character_as_a_player;§P(ED:MP:PF)§! Flag As Player;;;;;;;;;;;;;x
+edmp_playerflag_flag_this_ai_character_as_a_player;§P(ED:MP:PF)§! Flag As §MPlayer§!;;;;;;;;;;;;;x
 edmp_playerflag_flag_this_ai_character_as_a_player_desc;[Root.GetTitledFirstName] (and [Root.GetHerHis] successors) is flagged as an absent human player.;;;;;;;;;;;;;x
-edmp_playerflag_unflag_this_ai_character;§P(ED:MP:PF)§! Unflag As Player;;;;;;;;;;;;;x
+edmp_playerflag_unflag_this_ai_character;§P(ED:MP:PF)§! Unflag As §MPlayer§!;;;;;;;;;;;;;x
 edmp_playerflag_unflag_this_ai_character_desc;[Root.GetTitledFirstName] is no longer flagged as an absent human player.;;;;;;;;;;;;;x
-edmp_playerflag_unflag_thirdparty_character;§P(ED:MP:PF)§! Unflag An AI;;;;;;;;;;;;;x
+edmp_playerflag_unflag_thirdparty_character;§P(ED:MP:PF)§! Unflag An AI §MPlayer§!;;;;;;;;;;;;;x
 edmp_playerflag_unflag_thirdparty_character_desc;The selected AI character is no longer flagged as an absent human player.;;;;;;;;;;;;;x
-edmp_playerflag_unflag_all_ai_characters;§P(ED:MP:PF)§! Unflag All AI;;;;;;;;;;;;;x
+edmp_playerflag_unflag_all_ai_characters;§P(ED:MP:PF)§! Unflag All AI §MPlayers§!;;;;;;;;;;;;;x
 edmp_playerflag_unflag_all_ai_characters_desc;All AI characters are no longer flagged as absent human players.;;;;;;;;;;;;;x
+edmp_playerflag_flag_this_character_as_an_admin_helper;§P(ED:MP:PF)§! Flag As §PAdmin Helper§!;;;;;;;;;;;;;x
+edmp_playerflag_flag_this_character_as_an_admin_helper_desc;[Root.GetTitledFirstName] (and [Root.GetHerHis] successors) is designated as an §YAdmin Helpers§!, and will be granted §Yspecial incredibly-powerful privileges§! so that [Root.GetSheHe] can help the §YAdministrator§! to resolve any issues that may arise.;;;;;;;;;;;;;x
+edmp_playerflag_unflag_this_character_as_an_admin_helper;§P(ED:MP:PF)§! Unflag As §PAdmin Helper§!;;;;;;;;;;;;;x
+edmp_playerflag_unflag_this_character_as_an_admin_helper_desc;[Root.GetTitledFirstName] (and [Root.GetHerHis] successors) is no longer designated as an §YAdmin Helpers§!.;;;;;;;;;;;;;x
+edmp_playerflag_unflag_thirdparty_character_as_an_admin_helper;§P(ED:MP:PF)§! Unflag An §PAdmin Helper§!;;;;;;;;;;;;;x
+edmp_playerflag_unflag_thirdparty_character_as_an_admin_helper_desc;The selected character is no longer designated as an §YAdmin Helpers§!.;;;;;;;;;;;;;x
 #
 # Events
 EDMPPlayerFlag_1002_Title;(ED:MP) Absent Players;;;;;;;;;;;;;x
-EDMPPlayerFlag_1002_Desc_AllShown;[edmp_playerflag_absent_human_count.GetValue] characters have been detected as absent human players.\nTheir portraits are shown in the option below, in case you wish to review them.\nYou may also change these player flags at any time during the game via the special (ED:MP:PF) targeteed decisions, which can be shown/hidden via an intrigue menu decision.;;;;;;;;;;;;;x
+EDMPPlayerFlag_1002_Desc_AllShown;[edmp_playerflag_absent_human_count.GetValue] characters have been detected as absent human players.\nTheir portraits are shown in the option below, in case you wish to review them.\nYou may also change these player flags at any time during the game via the special (ED:MP:PF) targeted decisions, which can be shown/hidden via an intrigue menu decision.;;;;;;;;;;;;;x
 EDMPPlayerFlag_1002_Desc_First9Shown;[edmp_playerflag_absent_human_count.GetValue] characters have been detected as absent human players.\n9 of their portraits (chosen pseudo-randomly) are shown in the option below, in case you wish to review them.\nYou may also change these player flags at any time during the game via the special (ED:MP:PF) targeteed decisions, which can be shown/hidden via an intrigue menu decision.;;;;;;;;;;;;;x
 EDMPPlayerFlag_1002_EvtOpt_OK;OK;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_Title;(ED:MP) Check Admin Helpers;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_Desc;"Admin Helpers" are specially-designated players who can use many of the same incredibly-powerful "interference" decisions as the Administrator (you).\n\nNB: All "Admin Helper" privileges were automatically paused when the game started, and will remain paused until you dismiss this event.;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_EvtOpt_Exit_HumanAdminHelpers_RejectAll;[edmp_admin_helper_human_count.GetValue] human "Admin Helpers" detected: Reject All!;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_EvtOpt_Exit_HumanAdminHelpers_ApproveAll;[edmp_admin_helper_human_count.GetValue] human "Admin Helpers" detected: Approve All!;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_EvtOpt_ListOfAIAdminHelpersAutoRemoved;[edmp_admin_helper_removed_ai_count.GetValue] AI "Admin Helpers" detected & auto-rejected;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_EvtOpt_Exit_SetupError;ERROR! No human/AI "Admin Helpers" detected: Exit & fix manually.;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_EvtOpt_Exit_NoHumanAdminHelpers_DoNothing;Exit;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_EvtOpt_Exit_HumanAdminHelpers_ManualFixOutsideEvent;Exit, privileges remain paused, fix manually;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_EvtOpt_Exit_HumanHelpers_ErrorNegative_ManualFixOutsideEvent;ERROR! Exit, privileges remain paused, fix manually;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_WarningSomeHumanAdminHelpersNotShown_TT;§b.§!\n§RWARNING!§!\nOnly §Y9§! human §YAdmin Helpers'§! portraits can be shown in the event option.\nChoosing this option means appproving ALL human §YAdmin Helpers§!, including those whose portraits were not shown.\n§RPlease think very carefully before choosing this option!§!\n§b.§!;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_WarningAllHumanAdminHelpersApproved_TT;All of these §YAdmin Helpers§! will be appproved, granting them §Yspecial incredibly-powerful privileges§!.;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_EventReloadedNoChange_TT;This option is for information only.\nIf you select this option, the event will be reloaded with no changes.;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_EvtOpt_Exit_SetupError_Explanation_TT;§b.§!\n§RExplanation of error:§!\nThe mod logic which attempted to locate all of the §YAdmin Helpers§! returned unexpected results:\n --- edmp_admin_helper_human_count = [edmp_admin_helper_human_count.GetValue]\n --- edmp_admin_helper_removed_ai_count = [edmp_admin_helper_removed_ai_count.GetValue]\n§YIt is almost certainly safe to continue with the game without taking any further action.§!\nHowever, it would be a good idea to use the available tools (intrigue menu admin decisions, and self-targeted playerflag/adminhelper decisions) to check that any §YAdmin Helpers§! are in fact set up correctly.\n§b.§!;;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_WarningAllAdminHelperActionsRemainDisabled_TT;All §YAdmin Helper§! privileges will §Yremain paused§!!\n(You can manually re-enable them in the intrigue menu admin decisions.);;;;;;;;;;;;;x
+EDMPPlayerFlag_3002_EvtOpt_Exit_HumanHelpers_ErrorNegative_ManualFixOutsideEvent_Explanation_TT;§b.§!\n§RExplanation of error:§!\nThe mod logic which attempted to locate all of the §YAdmin Helpers§! somehow located a §Rnegative number§! of human §YAdmin Helpers§!:\n --- edmp_admin_helper_human_count = [edmp_admin_helper_human_count.GetValue]\n --- edmp_admin_helper_removed_ai_count = [edmp_admin_helper_removed_ai_count.GetValue]\n§YIt is almost certainly safe to continue with the game without taking any further action.§!\nHowever, it would be a good idea to use the available tools (intrigue menu admin decisions, and self-targeted playerflag/adminhelper decisions) to check that any §YAdmin Helpers§! are in fact set up correctly.\n§b.§!;;;;;;;;;;;;;x
 #
-# Tooltips
+# Trigger Tooltips
+edmp_this_character_is_sp_human_or_mp_host_tt;Is a human-controlled character in single-player, or is the multiplayer host character;;;;;;;;;;;;;x
+edmp_this_character_has_admin_modifier_tt;Has the "§M(ED:MP)§! Administrator" character modifier;;;;;;;;;;;;;x
+edmp_this_character_has_admin_helper_modifier_tt;Has the "§M(ED:MP)§! Admin Helper" character modifier;;;;;;;;;;;;;x
+edmp_negative_actions_always_available_for_admin_tt;This potentially-negative action is being performed by the §YAdministrator§!;;;;;;;;;;;;;x
+edmp_this_character_is_performing_a_negative_action_on_themself_tt;Is affecting [This.GetHerHim]self with this potentially-negative action;;;;;;;;;;;;;x
+edmp_this_character_is_not_admin_or_admin_helper_tt;Is NOT the §YAdministrator§! and is NOT an §YAdmin Helper§!\n§b............§gINFO: Only the §YAdministrator§g can perform potentially-negative actions on §YAdmin Helpers§g.§!;;;;;;;;;;;;;x
+edmp_playerflag_adminhelpers_are_paused_tt;§YAdmin Helper§! privileges are §Ysuspended§!;;;;;;;;;;;;;x
+edmp_playerflag_adminhelpers_are_not_paused_tt;§YAdmin Helper§! privileges are §Yenabled§!;;;;;;;;;;;;;x
+#
+# Effect Tooltips
 edmp_playerflag_remove_flag_from_this_character_short_tt;Unflagged;;;;;;;;;;;;;x
+edmp_playerflag_add_flag_to_this_character_tt;§Y[This.GetTitledFirstName]§!: Flagged as absent human player;;;;;;;;;;;;;x
+edmp_playerflag_remove_flag_from_this_character_tt;§Y[This.GetTitledFirstName]§!: Unflagged as absent human player;;;;;;;;;;;;;x
+edmp_playerflag_add_admin_flag_to_this_character_tt;§Y[This.GetTitledFirstName]§!: Flagged as §YAdministrator§!;;;;;;;;;;;;;x
+edmp_playerflag_remove_admin_flag_from_this_character_tt;§Y[This.GetTitledFirstName]§!: Unflagged as §YAdministrator§!;;;;;;;;;;;;;x
+edmp_playerflag_add_adminhelper_flag_to_this_character_tt;§Y[This.GetTitledFirstName]§!: Flagged as §YAdmin Helper§!;;;;;;;;;;;;;x
+edmp_playerflag_remove_adminhelper_flag_from_this_character_tt;§Y[This.GetTitledFirstName]§!: Unflagged as §YAdmin Helper§!;;;;;;;;;;;;;x
+edmp_playerflag_adminhelpers_pause_effect_tt;All §YAdmin Helper§! privileges are §Ysuspended indefinitely§!!;;;;;;;;;;;;;x
+edmp_playerflag_adminhelpers_unpause_effect_tt;All §YAdmin Helper§! privileges are §Yre-enabled§!!;;;;;;;;;;;;;x
 #
 # Trait
 edmp_absent_human_player;(ED:MP) Absent Human Player (Hidden);;;;;;;;;;;;;x

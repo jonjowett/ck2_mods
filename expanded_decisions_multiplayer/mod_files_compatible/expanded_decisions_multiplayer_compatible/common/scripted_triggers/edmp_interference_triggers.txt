@@ -4,31 +4,45 @@ edmp_interference_root_is_valid_potential_target = {
 		OR = {
 			is_landed = yes
 			mercenary = no
-			ai = no
+			edmp_this_character_is_a_current_or_absent_human_player = yes
 		}
 	}
 }
 
 edmp_interference_fromfrom_is_likely_to_interact_with_root = {
 	ROOT_FROMFROM = {
-		is_ruler = yes
 		OR = {
-			is_landed = yes
-			mercenary = no
-			ai = no
-		}
-		OR = {
-			is_within_diplo_range = ROOT
-			ai = no
-		}
-		OR = {
-			AND = {                                                    # Both ROOT and FROMFROM are independent
-				independent = yes
-				ROOT = { independent = yes }
+			
+			# Always include players (present or absent)
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+			
+			# Always include rulers who are raiding ROOT, or who ROOT is raiding, or who is at war with ROOT
+			AND = {
+				is_ruler = yes
+				war_with = ROOT
 			}
-			liege = { character = ROOT }                               # ROOT is FROMFROM's liege
-			any_vassal = { character = ROOT }                          # ROOT is FROMFROM's vassal
-			liege = { ROOT = { liege = { character = PREVPREV } } }    # ROOT and FROMFROM have the same de facto liege
+			
+			# Normal case: Include anyone who could theoretically be declared on (if a relevant CB existed)
+			AND = {
+				
+				# Only rulers in diplo range of ROOT
+				is_ruler = yes
+				is_within_diplo_range = ROOT
+				
+				# Non-merc or landed merc. No unlanded mercs!
+				OR = {
+					is_landed = yes
+					mercenary = no
+				}
+				
+				OR = {                                                             # One of the following is true:
+					independent = yes                                          #  --- FROMFROM is independent (ROOT can always declare on indep FROMFROM; but can only declare on non-indep FROMFROM in special cases - see below)
+					liege = { character = ROOT }                               #  --- ROOT is FROMFROM's direct liege
+					any_vassal = { character = ROOT }                          #  --- ROOT is FROMFROM's direct vassal
+					liege = { ROOT = { liege = { character = PREVPREV } } }    #  --- ROOT and FROMFROM have the same de facto liege
+				}
+				
+			}
 		}
 	}
 }

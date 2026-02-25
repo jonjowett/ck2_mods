@@ -3,11 +3,11 @@ decisions = {
 	edmp_realm_size_recalc_all = {
 		ai = no
 		potential = {
-			edmp_this_character_can_take_admin_actions = yes
+			edmp_this_character_can_see_admin_helper_actions = yes
 			has_character_flag = edmp_admin_submenu_is_open
 			edmp_realm_size_is_limited_for_players = yes
 		}
-		allow = { always = yes }
+		allow = { edmp_this_character_can_take_admin_helper_actions = yes }
 		effect = {
 			
 			# Recalculate for everyone, and forcibly show a notification

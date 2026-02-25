@@ -1,8 +1,111 @@
-edmp_this_character_can_take_admin_actions = {
+edmp_this_character_can_take_admin_actions = { # SP human or MP host
+	trigger_if = {
+		limit = { ai = yes }
+		ai = no
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = edmp_this_character_is_sp_human_or_mp_host_tt
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
+	}
+}
+
+edmp_this_character_can_see_admin_helper_actions = { # SP human, or MP host, or MP designated admin helper
 	ai = no
 	OR = {
 		multiplayer = no
 		is_multiplayer_host_character = yes
+		edmp_this_character_has_admin_helper_modifier = yes
+	}
+}
+
+edmp_this_character_can_take_admin_helper_actions = { # SP human, or MP host, or MP designated admin helper with admin helper features unpaused
+	trigger_if = {
+		limit = { ai = yes }
+		ai = no
+	}
+	trigger_else_if = {
+		limit = {
+			OR = {
+				multiplayer = no
+				is_multiplayer_host_character = yes
+			}
+		}
+		custom_tooltip = {
+			text = edmp_this_character_is_sp_human_or_mp_host_tt
+			always = yes
+		}
+	}
+	trigger_else = {
+		edmp_this_character_has_admin_helper_modifier = yes
+		edmp_playerflag_adminhelpers_are_not_paused = yes
+	}
+}
+
+edmp_this_character_has_admin_modifier = {
+	custom_tooltip = {
+		text = edmp_this_character_has_admin_modifier_tt
+		has_character_modifier = edmp_admin
+	}
+}
+
+edmp_this_character_has_admin_helper_modifier = {
+	custom_tooltip = {
+		text = edmp_this_character_has_admin_helper_modifier_tt
+		has_character_modifier = edmp_admin_helper
+	}
+}
+
+edmp_this_character_can_be_flagged_by_rootfrom_as_admin_helper = {
+	# In SP, can flag anyone
+	# In MP, can only flag OTHER humans
+	trigger_if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		ai = no
+		NOT = { character = ROOT_FROM }
+	}
+	trigger_else = {
+		always = yes
+	}
+}
+
+edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = {
+	trigger_if = {
+		limit = { ROOT_FROM = { edmp_this_character_can_take_admin_actions = yes } }
+		custom_tooltip = {
+			text = edmp_negative_actions_always_available_for_admin_tt
+			always = yes
+		}
+	}
+	trigger_else = {
+		OR = {
+			custom_tooltip = {
+				text = edmp_this_character_is_performing_a_negative_action_on_themself_tt
+				character = ROOT_FROM
+			}
+			custom_tooltip = {
+				text = edmp_this_character_is_not_admin_or_admin_helper_tt
+				edmp_this_character_can_see_admin_helper_actions = no
+			}
+		}
+	}
+}
+
+edmp_playerflag_adminhelpers_are_paused = {
+	custom_tooltip = {
+		text = edmp_playerflag_adminhelpers_are_paused_tt
+		has_global_flag = edmp_admin_helper_pause
+	}
+}
+
+edmp_playerflag_adminhelpers_are_not_paused = {
+	custom_tooltip = {
+		text = edmp_playerflag_adminhelpers_are_not_paused_tt
+		NOT = { has_global_flag = edmp_admin_helper_pause }
 	}
 }
 
