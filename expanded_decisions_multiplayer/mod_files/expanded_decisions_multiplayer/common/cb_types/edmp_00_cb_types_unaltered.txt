@@ -385,7 +385,7 @@ other_claim = {
 		}
 		
 		OR = {
-			multiplayer = no
+			edmp_this_is_not_a_multiplayer_game = yes
 			FROMFROM = { ai = yes }
 			has_game_rule = {
 				name = multiplayer_third_party_claims
@@ -11505,7 +11505,7 @@ manifest_destiny_invasion = {
 		ROOT = {
 			OR = {
 				ai = yes
-				multiplayer = no
+				edmp_this_is_not_a_multiplayer_game = yes
 				NOT = {
 					has_game_rule = {
 						name = multiplayer_invasions
