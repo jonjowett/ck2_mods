@@ -1,0 +1,171 @@
+# Audax Validator EnableCommentMetadata
+
+tpauto_allow_tracking_and_rebuild_vanilla = { # Should return true iff trade posts use vanilla buildings
+	tpauto_pdxrptg_mod_is_active = no
+	# ATEFF : uses vanilla TP buildings, so it's fine
+	# MTR   : ditto
+}
+
+tpauto_use_vanilla_education_traits = { # Returns true iff rebuild logic (ie. discounts) can use vanilla education traits (eg. midas touched)
+	tpauto_pdxrptg_mod_is_active = no
+}
+
+# We can only detect vanilla by a process of exclusion
+tpauto_block_vanilla_trade_post_triggers_due_to_conflicting_mod = {
+	OR = {
+		tpauto_pdxrptg_mod_is_active = yes
+		tpauto_ateff_mod_is_active   = yes
+	}
+}
+
+tpauto_this_province_can_have_trade_route_trade_post = {
+	custom_tooltip = {
+		text = tpauto_is_a_potential_trade_post_tt
+		OR = {
+			
+			# Vanilla
+			# Also works for: Romance of the Three Kingdoms
+			tpauto_this_province_can_have_trade_route_trade_post_vanilla = yes
+			
+			# MTR (Vanilla/CleanSlate/HIP)
+			tpauto_this_province_can_have_trade_route_trade_post_mtr = yes
+			
+			# ATEFF
+			tpauto_this_province_can_have_trade_route_trade_post_ateff = yes
+			
+			# PDXRPTG
+			tpauto_this_province_can_have_trade_route_trade_post_pdxrptg = yes
+			
+		}
+	}
+}
+
+tpauto_this_province_can_have_trade_route_trade_post_vanilla = {
+	tpauto_allow_tracking_and_rebuild_vanilla = yes
+	tpauto_block_vanilla_trade_post_triggers_due_to_conflicting_mod = no
+	OR = {
+		silk_road_trade_post_trigger = yes
+		trans_saharan_trade_post_trigger = yes
+	}
+}
+
+tpauto_manual_construction_temporarily_blocked = {
+	has_province_flag = tpauto_tracking_has_trade_post
+	has_trade_post = no
+}
+
+tpauto_can_auto_rebuild_trade_post = {
+	custom_tooltip = { text = tpauto_can_auto_rebuild_trade_post_tt }
+	# This technically-superfluous AND is needed for understandable tooltips, so suppress the Validator error
+	# Audax Validator "." Ignore_1001
+	AND = {
+		tpauto_manual_construction_temporarily_blocked = yes
+		owner = { war = no }
+		NOT = { any_province_holding = { owner = { war = yes } } }
+		NOT = { any_province_holding = { has_holding_modifier = looted_modifier } }
+	}
+}
+
+tpauto_this_character_can_rebuild_at_half_price_stewardship = {
+	OR = {
+		AND = {
+			has_regent = no
+			stewardship >= 20
+		}
+		AND = {
+			has_regent = yes
+			regent = { stewardship >= 20 }
+		}
+	}
+}
+
+tpauto_this_character_can_rebuild_at_no_cost = {
+	OR = {
+		tpauto_this_character_can_rebuild_at_no_cost_trader    = yes
+		tpauto_this_character_can_rebuild_at_no_cost_lifestyle = yes
+		tpauto_this_character_can_rebuild_at_no_cost_education = yes
+	}
+}
+
+tpauto_this_character_can_rebuild_at_no_cost_trader = {
+	OR = {
+		AND = {
+			has_regent = no
+			has_character_modifier = trader
+		}
+		AND = {
+			has_regent = yes
+			regent = { has_character_modifier = trader }
+		}
+	}
+}
+
+tpauto_this_character_can_rebuild_at_no_cost_lifestyle = {
+	OR = {
+		tpauto_this_character_can_rebuild_at_no_cost_lifestyle_architect     = yes
+		tpauto_this_character_can_rebuild_at_no_cost_lifestyle_administrator = yes
+	}
+}
+
+tpauto_this_character_can_rebuild_at_no_cost_lifestyle_architect = {
+	OR = {
+		AND = {
+			has_regent = no
+			trait = architect
+		}
+		AND = {
+			has_regent = yes
+			regent = { trait = architect }
+		}
+	}
+}
+
+tpauto_this_character_can_rebuild_at_no_cost_lifestyle_administrator = {
+	OR = {
+		AND = {
+			has_regent = no
+			trait = administrator
+		}
+		AND = {
+			has_regent = yes
+			regent = { trait = administrator }
+		}
+	}
+}
+
+tpauto_this_character_can_rebuild_at_no_cost_education = {
+	OR = {
+		tpauto_this_character_can_rebuild_at_no_cost_education_fortune_builder      = yes
+		tpauto_this_character_can_rebuild_at_no_cost_education_midas_touched        = yes
+		tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_4 = yes
+		tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_5 = yes
+	}
+}
+
+tpauto_this_character_can_rebuild_at_no_cost_education_fortune_builder = {
+	tpauto_use_vanilla_education_traits = yes
+	OR = {
+		AND = {
+			has_regent = no
+			trait = fortune_builder
+		}
+		AND = {
+			has_regent = yes
+			regent = { trait = fortune_builder }
+		}
+	}
+}
+
+tpauto_this_character_can_rebuild_at_no_cost_education_midas_touched = {
+	tpauto_use_vanilla_education_traits = yes
+	OR = {
+		AND = {
+			has_regent = no
+			trait = midas_touched
+		}
+		AND = {
+			has_regent = yes
+			regent = { trait = midas_touched }
+		}
+	}
+}

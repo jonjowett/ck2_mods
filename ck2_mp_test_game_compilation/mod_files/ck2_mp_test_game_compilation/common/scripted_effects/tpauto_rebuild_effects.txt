@@ -1,0 +1,37 @@
+# Audax Validator EnableCommentMetadata
+# Lots of extra ANDs in this file - ignore them all
+# Audax Validator "!" Ignore_1001
+
+################################################
+# Rebuild trade post according to stored flags #
+################################################
+
+tpauto_rebuild_trade_post = {
+	
+	if = {
+		
+		limit = { has_province_flag = tpauto_tracking_has_trade_post }
+		
+		# Create the trade post, and give it to the province owner
+		if = {
+			limit = { has_trade_post = no }
+			hidden_tooltip = { owner = { save_event_target_as = tpauto_new_trade_post_owner } }
+			build_holding = {
+				type = trade_post
+				holder = event_target:tpauto_new_trade_post_owner
+			}
+			hidden_tooltip = { clear_event_target = tpauto_new_trade_post_owner }
+		}
+		
+		# Reset the flag, so we can track how long it's been since the previous rebuild
+		clr_province_flag = tpauto_tracking_trade_post_rebuilt
+		set_province_flag = tpauto_tracking_trade_post_rebuilt
+		
+		# Rebuild the buildings
+		tpauto_rebuild_trade_post_buildings_vanilla = yes
+		tpauto_rebuild_trade_post_buildings_mtr = yes
+		tpauto_rebuild_trade_post_buildings_pdxrptg = yes
+		
+	}
+	
+}

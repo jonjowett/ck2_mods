@@ -1,0 +1,301 @@
+# These effects assume that event_target:expd_pb_target_bloodline_to_propagate has been set up beforehand
+
+expd_pb_propagate_target_bloodline_from_this_character_10_generations = {
+	event_target:expd_pb_target_bloodline_to_propagate = {
+		save_event_target_as = expd_pb_target_bloodline_for_query
+	}
+	any_child_even_if_dead = {
+		limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+		if = {
+			limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_to_propagate } }
+			event_target:expd_pb_target_bloodline_to_propagate = { add_bloodline_member = PREV }
+		}
+		any_child_even_if_dead = {
+			limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+			if = {
+				limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_to_propagate } }
+				event_target:expd_pb_target_bloodline_to_propagate = { add_bloodline_member = PREV }
+			}
+			any_child_even_if_dead = {
+				limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+				if = {
+					limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_to_propagate } }
+					event_target:expd_pb_target_bloodline_to_propagate = { add_bloodline_member = PREV }
+				}
+				any_child_even_if_dead = {
+					limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+					if = {
+						limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_to_propagate } }
+						event_target:expd_pb_target_bloodline_to_propagate = { add_bloodline_member = PREV }
+					}
+					any_child_even_if_dead = {
+						limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+						if = {
+							limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_to_propagate } }
+							event_target:expd_pb_target_bloodline_to_propagate = { add_bloodline_member = PREV }
+						}
+						any_child_even_if_dead = {
+							limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+							if = {
+								limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_to_propagate } }
+								event_target:expd_pb_target_bloodline_to_propagate = { add_bloodline_member = PREV }
+							}
+							any_child_even_if_dead = {
+								limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+								if = {
+									limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_to_propagate } }
+									event_target:expd_pb_target_bloodline_to_propagate = { add_bloodline_member = PREV }
+								}
+								any_child_even_if_dead = {
+									limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+									if = {
+										limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_to_propagate } }
+										event_target:expd_pb_target_bloodline_to_propagate = { add_bloodline_member = PREV }
+									}
+									any_child_even_if_dead = {
+										limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+										if = {
+											limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_to_propagate } }
+											event_target:expd_pb_target_bloodline_to_propagate = { add_bloodline_member = PREV }
+										}
+										any_child_even_if_dead = {
+											limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+											if = {
+												limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_to_propagate } }
+												event_target:expd_pb_target_bloodline_to_propagate = { add_bloodline_member = PREV }
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	clear_event_target = expd_pb_target_bloodline_for_query
+}
+
+expd_pb_propagate_all_bloodlines_from_this_character_10_generations = {
+	any_owned_bloodline = {
+		save_event_target_as = expd_pb_target_bloodline_for_query
+		PREV = {
+			any_child_even_if_dead = {
+				limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+				if = {
+					limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_for_query } }
+					event_target:expd_pb_target_bloodline_for_query = { add_bloodline_member = PREV }
+				}
+			}
+		}
+		clear_event_target = expd_pb_target_bloodline_for_query
+	}
+	any_child_even_if_dead = {
+		any_owned_bloodline = {
+			save_event_target_as = expd_pb_target_bloodline_for_query
+			PREV = {
+				any_child_even_if_dead = {
+					limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+					if = {
+						limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_for_query } }
+						event_target:expd_pb_target_bloodline_for_query = { add_bloodline_member = PREV }
+					}
+				}
+			}
+			clear_event_target = expd_pb_target_bloodline_for_query
+		}
+	}
+	any_child_even_if_dead = {
+		any_child_even_if_dead = {
+			any_owned_bloodline = {
+				save_event_target_as = expd_pb_target_bloodline_for_query
+				PREV = {
+					any_child_even_if_dead = {
+						limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+						if = {
+							limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_for_query } }
+							event_target:expd_pb_target_bloodline_for_query = { add_bloodline_member = PREV }
+						}
+					}
+				}
+				clear_event_target = expd_pb_target_bloodline_for_query
+			}
+		}
+	}
+	any_child_even_if_dead = {
+		any_child_even_if_dead = {
+			any_child_even_if_dead = {
+				any_owned_bloodline = {
+					save_event_target_as = expd_pb_target_bloodline_for_query
+					PREV = {
+						any_child_even_if_dead = {
+							limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+							if = {
+								limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_for_query } }
+								event_target:expd_pb_target_bloodline_for_query = { add_bloodline_member = PREV }
+							}
+						}
+					}
+					clear_event_target = expd_pb_target_bloodline_for_query
+				}
+			}
+		}
+	}
+	any_child_even_if_dead = {
+		any_child_even_if_dead = {
+			any_child_even_if_dead = {
+				any_child_even_if_dead = {
+					any_owned_bloodline = {
+						save_event_target_as = expd_pb_target_bloodline_for_query
+						PREV = {
+							any_child_even_if_dead = {
+								limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+								if = {
+									limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_for_query } }
+									event_target:expd_pb_target_bloodline_for_query = { add_bloodline_member = PREV }
+								}
+							}
+						}
+						clear_event_target = expd_pb_target_bloodline_for_query
+					}
+				}
+			}
+		}
+	}
+	any_child_even_if_dead = {
+		any_child_even_if_dead = {
+			any_child_even_if_dead = {
+				any_child_even_if_dead = {
+					any_child_even_if_dead = {
+						any_owned_bloodline = {
+							save_event_target_as = expd_pb_target_bloodline_for_query
+							PREV = {
+								any_child_even_if_dead = {
+									limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+									if = {
+										limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_for_query } }
+										event_target:expd_pb_target_bloodline_for_query = { add_bloodline_member = PREV }
+									}
+								}
+							}
+							clear_event_target = expd_pb_target_bloodline_for_query
+						}
+					}
+				}
+			}
+		}
+	}
+	any_child_even_if_dead = {
+		any_child_even_if_dead = {
+			any_child_even_if_dead = {
+				any_child_even_if_dead = {
+					any_child_even_if_dead = {
+						any_child_even_if_dead = {
+							any_owned_bloodline = {
+								save_event_target_as = expd_pb_target_bloodline_for_query
+								PREV = {
+									any_child_even_if_dead = {
+										limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+										if = {
+											limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_for_query } }
+											event_target:expd_pb_target_bloodline_for_query = { add_bloodline_member = PREV }
+										}
+									}
+								}
+								clear_event_target = expd_pb_target_bloodline_for_query
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	any_child_even_if_dead = {
+		any_child_even_if_dead = {
+			any_child_even_if_dead = {
+				any_child_even_if_dead = {
+					any_child_even_if_dead = {
+						any_child_even_if_dead = {
+							any_child_even_if_dead = {
+								any_owned_bloodline = {
+									save_event_target_as = expd_pb_target_bloodline_for_query
+									PREV = {
+										any_child_even_if_dead = {
+											limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+											if = {
+												limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_for_query } }
+												event_target:expd_pb_target_bloodline_for_query = { add_bloodline_member = PREV }
+											}
+										}
+									}
+									clear_event_target = expd_pb_target_bloodline_for_query
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	any_child_even_if_dead = {
+		any_child_even_if_dead = {
+			any_child_even_if_dead = {
+				any_child_even_if_dead = {
+					any_child_even_if_dead = {
+						any_child_even_if_dead = {
+							any_child_even_if_dead = {
+								any_child_even_if_dead = {
+									any_owned_bloodline = {
+										save_event_target_as = expd_pb_target_bloodline_for_query
+										PREV = {
+											any_child_even_if_dead = {
+												limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+												if = {
+													limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_for_query } }
+													event_target:expd_pb_target_bloodline_for_query = { add_bloodline_member = PREV }
+												}
+											}
+										}
+										clear_event_target = expd_pb_target_bloodline_for_query
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	any_child_even_if_dead = {
+		any_child_even_if_dead = {
+			any_child_even_if_dead = {
+				any_child_even_if_dead = {
+					any_child_even_if_dead = {
+						any_child_even_if_dead = {
+							any_child_even_if_dead = {
+								any_child_even_if_dead = {
+									any_child_even_if_dead = {
+										any_owned_bloodline = {
+											save_event_target_as = expd_pb_target_bloodline_for_query
+											PREV = {
+												any_child_even_if_dead = {
+													limit = { expd_pb_this_child_should_inherit_target_bloodline_from_prev = yes }
+													if = {
+														limit = { NOT = { is_bloodline_member_of = event_target:expd_pb_target_bloodline_for_query } }
+														event_target:expd_pb_target_bloodline_for_query = { add_bloodline_member = PREV }
+													}
+												}
+											}
+											clear_event_target = expd_pb_target_bloodline_for_query
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

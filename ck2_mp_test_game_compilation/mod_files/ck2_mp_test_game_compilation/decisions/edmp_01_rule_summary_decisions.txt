@@ -1,0 +1,36 @@
+decisions = {
+	
+	edmp_rule_summary_show = {
+		
+		ai = no
+		
+		potential = { 
+			edmp_another_mod_wants_to_suppress_this_decision = no
+		}
+		
+		allow = {
+			OR = {
+				custom_tooltip = {
+					text = edmp_rule_summary_is_not_currently_open_for_this_character_tt
+					NOT = { has_character_flag = edmp_rs_event_is_open }
+				}
+				custom_tooltip = {
+					text = edmp_rule_summary_has_been_open_for_this_character_for_6_months_tt
+					had_character_flag = {
+						flag = edmp_rs_event_is_open
+						months >= 6
+					}
+				}
+			}
+		}
+		
+		effect = {
+			custom_tooltip = {
+				text = edmp_rule_summary_popup_event_tt
+				character_event = { id = edmp_rs.1000 }
+			}
+		}
+		
+	}
+	
+}

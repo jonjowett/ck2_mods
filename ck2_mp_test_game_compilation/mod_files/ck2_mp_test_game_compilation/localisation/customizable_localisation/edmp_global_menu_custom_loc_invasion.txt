@@ -1,0 +1,38 @@
+defined_text = {
+	name = edmp_global_checkmark_invasions_disabled
+	use_first_valid = yes
+	text = {
+		trigger = { edmp_global_invasions_are_disabled_for_everyone = yes }
+		localisation_key =  edmp_global_checkmark_checked
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_global_checkmark_unchecked
+	}
+}
+
+defined_text = {
+	name = edmp_global_checkmark_invasions_managed_individually
+	use_first_valid = yes
+	text = {
+		trigger = { edmp_global_invasion_permissions_are_managed_individually = yes }
+		localisation_key =  edmp_global_checkmark_checked
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_global_checkmark_unchecked
+	}
+}
+
+defined_text = {
+	name = edmp_global_checkmark_invasions_enabled
+	use_first_valid = yes
+	text = {
+		trigger = { edmp_global_invasions_are_enabled_for_everyone = yes }
+		localisation_key =  edmp_global_checkmark_checked
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key =  edmp_global_checkmark_unchecked
+	}
+}

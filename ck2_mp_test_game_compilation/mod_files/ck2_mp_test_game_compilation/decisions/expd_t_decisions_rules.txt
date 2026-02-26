@@ -1,0 +1,32 @@
+decisions = {
+	expd_t_rules = {
+		ai = no
+		potential = {
+			ai = no
+			expd_t_another_mod_wants_to_suppress_this_decision = no
+		}
+		allow = {
+			OR = {
+				custom_tooltip = {
+					text = expd_t_rules_does_not_currently_have_rules_window_open_tt
+					NOT = { has_character_flag = expd_t_rules_window_open }
+				}
+				custom_tooltip = {
+					text = expd_t_rules_has_had_rules_window_open_for_3_months_tt
+					had_character_flag = {
+						flag = expd_t_rules_window_open
+						months = 3
+					}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = expd_t_rules_show_tt
+				clr_character_flag = expd_t_rules_window_open
+				set_character_flag = expd_t_rules_window_open
+				character_event = { id = EDTRules.1000 }
+			}
+		}
+	}
+}

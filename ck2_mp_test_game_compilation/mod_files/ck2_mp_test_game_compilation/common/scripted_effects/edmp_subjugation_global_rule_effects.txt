@@ -1,0 +1,79 @@
+edmp_global_subjugations_set_enabled_for_everyone = {
+	edmp_global_subjugations_set_enabled_for_everyone_without_notification = yes
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_gmn_player_notification_sent_tt
+			any_player = {
+				limit = { NOT = { character = PREV } }
+				character_event = { id = edmp_gmn.2200 }
+			}
+		}
+	}
+}
+
+edmp_global_subjugations_set_enabled_for_everyone_without_notification = {
+	custom_tooltip = {
+		text = edmp_global_subjugations_set_enabled_for_everyone_tt
+		clr_global_flag = edmp_global_subjugations_of_duke_plus_disabled_without_explicit_permission
+		clr_global_flag = edmp_global_subjugations_of_king_plus_disabled_without_explicit_permission
+		clr_global_flag = edmp_global_subjugations_of_emperor_plus_disabled_without_explicit_permission
+	}
+}
+
+edmp_global_subjugations_set_duke_plus_disabled_without_explicit_permission = {
+	custom_tooltip = {
+		text = edmp_global_subjugations_set_duke_plus_disabled_without_explicit_permission_tt
+		set_global_flag = edmp_global_subjugations_of_duke_plus_disabled_without_explicit_permission
+		clr_global_flag = edmp_global_subjugations_of_king_plus_disabled_without_explicit_permission
+		clr_global_flag = edmp_global_subjugations_of_emperor_plus_disabled_without_explicit_permission
+	}
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_gmn_player_notification_sent_tt
+			any_player = {
+				limit = { NOT = { character = PREV } }
+				character_event = { id = edmp_gmn.2200 }
+			}
+		}
+	}
+}
+
+edmp_global_subjugations_set_king_plus_disabled_without_explicit_permission = {
+	custom_tooltip = {
+		text = edmp_global_subjugations_set_king_plus_disabled_without_explicit_permission_tt
+		clr_global_flag = edmp_global_subjugations_of_duke_plus_disabled_without_explicit_permission
+		set_global_flag = edmp_global_subjugations_of_king_plus_disabled_without_explicit_permission
+		clr_global_flag = edmp_global_subjugations_of_emperor_plus_disabled_without_explicit_permission
+	}
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_gmn_player_notification_sent_tt
+			any_player = {
+				limit = { NOT = { character = PREV } }
+				character_event = { id = edmp_gmn.2200 }
+			}
+		}
+	}
+}
+
+edmp_global_subjugations_set_emperor_plus_disabled_without_explicit_permission = {
+	custom_tooltip = {
+		text = edmp_global_subjugations_set_emperor_plus_disabled_without_explicit_permission_tt
+		clr_global_flag = edmp_global_subjugations_of_duke_plus_disabled_without_explicit_permission
+		clr_global_flag = edmp_global_subjugations_of_king_plus_disabled_without_explicit_permission
+		set_global_flag = edmp_global_subjugations_of_emperor_plus_disabled_without_explicit_permission
+	}
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_gmn_player_notification_sent_tt
+			any_player = {
+				limit = { NOT = { character = PREV } }
+				character_event = { id = edmp_gmn.2200 }
+			}
+		}
+	}
+}

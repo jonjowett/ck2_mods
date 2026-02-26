@@ -1,0 +1,639 @@
+expd_t_prev_has_less_prestige_than_root = {
+	custom_tooltip = { text = EXPD_T_TOOLTIP_PREV_HAS_LESS_PRESTIGE_THAN_ROOT }
+	trigger_if = {
+		limit = {
+			ROOT = { prestige <= 0 }
+		}
+		ROOT = { prestige > 0 }
+		PREV = { prestige <= 0 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  0
+				prestige <= 250
+			}
+		}
+		ROOT = { prestige > 100 }
+		PREV = { prestige <= 100 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  250
+				prestige <= 500
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 250 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  500
+				prestige <= 1000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 500 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  1000
+				prestige <= 2000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 1000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  2000
+				prestige <= 3000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 2000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  3000
+				prestige <= 4000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 3000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  4000
+				prestige <= 5000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 4000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  5000
+				prestige <= 6000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 5000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  6000
+				prestige <= 7000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 6000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  7000
+				prestige <= 8000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 7000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  8000
+				prestige <= 9000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 8000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  9000
+				prestige <= 10000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 9000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  10000
+				prestige <= 15000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 10000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  15000
+				prestige <= 20000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 15000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  20000
+				prestige <= 30000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 20000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  30000
+				prestige <= 40000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 30000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  40000
+				prestige <= 50000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 40000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  50000
+				prestige <= 60000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 50000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  60000
+				prestige <= 70000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 60000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  70000
+				prestige <= 80000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 70000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  80000
+				prestige <= 90000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 80000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  90000
+				prestige <= 100000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 90000 }
+	}
+	trigger_else = {
+		PREV = { show_scope_change = no prestige <= 100000 }
+	}
+}
+
+expd_t_prev_has_less_than_half_the_prestige_of_root = {
+	custom_tooltip = { text = EXPD_T_TOOLTIP_PREV_HAS_SIGNIFICANTLY_LESS_PRESTIGE_THAN_ROOT }
+	trigger_if = {
+		limit = {
+			ROOT = { prestige <= 0 }
+		}
+		ROOT = { prestige > 0 }
+		PREV = { prestige <= 0 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  0
+				prestige <= 250
+			}
+		}
+		ROOT = { prestige > 100 }
+		PREV = { prestige <= 50 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  250
+				prestige <= 500
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 125 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  500
+				prestige <= 1000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 250 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  1000
+				prestige <= 2000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 500 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  2000
+				prestige <= 3000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 1000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  3000
+				prestige <= 4000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 1500 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  4000
+				prestige <= 5000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 2000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  5000
+				prestige <= 6000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 2500 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  6000
+				prestige <= 7000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 3000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  7000
+				prestige <= 8000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 3500 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  8000
+				prestige <= 9000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 4000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  9000
+				prestige <= 10000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 4500 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  10000
+				prestige <= 15000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 5000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  15000
+				prestige <= 20000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 7500 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  20000
+				prestige <= 30000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 10000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  30000
+				prestige <= 40000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 15000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  40000
+				prestige <= 50000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 20000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  50000
+				prestige <= 60000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 25000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  60000
+				prestige <= 70000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 30000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  70000
+				prestige <= 80000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 35000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  80000
+				prestige <= 90000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 40000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  90000
+				prestige <= 100000
+			}
+		}
+		PREV = { show_scope_change = no prestige <= 45000 }
+	}
+	trigger_else = {
+		PREV = { show_scope_change = no prestige <= 50000 }
+	}
+}
+
+expd_t_prev_has_more_than_double_the_prestige_of_root = {
+	custom_tooltip = { text = EXPD_T_TOOLTIP_PREV_HAS_SIGNIFICANTLY_MORE_PRESTIGE_THAN_ROOT }
+	trigger_if = {
+		limit = {
+			ROOT = { prestige <= 0 }
+		}
+		PREV = { show_scope_change = no prestige > 250 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  0
+				prestige <= 250
+			}
+		}
+		PREV = { show_scope_change = no prestige > 500 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  250
+				prestige <= 500
+			}
+		}
+		PREV = { show_scope_change = no prestige > 1000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  500
+				prestige <= 1000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 2000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  1000
+				prestige <= 2000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 4000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  2000
+				prestige <= 3000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 6000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  3000
+				prestige <= 4000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 8000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  4000
+				prestige <= 5000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 10000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  5000
+				prestige <= 6000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 12000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  6000
+				prestige <= 7000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 14000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  7000
+				prestige <= 8000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 16000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  8000
+				prestige <= 9000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 18000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  9000
+				prestige <= 10000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 20000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  10000
+				prestige <= 15000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 30000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  15000
+				prestige <= 20000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 40000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  20000
+				prestige <= 30000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 60000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  30000
+				prestige <= 40000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 80000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  40000
+				prestige <= 50000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 100000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  50000
+				prestige <= 60000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 120000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  60000
+				prestige <= 70000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 140000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  70000
+				prestige <= 80000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 160000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  80000
+				prestige <= 90000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 180000 }
+	}
+	trigger_else_if = {
+		limit = {
+			ROOT = {
+				prestige >  90000
+				prestige <= 100000
+			}
+		}
+		PREV = { show_scope_change = no prestige > 200000 }
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = EXPD_T_TOOLTIP_INVALID_ROOT_HAS_TOO_MUCH_PRESTIGE
+			always = no
+		}
+	}
+}

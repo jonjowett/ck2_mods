@@ -1,0 +1,41 @@
+edmp_invasion_on_success_root_takes_occupied_titles_from_from = {
+	# For human players in MP where invasion permissions are managed individually:
+	#                ROOT takes all occupied titles from FROM, but ONLY in kingdoms where they have permission to do so.
+	# Otherwise:
+	#                ROOT takes all occupied titles from FROM (ie. base game behaviour)
+	if = {
+		limit = {
+			OR = {
+				ROOT = { ai = no }
+				edmp_this_is_a_multiplayer_game = yes
+				edmp_global_invasion_permissions_are_managed_individually = yes
+			}
+		}
+		# ROOT occupies all baronies where they occupy the county
+		# For every title that ROOT has permission to invade, they gain all occupied counties and baronies
+		ROOT = {
+			occupy_minors_of_occupied_settlements = FROM
+			any_title = {
+				limit = { edmp_this_title_has_invasion_permission_flag_matching_prev_character = yes }
+				any_de_jure_vassal_title = {
+					limit = {
+						OR = {
+							tier = COUNT 
+							tier = BARON
+						}
+						holder_scope = { top_liege = { character = FROM } }
+						controller = { character = ROOT }
+					}
+					gain_title = { target = ROOT type = invasion }
+				}
+			}
+		}
+	}
+	else = {
+		ROOT = {
+			occupy_minors_of_occupied_settlements = FROM
+			gain_all_occupied_titles = { who = FROM type = invasion }
+		}
+	}
+	
+}

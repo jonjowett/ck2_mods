@@ -1,0 +1,15 @@
+edmp_root_has_a_title_under_this_duke_plus_title = {
+	higher_tier_than = COUNT
+	any_de_jure_vassal_title = {
+		OR = {
+			tier = COUNT
+			tier = BARON
+		}
+		holder_scope = {
+			OR = {
+				character = ROOT
+				any_liege = { character = ROOT }
+			}
+		}
+	}
+}

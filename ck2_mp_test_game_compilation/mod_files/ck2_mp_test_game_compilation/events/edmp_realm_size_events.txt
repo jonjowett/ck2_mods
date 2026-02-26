@@ -1,0 +1,137 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = EDMPRealmSize
+
+# on_startup : Single-player human / MP host : Wait a day, then recalc all characters' realm sizes
+character_event = {
+	id = EDMPRealmSize.1000
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	trigger = {
+		edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) should receive this event
+	}
+	immediate = {
+		set_global_flag = edmp_realm_size_calculate_all_on_startup_has_not_been_forced
+		character_event = { id = EDMPRealmSize.1001 days = 1 }
+	}
+}
+
+# On single player human / MP host : 1 day after startup, if there hasn't already been a forced "recalc all", recalc all realm sizes.
+# Note that the recalc realm size logic doesn't work if called from on_startup, but it does work if manually triggered before unpausing.
+#    ("Doesn't work" = all variables end up set to zero, for some unknown reason.)
+character_event = {
+	id = EDMPRealmSize.1001
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	trigger = {
+		has_global_flag = edmp_realm_size_calculate_all_on_startup_has_not_been_forced
+	}
+	immediate = {
+		clr_global_flag = edmp_realm_size_calculate_all_on_startup_has_not_been_forced
+		set_global_flag = edmp_realm_size_calc_force_notify_all_players
+		edmp_realm_size_calculate_for_all_relevant_characters = yes
+		clr_global_flag = edmp_realm_size_calc_force_notify_all_players
+	}
+}
+
+
+
+
+
+# on_yearly_pulse (and from above) : Recalc this character's realm size
+character_event = {
+	id = EDMPRealmSize.1100
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		edmp_realm_size_is_limited_for_players = yes
+		OR = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+			edmp_this_character_has_any_realm_size_modifier = yes
+		}
+	}
+	immediate = {
+		edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
+	}
+}
+
+# One day after all calculations: clear "calculated today" flags
+character_event = {
+	id = EDMPRealmSize.1101
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		clr_character_flag = edmp_realm_size_calc_this_character_was_calculated_today
+	}
+}
+
+
+
+
+
+# Notify this character of their newly calculated realm size
+character_event = {
+	id = EDMPRealmSize.2000
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	immediate = {
+		if = {
+			limit = { check_variable = { which = edmp_realm_size_excess value <= 0 } }
+			character_event = { id = EDMPRealmSize.2001 } # Good
+		}
+		else_if = {
+			limit = { check_variable = { which = edmp_realm_size_excess which <= edmp_realm_size_excess_close_threshold } }
+			character_event = { id = EDMPRealmSize.2002 } # Bad
+		}
+		else = {
+			character_event = { id = EDMPRealmSize.2003 } # Very Bad
+		}
+	}
+}
+character_event = {
+	id      = EDMPRealmSize.2001
+	title   = EDMPRealmSize_2000_Title
+	desc    = EDMPRealmSize_2000_Desc_Good
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
+	# Validator thinks long frame is incorrect; it's not.
+	# Audax Validator "." Ignore_NEXT
+	border  = GFX_event_long_frame_economy # Green frame (good)
+	is_triggered_only = yes
+	option  = {
+		name = EDMPRealmSize_2000_EvtOpt_OK
+	}
+}
+character_event = {
+	id      = EDMPRealmSize.2002
+	title   = EDMPRealmSize_2000_Title
+	desc    = EDMPRealmSize_2000_Desc_Bad
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
+	# Validator thinks long frame is incorrect; it's not.
+	# Audax Validator "." Ignore_NEXT
+	border  = GFX_event_long_frame_war     # Red frame (bad)
+	is_triggered_only = yes
+	option  = {
+		name = EDMPRealmSize_2000_EvtOpt_Curses
+		tooltip_info = yes
+	}
+}
+character_event = {
+	id      = EDMPRealmSize.2003
+	title   = EDMPRealmSize_2000_Title
+	desc    = EDMPRealmSize_2000_Desc_VeryBad
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
+	# Validator thinks long frame is incorrect; it's not.
+	# Audax Validator "." Ignore_NEXT
+	border  = GFX_event_long_frame_war     # Red frame (bad)
+	is_triggered_only = yes
+	option  = {
+		name = EDMPRealmSize_2000_EvtOpt_Curses
+		tooltip_info = yes
+	}
+}

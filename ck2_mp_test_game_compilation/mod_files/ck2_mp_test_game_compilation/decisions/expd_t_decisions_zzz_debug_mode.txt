@@ -1,0 +1,171 @@
+decisions = {
+	
+	expd_t_debug_mode_enable = {
+		ai = no
+		potential = {
+			expd_t_this_character_can_perform_admin_actions = yes
+			expd_t_this_character_can_see_debug_mode_decisions = no
+			expd_t_another_mod_wants_to_suppress_this_decision = no
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_t_debug_mode_enable_tt
+				set_global_flag = expd_t_debug_mode
+			}
+		}
+	}
+	
+	expd_t_debug_mode_disable = {
+		ai = no
+		is_high_prio = yes
+		potential = {
+			expd_t_this_character_can_see_debug_mode_decisions = yes
+			expd_t_another_mod_wants_to_suppress_this_decision = no
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = expd_t_debug_mode_disable_tt
+				clr_global_flag = expd_t_debug_mode
+			}
+		}
+	}
+	
+}
+
+targetted_decisions = {
+	
+	expd_t_debug_list_all_protectors = {
+		filter = self
+		third_party_filter = all
+		ai = no
+		potential = { expd_t_this_character_can_see_debug_mode_decisions = yes }
+		allow = { always = yes }
+		third_party_potential = {
+			FROMFROM = {
+				any_tributary = {
+					expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes
+				}
+			}
+		}
+		third_party_allow = { always = no }
+		effect = {
+			# Nothing
+		}
+	}
+	
+	expd_t_debug_list_all_protectorates = {
+		filter = self
+		third_party_filter = all
+		ai = no
+		potential = { expd_t_this_character_can_see_debug_mode_decisions = yes }
+		allow = { always = yes }
+		third_party_potential = {
+			FROMFROM = { expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes }
+		}
+		third_party_allow = { always = no }
+		effect = {
+			# Nothing
+		}
+	}
+	
+	expd_t_debug_destroy_all_ai_protectorates = {
+		filter = self
+		ai = no
+		potential = { expd_t_this_character_can_see_debug_mode_decisions = yes }
+		allow = { always = yes }
+		effect = {
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = expd_t_debug_mode_notification_sent_tt
+					save_event_target_as = expd_t_debug_mode_decision_taker
+					any_player = { character_event = { id = EDTDebugModeNotification.1000 } }
+					clear_event_target = expd_t_debug_mode_decision_taker
+				}
+			}
+			any_character = {
+				limit = {
+					expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes
+					suzerain = { expd_t_this_character_should_be_treated_as_an_ai = yes }
+				}
+				suzerain = { remove_tributary = PREV }
+			}
+		}
+	}
+	
+	expd_t_debug_cancel_all_of_this_suzerains_protectorates = {
+		only_playable = yes
+		filter = independent_rulers_including_me
+		ai = no
+		from_potential = { expd_t_this_character_can_see_debug_mode_decisions = yes }
+		potential = { any_tributary = { is_tributary = { type = expd_t_protectorate } } }
+		allow = { always = yes }
+		effect = {
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = expd_t_debug_mode_notification_sent_tt
+					FROM = { save_event_target_as = expd_t_debug_mode_decision_taker }
+					ROOT = { save_event_target_as = expd_t_debug_mode_character_affected }
+					FROM = { any_player = { character_event = { id = EDTDebugModeNotification.1100 } } }
+					clear_event_target = expd_t_debug_mode_decision_taker
+					clear_event_target = expd_t_debug_mode_character_affected
+				}
+			}
+			any_tributary = {
+				limit = { expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes }
+				suzerain = { remove_tributary = PREV }
+			}
+		}
+	}
+	
+	expd_t_debug_cancel_this_protectorate = {
+		only_playable = yes
+		filter = independent_rulers_including_me
+		ai = no
+		from_potential = { expd_t_this_character_can_see_debug_mode_decisions = yes }
+		potential = { expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes }
+		allow = { always = yes }
+		effect = {
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = expd_t_debug_mode_notification_sent_tt
+					FROM     = { save_event_target_as = expd_t_debug_mode_decision_taker }
+					ROOT     = { save_event_target_as = expd_t_debug_mode_character_affected }
+					suzerain = { save_event_target_as = expd_t_debug_mode_character_affected_other }
+					FROM = { any_player = { character_event = { id = EDTDebugModeNotification.1200 } } }
+					clear_event_target = expd_t_debug_mode_decision_taker
+					clear_event_target = expd_t_debug_mode_character_affected
+					clear_event_target = expd_t_debug_mode_character_affected_other
+				}
+			}
+			suzerain = { remove_tributary = PREV }
+		}
+	}
+	
+	expd_t_debug_force_this_character_to_be_protectorate_of_a_player = {
+		only_playable = yes
+		filter = independent_rulers_including_me
+		third_party_filter = independent_rulers_including_me
+		ai = no
+		# NB: This decision is deliberately visible in single-player, even though it's completely unnecessary, so that it is easy to debug!
+		from_potential = { expd_t_this_character_can_see_debug_mode_decisions = yes }
+		potential = { expd_t_this_character_is_independent_enough_to_become_a_protectorate_by_decision = yes }
+		allow = { always = yes }
+		third_party_potential = {
+			ROOT_FROMFROM = {
+				expd_t_this_character_should_be_treated_as_a_player = yes
+				independent = yes
+				NOT = { any_tributary = { character = ROOT } }
+			}
+		}
+		third_party_allow = { always = yes } # Since this is a debug mode operation, we don't bother to check whether the protectorate can instantly break free
+		effect = {
+			expd_t_from_makes_root_become_protectorate_of_fromfrom = yes
+		}
+	}
+	
+}

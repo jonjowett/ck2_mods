@@ -1,0 +1,288 @@
+decisions = {
+	
+	edmp_playerflag_show_decisions = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			NOT = { has_character_flag = edmp_playerflag_show }
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_playerflag_show_decisions_tt
+				set_character_flag = edmp_playerflag_show
+			}
+		}
+	}
+	
+	edmp_playerflag_hide_decisions_high_prio = {
+		is_high_prio = yes
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			has_character_flag = edmp_playerflag_show
+			OR = {
+				# Forgot to turn this off before exiting the submenu - oops!
+				NOT = { has_character_flag = edmp_admin_submenu_is_open }
+				# Submenu is open but not isolated
+				AND = {
+					has_character_flag = edmp_admin_submenu_is_open
+					edmp_currently_running_a_mod_which_puts_edmp_decisions_in_an_isolated_submenu = no
+				}
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_playerflag_hide_decisions_tt
+				clr_character_flag = edmp_playerflag_show
+			}
+		}
+	}
+	
+	edmp_playerflag_hide_decisions_low_prio = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			has_character_flag = edmp_playerflag_show
+			# Submenu is open and isolated
+			has_character_flag = edmp_admin_submenu_is_open
+			edmp_currently_running_a_mod_which_puts_edmp_decisions_in_an_isolated_submenu = yes
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_playerflag_hide_decisions_tt
+				clr_character_flag = edmp_playerflag_show
+			}
+		}
+	}
+	
+}
+
+targetted_decisions = {
+	
+	edmp_playerflag_flag_this_ai_character_as_a_player = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_playerflag_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { edmp_this_character_is_a_potential_absent_human_player = yes }
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		effect = { edmp_playerflag_add_flag_to_this_character = yes }
+	}
+	
+	edmp_playerflag_unflag_this_ai_character = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_playerflag_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { edmp_this_character_is_an_absent_human_player = yes }
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		effect = { edmp_playerflag_remove_flag_from_this_character = yes }
+	}
+	
+	edmp_playerflag_unflag_thirdparty_character = {
+		filter = self
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = { always = yes } # NB: The from_potential block is non-functional in self-targeted decisions
+		potential = {
+			has_character_flag = edmp_playerflag_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		allow = {
+			edmp_this_character_can_take_admin_helper_actions = yes # Always self-targeted, so no need to scope to FROM
+		                          any_character = { edmp_this_character_is_an_absent_human_player = yes   }
+		}
+		third_party_potential = { ROOT_FROMFROM = { edmp_this_character_is_an_absent_human_player = yes } }
+		third_party_allow = { always = yes }
+		effect = {
+			ROOT_FROMFROM = {
+				custom_tooltip = {
+					text = edmp_playerflag_remove_flag_from_this_character_short_tt
+					edmp_playerflag_remove_flag_from_this_character = yes
+				}
+			}
+		}
+	}
+	
+	edmp_playerflag_unflag_all_ai_characters = {
+		filter = self
+		ai = no
+		from_potential = { always = yes } # NB: The from_potential block is non-functional in self-targeted decisions
+		potential = {
+			has_character_flag = edmp_playerflag_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		allow = {
+			edmp_this_character_can_take_admin_helper_actions = yes # Always self-targeted, so no need to scope to FROM
+			any_character = { edmp_this_character_is_an_absent_human_player = yes }
+		}
+		effect = {
+			any_character = {
+				limit = { edmp_this_character_is_an_absent_human_player = yes }
+				custom_tooltip = {
+					text = edmp_playerflag_remove_flag_from_this_character_short_tt
+					edmp_playerflag_remove_flag_from_this_character = yes
+				}
+			}
+		}
+	}
+	
+}
+
+decisions = {
+	
+	edmp_playerflag_adminhelpers_pause = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can pause/unpause helpers
+			edmp_playerflag_adminhelpers_are_paused = no
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = {
+			custom_tooltip = {
+				text = edmp_admin_helper_startup_event_is_not_visible_tt
+				OR = {
+					NOT = { has_character_flag = edmp_admin_helper_startup_event_visible }
+					had_character_flag = {
+						flag = edmp_admin_helper_startup_event_visible
+						months = 6
+					}
+				}
+			}
+		}
+		effect = {
+			edmp_playerflag_adminhelpers_pause_effect = yes
+		}
+	}
+	
+	edmp_playerflag_adminhelpers_unpause = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can pause/unpause helpers
+			edmp_playerflag_adminhelpers_are_paused = yes
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = {
+			custom_tooltip = {
+				text = edmp_admin_helper_startup_event_is_not_visible_tt
+				OR = {
+					NOT = { has_character_flag = edmp_admin_helper_startup_event_visible }
+					had_character_flag = {
+						flag = edmp_admin_helper_startup_event_visible
+						months = 6
+					}
+				}
+			}
+		}
+		effect = {
+			edmp_playerflag_adminhelpers_unpause_effect = yes
+		}
+	}
+	
+}
+
+targetted_decisions = {
+	
+	edmp_playerflag_flag_this_character_as_an_admin_helper = {
+		
+		filter = all_including_me
+		ai = no
+		
+		from_potential = {
+			
+			OR = {
+				
+				has_character_flag = edmp_playerflag_show
+				
+				# Exceptionally, always show the decision if admin helpers are paused (because presumably this means the admin is administrating the helper settings)
+				edmp_playerflag_adminhelpers_are_paused = yes
+				
+			}
+			
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can add/remove helpers
+			
+		}
+		
+		potential = {
+			edmp_this_character_has_admin_helper_modifier = no # NB: Tooltip would be weird, but not a problem because there are no tooltips in potential block.
+			is_playable = yes
+		}
+		
+		allow = { edmp_this_character_can_be_flagged_by_rootfrom_as_admin_helper = yes }
+		
+		effect = { edmp_playerflag_add_adminhelper_flag_to_this_character = yes }
+		
+	}
+	
+	edmp_playerflag_unflag_this_character_as_an_admin_helper = {
+		
+		filter = all_including_me
+		ai = no
+		
+		from_potential = {
+			
+			OR = {
+				
+				has_character_flag = edmp_playerflag_show
+				
+				# Exceptionally, always show the decision if admin helpers are paused (because presumably this means the admin is administrating the helper settings)
+				edmp_playerflag_adminhelpers_are_paused = yes
+				
+				# Exceptionally, always show the decision for characters who are not eligible to be admin helpers (AI or host)
+				# This part should only ever be needed if something goes wrong somewhere else in the logic
+				ROOT = { edmp_this_character_can_be_flagged_by_rootfrom_as_admin_helper = no }
+				
+			}
+			
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can add/remove helpers
+			
+		}
+		
+		potential = { edmp_this_character_has_admin_helper_modifier = yes }
+		
+		allow = { always = yes }
+		
+		effect = { edmp_playerflag_remove_adminhelper_flag_from_this_character = yes }
+		
+	}
+	
+	edmp_playerflag_unflag_thirdparty_character_as_an_admin_helper = { # Arguably not particularly useful, included just in case
+		
+		filter = self
+		third_party_filter = all_including_me
+		ai = no
+		
+		from_potential = { always = yes } # NB: The from_potential block is non-functional in self-targeted decisions
+		
+		potential = {
+			
+			OR = {
+				has_character_flag = edmp_playerflag_show
+			
+				# Exceptionally, always show the decision if admin helpers are paused (because presumably this means the admin is administrating the helper settings)
+				edmp_playerflag_adminhelpers_are_paused = yes
+			}
+			
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can add/remove helpers
+			
+		}
+		
+		allow = {                 any_character = { edmp_this_character_has_admin_helper_modifier = yes } }
+		
+		third_party_potential = { ROOT_FROMFROM = { edmp_this_character_has_admin_helper_modifier = yes } }
+		
+		third_party_allow = { always = yes }
+		
+		effect = { ROOT_FROMFROM = { edmp_playerflag_remove_adminhelper_flag_from_this_character = yes } }
+		
+	}
+	
+}

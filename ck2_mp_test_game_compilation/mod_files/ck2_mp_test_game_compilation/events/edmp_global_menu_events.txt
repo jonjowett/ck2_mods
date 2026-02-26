@@ -1,0 +1,750 @@
+namespace = edmp_global
+
+# Numbering convention:
+# 1000      = Main gateway event (sole entrance & exit from the menu)
+# 2000-2999 = Casus Belli rules
+# 3000-3999 = Realm Size rules
+
+
+
+
+
+# Gateway event for the main/global menu.
+# This should be the ONLY entrance and ONLY exit from the menu.
+character_event = {
+	
+	id      = edmp_global.1000
+	title   = edmp_global_1000_title
+	desc    = edmp_global_1000_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # For consistency with other menus
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		clr_global_flag = edmp_global_menu_open
+		set_global_flag = edmp_global_menu_open
+	}
+	
+	option = {
+		name = edmp_global_1000_evtopt_cbs
+		hidden_tooltip = { character_event = { id = edmp_global.2000 } }
+	}
+	
+	option = {
+		name = edmp_global_1000_evtopt_realm_size
+		hidden_tooltip = { character_event = { id = edmp_global.3000 } }
+	}
+	
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { clr_global_flag = edmp_global_menu_open }
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+# Gateway event for the CB menu.
+# This should be the ONLY entrance and ONLY exit from the CB menu.
+character_event = {
+	
+	id      = edmp_global.2000
+	title   = edmp_global_2000_title
+	desc    = edmp_global_2000_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # For consistency with other menus
+	
+	is_triggered_only = yes
+	ai = no
+	
+	
+	
+	# Invasions (only one option will be visible)
+	option = {
+		name = edmp_global_2000_evtopt_invasions_are_disabled_for_everyone_by_game_rule_exit
+		trigger = {
+			has_game_rule = { name = multiplayer_invasions value = off }
+		}
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+	}
+	option = {
+		name = edmp_global_2000_evtopt_invasions_are_enabled_for_everyone_by_compatibility_exit
+		trigger = {
+			NOT = { has_game_rule = { name = multiplayer_invasions value = off } }
+			edmp_mod_is_active_in_compatibility_mode = yes
+		}
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+	}
+	option = {
+		trigger = {
+			NOT = { has_game_rule = { name = multiplayer_invasions value = off } }
+			edmp_mod_is_active_in_normal_mode = yes
+		}
+		name = {
+			text = edmp_global_2000_evtopt_invasions_are_disabled_for_everyone
+			trigger = { edmp_global_invasions_are_disabled_for_everyone           = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_invasions_are_enabled_for_everyone
+			trigger = { edmp_global_invasions_are_enabled_for_everyone            = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_invasions_are_managed_individually
+			trigger = { edmp_global_invasion_permissions_are_managed_individually = yes }
+		}
+		hidden_tooltip = { character_event = { id = edmp_global.2100 } }
+	}
+	
+	
+	
+	# Subjugations (only one option will be visible)
+	option = {
+		trigger = { edmp_mod_is_active_in_compatibility_mode = yes }
+		name = edmp_global_2000_evtopt_subjugations_are_enabled_for_everyone_by_compatibility_exit
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+	}
+	option = {
+		trigger = { edmp_mod_is_active_in_normal_mode = yes }
+		name = {
+			text = edmp_global_2000_evtopt_subjugations_rule_inconsistent
+			trigger = { edmp_global_subjugations_rule_inconsistent = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_subjugations_are_enabled
+			trigger = { edmp_global_subjugations_are_enabled = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_subjugations_of_duke_plus_are_disabled_without_explicit_permission
+			trigger = { edmp_global_subjugations_of_duke_plus_are_disabled_without_explicit_permission = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_subjugations_of_king_plus_are_disabled_without_explicit_permission
+			trigger = { edmp_global_subjugations_of_king_plus_are_disabled_without_explicit_permission = yes }
+		}
+		name = {
+			text = edmp_global_2000_evtopt_subjugations_of_emperor_plus_are_disabled_without_explicit_permission
+			trigger = { edmp_global_subjugations_of_emperor_plus_are_disabled_without_explicit_permission = yes }
+		}
+		hidden_tooltip = { character_event = { id = edmp_global.2200 } }
+	}
+	
+	
+	
+	# Exit, back to main menu
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+	}
+	
+}
+
+# Manage Invasion CB rules
+character_event = {
+	
+	id      = edmp_global.2100
+	title   = edmp_global_2100_title
+	desc    = edmp_global_2100_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # Description is long, needs left-alignment
+	
+	is_triggered_only = yes
+	ai = no
+	
+	option = {
+		name = edmp_global_2100_evtopt_set_invasions_disabled_for_everyone
+		trigger = { edmp_global_invasions_are_not_disabled_for_everyone = yes }
+		edmp_global_invasions_set_disabled_for_everyone = yes
+		hidden_tooltip = { character_event = { id = edmp_global.2100 } }
+	}
+	
+	option = {
+		name = edmp_global_2100_evtopt_set_invasions_managed_individually
+		trigger = { edmp_global_invasion_permissions_are_not_managed_individually = yes }
+		edmp_global_invasions_set_permissions_managed_individually = yes
+		hidden_tooltip = { character_event = { id = edmp_global.2100 } }
+	}
+	
+	option = {
+		name = edmp_global_2100_evtopt_set_invasions_enabled_for_everyone
+		trigger = { edmp_global_invasions_are_not_enabled_for_everyone = yes }
+		edmp_global_invasions_set_enabled_for_everyone = yes
+		hidden_tooltip = { character_event = { id = edmp_global.2100 } }
+	}
+	
+	# Exit, back to CB menu
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { character_event = { id = edmp_global.2000 } }
+	}
+	
+}
+
+# Manage Subjugation CB rules
+character_event = {
+	
+	id      = edmp_global.2200
+	title   = edmp_global_2200_title
+	desc    = edmp_global_2200_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # Description is long, needs left-alignment
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		if = {
+			limit = { edmp_global_subjugations_rule_inconsistent = yes }
+			edmp_global_subjugations_set_enabled_for_everyone_without_notification = yes
+		}
+	}
+	
+	# The user should always only see 3 of these 4 options, because:
+	#  --- The immediate clause above ensures that the setup is ALWAYS internally consistent once this event triggers
+	#  --- Which means that the current setup MUST ALWAYS be one of the 4 possible options
+	#  --- Which means that exactly one of the options below will ALWAYS be disabled
+	option = {
+		name = edmp_global_2200_evtopt_set_subjugations_enabled
+		trigger = { edmp_global_subjugations_are_enabled = no }
+		edmp_global_subjugations_set_enabled_for_everyone = yes
+		hidden_tooltip = { character_event = { id = edmp_global.2200 } }
+	}
+	option = {
+		name = edmp_global_2200_evtopt_set_duke_plus_disabled_without_explicit_permission
+		trigger = { edmp_global_subjugations_of_duke_plus_are_disabled_without_explicit_permission = no }
+		edmp_global_subjugations_set_duke_plus_disabled_without_explicit_permission = yes
+		hidden_tooltip = { character_event = { id = edmp_global.2200 } }
+	}
+	option = {
+		name = edmp_global_2200_evtopt_set_king_plus_disabled_without_explicit_permission
+		trigger = { edmp_global_subjugations_of_king_plus_are_disabled_without_explicit_permission = no }
+		edmp_global_subjugations_set_king_plus_disabled_without_explicit_permission = yes
+		hidden_tooltip = { character_event = { id = edmp_global.2200 } }
+	}
+	option = {
+		name = edmp_global_2200_evtopt_set_emperor_plus_disabled_without_explicit_permission
+		trigger = { edmp_global_subjugations_of_emperor_plus_are_disabled_without_explicit_permission = no }
+		edmp_global_subjugations_set_emperor_plus_disabled_without_explicit_permission = yes
+		hidden_tooltip = { character_event = { id = edmp_global.2200 } }
+	}
+	
+	# Exit, back to CB menu
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { character_event = { id = edmp_global.2000 } }
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+# Gateway event for the Realm Size menu.
+# This should be the ONLY entrance and ONLY exit from the Realm Size menu.
+character_event = {
+	
+	id      = edmp_global.3000
+	title   = edmp_global_3000_title
+	desc    = edmp_global_3000_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # Description might be quite long
+	
+	is_triggered_only = yes
+	ai = no
+	
+	
+	
+	# Realm Size rule toggle (only one option will be visible)
+	option = {
+		name = edmp_global_3000_evtopt_realm_size_is_limited_for_players_toggle
+		trigger = { edmp_realm_size_is_limited_for_players = yes }
+		edmp_realm_size_change_to_not_limited_for_players = yes
+		hidden_tooltip = { character_event = { id = edmp_global.3000 } }
+	}
+	option = {
+		name = edmp_global_3000_evtopt_realm_size_is_not_limited_for_players_toggle
+		trigger = { edmp_realm_size_is_not_limited_for_players = yes }
+		edmp_realm_size_change_to_limited_for_players = yes
+		hidden_tooltip = { character_event = { id = edmp_global.3000 } }
+	}
+	
+	
+	
+	# Change parameters button (only visible if realm size is limited)
+	option = {
+		name = edmp_global_3000_evtopt_realm_size_change_parameters
+		trigger = { edmp_realm_size_is_limited_for_players = yes }
+		hidden_tooltip = { character_event = { id = edmp_global.3001 } }
+	}
+	
+	
+	
+	# Exit, back to main menu
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+	}
+	
+}
+
+# Extra interstitial submenu, because there are lots of parameters
+character_event = {
+	
+	id      = edmp_global.3001
+	title   = edmp_global_3001_title
+	desc    = edmp_global_3001_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # Description might be quite long
+	
+	is_triggered_only = yes
+	ai = no
+	
+	option = {
+		name = edmp_global_3001_evtopt_realm_size_change_limit
+		hidden_tooltip = {
+			set_global_flag = global_edmp_realm_size_limit_first_entry
+			character_event = { id = edmp_global.3100 }
+		}
+	}
+	
+	option = {
+		name = edmp_global_3001_evtopt_realm_size_change_empty_holdings
+		hidden_tooltip = {
+			set_global_flag = global_edmp_realm_size_empty_holdings_first_entry
+			character_event = { id = edmp_global.3200 }
+		}
+	}
+	
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { character_event = { id = edmp_global.3000 } }
+	}
+	
+}
+
+# Change the Realm Size Limit
+character_event = {
+	
+	id      = edmp_global.3100
+	title   = edmp_global_3100_title
+	desc    = edmp_global_3100_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # For left-alignment
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		edmp_realm_size_check_parameters_and_reset_invalid_to_default = yes
+		if = {
+			limit = { has_global_flag = global_edmp_realm_size_limit_first_entry }
+			set_variable = { which = global_edmp_realm_size_limit_new which = global_edmp_realm_size_limit }
+			clr_global_flag = global_edmp_realm_size_limit_first_entry
+		}
+	}
+	
+	# Increase
+	option = {
+		name = edmp_global_3100_evtopt_realm_size_increase
+		hidden_tooltip = { character_event = { id = edmp_global.3101 } }
+	}
+	
+	# Decrease
+	option = {
+		name = edmp_global_3100_evtopt_realm_size_decrease
+		hidden_tooltip = { character_event = { id = edmp_global.3102 } }
+	}
+	
+	# Cancel & Exit
+	option = {
+		name = {
+			trigger = { # NB: Same as below (save & exit)
+				NOT = { check_variable = { which = global_edmp_realm_size_limit_new which == global_edmp_realm_size_limit } } 
+			}
+			text = edmp_global_evtopt_cancel_and_exit
+		}
+		name = {
+			trigger = {
+				        check_variable = { which = global_edmp_realm_size_limit_new which == global_edmp_realm_size_limit }
+			}
+			text = edmp_global_evtopt_exit_no_change
+		}
+		custom_tooltip = { text = edmp_global_realm_size_is_not_changed_tt }
+		hidden_tooltip = { set_variable = { which = global_edmp_realm_size_limit_new value = 0 } }
+		hidden_tooltip = { character_event = { id = edmp_global.3001 } }
+	}
+	
+	# Save & Exit
+	# Only show this button if the new limit is different to the old
+	option = {
+		name = edmp_global_evtopt_save_and_exit
+		trigger = { # NB: Same as above (cancel & exit, after user has changed something)
+				NOT = { check_variable = { which = global_edmp_realm_size_limit_new which == global_edmp_realm_size_limit } }
+		}
+		if = {
+			limit = { check_variable = { which = global_edmp_realm_size_limit_new value < 0 } }
+			custom_tooltip = {
+				text = edmp_global_realm_size_error_changed_to_zero_tt
+				set_variable = { which = global_edmp_realm_size_limit     value = 0                                }
+				set_variable = { which = global_edmp_realm_size_limit_new value = 0                                }
+			}
+		} else = {
+			custom_tooltip = {
+				text = edmp_global_realm_size_changed_to_new_value_tt
+				set_variable = { which = global_edmp_realm_size_limit     which = global_edmp_realm_size_limit_new }
+				set_variable = { which = global_edmp_realm_size_limit_new value = 0                                }
+			}
+		}
+		edmp_realm_size_calculate_for_all_relevant_characters = yes
+		if = {
+			limit = { edmp_this_is_a_multiplayer_game = yes }
+			custom_tooltip = {
+				text = edmp_gmn_player_notification_sent_tt
+				any_player = {
+					limit = { NOT = { character = PREV } }
+					character_event = { id = edmp_gmn.3100 }
+				}
+			}
+		}
+		hidden_tooltip = { character_event = { id = edmp_global.3001 } }
+	}
+	
+}
+
+# Increase
+character_event = {
+	
+	id      = edmp_global.3101
+	title   = edmp_global_3101_title
+	desc    = edmp_global_3101_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # For left-alignment
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		# Set up helper variables (used in localisation only)
+		set_variable = { which = edmp_realm_size_limit_new_value_1 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_2 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_3 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_4 which = global_edmp_realm_size_limit_new }
+		change_variable = { which = edmp_realm_size_limit_new_value_1 value =   5 }
+		change_variable = { which = edmp_realm_size_limit_new_value_2 value =  10 }
+		change_variable = { which = edmp_realm_size_limit_new_value_3 value =  25 }
+		change_variable = { which = edmp_realm_size_limit_new_value_4 value = 100 }
+	}
+	
+	option = {
+		name = edmp_global_3101_evtopt_increase_5
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =   5 } }
+	}
+	
+	option = {
+		name = edmp_global_3101_evtopt_increase_10
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =  10 } }
+	}
+	
+	option = {
+		name = edmp_global_3101_evtopt_increase_25
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =  25 } }
+	}
+	
+	option = {
+		name = edmp_global_3101_evtopt_increase_100
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value = 100 } }
+	}
+	
+	after = {
+		hidden_tooltip = {
+			# Clean up helper variables
+			set_variable = { which = edmp_realm_size_limit_new_value_1 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_2 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_3 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_4 value = 0 }
+			# Back to main realm size menu
+			character_event = { id = edmp_global.3100 }
+		}
+	}
+	
+}
+
+# Decrease
+character_event = {
+	
+	id      = edmp_global.3102
+	title   = edmp_global_3102_title
+	desc    = edmp_global_3102_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # For left-alignment
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		# Set up helper variables (used in localisation only)
+		set_variable = { which = edmp_realm_size_limit_new_value_1 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_2 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_3 which = global_edmp_realm_size_limit_new }
+		set_variable = { which = edmp_realm_size_limit_new_value_4 which = global_edmp_realm_size_limit_new }
+		change_variable = { which = edmp_realm_size_limit_new_value_1 value =   -5 }
+		change_variable = { which = edmp_realm_size_limit_new_value_2 value =  -10 }
+		change_variable = { which = edmp_realm_size_limit_new_value_3 value =  -25 }
+		change_variable = { which = edmp_realm_size_limit_new_value_4 value = -100 }
+	}
+	
+	# NB: Don't show options if they would make the realm size limit negative, as this is nonsensical.
+	#     Also, don't show them if they would make the realm size exactly zero, since we have a special zeroisation option for this.
+	option = {
+		name = edmp_global_3102_evtopt_decrease_5
+		trigger = { check_variable = { which = global_edmp_realm_size_limit_new value > 5 } }
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =   -5 } }
+	}
+	
+	option = {
+		name = edmp_global_3102_evtopt_decrease_10
+		trigger = { check_variable = { which = global_edmp_realm_size_limit_new value > 10 } }
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =  -10 } }
+	}
+	
+	option = {
+		name = edmp_global_3102_evtopt_decrease_25
+		trigger = { check_variable = { which = global_edmp_realm_size_limit_new value > 25 } }
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value =  -25 } }
+	}
+	
+	option = {
+		name = edmp_global_3102_evtopt_decrease_100
+		trigger = { check_variable = { which = global_edmp_realm_size_limit_new value > 100 } }
+		hidden_tooltip = { change_variable = { which = global_edmp_realm_size_limit_new value = -100 } }
+	}
+	
+	# Due to the limit on number of options in an event, we can only show this if at least one other option is not visible.
+	# So, to ensure this is visible in the most possible situations, show when the -100 option is not visible.
+	option = {
+		name = edmp_global_3102_evtopt_decrease_to_zero
+		trigger = { check_variable = { which = global_edmp_realm_size_limit_new value <= 100 } }
+		hidden_tooltip = { set_variable = { which = global_edmp_realm_size_limit_new value = 0 } }
+	}
+	
+	after = {
+		hidden_tooltip = {
+			# Clean up helper variables
+			set_variable = { which = edmp_realm_size_limit_new_value_1 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_2 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_3 value = 0 }
+			set_variable = { which = edmp_realm_size_limit_new_value_4 value = 0 }
+			# Back to main realm size menu
+			character_event = { id = edmp_global.3100 }
+		}
+	}
+	
+}
+
+# Change parameters for empty tribal/nomadic holdings
+# Each click cycles through possible values; then cancel&exit or save&exit
+character_event = {
+	
+	id      = edmp_global.3200
+	title   = edmp_global_3200_title
+	desc    = edmp_global_3200_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # Description is long & needs left-alignment
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		
+		edmp_realm_size_check_parameters_and_reset_invalid_to_default = yes
+		
+		# If this is the first time we're loading this event, set up the "new" values for each variable
+		if = {
+			limit = { has_global_flag = global_edmp_realm_size_empty_holdings_first_entry }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new  which = global_edmp_realm_size_empty_holdings_tribal  }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new which = global_edmp_realm_size_empty_holdings_nomadic }
+			clr_global_flag = global_edmp_realm_size_empty_holdings_first_entry
+		}
+		
+		# Calculate the "next" value for each variable (so it can be displayed/used in the relevant "cycle" event options)
+		# 8 items in each cycle = 1, 3/4, 2/3, 1/2, 1/3, 1/4, 1/8, 0
+		if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new value >= 1.000 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_next value = 0.750 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new value >= 0.750 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_next value = 0.667 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new value >= 0.667 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_next value = 0.500 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new value >= 0.500 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_next value = 0.333 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new value >= 0.333 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_next value = 0.250 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new value >= 0.250 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_next value = 0.125 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new value >= 0.125 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_next value = 0.000 }
+		}
+		else = {
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_next value = 1.000 }
+		}
+		if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new value >= 1.000 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_next value = 0.750 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new value >= 0.750 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_next value = 0.667 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new value >= 0.667 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_next value = 0.500 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new value >= 0.500 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_next value = 0.333 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new value >= 0.333 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_next value = 0.250 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new value >= 0.250 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_next value = 0.125 }
+		}
+		else_if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new value >= 0.125 } }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_next value = 0.000 }
+		}
+		else = {
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_next value = 1.000 }
+		}
+		
+	}
+	
+	# Cycle Tribal
+	option = {
+		name = edmp_global_3200_evtopt_realm_size_empty_holdings_tribal_cycle_value
+		hidden_tooltip = { set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new  which = global_edmp_realm_size_empty_holdings_tribal_next  } }
+		hidden_tooltip = { character_event = { id = edmp_global.3200 } }
+	}
+	
+	# Cycle Nomadic
+	option = {
+		name = edmp_global_3200_evtopt_realm_size_empty_holdings_nomadic_cycle_value
+		hidden_tooltip = { set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new which = global_edmp_realm_size_empty_holdings_nomadic_next } }
+		hidden_tooltip = { character_event = { id = edmp_global.3200 } }
+	}
+	
+	# Cancel & Exit
+	option = {
+		name = {
+			trigger = { # NB: Same as below (save & exit)
+				OR = {
+					NOT = { check_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new  which == global_edmp_realm_size_empty_holdings_tribal   } }
+					NOT = { check_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new which == global_edmp_realm_size_empty_holdings_nomadic  } }
+				}
+			}
+			text = edmp_global_evtopt_cancel_and_exit
+		}
+		name = {
+			trigger = {
+				# Audax Validator "." Ignore_1001
+				AND = {
+					        check_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new  which == global_edmp_realm_size_empty_holdings_tribal   }
+					        check_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new which == global_edmp_realm_size_empty_holdings_nomadic  }
+				}
+			}
+			text = edmp_global_evtopt_exit_no_change
+		}
+		custom_tooltip = { text = edmp_global_realm_size_empty_holding_tribal_parameter_not_changed_tt  }
+		custom_tooltip = { text = edmp_global_realm_size_empty_holding_nomadic_parameter_not_changed_tt }
+		hidden_tooltip = {
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new   value = 0 }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new  value = 0 }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_next  value = 0 }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_next value = 0 }
+		}
+		hidden_tooltip = { character_event = { id = edmp_global.3001 } }
+	}
+	
+	# Save & Exit
+	# Only show this button if the new limit is different to the old
+	option = {
+		name = edmp_global_evtopt_save_and_exit
+		trigger = { # NB: Same as above (cancel & exit, after user has changed something)
+				OR = {
+					NOT = { check_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new  which == global_edmp_realm_size_empty_holdings_tribal   } }
+					NOT = { check_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new which == global_edmp_realm_size_empty_holdings_nomadic  } }
+				}
+		}
+		if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new which == global_edmp_realm_size_empty_holdings_tribal } }
+			custom_tooltip = {
+				text = edmp_global_realm_size_empty_holding_tribal_parameter_not_changed_tt
+			}
+		}
+		else = {
+			custom_tooltip = {
+				text = edmp_global_realm_size_empty_holding_tribal_parameter_changed_tt
+				set_variable = { which = global_edmp_realm_size_empty_holdings_tribal which = global_edmp_realm_size_empty_holdings_tribal_new }
+			}
+		}
+		if = {
+			limit = { check_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new which == global_edmp_realm_size_empty_holdings_nomadic } }
+			custom_tooltip = {
+				text = edmp_global_realm_size_empty_holding_nomadic_parameter_not_changed_tt
+			}
+		}
+		else = {
+			custom_tooltip = {
+				text = edmp_global_realm_size_empty_holding_nomadic_parameter_changed_tt
+				set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic which = global_edmp_realm_size_empty_holdings_nomadic_new }
+			}
+		}
+		edmp_realm_size_calculate_for_all_relevant_characters = yes
+		if = {
+			limit = { edmp_this_is_a_multiplayer_game = yes }
+			custom_tooltip = {
+				text = edmp_gmn_player_notification_sent_tt
+				any_player = {
+					limit = { NOT = { character = PREV } }
+					character_event = { id = edmp_gmn.3200 }
+				}
+			}
+		}
+		hidden_tooltip = {
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_new   value = 0 }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_new  value = 0 }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_tribal_next  value = 0 }
+			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_next value = 0 }
+		}
+		hidden_tooltip = { character_event = { id = edmp_global.3001 } }
+	}
+	
+}

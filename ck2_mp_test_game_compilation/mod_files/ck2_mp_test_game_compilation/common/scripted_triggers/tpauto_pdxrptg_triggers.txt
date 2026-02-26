@@ -1,0 +1,54 @@
+# Audax Validator EnableCommentMetadata
+# The Validator can't read workshop mods (because they're zipped), so split them into an isolated file and ignore every error.
+# Audax Validator "!" Ignore_NEXT
+
+tpauto_allow_tracking_and_rebuild_pdxrptg = { # Should return true iff trade posts use PDXRPTG (aka Elder Kings) buildings
+	tpauto_pdxrptg_mod_is_active = yes
+}
+
+tpauto_pdxrptg_mod_is_active = {
+	# Based on ...\events\ek_startup.txt , event startup.0
+	# It's a rather primitive test, but it should be effective!
+	#  --- All of these flags seem very EK-specific, so they shouldn't be created in any other context.
+	OR = {
+		has_global_flag = mages_tamriel_necromancy_allowed
+		has_global_flag = mages_tamriel_necromancy_banned
+		has_global_flag = mages_akavir_necromancy_allowed
+		has_global_flag = mages_akavir_necromancy_banned
+		has_global_flag = house_veloth_extinct
+		has_global_flag = house_sul_extinct
+	}
+}
+
+tpauto_this_province_can_have_trade_route_trade_post_pdxrptg = {
+	tpauto_pdxrptg_mod_is_active = yes
+	trade_route_post_trigger = yes
+}
+
+tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_4 = {
+	tpauto_pdxrptg_mod_is_active = yes
+	OR = {
+		AND = {
+			has_regent = no
+			trait = magistrate_4
+		}
+		AND = {
+			has_regent = yes
+			regent = { trait = magistrate_4 }
+		}
+	}
+}
+
+tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_5 = {
+	tpauto_pdxrptg_mod_is_active = yes
+	OR = {
+		AND = {
+			has_regent = no
+			trait = magistrate_5
+		}
+		AND = {
+			has_regent = yes
+			regent = { trait = magistrate_5 }
+		}
+	}
+}

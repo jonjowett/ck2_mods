@@ -1,0 +1,151 @@
+expd_gp_title_is_great_project_county = {
+	custom_tooltip = {
+		text = expd_gp_title_is_great_project_county_tt
+		tier = COUNT
+		location = { has_wonder = yes }
+	}
+}
+
+expd_gp_title_is_great_project_county_where_slot_purchase_is_possible = {
+	
+	expd_gp_title_is_great_project_county = yes
+	
+	custom_tooltip = {
+		text = expd_gp_the_wonder_in_this_county_is_active_tt
+		location = { wonder = { is_active = yes } }
+	}
+	
+	custom_tooltip = {
+		text = expd_gp_the_wonder_in_this_county_is_at_max_stage_tt
+		location = { wonder = { is_at_max_stage = yes } }
+	}
+	
+	trigger_if = {
+		limit = {
+			location = {
+				wonder = {
+					OR = {
+						is_damaged = yes
+						is_being_looted = yes
+						is_being_restored = yes
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			text = expd_gp_the_wonder_in_this_county_is_not_currently_damaged_or_being_looted_or_being_restored_tt
+			always = no
+		}
+	}
+	trigger_else = {
+		hidden_tooltip = { always = yes }
+	}
+	
+	custom_tooltip = {
+		text = expd_gp_the_wonder_in_this_county_is_not_under_construction_tt
+		location = {
+			wonder = {
+				has_started_building_wonder         = no
+				has_started_building_wonder_upgrade = no
+			}
+		}
+	}
+	
+	custom_tooltip = {
+		text = expd_gp_the_wonder_in_this_county_has_gte8_upgrades_tt
+		location = {
+			wonder = {
+				num_of_wonder_upgrades >= 8
+			}
+		}
+	}
+	
+	custom_tooltip = {
+		text = expd_gp_the_wonder_in_this_county_has_had_at_most_7_slots_previously_added_tt
+		location = { check_variable = { which = expd_gp_wonder_slots_added value <= 7 } }
+	}
+	
+}
+
+expd_gp_from_has_enough_money_to_pay_for_a_slot_in_this_countys_wonder = {
+	# NB: This must be consistent with the equivalent scripted_effect
+	trigger_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_1 = yes }
+		FROM = { wealth >=   1000 }
+	}
+	trigger_else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_2 = yes }
+		FROM = { wealth >=   2000 }
+	}
+	trigger_else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_3 = yes }
+		FROM = { wealth >=   4000 }
+	}
+	trigger_else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_4 = yes }
+		FROM = { wealth >=   8000 }
+	}
+	trigger_else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_5 = yes }
+		FROM = { wealth >=  16000 }
+	}
+	trigger_else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_6 = yes }
+		FROM = { wealth >=  32000 }
+	}
+	trigger_else_if = {
+		limit = { expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_7 = yes }
+		FROM = { wealth >=  64000 }
+	}
+	trigger_else = {
+		FROM = { wealth >= 128000 }
+	}
+}
+
+expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_1 = {
+	location = {
+		check_variable = { which = expd_gp_wonder_slots_added value <= 0 }
+	}
+}
+
+expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_2 = {
+	location = {
+		check_variable = { which = expd_gp_wonder_slots_added value <= 1 }
+	}
+}
+
+expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_3 = {
+	location = {
+		check_variable = { which = expd_gp_wonder_slots_added value <= 2 }
+	}
+}
+
+expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_4 = {
+	location = {
+		check_variable = { which = expd_gp_wonder_slots_added value <= 3 }
+	}
+}
+
+expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_5 = {
+	location = {
+		check_variable = { which = expd_gp_wonder_slots_added value <= 4 }
+	}
+}
+
+expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_6 = {
+	location = {
+		check_variable = { which = expd_gp_wonder_slots_added value <= 5 }
+	}
+}
+
+expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_7 = {
+	location = {
+		check_variable = { which = expd_gp_wonder_slots_added value <= 6 }
+	}
+}
+
+expd_gp_adding_a_slot_to_the_wonder_in_this_county_has_cost_8 = {
+	location = {
+		check_variable = { which = expd_gp_wonder_slots_added value <= 7 }
+	}
+}

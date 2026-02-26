@@ -1,0 +1,134 @@
+# Audax Validator EnableCommentMetadata
+
+csh_main_decisions_are_visible_for_this_character = {
+	has_character_flag = csh_submenu_is_open
+}
+
+csh_this_character_can_take_admin_actions = {
+	ai = no
+	OR = {
+		multiplayer = no
+		is_multiplayer_host_character = yes
+	}
+}
+
+csh_this_character_has_at_least_one_artifact_filter_enabled = {
+	custom_tooltip = {
+		text = csh_this_character_has_at_least_one_artifact_filter_enabled_tt
+		OR = {
+			has_character_flag = csh_artifact_filter_only_unowned
+			has_character_flag = csh_artifact_filter_no_armor
+			has_character_flag = csh_artifact_filter_no_books
+			has_character_flag = csh_artifact_filter_no_clutter
+			has_character_flag = csh_artifact_filter_no_mounts_or_pets
+			has_character_flag = csh_artifact_filter_no_rings
+			has_character_flag = csh_artifact_filter_no_necklaces
+			has_character_flag = csh_artifact_filter_no_weapons
+			has_character_flag = csh_artifact_filter_no_other
+		}
+	}
+}
+
+csh_this_character_has_all_artifact_filters_disabled = {
+	custom_tooltip = {
+		text = csh_this_character_has_all_artifact_filters_disabled_tt
+		csh_this_character_has_at_least_one_artifact_filter_enabled = no
+	}
+}
+
+csh_this_character_has_all_artifact_filters_enabled = {
+	custom_tooltip = {
+		text = csh_this_character_has_all_artifact_filters_enabled_tt
+		# Audax Validator "." Ignore_1001
+		AND = {
+			has_character_flag = csh_artifact_filter_only_unowned
+			has_character_flag = csh_artifact_filter_no_armor
+			has_character_flag = csh_artifact_filter_no_books
+			has_character_flag = csh_artifact_filter_no_clutter
+			has_character_flag = csh_artifact_filter_no_mounts_or_pets
+			has_character_flag = csh_artifact_filter_no_rings
+			has_character_flag = csh_artifact_filter_no_necklaces
+			has_character_flag = csh_artifact_filter_no_weapons
+			has_character_flag = csh_artifact_filter_no_other
+		}
+	}
+}
+
+csh_this_character_does_not_have_all_artifact_filters_enabled = {
+	custom_tooltip = {
+		text = csh_this_character_does_not_have_all_artifact_filters_enabled_tt
+		csh_this_character_has_all_artifact_filters_enabled = no
+	}
+}
+
+csh_artifact_filters_are_visible_for_this_character = {
+	NOT = { has_global_flag = csh_updates_disabled }
+	csh_main_decisions_are_visible_for_this_character = yes
+	has_character_flag = csh_show_artifact_filters
+}
+
+
+
+
+
+# The purpose of these artifact-type-specific filters is to ensure that ONLY filters
+#    relating to the current total conversion are visible (eg. only show mount filter in Elder Kings).
+# Since these are intended to be very broad categories, it should be good enough to check
+#    whether the player or any playable ruler has that particular type of artifact.
+
+csh_artifact_filter_armor_is_visible_for_this_character = {
+	csh_artifact_filters_are_visible_for_this_character = yes
+	OR = {
+		any_artifact                        = { csh_this_artifact_is_armor          = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_armor          = yes } }
+		has_character_flag = csh_artifact_filter_no_armor
+	}
+}
+csh_artifact_filter_book_is_visible_for_this_character = {
+	csh_artifact_filters_are_visible_for_this_character = yes
+	OR = {
+		any_artifact                        = { csh_this_artifact_is_book           = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_book           = yes } }
+		has_character_flag = csh_artifact_filter_no_books
+	}
+}
+csh_artifact_filter_clutter_is_visible_for_this_character = {
+	csh_artifact_filters_are_visible_for_this_character = yes
+	OR = {
+		any_artifact                        = { csh_this_artifact_is_clutter        = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_clutter        = yes } }
+		has_character_flag = csh_artifact_filter_no_clutter
+	}
+}
+csh_artifact_filter_mount_or_pet_is_visible_for_this_character = {
+	csh_artifact_filters_are_visible_for_this_character = yes
+	OR = {
+		any_artifact                        = { csh_this_artifact_is_mount_or_pet   = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_mount_or_pet   = yes } }
+		has_character_flag = csh_artifact_filter_no_mounts_or_pets
+	}
+}
+csh_artifact_filter_necklace_is_visible_for_this_character = {
+	csh_artifact_filters_are_visible_for_this_character = yes
+	OR = {
+		any_artifact                        = { csh_this_artifact_is_necklace       = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_necklace       = yes } }
+		has_character_flag = csh_artifact_filter_no_necklaces
+	}
+}
+csh_artifact_filter_ring_is_visible_for_this_character = {
+	csh_artifact_filters_are_visible_for_this_character = yes
+	OR = {
+		any_artifact                        = { csh_this_artifact_is_ring           = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_ring           = yes } }
+		has_character_flag = csh_artifact_filter_no_rings
+	}
+}
+csh_artifact_filter_weapon_is_visible_for_this_character = {
+	csh_artifact_filters_are_visible_for_this_character = yes
+	OR = {
+		any_artifact                        = { csh_this_artifact_is_weapon         = yes }
+		any_playable_ruler = { any_artifact = { csh_this_artifact_is_weapon         = yes } }
+		has_character_flag = csh_artifact_filter_no_weapons
+	}
+}

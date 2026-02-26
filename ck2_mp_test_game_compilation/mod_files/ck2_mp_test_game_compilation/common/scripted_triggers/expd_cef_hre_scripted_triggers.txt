@@ -1,0 +1,242 @@
+#===================================
+#            POTENTIAL
+#===================================
+
+expd_cef_hre_root_can_see_decision_to_form_hre_late = {
+	expd_cef_hre_root_can_see_decision_to_form_hre_basic_requirements = yes
+	NOT = { has_global_flag = hre_removed }
+	has_global_flag = charlemagne_hre
+	OR = {
+		culture = german
+		culture = dutch
+	}
+	e_france = { has_holder = no }
+	is_alternate_start = no
+}
+
+expd_cef_hre_root_can_see_decision_to_form_hre_early = {
+	expd_cef_hre_root_can_see_decision_to_form_hre_basic_requirements = yes
+	conditional_tooltip = {
+		trigger = { is_alternate_start = no }
+		NOR = {
+			has_global_flag = charlemagne_hre 
+			is_title_active = e_hre 
+		}
+	}
+}
+
+expd_cef_hre_root_can_see_decision_to_form_hre_basic_requirements = {
+	is_playable = yes
+	NOT = { has_global_flag = rome_restored }
+	independent = yes
+	OR = {
+		religion = catholic
+		religion = fraticelli
+	}
+	NOT = { has_landed_title = e_byzantium }
+	e_hre = { has_holder = no }
+	NOT = { has_alternate_start_parameter = { key = religion_names value = random } }
+}
+
+
+
+
+
+#===================================
+#               ALLOW
+#===================================
+
+expd_cef_hre_root_can_take_decision_to_form_hre_early = {
+	expd_cef_hre_root_can_take_decision_to_form_hre_basic_requirements = yes
+	expd_cef_hre_root_can_take_decision_to_form_hre_early_extra_requirements = yes
+}
+
+expd_cef_hre_root_can_take_decision_to_form_hre_late = {
+	expd_cef_hre_root_can_take_decision_to_form_hre_basic_requirements = yes
+	expd_cef_hre_root_can_take_decision_to_form_hre_late_extra_requirements = yes
+}
+
+expd_cef_hre_root_can_take_decision_to_form_hre_basic_requirements = {
+	
+	is_adult = yes
+	prisoner = no
+	NOT = { trait = incapable }
+	
+	prestige = 1000
+	
+	# Required realm size is different depending on formation date
+	trigger_if = {
+		limit = { expd_cef_hre_root_can_see_decision_to_form_hre_early = yes }
+		realm_size = 220
+	}
+	trigger_else = {
+		realm_size = 180
+	}
+	
+	# Religious head opinion is required when forming early
+	conditional_tooltip = {
+		trigger = {
+			ai = no
+			expd_cef_hre_root_can_see_decision_to_form_hre_early = yes
+		}
+		religion_head = { opinion = { who = ROOT value = 25 } }
+	}
+	
+	conditional_tooltip = {
+		trigger = { ai = no }
+		scaled_wealth = 2
+	}
+	
+}
+
+expd_cef_hre_root_can_take_decision_to_form_hre_late_extra_requirements = {
+	
+	# Must have Germany
+	has_landed_title = k_germany
+	
+	# For 936, must have Italy.
+	# Otherwise, must have a kingdom that's not Germany.
+	trigger_if = {
+		limit = { start_date = 936.8.7 }
+		has_landed_title = k_italy
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = FORM_THE_HRE_TT
+			any_demesne_title = {
+				tier = KING
+				NOT = { title = k_germany }
+			}
+		}
+	}
+	
+}
+
+expd_cef_hre_root_can_take_decision_to_form_hre_early_extra_requirements = {
+	conditional_tooltip = {
+		trigger = { is_alternate_start = no }
+		
+		# Must have the kingdom of Italy or empire of Italia
+		# Mod added: Completely controlling the kingdom is sufficient
+		custom_tooltip = {
+			text = form_the_hre_early_tooltip_1
+			hidden_tooltip = {
+				OR = {
+					has_landed_title = k_italy
+					has_landed_title = e_italy
+					k_italy = { expd_cef_root_controls_this_kingdom = yes }
+				}
+			}
+		}
+		
+		# Must have one of Germania, Francia, Hispania or Britannia
+		# Or a kingdom in one of those empires
+		# Mod added: Or a kingdom in one of those regions, in case the empire has been destroyed via custom empire formation
+		custom_tooltip = {
+			text = form_the_hre_early_tooltip_2
+			hidden_tooltip = {
+				any_demesne_title = {
+					OR = {
+						title = e_france
+						title = e_germany
+						title = e_britannia
+						title = e_spain
+						AND = {
+							tier = KING
+							NOT = {	title = k_italy	}
+							OR = {
+								empire = { title = e_france }
+								empire = { title = e_germany }
+								empire = { title = e_britannia }
+								empire = { title = e_spain }
+								any_de_jure_vassal_title = {
+									tier = COUNT
+									location = {
+										OR = {
+											region = world_europe_west_brittania
+											region = world_europe_west_germania
+											region = world_europe_west_francia
+											region = world_europe_west_iberia
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		# None of Italia, Germania, Francia, Hispania or Britannia can be held by a Christian other than this character
+		custom_tooltip = {
+			text = form_the_hre_early_tooltip_3
+			hidden_tooltip = {
+				OR = {
+					has_landed_title = e_italy
+					e_italy = {	has_holder = no	}
+					e_italy = { holder_scope = { NOT = { religion_group = christian } } }
+				}
+				OR = {
+					has_landed_title = e_germany
+					e_germany = {	has_holder = no	}
+					e_germany = { holder_scope = { NOT = { religion_group = christian } } }
+				}
+				OR = {
+					has_landed_title = e_france
+					e_france = { has_holder = no	}
+					e_france = { holder_scope = { NOT = { religion_group = christian } } }
+				}
+				OR = {
+					has_landed_title = e_spain
+					e_spain = {	has_holder = no	}
+					e_spain = { holder_scope = { NOT = { religion_group = christian } } }
+				}
+				OR = {
+					has_landed_title = e_britannia
+					e_britannia = {	has_holder = no	}
+					e_britannia = { holder_scope = { NOT = { religion_group = christian } } }
+				} 
+			}
+		}
+	}
+}
+
+
+
+
+
+#===================================
+#               OTHER
+#===================================
+
+expd_cef_hre_root_can_grant_this_county_to_his_religious_head = {
+	
+	holder_scope = {
+		
+		# Not held by ROOT's religious head
+		NOT = { ROOT = { religion_head = { character = PREVPREV } } }
+		
+		# Not held by a vassal of ROOT's religious head
+		NOT = { any_liege = { ROOT = { religion_head = { character = PREVPREV } } } }
+		
+		# Is held by ROOT or one of his vassals
+		OR = {
+			character = ROOT
+			any_liege = { character = ROOT }
+		}
+		
+		# Holder has another county, or is an AI that does not belong to ROOT's dynasty
+		OR = {
+			AND = {
+				ai = yes
+				NOT = { dynasty = ROOT }
+			}
+			any_demesne_title = {
+				tier = COUNT
+				NOT = { title = PREVPREV }
+			}
+		}
+		
+	}
+	
+}

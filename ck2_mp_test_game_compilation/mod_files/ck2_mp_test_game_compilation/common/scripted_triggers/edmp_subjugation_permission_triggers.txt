@@ -1,0 +1,394 @@
+# Audax Validator EnableCommentMetadata
+
+# Triggers that can directly be used in CBs
+
+edmp_subjugation_can_use_gui = {
+	# Subjugations are always permitted for AI and in SP.
+	# Subjugations of barons and counts by players are always permitted.
+	# Subjugations of dukes by players are only permitted if the "duke+ only" global flag is NOT set, or if that player has permission to subjugate that particular character.
+	#      (Same logic for king+ and emperor+).
+	# In SP, also show the MP game rule logic to the player, even though it won't have any effect
+	#      (so that an MP save editor can audit).
+	
+	OR = {
+		
+		# This trigger_if block MUST appear above all other conditions, or the in-game tooltip is messed up.
+		trigger_if = {
+			limit = { edmp_global_subjugations_rule_inconsistent = yes }
+			edmp_global_subjugations_rule_is_not_inconsistent = yes # Should logically always evaluate to false, ie. blocker, in this circumstance
+		}
+		trigger_else_if = {
+			limit = { edmp_global_subjugations_are_enabled = yes }
+			edmp_global_subjugations_are_enabled = yes # Show this to the player, even though it's not restricting them
+		}
+		trigger_else_if = {
+			limit = { edmp_global_subjugations_of_duke_plus_are_disabled_without_explicit_permission = yes }
+			# Audax Validator "." Ignore_1001
+			AND = {
+				edmp_global_subjugations_of_duke_plus_are_disabled_without_explicit_permission = yes
+				OR = {
+					custom_tooltip = {
+						text = edmp_subjugation_from_is_lower_real_tier_than_duke_tt
+						ROOT_FROM = { lower_real_tier_than = DUKE }
+					}
+					edmp_root_has_permission_to_subjugate_from = yes
+				}
+			}
+		}
+		trigger_else_if = {
+			limit = { edmp_global_subjugations_of_king_plus_are_disabled_without_explicit_permission = yes }
+			# Audax Validator "." Ignore_1001
+			AND = {
+				edmp_global_subjugations_of_king_plus_are_disabled_without_explicit_permission = yes
+				OR = {
+					custom_tooltip = {
+						text = edmp_subjugation_from_is_lower_real_tier_than_king_tt
+						ROOT_FROM = { lower_real_tier_than = KING }
+					}
+					edmp_root_has_permission_to_subjugate_from = yes
+				}
+			}
+		}
+		trigger_else_if = {
+			limit = { edmp_global_subjugations_of_emperor_plus_are_disabled_without_explicit_permission = yes }
+			# Audax Validator "." Ignore_1001
+			AND = {
+				edmp_global_subjugations_of_emperor_plus_are_disabled_without_explicit_permission = yes
+				OR = {
+					custom_tooltip = {
+						text = edmp_subjugation_from_is_lower_real_tier_than_emperor_tt
+						ROOT_FROM = { lower_real_tier_than = EMPEROR }
+					}
+					edmp_root_has_permission_to_subjugate_from = yes
+				}
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = edmp_subjugation_can_use_gui_logic_error_tt
+				always = no
+			}
+		}
+		
+		edmp_root_is_an_ai = yes
+		
+		edmp_this_is_not_a_multiplayer_game = yes
+		
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+# General-use triggers
+
+
+
+
+
+
+
+
+
+
+edmp_this_character_has_no_subjugation_permission_flag = {
+	custom_tooltip = {
+		text = edmp_this_character_has_no_subjugation_permission_flag_tt
+		edmp_this_character_has_any_subjugation_permission_flag = no
+	}
+}
+
+edmp_this_character_has_any_subjugation_permission_flag = {
+	custom_tooltip = {
+		text = edmp_this_character_has_any_subjugation_permission_flag_tt
+		OR = {
+			has_character_modifier = edmp_subjugation_permission_character_01
+			has_character_modifier = edmp_subjugation_permission_character_02
+			has_character_modifier = edmp_subjugation_permission_character_03
+			has_character_modifier = edmp_subjugation_permission_character_04
+			has_character_modifier = edmp_subjugation_permission_character_05
+			has_character_modifier = edmp_subjugation_permission_character_06
+			has_character_modifier = edmp_subjugation_permission_character_07
+			has_character_modifier = edmp_subjugation_permission_character_08
+			has_character_modifier = edmp_subjugation_permission_character_09
+			has_character_modifier = edmp_subjugation_permission_character_10
+			has_character_modifier = edmp_subjugation_permission_character_11
+			has_character_modifier = edmp_subjugation_permission_character_12
+			has_character_modifier = edmp_subjugation_permission_character_13
+			has_character_modifier = edmp_subjugation_permission_character_14
+			has_character_modifier = edmp_subjugation_permission_character_15
+			has_character_modifier = edmp_subjugation_permission_character_16
+			has_character_modifier = edmp_subjugation_permission_character_17
+			has_character_modifier = edmp_subjugation_permission_character_18
+			has_character_modifier = edmp_subjugation_permission_character_19
+			has_character_modifier = edmp_subjugation_permission_character_20
+		}
+	}
+}
+
+
+
+
+
+edmp_this_character_has_any_subjugation_target_flag = {
+	custom_tooltip = {
+		text = edmp_this_character_has_any_subjugation_target_flag_tt
+		OR = {
+			has_character_flag = edmp_subjugation_permission_target_01
+			has_character_flag = edmp_subjugation_permission_target_02
+			has_character_flag = edmp_subjugation_permission_target_03
+			has_character_flag = edmp_subjugation_permission_target_04
+			has_character_flag = edmp_subjugation_permission_target_05
+			has_character_flag = edmp_subjugation_permission_target_06
+			has_character_flag = edmp_subjugation_permission_target_07
+			has_character_flag = edmp_subjugation_permission_target_08
+			has_character_flag = edmp_subjugation_permission_target_09
+			has_character_flag = edmp_subjugation_permission_target_10
+			has_character_flag = edmp_subjugation_permission_target_11
+			has_character_flag = edmp_subjugation_permission_target_12
+			has_character_flag = edmp_subjugation_permission_target_13
+			has_character_flag = edmp_subjugation_permission_target_14
+			has_character_flag = edmp_subjugation_permission_target_15
+			has_character_flag = edmp_subjugation_permission_target_16
+			has_character_flag = edmp_subjugation_permission_target_17
+			has_character_flag = edmp_subjugation_permission_target_18
+			has_character_flag = edmp_subjugation_permission_target_19
+			has_character_flag = edmp_subjugation_permission_target_20
+		}
+	}
+}
+
+
+
+
+
+edmp_all_subjugation_permission_character_flags_have_not_been_issued = {
+	custom_tooltip = {
+		text = edmp_all_subjugation_permission_character_flags_have_not_been_issued_tt
+		edmp_all_subjugation_permission_character_flags_have_been_issued = no
+	}
+}
+
+edmp_all_subjugation_permission_character_flags_have_been_issued = {
+	custom_tooltip = {
+		text = edmp_all_subjugation_permission_character_flags_have_been_issued_tt
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_01 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_02 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_03 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_04 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_05 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_06 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_07 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_08 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_09 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_10 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_11 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_12 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_13 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_14 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_15 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_16 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_17 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_18 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_19 }
+		any_character = { has_character_modifier = edmp_subjugation_permission_character_20 }
+	}
+}
+
+
+
+
+
+edmp_root_has_permission_to_subjugate_from = {
+	custom_tooltip = {
+		text = edmp_root_has_permission_to_subjugate_from_tt
+		ROOT_FROM = {
+			ROOT = {
+				edmp_this_character_has_permission_to_subjugate_prev_character = yes
+			}
+		}
+	}
+}
+
+edmp_this_character_has_permission_to_subjugate_prev_character = {
+	custom_tooltip = {
+		text = edmp_this_character_has_permission_to_subjugate_prev_character_tt
+		OR = {
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_01
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_01 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_02
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_02 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_03
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_03 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_04
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_04 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_05
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_05 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_06
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_06 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_07
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_07 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_08
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_08 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_09
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_09 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_10
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_10 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_11
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_11 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_12
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_12 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_13
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_13 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_14
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_14 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_15
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_15 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_16
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_16 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_17
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_17 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_18
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_18 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_19
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_19 }
+			}
+			AND = {
+				has_character_modifier      = edmp_subjugation_permission_character_20
+				PREV = { has_character_flag =    edmp_subjugation_permission_target_20 }
+			}
+		}
+	}
+}
+
+edmp_prev_character_has_permission_to_subjugate_this_character = {
+	custom_tooltip = {
+		text = edmp_prev_character_has_permission_to_subjugate_this_character_tt
+		OR = {
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_01 }
+				has_character_flag              =    edmp_subjugation_permission_target_01
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_02 }
+				has_character_flag              =    edmp_subjugation_permission_target_02
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_03 }
+				has_character_flag              =    edmp_subjugation_permission_target_03
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_04 }
+				has_character_flag              =    edmp_subjugation_permission_target_04
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_05 }
+				has_character_flag              =    edmp_subjugation_permission_target_05
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_06 }
+				has_character_flag              =    edmp_subjugation_permission_target_06
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_07 }
+				has_character_flag              =    edmp_subjugation_permission_target_07
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_08 }
+				has_character_flag              =    edmp_subjugation_permission_target_08
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_09 }
+				has_character_flag              =    edmp_subjugation_permission_target_09
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_10 }
+				has_character_flag              =    edmp_subjugation_permission_target_10
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_11 }
+				has_character_flag              =    edmp_subjugation_permission_target_11
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_12 }
+				has_character_flag              =    edmp_subjugation_permission_target_12
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_13 }
+				has_character_flag              =    edmp_subjugation_permission_target_13
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_14 }
+				has_character_flag              =    edmp_subjugation_permission_target_14
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_15 }
+				has_character_flag              =    edmp_subjugation_permission_target_15
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_16 }
+				has_character_flag              =    edmp_subjugation_permission_target_16
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_17 }
+				has_character_flag              =    edmp_subjugation_permission_target_17
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_18 }
+				has_character_flag              =    edmp_subjugation_permission_target_18
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_19 }
+				has_character_flag              =    edmp_subjugation_permission_target_19
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_subjugation_permission_character_20 }
+				has_character_flag              =    edmp_subjugation_permission_target_20
+			}
+		}
+	}
+}

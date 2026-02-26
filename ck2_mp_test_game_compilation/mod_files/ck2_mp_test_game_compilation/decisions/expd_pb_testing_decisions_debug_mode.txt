@@ -1,0 +1,443 @@
+# Debug mode decisions
+# Usage:
+#  --- In the console: set_flag expd_pb_debug_mode (or, in ironman, take the self-targeted decision)
+#  --- Then right-click on any living character and see which decisions are "allowed"
+#  --- Then check that the "allowed" status is correct (eg. the unknown father decision is "allowed" if and only if the father is unknown)
+
+targetted_decisions = {
+	
+	expd_pb_enable_debug_mode = {
+		only_playable = yes
+		filter = self
+		ai = no
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
+		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+			NOT = { has_global_flag = expd_pb_debug_mode }
+			NOT = { has_character_flag = expd_pb_bloodline_propagation_blocked }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = expd_pb_debug_mode
+			}
+		}
+	}
+	
+	expd_pb_disable_debug_mode = {
+		only_playable = yes
+		filter = self
+		ai = no
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
+		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				clr_global_flag = expd_pb_debug_mode
+			}
+		}
+	}
+	
+	expd_pb_test_this_character_has_unknown_father = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			expd_pb_this_child_has_unknown_father = yes
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_this_characters_parents_were_matri_married_at_this_characters_birth = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			expd_pb_this_childs_parents_were_matri_married_at_birth = yes
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_this_character_should_receive_matrilineal_bloodline_from_father_via_transfer = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			expd_pb_this_child_should_receive_matrilineal_bloodline_from_father_via_transfer = yes
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_this_character_should_receive_patrilineal_bloodline_from_mother_via_transfer = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			expd_pb_this_child_should_receive_patrilineal_bloodline_from_mother_via_transfer = yes
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_any_owned_bloodline_allows_bastards = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			any_owned_bloodline = {
+				expd_pb_this_bloodline_allows_bastards = yes
+			}
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_any_owned_bloodline_disallows_bastards = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			any_owned_bloodline = {
+				expd_pb_this_bloodline_allows_bastards = no
+			}
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_any_owned_bloodline_has_matri_transfer = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			any_owned_bloodline = {
+				expd_pb_this_bloodline_has_matrilineal_transfer = yes
+			}
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_any_owned_bloodline_does_not_have_matri_transfer = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			any_owned_bloodline = {
+				expd_pb_this_bloodline_has_matrilineal_transfer = no
+			}
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_any_owned_bloodline_is_patrilineal = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			any_owned_bloodline = {
+				expd_pb_this_bloodline_is_patrilineal = yes
+			}
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_any_owned_bloodline_is_matrilineal = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			any_owned_bloodline = {
+				expd_pb_this_bloodline_is_matrilineal = yes
+			}
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_any_owned_bloodline_is_all_descendants = {
+		only_playable = yes
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			has_global_flag = expd_pb_debug_mode
+		}
+		allow = {
+			any_owned_bloodline = {
+				expd_pb_this_bloodline_is_all_descendants = yes
+			}
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	# Self-targeted decisions which generate lists of characters in the third party slot
+	
+	expd_pb_test_list_of_children_with_unknown_fathers = {
+		only_playable = yes
+		filter = self
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
+		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+			has_global_flag = expd_pb_debug_mode
+		}
+		third_party_potential = {
+			FROMFROM = { expd_pb_this_child_has_unknown_father = yes }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_list_of_children_with_unknown_fathers_whose_mother_has_a_bloodline = {
+		only_playable = yes
+		filter = self
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
+		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+			has_global_flag = expd_pb_debug_mode
+		}
+		third_party_potential = {
+			FROMFROM = {
+				expd_pb_this_child_has_unknown_father = yes
+				NOT = {
+					any_owned_bloodline = {
+						always = yes
+					}
+				}
+				mother_even_if_dead = {
+					any_owned_bloodline = {
+						always = yes
+					}
+				}
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_list_of_children_with_no_bloodline_whose_father_has_a_patrilineal_bloodline = {
+		only_playable = yes
+		filter = self
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
+		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+			has_global_flag = expd_pb_debug_mode
+		}
+		third_party_potential = {
+			FROMFROM = {
+				NOT = {
+					any_owned_bloodline = {
+						always = yes
+					}
+				}
+				father_even_if_dead = {
+					any_owned_bloodline = {
+						expd_pb_this_bloodline_is_patrilineal = yes
+					}
+				}
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_list_of_children_with_no_bloodline_whose_father_has_a_matrilineal_bloodline = {
+		only_playable = yes
+		filter = self
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
+		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+			has_global_flag = expd_pb_debug_mode
+		}
+		third_party_potential = {
+			FROMFROM = {
+				NOT = {
+					any_owned_bloodline = {
+						always = yes
+					}
+				}
+				father_even_if_dead = {
+					any_owned_bloodline = {
+						expd_pb_this_bloodline_is_matrilineal = yes
+					}
+				}
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_list_of_children_with_no_bloodline_whose_mother_has_a_patrilineal_bloodline = {
+		only_playable = yes
+		filter = self
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
+		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+			has_global_flag = expd_pb_debug_mode
+		}
+		third_party_potential = {
+			FROMFROM = {
+				NOT = {
+					any_owned_bloodline = {
+						always = yes
+					}
+				}
+				mother_even_if_dead = {
+					any_owned_bloodline = {
+						expd_pb_this_bloodline_is_patrilineal = yes
+					}
+				}
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+	
+	expd_pb_test_list_of_children_with_no_bloodline_whose_mother_has_a_matrilineal_bloodline = {
+		only_playable = yes
+		filter = self
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
+		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+			has_global_flag = expd_pb_debug_mode
+		}
+		third_party_potential = {
+			FROMFROM = {
+				NOT = {
+					any_owned_bloodline = {
+						always = yes
+					}
+				}
+				mother_even_if_dead = {
+					any_owned_bloodline = {
+						expd_pb_this_bloodline_is_matrilineal = yes
+					}
+				}
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			custom_tooltip = { text = EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT }
+		}
+	}
+}

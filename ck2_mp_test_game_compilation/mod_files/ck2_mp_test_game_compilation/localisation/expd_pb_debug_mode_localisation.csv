@@ -1,0 +1,45 @@
+# Enable/disable debug mode
+expd_pb_enable_debug_mode;§R(ED:PB)§! Enable debug mode;;;;;;;;;x
+expd_pb_enable_debug_mode_desc;The §YPropagate Bloodlines§! mod's debug mode will be enabled, allowing you to investigate any issues.\n-\nNotable features:\n-\nTargeted decisions on all (living) characters, showing what the mod "thinks" about their ability to inherit bloodlines.\n-\nSelf-targeted decisions where the third-party filter contains useful lists of characters (eg. those that possibly "should" have a bloodline but don't).;;;;;;;;;x
+expd_pb_disable_debug_mode;§R(ED:PB)§! Disable debug mode;;;;;;;;;x
+expd_pb_disable_debug_mode_desc;The §YPropagate Bloodlines§! mod's debug mode will be disabled;;;;;;;;;x
+# Targeted decisions on any character : Properties of the character
+expd_pb_test_this_character_has_unknown_father;§R(ED:PB)§! Has Unknown Father;;;;;;;;;x
+expd_pb_test_this_characters_parents_were_matri_married_at_this_characters_birth;§R(ED:PB)§! Parents Matri-Married;;;;;;;;;x
+expd_pb_test_this_character_should_receive_matrilineal_bloodline_from_father_via_transfer;§R(ED:PB)§! Recv Matri BL from Father;;;;;;;;;x
+expd_pb_test_this_character_should_receive_patrilineal_bloodline_from_mother_via_transfer;§R(ED:PB)§! Recv Patri BL from Mother;;;;;;;;;x
+expd_pb_test_this_character_has_unknown_father_desc;§Y[Root.GetTitledFirstName]§! has an unknown father;;;;;;;;;x
+expd_pb_test_this_characters_parents_were_matri_married_at_this_characters_birth_desc;§Y[Root.GetTitledFirstName]§!'s parents were matrilineally married at the time of [Root.GetHerHis] birth;;;;;;;;;x
+expd_pb_test_this_character_should_receive_matrilineal_bloodline_from_father_via_transfer_desc;§Y[Root.GetTitledFirstName]§! should receive matrilineally-inherited bloodlines from [Root.GetHerHis] father if those bloodlines have matrilineal transfer;;;;;;;;x
+expd_pb_test_this_character_should_receive_patrilineal_bloodline_from_mother_via_transfer_desc;§Y[Root.GetTitledFirstName]§! should receive patrilineally-inherited bloodlines from [Root.GetHerHis] mother if those bloodlines have matrilineal transfer;;;;;;;;x
+# Targeted decisions on any character : Properties of the character's bloodlines
+expd_pb_test_any_owned_bloodline_allows_bastards;§R(ED:PB)§! Has Bastard BL;;;;;;;;;x
+expd_pb_test_any_owned_bloodline_disallows_bastards;§R(ED:PB)§! Has No-Bastard BL;;;;;;;;;x
+expd_pb_test_any_owned_bloodline_has_matri_transfer;§R(ED:PB)§! Has Matri TF BL;;;;;;;;;x
+expd_pb_test_any_owned_bloodline_does_not_have_matri_transfer;§R(ED:PB)§! Has No-Matri TF BL;;;;;;;;;x
+expd_pb_test_any_owned_bloodline_is_patrilineal;§R(ED:PB)§! Has Patri Inh BL;;;;;;;;;x
+expd_pb_test_any_owned_bloodline_is_matrilineal;§R(ED:PB)§! Has Matri Inh BL;;;;;;;;;x
+expd_pb_test_any_owned_bloodline_is_all_descendants;§R(ED:PB)§! Has AllDesc Inh BL;;;;;;;;;x
+expd_pb_test_any_owned_bloodline_allows_bastards_desc;§Y[Root.GetTitledFirstName]§! has at least one bloodline which allows inheritance by bastards;;;;;;;;x
+expd_pb_test_any_owned_bloodline_disallows_bastards_desc;§Y[Root.GetTitledFirstName]§! has at least one bloodline which forbids inheritance by  bastards;;;;;;;;x
+expd_pb_test_any_owned_bloodline_has_matri_transfer_desc;§Y[Root.GetTitledFirstName]§! has at least one bloodline which has matrilineal transfer;;;;;;;;x
+expd_pb_test_any_owned_bloodline_does_not_have_matri_transfer_desc;§Y[Root.GetTitledFirstName]§! has at least one bloodline which does not have matrilineal transfer;;;;;;;;x
+expd_pb_test_any_owned_bloodline_is_patrilineal_desc;§Y[Root.GetTitledFirstName]§! has at least one bloodline with patrilineal inheritance;;;;;;;;x
+expd_pb_test_any_owned_bloodline_is_matrilineal_desc;§Y[Root.GetTitledFirstName]§! has at least one bloodline with matrilineal inheritance;;;;;;;;x
+expd_pb_test_any_owned_bloodline_is_all_descendants_desc;§Y[Root.GetTitledFirstName]§! has at least one bloodline with "all descendants" inheritance;;;;;;;;x
+# Self-targeted lists : Unknown father
+expd_pb_test_list_of_children_with_unknown_fathers;§R(ED:PB)§! List: Unknown Fathers;;;;;;;;;x
+expd_pb_test_list_of_children_with_unknown_fathers_whose_mother_has_a_bloodline;§R(ED:PB)§! List: Unknown Fathers + BL;;;;;;;;;x
+expd_pb_test_list_of_children_with_unknown_fathers_desc;The third-party filter below contains all living characters who have unknown fathers§!\n-\nTip: If you want to investigate a character further, right-click on them and click the star icon to make them a character of special interest.;;;;;;;;;x
+expd_pb_test_list_of_children_with_unknown_fathers_whose_mother_has_a_bloodline_desc;The third-party filter below contains all living characters without a bloodline who have unknown fathers and whose mother has a bloodline§!\n-\nTip: If you want to investigate a character further, right-click on them and click the star icon to make them a character of special interest.;;;;;;;;;x
+# Self-targeted lists : Bloodlines not passed on
+expd_pb_test_list_of_children_with_no_bloodline_whose_father_has_a_patrilineal_bloodline;§R(ED:PB)§! List: Father Patri BL;;;;;;;;;x
+expd_pb_test_list_of_children_with_no_bloodline_whose_father_has_a_matrilineal_bloodline;§R(ED:PB)§! List: Father Matri BL;;;;;;;;;x
+expd_pb_test_list_of_children_with_no_bloodline_whose_mother_has_a_patrilineal_bloodline;§R(ED:PB)§! List: Mother Patri BL;;;;;;;;;x
+expd_pb_test_list_of_children_with_no_bloodline_whose_mother_has_a_matrilineal_bloodline;§R(ED:PB)§! List: Mother Matri BL;;;;;;;;;x
+expd_pb_test_list_of_children_with_no_bloodline_whose_father_has_a_patrilineal_bloodline_desc;The third-party filter below contains all living characters without a bloodline whose father has a patrilineal bloodline\n-\nTip: If you want to investigate a character further, right-click on them and click the star icon to make them a character of special interest.;;;;;;;;;x
+expd_pb_test_list_of_children_with_no_bloodline_whose_father_has_a_matrilineal_bloodline_desc;The third-party filter below contains all living characters without a bloodline whose father has a matrilineal bloodline\n-\nTip: If you want to investigate a character further, right-click on them and click the star icon to make them a character of special interest.;;;;;;;;;x
+expd_pb_test_list_of_children_with_no_bloodline_whose_mother_has_a_patrilineal_bloodline_desc;The third-party filter below contains all living characters without a bloodline whose mother has a patrilineal bloodline\n-\nTip: If you want to investigate a character further, right-click on them and click the star icon to make them a character of special interest.;;;;;;;;;x
+expd_pb_test_list_of_children_with_no_bloodline_whose_mother_has_a_matrilineal_bloodline_desc;The third-party filter below contains all living characters without a bloodline whose mother has a matrilineal bloodline\n-\nTip: If you want to investigate a character further, right-click on them and click the star icon to make them a character of special interest.;;;;;;;;;x
+# Effect tooltip
+EXPD_PB_TOOLTIP_DEBUG_MODE_EFFECT;Nothing will happen if you take this decision!;;;;;;;;;x

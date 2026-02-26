@@ -1,0 +1,37 @@
+namespace = edmp_gtpc
+
+# Scheduled cleanup event, set up at the same time as the building is added
+province_event = {
+	id = edmp_gtpc.1000
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		any_province_holding = {
+			if = { limit = { has_building = edmp_interference_grant_tp_ca } remove_building = edmp_interference_grant_tp_ca }
+			if = { limit = { has_building = edmp_interference_grant_tp_ct } remove_building = edmp_interference_grant_tp_ct }
+			if = { limit = { has_building = edmp_interference_grant_tp_tp } remove_building = edmp_interference_grant_tp_tp }
+			if = { limit = { has_building = edmp_interference_grant_tp_tb } remove_building = edmp_interference_grant_tp_tb }
+			if = { limit = { has_building = edmp_interference_grant_tp_no } remove_building = edmp_interference_grant_tp_no }
+		}
+	}
+}
+
+# Extra cleanup event, in case the regular cleanup doesn't work for some reason
+# Expected to be called on_X_pulse
+character_event = {
+	id = edmp_gtpc.2000
+	is_triggered_only = yes
+	hide_window = yes
+	only_rulers = yes
+	immediate = {
+		any_demesne_title = {
+			limit = { tier = COUNT }
+			location = {
+				if = {
+					limit = { NOT = { has_province_modifier = edmp_interference_grant_tp_building_destruction_countdown } }
+					province_event = { id = edmp_gtpc.1000 }
+				}
+			}
+		}
+	}
+}

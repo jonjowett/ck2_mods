@@ -1,0 +1,58 @@
+decisions = {
+	
+	edmp_global_menu_show = {
+		
+		ai = no
+		
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can change global rules
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		
+		allow = {
+			custom_tooltip = {
+				text = edmp_global_menu_not_currently_open_for_anyone_tt
+				NOT = { has_global_flag = edmp_global_menu_open }
+			}
+		}
+		
+		effect = {
+			custom_tooltip = {
+				text = edmp_global_menu_popup_event_tt
+				character_event = { id = edmp_global.1000 }
+			}
+		}
+		
+	}
+	
+}
+
+targetted_decisions = {
+	
+	edmp_global_menu_debug_remove_modifier = {
+		
+		ai = no
+		filter = self
+		
+		# Non-functional in self-targeted decisions
+		from_potential = { always = yes }
+		
+		# In SP, only a player with the menu open should be able to see this decision.
+		# In MP, only the host with the menu open should be able to see this decision.
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes
+			has_global_flag = edmp_global_menu_open
+		}
+		
+		allow = { always = yes }
+		
+		effect = {
+			custom_tooltip = {
+				text = edmp_global_menu_open_flag_removed_tt
+				clr_global_flag = edmp_global_menu_open
+			}
+		}
+		
+	}
+	
+}

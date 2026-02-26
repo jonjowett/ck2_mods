@@ -1,0 +1,779 @@
+namespace = edmp_ifn
+
+# War forced to end by FROM
+character_event = {
+	id    = edmp_ifn.1001
+	desc  = edmp_ifn_1001_desc
+	title = edmp_ifn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	option = {
+		trigger = { event_target:edmp_interference_force_end_war_white_peace_attacker = { character = ROOT } }
+		show_portrait = event_target:edmp_interference_force_end_war_white_peace_defender
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_ok_affected
+	}
+	option = {
+		trigger = { event_target:edmp_interference_force_end_war_white_peace_defender = { character = ROOT } }
+		show_portrait = event_target:edmp_interference_force_end_war_white_peace_attacker
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_ok_affected
+	}
+	option = {
+		trigger = {
+			NOR = {
+				event_target:edmp_interference_force_end_war_white_peace_attacker = { character = ROOT }
+				event_target:edmp_interference_force_end_war_white_peace_defender = { character = ROOT }
+			}
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_white_peace_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_white_peace_defender
+		name = edmp_ifn_evtopt_ok_unaffected
+	}
+	after = {
+		hidden_tooltip = {
+			clear_event_target = edmp_interference_force_end_war_white_peace_war
+			clear_event_target = edmp_interference_force_end_war_white_peace_attacker
+			clear_event_target = edmp_interference_force_end_war_white_peace_defender
+		}
+	}
+}
+
+# Tributary relationship cancelled by FROM
+character_event = {
+	id    = edmp_ifn.2001
+	desc  = edmp_ifn_2001_desc
+	title = edmp_ifn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	option = {
+		trigger = { event_target:edmp_interference_cancel_tributary_suzerain = { character = ROOT } }
+		show_portrait = event_target:edmp_interference_cancel_tributary_tributary
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_curses
+	}
+	option = {
+		trigger = { event_target:edmp_interference_cancel_tributary_tributary = { character = ROOT } }
+		show_portrait = event_target:edmp_interference_cancel_tributary_suzerain
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_excellent
+	}
+	option = {
+		trigger = {
+			NOR = {
+				event_target:edmp_interference_cancel_tributary_tributary = { character = ROOT }
+				event_target:edmp_interference_cancel_tributary_suzerain = { character = ROOT }
+			}
+		}
+		show_portrait = event_target:edmp_interference_cancel_tributary_tributary
+		show_portrait = event_target:edmp_interference_cancel_tributary_suzerain
+		name = edmp_ifn_evtopt_ok_unaffected
+	}
+	after = {
+		hidden_tooltip = {
+			clear_event_target = edmp_interference_cancel_tributary_tributary
+			clear_event_target = edmp_interference_cancel_tributary_suzerain
+		}
+	}
+}
+
+# Change in bilateral relationship forced by FROM
+character_event = {
+	id    = edmp_ifn.3001
+	title = edmp_ifn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_10_year_truce }
+		text                        = edmp_ifn_3001_desc_bilateral_10_year_truce
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_break_truce }
+		text                        = edmp_ifn_3001_desc_bilateral_break_truce
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_add_nap }
+		text                        = edmp_ifn_3001_desc_bilateral_add_nap
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_break_nap }
+		text                        = edmp_ifn_3001_desc_bilateral_break_nap
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_add_alliance }
+		text                        = edmp_ifn_3001_desc_bilateral_add_alliance
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_break_alliance }
+		text                        = edmp_ifn_3001_desc_bilateral_break_alliance
+	}
+	option = {
+		trigger = { event_target:edmp_interference_bilateral_party_1 = { character = ROOT } }
+		show_portrait = event_target:edmp_interference_bilateral_party_2
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_ok_affected
+	}
+	option = {
+		trigger = { event_target:edmp_interference_bilateral_party_2 = { character = ROOT } }
+		show_portrait = event_target:edmp_interference_bilateral_party_1
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_ok_affected
+	}
+	option = {
+		trigger = {
+			NOR = {
+				event_target:edmp_interference_bilateral_party_1 = { character = ROOT }
+				event_target:edmp_interference_bilateral_party_2 = { character = ROOT }
+			}
+		}
+		show_portrait = event_target:edmp_interference_bilateral_party_1
+		show_portrait = event_target:edmp_interference_bilateral_party_2
+		name = edmp_ifn_evtopt_ok_unaffected
+	}
+	after = {
+		hidden_tooltip = {
+			
+			clear_event_target = edmp_interference_bilateral_party_1
+			clear_event_target = edmp_interference_bilateral_party_1
+			
+			clr_global_flag    = edmp_interference_bilateral_10_year_truce
+			clr_global_flag    = edmp_interference_bilateral_break_truce
+			clr_global_flag    = edmp_interference_bilateral_add_nap
+			clr_global_flag    = edmp_interference_bilateral_break_nap
+			clr_global_flag    = edmp_interference_bilateral_add_alliance
+			clr_global_flag    = edmp_interference_bilateral_break_alliance
+			
+		}
+	}
+}
+
+# Hostile action against AI character for benefit of a human player, forced by FROM
+character_event = {
+	id    = edmp_ifn.4001
+	title = edmp_ifn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_aiplayer_imprison }
+		text                        = edmp_ifn_4001_desc_aiplayer_imprison
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_aiplayer_favor_cancelled_ai }
+		text                        = edmp_ifn_4001_desc_aiplayer_favor_cancelled_ai
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_aiplayer_favor_granted }
+		text                        = edmp_ifn_4001_desc_aiplayer_favor_granted
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_aiplayer_move }
+		text                        = edmp_ifn_4001_desc_aiplayer_move
+	}
+	option = {
+		trigger = { event_target:edmp_interference_aiplayer_ai = { character = ROOT } }
+		show_portrait = event_target:edmp_interference_aiplayer_player
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_curses
+	}
+	option = {
+		trigger = { event_target:edmp_interference_aiplayer_player = { character = ROOT } }
+		show_portrait = event_target:edmp_interference_aiplayer_ai
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_excellent
+	}
+	option = {
+		trigger = {
+			NOR = {
+				event_target:edmp_interference_aiplayer_player = { character = ROOT }
+				event_target:edmp_interference_aiplayer_ai     = { character = ROOT }
+			}
+		}
+		show_portrait = event_target:edmp_interference_aiplayer_player
+		show_portrait = event_target:edmp_interference_aiplayer_ai
+		name = edmp_ifn_evtopt_ok_unaffected
+	}
+	after = {
+		hidden_tooltip = {
+			
+			clear_event_target = edmp_interference_aiplayer_player
+			clear_event_target = edmp_interference_aiplayer_ai
+			
+			clr_global_flag    = edmp_interference_aiplayer_imprison
+			clr_global_flag    = edmp_interference_aiplayer_favor_cancelled_ai
+			clr_global_flag    = edmp_interference_aiplayer_favor_granted
+			clr_global_flag    = edmp_interference_aiplayer_move
+			
+		}
+	}
+}
+
+# Host (FROM) takes an action on a single character (AI or player)
+# Expects:
+#  --- One of the edmp_interference_singlechar_ global flags to be set BEFORE the event is called.
+#  --- The target of the action to be saved as event_target:edmp_interference_singlechar_affected
+#  --- If the action is bad for the target, the global flag edmp_interference_singlechar_bad should be set. If not, the flag should not be set.
+#  --- Optional: event_target:edmp_interference_singlechar_offmap_power , if the action relates to an offmap power. (So that the offmap power name & currency can be correctly localised.)
+#  --- Optional: event_target:edmp_interference_singlechar_artifact , if the action relates to an artifact. (So that the artifact name can be correctly localised.)
+character_event = {
+	id    = edmp_ifn.5001
+	title = edmp_ifn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_kill }
+		text                        = edmp_ifn_5001_desc_singlechar_kill
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_health_grant }
+		text                        = edmp_ifn_5001_desc_singlechar_health_grant
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_health_prolong }
+		text                        = edmp_ifn_5001_desc_singlechar_health_prolong
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_health_revoke }
+		text                        = edmp_ifn_5001_desc_singlechar_health_revoke
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_younger }
+		text                        = edmp_ifn_5001_desc_singlechar_younger
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_older }
+		text                        = edmp_ifn_5001_desc_singlechar_older
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_sexchange }
+		text                        = edmp_ifn_5001_desc_singlechar_sexchange
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_legitimise }
+		text                        = edmp_ifn_5001_desc_singlechar_legitimise
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_artifact_flag_as_unique }
+		text                        = edmp_ifn_5001_desc_singlechar_artifact_flag_as_unique
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_artifact_unflag_as_unique }
+		text                        = edmp_ifn_5001_desc_singlechar_artifact_unflag_as_unique
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_demesne_grant }
+		text                        = edmp_ifn_5001_desc_singlechar_demesne_grant
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_demesne_prolong }
+		text                        = edmp_ifn_5001_desc_singlechar_demesne_prolong
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_demesne_revoke }
+		text                        = edmp_ifn_5001_desc_singlechar_demesne_revoke
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_trade_post_grant }
+		text                        = edmp_ifn_5001_desc_singlechar_trade_post_grant
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_refill_all_levies }
+		text                        = edmp_ifn_5001_desc_singlechar_refill_all_levies
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_wealth_grant_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_wealth_grant_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_wealth_grant_10k }
+		text                        = edmp_ifn_5001_desc_singlechar_wealth_grant_10k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_wealth_remove }
+		text                        = edmp_ifn_5001_desc_singlechar_wealth_remove
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_wealth_restore }
+		text                        = edmp_ifn_5001_desc_singlechar_wealth_restore
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_prestige_grant_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_prestige_grant_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_prestige_remove_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_prestige_remove_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_piety_grant_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_piety_grant_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_piety_remove_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_piety_remove_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_offmap_currency_grant_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_offmap_currency_grant_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_offmap_currency_remove_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_offmap_currency_remove_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_grant_1k_mil }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_grant_1k_mil
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_grant_1k_eco }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_grant_1k_eco
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_grant_1k_cul }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_grant_1k_cul
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_remove_1k_mil }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_remove_1k_mil
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_remove_1k_eco }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_remove_1k_eco
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_remove_1k_cul }
+		text                        = edmp_ifn_5001_desc_singlechar_techpoints_remove_1k_cul
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_grant_10_perm }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_grant_10_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_grant_100_perm }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_grant_100_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_grant_10_temp }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_grant_10_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_grant_100_temp }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_grant_100_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_prolong_temp }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_prolong_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_revoke_all }
+		text                        = edmp_ifn_5001_desc_singlechar_realm_size_revoke_all
+	}
+	
+	# I am the target: good/bad => excellent/curses
+	option = {
+		trigger = {
+			event_target:edmp_interference_singlechar_affected = {
+				character = ROOT
+			}
+		}
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singlechar_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singlechar_bad } }
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# My enemy is the target: good/bad => curses/excellent
+	option = {
+		trigger = {
+			event_target:edmp_interference_singlechar_affected = {
+				NOT = { character = ROOT }
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour = yes
+			}
+		}
+		show_portrait = event_target:edmp_interference_singlechar_affected
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singlechar_bad }
+			text = edmp_ifn_evtopt_excellent
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singlechar_bad } }
+			text = edmp_ifn_evtopt_curses
+		}
+	}
+	
+	# My friend (of some sort) is the target: good/bad => excellent/curses
+	option = {
+		trigger = {
+			event_target:edmp_interference_singlechar_affected = {
+				NOT = { character = ROOT }
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour  = no
+				edmp_ifn_this_character_is_roots_friend_for_notification_flavour = yes
+			}
+		}
+		show_portrait = event_target:edmp_interference_singlechar_affected
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singlechar_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singlechar_bad } }
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# None of the above: OK
+	option = {
+		trigger = {
+			event_target:edmp_interference_singlechar_affected = {
+				NOT = { character = ROOT }
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour  = no
+				edmp_ifn_this_character_is_roots_friend_for_notification_flavour = no
+			}
+		}
+		show_portrait = event_target:edmp_interference_singlechar_affected
+		name = edmp_ifn_evtopt_ok_unaffected
+	}
+	
+	after = {
+		hidden_tooltip = {
+			
+			clear_event_target = edmp_interference_singlechar_affected
+			clear_event_target = edmp_interference_singlechar_offmap_power
+			clear_event_target = edmp_interference_singlechar_artifact
+			
+			clr_global_flag    = edmp_interference_singlechar_kill
+			clr_global_flag    = edmp_interference_singlechar_health_grant
+			clr_global_flag    = edmp_interference_singlechar_health_prolong
+			clr_global_flag    = edmp_interference_singlechar_health_revoke
+			clr_global_flag    = edmp_interference_singlechar_younger
+			clr_global_flag    = edmp_interference_singlechar_older
+			clr_global_flag    = edmp_interference_singlechar_sexchange
+			clr_global_flag    = edmp_interference_singlechar_legitimise
+			clr_global_flag    = edmp_interference_singlechar_artifact_flag_as_unique
+			clr_global_flag    = edmp_interference_singlechar_artifact_unflag_as_unique
+			clr_global_flag    = edmp_interference_singlechar_demesne_grant
+			clr_global_flag    = edmp_interference_singlechar_demesne_prolong
+			clr_global_flag    = edmp_interference_singlechar_demesne_revoke
+			clr_global_flag    = edmp_interference_singlechar_trade_post_grant
+			clr_global_flag    = edmp_interference_singlechar_refill_all_levies
+			clr_global_flag    = edmp_interference_singlechar_wealth_grant_1k
+			clr_global_flag    = edmp_interference_singlechar_wealth_grant_10k
+			clr_global_flag    = edmp_interference_singlechar_wealth_remove
+			clr_global_flag    = edmp_interference_singlechar_wealth_restore
+			clr_global_flag    = edmp_interference_singlechar_prestige_grant_1k
+			clr_global_flag    = edmp_interference_singlechar_prestige_remove_1k
+			clr_global_flag    = edmp_interference_singlechar_piety_grant_1k
+			clr_global_flag    = edmp_interference_singlechar_piety_remove_1k
+			clr_global_flag    = edmp_interference_singlechar_offmap_currency_grant_1k
+			clr_global_flag    = edmp_interference_singlechar_offmap_currency_remove_1k
+			clr_global_flag    = edmp_interference_singlechar_techpoints_grant_1k_mil
+			clr_global_flag    = edmp_interference_singlechar_techpoints_grant_1k_eco
+			clr_global_flag    = edmp_interference_singlechar_techpoints_grant_1k_cul
+			clr_global_flag    = edmp_interference_singlechar_techpoints_remove_1k_mil
+			clr_global_flag    = edmp_interference_singlechar_techpoints_remove_1k_eco
+			clr_global_flag    = edmp_interference_singlechar_techpoints_remove_1k_cul
+			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_10_perm
+			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_100_perm
+			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_10_temp
+			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_100_temp
+			clr_global_flag    = edmp_interference_singlechar_realm_size_prolong_temp
+			clr_global_flag    = edmp_interference_singlechar_realm_size_revoke_all
+			
+			clr_global_flag    = edmp_interference_singlechar_bad
+			
+		}
+	}
+	
+}
+
+# Host takes an action relating to a character and a title
+# Expects:
+#  --- One of the edmp_interference_singletitlechar_ global flags to be set BEFORE the event is called.
+#  --- Targeted character is stored as event_target:edmp_interference_singletitlechar_char_affected
+#  --- Targeted title is stored as event_target:edmp_interference_singletitlechar_title_affected
+#  --- If the action is bad for the targeted character, the global flag edmp_interference_singletitlechar_bad should be set. If not, the flag should not be set.
+character_event = {
+	id    = edmp_ifn.6001
+	title = edmp_ifn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitlechar_claim_grant }
+		text                        = edmp_ifn_6001_desc_singletitlechar_claim_grant
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitlechar_claim_remove }
+		text                        = edmp_ifn_6001_desc_singletitlechar_claim_remove
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitlechar_title_grant }
+		text                        = edmp_ifn_6001_desc_singletitlechar_title_grant
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitlechar_move_owners_capital }
+		text                        = edmp_ifn_6001_desc_singletitlechar_move_owners_capital
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitlechar_move_owners_primary_title_trad_capital_here }
+		text                        = edmp_ifn_6001_desc_singletitlechar_move_owners_primary_title_trad_capital_here
+	}
+	
+	# I am the target: good/bad => excellent/curses
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitlechar_char_affected = { character = ROOT }
+		}
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitlechar_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitlechar_bad } }
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# My title is the target: good/bad => curses/excellent
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitlechar_char_affected = { NOT = { character = ROOT } }
+			event_target:edmp_interference_singletitlechar_title_affected = { edmp_ifn_this_is_roots_title_for_notification_flavour = yes }
+		}
+		show_portrait = event_target:edmp_interference_singletitlechar_char_affected
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitlechar_bad }
+			text = edmp_ifn_evtopt_excellent
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitlechar_bad } }
+			text = edmp_ifn_evtopt_curses
+		}
+	}
+	
+	# My enemy is the target: good/bad => curses/excellent
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitlechar_char_affected = { NOT = { character = ROOT } }
+			event_target:edmp_interference_singletitlechar_title_affected = { edmp_ifn_this_is_roots_title_for_notification_flavour = no }
+			event_target:edmp_interference_singletitlechar_char_affected = {
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour = yes
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitlechar_char_affected
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitlechar_bad }
+			text = edmp_ifn_evtopt_excellent
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitlechar_bad } }
+			text = edmp_ifn_evtopt_curses
+		}
+	}
+	
+	# My friend (of some sort) is the target: good/bad => excellent/curses
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitlechar_char_affected = { NOT = { character = ROOT } }
+			event_target:edmp_interference_singletitlechar_title_affected = { edmp_ifn_this_is_roots_title_for_notification_flavour = no }
+			event_target:edmp_interference_singletitlechar_char_affected = {
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour  = no
+				edmp_ifn_this_character_is_roots_friend_for_notification_flavour = yes
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitlechar_char_affected
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitlechar_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitlechar_bad } }
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# None of the above: OK
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitlechar_char_affected = { NOT = { character = ROOT } }
+			event_target:edmp_interference_singletitlechar_title_affected = { edmp_ifn_this_is_roots_title_for_notification_flavour = no }
+			event_target:edmp_interference_singletitlechar_char_affected = {
+				edmp_ifn_this_character_is_roots_enemy_for_notification_flavour  = no
+				edmp_ifn_this_character_is_roots_friend_for_notification_flavour = no
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitlechar_char_affected
+		name = edmp_ifn_evtopt_ok_unaffected
+	}
+	
+	after = {
+		hidden_tooltip = {
+			
+			clear_event_target = edmp_interference_singletitlechar_char_affected
+			clear_event_target = edmp_interference_singletitlechar_title_affected
+			
+			clr_global_flag    = edmp_interference_singletitlechar_claim_grant
+			clr_global_flag    = edmp_interference_singletitlechar_claim_remove
+			clr_global_flag    = edmp_interference_singletitlechar_title_grant
+			clr_global_flag    = edmp_interference_singletitlechar_move_owners_capital
+			clr_global_flag    = edmp_interference_singletitlechar_move_owners_primary_title_trad_capital_here
+			
+			clr_global_flag    = edmp_interference_singletitlechar_bad
+			
+		}
+	}
+	
+}
+
+# Host takes an action relating to a title, without specifying a targeted character
+# Expects:
+#  --- One of the edmp_interference_singletitle_ global flags to be set BEFORE the event is called.
+#  --- Targeted title is stored as event_target:edmp_interference_singletitle_affected
+#  --- If the action is bad for the title's current holder, the global flag edmp_interference_singletitle_bad should be set. If not, the flag should not be set.
+character_event = {
+	id    = edmp_ifn.7001
+	title = edmp_ifn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_claim_remove_all }
+		text                        = edmp_ifn_7001_desc_singletitle_claim_remove_all
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_destroy }
+		text                        = edmp_ifn_7001_desc_singletitle_destroy
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_culture_to_owner }
+		text                        = edmp_ifn_7001_desc_singletitle_culture_to_owner
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_religion_to_owner }
+		text                        = edmp_ifn_7001_desc_singletitle_religion_to_owner
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_culture_to_neighbour }
+		text                        = edmp_ifn_7001_desc_singletitle_culture_to_neighbour
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_religion_to_neighbour }
+		text                        = edmp_ifn_7001_desc_singletitle_religion_to_neighbour
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singletitle_remove_negative_province_modifiers }
+		text                        = edmp_ifn_7001_desc_singletitle_remove_negative_province_modifiers
+	}
+	
+	immediate = {
+		# Store the current holder, so we can use them as the portrait for the event options
+		event_target:edmp_interference_singletitle_affected = { holder_scope = { save_event_target_as = edmp_interference_singletitle_affected_holder } }
+	}
+	
+	# This is my title: good/bad => excellent/curses
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitle_affected = {
+				edmp_ifn_this_is_roots_title_for_notification_flavour         = yes
+			}
+		}
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitle_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitle_bad } }
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# This is my enemy's title: good/bad => curses/excellent
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitle_affected = {
+				edmp_ifn_this_is_roots_title_for_notification_flavour         = no
+				edmp_ifn_this_is_roots_enemys_title_for_notification_flavour  = yes
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitle_affected_holder
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitle_bad }
+			text = edmp_ifn_evtopt_excellent
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitle_bad } }
+			text = edmp_ifn_evtopt_curses
+		}
+	}
+	
+	# This is my friend's (of some sort) title: good/bad => excellent/curses
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitle_affected = {
+				edmp_ifn_this_is_roots_title_for_notification_flavour         = no
+				edmp_ifn_this_is_roots_enemys_title_for_notification_flavour  = no
+				edmp_ifn_this_is_roots_friends_title_for_notification_flavour = yes
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitle_affected_holder
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_singletitle_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_singletitle_bad } }
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# None of the above: OK
+	option = {
+		trigger = {
+			event_target:edmp_interference_singletitle_affected = {
+				edmp_ifn_this_is_roots_title_for_notification_flavour         = no
+				edmp_ifn_this_is_roots_enemys_title_for_notification_flavour  = no
+				edmp_ifn_this_is_roots_friends_title_for_notification_flavour = no
+			}
+		}
+		show_portrait = event_target:edmp_interference_singletitle_affected_holder
+		name = edmp_ifn_evtopt_ok_unaffected
+	}
+	
+	after = {
+		hidden_tooltip = {
+			
+			clear_event_target = edmp_interference_singletitle_affected
+			clear_event_target = edmp_interference_singletitle_affected_holder
+			
+			clr_global_flag    = edmp_interference_singletitle_claim_remove_all
+			clr_global_flag    = edmp_interference_singletitle_destroy
+			clr_global_flag    = edmp_interference_singletitle_culture_to_owner
+			clr_global_flag    = edmp_interference_singletitle_religion_to_owner
+			clr_global_flag    = edmp_interference_singletitle_culture_to_neighbour
+			clr_global_flag    = edmp_interference_singletitle_religion_to_neighbour
+			clr_global_flag    = edmp_interference_singletitle_remove_negative_province_modifiers
+			
+			clr_global_flag    = edmp_interference_singletitle_bad
+			
+		}
+	}
+	
+}

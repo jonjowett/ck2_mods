@@ -1,0 +1,30 @@
+csh_update_merc_traits_for_this_character = {
+	csh_remove_all_merc_traits_from_this_character = yes
+	if = {
+		limit = { is_ruler = yes } # Filter out 99% of characters as early as possible
+		if = {
+			limit = {
+				# Dynamic mercenary with living band creator
+				# (The trait is only visible to the band creator, so there's no point in adding it if they are dead.)
+				trait = adventurer
+				primary_title = {
+					mercenary = yes
+					NOT = { has_title_flag = ze_dyn_merc } # Exclude feudal merc companies
+					band_creator = { is_alive = yes }
+				}
+			}
+			if = {
+				limit = { has_character_modifier = mercenary_traditions }
+				add_trait = csh_merc_trad
+			}
+			else = {
+				add_trait = csh_merc
+			}
+		}
+	}
+}
+
+csh_remove_all_merc_traits_from_this_character = {
+	remove_trait = csh_merc
+	remove_trait = csh_merc_trad
+}

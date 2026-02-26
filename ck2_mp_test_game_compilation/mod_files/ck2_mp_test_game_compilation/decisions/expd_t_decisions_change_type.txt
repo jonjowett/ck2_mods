@@ -1,0 +1,80 @@
+targetted_decisions = {
+	
+	expd_t_change_type_to_protectorate = {
+		# This decision allows players to change permanent tributaries into protectorates
+		# FROM = suzerain; ROOT = tributary
+		
+		only_independent = yes
+		filter = independent_rulers
+		
+		# This decision is only for players!
+		ai_target_filter = none
+		
+		from_potential = {
+			independent  = yes
+			is_landed    = yes
+			is_tributary = no
+			ai           = no
+		}
+		
+		potential = {
+			independent  = yes
+			is_landed    = yes
+			is_tributary = {
+				type = permanent
+				suzerain = FROM
+			}
+		}
+		
+		allow = {
+			always = yes
+		}
+		
+		effect = {
+			FROM = { expd_t_root_becomes_protectorate_of_this_character = yes }
+		}
+		
+	}
+	
+	expd_t_change_type_to_vanilla_permanent = {
+		# This decision allows players to change permanent tributaries into protectorates
+		# (Potentially useful for removing the mod from an ongoing save)
+		# FROM = suzerain; ROOT = tributary
+		
+		only_independent = yes
+		filter = independent_rulers
+		
+		# This decision is only for players!
+		ai_target_filter = none
+		
+		from_potential = {
+			independent  = yes
+			is_landed    = yes
+			is_tributary = no
+			ai           = no
+		}
+		
+		potential = {
+			independent  = yes
+			is_landed    = yes
+			expd_t_is_this_mod_tributary_of_from = yes
+		}
+		
+		allow = {
+			always = yes
+		}
+		
+		effect = {
+			FROM = {
+				make_tributary = {
+					who = ROOT
+					percentage = 0.2
+					tributary_type = permanent
+				}
+			}
+			hidden_tooltip = { ROOT = { character_event = { id = EDTSuzerainBuff.1000 } } }
+		}
+		
+	}
+	
+}

@@ -1,0 +1,1236 @@
+
+################################
+#                              #
+#      Targeted Decisions      #
+#                              #
+################################
+
+# ROOT is the decision target (ie. potential protectorate)
+# FROM is the decision taker (ie. potential protector)
+
+targetted_decisions = {
+	
+	expd_t_force_protectorate = {
+		# This decision is intended for situations where a new independent ruler has been set up, eg. by pressing a claim, and the person who set it up wants to protect them.
+		
+		only_independent = yes
+		filter = independent_rulers
+		ai_target_filter = independent_rulers
+		ai_check_interval = 6
+		
+		from_potential = {
+			expd_t_this_character_can_see_the_decision_to_make_root_a_protectorate = yes
+		}
+		
+		potential = {
+			expd_t_this_character_is_independent_enough_to_become_a_protectorate_by_decision = yes
+		}
+		
+		allow = {
+			
+			# Debug mode bypasses all allow block requirements (if you're a player) (so you can force-protectorise independent rulers)
+			trigger_if = {
+				limit = { FROM = { expd_t_this_character_can_see_debug_mode_decisions = yes } }
+				custom_tooltip = {
+					text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
+					always = yes
+				}
+			}
+			
+			# Normal mode:
+			trigger_else = {
+				#The main conditions are split out into a trigger so that the "Offer Protectorate" decision below can be disabled if this one is available
+				expd_t_from_can_instantly_force_root_to_be_protectorate = yes
+				
+			}
+		}
+		
+		effect = {
+			expd_t_from_makes_root_become_protectorate_of_from = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+	}
+	
+	expd_t_offer_protectorate = {
+		# This decision is intended for situations where a strong independent ruler might want to prop up a weak independent ruler, for some reason.
+		# The weak ruler can obviously reject the offer.
+		# FROM = potential suzerain; ROOT = potential tributary
+		
+		only_independent = yes
+		filter = independent_rulers
+		
+		# AI code should be good enough to allow them to offer this
+		ai_target_filter = independent_rulers
+		ai_check_interval = 24
+		
+		from_potential = {
+			expd_t_this_character_can_see_the_decision_to_make_root_a_protectorate = yes
+		}
+		
+		potential = {
+			expd_t_this_character_is_independent_enough_to_become_a_protectorate_by_decision = yes
+		}
+		
+		allow = {
+			
+			# Debug mode bypasses all allow block requirements (if you're a player) (so you can evaluate AI acceptance)
+			trigger_if = {
+				limit = { FROM = { expd_t_this_character_can_see_debug_mode_decisions = yes } }
+				custom_tooltip = {
+					text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
+					always = yes
+				}
+			}
+			
+			# Normal mode:
+			trigger_else = {
+				
+				# If the "Force Protectorate" interaction is available, you should use that instead.
+				conditional_tooltip = {
+					trigger = { expd_t_from_can_instantly_force_root_to_be_protectorate = yes }
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_USE_FORCED_PROTECTORATE_INSTEAD
+						always = no
+					}
+				}
+				
+				expd_t_root_meets_basic_requirements_to_become_protectorate_of_from_by_decision = yes
+				
+				# The target must vaguely like the decision taker
+				opinion = {
+					who = FROM
+					value >= 0
+				}
+				
+				# Cannot offer protection to someone who hates you (either rival or crime)
+				NOT = { is_foe = FROM }
+				
+				# Cannot offer protection to a human player (because they have no chance to refuse)
+				conditional_tooltip = {
+					trigger = { expd_t_this_character_should_be_treated_as_a_player = yes }
+					expd_t_this_character_should_be_treated_as_an_ai = yes
+				}
+				
+				# The potential suzerain must be either a lot stronger or a lot more prestigious than the potential tributary
+				
+				OR = {
+					
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_FROM_HAS_SIGNIFICANTLY_BIGGER_ARMY
+						FROM = {
+							relative_power = {
+								who = ROOT
+								power >= 2
+							}
+						}
+					}
+					
+					FROM = {
+						show_scope_change = no
+						ROOT = {
+							show_scope_change = no
+							expd_t_prev_has_more_than_double_the_prestige_of_root = yes
+						}
+					}
+					
+				}
+				
+				OR = {
+					
+					# Propping up independent rulers of your dynasty is a time-honoured tradition
+					# Propping up rulers whose heirs are of your dynasty is also good business
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_ROOT_OR_ROOTS_HEIR_IS_SAME_DYNASTY_AS_FROM
+						OR = {
+							dynasty = FROM
+							current_heir = { dynasty = FROM }
+						}
+					}
+					
+					# Propping up friends, lovers and spouses makes sense
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_ROOT_IS_FRIEND_OR_LOVER_OR_SPOUSE_OF_FROM
+						OR = {
+							is_friend = FROM
+							is_lover  = FROM
+							any_spouse = { character = FROM }
+						}
+					}
+					
+					# People with the same secret religion can prop each other up (although why they would do so rather than coming out is not obvious)
+					# Hide this option unless the decision-taker has a secret religion (it's an easter egg!)
+					trigger_if = {
+						limit = { FROM = { has_secret_religion = yes } }
+						custom_tooltip = {
+							text = EXPD_T_TOOLTIP_ROOT_HAS_SAME_SECRET_RELIGION_AS_FROM
+							ROOT = { has_secret_religion = yes }
+							FROM = { secret_religion_scope = { ROOT = { secret_religion_scope = { religion = PREVPREV } } } }
+						}
+					}
+					trigger_else = {
+						hidden_tooltip = { always = no }
+					}
+					
+					# Zealots can prop up co-religionists who border large nations (ie. kingdoms and empires) following other religions
+					AND = {
+						custom_tooltip = {
+							text = EXPD_T_TOOLTIP_FROM_IS_ZEALOUS_AND_OF_SAME_RELIGION_AS_ROOT
+							FROM = {
+								trait = zealous
+								has_secret_religion = no
+								religion = ROOT
+							}
+						}
+						custom_tooltip = {
+							text = EXPD_T_TOOLTIP_TARGET_HAS_POWERFUL_NEIGHBOUR_OF_DIFF_RELIGION
+							any_neighbor_independent_ruler = {
+								higher_real_tier_than = DUKE
+								expd_t_is_religious_enemy_of_from = yes
+								relative_power_including_allies_attacker = {
+									who = ROOT
+									power >= 2
+								}
+							}
+						}
+					}
+					
+				}
+			}
+		}
+		
+		effect = {
+			expd_t_from_makes_root_become_protectorate_of_from = yes
+		}
+		
+		ai_will_do = {
+			factor = 0.2
+			
+			modifier = {
+				factor = 2
+				FROM = { higher_real_tier_than = ROOT }
+			}
+			
+			modifier = {
+				factor = 2
+				FROM = { trait = brave }
+			}
+			modifier = {
+				factor = 2
+				FROM = { trait = ambitious }
+			}
+			modifier = {
+				factor = 2
+				FROM = { trait = proud }
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { trait = craven }
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { trait = content }
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { trait = humble }
+			}
+
+			modifier = {
+				factor = 4
+				FROM = {
+					trait = zealous
+					has_secret_religion = no
+					religion = ROOT
+				}
+				any_neighbor_independent_ruler = {
+					higher_real_tier_than = DUKE
+					expd_t_is_religious_enemy_of_from = yes
+					relative_power_including_allies_attacker = {
+						who = ROOT
+						power >= 2
+					}
+				}
+			}
+			
+			# AI is less likely to set up protectorates if the potential attackers have a larger army than the potential protector
+			modifier = {
+				factor = 0.5
+				any_neighbor_independent_ruler = {
+					has_cb = ROOT
+					relative_power_including_allies_attacker = {
+						who = FROM
+						power >= 2
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				any_neighbor_independent_ruler = {
+					has_cb = ROOT
+					relative_power_including_allies_attacker = {
+						who = FROM
+						power >= 5
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				any_neighbor_independent_ruler = {
+					has_cb = ROOT
+					relative_power_including_allies_attacker = {
+						who = FROM
+						power >= 10
+					}
+				}
+			}
+			
+			# AI is more likely to set up protectorates if they are very wealthy (IE: can hire mercs)
+			modifier = {
+				factor = 2
+				FROM = { wealth = 2000 }
+			}
+			modifier = {
+				factor = 2
+				FROM = { wealth = 5000 }
+			}
+			modifier = {
+				factor = 2
+				FROM = { wealth = 10000 }
+			}
+			
+			# AI is less likely to offer if they will be immediately dragged into costly defensive wars.
+			# This penalty is halved for brave decision-takers.
+			# Note that this check compares the primary attackers and all allies against the *decision-taker* (not the current defender)
+			modifier = {
+				factor = 0.8
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.2
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.9
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.2
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.8
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.3
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.9
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.3
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.4
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.75
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.4
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.5
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.75
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.5
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.2
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.6
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.6
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.6
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.2
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.7
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.6
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.7
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.1
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.8
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.55
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.8
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.1
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.9
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.55
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 0.9
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = no
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 1.0
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 1.0
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.25
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 1.5
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				expd_t_root_is_primary_defender_in_a_war = yes
+				expd_t_from_is_very_happy_to_join_roots_defensive_wars = yes
+				any_war = {
+					defender = { character = ROOT }
+					attacker = {
+						relative_power_including_allies_attacker = {
+							who = FROM
+							power > 2
+						}
+					}
+				}
+			}
+			
+		}
+		
+		ai_acceptance = {
+			show_maybe_for_human = yes
+			
+			factor = 0          # Starting score
+			yes_threshold = 50  # AI will accept for score >= this
+			
+			# I like being supported by my dynasty, and especially by my parents/grandparents/ancestors
+			additive_modifier = {
+				value = 20
+				dynasty = FROM
+			}
+			additive_modifier = {
+				value = 10
+				is_child_of = FROM
+			}
+			additive_modifier = {
+				value = 10
+				is_grandchild_of = FROM
+			}
+			additive_modifier = {
+				value = 10
+				is_descendant_of = FROM
+			}
+			
+			# There's a powerful member of my dynasty who could support me!
+			additive_modifier = {
+				value = -200
+				any_dynasty_member = {
+					is_landed = yes
+					independent = yes
+					is_tributary = no
+					NOT = { character = FROM }
+					relative_power = {
+						who = FROM
+						power > 1
+					}
+				}
+			}
+			
+			# You're only propping me up so the heir of your dynasty inherits...
+			additive_modifier = {
+				value = -100
+				NOT = { dynasty = FROM }
+				current_heir = { dynasty = FROM }
+				OR = {
+					is_feudal = yes
+					is_tribal = yes
+					is_nomadic = yes
+				}
+			}
+			
+			# I REALLY like being propped-up by friends and/or lovers
+			additive_modifier = {
+				value = 50
+				is_friend = FROM
+			}
+			additive_modifier = {
+				value = 50
+				is_lover = FROM
+			}
+			additive_modifier = {
+				value = 50
+				any_spouse = { character = FROM }
+			}
+			
+			# Effect of tier difference
+			additive_modifier = {
+				value = 20
+				lower_real_tier_than = FROM
+			}
+			additive_modifier = {
+				value = -20
+				higher_real_tier_than = FROM
+			}
+			
+			# Effect of being a holy order or mercenary band (IE: Can raise their own probably-rather-large band to defend themselves)
+			additive_modifier = {
+				value = -200
+				any_demesne_title = {
+					OR = {
+						holy_order = yes
+						mercenary = yes
+					}
+				}
+			}
+			
+			# Effect of opinion
+			additive_modifier = {
+				value = 20
+				opinion = {
+					who = FROM
+					value >= 25
+				}
+			}
+			additive_modifier = {
+				value = 20
+				opinion = {
+					who = FROM
+					value >= 50
+				}
+			}
+			additive_modifier = {
+				value = 20
+				opinion = {
+					who = FROM
+					value >= 75
+				}
+			}
+			additive_modifier = {
+				value = 20
+				opinion = {
+					who = FROM
+					value >= 100
+				}
+			}
+			
+			# Effect of traits
+			additive_modifier = {
+				value = 20
+				trait = content
+			}
+			additive_modifier = {
+				value = 20
+				trait = humble
+			}
+			additive_modifier = {
+				value = 20
+				trait = craven
+			}
+			additive_modifier = {
+				value = -20
+				trait = ambitious
+			}
+			additive_modifier = {
+				value = -20
+				trait = proud
+			}
+			additive_modifier = {
+				value = -20
+				trait = brave
+			}
+			
+			# Bordered by a larger realm of different religion (who might attack me!)
+			additive_modifier = {
+				value = 50
+				custom_tooltip = {
+					text = EXPD_T_REASON_POWERFUL_NEIGHBOUR_OF_DIFF_RELIGION
+					any_neighbor_independent_ruler = {
+						expd_t_is_religious_enemy_of_from = yes
+						relative_power_including_allies_attacker = {
+							who = ROOT
+							power >= 2
+						}
+						relative_power_including_allies_attacker = {
+							who = ROOT
+							power < 4
+						}
+					}
+				}
+			}
+			additive_modifier = {
+				value = 100
+				custom_tooltip = {
+					text = EXPD_T_REASON_V_POWERFUL_NEIGHBOUR_OF_DIFF_RELIGION
+					any_neighbor_independent_ruler = {
+						expd_t_is_religious_enemy_of_from = yes
+						relative_power_including_allies_attacker = {
+							who = ROOT
+							power >= 4
+						}
+						relative_power_including_allies_attacker = {
+							who = ROOT
+							power < 10
+						}
+					}
+				}
+			}
+			additive_modifier = {
+				value = 200
+				custom_tooltip = {
+					text = EXPD_T_REASON_VV_POWERFUL_NEIGHBOUR_OF_DIFF_RELIGION
+					any_neighbor_independent_ruler = {
+						expd_t_is_religious_enemy_of_from = yes
+						relative_power_including_allies_attacker = {
+							who = ROOT
+							power >= 10
+						}
+					}
+				}
+			}
+			
+			# Effect of potential protectorate's power (if I'm strong or wealthy, I don't need protection!)
+			additive_modifier = {
+				value = -50
+				realm_levies >= 5000
+			}
+			additive_modifier = {
+				value = -50
+				realm_levies >= 10000
+			}
+			additive_modifier = {
+				value = -50
+				realm_levies >= 15000
+			}
+			additive_modifier = {
+				value = -50
+				realm_levies >= 20000
+			}
+			additive_modifier = {
+				value = -50
+				wealth >= 1000
+			}
+			additive_modifier = {
+				value = -50
+				wealth >= 2000
+			}
+			additive_modifier = {
+				value = -50
+				wealth >= 3000
+			}
+			additive_modifier = {
+				value = -50
+				wealth >= 4000
+			}
+			additive_modifier = {
+				value = -50
+				wealth >= 5000
+			}
+			
+			# Effect of relative power: A potential protectorate is more likely to accept if their potential protector is much more powerful than they are, and less likely if their potential protector is similarly/less powerful
+			# NB: Being significantly less powerful should be blocked by the check to ensure that the potential protectorate can't immediately escape
+			additive_modifier = {
+				value = -100
+				relative_power = {
+					who = FROM
+					power >= 4
+				}
+			}
+			additive_modifier = {
+				value = -100
+				relative_power = {
+					who = FROM
+					power >= 3
+				}
+			}
+			additive_modifier = {
+				value = -100
+				relative_power = {
+					who = FROM
+					power >= 2
+				}
+			}
+			additive_modifier = {
+				value = -100
+				relative_power = {
+					who = FROM
+					power >= 1
+				}
+			}
+			additive_modifier = {
+				value = -100
+				relative_power = {
+					who = FROM
+					power >= 0.8
+				}
+			}
+			additive_modifier = {
+				value = 50
+				relative_power = {
+					who = FROM
+					power < 0.4
+				}
+			}
+			additive_modifier = {
+				value = 50
+				relative_power = {
+					who = FROM
+					power < 0.2
+				}
+			}
+			additive_modifier = {
+				value = 50
+				relative_power = {
+					who = FROM
+					power < 0.1
+				}
+			}
+			additive_modifier = {
+				value = 50
+				relative_power = {
+					who = FROM
+					power < 0.05
+				}
+			}
+			
+			# Effect of being primary defender in a losing war: Warscore
+			# -20% to -50%
+			additive_modifier = {
+				value = 100
+				custom_tooltip = {
+					text = EXPD_T_REASON_LOSING_WAR
+					any_war = {
+						defender = { character = ROOT }
+						war_score >= 20
+						war_score <  50
+					}
+				}
+			}
+			# -50% to -80%
+			additive_modifier = {
+				value = 200
+				custom_tooltip = {
+					text = EXPD_T_REASON_LOSING_WAR_BADLY
+					any_war = {
+						defender = { character = ROOT }
+						war_score >= 50
+						war_score <  80
+					}
+				}
+			}
+			# If defensive warscore is < -80%, protector probably won't be able to help in time
+			
+			# Effect of being primary defender in a losing war: Larger attacker
+			# Attacker is 2x bigger
+			additive_modifier = {
+				value = 50
+				custom_tooltip = {
+					text = EXPD_T_REASON_DEFENDING_AGAINST_LARGER_AGGRESSOR
+					any_war = {
+						defender = { character = ROOT }
+						war_score >= 20 #This reason is invalid unless you're clearly losing!
+						attacker = {
+							relative_power_including_allies_defender = {
+								who = PREV
+								power < 0.5
+							}
+						}
+					}
+				}
+			}
+			# Attacker is 4x bigger
+			additive_modifier = {
+				value = 50
+				custom_tooltip = {
+					text = EXPD_T_REASON_DEFENDING_AGAINST_MUCH_LARGER_AGGRESSOR
+					any_war = {
+						defender = { character = ROOT }
+						war_score >= 20 #This reason is invalid unless you're clearly losing!
+						attacker = {
+							relative_power_including_allies_defender = {
+								who = PREV
+								power < 0.25
+							}
+						}
+					}
+				}
+			}
+			
+			# Effect of distance (if the protector is further away then they are less likely to be effective)
+			additive_modifier = {
+				value = -100
+				distance_from_realm = {
+					who = FROM
+					value >= 100
+				}
+			}
+			additive_modifier = {
+				value = -100
+				distance_from_realm = {
+					who = FROM
+					value >= 200
+				}
+			}
+			additive_modifier = {
+				value = -150
+				distance_from_realm = {
+					who = FROM
+					value >= 300
+				}
+			}
+			additive_modifier = {
+				value = -150
+				distance_from_realm = {
+					who = FROM
+					value >= 400
+				}
+			}
+			additive_modifier = {
+				value = -200
+				distance_from_realm = {
+					who = FROM
+					value >= 500
+				}
+			}
+			additive_modifier = {
+				value = -200
+				distance_from_realm = {
+					who = FROM
+					value >= 600
+				}
+			}
+			additive_modifier = {
+				value = -250
+				distance_from_realm = {
+					who = FROM
+					value >= 700
+				}
+			}
+			additive_modifier = {
+				value = -250
+				distance_from_realm = {
+					who = FROM
+					value >= 800
+				}
+			}
+			additive_modifier = {
+				value = -1000
+				distance_from_realm = {
+					who = FROM
+					value >= 1000
+				}
+			}
+			
+			# Debug mode!
+			additive_modifier = {
+				value = 10000
+				custom_tooltip = {
+					text = EXPD_T_REASON_DEBUG_MODE_ENABLED
+					FROM = { expd_t_this_character_can_see_debug_mode_decisions = yes }
+				}
+			}
+			
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+################################
+#                              #
+#   Intrigue Menu Decisions    #
+#                              #
+################################
+
+# ROOT is the decision taker (ie. the protectorate)
+
+decisions = {
+	
+	expd_t_protectorate_independence_normal = {
+		
+		is_high_prio = yes
+		ai_check_interval = 6
+		
+		potential = {
+			expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes
+			expd_t_another_mod_wants_to_suppress_this_decision = no
+		}
+		
+		allow = {
+			
+			OR = {
+				
+				# Get out for free if you're a player in single-player and are in debug mode
+				trigger_if = {
+					limit = {
+						multiplayer = no
+						expd_t_this_character_can_see_debug_mode_decisions = yes
+					}
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_DEBUG_MODE_ENABLED
+						always = yes
+					}
+				}
+				
+				# Get out for free if you're a player in a multiplayer game
+				trigger_if = {
+					limit = {
+						ai = no
+						multiplayer = yes
+					}
+					custom_tooltip = {
+						text = EXPD_T_TOOLTIP_HUMAN_IN_MULTIPLAYER
+						always = yes
+					}
+				}
+				
+				# Get out for free if either you or your suzerain is not independent
+				suzerain = {
+					show_scope_change = no
+					ROOT = {
+						show_scope_change = no
+						expd_t_root_can_instantly_stop_being_a_protectorate_of_prev_due_to_non_independence = yes
+					}
+				}
+				
+				# Not at war with your suzerain, and not in a war on the same side as your suzerain
+				# And signifcantly more powerful or prestigious than your suzerain
+				AND = {
+					OR = {
+						war = no
+						custom_tooltip = {
+							text = EXPD_T_TOOLTIP_AT_WAR_BUT_NOT_WITH_SUZERAIN_OR_ON_SAME_SIDE_AS_SUZERAIN
+							war = yes
+							NOT = { suzerain = { war_with = ROOT } }
+							NOT = {
+								any_war = {
+									any_defender = { character = ROOT }
+									any_defender = { ROOT = { suzerain = { character = PREVPREVPREV } } }
+								}
+							}
+							NOT = {
+								any_war = {
+									any_attacker = { character = ROOT }
+									any_attacker = { ROOT = { suzerain = { character = PREVPREVPREV } } }
+								}
+							}
+						}
+					}
+					suzerain = {
+						show_scope_change = no
+						ROOT = {
+							show_scope_change = no
+							expd_t_root_has_significantly_more_troops_or_prestige_than_prev = yes
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			# No need to notify anyone if you got out due to debug mode, because this is only meaningful in single-player.
+			any_suzerain = {
+				character_event = { id = JD.2200 }
+				remove_tributary = ROOT
+				hidden_tooltip = {
+					character_event = { id = EDTSuzerainBuff.2000 }
+					character_event = { id = EDTSuzerainBuff.1000 }
+				}
+			}
+		}
+		ai_will_do = {
+			
+			factor = 1 # Base chance = 100%
+			
+			# Extreme chance if the relationship has become invalid
+			modifier = {
+				factor = 1000
+				suzerain = {
+					show_scope_change = no
+					ROOT = {
+						show_scope_change = no
+						expd_t_root_can_instantly_stop_being_a_protectorate_of_prev_due_to_non_independence = yes
+					}
+				}
+			}
+			
+			# Suzerain being lower tier is humiliating
+			modifier = {
+				factor = 10
+				any_suzerain = { lower_real_tier_than = ROOT }
+			}
+			
+			# More chance with higher AI ambition
+			modifier = {
+				factor = 2
+				ai_ambition > 20
+			}
+			modifier = {
+				factor = 2
+				ai_ambition > 40
+			}
+			modifier = {
+				factor = 2
+				ai_ambition > 60
+			}
+			modifier = {
+				factor = 2
+				ai_ambition > 80
+			}
+			modifier = {
+				factor = 2
+				ai_ambition > 100
+			}
+			modifier = {
+				factor = 0.5
+				ai_ambition < -20
+			}
+			modifier = {
+				factor = 0.5
+				ai_ambition < -40
+			}
+			modifier = {
+				factor = 0.5
+				ai_ambition < -60
+			}
+			modifier = {
+				factor = 0.5
+				ai_ambition < -80
+			}
+			modifier = {
+				factor = 0.5
+				ai_ambition < -100
+			}
+			
+			# Bordered by a larger realm of different religion (who might attack me!)
+			modifier = {
+				factor = 0.1
+				any_neighbor_independent_ruler = {
+					expd_t_is_religious_enemy_of_root = yes
+					relative_power_including_allies_attacker = {
+						who = ROOT
+						power >= 2
+					}
+				}
+			}
+			modifier = {
+				factor = 0.1
+				any_neighbor_independent_ruler = {
+					expd_t_is_religious_enemy_of_root = yes
+					relative_power_including_allies_attacker = {
+						who = ROOT
+						power >= 4
+					}
+				}
+			}
+			modifier = {
+				factor = 0.1
+				any_neighbor_independent_ruler = {
+					expd_t_is_religious_enemy_of_root = yes
+					relative_power_including_allies_attacker = {
+						who = ROOT
+						power >= 10
+					}
+				}
+			}
+			
+		}
+	}
+	
+}
