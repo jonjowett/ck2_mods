@@ -1,17 +1,35 @@
+#
 # List of all possible spacers
-BCT_Spacers_Actual;[BCT_Spacers_ImportantToYou][BCT_Spacers_Ruler][BCT_Spacers_DoubleRuler][BCT_Spacers_TripleRuler][BCT_Spacers_MarriedToRuler][BCT_Spacers_ConsortConcubine][BCT_Spacers_Heir][BCT_Spacers_Regent][BCT_Spacers_Councillor][BCT_Spacers_Commander][BCT_Spacers_OtherMinorTitle][BCT_Spacers_Prince];;;;;;;;;;;;;x
-# Spacer text, used every time a spacer is needed
+#  --- NB: Must have \n at the end
+BCT_Spacers_Actual;[BCT_Spacers_ImportantToYou][BCT_Spacers_Ruler][BCT_Spacers_DoubleRuler][BCT_Spacers_TripleRuler][BCT_Spacers_MarriedToRuler][BCT_Spacers_ConsortConcubine][BCT_Spacers_Heir][BCT_Spacers_Regent][BCT_Spacers_Councillor][BCT_Spacers_Commander][BCT_Spacers_OtherMinorTitle][BCT_Spacers_Prince]\n;;;;;;;;;;;;;x
+#
+# For each spacer that is warranted, decide whether to show a spacer or the debugging info
+BCT_Spacers_SpacerTT_ImportantToYou;[BCT_Spacers_ImportantToYou_DebugOrNot];;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Ruler;[BCT_Spacers_Ruler_DebugOrNot];;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_DoubleRuler;[BCT_Spacers_DoubleRuler_DebugOrNot];;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_TripleRuler;[BCT_Spacers_TripleRuler_DebugOrNot];;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_MarriedToRuler;[BCT_Spacers_MarriedToRuler_DebugOrNot];;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_ConsortConcubine;[BCT_Spacers_ConsortConcubine_DebugOrNot];;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Heir;[BCT_Spacers_Heir_DebugOrNot];;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Regent;[BCT_Spacers_Regent_DebugOrNot];;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Councillor;[BCT_Spacers_Councillor_DebugOrNot];;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Commander;[BCT_Spacers_Commander_DebugOrNot];;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_OtherMinorTitle;[BCT_Spacers_OtherMinorTitle_DebugOrNot];;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Prince;[BCT_Spacers_Prince_DebugOrNot];;;;;;;;;;;;;x
+#
+# Spacer text, used every time a spacer is needed and spacer debugging is disabled
 BCT_Spacers_SpacerTT;\n§g.§!;;;;;;;;;;;;;x
-# Spacer text for debugging
-BCT_Spacers_SpacerTT_ImportantToYou;\n§g(NotImportantToYou)§!;;;;;;;;;;;;;x
-BCT_Spacers_SpacerTT_Ruler;\n§g(NotRuler)§!;;;;;;;;;;;;;x
-BCT_Spacers_SpacerTT_DoubleRuler;\n§g(NotDoubleRuler)§!;;;;;;;;;;;;;x
-BCT_Spacers_SpacerTT_TripleRuler;\n§g(NotTripleRuler)§!;;;;;;;;;;;;;x
-BCT_Spacers_SpacerTT_MarriedToRuler;\n§g(NotMarriedToRuler)§!;;;;;;;;;;;;;x
-BCT_Spacers_SpacerTT_ConsortConcubine;\n§g(NotConsortOrConcubine)§!;;;;;;;;;;;;;x
-BCT_Spacers_SpacerTT_Heir;\n§g(NotHeir)§!;;;;;;;;;;;;;x
-BCT_Spacers_SpacerTT_Regent;\n§g(NotRegent)§!;;;;;;;;;;;;;x
-BCT_Spacers_SpacerTT_Councillor;\n§g(NotCouncillor)§!;;;;;;;;;;;;;x
-BCT_Spacers_SpacerTT_Commander;\n§g(NotCommander)§!;;;;;;;;;;;;;x
-BCT_Spacers_SpacerTT_OtherMinorTitle;\n§g(NotOtherMinorTitle)§!;;;;;;;;;;;;;x
-BCT_Spacers_SpacerTT_Prince;\n§g(NotPrince)§!;;;;;;;;;;;;;x
+#
+# Spacer text, used when a spacer is needed and spacer debugging is enabled
+BCT_Spacers_SpacerTT_ImportantToYou_Debug;\n§g(NotImportantToYou)§!;;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Ruler_Debug;\n§g(NotRuler)§!;;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_DoubleRuler_Debug;\n§g(NotDoubleRuler)§!;;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_TripleRuler_Debug;\n§g(NotTripleRuler)§!;;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_MarriedToRuler_Debug;\n§g(NotMarriedToRuler)§!;;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_ConsortConcubine_Debug;\n§g(NotConsortOrConcubine)§!;;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Heir_Debug;\n§g(NotHeir)§!;;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Regent_Debug;\n§g(NotRegent)§!;;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Councillor_Debug;\n§g(NotCouncillor)§!;;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Commander_Debug;\n§g(NotCommander)§!;;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_OtherMinorTitle_Debug;\n§g(NotOtherMinorTitle)§!;;;;;;;;;;;;;x
+BCT_Spacers_SpacerTT_Prince_Debug;\n§g(NotPrince)§!;;;;;;;;;;;;;x

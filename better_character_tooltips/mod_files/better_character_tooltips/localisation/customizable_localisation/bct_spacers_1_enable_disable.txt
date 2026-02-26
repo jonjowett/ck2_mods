@@ -1,0 +1,18 @@
+# Passthrough for several purposes:
+#  --- So the single override line isn't unreasonably long.
+#  --- So that spacers can be disabled globally or per-character, from a single location. (Eg: no-spacer version, global flag, character modifer.)
+#  --- So that spacers are only shown/evaluated for living characters.
+
+defined_text = {
+	name = BCT_Spacers
+	use_first_valid = yes
+	text = {
+		trigger = {
+			always = yes   # Set to always = no to create an ironman-compatible no-spacer version. Otherwise, always = yes.
+			NOT = { has_global_flag = bct_spacers_disabled }
+			NOT = { has_character_flag = bct_spacers_disabled }
+			is_alive = yes
+		}
+		localisation_key = BCT_Spacers_Actual
+	}
+}

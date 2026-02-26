@@ -1,15 +1,3 @@
-# Passthrough so the single override line isn't unreasonably long.
-# NB: This data is only shown/evaluated for living characters.
-
-defined_text = {
-	name = BCT_Spacers
-	use_first_valid = yes
-	text = {
-		trigger = { is_alive = yes }
-		localisation_key = BCT_Spacers_Actual
-	}
-}
-
 # The actual spacers
 # NB: We only want to insert a spacer if the condition is false - NOT a ruler, NOT an heir, etc.
 #     So, for brevity, every trigger is actually the inverse of the condition described in the custom loc name.
@@ -30,8 +18,7 @@ defined_text = {
 				AND = { is_landed = no liege = { character = ROOT } } # Your courtier
 			}
 		}
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_ImportantToYou
+		localisation_key = BCT_Spacers_SpacerTT_ImportantToYou
 	}
 }
 
@@ -39,9 +26,10 @@ defined_text = {
 	name = BCT_Spacers_Ruler
 	use_first_valid = yes
 	text = {
-		trigger = { is_ruler = no }
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_Ruler
+		trigger = {
+			is_ruler = no
+		}
+		localisation_key = BCT_Spacers_SpacerTT_Ruler
 	}
 }
 
@@ -60,8 +48,7 @@ defined_text = {
 				}
 			}
 		}
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_DoubleRuler
+		localisation_key = BCT_Spacers_SpacerTT_DoubleRuler
 	}
 }
 
@@ -87,8 +74,7 @@ defined_text = {
 				}
 			}
 		}
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_TripleRuler
+		localisation_key = BCT_Spacers_SpacerTT_TripleRuler
 	}
 }
 
@@ -102,8 +88,7 @@ defined_text = {
 				NOT = { any_spouse = { is_ruler = yes } }
 			}
 		}
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_MarriedToRuler
+		localisation_key = BCT_Spacers_SpacerTT_MarriedToRuler
 	}
 }
 
@@ -111,9 +96,10 @@ defined_text = {
 	name = BCT_Spacers_ConsortConcubine
 	use_first_valid = yes
 	text = {
-		trigger = { is_consort = no }
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_ConsortConcubine
+		trigger = {
+			is_consort = no
+		}
+		localisation_key = BCT_Spacers_SpacerTT_ConsortConcubine
 	}
 }
 
@@ -158,8 +144,7 @@ defined_text = {
 				
 			}
 		}
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_Heir
+		localisation_key = BCT_Spacers_SpacerTT_Heir
 	}
 }
 
@@ -190,8 +175,7 @@ defined_text = {
 				}
 			}
 		}
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_Regent
+		localisation_key = BCT_Spacers_SpacerTT_Regent
 	}
 }
 
@@ -200,8 +184,7 @@ defined_text = {
 	use_first_valid = yes
 	text = {
 		trigger = { is_voter = no } # is_voter includes council members outside the "normal" ones (ie. outside those that have defined job_titles)
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_Councillor
+		localisation_key = BCT_Spacers_SpacerTT_Councillor
 	}
 }
 
@@ -210,8 +193,7 @@ defined_text = {
 	use_first_valid = yes
 	text = {
 		trigger = { NOT = { has_minor_title = title_commander } }
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_Commander
+		localisation_key = BCT_Spacers_SpacerTT_Commander
 	}
 }
 
@@ -232,8 +214,7 @@ defined_text = {
 				}
 			}
 		}
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_OtherMinorTitle
+		localisation_key = BCT_Spacers_SpacerTT_OtherMinorTitle
 	}
 }
 
@@ -265,7 +246,6 @@ defined_text = {
 				}
 			}
 		}
-		localisation_key = BCT_Spacers_SpacerTT
-		#localisation_key = BCT_Spacers_SpacerTT_Prince
+		localisation_key = BCT_Spacers_SpacerTT_Prince
 	}
 }
