@@ -16,4 +16,8 @@ dependencies={
 	"\"PDXRP Tamriel Game\""
 	"\"Expanded Decisions: PDXRP Tamriel Game\""
 	
+	# Other total conversions
+	"\"After the End Fan Fork\""
+	"\"Romance of the Three Kingdoms\""
+	
 }

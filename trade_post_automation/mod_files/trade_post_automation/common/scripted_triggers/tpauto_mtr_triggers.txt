@@ -1,9 +1,10 @@
 # Audax Validator EnableCommentMetadata
-# The Validator can't read MTR (because it's zipped), so split MTR into an isolated file and ignore every error
+# The Validator can't read workshop mods (because they're zipped), so split them into an isolated file and ignore every error.
 # Audax Validator "!" Ignore_NEXT
 
-tpauto_allow_tracking_and_rebuild_mtr = {
+tpauto_allow_tracking_and_rebuild_mtr = { # Returns true iff trade posts use MTR buildings
 	tpauto_pdxrptg_mod_is_active = no
+	tpauto_ateff_mod_is_active   = no
 }
 
 tpauto_this_province_can_have_trade_route_trade_post_mtr = {

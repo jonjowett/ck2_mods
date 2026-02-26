@@ -1,0 +1,35 @@
+# Audax Validator EnableCommentMetadata
+# The Validator can't read workshop mods (because they're zipped), so split them into an isolated file and ignore every error.
+# Audax Validator "!" Ignore_NEXT
+
+tpauto_ateff_mod_is_active = {
+	
+	# Check a couple of global flags which seem like they should only exist in ATEFF, and which should persist for the whole game.
+	has_global_flag = scenario_initialized # From misc.5  in ...\events\misc_AfterTheEnd.txt ; created on new game start
+	has_global_flag = bad_checksum         # From misc.10 in ...\events\misc_AfterTheEnd.txt ; bad checksum is guaranteed if TPAuto is running at the same time!
+	
+	# Unfortunately, the names of those flags seem a bit generic.
+	# So, in addition, test for a couple of game rules that seem unique to ATEFF.
+	OR = {
+		has_game_rule = { name = RULE_PLAYERCOL_RULE value = historical }
+		has_game_rule = { name = RULE_PLAYERCOL_RULE value = customized }
+	}
+	OR = {
+		has_game_rule = { name = RULE_REDCOAT_INVASION value = historical     }
+		has_game_rule = { name = RULE_REDCOAT_INVASION value = random         }
+		has_game_rule = { name = RULE_REDCOAT_INVASION value = delayed_random }
+		has_game_rule = { name = RULE_REDCOAT_INVASION value = off            }
+	}
+	
+}
+
+
+tpauto_this_province_can_have_trade_route_trade_post_ateff = {
+	tpauto_ateff_mod_is_active = yes
+	OR = {
+		atlantic_trade_post_trigger = yes
+		caribbean_trade_post_trigger = yes
+		interstate_trade_post_trigger = yes
+		pacific_trade_post_trigger = yes
+	}
+}

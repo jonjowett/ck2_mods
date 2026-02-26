@@ -1,8 +1,8 @@
 # Audax Validator EnableCommentMetadata
-# The Validator can't read MTR (because it's zipped), so split MTR into an isolated file and ignore every error
+# The Validator can't read workshop mods (because they're zipped), so split them into an isolated file and ignore every error.
 # Audax Validator "!" Ignore_NEXT
 
-tpauto_allow_tracking_and_rebuild_pdxrptg = {
+tpauto_allow_tracking_and_rebuild_pdxrptg = { # Should return true iff trade posts use PDXRPTG (aka Elder Kings) buildings
 	tpauto_pdxrptg_mod_is_active = yes
 }
 
