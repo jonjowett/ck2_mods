@@ -1,0 +1,229 @@
+# Audax Validator EnableCommentMetadata
+
+# Validator erroneously flags every single number (below) as an error,
+#      and this file is otherwise very simple, so we'll skip this entire file.
+# Audax Validator "!" Ignore_NEXT
+
+defined_text = {
+	
+	name = BCT_HealthFertilityAge
+	use_first_valid = yes
+	
+	text = {
+		trigger = { is_alive = yes }
+		localisation_key = BCT_HealthFertilityAge_Alive
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = BCT_HealthFertilityAge_Dead
+	}
+	
+}
+
+
+
+defined_text = {
+	name = BCT_Gender
+	use_first_valid = yes
+	text = {
+		trigger = { is_female = no }
+		localisation_key = BCT_Gender_Male
+	}
+	text = {
+		trigger = { is_female = yes }
+		localisation_key = BCT_Gender_Female
+	}
+}
+
+
+
+defined_text = {
+	
+	name = BCT_Health
+	use_first_valid = yes
+	
+	#Generated text
+	text = { trigger = { health =  20.00 } localisation_key =  "§P20.0§!"  }
+	text = { trigger = { health =  19.50 } localisation_key =  "§P19.5§!"  }
+	text = { trigger = { health =  19.00 } localisation_key =  "§P19.0§!"  }
+	text = { trigger = { health =  18.50 } localisation_key =  "§P18.5§!"  }
+	text = { trigger = { health =  18.00 } localisation_key =  "§P18.0§!"  }
+	text = { trigger = { health =  17.50 } localisation_key =  "§P17.5§!"  }
+	text = { trigger = { health =  17.00 } localisation_key =  "§P17.0§!"  }
+	text = { trigger = { health =  16.50 } localisation_key =  "§P16.5§!"  }
+	text = { trigger = { health =  16.00 } localisation_key =  "§P16.0§!"  }
+	text = { trigger = { health =  15.50 } localisation_key =  "§P15.5§!"  }
+	text = { trigger = { health =  15.00 } localisation_key =  "§P15.0§!"  }
+	text = { trigger = { health =  14.50 } localisation_key =  "§P14.5§!"  }
+	text = { trigger = { health =  14.00 } localisation_key =  "§P14.0§!"  }
+	text = { trigger = { health =  13.50 } localisation_key =  "§P13.5§!"  }
+	text = { trigger = { health =  13.00 } localisation_key =  "§P13.0§!"  }
+	text = { trigger = { health =  12.50 } localisation_key =  "§P12.5§!"  }
+	text = { trigger = { health =  12.00 } localisation_key =  "§P12.0§!"  }
+	text = { trigger = { health =  11.50 } localisation_key =  "§P11.5§!"  }
+	text = { trigger = { health =  11.00 } localisation_key =  "§P11.0§!"  }
+	text = { trigger = { health =  10.50 } localisation_key =  "§P10.5§!"  }
+	text = { trigger = { health =  10.00 } localisation_key =  "§P10.0§!"  }
+	text = { trigger = { health =   9.75 } localisation_key =   "§P9.75§!" }
+	text = { trigger = { health =   9.50 } localisation_key =   "§P9.5§!"  }
+	text = { trigger = { health =   9.25 } localisation_key =   "§P9.25§!" }
+	text = { trigger = { health =   9.00 } localisation_key =   "§P9.0§!"  }
+	text = { trigger = { health =   8.75 } localisation_key =   "§P8.75§!" }
+	text = { trigger = { health =   8.50 } localisation_key =   "§P8.5§!"  }
+	text = { trigger = { health =   8.25 } localisation_key =   "§P8.25§!" }
+	text = { trigger = { health =   8.00 } localisation_key =   "§P8.0§!"  }
+	text = { trigger = { health =   7.75 } localisation_key =   "§G7.75§!" }
+	text = { trigger = { health =   7.50 } localisation_key =   "§G7.5§!"  }
+	text = { trigger = { health =   7.25 } localisation_key =   "§G7.25§!" }
+	text = { trigger = { health =   7.00 } localisation_key =   "§G7.0§!"  }
+	text = { trigger = { health =   6.75 } localisation_key =   "§G6.75§!" }
+	text = { trigger = { health =   6.50 } localisation_key =   "§G6.5§!"  }
+	text = { trigger = { health =   6.25 } localisation_key =   "§G6.25§!" }
+	text = { trigger = { health =   6.00 } localisation_key =   "§G6.0§!"  }
+	text = { trigger = { health =   5.75 } localisation_key =   "§Y5.75§!" }
+	text = { trigger = { health =   5.50 } localisation_key =   "§Y5.5§!"  }
+	text = { trigger = { health =   5.25 } localisation_key =   "§Y5.25§!" }
+	text = { trigger = { health =   5.00 } localisation_key =   "§Y5.0§!"  }
+	text = { trigger = { health =   4.75 } localisation_key =   "§Y4.75§!" }
+	text = { trigger = { health =   4.50 } localisation_key =   "§Y4.5§!"  }
+	text = { trigger = { health =   4.25 } localisation_key =   "§Y4.25§!" }
+	text = { trigger = { health =   4.00 } localisation_key =   "§Y4.0§!"  }
+	text = { trigger = { health =   3.75 } localisation_key =   "§Y3.75§!" }
+	text = { trigger = { health =   3.50 } localisation_key =   "§Y3.5§!"  }
+	text = { trigger = { health =   3.25 } localisation_key =   "§Y3.25§!" }
+	text = { trigger = { health =   3.00 } localisation_key =   "§Y3.0§!"  }
+	text = { trigger = { health =   2.75 } localisation_key =   "§Y2.75§!" }
+	text = { trigger = { health =   2.50 } localisation_key =   "§Y2.5§!"  }
+	text = { trigger = { health =   2.25 } localisation_key =   "§Y2.25§!" }
+	text = { trigger = { health =   2.00 } localisation_key =   "§Y2.0§!"  }
+	text = { trigger = { health =   1.75 } localisation_key =   "§R1.75§!" }
+	text = { trigger = { health =   1.50 } localisation_key =   "§R1.5§!"  }
+	text = { trigger = { health =   1.25 } localisation_key =   "§R1.25§!" }
+	text = { trigger = { health =   1.00 } localisation_key =   "§R1.0§!"  }
+	text = { trigger = { health =   0.75 } localisation_key =   "§R0.75§!" }
+	text = { trigger = { health =   0.50 } localisation_key =   "§R0.5§!"  }
+	text = { trigger = { health =   0.40 } localisation_key =   "§R0.4§!"  }
+	text = { trigger = { health =   0.30 } localisation_key =   "§R0.3§!"  }
+	text = { trigger = { health =   0.20 } localisation_key =   "§R0.2§!"  }
+	text = { trigger = { health =   0.10 } localisation_key =   "§R0.1§!"  }
+	text = { trigger = { health =   0.00 } localisation_key =   "§R0.0§!"  }
+	text = { trigger = { health =  -0.10 } localisation_key =  "§R-0.1§!"  }
+	text = { trigger = { health =  -0.20 } localisation_key =  "§R-0.2§!"  }
+	text = { trigger = { health =  -0.30 } localisation_key =  "§R-0.3§!"  }
+	text = { trigger = { health =  -0.40 } localisation_key =  "§R-0.4§!"  }
+	text = { trigger = { health =  -0.50 } localisation_key =  "§R-0.5§!"  }
+	text = { trigger = { health =  -0.75 } localisation_key =  "§R-0.75§!" }
+	text = { trigger = { health =  -1.00 } localisation_key =  "§R-1.0§!"  }
+	text = { trigger = { health =  -1.50 } localisation_key =  "§R-1.5§!"  }
+	text = { trigger = { health =  -2.00 } localisation_key =  "§R-2.0§!"  }
+	text = { trigger = { health =  -2.50 } localisation_key =  "§R-2.5§!"  }
+	text = { trigger = { health =  -3.00 } localisation_key =  "§R-3.0§!"  }
+	text = { trigger = { health =  -3.50 } localisation_key =  "§R-3.5§!"  }
+	text = { trigger = { health =  -4.00 } localisation_key =  "§R-4.0§!"  }
+	text = { trigger = { health =  -4.50 } localisation_key =  "§R-4.5§!"  }
+	text = { trigger = { health =  -5.00 } localisation_key =  "§R-5.0§!"  }
+	text = { trigger = { health =  -6.00 } localisation_key =  "§R-6.0§!"  }
+	text = { trigger = { health =  -7.00 } localisation_key =  "§R-7.0§!"  }
+	text = { trigger = { health =  -8.00 } localisation_key =  "§R-8.0§!"  }
+	text = { trigger = { health =  -9.00 } localisation_key =  "§R-9.0§!"  }
+	text = { trigger = { health = -10.00 } localisation_key = "§R-10.0§!"  }
+	
+	# Fallback
+	text = { trigger = { health < -10.00 } localisation_key = "§R-999§!" }
+	
+}
+
+
+
+defined_text = {
+	
+	name = BCT_Fertility
+	use_first_valid = yes
+	
+	#Generated text
+	text = { trigger = { fertility =  3.00 } localisation_key =  "§P300%§!" }
+	text = { trigger = { fertility =  2.95 } localisation_key =  "§P295%§!" }
+	text = { trigger = { fertility =  2.90 } localisation_key =  "§P290%§!" }
+	text = { trigger = { fertility =  2.85 } localisation_key =  "§P285%§!" }
+	text = { trigger = { fertility =  2.80 } localisation_key =  "§P280%§!" }
+	text = { trigger = { fertility =  2.75 } localisation_key =  "§P275%§!" }
+	text = { trigger = { fertility =  2.70 } localisation_key =  "§P270%§!" }
+	text = { trigger = { fertility =  2.65 } localisation_key =  "§P265%§!" }
+	text = { trigger = { fertility =  2.60 } localisation_key =  "§P260%§!" }
+	text = { trigger = { fertility =  2.55 } localisation_key =  "§P255%§!" }
+	text = { trigger = { fertility =  2.50 } localisation_key =  "§P250%§!" }
+	text = { trigger = { fertility =  2.45 } localisation_key =  "§P245%§!" }
+	text = { trigger = { fertility =  2.40 } localisation_key =  "§P240%§!" }
+	text = { trigger = { fertility =  2.35 } localisation_key =  "§P235%§!" }
+	text = { trigger = { fertility =  2.30 } localisation_key =  "§P230%§!" }
+	text = { trigger = { fertility =  2.25 } localisation_key =  "§P225%§!" }
+	text = { trigger = { fertility =  2.20 } localisation_key =  "§P220%§!" }
+	text = { trigger = { fertility =  2.15 } localisation_key =  "§P215%§!" }
+	text = { trigger = { fertility =  2.10 } localisation_key =  "§P210%§!" }
+	text = { trigger = { fertility =  2.05 } localisation_key =  "§P205%§!" }
+	text = { trigger = { fertility =  2.00 } localisation_key =  "§P200%§!" }
+	text = { trigger = { fertility =  1.95 } localisation_key =  "§P195%§!" }
+	text = { trigger = { fertility =  1.90 } localisation_key =  "§P190%§!" }
+	text = { trigger = { fertility =  1.85 } localisation_key =  "§P185%§!" }
+	text = { trigger = { fertility =  1.80 } localisation_key =  "§P180%§!" }
+	text = { trigger = { fertility =  1.75 } localisation_key =  "§P175%§!" }
+	text = { trigger = { fertility =  1.70 } localisation_key =  "§P170%§!" }
+	text = { trigger = { fertility =  1.65 } localisation_key =  "§P165%§!" }
+	text = { trigger = { fertility =  1.60 } localisation_key =  "§P160%§!" }
+	text = { trigger = { fertility =  1.55 } localisation_key =  "§P155%§!" }
+	text = { trigger = { fertility =  1.50 } localisation_key =  "§P150%§!" }
+	text = { trigger = { fertility =  1.45 } localisation_key =  "§P145%§!" }
+	text = { trigger = { fertility =  1.40 } localisation_key =  "§P140%§!" }
+	text = { trigger = { fertility =  1.35 } localisation_key =  "§P135%§!" }
+	text = { trigger = { fertility =  1.30 } localisation_key =  "§P130%§!" }
+	text = { trigger = { fertility =  1.25 } localisation_key =  "§P125%§!" }
+	text = { trigger = { fertility =  1.20 } localisation_key =  "§P120%§!" }
+	text = { trigger = { fertility =  1.15 } localisation_key =  "§P115%§!" }
+	text = { trigger = { fertility =  1.10 } localisation_key =  "§P110%§!" }
+	text = { trigger = { fertility =  1.05 } localisation_key =  "§P105%§!" }
+	text = { trigger = { fertility =  1.00 } localisation_key =  "§P100%§!" }
+	text = { trigger = { fertility =  0.95 } localisation_key =   "§P95%§!" }
+	text = { trigger = { fertility =  0.90 } localisation_key =   "§P90%§!" }
+	text = { trigger = { fertility =  0.85 } localisation_key =   "§P85%§!" }
+	text = { trigger = { fertility =  0.80 } localisation_key =   "§P80%§!" }
+	text = { trigger = { fertility =  0.75 } localisation_key =   "§G75%§!" }
+	text = { trigger = { fertility =  0.70 } localisation_key =   "§G70%§!" }
+	text = { trigger = { fertility =  0.65 } localisation_key =   "§G65%§!" }
+	text = { trigger = { fertility =  0.60 } localisation_key =   "§G60%§!" }
+	text = { trigger = { fertility =  0.55 } localisation_key =   "§W55%§!" }
+	text = { trigger = { fertility =  0.50 } localisation_key =   "§W50%§!" }
+	text = { trigger = { fertility =  0.45 } localisation_key =   "§W45%§!" }
+	text = { trigger = { fertility =  0.40 } localisation_key =   "§W40%§!" }
+	text = { trigger = { fertility =  0.35 } localisation_key =   "§Y35%§!" }
+	text = { trigger = { fertility =  0.30 } localisation_key =   "§Y30%§!" }
+	text = { trigger = { fertility =  0.25 } localisation_key =   "§Y25%§!" }
+	text = { trigger = { fertility =  0.20 } localisation_key =   "§Y20%§!" }
+	text = { trigger = { fertility =  0.15 } localisation_key =   "§R15%§!" }
+	text = { trigger = { fertility =  0.10 } localisation_key =   "§R10%§!" }
+	text = { trigger = { fertility =  0.05 } localisation_key =    "§R5%§!" }
+	text = { trigger = { fertility =  0.00 } localisation_key =    "§R0%§!" }
+	text = { trigger = { fertility = -0.05 } localisation_key =   "§R-5%§!" }
+	text = { trigger = { fertility = -0.10 } localisation_key =  "§R-10%§!" }
+	text = { trigger = { fertility = -0.15 } localisation_key =  "§R-15%§!" }
+	text = { trigger = { fertility = -0.20 } localisation_key =  "§R-20%§!" }
+	text = { trigger = { fertility = -0.25 } localisation_key =  "§R-25%§!" }
+	text = { trigger = { fertility = -0.30 } localisation_key =  "§R-30%§!" }
+	text = { trigger = { fertility = -0.35 } localisation_key =  "§R-35%§!" }
+	text = { trigger = { fertility = -0.40 } localisation_key =  "§R-40%§!" }
+	text = { trigger = { fertility = -0.45 } localisation_key =  "§R-45%§!" }
+	text = { trigger = { fertility = -0.50 } localisation_key =  "§R-50%§!" }
+	text = { trigger = { fertility = -0.55 } localisation_key =  "§R-55%§!" }
+	text = { trigger = { fertility = -0.60 } localisation_key =  "§R-60%§!" }
+	text = { trigger = { fertility = -0.65 } localisation_key =  "§R-65%§!" }
+	text = { trigger = { fertility = -0.70 } localisation_key =  "§R-70%§!" }
+	text = { trigger = { fertility = -0.75 } localisation_key =  "§R-75%§!" }
+	text = { trigger = { fertility = -0.80 } localisation_key =  "§R-80%§!" }
+	text = { trigger = { fertility = -0.85 } localisation_key =  "§R-85%§!" }
+	text = { trigger = { fertility = -0.90 } localisation_key =  "§R-90%§!" }
+	text = { trigger = { fertility = -0.95 } localisation_key =  "§R-95%§!" }
+	text = { trigger = { fertility = -1.00 } localisation_key = "§R-100%§!" }
+	
+	# Fallback
+	text = { trigger = { fertility < -1.00 } localisation_key = "§R-999%§!" }
+	
+}
