@@ -3,15 +3,24 @@
 ##########################################
 
 expd_pris_this_executioner_does_not_need_council_permission = {
+	
 	trigger_if = {
 		limit = { has_dlc = "Zeus" }
-		#limit = { always = no }
+		
+		# If you have a regent, you have council voting, regardless of everything else
 		has_regent = no
-		has_law = execution_voting_power_0
+		
+		# If you can see the execution voting law (ie. feudal or tribal with high org), then you must have ruler exclusivity
+		trigger_if = {
+			limit = { is_law_potential = execution_voting_power_0 }
+			has_law = execution_voting_power_0
+		}
+		
 	}
 	trigger_else = {
 		always = yes
 	}
+	
 }
 
 
