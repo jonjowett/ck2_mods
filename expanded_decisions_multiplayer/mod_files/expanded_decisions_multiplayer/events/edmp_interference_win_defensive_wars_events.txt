@@ -1,0 +1,160 @@
+namespace = edmp_wdw
+
+# Called from on_war_started
+# Fires whenever a war is started
+#  --- FROM is the attacker
+#  --- ROOT is the defender
+character_event = {
+	
+	id = edmp_wdw.1100
+	
+	hide_window = yes
+	is_triggered_only = yes
+	
+	ai = yes
+	
+	immediate = {
+		# If the primary defender can win defensive wars, do so immediately
+		if = {
+			limit = { ROOT = { edmp_interference_win_defensive_wars_this_character_can_potentially_use_imprisonment = yes } }
+			ROOT = { character_event = { id = edmp_wdw.2000 } }
+		}
+		# Otherwise, trigger a waiting event on the defender, and periodically check whether any of his allies can help
+		else = {
+			ROOT = { character_event = { id = edmp_wdw.1900 } }
+		}
+	}
+	
+}
+
+# Called from on_rebel_revolt
+# Fires when a province rebels
+#  --- ROOT is the province
+province_event = {
+	
+	id = edmp_wdw.1200
+	
+	hide_window = yes
+	is_triggered_only = yes
+	
+	trigger = {
+		# Top liege of the holder of the revolting province is an AI and is primary defender in a war (probably this war?)
+		ROOT = {
+			holder_scope = {
+				top_liege = {
+					ai = yes
+					any_war = { defender = { character = PREVPREV } }
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		# If the primary defender can win defensive wars, do so immediately
+		if = {
+			limit = { ROOT = { holder_scope = { top_liege = { edmp_interference_win_defensive_wars_this_character_can_potentially_use_imprisonment = yes } } } }
+			ROOT = { holder_scope = { top_liege = { character_event = { id = edmp_wdw.2000 } } } }
+		}
+		# Otherwise, trigger a waiting event on the defender, and periodically check whether any of his allies can help
+		else = {
+			ROOT = { holder_scope = { top_liege = { character_event = { id = edmp_wdw.1900 } } } }
+		}
+	}
+	
+}
+
+
+character_event = {
+	id = edmp_wdw.1900
+	hide_window = yes
+	is_triggered_only = yes
+	ai = yes
+	only_rulers = yes
+	war = yes
+	immediate = {
+		
+		# Clear any other delayed instances of this event which may exist
+		clear_delayed_event = { id = edmp_wdw.1900 }
+		
+		# If there is a war where any AI defender can use the "win wars" power, make that AI use the power
+		if = {
+			limit = {
+				any_war = {
+					defender = { character = ROOT } # ROOT is primary defender
+					war_score > -100                # War is not already won by defenders
+					any_defender = {
+						ai = yes
+						edmp_interference_win_defensive_wars_this_character_can_potentially_use_imprisonment = yes
+					}
+				}
+			}
+			any_war = {
+				limit = {
+					defender = { character = ROOT } # ROOT is primary defender
+					war_score > -100                # War is not already won by defenders
+				}
+				any_defender = {
+					limit = {
+						ai = yes
+						edmp_interference_win_defensive_wars_this_character_can_potentially_use_imprisonment = yes
+					}
+					character_event = { id = edmp_wdw.2000 }
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_war = {
+					defender = { character = ROOT } # ROOT is primary defender
+					war_score > -100                # War is not already won by defenders
+				}
+			}
+			character_event = { id = edmp_wdw.1900 days = 30 }
+		}
+	}
+	
+}
+
+# AI character, who is in a defensive war, uses their special "win defensive wars" power to imprison all of their attackers
+# Called:
+#  --- Directly from interference decisions:
+#       --- edmp_interference_grant_win_defensive_wars_to_this_character
+#       --- edmp_interference_prolong_win_defensive_wars_to_this_character
+#  --- Directly from on_actions where ROOT is already set correctly:
+#       --- on_startup
+#       --- on_yearly_pulse
+#  --- Indirectly from other on_actions (where ROOT is NOT set correctly), via the passthrough events above.
+character_event = {
+	
+	id = edmp_wdw.2000
+	
+	hide_window = yes
+	is_triggered_only = yes
+	
+	ai = yes
+	only_rulers = yes
+	war = yes
+	
+	trigger = {
+		edmp_interference_win_defensive_wars_this_character_can_potentially_use_imprisonment = yes
+		any_war = { any_defender = { character = ROOT } }
+	}
+	
+	immediate = {
+		clear_event_target = primary_attacker_to_be_imprisoned
+		any_war = {
+			limit = {
+				any_defender = { character = ROOT } # ROOT is a defender
+				war_score > -100                    # War is not already won by defenders
+			}
+			attacker = { save_event_target_as = primary_attacker_to_be_imprisoned }
+			ROOT = {
+				event_target:primary_attacker_to_be_imprisoned = {
+					edmp_interference_win_defensive_wars_prev_imprisons_this_character = yes
+				}
+			}
+			clear_event_target = primary_attacker_to_be_imprisoned
+		}
+	}
+	
+}

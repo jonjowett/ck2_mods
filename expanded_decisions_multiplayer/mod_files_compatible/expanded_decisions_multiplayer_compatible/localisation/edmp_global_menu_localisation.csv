@@ -23,6 +23,7 @@ edmp_global_1000_title;(ED:MP) Global Rules Admin Menu;;;;;;;;;;;;;x
 edmp_global_1000_desc;Please select the dynamic game rule you wish to manage:;;;;;;;;;;;;;x
 edmp_global_1000_evtopt_cbs;Casus Belli;;;;;;;;;;;;;x
 edmp_global_1000_evtopt_realm_size;Realm Size (Currently: [edmp_global_realm_size_limit_status_one_line]);;;;;;;;;;;;;x
+edmp_global_1000_evtopt_misc;Miscellaneous;;;;;;;;;;;;;x
 #
 #
 #
@@ -127,3 +128,23 @@ edmp_global_realm_size_empty_holding_tribal_parameter_not_changed_tt;The Tribal 
 edmp_global_realm_size_empty_holding_nomadic_parameter_not_changed_tt;The Nomadic Empty Holding Slot Contribution is NOT changed.\n(The Nomadic Empty Holding Slot Contribution remains at §Y[Root.global_edmp_realm_size_empty_holdings_nomadic.GetValue]§!.);;;;;;;;;;;;;x
 edmp_global_realm_size_empty_holding_tribal_parameter_changed_tt;The Tribal Empty Holding Slot Contribution changes from §Y[Root.global_edmp_realm_size_empty_holdings_tribal.GetValue]§! to §Y[Root.global_edmp_realm_size_empty_holdings_tribal_new.GetValue]§!.;;;;;;;;;;;;;x
 edmp_global_realm_size_empty_holding_nomadic_parameter_changed_tt;The Nomadic Empty Holding Slot Contribution changes from §Y[Root.global_edmp_realm_size_empty_holdings_nomadic.GetValue]§! to §Y[Root.global_edmp_realm_size_empty_holdings_nomadic_new.GetValue]§!.;;;;;;;;;;;;;x
+#
+#
+#
+#
+#
+#
+# Miscellaneous Menu
+edmp_global_4000_title;(ED:MP) Miscellaneous Rules;;;;;;;;;;;;;x
+edmp_global_4000_desc;Please select the Miscellaneous Rule you wish to change.;;;;;;;;;;;;;x
+edmp_global_4000_evtopt_win_defensive_wars_global;Players Win Defensive Wars (currently: [edmp_global_win_defensive_wars_global_status]);;;;;;;;;;;;;x
+#
+# Miscellaneous Menu - Players Win Defensive Wars
+edmp_global_4100_title;(ED:MP) Misc - Players Win Defensive Wars;;;;;;;;;;;;;x
+edmp_global_4100_desc;If this rule is enabled then ALL players will be able to imprison the primary attacker in ALL of their defensive wars.\n\n"All players" means all characters controlled by a human, and all characters controlled by AI who have the "Absent Player" flag.\n\n"All defensive wars" means all wars where:\n(1) The character is the main or a secondary defender, and\n(2) The primary attacker is NOT a current or absent player.\n\nIf this rule is enabled, the game will be a LOT EASIER for players!\n\nThis rule is currently [edmp_global_win_defensive_wars_global_status].;;;;;;;;;;;;;x
+edmp_global_4100_evtopt_win_defensive_wars_global_enable;Current: DISABLED --- Change to: ENABLED;;;;;;;;;;;;;x
+edmp_global_4100_evtopt_win_defensive_wars_global_disable;Current: ENABLED --- Change to: DISABLED;;;;;;;;;;;;;x
+edmp_global_4100_evtopt_win_defensive_wars_global_enable_tt;Current and absent human players will be able to freely imprison their attackers.\n\n§RWARNING!§! This rule change will take effect §Yimmediately§!!\n;;;;;;;;;;;;;x
+edmp_global_4100_evtopt_win_defensive_wars_global_disable_tt;Current and absent human players will no longer be able to freely imprison their attackers.\n\n§RWARNING!§! This rule change will take effect §Yimmediately§!!\n;;;;;;;;;;;;;x
+edmp_global_win_defensive_wars_global_status_enabled;ENABLED;;;;;;;;;;;;;x
+edmp_global_win_defensive_wars_global_status_disabled;DISABLED;;;;;;;;;;;;;x

@@ -4,6 +4,7 @@ namespace = edmp_global
 # 1000      = Main gateway event (sole entrance & exit from the menu)
 # 2000-2999 = Casus Belli rules
 # 3000-3999 = Realm Size rules
+# 4000-4999 = Miscellaneous rules
 
 
 
@@ -35,6 +36,11 @@ character_event = {
 	option = {
 		name = edmp_global_1000_evtopt_realm_size
 		hidden_tooltip = { character_event = { id = edmp_global.3000 } }
+	}
+	
+	option = {
+		name = edmp_global_1000_evtopt_misc
+		hidden_tooltip = { character_event = { id = edmp_global.4000 } }
 	}
 	
 	option = {
@@ -745,6 +751,115 @@ character_event = {
 			set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic_next value = 0 }
 		}
 		hidden_tooltip = { character_event = { id = edmp_global.3001 } }
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+# Gateway event for the CB menu.
+# This should be the ONLY entrance and ONLY exit from the CB menu.
+character_event = {
+	
+	id      = edmp_global.4000
+	title   = edmp_global_4000_title
+	desc    = edmp_global_4000_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # For consistency with other menus
+	
+	is_triggered_only = yes
+	ai = no
+	
+	
+	
+	# Global "Players Win Defensive Wars" settings
+	option = {
+		name = edmp_global_4000_evtopt_win_defensive_wars_global
+		hidden_tooltip = { character_event = { id = edmp_global.4100 } }
+	}
+	
+	
+	
+	# Exit, back to main menu
+	option = {
+		name = edmp_global_evtopt_exit
+		hidden_tooltip = { character_event = { id = edmp_global.1000 } }
+	}
+	
+	
+	
+}
+
+character_event = {
+	
+	id      = edmp_global.4100
+	title   = edmp_global_4100_title
+	desc    = edmp_global_4100_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter # For consistency with other menus
+	
+	is_triggered_only = yes
+	ai = no
+	
+	# Click to change the current rule
+	# Only one of these two options is visible
+	option = {
+		name = edmp_global_4100_evtopt_win_defensive_wars_global_enable
+		trigger = { NOT = { has_global_flag = edmp_interference_win_defensive_wars_global } }
+		# Change the rule
+		custom_tooltip = {
+			text = edmp_global_4100_evtopt_win_defensive_wars_global_enable_tt
+			set_global_flag = edmp_interference_win_defensive_wars_global
+		}
+		# Notify players
+		if = {
+			limit = { edmp_this_is_a_multiplayer_game = yes }
+			custom_tooltip = {
+				text = edmp_gmn_player_notification_sent_tt
+				any_player = {
+					limit = { NOT = { character = PREV } }
+					character_event = { id = edmp_gmn.4100 }
+				}
+			}
+		}
+		# Back to previous menu
+		hidden_tooltip = { character_event = { id = edmp_global.4000 } }
+	}
+	option = {
+		name = edmp_global_4100_evtopt_win_defensive_wars_global_disable
+		trigger = { has_global_flag = edmp_interference_win_defensive_wars_global }
+		# Change the rule
+		custom_tooltip = {
+			text = edmp_global_4100_evtopt_win_defensive_wars_global_disable_tt
+			clr_global_flag = edmp_interference_win_defensive_wars_global
+		}
+		# Notify players
+		if = {
+			limit = { edmp_this_is_a_multiplayer_game = yes }
+			custom_tooltip = {
+				text = edmp_gmn_player_notification_sent_tt
+				any_player = {
+					limit = { NOT = { character = PREV } }
+					character_event = { id = edmp_gmn.4100 }
+				}
+			}
+		}
+		# Back to previous menu
+		hidden_tooltip = { character_event = { id = edmp_global.4000 } }
+	}
+	
+	# Exit without changing anything
+	option = {
+		name = edmp_global_evtopt_exit_no_change
+		# Back to previous menu
+		hidden_tooltip = { character_event = { id = edmp_global.4000 } }
 	}
 	
 }

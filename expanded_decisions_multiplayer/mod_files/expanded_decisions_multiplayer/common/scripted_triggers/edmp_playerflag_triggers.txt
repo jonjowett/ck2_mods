@@ -1,17 +1,34 @@
 edmp_this_character_is_a_current_or_absent_human_player = {
-	OR = {
-		ai = no
-		has_character_modifier = edmp_playerflag
+	custom_tooltip = {
+		text = edmp_this_character_is_a_current_or_absent_human_player_tt
+		OR = {
+			ai = no
+			has_character_modifier = edmp_playerflag
+		}
 	}
 }
 
 edmp_this_character_is_an_absent_human_player = {
-	ai = yes
-	has_character_modifier = edmp_playerflag
+	custom_tooltip = {
+		text = edmp_this_character_is_an_absent_human_player_tt
+		ai = yes
+		has_character_modifier = edmp_playerflag
+	}
+}
+
+edmp_this_character_is_not_a_current_or_absent_human_player = {
+	custom_tooltip = {
+		text = edmp_this_character_is_not_a_current_or_absent_human_player_tt
+		ai = yes
+		NOT = { has_character_modifier = edmp_playerflag }
+	}
 }
 
 edmp_this_character_is_a_potential_absent_human_player = {
-	ai = yes
-	is_playable = yes
-	NOT = { has_character_modifier = edmp_playerflag }
+	custom_tooltip = {
+		text = edmp_this_character_is_a_potential_absent_human_player_tt
+		ai = yes
+		is_playable = yes
+		NOT = { has_character_modifier = edmp_playerflag }
+	}
 }

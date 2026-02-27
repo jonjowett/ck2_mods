@@ -93,6 +93,47 @@ decisions = {
 
 targetted_decisions = {
 	
+	edmp_interference_imprison_attacker = { # NB: Visible to non-admins!
+		filter = all
+		ai = no # As a targetted_decision, this can only be used by humans (due to CPU load). If AI need to use this feature, do it via on_action event.
+		is_high_prio = yes
+		from_potential = {
+			edmp_interference_win_defensive_wars_this_character_can_potentially_use_imprisonment = yes
+		}
+		potential = {
+			# Show the decision for every *other* participant in FROM's wars
+			any_war = {
+				OR = {
+					any_attacker = { character = ROOT }
+					any_defender = { character = ROOT }
+				}
+				OR = {
+					any_attacker = { character = ROOT_FROM }
+					any_defender = { character = ROOT_FROM }
+				}
+			}
+			NOT = { character = ROOT_FROM } # Just in case!
+		}
+		allow = {
+			ROOT_FROM = {
+				show_scope_change = no
+				ROOT = {
+					show_scope_change = no
+					edmp_interference_win_defensive_wars_this_character_is_a_valid_target_for_prev_to_imprison = yes
+				}
+			}
+		}
+		effect = {
+			ROOT_FROM = {
+				show_scope_change = no
+				ROOT = {
+					show_scope_change = no
+					edmp_interference_win_defensive_wars_prev_imprisons_this_character = yes
+				}
+			}
+		}
+	}
+	
 	edmp_interference_force_end_war_white_peace = {
 		filter = all_including_me
 		third_party_filter = all_including_me
@@ -614,7 +655,7 @@ targetted_decisions = {
 				set_global_flag = edmp_interference_singlechar_bad
 				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
-			# Trigger the notification event before the kill, in case the killed char is a player, and so that the enemy/friend notificcation flavour checks work properly
+			# Trigger the notification event before the kill, in case the killed char is a player, and so that the enemy/friend notification flavour checks work properly
 			hidden_tooltip = { edmp_interference_notify_players_singlechar = yes }
 			ROOT = {
 				death = {
@@ -624,6 +665,143 @@ targetted_decisions = {
 			}
 			edmp_interference_notify_players_tooltip_only = yes
 			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_kill }
+		}
+	}
+	
+	edmp_interference_grant_win_defensive_wars_to_this_character = { # Not potentially-negative
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			NOT = { has_character_modifier = edmp_interference_win_defensive_wars }
+			is_ruler = yes
+		}
+		allow = { # Keep in sync with the allow clause below
+			trigger_if = {
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global }
+				OR = {
+					AND = {
+						edmp_this_character_is_a_current_or_absent_human_player = yes
+						custom_tooltip = {
+							text = edmp_interference_win_defensive_wars_global_is_not_active_tt
+							always = no
+						}
+					}
+					edmp_this_character_is_not_a_current_or_absent_human_player = yes
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_win_defensive_wars_grant
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				add_character_modifier = {
+					name     = edmp_interference_win_defensive_wars
+					years    = 3
+					stacking = no
+					inherit  = yes # Since this is only a temporary buff, we're not going to try super-hard to cover all possible future situations where modifier inheritance might break (eg. abdication).
+				}
+				if = {
+					limit = {
+						ai = yes
+						any_war = { any_defender = { character = ROOT } }
+					}
+					custom_tooltip = {
+						text = edmp_interference_win_defensive_wars_ai_will_act_now_tt
+						character_event = { id = edmp_wdw.2000 }
+					}
+				}
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_win_defensive_wars_grant }
+		}
+	}
+	
+	edmp_interference_prolong_win_defensive_wars_to_this_character = { # Not potentially-negative
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			has_character_modifier = edmp_interference_win_defensive_wars
+			is_ruler = yes
+		}
+		allow = { # Keep in sync with the allow clause above
+			trigger_if = {
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global }
+				OR = {
+					AND = {
+						edmp_this_character_is_a_current_or_absent_human_player = yes
+						custom_tooltip = {
+							text = edmp_interference_win_defensive_wars_global_is_not_active_tt
+							always = no
+						}
+					}
+					edmp_this_character_is_not_a_current_or_absent_human_player = yes
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_win_defensive_wars_prolong
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				hidden_tooltip = { remove_character_modifier = edmp_interference_win_defensive_wars }
+				add_character_modifier = {
+					name     = edmp_interference_win_defensive_wars
+					years    = 3
+					stacking = no
+					inherit  = yes # Since this is only a temporary buff, we're not going to try super-hard to cover all possible future situations where modifier inheritance might break (eg. abdication).
+				}
+				if = {
+					limit = {
+						ai = yes
+						any_war = { any_defender = { character = ROOT } }
+					}
+					custom_tooltip = {
+						text = edmp_interference_win_defensive_wars_ai_will_act_now_tt
+						character_event = { id = edmp_wdw.2000 }
+					}
+				}
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_win_defensive_wars_prolong }
+		}
+	}
+	
+	edmp_interference_revoke_win_defensive_wars_to_this_character = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { has_character_modifier = edmp_interference_win_defensive_wars }
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		effect = {
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_singlechar_win_defensive_wars_revoke
+				set_global_flag = edmp_interference_singlechar_bad
+				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+			}
+			ROOT = {
+				show_scope_change = no
+				remove_character_modifier = edmp_interference_win_defensive_wars
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_win_defensive_wars_revoke }
 		}
 	}
 	

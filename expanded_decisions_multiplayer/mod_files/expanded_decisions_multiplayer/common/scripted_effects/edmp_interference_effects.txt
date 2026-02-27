@@ -1,0 +1,17 @@
+edmp_interference_win_defensive_wars_prev_imprisons_this_character = {
+	hidden_tooltip = {
+		set_global_flag = edmp_interference_singlechar_imprison_attacker
+		set_global_flag = edmp_interference_singlechar_bad
+		save_event_target_as = edmp_interference_singlechar_affected
+	}
+	custom_tooltip = {
+		text = edmp_interference_prev_defensively_imprisons_this_character_tt
+		if = {
+			limit = { prisoner = yes }
+			imprison = no
+		}
+		imprison = PREV
+	}
+	edmp_interference_notify_players_singlechar_actor_is_prev = yes
+	hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_imprison_attacker }
+}

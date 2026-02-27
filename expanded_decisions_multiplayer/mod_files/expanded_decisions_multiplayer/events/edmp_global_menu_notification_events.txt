@@ -107,3 +107,25 @@ character_event = {
 	option = { name = edmp_gmn_evtopt_ok }
 	
 }
+
+# Players Win Defensive Wars rule change
+character_event = {
+	
+	id      = edmp_gmn.4100
+	title   = edmp_gmn_title
+	picture = GFX_evt_camaraderie
+	
+	desc = {
+		trigger = { has_global_flag = edmp_interference_win_defensive_wars_global }
+		text = edmp_gmn_4100_desc_win_defensive_wars_global_enabled
+	}
+	desc = {
+		trigger = { NOT = { has_global_flag = edmp_interference_win_defensive_wars_global } }
+		text = edmp_gmn_4100_desc_win_defensive_wars_global_disabled
+	}
+	
+	is_triggered_only = yes
+	
+	option = { name = edmp_gmn_evtopt_ok }
+	
+}

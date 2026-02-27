@@ -126,6 +126,30 @@ edmp_interference_notify_players_singlechar = {
 	}
 }
 
+edmp_interference_notify_players_singlechar_actor_is_prev = {
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_interference_other_players_notified_tt
+			PREV = {
+				any_player = {
+					limit = {
+						OR = {
+							NOT = { character = PREV }
+							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+						}
+					}
+					character_event = { id = edmp_ifn.5001 }
+				}
+			}
+		}
+	}
+	hidden_tooltip = {
+		clr_global_flag    = edmp_interference_singlechar_bad
+		clear_event_target = edmp_interference_singlechar_affected
+	}
+}
+
 edmp_interference_notify_players_singletitlechar = {
 	if = {
 		limit = { edmp_this_is_a_multiplayer_game = yes }

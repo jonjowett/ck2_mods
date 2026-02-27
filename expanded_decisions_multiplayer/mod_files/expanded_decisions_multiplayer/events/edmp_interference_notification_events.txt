@@ -372,6 +372,26 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_realm_size_revoke_all }
 		text                        = edmp_ifn_5001_desc_singlechar_realm_size_revoke_all
 	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_win_defensive_wars_grant }
+		text                        = edmp_ifn_5001_desc_singlechar_win_defensive_wars_grant
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_win_defensive_wars_prolong }
+		text                        = edmp_ifn_5001_desc_singlechar_win_defensive_wars_prolong
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_win_defensive_wars_revoke }
+		text                        = edmp_ifn_5001_desc_singlechar_win_defensive_wars_revoke
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_imprison_attacker                FROM = { ai = no  } }
+		text                        = edmp_ifn_5001_desc_singlechar_imprison_attacker_from_is_human
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_imprison_attacker                FROM = { ai = yes } }
+		text                        = edmp_ifn_5001_desc_singlechar_imprison_attacker_from_is_ai
+	}
 	
 	# I am the target: good/bad => excellent/curses
 	option = {
