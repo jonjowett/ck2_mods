@@ -58,3 +58,52 @@ edmp_interference_this_is_not_some_kind_of_temporary_title = {
 		is_landless_type_title = no
 	}
 }
+
+edmp_interference_win_defensive_wars_this_character_can_potentially_use_imprisonment = {
+	OR = {
+		# Anyone (human or AI) specifically designated by the host can use this feature
+		has_character_modifier = edmp_interference_win_defensive_wars
+		# Only players may benefit from the global rule
+		AND = {
+			has_global_flag = edmp_interference_win_defensive_wars_global
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+		}
+	}
+	war = yes
+}
+
+edmp_interference_win_defensive_wars_this_character_is_a_valid_target_for_prev_to_imprison = {
+	
+	# Only AI can be imprisoned
+	THIS = { edmp_this_character_is_not_a_current_or_absent_human_player = yes }
+	
+	# Global rule is active and PREV is a player; or PREV has been specially designated by an admin
+	trigger_if = {
+		limit = { has_global_flag = edmp_interference_win_defensive_wars_global }
+		PREV = {
+			OR = {
+				has_character_modifier = edmp_interference_win_defensive_wars
+				AND = {
+					custom_tooltip = {
+						text = edmp_interference_win_defensive_wars_global_is_active_tt
+						always = yes
+					}
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+				}
+			}
+		}
+	}
+	trigger_else = {
+		PREV = { has_character_modifier = edmp_interference_win_defensive_wars }
+	}
+	
+	# THIS is **primary** attacker in a war where PREV is a **primary/secondary** defender
+	custom_tooltip = {
+		text = edmp_interference_win_defensive_wars_this_is_primary_attacker_and_prev_is_a_defender_tt
+		any_war = {
+			attacker = { character = THIS }
+			any_defender = { character = PREV }
+		}
+	}
+	
+}
