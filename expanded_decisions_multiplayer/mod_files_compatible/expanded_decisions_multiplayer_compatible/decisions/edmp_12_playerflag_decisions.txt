@@ -1,3 +1,24 @@
+
+
+
+
+
+
+
+
+
+
+
+##########################################################
+#                                                        #
+#                     ABSENT PLAYERS                     #
+#                                                        #
+##########################################################
+
+
+
+# Show/hide player flag targeted decisions
+
 decisions = {
 	
 	edmp_playerflag_show_decisions = {
@@ -60,6 +81,10 @@ decisions = {
 	}
 	
 }
+
+
+
+# Manually flag/unflag characters as absent players
 
 targetted_decisions = {
 	
@@ -137,7 +162,91 @@ targetted_decisions = {
 	
 }
 
+
+
+
+
+
+
+
+
+
+#########################################################
+#                                                       #
+#                     ADMIN HELPERS                     #
+#                                                       #
+#########################################################
+
+
+
 decisions = {
+	
+	
+	
+	# Show/hide admin helper targeted decisions
+	
+	edmp_playerflag_adminhelpers_show_decisions = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			NOT = { has_character_flag = edmp_playerflag_adminhelpers_show }
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_playerflag_adminhelpers_show_decisions_tt
+				set_character_flag = edmp_playerflag_adminhelpers_show
+			}
+		}
+	}
+	
+	edmp_playerflag_adminhelpers_hide_decisions_high_prio = {
+		is_high_prio = yes
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			has_character_flag = edmp_playerflag_adminhelpers_show
+			OR = {
+				# Forgot to turn this off before exiting the submenu - oops!
+				NOT = { has_character_flag = edmp_admin_submenu_is_open }
+				# Submenu is open but not isolated
+				AND = {
+					has_character_flag = edmp_admin_submenu_is_open
+					edmp_currently_running_a_mod_which_puts_edmp_decisions_in_an_isolated_submenu = no
+				}
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_playerflag_adminhelpers_hide_decisions_tt
+				clr_character_flag = edmp_playerflag_adminhelpers_show
+			}
+		}
+	}
+	
+	edmp_playerflag_adminhelpers_hide_decisions_low_prio = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			has_character_flag = edmp_playerflag_adminhelpers_show
+			# Submenu is open and isolated
+			has_character_flag = edmp_admin_submenu_is_open
+			edmp_currently_running_a_mod_which_puts_edmp_decisions_in_an_isolated_submenu = yes
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_playerflag_adminhelpers_hide_decisions_tt
+				clr_character_flag = edmp_playerflag_adminhelpers_show
+			}
+		}
+	}
+	
+	
+	
+	# Enable/disable all admin helper privileges
 	
 	edmp_playerflag_adminhelpers_pause = {
 		ai = no
@@ -189,6 +298,10 @@ decisions = {
 	
 }
 
+
+
+# Manually flag/unflag characters as admin helpers
+
 targetted_decisions = {
 	
 	edmp_playerflag_flag_this_character_as_an_admin_helper = {
@@ -200,7 +313,7 @@ targetted_decisions = {
 			
 			OR = {
 				
-				has_character_flag = edmp_playerflag_show
+				has_character_flag = edmp_playerflag_adminhelpers_show
 				
 				# Exceptionally, always show the decision if admin helpers are paused (because presumably this means the admin is administrating the helper settings)
 				edmp_playerflag_adminhelpers_are_paused = yes
@@ -231,7 +344,7 @@ targetted_decisions = {
 			
 			OR = {
 				
-				has_character_flag = edmp_playerflag_show
+				has_character_flag = edmp_playerflag_adminhelpers_show
 				
 				# Exceptionally, always show the decision if admin helpers are paused (because presumably this means the admin is administrating the helper settings)
 				edmp_playerflag_adminhelpers_are_paused = yes
@@ -265,7 +378,7 @@ targetted_decisions = {
 		potential = {
 			
 			OR = {
-				has_character_flag = edmp_playerflag_show
+				has_character_flag = edmp_playerflag_adminhelpers_show
 			
 				# Exceptionally, always show the decision if admin helpers are paused (because presumably this means the admin is administrating the helper settings)
 				edmp_playerflag_adminhelpers_are_paused = yes
