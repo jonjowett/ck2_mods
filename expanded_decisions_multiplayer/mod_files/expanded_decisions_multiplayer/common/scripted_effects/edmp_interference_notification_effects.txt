@@ -15,7 +15,7 @@ edmp_interference_notify_players_force_end_war_white_peace = {
 					limit = {
 						OR = {
 							NOT = { character = PREV }
-							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
 						}
 					}
 					character_event = { id = edmp_ifn.1001 }
@@ -40,7 +40,7 @@ edmp_interference_notify_players_tributary_cancel = {
 					limit = {
 						OR = {
 							NOT = { character = PREV }
-							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
 						}
 					}
 					character_event = { id = edmp_ifn.2001 }
@@ -64,7 +64,7 @@ edmp_interference_notify_players_bilateral = {
 					limit = {
 						OR = {
 							NOT = { character = PREV }
-							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
 						}
 					}
 					character_event = { id = edmp_ifn.3001 }
@@ -88,7 +88,7 @@ edmp_interference_notify_players_aiplayer = {
 					limit = {
 						OR = {
 							NOT = { character = PREV }
-							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
 						}
 					}
 					character_event = { id = edmp_ifn.4001 }
@@ -112,7 +112,7 @@ edmp_interference_notify_players_singlechar = {
 					limit = {
 						OR = {
 							NOT = { character = PREV }
-							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
 						}
 					}
 					character_event = { id = edmp_ifn.5001 }
@@ -136,7 +136,7 @@ edmp_interference_notify_players_singlechar_actor_is_prev = {
 					limit = {
 						OR = {
 							NOT = { character = PREV }
-							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
 						}
 					}
 					character_event = { id = edmp_ifn.5001 }
@@ -160,7 +160,7 @@ edmp_interference_notify_players_singletitlechar = {
 					limit = {
 						OR = {
 							NOT = { character = PREV }
-							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
 						}
 					}
 					character_event = { id = edmp_ifn.6001 }
@@ -186,7 +186,7 @@ edmp_interference_notify_players_singletitle = {
 					limit = {
 						OR = {
 							NOT = { character = PREV }
-							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
 						}
 					}
 					character_event = { id = edmp_ifn.7001 }
