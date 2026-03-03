@@ -385,12 +385,8 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_win_defensive_wars_revoke
 	}
 	desc = {
-		trigger = { has_global_flag =  edmp_interference_singlechar_imprison_attacker                FROM = { ai = no  } }
-		text                        = edmp_ifn_5001_desc_singlechar_imprison_attacker_from_is_human
-	}
-	desc = {
-		trigger = { has_global_flag =  edmp_interference_singlechar_imprison_attacker                FROM = { ai = yes } }
-		text                        = edmp_ifn_5001_desc_singlechar_imprison_attacker_from_is_ai
+		trigger = { has_global_flag =  edmp_interference_singlechar_imprison_attacker }
+		text                        = edmp_ifn_5001_desc_singlechar_imprison_attacker
 	}
 	
 	# I am the target: good/bad => excellent/curses
