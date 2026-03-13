@@ -1,26 +1,15 @@
 # Audax Validator EnableCommentMetadata
 
-# This *should* overwrite the vanilla and PDXRPTG trade post holding_type,
-#    because the filename is later in the alphabet and the mod is loaded after both of those.
+# Triggers in this file are *appended* to any triggers present in the base mod,
+#    and will appear at the end of the tooltip in-game due to the filename.
 
 # Suppress "Duplicate ID" warning
 # Audax Validator "." Ignore_NEXT
 trade_post = {
 	trigger = {
 		conditional_tooltip = {
-			limit = {
-				OR = {
-					FROM = {
-						is_patrician = no
-					}
-					AND = {
-						port = no
-						FROM = {
-							is_patrician = yes
-						}
-					}
-				}
-			}
+			limit = { tpauto_from_should_check_conditions_to_build_trade_route_trade_post_in_this_province = yes }
+			# NB: It's pointless to check for evil religion etc here, because we are
 			trigger_if = {
 				limit = {
 					tpauto_manual_construction_temporarily_blocked = yes

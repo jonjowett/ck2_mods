@@ -150,7 +150,7 @@ character_event = {
 					limit = {
 						OR = {
 							NOT = { character = PREV }
-							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
 						}
 					}
 					character_event = { id = edmp_auto_refill_levy.3100 }
@@ -198,7 +198,7 @@ character_event = {
 					limit = {
 						OR = {
 							NOT = { character = PREV }
-							has_global_flag = edmp_interference_debug_include_sender_in_notifications
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
 						}
 					}
 					character_event = { id = edmp_auto_refill_levy.3100 }

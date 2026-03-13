@@ -144,8 +144,9 @@ character_event = {
 		clear_event_target = primary_attacker_to_be_imprisoned
 		any_war = {
 			limit = {
-				any_defender = { character = ROOT } # ROOT is a defender
-				war_score > -100                    # War is not already won by defenders
+				attacker = { edmp_this_character_is_not_a_current_or_absent_human_player = yes } # Primary attacker is NOT a current or absent human player
+				any_defender = { character = ROOT }                                              # ROOT is a defender
+				war_score > -100                                                                 # War is not already won by defenders
 			}
 			attacker = { save_event_target_as = primary_attacker_to_be_imprisoned }
 			ROOT = {

@@ -2,23 +2,25 @@
 #
 # Intrigue Menu Decisions
 edmp_interference_show_targetted_decisions;(ED:MP) Show Targetted "Interference" Decisions;;;;;;;;;;;;;x
-edmp_interference_show_targetted_decisions_desc;This mod includes a large number of extremely-powerful targetted decisions, which allow the host a huge amount of control over an ongoing game. These are flagged with the special "§P(ED:MP:Intf)§!" prefix in the right-click menu. Due to the potential for accidental game-ruining error, §Yyou should keep these decisions hidden at all times unless you are actively using them§!.;;;;;;;;;;;;;x
+edmp_interference_show_targetted_decisions_desc;This mod includes a large number of extremely-powerful targetted decisions, which allow the §YAdministrator§! (and any §YAdmin Helpers§!) a huge amount of control over an ongoing game. These are flagged with the special "§P(ED:MP:Intf)§!" prefix in the right-click menu. Due to the potential for accidental game-ruining error, §Yyou should keep these decisions hidden at all times unless you are actively using them§!.;;;;;;;;;;;;;x
 edmp_interference_show_targetted_decisions_tt;All applicable §P(ED:MP:Intf)§! targetted decisions will be visible.\n§M! ! ! Be very careful ! ! !§!;;;;;;;;;;;;;x
 edmp_interference_hide_targetted_decisions_high_prio;(ED:MP) Hide Targetted "Interference" Decisions;;;;;;;;;;;;;x
-edmp_interference_hide_targetted_decisions_high_prio_desc;This mod includes a large number of extremely-powerful targetted decisions, which allow the host a huge amount of control over an ongoing game. These are flagged with the special "§P(ED:MP:Intf)§!" prefix in the right-click menu. Due to the potential for accidental game-ruining error, §Yyou should keep these decisions hidden at all times unless you are actively using them§!.;;;;;;;;;;;;;x
+edmp_interference_hide_targetted_decisions_high_prio_desc;This mod includes a large number of extremely-powerful targetted decisions, which allow the §YAdministrator§! (and any §YAdmin Helpers§!) a huge amount of control over an ongoing game. These are flagged with the special "§P(ED:MP:Intf)§!" prefix in the right-click menu. Due to the potential for accidental game-ruining error, §Yyou should keep these decisions hidden at all times unless you are actively using them§!.;;;;;;;;;;;;;x
 edmp_interference_hide_targetted_decisions_low_prio;(ED:MP) Hide Targetted "Interference" Decisions;;;;;;;;;;;;;x
-edmp_interference_hide_targetted_decisions_low_prio_desc;This mod includes a large number of extremely-powerful targetted decisions, which allow the host a huge amount of control over an ongoing game. These are flagged with the special "§P(ED:MP:Intf)§!" prefix in the right-click menu. Due to the potential for accidental game-ruining error, §Yyou should keep these decisions hidden at all times unless you are actively using them§!.;;;;;;;;;;;;;x
+edmp_interference_hide_targetted_decisions_low_prio_desc;This mod includes a large number of extremely-powerful targetted decisions, which allow the §YAdministrator§! (and any §YAdmin Helpers§!) a huge amount of control over an ongoing game. These are flagged with the special "§P(ED:MP:Intf)§!" prefix in the right-click menu. Due to the potential for accidental game-ruining error, §Yyou should keep these decisions hidden at all times unless you are actively using them§!.;;;;;;;;;;;;;x
 edmp_interference_hide_targetted_decisions_tt;All §P(ED:MP:Intf)§! targetted decisions will be hidden.;;;;;;;;;;;;;x
-edmp_interference_debug_include_me_in_notifications;(ED:MP) Debug - Show me "Interference" notifications;;;;;;;;;;;;;x
-edmp_interference_debug_include_me_in_notifications_desc;This mod sends notifications to all current players whenever the host takes an "Interference" action.\n\nNormally, the host (ie. you) is excluded from these notifications. (You don't need a notification to tell you about your most-recent mouse-click.)\n\n§YBy taking this decision, you will include yourself in these notifications§! (eg. for debugging purposes).;;;;;;;;;;;;;x
+edmp_interference_debug_include_me_in_notifications;(ED:MP) Show me "Interference" notifications;;;;;;;;;;;;;x
+edmp_interference_debug_include_me_in_notifications_desc;This mod sends notifications to all current players whenever the §YAdministrator§! (or an §YAdmin Helper§!) takes an "Interference" action.\n\nNormally, the character taking the action (ie. you) is excluded from these notifications. (Because you probably don't need a notification to tell you about your most-recent mouse-click.)\n\n§YBy taking this decision, you will include yourself in these notifications§! (eg. for debugging purposes).;;;;;;;;;;;;;x
 edmp_interference_debug_include_me_in_notifications_tt;You WILL receive notifications of future "Interference" actions;;;;;;;;;;;;;x
-edmp_interference_debug_exclude_me_from_notifications;(ED:MP) Debug - STOP showing me "Interference" notifications;;;;;;;;;;;;;x
-edmp_interference_debug_exclude_me_from_notifications_desc;This mod sends notifications to all current players whenever the host takes an "Interference" action.\n\nNormally, the host (ie. you) is excluded from these notifications. (You don't need a notification to tell you about your most-recent mouse-click.)\n\nCurrently, §Yyou have chosen to receive these notifications§! (eg. for debugging purposes).\n\n§YBy taking this decision, you will revert to the default setup, where you will NOT receive these notifications.§!;;;;;;;;;;;;;x
+edmp_interference_debug_exclude_me_from_notifications;(ED:MP) STOP showing me "Interference" notifications;;;;;;;;;;;;;x
+edmp_interference_debug_exclude_me_from_notifications_desc;This mod sends notifications to all current players whenever the §YAdministrator§! (or an §YAdmin Helper§!) takes an "Interference" action.\n\nNormally, the character taking the action (ie. you) is excluded from these notifications. (Because you probably don't need a notification to tell you about your most-recent mouse-click.)\n\n§YBy taking this decision, you will revert to the default setup, where you will NOT receive these notifications.§!;;;;;;;;;;;;;x
 edmp_interference_debug_exclude_me_from_notifications_tt;You WILL NOT receive notifications of future "Interference" actions;;;;;;;;;;;;;x
 #
-# Targetted Decisions
+# Targetted Decisions - Win Defensive Wars
 edmp_interference_imprison_attacker;§P(ED:MP:Intf)§! Imprison Attacker;;;;;;;;;;;;;x
 edmp_interference_imprison_attacker_desc;Forcibly imprison [Root.GetTitledFirstName], because [Root.GetSheHe] has dared to attack you!\n§b.§!\n§RThis is a massive cheat!§! If it's fun and possible to win the war normally, you should probably do so.;;;;;;;;;;;;;x
+#
+# Targetted Decisions - Admin/Adminhelper Interference
 edmp_interference_force_end_war_white_peace;§P(ED:MP:Intf)§! Force White Peace;;;;;;;;;;;;;x
 edmp_interference_force_end_war_white_peace_desc;Force one of [Root.GetTitledFirstName]'s wars to end in a white peace.;;;;;;;;;;;;;x
 edmp_interference_cancel_tributary_on_suzerain;§P(ED:MP:Intf)§! Cancel Tributary;;;;;;;;;;;;;x
@@ -172,11 +174,10 @@ edmp_interference_neighbour_is_chosen_randomly_try_again_if_necessary_tt;§YThe n
 edmp_interference_only_one_valid_neighbour_no_change_tt;§YThere is only one valid neighbour for this decision - you won't see any other options if you try again.§!;;;;;;;;;;;;;x
 edmp_interference_this_province_has_a_negative_modifier_ek_mod_not_active_tt;[This.Location.GetName] has an §YElder Kings§! negative province modifier §g(false because this is not an EK game)§!;;;;;;;;;;;;;x
 edmp_interference_imprison_this_ai_by_third_party_player_tt;[This.GetBestName] is imprisoned by [Root_FromFrom.GetBestName];;;;;;;;;;;;;x
-edmp_interference_win_defensive_wars_this_is_primary_attacker_and_prev_is_a_defender_tt;[This.GetBestName] is the §Yprimary attacker§! in a war where [Prev.GetBestName] is either the §Yprimary defender§! or a §Ysecondary defender§!;;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_root_is_primary_attacker_and_from_is_a_defender_tt;[Root.GetBestName] is the §Yprimary attacker§! in a war where [From.GetBestName] is either the §Yprimary defender§! or a §Ysecondary defender§!;;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_global_is_active_tt;The global §M(ED:MP)§Y Players Win Defensive Wars§! game rule is enabled;;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_global_is_not_active_tt;The global §M(ED:MP)§Y Players Win Defensive Wars§! game rule is NOT enabled;;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_ai_will_act_now_tt;[Root.GetBestName] immediately imprisons all attackers;;;;;;;;;;;;;x
-edmp_interference_prev_defensively_imprisons_this_character_tt;[This.GetBestName] is imprisoned by [Prev.GetBestName], due to [Prev.GetTitledFirstName]'s §M(ED:MP)§Y Win Defensive Wars§! ability;;;;;;;;;;;;;x
 #
 edmp_interference_line_break_tt;§g.§!\n;;;;;;;;;;;;;x
 #
