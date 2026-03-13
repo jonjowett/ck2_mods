@@ -188,7 +188,7 @@ decisions = {
 	edmp_playerflag_adminhelpers_show_decisions = {
 		ai = no
 		potential = {
-			edmp_this_character_can_see_admin_helper_actions = yes
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can add/remove helpers
 			NOT = { has_character_flag = edmp_playerflag_adminhelpers_show }
 			has_character_flag = edmp_admin_submenu_is_open
 		}
@@ -205,7 +205,6 @@ decisions = {
 		is_high_prio = yes
 		ai = no
 		potential = {
-			edmp_this_character_can_see_admin_helper_actions = yes
 			has_character_flag = edmp_playerflag_adminhelpers_show
 			OR = {
 				# Forgot to turn this off before exiting the submenu - oops!
@@ -215,6 +214,8 @@ decisions = {
 					has_character_flag = edmp_admin_submenu_is_open
 					edmp_currently_running_a_mod_which_puts_edmp_decisions_in_an_isolated_submenu = no
 				}
+				# Decisions are shown even though this character shouldn't be able to see them
+				edmp_this_character_can_take_admin_actions = no
 			}
 		}
 		allow = { always = yes }
