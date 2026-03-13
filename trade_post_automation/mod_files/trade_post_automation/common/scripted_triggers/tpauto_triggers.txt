@@ -1,22 +1,22 @@
 # Audax Validator EnableCommentMetadata
 
-tpauto_allow_tracking_and_rebuild_vanilla = { # Should return true iff trade posts use vanilla buildings
-	tpauto_pdxrptg_mod_is_active = no
-	# ATEFF : uses vanilla TP buildings, so it's fine
-	# MTR   : ditto
-}
 
-tpauto_use_vanilla_education_traits = { # Returns true iff rebuild logic (ie. discounts) can use vanilla education traits (eg. midas touched)
-	tpauto_pdxrptg_mod_is_active = no
-}
 
-# We can only detect vanilla by a process of exclusion
-tpauto_block_vanilla_trade_post_triggers_due_to_conflicting_mod = {
-	OR = {
-		tpauto_pdxrptg_mod_is_active = yes
-		tpauto_ateff_mod_is_active   = yes
-	}
-}
+
+
+
+
+
+
+
+########################################################
+#                                                      #
+#         GENERAL TRIGGERS FOR TP CONSTRUCTION         #
+#                 APPLYING TO ALL MODS                 #
+#                                                      #
+########################################################
+
+
 
 tpauto_this_province_can_have_trade_route_trade_post = {
 	custom_tooltip = {
@@ -36,7 +36,71 @@ tpauto_this_province_can_have_trade_route_trade_post = {
 			# PDXRPTG
 			tpauto_this_province_can_have_trade_route_trade_post_pdxrptg = yes
 			
+			# W:GoA
+			tpauto_this_province_can_have_trade_route_trade_post_wgoa = yes
+			
 		}
+	}
+}
+
+tpauto_from_should_check_conditions_to_build_trade_route_trade_post_in_this_province = {
+	OR = {
+		FROM = { is_patrician = no }
+		AND = {
+			port = no
+			FROM = { is_patrician = yes }
+		}
+	}
+}
+
+# These triggers are for mods which impose extra conditions on anyone trying to construct a TP.
+# NB: If these conditions fail, the TP may be auto-deleted!
+tpauto_from_can_build_trade_post_in_this_province = {
+	trigger_if = {
+		limit = { tpauto_wgoa_mod_is_active = yes }
+		tpauto_from_can_build_a_trade_post_in_this_province_wgoa = yes
+	}
+}
+tpauto_owner_can_build_trade_post_in_this_province = {
+	trigger_if = {
+		limit = { tpauto_wgoa_mod_is_active = yes }
+		tpauto_owner_can_build_a_trade_post_in_this_province_wgoa = yes
+	}
+}
+
+
+
+
+
+
+
+
+
+
+########################################################
+#                                                      #
+#                   VANILLA TRIGGERS                   #
+#                                                      #
+########################################################
+
+
+
+tpauto_allow_tracking_and_rebuild_vanilla = { # Should return true iff trade posts use vanilla buildings
+	tpauto_pdxrptg_mod_is_active = no
+	# ATEFF : uses vanilla TP buildings, so it's fine
+	# MTR   : ditto
+}
+
+tpauto_use_vanilla_education_traits = { # Returns true iff rebuild logic (ie. discounts) can use vanilla education traits (eg. midas touched)
+	tpauto_pdxrptg_mod_is_active = no
+}
+
+# We can only detect vanilla by a process of exclusion
+tpauto_block_vanilla_trade_post_triggers_due_to_conflicting_mod = {
+	OR = {
+		tpauto_pdxrptg_mod_is_active = yes
+		tpauto_ateff_mod_is_active   = yes
+		tpauto_wgoa_mod_is_active    = yes
 	}
 }
 
@@ -48,6 +112,24 @@ tpauto_this_province_can_have_trade_route_trade_post_vanilla = {
 		trans_saharan_trade_post_trigger = yes
 	}
 }
+
+
+
+
+
+
+
+
+
+
+########################################################
+#                                                      #
+#          GENERAL TRIGGERS FOR TP REBUILDING          #
+#                 APPLYING TO ALL MODS                 #
+#                                                      #
+########################################################
+
+
 
 tpauto_manual_construction_temporarily_blocked = {
 	has_province_flag = tpauto_tracking_has_trade_post
@@ -63,8 +145,13 @@ tpauto_can_auto_rebuild_trade_post = {
 		owner = { war = no }
 		NOT = { any_province_holding = { owner = { war = yes } } }
 		NOT = { any_province_holding = { has_holding_modifier = looted_modifier } }
+		tpauto_owner_can_build_trade_post_in_this_province = yes
 	}
 }
+
+
+
+# Half-price rebuild for high stewardship
 
 tpauto_this_character_can_rebuild_at_half_price_stewardship = {
 	OR = {
@@ -79,6 +166,10 @@ tpauto_this_character_can_rebuild_at_half_price_stewardship = {
 	}
 }
 
+
+
+# Zero cost rebuild for trader/architect/administrator/high stewardship education
+
 tpauto_this_character_can_rebuild_at_no_cost = {
 	OR = {
 		tpauto_this_character_can_rebuild_at_no_cost_trader    = yes
@@ -87,6 +178,7 @@ tpauto_this_character_can_rebuild_at_no_cost = {
 	}
 }
 
+# Trader
 tpauto_this_character_can_rebuild_at_no_cost_trader = {
 	OR = {
 		AND = {
@@ -100,13 +192,13 @@ tpauto_this_character_can_rebuild_at_no_cost_trader = {
 	}
 }
 
+# Architect/Administrator
 tpauto_this_character_can_rebuild_at_no_cost_lifestyle = {
 	OR = {
 		tpauto_this_character_can_rebuild_at_no_cost_lifestyle_architect     = yes
 		tpauto_this_character_can_rebuild_at_no_cost_lifestyle_administrator = yes
 	}
 }
-
 tpauto_this_character_can_rebuild_at_no_cost_lifestyle_architect = {
 	OR = {
 		AND = {
@@ -119,7 +211,6 @@ tpauto_this_character_can_rebuild_at_no_cost_lifestyle_architect = {
 		}
 	}
 }
-
 tpauto_this_character_can_rebuild_at_no_cost_lifestyle_administrator = {
 	OR = {
 		AND = {
@@ -133,6 +224,7 @@ tpauto_this_character_can_rebuild_at_no_cost_lifestyle_administrator = {
 	}
 }
 
+# High Stewardship education
 tpauto_this_character_can_rebuild_at_no_cost_education = {
 	OR = {
 		tpauto_this_character_can_rebuild_at_no_cost_education_fortune_builder      = yes
@@ -141,7 +233,6 @@ tpauto_this_character_can_rebuild_at_no_cost_education = {
 		tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_5 = yes
 	}
 }
-
 tpauto_this_character_can_rebuild_at_no_cost_education_fortune_builder = {
 	tpauto_use_vanilla_education_traits = yes
 	OR = {
@@ -155,7 +246,6 @@ tpauto_this_character_can_rebuild_at_no_cost_education_fortune_builder = {
 		}
 	}
 }
-
 tpauto_this_character_can_rebuild_at_no_cost_education_midas_touched = {
 	tpauto_use_vanilla_education_traits = yes
 	OR = {

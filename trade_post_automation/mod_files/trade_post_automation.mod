@@ -19,5 +19,6 @@ dependencies={
 	# Other total conversions
 	"\"After the End Fan Fork\""
 	"\"Romance of the Three Kingdoms\""
+	"\"Warcraft: Guardians of Azeroth\""
 	
 }
