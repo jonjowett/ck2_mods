@@ -26,6 +26,7 @@ if exist %this_mod_folder_location% (
 
 :: Copy files from git mods which have no significant dependencies
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%better_character_tooltips%git_mod_subfolder%better_character_tooltips\ %this_mod_folder_location%
+xcopy /R /Y /Q /S /E /I %git_mod_folder_location%better_character_tooltips_decisions%git_mod_subfolder%better_character_tooltips_decisions\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_character_search_helper%git_mod_subfolder%expanded_decisions_character_search_helper\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_commander_training%git_mod_subfolder%expanded_decisions_commander_training\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_custom_empire_formation%git_mod_subfolder%expanded_decisions_custom_empire_formation\ %this_mod_folder_location%
