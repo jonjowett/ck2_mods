@@ -176,6 +176,10 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_aiplayer_move }
 		text                        = edmp_ifn_4001_desc_aiplayer_move
 	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_aiplayer_player_wins_defensive_wars_vs_ai }
+		text                        = edmp_ifn_4001_desc_aiplayer_player_wins_defensive_wars_vs_ai
+	}
 	option = {
 		trigger = { event_target:edmp_interference_aiplayer_ai = { character = ROOT } }
 		show_portrait = event_target:edmp_interference_aiplayer_player
@@ -210,6 +214,7 @@ character_event = {
 			clr_global_flag    = edmp_interference_aiplayer_favor_cancelled_ai
 			clr_global_flag    = edmp_interference_aiplayer_favor_granted
 			clr_global_flag    = edmp_interference_aiplayer_move
+			clr_global_flag    = edmp_interference_aiplayer_player_wins_defensive_wars_vs_ai
 			
 		}
 	}
@@ -387,10 +392,6 @@ character_event = {
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_win_defensive_wars_revoke }
 		text                        = edmp_ifn_5001_desc_singlechar_win_defensive_wars_revoke
-	}
-	desc = {
-		trigger = { has_global_flag =  edmp_interference_singlechar_imprison_attacker }
-		text                        = edmp_ifn_5001_desc_singlechar_imprison_attacker
 	}
 	
 	# I am the target: good/bad => excellent/curses
