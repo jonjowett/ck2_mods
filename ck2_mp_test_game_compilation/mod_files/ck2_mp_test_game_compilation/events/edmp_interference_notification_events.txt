@@ -6,7 +6,7 @@ character_event = {
 	desc  = edmp_ifn_1001_desc
 	title = edmp_ifn_title
 	is_triggered_only = yes
-	portrait = FROM
+	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
 	option = {
 		trigger = { event_target:edmp_interference_force_end_war_white_peace_attacker = { character = ROOT } }
@@ -36,6 +36,7 @@ character_event = {
 			clear_event_target = edmp_interference_force_end_war_white_peace_war
 			clear_event_target = edmp_interference_force_end_war_white_peace_attacker
 			clear_event_target = edmp_interference_force_end_war_white_peace_defender
+			clear_event_target = edmp_interference_decision_taker
 		}
 	}
 }
@@ -46,7 +47,7 @@ character_event = {
 	desc  = edmp_ifn_2001_desc
 	title = edmp_ifn_title
 	is_triggered_only = yes
-	portrait = FROM
+	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
 	option = {
 		trigger = { event_target:edmp_interference_cancel_tributary_suzerain = { character = ROOT } }
@@ -75,6 +76,7 @@ character_event = {
 		hidden_tooltip = {
 			clear_event_target = edmp_interference_cancel_tributary_tributary
 			clear_event_target = edmp_interference_cancel_tributary_suzerain
+			clear_event_target = edmp_interference_decision_taker
 		}
 	}
 }
@@ -84,7 +86,7 @@ character_event = {
 	id    = edmp_ifn.3001
 	title = edmp_ifn_title
 	is_triggered_only = yes
-	portrait = FROM
+	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_bilateral_10_year_truce }
@@ -137,7 +139,8 @@ character_event = {
 		hidden_tooltip = {
 			
 			clear_event_target = edmp_interference_bilateral_party_1
-			clear_event_target = edmp_interference_bilateral_party_1
+			clear_event_target = edmp_interference_bilateral_party_2
+			clear_event_target = edmp_interference_decision_taker
 			
 			clr_global_flag    = edmp_interference_bilateral_10_year_truce
 			clr_global_flag    = edmp_interference_bilateral_break_truce
@@ -155,7 +158,7 @@ character_event = {
 	id    = edmp_ifn.4001
 	title = edmp_ifn_title
 	is_triggered_only = yes
-	portrait = FROM
+	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_aiplayer_imprison }
@@ -172,6 +175,10 @@ character_event = {
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_aiplayer_move }
 		text                        = edmp_ifn_4001_desc_aiplayer_move
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_aiplayer_player_wins_defensive_wars_vs_ai }
+		text                        = edmp_ifn_4001_desc_aiplayer_player_wins_defensive_wars_vs_ai
 	}
 	option = {
 		trigger = { event_target:edmp_interference_aiplayer_ai = { character = ROOT } }
@@ -201,11 +208,13 @@ character_event = {
 			
 			clear_event_target = edmp_interference_aiplayer_player
 			clear_event_target = edmp_interference_aiplayer_ai
+			clear_event_target = edmp_interference_decision_taker
 			
 			clr_global_flag    = edmp_interference_aiplayer_imprison
 			clr_global_flag    = edmp_interference_aiplayer_favor_cancelled_ai
 			clr_global_flag    = edmp_interference_aiplayer_favor_granted
 			clr_global_flag    = edmp_interference_aiplayer_move
+			clr_global_flag    = edmp_interference_aiplayer_player_wins_defensive_wars_vs_ai
 			
 		}
 	}
@@ -222,7 +231,7 @@ character_event = {
 	id    = edmp_ifn.5001
 	title = edmp_ifn_title
 	is_triggered_only = yes
-	portrait = FROM
+	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_kill }
@@ -384,10 +393,6 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_win_defensive_wars_revoke }
 		text                        = edmp_ifn_5001_desc_singlechar_win_defensive_wars_revoke
 	}
-	desc = {
-		trigger = { has_global_flag =  edmp_interference_singlechar_imprison_attacker }
-		text                        = edmp_ifn_5001_desc_singlechar_imprison_attacker
-	}
 	
 	# I am the target: good/bad => excellent/curses
 	option = {
@@ -467,6 +472,7 @@ character_event = {
 			clear_event_target = edmp_interference_singlechar_affected
 			clear_event_target = edmp_interference_singlechar_offmap_power
 			clear_event_target = edmp_interference_singlechar_artifact
+			clear_event_target = edmp_interference_decision_taker
 			
 			clr_global_flag    = edmp_interference_singlechar_kill
 			clr_global_flag    = edmp_interference_singlechar_health_grant
@@ -523,7 +529,7 @@ character_event = {
 	id    = edmp_ifn.6001
 	title = edmp_ifn_title
 	is_triggered_only = yes
-	portrait = FROM
+	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singletitlechar_claim_grant }
@@ -642,6 +648,7 @@ character_event = {
 			
 			clear_event_target = edmp_interference_singletitlechar_char_affected
 			clear_event_target = edmp_interference_singletitlechar_title_affected
+			clear_event_target = edmp_interference_decision_taker
 			
 			clr_global_flag    = edmp_interference_singletitlechar_claim_grant
 			clr_global_flag    = edmp_interference_singletitlechar_claim_remove
@@ -665,7 +672,7 @@ character_event = {
 	id    = edmp_ifn.7001
 	title = edmp_ifn_title
 	is_triggered_only = yes
-	portrait = FROM
+	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singletitle_claim_remove_all }
@@ -778,6 +785,7 @@ character_event = {
 			
 			clear_event_target = edmp_interference_singletitle_affected
 			clear_event_target = edmp_interference_singletitle_affected_holder
+			clear_event_target = edmp_interference_decision_taker
 			
 			clr_global_flag    = edmp_interference_singletitle_claim_remove_all
 			clr_global_flag    = edmp_interference_singletitle_destroy

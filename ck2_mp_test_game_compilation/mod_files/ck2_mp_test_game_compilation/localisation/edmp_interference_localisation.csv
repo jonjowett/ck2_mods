@@ -17,8 +17,8 @@ edmp_interference_debug_exclude_me_from_notifications_desc;This mod sends notifi
 edmp_interference_debug_exclude_me_from_notifications_tt;You WILL NOT receive notifications of future "Interference" actions;;;;;;;;;;;;;x
 #
 # Targetted Decisions - Win Defensive Wars
-edmp_interference_imprison_attacker;§P(ED:MP:Intf)§! Imprison Attacker;;;;;;;;;;;;;x
-edmp_interference_imprison_attacker_desc;Forcibly imprison [Root.GetTitledFirstName], because [Root.GetSheHe] has dared to attack you!\n§b.§!\n§RThis is a massive cheat!§! If it's fun and possible to win the war normally, you should probably do so.;;;;;;;;;;;;;x
+edmp_interference_win_defensive_war;§P(ED:MP:Intf)§! Win Def War;;;;;;;;;;;;;x
+edmp_interference_win_defensive_war_desc;Immediately win your defensive war(s) against [Root.GetTitledFirstName], because [Root.GetSheHe] has dared to attack you!\n§b.§!\n§RThis is a massive cheat!§! If it's fun and possible to win the war normally, you should probably do so.;;;;;;;;;;;;;x
 #
 # Targetted Decisions - Admin/Adminhelper Interference
 edmp_interference_force_end_war_white_peace;§P(ED:MP:Intf)§! Force White Peace;;;;;;;;;;;;;x
@@ -175,9 +175,11 @@ edmp_interference_only_one_valid_neighbour_no_change_tt;§YThere is only one vali
 edmp_interference_this_province_has_a_negative_modifier_ek_mod_not_active_tt;[This.Location.GetName] has an §YElder Kings§! negative province modifier §g(false because this is not an EK game)§!;;;;;;;;;;;;;x
 edmp_interference_imprison_this_ai_by_third_party_player_tt;[This.GetBestName] is imprisoned by [Root_FromFrom.GetBestName];;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_root_is_primary_attacker_and_from_is_a_defender_tt;[Root.GetBestName] is the §Yprimary attacker§! in a war where [From.GetBestName] is either the §Yprimary defender§! or a §Ysecondary defender§!;;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_root_is_not_imprisoned_by_from_tt;[Root.GetBestName] is NOT already imprisoned by [From.GetBestName];;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_global_is_active_tt;The global §M(ED:MP)§Y Players Win Defensive Wars§! game rule is enabled;;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_global_is_not_active_tt;The global §M(ED:MP)§Y Players Win Defensive Wars§! game rule is NOT enabled;;;;;;;;;;;;;x
-edmp_interference_win_defensive_wars_ai_will_act_now_tt;[Root.GetBestName] immediately imprisons all attackers;;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_ai_will_act_now_tt;[Root.GetBestName] immediately wins all defensive wars;;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_prev_wins_all_defensive_wars_against_this_character_tt;[This.GetBestName] immediately §Rloses§! all wars where [This.GetSheHe] is the §Yprimary attacker§! and [Prev.GetBestName] is §Ya defender§!;;;;;;;;;;;;;x
 #
 edmp_interference_line_break_tt;§g.§!\n;;;;;;;;;;;;;x
 #

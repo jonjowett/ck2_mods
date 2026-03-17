@@ -145,6 +145,7 @@ character_event = {
 			limit = { edmp_this_is_a_multiplayer_game = yes }
 			custom_tooltip = {
 				text = edmp_interference_other_players_notified_tt
+				save_event_target_as = edmp_interference_decision_taker
 				set_global_flag = edmp_auto_refill_levy_occurred_everyone
 				any_player = {
 					limit = {
@@ -193,6 +194,7 @@ character_event = {
 			limit = { edmp_this_is_a_multiplayer_game = yes }
 			custom_tooltip = {
 				text = edmp_interference_other_players_notified_tt
+				save_event_target_as = edmp_interference_decision_taker
 				set_global_flag = edmp_auto_refill_levy_occurred_players
 				any_player = {
 					limit = {
@@ -238,9 +240,10 @@ character_event = {
 # Notification for players that levies have been refilled (either for all characters or for all players)
 character_event = {
 	
-	id      = edmp_auto_refill_levy.3100
-	title   = edmp_auto_refill_levy_3100_title
-	picture = GFX_evt_camaraderie
+	id       = edmp_auto_refill_levy.3100
+	title    = edmp_auto_refill_levy_3100_title
+	picture  = GFX_evt_camaraderie
+	portrait = event_target:edmp_interference_decision_taker
 	
 	is_triggered_only = yes
 	
