@@ -81,6 +81,7 @@ targetted_decisions = {
 			ROOT_FROMFROM = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Forcing a white peace could be considered negative for both the attacker and defender (if they really want it, they can DIY with their own admin actions, or if they're both admin they can offer through the in-game interface)
 		}
 		effect = {
+			hidden_tooltip = { ROOT_FROM = { save_event_target_as = edmp_interference_decision_taker } }
 			any_war = {
 				limit = { 
 					OR = {
@@ -132,6 +133,7 @@ targetted_decisions = {
 		third_party_allow = { ROOT_FROMFROM = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } } # Could be considered negative for the tributary (eg. if they're relying on their suzerain for protection), because it may be very difficult to re-establish the tributary relationship.
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_cancel_tributary_tributary }
 				ROOT          = { save_event_target_as = edmp_interference_cancel_tributary_suzerain  }
 			}
@@ -158,6 +160,7 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT          = { save_event_target_as = edmp_interference_cancel_tributary_tributary }
 				suzerain      = { save_event_target_as = edmp_interference_cancel_tributary_suzerain  }
 			}
@@ -180,6 +183,7 @@ targetted_decisions = {
 		third_party_allow = { always = yes }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
 				set_global_flag                        = edmp_interference_bilateral_10_year_truce
@@ -236,6 +240,7 @@ targetted_decisions = {
 		third_party_allow = { always = yes }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
 				set_global_flag                        = edmp_interference_bilateral_break_truce
@@ -278,6 +283,7 @@ targetted_decisions = {
 		third_party_allow = { always = yes }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
 				set_global_flag                        = edmp_interference_bilateral_add_nap
@@ -323,6 +329,7 @@ targetted_decisions = {
 		third_party_allow = { always = yes }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
 				set_global_flag                        = edmp_interference_bilateral_break_nap
@@ -366,6 +373,7 @@ targetted_decisions = {
 		third_party_allow = { always = yes }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
 				set_global_flag                        = edmp_interference_bilateral_add_alliance
@@ -399,6 +407,7 @@ targetted_decisions = {
 		third_party_allow = { always = yes }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
 				set_global_flag                        = edmp_interference_bilateral_break_alliance
@@ -440,6 +449,7 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT          = { save_event_target_as = edmp_interference_aiplayer_ai     }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_aiplayer_player }
 				set_global_flag                        = edmp_interference_aiplayer_imprison
@@ -494,6 +504,7 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT          = { save_event_target_as = edmp_interference_aiplayer_ai     }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_aiplayer_player }
 				
@@ -532,6 +543,7 @@ targetted_decisions = {
 		third_party_allow = { ROOT_FROMFROM = { NOT = { host = { character = ROOT } } } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT          = { save_event_target_as = edmp_interference_aiplayer_ai     }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_aiplayer_player }
 				set_global_flag                        = edmp_interference_aiplayer_move
@@ -556,9 +568,10 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_kill
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			# Trigger the notification event before the kill, in case the killed char is a player, and so that the enemy/friend notification flavour checks work properly
 			hidden_tooltip = { edmp_interference_notify_players_singlechar = yes }
@@ -602,8 +615,9 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_win_defensive_wars_grant
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -658,8 +672,9 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_win_defensive_wars_prolong
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -697,9 +712,10 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_win_defensive_wars_revoke
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -721,8 +737,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_health_grant
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -748,8 +765,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_health_prolong
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -779,9 +797,10 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_health_revoke
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -806,8 +825,9 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_younger
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -832,9 +852,10 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_older
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -861,8 +882,9 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_sexchange
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -896,8 +918,9 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_legitimise
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -953,9 +976,10 @@ targetted_decisions = {
 			if = {
 				limit = { edmp_ek_mod_is_active = yes }
 				hidden_tooltip = {
-					set_global_flag = edmp_interference_singlechar_artifact_flag_as_unique
+					ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 					ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 					ROOT_FROMFROM = { save_event_target_as = edmp_interference_singlechar_artifact }
+					set_global_flag = edmp_interference_singlechar_artifact_flag_as_unique
 				}
 				custom_tooltip = {
 					text = edmp_interference_artifact_fromfrom_flagged_as_unique_tt
@@ -1014,10 +1038,11 @@ targetted_decisions = {
 			if = {
 				limit = { edmp_ek_mod_is_active = yes }
 				hidden_tooltip = {
-					set_global_flag = edmp_interference_singlechar_artifact_unflag_as_unique
-					set_global_flag = edmp_interference_singlechar_bad
+					ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 					ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 					ROOT_FROMFROM = { save_event_target_as = edmp_interference_singlechar_artifact }
+					set_global_flag = edmp_interference_singlechar_artifact_unflag_as_unique
+					set_global_flag = edmp_interference_singlechar_bad
 				}
 				custom_tooltip = {
 					text = edmp_interference_artifact_fromfrom_unflagged_as_unique_tt
@@ -1043,8 +1068,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_demesne_grant
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -1070,8 +1096,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_demesne_prolong
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -1098,9 +1125,10 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_demesne_revoke
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -1141,8 +1169,9 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_trade_post_grant
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -1194,8 +1223,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_refill_all_levies
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			hidden_tooltip = { # Specific tooltip not needed, because it's described in the decision's _desc
 				any_demesne_title = {
@@ -1219,8 +1249,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_wealth_grant_1k
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -1250,8 +1281,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_wealth_grant_10k
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -1291,9 +1323,10 @@ targetted_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_wealth_remove
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			custom_tooltip = {
 				text = edmp_interference_wealth_root_loses_all_but_500_tt
@@ -1332,6 +1365,11 @@ targetted_decisions = {
 			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
 		}
 		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_wealth_restore
+			}
 			hidden_tooltip = { # No need for a custom_tooltip, because this process is explained in this decision's _desc 
 				
 				# Store quantity of stacked modifiers in edmp_interference_wealth_record_removed_no_of_stacks
@@ -1360,10 +1398,6 @@ targetted_decisions = {
 				set_variable = { which = edmp_interference_wealth_removed value = 0 }
 				
 			}
-			hidden_tooltip = {
-				set_global_flag = edmp_interference_singlechar_wealth_restore
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
-			}
 			edmp_interference_notify_players_singlechar = yes
 			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_wealth_restore }
 		}
@@ -1380,8 +1414,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_prestige_grant_1k
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -1403,9 +1438,10 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_prestige_remove_1k
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -1427,8 +1463,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_piety_grant_1k
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -1450,9 +1487,10 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_piety_remove_1k
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			ROOT = {
 				show_scope_change = no
@@ -1479,9 +1517,10 @@ targetted_decisions = {
 		third_party_allow = { always = yes }
 		effect = {
 			hidden_tooltip = {
-				set_global_flag = edmp_interference_singlechar_offmap_currency_grant_1k
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				ROOT_FROMFROM = { offmap_power = { save_event_target_as = edmp_interference_singlechar_offmap_power } }
+				set_global_flag = edmp_interference_singlechar_offmap_currency_grant_1k
 			}
 			ROOT_FROMFROM = {
 				show_scope_change = no
@@ -1518,10 +1557,11 @@ targetted_decisions = {
 		third_party_allow = { always = yes }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				ROOT_FROMFROM = { offmap_power = { save_event_target_as = edmp_interference_singlechar_offmap_power } }
 				set_global_flag = edmp_interference_singlechar_offmap_currency_remove_1k
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
-				ROOT_FROMFROM = { offmap_power = { save_event_target_as = edmp_interference_singlechar_offmap_power } }
 			}
 			ROOT_FROMFROM = {
 				show_scope_change = no
@@ -1553,8 +1593,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_techpoints_grant_1k_mil
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			hidden_tooltip = {
 				# Effect is already described in decision description, no need for duplication
@@ -1576,8 +1617,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_techpoints_grant_1k_eco
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			hidden_tooltip = {
 				# Effect is already described in decision description, no need for duplication
@@ -1599,8 +1641,9 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_techpoints_grant_1k_cul
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			hidden_tooltip = {
 				# Effect is already described in decision description, no need for duplication
@@ -1622,9 +1665,10 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_techpoints_remove_1k_mil
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			hidden_tooltip = {
 				# Effect is already described in decision description, no need for duplication
@@ -1646,9 +1690,10 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_techpoints_remove_1k_eco
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			hidden_tooltip = {
 				# Effect is already described in decision description, no need for duplication
@@ -1670,9 +1715,10 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
 				set_global_flag = edmp_interference_singlechar_techpoints_remove_1k_cul
 				set_global_flag = edmp_interference_singlechar_bad
-				ROOT = { save_event_target_as = edmp_interference_singlechar_affected }
 			}
 			hidden_tooltip = {
 				# Effect is already described in decision description, no need for duplication
@@ -1734,6 +1780,7 @@ title_decisions = {
 		third_party_allow = { always = yes }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_singletitlechar_char_affected  }
 				ROOT          = { save_event_target_as = edmp_interference_singletitlechar_title_affected }
 				set_global_flag = edmp_interference_singletitlechar_title_grant
@@ -1795,6 +1842,7 @@ title_decisions = {
 		third_party_allow = { always = yes }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_singletitlechar_char_affected  }
 				ROOT          = { save_event_target_as = edmp_interference_singletitlechar_title_affected }
 				set_global_flag = edmp_interference_singletitlechar_claim_grant
@@ -1825,6 +1873,7 @@ title_decisions = {
 		third_party_allow = { always = yes }
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT_FROMFROM = { save_event_target_as = edmp_interference_singletitlechar_char_affected  }
 				ROOT          = { save_event_target_as = edmp_interference_singletitlechar_title_affected }
 				set_global_flag = edmp_interference_singletitlechar_claim_remove
@@ -1853,7 +1902,8 @@ title_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
-				ROOT = { save_event_target_as = edmp_interference_singletitle_affected }
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singletitle_affected }
 				set_global_flag = edmp_interference_singletitle_claim_remove_all
 				# "bad" for this type of action means "bad for the current holder", so this is NOT "bad".
 			}
@@ -1924,7 +1974,8 @@ title_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
-				ROOT = { save_event_target_as = edmp_interference_singletitle_affected }
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singletitle_affected }
 				set_global_flag = edmp_interference_singletitle_destroy
 				set_global_flag = edmp_interference_singletitle_bad
 			}
@@ -1954,6 +2005,7 @@ title_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM             = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT                  = { save_event_target_as = edmp_interference_singletitlechar_title_affected }
 				ROOT = { holder_scope = { save_event_target_as = edmp_interference_singletitlechar_char_affected  } }
 				set_global_flag = edmp_interference_singletitlechar_move_owners_capital
@@ -2006,6 +2058,7 @@ title_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
+				ROOT_FROM             = { save_event_target_as = edmp_interference_decision_taker }
 				ROOT                  = { save_event_target_as = edmp_interference_singletitlechar_title_affected }
 				ROOT = { holder_scope = { save_event_target_as = edmp_interference_singletitlechar_char_affected  } }
 				set_global_flag = edmp_interference_singletitlechar_move_owners_primary_title_trad_capital_here 
@@ -2039,7 +2092,8 @@ title_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
-				ROOT = { save_event_target_as = edmp_interference_singletitle_affected }
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singletitle_affected }
 				set_global_flag = edmp_interference_singletitle_remove_negative_province_modifiers
 			}
 			location = {
@@ -2068,7 +2122,8 @@ title_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
-				ROOT = { save_event_target_as = edmp_interference_singletitle_affected }
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singletitle_affected }
 				set_global_flag = edmp_interference_singletitle_culture_to_owner
 			}
 			holder_scope = {
@@ -2100,7 +2155,8 @@ title_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
-				ROOT = { save_event_target_as = edmp_interference_singletitle_affected }
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singletitle_affected }
 				set_global_flag = edmp_interference_singletitle_religion_to_owner
 			}
 			holder_scope = {
@@ -2132,7 +2188,8 @@ title_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
-				ROOT = { save_event_target_as = edmp_interference_singletitle_affected }
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singletitle_affected }
 				set_global_flag = edmp_interference_singletitle_culture_to_neighbour
 			}
 			if = {
@@ -2178,7 +2235,8 @@ title_decisions = {
 		}
 		effect = {
 			hidden_tooltip = {
-				ROOT = { save_event_target_as = edmp_interference_singletitle_affected }
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singletitle_affected }
 				set_global_flag = edmp_interference_singletitle_religion_to_neighbour
 			}
 			if = {

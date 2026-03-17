@@ -13,7 +13,10 @@ decisions = {
 			}
 		}
 		effect = {
-			hidden_tooltip = { set_global_flag = edmp_realm_size_calc_force_notify_all_players }
+			hidden_tooltip = {
+				set_global_flag = edmp_realm_size_calc_force_notify_all_players
+				save_event_target_as = edmp_realm_size_character_who_caused_recalc
+			}
 			edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
 			hidden_tooltip = { clr_global_flag = edmp_realm_size_calc_force_notify_all_players }
 			# Add the modifier AFTER forcing the recalc, because otherwise it will be removed during the process.

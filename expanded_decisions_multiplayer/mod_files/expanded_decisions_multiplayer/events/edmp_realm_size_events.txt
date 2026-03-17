@@ -31,6 +31,7 @@ character_event = {
 	immediate = {
 		clr_global_flag = edmp_realm_size_calculate_all_on_startup_has_not_been_forced
 		set_global_flag = edmp_realm_size_calc_force_notify_all_players
+		save_event_target_as = edmp_realm_size_character_who_caused_recalc
 		edmp_realm_size_calculate_for_all_relevant_characters = yes
 		clr_global_flag = edmp_realm_size_calc_force_notify_all_players
 	}
@@ -53,6 +54,21 @@ character_event = {
 		}
 	}
 	immediate = {
+		# If we're in multiplayer and there's an identifiable host, record them as the triggerer of the recalculation.
+		# Otherwise, ie. as a fallback, record this character as the triggerer of their own recalculation.
+		if = {
+			limit = {
+				multiplayer = yes
+				any_player = { is_multiplayer_host_character = yes }
+			}
+			random_player = {
+				limit = { is_multiplayer_host_character = yes }
+				save_event_target_as = edmp_realm_size_character_who_caused_recalc
+			}
+		}
+		else = {
+			save_event_target_as = edmp_realm_size_character_who_caused_recalc
+		}
 		edmp_realm_size_calculate_and_add_modifiers_to_this_character_force = yes
 	}
 }
@@ -92,11 +108,12 @@ character_event = {
 	}
 }
 character_event = {
-	id      = EDMPRealmSize.2001
-	title   = EDMPRealmSize_2000_Title
-	desc    = EDMPRealmSize_2000_Desc_Good
-	picture = GFX_evt_camaraderie
-	window  = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
+	id       = EDMPRealmSize.2001
+	title    = EDMPRealmSize_2000_Title
+	desc     = EDMPRealmSize_2000_Desc_Good
+	picture  = GFX_evt_camaraderie
+	portrait = event_target:edmp_realm_size_character_who_caused_recalc
+	window   = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
 	# Validator thinks long frame is incorrect; it's not.
 	# Audax Validator "." Ignore_NEXT
 	border  = GFX_event_long_frame_economy # Green frame (good)
@@ -106,11 +123,12 @@ character_event = {
 	}
 }
 character_event = {
-	id      = EDMPRealmSize.2002
-	title   = EDMPRealmSize_2000_Title
-	desc    = EDMPRealmSize_2000_Desc_Bad
-	picture = GFX_evt_camaraderie
-	window  = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
+	id       = EDMPRealmSize.2002
+	title    = EDMPRealmSize_2000_Title
+	desc     = EDMPRealmSize_2000_Desc_Bad
+	picture  = GFX_evt_camaraderie
+	portrait = event_target:edmp_realm_size_character_who_caused_recalc
+	window   = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
 	# Validator thinks long frame is incorrect; it's not.
 	# Audax Validator "." Ignore_NEXT
 	border  = GFX_event_long_frame_war     # Red frame (bad)
@@ -121,11 +139,12 @@ character_event = {
 	}
 }
 character_event = {
-	id      = EDMPRealmSize.2003
-	title   = EDMPRealmSize_2000_Title
-	desc    = EDMPRealmSize_2000_Desc_VeryBad
-	picture = GFX_evt_camaraderie
-	window  = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
+	id       = EDMPRealmSize.2003
+	title    = EDMPRealmSize_2000_Title
+	desc     = EDMPRealmSize_2000_Desc_VeryBad
+	picture  = GFX_evt_camaraderie
+	portrait = event_target:edmp_realm_size_character_who_caused_recalc
+	window   = EventWindowEDMPLongCharacter # Left-aligned, lots of space for text
 	# Validator thinks long frame is incorrect; it's not.
 	# Audax Validator "." Ignore_NEXT
 	border  = GFX_event_long_frame_war     # Red frame (bad)

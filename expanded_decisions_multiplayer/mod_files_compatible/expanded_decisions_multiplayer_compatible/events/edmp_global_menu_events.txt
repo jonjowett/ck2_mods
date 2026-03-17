@@ -415,6 +415,7 @@ character_event = {
 				set_variable = { which = global_edmp_realm_size_limit_new value = 0                                }
 			}
 		}
+		hidden_tooltip = { save_event_target_as = edmp_realm_size_character_who_caused_recalc }
 		edmp_realm_size_calculate_for_all_relevant_characters = yes
 		if = {
 			limit = { edmp_this_is_a_multiplayer_game = yes }
@@ -733,6 +734,7 @@ character_event = {
 				set_variable = { which = global_edmp_realm_size_empty_holdings_nomadic which = global_edmp_realm_size_empty_holdings_nomadic_new }
 			}
 		}
+		hidden_tooltip = { save_event_target_as = edmp_realm_size_character_who_caused_recalc }
 		edmp_realm_size_calculate_for_all_relevant_characters = yes
 		if = {
 			limit = { edmp_this_is_a_multiplayer_game = yes }

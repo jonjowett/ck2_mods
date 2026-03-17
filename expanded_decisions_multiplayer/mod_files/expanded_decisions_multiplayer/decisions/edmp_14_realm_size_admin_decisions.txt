@@ -11,9 +11,14 @@ decisions = {
 		effect = {
 			
 			# Recalculate for everyone, and forcibly show a notification
-			hidden_tooltip = { set_global_flag = edmp_realm_size_calc_force_notify_all_players }
+			hidden_tooltip = {
+				save_event_target_as = edmp_realm_size_character_who_caused_recalc
+				set_global_flag = edmp_realm_size_calc_force_notify_all_players
+			}
 			edmp_realm_size_calculate_for_all_relevant_characters = yes
-			hidden_tooltip = { clr_global_flag = edmp_realm_size_calc_force_notify_all_players }
+			hidden_tooltip = {
+				clr_global_flag = edmp_realm_size_calc_force_notify_all_players
+			}
 			
 			custom_tooltip = { text = edmp_realm_size_everyone_is_notified_of_recalc_tt }
 			

@@ -111,4 +111,18 @@ edmp_interference_win_defensive_wars_root_character_is_a_valid_target_for_from_t
 		}
 	}
 	
+	# ROOT is *not* already imprisoned by FROM
+	custom_tooltip = {
+		text = edmp_interference_win_defensive_wars_root_is_not_imprisoned_by_from_tt
+		ROOT = {
+			OR = {
+				prisoner = no
+				AND = {
+					prisoner = yes
+					host = { NOT = { character = ROOT_FROM } }
+				}
+			}
+		}
+	}
+	
 }

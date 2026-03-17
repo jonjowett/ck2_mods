@@ -35,6 +35,42 @@ defined_text = {
 }
 
 defined_text = {
+	name = edmp_insert_username_decision_taker
+	use_first_valid = yes
+	
+	# decision_taker is human, in a genuine MP game => Show decision_taker's username
+	text = {
+		trigger = {
+			multiplayer = yes
+			event_target:edmp_interference_decision_taker = { ai = no }
+		}
+		localisation_key = edmp_insert_username_decision_taker_actual
+	}
+	
+	# decision_taker is an absent player, in a genuine MP game => Show their "absent player" status
+	text = {
+		trigger = {
+			multiplayer = yes
+			event_target:edmp_interference_decision_taker = { edmp_this_character_is_an_absent_human_player = yes }
+		}
+		localisation_key = edmp_insert_username_absent_player
+	}
+	
+	# decision_taker is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	text = {
+		trigger = {
+			edmp_this_is_a_multiplayer_game = yes
+			event_target:edmp_interference_decision_taker = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+		}
+		localisation_key = edmp_insert_username_sp_debug
+	}
+	
+	# Any other situation => decision_taker is AI, or this is a SP game => Show nothing
+	# (Since we actively want to show *nothing*, we can simply not write any code here!)
+	
+}
+
+defined_text = {
 	name = edmp_insert_username_aiplayer_player
 	use_first_valid = yes
 	
