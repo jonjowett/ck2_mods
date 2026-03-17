@@ -84,3 +84,33 @@ edmp_playerflag_adminhelpers_unpause_effect = {
 		clr_global_flag = edmp_admin_helper_pause
 	}
 }
+
+
+
+
+
+edmp_playerflag_adminhelpers_startup_event_cleanup_effect = {
+	
+	set_variable = { which = edmp_admin_helper_removed_ai_count value = 0 }
+	clear_event_target = edmp_admin_helper_removed_ai_1
+	clear_event_target = edmp_admin_helper_removed_ai_2
+	clear_event_target = edmp_admin_helper_removed_ai_3
+	clear_event_target = edmp_admin_helper_removed_ai_4
+	clear_event_target = edmp_admin_helper_removed_ai_5
+	clear_event_target = edmp_admin_helper_removed_ai_6
+	clear_event_target = edmp_admin_helper_removed_ai_7
+	clear_event_target = edmp_admin_helper_removed_ai_8
+	clear_event_target = edmp_admin_helper_removed_ai_9
+	
+	set_variable = { which = edmp_admin_helper_human_count value = 0 }
+	clear_event_target = edmp_admin_helper_human_1
+	clear_event_target = edmp_admin_helper_human_2
+	clear_event_target = edmp_admin_helper_human_3
+	clear_event_target = edmp_admin_helper_human_4
+	clear_event_target = edmp_admin_helper_human_5
+	clear_event_target = edmp_admin_helper_human_6
+	clear_event_target = edmp_admin_helper_human_7
+	clear_event_target = edmp_admin_helper_human_8
+	clear_event_target = edmp_admin_helper_human_9
+	
+}
