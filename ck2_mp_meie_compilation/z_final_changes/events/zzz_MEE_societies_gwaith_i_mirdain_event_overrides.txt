@@ -1,0 +1,441 @@
+namespace = gwaith
+
+## Check whether the customer wants to ask for an artifact. If so then: which one, then actually ask.
+## ROOT = Customer
+## FROM = Craftsman
+character_event = {
+	id = gwaith.351
+	desc = EVTDESC_gwaith.351
+	picture = GFX_evt_reforge_narsil
+	
+	is_triggered_only = yes
+	
+	
+	
+	option = { 
+		
+		name = EVTOPTA_gwaith.351 ## Yes, i want to ask him a sword
+		
+		trigger = {
+			# Does not already have this exact artifact (because dupes are not permitted)
+			OR = {
+				num_of_artifacts == 0
+				NOT = { any_artifact = { artifact_type = elvish_sword } }
+			}
+			# Has a HQ non-elven-forged artifact, or enough money
+			OR = {
+				AND = {
+					num_of_artifacts >= 1
+					any_artifact = {
+						artifact_can_be_gifted_to = ROOT_FROM
+						NOR = {
+							artifact_type = elvish_sword
+							artifact_type = elvish_spear
+							artifact_type = elven_lord_armor
+						}
+					}
+				}
+				scaled_wealth = { value = 4 min = 200 max = 1000 }
+			}
+		}
+		
+		FROM = { character_event = { id = gwaith.352 } }
+		set_character_flag = ask_for_sword
+		
+		ai_chance = {
+			factor = 100
+			
+			# AI won't ask for a sword if they already have a spear
+			modifier = {
+				factor = 0
+				num_of_artifacts >= 1
+				any_artifact = { artifact_type = elvish_spear }
+			}
+		}
+		
+	}
+	
+	
+	
+	option = { 
+		
+		name = EVTOPTB_gwaith.351 ## Yes, i want to ask him a spear
+		
+		trigger = {
+			# Does not already have this exact artifact (because dupes are not permitted)
+			OR = {
+				num_of_artifacts == 0
+				NOT = { any_artifact = { artifact_type = elvish_spear } }
+			}
+			# Has a HQ non-elven-forged artifact, or enough money
+			OR = {
+				AND = {
+					num_of_artifacts >= 1
+					any_artifact = {
+						artifact_can_be_gifted_to = ROOT_FROM
+						NOR = {
+							artifact_type = elvish_sword
+							artifact_type = elvish_spear
+							artifact_type = elven_lord_armor
+						}
+					}
+				}
+				scaled_wealth = { value = 4 min = 200 max = 1000 }
+			}
+		}
+		
+		FROM = { character_event = { id = gwaith.352 } }
+		set_character_flag = ask_for_spear
+		
+		ai_chance = {
+			factor = 100
+			
+			# AI won't ask for a spear if they already have a sword
+			modifier = {
+				factor = 0
+				num_of_artifacts >= 1
+				any_artifact = { artifact_type = elvish_sword }
+			}
+		}
+		
+	}
+	
+	
+	
+	option = { 
+		
+		name = EVTOPTC_gwaith.351 ## Yes, i want to ask him an armor
+		
+		trigger = {
+			# Does not already have this exact artifact (because dupes are not permitted)
+			OR = {
+				num_of_artifacts == 0
+				NOT = { any_artifact = { artifact_type = elven_lord_armor } }
+			}
+			# Has a HQ non-elven-forged artifact, or enough money
+			OR = {
+				AND = {
+					num_of_artifacts >= 1
+					any_artifact = {
+						artifact_can_be_gifted_to = ROOT_FROM
+						NOR = {
+							artifact_type = elvish_sword
+							artifact_type = elvish_spear
+							artifact_type = elven_lord_armor
+						}
+					}
+				}
+				scaled_wealth = { value = 4 min = 200 max = 1000 }
+			}
+		}
+		
+		FROM = { character_event = { id = gwaith.352 } }
+		set_character_flag = ask_for_armor
+		
+		ai_chance = { factor = 100 }
+		
+	}
+	
+	option = { 
+		name = EVTOPTD_gwaith.351 ## Nope
+		FROM = { clr_character_flag = forge_for_another }
+		ai_chance = { factor = 1 }
+	}
+	
+}
+
+
+
+## The craftsman decides on the price of the artifact (either gold or another artifact)
+## ROOT = Craftsman
+## FROM = Customer
+character_event = {
+	id = gwaith.352
+	desc = EVTDESC_gwaith.352
+	picture = GFX_evt_reforge_narsil
+	
+	immediate = {
+		FROM = {
+			random_artifact = {
+				limit = {
+					artifact_can_be_gifted_to = ROOT
+					NOR = {
+						artifact_type = elvish_sword
+						artifact_type = elvish_spear
+						artifact_type = elven_lord_armor
+					}
+				}
+				preferred_limit = { quality >= 5 }
+				preferred_limit = { quality >= 4 }
+				preferred_limit = { quality >= 3 }
+				preferred_limit = { quality >= 2 }
+				save_event_target_as = gwaith_forge_cost_artifact_1
+				ROOT = { set_character_flag = gwaith_forge_cost_artifact_1_found }
+			}
+			random_artifact = {
+				limit = {
+					artifact_can_be_gifted_to = ROOT
+					NOR = {
+						artifact_type = elvish_sword
+						artifact_type = elvish_spear
+						artifact_type = elven_lord_armor
+					}
+				}
+				preferred_limit = { quality >= 5 }
+				preferred_limit = { quality >= 4 }
+				preferred_limit = { quality >= 3 }
+				preferred_limit = { quality >= 2 }
+				save_event_target_as = gwaith_forge_cost_artifact_2
+				ROOT = { set_character_flag = gwaith_forge_cost_artifact_2_found }
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = EVTOPTA_gwaith.352 ## Ok, but for some money
+		trigger = { FROM = { scaled_wealth          = { value = 4 min = 200 max = 1000           } } }
+		tooltip = { FROM = { transfer_scaled_wealth = { value = 4 min = 200 max = 1000 to = ROOT } } }
+		tooltip = { change_society_currency = { society = gwaith_i_mirdain value = 100 } }
+		FROM = { character_event = { id = gwaith.353 days = 10 } }
+		clear_event_target = gwaith_forge_cost_artifact_1
+		clear_event_target = gwaith_forge_cost_artifact_2
+		ai_chance = { factor = 10000 }
+	}
+	option = { 
+		name = EVTOPTB_gwaith.352 ## Ok, but for another artifact
+		trigger = { has_character_flag = gwaith_forge_cost_artifact_1_found }
+		tooltip = { event_target:gwaith_forge_cost_artifact_1 = { transfer_artifact = { from = ROOT_FROM to = ROOT } } }
+		tooltip = { change_society_currency = { society = gwaith_i_mirdain value = 100 } }
+		FROM = {
+			set_character_flag = gwaith_forge_cost_artifact_1_chosen
+			character_event = { id = gwaith.354 days = 10 }
+		}
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 1000
+				event_target:gwaith_forge_cost_artifact_1 = { quality == 5 }
+			}
+			modifier = {
+				factor = 100
+				event_target:gwaith_forge_cost_artifact_1 = { quality == 4 }
+			}
+			modifier = {
+				factor = 20
+				event_target:gwaith_forge_cost_artifact_1 = { quality == 3 }
+			}
+			modifier = {
+				factor = 5
+				event_target:gwaith_forge_cost_artifact_1 = { quality == 2 }
+			}
+		}
+	}
+	option = { 
+		name = EVTOPTB_gwaith.352 ## Ok, but for another artifact
+		trigger = { has_character_flag = gwaith_forge_cost_artifact_2_found }
+		tooltip = { event_target:gwaith_forge_cost_artifact_2 = { transfer_artifact = { from = ROOT_FROM to = ROOT } } }
+		tooltip = { change_society_currency = { society = gwaith_i_mirdain value = 100 } }
+		FROM = {
+			set_character_flag = gwaith_forge_cost_artifact_2_chosen
+			character_event = { id = gwaith.354 days = 10 }
+		}
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 1000
+				event_target:gwaith_forge_cost_artifact_2 = { quality == 5 }
+			}
+			modifier = {
+				factor = 100
+				event_target:gwaith_forge_cost_artifact_2 = { quality == 4 }
+			}
+			modifier = {
+				factor = 20
+				event_target:gwaith_forge_cost_artifact_2 = { quality == 3 }
+			}
+			modifier = {
+				factor = 5
+				event_target:gwaith_forge_cost_artifact_2 = { quality == 2 }
+			}
+		}
+	}
+	option = { 
+		name = EVTOPTD_gwaith.352 ## I won't
+		clr_character_flag = forge_for_another
+		FROM = { character_event = { id = gwaith.355 days = 10 } }
+		clear_event_target = gwaith_forge_cost_artifact_1
+		clear_event_target = gwaith_forge_cost_artifact_2
+		ai_chance = { factor = 1 }
+	}
+	after = {
+		clr_character_flag = gwaith_forge_cost_artifact_1_found
+		clr_character_flag = gwaith_forge_cost_artifact_2_found
+	}
+}
+
+## The customer decides whether the gold cost is acceptable
+## ROOT = Customer
+## FROM = Craftsman
+character_event = {
+	id = gwaith.353
+	desc = EVTDESC_gwaith.353
+	picture = GFX_evt_reforge_narsil
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = EVTOPTA_gwaith.353 ## Ok, but for some money
+		trigger = {
+			OR = {
+				ai = no # Players can choose to go into debt
+				scaled_wealth = { value = 4 min = 200 max = 1000 }
+			}
+		}
+		transfer_scaled_wealth = { to = FROM value = 4 min = 200 max = 1000 }
+		if = {
+			limit = { has_character_flag = ask_for_sword }
+			add_artifact = elvish_sword
+		}
+		if = {
+			limit = { has_character_flag = ask_for_spear }
+			add_artifact = elvish_spear
+		}
+		if = {
+			limit = { has_character_flag = ask_for_armor }
+			add_artifact = elven_lord_armor
+		}
+		FROM = { change_society_currency = { society = gwaith_i_mirdain value = 100 } }
+		ai_chance = { factor = 10000 }
+	}
+	option = { 
+		name = EVTOPTD_gwaith.353 ## I won't
+		prestige = -200
+		ai_chance = { factor = 1 } # If the AI gets this far, they will not cancel
+	}
+	after = {
+		clr_character_flag = ask_for_sword
+		clr_character_flag = ask_for_spear
+		clr_character_flag = ask_for_armor
+		clr_character_flag = gwaith_forge_cost_artifact_1_chosen
+		clr_character_flag = gwaith_forge_cost_artifact_2_chosen
+		FROM = {
+			clr_character_flag = forge_for_another
+			clr_character_flag = gwaith_forge_cost_artifact_1_found
+			clr_character_flag = gwaith_forge_cost_artifact_2_found
+		}
+		clear_event_target = gwaith_forge_cost_artifact_1
+		clear_event_target = gwaith_forge_cost_artifact_2
+	}
+}
+
+## The customer decides whether the artifact cost is acceptable
+## ROOT = Customer
+## FROM = Craftsman
+character_event = {
+	id = gwaith.354
+	desc = EVTDESC_gwaith.354
+	picture = GFX_evt_reforge_narsil
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = EVTOPTA_gwaith.353 ## Ok, but for another artifact
+		if = {
+			limit = { has_character_flag = gwaith_forge_cost_artifact_1_chosen }
+			event_target:gwaith_forge_cost_artifact_1 = { transfer_artifact = { from = ROOT to = ROOT_FROM } }
+		}
+		else_if = {
+			limit = { has_character_flag = gwaith_forge_cost_artifact_2_chosen }
+			event_target:gwaith_forge_cost_artifact_2 = { transfer_artifact = { from = ROOT to = ROOT_FROM } }
+		}
+		else = {
+			random_artifact	 = {
+				limit = {
+					artifact_can_be_gifted_to = ROOT_FROM
+					NOR = {
+						artifact_type = elvish_sword
+						artifact_type = elvish_spear
+						artifact_type = elven_lord_armor
+					}
+				}
+				preferred_limit = { quality >= 5 }
+				preferred_limit = { quality >= 4 }
+				preferred_limit = { quality >= 3 }
+				preferred_limit = { quality >= 2 }
+				transfer_artifact = { from = ROOT to = ROOT_FROM }
+			}
+		}
+		if = {
+			limit = { has_character_flag = ask_for_sword }
+			add_artifact = elvish_sword
+		}
+		if = {
+			limit = { has_character_flag = ask_for_spear }
+			add_artifact = elvish_spear
+		}
+		if = {
+			limit = { has_character_flag = ask_for_armor }
+			add_artifact = elven_lord_armor
+		}
+		FROM = { change_society_currency = { society = gwaith_i_mirdain value = 100 } }
+	}
+	
+	option = { 
+		name = EVTOPTD_gwaith.353 ## I won't
+		prestige = -200
+	}
+	
+	after = {
+		clr_character_flag = ask_for_sword
+		clr_character_flag = ask_for_spear
+		clr_character_flag = ask_for_armor
+		clr_character_flag = gwaith_forge_cost_artifact_1_chosen
+		clr_character_flag = gwaith_forge_cost_artifact_2_chosen
+		FROM = {
+			clr_character_flag = forge_for_another
+			clr_character_flag = gwaith_forge_cost_artifact_1_found
+			clr_character_flag = gwaith_forge_cost_artifact_2_found
+		}
+		clear_event_target = gwaith_forge_cost_artifact_1
+		clear_event_target = gwaith_forge_cost_artifact_2
+	}
+}
+
+## The customer is informed that the craftsman refused their request
+## ROOT = Customer
+## FROM = Craftsman
+character_event = {
+	id = gwaith.355
+	desc = EVTDESC_gwaith.355
+	picture = GFX_evt_reforge_narsil
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = EVTOPTA_gwaith.355 ## Ok...
+		prestige = -200
+		random_list = {
+			60 = { add_trait = stressed }
+			20 = { add_trait = depressed }
+			20 = { }
+		}
+	}
+	
+	after = {
+		clr_character_flag = ask_for_sword
+		clr_character_flag = ask_for_spear
+		clr_character_flag = ask_for_armor
+		clr_character_flag = gwaith_forge_cost_artifact_1_chosen
+		clr_character_flag = gwaith_forge_cost_artifact_2_chosen
+		FROM = {
+			clr_character_flag = forge_for_another
+			clr_character_flag = gwaith_forge_cost_artifact_1_found
+			clr_character_flag = gwaith_forge_cost_artifact_2_found
+		}
+		clear_event_target = gwaith_forge_cost_artifact_1
+		clear_event_target = gwaith_forge_cost_artifact_2
+	}
+	
+}
