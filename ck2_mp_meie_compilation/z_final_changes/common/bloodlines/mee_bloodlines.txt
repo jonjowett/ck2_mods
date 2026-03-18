@@ -1,0 +1,214 @@
+blood_of_numenor = {
+	combat_rating = 40
+    health = 15.0	
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_numenor
+	flags = { historical_bloodline numenor_bloodline1 }
+}
+blood_of_numenor2 = {
+	combat_rating = 20
+    health = 6.0	
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_numenor
+	flags = { historical_bloodline numenor_bloodline2 }
+}
+blood_of_elros = {
+	combat_rating = 55
+	monthly_character_prestige = 0.5
+	fertility_penalty = -0.1
+	bloodline_effect_great_heroes_appear = 1
+	inheritance = patrilineal
+	allow_bastards = no
+	picture = GFX_bloodline_numenor
+	active = {
+		religion = religion_numenorean
+	}	
+	flags = { historical_bloodline bloodline_elros bloodline_heroes }
+}
+
+bloodline_eorl = {
+	combat_rating = 20
+	monthly_character_prestige = 0.5
+	bloodline_effect_great_heroes_appear = 1
+	command_modifier = {
+		cavalry = 0.50
+	}	
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_eorl
+	active = {
+		religion = religion_orome
+	}	
+	flags = { historical_bloodline bloodline_eorl bloodline_heroes }
+}
+
+blood_durin = {
+	combat_rating = 55
+	monthly_character_prestige = 0.5
+    health = 24.0	
+	bloodline_effect_great_heroes_appear = 1
+	command_modifier = {
+		morale_defence = 0.85
+	}
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_durin
+	active = {
+		religion = religion_mahal
+	}
+	flags = { historical_bloodline bloodline_durin bloodline_heroes }
+}
+blood_mearas = {
+	combat_rating = 30
+    health = 3	
+    fertility = -0.2	
+    ai_ambition = -100 #Influences the AI's desire for expansion, primarily affecting the likelihood of wanting to declare war.	
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_mearas
+	flags = { historical_bloodline bloodline_mearas }
+}
+
+
+
+
+### ELFIC BLOODLINES ###
+blood_elf = {
+	diplomacy = 2
+	stewardship = 1
+    fertility = -0.5
+    immortal = yes
+    ai_ambition = -15 #Influences the AI's desire for expansion, primarily affecting the likelihood of wanting to declare war.
+    ai_rationality = 20 #Influences the way the AI makes choices, such as whether the AI will compare its own levy size with its enemy levy size if it wants to go to war.
+    ai_honor = 80 	
+	culture_orkish_opinion = -100
+	culture_numenorean_opinion = 40	
+	culture_black_numenorean_opinion = -40	
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_elf
+	active = {
+		religion = religion_moriquendi
+	}
+	flags = { historical_bloodline bloodline_elf }
+}
+blood_semi_elf = {
+	diplomacy = 1
+	stewardship = 1
+    fertility = -0.35
+    immortal = yes
+    ai_ambition = -15 #Influences the AI's desire for expansion, primarily affecting the likelihood of wanting to declare war.
+    ai_rationality = 20 #Influences the way the AI makes choices, such as whether the AI will compare its own levy size with its enemy levy size if it wants to go to war.
+    ai_honor = 70	
+	culture_orkish_opinion = -70
+	culture_numenorean_opinion = 20	
+	culture_black_numenorean_opinion = -20		
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_semi_elf
+	flags = { historical_bloodline bloodline_semi_elf }
+}
+blood_elvish_blood = {
+	diplomacy = 1
+    fertility = -0.2	
+    health = 10.0
+	culture_orkish_opinion = -40
+	culture_numenorean_opinion = 10	
+	culture_black_numenorean_opinion = -10	
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_elvish_blood
+	flags = { historical_bloodline bloodline_elvish_blood }
+}
+
+blood_finarfin = {
+	combat_rating = 65
+	monthly_character_prestige = 0.5
+	bloodline_effect_great_heroes_appear = 1	
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_finarfin
+	active = {
+		religion = religion_moriquendi
+	}	
+	flags = { historical_bloodline bloodline_finarfin bloodline_heroes }
+}
+blood_fingolfin = {
+	combat_rating = 65
+	monthly_character_prestige = 0.5	
+	bloodline_effect_loyal_councilors = 1
+	bloodline_effect_battle_bards = 1
+	command_modifier = {
+		morale_defence = 0.45
+	}	
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_fingolfin
+	active = {
+		religion = religion_moriquendi
+	}	
+	flags = { historical_bloodline bloodline_fingolfin bloodline_loyalist bloodline_battle_bards }
+}
+blood_feanor = {
+	combat_rating = 70
+	monthly_character_prestige = 0.7
+	bloodline_effect_artisan_craftsmen = 1
+	bloodline_effect_ambition = 1
+	bloodline_effect_architect = 1	
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_feanor
+	active = {
+		religion = religion_moriquendi
+	}	
+	flags = { historical_bloodline bloodline_feanor bloodline_ambition bloodline_architect }
+}
+blood_elu_thingol = {
+	combat_rating = 40
+	monthly_character_prestige = 0.7
+	bloodline_effect_ambition = 1
+	bloodline_effect_architect = 1	
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_feanor
+	active = {
+		religion = religion_moriquendi
+	}	
+	flags = { historical_bloodline bloodline_thingol bloodline_ambition bloodline_architect }
+}
+blood_cirdan = {
+	combat_rating = 40
+	monthly_character_prestige = 0.3
+	bloodline_effect_pet_eagle = 1
+	bloodline_effect_loyal_councilors = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_feanor
+	active = {
+		religion = religion_moriquendi
+	}	
+	flags = { historical_bloodline bloodline_cirdan bloodline_loyalist }
+}
+blood_oropher = {
+	combat_rating = 40
+	monthly_character_prestige = 0.3
+	bloodline_effect_ambition = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_feanor
+	active = {
+		religion = religion_moriquendi
+	}	
+	flags = { historical_bloodline bloodline_oropher bloodline_ambition }
+}
+corrupted_blood_of = {
+	combat_rating = 10
+	monthly_character_prestige = -0.2
+	bloodline_effect_ambition = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodline_feanor
+	flags = { historical_bloodline bloodline_nine bloodline_ambition }
+}
