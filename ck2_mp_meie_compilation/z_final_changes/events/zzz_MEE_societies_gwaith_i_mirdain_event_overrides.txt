@@ -28,11 +28,7 @@ character_event = {
 					num_of_artifacts >= 1
 					any_artifact = {
 						artifact_can_be_gifted_to = ROOT_FROM
-						NOR = {
-							artifact_type = elvish_sword
-							artifact_type = elvish_spear
-							artifact_type = elven_lord_armor
-						}
+						meiecomp_gwaith_crafting_this_artifact_type_can_be_used_as_payment_for_crafting = yes
 					}
 				}
 				scaled_wealth = { value = 4 min = 200 max = 1000 }
@@ -73,11 +69,7 @@ character_event = {
 					num_of_artifacts >= 1
 					any_artifact = {
 						artifact_can_be_gifted_to = ROOT_FROM
-						NOR = {
-							artifact_type = elvish_sword
-							artifact_type = elvish_spear
-							artifact_type = elven_lord_armor
-						}
+						meiecomp_gwaith_crafting_this_artifact_type_can_be_used_as_payment_for_crafting = yes
 					}
 				}
 				scaled_wealth = { value = 4 min = 200 max = 1000 }
@@ -118,11 +110,7 @@ character_event = {
 					num_of_artifacts >= 1
 					any_artifact = {
 						artifact_can_be_gifted_to = ROOT_FROM
-						NOR = {
-							artifact_type = elvish_sword
-							artifact_type = elvish_spear
-							artifact_type = elven_lord_armor
-						}
+						meiecomp_gwaith_crafting_this_artifact_type_can_be_used_as_payment_for_crafting = yes
 					}
 				}
 				scaled_wealth = { value = 4 min = 200 max = 1000 }
@@ -159,11 +147,7 @@ character_event = {
 			random_artifact = {
 				limit = {
 					artifact_can_be_gifted_to = ROOT
-					NOR = {
-						artifact_type = elvish_sword
-						artifact_type = elvish_spear
-						artifact_type = elven_lord_armor
-					}
+					meiecomp_gwaith_crafting_this_artifact_type_can_be_used_as_payment_for_crafting = yes
 				}
 				preferred_limit = { quality >= 5 }
 				preferred_limit = { quality >= 4 }
@@ -175,11 +159,8 @@ character_event = {
 			random_artifact = {
 				limit = {
 					artifact_can_be_gifted_to = ROOT
-					NOR = {
-						artifact_type = elvish_sword
-						artifact_type = elvish_spear
-						artifact_type = elven_lord_armor
-					}
+					meiecomp_gwaith_crafting_this_artifact_type_can_be_used_as_payment_for_crafting = yes
+					NOT = { artifact = event_target:gwaith_forge_cost_artifact_1 } # Not the same exact artifact as the other one that was chosen
 				}
 				preferred_limit = { quality >= 5 }
 				preferred_limit = { quality >= 4 }
