@@ -15,18 +15,24 @@ targeted_decisions = {
 			NOT = { is_inaccessible_trigger = yes }
 			society_member_of = gwaith_i_mirdain
 			society_currency >= 300
-			custom_tooltip = {
-				text = "It has been at least 3 years since the last time you took this decision"
-				had_character_flag = { flag = improve_skills_craft_timeout years >= 3 }
-			}
-			OR = {
+			trigger_if = {
+				limit = { has_character_flag = improve_skills_craft_timeout }
 				custom_tooltip = {
-					text = "Is NOT currently improving crafting skills"
-					NOT = {  has_character_flag = improve_skills_craft }
+					text = "It has been at least 1 year since the last time you took this decision"
+					had_character_flag = { flag = improve_skills_craft_timeout years >= 1 }
 				}
-				custom_tooltip = {
-					text = "The improve crafting skills event chain has been in progress for at least 3 years (ie. it's probably stuck)"
-					had_character_flag = { flag = improve_skills_craft years >= 3 }
+			}
+			trigger_if = {
+				limit = { has_character_flag = improve_skills_craft }
+				OR = {
+					custom_tooltip = {
+						text = "Is NOT currently improving crafting skills"
+						NOT = { has_character_flag = improve_skills_craft }
+					}
+					custom_tooltip = {
+						text = "The improve crafting skills event chain has been in progress for at least 3 years (ie. it's probably stuck)"
+						had_character_flag = { flag = improve_skills_craft years >= 3 }
+					}
 				}
 			}
 		}
