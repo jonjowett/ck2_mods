@@ -16,9 +16,12 @@ dependencies={
 	"\"PDXRP Tamriel Game\""
 	"\"Expanded Decisions: PDXRP Tamriel Game\""
 	
-	# Other total conversions
+	# Other total conversions with major changes
 	"\"After the End Fan Fork\""
-	"\"Romance of the Three Kingdoms\""
 	"\"Warcraft: Guardians of Azeroth\""
+	
+	# Other total conversions with essentially no changes from the base game (in terms of trade mechanics, anyway)
+	"\"Romance of the Three Kingdoms\""
+	"\"Middle-Earth... in Earth !\""
 	
 }
