@@ -1,0 +1,29 @@
+emb_this_character_has_same_or_more_advanced_government_than_prev = {
+	
+	OR = {
+		
+		# Feudal, Theocracy & Republic are all "advanced", so if this character has one of those govs then the trigger is always true
+		is_feudal = yes
+		is_republic = yes
+		is_theocracy = yes
+		
+		# If this character is tribal then PREV must be nomadic or tribal
+		AND = {
+			is_tribal = yes
+			PREV = {
+				OR = {
+					is_nomadic = yes
+					is_tribal = yes
+				}
+			}
+		}
+		
+		# If this character is nomadic then PREV must also be nomadic
+		AND = {
+			is_nomadic = yes
+			PREV = { is_nomadic = yes }
+		}
+		
+	}
+	
+}

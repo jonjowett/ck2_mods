@@ -1,0 +1,53 @@
+decisions = {
+	
+	# Altered version of base game's convert_indian_branch targetted_decision, allowing you to select a branch if you have none.
+	# Converted from a targetted_decision to an intrigue menu decision.
+	expd_india_choose_branch_if_none = {
+		
+		only_rulers = yes         # Required because the path-selection events implicitly assume the selector has a title.
+		is_high_prio = yes
+		ai_check_interval = 1     # ASAP
+		
+		potential = {
+			
+			is_ruler = yes    # Required because the path-selection events implicitly assume the selector has a title.
+			
+			has_dharmic_religion_trigger = yes
+			
+			# Only show decision if you have NONE of the dharmic religion paths
+			NOR = {
+				trait = shaivist_hindu
+				trait = vaishnavist_hindu
+				trait = shaktist_hindu
+				trait = smartist_hindu
+				trait = mahayana_buddhist
+				trait = vajrayana_buddhist
+				trait = theravada_buddhist
+				trait = digambara_jain
+				trait = svetambara_jain
+			}
+			
+		}
+		
+		allow = { always = yes }
+		
+		effect = {
+			if = {
+				limit = { religion = hindu }
+				character_event = { id = RoI.115 } # Choose branch
+			}
+			if = {
+				limit = { religion = buddhist }
+				character_event = { id = RoI.116 } # Choose branch
+			}
+			if = {
+				limit = { religion = jain }
+				character_event = { id = RoI.117 } # Choose branch
+			}
+		}
+		
+		ai_will_do = { factor = 1 }
+		
+	}
+	
+}

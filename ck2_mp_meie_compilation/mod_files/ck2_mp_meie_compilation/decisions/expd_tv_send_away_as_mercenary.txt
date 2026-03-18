@@ -1,0 +1,297 @@
+# Targetted decisions are possible vs _all_ other characters and shown are in the Diplomacy View, not the Intrigue View. The taker is in the FROM scope.
+#
+# filter = [self/court/home_court/vassals/sub_realm/realm/dynasty/all] ('self' MUST be set for decisions targetting only the taker, the other filter types can be set to lessen CPU load)
+# ai_target_filter = [self/court/home_court/vassals/sub_realm/realm/dynasty/all] (which characters for which the AI evaluates the decision.)
+#	court: all characters in the AI's host court, including prisoners, and characters currently away (wards, prisoners, etc)
+#	home_court: all characters in the AI's home court, including prisoners, and characters currently away (wards, prisoners, etc)
+#	vassals: direct vassal rulers of the AI's employer
+#	sub_realm: all characters below the AI's employer
+#	realm: all characters in the same top realm as the AI
+#	dynasty: all members of the same dynasty
+#	rivals: your rivals plus any character you have an opinion modifier with 'crime = yes' set (the same set of characters the 'is_foe' trigger evaluates)
+#	all: all living characters (Avoid if possible. VERY CPU-HEAVY!)
+#
+
+targetted_decisions = {
+	expd_tv_send_away_as_mercenary = {
+		
+		# Allows you to "send away as a mercenary" anyone in your court who is either {a close relative} or {a descendant} or {a dynast who could send their own children away in vanilla if only they were landed}
+		# Shieldmaidens are also allowed, if they would otherwise be ineligble.
+		# Expanded version of create_mercenary_company in HL_mercenary_decisions.txt . The vast majority of the changes are in the potential block.
+		
+		only_playable = yes
+		filter = home_court
+		ai_target_filter = home_court
+		ai_check_interval = 36
+		
+		from_potential = {
+			is_playable = yes
+			OR = {
+				has_dlc = "Horse Lords"
+				any_owned_bloodline = {
+					has_bloodline_flag = bloodline_mercenary_traditions
+				}
+			}
+			is_adult = yes
+			prisoner = no
+			NOT = { trait = incapable }
+			OR = {
+				government = nomadic_government
+				has_character_modifier = mercenary_traditions
+				expd_tv_this_character_has_a_mercenary_bloodline = yes
+			}
+		}
+		
+		potential = {
+			
+			#Mod changes: If the vanilla decision is potentially valid then you should take that instead!
+			NOT = {
+				FROM = {
+					is_targeted_decision_potential = {
+						key = create_mercenary_company
+						character = ROOT
+					}
+				}
+			}
+			mercenary = no
+			
+			#Mod changes: Is of your dynasty, or is a bastard of your dynasty (red or black blood drop on portrait)
+			expd_tv_this_character_is_of_froms_dynasty_including_bastard = yes
+			
+			OR = {
+				#Any descendant & any close relative
+				is_descendant_of = FROM
+				is_close_relative = FROM
+				
+				#Any dynast who could take the vanilla decision if they were male & landed 
+				has_character_modifier = mercenary_traditions
+				expd_tv_this_character_has_a_mercenary_bloodline = yes
+			}
+			
+		}
+		allow = {
+			is_adult = yes
+			is_ruler = no
+			prisoner = no
+			custom_tooltip = {
+				text = inaccessible_tooltip
+				hidden_tooltip = {
+					NOT = { is_inaccessible_trigger = yes }
+				}
+			}
+			NOT = { trait = incapable }
+			
+			#Mod changes: Moved the gender requirement to the allow block, since it's now more nuanced
+			trigger_if = {
+				limit = { is_female = no } # Male courtier
+				ROOT = { NOT = { has_religion_feature = religion_matriarchal } }
+				FROM = { NOT = { has_religion_feature = religion_matriarchal } }
+			}
+			trigger_else = { # Female courtier
+				OR = {
+					AND = {
+						ROOT = { has_religion_feature = religion_matriarchal }
+						FROM = { has_religion_feature = religion_matriarchal }
+					}
+					AND = {
+						ROOT = { has_religion_feature = religion_equal }
+						FROM = { has_religion_feature = religion_equal }
+					}
+					FROM = { primary_title = { has_law = status_of_women_4 } }
+					#Mod changes: Allow shieldmaidens to be sent away, even if laws would otherwise prohibit it
+					ROOT = { trait = shieldmaiden }
+				}
+			}
+			
+			# This was included in vanilla even though it is redundant with the home_court scope specified at the top of the decision
+			# Probably included here as an extra explanation for players
+			liege = { character = FROM }
+			
+			# Add some of the potential conditions, as extra explanations for players
+			expd_tv_this_character_is_of_froms_dynasty_including_bastard = yes
+			OR = {
+				#Any descendant & any close relative
+				is_descendant_of = FROM
+				is_close_relative = FROM
+				#Any dynast who could take the vanilla decision if they were male & landed 
+				has_character_modifier = mercenary_traditions
+				expd_tv_this_character_has_a_mercenary_bloodline = yes
+			}
+			
+			# Cleaned-up version of the vanilla condition
+			FROM = {
+				trigger_if = {
+					limit = { government = nomadic_government }
+					unused_manpower = 500
+					max_manpower = 500
+				}
+				trigger_else = {
+					demesne_garrison_size = 500
+				}
+			}
+			
+			# Cleaned-up version of the vanilla condition
+			OR = {
+				FROM = { government = nomadic_government }
+				ROOT = { has_character_modifier = mercenary_traditions }
+				ROOT = { expd_tv_this_character_has_a_mercenary_bloodline = yes }
+			}
+			
+		}
+		effect = {
+			FROM = {
+				if = {
+					limit = { is_nomadic = yes }
+					clan_title = {
+						create_title = {
+							tier = DUKE
+							name = DYNAMIC_MERCENARY_COMPANY
+							landless = yes
+							temporary = yes
+							adventurer = yes
+							custom_created = yes
+							culture = ROOT
+							holder = ROOT
+							base_title = THIS
+							mercenary = yes
+							ruler = "CAPTAIN"
+							ruler_female = "CAPTAIN"
+							foa = "CAPTAIN_FOA"
+						}
+					}
+				}
+				if = {
+					limit = { is_nomadic = no }
+					primary_title = {
+						create_title = {
+							tier = DUKE
+							name = DYNAMIC_MERCENARY_COMPANY
+							landless = yes
+							temporary = yes
+							adventurer = yes
+							custom_created = yes
+							culture = ROOT
+							holder = ROOT
+							base_title = THIS
+							mercenary = yes
+							ruler = "CAPTAIN"
+							ruler_female = "CAPTAIN"
+							foa = "CAPTAIN_FOA"
+						}
+					}
+				}
+				
+				ROOT = { set_defacto_liege = THIS }
+			}
+			set_character_flag = is_mercenary_leader
+			add_trait = adventurer
+			add_character_modifier = { modifier = started_mercenary_company months = 30 }
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					any_mercenary_band = {
+						count = 3
+						band_creator = {
+							character = FROM
+						}
+					}
+					FROM = {
+						is_primary_war_attacker = yes
+						is_primary_war_defender = yes
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				any_mercenary_band = {
+					count = 1
+					band_creator = {
+						character = FROM
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				any_mercenary_band = {
+					count = 2
+					band_creator = {
+						character = FROM
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				martial = 10
+			}
+
+			modifier = {
+				factor = 3
+				martial = 14
+			}
+
+			modifier = {
+				factor = 4
+				martial = 18
+			}
+
+			modifier = {
+				factor = 2
+				prestige = 100
+			}
+
+			modifier = {
+				factor = 3
+				prestige = 400
+			}
+
+			modifier = {
+				factor = 4
+				prestige = 1000
+			}
+
+			# Adjusted weights so that highly-martially-educated characters are more likely to be sent
+			# (But not drastically more likely, in line with the vanilla approach above)
+			modifier = {
+				factor = 2
+				trait = misguided_warrior
+			}
+			modifier = {
+				factor = 3
+				trait = tough_soldier
+			}
+			modifier = {
+				factor = 4
+				trait = skilled_tactician
+			}
+			modifier = {
+				factor = 5
+				trait = brilliant_strategist
+			}
+			
+			# Deprioritise if there's a valid target for the vanilla decision
+			modifier = {
+				factor = 0.25
+				FROM = {
+					any_courtier = {
+						FROM = {
+							is_targeted_decision_potential = {
+								key = create_mercenary_company
+								character = PREV
+							}
+							is_targeted_decision_allowed = {
+								key = create_mercenary_company
+								character = PREV
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+expd_india_deduct_piety_and_prestige_from_this_character_who_is_reclaiming_their_caste = {
+	# AI can do this for free
+	if = {
+		limit = { ai = no }
+		# Do nothing
+	}
+	# Players lose tier-dependent prestige & piety
+	else_if = {
+		limit = { tier = EMPEROR }
+		prestige = -1000
+		piety = -200
+	}
+	else_if = {
+		limit = { tier = KING }
+		prestige = -500
+		piety = -100
+	}
+	else = {
+		prestige = -200
+		piety = -50
+	}
+}

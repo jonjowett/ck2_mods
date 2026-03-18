@@ -1,0 +1,367 @@
+# Triggers that can directly be used in CBs
+
+edmp_invasion_can_use_gui = {
+	# Invasions are always permitted for AI and in SP
+	# In MP, show the game rule setting to the player (disabled/enabled/individual).
+	# Further, in the individual case, return true iff the player has permission to invade at least one of the target's kingdoms.
+	#  --- If this is true, the list of possible kingdom targets MUST be filtered by can_use_title.
+	# In SP, also show the MP game rule logic to the player, even though it won't have any effect
+	#      (so that an MP save editor can audit).
+	
+	OR = {
+		
+		# This trigger_if block MUST appear above all other conditions, or the in-game tooltip is messed up.
+		trigger_if = {
+			limit = { edmp_global_invasions_are_disabled_for_everyone = yes }
+			edmp_global_invasions_are_not_disabled_for_everyone = yes # Should always be false (ie. blocking) in this context
+		}
+		trigger_else_if = {
+			limit = { edmp_global_invasions_are_enabled_for_everyone = yes }
+			edmp_global_invasions_are_enabled_for_everyone = yes # Should always be true in this context, included so that the player is notified
+		}
+		trigger_else_if = {
+			limit = {
+				# Implicit: Invasions are managed individually for each human player
+				edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms = yes
+			}
+			custom_tooltip = { text = edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms_cb_tt always = yes }
+		}
+		trigger_else = {
+			# Invasions are managed individually for each player, and ROOT does NOT have permission to invade FROM
+			custom_tooltip = { text = edmp_root_does_not_have_permission_to_invade_at_least_one_of_froms_kingdoms_cb_tt always = no }
+		}
+		
+		edmp_root_is_an_ai = yes
+		
+		edmp_this_is_not_a_multiplayer_game = yes
+		
+	}
+}
+
+edmp_invasion_can_use_title = {
+	# If ROOT is a human, and this is multiplayer, and invasion permissions are managed individually,
+	#       and ROOT has permission to invade AT LEAST ONE title held by FROM,
+	#       then ONLY show those titles where ROOT has permission.
+	# Otherwise, show all
+	OR = {
+		
+		trigger_if = {
+			limit = {
+				edmp_global_invasion_permissions_are_managed_individually = yes
+				edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms = yes
+			}
+			edmp_this_title_has_invasion_permission_flag_matching_root_character = yes
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = edmp_global_invasion_permissions_are_not_managed_individually_tt
+				always = yes
+			}
+		}
+		
+		edmp_root_is_an_ai = yes
+		
+		edmp_this_is_not_a_multiplayer_game = yes
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+# General-use triggers
+
+
+
+
+
+
+
+
+
+
+edmp_this_character_has_no_invasion_permission_flag = {
+	custom_tooltip = {
+		text = edmp_this_character_has_no_invasion_permission_flag_tt
+		edmp_this_character_has_any_invasion_permission_flag = no
+	}
+}
+
+edmp_this_character_has_any_invasion_permission_flag = {
+	custom_tooltip = {
+		text = edmp_this_character_has_any_invasion_permission_flag_tt
+		OR = {
+			has_character_modifier = edmp_invasion_permission_character_01
+			has_character_modifier = edmp_invasion_permission_character_02
+			has_character_modifier = edmp_invasion_permission_character_03
+			has_character_modifier = edmp_invasion_permission_character_04
+			has_character_modifier = edmp_invasion_permission_character_05
+			has_character_modifier = edmp_invasion_permission_character_06
+			has_character_modifier = edmp_invasion_permission_character_07
+			has_character_modifier = edmp_invasion_permission_character_08
+			has_character_modifier = edmp_invasion_permission_character_09
+			has_character_modifier = edmp_invasion_permission_character_10
+			has_character_modifier = edmp_invasion_permission_character_11
+			has_character_modifier = edmp_invasion_permission_character_12
+			has_character_modifier = edmp_invasion_permission_character_13
+			has_character_modifier = edmp_invasion_permission_character_14
+			has_character_modifier = edmp_invasion_permission_character_15
+			has_character_modifier = edmp_invasion_permission_character_16
+			has_character_modifier = edmp_invasion_permission_character_17
+			has_character_modifier = edmp_invasion_permission_character_18
+			has_character_modifier = edmp_invasion_permission_character_19
+			has_character_modifier = edmp_invasion_permission_character_20
+		}
+	}
+}
+
+
+
+
+
+edmp_all_invasion_permission_character_flags_have_not_been_issued = {
+	custom_tooltip = {
+		text = edmp_all_invasion_permission_character_flags_have_not_been_issued_tt
+		edmp_all_invasion_permission_character_flags_have_been_issued = no
+	}
+}
+
+edmp_all_invasion_permission_character_flags_have_been_issued = {
+	custom_tooltip = {
+		text = edmp_all_invasion_permission_character_flags_have_been_issued_tt
+		any_character = { has_character_modifier = edmp_invasion_permission_character_01 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_02 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_03 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_04 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_05 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_06 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_07 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_08 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_09 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_10 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_11 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_12 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_13 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_14 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_15 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_16 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_17 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_18 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_19 }
+		any_character = { has_character_modifier = edmp_invasion_permission_character_20 }
+	}
+}
+
+
+
+
+
+edmp_root_does_not_have_permission_to_invade_at_least_one_of_froms_kingdoms = {
+	custom_tooltip = {
+		text = edmp_root_does_not_have_permission_to_invade_at_least_one_of_froms_kingdoms_tt
+		edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms = no
+	}
+}
+
+edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms = {
+	custom_tooltip = {
+		text = edmp_root_has_permission_to_invade_at_least_one_of_froms_kingdoms_tt
+		ROOT_FROM = {
+			any_realm_title = {
+				tier = COUNT
+				any_dejure_liege = {
+					tier = KING
+					edmp_this_title_has_invasion_permission_flag_matching_root_character = yes
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+edmp_this_title_has_invasion_permission_flag_matching_prev_character = {
+	custom_tooltip = {
+		text = edmp_this_title_has_invasion_permission_flag_matching_prev_character_tt
+		OR = {
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_01 }
+				has_flag                            = edmp_invasion_permission_title_01
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_02 }
+				has_flag                            = edmp_invasion_permission_title_02
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_03 }
+				has_flag                            = edmp_invasion_permission_title_03
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_04 }
+				has_flag                            = edmp_invasion_permission_title_04
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_05 }
+				has_flag                            = edmp_invasion_permission_title_05
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_06 }
+				has_flag                            = edmp_invasion_permission_title_06
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_07 }
+				has_flag                            = edmp_invasion_permission_title_07
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_08 }
+				has_flag                            = edmp_invasion_permission_title_08
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_09 }
+				has_flag                            = edmp_invasion_permission_title_09
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_10 }
+				has_flag                            = edmp_invasion_permission_title_10
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_11 }
+				has_flag                            = edmp_invasion_permission_title_11
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_12 }
+				has_flag                            = edmp_invasion_permission_title_12
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_13 }
+				has_flag                            = edmp_invasion_permission_title_13
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_14 }
+				has_flag                            = edmp_invasion_permission_title_14
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_15 }
+				has_flag                            = edmp_invasion_permission_title_15
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_16 }
+				has_flag                            = edmp_invasion_permission_title_16
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_17 }
+				has_flag                            = edmp_invasion_permission_title_17
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_18 }
+				has_flag                            = edmp_invasion_permission_title_18
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_19 }
+				has_flag                            = edmp_invasion_permission_title_19
+			}
+			AND = {
+				PREV = { has_character_modifier = edmp_invasion_permission_character_20 }
+				has_flag                            = edmp_invasion_permission_title_20
+			}
+		}
+	}
+}
+
+edmp_this_title_has_invasion_permission_flag_matching_root_character = {
+	custom_tooltip = {
+		text = edmp_this_title_has_invasion_permission_flag_matching_root_character_tt
+		OR = {
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_01 }
+				has_flag                            = edmp_invasion_permission_title_01
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_02 }
+				has_flag                            = edmp_invasion_permission_title_02
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_03 }
+				has_flag                            = edmp_invasion_permission_title_03
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_04 }
+				has_flag                            = edmp_invasion_permission_title_04
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_05 }
+				has_flag                            = edmp_invasion_permission_title_05
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_06 }
+				has_flag                            = edmp_invasion_permission_title_06
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_07 }
+				has_flag                            = edmp_invasion_permission_title_07
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_08 }
+				has_flag                            = edmp_invasion_permission_title_08
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_09 }
+				has_flag                            = edmp_invasion_permission_title_09
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_10 }
+				has_flag                            = edmp_invasion_permission_title_10
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_11 }
+				has_flag                            = edmp_invasion_permission_title_11
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_12 }
+				has_flag                            = edmp_invasion_permission_title_12
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_13 }
+				has_flag                            = edmp_invasion_permission_title_13
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_14 }
+				has_flag                            = edmp_invasion_permission_title_14
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_15 }
+				has_flag                            = edmp_invasion_permission_title_15
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_16 }
+				has_flag                            = edmp_invasion_permission_title_16
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_17 }
+				has_flag                            = edmp_invasion_permission_title_17
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_18 }
+				has_flag                            = edmp_invasion_permission_title_18
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_19 }
+				has_flag                            = edmp_invasion_permission_title_19
+			}
+			AND = {
+				ROOT = { has_character_modifier = edmp_invasion_permission_character_20 }
+				has_flag                            = edmp_invasion_permission_title_20
+			}
+		}
+	}
+}

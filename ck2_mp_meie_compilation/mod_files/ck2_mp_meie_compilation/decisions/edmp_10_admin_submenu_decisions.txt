@@ -1,0 +1,42 @@
+decisions = {
+	
+	edmp_admin_submenu_open = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			edmp_another_mod_wants_to_suppress_this_decision = no
+			NOT = { has_character_flag = edmp_admin_submenu_is_open }
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { set_character_flag = edmp_admin_submenu_is_open }
+		}
+	}
+	edmp_admin_submenu_close_high_prio = {
+		ai = no
+		is_high_prio = yes
+		potential = {
+			OR = {
+				edmp_this_character_can_see_admin_helper_actions = no
+				always = no # Currently not needed in any other situations
+			}
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { clr_character_flag = edmp_admin_submenu_is_open }
+		}
+	}
+	edmp_admin_submenu_close_low_prio = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			edmp_currently_running_a_mod_which_has_its_own_close_submenu_button_supporting_edmp = no
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { clr_character_flag = edmp_admin_submenu_is_open }
+		}
+	}
+}

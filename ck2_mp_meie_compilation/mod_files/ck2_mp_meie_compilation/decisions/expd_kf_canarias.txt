@@ -1,0 +1,40 @@
+decisions = {
+	expd_kf_create_canarias = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+		
+		potential = {
+			d_canarias_expd_df = {
+				k_canarias_expd_kf = {
+					expd_kf_root_can_see_decision_to_create_this_kingdom_from_prev_single_duchy = yes
+				}
+			}
+		}
+		
+		allow = {
+			d_canarias_expd_df = {
+				show_scope_change = no
+				k_canarias_expd_kf = {
+					show_scope_change = no
+					expd_kf_root_can_take_decision_to_create_this_kingdom_from_prev_single_duchy = yes
+				}
+			}
+		}
+		
+		effect = {
+			d_canarias_expd_df = {
+				show_scope_change = no
+				k_canarias_expd_kf = {
+					show_scope_change = no
+					expd_kf_create_this_kingdom_from_prev_single_duchy_and_grant_to_root = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+	}
+}

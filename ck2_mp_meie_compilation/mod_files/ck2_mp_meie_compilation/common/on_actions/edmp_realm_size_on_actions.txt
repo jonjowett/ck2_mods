@@ -1,0 +1,11 @@
+# Automatically calculate realm size modifiers for human players and absentees
+on_startup = {
+	events = {
+		EDMPRealmSize.1000
+	}
+}
+on_yearly_pulse = {
+	events = {
+		EDMPRealmSize.1100
+	}
+}

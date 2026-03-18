@@ -1,0 +1,661 @@
+targetted_decisions = {
+	# All "targeted liege" prisoner-related decisions are available to the player only, because the only "filter" which fits is "all", and this is flagged as "very CPU heavy" (but that probably only applies if the AI does it)
+	
+	
+	
+	
+	
+	#############################
+	# Single prisoner execution #
+	#############################
+	
+	expd_pris_targeted_execution_single_prisoner_from_this_liege = {
+		# Executes a selected prisoner that belongs in targeted landed character's court
+		
+		only_playable = yes
+		ai = no
+		
+		filter = all_including_me
+		third_party_filter = court
+		
+		ai_target_filter = none
+		ai_third_party_filter = none
+		ai_check_interval = 999
+		
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			FROM = {
+				any_courtier = {
+					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+					OR = {
+						has_character_modifier = house_arrest
+						has_character_modifier = the_dungeon
+						has_character_modifier = the_oubliette
+					}
+				}
+			}
+		}
+		third_party_potential = {
+			FROMFROM = { expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes }
+		}
+		allow = {
+			FROM = {
+				expd_pris_this_executioner_does_not_need_council_permission = yes
+				custom_tooltip = {
+					text = EXPD_PRIS_TOOLTIP_TARGETED_LIEGE_PRISONER_DECISIONS_NOT_BLOCKED_ON_FROM
+					NOT = { has_character_flag = expd_pris_targeted_liege_prisoner_decisions_blocked }
+				}
+			}
+		}
+		effect = {
+			
+			# Add tooltip warnings about bad consequences of the execution
+			if = {
+				limit = {
+					ROOT_FROMFROM = {
+						expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+						expd_pris_from_gains_tyranny_due_to_executing_this = yes
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_GAIN_TYRANNY_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					ROOT_FROMFROM = {
+						expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+						expd_pris_from_gains_kinslayer_due_to_executing_this = yes
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_GAIN_KINSLAYER_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					ROOT_FROMFROM = {
+						expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+						expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_LOSE_FOREIGN_OPINION_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					ROOT_FROMFROM = {
+						expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+						expd_pris_from_loses_piety_due_to_executing_this = yes
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_LOSE_PIETY_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					ROOT_FROMFROM = {
+						expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+						OR = {
+							expd_pris_from_gains_tyranny_due_to_executing_this = yes
+							expd_pris_from_gains_kinslayer_due_to_executing_this = yes
+							expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes
+							expd_pris_from_loses_piety_due_to_executing_this = yes
+						}
+							
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_BLANK_LINE }
+			}
+			
+			# Perform the execution
+			FROM = {
+				show_scope_change = no
+				hidden_tooltip = { expd_pris_choose_mass_execution_method = yes }
+				ROOT_FROMFROM = {
+					custom_tooltip = {
+						text = EXPD_PRIS_TOOLTIP_THIS_PRISONER_IS_EXECUTED_IN_MASS_EXECUTION
+						expd_pris_from_executes_this_prisoner_in_mass_execution = yes
+					}
+				}
+				hidden_tooltip = { expd_pris_clear_mass_execution_method = yes }
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	###########################
+	# Mass prisoner execution #
+	###########################
+	
+	expd_pris_targeted_execution_all_prisoners_from_this_liege = {
+		# Execute ALL prisoners that belong in the targeted landed character's court
+		
+		only_playable = yes
+		ai = no
+		
+		filter = all_including_me
+		
+		ai_target_filter = none
+		ai_third_party_filter = none
+		ai_check_interval = 999
+		
+		from_potential = {
+			ai = no
+		}
+		
+		potential = {
+			FROM = {
+				any_courtier = {
+					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+					OR = {
+						has_character_modifier = house_arrest
+						has_character_modifier = the_dungeon
+						has_character_modifier = the_oubliette
+					}
+				}
+			}
+		}
+		
+		allow = {
+			FROM = {
+				expd_pris_this_executioner_does_not_need_council_permission = yes
+				custom_tooltip = {
+					text = EXPD_PRIS_TOOLTIP_TARGETED_LIEGE_PRISONER_DECISIONS_NOT_BLOCKED_ON_FROM
+					NOT = { has_character_flag = expd_pris_targeted_liege_prisoner_decisions_blocked }
+				}
+			}
+		}
+		
+		effect = {
+			
+			# Add tooltip warnings about bad consequences of the mass execution
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							expd_pris_from_gains_tyranny_due_to_executing_this = yes
+							OR = {
+								has_character_modifier = house_arrest
+								has_character_modifier = the_dungeon
+								has_character_modifier = the_oubliette
+							}
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_GAIN_TYRANNY_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							expd_pris_from_gains_kinslayer_due_to_executing_this = yes
+							OR = {
+								has_character_modifier = house_arrest
+								has_character_modifier = the_dungeon
+								has_character_modifier = the_oubliette
+							}
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_GAIN_KINSLAYER_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes
+							OR = {
+								has_character_modifier = house_arrest
+								has_character_modifier = the_dungeon
+								has_character_modifier = the_oubliette
+							}
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_LOSE_FOREIGN_OPINION_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							expd_pris_from_loses_piety_due_to_executing_this = yes
+							OR = {
+								has_character_modifier = house_arrest
+								has_character_modifier = the_dungeon
+								has_character_modifier = the_oubliette
+							}
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_LOSE_PIETY_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							OR = {
+								has_character_modifier = house_arrest
+								has_character_modifier = the_dungeon
+								has_character_modifier = the_oubliette
+							}
+							OR = {
+								expd_pris_from_gains_tyranny_due_to_executing_this = yes
+								expd_pris_from_gains_kinslayer_due_to_executing_this = yes
+								expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes
+								expd_pris_from_loses_piety_due_to_executing_this = yes
+							}
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_BLANK_LINE }
+			}
+				
+			# Perform the mass execution
+			FROM = {
+				show_scope_change = no
+				hidden_tooltip = { expd_pris_choose_mass_execution_method = yes }
+				any_courtier = {
+					limit = {
+						expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+						OR = {
+							has_character_modifier = house_arrest
+							has_character_modifier = the_dungeon
+							has_character_modifier = the_oubliette
+						}
+					}
+					custom_tooltip = {
+						text = EXPD_PRIS_TOOLTIP_THIS_PRISONER_IS_EXECUTED_IN_MASS_EXECUTION
+						expd_pris_from_executes_this_prisoner_in_mass_execution = yes
+					}
+				}
+				hidden_tooltip = { expd_pris_clear_mass_execution_method = yes }
+			}
+		}
+	}
+	
+	expd_pris_targeted_execution_all_house_arrested_prisoners_from_this_liege = {
+		# Execute ALL house-arrested prisoners that belong in the targeted landed character's court
+		
+		only_playable = yes
+		ai = no
+		
+		filter = all_including_me
+		
+		ai_target_filter = none
+		ai_third_party_filter = none
+		ai_check_interval = 999
+		
+		from_potential = {
+			ai = no
+		}
+		
+		potential = {
+			FROM = {
+				any_courtier = {
+					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+					has_character_modifier = house_arrest
+				}
+				any_courtier = {
+					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+					NOT = { has_character_modifier = house_arrest }
+				}
+			}
+		}
+		
+		allow = {
+			FROM = {
+				expd_pris_this_executioner_does_not_need_council_permission = yes
+				custom_tooltip = {
+					text = EXPD_PRIS_TOOLTIP_TARGETED_LIEGE_PRISONER_DECISIONS_NOT_BLOCKED_ON_FROM
+					NOT = { has_character_flag = expd_pris_targeted_liege_prisoner_decisions_blocked }
+				}
+			}
+		}
+		
+		effect = {
+			# Add tooltip warnings about bad consequences of the mass execution
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = house_arrest
+							expd_pris_from_gains_tyranny_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_GAIN_TYRANNY_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = house_arrest
+							expd_pris_from_gains_kinslayer_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_GAIN_KINSLAYER_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = house_arrest
+							expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_LOSE_FOREIGN_OPINION_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = house_arrest
+							expd_pris_from_loses_piety_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_LOSE_PIETY_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = house_arrest
+							OR = {
+								expd_pris_from_gains_tyranny_due_to_executing_this = yes
+								expd_pris_from_gains_kinslayer_due_to_executing_this = yes
+								expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes
+								expd_pris_from_loses_piety_due_to_executing_this = yes
+							}
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_BLANK_LINE }
+			}
+			
+			# Perform the mass execution
+			FROM = {
+				show_scope_change = no
+				hidden_tooltip = { expd_pris_choose_mass_execution_method = yes }
+				any_courtier = {
+					limit = {
+						expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+						has_character_modifier = house_arrest
+					}
+					custom_tooltip = {
+						text = EXPD_PRIS_TOOLTIP_THIS_PRISONER_IS_EXECUTED_IN_MASS_EXECUTION
+						expd_pris_from_executes_this_prisoner_in_mass_execution = yes
+					}
+				}
+				hidden_tooltip = { expd_pris_clear_mass_execution_method = yes }
+			}
+		}
+	}
+	
+	expd_pris_targeted_execution_all_dungeon_prisoners_from_this_liege = {
+		# Execute ALL prisoners in the dungeon that belong in the targeted landed character's court
+		
+		only_playable = yes
+		ai = no
+		
+		filter = all_including_me
+		
+		ai_target_filter = none
+		ai_third_party_filter = none
+		ai_check_interval = 999
+		
+		from_potential = {
+			ai = no
+		}
+		
+		potential = {
+			FROM = {
+				any_courtier = {
+					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+					has_character_modifier = the_dungeon
+				}
+				any_courtier = {
+					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+					NOT = { has_character_modifier = the_dungeon }
+				}
+			}
+		}
+		
+		allow = {
+			FROM = {
+				expd_pris_this_executioner_does_not_need_council_permission = yes
+				custom_tooltip = {
+					text = EXPD_PRIS_TOOLTIP_TARGETED_LIEGE_PRISONER_DECISIONS_NOT_BLOCKED_ON_FROM
+					NOT = { has_character_flag = expd_pris_targeted_liege_prisoner_decisions_blocked }
+				}
+			}
+		}
+		
+		effect = {
+			
+			# Add tooltip warnings about bad consequences of the mass execution
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = the_dungeon
+							expd_pris_from_gains_tyranny_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_GAIN_TYRANNY_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = the_dungeon
+							expd_pris_from_gains_kinslayer_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_GAIN_KINSLAYER_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = the_dungeon
+							expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_LOSE_FOREIGN_OPINION_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = the_dungeon
+							expd_pris_from_loses_piety_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_LOSE_PIETY_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = the_dungeon
+							OR = {
+								expd_pris_from_gains_tyranny_due_to_executing_this = yes
+								expd_pris_from_gains_kinslayer_due_to_executing_this = yes
+								expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes
+								expd_pris_from_loses_piety_due_to_executing_this = yes
+							}
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_BLANK_LINE }
+			}
+			
+			# Perform the mass execution
+			FROM = {
+				show_scope_change = no
+				hidden_tooltip = { expd_pris_choose_mass_execution_method = yes }
+				any_courtier = {
+					limit = {
+						expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+						has_character_modifier = the_dungeon
+					}
+					custom_tooltip = {
+						text = EXPD_PRIS_TOOLTIP_THIS_PRISONER_IS_EXECUTED_IN_MASS_EXECUTION
+						expd_pris_from_executes_this_prisoner_in_mass_execution = yes
+					}
+				}
+				hidden_tooltip = { expd_pris_clear_mass_execution_method = yes }
+			}
+		}
+	}
+	
+	expd_pris_targeted_execution_all_oublietted_prisoners_from_this_liege = {
+		# Execute ALL oublietted prisoners that belong in the targeted landed character's court
+		
+		only_playable = yes
+		ai = no
+		
+		filter = all_including_me
+		
+		ai_target_filter = none
+		ai_third_party_filter = none
+		ai_check_interval = 999
+		
+		from_potential = {
+			ai = no
+		}
+		
+		potential = {
+			FROM = {
+				any_courtier = {
+					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+					has_character_modifier = the_oubliette
+				}
+				any_courtier = {
+					expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+					NOT = { has_character_modifier = the_oubliette }
+				}
+			}
+		}
+		
+		allow = {
+			FROM = {
+				expd_pris_this_executioner_does_not_need_council_permission = yes
+				custom_tooltip = {
+					text = EXPD_PRIS_TOOLTIP_TARGETED_LIEGE_PRISONER_DECISIONS_NOT_BLOCKED_ON_FROM
+					NOT = { has_character_flag = expd_pris_targeted_liege_prisoner_decisions_blocked }
+				}
+			}
+		}
+		
+		effect = {
+			
+			# Add tooltip warnings about bad consequences of the mass execution
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = the_oubliette
+							expd_pris_from_gains_tyranny_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_GAIN_TYRANNY_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = the_oubliette
+							expd_pris_from_gains_kinslayer_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_GAIN_KINSLAYER_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = the_oubliette
+							expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_LOSE_FOREIGN_OPINION_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = the_oubliette
+							expd_pris_from_loses_piety_due_to_executing_this = yes
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_FROM_WILL_LOSE_PIETY_DUE_TO_MASS_EXECUTION }
+			}
+			if = {
+				limit = {
+					FROM = {
+						any_courtier = {
+							expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+							has_character_modifier = the_oubliette
+							OR = {
+								expd_pris_from_gains_tyranny_due_to_executing_this = yes
+								expd_pris_from_gains_kinslayer_due_to_executing_this = yes
+								expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes
+								expd_pris_from_loses_piety_due_to_executing_this = yes
+							}
+						}
+					}
+				}
+				custom_tooltip = { text = EXPD_PRIS_TOOLTIP_BLANK_LINE }
+			}
+			
+			# Perform the mass execution
+			FROM = {
+				show_scope_change = no
+				hidden_tooltip = { expd_pris_choose_mass_execution_method = yes }
+				any_courtier = {
+					limit = {
+						expd_pris_is_unlanded_prisoner_of_from_and_belongs_in_roots_court = yes
+						has_character_modifier = the_oubliette
+					}
+					custom_tooltip = {
+						text = EXPD_PRIS_TOOLTIP_THIS_PRISONER_IS_EXECUTED_IN_MASS_EXECUTION
+						expd_pris_from_executes_this_prisoner_in_mass_execution = yes
+					}
+				}
+				hidden_tooltip = { expd_pris_clear_mass_execution_method = yes }
+			}
+		}
+	}
+	
+}

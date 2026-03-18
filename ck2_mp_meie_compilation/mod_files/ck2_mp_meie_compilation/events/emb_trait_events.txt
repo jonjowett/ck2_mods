@@ -1,0 +1,1360 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = EMBTraits
+
+# Numbering convention for events in this file:
+#  --- x00 = Initial event called by a relevant on_action
+#  --- x10 = Random choice whether to apply the trait
+#  --- x20 = Apply the trait
+#
+# Traits included:
+#  --- 1xx = Homosexual
+#  --- 2xx = Lustful
+#  --- 3xx = Shieldmaiden
+#  --- 4xx = Education upgrade
+
+
+
+
+
+###############################
+#                             #
+#        HOMOSEXUALITY        #
+#                             #
+###############################
+
+# Certain bloodlines can cause an additional chance of becoming homosexual during adolescence.
+# This event is designed to be triggered on_adolescence, ie. once at exactly 12 years old.
+
+character_event = {
+	id = EMBTraits.100
+	hide_window = yes
+	is_triggered_only = yes
+	has_dlc = "Holy Fury"
+	trigger = {
+		OR = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = ROOT
+				has_bloodline_flag = emb_bloodline_effect_flag_homosexual_mf
+			}
+			AND = {
+				is_female = no
+				any_owned_bloodline = {
+					bloodline_is_active_for = ROOT
+					has_bloodline_flag = emb_bloodline_effect_flag_homosexual_m
+				}
+			}
+			AND = {
+				is_female = yes
+				any_owned_bloodline = {
+					bloodline_is_active_for = ROOT
+					has_bloodline_flag = emb_bloodline_effect_flag_homosexual_f
+				}
+			}
+		}
+	}
+	immediate = {
+		# Check back when the child is 13 or 14
+		character_event = { id = EMBTraits.110 days = 365 random = 730 }
+	}
+}
+
+character_event = {
+	id = EMBTraits.110
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		# If the character is already homosexual, we can skip this
+		NOT = { trait = homosexual }
+	}
+	immediate = {
+		random_list = {
+			10 = {
+				# Fixed 10% chance of becoming homosexual
+				character_event = { id = EMBTraits.120 }
+			}
+			90 = {
+				# No effect
+			}
+		}
+	}
+}
+
+character_event = { # TODO: Add flavour text / ping events / etc
+	id = EMBTraits.120
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		add_trait = homosexual
+	}
+}
+
+
+
+
+
+###############################
+#                             #
+#            LUST             #
+#                             #
+###############################
+
+# Certain bloodlines can cause an additional chance of becoming lustful during adolescence.
+# This event is designed to be triggered on_adolescence, ie. once at exactly 12 years old.
+
+character_event = {
+	id = EMBTraits.200
+	hide_window = yes
+	is_triggered_only = yes
+	has_dlc = "Holy Fury"
+	trigger = {
+		OR = {
+			any_owned_bloodline = {
+				bloodline_is_active_for = ROOT
+				has_bloodline_flag = emb_bloodline_effect_flag_lustful_mf
+			}
+			AND = {
+				is_female = no
+				any_owned_bloodline = {
+					bloodline_is_active_for = ROOT
+					has_bloodline_flag = emb_bloodline_effect_flag_lustful_m
+				}
+			}
+			AND = {
+				is_female = yes
+				any_owned_bloodline = {
+					bloodline_is_active_for = ROOT
+					has_bloodline_flag = emb_bloodline_effect_flag_lustful_f
+				}
+			}
+		}
+	}
+	immediate = {
+		# Check back when the child is 15.25-15.75 (so that most/all other education changes have had a chance to have an effect)
+		character_event = { id = EMBTraits.210 days = 1186 random = 180 }
+	}
+}
+
+character_event = {
+	id = EMBTraits.210
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		# If the character is already lustful, we can skip all this
+		NOT = { trait = lustful }
+	}
+	immediate = {
+		random_list = {
+			80 = {
+				# No effect
+			}
+			20 = {
+				# 20% base chance of becoming lustful, influenced by educator's & parents' traits
+				mult_modifier = {
+					factor = 4
+					OR = {
+						AND = {
+							has_dlc = "Zeus"
+							educator = {
+								OR = {
+									trait = lustful
+									trait = seducer
+									trait = seductress
+								}
+							}
+						}
+						AND = {
+							NOT = { has_dlc = "Zeus" }
+							guardian = {
+								OR = {
+									trait = lustful
+									trait = seducer
+									trait = seductress
+								}
+							}
+						}
+					}
+				}
+				mult_modifier = {
+					factor = 0.25
+					OR = {
+						AND = {
+							has_dlc = "Zeus"
+							educator = {
+								OR = {
+									trait = chaste
+									trait = celibate
+								}
+							}
+						}
+						AND = {
+							NOT = { has_dlc = "Zeus" }
+							guardian = {
+								OR = {
+									trait = chaste
+									trait = celibate
+								}
+							}
+						}
+					}
+				}
+				mult_modifier = {
+					factor = 2
+					father_even_if_dead = {
+						OR = {
+							trait = lustful
+							trait = seducer
+						}
+					}
+				}
+				mult_modifier = {
+					factor = 0.5
+					father_even_if_dead = {
+						OR = {
+							trait = chaste
+							trait = celibate
+						}
+					}
+				}
+				mult_modifier = {
+					factor = 2
+					mother_even_if_dead = {
+						OR = {
+							trait = lustful
+							trait = seductress
+						}
+					}
+				}
+				mult_modifier = {
+					factor = 0.5
+					mother_even_if_dead = {
+						OR = {
+							trait = chaste
+							trait = celibate
+						}
+					}
+				}
+				character_event = { id = EMBTraits.220 }
+			}
+		}
+	}
+}
+
+character_event = { # TODO: Add flavour text / ping events / etc
+	id = EMBTraits.220
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		add_trait = lustful
+	}
+}
+
+
+
+
+
+###############################
+#                             #
+#        SHIELDMAIDEN         #
+#                             #
+###############################
+
+# Certain bloodlines can cause an additional chance of becoming a shieldmaiden in early adulthood.
+# This event is designed to be triggered on_adulthood, ie. once at exactly 16 years old.
+
+character_event = {
+	id = EMBTraits.300
+	hide_window = yes
+	is_triggered_only = yes
+	has_dlc = "Holy Fury"
+	only_women = yes
+	trigger = {
+		any_owned_bloodline = {
+			bloodline_is_active_for = ROOT
+			has_bloodline_flag = emb_bloodline_effect_flag_shieldmaiden_f
+		}
+	}
+	immediate = {
+		# Check back sometime in the next year (so that any education cleanup events have definitely finished)
+		character_event = { id = EMBTraits.310 days = 90 random = 180 }
+	}
+}
+
+character_event = {
+	id = EMBTraits.310
+	hide_window = yes
+	is_triggered_only = yes
+	only_women = yes
+	immediate = {
+		if = {
+			limit = { trait = shieldmaiden }
+			# Character has already acquired the shieldmaiden trait somehow - there's nothing further to do!
+			# If necessary, clean up the deferral tracking variable:
+			if = {
+				limit = { check_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value > 0 } }
+				set_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value = 0 }
+			}
+		}
+		else = {
+			if = {
+				limit = { is_ill = yes }
+				if = {
+					limit = { check_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value == 0 } }
+					set_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value = 0 }
+				}
+				if = {
+					limit = { check_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value <= 5 } }
+					# Check back in another 180 days
+					# (We don't want to trigger the shieldmaiden event while the character is ill and might recover, because the weightings will be affected)
+					change_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value = 1 }
+					character_event = { id = EMBTraits.310 days = 180 }
+				}
+				else = {
+					# Character has been ill for 3 years and doesn't seem to be recovering, so force the event to occur anyway
+					# (IE: The event will definitely occur before age 19)
+					set_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value = 0 } # Cleanup the variable
+					character_event = { id = EMBTraits.311 }
+				}
+			}
+			else = {
+				# Character is not ill, continue to the main event
+				character_event = { id = EMBTraits.311 }
+				# If necessary, clean up the deferral tracking variable:
+				if = {
+					limit = { check_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value > 0 } }
+					set_variable = { which = emb_shieldmaiden_deferrals_due_to_illness value = 0 }
+				}
+			}
+		}
+	}
+}
+
+character_event = {
+	id = EMBTraits.311
+	hide_window = yes
+	is_triggered_only = yes
+	only_women = yes
+	immediate = {
+		random_list = {
+			80 = {
+				# No effect
+			}
+			20 = {
+				
+				# Martial stat has a large impact
+				mult_modifier = {
+					factor = 0.1
+					martial < 2
+				}
+				mult_modifier = {
+					factor = 0.2
+					martial < 4
+				}
+				mult_modifier = {
+					factor = 0.3
+					martial < 6
+				}
+				mult_modifier = {
+					factor = 0.4
+					martial < 8
+				}
+				mult_modifier = {
+					factor = 0.5
+					martial < 10
+				}
+				mult_modifier = {
+					factor = 1.1
+					martial >= 12
+				}
+				mult_modifier = {
+					factor = 1.1
+					martial >= 16
+				}
+				mult_modifier = {
+					factor = 1.25
+					martial >= 20
+				}
+				mult_modifier = {
+					factor = 1.25
+					martial >= 24
+				}
+				mult_modifier = {
+					factor = 1.5
+					martial >= 28
+				}
+				mult_modifier = {
+					factor = 1.5
+					martial >= 32
+				}
+				
+				# High PCS has a medium positive impact, low PCS has a large negative impact
+				mult_modifier = {
+					factor = 0.1
+					combat_rating < -10
+				}
+				mult_modifier = {
+					factor = 0.1
+					combat_rating < 0
+				}
+				mult_modifier = {
+					factor = 0.5
+					combat_rating < 10
+				}
+				mult_modifier = {
+					factor = 1.1
+					combat_rating >= 20
+				}
+				mult_modifier = {
+					factor = 1.1
+					combat_rating >= 30
+				}
+				mult_modifier = {
+					factor = 1.25
+					combat_rating >= 40
+				}
+				mult_modifier = {
+					factor = 1.25
+					combat_rating >= 50
+				}
+				
+				# Mother, grandmother and great-grandmothers who were shieldmaidens causes a small positive impact
+				mult_modifier = {
+					factor = 1.1
+					mother_even_if_dead = { trait = shieldmaiden }
+				}
+				mult_modifier = {
+					factor = 1.1
+					OR = {
+						mother_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } }
+						father_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } }
+					}
+				}
+				mult_modifier = {
+					factor = 1.1
+					OR = {
+						mother_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } } }
+						mother_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } } }
+						father_even_if_dead = { mother_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } } }
+						father_even_if_dead = { father_even_if_dead = { mother_even_if_dead = { trait = shieldmaiden } } }
+					}
+				}
+				
+				# Personal traits have a major impact
+				mult_modifier = {
+					factor = 0.1
+					trait = craven
+				}
+				mult_modifier = {
+					factor = 4
+					trait = brave
+				}
+				mult_modifier = {
+					factor = 0.1
+					is_weak_trigger = yes
+				}
+				mult_modifier = {
+					factor = 4
+					is_strong_trigger = yes
+				}
+				mult_modifier = {
+					factor = 0.5
+					has_education_martial_trigger = no
+				}
+				mult_modifier = {
+					factor = 1.5
+					trait = tough_soldier
+				}
+				mult_modifier = {
+					factor = 2
+					trait = skilled_tactician
+				}
+				mult_modifier = {
+					factor = 4
+					trait = brilliant_strategist
+				}
+				
+				# Disabilities have a major negative impact
+				mult_modifier = {
+					factor = 0
+					has_severe_disability_trigger = yes
+				}
+				mult_modifier = {
+					factor = 0.1
+					has_medium_disability_trigger = yes
+				}
+				
+				# Low health has a major negative impact
+				mult_modifier = {
+					factor = 0
+					health < 2
+				}
+				mult_modifier = {
+					factor = 0.1
+					health < 3
+				}
+				mult_modifier = {
+					factor = 0.25
+					health < 4
+				}
+				
+				character_event = { id = EMBTraits.320 }
+			}
+		}
+	}
+}
+
+character_event = { # TODO: Add flavour text / ping events / etc
+	id = EMBTraits.320
+	hide_window = yes
+	is_triggered_only = yes
+	only_women = yes
+	immediate = {
+		add_trait = shieldmaiden
+	}
+}
+
+
+
+
+
+###############################
+#                             #
+#         EDUCATION           #
+#                             #
+###############################
+
+# On adulthood, a bloodline may grant improvement in education.
+# However, it's not a good idea to do the check immediately on adulthood, as the education trait might not have been granted yet (or might be changed by other events).
+#  --- So, do the "real" check a few days later.
+
+character_event = {
+	id = EMBTraits.400
+	hide_window = yes
+	is_triggered_only = yes
+	has_dlc = "Holy Fury"
+	trigger = {
+		any_owned_bloodline = {
+			OR = {
+				bloodline_is_active_for = ROOT
+				has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+			}
+			OR = {
+				has_bloodline_flag = emb_bloodline_effect_education_upgrade_all
+				has_bloodline_flag = emb_bloodline_effect_education_upgrade_diplomacy
+				has_bloodline_flag = emb_bloodline_effect_education_upgrade_martial
+				has_bloodline_flag = emb_bloodline_effect_education_upgrade_stewardship
+				has_bloodline_flag = emb_bloodline_effect_education_upgrade_intrigue
+				has_bloodline_flag = emb_bloodline_effect_education_upgrade_learning
+			}
+		}
+		is_dumb_trigger = no # Dumb kids never get the upgrade
+	}
+	immediate = {
+		# Check back sometime in the next year (so that any education cleanup events have definitely finished)
+		guardian = { save_event_target_as = emb_education_upgrade_childs_guardian }
+		character_event = { id = EMBTraits.410 days = 90 random = 180 }
+		character_event = { id = EMBTraits.499 days = 275 } # Always at least 5 days after the main event was triggered (on the previous line)
+	}
+}
+
+# Check whether the character has the relevant combination of education and bloodline flag
+# If yes, trigger the visible upgrade event
+character_event = {
+	id = EMBTraits.410
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = {
+				any_owned_bloodline = {
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
+					has_bloodline_flag = emb_bloodline_effect_education_upgrade_all
+				}
+			}
+			if = {
+				limit = { has_education_diplomacy_trigger = yes }
+				set_character_flag = emb_education_upgrade_diplomacy
+			}
+			else_if = {
+				limit = { has_education_martial_trigger = yes }
+				set_character_flag = emb_education_upgrade_martial
+			}
+			else_if = {
+				limit = { has_education_stewardship_trigger = yes }
+				set_character_flag = emb_education_upgrade_stewardship
+			}
+			else_if = {
+				limit = { has_education_intrigue_trigger = yes }
+				set_character_flag = emb_education_upgrade_intrigue
+			}
+			else_if = {
+				limit = { has_education_learning_trigger = yes }
+				set_character_flag = emb_education_upgrade_learning
+			}
+			else = {
+				set_character_flag = emb_education_upgrade_fallback
+			}
+			if = {
+				limit = {
+					OR = {
+						has_character_flag = emb_education_upgrade_diplomacy
+						has_character_flag = emb_education_upgrade_martial
+						has_character_flag = emb_education_upgrade_stewardship
+						has_character_flag = emb_education_upgrade_intrigue
+						has_character_flag = emb_education_upgrade_learning
+					}
+				}
+				set_character_flag = emb_education_upgrade
+				set_character_flag = emb_education_upgrade_all
+				random_owned_bloodline = {
+					limit = {
+						OR = {
+							bloodline_is_active_for = ROOT
+							has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+						}
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_all
+					}
+					founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_education_diplomacy_trigger = yes
+				any_owned_bloodline = {
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
+					has_bloodline_flag = emb_bloodline_effect_education_upgrade_diplomacy
+				}
+			}
+			set_character_flag = emb_education_upgrade
+			set_character_flag = emb_education_upgrade_diplomacy
+			random_owned_bloodline = {
+				limit = {
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
+					has_bloodline_flag = emb_bloodline_effect_education_upgrade_diplomacy
+				}
+				founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }
+			}
+		}
+		else_if = {
+			limit = {
+				has_education_martial_trigger = yes
+				any_owned_bloodline = {
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
+					has_bloodline_flag = emb_bloodline_effect_education_upgrade_martial
+				}
+			}
+			set_character_flag = emb_education_upgrade
+			set_character_flag = emb_education_upgrade_martial
+			random_owned_bloodline = {
+				limit = {
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
+					has_bloodline_flag = emb_bloodline_effect_education_upgrade_martial
+				}
+				founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }
+			}
+		}
+		else_if = {
+			limit = {
+				has_education_stewardship_trigger = yes
+				any_owned_bloodline = {
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
+					has_bloodline_flag = emb_bloodline_effect_education_upgrade_stewardship
+				}
+			}
+			set_character_flag = emb_education_upgrade
+			set_character_flag = emb_education_upgrade_stewardship
+			random_owned_bloodline = {
+				limit = {
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
+					has_bloodline_flag = emb_bloodline_effect_education_upgrade_stewardship
+				}
+				founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }
+			}
+		}
+		else_if = {
+			limit = {
+				has_education_intrigue_trigger = yes
+				any_owned_bloodline = {
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
+					has_bloodline_flag = emb_bloodline_effect_education_upgrade_intrigue
+				}
+			}
+			set_character_flag = emb_education_upgrade
+			set_character_flag = emb_education_upgrade_intrigue
+			random_owned_bloodline = {
+				limit = {
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
+					has_bloodline_flag = emb_bloodline_effect_education_upgrade_intrigue
+				}
+				founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }
+			}
+		}
+		else_if = {
+			limit = {
+				has_education_learning_trigger = yes
+				any_owned_bloodline = {
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
+					has_bloodline_flag = emb_bloodline_effect_education_upgrade_learning
+				}
+			}
+			set_character_flag = emb_education_upgrade
+			set_character_flag = emb_education_upgrade_learning
+			random_owned_bloodline = {
+				limit = {
+					OR = {
+						bloodline_is_active_for = ROOT
+						has_bloodline_flag = emb_bloodline_effect_education_upgrade_even_when_inactive
+					}
+					has_bloodline_flag = emb_bloodline_effect_education_upgrade_learning
+				}
+				founder = { save_event_target_as = emb_education_upgrade_childs_bloodline_founder }
+			}
+		}
+		else = {
+			# Character does NOT have an education trait which matches their bloodline - do nothing
+		}
+		
+		# Only trigger the education upgrade event for characters who qualify
+		if = {
+			limit = { has_character_flag = emb_education_upgrade }
+			character_event = { id = EMBTraits.420 }
+		}
+		
+		# Always trigger the cleanup event
+		character_event = { id = EMBTraits.499 days = 1 }
+		
+	}
+}
+
+character_event = {
+	id = EMBTraits.420
+	
+	is_triggered_only = yes
+	portrait = event_target:emb_education_upgrade_childs_bloodline_founder
+	
+	title = EMBTraits420_Title
+	
+	# Event description may vary considerably, depending on type of bloodline and type of education
+	desc = {
+		trigger = { has_character_flag = emb_education_upgrade_all }
+		text = EMBTraits420_Desc_All
+	}
+	desc = {
+		trigger = {
+			NOT = { has_character_flag = emb_education_upgrade_all }
+			has_character_flag = emb_education_upgrade_diplomacy
+		}
+		text = EMBTraits420_Desc_Diplomacy
+	}
+	desc = {
+		trigger = {
+			NOT = { has_character_flag = emb_education_upgrade_all }
+			has_character_flag = emb_education_upgrade_martial
+		}
+		text = EMBTraits420_Desc_Martial
+	}
+	desc = {
+		trigger = {
+			NOT = { has_character_flag = emb_education_upgrade_all }
+			has_character_flag = emb_education_upgrade_stewardship
+		}
+		text = EMBTraits420_Desc_Stewardship
+	}
+	desc = {
+		trigger = {
+			NOT = { has_character_flag = emb_education_upgrade_all }
+			has_character_flag = emb_education_upgrade_intrigue
+		}
+		text = EMBTraits420_Desc_Intrigue
+	}
+	desc = {
+		trigger = {
+			NOT = { has_character_flag = emb_education_upgrade_all }
+			has_character_flag = emb_education_upgrade_learning
+		}
+		text = EMBTraits420_Desc_Learning
+	}
+	
+	# Show a different picture depending on the child's education
+	picture = {
+		trigger = { has_character_flag = emb_education_upgrade_diplomacy }
+		picture = GFX_evt_china_diplomatic_incident
+	}
+	picture = {
+		trigger = { has_character_flag = emb_education_upgrade_martial }
+		picture = GFX_evt_teaching_moment
+	}
+	picture = {
+		trigger = { has_character_flag = emb_education_upgrade_stewardship }
+		picture = GFX_evt_state_diplomacy
+	}
+	picture = {
+		trigger = { has_character_flag = emb_education_upgrade_intrigue }
+		picture = GFX_evt_eavesdropping
+	}
+	picture = {
+		trigger = { has_character_flag = emb_education_upgrade_learning }
+		picture = GFX_evt_library
+	}
+	
+	# Fizzle if the flags were not set up correctly by the previous event (to avoid having to do fallbacks for everything)
+	trigger = {
+		has_character_flag = emb_education_upgrade
+		OR = {
+			has_character_flag = emb_education_upgrade_diplomacy
+			has_character_flag = emb_education_upgrade_martial
+			has_character_flag = emb_education_upgrade_stewardship
+			has_character_flag = emb_education_upgrade_intrigue
+			has_character_flag = emb_education_upgrade_learning
+		}
+	}
+	
+	option = {
+		
+		name = EMBTraits420_Option_UpgradeEducation
+		
+		trigger = {
+			NOR = {
+				trait = grey_eminence
+				trait = brilliant_strategist
+				trait = midas_touched
+				trait = elusive_shadow
+				trait = mastermind_theologian
+			}
+		}
+		
+		# Use the vanilla scripted_effect to upgrade the child's education
+		upgrade_education_effect = yes
+		
+		hidden_tooltip = { set_character_flag = emb_education_upgrade_performed }
+		
+	}
+	
+	option = {
+		name = EMBTraits420_Option_EducationAlreadyMaxed
+		trigger = { trait = grey_eminence }
+		change_diplomacy = 2
+		show_trait = grey_eminence
+		hidden_tooltip = { set_character_flag = emb_education_upgrade_not_performed_already_at_max }
+	}
+	
+	option = {
+		name = EMBTraits420_Option_EducationAlreadyMaxed
+		trigger = { trait = brilliant_strategist }
+		change_martial = 2
+		show_trait = brilliant_strategist
+		hidden_tooltip = { set_character_flag = emb_education_upgrade_not_performed_already_at_max }
+	}
+	
+	option = {
+		name = EMBTraits420_Option_EducationAlreadyMaxed
+		trigger = { trait = midas_touched }
+		change_stewardship = 2
+		show_trait = midas_touched
+		hidden_tooltip = { set_character_flag = emb_education_upgrade_not_performed_already_at_max }
+	}
+	
+	option = {
+		name = EMBTraits420_Option_EducationAlreadyMaxed
+		trigger = { trait = elusive_shadow }
+		change_intrigue = 2
+		show_trait = elusive_shadow
+		hidden_tooltip = { set_character_flag = emb_education_upgrade_not_performed_already_at_max }
+	}
+	
+	option = {
+		name = EMBTraits420_Option_EducationAlreadyMaxed
+		trigger = { trait = mastermind_theologian }
+		change_learning = 2
+		show_trait = mastermind_theologian
+		hidden_tooltip = { set_character_flag = emb_education_upgrade_not_performed_already_at_max }
+	}
+	
+	after = {
+		
+		# Notify the child's guardian, host (if unlanded), parents, and player close relatives about the upgraded education.
+		# But if someone fulfils several of these roles, they should only be notified once!
+		hidden_tooltip = {
+			
+			# Guardian
+			event_target:emb_education_upgrade_childs_guardian = { character_event = { id = EMBTraits.421 } }
+			
+			# Father (if not guardian)
+			if = {
+				limit = {
+					NOT = {
+						father = { ROOT = { event_target:emb_education_upgrade_childs_guardian = { character = PREVPREV } } }
+					}
+				}
+				father = { character_event = { id = EMBTraits.421 } }
+			}
+			
+			# Mother (if not guardian or father)
+			if = {
+				limit = {
+					NOR = {
+						mother = { ROOT = { event_target:emb_education_upgrade_childs_guardian = { character = PREVPREV } } }
+						mother = { ROOT = { father = { character = PREVPREV } } }
+					}
+				}
+				mother = { character_event = { id = EMBTraits.421 } }
+			}
+			
+			# Host (if not mother, father or guardian)
+			if = {
+				limit = {
+					is_landed = no
+					NOR = {
+						host = { ROOT = { event_target:emb_education_upgrade_childs_guardian = { character = PREVPREV } } }
+						host = { ROOT = { father = { character = PREVPREV } } }
+						host = { ROOT = { mother = { character = PREVPREV } } }
+					}
+				}
+				host = { character_event = { id = EMBTraits.421 } }
+			}
+			
+			# Non-AI close relative (if not mother, father, guardian or host)
+			any_close_relative = {
+				limit = {
+					ai = no
+					NOR = {
+						ROOT = { event_target:emb_education_upgrade_childs_guardian = { character = PREVPREV } }
+						ROOT = { father = { character = PREVPREV } }
+						ROOT = { mother = { character = PREVPREV } }
+						ROOT = {
+							is_landed = no
+							host = { character = PREVPREV }
+						}
+					}
+				}
+				character_event = { id = EMBTraits.421 }
+			}
+			
+		}
+		
+	}
+	
+}
+
+# Notification of a child's education upgrade, for interested parties
+# ROOT = The interested party
+# FROM = The upgraded child
+# NB#1: All flags describing what happened (see previous event) will still be present on the child.
+# NB#2: Bloodline founder event target is also still available for use in lovalisation if wanted.
+character_event = {
+	id = EMBTraits.421
+	is_triggered_only = yes
+	title = EMBTraits421_Title
+	
+	# Event description depends on this character's relationship with the upgraded child (ie. FROM)
+	desc = {
+		trigger = {
+			event_target:emb_education_upgrade_childs_guardian = { character = ROOT }
+		}
+		text = EMBTraits421_Desc_MyWard
+	}
+	desc = {
+		trigger = {
+			NOT = { event_target:emb_education_upgrade_childs_guardian = { character = ROOT } }
+			is_close_relative = FROM
+		}
+		text = EMBTraits421_Desc_MyCloseRelative
+	}
+	desc = {
+		trigger = {
+			NOT = { event_target:emb_education_upgrade_childs_guardian = { character = ROOT } }
+			NOT = { is_close_relative = FROM }
+			FROM = { host = { character = ROOT } }
+		}
+		text = EMBTraits421_Desc_MyCourtier
+	}
+	desc = {
+		trigger = {
+			NOT = { event_target:emb_education_upgrade_childs_guardian = { character = ROOT } }
+			NOT = { is_close_relative = FROM }
+			NOT = { FROM = { host = { character = ROOT } } }
+		}
+		text = EMBTraits421_Desc_Fallback
+	}
+	
+	picture = GFX_evt_recieve_letter
+	
+	# Only show this event if FROM has had one of the expected effects applied to them
+	trigger = {
+		FROM = {
+			OR = {
+				has_character_flag = emb_education_upgrade_performed
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+			}
+		}
+	}
+	
+	# Show a different option button depending on what happened
+	
+	# Stat increase
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				trait = grey_eminence
+			}
+		}
+		show_trait = grey_eminence
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				trait = brilliant_strategist
+			}
+		}
+		show_trait = brilliant_strategist
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				trait = midas_touched
+			}
+		}
+		show_trait = midas_touched
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				trait = elusive_shadow
+			}
+		}
+		show_trait = elusive_shadow
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				trait = mastermind_theologian
+			}
+		}
+		show_trait = mastermind_theologian
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_not_performed_already_at_max
+				NOR = {
+					trait = grey_eminence
+					trait = brilliant_strategist
+					trait = midas_touched
+					trait = elusive_shadow
+					trait = mastermind_theologian
+				}
+			}
+		}
+		name = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven
+		custom_tooltip = { text = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_StatsGiven_tt }
+		tooltip_info_custom = EMBTraits421_Option_UpgradeNotPerformed_AlreadyAtMax_FallbackTooltip_tt
+	}
+	
+	# Education upgrade: Diplomacy
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = underhanded_rogue
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = naive_appeaser
+		show_trait = underhanded_rogue
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = charismatic_negotiator
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = underhanded_rogue
+		show_trait = charismatic_negotiator
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = grey_eminence
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = charismatic_negotiator
+		show_trait = grey_eminence
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	
+	# Education upgrade: Martial
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = tough_soldier
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = misguided_warrior
+		show_trait = tough_soldier
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = skilled_tactician
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = tough_soldier
+		show_trait = skilled_tactician
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = brilliant_strategist
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = skilled_tactician
+		show_trait = brilliant_strategist
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	
+	# Education upgrade: Stewardship
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = thrifty_clerk
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = indulgent_wastrel
+		show_trait = thrifty_clerk
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = fortune_builder
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = thrifty_clerk
+		show_trait = fortune_builder
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = midas_touched
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = fortune_builder
+		show_trait = midas_touched
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	
+	# Education upgrade: Intrigue
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = flamboyant_schemer
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = amateurish_plotter
+		show_trait = flamboyant_schemer
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = intricate_webweaver
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = flamboyant_schemer
+		show_trait = intricate_webweaver
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = elusive_shadow
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = intricate_webweaver
+		show_trait = elusive_shadow
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	
+	# Education upgrade: Learning
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = martial_cleric
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = detached_priest
+		show_trait = martial_cleric
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = scholarly_theologian
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = martial_cleric
+		show_trait = scholarly_theologian
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				trait = mastermind_theologian
+			}
+		}
+		# NB: The Validator falsely claims that show_trait can't be duplicated, but this is actually valid
+		show_trait = scholarly_theologian
+		show_trait = mastermind_theologian
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+	}
+	
+	# Education upgrade: Fallback
+	option = {
+		trigger = {
+			FROM = {
+				has_character_flag = emb_education_upgrade_performed
+				NOR = {
+					trait = underhanded_rogue
+					trait = charismatic_negotiator
+					trait = grey_eminence
+					trait = tough_soldier
+					trait = skilled_tactician
+					trait = brilliant_strategist
+					trait = thrifty_clerk
+					trait = fortune_builder
+					trait = midas_touched
+					trait = flamboyant_schemer
+					trait = intricate_webweaver
+					trait = elusive_shadow
+					trait = martial_cleric
+					trait = scholarly_theologian
+					trait = mastermind_theologian
+				}
+			}
+		}
+		name = EMBTraits421_Option_UpgradePerformed
+		custom_tooltip = { text = EMBTraits421_Option_UpgradePerformed_tt }
+		tooltip_info_custom = EMBTraits421_Option_UpgradePerformed_FallbackTooltip_tt
+	}
+	
+}
+
+# Cleanup flags & event targets
+# This event should be called for the character being altered, 1 day AFTER any alterations have occurred.
+character_event = {
+	id = EMBTraits.499
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		
+		clear_event_target = emb_education_upgrade_childs_guardian
+		clear_event_target = emb_education_upgrade_childs_bloodline_founder
+		
+		clr_character_flag = emb_education_upgrade
+		
+		clr_character_flag = emb_education_upgrade_all
+		clr_character_flag = emb_education_upgrade_diplomacy
+		clr_character_flag = emb_education_upgrade_martial
+		clr_character_flag = emb_education_upgrade_stewardship
+		clr_character_flag = emb_education_upgrade_intrigue
+		clr_character_flag = emb_education_upgrade_learning
+		clr_character_flag = emb_education_upgrade_fallback
+		
+		clr_character_flag = emb_education_upgrade_performed
+		clr_character_flag = emb_education_upgrade_not_performed_already_at_max
+		
+	}
+}

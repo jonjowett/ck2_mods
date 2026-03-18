@@ -1,0 +1,467 @@
+namespace = TPAuto
+
+
+
+
+
+####################
+# Tracking startup #
+####################
+
+# Fired on_startup for EVERY character (except for ruler-designed characters)
+# Also fired on_chronicle_start (ie. on new game)
+character_event = {
+	id = TPAuto.1000
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	trigger = {
+		NOT = { has_global_flag = tpauto_tracking_startup_in_progress }
+	}
+	immediate = {
+		random_player = {
+			character_event = { id = TPAuto.1100 }
+		}
+	}
+}
+
+# Alternate method to start tracking (eg. for ruler-designed characters on loading a save)
+# Fired on_yearly_pulse)
+character_event = {
+	id = TPAuto.1001
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	trigger = {
+		NOT = { has_global_flag = tpauto_tracking_startup_in_progress }
+		NOT = { has_global_flag = tpauto_tracking_startup_complete }
+	}
+	immediate = {
+		random_player = {
+			character_event = { id = TPAuto.1100 }
+		}
+	}
+}
+
+# Intended to be fired on one random player (and then never again, until the next game load)
+character_event = {
+	id = TPAuto.1100
+	is_triggered_only = yes
+	hide_window = yes
+	ai = no
+	trigger = {
+		NOT = { has_global_flag = tpauto_tracking_startup_in_progress }
+	}
+	immediate = {
+		
+		# Set the "startup in progress" flag, so no other event tries to run startup
+		set_global_flag = tpauto_tracking_startup_in_progress
+		
+		# Set up an event in the future which will clear the "startup in progress" flag
+		capital_scope = {
+			province_event = {
+				id = TPAuto.1999
+				days = 2
+			}
+		}
+		
+		# Scope to all provinces with trade posts, and start tracking events for each of them
+		any_province = {
+			clear_delayed_event = { id = TPAuto.2001 } # Remove all existing regular tracking events
+			if = {
+				limit = { tpauto_this_province_can_have_trade_route_trade_post = yes }
+				province_event = { id = TPAuto.2000 }
+			}
+		}
+		
+		# Set a flag to indicate that tracking has started
+		set_global_flag = tpauto_tracking_startup_complete
+		
+	}
+}
+
+# Clear tracking flags
+province_event = {
+	id = TPAuto.1999
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		clr_global_flag = tpauto_tracking_startup_in_progress
+	}
+}
+
+
+
+
+
+##########################
+# Regular tracking pulse #
+##########################
+
+# Start regular tracking
+province_event = {
+	id = TPAuto.2000
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		
+		# If province has a trade post: Record trade post buildings in the province
+		province_event = { id = TPAuto.2100 }
+		
+		# Start yearly tracking on a random day 0-1 years in the future.
+		# Since we do this for a large number of provinces, the large number of events should be fairly well spread through the year.
+		province_event = {
+			id = TPAuto.2001
+			days = 5 # Ensure the startup process has finished its cleanup
+			random = 365
+		}
+		
+	}
+}
+
+# Regular tracking - do necessary housekeeping in this province, then trigger again on the same day next year
+province_event = {
+	id = TPAuto.2001
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		
+		# If province has a trade post: Record trade post buildings in the province
+		province_event = { id = TPAuto.2100 }
+		
+		# If province does not have a trade post: Try to rebuild it from the flags
+		province_event = { id = TPAuto.2200 }
+		
+		# Re-trigger this event in a year
+		province_event = {
+			id = TPAuto.2001
+			days = 365
+		}
+		
+	}
+}
+
+province_event = {
+	id = TPAuto.2100
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		has_trade_post = yes
+	}
+	immediate = {
+		tpauto_tracking_effect_record_trade_post_buildings = yes
+	}
+}
+
+# Try to rebuild the trade post, in province scope
+# (Only show an event to the character if the trade post can be rebuilt.)
+province_event = {
+	id = TPAuto.2200
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		has_trade_post = no
+	}
+	immediate = {
+		if = {
+			limit = { tpauto_can_auto_rebuild_trade_post = yes }
+			tpauto_rebuild_decide_number_of_buildings_deleted = yes
+			owner = { character_event = { id = TPAuto.2201 } }
+		}
+	}
+}
+
+# Visible event telling the character that their trade post has been rebuilt
+# Expected to be called from TPAuto.2200
+# FROM is province containing trade post, ROOT is province owner
+character_event = {
+	id      = TPAuto.2201
+	title   = TPAuto_2201_Title
+	desc    = TPAuto_2201_Desc
+	picture = GFX_evt_market_altaic
+	is_triggered_only = yes
+	trigger = {
+		FROM = { tpauto_can_auto_rebuild_trade_post = yes }
+	}
+	
+	# Option 1: Rebuild the trade post at no cost (either with or without building deletion)
+	# One of these will always be visible, no matter what, thanks to the opposite triggers
+	option = {
+		trigger = {
+			FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_zero }
+		}
+		tooltip_info_custom = TPAuto_2201_OptionTTI_Luck
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Luck
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = { factor = 1000 }
+	}
+	option = {
+		trigger = {
+			NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_zero } }
+		}
+		name = TPAuto_2201_Option_RebuildWithSomeDeletion
+		FROM = {
+			tpauto_rebuild_delete_specified_number_of_building_flags = yes
+			tpauto_rebuild_trade_post = yes
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				tpauto_this_character_can_rebuild_at_no_cost = yes
+			}
+		}
+	}
+	
+	# Option 2: Rebuild in full, for full price
+	# Only visible if some buildings would be deleted under option 1
+	option = {
+		trigger = {
+			NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_zero } }
+			tpauto_this_character_can_rebuild_at_half_price_stewardship = no
+		}
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Pay
+		if = {
+			limit = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+			wealth = -300
+		}
+		else = {
+			wealth = -150
+		}
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				tpauto_this_character_can_rebuild_at_no_cost = yes
+			}
+			modifier = {
+				factor = 0
+				tpauto_this_character_can_rebuild_at_half_price_stewardship = yes
+			}
+			modifier = {
+				factor = 0
+				NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+				wealth <= 150
+			}
+			modifier = {
+				factor = 2
+				NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+				wealth >= 200
+			}
+			modifier = {
+				factor = 2
+				NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+				wealth >= 300
+			}
+			modifier = {
+				factor = 5
+				NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+				wealth >= 500
+			}
+			modifier = {
+				factor = 10
+				NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+				wealth >= 1000
+			}
+			modifier = {
+				factor = 0
+				FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two }
+				wealth <= 300
+			}
+			modifier = {
+				factor = 2
+				FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two }
+				wealth >= 400
+			}
+			modifier = {
+				factor = 2
+				FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two }
+				wealth >= 600
+			}
+			modifier = {
+				factor = 5
+				FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two }
+				wealth >= 1000
+			}
+			modifier = {
+				factor = 10
+				FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two }
+				wealth >= 2000
+			}
+		}
+	}
+	
+	# Option 3: Rebuild in full, for half price due to high stewardship skill.
+	# Only visible if some buildings would be deleted in option 1, and if there is no free repair option.
+	# (The latter is so that the user can safely click the one and only highlighted option without having to think too hard.)
+	option = { # Pay half price, due to stewardship skill
+		trigger = {
+			NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_zero } }
+			tpauto_this_character_can_rebuild_at_half_price_stewardship = yes
+			tpauto_this_character_can_rebuild_at_no_cost = no
+		}
+		tooltip_info = stewardship
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship
+		if = {
+			limit = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+			wealth = -150
+		}
+		else = {
+			wealth = -75
+		}
+		custom_tooltip = { text = TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_ExplainDiscount_tt }
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				tpauto_this_character_can_rebuild_at_no_cost = yes
+			}
+			modifier = {
+				factor = 0
+				NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+				wealth <= 75
+			}
+			modifier = {
+				factor = 2
+				NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+				wealth >= 100
+			}
+			modifier = {
+				factor = 2
+				NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+				wealth >= 150
+			}
+			modifier = {
+				factor = 5
+				NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+				wealth >= 250
+			}
+			modifier = {
+				factor = 10
+				NOT = { FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two } }
+				wealth >= 500
+			}
+			modifier = {
+				factor = 0
+				FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two }
+				wealth <= 150
+			}
+			modifier = {
+				factor = 2
+				FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two }
+				wealth >= 200
+			}
+			modifier = {
+				factor = 2
+				FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two }
+				wealth >= 300
+			}
+			modifier = {
+				factor = 5
+				FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two }
+				wealth >= 500
+			}
+			modifier = {
+				factor = 10
+				FROM = { has_province_flag = tpauto_rebuild_buildings_deleted_two }
+				wealth >= 1000
+			}
+		}
+	}
+	
+	# Option 4: Something special means you can rebuild in full for free
+	# Only the "most awesome" reason will be shown
+	
+	# Awesome reason #1: Renowned trader
+	option = {
+		trigger = { tpauto_this_character_can_rebuild_at_no_cost_trader = yes }
+		tooltip_info_custom = TPAuto_2201_OptionTTI_Trader
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Trader
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = { factor = 1000 }
+	}
+	
+	# Awesome reason #2: Architect or Administrator lifestyle
+	option = {
+		trigger = {
+			tpauto_this_character_can_rebuild_at_no_cost_trader = no
+			tpauto_this_character_can_rebuild_at_no_cost_lifestyle_architect = yes
+		}
+		tooltip_info_custom = TPAuto_2201_OptionTTI_Lifestyle
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle
+		show_trait = architect
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = { factor = 1000 }
+	}
+	option = {
+		trigger = {
+			tpauto_this_character_can_rebuild_at_no_cost_trader = no
+			tpauto_this_character_can_rebuild_at_no_cost_lifestyle_architect = no
+			tpauto_this_character_can_rebuild_at_no_cost_lifestyle_administrator = yes
+		}
+		tooltip_info_custom = TPAuto_2201_OptionTTI_Lifestyle
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle
+		show_trait = administrator
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = { factor = 1000 }
+	}
+	
+	# Awesome reason #3: Best or second-best stewardship education
+	option = {
+		trigger = {
+			tpauto_this_character_can_rebuild_at_no_cost_trader = no
+			tpauto_this_character_can_rebuild_at_no_cost_lifestyle = no
+			tpauto_this_character_can_rebuild_at_no_cost_education_midas_touched = yes
+		}
+		tooltip_info_custom = TPAuto_2201_OptionTTI_Education
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Education
+		show_trait = midas_touched
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = { factor = 1000 }
+	}
+	option = {
+		trigger = {
+			tpauto_this_character_can_rebuild_at_no_cost_trader = no
+			tpauto_this_character_can_rebuild_at_no_cost_lifestyle = no
+			tpauto_this_character_can_rebuild_at_no_cost_education_midas_touched = no
+			tpauto_this_character_can_rebuild_at_no_cost_education_fortune_builder = yes
+		}
+		tooltip_info_custom = TPAuto_2201_OptionTTI_Education
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Education
+		show_trait = fortune_builder
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = { factor = 1000 }
+	}
+	
+	# Awesome reason #3a: Best or second-best stewardship education (PDXRPTG mod)
+	option = {
+		trigger = {
+			tpauto_this_character_can_rebuild_at_no_cost_trader = no
+			tpauto_this_character_can_rebuild_at_no_cost_lifestyle = no
+			tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_5 = yes
+		}
+		tooltip_info_custom = TPAuto_2201_OptionTTI_Education
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Education
+		# Audax Validator "." Ignore_NEXT
+		show_trait = magistrate_5
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = { factor = 1000 }
+	}
+	option = {
+		trigger = {
+			tpauto_this_character_can_rebuild_at_no_cost_trader = no
+			tpauto_this_character_can_rebuild_at_no_cost_lifestyle = no
+			tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_5 = no
+			tpauto_this_character_can_rebuild_at_no_cost_education_pdxrptg_magistrate_4 = yes
+		}
+		tooltip_info_custom = TPAuto_2201_OptionTTI_Education
+		name = TPAuto_2201_Option_RebuildWithNoDeletion_Education
+		# Audax Validator "." Ignore_NEXT
+		show_trait = magistrate_4
+		FROM = { tpauto_rebuild_trade_post = yes }
+		ai_chance = { factor = 1000 }
+	}
+	
+}

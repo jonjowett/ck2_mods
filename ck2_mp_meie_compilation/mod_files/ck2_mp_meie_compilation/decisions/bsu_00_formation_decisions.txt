@@ -1,0 +1,123 @@
+decisions = {
+	
+	bsu_form_lcr = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+
+		potential = {
+			OR = {		###Must be Slavic of Lech, Czech or Rus lineage
+				culture = russian
+				culture = polish
+				culture = bohemian
+				culture = volhynian
+				culture = ilmenian
+				culture = severian
+				culture = pommeranian
+			}
+			any_demesne_title = {
+				OR = {
+					tier = KING
+					tier = EMPEROR
+				}
+			}
+			e_lechczechrus = {
+				is_titular = yes
+			}
+			e_lechczechrus = {
+				has_holder = no
+			}
+			is_alternate_start = no
+		}
+
+		allow = {
+			is_adult = yes
+			prestige = 5000
+			war = no
+			NOT = { trait = incapable }
+			
+			#Control Czech, Poland & Rus
+			completely_controls = k_bohemia
+			completely_controls = k_poland
+			completely_controls = k_galicia-volhynia
+			completely_controls = k_ruthenia
+			completely_controls = k_chernigov
+			completely_controls = k_vladimir
+			completely_controls = k_rus
+			
+			is_vice_royalty = no
+		}
+
+		effect = {
+			custom_tooltip = {
+				text = form_lcr_tt
+				###Mod Bugfix: Ensure laws are copied if the character is a king when they take the decision
+				primary_title = {
+					e_lechczechrus = {
+						grant_title_no_opinion = ROOT
+						copy_title_laws = PREV
+						copy_title_history = PREV
+					}
+				}
+			}
+			
+			bsu_found_bloodline_initial = yes
+
+			hidden_tooltip = {
+			
+				if = {
+					limit = {
+						ai = no
+					}
+					set_character_flag = achievement_lcr
+				}
+
+				any_demesne_title = {
+					limit = {
+						tier = EMPEROR
+						NOT = { title = e_lechczechrus }
+					}
+					destroy_landed_title = THIS
+				}
+				
+				###Mod Removed - Doesn't do anything
+				#capital = PREV
+
+				###Slavic kingdoms go to LCR
+				k_bohemia = { de_jure_liege = e_lechczechrus }
+				k_poland = { de_jure_liege = e_lechczechrus }
+				k_galicia-volhynia = { de_jure_liege = e_lechczechrus }
+				k_ruthenia = { de_jure_liege = e_lechczechrus }
+				k_chernigov = { de_jure_liege = e_lechczechrus }
+				k_vladimir = { de_jure_liege = e_lechczechrus }
+				k_rus = { de_jure_liege = e_lechczechrus }
+				
+				###If you also completely control Pomerania, it's added to LCR as well
+				if = {
+					limit = {
+						completely_controls = k_pomerania 
+					}
+					k_pomerania = { de_jure_liege = e_lechczechrus }
+					set_global_flag = bsu_lcr_has_welcomed_pomeranians
+				}
+				
+				###Mod added - Any other personally-owned kingdoms in eastern europe (eg. custom kingdoms) are added to LCR
+				any_demesne_title = {
+					limit = {
+						tier = KING
+						region = world_europe_east
+					}
+					de_jure_liege = e_lechczechrus
+				}
+
+				ROOT = {
+					narrative_event = { id = HFP.99999 }
+				}
+				any_playable_ruler = {
+					narrative_event = { id = HFP.99999 }
+				}
+			}
+		}
+	}
+	
+}

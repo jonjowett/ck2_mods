@@ -1,0 +1,49 @@
+# 3 mutually-exclusive options:
+#  --- Disabled for everyone: If edmp_global_invasions_disabled_for_everyone IS set
+#  --- Individually managed:  If edmp_global_invasions_disabled_for_everyone IS NOT set,
+#                                      and edmp_global_invasions_permissions_managed_individually IS set.
+#  --- Enabled for everyone:  If BOTH flags are NOT set.
+
+edmp_global_invasions_are_disabled_for_everyone = {
+	custom_tooltip = {
+		text = edmp_global_invasions_are_disabled_for_everyone_tt
+		has_global_flag = edmp_global_invasions_disabled_for_everyone
+	}
+}
+
+edmp_global_invasions_are_not_disabled_for_everyone = {
+	custom_tooltip = {
+		text = edmp_global_invasions_are_not_disabled_for_everyone_tt
+		edmp_global_invasions_are_disabled_for_everyone = no
+	}
+}
+
+edmp_global_invasion_permissions_are_managed_individually = {
+	custom_tooltip = {
+		text = edmp_global_invasion_permissions_are_managed_individually_tt
+		edmp_global_invasions_are_not_disabled_for_everyone = yes
+		has_global_flag = edmp_global_invasions_permissions_managed_individually
+	}
+}
+
+edmp_global_invasion_permissions_are_not_managed_individually = {
+	custom_tooltip = {
+		text = edmp_global_invasion_permissions_are_not_managed_individually_tt
+		edmp_global_invasion_permissions_are_managed_individually = no
+	}
+}
+
+edmp_global_invasions_are_enabled_for_everyone = {
+	custom_tooltip = {
+		text = edmp_global_invasions_are_enabled_for_everyone_tt
+		edmp_global_invasions_are_not_disabled_for_everyone = yes
+		edmp_global_invasion_permissions_are_not_managed_individually = yes
+	}
+}
+
+edmp_global_invasions_are_not_enabled_for_everyone = {
+	custom_tooltip = {
+		text = edmp_global_invasions_are_not_enabled_for_everyone_tt
+		edmp_global_invasions_are_enabled_for_everyone = no
+	}
+}

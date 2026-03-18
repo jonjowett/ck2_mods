@@ -1,0 +1,99 @@
+# Audax Validator EnableCommentMetadata
+
+namespace = MNM
+
+# Explicit override of the base game events MNM.70010 & 70011
+# Keep the base game MTTH-style trigger, so that it shows up correctly in council screen tooltips
+#  --- NB: 70010 is triggered on the ***MARSHAL***, not the liege!
+# But replace the logic with something akin to the JD Chinese strategist event (find & store a commander > choose a trait > store it as a flag > apply the trait)
+#  --- This makes it possible to choose a synergistic trait, and means most of the logic can be reused in the targetted decision.
+
+# MTTH event: Marshal drills a commander
+character_event = {
+	
+	# Deliberate duplication of ID - replaces the base game event
+	# Audax Validator "." Ignore_NEXT
+	id      = MNM.70010
+	
+	title   = MNM.70010.t
+	desc    = MNM.70010.d
+	picture = GFX_evt_melee
+	border  = GFX_event_normal_frame_war
+	
+	min_age = 16
+	capable_only = yes
+	prisoner = no
+	has_job_title = yes # Optimisation (present in base game), significantly limiting the number of characters for which the MTTH is evaluated
+	
+	trigger = {
+		expd_ct_this_character_can_provide_marshal_training = yes
+		liege = {
+			any_courtier_or_vassal = {
+				NOT = { character = PREV } # Don't attempt to train the liege (in case he is his liege's commander)
+				has_minor_title = title_commander
+				expd_ct_this_character_can_receive_marshal_training = yes
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 200
+		expd_ct_job_event_mtth_modifier_martial_score = yes
+	}
+	
+	immediate = {
+		
+		save_event_target_as = expd_ct_marshal_performing_training
+		
+		liege = {
+			random_courtier_or_vassal = {
+				limit = {
+					NOT = { character = PREV } # Don't attempt to train the liege (in case he is his liege's commander)
+					has_minor_title = title_commander
+					expd_ct_this_character_can_receive_marshal_training = yes
+				}
+				
+				# Mod edit: Prioritise more-skilled characters
+				preferred_limit = { martial = 30 }
+				preferred_limit = { martial = 25 }
+				preferred_limit = { martial = 20 }
+				preferred_limit = { martial = 15 }
+				preferred_limit = { martial = 10 }
+				
+				# Reuse the vanilla event_target name, because it's probably used in localisation, and we don't want to rewrite all that.
+				save_event_target_as = commander_improved
+				
+			}
+		}
+		
+	}
+	
+	option = {
+		name =  EXCELLENT
+		liege = { character_event = { id = MNM.70011 } }
+	}
+}
+
+character_event = {
+	
+	# Deliberate duplication of ID - replaces the base game event
+	# Audax Validator "." Ignore_NEXT
+	id      = MNM.70011
+	
+	title   = MNM.70010.t
+	desc    = MNM.70011.d
+	picture = GFX_evt_melee
+	border  = GFX_event_normal_frame_war
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		expd_ct_choose_marshal_training_for_trainee = yes
+	}
+	
+	option = {
+		name =  EXCELLENT
+		prestige = 5
+		expd_ct_apply_marshal_training_to_trainee_base_game_event = yes
+	}
+}

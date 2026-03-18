@@ -1,0 +1,925 @@
+decisions = {
+	
+	bsu_welcome_pomeranians = {
+		
+		#Special logic for Pomerania, in case the user took the vanilla decision to form LCR
+		#In brief, we should allow this decision whether Pomerania is or is not dejure part of LCR:
+		# --- If the user took the vanilla decision and integrated Pomerania then the global flag wasn't set and Pomerania is dejure part of LCR - but we need this decision to set the global flag
+		# --- If the user took the vanilla decision and did not integrate Pomerania then  he global flag wasn't set and Pomerania is NOT dejure part of LCR - we need this decision to set the flag and change the dejure
+		# --- If the user took the modded decision and integrated Pomerania then the global flag WAS set and Pomerania is dejure part of LCR - we don't need or want this decision, and it will already be blocked by the global flag check above
+		# --- If the user took the modded decision and did not integrate Pomerania then the global flag wasn't set and Pomerania is NOT dejure part of LCR - we need this decision to set the flag and change the dejure
+		
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_pomeranians }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			OR = {
+				completely_controls = k_pomerania # Fallback in case the title has become titular
+				k_pomerania = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+			}
+		}
+		allow = {
+			completely_controls = k_pomerania
+			custom_tooltip = {
+				text = bsu_emperor_is_accepted_culture
+				e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+			}
+			custom_tooltip = {
+				text = bsu_emperor_is_accepted_religion
+				e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+			}
+		}
+		effect = {
+			k_pomerania = { de_jure_liege = e_lechczechrus }
+			custom_tooltip = {
+				text = bsu_welcome_pomeranians_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_pomeranians
+				character_event = { id = BSU.1000 }
+			}
+		}
+	}
+	
+	bsu_welcome_hungarians = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_hungarians }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			OR = {
+				completely_controls = k_hungary
+				k_hungary = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+			}
+			k_hungary = { NOT = { dejure_liege_title = { holder = ROOT } } }
+		}
+		allow = {
+			completely_controls = k_hungary
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_culture
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				}
+				e_lechczechrus = { holder_scope = { bsu_is_culture_hungarian = yes } }
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_religion
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+				}
+				e_lechczechrus = { holder_scope = { OR = { religion = tengri_pagan religion = tengri_pagan_reformed } } }
+			}
+		}
+		effect = {
+			k_hungary = { de_jure_liege = e_lechczechrus }
+			custom_tooltip = {
+				text = bsu_welcome_hungarians_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_hungarians
+				character_event = { id = BSU.1000 }
+			}
+			custom_tooltip = {
+				text = bsu_welcome_hungarians_create_bloodline
+				bsu_found_bloodline_hungarian = yes
+			}
+		}
+	}
+	
+	bsu_welcome_lithuanians = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_lithuanians }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			OR = {
+				completely_controls = k_lithuania
+				k_lithuania = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+			}
+			k_lithuania = { NOT = { dejure_liege_title = { holder = ROOT } } }
+		}
+		allow = {
+			completely_controls = k_lithuania
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_culture
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				}
+				e_lechczechrus = { holder_scope = { bsu_is_culture_lithuanian = yes } }
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_religion
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+				}
+				e_lechczechrus = { holder_scope = { OR = { religion = baltic_pagan religion = baltic_pagan_reformed } } }
+			}
+		}
+		effect = {
+			k_lithuania = { de_jure_liege = e_lechczechrus }
+			custom_tooltip = {
+				text = bsu_welcome_lithuanians_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_lithuanians
+				character_event = { id = BSU.1000 }
+			}
+			custom_tooltip = {
+				text = bsu_welcome_lithuanians_create_bloodline
+				bsu_found_bloodline_baltic = yes
+			}
+		}
+	}
+	
+	bsu_welcome_western_finns = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_western_finns }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			OR = {
+				AND = {
+					OR = {
+						completely_controls = k_estonia
+						k_estonia = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_estonia = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+				AND = {
+					OR = {
+						completely_controls = k_finland
+						k_finland = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_finland = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+				AND = {
+					OR = {
+						completely_controls = k_sapmi
+						k_sapmi = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_sapmi = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+			}
+		}
+		allow = {
+			completely_controls = k_estonia
+			completely_controls = k_finland
+			completely_controls = k_sapmi
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_culture
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				}
+				e_lechczechrus = { holder_scope = { bsu_is_culture_western_finn = yes } }
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_religion
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+				}
+				e_lechczechrus = { holder_scope = { OR = { religion = finnish_pagan religion = finnish_pagan_reformed } } }
+			}
+		}
+		effect = {
+			k_estonia = { de_jure_liege = e_lechczechrus }
+			k_finland = { de_jure_liege = e_lechczechrus }
+			k_sapmi   = { de_jure_liege = e_lechczechrus }
+			custom_tooltip = {
+				text = bsu_welcome_western_finns_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_western_finns
+			}
+			if = {
+				limit = {
+					custom_tooltip = {
+						text = bsu_welcome_all_finns_condition
+						has_global_flag = bsu_lcr_has_welcomed_western_finns
+						has_global_flag = bsu_lcr_has_welcomed_northern_finns
+						has_global_flag = bsu_lcr_has_welcomed_siberians
+					}
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_finns_add_tolerance
+					set_global_flag = bsu_lcr_has_welcomed_all_finns
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_finns_create_bloodline
+					bsu_found_bloodline_finnish = yes
+				}
+			}
+			hidden_tooltip = {
+				character_event = { id = BSU.1000 }
+			}
+		}
+	}
+	
+	bsu_welcome_northern_finns = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_northern_finns }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			OR = {
+				AND = {
+					OR = {
+						completely_controls = k_nenets
+						k_nenets = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_nenets = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+				AND = {
+					OR = {
+						completely_controls = k_perm
+						k_perm = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_perm = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+			}
+		}
+		allow = {
+			completely_controls = k_nenets
+			completely_controls = k_perm
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_culture
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				}
+				e_lechczechrus = { holder_scope = { bsu_is_culture_northern_finn = yes } }
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_religion
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+				}
+				e_lechczechrus = { holder_scope = { OR = { religion = finnish_pagan religion = finnish_pagan_reformed } } }
+			}
+		}
+		effect = {
+			k_nenets = { de_jure_liege = e_lechczechrus }
+			k_perm   = { de_jure_liege = e_lechczechrus }
+			custom_tooltip = {
+				text = bsu_welcome_northern_finns_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_northern_finns
+			}
+			if = {
+				limit = {
+					custom_tooltip = {
+						text = bsu_welcome_all_finns_condition
+						has_global_flag = bsu_lcr_has_welcomed_western_finns
+						has_global_flag = bsu_lcr_has_welcomed_northern_finns
+						has_global_flag = bsu_lcr_has_welcomed_siberians
+					}
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_finns_add_tolerance
+					set_global_flag = bsu_lcr_has_welcomed_all_finns
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_finns_create_bloodline
+					bsu_found_bloodline_finnish = yes
+				}
+			}
+			hidden_tooltip = {
+				character_event = { id = BSU.1000 }
+			}
+		}
+	}
+	
+	bsu_welcome_siberians = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_siberians }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			OR = {
+				completely_controls = k_sibir
+				k_sibir = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+			}
+			k_sibir = { NOT = { dejure_liege_title = { holder = ROOT } } }
+		}
+		allow = {
+			completely_controls = k_sibir
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_culture
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				}
+				e_lechczechrus = { holder_scope = { bsu_is_culture_siberian = yes } }
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_religion
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+				}
+				e_lechczechrus = { holder_scope = { OR = { religion = finnish_pagan religion = finnish_pagan_reformed } } }
+			}
+		}
+		effect = {
+			k_sibir = { de_jure_liege = e_lechczechrus }
+			custom_tooltip = {
+				text = bsu_welcome_siberians_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_siberians
+			}
+			if = {
+				limit = {
+					custom_tooltip = {
+						text = bsu_welcome_all_finns_condition
+						has_global_flag = bsu_lcr_has_welcomed_western_finns
+						has_global_flag = bsu_lcr_has_welcomed_northern_finns
+						has_global_flag = bsu_lcr_has_welcomed_siberians
+					}
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_finns_add_tolerance
+					set_global_flag = bsu_lcr_has_welcomed_all_finns
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_finns_create_bloodline
+					bsu_found_bloodline_finnish = yes
+				}
+			}
+			hidden_tooltip = {
+				character_event = { id = BSU.1000 }
+			}
+		}
+	}
+	
+	bsu_welcome_south_west_slavs = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_south_west_slavs }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			OR = {
+				AND = {
+					OR = {
+						completely_controls = k_croatia
+						k_croatia = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_croatia = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+				AND = {
+					OR = {
+						completely_controls = k_serbia
+						k_serbia = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_serbia = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+				AND = {
+					OR = {
+						completely_controls = k_carinthia
+						k_carinthia = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_carinthia = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+			}
+		}
+		allow = {
+			completely_controls = k_croatia
+			completely_controls = k_serbia
+			completely_controls = k_carinthia
+			OR = {
+				k_bosnia = { is_titular = yes }
+				completely_controls = k_bosnia
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_culture
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				}
+				e_lechczechrus = { holder_scope = { bsu_is_culture_south_west_slav = yes } }
+			}
+			custom_tooltip = {
+				text = bsu_emperor_is_accepted_religion
+				e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+			}
+		}
+		effect = {
+			k_croatia   = { de_jure_liege = e_lechczechrus }
+			k_serbia    = { de_jure_liege = e_lechczechrus }
+			k_carinthia = { de_jure_liege = e_lechczechrus }
+			if = {
+				#Bosnia almost certainly doesn't exist, so we only move it into LCR if it does in fact exist
+				limit = { k_bosnia = { is_titular = no } }
+				k_bosnia = { de_jure_liege = e_lechczechrus }
+			}
+			custom_tooltip = {
+				text = bsu_welcome_south_west_slavs_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_south_west_slavs
+			}
+			if = {
+				limit = {
+					custom_tooltip = {
+						text = bsu_welcome_all_southern_slavs_condition
+						has_global_flag = bsu_lcr_has_welcomed_south_west_slavs
+						has_global_flag = bsu_lcr_has_welcomed_south_east_slavs
+					}
+				}
+				hidden_tooltip = {
+					set_global_flag = bsu_lcr_has_welcomed_all_southern_slavs
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_southern_slavs_create_bloodline
+					bsu_found_bloodline_south = yes
+				}
+			}
+			hidden_tooltip = {
+				character_event = { id = BSU.1000 }
+			}
+		}
+	}
+	
+	bsu_welcome_south_east_slavs = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_south_east_slavs }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			OR = {
+				AND = {
+					OR = {
+						completely_controls = k_bulgaria
+						k_bulgaria = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_bulgaria = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+				AND = {
+					OR = {
+						completely_controls = k_dacia
+						k_dacia = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_dacia = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+			}
+		}
+		allow = {
+			completely_controls = k_bulgaria
+			completely_controls = k_dacia
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_culture
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				}
+				e_lechczechrus = { holder_scope = { bsu_is_culture_south_east_slav = yes } }
+			}
+			custom_tooltip = {
+				text = bsu_emperor_is_accepted_religion
+				e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+			}
+		}
+		effect = {
+			k_bulgaria  = { de_jure_liege = e_lechczechrus }
+			k_dacia     = { de_jure_liege = e_lechczechrus }
+			custom_tooltip = {
+				text = bsu_welcome_south_east_slavs_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_south_east_slavs
+			}
+			if = {
+				limit = {
+					custom_tooltip = {
+						text = bsu_welcome_all_southern_slavs_condition
+						has_global_flag = bsu_lcr_has_welcomed_south_west_slavs
+						has_global_flag = bsu_lcr_has_welcomed_south_east_slavs
+					}
+				}
+				hidden_tooltip = {
+					set_global_flag = bsu_lcr_has_welcomed_all_southern_slavs
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_southern_slavs_create_bloodline
+					bsu_found_bloodline_south = yes
+				}
+			}
+			hidden_tooltip = {
+				character_event = { id = BSU.1000 }
+			}
+		}
+	}
+	
+	bsu_welcome_bolghars = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_bolghars }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			
+			OR = {
+				completely_controls = k_volga_bulgaria
+				k_volga_bulgaria = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+			}
+			k_volga_bulgaria = { NOT = { dejure_liege_title = { holder = ROOT } } }
+			
+		}
+		allow = {
+			completely_controls = k_volga_bulgaria
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_culture
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				}
+				e_lechczechrus = { holder_scope = { bsu_is_culture_bolghar = yes } }
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_religion
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+				}
+				e_lechczechrus = { holder_scope = { OR = { religion = tengri_pagan religion = tengri_pagan_reformed } } }
+			}
+		}
+		effect = {
+			k_volga_bulgaria = { de_jure_liege = e_lechczechrus }
+			custom_tooltip = {
+				text = bsu_welcome_bolghars_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_bolghars
+			}
+			custom_tooltip = {
+				text = bsu_welcome_bolghars_create_bloodline
+				bsu_found_bloodline_bolghar = yes
+			}
+			if = {
+				limit = {
+					custom_tooltip = {
+						text = bsu_welcome_all_nearby_nomads_condition
+						has_global_flag = bsu_lcr_has_welcomed_bolghars
+						has_global_flag = bsu_lcr_has_welcomed_khazars
+						has_global_flag = bsu_lcr_has_welcomed_alans
+					}
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_nearby_nomads_add_tolerance
+					set_global_flag = bsu_lcr_has_welcomed_all_nearby_nomads
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_nearby_nomads_create_bloodline
+					bsu_found_bloodline_tengri = yes
+				}
+			}
+			hidden_tooltip = {
+				character_event = { id = BSU.1000 }
+			}
+		}
+	}
+	
+	bsu_welcome_khazars = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_khazars }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			
+			OR = {
+				AND = {
+					OR = {
+						completely_controls = k_khazaria
+						k_khazaria = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_khazaria = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+				AND = {
+					OR = {
+						completely_controls = k_crimea
+						k_crimea = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_crimea = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+			}
+		}
+		allow = {
+			completely_controls = k_khazaria
+			completely_controls = k_crimea
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_culture
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				}
+				e_lechczechrus = { holder_scope = { bsu_is_culture_khazar = yes } }
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_religion
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+				}
+				e_lechczechrus = { holder_scope = { OR = { religion = tengri_pagan religion = tengri_pagan_reformed } } }
+			}
+		}
+		effect = {
+			k_khazaria = { de_jure_liege = e_lechczechrus }
+			k_crimea   = { de_jure_liege = e_lechczechrus }
+			custom_tooltip = {
+				text = bsu_welcome_khazars_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_khazars
+			}
+			custom_tooltip = {
+				text = bsu_welcome_khazars_create_bloodline
+				bsu_found_bloodline_khazar = yes
+			}
+			if = {
+				limit = {
+					custom_tooltip = {
+						text = bsu_welcome_all_nearby_nomads_condition
+						has_global_flag = bsu_lcr_has_welcomed_bolghars
+						has_global_flag = bsu_lcr_has_welcomed_khazars
+						has_global_flag = bsu_lcr_has_welcomed_alans
+					}
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_nearby_nomads_add_tolerance
+					set_global_flag = bsu_lcr_has_welcomed_all_nearby_nomads
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_nearby_nomads_create_bloodline
+					bsu_found_bloodline_tengri = yes
+				}
+			}
+			hidden_tooltip = {
+				character_event = { id = BSU.1000 }
+			}
+		}
+	}
+	
+	bsu_welcome_alans = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_alans }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			
+			OR = {
+				completely_controls = k_alania
+				k_alania = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+			}
+			k_alania = { NOT = { dejure_liege_title = { holder = ROOT } } }
+			
+		}
+		allow = {
+			completely_controls = k_alania
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_culture
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				}
+				e_lechczechrus = { holder_scope = { bsu_is_culture_alan = yes } }
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_religion
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+				}
+				e_lechczechrus = { holder_scope = { OR = { religion = tengri_pagan religion = tengri_pagan_reformed } } }
+			}
+		}
+		effect = {
+			k_alania = { de_jure_liege = e_lechczechrus }
+			custom_tooltip = {
+				text = bsu_welcome_alans_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_alans
+			}
+			custom_tooltip = {
+				text = bsu_welcome_alans_create_bloodline
+				bsu_found_bloodline_alan = yes
+			}
+			if = {
+				limit = {
+					custom_tooltip = {
+						text = bsu_welcome_all_nearby_nomads_condition
+						has_global_flag = bsu_lcr_has_welcomed_bolghars
+						has_global_flag = bsu_lcr_has_welcomed_khazars
+						has_global_flag = bsu_lcr_has_welcomed_alans
+					}
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_nearby_nomads_add_tolerance
+					set_global_flag = bsu_lcr_has_welcomed_all_nearby_nomads
+				}
+				custom_tooltip = {
+					text = bsu_welcome_all_nearby_nomads_create_bloodline
+					bsu_found_bloodline_tengri = yes
+				}
+			}
+			hidden_tooltip = {
+				character_event = { id = BSU.1000 }
+			}
+		}
+	}
+	
+	bsu_welcome_scandinavians = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_scandinavians }
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			
+			OR = {
+				AND = {
+					OR = {
+						completely_controls = k_denmark
+						k_denmark = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_denmark = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+				AND = {
+					OR = {
+						completely_controls = k_sweden
+						k_sweden = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_sweden = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+				AND = {
+					OR = {
+						completely_controls = k_norway
+						k_norway = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_norway = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+				AND = {
+					OR = {
+						completely_controls = k_saxony
+						k_saxony = { any_de_jure_vassal_title = { holder_scope = { is_vassal_or_below_of = ROOT } } }
+					}
+					k_saxony = { NOT = { dejure_liege_title = { holder = ROOT } } }
+				}
+			}
+		}
+		allow = {
+			completely_controls = k_denmark
+			completely_controls = k_sweden
+			completely_controls = k_norway
+			OR = {
+				k_saxony = { is_titular = yes }
+				completely_controls = k_saxony
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_culture
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+				}
+				e_lechczechrus = { holder_scope = { bsu_is_culture_scandinavian = yes } }
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_religion
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+				}
+				e_lechczechrus = { holder_scope = { OR = { religion = norse_pagan religion = norse_pagan_reformed } } }
+			}
+		}
+		effect = {
+			k_denmark = { de_jure_liege = e_lechczechrus }
+			k_sweden  = { de_jure_liege = e_lechczechrus }
+			k_norway  = { de_jure_liege = e_lechczechrus }
+			if = {
+				#Saxony only exists in certain start dates, so we only move it into LCR if it does in fact exist
+				limit = { k_saxony = { is_titular = no } }
+				k_saxony = { de_jure_liege = e_lechczechrus }
+			}
+			custom_tooltip = {
+				text = bsu_welcome_scandinavians_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_scandinavians
+				character_event = { id = BSU.1000 }
+			}
+			custom_tooltip = {
+				text = bsu_welcome_scandinavians_create_bloodline
+				bsu_found_bloodline_scandinavian = yes
+			}
+		}
+	}
+	
+	bsu_integrate_bloodlines = {
+		is_high_prio = yes
+		only_playable = yes
+		ai_check_interval = 60
+		potential = {
+			is_alternate_start = no
+			e_lechczechrus = {
+				is_titular = no
+				holder = ROOT
+			}
+			NOT = { has_global_flag = bsu_lcr_has_welcomed_everyone }
+			calc_true_if = {
+				amount >= 3
+				has_global_flag = bsu_lcr_has_welcomed_hungarians
+				has_global_flag = bsu_lcr_has_welcomed_lithuanians
+				has_global_flag = bsu_lcr_has_welcomed_all_finns
+				has_global_flag = bsu_lcr_has_welcomed_all_southern_slavs
+				has_global_flag = bsu_lcr_has_welcomed_all_nearby_nomads
+				has_global_flag = bsu_lcr_has_welcomed_scandinavians
+			}
+		}
+		allow = {
+			custom_tooltip = {
+				text = bsu_integrate_bloodlines_has_taken_all_decisions
+				has_global_flag = bsu_lcr_has_welcomed_hungarians
+				has_global_flag = bsu_lcr_has_welcomed_lithuanians
+				has_global_flag = bsu_lcr_has_welcomed_all_finns
+				has_global_flag = bsu_lcr_has_welcomed_all_southern_slavs
+				has_global_flag = bsu_lcr_has_welcomed_all_nearby_nomads
+				has_global_flag = bsu_lcr_has_welcomed_scandinavians
+			}
+			custom_tooltip = {
+				text = bsu_emperor_is_accepted_culture
+				e_lechczechrus = { holder_scope = { bsu_is_accepted_culture = yes } }
+			}
+			OR = {
+				custom_tooltip = {
+					text = bsu_emperor_is_accepted_religion
+					e_lechczechrus = { holder_scope = { bsu_is_accepted_religion = yes } }
+				}
+				e_lechczechrus = { holder_scope = { religion_group = pagan_group } }
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = bsu_integrate_bloodlines_create_bloodline
+				bsu_found_bloodline_final = yes
+			}
+			custom_tooltip = {
+				text = bsu_integrate_bloodlines_add_tolerance
+				set_global_flag = bsu_lcr_has_welcomed_everyone
+				#Cleanup: Clear all other global flags
+				clr_global_flag = bsu_lcr_has_welcomed_hungarians
+				clr_global_flag = bsu_lcr_has_welcomed_lithuanians
+				clr_global_flag = bsu_lcr_has_welcomed_all_finns
+				clr_global_flag = bsu_lcr_has_welcomed_western_finns
+				clr_global_flag = bsu_lcr_has_welcomed_northern_finns
+				clr_global_flag = bsu_lcr_has_welcomed_siberians
+				clr_global_flag = bsu_lcr_has_welcomed_all_southern_slavs
+				clr_global_flag = bsu_lcr_has_welcomed_south_west_slavs
+				clr_global_flag = bsu_lcr_has_welcomed_south_east_slavs
+				clr_global_flag = bsu_lcr_has_welcomed_all_nearby_nomads
+				clr_global_flag = bsu_lcr_has_welcomed_bolghars
+				clr_global_flag = bsu_lcr_has_welcomed_khazars
+				clr_global_flag = bsu_lcr_has_welcomed_alans
+				clr_global_flag = bsu_lcr_has_welcomed_scandinavians
+			}
+		}
+	}
+	
+}

@@ -1,0 +1,2529 @@
+namespace = IB
+
+## id 10 -> pope bloodline <- id = 100
+## id 20 -> wonder bloodline
+## id 30 -> reform bloodline
+## id 40 -> virginmary bloodline
+## id 50 -> family bloodline
+## id 60 -> china bloodline
+## id 70 -> tyrant bloodline
+## id 80 -> hunter bloodline
+## id 90 -> prolific bloodline
+## id 110 -> godslayer bloodline
+## id 120 -> arthur bloodline
+## id 130 -> blot bloodline
+## id 140 -> seventh bloodline
+## id 160 -> mansa musa bloodline
+## id 170 -> defeat crusade
+## id 180 -> death chess
+## id 190 -> art of war
+## id 200 -> female warrior
+
+character_event = {
+	id = IB.000
+	hide_window = yes
+	is_triggered_only = yes
+	ai = no
+	trigger = {
+		NOT = {
+			has_global_flag = IB_initialized 
+		}
+		ai = no
+	}
+	immediate = {
+		set_global_flag = IB_initialized
+		set_variable = { which = global_IB_popely_bloodline_var value = 0 }
+		set_variable = { which = global_IB_family_bloodline_var value = 0 }
+	}
+}
+
+character_event = {
+	id = IB.001
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		NOR = {
+			has_global_flag = IB_ai_less 
+			has_global_flag = IB_ai_none
+			has_global_flag = IB_ai_all
+		}
+		ai = no
+	}
+	immediate = {
+		random_player = { character_event = { id = IB.002 } }
+	}
+}
+
+character_event = {
+	id = IB.002
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.AI
+	is_triggered_only = yes
+	ai = no
+	trigger = {
+		NOR = {
+			has_global_flag = IB_ai_less 
+			has_global_flag = IB_ai_none
+			has_global_flag = IB_ai_all
+		}
+		ai = no
+	}
+	option = {
+		name = EVTOPT_AI_1
+		set_global_flag = IB_ai_all
+	}
+	option = {
+		name = EVTOPT_AI_less
+		set_global_flag = IB_ai_less
+		
+	}
+	option = {
+		name = EVTOPT_AI_none
+		tooltip_info_custom = EVTOPT_AI_none_tool
+		set_global_flag = IB_ai_none
+	}
+}
+
+character_event = {
+	id = IB.101
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_Popely_bloodline }
+		}
+		ROOT = {
+			religion_head = {
+				dynasty = PREV 
+			}
+		}
+    }
+	
+	immediate = {
+		ROOT = {
+			dynasty_head = { character_event = { id = IB.1011 } }
+		}
+	}
+}
+
+#Give bloodline, popely
+character_event = {
+	id = IB.1011
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.1
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_Popely_bloodline }
+		}
+    }
+	
+	immediate = {
+		sound_effect = bloodline_added
+		create_bloodline = {
+                    type = IB_papal_bloodline
+        }
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.1
+		tooltip_info = learning
+		prestige = 300
+		piety = 300
+	}
+}
+
+character_event = {
+	id = IB.102
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_Popely_bloodline2 }
+		}
+		ROOT = {
+			religion_head = {
+				dynasty = PREV 
+			}
+		}
+    }
+	
+	immediate = {
+		ROOT = {
+			dynasty_head = { character_event = { id = IB.1012 } }
+		}
+	}
+}
+
+
+#Give bloodline, popely2
+character_event = {
+	id = IB.1012
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.1
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_Popely_bloodline2 }
+		}
+    }
+	
+	immediate = {
+		sound_effect = bloodline_added
+        create_bloodline = {
+                    type = IB_papal_bloodline2
+        }
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.1
+		tooltip_info = learning
+		prestige = 300
+		piety = 300
+	}
+}
+
+character_event = {
+	id = IB.103
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_Popely_bloodline3 }
+		}
+		ROOT = {
+			religion_head = {
+				dynasty = PREV 
+			}
+		}
+    }
+	
+	immediate = {
+		ROOT = {
+			dynasty_head = { character_event = { id = IB.1013 } }
+		}
+	}
+}
+
+#Give bloodline, popely3
+character_event = {
+	id = IB.1013
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.1
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_Popely_bloodline3 }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+		create_bloodline = {
+                    type = IB_papal_bloodline3
+        }
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.1
+		tooltip_info = learning
+		prestige = 300
+		piety = 300      
+	}
+}
+
+character_event = {
+	id = IB.104
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_Popely_bloodline4 }
+		}
+		ROOT = {
+			religion_head = {
+				dynasty = PREV 
+			}
+		}
+    }
+	
+	immediate = {
+		ROOT = {
+			dynasty_head = { character_event = { id = IB.1014 } }
+		}
+	}
+}
+
+#Give bloodline, popely4
+character_event = {
+	id = IB.1014
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.1
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_Popely_bloodline4 }
+		}
+    }
+	
+	immediate = {
+		sound_effect = bloodline_added
+		create_bloodline = {
+                    type = IB_papal_bloodline4
+        }
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.1
+		tooltip_info = learning
+		prestige = 300
+		piety = 300
+	}
+}
+
+character_event = {
+	id = IB.105
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_Popely_bloodline5 }
+		}
+		ROOT = {
+			religion_head = {
+				dynasty = PREV 
+			}
+		}
+    }
+	
+	immediate = {
+		ROOT = {
+			dynasty_head = { character_event = { id = IB.1015 } }
+		}
+	}
+}
+
+#Give bloodline, popely5
+character_event = {
+	id = IB.1015
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.1
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_Popely_bloodline5 }
+		}
+    }
+	
+	immediate = {
+		sound_effect = bloodline_added
+		create_bloodline = {
+                    type = IB_papal_bloodline5
+        }
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.1
+		tooltip_info = learning
+		prestige = 300
+		piety = 300        
+	}
+}
+
+
+#Check if pope is dynast, on_new_holder inheritance, usurpation
+
+character_event = {
+    id = IB.11
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        FROM = {
+            title = k_papal_state
+        }
+    }
+
+    immediate = {
+        if = {
+            limit = {
+				any_player = {
+					ROOT = { 
+						primary_title = { title = k_papal_state	}
+						dynasty = PREV
+					}
+				}  
+            }
+		
+            change_variable = { which = global_IB_popely_bloodline_var value = 1}
+            IB_popely_bloodline_effect = yes
+			IB_popely_bloodline_effect2 = yes
+			IB_popely_bloodline_effect3 = yes
+			IB_popely_bloodline_effect4 = yes
+			IB_popely_bloodline_effect5 = yes
+        }
+    }
+}
+
+#Check if pope is dynast, on_new_holder
+character_event = {
+    id = IB.12
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        FROM = {
+            title = k_papal_state
+        }
+    }
+
+    immediate = {
+        if = {
+             limit = {
+				any_player = {
+					ROOT = { 
+						primary_title = { title = k_papal_state	}
+						dynasty = PREV
+					}
+				}  
+            }
+		
+            change_variable = { which = global_IB_popely_bloodline_var value = 1}
+            IB_popely_bloodline_effect = yes
+			IB_popely_bloodline_effect2 = yes
+			IB_popely_bloodline_effect3 = yes
+			IB_popely_bloodline_effect4 = yes
+			IB_popely_bloodline_effect5 = yes
+        }
+    }
+}
+
+
+#Popely Bloodline, zealous
+
+character_event = {
+	id = IB.13
+	
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_bloodline = {
+			OR = {
+				has_bloodline_flag = IB_Popely_bloodline
+				has_bloodline_flag = IB_Popely_bloodline2
+				has_bloodline_flag = IB_Popely_bloodline3
+				has_bloodline_flag = IB_Popely_bloodline4
+				has_bloodline_flag = IB_Popely_bloodline5
+				has_bloodline_flag = IB_reformist_bloodline
+			}
+		}
+	}
+	immediate = {
+		popely_bloodline_zealous_effect = yes
+	}
+}
+
+#Wonder construction start
+character_event = {
+    id = IB.20
+    hide_window = yes
+    is_triggered_only = yes
+	trigger = { 
+		has_dlc = "Holy Fury"
+	}
+	
+    immediate = {
+        if = { 
+			limit = { 
+				ROOT = { check_variable = { which = IB_wonderly_bloodline_1 value == 0 } } 	
+			}
+			ROOT = { set_variable = { which = IB_wonderly_bloodline_1 value = 0 } }
+		}
+		change_variable = { which = IB_wonderly_bloodline_1 value = 1}
+		
+		if = {
+			limit = { 
+				FROM = { 
+					wonder = {
+						has_wonder_flag = holy_building 
+						}
+					}
+				}
+			ROOT = { set_character_flag = IB_holy_wonder }
+		}
+		IB_wonderly_bloodline_effect = yes
+		IB_wonderly_bloodline_effect_temple = yes
+    }
+}
+
+#give wonder bloodline
+long_character_event = {
+	id = IB.21
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.21
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_wonderly_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.2
+		tooltip_info = stewardship
+		prestige = 300
+        create_bloodline = {
+                    type = IB_wonderly_bloodline
+        }
+	}
+}
+
+#Give wonder bloodline, temple
+long_character_event = {
+	id = IB.22
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.22
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_wonderly_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.2
+		tooltip_info = stewardship
+		prestige = 200
+		piety = 100
+        create_bloodline = {
+                    type = IB_wonderly_bloodline_h
+        }
+	}
+}
+
+long_character_event = {
+	id = IB.30
+	
+	picture = { 
+		trigger = { 
+			ROOT = { 
+				OR = { 
+					religion = hellenic_pagan
+					religion = hellenic_pagan_reformed
+				}
+			}
+		} 
+		picture = GFX_evt_hellenic_temple
+	}
+	picture = { 
+		trigger = { 
+			ROOT = { 
+				OR = { 
+					religion = west_african_pagan
+					religion = west_african_pagan_reformed
+				}
+			}
+		} 
+		picture = GFX_evt_west_african_ruler
+	}
+	picture = { 
+		trigger = { 
+			ROOT = { 
+				NOR = { 
+					religion = hellenic_pagan
+					religion = hellenic_pagan_reformed
+					religion = west_african_pagan
+					religion = west_african_pagan_reformed
+				}
+			}
+		} 
+		picture = GFX_evt_pagan_reformation
+	}
+	
+	desc = EVTDESCIB.30
+	is_triggered_only = yes
+	trigger = {
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+	}
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.1
+		tooltip_info = learning
+		trigger = {
+			NAND = {
+				has_religion_feature = religion_dogmatic
+				has_religion_feature = religion_temporal_head
+				has_religion_feature = religion_holy_family
+			}
+		}
+		prestige = 300
+		piety = 300
+        create_bloodline = {
+                    type = IB_reformist_bloodline
+        }
+	}
+	option = {
+		name = EVTOPT_a_IB.30
+		tooltip_info = learning
+		prestige = 300
+		piety = 300
+		trigger = {
+			has_religion_feature = religion_dogmatic
+			has_religion_feature = religion_temporal_head
+			has_religion_feature = religion_holy_family
+		}
+        create_bloodline = {
+                    type = IB_reformist_godking_bloodline
+        }
+	}
+}
+
+#Virgin Birth Bloodline
+character_event = {
+	id = IB.40
+	picture = GFX_evt_birth
+	desc = EVTDESCIB.22
+	is_triggered_only = yes
+	trigger = {
+        mother = {
+			has_character_flag = virginmary
+		}
+		NAND = {
+			OR = {
+				has_global_flag = IB_ai_less
+				has_global_flag = IB_ai_none
+			}
+			NOR = {
+				mother = {
+					ai = no
+				}
+				father = {
+					ai = no
+				}
+			}
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.2
+		prestige = 500
+		piety = 500
+        create_bloodline = {
+                    type = IB_virginmary_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.50
+	hide_window = yes
+	is_triggered_only = yes
+	
+	trigger = {
+		any_player = {
+			ROOT = { 
+				dynasty = PREV
+			}
+		}
+		ROOT = {
+			trait = inbred
+		}
+	}
+	immediate = {
+        change_variable = { which = global_IB_family_bloodline_var value = 1}
+        IB_family_bloodline_effect = yes
+    }
+}
+
+#Inbred Bloodline
+character_event = {
+	id = IB.51
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.5
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_family_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.5
+		tooltip_info = inbred
+		prestige = -100
+        create_bloodline = {
+                    type = IB_family_bloodline
+        }
+	}
+	option = {
+		name = EVTOPT_b_IB.5
+		tooltip_info = lustful
+		piety = -100
+		add_trait = lustful
+        create_bloodline = {
+                    type = IB_family_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.52
+	
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_bloodline = {
+			OR = {
+				has_bloodline_flag = IB_family_bloodline
+			}
+		}
+	}
+	immediate = {
+		family_bloodline_harelip_effect = yes
+	}
+}
+
+character_event = {
+	id = IB.60
+	is_triggered_only = yes
+	hide_window = yes
+	has_dlc = "Jade Dragon"
+	offmap = only
+	
+	trigger = {
+        is_offmap_tag = offmap_china
+    	NOT = { dynasty = FROM }
+		NOT = { has_global_flag = IB_china_bloodline }
+    }
+	immediate = {
+        if = {
+            limit = {
+                any_player = {
+                    dynasty = ROOT
+                }
+            }
+            IB_china_bloodline_effect = yes
+        }
+	}
+}
+
+character_event = {
+	id = IB.61
+	hide_window = yes
+	is_triggered_only = yes
+    trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_china_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+		ROOT = {
+			dynasty_head = { character_event = { id = IB.62 } }
+		}
+	}
+}
+
+character_event = {
+	id = IB.62
+	picture = GFX_evt_china_golden_age
+	desc = EVTDESCIB.60
+	is_triggered_only = yes
+    trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_china_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+		offmap_china = {
+			offmap_ruler = {
+				dynasty = ROOT
+			}
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+		create_bloodline = {
+            type = IB_china_bloodline
+        }
+	}
+	option = {
+		name = EVTOPT_a_IB.60
+		tooltip_info = martial
+		prestige = 500
+	}
+}
+
+character_event = {
+    id = IB.70
+    hide_window = yes
+    is_triggered_only = yes
+	trigger = { 
+		has_dlc = "Holy Fury"
+	}
+	
+    immediate = {
+        if = { 
+			limit = { 
+				ROOT = { check_variable = { which = IB_tyrant value == 0 } } 	
+			}
+			ROOT = { set_variable = { which = IB_tyrant value = 0 } }
+		}
+		change_variable = { which = IB_tyrant value = 1}
+		
+		IB_tyrantly_bloodline_effect = yes
+    }
+}
+
+#Tyrant Bloodline
+character_event = {
+	id = IB.71
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.70
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_tyrantly_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.70
+		tooltip_info = martial
+		prestige = 200
+		add_trait = cruel
+        create_bloodline = {
+            type = IB_tyrantly_bloodline
+        }
+	}
+}
+
+
+#Give hunter bloodline
+character_event = {
+	id = IB.80
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.80
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_hunter_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.80
+		tooltip_info = martial
+		prestige = 300
+        create_bloodline = {
+            type = IB_hunter_bloodline
+        }
+	}
+}
+
+#Give merciful hunter bloodline
+character_event = {
+	id = IB.81
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.80
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_hunter_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.81
+		tooltip_info = kind
+		prestige = 300
+        create_bloodline = {
+            type = IB_hunterm_bloodline
+        }
+		add_trait = kind
+	}
+}
+
+#Hunter bloodline might to get a dog
+character_event = {
+	id = IB.82
+	
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_bloodline = {
+			has_bloodline_flag = IB_hunter_bloodline
+		}
+	}
+	immediate = {
+		hunter_bloodline_dog_effect = yes
+	}
+}
+
+#prolific bloodline
+character_event = {
+	id = IB.90
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		prolific_bloodline_effect = yes
+	}
+}
+
+#prolific bloodline, mother
+character_event = {
+	id = IB.91
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.91
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_prolific_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	option = {
+		name = EVTOPT_a_IB.91
+		trigger = {
+			NOT = { has_character_flag = adulterer_IB }
+		}
+		prestige = 300
+        create_bloodline = {
+            type = IB_prolific_bloodline
+        }
+	}
+	
+    option = {
+		name = EVTOPT_b_IB.91
+		trigger = {
+			has_character_flag = adulterer_IB
+		}
+		prestige = 300
+		piety = -100
+        create_bloodline = {
+            type = IB_prolificu_bloodline
+        }
+	}
+}
+
+
+#prolific bloodline, father
+character_event = {
+	id = IB.92
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.92
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_prolific_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.92
+		prestige = 300
+        create_bloodline = {
+            type = IB_casanova_bloodline
+        }
+	}
+}
+
+#godslayer bloodline
+character_event = {
+	id = IB.110
+	picture = GFX_evt_kraken
+	desc = EVTDESCIB.110
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_godslayer_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.110
+		tooltip_info = lunatic
+		prestige = 300
+        create_bloodline = {
+                    type = IB_godslayer_bloodline
+        }
+	}
+}
+
+#godslayer lunatic
+character_event = {
+	id = IB.111
+	
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_bloodline = {
+				has_bloodline_flag = IB_godslayer_bloodline
+		}
+	}
+	immediate = {
+		godslayer_bloodline_lunatic_effect = yes
+	}
+}
+
+
+#Arthur created britannia
+character_event = {
+	id = IB.120
+	
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+        FROM = {
+			title = e_britannia
+		}
+		ROOT = { culture = welsh } 
+    }
+	immediate = {
+		ROOT = { set_character_flag = arthur_created_britannia }
+		arthur_bloodline_effect = yes
+	}
+}
+
+#arthur defended agaisnt norse
+character_event = {
+	id = IB.121
+	
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+        OR = {
+            FROM = { religion = norse_pagan }
+			FROM = { religion = norse_pagan_reformed }
+        }
+		ROOT = { culture = welsh }
+    }
+	immediate = {
+		ROOT = { set_character_flag = arthur_defended_britannia }
+		arthur_bloodline_effect = yes
+	}
+}
+
+#arthur bloodline
+character_event = {
+	id = IB.122
+	picture = GFX_evt_a_crowning_ceremony
+	desc = EVTDESCIB.122
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_arthur_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.122
+		tooltip_info = martial
+		prestige = 500
+        create_bloodline = {
+                    type = IB_arthur_bloodline
+        }
+		ROOT = { character_event = { id = IB.123 days = 30 } }
+	}
+}
+
+character_event = {
+	id = IB.123
+	picture = GFX_evt_mysterious_forest_wol
+	desc = EVTDESCIB.123
+	is_triggered_only = yes
+	trigger = {
+			any_owned_bloodline = { has_bloodline_flag = IB_arthur_bloodline }
+    }
+
+    option = {
+		name = EVTOPT_a_IB.123
+		ROOT = { character_event = { id = IB.124 days = 10 } }
+	}
+}
+
+character_event = {
+	id = IB.124
+	picture = GFX_evt_relic_box
+	desc = EVTDESCIB.124
+	is_triggered_only = yes
+	trigger = {
+			any_owned_bloodline = { has_bloodline_flag = IB_arthur_bloodline }
+    }
+    option = {
+		name = EVTOPT_a_IB.124
+		tooltip_info = martial
+        ROOT = { add_artifact = IB_excalibur }
+	}
+}
+
+character_event = {
+	id = IB.130
+	picture = GFX_evt_midwinter_blot_oldgods
+	desc = EVTDESCIB.130
+	is_triggered_only = yes
+	trigger = {
+		NOT = { any_owned_bloodline = { has_bloodline_flag = IB_triology_bloodline } }
+    }
+    option = {
+		name = EVTOPT_a_IB.130
+		tooltip_info = martial
+       create_bloodline = {
+                    type = IB_triology_uncut_bloodline
+        }
+	}
+}
+
+
+character_event = {
+	id = IB.131
+	picture = GFX_evt_midwinter_blot_oldgods
+	desc = EVTDESCIB.131
+	is_triggered_only = yes
+	trigger = {
+			NOT = { any_owned_bloodline = { has_bloodline_flag = IB_triology_bloodline } }
+    }
+    option = {
+		name = EVTOPT_a_IB.130
+		tooltip_info = martial
+       create_bloodline = {
+                    type = IB_triology_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.140
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			AND = {
+				ROOT = {
+					NOT = { trait = twin }
+				}
+				OR = {
+					father = { has_character_flag = seventh_son }
+					father = { any_child = {has_character_flag = sevens_son} }
+					father = { num_of_children == 7}
+				}
+			}
+			AND = {
+				ROOT = {
+					trait = twin 
+				}
+				OR = {
+					father = { has_character_flag = seventh_son }
+					father = { any_child = {has_character_flag = sevens_son} }
+					father = { num_of_children == 8}
+				}
+			}
+		}
+	}
+	immediate = {
+		if = {
+				limit = {
+					OR = {
+						father = { has_character_flag = seventh_son}
+						father = { any_child = {has_character_flag = sevens_son} }
+					}
+				}
+			ROOT = {set_character_flag = sevens_son }
+			IB_seventh_bloodline_effect = yes
+		}
+		if = {
+				limit = {
+					OR = {
+						AND = {
+							ROOT = {
+								NOT = { trait = twin }
+							}
+							father = { num_of_children == 7}
+							NOT = {
+								father = {
+									any_child_even_if_dead = {	is_female = yes	}
+								}
+							}
+						}
+						AND = {
+							ROOT = {
+								trait = twin
+							}
+							father = { num_of_children == 8}
+							NOT = {
+								father = {
+									any_child_even_if_dead = {	is_female = yes	}
+								}
+							}
+						}
+					}
+				}
+			ROOT = { set_character_flag = seventh_son }
+			IB_seventh_bloodline_effect = yes
+		}
+	}
+}
+
+
+character_event = {
+	id = IB.141
+	picture = GFX_evt_midwinter_blot_oldgods
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = { any_owned_bloodline = { has_bloodline_flag = IB_sevenly_bloodline } }
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+    immediate = {
+		create_bloodline = { type = IB_sevenly_bloodline }
+		add_trait = genius
+		add_trait = strong
+		add_trait = fair
+		father = { character_event = { id = IB.142 } }
+		ROOT = { character_event = { id = IB.144 years = 16 } }
+	}
+}
+
+character_event = {
+	id = IB.142
+	picture = GFX_evt_midwinter_blot_oldgods
+	desc = EVTDESCIB.142
+	is_triggered_only = yes
+	trigger = {
+			NOT = { any_owned_bloodline = { has_bloodline_flag = IB_sevenly_bloodline } }
+    }
+    option = {
+		name = EVTOPT_a_IB.142
+		tooltip_info = genius
+	}
+}
+
+#Seventh trait
+character_event = {
+	id = IB.143
+	
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_bloodline = {
+			has_bloodline_flag = IB_sevenly_bloodline
+		}
+	}
+	immediate = {
+		sevenly_bloodline_genius_effect = yes
+	}
+}
+
+
+#seventh gets physician
+character_event = {
+	id = IB.144
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+			any_owned_bloodline = { has_bloodline_flag = IB_sevenly_bloodline }
+    }
+    immediate = {
+		add_trait = physician
+	}
+}
+
+#hannibal check
+character_event = {
+	id = IB.150
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			death_reason = death_execution_eaten_unknown
+			death_reason = death_execution_eaten
+		}
+	}
+    immediate = {
+		killer = {
+			if = {
+				limit = {
+					killer = { check_variable = { which = IB_hannibal_bloodline value == 0 } } 	
+				}
+				killer = { set_variable = { which = IB_hannibal_bloodline value = 0 } }
+			}
+			killer = { change_variable = { which = IB_hannibal_bloodline value = 1} }
+		}
+		killer = {
+			if = {
+				limit = {
+					killer = { check_variable = { which = IB_cronus_kill value == 0 } } 	
+				}
+				killer = { set_variable = { which = IB_cronus_kill value = 0 } }
+			}
+			if = {
+				limit = {
+					killer = {
+						ROOT = {
+							is_child_of = PREV
+						}
+					}
+				}
+				killer = { change_variable = { which = IB_cronus_kill value = 1} }
+			}
+		}
+		if = {
+			limit = {
+				killer = { check_variable = { which = IB_cronus_kill value = 5 } }
+			}
+			killer = { character_event = { id = IB.280 } }
+		}
+		IB_hannibal_bloodline_effect = yes
+		IB_hannibal_healing_effect = yes
+	}
+}
+
+
+character_event = {
+	id = IB.151
+	picture = GFX_evt_King_Lunatic
+	desc = EVTDESCIB.151
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_hannibal_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.151
+		tooltip_info = cannibal
+		prestige = -100
+		piety = -200
+        create_bloodline = {
+            type = IB_hannibal_bloodline
+        }
+	}
+}
+
+
+character_event = {
+	id = IB.160
+	picture = GFX_evt_merchant_caravan
+	desc = EVTDESCIB.160
+	is_triggered_only = yes
+	trigger = {
+			NOT = { 
+				any_owned_bloodline = { 
+					has_bloodline_flag = IB_mansa_bloodline } 
+			}
+			ai = no
+			wealth = 100000
+			yearly_income = 2000
+    }
+    option = {
+		name = EVTOPT_a_IB.160
+		tooltip_info = greedy
+		prestige = 500
+		add_trait = greedy
+        create_bloodline = {
+                    type = IB_mansa_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.170
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.170
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_crusade_repelled_bloodline 	}
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+    option = {
+		name = EVTOPT_a_IB.170
+		prestige = 500
+		piety = 500
+		add_trait = zealous
+        create_bloodline = {
+            type = IB_crusade_repelled_bloodline
+        }
+	}
+}
+
+#chess bloodline
+character_event = {
+	id = IB.180
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.180
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_chess_bloodline	}
+		}
+		NAND = {
+			OR = {
+				has_global_flag = IB_ai_less
+				has_global_flag = IB_ai_none
+			}
+			ai = yes
+		}
+    }
+    option = {
+		trigger = {
+			has_character_flag = IB_drunkchess_bloodline
+		}
+		name = EVTOPT_a_IB.180
+		prestige = 300
+        create_bloodline = {
+			type = IB_drunkchess_bloodline
+        }
+		clr_character_flag = IB_drunkchess_bloodline
+		clr_character_flag = IB_sacrificechess_bloodline
+		clr_character_flag = IB_grandmaster_bloodline
+		clr_character_flag = IB_spychess_bloodline
+		clr_character_flag = IB_intmaster_bloodline
+		clr_character_flag = IB_intimidatedeath_bloodline
+	}
+	option = {
+		trigger = {
+			has_character_flag = IB_sacrificechess_bloodline
+		}
+		name = EVTOPT_b_IB.180
+		prestige = 300
+        create_bloodline = {
+            type = IB_sacrificechess_bloodline
+        }
+		clr_character_flag = IB_drunkchess_bloodline
+		clr_character_flag = IB_sacrificechess_bloodline
+		clr_character_flag = IB_grandmaster_bloodline
+		clr_character_flag = IB_spychess_bloodline
+		clr_character_flag = IB_intmaster_bloodline
+		clr_character_flag = IB_intimidatedeath_bloodline
+	}
+	option = {
+		name= {
+		  text = EVTOPT_c_IB.180
+		  trigger = {
+			has_character_flag = IB_grandmaster_bloodline
+		  }
+		}
+
+		name = {
+		  text = EVTOPT_e_IB.180
+		  trigger = {
+			NOT = { has_character_flag = IB_grandmaster_bloodline }
+		  }
+		}
+		if = { 
+			limit = {
+				has_character_flag = IB_grandmaster_bloodline
+			}
+			prestige = 300
+			create_bloodline = {
+				type = IB_grandmaster_bloodline
+			}
+		}
+		else = {
+			prestige = 100
+			create_bloodline = {
+				type = IB_genchess_bloodline
+			}
+		}
+		clr_character_flag = IB_drunkchess_bloodline
+		clr_character_flag = IB_sacrificechess_bloodline
+		clr_character_flag = IB_grandmaster_bloodline
+		clr_character_flag = IB_spychess_bloodline
+		clr_character_flag = IB_intmaster_bloodline
+		clr_character_flag = IB_intimidatedeath_bloodline
+	}
+	option = {
+		name = EVTOPT_d_IB.180
+        ROOT = { character_event = { id = IB.181 } }
+	}
+}
+
+character_event = {
+	id = IB.181
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.180
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_chess_bloodline	}
+		}
+		NAND = {
+			OR = {
+				has_global_flag = IB_ai_less
+				has_global_flag = IB_ai_none
+			}
+			ai = yes
+		}
+    }
+    option = {
+		trigger = {
+			has_character_flag = IB_spychess_bloodline
+		}
+		name = EVTOPT_a_IB.181
+		prestige = 300
+        if = {
+			limit = {
+				is_female = yes
+			}
+			create_bloodline = {
+						type = IB_femmefatale_bloodline
+			}
+		}
+		else = {
+			create_bloodline = {
+						type = IB_bond_bloodline
+			}
+		}
+		clr_character_flag = IB_drunkchess_bloodline
+		clr_character_flag = IB_sacrificechess_bloodline
+		clr_character_flag = IB_grandmaster_bloodline
+		clr_character_flag = IB_spychess_bloodline
+		clr_character_flag = IB_intmaster_bloodline
+		clr_character_flag = IB_intimidatedeath_bloodline
+	}
+	option = {
+		trigger = {
+			has_character_flag = IB_intmaster_bloodline
+		}
+		name = EVTOPT_b_IB.181
+		prestige = 300
+        create_bloodline = {
+                    type = IB_intmaster_bloodline
+        }
+		clr_character_flag = IB_drunkchess_bloodline
+		clr_character_flag = IB_sacrificechess_bloodline
+		clr_character_flag = IB_grandmaster_bloodline
+		clr_character_flag = IB_spychess_bloodline
+		clr_character_flag = IB_intmaster_bloodline
+		clr_character_flag = IB_intimidatedeath_bloodline
+	}
+	option = {
+		trigger = {
+			has_character_flag = IB_intimidatedeath_bloodline
+		}
+		name = EVTOPT_c_IB.181
+		prestige = 300
+        create_bloodline = {
+                    type = IB_intimidatedeath_bloodline
+        }
+		clr_character_flag = IB_drunkchess_bloodline
+		clr_character_flag = IB_sacrificechess_bloodline
+		clr_character_flag = IB_grandmaster_bloodline
+		clr_character_flag = IB_spychess_bloodline
+		clr_character_flag = IB_intmaster_bloodline
+		clr_character_flag = IB_intimidatedeath_bloodline
+	}
+	option = {
+		name = EVTOPT_d_IB.181
+        ROOT = { character_event = { id = IB.180 } }
+	}
+}
+
+character_event = {
+	id = IB.182
+	
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			any_owned_bloodline = {	has_bloodline_flag = IB_chess_magnus	}
+			any_owned_bloodline = {	has_bloodline_flag = IB_chess_internat	}
+		}
+	}
+	immediate = {
+		chessmaster_bloodline_effect = yes
+	}
+}
+
+
+#win against strong	
+#Offensive War Defeat
+#FROM is the attacker
+#ROOT is the defender
+
+character_event = {
+	id = IB.190
+	is_triggered_only = yes
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.190
+	
+	trigger = {
+		OR = {
+			ROOT = {
+				NOT = {
+					is_tribal = yes
+					is_nomadic = yes
+				}
+				relative_realm_size = { who = FROM size < 0.1 }
+			}
+			ROOT = {
+				OR = {
+					is_tribal = yes
+					is_nomadic = yes
+				}
+				relative_realm_size = { who = FROM size < 0.03 }
+			}
+		}
+		FROM = {
+			realm_size = 50
+		}
+		ROOT = {
+				NOT = {	any_owned_bloodline = { has_bloodline_flag = IB_artofwar_bloodline }	}
+		}
+		NAND = {
+			OR = {
+				has_global_flag = IB_ai_less
+				has_global_flag = IB_ai_none
+			}
+			ai = yes
+		}
+	}
+	option = {
+		name = EVTOPT_a_IB.190
+		prestige = 300
+        create_bloodline = {
+            type = IB_artofwar_bloodline
+        }
+	}
+}
+
+#Offensive War Victory
+#FROM is the attacker
+#ROOT is the defender
+
+character_event = {
+	id = IB.191
+		
+	is_triggered_only = yes
+	hide_window = yes
+
+	trigger = {
+		OR = {
+			FROM = {
+				NOT = {
+					is_tribal = yes
+					is_nomadic = yes
+				}
+				relative_realm_size = { who = ROOT size < 0.1 }
+			}
+			FROM = {
+				OR = {
+					is_tribal = yes
+					is_nomadic = yes
+				}
+				relative_realm_size = { who = ROOT size < 0.03 }
+			}
+		}
+		ROOT = {
+			realm_size = 50
+		}
+		FROM = {
+			NOT = {	any_owned_bloodline = { has_bloodline_flag = IB_artofwar_bloodline }	}
+		}
+		NAND = {
+			OR = {
+				has_global_flag = IB_ai_less
+				has_global_flag = IB_ai_none
+			}
+			ai = yes
+		}
+	}
+	option = {
+		FROM = { character_event = { id = IB.192 } }
+		name = EVTOPT_a_IB.190
+	}
+}
+
+
+
+character_event = {
+	id = IB.192
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.191
+	
+	is_triggered_only = yes
+
+	trigger = {
+		ROOT = {
+			NOT = {	any_owned_bloodline = { has_bloodline_flag = IB_artofwar_bloodline }	}
+		}
+		NAND = {
+			OR = {
+				has_global_flag = IB_ai_less
+				has_global_flag = IB_ai_none
+			}
+			ai = yes
+		}
+	}
+	option = {
+		name = EVTOPT_a_IB.190
+		prestige = 300
+		create_bloodline = {
+			type = IB_artofwar_bloodline
+		}
+	}
+}
+
+character_event = {
+	id = IB.200
+	hide_window = yes
+	
+	is_triggered_only = yes
+
+	trigger = {
+		is_female = yes
+		is_alive = yes
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+	}
+	immediate = {
+		if = { 
+			limit = { 
+				ROOT = { check_variable = { which = IB_female_warrior value == 0 } } 	
+			}
+			ROOT = { set_variable = { which = IB_female_warrior value = 0 } }
+		}
+		change_variable = { which = IB_female_warrior value = 1}
+	}
+	ib_female_warrior_effect = yes
+}
+
+character_event = {
+	id = IB.201
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		ROOT = {
+			NOT = {	any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }	}
+		}
+	}
+	immediate = {
+		ROOT = { femwar_bloodline_create_effect = yes }
+	}
+}
+
+
+character_event = {
+	id = IB.2001
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_valkyrie_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2002
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_cynane_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2003
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_amazon_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2004
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_artemisia_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2005
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_zenobia_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2006
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_khawlah_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2007
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_doramilaje_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2008
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_boudicca_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2009
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_jeannedarc_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2010
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_fuhao_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2011
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_tomyris_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2012
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_khutulun_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.2013
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.201
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.201
+		prestige = 300
+        create_bloodline = {
+                    type = IB_genfemwar_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.210
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			ROOT = { any_owned_bloodline = { has_bloodline_flag = IB_hannibalbarca_bloodline } }
+		}
+		NOT = {
+			FROMFROM = { culture = maghreb_arabic }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+    immediate = {
+		ib_barca_bloodline_effect = yes
+	}
+}
+
+character_event = {
+	id = IB.211
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.211
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_hannibalbarca_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.211
+		prestige = 300
+        create_bloodline = {
+            type = IB_hannibalbarca_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.220
+	picture = GFX_evt_library
+	desc = EVTDESCIB.220
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_author_bloodline }
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.220
+		ROOT = { 
+			capital_scope = {
+				province_event = { id = IB.221 }
+			}
+		}
+		prestige = 300
+		create_bloodline = {
+            type = IB_author_bloodline
+        }
+	}
+}
+
+		
+#add Writers Guild
+province_event = { 
+	id = IB.221
+	hide_window = yes
+	
+	is_triggered_only = yes
+	trigger = {
+		ROOT = { 
+			NOT = { has_province_modifier = ib_writers_guild_province }
+		}
+	}
+	
+	immediate = {
+		ROOT = {
+			add_province_modifier = { name = ib_writers_guild_province duration = -1 }
+		}
+	}
+}
+
+
+character_event = {
+	id = IB.230
+	picture = GFX_evt_busy_trading_dock_republic
+	desc = EVTDESCIB.230
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_merchant_bloodline }
+		}
+		ROOT = { num_of_trade_posts = 25 }
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.230
+		ROOT = {
+			prestige = 300
+			create_bloodline = {
+				type = IB_merchant_bloodline
+			}
+		}
+	}
+}
+
+
+#Offensive War Defeat
+#FROM is the attacker
+#ROOT is the defender
+
+character_event = {
+	id = IB.240
+	is_triggered_only = yes
+	hide_window = yes 
+	
+	trigger = {
+		ROOT = {
+			has_landed_title = k_saxony
+		}
+		OR = {
+			FROM = { has_character_flag = is_charlemagne }
+			FROM = { has_character_flag = is_carloman }
+		}
+		ROOT = {
+			NOT = {	any_owned_bloodline = { has_bloodline_flag = IB_saxony_bloodline }	}
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+	}
+	immediate = {
+		ROOT = { set_character_flag = saxony_win }
+		IB_saxony_bloodline_effect = yes
+	}
+}
+
+#Offensive War Victory
+#FROM is the attacker
+#ROOT is the defender
+
+character_event = {
+	id = IB.241
+		
+	is_triggered_only = yes
+	hide_window = yes
+
+	trigger = {
+		FROM = {
+			has_landed_title = k_saxony
+		}
+		OR = {
+			ROOT = { has_character_flag = is_charlemagne }
+			ROOT = { has_character_flag = is_carloman }
+		}
+		FROM = {
+			NOT = {	any_owned_bloodline = { has_bloodline_flag = IB_saxony_bloodline }	}
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+	}
+	immediate = {
+		FROM = { set_character_flag = saxony_win }
+		IB_saxony_bloodline_effect_FROM = yes
+	}
+}
+
+
+character_event = {
+	id = IB.243
+	
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+        OR = {
+			FROM = {
+				title = e_germany 
+			}
+			FROM = {
+				title = e_scandinavia
+			}
+		}
+		ROOT = {
+			has_landed_title = k_saxony
+		}
+    }
+	immediate = {
+		ROOT = { set_character_flag = saxony_created_empire }
+		IB_saxony_bloodline_effect = yes
+	}
+}
+
+#Saxony bloodline
+character_event = {
+	id = IB.244
+	picture = GFX_evt_irminsul_shrine
+	desc = EVTDESCIB.244
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_saxony_bloodline }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.244
+		tooltip_info = martial
+		prestige = 500
+        create_bloodline = {
+            type = IB_saxony_bloodline
+        }
+	}
+}
+
+character_event = {
+    id = IB.250
+    hide_window = yes
+    is_triggered_only = yes
+	trigger = { 
+		has_dlc = "Holy Fury"
+	}
+	
+    immediate = {
+		any_spouse = {
+			character_event = { id = IB.251 }
+		}
+    }
+}
+
+character_event = {
+    id = IB.251
+    hide_window = yes
+    is_triggered_only = yes
+	trigger = { 
+		has_dlc = "Holy Fury"
+	}
+	
+    immediate = {
+		if = {
+			limit = {
+				age <= 45
+				is_female = yes
+			}
+			if = { 
+				limit = { 
+					ROOT = { check_variable = { which = IB_black_widow value == 0 } } 	
+				}
+			ROOT = { set_variable = { which = IB_black_widow value = 0 } }
+			}
+		change_variable = { which = IB_black_widow value = 1}
+		IB_black_widow_bloodline_effect = yes
+		}
+    }
+}
+
+character_event = {
+	id = IB.252
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.252
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_black_widow_bloodline }
+		}
+		NAND = {
+			OR = {
+				has_global_flag = IB_ai_less
+				has_global_flag = IB_ai_none
+			}
+			ai = yes
+		}
+    }
+	
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.252
+		tooltip_info = intrigue
+		prestige = -200
+        create_bloodline = {
+            type = IB_black_widow_bloodline
+        }
+	}
+}
+
+#long lived
+character_event = {
+	id = IB.260
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.260
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_longevity_bloodline }
+		}
+		age = 90
+		NOT = {
+			trait = immortal
+		}
+		NAND = {
+			OR = {
+				has_global_flag = IB_ai_less
+				has_global_flag = IB_ai_none
+			}
+			ai = yes
+		}
+    }
+	
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+    option = {
+		name = EVTOPT_a_IB.260
+		prestige = 300
+        create_bloodline = {
+            type = IB_longevity_bloodline
+        }
+	}
+}
+
+
+character_event = {
+	id = IB.270
+	picture = GFX_evt_battle
+	desc = EVTDESCIB.270
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_kaiserirum_bloodline }
+		}
+		NOT = {
+			has_global_flag = IB_kaiseri_rum
+		}
+		NAND = {
+			has_global_flag = IB_ai_none
+			ai = yes
+		}
+		FROM = { title = c_byzantion }
+		ROOT = {
+			culture = turkish 
+			religion_group = muslim
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+
+    option = {
+		name = EVTOPT_a_IB.270
+		prestige = 500
+        create_bloodline = {
+            type = IB_kaiserirum_bloodline
+        }
+		set_global_flag = IB_kaiseri_rum
+	}
+}
+
+character_event = {
+	id = IB.280
+	picture = GFX_evt_King_Lunatic
+	desc = EVTDESCIB.280
+	is_triggered_only = yes
+	trigger = {
+        NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_cronus_child_bloodline }
+		}
+		OR = {
+			ROOT = { religion = hellenic_pagan }
+			ROOT = { religion = hellenic_pagan_reformed }
+		}
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.280
+		tooltip_info = cannibal
+		prestige = -200
+		piety = -200
+        create_bloodline = {
+            type = IB_cronus_child_bloodline
+        }
+	}
+}
+
+character_event = {
+	id = IB.290
+	picture = GFX_evt_jerusalem_captured_jews
+	desc = EVTDESCIB.290
+	is_triggered_only = yes
+	
+	trigger = {
+        religion = jewish
+    }
+	immediate = {
+		sound_effect = bloodline_added
+	}
+    option = {
+		name = EVTOPT_a_IB.290
+		prestige = 300
+		piety = 500
+        create_bloodline = {
+            type = IB_melekh_mashiach_bloodline
+        }
+	}
+}

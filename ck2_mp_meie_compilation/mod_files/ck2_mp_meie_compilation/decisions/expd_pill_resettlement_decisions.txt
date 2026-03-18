@@ -1,0 +1,73 @@
+# For title_decisions, FROM is the decision taker & ROOT is the targeted title
+
+title_decisions = {
+	expd_pill_resettle_from_neighbouring_province = {
+		
+		filter = realm_owned
+		ai = no # The AI almost certainly doesn't understand how to use this properly, and the decision only really exists for player roleplay anyway
+		
+		potential = {
+			
+			# Only valid for tribal rulers (since they are the only ones who can get any use out of the extra pillaging added by the mod)
+			FROM = { is_tribal = yes }
+			
+			ROOT = {
+				
+				# Must be a count-tier title
+				tier = COUNT
+				
+				# Must be owned by decision taker, or one of their vassals (direct or indirect)
+				holder_scope = {
+					OR = {
+						character = FROM
+						any_liege = { character = FROM }
+					}
+				}
+				
+				# Must be an empty province
+				location = { num_of_settlements == 0 }
+				
+			}
+			
+		}
+		
+		allow = {
+			
+			# Decision-taker must be able to pay the prestige cost to build a new tribe
+			FROM = { prestige >= 50 }
+			
+			# There must be a valid resettlement source
+			# If FROM wants to resettle with their own exact culture and religion, they should build a tribe directly!
+			ROOT = {
+				show_scope_change = no
+				location = {
+					show_scope_change = no
+					custom_tooltip = {
+						text = EXPD_PILL_TOOLTIP_THIS_PROVINCE_HAS_NO_SETTLEMENTS_AND_NO_CONSTRUCTION
+						has_settlement_construction = no
+						num_of_settlements == 0
+					}
+					custom_tooltip = {
+						text = EXPD_PILL_TOOLTIP_THIS_PROVINCE_HAS_ADJACENT_PROVINCE_OF_DIFF_CULTURE_OR_RELIGION
+						any_neighbor_province = {
+							is_land = yes
+							NAND = {
+								culture  = PREV
+								religion = PREV
+							}
+						}
+					}
+				}
+			}
+			
+		}
+		
+		effect = {
+			custom_tooltip = {
+				text = EXPD_PILL_TOOLTIP_EVENT_OCCURS_ALLOWING_RESETTLEMENT_FROM_ADJACENT_PROVINCE
+				ROOT = { location = { province_event = { id = ExpdPillResettle.100 } } }
+			}
+		}
+		
+	}
+}

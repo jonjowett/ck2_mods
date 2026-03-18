@@ -1,0 +1,25 @@
+expd_tv_this_character_is_of_froms_dynasty_including_bastard = {
+	custom_tooltip = {
+		text = EXPD_TV_TOOLTIP_THIS_CHARACTER_IS_OF_FROMS_DYNASTY_INCLUDING_BASTARD
+		OR = {
+			dynasty = FROM
+			AND = {
+				trait = bastard
+				OR = {
+					mother_even_if_dead = { dynasty = FROM }
+					father_even_if_dead = { dynasty = FROM }
+				}
+			}
+		}
+	}
+}
+
+expd_tv_this_character_has_a_mercenary_bloodline = {
+	custom_tooltip = {
+		text = EXPD_TV_TOOLTIP_THIS_CHARACTER_HAS_A_MERCENARY_BLOODLINE
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = bloodline_mercenary_traditions
+		}
+	}
+}

@@ -1,0 +1,26 @@
+namespace = edmp_rs
+
+# Normal-user event, summarising all current game rules
+character_event = {
+	
+	id      = edmp_rs.1000
+	title   = edmp_rs_1000_title
+	desc    = edmp_rs_1000_desc
+	picture = GFX_evt_camaraderie
+	window  = EventWindowEDMPLongCharacter
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		clr_character_flag = edmp_rs_event_is_open
+		set_character_flag = edmp_rs_event_is_open
+	}
+	
+	option = { name = edmp_rs_1000_evtopt_exit }
+	
+	after = {
+		hidden_tooltip = { clr_character_flag = edmp_rs_event_is_open }
+	}
+	
+}

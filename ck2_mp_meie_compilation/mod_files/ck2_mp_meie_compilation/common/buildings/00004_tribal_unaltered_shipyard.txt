@@ -1,0 +1,77 @@
+# Audax Validator EnableCommentMetadata
+# Audax Validator "!" Ignore_NEXT
+# Ignore all errors in this file, since the buildings are identical to the base game.
+
+ # Triggers are in Province scope. The From Scope contains the settlement holder (character)
+ # start trigger is in title scope.
+
+tribal = {
+	
+	tb_shipyard_1 = {
+		desc = shipyard_desc
+		port = yes
+		trigger = { TECH_NAVAL = 1 }
+		prestige_cost = 100
+		build_time = 365
+		galleys = 6
+		ai_creation_factor = 96
+		ai_republic_modifier = 5
+		
+		convert_to_castle = ca_shipyard_1
+		convert_to_city = ct_shipyard_1
+		
+		extra_tech_building_start = 0.3
+	}
+	
+	tb_shipyard_2 = {
+		desc = shipyard_desc
+		port = yes
+		trigger = { TECH_NAVAL = 2 }
+		upgrades_from = tb_shipyard_1
+		prestige_cost = 200
+		build_time = 730
+		galleys = 7
+		ai_creation_factor = 95
+		ai_republic_modifier = 5
+		
+		convert_to_castle = ca_shipyard_2
+		convert_to_city = ct_shipyard_2
+		
+		extra_tech_building_start = 0.3
+	}
+	
+	tb_shipyard_3 = {
+		desc = shipyard_desc
+		port = yes
+		trigger = { TECH_NAVAL = 3 }
+		upgrades_from = tb_shipyard_2
+		prestige_cost = 300
+		build_time = 1095
+		galleys = 8
+		ai_creation_factor = 94
+		ai_republic_modifier = 5
+		
+		convert_to_castle = ca_shipyard_3
+		convert_to_city = ct_shipyard_3
+		
+		extra_tech_building_start = 0.3
+	}
+	
+	tb_shipyard_4 = {
+		desc = shipyard_desc
+		port = yes
+		trigger = { TECH_NAVAL = 4 }
+		upgrades_from = tb_shipyard_3
+		prestige_cost = 400
+		build_time = 1460
+		galleys = 9
+		ai_creation_factor = 93
+		ai_republic_modifier = 5
+		
+		convert_to_castle = ca_shipyard_4
+		convert_to_city = ct_shipyard_4
+		
+		extra_tech_building_start = 0.3
+	}
+	
+}

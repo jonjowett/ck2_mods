@@ -1,0 +1,68 @@
+#
+# Modifiers
+edmp_realm_size_under_limit_ai_no_effect;§M(ED:MP)§! Realm Size Under Limit (AI);;;;;;;;;;;;;x
+edmp_realm_size_under_limit_ai_no_effect_desc;This is an §Gabsent human player§! whose realm size is §Gunder§! the Global Realm Size Limit, so they receive §Gno penalties§!.[edmp_realm_size_display_calculation];;;;;;;;;;;;;x
+edmp_realm_size_under_limit_player_no_effect;§M(ED:MP)§! Realm Size Under Limit (Player);;;;;;;;;;;;;x
+edmp_realm_size_under_limit_player_no_effect_desc;This is a §Yhuman player§! whose realm size is §Gunder§! the Global Realm Size Limit, so they receive §Gno penalties§!.[edmp_realm_size_display_calculation];;;;;;;;;;;;;x
+edmp_realm_size_over_limit_ai_no_effect;§M(ED:MP)§! Realm Size Over Limit (AI);;;;;;;;;;;;;x
+edmp_realm_size_over_limit_ai_no_effect_desc;This is an §Gabsent human player§! whose realm size is §Rover§! the Global Realm Size Limit, so they receive §Gno penalties§!.[edmp_realm_size_display_calculation];;;;;;;;;;;;;x
+edmp_realm_size_over_limit_close_player_stackable;§M(ED:MP)§! Realm Size Over Limit (Player) (§YClose§!);;;;;;;;;;;;;x
+edmp_realm_size_over_limit_close_player_stackable_desc;This is an §Yhuman player§! whose realm size is §Rslightly over§! the Global Realm Size Limit, so they receive §Rsmall escalating penalties§!.[edmp_realm_size_display_calculation];;;;;;;;;;;;;x
+edmp_realm_size_over_limit_significant_player_stackable;§M(ED:MP)§! Realm Size Over Limit (Player) (§RSignificant§!);;;;;;;;;;;;;x
+edmp_realm_size_over_limit_significant_player_stackable_desc;This is an §Yhuman player§! whose realm size is §Rsignificantly over§! the Global Realm Size Limit, so they receive §Rsignificant escalating penalties§!.[edmp_realm_size_display_calculation];;;;;;;;;;;;;x
+edmp_realm_size_extra_limit_stackable_permanent;§M(ED:MP)§! Realm Size Extra Limit (Permanent);;;;;;;;;;;;;x
+edmp_realm_size_extra_limit_stackable_permanent_desc;This §Gpermanent§! modifier §Greduces§! this character's realm size, for the purpose of the §M(ED:MP)§! Realm Size Limit calculation.;;;;;;;;;;;;;x
+edmp_realm_size_extra_limit_stackable_temporary;§M(ED:MP)§! Realm Size Extra Limit (Temporary);;;;;;;;;;;;;x
+edmp_realm_size_extra_limit_stackable_temporary_desc;This §Rtemporary§! modifier §Greduces§! this character's realm size, for the purpose of the §M(ED:MP)§! Realm Size Limit calculation.;;;;;;;;;;;;;x
+edmp_realm_size_recently_forced_recalculation;§M(ED:MP)§! Realm Size Recalc Blocked;;;;;;;;;;;;;x
+edmp_realm_size_recently_forced_recalculation_desc;This character has recently forcibly recalculated their realm size.\n\nTo avoid excess lag, they are prevented from performing another recalulation while this modifier is in effect.;;;;;;;;;;;;;x
+#
+# Custom Loc for the realm size calculation
+# Split into several smaller custom locs (relatively arbitrarily), due to 1023 char limit per line
+edmp_realm_size_display_calculation_actual;[edmp_realm_size_display_calculation_part1][edmp_realm_size_display_calculation_part2][edmp_realm_size_display_calculation_part3][edmp_realm_size_display_calculation_part4][edmp_realm_size_display_calculation_part5][edmp_realm_size_display_calculation_part6][edmp_realm_size_display_calculation_part7][edmp_realm_size_display_calculation_part8][edmp_realm_size_display_calculation_part9];;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_part1_actual;\n\nTotal Realm Size: §Y[Root.edmp_realm_size_total.GetValue]§!;;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_part2_actual;\n - From §Y[Root.edmp_realm_size_total_holdings.GetValue]§! holdings in realm: §Y[Root.edmp_realm_size_total_holdings.GetValue]§!;;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_part3_actual;\n - From §Y[Root.edmp_realm_size_total_tribal_empty_holdings.GetValue]§! empty holding slots (in §Y[Root.edmp_realm_size_total_tribal_counties.GetValue]§! tribal counties) (§Y[Root.global_edmp_realm_size_empty_holdings_tribal.GetValue]§!/slot): §Y[Root.edmp_realm_size_total_tribal_empty_realm_size.GetValue]§! §g(rounded)§!;;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_part4_actual;\n - From §Y[Root.edmp_realm_size_total_nomadic_empty_holdings.GetValue]§! empty holding slots (in §Y[Root.edmp_realm_size_total_nomadic_counties.GetValue]§! nomadic counties) (§Y[Root.global_edmp_realm_size_empty_holdings_nomadic.GetValue]§!/slot): §Y[Root.edmp_realm_size_total_nomadic_empty_realm_size.GetValue]§! §g(rounded)§!;;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_part5_actual;\n - From §Y[Root.edmp_realm_size_total_player_vassals_quantity.GetValue]§! player vassals' "Total Realm Size": [edmp_realm_size_display_calculation_colour_goodbad_part5a][Root.edmp_realm_size_total_player_vassals.GetValue]§!\n - From §Y[Root.edmp_realm_size_total_player_vassals_quantity.GetValue]§! player vassals' "Extra Realm Size Limit": [edmp_realm_size_display_calculation_colour_goodbad_part5b][Root.edmp_realm_size_total_extra_player_vassals.GetValue]§!;;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_part6_actual;\n - From your "Extra Realm Size Limit": [edmp_realm_size_display_calculation_colour_goodbad_part6][Root.edmp_realm_size_total_extra.GetValue]§!;;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_part7_actual;\n\nGlobal Realm Size Limit: §Y[Root.global_edmp_realm_size_limit.GetValue]§!;;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_part8_actual;\n\nExcess Realm Size: [edmp_realm_size_display_calculation_colour_goodbad_part8][Root.edmp_realm_size_excess.GetValue]§!;;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_part9_actual;\n- Maximum Excess Realm Size before §R"Significant"§! penalties are applied (if human): §Y[Root.edmp_realm_size_excess_close_threshold.GetValue]§!\n- §M(ED:MP)§! Realm Size Over Limit (§YClose§!) penalties applied (if human): [edmp_realm_size_display_calculation_colour_goodbad_part9a][Root.edmp_realm_size_excess_close.GetValue]§!\n- §M(ED:MP)§! Realm Size Over Limit (§RSignificant§!) penalties applied (if human): [edmp_realm_size_display_calculation_colour_goodbad_part9b][Root.edmp_realm_size_excess_significant.GetValue];;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_colour_good;§G;;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_colour_neutral;§Y;;;;;;;;;;;;;x
+edmp_realm_size_display_calculation_colour_bad;§R;;;;;;;;;;;;;x
+#
+# scripted_triggers
+edmp_realm_size_is_limited_for_players_tt;§M(ED:MP)§! Realm Size is §Ylimited§! for §Yhuman players§!;;;;;;;;;;;;;x
+edmp_realm_size_is_not_limited_for_players_tt;§M(ED:MP)§! Realm Size is §Ynot limited§!;;;;;;;;;;;;;x
+edmp_this_character_has_any_realm_size_modifier_tt;Has any §Y"§M(ED:MP)§Y Realm Size"§! modifier;;;;;;;;;;;;;x
+edmp_this_character_has_at_least_one_extra_limit_modifier_tt;Has any §Y"§M(ED:MP)§Y Realm Size"§! modifier which provides §YExtra Realm Size Limit§!;;;;;;;;;;;;;x
+edmp_this_character_has_at_least_one_permanent_extra_limit_modifier_tt;Has any §Ypermanent "§M(ED:MP)§Y Realm Size"§! modifier which provides §YExtra Realm Size Limit§!;;;;;;;;;;;;;x
+edmp_this_character_has_at_least_one_temporary_extra_limit_modifier_tt;Has any §Ytemporary "§M(ED:MP)§Y Realm Size"§! modifier which provides §YExtra Realm Size Limit§!;;;;;;;;;;;;;x
+#
+# scripted_effects (general)
+edmp_realm_size_calculate_for_all_relevant_characters_tt;§M(ED:MP)§! Realm Size (and all associated modifiers) will be §Yrecalculated§! for §Yall relevant characters§!. §RWARNING! CPU Intensive!§!;;;;;;;;;;;;;x
+edmp_realm_size_calculate_and_add_modifiers_to_this_character_tt;§M(ED:MP)§! Realm Size (and all associated modifiers) will be §Yrecalculated§! for §Y[This.GetBestName]§!.;;;;;;;;;;;;;x
+edmp_realm_size_remove_all_permanent_extra_limit_modifiers_from_this_character_tt;All instances of the §Y"§M(ED:MP)§Y Realm Size Extra Limit (Permanent)"§! modifier are removed from §Y[This.GetBestName]§!.;;;;;;;;;;;;;x
+edmp_realm_size_remove_all_temporary_extra_limit_modifiers_from_this_character_tt;All instances of the §Y"§M(ED:MP)§Y Realm Size Extra Limit (Temporary)"§! modifier are removed from §Y[This.GetBestName]§!.;;;;;;;;;;;;;x
+edmp_realm_size_remove_all_over_limit_player_stackable_modifiers_from_this_character_tt;All instances of the §Y"§M(ED:MP)§Y Realm Size Over Limit (Player) (Close)"§! and §Y"(Significant)"§! modifiers are removed from §Y[This.GetBestName]§!.;;;;;;;;;;;;;x
+edmp_realm_size_refresh_this_characters_stackable_extra_limit_temporary_modifiers_tt;All instances of §Y[This.GetTitledFirstName]§!'s §Y"§M(ED:MP)§Y Realm Size Extra Limit (Temporary)"§! modifier are prolonged, so that they expire in §Y3 years' time§!.;;;;;;;;;;;;;x
+#
+# Intrigue Menu decisions
+edmp_realm_size_recalc_all;(ED:MP) Debug - Realm Size - Recalc All;;;;;;;;;;;;;x
+edmp_realm_size_recalc_all_desc;Recalculate the §M(ED:MP)§! Realm Size for ALL relevant characters.\n§RWARNING! CPU Intensive!§!;;;;;;;;;;;;;x
+edmp_realm_size_everyone_is_notified_of_recalc_tt;§MAll players are notified of their recalculated realm sizes!§!;;;;;;;;;;;;;x
+edmp_realm_size_tomorrows_forced_recalc_is_cancelled_tt;The §Yautomatic forced recalculation§!, normally scheduled for 1 day after startup, is §Rcancelled§!!;;;;;;;;;;;;;x
+edmp_realm_size_recalc_mine;(ED:MP) Realm Size - Recalc;;;;;;;;;;;;;x
+edmp_realm_size_recalc_mine_desc;§M(ED:MP)§! Realm Size is normally recalculated on a random day, once per year.\nHowever, in some circumstances, you may wish to force an early recalculation.\n\n§RWARNING!§! You may only take this decision §Yonce every 3 months§!!\n§g(IE: Grant independence to all relevant characters BEFORE taking this decision.)§!;;;;;;;;;;;;;x
+edmp_realm_size_recalc_mine_cooldown_warning_tt;\n§RWARNING!§! You may only take this decision §Yonce every 3 months§!! (Tracked by the modifier below.)\n§g(IE: Grant independence to all relevant characters BEFORE taking this decision.)§!\n;;;;;;;;;;;;;x
+edmp_realm_size_has_not_recently_recalculated_realm_size_tt;Has NOT recently used this decision to recalculate realm size (expires §Y[This.edmp_realm_size_recently_forced_recalculation.GetExpiryDate]§!);;;;;;;;;;;;;x
+#
+# Realm Size Notification Event
+EDMPRealmSize_2000_Title;(ED:MP) Realm Size Recalculated;;;;;;;;;;;;;x
+EDMPRealmSize_2000_Desc_Good;Your current "Realm Size" is UNDER the limit.\nYou have NOT received any penalties.\n\nCurrent Limit = [Root.global_edmp_realm_size_limit.GetValue]\nCurrent Realm Size = [Root.edmp_realm_size_total.GetValue]\nCurrent Excess Realm Size = [Root.edmp_realm_size_excess.GetValue]\n( Previous Excess Realm Size = [Root.edmp_realm_size_excess_before.GetValue] )\n\nFor more details, please see the "(ED:MP) Realm Size" tooltip (character modifier, green crowned-shield icon).;;;;;;;;;;;;;x
+EDMPRealmSize_2000_Desc_Bad;Your current "Realm Size" is SLIGHTLY OVER the limit.\nYou have received MINOR penalties.\n\nCurrent Limit = [Root.global_edmp_realm_size_limit.GetValue]\nCurrent Realm Size = [Root.edmp_realm_size_total.GetValue]\nCurrent Excess Realm Size = [Root.edmp_realm_size_excess.GetValue]\n( Previous Excess Realm Size = [Root.edmp_realm_size_excess_before.GetValue] )\n\nFor more details, please see the "(ED:MP) Realm Size" tooltip (character modifier, red crowned-shield icon).;;;;;;;;;;;;;x
+EDMPRealmSize_2000_Desc_VeryBad;Your current "Realm Size" is SIGNIFICANTLY OVER the limit.\nYou have received SIGNIFICANT penalties.\n\nCurrent Limit = [Root.global_edmp_realm_size_limit.GetValue]\nCurrent Realm Size = [Root.edmp_realm_size_total.GetValue]\nCurrent Excess Realm Size = [Root.edmp_realm_size_excess.GetValue]\n( Previous Excess Realm Size = [Root.edmp_realm_size_excess_before.GetValue] )\n\nFor more details, please see the "(ED:MP) Realm Size" tooltip (character modifier, red crowned-shield icon).;;;;;;;;;;;;;x
+EDMPRealmSize_2000_EvtOpt_OK;OK;;;;;;;;;;;;;x
+EDMPRealmSize_2000_EvtOpt_Curses;Curses!;;;;;;;;;;;;;x

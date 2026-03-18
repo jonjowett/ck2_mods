@@ -1,0 +1,75 @@
+expd_ct_root_can_lead_rootfroms_armies = {
+	ROOT_FROM = {
+		show_scope_change = no
+		ROOT = {
+			custom_tooltip = {
+				text = expd_ct_this_character_can_lead_prevs_armies_tt
+				OR = {
+					character = PREV
+					AND = {
+						has_minor_title = title_commander
+						liege = { character = PREVPREV }
+					}
+					AND = {
+						has_job_title = job_marshal
+						liege = { character = PREVPREV }
+					}
+				}
+			}
+		}
+	}
+}
+
+expd_ct_this_character_is_a_valid_target_for_chinese_training = {
+	
+	# Chinese strategists can't be taught any more strategy, but we don't want to clutter the tooltip unnecessarily
+	trigger_if = {
+		limit = { has_character_modifier = jd_strategist }
+		NOT = { has_character_modifier = jd_strategist }
+	}
+	
+	# Does not have two Chinese leadership traits
+	# (There are only 4, so checking all possible combos isn't too bad...)
+	custom_tooltip = {
+		text = expd_ct_this_character_has_zero_or_one_chinese_commander_trait_tt
+		NAND = {
+			trait = master_of_flame
+			trait = logistics_expert
+		}
+		NAND = {
+			trait = master_of_flame
+			trait = levy_coordinator
+		}
+		NAND = {
+			trait = master_of_flame
+			trait = sapper
+		}
+		NAND = {
+			trait = logistics_expert
+			trait = levy_coordinator
+		}
+		NAND = {
+			trait = logistics_expert
+			trait = sapper
+		}
+		NAND = {
+			trait = levy_coordinator
+			trait = sapper
+		}
+	}
+	
+	# Has at most two leadership traits, or has no Chinese leadership traits
+	OR = {
+		leader_traits <= 2
+		custom_tooltip = {
+			text = expd_ct_this_character_has_no_chinese_commander_traits_tt
+			NOR = {
+				trait = master_of_flame
+				trait = logistics_expert
+				trait = levy_coordinator
+				trait = sapper
+			}
+		}
+	}
+	
+}

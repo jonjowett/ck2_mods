@@ -1,0 +1,214 @@
+namespace = EMBAlexander
+
+# on_war_ended_victory: Check if the character conquered a truly massive amount of land
+# FROM is the attacker, ROOT is the defender
+character_event = {
+	id = EMBAlexander.1000
+	hide_window = yes
+	is_triggered_only = yes
+	has_dlc = "Holy Fury"
+	trigger = {
+		FROM = {
+			NOT = { any_owned_bloodline = { has_bloodline_flag = emb_alexander_bloodline } }
+		}
+	}
+	immediate = {
+		FROM = {
+			set_character_flag = emb_alexander_check_conquest_size
+			set_variable = {
+				which = emb_alexander_conquest_counter
+				value = 0
+			}
+			character_event = { id = EMBAlexander.1002 days = 1 }
+		}
+	}
+}
+
+# on_new_holder: For every new county, add 1 to the conquest size. If the conquest size is large enough, grant bloodline.
+# ROOT is the new holder, FROM is the title, FROMFROM is the previous holder
+character_event = {
+	id = EMBAlexander.1001
+	hide_window = yes
+	is_triggered_only = yes
+	has_dlc = "Holy Fury"
+	trigger = {
+		FROM = { tier = COUNT }
+		has_character_flag = emb_alexander_check_conquest_size
+		NOT = { any_owned_bloodline = { has_bloodline_flag = emb_alexander_bloodline } }
+	}
+	immediate = {
+		change_variable = {
+			which = emb_alexander_conquest_counter
+			value = 1
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = emb_alexander_conquest_counter
+					value >= 50
+				}
+			}
+			character_event = { id = EMBAlexander.1002 } # Stop counting immediately
+			if = {
+				limit = { emb_alexander_this_character_is_eligible_for_alexander_flavored_bloodline = yes }
+				narrative_event = { id = EMBAlexander.1101 }
+			}
+			else_if = {
+				limit = { emb_alexander_this_character_is_eligible_for_ashoka_flavored_bloodline = yes }
+				narrative_event = { id = EMBAlexander.1102 }
+			}
+			else = {
+				narrative_event = { id = EMBAlexander.1103 }
+			}
+		}
+	}
+}
+
+# Clean up all flags and variables related to checking conquest size
+character_event = {
+	id = EMBAlexander.1002
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		clr_character_flag = emb_alexander_check_conquest_size
+		set_variable = {
+			which = emb_alexander_conquest_counter
+			value = 0
+		}
+	}
+}
+
+# Grant bloodline (Alexander flavour)
+# ROOT is the successful attacker and bloodline recipient
+narrative_event = {
+	id = EMBAlexander.1101
+	is_triggered_only = yes
+	title = EMBAlexander_AlexanderBloodlineEvent_Title
+	desc = EMBAlexander_AlexanderBloodlineEvent_Desc
+	border = GFX_event_narrative_frame_war
+	picture = GFX_evt_siege
+	option = {
+		name = EMBAlexander_BloodlineEvent_Option_NickAlexander
+		emb_alexander_add_alexander_bloodline_to_this_character = yes
+		emb_alexander_change_this_characters_nickname_alexander = yes
+		ai_chance = { factor = 0 } # This nickname will probably be lost within a decade, and the AI won't try to get it back.
+	}
+	option = {
+		name = EMBAlexander_BloodlineEvent_Option_NickConqueror
+		emb_alexander_add_alexander_bloodline_to_this_character = yes
+		emb_alexander_change_this_characters_nickname_conqueror = yes
+		ai_chance = { factor = 10 }
+	}
+	option = {
+		name = EMBAlexander_BloodlineEvent_Option_NickGreat
+		emb_alexander_add_alexander_bloodline_to_this_character = yes
+		emb_alexander_change_this_characters_nickname_great = yes
+		ai_chance = { factor = 10 }
+	}
+	option = {
+		name = EMBAlexander_BloodlineEvent_Option_NoNick
+		emb_alexander_add_alexander_bloodline_to_this_character = yes
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				OR = {
+					this_has_super_cool_nickname_trigger = yes
+					this_has_cool_nickname_trigger = yes
+				}
+			}
+			modifier = {
+				factor = 0
+				this_has_lame_nickname_trigger = yes
+			}
+		}
+	}
+}
+
+# Grant bloodline (Ashoka flavour)
+# ROOT is the successful attacker and bloodline recipient
+narrative_event = {
+	id = EMBAlexander.1102
+	is_triggered_only = yes
+	title = EMBAlexander_AshokaBloodlineEvent_Title
+	desc = EMBAlexander_AshokaBloodlineEvent_Desc
+	border = GFX_event_narrative_frame_war
+	picture = GFX_evt_siege
+	option = {
+		name = EMBAlexander_BloodlineEvent_Option_NickAshoka
+		emb_alexander_add_ashoka_bloodline_to_this_character = yes
+		emb_alexander_change_this_characters_nickname_ashoka = yes
+		ai_chance = { factor = 0 } # This nickname will probably be lost within a decade, and the AI won't try to get it back.
+	}
+	option = {
+		name = EMBAlexander_BloodlineEvent_Option_NickConqueror
+		emb_alexander_add_ashoka_bloodline_to_this_character = yes
+		emb_alexander_change_this_characters_nickname_conqueror = yes
+		ai_chance = { factor = 10 }
+	}
+	option = {
+		name = EMBAlexander_BloodlineEvent_Option_NickGreat
+		emb_alexander_add_ashoka_bloodline_to_this_character = yes
+		emb_alexander_change_this_characters_nickname_great = yes
+		ai_chance = { factor = 10 }
+	}
+	option = {
+		name = EMBAlexander_BloodlineEvent_Option_NoNick
+		emb_alexander_add_ashoka_bloodline_to_this_character = yes
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				OR = {
+					this_has_super_cool_nickname_trigger = yes
+					this_has_cool_nickname_trigger = yes
+				}
+			}
+			modifier = {
+				factor = 0
+				this_has_lame_nickname_trigger = yes
+			}
+		}
+	}
+}
+
+# Grant bloodline (Generic flavour)
+# ROOT is the successful attacker and bloodline recipient
+narrative_event = {
+	id = EMBAlexander.1103
+	is_triggered_only = yes
+	title = EMBAlexander_GenericBloodlineEvent_Title
+	desc = EMBAlexander_GenericBloodlineEvent_Desc
+	border = GFX_event_narrative_frame_war
+	picture = GFX_evt_siege
+	option = {
+		name = EMBAlexander_BloodlineEvent_Option_NickConqueror
+		emb_alexander_add_generic_bloodline_to_this_character = yes
+		emb_alexander_change_this_characters_nickname_conqueror = yes
+		ai_chance = { factor = 10 }
+	}
+	option = {
+		name = EMBAlexander_BloodlineEvent_Option_NickGreat
+		emb_alexander_add_generic_bloodline_to_this_character = yes
+		emb_alexander_change_this_characters_nickname_great = yes
+		ai_chance = { factor = 10 }
+	}
+	option = {
+		name = EMBAlexander_BloodlineEvent_Option_NoNick
+		emb_alexander_add_generic_bloodline_to_this_character = yes
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				OR = {
+					this_has_super_cool_nickname_trigger = yes
+					this_has_cool_nickname_trigger = yes
+				}
+			}
+			modifier = {
+				factor = 0
+				this_has_lame_nickname_trigger = yes
+			}
+		}
+	}
+}

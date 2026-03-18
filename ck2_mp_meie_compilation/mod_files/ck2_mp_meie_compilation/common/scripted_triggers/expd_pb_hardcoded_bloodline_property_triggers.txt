@@ -1,0 +1,263 @@
+# These triggers are designed to be used in conjunction with the triggers in expd_pb_bloodline_inheritance_triggers.txt.
+# They have been split out into a separate file for clarity, and in case some other modder wants to overwrite the hardcoding.
+
+# This file currently covers:
+#  --- Vanilla CK2
+#  --- Mods:
+#       --- More Bloodlines
+#       --- Even More Bloodlines
+#       --- Better Slavic Union
+
+# This line allows for certain Validator errors to be disabled:
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+###############
+# Inheritance #
+###############
+
+expd_pb_this_bloodline_is_definitely_patrilineal = {
+	OR = {
+		
+		# Vanilla
+		# Saintly & ancestor worship bloodlines are always patrilineal
+		AND = {
+			expd_pb_this_bloodline_is_from_any_known_mod = no
+			OR = {
+				has_bloodline_flag = saintly_bloodline
+				has_bloodline_flag = ancestor_worship_bloodline
+			}
+		}
+		
+		# Mod: More Bloodlines - Everything except the various femwar bloodlines
+		AND = {
+			expd_pb_this_bloodline_is_from_more_bloodlines_mod = yes
+			NOT = { has_bloodline_flag = IB_femwar_bloodline }
+		}
+		
+		# Mod: Even More Bloodlines - Anything flagged as "m"
+		has_bloodline_flag = emb_m
+		
+		# Mod: Better Slavic Union - Anything flagged as "m"
+		has_bloodline_flag = bsu_m
+		
+	}
+}
+
+expd_pb_this_bloodline_is_definitely_matrilineal = {
+	OR = {
+		
+		# Vanilla
+		AND = { # bayajidda_and_magajiva
+			has_bloodline_flag = historical_bloodline
+			has_bloodline_flag = bloodline_enatic_cognatic
+			expd_pb_this_bloodline_is_from_any_known_mod = no
+		}
+		
+		# Mod: More Bloodlines - Only the various femwar bloodlines
+		has_bloodline_flag = IB_femwar_bloodline
+		
+		# Mod: Even More Bloodlines - Anything flagged as "f"
+		has_bloodline_flag = emb_f
+		
+		# Mod: Better Slavic Union - Anything flagged as "f"
+		has_bloodline_flag = bsu_f
+		
+	}
+}
+
+expd_pb_this_bloodline_is_definitely_all_descendants = {
+	OR = {
+		
+		# Vanilla - None
+		
+		# Mod: More Bloodlines - None
+		
+		# Mod: Even More Bloodlines - Anything flagged as "ad"
+		has_bloodline_flag = emb_ad
+		
+		# Mod: Better Slavic Union - Anything flagged as "ad"
+		has_bloodline_flag = bsu_ad
+		
+	}
+}
+
+expd_pb_this_bloodline_is_definitely_no_descendants = {
+	# Not aware of any bloodlines that use this, which is not surprising because it seems counter-productive
+	always = no
+}
+
+
+
+
+
+########################
+# Matrilineal Transfer #
+########################
+
+expd_pb_this_bloodline_definitely_has_matrilineal_transfer = {
+	
+	OR = {
+		
+		# Mod: More Bloodlines - Every bloodline
+		expd_pb_this_bloodline_is_from_more_bloodlines_mod = yes
+		
+		# Mod: Even More Bloodlines - Every bloodline
+		expd_pb_this_bloodline_is_from_even_more_bloodlines_mod = yes
+		
+		# Mod: Better Slavic Union - Every bloodline
+		expd_pb_this_bloodline_is_from_better_slavic_union_mod = yes
+		
+	}
+	
+}
+
+expd_pb_this_bloodline_definitely_does_not_have_matrilineal_transfer = {
+	
+	# Vanilla
+	
+	# Ignore the warning about unnecessary AND, because it's actually necessary
+	# Audax Validator "." Ignore_1001
+	AND = {
+		expd_pb_this_bloodline_is_from_any_known_mod = no
+		OR = {
+			AND = {                                                 # Phalaris
+				has_bloodline_flag = created_bloodline
+				has_bloodline_flag = bloodline_brazen_bull
+			}
+			AND = {                                                 # Matilde male
+				has_bloodline_flag = created_bloodline
+				has_bloodline_flag = bloodline_easy_monks
+				NOT = { has_bloodline_flag = matilde_bloodline }
+			}
+		}
+	}
+	
+}
+
+
+
+
+
+##################
+# Allow Bastards #
+##################
+
+expd_pb_this_bloodline_definitely_allows_bastards = {
+	
+	OR = {
+		
+		# Mod: More Bloodlines - Every bloodline
+		expd_pb_this_bloodline_is_from_more_bloodlines_mod = yes
+		
+		# Mod: Even More Bloodlines - Every bloodline
+		expd_pb_this_bloodline_is_from_even_more_bloodlines_mod = yes
+		
+		# Mod: Better Slavic Union - Every bloodline
+		expd_pb_this_bloodline_is_from_better_slavic_union_mod = yes
+		
+	}
+	
+}
+
+expd_pb_this_bloodline_definitely_disallows_bastards = {
+	
+	# Vanilla
+	
+	# Ignore the warning about unnecessary AND, because it's actually necessary
+	# Audax Validator "." Ignore_1001
+	AND = {
+		expd_pb_this_bloodline_is_from_any_known_mod = no
+		OR = {
+			has_bloodline_flag = bloodline_shiite_leader          # Fatimid
+			has_bloodline_flag = bloodline_mardavij               # Mardavij
+			has_bloodline_flag = bloodline_brazen_bull            # Phalaris
+			has_bloodline_flag = bloodline_easy_monks             # Seems generic, but actually unique to the three Matilde bloodlines
+			has_bloodline_flag = saintly_bloodline                # Any Christian saint
+			AND = {                                               # Any "holy" ancestor worship bloodline
+				has_bloodline_flag = ancestor_worship_bloodline
+				OR = {
+					has_bloodline_flag = defender_of_the_faith
+					has_bloodline_flag = monastic_saintly_bloodline
+					has_bloodline_flag = cultural_saintly_bloodline
+					has_bloodline_flag = inquisitional_saintly_bloodline
+					has_bloodline_flag = jewish_saintly_bloodline
+					has_bloodline_flag = theologian_saintly_bloodline
+				}
+			}
+		}
+	}
+	
+}
+
+
+
+
+
+############################
+# Detect modded bloodlines #
+############################
+
+expd_pb_this_bloodline_is_from_any_known_mod = {
+	OR = {
+		expd_pb_this_bloodline_is_from_better_slavic_union_mod  = yes
+		expd_pb_this_bloodline_is_from_even_more_bloodlines_mod = yes
+		expd_pb_this_bloodline_is_from_more_bloodlines_mod      = yes
+	}
+}
+
+expd_pb_this_bloodline_is_from_better_slavic_union_mod = {
+	OR = {
+		has_bloodline_flag = bsu
+		has_bloodline_flag = bsu_lcr
+	}
+}
+
+expd_pb_this_bloodline_is_from_even_more_bloodlines_mod = {
+	OR = {
+		has_bloodline_flag = emb
+		has_bloodline_flag = emb_raider
+	}
+}
+
+expd_pb_this_bloodline_is_from_more_bloodlines_mod = {
+	OR = {
+		has_bloodline_flag = IB_Popely_bloodline
+		has_bloodline_flag = IB_Popely_bloodline2
+		has_bloodline_flag = IB_Popely_bloodline3
+		has_bloodline_flag = IB_Popely_bloodline4
+		has_bloodline_flag = IB_Popely_bloodline5
+		has_bloodline_flag = IB_wonderly_bloodline
+		has_bloodline_flag = IB_reformist_bloodline
+		has_bloodline_flag = IB_virginmary_bloodline
+		has_bloodline_flag = IB_family_bloodline
+		has_bloodline_flag = IB_china_bloodline
+		has_bloodline_flag = IB_tyrantly_bloodline
+		has_bloodline_flag = IB_hunter_bloodline
+		has_bloodline_flag = IB_prolific_bloodline
+		has_bloodline_flag = IB_godslayer_bloodline
+		has_bloodline_flag = IB_arthur_bloodline
+		has_bloodline_flag = IB_triology_bloodline
+		has_bloodline_flag = IB_sevenly_bloodline
+		has_bloodline_flag = IB_hannibal_bloodline
+		has_bloodline_flag = IB_charismatic_bloodline
+		has_bloodline_flag = IB_shield_bloodline
+		has_bloodline_flag = IB_mansa_bloodline
+		has_bloodline_flag = IB_crusade_repelled_bloodline
+		has_bloodline_flag = IB_chess_bloodline
+		has_bloodline_flag = IB_artofwar_bloodline
+		has_bloodline_flag = IB_femwar_bloodline
+		has_bloodline_flag = IB_hannibalbarca_bloodline
+		has_bloodline_flag = IB_author_bloodline
+		has_bloodline_flag = IB_merchant_bloodline
+		has_bloodline_flag = IB_saxony_bloodline
+		has_bloodline_flag = IB_black_widow_bloodline
+		has_bloodline_flag = IB_longevity_bloodline
+		has_bloodline_flag = IB_kaiserirum_bloodline
+		has_bloodline_flag = IB_cronus_child_bloodline
+		has_bloodline_flag = IB_melekh_mashiach_bloodline
+	}
+}

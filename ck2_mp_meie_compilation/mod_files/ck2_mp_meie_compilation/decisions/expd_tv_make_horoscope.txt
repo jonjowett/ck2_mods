@@ -1,0 +1,125 @@
+# Targetted decisions are possible vs _all_ other characters and shown are in the Diplomacy View, not the Intrigue View. The taker is in the FROM scope.
+#
+# filter = [self/court/home_court/vassals/sub_realm/realm/dynasty/all] ('self' MUST be set for decisions targetting only the taker, the other filter types can be set to lessen CPU load)
+# ai_target_filter = [self/court/home_court/vassals/sub_realm/realm/dynasty/all] (which characters for which the AI evaluates the decision.)
+#	court: all characters in the AI's host court, including prisoners, and characters currently away (wards, prisoners, etc)
+#	home_court: all characters in the AI's home court, including prisoners, and characters currently away (wards, prisoners, etc)
+#	vassals: direct vassal rulers of the AI's employer
+#	sub_realm: all characters below the AI's employer
+#	realm: all characters in the same top realm as the AI
+#	dynasty: all members of the same dynasty
+#	rivals: your rivals plus any character you have an opinion modifier with 'crime = yes' set (the same set of characters the 'is_foe' trigger evaluates)
+#	all: all living characters (Avoid if possible. VERY CPU-HEAVY!)
+#
+
+targetted_decisions = {
+	
+	expd_tv_make_horoscope = {
+		# Allows you to make a horoscope for any close relative or descendant
+		# Expanded version of hermetics_make_horoscope in mnm_hermetics_decisions.txt
+		
+		only_playable = yes
+		filter = home_court
+		ai_target_filter = home_court
+		ai_check_interval = 10
+		
+		from_potential = {
+			has_dlc = "Mystics"
+			society_member_of = hermetics
+			society_rank = 3
+		}
+
+		potential = {
+			
+			#Mod changes: If the vanilla decision is potentially valid then you should take that instead!
+			NOT = {
+				FROM = {
+					is_targeted_decision_potential = {
+						key = hermetics_make_horoscope
+						character = ROOT
+					}
+				}
+			}
+			
+			#Mod changes: Altered version of the vanilla potential block, allowing the decision to be used on more people
+			
+			# Hide this decision on all adults
+			is_adult = no
+			
+			# Show the decision for close relatives and (dynastic) descendants
+			dynasty = FROM
+			OR = {
+				is_close_relative = FROM
+				is_descendant_of = FROM
+			}
+			
+		}
+
+		allow = {
+    		is_adult = no
+			custom_tooltip = {
+				text = hermetics_horoscope_cooldown_tooltip
+				NOT = { has_character_modifier = horoscope_cooldown }
+			}
+			FROM = { has_society_currency_medium_trigger = yes }
+		}
+
+		effect = {
+			hidden_effect = {
+				add_character_modifier = {
+					name = horoscope_cooldown
+					duration =-1 #not actually a cooldown, but blocks decision until cleared (which does happen, promise)
+					hidden = yes
+				}
+				save_event_target_as = horoscope_child
+				FROM = { character_event = { id = MNM.1250 days = 5 } }
+			}
+			FROM = { detract_society_currency_medium_effect = yes }
+		}
+
+		ai_will_do = {
+			factor = 0.1
+
+			modifier = {
+				factor = 1.5
+				is_dumb_trigger = yes
+			}
+			modifier = {
+				factor = 1.5
+				is_smart_trigger = yes
+			}
+			modifier = {
+				factor = 10
+				is_primary_heir = FROM
+			}
+			modifier = {
+				factor = 1.5
+				FROM = { trait = trusting }
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { trait = cynical }
+			}
+			
+			# Deprioritise if there's a valid target for the vanilla decision
+			modifier = {
+				factor = 0.25
+				FROM = {
+					any_courtier = {
+						FROM = {
+							is_targeted_decision_potential = {
+								key = hermetics_make_horoscope
+								character = PREV
+							}
+							is_targeted_decision_allowed = {
+								key = hermetics_make_horoscope
+								character = PREV
+							}
+						}
+					}
+				}
+			}
+			
+		}
+	}
+}

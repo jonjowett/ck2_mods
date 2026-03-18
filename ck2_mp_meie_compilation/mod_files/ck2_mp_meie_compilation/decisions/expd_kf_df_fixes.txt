@@ -1,0 +1,95 @@
+decisions = {
+	
+	expd_kf_fix_krete = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+		potential = {
+			k_krete_expd_kf = {
+				has_holder = yes
+				is_titular = no
+				holder_scope = {
+					OR = {
+						is_vassal_or_below_of = ROOT
+						character = ROOT
+					}
+				}
+				NOT = {
+					any_dejure_liege = {
+						tier = EMPEROR
+					}
+				}
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			k_krete_expd_kf = {
+				de_jure_liege = e_byzantium
+			}
+		}
+	}
+	
+	expd_kf_fix_mann = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+		potential = {
+			k_mann_expd_kf = {
+				has_holder = yes
+				is_titular = no
+				holder_scope = {
+					OR = {
+						is_vassal_or_below_of = ROOT
+						character = ROOT
+					}
+				}
+				NOT = {
+					any_dejure_liege = {
+						tier = EMPEROR
+					}
+				}
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			k_mann_expd_kf = {
+				de_jure_liege = e_britannia
+			}
+		}
+	}
+	
+	expd_df_fix_canarias = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 60
+		potential = {
+			d_canarias_expd_df = {
+				has_holder = yes
+				is_titular = no
+				holder_scope = {
+					OR = {
+						is_vassal_or_below_of = ROOT
+						character = ROOT
+					}
+				}
+				NOT = {
+					any_dejure_liege = {
+						tier = KING
+					}
+				}
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			d_canarias_expd_df = {
+				de_jure_liege = k_mauretania
+			}
+		}
+	}
+}

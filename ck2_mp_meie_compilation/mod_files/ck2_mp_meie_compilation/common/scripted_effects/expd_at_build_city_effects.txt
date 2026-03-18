@@ -1,0 +1,45 @@
+expd_at_build_city_effect = {
+	FROM = {
+		if = {
+			limit = {
+				expd_at_this_characters_stewardship_skill_is_40_plus = yes
+			}
+			wealth = -500
+		}
+		else_if = {
+			limit = {
+				OR = {
+					expd_at_this_characters_stewardship_skill_is_30_to_40 = yes
+					expd_at_this_characters_steward_has_stewardship_40_plus = yes
+				}
+			}
+			wealth = -600
+		}
+		else_if = {
+			limit = {
+				OR = {
+					expd_at_this_characters_stewardship_skill_is_20_to_30 = yes
+					expd_at_this_characters_steward_has_stewardship_30_to_40 = yes
+				}
+			}
+			wealth = -800
+		}
+		else_if = {
+			limit = {
+				OR = {
+					expd_at_this_characters_stewardship_skill_is_10_to_20 = yes
+					expd_at_this_characters_steward_has_stewardship_20_to_30 = yes
+				}
+			}
+			wealth = -1000
+		}
+		else = {
+			# Fallback tooltip, just in case
+			wealth = -1000
+		}
+	}
+	location = {
+		show_scope_change = no
+		build_holding = { type = city }
+	}
+}

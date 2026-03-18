@@ -1,0 +1,196 @@
+namespace = ExpdPillResettle
+
+
+
+province_event = {
+	id      = ExpdPillResettle.100
+	title   = ExpdPillResettle_ChooseSource_EvtTitle
+	desc    = ExpdPillResettle_ChooseSource_EvtDesc
+	picture = GFX_evt_tribal_lands
+	
+	is_triggered_only = yes
+	
+	
+	
+	immediate = {
+		
+		# Locate up to 3 possible resettlement sources
+		random_neighbor_province = {
+			limit = {
+				is_land = yes
+				NAND = {
+					culture  = ROOT
+					religion = ROOT
+				}
+			}
+			# Try to find a neighbouring same-realm province with same culture or religion group
+			preferred_limit = {
+				ROOT = {
+					owner = {
+						top_liege = {
+							any_realm_province = {
+								province = PREVPREVPREVPREV 
+							}
+						}
+						OR = {
+							culture_group  = PREVPREV
+							religion_group = PREVPREV
+						}
+					}
+				}
+			}
+			# If that fails, try for a different-realm neighbouring province with same culture or religion group
+			preferred_limit = {
+				ROOT = {
+					owner = {
+						OR = {
+							culture_group  = PREVPREV
+							religion_group = PREVPREV
+						}
+					}
+				}
+			}
+			save_event_target_as = expd_pill_resettlement_possible_source_1
+			ROOT = { change_variable = { which = expd_pill_resettlement_possible_sources value = 1 } }
+		}
+		random_neighbor_province = {
+			limit = {
+				is_land = yes
+				NAND = {
+					culture  = ROOT
+					religion = ROOT
+				}
+				NAND = {
+					culture  = event_target:expd_pill_resettlement_possible_source_1
+					religion = event_target:expd_pill_resettlement_possible_source_1
+				}
+			}
+			# Try to find a neighbouring province with same culture or religion group as the province owner
+			preferred_limit = {
+				ROOT = {
+					owner = {
+						OR = {
+							culture_group  = PREVPREV
+							religion_group = PREVPREV
+						}
+					}
+				}
+			}
+			save_event_target_as = expd_pill_resettlement_possible_source_2
+			ROOT = { change_variable = { which = expd_pill_resettlement_possible_sources value = 1 } }
+		}
+		random_neighbor_province = {
+			limit = {
+				is_land = yes
+				NAND = {
+					culture  = ROOT
+					religion = ROOT
+				}
+				NAND = {
+					culture  = event_target:expd_pill_resettlement_possible_source_1
+					religion = event_target:expd_pill_resettlement_possible_source_1
+				}
+				NAND = {
+					culture  = event_target:expd_pill_resettlement_possible_source_2
+					religion = event_target:expd_pill_resettlement_possible_source_2
+				}
+			}
+			# Keep the third choice as true random, so users can retry if necessary
+			save_event_target_as = expd_pill_resettlement_possible_source_3
+			ROOT = { change_variable = { which = expd_pill_resettlement_possible_sources value = 1 } }
+		}
+		
+		# Check whether there is a 4th possible source (so we can inform the user in the localisation)
+		random_neighbor_province = {
+			limit = {
+				is_land = yes
+				NAND = {
+					culture  = ROOT
+					religion = ROOT
+				}
+				NAND = {
+					culture  = event_target:expd_pill_resettlement_possible_source_1
+					religion = event_target:expd_pill_resettlement_possible_source_1
+				}
+				NAND = {
+					culture  = event_target:expd_pill_resettlement_possible_source_2
+					religion = event_target:expd_pill_resettlement_possible_source_2
+				}
+				NAND = {
+					culture  = event_target:expd_pill_resettlement_possible_source_3
+					religion = event_target:expd_pill_resettlement_possible_source_3
+				}
+			}
+			ROOT = { change_variable = { which = expd_pill_resettlement_possible_sources value = 1 } }
+		}
+	}
+	
+	
+	
+	# If there were no possible population sources, show only one option that explains this to the user
+	option = {
+		name = ExpdPillResettle_ChooseSource_EvtOpt_NoValidSources
+		trigger = {
+			check_variable = { which = expd_pill_resettlement_possible_sources value < 1 }
+		}
+	}
+	
+	# If there were >= 1 possible population sources, show them in the first 1-3 options
+	option = {
+		name = ExpdPillResettle_ChooseSource_EvtOpt_FromSource1
+		trigger = {
+			check_variable = { which = expd_pill_resettlement_possible_sources value >= 1 }
+		}
+		event_target:expd_pill_resettlement_possible_source_1 = {
+			show_scope_change = no
+			expd_pill_resettle_root_province_from_this_province = yes
+		}
+	}
+	option = {
+		name = ExpdPillResettle_ChooseSource_EvtOpt_FromSource2
+		trigger = {
+			check_variable = { which = expd_pill_resettlement_possible_sources value >= 2 }
+		}
+		event_target:expd_pill_resettlement_possible_source_2 = {
+			show_scope_change = no
+			expd_pill_resettle_root_province_from_this_province = yes
+		}
+	}
+	option = {
+		name = ExpdPillResettle_ChooseSource_EvtOpt_FromSource3
+		trigger = {
+			check_variable = { which = expd_pill_resettlement_possible_sources value >= 3 }
+		}
+		event_target:expd_pill_resettlement_possible_source_3 = {
+			show_scope_change = no
+			expd_pill_resettle_root_province_from_this_province = yes
+		}
+	}
+	
+	# Customise the 4th option depending on whether there were <=3 or >3 possible sources
+	option = {
+		name = ExpdPillResettle_ChooseSource_EvtOpt_Cancel
+		trigger = {
+			check_variable = { which = expd_pill_resettlement_possible_sources value >= 1 }
+		}
+		if = {
+			limit = { check_variable = { which = expd_pill_resettlement_possible_sources value <= 3 } }
+			custom_tooltip = { text = EXPD_PILL_TOOLTIP_INFO_THERE_ARE_LTE3_SOURCES }
+		}
+		else = {
+			custom_tooltip = { text = EXPD_PILL_TOOLTIP_INFO_THERE_ARE_GT3_SOURCES  }
+		}
+	}
+	
+	
+	
+	after = {
+		# Cleanup
+		hidden_tooltip = {
+			clear_event_target = expd_pill_resettlement_possible_source_1
+			clear_event_target = expd_pill_resettlement_possible_source_2
+			clear_event_target = expd_pill_resettlement_possible_source_3
+			set_variable = { which = expd_pill_resettlement_possible_sources value = 0 }
+		}
+	}
+}

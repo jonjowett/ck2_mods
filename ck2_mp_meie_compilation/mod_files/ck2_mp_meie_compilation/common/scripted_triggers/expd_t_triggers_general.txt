@@ -1,0 +1,91 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+
+
+# Conditions for changing rules
+
+expd_t_rules_this_character_can_change_rules = {
+	expd_t_this_character_can_perform_admin_actions= yes
+}
+
+
+
+
+
+# Detect religious enemies (eg. for offering protectorate)
+
+expd_t_is_religious_enemy_of_from = {
+	OR = {
+		NOT = { religion_group = FROM }
+		is_heresy_of = FROM
+		is_parent_religion = FROM
+	}
+}
+
+expd_t_is_religious_enemy_of_root = {
+	OR = {
+		NOT = { religion_group = ROOT }
+		is_heresy_of = ROOT
+		is_parent_religion = ROOT
+	}
+}
+
+
+
+
+
+# Triggers used in decisions etc
+
+expd_t_top_liege_is_normal_or_modded_tributary_of_root = {
+	top_liege = {
+		suzerain = { character = ROOT }
+		expd_t_is_normal_or_modded_tributary_of_anyone = yes
+	}
+}
+
+expd_t_is_normal_or_modded_permanent_tributary_of_root = {
+	suzerain = { character = ROOT }
+	expd_t_is_normal_or_modded_permanent_tributary_of_anyone = yes
+}
+
+expd_t_is_this_mod_tributary_of_from = {
+	suzerain = { character = ROOT_FROM }
+	expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes
+}
+
+
+
+
+
+# Classification of tributary types
+
+expd_t_is_normal_or_modded_tributary_of_anyone = {
+	OR = {
+		is_tributary = { type = default }
+		expd_t_is_normal_or_modded_permanent_tributary_of_anyone = yes
+	}
+}
+
+expd_t_is_normal_or_modded_permanent_tributary_of_anyone = {
+	OR = {
+		is_tributary = { type = permanent }
+		expd_t_is_modded_permanent_tributary_of_anyone_this_mod = yes
+		expd_t_is_modded_permanent_tributary_of_anyone_ek = yes
+	}
+}
+
+expd_t_is_modded_permanent_tributary_of_anyone_this_mod = {
+	OR = {
+		is_tributary = { type = expd_t_protectorate }
+		is_tributary = { type = expd_t_protectorate_without_infighting }
+	}
+}
+
+expd_t_is_modded_permanent_tributary_of_anyone_ek = {
+	is_tributary = {
+		# Audax Validator "." Ignore_NEXT
+		type = tribunal_temple
+	}
+}

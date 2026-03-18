@@ -1,0 +1,60 @@
+castle = {
+	edmp_interference_grant_tp_ca = {
+		desc = edmp_interference_grant_tp_desc
+		potential = { has_building = edmp_interference_grant_tp_ca } # Invisible unless it's already built
+		is_active_trigger = { always = yes }
+		trigger = { always = no } # Never buildable, only constructible via script
+		ai_creation_factor = 0 # Just in case, let's disable it for AI
+		max_tradeposts = 100
+		gold_cost = 100000
+		build_time = 36500
+	}
+}
+city = {
+	edmp_interference_grant_tp_ct = {
+		desc = edmp_interference_grant_tp_desc
+		potential = { has_building = edmp_interference_grant_tp_ct } # Invisible unless it's already built
+		is_active_trigger = { always = yes }
+		trigger = { always = no } # Never buildable, only constructible via script
+		ai_creation_factor = 0 # Just in case, let's disable it for AI
+		max_tradeposts = 100
+		gold_cost = 100000
+		build_time = 36500
+	}
+}
+temple = {
+	edmp_interference_grant_tp_tp = {
+		desc = edmp_interference_grant_tp_desc
+		potential = { has_building = edmp_interference_grant_tp_tp } # Invisible unless it's already built
+		is_active_trigger = { always = yes }
+		trigger = { always = no } # Never buildable, only constructible via script
+		ai_creation_factor = 0 # Just in case, let's disable it for AI
+		max_tradeposts = 100
+		gold_cost = 100000
+		build_time = 36500
+	}
+}
+tribal = {
+	edmp_interference_grant_tp_tb = {
+		desc = edmp_interference_grant_tp_desc
+		potential = { has_building = edmp_interference_grant_tp_tb } # Invisible unless it's already built
+		is_active_trigger = { always = yes }
+		trigger = { always = no } # Never buildable, only constructible via script
+		ai_creation_factor = 0 # Just in case, let's disable it for AI
+		max_tradeposts = 100
+		gold_cost = 100000
+		build_time = 36500
+	}
+}
+nomad = {
+	edmp_interference_grant_tp_no = {
+		desc = edmp_interference_grant_tp_desc
+		potential = { has_building = edmp_interference_grant_tp_no } # Invisible unless it's already built
+		is_active_trigger = { always = yes }
+		trigger = { always = no } # Never buildable, only constructible via script
+		ai_creation_factor = 0 # Just in case, let's disable it for AI
+		max_tradeposts = 100
+		gold_cost = 100000
+		build_time = 36500
+	}
+}

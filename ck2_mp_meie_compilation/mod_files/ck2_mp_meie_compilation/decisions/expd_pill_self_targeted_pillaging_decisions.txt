@@ -1,0 +1,40 @@
+targeted_decisions = {
+	expd_pill_instant_full_pillage_all_settlements = {
+		# This is a shortcut for taking instant-pillage decision on all possible settlements
+		# Disabled for AI via pre-trigger and ai_will_do, because the AI will almost certainly give settlements away before checking whether this decision is available.
+		ai = no
+		filter = self
+		is_high_prio = yes
+		only_playable = yes
+		potential = {
+			ROOT = {
+				any_demesne_title = {
+					expd_pill_this_holding_is_potentially_pillageable_by_prev_character = yes
+					expd_pill_this_holding_is_allowed_to_be_pillaged_by_prev_character = yes
+				}
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			custom_tooltip = { text = expd_pill_instant_full_pillage_all_settlements_tt }
+			ROOT = {
+				show_scope_change = no
+				any_demesne_title = {
+					limit = {
+						expd_pill_this_holding_is_potentially_pillageable_by_prev_character = yes
+						expd_pill_this_holding_is_allowed_to_be_pillaged_by_prev_character = yes
+					}
+					custom_tooltip = {
+						text = expd_pill_instant_full_pillage_this_settlement_tt
+						expd_pill_this_holding_is_fully_pillaged_by_prev_character = yes
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

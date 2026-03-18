@@ -1,0 +1,99 @@
+namespace = edmp_ipn
+
+# Numbering convention:
+#    0-1999 : Unused
+# 2000-2999 : Player-specific permission granted
+# 3000-3999 : Player-specific permission withdrawn
+
+# Notify players that the host has granted ONE invasion permission to a fellow player.
+# ROOT = player being notified
+# FROM = host (or a random player, if no host can be found for some weird reason)
+# Event targets edmp_ipn_title & edmp_ipn_character are expected to exist
+character_event = {
+	id    = edmp_ipn.2001
+	desc  = edmp_ipn_2001_desc
+	title = edmp_ipn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	option = {
+		trigger = { event_target:edmp_ipn_character = { character = ROOT } }
+		tooltip_info = yes
+		name = edmp_ipn_evtopt_excellent_new_cb
+	}
+	option = {
+		trigger = {
+			NOT = { event_target:edmp_ipn_character = { character = ROOT } }
+			event_target:edmp_ipn_title = { edmp_root_has_a_title_under_this_duke_plus_title = yes }
+		}
+		tooltip_info = yes
+		show_portrait = event_target:edmp_ipn_character
+		name = edmp_ipn_evtopt_curses_threatened
+	}
+	option = {
+		trigger = {
+			NOT = { event_target:edmp_ipn_character = { character = ROOT } }
+			NOT = { event_target:edmp_ipn_title = { edmp_root_has_a_title_under_this_duke_plus_title = yes } }
+		}
+		show_portrait = event_target:edmp_ipn_character
+		name = edmp_ipn_evtopt_ok_unaffected
+	}
+}
+
+# Notify players that the host has withdrawn ALL invasion permissions from a fellow player.
+# ROOT = player being notified
+# FROM = host (or a random player, if no host can be found for some weird reason)
+# Event target edmp_ipn_character is expected to exist
+character_event = {
+	id    = edmp_ipn.3000
+	desc  = edmp_ipn_3000_desc
+	title = edmp_ipn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	option = {
+		trigger = { event_target:edmp_ipn_character = { character = ROOT } }
+		tooltip_info = yes
+		name = edmp_ipn_evtopt_curses_cb_lost
+	}
+	option = {
+		trigger = { NOT = { event_target:edmp_ipn_character = { character = ROOT } } }
+		show_portrait = event_target:edmp_ipn_character
+		name = edmp_ipn_evtopt_ok_unaffected
+	}
+}
+
+# Notify players that the host has withdrawn ONE invasion permission from a fellow player.
+# ROOT = player being notified
+# FROM = host (or a random player, if no host can be found for some weird reason)
+# Event targets edmp_ipn_character & edmp_ipn_title are expected to exist
+character_event = {
+	id    = edmp_ipn.3001
+	desc  = edmp_ipn_3001_desc
+	title = edmp_ipn_title
+	is_triggered_only = yes
+	portrait = FROM
+	picture = GFX_evt_recieve_letter
+	option = {
+		trigger = { event_target:edmp_ipn_character = { character = ROOT } }
+		tooltip_info = yes
+		name = edmp_ipn_evtopt_curses_cb_lost
+	}
+	option = {
+		trigger = {
+			NOT = { event_target:edmp_ipn_character = { character = ROOT } }
+			event_target:edmp_ipn_title = { edmp_root_has_a_title_under_this_duke_plus_title = yes }
+		}
+		tooltip_info = yes
+		show_portrait = event_target:edmp_ipn_character
+		name = edmp_ipn_evtopt_excellent_safe
+	}
+	option = {
+		trigger = {
+			NOT = { event_target:edmp_ipn_character = { character = ROOT } }
+			NOT = { event_target:edmp_ipn_title = { edmp_root_has_a_title_under_this_duke_plus_title = yes } }
+		}
+		show_portrait = event_target:edmp_ipn_character
+		name = edmp_ipn_evtopt_ok_unaffected
+	}
+}

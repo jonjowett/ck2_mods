@@ -1,0 +1,61 @@
+# Bloodline effects (for bloodline screen)
+emb_raider_bloodline_effect_spawn_raiders;Sacking settlements may cause §Gcitizen raiding parties§! to appear in your capital;;;;;;;;;;;;;x
+emb_raider_bloodline_effect_adventurer_independent;(TODO) Unlanded characters are likely to form independent raiding parties;;;;;;;;;;;;;x
+emb_raider_bloodline_effect_adventurer_targeted;(TODO) Unlanded children can be sent away as raiders;;;;;;;;;;;;;x
+emb_raider_bloodline_effect_seaking_coastal_county_conquest;§GSea Kings§! and §GSea Queens§! can perform coastal county conquests;;;;;;;;;;;;;x
+emb_raider_coastal_county_conquest_desc;§GSea Kings§! and §GSea Queens§! with a legendary raider bloodline can perform coastal county conquests without specific reasons.;;;;;;;;;;;;;x
+# Events
+# Ultimate raider bloodline
+EMBRaider_1200_EVTTITLE;An unprecedented raider!;;;;;;;;;;;;;x
+EMBRaider_1200_EVTDESC;Rulers and adventurers throughout the world frequently turn to raiding on occasion. Many of these raiders build up a fearsome reputation - and some of them even reach the fearsome heights of Sea King or Queen.\n[Root.GetFullName], however, has raided and plundered so much that even [Root.GetHerHis] fellow Sea Kings view [Root.GetHerHim] with awe. [Root.GetHerHisCap] name will echo down through the ages as an example of the heights - and depths - of which a person is capable.;;;;;;;;;;;;;x
+EMBRaider_1200_EVTOPT_A;The world is my oyster!;;;;;;;;;;;;;x
+emb_raider_ultimate_bloodline_name;Blood of the Legendary Raider;;;;;;;;;;;;;x
+emb_raider_ultimate_bloodline_desc;The civilized world trembles at the very mention of [Root.GetTitledFirstName]'s raiders, and [Root.GetHerHis] fellow raiders regard [Root.GetHerHim] with awe.;;;;;;;;;;;;;x
+# Raiders spawn at capital
+EMBRaider_5001_EVTDESC;News of our recent successful raids has reached our capital! A large number of our citizens have taken up arms and demanded to be included in the chance for plunder and adventure.;;;;;;;;;;;;;x
+EMBRaider_5001_EVTOPT_A_ACCEPT;Welcome them with open arms;;;;;;;;;;;;;x
+EMBRaider_5001_EVTOPT_B_REJECT;Bribe them to disperse peacefully;;;;;;;;;;;;;x
+EMBRaider_5001_EVTOPT_C_REJECT;Persuade them to disperse peacefully;;;;;;;;;;;;;x
+EMB_RAIDER_TOOLTIP_SPAWNED_RAIDERS_WANT_TO_RAID;These citizen raiders will be unhappy unless they are actively raiding;;;;;;;;;;;;;x
+EMB_RAIDER_TOOLTIP_SPAWNED_RAIDERS_DISBAND;Disappointed, the citizen raiders disband;;;;;;;;;;;;;x
+EMB_RAIDER_TOOLTIP_SPAWNED_RAIDERS_LESS_LIKELY;For several years, our citizens will be less likely to spontaneously form raiding bands;;;;;;;;;;;;;x
+# Spawned raiders aren't raiding
+EMBRaider_5011_EVTDESC;Our citizen raiders are complaining about the fact that they aren't raiding. They are asking why they bothered to follow you when you haven't delivered on your promises.;;;;;;;;;;;;;x
+EMBRaider_5011_EVTOPT_A_VIKING;Promise them loot, and emphasise your reputation as a successful raider;;;;;;;;;;;;;x
+EMBRaider_5011_EVTOPT_B_RAVAGER;Promise them loot, and emphasise your reputation as a Ravager;;;;;;;;;;;;;x
+EMBRaider_5011_EVTOPT_C_SEAKING;Promise them loot, and emphasise your reputation as an incomparable raider;;;;;;;;;;;;;x
+EMBRaider_5011_EVTOPT_D_MARTIAL;Promise them loot and adventure;;;;;;;;;;;;;x
+EMBRaider_5011_EVTOPT_E_DIPLOMACY;Persuade them to give you a little more time;;;;;;;;;;;;;x
+EMBRaider_5011_EVTOPT_F_INTRIGUE;Blackmail the ringleaders;;;;;;;;;;;;;x
+EMBRaider_5011_EVTOPT_G_BRIBE;Bribe them to give you a little more time;;;;;;;;;;;;;x
+EMBRaider_5011_EVTOPT_H_SECOND_BRIBE;Bribe them again, to give you even more time;;;;;;;;;;;;;x
+EMBRaider_5011_EVTOPT_I_THIRD_BRIBE;Bribe them for a third time;;;;;;;;;;;;;x
+EMBRaider_5011_EVTOPT_J_DISBAND;Send them home;;;;;;;;;;;;;x
+EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_PLACATED_FOR_NOW;The citizen raiders are placated... for now...;;;;;;;;;;;;;x
+EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_WILL_NOT_ACCEPT_MORE_BRIBES;§RThis is your last chance: the citizen raiders will not accept any more bribes!§!;;;;;;;;;;;;;x
+EMB_RAIDER_TOOLTIP_ALL_NONRAIDING_SPAWNED_RAIDERS_DISMISSED;All non-raiding citizen raiders will be dismissed;;;;;;;;;;;;;x
+# Spawned raiders are raiding once more!
+EMBRaider_5012_EVTDESC;Our citizen raiders are now busy raiding, as promised. Their complaints have ceased, and we can turn our attention elsewhere.;;;;;;;;;;;;;x
+EMBRaider_5012_EVTOPT_A_GOOD_TO_HEAR;Good to hear!;;;;;;;;;;;;;x
+# Spawned raider promise modifiers: Names
+emb_persuaded_spawned_raiders_viking;Citizen Raiders Placated: Viking/Pirate;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_ravager;Citizen Raiders Placated: Ravager;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_seaking;Citizen Raiders Placated: Sea King/Queen;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_martial;Citizen Raiders Placated: Adventure;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_diplomacy;Citizen Raiders Placated: Persuasion;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_intrigue;Citizen Raiders Placated: Blackmail;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_bribe;Citizen Raiders Placated: Bribery;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_second_bribe;Citizen Raiders Placated: More Bribery;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_third_bribe;Citizen Raiders Placated: Even More Bribery;;;;;;;;;;;;;x
+# Spawned raider promise modifiers: Descriptions
+emb_persuaded_spawned_raiders_viking_desc;The non-raiding §Ycitizen raiding parties§! have been temporarily placated, because you have promised them loot and pointed out your established reputation as a successful raider. \n§Y(This modifier will be removed if ALL citizen raiding parties are raiding at the next check.)§!;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_ravager_desc;The non-raiding §Ycitizen raiding parties§! have been temporarily placated, because you have promised them loot and pointed out your established reputation as a §YRavager§!. \n§Y(This modifier will be removed if ALL citizen raiding parties are raiding at the next check.)§!;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_seaking_desc;The non-raiding §Ycitizen raiding parties§! have been temporarily placated, because you have promised them loot and pointed out your established reputation as an incomparable raider. \n§Y(This modifier will be removed if ALL citizen raiding parties are raiding at the next check.)§!;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_martial_desc;The non-raiding §Ycitizen raiding parties§! have been temporarily placated, because you have promised them loot and adventure. \n§Y(This modifier will be removed if ALL citizen raiding parties are raiding at the next check.)§!;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_diplomacy_desc;The non-raiding §Ycitizen raiding parties§! have been temporarily placated, because you persuaded them to give you a little more time. \n§Y(This modifier will be removed if ALL citizen raiding parties are raiding at the next check.)§!;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_intrigue_desc;The non-raiding §Ycitizen raiding parties§! have been temporarily placated, because you blackmailed their leaders. \n§Y(This modifier will be removed if ALL citizen raiding parties are raiding at the next check.)§!;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_bribe_desc;The non-raiding §Ycitizen raiding parties§! have been temporarily placated, because you bribed them to give you a little more time. \n§Y(This modifier will be removed if ALL citizen raiding parties are raiding at the next check.)§!;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_second_bribe_desc;The non-raiding §Ycitizen raiding parties§! have been temporarily placated, because you bribed them to give you even more time. \n§Y(This modifier will be removed if ALL citizen raiding parties are raiding at the next check.)§!;;;;;;;;;;;;;x
+emb_persuaded_spawned_raiders_third_bribe_desc;The non-raiding §Ycitizen raiding parties§! have been temporarily placated, because you bribed them for a third and final time. \n§Y(This modifier will be removed if ALL citizen raiding parties are raiding at the next check.)§!;;;;;;;;;;;;;x
+# Misc Tooltips
+EMB_RAIDER_TOOLTIP_THIS_CHAR_OWNS_ALL_POSSIBLE_RAIDER_BLOODLINES;[This.GetTitledFirstName] already owns at least one of every possible type of raider bloodline;;;;;;;;;;;;;x

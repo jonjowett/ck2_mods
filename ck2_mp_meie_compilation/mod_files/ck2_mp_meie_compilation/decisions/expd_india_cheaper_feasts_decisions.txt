@@ -1,0 +1,585 @@
+decisions = {
+	
+	expd_india_hold_diwali_feast_hindu_cheaper = {
+		
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 4
+		
+		potential = {
+			
+			# Only show the decision to characters with high yearly income, where this version will be cheaper.
+			yearly_income > 500
+			
+			# Bugfix to base game conditions
+			liege = {
+				NOR = {
+					has_character_modifier = holding_diwali_feast
+					has_character_modifier = holding_kali_puja_feast
+				}
+			}
+			
+			# Other conditions unchanged from base game
+			has_dlc = "Rajas of India"
+			is_playable = yes
+			is_adult = yes
+			OR = {
+				is_feudal = yes
+				is_tribal = yes
+				is_nomadic = yes
+				is_republic = yes
+			}
+			prisoner = no
+			religion = hindu
+			NOT = { trait = incapable }
+			NOT = { has_character_modifier = patron_kali }
+			NOT = { has_character_modifier = holding_diwali_feast }
+			NOT = { has_character_modifier = holding_kali_puja_feast }
+			NOT = { has_character_modifier = large_feast_timer }
+			NOT = { has_character_modifier = fabulous_feast }
+			NOT = { has_character_flag = guest_diwali_feast_started }
+			num_of_vassals = 1
+			NOT = { has_alternate_start_parameter = { key = religion_names value = random } }
+			
+		}
+		
+		allow = {
+			
+			# Cost is capped
+			scaled_wealth = {
+				value = 0.2
+				max   = 100
+			}
+			
+			# Otherwise, unchanged from base game
+			war = no
+			custom_tooltip = {
+				text = UNOCCUPIED_DEMESNE_TITLE
+				hidden_tooltip = {
+					any_demesne_title = {
+						NOT = { higher_tier_than = count }
+						is_occupied = no
+					}
+				}
+			}
+			prisoner = no
+			NOT = { is_inaccessible_trigger = yes }
+			month = 9
+			prestige = 100
+			custom_tooltip = {
+				text = is_not_busy_trigger_tooltip
+				hidden_tooltip = { NOT = { has_character_flag = do_not_disturb } }
+			}
+			
+		}
+		
+		effect = {
+			
+			# Cost is capped
+			scaled_wealth = {
+				value = -0.2
+				max   = -100
+			}
+			
+			# Otherwise, unchanged from base game
+			add_character_modifier = {
+				name = holding_diwali_feast
+				duration = 365
+			}
+			set_character_flag = recent_minor_decision
+			set_character_flag = do_not_disturb
+			hidden_tooltip = { character_event = { id = RoI.1000 } }
+			if = {
+				limit = { has_dlc = "Reapers" }
+				custom_tooltip = {
+					text = capital_prospers_custom_tooltip
+					hidden_tooltip = {
+						capital_scope = {
+							change_variable = { which = prosperity_value value = 8 }
+						}
+					}
+				}
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			# AI cost awareness is also capped
+			modifier = {
+				factor = 0
+				NOT = {
+					scaled_wealth = {
+						value = 2
+						max   = 500
+					}
+				}
+			}
+			
+			# Otherwise, unchanged from base game
+			modifier = {
+				factor = 0.5
+				trait = shy
+			}
+			modifier = {
+				factor = 0.5
+				NOT = { diplomacy = 10 }
+			}	
+			modifier = {
+				factor = 0
+				has_character_flag = recent_minor_decision
+				NOT = {
+					had_character_flag = {
+						flag = recent_minor_decision
+						days = 730
+					}
+				}
+			}	
+			modifier = {
+				factor = 0
+				NOT = { age = 30 }
+			}
+		}
+		
+	}
+	
+	expd_india_hold_diwali_feast_buddhist_cheaper = {
+		
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 4
+		
+		potential = {
+			
+			# Only show the decision to characters with high yearly income, where this version will be cheaper.
+			yearly_income > 500
+			
+			# Bugfix to base game conditions
+			liege = {
+				NOR = {
+					has_character_modifier = holding_diwali_feast
+					has_character_modifier = holding_kali_puja_feast
+				}
+			}
+			
+			# Other conditions unchanged from base game
+			has_dlc = "Rajas of India"
+			is_playable = yes
+			is_adult = yes
+			OR = {
+				is_feudal = yes
+				is_tribal = yes
+				is_nomadic = yes
+				is_republic = yes
+			}
+			prisoner = no
+			religion = buddhist
+			NOT = { trait = incapable }
+			NOT = { has_character_modifier = holding_diwali_feast }
+			NOT = { has_character_modifier = holding_kali_puja_feast }
+			NOT = { has_character_modifier = large_feast_timer }
+			NOT = { has_character_modifier = fabulous_feast }
+			NOT = { has_character_flag = guest_diwali_feast_started }
+			num_of_vassals = 1
+			NOT = { has_alternate_start_parameter = { key = religion_names value = random } }
+			
+		}
+		
+		allow = {
+			
+			# Cost is capped
+			scaled_wealth = {
+				value = 0.2
+				max   = 100
+			}
+			
+			# Otherwise, unchanged from base game
+			war = no
+			custom_tooltip = {
+				text = UNOCCUPIED_DEMESNE_TITLE
+				hidden_tooltip = {
+					any_demesne_title = {
+						NOT = { higher_tier_than = count }
+						is_occupied = no
+					}
+				}
+			}
+			prisoner = no
+			NOT = { is_inaccessible_trigger = yes }
+			month = 9
+			prestige = 100
+			custom_tooltip = {
+				text = is_not_busy_trigger_tooltip
+				hidden_tooltip = { NOT = { has_character_flag = do_not_disturb } }
+			}
+			
+		}
+		
+		effect = {
+			
+			# Cost is capped
+			scaled_wealth = {
+				value = -0.2
+				max   = -100
+			}
+			
+			# Otherwise, unchanged from base game
+			add_character_modifier = {
+				name = holding_diwali_feast
+				duration = 365
+			}
+			set_character_flag = recent_minor_decision
+			set_character_flag = do_not_disturb
+			hidden_tooltip = { character_event = { id = RoI.1000 } }
+			if = {
+				limit = { has_dlc = "Reapers" }
+				custom_tooltip = {
+					text = capital_prospers_custom_tooltip
+					hidden_tooltip = {
+						capital_scope = {
+							change_variable = { which = prosperity_value value = 8 }
+						}
+					}
+				}
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			# AI cost awareness is also capped
+			modifier = {
+				factor = 0
+				NOT = {
+					scaled_wealth = {
+						value = 2
+						max   = 500
+					}
+				}
+			}
+			
+			# Otherwise, unchanged from base game
+			modifier = {
+				factor = 0.5
+				trait = shy
+			}
+			modifier = {
+				factor = 0.5
+				NOT = { diplomacy = 10 }
+			}	
+			modifier = {
+				factor = 0
+				has_character_flag = recent_minor_decision
+				NOT = {
+					had_character_flag = {
+						flag = recent_minor_decision
+						days = 730
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				NOT = { age = 30 }
+			}
+		}
+		
+	}
+	
+	expd_india_hold_diwali_feast_jain_cheaper = {
+		
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 4
+		
+		potential = {
+			
+			# Only show the decision to characters with high yearly income, where this version will be cheaper.
+			yearly_income > 500
+			
+			# Bugfix to base game conditions
+			liege = {
+				NOR = {
+					has_character_modifier = holding_diwali_feast
+					has_character_modifier = holding_kali_puja_feast
+				}
+			}
+			
+			# Other conditions unchanged from base game
+			has_dlc = "Rajas of India"
+			is_playable = yes
+			is_adult = yes
+			OR = {
+				is_feudal = yes
+				is_tribal = yes
+				is_nomadic = yes
+				is_republic = yes
+			}
+			prisoner = no
+			religion = jain
+			NOT = { trait = incapable }
+			NOT = { has_character_modifier = holding_diwali_feast }
+			NOT = { has_character_modifier = holding_kali_puja_feast }
+			NOT = { has_character_modifier = large_feast_timer }
+			NOT = { has_character_modifier = fabulous_feast }
+			NOT = { has_character_flag = guest_diwali_feast_started }
+			num_of_vassals = 1
+			NOT = { has_alternate_start_parameter = { key = religion_names value = random } }
+			
+		}
+		
+		allow = {
+			
+			# Cost is capped
+			scaled_wealth = {
+				value = 0.2
+				max   = 100
+			}
+			
+			# Otherwise, unchanged from base game
+			war = no
+			custom_tooltip = {
+				text = UNOCCUPIED_DEMESNE_TITLE
+				hidden_tooltip = {
+					any_demesne_title = {
+						NOT = { higher_tier_than = count }
+						is_occupied = no
+					}
+				}
+			}
+			prisoner = no
+			NOT = { is_inaccessible_trigger = yes }
+			month = 9
+			prestige = 100
+			custom_tooltip = {
+				text = is_not_busy_trigger_tooltip
+				hidden_tooltip = { NOT = { has_character_flag = do_not_disturb } }
+			}
+			
+		}
+		
+		effect = {
+			
+			# Cost is capped
+			scaled_wealth = {
+				value = -0.2
+				max   = -100
+			}
+			
+			# Otherwise, unchanged from base game
+			add_character_modifier = {
+				name = holding_diwali_feast
+				duration = 365
+			}
+			set_character_flag = recent_minor_decision
+			set_character_flag = do_not_disturb
+			hidden_tooltip = { character_event = { id = RoI.1000 } }
+			if = {
+				limit = { has_dlc = "Reapers" }
+				custom_tooltip = {
+					text = capital_prospers_custom_tooltip
+					hidden_tooltip = {
+						capital_scope = {
+							change_variable = { which = prosperity_value value = 8 }
+						}
+					}
+				}
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			# AI cost awareness is also capped
+			modifier = {
+				factor = 0
+				NOT = {
+					scaled_wealth = {
+						value = 2
+						max   = 500
+					}
+				}
+			}
+			
+			# Otherwise, unchanged from base game
+			modifier = {
+				factor = 0.5
+				trait = shy
+			}
+			modifier = {
+				factor = 0.5
+				NOT = { diplomacy = 10 }
+			}	
+			modifier = {
+				factor = 0
+				has_character_flag = recent_minor_decision
+				NOT = {
+					had_character_flag = {
+						flag = recent_minor_decision
+						days = 730
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				NOT = { age = 30 }
+			}
+		}
+		
+	}
+	
+	expd_india_hold_diwali_feast_kali_puja_cheaper = {
+		
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 4
+		
+		potential = {
+			
+			# Only show the decision to characters with high yearly income, where this version will be cheaper.
+			yearly_income > 500
+			
+			# Bugfix to base game conditions
+			liege = {
+				NOR = {
+					has_character_modifier = holding_diwali_feast
+					has_character_modifier = holding_kali_puja_feast
+				}
+			}
+			
+			# Other conditions unchanged from base game
+			has_dlc = "Rajas of India"
+			is_playable = yes
+			is_adult = yes
+			OR = {
+				is_feudal = yes
+				is_tribal = yes
+				is_nomadic = yes
+				is_republic = yes
+			}
+			prisoner = no
+			religion = hindu
+			NOT = { trait = incapable }
+			OR = {
+				has_character_modifier = patron_kali
+				capital_scope = { region = world_india_bengal }
+			}
+			NOT = { has_character_modifier = holding_diwali_feast }
+			NOT = { has_character_modifier = holding_kali_puja_feast }
+			NOT = { has_character_modifier = large_feast_timer }
+			NOT = { has_character_modifier = fabulous_feast }
+			NOT = { has_character_flag = guest_diwali_feast_started }
+			num_of_vassals = 1
+			NOT = { has_alternate_start_parameter = { key = religion_names value = random } }
+		}
+		
+		allow = {
+			
+			# Cost is capped
+			scaled_wealth = {
+				value = 0.2
+				max   = 100
+			}
+			
+			# Otherwise, unchanged from base game
+			war = no
+			custom_tooltip = {
+				text = UNOCCUPIED_DEMESNE_TITLE
+				hidden_tooltip = {
+					any_demesne_title = {
+						NOT = { higher_tier_than = count }
+						is_occupied = no
+					}
+				}
+			}
+			OR = {
+				has_character_modifier = patron_kali
+				capital_scope = {
+					region = world_india_bengal
+				}
+			}
+			prisoner = no
+			NOT = { is_inaccessible_trigger = yes }
+			month = 9
+			prestige = 100
+			custom_tooltip = {
+				text = is_not_busy_trigger_tooltip
+				hidden_tooltip = { NOT = { has_character_flag = do_not_disturb } }
+			}
+			
+		}
+		
+		effect = {
+			
+			# Cost is capped
+			scaled_wealth = {
+				value = -0.2
+				max   = -100
+			}
+			
+			# Otherwise, unchanged from base game
+			add_character_modifier = {
+				name = holding_kali_puja_feast
+				duration = 365
+			}
+			set_character_flag = recent_minor_decision
+			set_character_flag = do_not_disturb
+			hidden_tooltip = { character_event = { id = RoI.1000 } }
+			if = {
+				limit = { has_dlc = "Reapers" }
+				custom_tooltip = {
+					text = capital_prospers_custom_tooltip
+					hidden_tooltip = {
+						capital_scope = {
+							change_variable = { which = prosperity_value value = 8 }
+						}
+					}
+				}
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			# AI cost awareness is also capped
+			modifier = {
+				factor = 0
+				NOT = {
+					scaled_wealth = {
+						value = 2
+						max   = 500
+					}
+				}
+			}
+			
+			# Otherwise, unchanged from base game
+			modifier = {
+				factor = 0.5
+				trait = shy
+			}
+			modifier = {
+				factor = 0.5
+				NOT = { diplomacy = 10 }
+			}	
+			modifier = {
+				factor = 0
+				has_character_flag = recent_minor_decision
+				NOT = {
+					had_character_flag = {
+						flag = recent_minor_decision
+						days = 730
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				NOT = { age = 30 }
+			}
+		}
+		
+	}
+	
+}

@@ -1,0 +1,62 @@
+edmp_ifn_this_character_is_roots_enemy_for_notification_flavour = {
+	
+	OR = {
+		
+		# Enemy or rival (from opinion modifier properties)
+		is_foe = ROOT
+		
+		# ROOT is plotting against this character
+		is_plot_target_of = ROOT
+		
+		# ROOT and this character are directly at war with each other
+		any_war = {
+			attacker = { OR = { character = PREVPREV character = ROOT } }
+			defender = { OR = { character = PREVPREV character = ROOT } }
+		}
+		
+		# This character is doing something hostile to ROOT which is only captured by cchecking for specific opinion modifiers
+		ROOT = {
+			OR = {
+				has_opinion_modifier = { who = PREV name = opinion_targeted_by_adventurer }    # This character is preparing an adventure against ROOT
+				has_opinion_modifier = { who = PREV name = preparing_to_invade_me }            # This character is preparing an invasion against ROOT
+				has_opinion_modifier = { who = PREV name = opinion_looted }                    # This character is raiding ROOT
+			}
+		}
+		
+	}
+	
+}
+
+edmp_ifn_this_character_is_roots_friend_for_notification_flavour = {
+	OR = {
+		character = ROOT
+		is_close_relative = ROOT
+		dynasty = ROOT
+		is_married = ROOT
+		is_consort = ROOT
+		is_friend = ROOT
+		is_lover = ROOT
+		is_allied_with = ROOT
+	}
+}
+
+edmp_ifn_this_is_roots_title_for_notification_flavour = {
+	OR = {
+		holder_scope = { character = ROOT }
+		holder_scope = { any_liege = { character = ROOT } }
+	}
+}
+
+edmp_ifn_this_is_roots_enemys_title_for_notification_flavour = {
+	OR = {
+		holder_scope = { edmp_ifn_this_character_is_roots_enemy_for_notification_flavour = yes }
+		holder_scope = { any_liege = { edmp_ifn_this_character_is_roots_enemy_for_notification_flavour = yes } }
+	}
+}
+
+edmp_ifn_this_is_roots_friends_title_for_notification_flavour = {
+	OR = {
+		holder_scope = { edmp_ifn_this_character_is_roots_friend_for_notification_flavour = yes }
+		holder_scope = { any_liege = { edmp_ifn_this_character_is_roots_friend_for_notification_flavour = yes } }
+	}
+}

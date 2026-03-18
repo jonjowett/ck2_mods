@@ -1,0 +1,39 @@
+namespace = EXPDPrisoner
+
+# Send prisoner to a different location immediately after imprisonment, depending on character preferences
+# Called from on_actions\on_become_imprisoned_any_reason. ROOT is prisoner, FROM is imprisoner.
+character_event = {
+	id = EXPDPrisoner.1000
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			# Sanity check - make sure the prisoner is in fact imprisoned by the designated imprisoner
+			# (This can sometimes go wrong, eg. when characters imprisoned elsewhere are "captured" after a siege.)
+			# Also, we should only do anything if the imprisoner has set a policy - if they haven't, then we shouldn't do anything (ie. rely on vanilla behaviour, ie. send to dungeon).
+			limit = {
+				prisoner = yes
+				host = { character = FROM }
+				FROM = {
+					OR = {
+						has_character_modifier = expd_pris_default_prison_house_arrest
+						has_character_modifier = expd_pris_default_prison_dungeon
+						has_character_modifier = expd_pris_default_prison_oubliette
+					}
+				}
+			}
+			if = {
+				limit = { FROM = { has_character_modifier = expd_pris_default_prison_house_arrest } }
+				expd_pris_send_single_prisoner_to_house_arrest_effect = yes
+			}
+			else_if = {
+				limit = { FROM = { has_character_modifier = expd_pris_default_prison_oubliette } }
+				expd_pris_send_single_prisoner_to_oubliette_effect = yes
+			}
+			else = {
+				# Either expd_pris_default_prison_dungeon ; or fallback option in case of logic errors
+				expd_pris_send_single_prisoner_to_dungeon_effect = yes
+			}
+		}
+	}
+}

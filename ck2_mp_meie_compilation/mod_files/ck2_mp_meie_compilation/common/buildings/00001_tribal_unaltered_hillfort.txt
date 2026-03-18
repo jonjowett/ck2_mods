@@ -1,0 +1,80 @@
+# Audax Validator EnableCommentMetadata
+# Audax Validator "!" Ignore_NEXT
+# Ignore all errors in this file, since the buildings are identical to the base game.
+
+ # Triggers are in Province scope. The From Scope contains the settlement holder (character)
+ # start trigger is in title scope.
+
+tribal = {
+	
+	tb_hillfort_1 = {
+		desc = tb_hillfort_1_desc
+		trigger = { TECH_CASTLE_CONSTRUCTION = 0 }
+		gold_cost = 25
+		build_time = 365
+		
+		fort_level = 0.25
+		levy_size = 0.05
+		retinuesize = 100
+		ai_creation_factor = 97
+		ai_feudal_modifier = 10
+		ai_republic_modifier = -10
+		
+		extra_tech_building_start = 0.3
+	}
+	
+	tb_hillfort_2 = {
+		desc = tb_hillfort_2_desc
+		trigger = { TECH_CASTLE_CONSTRUCTION = 0 }
+		upgrades_from = tb_hillfort_1
+		gold_cost = 50
+		build_time = 365
+		
+		fort_level = 0.25
+		levy_size = 0.05
+		ai_creation_factor = 98
+		ai_feudal_modifier = 10
+		ai_republic_modifier = -10
+		
+		convert_to_city = ct_wall_1
+		convert_to_castle = ca_wall_1
+		
+		extra_tech_building_start = 1.5
+	}
+	
+	tb_hillfort_3 = {
+		desc = tb_hillfort_3_desc
+		trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+		upgrades_from = tb_hillfort_2
+		gold_cost = 75
+		build_time = 365
+		
+		fort_level = 0.25
+		levy_size = 0.05
+		ai_creation_factor = 99
+		ai_feudal_modifier = 10
+		ai_republic_modifier = -10
+		
+		extra_tech_building_start = 2
+	}
+	
+	tb_hillfort_4 = {
+		desc = tb_hillfort_4_desc
+		trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+		upgrades_from = tb_hillfort_3
+		gold_cost = 100
+		build_time = 365
+		
+		fort_level = 0.25
+		levy_size = 0.05
+		ai_creation_factor = 100
+		ai_feudal_modifier = 10
+		ai_republic_modifier = -10
+		
+		convert_to_city = ct_wall_2
+		convert_to_castle = ca_wall_2
+		
+		extra_tech_building_start = 2.5
+	}
+	
+}

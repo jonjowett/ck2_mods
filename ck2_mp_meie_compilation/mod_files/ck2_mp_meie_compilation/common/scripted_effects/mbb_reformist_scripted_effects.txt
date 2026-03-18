@@ -1,0 +1,389 @@
+mbb_create_reformist_bloodline = {
+	event_target:mbb_religion_that_was_reformed = {
+		show_scope_change = no
+		if = {
+			limit = { religion = aztec_reformed }
+			if = {
+				limit = { mbb_this_religion_is_godking = yes }
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_godking_bloodline_aztec }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_bloodline_aztec }
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = baltic_pagan_reformed }
+			if = {
+				limit = { mbb_this_religion_is_godking = yes }
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_godking_bloodline_baltic }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_bloodline_baltic }
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = bon_reformed }
+			if = {
+				limit = { mbb_this_religion_is_godking = yes }
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_godking_bloodline_bon }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_bloodline_bon }
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = finnish_pagan_reformed }
+			if = {
+				limit = { mbb_this_religion_is_godking = yes }
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_godking_bloodline_finnish }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_bloodline_finnish }
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = hellenic_pagan_reformed }
+			if = {
+				limit = { mbb_this_religion_is_godking = yes }
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_godking_bloodline_hellenic }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_bloodline_hellenic }
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = norse_pagan_reformed }
+			if = {
+				limit = { mbb_this_religion_is_godking = yes }
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_godking_bloodline_norse }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_bloodline_norse }
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = slavic_pagan_reformed }
+			if = {
+				limit = { mbb_this_religion_is_godking = yes }
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_godking_bloodline_slavic }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_bloodline_slavic }
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = tengri_pagan_reformed }
+			if = {
+				limit = { mbb_this_religion_is_godking = yes }
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_godking_bloodline_tengri }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_bloodline_tengri }
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = west_african_pagan_reformed }
+			if = {
+				limit = { mbb_this_religion_is_godking = yes }
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_godking_bloodline_west_african }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_bloodline_west_african }
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = zun_pagan_reformed }
+			if = {
+				limit = { mbb_this_religion_is_godking = yes }
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_godking_bloodline_zun }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_bloodline_zun }
+				}
+			}
+		}
+		else = { # Failsafe: Create bloodline linked to founder's religion on death (instead of being linked to a hardcoded religion).
+			if = {
+				limit = { mbb_this_religion_is_godking = yes }
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_godking_bloodline }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					create_bloodline = { type = IB_reformist_bloodline }
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+mbb_grant_reformist_nickname_leadership = { # Leadership-specific nickname
+	event_target:mbb_religion_that_was_reformed = {
+		show_scope_change = no
+		if = {
+			limit = { mbb_this_religion_is_godking = yes }
+			ROOT = { show_scope_change = no give_nickname = nick_the_exalted }
+		}
+		else_if = {
+			limit = { has_religion_feature = religion_temporal_head }
+			ROOT = { show_scope_change = no give_nickname = nick_the_prophet }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_religion_feature = religion_theocratic_head
+					has_religion_feature = religion_autocephaly
+				}
+			}
+			ROOT = { show_scope_change = no give_nickname = nick_the_righteous }
+		}
+		else_if = {
+			limit = { has_religion_feature = religion_no_leader }
+			ROOT = { show_scope_change = no give_nickname = nick_the_guide }
+		}
+		else = {
+			ROOT = { show_scope_change = no give_nickname = nick_the_guide }
+		}
+	}
+}
+
+mbb_grant_reformist_nickname_nature = { # Nature-specific nickname
+	event_target:mbb_religion_that_was_reformed = {
+		show_scope_change = no
+		
+		# Peaceful -> Kind Hearted
+		if = {
+			limit = { has_religion_feature = religion_peaceful }
+			ROOT = { show_scope_change = no give_nickname = nick_the_kind_hearted }
+		}
+		
+		# Warlike -> World Burner
+		else_if = {
+			limit = { has_religion_feature = religion_warlike }
+			ROOT = { show_scope_change = no give_nickname = nick_the_world_burner }
+		}
+		
+		# Defensive -> Bulwark
+		else_if = {
+			limit = { has_religion_feature = religion_defensive }
+			ROOT = { show_scope_change = no give_nickname = nick_the_bulwark }
+		}
+		
+		# Proselytising -> Missionary nickname as per mass conversion sponsor/convertee (whichever seems cooler)
+		else_if = {
+			limit = { has_religion_feature = religion_proselytizing }
+			if = {
+				limit = { religion = zun_pagan_reformed }
+				ROOT = { show_scope_change = no give_nickname = nick_the_proselytizer }
+			}
+			else_if = {
+				limit = { religion = west_african_pagan_reformed }
+				ROOT = { show_scope_change = no give_nickname = nick_the_awoken }
+			}
+			else_if = {
+				limit = { religion = aztec_reformed }
+				ROOT = { show_scope_change = no give_nickname = nick_the_bleeding_eyes }
+			}
+			else_if = {
+				limit = { religion = tengri_pagan_reformed }
+				ROOT = { show_scope_change = no give_nickname = nick_the_sky_rider }
+			}
+			else_if = {
+				limit = { religion = hellenic_pagan_reformed }
+				ROOT = { show_scope_change = no give_nickname = nick_the_educator }
+			}
+			else = {
+				ROOT = { show_scope_change = no give_nickname = nick_the_missionary }
+			}
+		}
+		
+		# Dogmatic -> Inquisitor
+		else_if = {
+			limit = { has_religion_feature = religion_dogmatic }
+			ROOT = { show_scope_change = no give_nickname = nick_the_inquisitor }
+		}
+		
+		# Cosmopolitan -> Diplomat
+		else_if = {
+			limit = { has_religion_feature = religion_cosmopolitan }
+			ROOT = { show_scope_change = no give_nickname = nick_the_diplomat }
+		}
+		
+		# Other (?!?!)
+		else = {
+			ROOT = { show_scope_change = no give_nickname = nick_the_magnificent }
+		}
+	}
+}
+
+mbb_grant_reformist_nickname_doctrine = { # Doctrine-specific nickname, ordered with coolest/rarest first
+	event_target:mbb_religion_that_was_reformed = {
+		show_scope_change = no
+		
+		# Sacrifice/Aztec (not Aztec proselytisers, due to duplication) -> Bleeding Eyes
+		if = {
+			limit = {
+				OR = {
+					has_religion_feature = religion_ritual_sacrifice
+					AND = {
+						religion = aztec_reformed
+						NOT = { has_religion_feature = religion_peaceful }
+					}
+				}
+				NAND = {
+					religion = aztec_reformed
+					has_religion_feature = religion_proselytizing
+				}
+			}
+			ROOT = { show_scope_change = no give_nickname = nick_the_bleeding_eyes }
+		}
+		
+		# Seafaring -> Explorer
+		else_if = {
+			limit = {
+				OR = {
+					has_religion_feature = religion_seafaring
+					has_religion_feature = religion_feature_aztec
+					has_religion_feature = religion_feature_norse
+				}
+			}
+			ROOT = { show_scope_change = no give_nickname = nick_the_explorer }
+		}
+		
+		# Meritocratic/Equal/Stable (not dogmatic/warlike) -> Enlightened
+		else_if = {
+			limit = {
+				OR = {
+					has_religion_feature = religion_meritocratic
+					has_religion_feature = religion_stable
+					has_religion_feature = religion_equal
+					has_religion_feature = religion_feature_slavic
+					has_religion_feature = religion_feature_finnish
+					has_religion_feature = religion_feature_hellenic
+				}
+				NOT = { has_religion_feature = religion_dogmatic }
+				NOT = { has_religion_feature = religion_warlike }
+			}
+			ROOT = { show_scope_change = no give_nickname = nick_the_enlightened }
+		}
+		
+		# Haruspicy (not temporal, due to duplication) -> Prophet
+		else_if = {
+			limit = {
+				OR = {
+					has_religion_feature = religion_haruspicy
+					has_religion_feature = religion_feature_hellenic
+				}
+				NOT = { has_religion_feature = religion_temporal_head }
+			}
+			ROOT = { show_scope_change = no give_nickname = nick_the_prophet }
+		}
+		
+		# Animist -> Purified
+		else_if = {
+			limit = {
+				OR = {
+					has_religion_feature = religion_animistic
+					religion = west_african_pagan_reformed
+				}
+			}
+			ROOT = { show_scope_change = no give_nickname = nick_the_purified }
+		}
+		
+		# Astrology -> Astrologer
+		else_if = {
+			limit = { has_religion_feature = religion_astrology }
+			ROOT = { show_scope_change = no give_nickname = nick_the_astrologer }
+		}
+		
+		# Syncretic (not cosmo) -> Diplomat
+		else_if = {
+			limit = {
+				has_religion_feature = religion_syncretic
+				NOT = { has_religion_feature = religion_cosmopolitan }
+			}
+			ROOT = { show_scope_change = no give_nickname = nick_the_diplomat }
+		}
+		
+		# Relentless (not warlike) -> World Burner
+		else_if = {
+			limit = {
+				has_religion_feature = religion_relentless
+				NOT = { has_religion_feature = religion_warlike }
+			}
+			ROOT = { show_scope_change = no give_nickname = nick_the_world_burner }
+		}
+		
+		# Anything else -> Pious
+		else = {
+			ROOT = { show_scope_change = no give_nickname = nick_the_pious }
+		}
+		
+	}
+}

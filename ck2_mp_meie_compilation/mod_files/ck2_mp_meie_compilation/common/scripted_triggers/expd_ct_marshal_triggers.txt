@@ -1,0 +1,134 @@
+expd_ct_this_character_can_provide_marshal_training = {
+	has_job_title  = job_marshal             # Obviously, only the marshal can do marshal training
+	has_job_action = action_organize_army    # If the marshal doesn't have this action, neither the base-game-style event nor the targetted decision should work
+	age >= 16                                # Consistent with base game pre-trigger, kept (despite the fact it should always be true!) in case you somehow acquire a child marshal...
+	prisoner = no                            # Consistent with base game pre-trigger
+	is_incapable = no                        # More-general restriction, so that all incapable traits don't have to be listed separately
+	is_inaccessible_trigger = no             # More-general restriction, so that all hiding/seclusion traits don't have to be listed separately
+}
+
+expd_ct_root_can_lead_rootfroms_armies_and_is_not_marshal = {
+	ROOT_FROM = {
+		show_scope_change = no
+		ROOT = {
+			custom_tooltip = {
+				text = expd_ct_this_character_can_lead_prevs_armies_and_is_not_marshal_tt
+				OR = {
+					character = PREV
+					AND = {
+						has_minor_title = title_commander
+						liege = { character = PREVPREV }
+					}
+				}
+				NAND = {
+					has_job_title = job_marshal
+					liege = { character = PREVPREV }
+				}
+			}
+		}
+	}
+}
+
+expd_ct_this_character_can_receive_marshal_training = {
+	trigger_if = {
+		limit = { has_character_modifier = drill_cooldown_timer }
+		custom_tooltip = {
+			text = expd_ct_this_character_has_not_recently_received_marshal_training_blocked_tt
+			always = no
+		}
+	}
+	trigger_else = {
+		custom_tooltip = {
+			text = expd_ct_this_character_has_not_recently_received_marshal_training_allowed_tt
+			always = yes
+		}
+	}
+	OR = {
+		martial < 20
+		expd_ct_this_character_has_no_conventional_leadership_traits = yes
+	}
+}
+
+expd_ct_this_character_has_no_conventional_leadership_traits = {
+	custom_tooltip = {
+		text = expd_ct_this_character_has_no_conventional_leadership_traits_tt
+		NOR = {
+			trait = light_foot_leader
+			trait = heavy_infantry_leader 
+			trait = cavalry_leader
+			trait = inspiring_leader
+			trait = trickster
+			trait = organizer
+			trait = defensive_leader
+			trait = experimenter
+			trait = flanker
+			trait = aggressive_leader
+			trait = siege_leader
+			trait = flat_terrain_leader
+			trait = rough_terrain_leader
+			trait = mountain_terrain_leader
+			trait = desert_terrain_leader
+			trait = unyielding_leader
+			trait = narrow_flank_leader
+			trait = war_elephant_leader
+			trait = jungle_terrain_leader
+			trait = winter_soldier
+		}
+	}
+}
+
+expd_ct_marshal_training_payment_is_favor = {
+	ai = no
+	has_dlc = "Conclave"
+	NOT = { has_global_flag = expd_ct_debug_force_non_conclave_marshal_training }
+}
+
+expd_ct_this_characters_favor_size_is_emperor = {
+	OR = {
+		real_tier = EMPEROR
+		AND = {
+			is_ruler = no
+			OR = {
+				mother = { real_tier = EMPEROR }
+				father = { real_tier = EMPEROR }
+			}
+		}
+	}
+}
+
+expd_ct_this_characters_favor_size_is_king = {
+	OR = {
+		real_tier = KING
+		AND = {
+			is_ruler = no
+			OR = {
+				mother = { real_tier = KING }
+				father = { real_tier = KING }
+			}
+		}
+	}
+}
+
+expd_ct_this_characters_favor_size_is_duke = {
+	OR = {
+		real_tier = DUKE
+		AND = {
+			is_ruler = no
+			OR = {
+				mother = { real_tier = DUKE }
+				father = { real_tier = DUKE }
+			}
+		}
+	}
+}
+
+expd_ct_this_characters_favor_size_is_baron = {
+	real_tier = BARON
+}
+
+expd_ct_this_characters_favor_size_is_count = {
+	expd_ct_this_characters_favor_size_is_emperor = no
+	expd_ct_this_characters_favor_size_is_king    = no
+	expd_ct_this_characters_favor_size_is_duke    = no
+	expd_ct_this_characters_favor_size_is_baron   = no
+}

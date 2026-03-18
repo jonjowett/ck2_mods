@@ -1,0 +1,74 @@
+# Expanded version of dissolve_mercenary_company in HL_mercenary_decisions.txt
+# Allows dynasts to be recalled to your court if their band creator was a previous player character.
+#  --- Unfortunately, it doesn't seem to be possible to check for this directly, so we check indirectly (dead character of same dynasty who on death held a title currently held by you)
+
+targetted_decisions = {
+	expd_tv_recall_to_court = {
+		only_playable = yes
+		ai = no
+		filter = independent_rulers
+		
+		from_potential = {
+			is_playable = yes
+			is_landed = yes
+			OR = {
+				government = nomadic_government
+				has_character_modifier = mercenary_traditions
+				any_owned_bloodline = { has_bloodline_flag = bloodline_mercenary_traditions }
+			}
+		}
+		potential = {
+			mercenary = yes
+			expd_tv_this_character_is_of_froms_dynasty_including_bastard = yes
+			primary_title = { NOT = { has_title_flag = ze_dyn_merc } }
+		}
+		allow = {
+			OR = {
+				custom_tooltip = {
+					text = is_mercenary_leader_YEAR
+					had_character_flag = { flag = is_mercenary_leader days = 1825 }
+				}
+				prisoner = yes
+			}
+			primary_title = {
+				NOT = { has_raised_standing_troops = yes }
+				trigger_if = {
+					limit = { NOT = { band_creator = { always = yes } } }
+					custom_tooltip = {
+						text = EXPD_TV_TOOLTIP_THIS_TITLES_BAND_CREATOR_LINK_HAS_BEEN_BROKEN
+						always = yes
+					}
+				}
+				trigger_else = {
+					band_creator = {
+						OR = {
+							is_alive = no
+							is_landed = no
+							is_playable = no
+						}
+						OR = {
+							custom_tooltip = {
+								text = EXPD_TV_TOOLTIP_THIS_DEAD_CHARACTER_IS_A_PREVIOUS_HOLDER_OF_ONE_OF_FROMS_TITLES
+								FROM = { any_demesne_title = { any_previous_holder = { character = PREVPREVPREV } } }
+							}
+							custom_tooltip = {
+								text = EXPD_TV_TOOLTIP_THIS_CHARACTER_IS_AN_UNLANDED_COURTIER_OF_FROM
+								is_ruler = no
+								liege = { character = FROM }
+							}
+						}
+					}
+				}
+				
+			}
+		}
+		effect = {
+			primary_title = {
+				activate_title = { title = THIS status = no }
+				destroy_landed_title = THIS
+			}
+			move_character = FROM
+			clr_character_flag = is_mercenary_leader
+		}
+	}
+}

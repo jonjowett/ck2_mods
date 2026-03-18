@@ -1,0 +1,30 @@
+character_event = {
+	id = 6358
+	desc = EVTDESC6358
+	picture = GFX_evt_recovery
+	border = GFX_event_normal_frame_religion
+	
+	hide_from = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = EVTOPTA6358
+		prestige = 100
+		if = {
+			limit = { lifestyle_traits = 1 }
+			change_learning = 1
+		}		
+		if = {
+			limit = {
+				NOT = { lifestyle_traits = 1 }
+				NOT = { has_dlc = "Way of Life" }
+			}
+			add_trait = scholar
+		}
+	}
+	option = {
+		name = EVTOPTB6358
+		add_character_modifier = { name = "killed_an_old_one" duration = -1 }
+		ROOT = { character_event = { id = IB.110 } }
+	}	
+}

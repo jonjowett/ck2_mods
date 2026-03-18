@@ -1,0 +1,64 @@
+# Virgin birth
+character_event = {
+	id = SoA.5242
+	desc = EVTDESC_SoA_5242
+	picture = GFX_evt_pregnancy
+	border = GFX_event_normal_frame_religion
+
+	only_women = yes
+	capable_only = yes
+	prisoner = no
+	min_age = 17
+	max_age = 45
+	religion_group = christian
+	is_married = yes
+	has_dlc = "Sons of Abraham"
+
+	trigger = {
+		is_pregnant = no
+		spouse = {
+			trait = chaste
+			trait = celibate
+		}
+		NOT = {
+			trait = chaste
+		}
+		NOT = {
+			trait = celibate
+		}
+		NOT = {
+			trait = homosexual
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 1000
+			modifier = {
+				factor = 0.5
+				trait = lustful
+		}
+			modifier = {
+				factor = 0.8
+				trait = hedonist
+		}
+	}
+
+	option = {
+		name = EVTOPTA_SoA_5242
+		if = {
+			limit = { NOT = { trait = zealous } }
+			add_trait = zealous
+		}
+		set_character_flag = virginmary
+		hidden_tooltip = { spouse = { character_event = { id = SoA.5243 } } }
+	}
+	option = {
+		name = EVTOPTB_SoA_5242
+		if = {
+			limit = { NOT = { trait = deceitful } }
+				add_trait = deceitful
+		}
+		set_character_flag = virginmary
+		hidden_tooltip = { spouse = { character_event = { id = SoA.5243 } } }
+	}
+}

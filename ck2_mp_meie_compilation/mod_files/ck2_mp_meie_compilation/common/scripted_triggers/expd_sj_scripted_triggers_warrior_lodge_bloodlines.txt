@@ -1,0 +1,299 @@
+
+##############################
+# Detect existing bloodlines #
+##############################
+
+expd_sj_this_character_already_has_eagle_hunter_bloodline = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		OR = {
+			has_bloodline_flag = expd_sj_eagle_hunter
+			has_bloodline_flag = bloodline_pet_eagle
+		}
+	}
+}
+
+expd_sj_this_character_already_has_dog_hunter_bloodline = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		OR = {
+			has_bloodline_flag = expd_sj_dog_hunter
+			has_bloodline_flag = bloodline_pet_dog
+		}
+	}
+}
+
+expd_sj_this_character_already_has_survivor_bloodline = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		OR = {
+			has_bloodline_flag = expd_sj_survivor
+			has_bloodline_flag = battle_survivor_bloodline
+		}
+	}
+}
+
+expd_sj_this_character_already_has_leader_bloodline = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		OR = {
+			has_bloodline_flag = expd_sj_leader
+			has_bloodline_flag = bloodline_loyalist
+		}
+	}
+}
+
+expd_sj_this_character_already_has_warrior_bloodline = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		OR = {
+			has_bloodline_flag = expd_sj_warrior
+			has_bloodline_flag = bloodline_legendary_warrior
+		}
+	}
+}
+
+expd_sj_this_character_already_has_soldier_bloodline = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		OR = {
+			has_bloodline_flag = expd_sj_soldier
+			has_bloodline_flag = bloodline_artisan_craftsmen
+		}
+	}
+}
+
+expd_sj_this_character_already_has_bard_bloodline = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		OR = {
+			has_bloodline_flag = expd_sj_bard
+			has_bloodline_flag = bloodline_battle_bards
+		}
+	}
+}
+
+expd_sj_this_character_already_has_commander_bloodline = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		OR = {
+			has_bloodline_flag = expd_sj_commander
+			has_bloodline_flag = bloodline_inspire_commanders
+		}
+	}
+}
+
+expd_sj_this_character_already_has_captor_bloodline = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		OR = {
+			has_bloodline_flag = expd_sj_captor
+			has_bloodline_flag = bloodline_fearsome
+		}
+	}
+}
+
+expd_sj_this_character_already_has_raider_bloodline = {
+	any_owned_bloodline = {
+		bloodline_is_active_for = PREV
+		OR = {
+			has_bloodline_flag = expd_sj_raider
+			has_bloodline_flag = bloodline_reaver
+		}
+	}
+}
+
+
+
+
+
+############################################
+# Detect predisposition towards bloodlines #
+############################################
+
+expd_sj_this_character_is_predisposed_to_eagle_hunter_bloodline = {
+	# This bloodline is so unique and difficult-to-obtain that it should always be prioritised (see above)
+	expd_sj_this_character_already_has_eagle_hunter_bloodline = no
+	# NB: expd_sj_this_character_is_predisposed_to_a_top_priority_bloodline is deliberately NOT included here, due to circularity
+}
+
+expd_sj_this_character_is_predisposed_to_dog_hunter_bloodline = {
+	expd_sj_this_character_already_has_dog_hunter_bloodline = no
+	expd_sj_this_character_is_predisposed_to_a_top_priority_bloodline = no
+	# Hunters and characters with hunting dogs are predisposed
+	OR = {
+		trait = hunter
+		has_character_modifier = pet_hunting_dog
+	}
+	# ... but cruel characters aren't going to be friends with dogs
+	NOT = { trait = cruel }
+}
+
+expd_sj_this_character_is_predisposed_to_survivor_bloodline = {
+	expd_sj_this_character_already_has_survivor_bloodline = no
+	expd_sj_this_character_is_predisposed_to_a_top_priority_bloodline = no
+	# Characters who forge a legendary bloodline despite extreme injury are more likely to create the survivor bloodline
+	# Also, the Bon warrior lodge has a special power for deleting injuries, so members of this lodge are always predisposed to forge this bloodline
+	OR = {
+		trait = disfigured
+		trait = mangled
+		trait = one_eyed
+		trait = one_handed
+		trait = one_legged
+		trait = scarred_high
+		event_target:society_affiliation = { is_society = warrior_lodge_bon }
+	}
+	# ... but weak characters are NOT predisposed
+	NOR = {
+		trait = feeble
+		trait = weak
+		trait = inbred
+	}
+}
+
+expd_sj_this_character_is_predisposed_to_leader_bloodline = {
+	expd_sj_this_character_already_has_leader_bloodline = no
+	expd_sj_this_character_is_predisposed_to_a_top_priority_bloodline = no
+	# Rulers with 2+ loyal councillors are more likely to create the loyalty bloodline
+	is_ruler = yes
+	any_courtier = {
+		is_voter = yes
+		has_position = loyalist
+		count >= 2
+	}
+	# ... but arbitrary characters don't inspire loyalty in their councillors, so they are not predisposed
+	NOT = { trait = arbitrary }
+}
+
+expd_sj_this_character_is_predisposed_to_warrior_bloodline = {
+	expd_sj_this_character_already_has_warrior_bloodline = no
+	expd_sj_this_character_is_predisposed_to_a_top_priority_bloodline = no
+	expd_sj_this_characters_traits_inspire_warriors = yes
+}
+
+expd_sj_this_character_is_predisposed_to_soldier_bloodline = {
+	expd_sj_this_character_already_has_soldier_bloodline = no
+	expd_sj_this_character_is_predisposed_to_a_top_priority_bloodline = no
+	# Rulers who DON'T already have all 3 tier-3+ smithed artifacts are more likely to create the smith loyalty bloodline
+	# (Because rulers who DO already have all 3 aren't likely to look for smiths...)
+	is_ruler = yes
+	NOT = {
+		any_artifact = {
+			has_artifact_flag = created
+			has_artifact_flag = crown_jewel
+			quality >= 3
+		}
+	}
+	NOT = {
+		any_artifact = {
+			has_artifact_flag = created
+			has_artifact_flag = combat_weapon
+			quality >= 3
+		}
+	}
+	NOT = {
+		any_artifact = {
+			has_artifact_flag = created
+			has_artifact_flag = armor
+			quality >= 3
+		}
+	}
+	# ... but arbitrary characters don't inspire confidence in smiths, so they are not predisposed
+	NOT = { trait = arbitrary }
+}
+
+expd_sj_this_character_is_predisposed_to_bard_bloodline = {
+	expd_sj_this_character_already_has_bard_bloodline = no
+	expd_sj_this_character_is_predisposed_to_a_top_priority_bloodline = no
+	# Poets and socialites are more likely to become battle bards
+	OR = {
+		trait = poet
+		trait = socializer
+		trait = gregarious
+		diplomacy >= 25
+	}
+	# Shy characters are only predisposed if they are poets
+	OR = {
+		trait = poet
+		NOT = { trait = shy }
+	}
+}
+
+expd_sj_this_character_is_predisposed_to_commander_bloodline = {
+	expd_sj_this_character_already_has_commander_bloodline = no
+	expd_sj_this_character_is_predisposed_to_a_top_priority_bloodline = no
+	expd_sj_this_characters_traits_inspire_warriors = yes
+}
+
+expd_sj_this_character_is_predisposed_to_captor_bloodline = {
+	expd_sj_this_character_already_has_captor_bloodline = no
+	expd_sj_this_character_is_predisposed_to_a_top_priority_bloodline = no
+	# Characters are predisposed to this bloodline if they have the Norse leader trait, or are in the Norse lodge,
+	#    or if they have lots of recent foreign prisoners who were probably commanders
+	OR = {
+		trait = norse_leader
+		event_target:society_affiliation = { is_society = warrior_lodge_norse }
+		any_courtier = {
+			prisoner = yes
+			imprisoned_days <= 1825 # 5 years
+			is_ruler = no
+			is_adult = yes
+			OR = {
+				martial >= 15
+				leader_traits >= 1
+			}
+			OR = {
+				is_female = no
+				trait = shieldmaiden
+			}
+			NOT = { any_liege = { same_realm = PREVPREV } }
+			count >= 10
+		}
+	}
+}
+
+expd_sj_this_character_is_predisposed_to_raider_bloodline = {
+	expd_sj_this_character_already_has_raider_bloodline = no
+	expd_sj_this_character_is_predisposed_to_a_top_priority_bloodline = no
+	# Characters are predisposed to this bloodline if they can spawn raiders somehow, and are not content or charitable
+	is_ruler = yes
+	OR = {
+		is_tribal = yes
+		any_owned_bloodline = {
+			bloodline_is_active_for = PREV
+			has_bloodline_flag = emb_effect_spawn_raiders
+		}
+	}
+	NOR = {
+		trait = content
+		trait = charitable
+	}
+}
+
+
+
+
+
+#############
+# Utilities #
+#############
+
+expd_sj_this_character_is_predisposed_to_a_top_priority_bloodline = {
+	# Be careful about circularity! Don't use this trigger in any of the triggers that are listed inside this trigger!
+	# Only the eagle hunter bloodline is a top priority that overrides anything else
+	expd_sj_this_character_is_predisposed_to_eagle_hunter_bloodline = yes
+}
+
+expd_sj_this_characters_traits_inspire_warriors = {
+	# Great warriors and commanders are attracted to highly martial characters
+	# Also, the Slavic & Suomenskuo warrior lodges have powers which spawn warriors, so they are always predisposed to this bloodline
+	OR = {
+		trait = strategist
+		trait = brilliant_strategist
+		martial >= 25
+		event_target:society_affiliation = { is_society = warrior_lodge_slavic }
+		event_target:society_affiliation = { is_society = warrior_lodge_finnish }
+	}
+	# ... but they don't like craven characters
+	NOT = { trait = craven }
+}

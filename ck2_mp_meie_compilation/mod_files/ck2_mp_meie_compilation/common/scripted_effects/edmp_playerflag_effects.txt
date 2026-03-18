@@ -1,0 +1,116 @@
+edmp_playerflag_add_flag_to_this_character = {
+	custom_tooltip = {
+		text = edmp_playerflag_add_flag_to_this_character_tt
+		add_character_modifier = {
+			name     = edmp_playerflag
+			duration = -1
+			inherit  = yes
+		}
+		add_trait = edmp_absent_human_player # Ensures AI rationality, honor & lack of ambition
+	}
+}
+
+edmp_playerflag_remove_flag_from_this_character = {
+	custom_tooltip = {
+		text = edmp_playerflag_remove_flag_from_this_character_tt
+		remove_character_modifier = edmp_playerflag
+		remove_trait = edmp_absent_human_player
+	}
+}
+
+
+
+
+
+edmp_playerflag_add_admin_flag_to_this_character = {
+	custom_tooltip = {
+		text = edmp_playerflag_add_admin_flag_to_this_character_tt
+		add_character_modifier = {
+			name     = edmp_admin
+			duration = -1
+			inherit  = yes
+		}
+	}
+}
+
+edmp_playerflag_remove_admin_flag_from_this_character = {
+	custom_tooltip = {
+		text = edmp_playerflag_remove_admin_flag_from_this_character_tt
+		remove_character_modifier = edmp_admin
+		clr_character_flag = edmp_admin_submenu_is_open
+		clr_character_flag = edmp_playerflag_show
+		clr_character_flag = edmp_interference_show
+	}
+}
+
+
+
+
+
+edmp_playerflag_add_adminhelper_flag_to_this_character = {
+	custom_tooltip = {
+		text = edmp_playerflag_add_adminhelper_flag_to_this_character_tt
+		add_character_modifier = {
+			name     = edmp_admin_helper
+			duration = -1
+			inherit  = yes
+		}
+	}
+}
+
+edmp_playerflag_remove_adminhelper_flag_from_this_character = {
+	custom_tooltip = {
+		text = edmp_playerflag_remove_adminhelper_flag_from_this_character_tt
+		remove_character_modifier = edmp_admin_helper
+		clr_character_flag = edmp_admin_submenu_is_open
+		clr_character_flag = edmp_playerflag_show
+		clr_character_flag = edmp_interference_show
+	}
+}
+
+
+
+
+
+edmp_playerflag_adminhelpers_pause_effect = {
+	custom_tooltip = {
+		text = edmp_playerflag_adminhelpers_pause_effect_tt
+		set_global_flag = edmp_admin_helper_pause
+	}
+}
+edmp_playerflag_adminhelpers_unpause_effect = {
+	custom_tooltip = {
+		text = edmp_playerflag_adminhelpers_unpause_effect_tt
+		clr_global_flag = edmp_admin_helper_pause
+	}
+}
+
+
+
+
+
+edmp_playerflag_adminhelpers_startup_event_cleanup_effect = {
+	
+	set_variable = { which = edmp_admin_helper_removed_ai_count value = 0 }
+	clear_event_target = edmp_admin_helper_removed_ai_1
+	clear_event_target = edmp_admin_helper_removed_ai_2
+	clear_event_target = edmp_admin_helper_removed_ai_3
+	clear_event_target = edmp_admin_helper_removed_ai_4
+	clear_event_target = edmp_admin_helper_removed_ai_5
+	clear_event_target = edmp_admin_helper_removed_ai_6
+	clear_event_target = edmp_admin_helper_removed_ai_7
+	clear_event_target = edmp_admin_helper_removed_ai_8
+	clear_event_target = edmp_admin_helper_removed_ai_9
+	
+	set_variable = { which = edmp_admin_helper_human_count value = 0 }
+	clear_event_target = edmp_admin_helper_human_1
+	clear_event_target = edmp_admin_helper_human_2
+	clear_event_target = edmp_admin_helper_human_3
+	clear_event_target = edmp_admin_helper_human_4
+	clear_event_target = edmp_admin_helper_human_5
+	clear_event_target = edmp_admin_helper_human_6
+	clear_event_target = edmp_admin_helper_human_7
+	clear_event_target = edmp_admin_helper_human_8
+	clear_event_target = edmp_admin_helper_human_9
+	
+}

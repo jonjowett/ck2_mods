@@ -1,0 +1,225 @@
+targetted_decisions = {
+	# ROOT = targeted character ; FROM = decision taker ; FROMFROM = third party (if applicable)
+	
+	
+	
+	
+	
+	edmp_apply_subjugation_permission_flag_to_this_character_decision = {
+		
+		ai = no
+		filter = all_including_me
+		
+		from_potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			edmp_mod_is_active_in_normal_mode = yes
+		}
+		
+		# Only allow potential-humans to be flagged
+		potential = {
+			edmp_this_character_could_be_a_human_player = yes
+			edmp_this_character_has_no_subjugation_permission_flag = yes
+			edmp_global_subjugations_are_not_enabled = yes
+		}
+		
+		allow = {
+			edmp_all_subjugation_permission_character_flags_have_not_been_issued = yes
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		
+		effect = { edmp_apply_subjugation_permission_flag_to_this_character = yes }
+		
+	}
+	
+	
+	
+	
+	
+	edmp_remove_subjugation_permission_flag_from_this_character_decision = {
+		
+		ai = no
+		filter = all_including_me
+		
+		from_potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			edmp_mod_is_active_in_normal_mode = yes
+		}
+		
+		# Any character with a flag can be manually unflagged (player or not)
+		potential = { edmp_this_character_has_any_subjugation_permission_flag = yes }
+		
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		
+		effect = { edmp_remove_subjugation_permission_flag_from_this_character = yes }
+		
+	}
+	
+	
+	
+	
+	
+	edmp_remove_subjugation_permission_flag_from_listed_character_decision = {
+		
+		ai = no
+		filter = self
+		
+		third_party_filter = all
+		
+		# What scope should the third party be filtered from?
+		# ROOT & FROM should be identical when self-targeted, but FROM is sometimes-nonfunctional in these decisions (see from_potential), so filter from ROOT to be safe.
+		third_party = ROOT
+		
+		# Non-functional in self-targeted decisions
+		from_potential = { always = yes }
+		
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			edmp_mod_is_active_in_normal_mode = yes
+			# Only show the decision to be taken if there will be someone in the third-party list
+			any_character = { edmp_this_character_has_any_subjugation_permission_flag = yes }
+		}
+		
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		
+		third_party_potential = {
+			ROOT_FROMFROM = { edmp_this_character_has_any_subjugation_permission_flag = yes }
+		}
+		
+		third_party_allow = { always = yes }
+		
+		effect = {
+			ROOT_FROMFROM = {
+				show_scope_change = no
+				edmp_remove_subjugation_permission_flag_from_this_character = yes
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	
+	edmp_apply_subjugation_target_flag_to_this_character_decision = {
+		
+		ai = no
+		filter = independent_rulers
+		
+		third_party_filter = all
+		
+		# What scope should the third party be filtered from?
+		# Since the filter is not personal (it's "all independent rulers"), this probably doesn't matter, but let's use FROM (decision-taker) just to be safe.
+		third_party = FROM
+		
+		from_potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			edmp_mod_is_active_in_normal_mode = yes
+		}
+		
+		# This decision can only be used on characters of the requisite tier (depending on the global subjugation rule).
+		potential = {
+			edmp_global_subjugations_are_not_enabled = yes
+			independent = yes
+			OR = {
+				AND = {
+					edmp_global_subjugations_of_duke_plus_are_disabled_without_explicit_permission = yes
+					higher_real_tier_than = COUNT
+				}
+				AND = {
+					edmp_global_subjugations_of_king_plus_are_disabled_without_explicit_permission = yes
+					higher_real_tier_than = DUKE
+				}
+				AND = {
+					edmp_global_subjugations_of_emperor_plus_are_disabled_without_explicit_permission = yes
+					real_tier = EMPEROR
+				}
+			}
+		}
+		
+		# Only allow the decision to be taken if there will be someone in the third-party list
+		# Keep the contents of this block in sync with third_party_potential
+		allow = {
+			ROOT = {
+				show_scope_change = no
+				any_character = {
+					edmp_this_character_has_any_subjugation_permission_flag = yes
+					edmp_this_character_has_permission_to_subjugate_prev_character = no
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		
+		# Only include characters who have a subjugation permission flag, but don't have ROOT as a target
+		# Keep the contents of this block in sync with allow
+		third_party_potential = {
+			ROOT = {
+				show_scope_change = no
+				FROMFROM = {
+					edmp_this_character_has_any_subjugation_permission_flag = yes
+					edmp_this_character_has_permission_to_subjugate_prev_character = no
+				}
+			}
+		}
+		
+		third_party_allow = { always = yes }
+		
+		effect = { ROOT_FROMFROM = { ROOT = { edmp_apply_prev_characters_subjugation_target_flag_to_this_character = yes } } }
+		
+	}
+	
+	
+	
+	
+	
+	edmp_remove_subjugation_target_flag_from_this_character_decision = {
+		
+		ai = no
+		filter = all
+		
+		third_party_filter = all
+		
+		# What scope should the third party be filtered from?
+		# Since there's no filter, this probably doesn't matter, but let's use FROM (decision-taker) just to be safe.
+		third_party = FROM
+		
+		from_potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			edmp_mod_is_active_in_normal_mode = yes
+		}
+		
+		potential = { edmp_this_character_has_any_subjugation_target_flag = yes }
+		
+		# Only allow the decision to be taken if there will be someone in the third-party list
+		# Keep the contents of this block in sync with third_party_potential
+		allow = {
+			ROOT = {
+				show_scope_change = no
+				any_character = {
+					edmp_this_character_has_permission_to_subjugate_prev_character = yes
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		
+		# Only include characters who have permission to subjugate this specific character
+		# Keep the contents of this block in sync with allow
+		third_party_potential = {
+			ROOT = {
+				show_scope_change = no
+				FROMFROM = {
+					edmp_this_character_has_permission_to_subjugate_prev_character = yes
+				}
+			}
+		}
+		
+		third_party_allow = { always = yes }
+		
+		effect = { ROOT_FROMFROM = { ROOT = { edmp_remove_prev_characters_subjugation_target_flag_from_this_character = yes } } }
+		
+	}
+	
+	
+	
+	
+	
+}

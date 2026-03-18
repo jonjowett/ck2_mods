@@ -1,0 +1,63 @@
+expd_gp_send_debug_notification_destroy_gp = {
+	hidden_tooltip = { set_global_flag = expd_gp_debug_notification_destroy_gp }
+	expd_gp_send_debug_notification_generic = yes
+	hidden_tooltip = { clr_global_flag = expd_gp_debug_notification_destroy_gp }
+}
+
+expd_gp_send_debug_notification_destroy_improvement = {
+	hidden_tooltip = { set_global_flag = expd_gp_debug_notification_destroy_improvement }
+	expd_gp_send_debug_notification_generic = yes
+	hidden_tooltip = { clr_global_flag = expd_gp_debug_notification_destroy_improvement }
+}
+
+expd_gp_send_debug_notification_add_improvement_slot = {
+	hidden_tooltip = { set_global_flag = expd_gp_debug_notification_add_improvement_slot }
+	expd_gp_send_debug_notification_generic = yes
+	hidden_tooltip = { clr_global_flag = expd_gp_debug_notification_add_improvement_slot }
+}
+
+expd_gp_send_debug_notification_remove_improvement_slot = {
+	hidden_tooltip = { set_global_flag = expd_gp_debug_notification_remove_improvement_slot }
+	expd_gp_send_debug_notification_generic = yes
+	hidden_tooltip = { clr_global_flag = expd_gp_debug_notification_remove_improvement_slot }
+}
+
+expd_gp_send_debug_notification_increase_expansion_cost = {
+	hidden_tooltip = { set_global_flag = expd_gp_debug_notification_increase_expansion_cost }
+	expd_gp_send_debug_notification_generic = yes
+	hidden_tooltip = { clr_global_flag = expd_gp_debug_notification_increase_expansion_cost }
+}
+
+expd_gp_send_debug_notification_decrease_expansion_cost = {
+	hidden_tooltip = { set_global_flag = expd_gp_debug_notification_decrease_expansion_cost }
+	expd_gp_send_debug_notification_generic = yes
+	hidden_tooltip = { clr_global_flag = expd_gp_debug_notification_decrease_expansion_cost }
+}
+
+
+expd_gp_send_debug_notification_generic = {
+	if = {
+		limit = { multiplayer = yes }
+		custom_tooltip = {
+			text = expd_gp_all_players_notified_tt
+			location = { save_event_target_as = expd_gp_debug_notification_gp_province }
+			event_target:expd_gp_debug_notification_gp_province = { # Use the event_target here, instead of location, so the Validator doesn't erroneously think that it isn't used anywhere.
+				holder_scope = {
+					save_event_target_as = expd_gp_debug_notification_local_count
+					top_liege = { save_event_target_as = expd_gp_debug_notification_gp_owner }
+				}
+			}
+			FROM = {
+				save_event_target_as = expd_gp_debug_notification_decision_taker
+				any_player = {
+					limit = { NOT = { character = PREV } }
+					character_event = { id = ExpdGPDebugNotification.1000 }
+				}
+			}
+			clear_event_target = expd_gp_debug_notification_gp_province
+			clear_event_target = expd_gp_debug_notification_local_count
+			clear_event_target = expd_gp_debug_notification_gp_owner
+			clear_event_target = expd_gp_debug_notification_decision_taker
+		}
+	}
+}

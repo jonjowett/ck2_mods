@@ -1,0 +1,711 @@
+# The effects in this file are used to control mass executions
+# How to use:
+#  --- Call expd_pris_choose_mass_execution_method = yes on the executioner (to set a consistent mass execution method based on the executioner's traits)
+#  --- Call expd_pris_from_executes_this_prisoner_in_mass_execution = yes for each prisoner to be executed (ensuring that the executioner is in FROM)
+#  --- Call expd_pris_clear_mass_execution_method = yes on the executioner (to clean up the mass execution flag)
+# Sacrificing to your gods is disabled for now
+
+
+
+
+
+###################################
+# Set/Clear mass execution method #
+###################################
+
+expd_pris_clear_mass_execution_method = {
+	clr_character_flag = expd_pris_mass_execution_beheading
+	clr_character_flag = expd_pris_mass_execution_crucifixion
+	clr_character_flag = expd_pris_mass_execution_hanging
+	clr_character_flag = expd_pris_mass_execution_hunt
+	clr_character_flag = expd_pris_mass_execution_impaling
+	clr_character_flag = expd_pris_mass_execution_live_burial
+	clr_character_flag = expd_pris_mass_execution_poison
+	clr_character_flag = expd_pris_mass_execution_sacrifice
+	clr_character_flag = expd_pris_mass_execution_wonder_moat_pit
+	clr_character_flag = expd_pris_mass_execution_wonder_moat_spike
+	clr_character_flag = expd_pris_mass_execution_wonder_moat_water
+	clr_character_flag = expd_pris_mass_execution_wonder_spikes
+}
+
+expd_pris_choose_mass_execution_method = {
+	# Use this effect (and not any of the others), to be sure 
+	
+	expd_pris_clear_mass_execution_method = yes
+	
+	random_list = {
+		
+		# Nice, practical mass execution
+		10 = {
+			mult_modifier = {
+				trait = kind
+				factor = 5
+			}
+			mult_modifier = {
+				trait = just
+				factor = 2
+			}
+			mult_modifier = {
+				trait = patient
+				factor = 2
+			}
+			mult_modifier = {
+				trait = temperate
+				factor = 2
+			}
+			mult_modifier = {
+				trait = charitable
+				factor = 2
+			}
+			mult_modifier = {
+				trait = cruel
+				factor = 0.5
+			}
+			mult_modifier = {
+				trait = wroth
+				factor = 0.5
+			}
+			mult_modifier = {
+				trait = impaler
+				factor = 0.2
+			}
+			expd_pris_choose_mass_execution_method_nice = yes
+		}
+		
+		# Cruel mass execution
+		10 = {
+			mult_modifier = {
+				trait = kind
+				factor = 0
+			}
+			mult_modifier = {
+				trait = just
+				factor = 0.5
+			}
+			mult_modifier = {
+				trait = temperate
+				factor = 0.5
+			}
+			mult_modifier = {
+				trait = charitable
+				factor = 0.5
+			}
+			mult_modifier = {
+				trait = cruel
+				factor = 2
+			}
+			mult_modifier = {
+				trait = wroth
+				factor = 2
+			}
+			mult_modifier = {
+				trait = lunatic
+				factor = 2
+			}
+			mult_modifier = {
+				trait = possessed
+				factor = 2
+			}
+			mult_modifier = {
+				OR = {
+					trait = impaler
+					trait = gardener
+					trait = hunter
+					has_focus = focus_hunting
+				}
+				factor = 5
+			}
+			expd_pris_choose_mass_execution_method_cruel = yes
+		}
+		
+#		# Sacrifice them to your gods
+#		10 = {
+#			mult_modifier = {
+#				factor = 0
+#				expd_pris_this_executioner_can_sacrifice_prisoners = no
+#			}
+#			mult_modifier = {
+#				factor = 5
+#				expd_pris_this_executioner_can_sacrifice_prisoners = yes
+#			}
+#			mult_modifier = {
+#				factor = 2
+#				trait = zealous
+#			}
+#			set_character_flag = expd_pris_mass_execution_sacrifice
+#		}
+		
+		# Execute them using your wonder
+		10 = {
+			mult_modifier = {
+				factor = 0
+				expd_pris_this_executioner_can_use_wonder = no
+			}
+			mult_modifier = {
+				factor = 5
+				expd_pris_this_executioner_can_use_wonder = yes
+			}
+			mult_modifier = {
+				trait = kind
+				factor = 0
+			}
+			mult_modifier = {
+				trait = just
+				factor = 0.5
+			}
+			mult_modifier = {
+				trait = temperate
+				factor = 0.5
+			}
+			mult_modifier = {
+				trait = charitable
+				factor = 0.5
+			}
+			mult_modifier = {
+				trait = cruel
+				factor = 2
+			}
+			mult_modifier = {
+				trait = wroth
+				factor = 2
+			}
+			mult_modifier = {
+				trait = lunatic
+				factor = 2
+			}
+			mult_modifier = {
+				trait = possessed
+				factor = 2
+			}
+			mult_modifier = {
+				trait = impaler
+				factor = 2
+			}
+			expd_pris_choose_mass_execution_method_wonder = yes
+		}
+		
+		fallback = {
+			expd_pris_choose_mass_execution_method_nice = yes
+		}
+	}
+	
+}
+
+expd_pris_choose_mass_execution_method_nice = {
+	random_list = {
+		10 = {
+			mult_modifier = { # Got to be patient to watch all those executions
+				trait = patient
+				factor = 2
+			}
+			set_character_flag = expd_pris_mass_execution_beheading
+		}
+		10 = {
+			mult_modifier = { # Got to be patient to watch all those executions
+				trait = patient
+				factor = 2
+			}
+			mult_modifier = {
+				trait = cruel
+				factor = 2
+			}
+			mult_modifier = {
+				trait = wroth
+				factor = 2
+			}
+			mult_modifier = {
+				trait = impaler
+				factor = 2
+			}
+			set_character_flag = expd_pris_mass_execution_hanging
+		}
+		10 = {
+			mult_modifier = { # Impatient people just want someone else to take care of it
+				NOT = { trait = patient }
+				factor = 2
+			}
+			mult_modifier = { # Temperate don't like public spectacles
+				trait = temperate
+				factor = 2
+			}
+			mult_modifier = { # Charitable & kind allow a quick quiet death
+				trait = charitable
+				factor = 2
+			}
+			mult_modifier = {
+				trait = kind
+				factor = 2
+			}
+			set_character_flag = expd_pris_mass_execution_poison
+		}
+		fallback = {
+			set_character_flag = expd_pris_mass_execution_hanging
+		}
+	}
+}
+
+expd_pris_choose_mass_execution_method_cruel = {
+	random_list = {
+		
+		# Grand Hunt
+		# Strongly preferred by hunter
+		# Preferred by diligent
+		10 = {
+			mult_modifier = {
+				factor = 0.1
+				NOR = {
+					trait = hunter
+					has_focus = focus_hunting
+				}
+			}
+			mult_modifier = {
+				factor = 5
+				OR = {
+					trait = hunter
+					has_focus = focus_hunting
+				}
+			}
+			mult_modifier = {
+				factor = 2
+				trait = diligent
+			}
+			set_character_flag = expd_pris_mass_execution_hunt
+		}
+		
+		# Buried alive (in the garden)
+		# Strongly preferred by gardener
+		# Preferred by patient/temperate
+		10 = {
+			mult_modifier = {
+				factor = 0.1
+				NOT = { trait = gardener }
+			}
+			mult_modifier = {
+				factor = 5
+				trait = gardener
+			}
+			mult_modifier = {
+				factor = 2
+				trait = patient
+			}
+			mult_modifier = {
+				factor = 2
+				trait = temperate
+			}
+			set_character_flag = expd_pris_mass_execution_live_burial
+		}
+		
+		# Impaled/crucified (crucifixion preferred if available)
+		# Strongly preferred by impaler
+		# Preferred by cruel
+		10 = {
+			mult_modifier = {
+				factor = 0.1
+				NOT = { trait = impaler }
+			}
+			mult_modifier = {
+				factor = 5
+				trait = impaler
+			}
+			mult_modifier = {
+				factor = 2
+				trait = cruel
+			}
+			random_list = {
+				10 = {
+					mult_modifier = {
+						factor = 0
+						expd_pris_this_executioner_can_crucify_prisoners = no
+					}
+					mult_modifier = {
+						factor = 0.5
+						expd_pris_this_executioner_can_crucify_prisoners = yes
+					}
+					set_character_flag = expd_pris_mass_execution_impaling
+				}
+				10 = {
+					mult_modifier = {
+						factor = 2
+						expd_pris_this_executioner_can_crucify_prisoners = yes
+					}
+					set_character_flag = expd_pris_mass_execution_crucifixion
+				}
+				fallback = {
+					set_character_flag = expd_pris_mass_execution_impaling
+				}
+			}
+		}
+		
+		# If you don't match any of the specified cruel execution methods very well, try the wonder methods
+		2 = {
+			expd_pris_choose_mass_execution_method_wonder = yes
+		}
+		fallback = {
+			expd_pris_choose_mass_execution_method_wonder = yes
+		}
+	}
+}
+
+expd_pris_choose_mass_execution_method_wonder = {
+	random_list = {
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = {
+					independent = yes
+					any_realm_wonder = { has_wonder_upgrade = upgrade_spikes }
+				}
+			}
+			mult_modifier = {
+				factor = 2
+				trait = impaler
+			}
+			set_character_flag = expd_pris_mass_execution_wonder_spikes
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = {
+					independent = yes
+					any_realm_wonder = { has_wonder_upgrade = upgrade_moat_spike }
+				}
+			}
+			mult_modifier = {
+				factor = 2
+				trait = impaler
+			}
+			set_character_flag = expd_pris_mass_execution_wonder_moat_spike
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = {
+					independent = yes
+					any_realm_wonder = { has_wonder_upgrade = upgrade_moat_pit }
+				}
+			}
+			modifier = {
+				factor = 2
+				trait = gardener
+			}
+			set_character_flag = expd_pris_mass_execution_wonder_moat_pit
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = {
+					independent = yes
+					any_realm_wonder = { has_wonder_upgrade = upgrade_moat_water }
+				}
+			}
+			modifier = {
+				factor = 2
+				trait = cruel
+			}
+			set_character_flag = expd_pris_mass_execution_wonder_moat_water
+		}
+		
+		# If you don't match any of the wonder execution methods very well, fall back to one of the nice methods
+		10 = {
+			expd_pris_choose_mass_execution_method_nice = yes
+		}
+		fallback = {
+			expd_pris_choose_mass_execution_method_nice = yes
+		}
+	}
+}
+
+
+
+
+
+#############################################################
+# Execute a prisoner according to the mass execution method #
+#############################################################
+
+expd_pris_from_executes_this_prisoner_in_mass_execution = {
+	if = {
+		limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_beheading } }
+		expd_pris_from_executes_this_prisoner_beheading = yes
+	}
+	else_if = {
+		limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_crucifixion } }
+		expd_pris_from_executes_this_prisoner_crucifixion = yes
+	}
+	else_if = {
+		limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_hanging } }
+		expd_pris_from_executes_this_prisoner_hanging = yes
+	}
+	else_if = {
+		limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_hunt } }
+		expd_pris_from_executes_this_prisoner_hunt = yes
+	}
+	else_if = {
+		limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_impaling } }
+		expd_pris_from_executes_this_prisoner_impaling = yes
+	}
+	else_if = {
+		limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_live_burial } }
+		expd_pris_from_executes_this_prisoner_live_burial = yes
+	}
+	else_if = {
+		limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_poison } }
+		expd_pris_from_executes_this_prisoner_poison = yes
+	}
+	#else_if = {
+	#	limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_sacrifice } }
+	#	expd_pris_from_executes_this_prisoner_sacrifice = yes
+	#}
+	else_if = {
+		limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_wonder_moat_pit } }
+		expd_pris_from_executes_this_prisoner_wonder_moat_pit = yes
+	}
+	else_if = {
+		limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_wonder_moat_spike } }
+		expd_pris_from_executes_this_prisoner_wonder_moat_spike = yes
+	}
+	else_if = {
+		limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_wonder_moat_water } }
+		expd_pris_from_executes_this_prisoner_wonder_moat_water = yes
+	}
+	else_if = {
+		limit = { ROOT_FROM = { has_character_flag = expd_pris_mass_execution_wonder_spikes } }
+		expd_pris_from_executes_this_prisoner_wonder_spikes = yes
+	}
+	else = {
+		# Fallback in case mass execution flag not properly set
+		expd_pris_from_executes_this_prisoner_beheading = yes
+	}
+}
+
+
+
+
+
+######################
+# Execute a prisoner #
+######################
+
+expd_pris_from_executes_this_prisoner_beheading = {
+	expd_pris_update_from_due_to_execution_of_this = yes
+	death = {
+		death_reason = death_execution_beheading
+		killer = ROOT_FROM
+	}
+}
+
+expd_pris_from_executes_this_prisoner_hanging = {
+	expd_pris_update_from_due_to_execution_of_this = yes
+	death = {
+		death_reason = death_execution_hanging
+		killer = ROOT_FROM
+	}
+}
+
+expd_pris_from_executes_this_prisoner_poison = {
+	expd_pris_update_from_due_to_execution_of_this = yes
+	death = {
+		death_reason = death_execution_poison
+		killer = ROOT_FROM
+	}
+}
+
+expd_pris_from_executes_this_prisoner_hunt = {
+	expd_pris_update_from_due_to_execution_of_this = yes
+	death = {
+		death_reason = death_execution_hunt
+		killer = ROOT_FROM
+	}
+}
+
+expd_pris_from_executes_this_prisoner_live_burial = {
+	expd_pris_update_from_due_to_execution_of_this = yes
+	death = {
+		death_reason = death_execution_live_burial
+		killer = ROOT_FROM
+	}
+}
+
+expd_pris_from_executes_this_prisoner_impaling = {
+	expd_pris_update_from_due_to_execution_of_this = yes
+	death = {
+		death_reason = death_execution_impaling
+		killer = ROOT_FROM
+	}
+}
+
+expd_pris_from_executes_this_prisoner_crucifixion = {
+	expd_pris_update_from_due_to_execution_of_this = yes
+	death = {
+		death_reason = death_execution_crucifixion
+		killer = ROOT_FROM
+	}
+}
+
+#expd_pris_from_executes_this_prisoner_sacrifice = {
+#	expd_pris_update_from_due_to_execution_of_this = yes
+#	death = {
+#		death_reason = death_execution_aztec_sacrifice
+#		killer = ROOT_FROM
+#	}
+#}
+
+expd_pris_from_executes_this_prisoner_wonder_moat_pit = {
+	expd_pris_update_from_due_to_execution_of_this = yes
+	death = {
+		death_reason = death_execution_wonder_moat_pit
+		killer = ROOT_FROM
+	}
+}
+
+expd_pris_from_executes_this_prisoner_wonder_moat_spike = {
+	expd_pris_update_from_due_to_execution_of_this = yes
+	death = {
+		death_reason = death_execution_wonder_moat_spikes
+		killer = ROOT_FROM
+	}
+}
+
+expd_pris_from_executes_this_prisoner_wonder_moat_water = {
+	expd_pris_update_from_due_to_execution_of_this = yes
+	death = {
+		death_reason = death_execution_wonder_moat_water
+		killer = ROOT_FROM
+	}
+}
+
+expd_pris_from_executes_this_prisoner_wonder_spikes = {
+	expd_pris_update_from_due_to_execution_of_this = yes
+	death = {
+		death_reason = death_execution_wonder_spikes
+		killer = ROOT_FROM
+	}
+}
+
+
+
+
+
+#######################################################
+# Update the executioner as a result of the execution #
+#######################################################
+
+expd_pris_update_from_due_to_execution_of_this = {
+	
+	# Piety loss (if same religion)
+	if = {
+		limit = { expd_pris_from_loses_piety_due_to_executing_this = yes }
+		ROOT_FROM = { piety = -20 }
+	}
+	
+	# Tyranny gain (if executed prisoner is not foreign)
+	if = {
+		limit = { expd_pris_from_gains_tyranny_due_to_executing_this = yes }
+		ROOT_FROM = {
+			any_courtier_or_vassal = {
+				limit = { PREV = { is_liege_of = PREV } } # Exclude anyone who is in the court but isn't the executioner's vassal (eg. prisoners)
+				opinion = {
+					modifier = opinion_tyrant
+					who = ROOT_FROM
+				}
+			}
+			expd_pris_more_bloodlines_add_to_tyranny_counter = yes
+		}
+	}
+	
+	# Add kinslayer trait
+	if = {
+		limit = { expd_pris_from_gains_tribal_kinslayer_due_to_executing_this = yes }
+		ROOT_FROM = {
+			add_trait = tribal_kinslayer
+			remove_trait = dynastic_kinslayer
+			remove_trait = familial_kinslayer
+			remove_trait = kinslayer
+		}
+	}
+	if = {
+		limit = { expd_pris_from_gains_dynastic_kinslayer_due_to_executing_this = yes }
+		ROOT_FROM = {
+			remove_trait = tribal_kinslayer
+			add_trait = dynastic_kinslayer
+		}
+	}
+	if = {
+		limit = { expd_pris_from_gains_familial_kinslayer_due_to_executing_this = yes }
+		ROOT_FROM = {
+			remove_trait = tribal_kinslayer
+			remove_trait = dynastic_kinslayer
+			add_trait = familial_kinslayer
+		}
+	}
+	if = {
+		limit = { expd_pris_from_gains_close_kinslayer_due_to_executing_this = yes }
+		ROOT_FROM = {
+			remove_trait = tribal_kinslayer
+			remove_trait = dynastic_kinslayer
+			remove_trait = familial_kinslayer
+			add_trait = kinslayer
+		}
+	}
+	
+	# Foreign opinion loss (if executed prisoner is foreign)
+	if = {
+		limit = { expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes }
+		any_liege = {
+			limit = { independent = yes } # For some reason, top_liege doesn't work as expected
+			opinion = {
+				modifier = opinion_unjust_execution
+				who = ROOT_FROM
+			}
+			any_realm_lord = { # Vanilla only applies the modifier to landed vassals of the top liege (and not courtiers etc), so we do the same
+				opinion = {
+					modifier = opinion_unjust_execution
+					who = ROOT_FROM
+				}
+			}
+		}
+	}
+	
+	# Close relative opinion loss 
+	# Parent always loses opinion; others only lose opinion if the execution is unjustified
+	# But need to ensure that only one opinion penalty is applied (ie. the worst one)
+	father = {
+		opinion = {
+			modifier = opinion_executed_child
+			who = ROOT_FROM
+		}
+	}
+	mother = {
+		opinion = {
+			modifier = opinion_executed_child
+			who = ROOT_FROM
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				expd_pris_from_gains_tyranny_due_to_executing_this = yes
+				expd_pris_from_loses_foreign_opinion_due_to_executing_this = yes
+			}
+		}
+		any_spouse = {
+			limit = {
+				NOT = { is_parent_of = PREV }
+			}
+			opinion = {
+				modifier = opinion_spouse_slayer
+				who = ROOT_FROM
+			}
+		}
+		any_close_relative = {
+			limit = {
+				NOT = { is_parent_of = PREV }
+				NOT = { any_spouse = { character = PREVPREV } }
+			}
+			opinion = {
+				modifier = opinion_killed_close_kin
+				who = ROOT_FROM
+			}
+		}
+	}
+}

@@ -1,0 +1,280 @@
+bsu_found_bloodline_initial = {
+	if = {
+		limit = {
+			has_dlc = "Holy Fury"
+			NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_initial } }
+		}
+		if = {
+			limit = { is_female = yes }
+			create_bloodline = { type = bsu_lcr_female }
+			new_bloodline = {
+				set_description = "lcr_female_desc"
+				set_name = "lcr_female"
+			}
+		}
+		else = {
+			create_bloodline = { type = bsu_lcr_male }
+			new_bloodline = {
+				set_description = "lcr_male_desc"
+				set_name = "lcr_male"
+			}
+		}
+	}
+}
+
+bsu_found_bloodline_south = {
+	if = {
+		limit = {
+			has_dlc = "Holy Fury"
+			has_global_flag = bsu_lcr_has_welcomed_all_southern_slavs
+			NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_south } }
+		}
+		if = {
+			limit = { is_female = yes }
+			create_bloodline = { type = bsu_lcr_south_female }
+		}
+		else = {
+			create_bloodline = { type = bsu_lcr_south_male }
+		}
+		new_bloodline = {
+			set_description = "bsu_lcr_south_desc"
+			set_name = "bsu_lcr_name"
+		}
+	}
+}
+
+bsu_found_bloodline_hungarian = {
+	if = {
+		limit = {
+			has_dlc = "Holy Fury"
+			has_global_flag = bsu_lcr_has_welcomed_hungarians
+			NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_hungarian } }
+		}
+		if = {
+			limit = { is_female = yes }
+			create_bloodline = { type = bsu_lcr_hungarian_female }
+		}
+		else = {
+			create_bloodline = { type = bsu_lcr_hungarian_male }
+		}
+		new_bloodline = {
+			set_description = "bsu_lcr_hungarian_desc"
+			set_name = "bsu_lcr_name"
+		}
+	}
+}
+
+bsu_found_bloodline_baltic = {
+	if = {
+		limit = {
+			has_dlc = "Holy Fury"
+			has_global_flag = bsu_lcr_has_welcomed_lithuanians
+			NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_baltic } }
+		}
+		if = {
+			limit = { is_female = yes }
+			create_bloodline = { type = bsu_lcr_baltic_female }
+		}
+		else = {
+			create_bloodline = { type = bsu_lcr_baltic_male }
+		}
+		new_bloodline = {
+			set_description = "bsu_lcr_baltic_desc"
+			set_name = "bsu_lcr_name"
+		}
+	}
+}
+
+bsu_found_bloodline_finnish = {
+	if = {
+		limit = {
+			has_dlc = "Holy Fury"
+			has_global_flag = bsu_lcr_has_welcomed_all_finns
+			NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_finnish } }
+		}
+		if = {
+			limit = { is_female = yes }
+			create_bloodline = { type = bsu_lcr_finnish_female }
+		}
+		else = {
+			create_bloodline = { type = bsu_lcr_finnish_male }
+		}
+		new_bloodline = {
+			set_description = "bsu_lcr_finnish_desc"
+			set_name = "bsu_lcr_name"
+		}
+	}
+}
+
+bsu_found_bloodline_bolghar = {
+	if = {
+		limit = {
+			has_dlc = "Holy Fury"
+			has_global_flag = bsu_lcr_has_welcomed_bolghars
+			NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_bolghar } }
+		}
+		if = {
+			limit = { is_female = yes }
+			create_bloodline = { type = bsu_lcr_bolghar_female }
+		}
+		else = {
+			create_bloodline = { type = bsu_lcr_bolghar_male }
+		}
+		new_bloodline = {
+			set_description = "bsu_lcr_bolghar_desc"
+			set_name = "bsu_lcr_name"
+		}
+	}
+}
+
+bsu_found_bloodline_khazar = {
+	if = {
+		limit = {
+			has_dlc = "Holy Fury"
+			has_global_flag = bsu_lcr_has_welcomed_khazars
+			NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_khazar } }
+		}
+		if = {
+			limit = { is_female = yes }
+			create_bloodline = { type = bsu_lcr_khazar_female }
+		}
+		else = {
+			create_bloodline = { type = bsu_lcr_khazar_male }
+		}
+		new_bloodline = {
+			set_description = "bsu_lcr_khazar_desc"
+			set_name = "bsu_lcr_name"
+		}
+	}
+}
+
+bsu_found_bloodline_alan = {
+	if = {
+		limit = {
+			has_dlc = "Holy Fury"
+			has_global_flag = bsu_lcr_has_welcomed_alans
+			NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_alan } }
+		}
+		if = {
+			limit = { is_female = yes }
+			create_bloodline = { type = bsu_lcr_alan_female }
+		}
+		else = {
+			create_bloodline = { type = bsu_lcr_alan_male }
+		}
+		new_bloodline = {
+			set_description = "bsu_lcr_alan_desc"
+			set_name = "bsu_lcr_name"
+		}
+	}
+}
+
+bsu_found_bloodline_tengri = {
+	if = {
+		limit = {
+			has_dlc = "Holy Fury"
+			has_global_flag = bsu_lcr_has_welcomed_all_tengri
+			NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_tengri } }
+		}
+		if = {
+			limit = { is_female = yes }
+			create_bloodline = { type = bsu_lcr_tengri_female }
+		}
+		else = {
+			create_bloodline = { type = bsu_lcr_tengri_male }
+		}
+		new_bloodline = {
+			set_description = "bsu_lcr_tengri_desc"
+			set_name = "bsu_lcr_name"
+		}
+	}
+}
+
+bsu_found_bloodline_scandinavian = {
+	if = {
+		limit = {
+			has_dlc = "Holy Fury"
+			has_global_flag = bsu_lcr_has_welcomed_scandinavians
+			NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_scandinavian } }
+		}
+		if = {
+			limit = { is_female = yes }
+			create_bloodline = { type = bsu_lcr_scandinavian_female }
+		}
+		else = {
+			create_bloodline = { type = bsu_lcr_scandinavian_male }
+		}
+		new_bloodline = {
+			set_description = "bsu_lcr_scandinavian_desc"
+			set_name = "bsu_lcr_name"
+		}
+	}
+}
+
+bsu_found_bloodline_final = {
+	if = {
+		limit = {
+			has_dlc = "Holy Fury"
+			
+			#Must not already own the final bloodline
+			NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_final } }
+			
+			#All other Slavic Union integration decisions must have been taken
+			has_global_flag = bsu_lcr_has_welcomed_all_southern_slavs
+			has_global_flag = bsu_lcr_has_welcomed_hungarians
+			has_global_flag = bsu_lcr_has_welcomed_lithuanians
+			has_global_flag = bsu_lcr_has_welcomed_all_finns
+			has_global_flag = bsu_lcr_has_welcomed_bolghars
+			has_global_flag = bsu_lcr_has_welcomed_khazars
+			has_global_flag = bsu_lcr_has_welcomed_alans
+			has_global_flag = bsu_lcr_has_welcomed_all_tengri
+			has_global_flag = bsu_lcr_has_welcomed_scandinavians
+			
+		}
+		
+		#First preference: Locate the original founder of the Slavic Union, and create the "final" bloodline with him/her as the founder
+		#This is preferred because we will later be propagating the bloodline to everyone who has any of the Slavic Union bloodlines, and we would normally expect all of those characters to be descendants of the original founder.
+		if = {
+			limit = { any_bloodline = { has_bloodline_flag = bsu_lcr_initial } }
+			any_bloodline = {
+				if = {
+					limit = { has_bloodline_flag = bsu_lcr_initial }
+					founder = {
+						create_bloodline = { type = bsu_lcr_final }
+						new_bloodline = {
+							set_description = "bsu_lcr_final_desc"
+							set_name = "bsu_lcr_final_name"
+							save_event_target_as = bsu_new_final_bloodline
+						}
+					}
+				}
+			}
+		}
+		#Fallback, in case the modded initial bloodline doesn't exist (eg. because the player took the vanilla "Form Slavic Union" decision
+		#Create the "final" bloodline with the character taking the decision as the founder
+		else = {
+			create_bloodline = { type = bsu_lcr_final }
+			new_bloodline = {
+				set_description = "bsu_lcr_final_desc_fallback"
+				set_name = "bsu_lcr_final_name"
+				save_event_target_as = bsu_new_final_bloodline
+			}
+		}
+		
+		#For every member of any of the Slavic Union bloodlines, living or dead, add them to the newly-created "final" bloodline.
+		#Also, delete all of the non-"final" Slavic Union bloodlines.
+		any_bloodline = {
+			limit = {
+				has_bloodline_flag = bsu_lcr
+				NOT = { has_bloodline_flag = bsu_lcr_final }
+			}
+			any_bloodline_member_including_dead = {
+				if = {
+					limit = { NOT = { any_owned_bloodline = { has_bloodline_flag = bsu_lcr_final } } }
+					add_to_bloodline = event_target:bsu_new_final_bloodline
+				}
+			}
+			destroy_bloodline = yes
+		}
+	}
+}

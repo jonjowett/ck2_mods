@@ -1,0 +1,110 @@
+expd_herm_10_years_since_previous_magnum_opus = {
+	custom_tooltip = {
+		text = expd_herm_10_years_since_previous_magnum_opus_tt
+		had_character_flag = {
+			flag = wrote_magnum_opus
+			years >= 10
+		}
+		had_character_flag = {
+			flag = wrote_magnum_opus
+			years < 20
+		}
+	}
+}
+
+expd_herm_20_years_since_previous_magnum_opus = {
+	custom_tooltip = {
+		text = expd_herm_20_years_since_previous_magnum_opus_tt
+		had_character_flag = {
+			flag = wrote_magnum_opus
+			years >= 20
+		}
+		had_character_flag = {
+			flag = wrote_magnum_opus
+			years < 30
+		}
+	}
+}
+
+expd_herm_30_years_since_previous_magnum_opus = {
+	custom_tooltip = {
+		text = expd_herm_30_years_since_previous_magnum_opus_tt
+		had_character_flag = {
+			flag = wrote_magnum_opus
+			years >= 30
+		}
+		had_character_flag = {
+			flag = wrote_magnum_opus
+			years < 40
+		}
+	}
+}
+
+expd_herm_40_years_since_previous_magnum_opus = {
+	custom_tooltip = {
+		text = expd_herm_40_years_since_previous_magnum_opus_tt
+		had_character_flag = {
+			flag = wrote_magnum_opus
+			years >= 40
+		}
+		had_character_flag = {
+			flag = wrote_magnum_opus
+			years < 50
+		}
+	}
+}
+
+expd_herm_50_years_since_previous_magnum_opus = {
+	custom_tooltip = {
+		text = expd_herm_50_years_since_previous_magnum_opus_tt
+		had_character_flag = {
+			flag = wrote_magnum_opus
+			years >= 50
+		}
+	}
+}
+
+expd_herm_is_not_currently_writing_a_magnum_opus = {
+	custom_tooltip = {
+		text = expd_herm_is_not_currently_writing_a_magnum_opus_tt
+		# The "writing magnum opus" modifier is applied at the beginning of the event chain and removed at the end.
+		# However, we also need to check that we're not in the short interval between taking the decision (where wrote_magnum_opus is applied)
+		#           and the start of the event chain (a day or two later) - hence the second condition.
+		NOT = { has_character_modifier = writing_magnum_opus }
+		OR = {
+			NOT = { has_character_flag = wrote_magnum_opus }
+			had_character_flag = {
+				flag = wrote_magnum_opus
+				months >= 1
+			}
+		}
+	}
+}
+
+expd_herm_has_already_written_a_second_magnum_opus = {
+	custom_tooltip = {
+		text = expd_herm_has_already_written_a_second_magnum_opus_tt
+		has_character_flag = expd_herm_wrote_second_magnum_opus
+	}
+}
+
+expd_herm_has_not_already_written_a_second_magnum_opus = {
+	custom_tooltip = {
+		text = expd_herm_has_not_already_written_a_second_magnum_opus_tt
+		expd_herm_has_already_written_a_second_magnum_opus = no
+	}
+}
+
+expd_herm_has_already_written_a_third_magnum_opus = {
+	custom_tooltip = {
+		text = expd_herm_has_already_written_a_third_magnum_opus_tt
+		has_character_flag = expd_herm_wrote_third_magnum_opus
+	}
+}
+
+expd_herm_has_not_already_written_a_third_magnum_opus = {
+	custom_tooltip = {
+		text = expd_herm_has_not_already_written_a_third_magnum_opus_tt
+		expd_herm_has_already_written_a_third_magnum_opus = no
+	}
+}

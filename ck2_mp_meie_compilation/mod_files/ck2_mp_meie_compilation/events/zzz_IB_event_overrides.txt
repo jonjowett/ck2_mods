@@ -1,0 +1,59 @@
+namespace = IB
+
+#long lived
+character_event = {
+	id = IB.260
+	picture = GFX_evt_bloodlines
+	desc = EVTDESCIB.260
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			any_owned_bloodline = { has_bloodline_flag = IB_longevity_bloodline }
+		}
+		age = 90
+		
+		NOT = { trait = immortal }
+		
+		# Add some more explicit prevention so immortals and pseudo-immortals don't immediately earn this bloodline
+		total_years_played >= 30    # Prevent gaining the bloodline for characters who just start with stupid-high age
+		immortal = no               # Prevents all immortals from gaining the bloodline (if they have immortality granted by some other trait)
+		OR = {                      # Pseudo-immortals only gain the bloodline at age 500
+			age = 500
+			NOR = {
+				trait = dwarven
+				trait = orkish
+				trait = ringbearer1
+				trait = skin_changer
+			}
+		}
+		OR = {                      # Very-long-lived (ie. high-but-not-broken health bonus) only gain the bloodline at age 300
+			age = 300
+			NOR = {
+				trait = hobbit
+				trait = half_orc
+			}
+		}
+		
+		
+		NAND = {
+			OR = {
+				has_global_flag = IB_ai_less
+				has_global_flag = IB_ai_none
+			}
+			ai = yes
+		}
+	}
+	
+	immediate = {
+		sound_effect = bloodline_added
+	}
+	
+	option = {
+		name = EVTOPT_a_IB.260
+		prestige = 300
+		create_bloodline = {
+			type = IB_longevity_bloodline
+		}
+	}
+	
+}

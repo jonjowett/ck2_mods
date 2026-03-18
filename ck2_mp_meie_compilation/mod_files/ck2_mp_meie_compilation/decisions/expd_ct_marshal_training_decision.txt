@@ -1,0 +1,189 @@
+targetted_decisions = {
+	
+	expd_ct_marshal_training_decision = {
+		
+		only_playable = yes
+		
+		filter = sub_realm_including_me
+		ai_target_filter = sub_realm_including_me
+		
+		ai_check_interval = 12
+		
+		from_potential = {
+			# Marshal training is only available with the relevant DLC
+			has_dlc = "Mystics"
+		}
+		
+		potential = {
+			# Only show if FROM is self-targeting, or targeting one of their commanders
+			expd_ct_root_can_lead_rootfroms_armies_and_is_not_marshal = yes
+		}
+		
+		allow = {
+			
+			# Duplicate the potential block, so that the player can understand who is targetable
+			expd_ct_root_can_lead_rootfroms_armies_and_is_not_marshal = yes
+			
+			# ROOT must be a valid target
+			ROOT = { expd_ct_this_character_can_receive_marshal_training = yes }
+			
+			# FROM must have a valid Marshal, and must be able to pay them (favor/cash), and must not be in timeout
+			FROM = {
+				
+				# If FROM doesn't have a Marshal, simplify the tooltip
+				trigger_if = {
+					limit = { NOT = { any_courtier_or_vassal = { has_job_title = job_marshal } } }
+					custom_tooltip = {
+						text = expd_ct_this_character_has_a_marshal_tt
+						always = no
+					}
+				}
+				
+				trigger_else = {
+					
+					# If FROM has a Marshal, check he is available for training and that FROM can afford to pay him
+					
+					# Marshal is valid
+					job_marshal = { expd_ct_this_character_can_provide_marshal_training = yes }
+					
+					# If you have Conclave, must be able to give them a favor
+					trigger_if = {
+						limit = { expd_ct_marshal_training_payment_is_favor = yes }
+						custom_tooltip = {
+							text = expd_ct_this_character_does_not_owe_a_favor_to_their_marshal_tt
+							NOT = { job_marshal = { holds_favor_on = PREV } }
+						}
+					}
+					
+					# If you do not have Conclave, must be able to subtract cash equivalent of a Conclave favor
+					trigger_else = {
+						trigger_if = {
+							limit = { job_marshal = { expd_ct_this_characters_favor_size_is_emperor = yes } }
+							wealth >= 680
+						}
+						trigger_else_if = {
+							limit = { job_marshal = { expd_ct_this_characters_favor_size_is_king = yes } }
+							wealth >= 400
+						}
+						trigger_else_if = {
+							limit = { job_marshal = { expd_ct_this_characters_favor_size_is_duke = yes } }
+							wealth >= 200
+						}
+						trigger_else_if = {
+							limit = { job_marshal = { expd_ct_this_characters_favor_size_is_baron = yes } }
+							wealth >= 40
+						}
+						trigger_else = {
+							wealth >= 80
+						}
+					}
+					
+					# Include all other costs in this trigger_if block so the tooltips are a bit clearer
+					
+					# Additional cost for self-targeted decision
+					trigger_if = {
+						limit = { character = ROOT }
+						prestige >= 1000 # Keep in sync with logic below
+					}
+					
+					# Has not recently performed any marshal training
+					trigger_if = {
+						limit = { has_character_modifier = expd_ct_block_marshal_training }
+						custom_tooltip = {
+							text = expd_ct_block_marshal_training_blocked_tt
+							always = no
+						}
+					}
+					trigger_else = {
+						custom_tooltip = {
+							text = expd_ct_block_marshal_training_allowed_tt
+							always = yes
+						}
+					}
+					
+					# Prevent exploits via race conditions
+					trigger_if = {
+						limit = { had_character_flag = { flag = expd_ct_deciding_marshal_training years <= 1 } }
+						custom_tooltip = {
+							text = expd_ct_deciding_marshal_training_tt
+							always = no
+						}
+					}
+					
+				}
+				
+			}
+		}
+		
+		effect = {
+			
+			# Do the training
+			hidden_tooltip = {
+				FROM = {
+					clr_character_flag = expd_ct_deciding_marshal_training
+					set_character_flag = expd_ct_deciding_marshal_training
+				}
+				FROM = { job_marshal = { save_event_target_as = expd_ct_marshal_performing_training } }
+				ROOT = { save_event_target_as = commander_improved }
+			}
+			custom_tooltip = {
+				text = expd_ct_marshal_training_trigger_event_tt
+				event_target:expd_ct_marshal_performing_training = { character_event = { id = ExpdCT.70010 } }
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 0.1
+			
+			# AI is more likely to use this decision on itself, its heir, and on its better commanders
+			modifier = {
+				factor = 5
+				ROOT = { character = FROM }
+			}
+			modifier = {
+				factor = 2
+				FROM = { current_heir = { character = ROOT } }
+			}
+			modifier = { factor = 1.2 ROOT = { martial = 10 } }
+			modifier = { factor = 1.2 ROOT = { martial = 12 } }
+			modifier = { factor = 1.2 ROOT = { martial = 14 } }
+			modifier = { factor = 1.4 ROOT = { martial = 16 } }
+			modifier = { factor = 1.4 ROOT = { martial = 18 } }
+			modifier = { factor = 1.4 ROOT = { martial = 20 } }
+			modifier = { factor = 1.6 ROOT = { martial = 22 } }
+			modifier = { factor = 1.6 ROOT = { martial = 24 } }
+			modifier = { factor = 1.6 ROOT = { martial = 26 } }
+			modifier = { factor = 1.8 ROOT = { martial = 28 } }
+			modifier = { factor = 1.8 ROOT = { martial = 30 } }
+			modifier = { factor = 1.8 ROOT = { martial = 32 } }
+			modifier = { factor = 2.0 ROOT = { martial = 34 } }
+			modifier = { factor = 2.0 ROOT = { martial = 36 } }
+			modifier = { factor = 2.0 ROOT = { martial = 38 } }
+			modifier = { factor = 2.0 ROOT = { martial = 40 } }
+			
+			# AI must have significant excess wealth
+			#  --- Because, even with Conclave, they will transfer wealth instead of transferring a favor
+			#  --- Because AI are probably rather bad at deciding who they can afford to give a favor to, and I certainly can't write the logic here!
+			# Specifically:
+			#  --- Prohibited unless they have ~1000 excess
+			#  --- 50% lower chance unless they have ~2000 excess
+			#  --- Higher chance if they are ridiculously wealthy (ie. can't find anything else to spend their money on)
+			modifier = { factor = 0   FROM = { wealth <= 1500 } }
+			modifier = { factor = 0.5 FROM = { wealth <= 2500 } }
+			modifier = { factor = 1.5 FROM = { wealth >= 4000 } }
+			modifier = { factor = 2.0 FROM = { wealth >= 5000 } }
+			
+			# AI is unlikely to take this decision if their Marshal is rubbish (because it'll cost a lot and have a very long cooldown)
+			modifier = { factor = 0.1 FROM = { job_marshal = { martial <  4 } } }
+			modifier = { factor = 0.2 FROM = { job_marshal = { martial <  6 } } }
+			modifier = { factor = 0.3 FROM = { job_marshal = { martial <  8 } } }
+			modifier = { factor = 0.4 FROM = { job_marshal = { martial < 10 } } }
+			modifier = { factor = 0.5 FROM = { job_marshal = { martial < 12 } } }
+			
+		}
+		
+	}
+	
+	
+}

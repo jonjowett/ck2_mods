@@ -1,0 +1,1071 @@
+# Audax Validator EnableCommentMetadata
+
+expd_pill_this_holding_is_fully_pillaged_by_prev_character = {
+	
+	
+	
+	###########################
+	# Grant pillager nickname #
+	###########################
+	
+	#Nickname grant is slightly modified from vanilla so the Validator doesn't complain
+	hidden_tooltip = {
+		
+		# nickname_target is hardcoded in the localisation files, so we must use it or the "scourge of culture" (etc) nicknames will be broken.
+		# However, nickname_target is used inconsistently in many different scopes throughout the codebase, which means the Validator complains about this line.
+		location = {
+			# Audax Validator "." Ignore_ALL
+			save_event_target_as = nickname_target
+		}
+		
+		# Apply the nickname, using same criteria as vanilla
+		if = {
+			limit = {
+				PREV = { 
+					has_nickname = no
+					is_adult = yes
+					NOT = { trait = incapable }
+				}
+			}
+			random_list = {
+				5 = {
+					PREV = { give_nickname = nick_the_destroyer }
+				}
+				5 = {
+					PREV = { give_nickname = nick_the_scourge_of_god }
+					modifier = {
+						factor = 0
+						event_target:nickname_target = { religion = PREV }
+					}
+				}
+				5 = {
+					PREV = { give_nickname = nick_the_slayer_of_culture }
+					modifier = {
+						factor = 0
+						event_target:nickname_target = { culture = PREV }
+					}
+				}
+				5 = {
+					PREV = { give_nickname = nick_the_terror_of_provincename }
+				}
+				5 = {
+					PREV = { give_nickname = nick_the_culture_marauder }
+					modifier = {
+						factor = 0
+						event_target:nickname_target = { culture = PREV }
+					}
+				}
+				75 = {}
+			}
+		}
+		
+		# Clean up the event target
+		clear_event_target = nickname_target
+		
+	}
+	
+	
+	
+	#######################################################################
+	# Grant tech & gold, depending on number of buildings in this holding #
+	#######################################################################
+	
+	# Every pillage operation gives:
+	#  --- Non-tribal holdings: -2 buildings & 50 wealth & 5 techpoints
+	#  --- Tribal holdings:     -2 buildings & 25 wealth & 150 nomad population
+	# First pillage operation is free, every subsequent one costs 25 piety.
+	# 1/3 of total techpoint gain (rounded to nearrest integer) is applied to each of mil/eco/cul.
+	# Explicit calculation stops at 40 total buildings, because pillaging more than that seems unlikely
+	
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 2
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 2 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 0 } }
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 50 }
+			custom_tooltip = {
+				text = gain_tech_custom_tooltip
+				hidden_tooltip = {
+					PREV = {
+						random_list = {
+							10 = { military_techpoints = 5 }
+							10 = { economy_techpoints = 5 }
+							10 = { culture_techpoints = 5 }
+						}
+					}
+				}
+			}
+		}
+		else = {
+			PREV = { wealth = 25 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 150 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 4
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 4 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 25 } }
+			piety = -25
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 100 }
+			PREV = {
+				random_list = {
+					10 = { military_techpoints = 10 }
+					10 = { economy_techpoints = 10 }
+					10 = { culture_techpoints = 10 }
+				}
+			}
+		}
+		else = {
+			PREV = { wealth = 50 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 300 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 6
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 6 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 50 } }
+			piety = -50
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 150 }
+			PREV = {
+				military_techpoints = 5
+				economy_techpoints = 5
+				culture_techpoints = 5
+			}
+		}
+		else = {
+			PREV = { wealth = 75 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 450 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 8
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 8 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 75 } }
+			piety = -75
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 200 }
+			PREV = {
+				military_techpoints = 7
+				economy_techpoints = 7
+				culture_techpoints = 7
+			}
+		}
+		else = {
+			PREV = { wealth = 100 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 600 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 10
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 10 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 100 } }
+			piety = -100
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 250 }
+			PREV = {
+				military_techpoints = 8
+				economy_techpoints = 8
+				culture_techpoints = 8
+			}
+		}
+		else = {
+			PREV = { wealth = 100 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 600 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 12
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 12 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 125 } }
+			piety = -125
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 300 }
+			PREV = {
+				military_techpoints = 10
+				economy_techpoints = 10
+				culture_techpoints = 10
+			}
+		}
+		else = {
+			PREV = { wealth = 150 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 750 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 14
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 14 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 150 } }
+			piety = -150
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 350 }
+			PREV = {
+				military_techpoints = 12
+				economy_techpoints = 12
+				culture_techpoints = 12
+			}
+		}
+		else = {
+			PREV = { wealth = 175 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 900 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 16
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 16 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 175 } }
+			piety = -175
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 400 }
+			PREV = {
+				military_techpoints = 13
+				economy_techpoints = 13
+				culture_techpoints = 13
+			}
+		}
+		else = {
+			PREV = { wealth = 200 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 1050 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 18
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 18 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 200 } }
+			piety = -200
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 450 }
+			PREV = {
+				military_techpoints = 15
+				economy_techpoints = 15
+				culture_techpoints = 15
+			}
+		}
+		else = {
+			PREV = { wealth = 225 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 1200 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 20
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 20 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 225 } }
+			piety = -225
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 500 }
+			PREV = {
+				military_techpoints = 17
+				economy_techpoints = 17
+				culture_techpoints = 17
+			}
+		}
+		else = {
+			PREV = { wealth = 250 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 1350 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 22
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 22 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 250 } }
+			piety = -250
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 550 }
+			PREV = {
+				military_techpoints = 18
+				economy_techpoints = 18
+				culture_techpoints = 18
+			}
+		}
+		else = {
+			PREV = { wealth = 275 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 1500 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 24
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 24 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 275 } }
+			piety = -275
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 600 }
+			PREV = {
+				military_techpoints = 20
+				economy_techpoints = 20
+				culture_techpoints = 20
+			}
+		}
+		else = {
+			PREV = { wealth = 300 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 1650 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 26
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 26 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 300 } }
+			piety = -300
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 650 }
+			PREV = {
+				military_techpoints = 22
+				economy_techpoints = 22
+				culture_techpoints = 22
+			}
+		}
+		else = {
+			PREV = { wealth = 325 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 1800 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 28
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 28 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 325 } }
+			piety = -325
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 700 }
+			PREV = {
+				military_techpoints = 23
+				economy_techpoints = 23
+				culture_techpoints = 23
+			}
+		}
+		else = {
+			PREV = { wealth = 350 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 1950 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 30
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 30 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 350 } }
+			piety = -350
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 750 }
+			PREV = {
+				military_techpoints = 25
+				economy_techpoints = 25
+				culture_techpoints = 25
+			}
+		}
+		else = {
+			PREV = { wealth = 375 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 2100 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 32
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 32 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 375 } }
+			piety = -375
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 800 }
+			PREV = {
+				military_techpoints = 27
+				economy_techpoints = 27
+				culture_techpoints = 27
+			}
+		}
+		else = {
+			PREV = { wealth = 400 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 2250 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 34
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 34 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 400 } }
+			piety = -400
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 850 }
+			PREV = {
+				military_techpoints = 28
+				economy_techpoints = 28
+				culture_techpoints = 28
+			}
+		}
+		else = {
+			PREV = { wealth = 425 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 2400 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 36
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 36 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 425 } }
+			piety = -425
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 900 }
+			PREV = {
+				military_techpoints = 30
+				economy_techpoints = 30
+				culture_techpoints = 30
+			}
+		}
+		else = {
+			PREV = { wealth = 450 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 2550 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 38
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 38 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 450 } }
+			piety = -450
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 950 }
+			PREV = {
+				military_techpoints = 32
+				economy_techpoints = 32
+				culture_techpoints = 32
+			}
+		}
+		else = {
+			PREV = { wealth = 475 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 2700 }
+			}
+		}
+	}
+	
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					tier = BARON
+					num_of_buildings <= 40
+				}
+				AND = {
+					tier = COUNT
+					capital_holding = { num_of_buildings <= 40 }
+				}
+			}
+		}
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 475 } }
+			piety = -475
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 1000 }
+			PREV = {
+				military_techpoints = 33
+				economy_techpoints = 33
+				culture_techpoints = 33
+			}
+		}
+		else = {
+			PREV = { wealth = 500 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 2850 }
+			}
+		}
+	}
+	
+	else = { # Assume approx 48-50 buildings, but use nice-looking numbers
+		PREV = {
+			hidden_tooltip = { set_variable = { which = expd_pill_full_pillage_this_decision_piety_deducted value = 600 } }
+			piety = -600
+		}
+		if = {
+			limit = { NOT = { holding_type = tribal } }
+			PREV = { wealth = 1200 }
+			PREV = {
+				military_techpoints = 40
+				economy_techpoints = 40
+				culture_techpoints = 40
+			}
+		}
+		else = {
+			PREV = { wealth = 600 }
+			if = {
+				limit = { is_nomadic = yes}
+				PREV = { population = 3600 }
+			}
+		}
+	}
+	
+	
+	
+	##############################################################################
+	# Refund piety if the character has recently pillaged a different settlement #
+	##############################################################################
+	
+	if = {
+		limit = {
+			check_variable = {
+				which = expd_pill_full_pillage_max_piety_recently_deducted
+				value > 0
+			}
+		}
+		custom_tooltip = { text = EXPD_PILL_TOOLTIP_POSSIBLY_REFUND_PIETY_FOR_RECENTLY_FULLY_PILLAGING_ANOTHER_SETTLEMENT }
+	}
+	
+	hidden_tooltip = {
+		PREV = {
+			
+			# If {piety loss from this decision} <= {max recent piety loss} then this means that a bigger settlement was recently fully-pillaged.
+			# The exploit's piety cost is set by the number of buildings in the biggest settlement that's been fully-pillaged.
+			# Therefore, this decision should have had no piety cost. So we refund {piety loss from this decision}.
+			if = {
+				limit = {
+					check_variable = {
+						which = expd_pill_full_pillage_this_decision_piety_deducted
+						which <= expd_pill_full_pillage_max_piety_recently_deducted
+					}
+				}
+				set_variable = {
+					which = expd_pill_full_pillage_this_decision_piety_to_refund
+					which = expd_pill_full_pillage_this_decision_piety_deducted
+				}
+			}
+			
+			# If {piety loss from this decision} > {max recent piety loss} then this means that the current settlement is the biggest that has recently been pillaged.
+			# Therefore, the total amount we should deduct, over all recent full-pillage decisions, is identical to the amount deducted in this decision.
+			# Therefore, we should refund {max recent piety loss}, and then update the tracked maximum amount.
+			else = {
+				set_variable = {
+					which = expd_pill_full_pillage_this_decision_piety_to_refund
+					which = expd_pill_full_pillage_max_piety_recently_deducted
+				}
+				set_variable = {
+					which = expd_pill_full_pillage_max_piety_recently_deducted
+					which = expd_pill_full_pillage_this_decision_piety_deducted
+				}
+			}
+			
+			# Do the actual refund
+			while = {
+				limit = {
+					check_variable = {
+						which = expd_pill_full_pillage_this_decision_piety_to_refund
+						value >= 5
+					}
+				}
+				piety = 5
+				subtract_variable = {
+					which = expd_pill_full_pillage_this_decision_piety_to_refund
+					value = 5
+				}
+			}
+			
+			# Clear variables which are specific to this decision
+			set_variable = {
+				which = expd_pill_full_pillage_this_decision_piety_deducted
+				value = 0
+			}
+			set_variable = {
+				which = expd_pill_full_pillage_this_decision_piety_to_refund
+				value = 0
+			}
+			
+			# Reset the full-pillage timer for this character, and trigger a cleanup event in just over a month
+			clr_character_flag = expd_pill_full_pillage_recently_occurred
+			set_character_flag = expd_pill_full_pillage_recently_occurred
+			character_event = {
+				id = ExpdPill.9000
+				days = 45
+			}
+			
+		}
+	}
+	
+	
+	
+	###########################################################
+	# Destroy the holding and add relevant province modifiers #
+	###########################################################
+	
+	# Destroy the settlement
+	if = {
+		limit = { tier = COUNT }
+		capital_holding = { destroy_settlement = THIS }
+	}
+	else = {
+		destroy_settlement = THIS
+	}
+	
+	# Add a temporary character flag, to ensure the effects below are properly described in tooltips
+	hidden_tooltip = { PREV = { set_character_flag = expd_pill_temp_flag_in_scripted_effects_after_destroying_settlement } }
+	
+	# Add/remove relevant province modifiers
+	location = {
+		add_province_modifier = {
+			modifier = burnt_the_land
+			years = 10
+		}
+	}
+	if = { # >=1 settlements remaining after this pillaging action
+		limit = {
+			OR = {
+				AND = {
+					location = { num_of_settlements > 0 }
+					PREV = { has_character_flag = expd_pill_temp_flag_in_scripted_effects_after_destroying_settlement }
+				}
+				AND = {
+					location = { num_of_settlements > 1 }
+					NOT = { PREV = { has_character_flag = expd_pill_temp_flag_in_scripted_effects_after_destroying_settlement } }
+				}
+			}
+		}
+		location = {
+			add_province_modifier = {
+				modifier = rampaging_nomads
+				years = 10
+			}
+		}
+	}
+	else = { # Zero settlements remaining after this pillaging action
+		if = {
+			limit = { location = { has_province_modifier = rampaging_nomads } }
+			location = { remove_province_modifier = rampaging_nomads }
+		}
+		custom_tooltip = {
+			text = EXPD_PILL_TOOLTIP_CLEAR_PROSPERITY_DEPOPULATION
+			location = {
+				remove_province_modifier = prosperity_modifier_1
+				remove_province_modifier = prosperity_modifier_2
+				remove_province_modifier = prosperity_modifier_3
+				remove_province_modifier = depopulated_1
+				remove_province_modifier = depopulated_2
+				remove_province_modifier = depopulated_3
+			}
+		}
+		
+		# Apply province modifiers from HL.4814
+		# Order of precedence in case of overlapping conditions is set according to what seems most useful in general: {population} > {monthly piety & monthly prestige} > {5 instant prestige}
+		if = { # Nomads should always take the population boost if possible
+			limit = {
+				PREV = {
+					is_nomadic = yes
+					OR = {
+						trait = gardener
+						trait = diligent
+					}
+				}
+			}
+			PREV = {
+				show_scope_change = no
+				capital_holding = {
+					add_holding_modifier = {
+						name = nomad_population_boom
+						years = 10
+						stacking = yes
+					}
+				}
+			}
+		}
+		else_if = { # If both monthly piety and monthly prestige are possible, choose one randomly (with a higher chance if you have both traits associated with that option)
+			limit = {
+				PREV = {
+					OR = {
+						trait = zealous
+						trait = possessed
+					}
+					OR = {
+						trait = impaler
+						trait = cruel
+					}
+				}
+				NOT = { location = { has_province_modifier = nomadic_rites } }
+				NOT = { location = { has_province_modifier = throne_of_skulls } }
+			}
+			random_list = {
+				50 = {
+					mult_modifier = {
+						factor = 2
+						PREVPREV = {
+							trait = zealous
+							trait = possessed
+						}
+					}
+					location = {
+						add_province_modifier = {
+							name = nomadic_rites
+							years = 10
+						}
+					}
+				}
+				50 = {
+					mult_modifier = {
+						factor = 2
+						PREVPREV = {
+							trait = impaler
+							trait = cruel
+						}
+					}
+					location = {
+						add_province_modifier = {
+							name = throne_of_skulls
+							years = 10
+						}
+					}
+				}
+			}
+		}
+		else_if = { # Monthly piety is possible but not monthly prestige: take it
+			limit = {
+				PREV = {
+					OR = {
+						trait = zealous
+						trait = possessed
+					}
+				}
+				NOT = { location = { has_province_modifier = nomadic_rites } }
+			}
+			location = {
+				add_province_modifier = {
+					name = nomadic_rites
+					years = 10
+				}
+			}
+		}
+		else_if = { # Monthly prestige is possible but not monthly piety: take it
+			limit = {
+				PREV = {
+					OR = {
+						trait = impaler
+						trait = cruel
+					}
+				}
+				NOT = { location = { has_province_modifier = throne_of_skulls } }
+			}
+			location = {
+				add_province_modifier = {
+					name = throne_of_skulls
+					years = 10
+				}
+			}
+		}
+		else = { # Final fallback
+			PREV = { prestige = 5 }
+		}
+	}
+	
+	# Clear the temporary character flag
+	hidden_tooltip = { PREV = { clr_character_flag = expd_pill_temp_flag_in_scripted_effects_after_destroying_settlement } }
+	
+}

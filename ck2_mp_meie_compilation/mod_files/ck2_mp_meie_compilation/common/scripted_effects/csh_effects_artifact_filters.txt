@@ -1,0 +1,168 @@
+csh_remove_all_artifact_filters_from_this_character = {
+	custom_tooltip = {
+		text = csh_remove_all_artifact_filters_from_this_character_tt
+		clr_character_flag = csh_artifact_filter_only_unowned
+		clr_character_flag = csh_artifact_filter_no_armor
+		clr_character_flag = csh_artifact_filter_no_books
+		clr_character_flag = csh_artifact_filter_no_clutter
+		clr_character_flag = csh_artifact_filter_no_mounts_or_pets
+		clr_character_flag = csh_artifact_filter_no_rings
+		clr_character_flag = csh_artifact_filter_no_necklaces
+		clr_character_flag = csh_artifact_filter_no_weapons
+		clr_character_flag = csh_artifact_filter_no_other
+	}
+}
+
+csh_add_all_artifact_filters_to_this_character = {
+	custom_tooltip = {
+		text = csh_add_all_artifact_filters_to_this_character_tt
+		
+		# For safety, clear all flags before starting to set them again
+		csh_remove_all_artifact_filters_from_this_character = yes
+		
+		# The "only unowned" and "no other" decisions are always available,
+		#    so we should always set them
+		set_character_flag = csh_artifact_filter_only_unowned
+		set_character_flag = csh_artifact_filter_no_other
+		
+		# All other filters are only available (ie. only set by this decision)
+		#    if the user has at least one of the relevant type of artifact
+		if = {
+			limit = { csh_artifact_filter_armor_is_visible_for_this_character = yes }
+			set_character_flag = csh_artifact_filter_no_armor
+		}
+		if = {
+			limit = { csh_artifact_filter_book_is_visible_for_this_character = yes }
+			set_character_flag = csh_artifact_filter_no_books
+		}
+		if = {
+			limit = { csh_artifact_filter_clutter_is_visible_for_this_character = yes }
+			set_character_flag = csh_artifact_filter_no_clutter
+		}
+		if = {
+			limit = { csh_artifact_filter_mount_or_pet_is_visible_for_this_character = yes }
+			set_character_flag = csh_artifact_filter_no_mounts_or_pets
+		}
+		if = {
+			limit = { csh_artifact_filter_necklace_is_visible_for_this_character = yes }
+			set_character_flag = csh_artifact_filter_no_necklaces
+		}
+		if = {
+			limit = { csh_artifact_filter_ring_is_visible_for_this_character = yes }
+			set_character_flag = csh_artifact_filter_no_rings
+		}
+		if = {
+			limit = { csh_artifact_filter_weapon_is_visible_for_this_character = yes }
+			set_character_flag = csh_artifact_filter_no_weapons
+		}
+		
+	}
+}
+
+csh_invert_this_characters_artifact_filters = {
+	custom_tooltip = {
+		text = csh_invert_this_characters_artifact_filters_tt
+		
+		
+		
+		# "Only Unowned" and "Other" are always visible, so always invert them
+		
+		if = {
+			limit = { has_character_flag = csh_artifact_filter_only_unowned }
+			clr_character_flag = csh_artifact_filter_only_unowned
+		}
+		else = {
+			set_character_flag = csh_artifact_filter_only_unowned
+		}
+		
+		if = {
+			limit = { has_character_flag = csh_artifact_filter_no_other }
+			clr_character_flag = csh_artifact_filter_no_other
+		}
+		else = {
+			set_character_flag = csh_artifact_filter_no_other
+		}
+		
+		
+		
+		# For all other filters, only invert them if they should be visible
+		
+		if = {
+			limit = { csh_artifact_filter_armor_is_visible_for_this_character = yes }
+			if = {
+				limit = { has_character_flag = csh_artifact_filter_no_armor }
+				clr_character_flag = csh_artifact_filter_no_armor
+			}
+			else = {
+				set_character_flag = csh_artifact_filter_no_armor
+			}
+		}
+		
+		if = {
+			limit = { csh_artifact_filter_book_is_visible_for_this_character = yes }
+			if = {
+				limit = { has_character_flag = csh_artifact_filter_no_books }
+				clr_character_flag = csh_artifact_filter_no_books
+			}
+			else = {
+				set_character_flag = csh_artifact_filter_no_books
+			}
+		}
+		
+		if = {
+			limit = { csh_artifact_filter_clutter_is_visible_for_this_character = yes }
+			if = {
+				limit = { has_character_flag = csh_artifact_filter_no_clutter }
+				clr_character_flag = csh_artifact_filter_no_clutter
+			}
+			else = {
+				set_character_flag = csh_artifact_filter_no_clutter
+			}
+		}
+		
+		if = {
+			limit = { csh_artifact_filter_mount_or_pet_is_visible_for_this_character = yes }
+			if = {
+				limit = { has_character_flag = csh_artifact_filter_no_mounts_or_pets }
+				clr_character_flag = csh_artifact_filter_no_mounts_or_pets
+			}
+			else = {
+				set_character_flag = csh_artifact_filter_no_mounts_or_pets
+			}
+		}
+		
+		if = {
+			limit = { csh_artifact_filter_necklace_is_visible_for_this_character = yes }
+			if = {
+				limit = { has_character_flag = csh_artifact_filter_no_necklaces }
+				clr_character_flag = csh_artifact_filter_no_necklaces
+			}
+			else = {
+				set_character_flag = csh_artifact_filter_no_necklaces
+			}
+		}
+		
+		if = {
+			limit = { csh_artifact_filter_ring_is_visible_for_this_character = yes }
+			if = {
+				limit = { has_character_flag = csh_artifact_filter_no_rings }
+				clr_character_flag = csh_artifact_filter_no_rings
+			}
+			else = {
+				set_character_flag = csh_artifact_filter_no_rings
+			}
+		}
+		
+		if = {
+			limit = { csh_artifact_filter_weapon_is_visible_for_this_character = yes }
+			if = {
+				limit = { has_character_flag = csh_artifact_filter_no_weapons }
+				clr_character_flag = csh_artifact_filter_no_weapons
+			}
+			else = {
+				set_character_flag = csh_artifact_filter_no_weapons
+			}
+		}
+		
+	}
+}

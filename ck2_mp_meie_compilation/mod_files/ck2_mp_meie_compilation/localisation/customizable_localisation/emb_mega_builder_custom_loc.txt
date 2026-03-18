@@ -1,0 +1,94 @@
+defined_text = {
+	name = EMBMegaBuilder_CL_FortuneBuilder
+	use_first_valid = yes
+	text = {
+		trigger = { ROOT = { trait = fortune_builder } }
+		localisation_key = EMBMegaBuilder_CL_FortuneBuilder_Y
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EMBMegaBuilder_CL_FortuneBuilder_N
+	}
+}
+
+defined_text = {
+	name = EMBMegaBuilder_CL_MidasTouched
+	use_first_valid = yes
+	text = {
+		trigger = { ROOT = { trait = midas_touched } }
+		localisation_key = EMBMegaBuilder_CL_MidasTouched_Y
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EMBMegaBuilder_CL_MidasTouched_N
+	}
+}
+
+defined_text = {
+	name = EMBMegaBuilder_CL_Stewardship25
+	use_first_valid = yes
+	text = {
+		trigger = { ROOT = { stewardship >= 25 } }
+		localisation_key = EMBMegaBuilder_CL_Stewardship25_Y
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EMBMegaBuilder_CL_Stewardship25_N
+	}
+}
+
+defined_text = {
+	name = EMBMegaBuilder_CL_Administrator
+	use_first_valid = yes
+	text = {
+		trigger = { ROOT = { trait = administrator } }
+		localisation_key = EMBMegaBuilder_CL_Administrator_Y
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EMBMegaBuilder_CL_Administrator_N
+	}
+}
+
+defined_text = {
+	name = EMBMegaBuilder_CL_Architect
+	use_first_valid = yes
+	text = {
+		trigger = { ROOT = { trait = architect } }
+		localisation_key = EMBMegaBuilder_CL_Architect_Y
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EMBMegaBuilder_CL_Architect_N
+	}
+}
+
+defined_text = {
+	name = EMBMegaBuilder_CL_Scholar
+	use_first_valid = yes
+	text = {
+		trigger = { ROOT = { trait = scholar } }
+		localisation_key = EMBMegaBuilder_CL_Scholar_Y
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EMBMegaBuilder_CL_Scholar_N
+	}
+}
+
+defined_text = {
+	name = EMBMegaBuilder_CL_Constructed10
+	use_first_valid = yes
+	text = {
+		trigger = { check_variable = { which = emb_mega_builder_count value >= 10 } }
+		localisation_key = EMBMegaBuilder_CL_Constructed10_Y
+	}
+	text = {
+		trigger = { check_variable = { which = emb_mega_builder_count value ==  0 } }
+		localisation_key = EMBMegaBuilder_CL_Constructed10_N_0
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = EMBMegaBuilder_CL_Constructed10_N
+	}
+}

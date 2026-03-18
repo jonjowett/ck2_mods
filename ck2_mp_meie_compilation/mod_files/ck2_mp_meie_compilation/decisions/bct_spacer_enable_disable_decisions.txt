@@ -1,0 +1,92 @@
+decisions = {
+	
+	
+	
+	
+	
+	bct_spacers_enable_global = {
+		ai = no
+		potential = {
+			bct_this_character_can_take_admin_decisions = yes
+			bct_spacers_are_disabled_globally = yes
+		}
+		allow = { always = yes }
+		effect = { bct_enable_spacers_globally = yes }
+	}
+	
+	bct_spacers_disable_global = {
+		ai = no
+		potential = {
+			bct_this_character_can_take_admin_decisions = yes
+			bct_spacers_are_disabled_globally = no
+		}
+		allow = { always = yes }
+		effect = { bct_disable_spacers_globally = yes }
+	}
+	
+	
+	
+	
+	
+	bct_spacers_enable_debugging = {
+		ai = no
+		potential = {
+			
+			bct_spacer_debugging_is_enabled = no
+			
+			bct_this_character_can_take_admin_decisions = yes
+			
+			# Only show this decision if spacers are visible for this character (otherwise, what's the point in debugging?!)
+			bct_spacers_are_disabled_globally = no
+			bct_spacers_are_disabled_for_this_character = no
+			
+		}
+		allow = { always = yes }
+		effect = { bct_enable_spacer_debugging = yes }
+	}
+	
+	bct_spacers_disable_debugging = {
+		ai = no
+		potential = {
+			
+			bct_spacer_debugging_is_enabled = yes
+			
+			bct_this_character_can_take_admin_decisions = yes
+			
+			# ALWAYS show this decision if debugging is enabled, regardless of whether anyone can see the spacers.
+			# Debugging should always be turned off ASAP; adding clutter to the intrigue decision menu will hopefully prompt the admin to do so.
+			
+		}
+		allow = { always = yes }
+		effect = { bct_disable_spacer_debugging = yes }
+	}
+	
+	
+	
+	
+	
+	bct_spacers_enable_for_this_character = {
+		ai = no
+		potential = {
+			bct_spacers_are_disabled_globally = no
+			bct_spacers_are_disabled_for_this_character = yes
+		}
+		allow = { always = yes }
+		effect = { bct_enable_spacers_for_this_character = yes }
+	}
+	
+	bct_spacers_disable_for_this_character = {
+		ai = no
+		potential = {
+			bct_spacers_are_disabled_globally = no
+			bct_spacers_are_disabled_for_this_character = no
+		}
+		allow = { always = yes }
+		effect = { bct_disable_spacers_for_this_character = yes }
+	}
+	
+	
+	
+	
+	
+}

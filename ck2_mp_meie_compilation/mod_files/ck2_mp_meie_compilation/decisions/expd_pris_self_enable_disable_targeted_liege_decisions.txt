@@ -1,0 +1,51 @@
+targetted_decisions = {
+	# All "targeted liege" prisoner-related decisions are available to the player only, because the only "filter" which fits is "all", and this is flagged as "very CPU heavy" (but that probably only applies if the AI does it)
+	
+	expd_pris_self_enable_targeted_liege_prisoner_decisions = {
+		
+		only_playable = yes
+		ai = no
+		
+		filter = self
+		
+		ai_target_filter = none
+		ai_third_party_filter = none
+		ai_check_interval = 999
+		
+		potential = {
+			has_character_flag = expd_pris_targeted_liege_prisoner_decisions_blocked
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				clr_character_flag = expd_pris_targeted_liege_prisoner_decisions_blocked
+			}
+		}
+	}
+	
+	expd_pris_self_block_targeted_liege_prisoner_decisions = {
+		
+		only_playable = yes
+		ai = no
+		
+		filter = self
+		
+		ai_target_filter = none
+		ai_third_party_filter = none
+		ai_check_interval = 999
+		
+		potential = {
+			NOT = { has_character_flag = expd_pris_targeted_liege_prisoner_decisions_blocked }
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_tooltip = {
+				set_character_flag = expd_pris_targeted_liege_prisoner_decisions_blocked
+			}
+		}
+	}
+}

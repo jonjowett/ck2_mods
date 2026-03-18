@@ -1,0 +1,175 @@
+expd_at_build_city_potential = {
+	tier = COUNT
+	location = { has_city = no }
+	OR = {
+		holder_scope = { character = FROM }
+		holder_scope = {
+			is_vassal_or_below_of = FROM
+			is_tribal = yes
+		}
+	}
+}
+
+expd_at_build_city_from_potential = {
+	is_tribal = yes
+	OR = {
+		has_law = expd_at_imperial_administration_law_1
+		has_law = expd_at_imperial_administration_law_2
+	}
+}
+
+expd_at_build_city_allow = {
+	FROM = {
+		OR = {
+			AND = {
+				OR = {
+					AND = {
+						expd_at_this_characters_stewardship_skill_is_10_to_20 = yes
+						expd_at_this_characters_steward_has_stewardship_less_than_30 = yes
+					}
+					AND = {
+						expd_at_this_characters_stewardship_skill_is_less_than_20 = yes
+						expd_at_this_characters_steward_has_stewardship_20_to_30 = yes
+					}
+				}
+				wealth >= 1000
+			}
+			AND = {
+				OR = {
+					AND = {
+						expd_at_this_characters_stewardship_skill_is_20_to_30 = yes
+						expd_at_this_characters_steward_has_stewardship_less_than_40 = yes
+					}
+					AND = {
+						expd_at_this_characters_stewardship_skill_is_less_than_30 = yes
+						expd_at_this_characters_steward_has_stewardship_30_to_40 = yes
+					}
+				}
+				wealth >= 800
+			}
+			AND = {
+				OR = {
+					expd_at_this_characters_stewardship_skill_is_30_to_40 = yes
+					AND = {
+						expd_at_this_characters_stewardship_skill_is_less_than_40 = yes
+						expd_at_this_characters_steward_has_stewardship_40_plus = yes
+					}
+				}
+				wealth >= 600
+			}
+			AND = {
+				expd_at_this_characters_stewardship_skill_is_40_plus = yes
+				wealth >= 500
+			}
+		}
+	}
+}
+
+expd_at_this_characters_stewardship_skill_is_10_to_20 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_stewardship_skill_is_10_to_20_tt
+		stewardship >= 10
+		stewardship < 20
+	}
+}
+
+expd_at_this_characters_stewardship_skill_is_20_to_30 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_stewardship_skill_is_20_to_30_tt
+		stewardship >= 20
+		stewardship < 30
+	}
+}
+
+expd_at_this_characters_stewardship_skill_is_30_to_40 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_stewardship_skill_is_30_to_40_tt
+		stewardship >= 30
+		stewardship < 40
+	}
+}
+
+expd_at_this_characters_stewardship_skill_is_40_plus= {
+	custom_tooltip = {
+		text = expd_at_this_characters_stewardship_skill_is_40_plus_tt
+		stewardship >= 40
+	}
+}
+
+expd_at_this_characters_stewardship_skill_is_less_than_20 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_stewardship_skill_is_less_than_20_tt
+		stewardship < 20
+	}
+}
+
+expd_at_this_characters_stewardship_skill_is_less_than_30 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_stewardship_skill_is_less_than_30_tt
+		stewardship < 30
+	}
+}
+
+expd_at_this_characters_stewardship_skill_is_less_than_40 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_stewardship_skill_is_less_than_40_tt
+		stewardship < 40
+	}
+}
+
+expd_at_this_characters_steward_has_stewardship_20_to_30 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_steward_has_stewardship_20_to_30_tt
+		any_courtier_or_vassal = {
+			has_job_title = job_treasurer
+			liege = { character = PREVPREV }
+			stewardship >= 20
+			stewardship < 30
+		}
+	}
+}
+
+expd_at_this_characters_steward_has_stewardship_30_to_40 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_steward_has_stewardship_30_to_40_tt
+		any_courtier_or_vassal = {
+			has_job_title = job_treasurer
+			liege = { character = PREVPREV }
+			stewardship >= 30
+			stewardship < 40
+		}
+	}
+}
+
+expd_at_this_characters_steward_has_stewardship_40_plus = {
+	custom_tooltip = {
+		text = expd_at_this_characters_steward_has_stewardship_40_plus_tt
+		any_courtier_or_vassal = {
+			has_job_title = job_treasurer
+			liege = { character = PREVPREV }
+			stewardship >= 40
+		}
+	}
+}
+
+expd_at_this_characters_steward_has_stewardship_less_than_30 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_steward_has_stewardship_less_than_30_tt
+		any_courtier_or_vassal = {
+			has_job_title = job_treasurer
+			liege = { character = PREVPREV }
+			stewardship < 30
+		}
+	}
+}
+
+expd_at_this_characters_steward_has_stewardship_less_than_40 = {
+	custom_tooltip = {
+		text = expd_at_this_characters_steward_has_stewardship_less_than_40_tt
+		any_courtier_or_vassal = {
+			has_job_title = job_treasurer
+			liege = { character = PREVPREV }
+			stewardship < 40
+		}
+	}
+}
