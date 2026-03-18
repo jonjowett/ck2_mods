@@ -20,6 +20,7 @@ if exist %this_mod_folder_location% (
 	del /F /S /Q %this_mod_folder_location%
 	rmdir /S /Q %this_mod_folder_location%
 )
+::pause
 
 
 
@@ -77,10 +78,16 @@ xcopy /R /Y /Q /S /E /I %workshop_mod_folder_location_alexiad_comp%viking_counte
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%more_bloodlines_bugfix\reference_files\more_bloodlines\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%more_bloodlines_bugfix%git_mod_subfolder%more_bloodlines_bugfix\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%even_more_bloodlines%git_mod_subfolder%even_more_bloodlines\ %this_mod_folder_location%
+
 :: TP automation should probably come after everything else trade (although it might not be strictly necessary)
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%trade_post_automation%git_mod_subfolder%trade_post_automation\ %this_mod_folder_location%
+
 :: ED:MP must be included after all the bloodline stuff
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_multiplayer\mod_files_compatible\expanded_decisions_multiplayer_compatible\ %this_mod_folder_location%
+
+
+
+
 
 :: Final changes specific to this game
 xcopy /R /Y /Q /S /E /I .\z_final_changes\ %this_mod_folder_location%
