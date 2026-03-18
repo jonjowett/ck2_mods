@@ -1,0 +1,66 @@
+decisions = {
+
+	quest_for_missing_silmaril = {
+		is_high_prio = yes
+	
+		potential = {
+			is_ruler = yes
+			NOT = { has_global_flag = third_silmaril_found }
+			OR = {
+				NOT = { has_character_flag = quest_for_missing_silmaril }
+				NOT = { any_courtier_or_vassal = { has_character_flag = emissary_quest_missing_silmaril } }
+			}
+		}
+		allow = {
+			prestige = 1000
+			wealth = 1000
+			prisoner = no
+		}
+		effect = {
+			character_event = {
+				id = silmarils.1
+			}
+			set_character_flag = quest_for_missing_silmaril
+		}
+		revoke_allowed = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 0.000001
+		}
+	}
+
+	craft_the_silmaril_crown = {
+		is_high_prio = yes
+	
+		potential = {
+			is_ruler = yes
+			NOT = { has_global_flag = third_silmaril_found }
+			NOT = { has_character_flag = quest_for_missing_silmaril }
+			has_artifact= first_silmaril
+			has_artifact= second_silmaril
+			has_artifact= third_silmaril
+		}
+		allow = {
+			prestige = 2000
+			wealth = 1500
+			prisoner = no
+			has_artifact= first_silmaril
+			has_artifact= second_silmaril
+			has_artifact= third_silmaril			
+		}
+		effect = {
+			character_event = {
+				id = silmarils.1000
+			}
+			set_character_flag = create_the_silmaril_crown
+		}
+		revoke_allowed = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 0.000001
+		}
+	}
+	
+}

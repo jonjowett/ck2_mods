@@ -1,0 +1,867 @@
+namespace = silmarils
+
+### Information at start
+narrative_event = {
+	id = silmarils.0
+	title = "EVTTITsilmarils.0"
+	desc = "EVTDESCsilmarils.0"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.0" ## OK
+	}
+}
+
+
+### Quest for missing silmaril
+character_event = {
+	id = silmarils.1
+	desc = "EVTDESCsilmarils.1"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.1" ## My Marshall!
+		trigger = {
+			any_courtier_or_vassal = {
+				has_job_title = job_marshal
+				prisoner = no
+			}
+		}
+		any_courtier_or_vassal = {
+			limit = {
+				has_job_title = job_marshal
+			}
+			character_event = { id =  silmarils.2 }
+		}
+		wealth = -400
+	}
+	option = {
+		name = "EVTOPTBsilmarils.1" ## My Spymaster!
+		trigger = {
+			any_courtier_or_vassal = {
+				has_job_title = job_spymaster
+				prisoner = no
+			}
+		}		
+		any_courtier_or_vassal = {
+			limit = {
+				has_job_title = job_spymaster
+			}
+			character_event = { id =  silmarils.2 }
+		}
+		wealth = -400		
+	}
+	option = {
+		name = "EVTOPTDsilmarils.1" ## Forgot about it...
+		clr_character_flag = quest_for_missing_silmaril
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			clr_character_flag = emissary_quest_missing_silmaril
+		}		
+	}	
+}
+
+### the character is informed
+character_event = {
+	id = silmarils.2
+	desc = "EVTDESCsilmarils.2"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "OK" ## Ok.
+		set_character_flag = emissary_quest_missing_silmaril
+		FROM = {
+			narrative_event = { id =  silmarils.3 days = 3 }
+		}
+	}
+
+}
+
+### send the quest
+narrative_event = {
+	id = silmarils.3
+	desc = "EVTDESCsilmarils.3"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.3" ## Search on the coasts
+		narrative_event = { id =  silmarils.100 }
+	}
+
+}
+
+
+
+###COASTAL PART###
+### Where to search?
+narrative_event = {
+	id = silmarils.100
+	desc = "EVTDESCsilmarils.100"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.100" ## Search on mediterrane
+		narrative_event = { id =  silmarils.101 days = 50 }
+	}
+	option = {
+		name = "EVTOPTBsilmarils.100" ## Search on norwegian coasts
+		narrative_event = { id =  silmarils.102 days = 50 }
+	}
+	option = {
+		name = "EVTOPTCsilmarils.100" ## Search on numenoreans coasts
+		narrative_event = { id =  silmarils.103 days = 50 }
+	}	
+
+}
+
+### Not to be seen
+narrative_event = {
+	id = silmarils.101
+	desc = "EVTDESCsilmarils.101"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.101" ## Search on the coasts
+		random_list = {	
+			75 = {
+				narrative_event = { id =  silmarils.110 }
+			}
+			25 = {
+				narrative_event = { id =  silmarils.120 }
+			}
+		}
+				
+	}	
+
+}
+### Not to be seen
+narrative_event = {
+	id = silmarils.102
+	desc = "EVTDESCsilmarils.101"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.101" ## Search on the coasts
+		random_list = {	
+			60 = {
+				narrative_event = { id =  silmarils.110 }
+			}
+			40 = {
+				narrative_event = { id =  silmarils.120 }
+			}
+		}
+				
+	}	
+
+}
+### Not to be seen
+narrative_event = {
+	id = silmarils.103
+	desc = "EVTDESCsilmarils.101"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.101" ## Search on the coasts
+		random_list = {	
+			70 = {
+				narrative_event = { id =  silmarils.110 }
+			}
+			30 = {
+				narrative_event = { id =  silmarils.120 }
+			}
+		}
+				
+	}	
+
+}
+
+### Nothing...
+narrative_event = {
+	id = silmarils.110
+	desc = "EVTDESCsilmarils.110"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+
+	
+	option = {
+		name = "EVTOPTAsilmarils.110" ## Nothing...
+		random_list = {	
+			50 = {
+			}
+			35 = {
+				add_trait = stressed
+			}
+			15 = {
+				add_trait = depressed
+			}			
+		}
+		clr_character_flag = quest_for_missing_silmaril
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			clr_character_flag = emissary_quest_missing_silmaril
+		}				
+	}	
+	
+	option = {
+		name = "EVTOPTBsilmarils.110" ## Search again !
+		wealth = -200
+		narrative_event = { id =  silmarils.3 }		
+	}	
+
+}
+
+### About this wreck?
+narrative_event = {
+	id = silmarils.120
+	desc = "EVTDESCsilmarils.120"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTAsilmarils.120" ## We should find it!
+		wealth = -150
+		random_list = {	
+			80 = {
+			}
+			20 = {
+				add_trait = stressed
+			}			
+		}
+		narrative_event = { id =  silmarils.121 days = 50 }		
+	}	
+	
+	option = {
+		name = "EVTOPTBsilmarils.120" ## forgot about it...
+		prestige = -200
+		narrative_event = { id =  silmarils.3 }		
+	}	
+
+}
+### not to be seen
+narrative_event = {
+	id = silmarils.121
+	desc = "EVTDESCsilmarils.121"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.101" ## Search on the coasts
+		random_list = {	
+			70 = {
+				narrative_event = { id =  silmarils.102 }
+			}
+			30 = {
+				narrative_event = { id =  silmarils.122 }
+			}
+		}
+				
+	}	
+
+}
+
+### About this wreck?
+narrative_event = {
+	id = silmarils.122
+	desc = "EVTDESCsilmarils.122"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.122" ## We have to explore it!
+		wealth = -150
+		random_list = {	
+			80 = {
+			}
+			20 = {
+				add_trait = stressed
+			}			
+		}
+		narrative_event = { id =  silmarils.123 days = 50 }		
+	}		
+
+}
+### not to be seen
+narrative_event = {
+	id = silmarils.123
+	desc = "EVTDESCsilmarils.123"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.101" ## Search on the coasts
+		random_list = {	
+			97 = {
+				narrative_event = { id =  silmarils.124 }
+			}
+			3 = {
+				narrative_event = { id =  silmarils.160 }
+			}
+		}
+				
+	}	
+
+}
+
+### The Wreck is empty...
+narrative_event = {
+	id = silmarils.124
+	desc = "EVTDESCsilmarils.124"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.124" ## Maybe ask the fishermen?
+		narrative_event = { id =  silmarils.145 days = 50 }			
+	}	
+	option = {
+		name = "EVTOPTBsilmarils.124" ## That's the pirates!
+		narrative_event = { id =  silmarils.125 days = 50 }					
+	}
+	option = {
+		name = "EVTOPTCsilmarils.124" ## Abandon it.
+		random_list = {	
+			60 = {
+			}
+			40 = {
+				add_trait = stressed
+			}			
+		}
+		prestige = -200
+		clr_character_flag = quest_for_missing_silmaril
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			clr_character_flag = emissary_quest_missing_silmaril
+		}		
+	}	
+	option = {
+		name = "EVTOPTDsilmarils.124" ## Search in another place
+		narrative_event = { id =  silmarils.3 days = 50 }
+		wealth = -200	
+	}	
+
+}
+
+### not to be seen
+narrative_event = {
+	id = silmarils.125
+	desc = "EVTDESCsilmarils.125"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.101"
+		random_list = {	
+			70 = {
+				narrative_event = { id =  silmarils.126 }
+			}
+			30 = {
+				narrative_event = { id =  silmarils.129 }
+			}
+		}
+				
+	}	
+
+}
+
+### PIRATES!
+narrative_event = {
+	id = silmarils.126
+	desc = "EVTDESCsilmarils.126"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.126" ## We have to fight them !
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			character_event = { id =  silmarils.127 }
+		}				
+	}	
+}
+
+### not to be seen
+narrative_event = {
+	id = silmarils.127
+	desc = "EVTDESCsilmarils.127"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.101" ## Search on the coasts
+		random_list = {	
+			60 = {
+				FROM = { narrative_event = { id =  silmarils.128 } } ## KILLED BY PIRATES
+			}
+			30 = {
+				FROM = { narrative_event = { id =  silmarils.130 } } ## VICTORIOUS BUT WOUNDED -ESCAPED
+			}
+			10 = {
+				FROM = { narrative_event = { id =  silmarils.140 } } ## VICTORIOUS - PIRATES TREASURE
+			}			
+		}
+				
+	}	
+
+}
+
+### EMISSARY KILLED BY PIRATES !
+narrative_event = {
+	id = silmarils.128
+	desc = "EVTDESCsilmarils.128"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.128" ## That's terrible!
+		character_event = { id = silmarils.129 days = 10 }
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			death = { death_reason = death_battle }
+		}				
+	}	
+}
+
+character_event = {
+	id = silmarils.129
+	desc = "EVTDESCsilmarils.129"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.129" ## Search again!	
+		narrative_event = { id =  silmarils.1 days = 20 }
+	}	
+	option = {
+		name = "EVTOPTBsilmarils.129" ## Abandon it.	
+		prestige = -250
+		clr_character_flag = quest_for_missing_silmaril
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			clr_character_flag = emissary_quest_missing_silmaril
+		}			
+	}	
+}
+
+### EMISSARY WOUNDED BY PIRATES BUT ESCAPED!
+narrative_event = {
+	id = silmarils.130
+	desc = "EVTDESCsilmarils.130"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.130" ## OK...
+		character_event = { id = silmarils.129 days = 10 }
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			add_trait = wounded
+			clr_character_flag = emissary_quest_missing_silmaril
+		}				
+	}	
+}
+
+### EMISSARY VICTORIOUS - FOUND THE PIRATES TREASURE !
+narrative_event = {
+	id = silmarils.140
+	desc = "EVTDESCsilmarils.140"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.140" ## Oh... What will we find?
+		character_event = { id = silmarils.141  }
+		
+	}	
+}
+
+### not to be seen
+narrative_event = {
+	id = silmarils.141
+	desc = "EVTDESCsilmarils.127"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.10" ## Search on the coasts
+		random_list = {	
+			80 = {
+				FROM = { narrative_event = { id =  silmarils.142 } } ## NOTHING INTERESTING...
+			}
+			20 = {
+				FROM = { narrative_event = { id =  silmarils.143 } } ## THE JEWEL !!!!
+			}		
+		}
+				
+	}	
+
+}
+
+### EMISSARY VICTORIOUS - NOT THE SILMARIL !
+narrative_event = {
+	id = silmarils.142
+	desc = "EVTDESCsilmarils.142"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.142" ## Search in another place
+		character_event = { id = silmarils.3  }	
+		wealth = -250
+	}	
+	option = {
+		name = "EVTOPTBsilmarils.142" ## Forgot it...
+		prestige = -250
+		clr_character_flag = quest_for_missing_silmaril
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			clr_character_flag = emissary_quest_missing_silmaril
+		}				
+	}	
+}
+
+### EMISSARY VICTORIOUS - FOUND THE SILMARIL - PIRATES END
+narrative_event = {
+	id = silmarils.143
+	desc = "EVTDESCsilmarils.143"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.143" ## GREAT!!
+		add_artifact = third_silmaril
+		set_global_flag = third_silmaril_found
+		prestige = 200
+		give_nickname = nick_the_silmaril_finder
+	}	
+}
+
+
+
+### FISHERMEN WAY ###
+
+### not to be seen
+narrative_event = {
+	id = silmarils.145
+	desc = "EVTDESCsilmarils.145"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.140" ## Search on the coasts
+		random_list = {	
+			70 = {
+				narrative_event = { id =  silmarils.141 } ## Nothing to find
+			}
+			30 = {
+				narrative_event = { id =  silmarils.150 } ## Fishermen!
+			}
+		}
+				
+	}	
+}
+
+## Nothing...
+character_event = {
+	id = silmarils.145
+	desc = "EVTDESCsilmarils.145"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.145" ## Search again!	
+		narrative_event = { id =  silmarils.3 days = 20 }
+	}	
+	option = {
+		name = "EVTOPTBsilmarils.145" ## Abandon it.	
+		prestige = -250
+		clr_character_flag = quest_for_missing_silmaril
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			clr_character_flag = emissary_quest_missing_silmaril
+		}		
+	}	
+}
+
+## Fishermen found !
+character_event = {
+	id = silmarils.150
+	desc = "EVTDESCsilmarils.150"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.150" ## Pay them	
+		narrative_event = { id =  silmarils.151 }
+		wealth = -2000
+	}	
+	option = {
+		name = "EVTOPTBsilmarils.150" ## Abandon it.	
+		prestige = -250
+		clr_character_flag = quest_for_missing_silmaril
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			clr_character_flag = emissary_quest_missing_silmaril
+		}		
+	}	
+	option = {
+		name = "EVTOPTCsilmarils.150" ## Search in another place	
+		narrative_event = { id =  silmarils.3 days = 20 }
+		wealth = -250
+	}		
+}
+
+### not to be seen
+narrative_event = {
+	id = silmarils.151
+	desc = "EVTDESCsilmarils.151"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.140" ## Search on the coasts
+		random_list = {	
+			80 = {
+				narrative_event = { id =  silmarils.152 } ## The treasure is a false one
+			}
+			20 = {
+				narrative_event = { id =  silmarils.153 } ## This is the Silmaril !
+			}
+		}
+				
+	}	
+}
+
+## A bad treasure...
+character_event = {
+	id = silmarils.152
+	desc = "EVTDESCsilmarils.152"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTBsilmarils.152" ## Abandon it.	
+		prestige = -250
+		clr_character_flag = quest_for_missing_silmaril
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			clr_character_flag = emissary_quest_missing_silmaril
+		}		
+	}	
+	option = {
+		name = "EVTOPTCsilmarils.152" ## Search in another place	
+		narrative_event = { id =  silmarils.1 days = 20 }
+		wealth = -250
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			clr_character_flag = emissary_quest_missing_silmaril
+		}			
+	}		
+}
+
+### EMISSARY VICTORIOUS - FOUND THE SILMARIL - FISHERMEN END
+narrative_event = {
+	id = silmarils.153
+	desc = "EVTDESCsilmarils.153"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.153" ## GREAT!!
+		add_artifact = third_silmaril
+		set_global_flag = third_silmaril_found
+		prestige = 200
+		give_nickname = nick_the_silmaril_finder
+	}	
+}
+
+
+### IN THE WRECK - A CHEST ####
+
+
+### A CHEST WAS FOUND
+narrative_event = {
+	id = silmarils.160
+	desc = "EVTDESCsilmarils.160"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.160" ## OPEN IT!
+		narrative_event = { id =  silmarils.161 days = 20 }
+	}	
+}
+
+### not to be seen
+narrative_event = {
+	id = silmarils.161
+	desc = "EVTDESCsilmarils.151"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.140" ## Search on the coasts
+		random_list = {	
+			80 = {
+				narrative_event = { id =  silmarils.161 } ## The treasure is a false one
+			}
+			20 = {
+				narrative_event = { id =  silmarils.162 } ## This is the Silmaril !
+			}
+		}
+				
+	}	
+}
+
+### A BAD CHEST
+narrative_event = {
+	id = silmarils.161
+	desc = "EVTDESCsilmarils.161"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTBsilmarils.152" ## Abandon it.	
+		prestige = -250
+		clr_character_flag = quest_for_missing_silmaril
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			clr_character_flag = emissary_quest_missing_silmaril
+		}		
+	}	
+	option = {
+		name = "EVTOPTCsilmarils.152" ## Search in another place	
+		narrative_event = { id =  silmarils.1 days = 20 }
+		wealth = -250
+		any_courtier_or_vassal = {
+			limit = {
+				has_character_flag = emissary_quest_missing_silmaril
+			}
+			clr_character_flag = emissary_quest_missing_silmaril
+		}			
+	}	
+}
+
+### EMISSARY VICTORIOUS - FOUND THE SILMARIL - FISHERMEN END
+narrative_event = {
+	id = silmarils.162
+	desc = "EVTDESCsilmarils.162"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.153" ## GREAT!!
+		add_artifact = third_silmaril
+		set_global_flag = third_silmaril_found
+		prestige = 200
+		give_nickname = nick_the_silmaril_finder
+	}	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#### SILMARIL CROWN ####
+narrative_event = {
+	id = silmarils.1000
+	desc = "EVTDESCsilmarils.1000"
+	picture = GFX_evt_council
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTAsilmarils.1000" ## GREAT!!
+		add_artifact = crown_silmaril
+		unsafe_destroy_artifact = elvish_sword
+		unsafe_destroy_artifact = elvish_sword
+		unsafe_destroy_artifact = elvish_sword
+		wealth = -800
+		give_nickname = nick_lord_of_silmarils
+	}	
+}
