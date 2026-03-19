@@ -810,7 +810,7 @@ offmap_decisions = {
 					NOT = { trait = mangled }
 				}
 				NOT = { prisoner = yes }
-
+				
 				OR = {
 					custom_tooltip = {
 						text = is_close_relative_tt
@@ -855,8 +855,7 @@ offmap_decisions = {
 				}
 				
 				# MOD EDIT: Immortals (of any flavour) can't be sent to China
-				immortal = no
-				age <= 100
+				meiecomp_this_character_is_not_immortal = yes
 				
 			}
 		}
@@ -1576,8 +1575,7 @@ offmap_decisions = {
 				}
 				
 				# MOD EDIT: Immortals (of any flavour) can't be sent to China
-				immortal = no
-				age <= 100
+				meiecomp_this_character_is_not_immortal = yes
 				
 			}
 		}
@@ -2243,8 +2241,7 @@ offmap_decisions = {
 				}
 				
 				# MOD EDIT: Immortals (of any flavour) can't be sent to China
-				immortal = no
-				age <= 100
+				meiecomp_this_character_is_not_immortal = yes
 				
 			}
 		}
@@ -2858,8 +2855,7 @@ offmap_decisions = {
 				}
 				
 				# MOD EDIT: Immortals (of any flavour) can't be sent to China
-				immortal = no
-				age <= 100
+				meiecomp_this_character_is_not_immortal = yes
 				
 			}
 		}

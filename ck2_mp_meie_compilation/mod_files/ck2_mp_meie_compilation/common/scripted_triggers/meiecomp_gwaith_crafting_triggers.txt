@@ -1,0 +1,49 @@
+meiecomp_gwaith_crafting_this_character_can_afford_to_pay_rootfrom_for_crafting = {
+	OR = {
+		meiecomp_gwaith_crafting_this_character_can_afford_to_pay_gold_for_crafting = yes
+		meiecomp_gwaith_crafting_this_character_can_afford_to_give_artifact_to_rootfrom_for_crafting = yes
+	}
+}
+
+meiecomp_gwaith_crafting_this_character_can_afford_to_pay_gold_for_crafting = {
+	OR = {
+		ai = no # Humans can go into debt
+		AND = {
+			wealth >= 200
+			OR = {
+				is_landed = no
+				scaled_wealth = { value = 4 min = 200 max = 1000 }
+			}
+		}
+	}
+}
+
+meiecomp_gwaith_crafting_this_character_can_afford_to_give_artifact_to_rootfrom_for_crafting = {
+	AND = {
+		num_of_artifacts >= 1
+		any_artifact = {
+			artifact_can_be_gifted_to = ROOT_FROM
+			meiecomp_gwaith_crafting_this_artifact_type_can_be_used_as_payment_for_crafting = yes
+		}
+	}
+}
+
+meiecomp_gwaith_crafting_this_artifact_type_can_be_used_as_payment_for_crafting = {
+	
+	# Must NOT be a commissioned artifact
+	NOR = {
+		artifact_type = elvish_sword
+		artifact_type = elvish_spear
+		artifact_type = elven_lord_armor
+	}
+	
+	# Must NOT be a unique MEIE artifact
+	# Shortcut: Looks like every such artifact has these two exact tags
+	NOT = {
+		AND = {
+			has_artifact_flag = easter_egg
+			has_artifact_flag = very_rare
+		}
+	}
+	
+}

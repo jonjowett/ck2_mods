@@ -1,0 +1,380 @@
+targeted_decisions = {
+	improve_your_skills_craft_elf = {
+		is_in_society = yes
+		
+		filter = self
+		ai_target_filter = self
+		
+		potential = {
+			society_member_of = gwaith_i_mirdain
+			NOT = { trait = legendary_craftman }
+		}
+		allow = {
+			prisoner = no
+			NOT = { trait = incapable }
+			NOT = { is_inaccessible_trigger = yes }
+			society_member_of = gwaith_i_mirdain
+			society_currency >= 300
+			trigger_if = {
+				limit = { has_character_flag = improve_skills_craft_timeout }
+				custom_tooltip = {
+					text = "It has been at least 1 year since the last time you took this decision"
+					had_character_flag = { flag = improve_skills_craft_timeout years >= 1 }
+				}
+			}
+			trigger_if = {
+				limit = { has_character_flag = improve_skills_craft }
+				OR = {
+					custom_tooltip = {
+						text = "Is NOT currently improving crafting skills"
+						NOT = { has_character_flag = improve_skills_craft }
+					}
+					custom_tooltip = {
+						text = "The improve crafting skills event chain has been in progress for at least 3 years (ie. it's probably stuck)"
+						had_character_flag = { flag = improve_skills_craft years >= 3 }
+					}
+				}
+			}
+		}
+
+		effect = {
+			
+			# Ensure a minimum of 3 years between attempts
+			clr_character_flag = improve_skills_craft_timeout
+			set_character_flag = improve_skills_craft_timeout
+			
+			# Flag that this character is currently trying to improve their skills
+			# Reset the timer, for the purposes of had_character_flag above
+			clr_character_flag = improve_skills_craft
+			set_character_flag = improve_skills_craft
+			
+			# Clear tracking flags for measuring success of this attempt
+			clr_character_flag = helped_by_master
+			clr_character_flag = not_helped_by_master
+			clr_character_flag = bought_ancient_scroll
+			clr_character_flag = bought_ancient_weapons
+			clr_character_flag = bought_runic_objects
+			clr_character_flag = bought_materials_forge
+			
+			# Trigger the event, and deduct the society currency
+			hidden_effect = { character_event = { id = gwaith.0 days = 5 } }
+			change_society_currency = {
+				society = gwaith_i_mirdain
+				value = -300
+			}
+			
+		}
+
+		revoke_allowed = {
+			always = no
+		}
+		
+		ai_will_do = {
+			factor = 0.1
+			modifier = {
+				is_ruler = yes
+				factor = 10
+			}
+			modifier = {
+				stewardship = 12
+    			factor = 10
+			}
+			modifier = {
+				stewardship = 15
+    			factor = 10
+			}
+
+		}
+	}
+
+
+	ask_to_forge_weapon = {
+
+		from_potential = {
+			is_within_diplo_range = ROOT
+			NOT = { culture = culture_orkish }
+			NOT = { culture = culture_black_numenorean }
+			NOT = { trait = incapable }			
+			OR = {
+				is_inaccessible_trigger = no
+				AND = {
+					FROM = {
+						has_character_modifier = in_seclusion
+						at_location = ROOT
+					}
+					ROOT = {
+						has_character_modifier = in_seclusion
+					}
+				}
+			}
+		}
+
+		potential = {
+			society_member_of = gwaith_i_mirdain
+			society_rank = { society = gwaith_i_mirdain rank = 3 }	
+			NOT = { has_character_flag = forge_for_another }
+		}
+
+		allow = {		
+				prisoner = no
+				NOT = { trait = incapable }
+				
+				has_society_currency_tiny_trigger = yes
+				society_member_of = gwaith_i_mirdain
+				society_rank = { society = gwaith_i_mirdain rank = 3 }	
+				
+				custom_tooltip = {
+					text = is_accessible
+					OR = {
+						is_inaccessible_trigger = no
+						AND = {
+							FROM = {
+								has_character_modifier = in_seclusion
+								at_location = ROOT
+							}
+							ROOT = {
+								has_character_modifier = in_seclusion
+							}
+						}
+					}
+				}
+			FROM = {
+				prisoner = no
+				NOT = { culture = culture_orkish }
+				NOT = { culture = culture_black_numenorean }
+				NOT = { trait = incapable }
+
+				is_inaccessible_trigger = no		
+			}	
+		}
+
+		effect = {	
+				set_character_flag = forge_for_another
+				FROM = { 
+					character_event = { id = gwaith.351 }
+				}
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.1 # slow down
+			}
+		}
+	}
+
+	
+}
+
+
+decisions = {
+
+craft_a_magical_ring = {
+		is_in_society = yes
+		
+		filter = self
+		ai_target_filter = self
+		
+		potential = {
+			society_member_of = gwaith_i_mirdain
+			NOT = { has_character_flag = craft_a_magical_ring }
+			society_rank = { society = gwaith_i_mirdain rank = 4 }	
+		}
+		allow = {
+			prisoner = no
+			NOT = { trait = incapable }
+			NOT = { is_inaccessible_trigger = yes }
+			trait = legendary_craftman
+			society_rank = { society = gwaith_i_mirdain rank = 4 }	
+			society_currency >= 1500
+		}
+
+		effect = {
+			set_character_flag = craft_a_magical_ring
+			hidden_effect = { character_event = { id = gwaith.100 } }
+		}
+
+		revoke_allowed = {
+			always = no
+		}
+		
+		ai_will_do = {
+			factor = 0.1
+			modifier = {
+				is_ruler = yes
+				factor = 10
+			}
+			modifier = {
+				stewardship = 12
+    			factor = 10
+			}
+			modifier = {
+				stewardship = 15
+    			factor = 10
+			}
+
+		}
+}
+	
+craft_a_weapon_elf = {
+		is_in_society = yes
+		
+		filter = self
+		ai_target_filter = self
+		
+		potential = {
+			society_member_of = gwaith_i_mirdain
+			NOT = { has_character_flag = craft_a_weapon }
+			society_rank = { society = gwaith_i_mirdain rank = 3 }	
+		}
+		allow = {
+			prisoner = no
+			NOT = { trait = incapable }
+			NOT = { is_inaccessible_trigger = yes }
+			OR = {
+				trait = legendary_craftman
+				trait = master_craftsman
+				trait = skilled_craftsman
+			}
+			society_rank = { society = gwaith_i_mirdain rank = 3 }	
+			society_currency >= 500
+		}
+
+		effect = {
+			set_character_flag = craft_a_weapon
+			hidden_effect = { character_event = { id = gwaith.199 } }
+		}
+
+		revoke_allowed = {
+			always = no
+		}
+		
+		ai_will_do = {
+			factor = 0.1
+			modifier = {
+				is_ruler = yes
+				factor = 10
+			}
+			modifier = {
+				stewardship = 12
+    			factor = 10
+			}
+			modifier = {
+				stewardship = 15
+    			factor = 10
+			}
+
+		}
+}	
+
+
+improve_a_weapon_elf = {
+		is_in_society = yes
+		
+		filter = self
+		ai_target_filter = self
+		
+		potential = {
+			society_member_of = gwaith_i_mirdain
+			NOT = { has_character_flag = craft_a_weapon }
+			NOT = { has_character_flag = improve_a_weapon }
+			society_rank = { society = gwaith_i_mirdain rank = 4 }	
+			OR = {
+				has_artifact = elvish_spear_mithril
+				has_artifact = elvish_spear
+				has_artifact = elvish_sword_mithril
+				has_artifact = elvish_sword
+			}
+		}
+		allow = {
+			prisoner = no
+			NOT = { trait = incapable }
+			NOT = { is_inaccessible_trigger = yes }
+			trait = legendary_craftman
+			OR = {
+				has_artifact = elvish_spear_mithril
+				has_artifact = elvish_spear
+				has_artifact = elvish_sword_mithril
+				has_artifact = elvish_sword
+			}			
+			society_rank = { society = gwaith_i_mirdain rank = 4 }	
+			society_currency >= 1000
+		}
+
+		effect = {
+			set_character_flag = improve_a_weapon
+			hidden_effect = { character_event = { id = gwaith.300 } }
+		}
+
+		revoke_allowed = {
+			always = no
+		}
+		
+		ai_will_do = {
+			factor = 0.1
+			modifier = {
+				is_ruler = yes
+				factor = 10
+			}
+			modifier = {
+				stewardship = 12
+    			factor = 10
+			}
+			modifier = {
+				stewardship = 15
+    			factor = 10
+			}
+
+		}
+}	
+
+employ_craftman_court_elf = {
+		is_in_society = yes
+		
+		filter = self
+		ai_target_filter = self
+		
+		potential = {
+			society_member_of = gwaith_i_mirdain
+			NOT = { has_character_flag = artisan_recruited }
+			society_rank = { society = gwaith_i_mirdain rank = 2 }	
+		}
+		allow = {
+			prisoner = no
+			NOT = { trait = incapable }
+			NOT = { is_inaccessible_trigger = yes }
+			OR = {
+				trait = legendary_craftman
+				trait = master_craftsman
+				trait = skilled_craftsman
+			}
+			society_rank = { society = gwaith_i_mirdain rank = 2 }	
+			society_currency >= 300
+		}
+
+		effect = {
+			set_character_flag = artisan_recruited
+			hidden_effect = { character_event = { id = gwaith.50 } }
+		}
+
+		revoke_allowed = {
+			always = no
+		}
+		
+		ai_will_do = {
+			factor = 0.1
+			modifier = {
+				is_ruler = yes
+				factor = 10
+			}
+			modifier = {
+				stewardship = 12
+    			factor = 10
+			}
+			modifier = {
+				stewardship = 15
+    			factor = 10
+			}
+
+		}
+}	
