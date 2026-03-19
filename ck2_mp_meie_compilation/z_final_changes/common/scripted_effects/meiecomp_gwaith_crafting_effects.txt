@@ -1,0 +1,15 @@
+meiecomp_this_character_pays_gold_to_prev_for_crafting = {
+	if = {
+		limit = {
+			OR = {
+				is_landed = no      # Probably has no income
+				monthly_income <= 4 # Low income means min transfer of 200 is wanted ( 4mthinc * 12mths * 4yrs = 192 )
+			}
+		}
+		wealth = -200
+		PREV = { wealth = 200 }
+	}
+	else = {
+		transfer_scaled_wealth = { to = PREV value = 4 min = 200 max = 1000 }
+	}
+}

@@ -23,16 +23,7 @@ character_event = {
 				NOT = { any_artifact = { artifact_type = elvish_sword } }
 			}
 			# Has a HQ non-elven-forged artifact, or enough money
-			OR = {
-				AND = {
-					num_of_artifacts >= 1
-					any_artifact = {
-						artifact_can_be_gifted_to = ROOT_FROM
-						meiecomp_gwaith_crafting_this_artifact_type_can_be_used_as_payment_for_crafting = yes
-					}
-				}
-				scaled_wealth = { value = 4 min = 200 max = 1000 }
-			}
+			meiecomp_gwaith_crafting_this_character_can_afford_to_pay_rootfrom_for_crafting = yes
 		}
 		
 		FROM = { character_event = { id = gwaith.352 } }
@@ -64,16 +55,7 @@ character_event = {
 				NOT = { any_artifact = { artifact_type = elvish_spear } }
 			}
 			# Has a HQ non-elven-forged artifact, or enough money
-			OR = {
-				AND = {
-					num_of_artifacts >= 1
-					any_artifact = {
-						artifact_can_be_gifted_to = ROOT_FROM
-						meiecomp_gwaith_crafting_this_artifact_type_can_be_used_as_payment_for_crafting = yes
-					}
-				}
-				scaled_wealth = { value = 4 min = 200 max = 1000 }
-			}
+			meiecomp_gwaith_crafting_this_character_can_afford_to_pay_rootfrom_for_crafting = yes
 		}
 		
 		FROM = { character_event = { id = gwaith.352 } }
@@ -105,16 +87,7 @@ character_event = {
 				NOT = { any_artifact = { artifact_type = elven_lord_armor } }
 			}
 			# Has a HQ non-elven-forged artifact, or enough money
-			OR = {
-				AND = {
-					num_of_artifacts >= 1
-					any_artifact = {
-						artifact_can_be_gifted_to = ROOT_FROM
-						meiecomp_gwaith_crafting_this_artifact_type_can_be_used_as_payment_for_crafting = yes
-					}
-				}
-				scaled_wealth = { value = 4 min = 200 max = 1000 }
-			}
+			meiecomp_gwaith_crafting_this_character_can_afford_to_pay_rootfrom_for_crafting = yes
 		}
 		
 		FROM = { character_event = { id = gwaith.352 } }
@@ -176,8 +149,16 @@ character_event = {
 	
 	option = { 
 		name = EVTOPTA_gwaith.352 ## Ok, but for some money
-		trigger = { FROM = { scaled_wealth          = { value = 4 min = 200 max = 1000           } } }
-		tooltip = { FROM = { transfer_scaled_wealth = { value = 4 min = 200 max = 1000 to = ROOT } } }
+		trigger = { FROM = { meiecomp_gwaith_crafting_this_character_can_afford_to_pay_gold_for_crafting = yes } }
+		custom_tooltip = { text = "INFO: If your proposal is accepted, the following effects will occur:" }
+		tooltip = {
+			ROOT = {
+				show_scope_change = no
+				FROM = {
+					meiecomp_this_character_pays_gold_to_prev_for_crafting = yes
+				}
+			}
+		}
 		tooltip = { change_society_currency = { society = gwaith_i_mirdain value = 100 } }
 		FROM = { character_event = { id = gwaith.353 days = 10 } }
 		clear_event_target = gwaith_forge_cost_artifact_1
@@ -187,6 +168,7 @@ character_event = {
 	option = { 
 		name = EVTOPTB_gwaith.352 ## Ok, but for another artifact
 		trigger = { has_character_flag = gwaith_forge_cost_artifact_1_found }
+		custom_tooltip = { text = "INFO: If your proposal is accepted, the following effects will occur:" }
 		tooltip = { event_target:gwaith_forge_cost_artifact_1 = { transfer_artifact = { from = ROOT_FROM to = ROOT } } }
 		tooltip = { change_society_currency = { society = gwaith_i_mirdain value = 100 } }
 		FROM = {
@@ -216,6 +198,7 @@ character_event = {
 	option = { 
 		name = EVTOPTB_gwaith.352 ## Ok, but for another artifact
 		trigger = { has_character_flag = gwaith_forge_cost_artifact_2_found }
+		custom_tooltip = { text = "INFO: If your proposal is accepted, the following effects will occur:" }
 		tooltip = { event_target:gwaith_forge_cost_artifact_2 = { transfer_artifact = { from = ROOT_FROM to = ROOT } } }
 		tooltip = { change_society_currency = { society = gwaith_i_mirdain value = 100 } }
 		FROM = {
@@ -268,13 +251,13 @@ character_event = {
 	
 	option = { 
 		name = EVTOPTA_gwaith.353 ## Ok, but for some money
-		trigger = {
-			OR = {
-				ai = no # Players can choose to go into debt
-				scaled_wealth = { value = 4 min = 200 max = 1000 }
+		trigger = { meiecomp_gwaith_crafting_this_character_can_afford_to_pay_gold_for_crafting = yes }
+		FROM = {
+			show_scope_change = no
+			ROOT = {
+				meiecomp_this_character_pays_gold_to_prev_for_crafting = yes
 			}
 		}
-		transfer_scaled_wealth = { to = FROM value = 4 min = 200 max = 1000 }
 		if = {
 			limit = { has_character_flag = ask_for_sword }
 			add_artifact = elvish_sword
