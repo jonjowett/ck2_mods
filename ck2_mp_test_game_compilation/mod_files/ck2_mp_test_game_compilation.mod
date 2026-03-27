@@ -24,4 +24,7 @@ dependencies = {
 	"\"Warcraft: GoA Models\""
 	"\"Warcraft: GoA Music\""
 	
+	# Faerun
+	"\"Faerun - Forgotten Realms Total Conversion\""
+	
 }
