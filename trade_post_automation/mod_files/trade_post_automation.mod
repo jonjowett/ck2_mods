@@ -19,6 +19,7 @@ dependencies={
 	# Other total conversions with major changes
 	"\"After the End Fan Fork\""
 	"\"Warcraft: Guardians of Azeroth\""
+	"\"Faerun - Forgotten Realms Total Conversion\""
 	
 	# Other total conversions with essentially no changes from the base game (in terms of trade mechanics, anyway)
 	"\"Romance of the Three Kingdoms\""

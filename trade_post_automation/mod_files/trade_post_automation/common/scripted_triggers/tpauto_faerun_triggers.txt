@@ -1,0 +1,96 @@
+# Audax Validator EnableCommentMetadata
+# The Validator can't read workshop mods (because they're zipped), so split them into an isolated file and ignore every error.
+# Audax Validator "!" Ignore_NEXT
+
+tpauto_faerun_mod_is_active = {
+	has_global_flag = faerun_started # Should always be true for every faerun game.
+	calc_true_if = {
+		count >= 10 # 10/13 seems reasonable
+		OR = {
+			has_game_rule = { name = minor_story_events value = on        }
+			has_game_rule = { name = minor_story_events value = dangerous }
+			has_game_rule = { name = minor_story_events value = lethal    }
+			has_game_rule = { name = minor_story_events value = off       }
+		}
+		OR = {
+			has_game_rule = { name = diversity value = on  }
+			has_game_rule = { name = diversity value = off }
+		}
+		OR = {
+			has_game_rule = { name = divine_mandate value = restricted }
+			has_game_rule = { name = divine_mandate value = loose      }
+		}
+		OR = {
+			has_game_rule = { name = wild_magic_surge_rule value = on  }
+			has_game_rule = { name = wild_magic_surge_rule value = off }
+		}
+		OR = {
+			has_game_rule = { name = rule_spellplague value = on  }
+			has_game_rule = { name = rule_spellplague value = off }
+		}
+		OR = {
+			has_game_rule = { name = spellplague_character_effects_rule value = demesne  }
+			has_game_rule = { name = spellplague_character_effects_rule value = full     }
+			has_game_rule = { name = spellplague_character_effects_rule value = merciful }
+		}
+		OR = {
+			has_game_rule = { name = plaguelands_spread_rule value = normal }
+			has_game_rule = { name = plaguelands_spread_rule value = always }
+			has_game_rule = { name = plaguelands_spread_rule value = never  }
+		}
+		OR = {
+			has_game_rule = { name = spellplague_start_rule value = random }
+			has_game_rule = { name = spellplague_start_rule value = mhair  }
+		}
+		OR = {
+			has_game_rule = { name = spellplague_halruaa_rule value = random }
+			has_game_rule = { name = spellplague_halruaa_rule value = always }
+		}
+		OR = {
+			has_game_rule = { name = spellplague_elfharrow_rule value = dynamic }
+			has_game_rule = { name = spellplague_elfharrow_rule value = always  }
+			has_game_rule = { name = spellplague_elfharrow_rule value = never   }
+		}
+		OR = {
+			has_game_rule = { name = spellplague_underchasm_rule value = random }
+			has_game_rule = { name = spellplague_underchasm_rule value = shaar  }
+		}
+		OR = {
+			has_game_rule = { name = ritual_of_the_border_rule value = on  }
+			has_game_rule = { name = ritual_of_the_border_rule value = off }
+		}
+		OR = {
+			has_game_rule = { name = static_portrait_rule value = on  }
+			has_game_rule = { name = static_portrait_rule value = off }
+		}
+	}
+}
+tpauto_this_province_can_have_trade_route_trade_post_faerun = {
+	tpauto_faerun_mod_is_active = yes
+	OR = {
+		AND = {
+			trade_route = silk_road
+			silk_road_trade_post_trigger = yes
+		}
+		AND = {
+			trade_route = spice_road
+			spice_road_trade_post_trigger = yes
+		}
+		AND = {
+			trade_route = golden_waters
+			golden_waters_trade_post_trigger = yes
+		}
+		AND = {
+			trade_route = sword_coast_way
+			sword_coast_way_trade_post_trigger = yes
+		}
+		AND = {
+			trade_route = black_road
+			black_road_trade_post_trigger = yes
+		}
+		AND = {
+			trade_route = sea_fallen_stars_route
+			sea_fallen_stars_route_trade_post_trigger = yes
+		}
+	}
+}
