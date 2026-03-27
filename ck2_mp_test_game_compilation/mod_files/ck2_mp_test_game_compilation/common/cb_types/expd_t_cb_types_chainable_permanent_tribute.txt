@@ -20,7 +20,10 @@ expd_t_chainable_permanent_tributary_cb = { # New8
 	sort_priority = 810
 	
 	can_use_gui = {
-		check_if_crusader_trigger = yes
+		
+		# Crusader check removed because it breaks total conversions
+		#check_if_crusader_trigger = yes
+		
 		ROOT = {
 			relative_realm_size = {
 				who = FROM 

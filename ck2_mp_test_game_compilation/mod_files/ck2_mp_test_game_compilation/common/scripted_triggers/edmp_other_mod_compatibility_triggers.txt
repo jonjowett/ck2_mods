@@ -44,3 +44,16 @@ edmp_ed_pdxrptg_mod_is_active = {
 		has_province_modifier = expd_pdxrptg_detectability
 	}
 }
+
+edmp_ed_t_mod_is_active = {
+	trigger_if = {
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			expd_t_mod_is_active = yes
+		}
+		always = yes
+	}
+	trigger_else = {
+		always = no
+	}
+}
