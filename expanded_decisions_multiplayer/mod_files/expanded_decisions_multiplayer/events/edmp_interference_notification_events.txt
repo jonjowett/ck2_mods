@@ -41,42 +41,90 @@ character_event = {
 	}
 }
 
-# Tributary relationship cancelled by FROM
+# Tributary relationship changed by FROM
 character_event = {
 	id    = edmp_ifn.2001
-	desc  = edmp_ifn_2001_desc
 	title = edmp_ifn_title
 	is_triggered_only = yes
 	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
+	
+	desc = {
+		trigger = { has_global_flag = edmp_interference_tributary_cancelled }
+		text                       = edmp_ifn_2001_desc_tributary_cancelled
+	}
+	desc = {
+		trigger = { has_global_flag = edmp_interference_tributary_forced }
+		text                       = edmp_ifn_2001_desc_tributary_forced
+	}
+	
+	# ROOT is suzerain
 	option = {
-		trigger = { event_target:edmp_interference_cancel_tributary_suzerain = { character = ROOT } }
-		show_portrait = event_target:edmp_interference_cancel_tributary_tributary
+		trigger = {
+			event_target:edmp_interference_tributary_action_suzerain = { character = ROOT }
+			has_global_flag = edmp_interference_tributary_bad_for_suzerain
+		}
+		show_portrait = event_target:edmp_interference_tributary_action_tributary
 		tooltip_info = yes
 		name = edmp_ifn_evtopt_curses
 	}
 	option = {
-		trigger = { event_target:edmp_interference_cancel_tributary_tributary = { character = ROOT } }
-		show_portrait = event_target:edmp_interference_cancel_tributary_suzerain
+		trigger = {
+			event_target:edmp_interference_tributary_action_suzerain = { character = ROOT }
+			NOT = { has_global_flag = edmp_interference_tributary_bad_for_suzerain }
+		}
+		show_portrait = event_target:edmp_interference_tributary_action_tributary
 		tooltip_info = yes
 		name = edmp_ifn_evtopt_excellent
 	}
+	
+	# ROOT is tributary
+	option = {
+		trigger = {
+			event_target:edmp_interference_tributary_action_tributary = { character = ROOT }
+			has_global_flag = edmp_interference_tributary_bad_for_tributary
+		}
+		show_portrait = event_target:edmp_interference_tributary_action_suzerain
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_curses
+	}
+	option = {
+		trigger = {
+			event_target:edmp_interference_tributary_action_tributary = { character = ROOT }
+			NOT = { has_global_flag = edmp_interference_tributary_bad_for_tributary }
+		}
+		show_portrait = event_target:edmp_interference_tributary_action_suzerain
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_excellent
+	}
+	
+	# ROOT is neither tributary nor suzerain
 	option = {
 		trigger = {
 			NOR = {
-				event_target:edmp_interference_cancel_tributary_tributary = { character = ROOT }
-				event_target:edmp_interference_cancel_tributary_suzerain = { character = ROOT }
+				event_target:edmp_interference_tributary_action_tributary = { character = ROOT }
+				event_target:edmp_interference_tributary_action_suzerain = { character = ROOT }
 			}
 		}
-		show_portrait = event_target:edmp_interference_cancel_tributary_tributary
-		show_portrait = event_target:edmp_interference_cancel_tributary_suzerain
+		show_portrait = event_target:edmp_interference_tributary_action_tributary
+		show_portrait = event_target:edmp_interference_tributary_action_suzerain
 		name = edmp_ifn_evtopt_ok_unaffected
 	}
+	
 	after = {
 		hidden_tooltip = {
-			clear_event_target = edmp_interference_cancel_tributary_tributary
-			clear_event_target = edmp_interference_cancel_tributary_suzerain
+			
 			clear_event_target = edmp_interference_decision_taker
+			
+			clear_event_target = edmp_interference_tributary_action_tributary
+			clear_event_target = edmp_interference_tributary_action_suzerain
+			
+			clr_global_flag    = edmp_interference_tributary_bad_for_tributary
+			clr_global_flag    = edmp_interference_tributary_bad_for_suzerain
+			
+			clr_global_flag    = edmp_interference_tributary_cancelled
+			clr_global_flag    = edmp_interference_tributary_forced
+			
 		}
 	}
 }

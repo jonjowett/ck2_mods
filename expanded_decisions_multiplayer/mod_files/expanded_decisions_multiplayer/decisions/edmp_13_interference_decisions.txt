@@ -130,11 +130,13 @@ targetted_decisions = {
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
-				ROOT_FROMFROM = { save_event_target_as = edmp_interference_cancel_tributary_tributary }
-				ROOT          = { save_event_target_as = edmp_interference_cancel_tributary_suzerain  }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_tributary_action_tributary }
+				ROOT          = { save_event_target_as = edmp_interference_tributary_action_suzerain  }
+				set_global_flag = edmp_interference_tributary_cancelled
+				set_global_flag = edmp_interference_tributary_bad_for_suzerain
 			}
 			ROOT = { remove_tributary = ROOT_FROMFROM }
-			edmp_interference_notify_players_tributary_cancel = yes
+			edmp_interference_notify_players_tributary = yes
 		}
 	}
 	
@@ -157,11 +159,54 @@ targetted_decisions = {
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
-				ROOT          = { save_event_target_as = edmp_interference_cancel_tributary_tributary }
-				suzerain      = { save_event_target_as = edmp_interference_cancel_tributary_suzerain  }
+				ROOT          = { save_event_target_as = edmp_interference_tributary_action_tributary }
+				suzerain      = { save_event_target_as = edmp_interference_tributary_action_suzerain  }
+				set_global_flag = edmp_interference_tributary_cancelled
+				set_global_flag = edmp_interference_tributary_bad_for_suzerain
 			}
 			suzerain = { remove_tributary = ROOT }
-			edmp_interference_notify_players_tributary_cancel = yes
+			edmp_interference_notify_players_tributary = yes
+		}
+	}
+	
+	edmp_interference_force_tributary = {
+		filter = independent_rulers
+		third_party_filter = independent_rulers_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			independent = yes
+		}
+		allow = {
+			is_tributary = no
+			OR = {
+				custom_tooltip = {
+					text = edmp_interference_force_tributary_from_doesnt_have_event_open_tt
+					ROOT_FROM = { NOT = { has_character_flag = edmp_ft_event_open } }
+				}
+				custom_tooltip = {
+					text = edmp_interference_force_tributary_from_has_had_event_open_6_months_tt
+					ROOT_FROM = { had_character_flag = { flag = edmp_ft_event_open months >= 6 } }
+				}
+			}
+		}
+		third_party_potential = { ROOT_FROMFROM = { independent = yes } }
+		third_party_allow     = { ROOT_FROMFROM = { is_within_diplo_range = ROOT } }
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_force_tributary_tt
+				ROOT          = { save_event_target_as = edmp_interference_tributary_action_tributary }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_tributary_action_suzerain  }
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker             }
+				ROOT_FROM = {
+					set_variable = { which = edmp_ft_screen_no value = 0 }
+					character_event = { id = edmp_ft.1000 }
+				}
+			}
 		}
 	}
 	

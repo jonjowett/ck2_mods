@@ -31,7 +31,15 @@ edmp_interference_notify_players_force_end_war_white_peace = {
 	}
 }
 
-edmp_interference_notify_players_tributary_cancel = {
+edmp_interference_notify_players_tributary_forced = {
+	hidden_tooltip = {
+		set_global_flag = edmp_interference_tributary_forced
+		set_global_flag = edmp_interference_tributary_bad_for_tributary
+	}
+	edmp_interference_notify_players_tributary = yes
+}
+
+edmp_interference_notify_players_tributary = {
 	if = {
 		limit = { edmp_this_is_a_multiplayer_game = yes }
 		custom_tooltip = {
@@ -50,11 +58,12 @@ edmp_interference_notify_players_tributary_cancel = {
 		}
 	}
 	hidden_tooltip = {
-		clear_event_target = edmp_interference_cancel_tributary_tributary
-		clear_event_target = edmp_interference_cancel_tributary_suzerain
+		clear_event_target = edmp_interference_tributary_action_tributary
+		clear_event_target = edmp_interference_tributary_action_suzerain
 		clear_event_target = edmp_interference_decision_taker
 	}
 }
+
 
 edmp_interference_notify_players_bilateral = {
 	if = {
