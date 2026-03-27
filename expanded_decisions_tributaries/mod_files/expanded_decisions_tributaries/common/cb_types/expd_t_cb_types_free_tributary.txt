@@ -22,13 +22,17 @@ expd_t_free_tributary_cb = {
 	}
 
 	can_use_gui = {
-		check_if_crusader_trigger = yes
+		
+		# Crusader check removed because it breaks total conversions
+		#check_if_crusader_trigger = yes
+		
 		ROOT = { #Cannot use CB if can take decision to stop paying tribute
 			conditional_tooltip = {
 				trigger = { is_decision_potential = expd_t_protectorate_independence_normal }
 				NOT = { is_decision_allowed = expd_t_protectorate_independence_normal }
 			}
 		}
+		
 	}
 
 	is_valid = {
