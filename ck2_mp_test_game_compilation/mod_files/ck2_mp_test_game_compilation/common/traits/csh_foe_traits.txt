@@ -6,6 +6,7 @@ csh_foe = {
 	customizer = no
 	random = no
 	is_visible = {
+		ROOT = { csh_this_character_doesnt_want_traits_to_be_hidden_for_themselves_only = yes }
 		FROM = { is_alive = yes }
 		OR = {
 			ROOT = { is_foe = FROM }

@@ -170,19 +170,23 @@ targetted_decisions = {
 	}
 	
 	edmp_interference_force_tributary = {
-		filter = independent_rulers
+		filter = independent_rulers_including_me
 		third_party_filter = independent_rulers_including_me
 		ai = no
+		show_third_party_potential = yes
 		from_potential = {
 			has_character_flag = edmp_interference_show
 			edmp_this_character_can_see_admin_helper_actions = yes
 		}
 		potential = {
 			edmp_interference_root_is_valid_potential_target = yes
-			independent = yes
 		}
 		allow = {
+			# Technically superfluous, but restated anyway so it's obvious to the decision-taker why this decision may sometimes be suppressed.
+			independent = yes
+			# Must not already be a tributary (break that relationship first)
 			is_tributary = no
+			# Must not be currently forcing someone to be a tributary (finish that process first)
 			OR = {
 				custom_tooltip = {
 					text = edmp_interference_force_tributary_from_doesnt_have_event_open_tt
@@ -193,9 +197,21 @@ targetted_decisions = {
 					ROOT_FROM = { had_character_flag = { flag = edmp_ft_event_open months >= 6 } }
 				}
 			}
+			# Always considered negative for the tributary, because they are losing their independence
+			ROOT = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
 		}
-		third_party_potential = { ROOT_FROMFROM = { independent = yes } }
-		third_party_allow     = { ROOT_FROMFROM = { is_within_diplo_range = ROOT } }
+		third_party_potential = {
+			# Suzerain must be independent and within diplo range of ROOT
+			ROOT_FROMFROM = {
+				independent = yes
+				is_within_diplo_range = ROOT
+			}
+		}
+		third_party_allow = { always = yes }
+		third_party_score = {
+			factor = 1
+			edmp_interference_third_party_scores_independent_rulers_preferring_player_then_nearby_ai_then_tier = yes
+		}
 		effect = {
 			custom_tooltip = {
 				text = edmp_interference_force_tributary_tt
@@ -207,6 +223,86 @@ targetted_decisions = {
 					character_event = { id = edmp_ft.1000 }
 				}
 			}
+		}
+	}
+	
+	edmp_interference_force_vassal = {
+		filter = independent_rulers_including_me
+		third_party_filter = independent_rulers_including_me
+		ai = no
+		show_third_party_potential = yes
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			lower_tier_than = EMPEROR
+		}
+		allow = {
+			# These are technically superfluous, but restated anyway so it's obvious to the decision-taker why this decision may sometimes be suppressed.
+			independent = yes
+			lower_tier_than = EMPEROR
+			# Always considered negative for the tributary, because they are losing their independence
+			ROOT = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+		}
+		third_party_potential = {
+			ROOT_FROMFROM = {
+				independent = yes
+				higher_real_tier_than = ROOT
+				is_within_diplo_range = ROOT
+			}
+		}
+		third_party_allow = { always = yes }
+		third_party_score = {
+			factor = 1
+			edmp_interference_third_party_scores_independent_rulers_preferring_player_then_nearby_ai_then_tier = yes
+		}
+		effect = {
+			# NB: Reuse the tributary notification screen, since it's very VERY similar - we only need loc changes.
+			hidden_tooltip = {
+				ROOT          = { save_event_target_as = edmp_interference_tributary_action_tributary }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_tributary_action_suzerain  }
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker             }
+				set_global_flag = edmp_interference_tributary_vassal_forced
+				set_global_flag = edmp_interference_tributary_bad_for_tributary
+			}
+			set_defacto_liege = ROOT_FROM
+			edmp_interference_notify_players_tributary = yes
+		}
+	}
+	
+	edmp_interference_force_independent = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			independent = no
+		}
+		allow = {
+			# Technically superfluous, but restated anyway so it's obvious to the decision-taker why this decision may sometimes be suppressed.
+			independent = no
+			# Considered negative for all of ROOT's lieges, but we'll simplify by only looking at their direct and top liege
+			ROOT = {
+				liege     = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+				top_liege = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+			}
+		}
+		effect = {
+			# NB: Reuse the tributary notification screen, since it's very VERY similar - we only need loc changes.
+			hidden_tooltip = {
+				ROOT               = { save_event_target_as = edmp_interference_tributary_action_tributary }
+				ROOT = { top_liege = { save_event_target_as = edmp_interference_tributary_action_suzerain  } }
+				ROOT_FROM          = { save_event_target_as = edmp_interference_decision_taker             }
+				set_global_flag = edmp_interference_tributary_independence_forced
+				set_global_flag = edmp_interference_tributary_bad_for_suzerain
+			}
+			set_defacto_liege = THIS
+			edmp_interference_notify_players_tributary = yes
 		}
 	}
 	

@@ -1,20 +1,20 @@
 # Template;§M(ED:MP)§!;;;;;;;;;;;;;x
 #
 # Intrigue Menu Decisions
-edmp_interference_show_targetted_decisions;(ED:MP) Show Targetted "Interference" Decisions;;;;;;;;;;;;;x
+edmp_interference_show_targetted_decisions;(ED:MP:Admin) "Interference" Decns HIDDEN - Show?;;;;;;;;;;;;;x
 edmp_interference_show_targetted_decisions_desc;This mod includes a large number of extremely-powerful targetted decisions, which allow the §YAdministrator§! (and any §YAdmin Helpers§!) a huge amount of control over an ongoing game. These are flagged with the special "§P(ED:MP:Intf)§!" prefix in the right-click menu. Due to the potential for accidental game-ruining error, §Yyou should keep these decisions hidden at all times unless you are actively using them§!.;;;;;;;;;;;;;x
 edmp_interference_show_targetted_decisions_tt;All applicable §P(ED:MP:Intf)§! targetted decisions will be visible.\n§M! ! ! Be very careful ! ! !§!;;;;;;;;;;;;;x
-edmp_interference_hide_targetted_decisions_high_prio;(ED:MP) Hide Targetted "Interference" Decisions;;;;;;;;;;;;;x
+edmp_interference_hide_targetted_decisions_high_prio;(ED:MP:Admin) "Interference" Decns VISIBLE - Hide?;;;;;;;;;;;;;x
 edmp_interference_hide_targetted_decisions_high_prio_desc;This mod includes a large number of extremely-powerful targetted decisions, which allow the §YAdministrator§! (and any §YAdmin Helpers§!) a huge amount of control over an ongoing game. These are flagged with the special "§P(ED:MP:Intf)§!" prefix in the right-click menu. Due to the potential for accidental game-ruining error, §Yyou should keep these decisions hidden at all times unless you are actively using them§!.;;;;;;;;;;;;;x
-edmp_interference_hide_targetted_decisions_low_prio;(ED:MP) Hide Targetted "Interference" Decisions;;;;;;;;;;;;;x
+edmp_interference_hide_targetted_decisions_low_prio;(ED:MP:Admin) "Interference" Decns VISIBLE - Hide?;;;;;;;;;;;;;x
 edmp_interference_hide_targetted_decisions_low_prio_desc;This mod includes a large number of extremely-powerful targetted decisions, which allow the §YAdministrator§! (and any §YAdmin Helpers§!) a huge amount of control over an ongoing game. These are flagged with the special "§P(ED:MP:Intf)§!" prefix in the right-click menu. Due to the potential for accidental game-ruining error, §Yyou should keep these decisions hidden at all times unless you are actively using them§!.;;;;;;;;;;;;;x
 edmp_interference_hide_targetted_decisions_tt;All §P(ED:MP:Intf)§! targetted decisions will be hidden.;;;;;;;;;;;;;x
-edmp_interference_debug_include_me_in_notifications;(ED:MP) Show me "Interference" notifications;;;;;;;;;;;;;x
+edmp_interference_debug_include_me_in_notifications;(ED:MP:Admin) DEBUG - Show self-notifications;;;;;;;;;;;;;x
 edmp_interference_debug_include_me_in_notifications_desc;This mod sends notifications to all current players whenever the §YAdministrator§! (or an §YAdmin Helper§!) takes an "Interference" action.\n\nNormally, the character taking the action (ie. you) is excluded from these notifications. (Because you probably don't need a notification to tell you about your most-recent mouse-click.)\n\n§YBy taking this decision, you will include yourself in these notifications§! (eg. for debugging purposes).;;;;;;;;;;;;;x
-edmp_interference_debug_include_me_in_notifications_tt;You WILL receive notifications of future "Interference" actions;;;;;;;;;;;;;x
-edmp_interference_debug_exclude_me_from_notifications;(ED:MP) STOP showing me "Interference" notifications;;;;;;;;;;;;;x
+edmp_interference_debug_include_me_in_notifications_tt;You WILL receive notifications about your own future "Interference" actions;;;;;;;;;;;;;x
+edmp_interference_debug_exclude_me_from_notifications;(ED:MP:Admin) STOP DEBUG - Hide self-notifications;;;;;;;;;;;;;x
 edmp_interference_debug_exclude_me_from_notifications_desc;This mod sends notifications to all current players whenever the §YAdministrator§! (or an §YAdmin Helper§!) takes an "Interference" action.\n\nNormally, the character taking the action (ie. you) is excluded from these notifications. (Because you probably don't need a notification to tell you about your most-recent mouse-click.)\n\n§YBy taking this decision, you will revert to the default setup, where you will NOT receive these notifications.§!;;;;;;;;;;;;;x
-edmp_interference_debug_exclude_me_from_notifications_tt;You WILL NOT receive notifications of future "Interference" actions;;;;;;;;;;;;;x
+edmp_interference_debug_exclude_me_from_notifications_tt;You WILL NOT receive notifications about your own future "Interference" actions;;;;;;;;;;;;;x
 #
 # Targetted Decisions - Win Defensive Wars
 edmp_interference_win_defensive_war;§P(ED:MP:Intf)§! Win Def War;;;;;;;;;;;;;x
@@ -29,6 +29,10 @@ edmp_interference_cancel_tributary_on_tributary;§P(ED:MP:Intf)§! End Tribute;;;;
 edmp_interference_cancel_tributary_on_tributary_desc;[Root.GetTitledFirstName] stops paying tribute to [Root.GetHerHis] suzerain.;;;;;;;;;;;;;x
 edmp_interference_force_tributary;§P(ED:MP:Intf)§! Force Tributary;;;;;;;;;;;;;x
 edmp_interference_force_tributary_desc;Force [Root.GetTitledFirstName] to be a tributary of another independent ruler.;;;;;;;;;;;;;x
+edmp_interference_force_vassal;§P(ED:MP:Intf)§! Force Vassal;;;;;;;;;;;;;x
+edmp_interference_force_vassal_desc;Force [Root.GetTitledFirstName] to be a vassal of another independent ruler.;;;;;;;;;;;;;x
+edmp_interference_force_independent;§P(ED:MP:Intf)§! Force Independence;;;;;;;;;;;;;x
+edmp_interference_force_independent_desc;Force [Root.GetTitledFirstName] to be independent.;;;;;;;;;;;;;x
 edmp_interference_add_bilateral_10_year_truce_with_third_party;§P(ED:MP:Intf)§! Create Truce;;;;;;;;;;;;;x
 edmp_interference_add_bilateral_10_year_truce_with_third_party_desc;Create a §Ybilateral§! 10-year truce between [Root.GetTitledFirstName] and another character.;;;;;;;;;;;;;x
 edmp_interference_break_truce_with_third_party;§P(ED:MP:Intf)§! Break Truce;;;;;;;;;;;;;x
@@ -223,7 +227,7 @@ edmp_interference_force_tributary_tt;An §Yevent§! will occur, in which you can s
 edmp_interference_force_tributary_from_doesnt_have_event_open_tt;[From.GetTitledFirstName] does NOT currently have the "Choose Tributary Type" event open;;;;;;;;;;;;;x
 edmp_interference_force_tributary_from_has_had_event_open_6_months_tt;[From.GetTitledFirstName] has had the "Choose Tributary Type" event open for 6 months;;;;;;;;;;;;;x
 edmp_ft_1000_title;(ED:MP) Choose Tributary Type;;;;;;;;;;;;;x
-edmp_ft_1000_desc;You have chosen to force the following tributary relationship:\n - Tributary: [edmp_interference_tributary_action_tributary.GetBestName]\n - Suzerain: [edmp_interference_tributary_action_suzerain.GetBestName]\n\nCK2 supports many different types of tributary, please use the options below to specify which one exactly.\n - Base game types are always shown (just in case)\n - Some modded types are supported\n.....(These are hardcoded, contact ED:MP dev to add others.);;;;;;;;;;;;;x
+edmp_ft_1000_desc;You have chosen to force the following tributary relationship:\n - Tributary: [edmp_interference_tributary_action_tributary.GetBestName]\n - Suzerain: [edmp_interference_tributary_action_suzerain.GetBestName]\n\nCK2 supports many different types of tributary, so please use the options below to specify which one exactly.\n - Base game types are always shown (just in case)\n - Some modded types are supported (only shown if relevant)\n(These are hardcoded, contact the ED:MP dev to add others.);;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_error_exit;!!!UNEXPECTED ERROR!!! Exit;;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_p1_default;Base Game: Default / "Extorted";;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_p1_permanent;Base Game: Permanent;;;;;;;;;;;;;x
@@ -233,5 +237,5 @@ edmp_ft_1000_evtopt_p3_ed_t_p;ED:T Protectorate;;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_next;Next;;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_loop_restart;Return to the start;;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_loop_exit;Exit;;;;;;;;;;;;;x
-edmp_ft_warning_base_game_tributary_type_does_not_exist_tt;§b.§!\n§RWARNING! There are currently no tributaries of this type!§!\n- It is impossible to directly detect whether this tributary type is valid and intended for your current setup.\n§b.....§g(So we check indirectly by looking for any currently-existing examples.)§!\n- Since none have been detected, this tributary type MAY not be supported by your mod list.\n§b.....§g(Counterexample: In the base game, it's common for there to be no offmap tributaries.)§!\n- If this tributary type is in fact unsupported, forcing it may have unexpected results!\n§b.....§g(Anything from "nothing happens" to save corruption and/or crash to desktop.)§!\n - If you are uncertain, it would be wise to §Ytest this option in single-player mode§!!\n§b.§!;;;;;;;;;;;;;x
+edmp_ft_warning_base_game_tributary_type_does_not_exist_tt;§b.§!\n§RWARNING! There are currently no tributaries of this type!§!\n- It is impossible to directly detect whether this tributary type is valid and intended for your current setup.\n§b.....§g(So we check indirectly by looking for any currently-existing examples.)§!\n- Since none have been detected, this tributary type MAY NOT be supported by your mod list.\n§b.....§g(Counterexample: In the base game, it's common for there to be no offmap tributaries.)§!\n- If this tributary type is in fact unsupported, forcing it may have unexpected results!\n§b.....§g(Anything from "nothing happens" to save corruption and/or crash to desktop.)§!\n- If you are uncertain, it would be wise to §Ytest this option in single-player mode§!!\n§b.§!;;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_loop_exit_tt;§YNothing will change§!;;;;;;;;;;;;;x

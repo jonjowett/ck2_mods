@@ -5,7 +5,9 @@ csh_remove_all_artifact_filters_from_this_character = {
 		clr_character_flag = csh_artifact_filter_no_armor
 		clr_character_flag = csh_artifact_filter_no_books
 		clr_character_flag = csh_artifact_filter_no_clutter
+		clr_character_flag = csh_artifact_filter_no_destroyed_on_death
 		clr_character_flag = csh_artifact_filter_no_mounts_or_pets
+		clr_character_flag = csh_artifact_filter_no_offhand
 		clr_character_flag = csh_artifact_filter_no_rings
 		clr_character_flag = csh_artifact_filter_no_necklaces
 		clr_character_flag = csh_artifact_filter_no_weapons
@@ -40,12 +42,20 @@ csh_add_all_artifact_filters_to_this_character = {
 			set_character_flag = csh_artifact_filter_no_clutter
 		}
 		if = {
+			limit = { csh_artifact_filter_destroyed_on_death_is_visible_for_this_character = yes }
+			set_character_flag = csh_artifact_filter_no_destroyed_on_death
+		}
+		if = {
 			limit = { csh_artifact_filter_mount_or_pet_is_visible_for_this_character = yes }
 			set_character_flag = csh_artifact_filter_no_mounts_or_pets
 		}
 		if = {
 			limit = { csh_artifact_filter_necklace_is_visible_for_this_character = yes }
 			set_character_flag = csh_artifact_filter_no_necklaces
+		}
+		if = {
+			limit = { csh_artifact_filter_offhand_is_visible_for_this_character = yes }
+			set_character_flag = csh_artifact_filter_no_offhand
 		}
 		if = {
 			limit = { csh_artifact_filter_ring_is_visible_for_this_character = yes }
@@ -121,6 +131,17 @@ csh_invert_this_characters_artifact_filters = {
 		}
 		
 		if = {
+			limit = { csh_artifact_filter_destroyed_on_death_is_visible_for_this_character = yes }
+			if = {
+				limit = { has_character_flag = csh_artifact_filter_no_destroyed_on_death }
+				clr_character_flag = csh_artifact_filter_no_destroyed_on_death
+			}
+			else = {
+				set_character_flag = csh_artifact_filter_no_destroyed_on_death
+			}
+		}
+		
+		if = {
 			limit = { csh_artifact_filter_mount_or_pet_is_visible_for_this_character = yes }
 			if = {
 				limit = { has_character_flag = csh_artifact_filter_no_mounts_or_pets }
@@ -139,6 +160,17 @@ csh_invert_this_characters_artifact_filters = {
 			}
 			else = {
 				set_character_flag = csh_artifact_filter_no_necklaces
+			}
+		}
+		
+		if = {
+			limit = { csh_artifact_filter_offhand_is_visible_for_this_character = yes }
+			if = {
+				limit = { has_character_flag = csh_artifact_filter_no_offhand }
+				clr_character_flag = csh_artifact_filter_no_offhand
+			}
+			else = {
+				set_character_flag = csh_artifact_filter_no_offhand
 			}
 		}
 		

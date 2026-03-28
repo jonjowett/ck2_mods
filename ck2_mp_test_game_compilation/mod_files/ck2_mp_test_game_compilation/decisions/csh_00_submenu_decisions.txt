@@ -4,6 +4,11 @@ decisions = {
 		potential = {
 			NOT = { has_character_flag = csh_submenu_is_open }
 			csh_another_mod_wants_to_suppress_this_decision = no
+			# If the mod's features are disabled, only the admin can open the menu (clutter suppression for MP)
+			OR = {
+				csh_this_character_can_take_admin_actions = yes
+				NOT = { has_global_flag = csh_updates_disabled }
+			}
 		}
 		allow = { always = yes }
 		effect = { hidden_tooltip = { set_character_flag = csh_submenu_is_open } }
