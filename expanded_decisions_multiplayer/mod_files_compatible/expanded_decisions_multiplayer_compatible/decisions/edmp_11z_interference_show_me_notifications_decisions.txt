@@ -1,0 +1,35 @@
+# Audax Validator EnableCommentMetadata
+decisions = {
+	edmp_interference_debug_include_me_in_notifications = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			has_character_flag = edmp_interference_show
+			NOT = { has_character_flag = edmp_interference_debug_include_sender_in_notifications }
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_debug_include_me_in_notifications_tt
+				set_character_flag = edmp_interference_debug_include_sender_in_notifications
+			}
+		}
+	}
+	edmp_interference_debug_exclude_me_from_notifications = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			has_character_flag = edmp_interference_show
+			has_character_flag = edmp_interference_debug_include_sender_in_notifications
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_debug_exclude_me_from_notifications_tt
+				clr_character_flag = edmp_interference_debug_include_sender_in_notifications
+			}
+		}
+	}
+}
