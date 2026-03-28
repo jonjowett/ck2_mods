@@ -127,7 +127,6 @@ targetted_decisions = {
 			}
 		}
 		third_party_allow = { ROOT_FROMFROM = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } } # Could be considered negative for the tributary (eg. if they're relying on their suzerain for protection), because it may be very difficult to re-establish the tributary relationship.
-		third_party_score = { edmp_interference_third_party_scores_independent_rulers_preferring_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
@@ -209,7 +208,10 @@ targetted_decisions = {
 			}
 		}
 		third_party_allow = { always = yes }
-		third_party_score = { edmp_interference_third_party_scores_independent_rulers_preferring_player_then_nearby_ai_then_tier = yes }
+		third_party_score = {
+			factor = 1
+			edmp_interference_third_party_scores_independent_rulers_preferring_player_then_nearby_ai_then_tier = yes
+		}
 		effect = {
 			custom_tooltip = {
 				text = edmp_interference_force_tributary_tt
@@ -252,7 +254,10 @@ targetted_decisions = {
 			}
 		}
 		third_party_allow = { always = yes }
-		third_party_score = { edmp_interference_third_party_scores_independent_rulers_preferring_player_then_nearby_ai_then_tier = yes }
+		third_party_score = {
+			factor = 1
+			edmp_interference_third_party_scores_independent_rulers_preferring_player_then_nearby_ai_then_tier = yes
+		}
 		effect = {
 			# NB: Reuse the tributary notification screen, since it's very VERY similar - we only need loc changes.
 			hidden_tooltip = {
