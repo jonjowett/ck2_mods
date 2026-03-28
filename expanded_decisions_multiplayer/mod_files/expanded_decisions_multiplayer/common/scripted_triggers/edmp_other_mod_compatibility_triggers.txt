@@ -2,14 +2,26 @@
 
 edmp_another_mod_wants_to_suppress_this_decision = {
 	
-	# PDXRPTG & ED:PDXRPTG submod
-	# Audax Validator "." Ignore_NEXT
-	AND = {
-		edmp_ek_mod_is_active = yes
-		NOT = {
-			# Audax Validator "." Ignore_NEXT
-			has_submenu_open = no
+	OR = {
+		
+		# PDXRPTG & ED:PDXRPTG submod
+		AND = {
+			edmp_ek_mod_is_active = yes
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				has_submenu_open = no
+			}
 		}
+		
+		# Faerun
+		AND = {
+			edmp_faerun_mod_is_active = yes
+			# not_casting = yes means we are in the main intrigue menu
+			# not_casting = no  means we are in a submenu (and we therefore want to suppress all other decisions)
+			# Audax Validator "." Ignore_NEXT
+			not_casting = no
+		}
+		
 	}
 	
 }
@@ -36,6 +48,10 @@ edmp_ek_mod_is_active = {
 		has_global_flag = house_veloth_extinct
 		has_global_flag = house_sul_extinct
 	}
+}
+
+edmp_faerun_mod_is_active = {
+	has_global_flag = faerun_started # Should always be true for every faerun game, should never be true for others
 }
 
 edmp_ed_pdxrptg_mod_is_active = {
