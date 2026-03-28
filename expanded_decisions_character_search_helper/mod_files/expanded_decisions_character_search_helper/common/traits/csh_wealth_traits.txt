@@ -1,7 +1,12 @@
+# For visibility:
+#  --- FROM = The character with the trait
+#  --- ROOT = The character looking at FROM
+
 csh_wealth_0 = {
 	customizer = no
 	random = no
 	is_visible = {
+		ROOT = { csh_this_character_doesnt_want_traits_to_be_hidden_for_themselves_only = yes }
 		FROM = { is_alive = yes }
 	}
 	opposites = {
@@ -17,6 +22,7 @@ csh_wealth_1 = {
 	customizer = no
 	random = no
 	is_visible = {
+		ROOT = { csh_this_character_doesnt_want_traits_to_be_hidden_for_themselves_only = yes }
 		FROM = { is_alive = yes }
 	}
 	opposites = {
@@ -32,6 +38,7 @@ csh_wealth_2 = {
 	customizer = no
 	random = no
 	is_visible = {
+		ROOT = { csh_this_character_doesnt_want_traits_to_be_hidden_for_themselves_only = yes }
 		FROM = { is_alive = yes }
 	}
 	opposites = {
@@ -47,6 +54,7 @@ csh_wealth_3 = {
 	customizer = no
 	random = no
 	is_visible = {
+		ROOT = { csh_this_character_doesnt_want_traits_to_be_hidden_for_themselves_only = yes }
 		FROM = { is_alive = yes }
 	}
 	opposites = {
@@ -62,6 +70,7 @@ csh_wealth_4 = {
 	customizer = no
 	random = no
 	is_visible = {
+		ROOT = { csh_this_character_doesnt_want_traits_to_be_hidden_for_themselves_only = yes }
 		FROM = { is_alive = yes }
 	}
 	opposites = {
@@ -77,6 +86,7 @@ csh_wealth_5 = {
 	customizer = no
 	random = no
 	is_visible = {
+		ROOT = { csh_this_character_doesnt_want_traits_to_be_hidden_for_themselves_only = yes }
 		FROM = { is_alive = yes }
 	}
 	opposites = {

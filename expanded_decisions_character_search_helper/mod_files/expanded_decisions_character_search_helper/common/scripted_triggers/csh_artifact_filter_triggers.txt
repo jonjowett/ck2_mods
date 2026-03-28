@@ -16,12 +16,20 @@ csh_this_artifact_is_not_filtered_out_by_root = {
 		csh_this_artifact_is_clutter = no
 	}
 	OR = {
+		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_destroyed_on_death } }
+		csh_this_artifact_is_destroyed_on_death = no
+	}
+	OR = {
 		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_mounts_or_pets } }
 		csh_this_artifact_is_mount_or_pet = no
 	}
 	OR = {
 		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_necklaces } }
 		csh_this_artifact_is_necklace = no
+	}
+	OR = {
+		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_offhand } }
+		csh_this_artifact_is_offhand = no
 	}
 	OR = {
 		ROOT = { NOT = { has_character_flag = csh_artifact_filter_no_rings } }
@@ -37,6 +45,7 @@ csh_this_artifact_is_not_filtered_out_by_root = {
 		csh_this_artifact_is_armor = yes
 		csh_this_artifact_is_book = yes
 		csh_this_artifact_is_clutter = yes
+		csh_this_artifact_is_destroyed_on_death = yes
 		csh_this_artifact_is_mount_or_pet = yes
 		csh_this_artifact_is_necklace = yes
 		csh_this_artifact_is_ring = yes
@@ -46,6 +55,8 @@ csh_this_artifact_is_not_filtered_out_by_root = {
 
 csh_this_artifact_is_armor = {
 	has_artifact_flag = armor
+	# Faerun
+	has_artifact_flag = armor_set
 }
 
 csh_this_artifact_is_book = {
@@ -58,14 +69,29 @@ csh_this_artifact_is_book = {
 }
 
 csh_this_artifact_is_clutter = {
+	# PDXRPTG (EK + VIET)
 	has_artifact_flag = VIET_clutter_flag
+}
+
+csh_this_artifact_is_destroyed_on_death = {
+	# Faerun
+	has_artifact_flag = destroyed_on_death
 }
 
 csh_this_artifact_is_mount_or_pet = {
 	OR = {
+		# EK
 		has_artifact_flag = mount
 		has_artifact_flag = pet
+		# Faerun
+		has_artifact_flag = animal_companion
+		has_artifact_flag = familiar
 	}
+}
+
+csh_this_artifact_is_offhand = {
+	# Faerun
+	has_artifact_flag = offhand
 }
 
 csh_this_artifact_is_necklace = {

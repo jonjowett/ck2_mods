@@ -63,4 +63,46 @@ decisions = {
 	
 	
 	
+	csh_disable_traits_for_me_only = {
+		ai = no
+		potential = {
+			csh_main_decisions_are_visible_for_this_character = yes
+			NOT = { has_character_modifier = csh_disable_traits_for_me_only_modifier }
+			# The decision to hide the traits is only visible in multiplayer
+			multiplayer = yes
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = csh_disable_traits_for_me_only_tt
+				add_character_modifier = {
+					name     = csh_disable_traits_for_me_only_modifier
+					duration = -1
+					hidden   = yes
+					stacking = no
+					inherit  = yes
+				}
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	csh_enable_traits_for_me_only = {
+		ai = no
+		potential = {
+			csh_main_decisions_are_visible_for_this_character = yes
+			has_character_modifier = csh_disable_traits_for_me_only_modifier
+			# The decision to show the traits is visible in both MP and SP (so there's a way for players in SP to reverse a decision made in MP)
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = csh_enable_traits_for_me_only_tt
+				remove_character_modifier = csh_disable_traits_for_me_only_modifier
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	
+	
+	
 }

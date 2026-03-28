@@ -8,6 +8,7 @@ decisions = {
 		ai = no
 		potential = {
 			csh_main_decisions_are_visible_for_this_character = yes
+			csh_this_character_doesnt_want_traits_to_be_hidden_for_themselves_only = yes
 			NOT = { has_global_flag = csh_updates_disabled }
 			NOT = { has_character_flag = csh_show_artifact_filters }
 		}
@@ -21,6 +22,7 @@ decisions = {
 		ai = no
 		potential = {
 			csh_artifact_filters_are_visible_for_this_character = yes
+			csh_this_character_doesnt_want_traits_to_be_hidden_for_themselves_only = yes
 		}
 		allow = { always = yes }
 		effect = {
@@ -118,6 +120,36 @@ decisions = {
 	# As a general rule, these decisions are ONLY visible if the character has at least one of the relevant type of artifact
 	#  --- This means we can offer full support for all mods, with very little additional effort!
 	
+	
+	
+	# Localisation: "Animals" (we want this to appear in alphabetical order in the list of decisions)
+	csh_artifact_filter_toggle_no_mounts_or_pets_on = {
+		ai = no
+		potential = {
+			csh_artifact_filter_mount_or_pet_is_visible_for_this_character = yes
+			NOT = { has_character_flag = csh_artifact_filter_no_mounts_or_pets }
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { set_character_flag = csh_artifact_filter_no_mounts_or_pets }
+			custom_tooltip = { text = csh_artifact_filter_notes_tt }
+		}
+	}
+	csh_artifact_filter_toggle_no_mounts_or_pets_off = {
+		ai = no
+		potential = {
+			csh_artifact_filter_mount_or_pet_is_visible_for_this_character = yes
+			has_character_flag = csh_artifact_filter_no_mounts_or_pets
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { clr_character_flag = csh_artifact_filter_no_mounts_or_pets }
+			custom_tooltip = { text = csh_artifact_filter_notes_tt }
+		}
+	}
+	
+	
+	
 	csh_artifact_filter_toggle_no_armor_on = {
 		ai = no
 		potential = {
@@ -197,31 +229,6 @@ decisions = {
 		}
 	}
 	
-	csh_artifact_filter_toggle_no_mounts_or_pets_on = {
-		ai = no
-		potential = {
-			csh_artifact_filter_mount_or_pet_is_visible_for_this_character = yes
-			NOT = { has_character_flag = csh_artifact_filter_no_mounts_or_pets }
-		}
-		allow = { always = yes }
-		effect = {
-			hidden_tooltip = { set_character_flag = csh_artifact_filter_no_mounts_or_pets }
-			custom_tooltip = { text = csh_artifact_filter_notes_tt }
-		}
-	}
-	csh_artifact_filter_toggle_no_mounts_or_pets_off = {
-		ai = no
-		potential = {
-			csh_artifact_filter_mount_or_pet_is_visible_for_this_character = yes
-			has_character_flag = csh_artifact_filter_no_mounts_or_pets
-		}
-		allow = { always = yes }
-		effect = {
-			hidden_tooltip = { clr_character_flag = csh_artifact_filter_no_mounts_or_pets }
-			custom_tooltip = { text = csh_artifact_filter_notes_tt }
-		}
-	}
-	
 	
 	
 	csh_artifact_filter_toggle_no_necklaces_on = {
@@ -245,6 +252,33 @@ decisions = {
 		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { clr_character_flag = csh_artifact_filter_no_necklaces }
+			custom_tooltip = { text = csh_artifact_filter_notes_tt }
+		}
+	}
+	
+	
+	
+	csh_artifact_filter_toggle_no_offhand_on = {
+		ai = no
+		potential = {
+			csh_artifact_filter_offhand_is_visible_for_this_character = yes
+			NOT = { has_character_flag = csh_artifact_filter_no_offhand }
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { set_character_flag = csh_artifact_filter_no_offhand }
+			custom_tooltip = { text = csh_artifact_filter_notes_tt }
+		}
+	}
+	csh_artifact_filter_toggle_no_offhand_off = {
+		ai = no
+		potential = {
+			csh_artifact_filter_offhand_is_visible_for_this_character = yes
+			has_character_flag = csh_artifact_filter_no_offhand
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { clr_character_flag = csh_artifact_filter_no_offhand }
 			custom_tooltip = { text = csh_artifact_filter_notes_tt }
 		}
 	}
@@ -326,6 +360,34 @@ decisions = {
 		allow = { always = yes }
 		effect = {
 			hidden_tooltip = { clr_character_flag = csh_artifact_filter_no_other }
+			custom_tooltip = { text = csh_artifact_filter_notes_tt }
+		}
+	}
+	
+	
+	
+	# Localisation: "Uninheritable" (special category, we want this to be at the end of the list)
+	csh_artifact_filter_toggle_no_destroyed_on_death_on = {
+		ai = no
+		potential = {
+			csh_artifact_filter_destroyed_on_death_is_visible_for_this_character = yes
+			NOT = { has_character_flag = csh_artifact_filter_no_destroyed_on_death }
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { set_character_flag = csh_artifact_filter_no_destroyed_on_death }
+			custom_tooltip = { text = csh_artifact_filter_notes_tt }
+		}
+	}
+	csh_artifact_filter_toggle_no_destroyed_on_death_off = {
+		ai = no
+		potential = {
+			csh_artifact_filter_destroyed_on_death_is_visible_for_this_character = yes
+			has_character_flag = csh_artifact_filter_no_destroyed_on_death
+		}
+		allow = { always = yes }
+		effect = {
+			hidden_tooltip = { clr_character_flag = csh_artifact_filter_no_destroyed_on_death }
 			custom_tooltip = { text = csh_artifact_filter_notes_tt }
 		}
 	}
