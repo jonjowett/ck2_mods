@@ -29,6 +29,10 @@ edmp_interference_cancel_tributary_on_tributary;§P(ED:MP:Intf)§! End Tribute;;;;
 edmp_interference_cancel_tributary_on_tributary_desc;[Root.GetTitledFirstName] stops paying tribute to [Root.GetHerHis] suzerain.;;;;;;;;;;;;;x
 edmp_interference_force_tributary;§P(ED:MP:Intf)§! Force Tributary;;;;;;;;;;;;;x
 edmp_interference_force_tributary_desc;Force [Root.GetTitledFirstName] to be a tributary of another independent ruler.;;;;;;;;;;;;;x
+edmp_interference_force_vassal;§P(ED:MP:Intf)§! Force Vassal;;;;;;;;;;;;;x
+edmp_interference_force_vassal_desc;Force [Root.GetTitledFirstName] to be a vassal of another independent ruler.;;;;;;;;;;;;;x
+edmp_interference_force_independent;§P(ED:MP:Intf)§! Force Independence;;;;;;;;;;;;;x
+edmp_interference_force_independent_desc;Force [Root.GetTitledFirstName] to be independent.;;;;;;;;;;;;;x
 edmp_interference_add_bilateral_10_year_truce_with_third_party;§P(ED:MP:Intf)§! Create Truce;;;;;;;;;;;;;x
 edmp_interference_add_bilateral_10_year_truce_with_third_party_desc;Create a §Ybilateral§! 10-year truce between [Root.GetTitledFirstName] and another character.;;;;;;;;;;;;;x
 edmp_interference_break_truce_with_third_party;§P(ED:MP:Intf)§! Break Truce;;;;;;;;;;;;;x
@@ -223,7 +227,7 @@ edmp_interference_force_tributary_tt;An §Yevent§! will occur, in which you can s
 edmp_interference_force_tributary_from_doesnt_have_event_open_tt;[From.GetTitledFirstName] does NOT currently have the "Choose Tributary Type" event open;;;;;;;;;;;;;x
 edmp_interference_force_tributary_from_has_had_event_open_6_months_tt;[From.GetTitledFirstName] has had the "Choose Tributary Type" event open for 6 months;;;;;;;;;;;;;x
 edmp_ft_1000_title;(ED:MP) Choose Tributary Type;;;;;;;;;;;;;x
-edmp_ft_1000_desc;You have chosen to force the following tributary relationship:\n - Tributary: [edmp_interference_tributary_action_tributary.GetBestName]\n - Suzerain: [edmp_interference_tributary_action_suzerain.GetBestName]\n\nCK2 supports many different types of tributary, please use the options below to specify which one exactly.\n - Base game types are always shown (just in case)\n - Some modded types are supported\n.....(These are hardcoded, contact ED:MP dev to add others.);;;;;;;;;;;;;x
+edmp_ft_1000_desc;You have chosen to force the following tributary relationship:\n - Tributary: [edmp_interference_tributary_action_tributary.GetBestName]\n - Suzerain: [edmp_interference_tributary_action_suzerain.GetBestName]\n\nCK2 supports many different types of tributary, so please use the options below to specify which one exactly.\n - Base game types are always shown (just in case)\n - Some modded types are supported (only shown if relevant)\n(These are hardcoded, contact the ED:MP dev to add others.);;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_error_exit;!!!UNEXPECTED ERROR!!! Exit;;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_p1_default;Base Game: Default / "Extorted";;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_p1_permanent;Base Game: Permanent;;;;;;;;;;;;;x
@@ -233,5 +237,5 @@ edmp_ft_1000_evtopt_p3_ed_t_p;ED:T Protectorate;;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_next;Next;;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_loop_restart;Return to the start;;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_loop_exit;Exit;;;;;;;;;;;;;x
-edmp_ft_warning_base_game_tributary_type_does_not_exist_tt;§b.§!\n§RWARNING! There are currently no tributaries of this type!§!\n- It is impossible to directly detect whether this tributary type is valid and intended for your current setup.\n§b.....§g(So we check indirectly by looking for any currently-existing examples.)§!\n- Since none have been detected, this tributary type MAY not be supported by your mod list.\n§b.....§g(Counterexample: In the base game, it's common for there to be no offmap tributaries.)§!\n- If this tributary type is in fact unsupported, forcing it may have unexpected results!\n§b.....§g(Anything from "nothing happens" to save corruption and/or crash to desktop.)§!\n - If you are uncertain, it would be wise to §Ytest this option in single-player mode§!!\n§b.§!;;;;;;;;;;;;;x
+edmp_ft_warning_base_game_tributary_type_does_not_exist_tt;§b.§!\n§RWARNING! There are currently no tributaries of this type!§!\n- It is impossible to directly detect whether this tributary type is valid and intended for your current setup.\n§b.....§g(So we check indirectly by looking for any currently-existing examples.)§!\n- Since none have been detected, this tributary type MAY NOT be supported by your mod list.\n§b.....§g(Counterexample: In the base game, it's common for there to be no offmap tributaries.)§!\n- If this tributary type is in fact unsupported, forcing it may have unexpected results!\n§b.....§g(Anything from "nothing happens" to save corruption and/or crash to desktop.)§!\n- If you are uncertain, it would be wise to §Ytest this option in single-player mode§!!\n§b.§!;;;;;;;;;;;;;x
 edmp_ft_1000_evtopt_loop_exit_tt;§YNothing will change§!;;;;;;;;;;;;;x

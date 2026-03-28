@@ -57,6 +57,14 @@ character_event = {
 		trigger = { has_global_flag = edmp_interference_tributary_forced }
 		text                       = edmp_ifn_2001_desc_tributary_forced
 	}
+	desc = {
+		trigger = { has_global_flag = edmp_interference_tributary_vassal_forced }
+		text                       = edmp_ifn_2001_desc_tributary_vassal_forced
+	}
+	desc = {
+		trigger = { has_global_flag = edmp_interference_tributary_independence_forced }
+		text                       = edmp_ifn_2001_desc_tributary_independence_forced
+	}
 	
 	# ROOT is suzerain
 	option = {
@@ -124,6 +132,8 @@ character_event = {
 			
 			clr_global_flag    = edmp_interference_tributary_cancelled
 			clr_global_flag    = edmp_interference_tributary_forced
+			clr_global_flag    = edmp_interference_tributary_vassal_forced
+			clr_global_flag    = edmp_interference_tributary_independence_forced
 			
 		}
 	}
