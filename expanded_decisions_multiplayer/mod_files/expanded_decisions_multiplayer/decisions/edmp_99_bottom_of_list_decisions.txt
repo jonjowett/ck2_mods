@@ -1,0 +1,15 @@
+decisions = {
+	
+	edmp_admin_submenu_bottom = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes
+			# ONLY show if the admin submenu is open, and if the submenu is NOT isolated
+			edmp_currently_running_a_mod_which_puts_edmp_decisions_in_an_isolated_submenu = no
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow  = { always = no }
+		effect = { }
+	}
+	
+}
