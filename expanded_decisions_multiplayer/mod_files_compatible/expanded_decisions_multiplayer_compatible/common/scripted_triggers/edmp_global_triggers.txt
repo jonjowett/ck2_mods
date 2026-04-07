@@ -95,13 +95,14 @@ edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = {
 	}
 }
 
+# NB: Pause/unpause admin helpers uses a modifier on province 1, instead of a global flag,
+#        because playtesting showed that the global flag is often not propagated to other players. (???!!!)
 edmp_playerflag_adminhelpers_are_paused = {
 	custom_tooltip = {
 		text = edmp_playerflag_adminhelpers_are_paused_tt
-		has_global_flag = edmp_admin_helper_pause
+		1 = { has_province_modifier = edmp_admin_helpers_are_paused }
 	}
 }
-
 edmp_playerflag_adminhelpers_are_not_paused = {
 	custom_tooltip = {
 		text = edmp_playerflag_adminhelpers_are_not_paused_tt

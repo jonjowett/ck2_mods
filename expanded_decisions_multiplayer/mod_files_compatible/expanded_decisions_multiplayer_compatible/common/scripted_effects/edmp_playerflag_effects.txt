@@ -71,17 +71,26 @@ edmp_playerflag_remove_adminhelper_flag_from_this_character = {
 
 
 
-
+# NB: Pause/unpause admin helpers uses a modifier on province 1, instead of a global flag,
+#        because playtesting showed that the global flag is often not propagated to other players. (???!!!)
 edmp_playerflag_adminhelpers_pause_effect = {
 	custom_tooltip = {
 		text = edmp_playerflag_adminhelpers_pause_effect_tt
-		set_global_flag = edmp_admin_helper_pause
+		1 = {
+			add_province_modifier = {
+				name = edmp_admin_helpers_are_paused
+				duration = -1
+				# Temporarily visible to help with debugging
+				#hidden = yes
+				stacking = no
+			}
+		}
 	}
 }
 edmp_playerflag_adminhelpers_unpause_effect = {
 	custom_tooltip = {
 		text = edmp_playerflag_adminhelpers_unpause_effect_tt
-		clr_global_flag = edmp_admin_helper_pause
+		1 = { remove_province_modifier = edmp_admin_helpers_are_paused }
 	}
 }
 
