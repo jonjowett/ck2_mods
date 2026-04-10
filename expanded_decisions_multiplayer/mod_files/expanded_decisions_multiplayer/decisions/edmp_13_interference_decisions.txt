@@ -986,6 +986,7 @@ targetted_decisions = {
 		allow = {
 			age >= 16
 			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT      = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Potentially-negative for the character being made older, because this could kill them if it was repeated multiple times quickly
 		}
 		effect = {
 			hidden_tooltip = {
@@ -1003,7 +1004,7 @@ targetted_decisions = {
 		}
 	}
 	
-	edmp_interference_change_this_characters_sex = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+	edmp_interference_change_this_characters_sex = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
@@ -1016,6 +1017,7 @@ targetted_decisions = {
 			is_consort = no
 			is_senior_consort_party = no
 			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT      = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Potentially-negative because players may not want to have their sex changed, and continually switching it back might be rather annoying
 		}
 		effect = {
 			hidden_tooltip = {
@@ -1042,7 +1044,6 @@ targetted_decisions = {
 		potential = {
 			trait = bastard
 			is_alive = yes
-			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
 		}
 		allow = {
 			custom_tooltip = {
@@ -1052,6 +1053,7 @@ targetted_decisions = {
 					mother_even_if_dead = { dynasty = ROOT }
 				}
 			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
 		}
 		effect = {
 			hidden_tooltip = {
