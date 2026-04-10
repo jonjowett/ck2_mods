@@ -1726,7 +1726,7 @@ targetted_decisions = {
 			has_character_flag = edmp_interference_show
 			edmp_this_character_can_see_admin_helper_actions = yes
 		}
-		potential = { is_playable = yes }
+		potential = { edmp_this_character_is_potentially_playable = yes }
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
@@ -1750,7 +1750,7 @@ targetted_decisions = {
 			has_character_flag = edmp_interference_show
 			edmp_this_character_can_see_admin_helper_actions = yes
 		}
-		potential = { is_playable = yes }
+		potential = { edmp_this_character_is_potentially_playable = yes }
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
@@ -1774,7 +1774,7 @@ targetted_decisions = {
 			has_character_flag = edmp_interference_show
 			edmp_this_character_can_see_admin_helper_actions = yes
 		}
-		potential = { is_playable = yes }
+		potential = { edmp_this_character_is_potentially_playable = yes }
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
@@ -1798,7 +1798,7 @@ targetted_decisions = {
 			has_character_flag = edmp_interference_show
 			edmp_this_character_can_see_admin_helper_actions = yes
 		}
-		potential = { is_playable = yes }
+		potential = { edmp_this_character_is_potentially_playable = yes }
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
@@ -1823,7 +1823,7 @@ targetted_decisions = {
 			has_character_flag = edmp_interference_show
 			edmp_this_character_can_see_admin_helper_actions = yes
 		}
-		potential = { is_playable = yes }
+		potential = { edmp_this_character_is_potentially_playable = yes }
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
@@ -1848,7 +1848,7 @@ targetted_decisions = {
 			has_character_flag = edmp_interference_show
 			edmp_this_character_can_see_admin_helper_actions = yes
 		}
-		potential = { is_playable = yes }
+		potential = { edmp_this_character_is_potentially_playable = yes }
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
@@ -1889,7 +1889,7 @@ title_decisions = {
 				text = edmp_interference_there_is_a_player_who_does_not_hold_this_title_tt
 				OR = {
 					holder_scope = {
-						any_playable_ruler = {
+						any_character = {
 							edmp_this_character_is_a_current_or_absent_human_player = yes
 							NOT = { character = PREV }
 						}
@@ -1951,7 +1951,7 @@ title_decisions = {
 			edmp_interference_this_is_not_some_kind_of_temporary_title = yes
 			custom_tooltip = {
 				text = edmp_interference_there_is_a_player_who_does_not_hold_or_claim_this_title_tt
-				any_playable_ruler = {
+				any_character = {
 					edmp_this_character_is_a_current_or_absent_human_player = yes
 					NOT = { has_strong_claim = ROOT }
 					ROOT = {

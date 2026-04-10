@@ -165,16 +165,8 @@ character_event = {
 		show_portrait = ROOT # Otherwise, ROOT's portrait won't be shown
 		custom_tooltip = {
 			text = edmp_auto_refill_levy_3001_evtopt_refill_player_levies_tt
-			any_playable_ruler = {
+			any_character = {
 				limit = { edmp_this_character_is_a_current_or_absent_human_player = yes }
-				any_demesne_title = {
-					limit = { lower_real_tier_than = DUKE }
-					refill_holding_levy = yes
-				}
-			}
-			# any_playable_ruler always excludes ROOT, and they are playable by definition (because they are a human).
-			# So, we ALSO need to do the same thing for ROOT.
-			ROOT = {
 				any_demesne_title = {
 					limit = { lower_real_tier_than = DUKE }
 					refill_holding_levy = yes
@@ -183,7 +175,7 @@ character_event = {
 		}
 		if = {
 			limit = {
-				any_playable_ruler = {
+				any_character = {
 					edmp_this_character_is_a_current_or_absent_human_player = yes
 					count = 9
 				}

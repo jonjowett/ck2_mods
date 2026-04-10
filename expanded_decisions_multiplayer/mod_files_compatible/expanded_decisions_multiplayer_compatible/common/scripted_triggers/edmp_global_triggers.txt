@@ -111,9 +111,24 @@ edmp_playerflag_adminhelpers_are_not_paused = {
 }
 
 edmp_this_character_could_be_a_human_player = {
-	is_playable = yes
+	edmp_this_character_is_potentially_playable = yes
 	OR = {
 		multiplayer = no
 		ai = no
+	}
+}
+
+edmp_this_character_is_potentially_playable = {
+	custom_tooltip = {
+		text = edmp_this_character_is_potentially_playable_tt
+		OR = {
+			is_patrician = yes # Patricians are always playable
+			AND = {
+				higher_real_tier_than = BARON   # Unless you're a patrician, you must be count+
+				is_landed = yes                 # I *think* the only way you can play as unlanded is via a mod which adds some kind of invisible "landed" title as a workaround
+				is_republic = no                # Republics are hardcoded to be unplayable (except for merchant republics, ie. patricians, and any fake-republics modded-into the feudal group)
+				is_theocracy = no               # Theocracies are hardocded to be unplayable (except for fake-theocracies modded into the feudal group)
+			}
+		}
 	}
 }
