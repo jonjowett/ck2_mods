@@ -36,8 +36,8 @@ targetted_decisions = {
 	}
 	
 	edmp_interference_character_switch = {
-		filter = all
-		third_party_filter = all
+		filter = all                          # No-one can switch to the decision-taker's character, because they are currently a human
+		third_party_filter = all_including_me # Decision taker can say that they are the one that wants to switch
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -47,17 +47,33 @@ targetted_decisions = {
 			edmp_this_character_is_potentially_playable = yes
 		}
 		allow = {
-			trigger_if = {
-				limit = { ROOT_FROM = { edmp_this_character_can_take_admin_actions = yes } }
-				# Admins can switch anyone anywhere anytime (except "on top of" another current player)
-				ROOT      = { ai = yes }
-				ROOT_FROM = { edmp_this_character_can_take_admin_actions = yes }
+			ROOT = {
+				trigger_if = {
+					limit = { ROOT_FROM = { edmp_this_character_can_take_admin_actions = yes } }
+					# Admins can switch anyone anywhere anytime (except "on top of" another current player)
+					ai = yes
+				}
+				trigger_else = {
+					# Admin helpers can only switch players to characters who are NOT AI and NOT flagged as absent players.
+					edmp_this_character_is_not_a_current_or_absent_human_player = yes
+				}
+				# For consistency, ROOT must NEVER be the target of an offer under consideration by anyone
+				custom_tooltip = {
+					text = edmp_interference_character_switch_this_character_is_not_target_of_offer_still_under_consideration_tt
+					OR = {
+						NOT = { has_character_flag  = edmp_interference_character_switch_offer_target }
+						had_character_flag = { flag = edmp_interference_character_switch_offer_target months >= 6 }
+					}
+				}
 			}
-			trigger_else = {
-				# Admin helpers can only switch players to characters who are NOT AI and NOT flagged as absent players.
-				# Further, admin helpers can only have 1 offer under consideration at once.
-				ROOT      = { edmp_this_character_is_not_a_current_or_absent_human_player = yes }
-				ROOT_FROM = {
+			ROOT_FROM = {
+				trigger_if = {
+					limit = { edmp_this_character_can_take_admin_actions = yes }
+					# Admins can send multiple offers at once
+					edmp_this_character_can_take_admin_actions = yes
+				}
+				trigger_else = {
+					# Admin helpers can only send one offer at a time
 					edmp_this_character_can_take_admin_helper_actions = yes
 					custom_tooltip = {
 						text = edmp_interference_character_switch_this_character_has_no_sent_offer_still_under_consideration_tt
@@ -67,14 +83,22 @@ targetted_decisions = {
 						}
 					}
 				}
+				# For consistency, FROM can NEVER send an offer while they're considering their own migration
+				custom_tooltip = {
+					text = edmp_interference_character_switch_this_character_is_not_considering_another_offer_tt
+					OR = {
+						NOT = { has_character_flag = edmp_interference_character_switch_offer_considering }
+						had_character_flag = { flag = edmp_interference_character_switch_offer_considering months >= 6 }
+					}
+				}
 			}
 		}
-		third_party_potential = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+		third_party_potential = { ROOT_FROMFROM = { edmp_this_character_is_a_current_or_absent_human_player = yes } }
 		third_party_allow = {
 			# Must not already be considering another character switch offer (even from admin - otherwise this could get VERY confusing for the recipient)
-			custom_tooltip = {
-				text = edmp_interference_character_switch_fromfrom_is_not_considering_another_offer_tt
-				ROOT_FROMFROM = {
+			ROOT_FROMFROM = {
+				custom_tooltip = {
+					text = edmp_interference_character_switch_this_character_is_not_considering_another_offer_tt
 					OR = {
 						NOT = { has_character_flag = edmp_interference_character_switch_offer_considering }
 						had_character_flag = { flag = edmp_interference_character_switch_offer_considering months >= 6 }
@@ -91,6 +115,7 @@ targetted_decisions = {
 				text = edmp_interference_character_switch_selected_player_receives_an_event_asking_for_confirmation_tt
 				ROOT = {
 					save_event_target_as = edmp_interference_aiplayer_ai
+					set_character_flag   = edmp_interference_character_switch_offer_target
 				}
 				ROOT_FROM = {
 					save_event_target_as = edmp_interference_decision_taker
@@ -99,7 +124,12 @@ targetted_decisions = {
 				ROOT_FROMFROM = {
 					save_event_target_as = edmp_interference_aiplayer_player
 					set_character_flag   = edmp_interference_character_switch_offer_considering
-					character_event      = { id = edmp_cs.1000 }
+				}
+				# Decision-taker sends the event to the player
+				event_target:edmp_interference_decision_taker = {
+					event_target:edmp_interference_aiplayer_player = {
+						character_event = { id = edmp_cs.1000 }
+					}
 				}
 			}
 			if = {

@@ -263,14 +263,36 @@ character_event = {
 	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	
 	option = {
-		trigger = { event_target:edmp_interference_aiplayer_ai = { character = ROOT } }
+		trigger = {
+			OR = {
+				AND = {
+					event_target:edmp_interference_aiplayer_ai     = { character = ROOT }
+					NOT = { has_global_flag = edmp_interference_aiplayer_reverse_normal_flavour }
+				}
+				AND = {
+					event_target:edmp_interference_aiplayer_player = { character = ROOT }
+					has_global_flag = edmp_interference_aiplayer_reverse_normal_flavour
+				}
+			}
+		}
 		show_portrait = event_target:edmp_interference_aiplayer_player
 		tooltip_info = yes
 		name = edmp_ifn_evtopt_curses
 	}
 	
 	option = {
-		trigger = { event_target:edmp_interference_aiplayer_player = { character = ROOT } }
+		trigger = {
+			OR = {
+				AND = {
+					event_target:edmp_interference_aiplayer_ai     = { character = ROOT }
+					has_global_flag = edmp_interference_aiplayer_reverse_normal_flavour
+				}
+				AND = {
+					event_target:edmp_interference_aiplayer_player = { character = ROOT }
+					NOT = { has_global_flag = edmp_interference_aiplayer_reverse_normal_flavour }
+				}
+			}
+		}
 		show_portrait = event_target:edmp_interference_aiplayer_ai
 		tooltip_info = yes
 		name = edmp_ifn_evtopt_excellent
@@ -294,6 +316,8 @@ character_event = {
 			clear_event_target = edmp_interference_aiplayer_player
 			clear_event_target = edmp_interference_aiplayer_ai
 			clear_event_target = edmp_interference_decision_taker
+			
+			clr_global_flag    = edmp_interference_aiplayer_reverse_normal_flavour
 			
 			clr_global_flag    = edmp_interference_aiplayer_imprison
 			clr_global_flag    = edmp_interference_aiplayer_favor_cancelled_ai
