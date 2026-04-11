@@ -8,18 +8,36 @@ namespace = edmp_cs
 #  --- edmp_interference_aiplayer_ai     = potential character switch for current player & recipient of this event (edmp_interference_aiplayer_player)
 
 # For decision safety, the following character flags should be set before calling edmp_cs.1000:
-#  --- edmp_interference_considering_switch_offer , on edmp_interference_aiplayer_player
-#  --- edmp_interference_sent_switch_offer                   
+#  --- edmp_interference_character_switch_offer_sent        , on edmp_interference_decision_taker
+#  --- edmp_interference_character_switch_offer_considering , on edmp_interference_aiplayer_player
+#  --- edmp_interference_character_switch_offer_target      , on edmp_interference_aiplayer_ai
 
+# ROOT = edmp_interference_aiplayer_player
+# FROM = DO NOT TRY TO USE! PROBABLY INCONSISTENT!
 character_event = {
 	id = edmp_cs.1000
 	is_triggered_only = yes
 	hide_window = yes
 	immediate = {
 		# Final validation, to double-check that everything seems reasonable
+		log = "edmp_cs.1000 : edmp_interference_decision_taker  = [edmp_interference_decision_taker.GetID] [edmp_interference_decision_taker.GetTitledFirstName]"
+		log = "edmp_cs.1000 : edmp_interference_aiplayer_player = [edmp_interference_aiplayer_player.GetID] [edmp_interference_aiplayer_player.GetTitledFirstName]"
+		log = "edmp_cs.1000 : ROOT                              = [Root.GetID] [Root.GetTitledFirstName]"
+		log = "edmp_cs.1000 : edmp_interference_aiplayer_ai     = [edmp_interference_aiplayer_ai.GetID] [edmp_interference_aiplayer_ai.GetTitledFirstName]"
+		if = {
+			limit = { event_target:edmp_interference_aiplayer_player = { character = ROOT } }
+			log = "edmp_cs.1000 : edmp_interference_aiplayer_player = ROOT"
+		}
+		if = {
+			limit = { event_target:edmp_interference_aiplayer_player = { edmp_this_character_is_a_current_or_absent_human_player = yes } }
+			log = "edmp_cs.1000 : edmp_interference_aiplayer_player = current or absent player"
+		}
+		if = {
+			limit = { event_target:edmp_interference_aiplayer_ai     = { ai = yes } }
+			log = "edmp_cs.1000 : edmp_interference_aiplayer_ai     = AI controlled"
+		}
 		if = {
 			limit = {
-				event_target:edmp_interference_decision_taker  = { character = ROOT_FROM }
 				event_target:edmp_interference_aiplayer_player = { character = ROOT }
 				event_target:edmp_interference_aiplayer_player = { edmp_this_character_is_a_current_or_absent_human_player = yes }
 				event_target:edmp_interference_aiplayer_ai     = { ai = yes }
@@ -30,24 +48,21 @@ character_event = {
 		}
 		else = {
 			# Validation failure - exit with cleanup
-			# Remove the "offer sent" flag from the decision taker & "considering" flag from the player
+			# Clear lockout flags
 			hidden_tooltip = {
-				ROOT_FROM                                      = { clr_character_flag = edmp_interference_character_switch_offer_sent }
-				event_target:edmp_interference_decision_taker  = { clr_character_flag = edmp_interference_character_switch_offer_sent }
 				ROOT                                           = { clr_character_flag = edmp_interference_character_switch_offer_considering }
+				event_target:edmp_interference_decision_taker  = { clr_character_flag = edmp_interference_character_switch_offer_sent        }
 				event_target:edmp_interference_aiplayer_player = { clr_character_flag = edmp_interference_character_switch_offer_considering }
+				event_target:edmp_interference_aiplayer_ai     = { clr_character_flag = edmp_interference_character_switch_offer_target      }
 			}
-			# Notify FROM of the failure.
-			# Also notify the decision taker, if they are a different character
-			ROOT_FROM = { character_event = { id = edmp_cs.1041 } }
-			if = {
-				limit = { event_target:edmp_interference_decision_taker = { NOT = { character = ROOT_FROM } } }
-				event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1041 } }
-			}
+			# Notify decision-taker of the failure.
+			event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1041 } }
 		}
 	}
 }
 
+# ROOT = edmp_interference_aiplayer_player
+# FROM = DO NOT TRY TO USE! PROBABLY INCONSISTENT!
 character_event = {
 	
 	id       = edmp_cs.1001
@@ -59,11 +74,24 @@ character_event = {
 	
 	is_triggered_only = yes
 	
+	
+	
+	
+	
 	# First option is what's selected in case of timeout.
 	# So, we want "refuse" to be first - we don't want people to be forced to switch while AFK!
 	option = {
+		
 		name = edmp_cs_1001_evtopt_refuse
+		
 		ai_chance = { factor = 0 }
+		
+		# Hidden: First, ALWAYS clear ALL lockout flags
+		hidden_tooltip = {
+			event_target:edmp_interference_decision_taker  = { clr_character_flag = edmp_interference_character_switch_offer_sent        }
+			event_target:edmp_interference_aiplayer_player = { clr_character_flag = edmp_interference_character_switch_offer_considering }
+			event_target:edmp_interference_aiplayer_ai     = { clr_character_flag = edmp_interference_character_switch_offer_target      }
+		}
 		
 		# Final check: Refuse as normal if the proposed new character is still alive and playable, otherwise show "invalid" message.
 		if = {
@@ -79,11 +107,27 @@ character_event = {
 				event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1021 } }
 			}
 		}
+		
 	}
 	
+	
+	
+	
+	
 	option = {
+		
 		name = edmp_cs_1001_evtopt_accept_with_wealth_and_artifact_transfer
+		
 		ai_chance = { factor = 1 }
+		
+		show_portrait = event_target:edmp_interference_aiplayer_ai
+		
+		# Hidden: First, ALWAYS clear ALL lockout flags
+		hidden_tooltip = {
+			event_target:edmp_interference_decision_taker  = { clr_character_flag = edmp_interference_character_switch_offer_sent        }
+			event_target:edmp_interference_aiplayer_player = { clr_character_flag = edmp_interference_character_switch_offer_considering }
+			event_target:edmp_interference_aiplayer_ai     = { clr_character_flag = edmp_interference_character_switch_offer_target      }
+		}
 		
 		# Final check: Only do the switch if the proposed new character is still alive and playable
 		if = {
@@ -177,6 +221,7 @@ character_event = {
 			# (Keep this last part in sync with the "no transfer" option below)
 			
 			# Finally, change the character being played
+			custom_tooltip = { text = edmp_cs_blank_line_tt }
 			event_target:edmp_interference_aiplayer_player = { set_player_character = event_target:edmp_interference_aiplayer_ai }
 			
 			# Hidden: Move player & admin helper flags
@@ -197,18 +242,42 @@ character_event = {
 			
 			# Hidden: Notify all players about the switch, and send a separate notification to the decision-taker
 			hidden_tooltip = {
+				if = {
+					limit = { NOT = { event_target:edmp_interference_decision_taker = { character = event_target:edmp_interference_aiplayer_player } } }
+					# Decision-taker is switching someone else: send notification to decision-taker
+					event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1011 } }
+				}
+				else = {
+					# Decision-taker is switching themself: send notification to the target character
+					event_target:edmp_interference_aiplayer_ai    = { character_event = { id = edmp_cs.1011 } }
+				}
 				set_global_flag = edmp_interference_aiplayer_character_switch
-				edmp_interference_notify_players_aiplayer = yes
+				set_global_flag = edmp_interference_aiplayer_reverse_normal_flavour
+				edmp_interference_notify_players_aiplayer = yes # This notification will clear all of the event targets, so we MUST do this LAST
 				clr_global_flag = edmp_interference_aiplayer_character_switch
-				event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1011 } }
 			}
 			
 		}
 	}
 	
+	
+	
+	
+	
 	option = {
+		
 		name = edmp_cs_1001_evtopt_accept_without_wealth_and_artifact_transfer
+		
 		ai_chance = { factor = 0 }
+		
+		show_portrait = event_target:edmp_interference_aiplayer_ai
+		
+		# Hidden: First, ALWAYS clear ALL lockout flags
+		hidden_tooltip = {
+			event_target:edmp_interference_decision_taker  = { clr_character_flag = edmp_interference_character_switch_offer_sent        }
+			event_target:edmp_interference_aiplayer_player = { clr_character_flag = edmp_interference_character_switch_offer_considering }
+			event_target:edmp_interference_aiplayer_ai     = { clr_character_flag = edmp_interference_character_switch_offer_target      }
+		}
 		
 		# Final check: Only do the switch if the proposed new character is still alive and playable
 		if = {
@@ -223,9 +292,13 @@ character_event = {
 			
 			# Proposed new character is alive and playable - continue
 			
+			# Warn the player that this is irrevocable and not 100% guaranteed to succeed
+			custom_tooltip = { text = edmp_cs_1001_evtopt_accept_warning_tt }
+			
 			# (Keep this in sync with the last part of the "with transfer" option above)
 			
 			# Finally, change the character being played
+			custom_tooltip = { text = edmp_cs_blank_line_tt }
 			event_target:edmp_interference_aiplayer_player = { set_player_character = event_target:edmp_interference_aiplayer_ai }
 			
 			# Hidden: Move player & admin helper flags
@@ -246,18 +319,34 @@ character_event = {
 			
 			# Hidden: Notify all players about the switch, and send a separate notification to the decision-taker
 			hidden_tooltip = {
+				if = {
+					limit = { NOT = { event_target:edmp_interference_decision_taker = { character = event_target:edmp_interference_aiplayer_player } } }
+					# Decision-taker is switching someone else: send notification to decision-taker
+					event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1011 } }
+				}
+				else = {
+					# Decision-taker is switching themself: send notification to the target character
+					event_target:edmp_interference_aiplayer_ai    = { character_event = { id = edmp_cs.1011 } }
+				}
 				set_global_flag = edmp_interference_aiplayer_character_switch
-				edmp_interference_notify_players_aiplayer = yes
+				set_global_flag = edmp_interference_aiplayer_reverse_normal_flavour
+				edmp_interference_notify_players_aiplayer = yes # This notification will clear all of the event targets, so we MUST do this LAST
 				clr_global_flag = edmp_interference_aiplayer_character_switch
-				event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1011 } }
 			}
 			
 		}
 	}
 	
+	
+	
+	
+	
 	option = {
+		
 		name = edmp_cs_1001_evtopt_refuse_and_report
+		
 		ai_chance = { factor = 0 }
+		
 		trigger = {
 			OR = {
 				edmp_this_is_a_single_player_game_in_multiplayer_simulation_mode = yes      # Always show report option in MP sim mode, so it can be checked
@@ -267,10 +356,19 @@ character_event = {
 				}
 			}
 		}
+		
+		# Hidden: First, ALWAYS clear ALL lockout flags
+		hidden_tooltip = {
+			event_target:edmp_interference_decision_taker  = { clr_character_flag = edmp_interference_character_switch_offer_sent        }
+			event_target:edmp_interference_aiplayer_player = { clr_character_flag = edmp_interference_character_switch_offer_considering }
+			event_target:edmp_interference_aiplayer_ai     = { clr_character_flag = edmp_interference_character_switch_offer_target      }
+		}
+		
 		custom_tooltip = {
 			text = edmp_cs_1001_evtopt_refuse_tt
 			event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1021 } }
 		}
+		
 		custom_tooltip = {
 			text = edmp_cs_1001_evtopt_report_tt
 			any_player = {
@@ -278,14 +376,7 @@ character_event = {
 				character_event = { id = edmp_cs.1031 }
 			}
 		}
-	}
-	
-	after = {
-		# We ALWAYS want to clear the tracking flags from the player and decision-taker on exiting this event
-		hidden_tooltip = {
-			event_target:edmp_interference_decision_taker  = { clr_character_flag = edmp_interference_character_switch_offer_sent }
-			event_target:edmp_interference_aiplayer_player = { clr_character_flag = edmp_interference_character_switch_offer_considering }
-		}
+		
 	}
 	
 }

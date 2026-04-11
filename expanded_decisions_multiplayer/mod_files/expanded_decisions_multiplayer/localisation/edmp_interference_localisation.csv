@@ -21,29 +21,31 @@ edmp_interference_win_defensive_war;§P(ED:MP:Intf)§! Win Def War;;;;;;;;;;;;;x
 edmp_interference_win_defensive_war_desc;Immediately win your defensive war(s) against [Root.GetTitledFirstName], because [Root.GetSheHe] has dared to attack you!\n§b.§!\n§RThis is a massive cheat!§! If it's fun and possible to win the war normally, you should probably do so.;;;;;;;;;;;;;x
 #
 # Targetted Decisions - Character Switch (plus tooltips & subsequent events)
-edmp_interference_character_switch;§P(ED:MP:Intf)§! Migrate Player;;;;;;;;;;;;;x
-edmp_interference_character_switch_desc;The selected player will receive the option to switch from their current character to [Root.GetTitledFirstName];;;;;;;;;;;;;x
+edmp_interference_character_switch;§P(ED:MP:Intf)§! Move Human Player;;;;;;;;;;;;;x
+edmp_interference_character_switch_desc;The selected player will receive a §YPlayer Migration Offer§!, which allows them to choose to switch from their current character to [Root.GetTitledFirstName];;;;;;;;;;;;;x
 edmp_interference_character_switch_this_character_has_no_sent_offer_still_under_consideration_tt;Has NOT sent a §YPlayer Migration Offer§! which is still under consideration;;;;;;;;;;;;;x
-edmp_interference_character_switch_fromfrom_is_not_considering_another_offer_tt;Is NOT currently considering a §YPlayer Migration Offer§!;;;;;;;;;;;;;x
-edmp_interference_character_switch_offer_outstanding_warning_tt;§RWARNING!§! [Root_FromFrom.GetTitledFirstName] is currently considering a §YPlayer Migration Offer§!. §RSending another may be VERY confusing!§!;;;;;;;;;;;;;x
-edmp_interference_character_switch_selected_player_receives_an_event_asking_for_confirmation_tt;[Root_FromFrom.GetTitledFirstName] receives a §YPlayer Migration Offer§!;;;;;;;;;;;;;x
+edmp_interference_character_switch_this_character_is_not_considering_another_offer_tt;Is NOT currently considering a §YPlayer Migration Offer§!;;;;;;;;;;;;;x
+edmp_interference_character_switch_this_character_is_not_target_of_offer_still_under_consideration_tt;Is NOT the target of a §YPlayer Migration Offer§! which is still under consideration;;;;;;;;;;;;;x
+edmp_interference_character_switch_offer_outstanding_warning_tt;§RWARNING!§! [FromFrom.GetTitledFirstName] is currently considering a §YPlayer Migration Offer§!. §RSending another may be VERY confusing!§!;;;;;;;;;;;;;x
+edmp_interference_character_switch_selected_player_receives_an_event_asking_for_confirmation_tt;[FromFrom.GetTitledFirstName]\nreceives a §YPlayer Migration Offer§!;;;;;;;;;;;;;x
 edmp_interference_character_switch_ai_will_always_accept_tt;AI characters §Galways accept§! §YPlayer Migration Offers§!;;;;;;;;;;;;;x
-edmp_interference_character_switch_other_players_notified_if_player_accepts_tt;If the §YPlayer Migration Offer§! is accepted, §Mall other players will be notified of this interference!§!;;;;;;;;;;;;;x
+edmp_interference_character_switch_other_players_notified_if_player_accepts_tt;If the §YPlayer Migration Offer§! is accepted,\n§Mall other players will be notified of this interference!§!;;;;;;;;;;;;;x
 edmp_cs_1001_title;(ED:MP) Player Migration Offer;;;;;;;;;;;;;x
-edmp_cs_1001_desc;[edmp_interference_decision_taker.GetTitledFirstName][edmp_insert_username_decision_taker] is offering you the chance to leave your current character behind and play as someone else: [edmp_interference_aiplayer_ai.GetBestName];;;;;;;;;;;;;x
+edmp_cs_1001_desc;[edmp_interference_decision_taker.GetTitledFirstName][edmp_insert_username_decision_taker] is offering you the chance to leave your current character behind and play as someone else:\n[edmp_interference_aiplayer_ai.GetBestName];;;;;;;;;;;;;x
 edmp_cs_1001_evtopt_accept_with_wealth_and_artifact_transfer;I accept! Transfer my wealth and artifacts!;;;;;;;;;;;;;x
 edmp_cs_1001_evtopt_accept_without_wealth_and_artifact_transfer;I accept! And I will give up all of my worldly possessions!;;;;;;;;;;;;;x
 edmp_cs_1001_evtopt_invalid_tt;This §YPlayer Migration Offer§! is now §Rinvalid§!! §MNothing will happen!§!\n§b.....§g(Maybe the target died or became unlanded?)§!;;;;;;;;;;;;;x
-edmp_cs_1001_evtopt_accept_warning_tt;§RWARNING! This cannot be undone!§!\n\n§MCheck the target character VERY carefully!§!;;;;;;;;;;;;;x
-edmp_cs_1001_evtopt_accept_transfer_all_artifacts_to_ai_tt;All of [edmp_interference_aiplayer_player.GetTitledFirstName]'s artifacts are transferred to [edmp_interference_aiplayer_ai.GetTitledFirstName]\n§b.....§MUnstackable artifacts will be automatically destroyed!§!;;;;;;;;;;;;;x
-edmp_cs_1001_evtopt_accept_no_artifacts_to_transfer_tt;([edmp_interference_aiplayer_player.GetTitledFirstName] has no artifacts to transfer);;;;;;;;;;;;;x
-edmp_cs_1001_evtopt_accept_transfer_all_wealth_over_100_to_ai_tt;All of [edmp_interference_aiplayer_player.GetTitledFirstName]'s wealth above 100¤ is transferred to [edmp_interference_aiplayer_ai.GetTitledFirstName]\n§b.....§M[edmp_interference_aiplayer_player.GetTitledFirstName] retains the final 100¤§!;;;;;;;;;;;;;x
-edmp_cs_1001_evtopt_accept_transfer_90pc_of_wealth_to_ai_tt;90% of [edmp_interference_aiplayer_player.GetTitledFirstName]'s wealth is transferred to [edmp_interference_aiplayer_ai.GetTitledFirstName]\n§b.....§M[edmp_interference_aiplayer_player.GetTitledFirstName] retains the final 10%§!;;;;;;;;;;;;;x
-edmp_cs_1001_evtopt_accept_no_wealth_to_transfer_tt;([edmp_interference_aiplayer_player.GetTitledFirstName] has no wealth to transfer);;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_warning_tt;§RWARNING! This cannot be undone!§!\n§b.....§MCheck the target character VERY carefully!§!\n\nThis process has a §Msmall chance§! of causing a §R"Game Over"§!.\n§b.....§!So, just in case, you should §Msave the game§! before proceeding!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_transfer_all_artifacts_to_ai_tt;§b.§!\nAll of [edmp_interference_aiplayer_player.GetTitledFirstName]'s artifacts are transferred to [edmp_interference_aiplayer_ai.GetTitledFirstName]\n§b.....§MDuplicate unstackable artifacts will be automatically destroyed!§!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_no_artifacts_to_transfer_tt;§b.§!\n([edmp_interference_aiplayer_player.GetTitledFirstName] has no artifacts to transfer);;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_transfer_all_wealth_over_100_to_ai_tt;§b.§!\nAll of [edmp_interference_aiplayer_player.GetTitledFirstName]'s wealth above 100¤ is transferred to [edmp_interference_aiplayer_ai.GetTitledFirstName]\n§b.....§M[edmp_interference_aiplayer_player.GetTitledFirstName] retains the final 100¤§!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_transfer_90pc_of_wealth_to_ai_tt;§b.§!\n90% of [edmp_interference_aiplayer_player.GetTitledFirstName]'s wealth is transferred to [edmp_interference_aiplayer_ai.GetTitledFirstName]\n§b.....§M[edmp_interference_aiplayer_player.GetTitledFirstName] retains the final 10%§!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_no_wealth_to_transfer_tt;§b.§!\n([edmp_interference_aiplayer_player.GetTitledFirstName] has no wealth to transfer);;;;;;;;;;;;;x
+edmp_cs_blank_line_tt;§b.§!;;;;;;;;;;;;;x
 edmp_cs_1001_evtopt_refuse;I refuse!;;;;;;;;;;;;;x
 edmp_cs_1001_evtopt_refuse_tt;§MNothing will happen!§!;;;;;;;;;;;;;x
 edmp_cs_1001_evtopt_refuse_and_report;I refuse! And I want to report the Admin Helper!;;;;;;;;;;;;;x
-edmp_cs_1001_evtopt_report_tt;§MThe abuse will be reported to the §YAdministrator§M, who may take further action.§!\n\nUse this option if [edmp_interference_decision_taker.GetTitledFirstName][edmp_insert_username_decision_taker] is somehow using §YPlayer Migration Offers§! for trolling/griefing.\n§b.....§g(Refused offers do NOT create mass notifications, so the Administrator may not be aware.)§!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_report_tt;§b.§!\n§MThe abuse will be reported to the §YAdministrator§M, who may take further action.§!\n\nUse this option if [edmp_interference_decision_taker.GetTitledFirstName][edmp_insert_username_decision_taker] is somehow using §YPlayer Migration Offers§! for trolling/griefing.\n§b.....§g(Refused offers do NOT create mass notifications, so the Administrator may not be aware.)§!;;;;;;;;;;;;;x
 edmp_cs_evtopt_ok;OK;;;;;;;;;;;;;x
 edmp_cs_1011_title;(ED:MP) Migration Accepted!;;;;;;;;;;;;;x
 edmp_cs_1011_desc;The Player Migration Offer you proposed has been accepted and has occurred!\nPrevious character: [edmp_interference_aiplayer_player.GetTitledFirstName]\nNew character: [edmp_interference_aiplayer_ai.GetTitledFirstName][edmp_insert_username_aiplayer_ai];;;;;;;;;;;;;x
