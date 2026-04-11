@@ -20,6 +20,44 @@ edmp_interference_debug_exclude_me_from_notifications_tt;You WILL NOT receive no
 edmp_interference_win_defensive_war;§P(ED:MP:Intf)§! Win Def War;;;;;;;;;;;;;x
 edmp_interference_win_defensive_war_desc;Immediately win your defensive war(s) against [Root.GetTitledFirstName], because [Root.GetSheHe] has dared to attack you!\n§b.§!\n§RThis is a massive cheat!§! If it's fun and possible to win the war normally, you should probably do so.;;;;;;;;;;;;;x
 #
+# Targetted Decisions - Character Switch (plus tooltips & subsequent events)
+edmp_interference_character_switch;§P(ED:MP:Intf)§! Migrate Player;;;;;;;;;;;;;x
+edmp_interference_character_switch_desc;The selected player will receive the option to switch from their current character to [Root.GetTitledFirstName];;;;;;;;;;;;;x
+edmp_interference_character_switch_this_character_has_no_sent_offer_still_under_consideration_tt;Has NOT sent a §YPlayer Migration Offer§! which is still under consideration;;;;;;;;;;;;;x
+edmp_interference_character_switch_fromfrom_is_not_considering_another_offer_tt;Is NOT currently considering a §YPlayer Migration Offer§!;;;;;;;;;;;;;x
+edmp_interference_character_switch_offer_outstanding_warning_tt;§RWARNING!§! [Root_FromFrom.GetTitledFirstName] is currently considering a §YPlayer Migration Offer§!. §RSending another may be VERY confusing!§!;;;;;;;;;;;;;x
+edmp_interference_character_switch_selected_player_receives_an_event_asking_for_confirmation_tt;[Root_FromFrom.GetTitledFirstName] receives a §YPlayer Migration Offer§!;;;;;;;;;;;;;x
+edmp_interference_character_switch_ai_will_always_accept_tt;AI characters §Galways accept§! §YPlayer Migration Offers§!;;;;;;;;;;;;;x
+edmp_interference_character_switch_other_players_notified_if_player_accepts_tt;If the §YPlayer Migration Offer§! is accepted, §Mall other players will be notified of this interference!§!;;;;;;;;;;;;;x
+edmp_cs_1001_title;(ED:MP) Player Migration Offer;;;;;;;;;;;;;x
+edmp_cs_1001_desc;[edmp_interference_decision_taker.GetTitledFirstName][edmp_insert_username_decision_taker] is offering you the chance to leave your current character behind and play as someone else: [edmp_interference_aiplayer_ai.GetBestName];;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_with_wealth_and_artifact_transfer;I accept! Transfer my wealth and artifacts!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_without_wealth_and_artifact_transfer;I accept! And I will give up all of my worldly possessions!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_invalid_tt;This §YPlayer Migration Offer§! is now §Rinvalid§!! §MNothing will happen!§!\n§b.....§g(Maybe the target died or became unlanded?)§!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_warning_tt;§RWARNING! This cannot be undone!§!\n\n§MCheck the target character VERY carefully!§!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_transfer_all_artifacts_to_ai_tt;All of [edmp_interference_aiplayer_player.GetTitledFirstName]'s artifacts are transferred to [edmp_interference_aiplayer_ai.GetTitledFirstName]\n§b.....§MUnstackable artifacts will be automatically destroyed!§!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_no_artifacts_to_transfer_tt;([edmp_interference_aiplayer_player.GetTitledFirstName] has no artifacts to transfer);;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_transfer_all_wealth_over_100_to_ai_tt;All of [edmp_interference_aiplayer_player.GetTitledFirstName]'s wealth above 100¤ is transferred to [edmp_interference_aiplayer_ai.GetTitledFirstName]\n§b.....§M[edmp_interference_aiplayer_player.GetTitledFirstName] retains the final 100¤§!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_transfer_90pc_of_wealth_to_ai_tt;90% of [edmp_interference_aiplayer_player.GetTitledFirstName]'s wealth is transferred to [edmp_interference_aiplayer_ai.GetTitledFirstName]\n§b.....§M[edmp_interference_aiplayer_player.GetTitledFirstName] retains the final 10%§!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_accept_no_wealth_to_transfer_tt;([edmp_interference_aiplayer_player.GetTitledFirstName] has no wealth to transfer);;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_refuse;I refuse!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_refuse_tt;§MNothing will happen!§!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_refuse_and_report;I refuse! And I want to report the Admin Helper!;;;;;;;;;;;;;x
+edmp_cs_1001_evtopt_report_tt;§MThe abuse will be reported to the §YAdministrator§M, who may take further action.§!\n\nUse this option if [edmp_interference_decision_taker.GetTitledFirstName][edmp_insert_username_decision_taker] is somehow using §YPlayer Migration Offers§! for trolling/griefing.\n§b.....§g(Refused offers do NOT create mass notifications, so the Administrator may not be aware.)§!;;;;;;;;;;;;;x
+edmp_cs_evtopt_ok;OK;;;;;;;;;;;;;x
+edmp_cs_1011_title;(ED:MP) Migration Accepted!;;;;;;;;;;;;;x
+edmp_cs_1011_desc;The Player Migration Offer you proposed has been accepted and has occurred!\nPrevious character: [edmp_interference_aiplayer_player.GetTitledFirstName]\nNew character: [edmp_interference_aiplayer_ai.GetTitledFirstName][edmp_insert_username_aiplayer_ai];;;;;;;;;;;;;x
+edmp_cs_1012_title;(ED:MP) Migration Became Invalid!;;;;;;;;;;;;;x
+edmp_cs_1012_desc;The Player Migration Offer you proposed became invalid for some reason (eg. target died or became unlanded)!\nTherefore, nothing happened.\nPlayer: [edmp_interference_aiplayer_player.GetTitledFirstName][edmp_insert_username_aiplayer_player]\nTarget: [edmp_interference_aiplayer_ai.GetTitledFirstName];;;;;;;;;;;;;x
+edmp_cs_1021_title;(ED:MP) Migration Refused!;;;;;;;;;;;;;x
+edmp_cs_1021_desc;The Player Migration Offer you proposed was refused!\nTherefore, nothing happened.\nPlayer: [edmp_interference_aiplayer_player.GetTitledFirstName][edmp_insert_username_aiplayer_player]\nTarget: [edmp_interference_aiplayer_ai.GetTitledFirstName];;;;;;;;;;;;;x
+edmp_cs_1031_title;(ED:MP) Abuse Report;;;;;;;;;;;;;x
+edmp_cs_1031_desc;A player has reported an Admin Helper for abuse of the Player Migration Offer feature (eg. trolling/griefing).\nPlayer: [edmp_interference_aiplayer_player.GetTitledFirstName][edmp_insert_username_aiplayer_player]\nAdmin Helper: [edmp_interference_decision_taker.GetTitledFirstName][edmp_insert_username_decision_taker];;;;;;;;;;;;;x
+edmp_cs_1031_revoke_admin_helper_status;Revoke Admin Helper privileges;;;;;;;;;;;;;x
+edmp_cs_1031_do_nothing;Do nothing (for now);;;;;;;;;;;;;x
+edmp_cs_1041_title;(ED:MP) Migration Invalid!;;;;;;;;;;;;;x
+edmp_cs_1041_desc;The Player Migration Offer you proposed was found to be invalid before the player even saw it!\nTherefore, nothing happened.\nPlayer: [edmp_interference_aiplayer_player.GetTitledFirstName][edmp_insert_username_aiplayer_player]\nTarget: [edmp_interference_aiplayer_ai.GetTitledFirstName]\nDecision-Taker: [edmp_interference_decision_taker.GetTitledFirstName][edmp_insert_username_decision_taker];;;;;;;;;;;;;x
+#
 # Targetted Decisions - Admin/Adminhelper Interference
 edmp_interference_force_end_war_white_peace;§P(ED:MP:Intf)§! Force White Peace;;;;;;;;;;;;;x
 edmp_interference_force_end_war_white_peace_desc;Force one of [Root.GetTitledFirstName]'s wars to end in a white peace.;;;;;;;;;;;;;x
@@ -77,6 +115,10 @@ edmp_interference_artifact_flag_as_unique;§P(ED:MP:Intf)§! Artifact: Protect;;;;
 edmp_interference_artifact_flag_as_unique_desc;Flag one of [Root.GetTitledFirstName]'s artifacts so that it §Ywill not be destroyed§! by most/all events.;;;;;;;;;;;;;x
 edmp_interference_artifact_unflag_as_unique;§P(ED:MP:Intf)§! Artifact: Unprotect;;;;;;;;;;;;;x
 edmp_interference_artifact_unflag_as_unique_desc;Remove the §Yprotection flag§! from one of [Root.GetTitledFirstName]'s artifacts, meaning it is §Yno longer protected from event-based destruction§!.;;;;;;;;;;;;;x
+edmp_interference_artifact_transfer_all_to_player;§P(ED:MP:Intf)§! Artifact: Transfer All;;;;;;;;;;;;;x
+edmp_interference_artifact_transfer_all_to_player_desc;Transfer ALL of [Root.GetTitledFirstName]'s artifacts to a selected player.;;;;;;;;;;;;;x
+edmp_interference_artifact_transfer_single_to_me;§P(ED:MP:Intf)§! Artifact: Take One;;;;;;;;;;;;;x
+edmp_interference_artifact_transfer_single_to_me_desc;Take one of [Root.GetTitledFirstName]'s artifacts for yourself (either to keep, or to transfer onwards to some other character).;;;;;;;;;;;;;x
 edmp_interference_grant_larger_demesne_to_this_character;§P(ED:MP:Intf)§! Grant Demesne;;;;;;;;;;;;;x
 edmp_interference_grant_larger_demesne_to_this_character_desc;[Root.GetTitledFirstName] will be granted §YTemporary Large Demesne§! (§G+1000 Demesne Limit§!) for §Y3 years§!.;;;;;;;;;;;;;x
 edmp_interference_prolong_larger_demesne_to_this_character;§P(ED:MP:Intf)§! Prolong Demesne;;;;;;;;;;;;;x
@@ -164,6 +206,9 @@ edmp_interference_this_is_not_some_kind_of_temporary_title_tt;This is NOT some k
 edmp_interference_legitimise_this_character_hasnt_already_founded_their_own_dynasty_tt;Has NOT already founded [Root.GetHerHis] own dynasty;;;;;;;;;;;;;x
 edmp_interference_artifact_has_at_least_one_non_unique_tt;Has at least one "unprotected" artifact;;;;;;;;;;;;;x
 edmp_interference_artifact_has_at_least_one_unique_tt;Has at least one "protected" artifact;;;;;;;;;;;;;x
+edmp_interference_artifact_transfer_root_owns_at_least_one_artifact_that_can_be_gifted_to_a_player_tt;§Y[Root.GetTitledFirstName]§! owns at least one artifact that can be gifted to §Ya current or absent player§!;;;;;;;;;;;;;x
+edmp_interference_artifact_transfer_root_owns_at_least_one_artifact_that_can_be_gifted_to_fromfrom_tt;§Y[Root.GetTitledFirstName]§! owns at least one artifact that can be gifted to §Y[Root_FromFrom.GetTitledFirstName]§!;;;;;;;;;;;;;x
+edmp_interference_artifact_transfer_root_owns_at_least_one_artifact_that_can_be_gifted_to_from_tt;§Y[Root.GetTitledFirstName]§! owns at least one artifact that can be gifted to §Y[Root_From.GetTitledFirstName]§!;;;;;;;;;;;;;x
 edmp_interference_supported_total_conversion_mod_is_active_tt;Is running a total conversion mod which supports flag-based artifact protection (eg: Elder Kings);;;;;;;;;;;;;x
 edmp_interference_error_no_supported_total_conversion_mod_tt;§RERROR! No supported total conversion mod detected!§!\n\nIf you can see this message then there is an inconsistency in the mod code. Please report this issue to the mod developer.;;;;;;;;;;;;;x
 edmp_interference_artifact_fromfrom_flagged_as_unique_tt;§Y[FromFrom.GetName]§!: Protected;;;;;;;;;;;;;x
