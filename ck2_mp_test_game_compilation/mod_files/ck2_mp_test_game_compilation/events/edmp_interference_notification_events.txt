@@ -49,6 +49,7 @@ character_event = {
 	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
 	
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	desc = {
 		trigger = { has_global_flag = edmp_interference_tributary_cancelled }
 		text                       = edmp_ifn_2001_desc_tributary_cancelled
@@ -65,6 +66,7 @@ character_event = {
 		trigger = { has_global_flag = edmp_interference_tributary_independence_forced }
 		text                       = edmp_ifn_2001_desc_tributary_independence_forced
 	}
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	
 	# ROOT is suzerain
 	option = {
@@ -141,11 +143,14 @@ character_event = {
 
 # Change in bilateral relationship forced by FROM
 character_event = {
+	
 	id    = edmp_ifn.3001
 	title = edmp_ifn_title
 	is_triggered_only = yes
 	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
+	
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_bilateral_10_year_truce }
 		text                        = edmp_ifn_3001_desc_bilateral_10_year_truce
@@ -170,18 +175,22 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_bilateral_break_alliance }
 		text                        = edmp_ifn_3001_desc_bilateral_break_alliance
 	}
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
+	
 	option = {
 		trigger = { event_target:edmp_interference_bilateral_party_1 = { character = ROOT } }
 		show_portrait = event_target:edmp_interference_bilateral_party_2
 		tooltip_info = yes
 		name = edmp_ifn_evtopt_ok_affected
 	}
+	
 	option = {
 		trigger = { event_target:edmp_interference_bilateral_party_2 = { character = ROOT } }
 		show_portrait = event_target:edmp_interference_bilateral_party_1
 		tooltip_info = yes
 		name = edmp_ifn_evtopt_ok_affected
 	}
+	
 	option = {
 		trigger = {
 			NOR = {
@@ -193,6 +202,7 @@ character_event = {
 		show_portrait = event_target:edmp_interference_bilateral_party_2
 		name = edmp_ifn_evtopt_ok_unaffected
 	}
+	
 	after = {
 		hidden_tooltip = {
 			
@@ -209,15 +219,19 @@ character_event = {
 			
 		}
 	}
+	
 }
 
 # Hostile action against AI character for benefit of a human player, forced by FROM
 character_event = {
+	
 	id    = edmp_ifn.4001
 	title = edmp_ifn_title
 	is_triggered_only = yes
 	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
+	
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_aiplayer_imprison }
 		text                        = edmp_ifn_4001_desc_aiplayer_imprison
@@ -238,18 +252,30 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_aiplayer_player_wins_defensive_wars_vs_ai }
 		text                        = edmp_ifn_4001_desc_aiplayer_player_wins_defensive_wars_vs_ai
 	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_aiplayer_transfer_all_artifacts }
+		text                        = edmp_ifn_4001_desc_aiplayer_transfer_all_artifacts
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_aiplayer_character_switch }
+		text                        = edmp_ifn_4001_desc_aiplayer_character_switch
+	}
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
+	
 	option = {
 		trigger = { event_target:edmp_interference_aiplayer_ai = { character = ROOT } }
 		show_portrait = event_target:edmp_interference_aiplayer_player
 		tooltip_info = yes
 		name = edmp_ifn_evtopt_curses
 	}
+	
 	option = {
 		trigger = { event_target:edmp_interference_aiplayer_player = { character = ROOT } }
 		show_portrait = event_target:edmp_interference_aiplayer_ai
 		tooltip_info = yes
 		name = edmp_ifn_evtopt_excellent
 	}
+	
 	option = {
 		trigger = {
 			NOR = {
@@ -261,6 +287,7 @@ character_event = {
 		show_portrait = event_target:edmp_interference_aiplayer_ai
 		name = edmp_ifn_evtopt_ok_unaffected
 	}
+	
 	after = {
 		hidden_tooltip = {
 			
@@ -273,9 +300,12 @@ character_event = {
 			clr_global_flag    = edmp_interference_aiplayer_favor_granted
 			clr_global_flag    = edmp_interference_aiplayer_move
 			clr_global_flag    = edmp_interference_aiplayer_player_wins_defensive_wars_vs_ai
+			clr_global_flag    = edmp_interference_aiplayer_transfer_all_artifacts
+			clr_global_flag    = edmp_interference_aiplayer_character_switch
 			
 		}
 	}
+	
 }
 
 # Host (FROM) takes an action on a single character (AI or player)
@@ -286,11 +316,14 @@ character_event = {
 #  --- Optional: event_target:edmp_interference_singlechar_offmap_power , if the action relates to an offmap power. (So that the offmap power name & currency can be correctly localised.)
 #  --- Optional: event_target:edmp_interference_singlechar_artifact , if the action relates to an artifact. (So that the artifact name can be correctly localised.)
 character_event = {
+	
 	id    = edmp_ifn.5001
 	title = edmp_ifn_title
 	is_triggered_only = yes
 	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
+	
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_kill }
 		text                        = edmp_ifn_5001_desc_singlechar_kill
@@ -330,6 +363,10 @@ character_event = {
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_artifact_unflag_as_unique }
 		text                        = edmp_ifn_5001_desc_singlechar_artifact_unflag_as_unique
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_artifact_transfer_single_to_decision_taker }
+		text                        = edmp_ifn_5001_desc_singlechar_artifact_transfer_single_to_decision_taker
 	}
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_demesne_grant }
@@ -451,6 +488,7 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_win_defensive_wars_revoke }
 		text                        = edmp_ifn_5001_desc_singlechar_win_defensive_wars_revoke
 	}
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	
 	# I am the target: good/bad => excellent/curses
 	option = {
@@ -542,6 +580,7 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_legitimise
 			clr_global_flag    = edmp_interference_singlechar_artifact_flag_as_unique
 			clr_global_flag    = edmp_interference_singlechar_artifact_unflag_as_unique
+			clr_global_flag    = edmp_interference_singlechar_artifact_transfer_single_to_decision_taker
 			clr_global_flag    = edmp_interference_singlechar_demesne_grant
 			clr_global_flag    = edmp_interference_singlechar_demesne_prolong
 			clr_global_flag    = edmp_interference_singlechar_demesne_revoke
@@ -584,11 +623,14 @@ character_event = {
 #  --- Targeted title is stored as event_target:edmp_interference_singletitlechar_title_affected
 #  --- If the action is bad for the targeted character, the global flag edmp_interference_singletitlechar_bad should be set. If not, the flag should not be set.
 character_event = {
+	
 	id    = edmp_ifn.6001
 	title = edmp_ifn_title
 	is_triggered_only = yes
 	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
+	
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singletitlechar_claim_grant }
 		text                        = edmp_ifn_6001_desc_singletitlechar_claim_grant
@@ -609,6 +651,7 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_singletitlechar_move_owners_primary_title_trad_capital_here }
 		text                        = edmp_ifn_6001_desc_singletitlechar_move_owners_primary_title_trad_capital_here
 	}
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	
 	# I am the target: good/bad => excellent/curses
 	option = {
@@ -727,11 +770,14 @@ character_event = {
 #  --- Targeted title is stored as event_target:edmp_interference_singletitle_affected
 #  --- If the action is bad for the title's current holder, the global flag edmp_interference_singletitle_bad should be set. If not, the flag should not be set.
 character_event = {
+	
 	id    = edmp_ifn.7001
 	title = edmp_ifn_title
 	is_triggered_only = yes
 	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
+	
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singletitle_claim_remove_all }
 		text                        = edmp_ifn_7001_desc_singletitle_claim_remove_all
@@ -760,6 +806,7 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_singletitle_remove_negative_province_modifiers }
 		text                        = edmp_ifn_7001_desc_singletitle_remove_negative_province_modifiers
 	}
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	
 	immediate = {
 		# Store the current holder, so we can use them as the portrait for the event options
