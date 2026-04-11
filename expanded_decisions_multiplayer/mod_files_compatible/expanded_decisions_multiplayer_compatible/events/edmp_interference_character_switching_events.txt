@@ -1,0 +1,402 @@
+namespace = edmp_cs
+
+# *ONLY* edmp_cs.1000 should ever be called - don't directly call any of the others!
+
+# Assumes the following event_targets have been created prior to calling edmp_cs.1000:
+#  --- edmp_interference_decision_taker  = character proposing this switch (admin or admin helper)
+#  --- edmp_interference_aiplayer_player = current player, and recipient of this event, who is being asked whether they want to switch to edmp_interference_aiplayer_ai
+#  --- edmp_interference_aiplayer_ai     = potential character switch for current player & recipient of this event (edmp_interference_aiplayer_player)
+
+# For decision safety, the following character flags should be set before calling edmp_cs.1000:
+#  --- edmp_interference_considering_switch_offer , on edmp_interference_aiplayer_player
+#  --- edmp_interference_sent_switch_offer                   
+
+character_event = {
+	id = edmp_cs.1000
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		# Final validation, to double-check that everything seems reasonable
+		if = {
+			limit = {
+				event_target:edmp_interference_decision_taker  = { character = ROOT_FROM }
+				event_target:edmp_interference_aiplayer_player = { character = ROOT }
+				event_target:edmp_interference_aiplayer_player = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+				event_target:edmp_interference_aiplayer_ai     = { ai = yes }
+			}
+			# Validation success - show choice to player
+			# (Absent player controlled by AI will always say yes)
+			event_target:edmp_interference_aiplayer_player = { character_event = { id = edmp_cs.1001 } }
+		}
+		else = {
+			# Validation failure - exit with cleanup
+			# Remove the "offer sent" flag from the decision taker & "considering" flag from the player
+			hidden_tooltip = {
+				ROOT_FROM                                      = { clr_character_flag = edmp_interference_character_switch_offer_sent }
+				event_target:edmp_interference_decision_taker  = { clr_character_flag = edmp_interference_character_switch_offer_sent }
+				ROOT                                           = { clr_character_flag = edmp_interference_character_switch_offer_considering }
+				event_target:edmp_interference_aiplayer_player = { clr_character_flag = edmp_interference_character_switch_offer_considering }
+			}
+			# Notify FROM of the failure.
+			# Also notify the decision taker, if they are a different character
+			ROOT_FROM = { character_event = { id = edmp_cs.1041 } }
+			if = {
+				limit = { event_target:edmp_interference_decision_taker = { NOT = { character = ROOT_FROM } } }
+				event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1041 } }
+			}
+		}
+	}
+}
+
+character_event = {
+	
+	id       = edmp_cs.1001
+	title    = edmp_cs_1001_title
+	desc     = edmp_cs_1001_desc
+	picture  = GFX_evt_recieve_letter
+	border   = GFX_event_normal_frame_diplomacy # Blue
+	portrait = event_target:edmp_interference_decision_taker
+	
+	is_triggered_only = yes
+	
+	# First option is what's selected in case of timeout.
+	# So, we want "refuse" to be first - we don't want people to be forced to switch while AFK!
+	option = {
+		name = edmp_cs_1001_evtopt_refuse
+		ai_chance = { factor = 0 }
+		
+		# Final check: Refuse as normal if the proposed new character is still alive and playable, otherwise show "invalid" message.
+		if = {
+			limit = { NOT = { event_target:edmp_interference_aiplayer_ai = { is_alive = yes edmp_this_character_is_potentially_playable = yes } } }
+			custom_tooltip = {
+				text = edmp_cs_1001_evtopt_invalid_tt
+				event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1012 } }
+			}
+		}
+		else = {
+			custom_tooltip = {
+				text = edmp_cs_1001_evtopt_refuse_tt
+				event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1021 } }
+			}
+		}
+	}
+	
+	option = {
+		name = edmp_cs_1001_evtopt_accept_with_wealth_and_artifact_transfer
+		ai_chance = { factor = 1 }
+		
+		# Final check: Only do the switch if the proposed new character is still alive and playable
+		if = {
+			limit = { NOT = { event_target:edmp_interference_aiplayer_ai = { is_alive = yes edmp_this_character_is_potentially_playable = yes } } }
+			# Proposed new character is dead or unplayable - do nothing & notify decision-taker
+			custom_tooltip = {
+				text = edmp_cs_1001_evtopt_invalid_tt
+				event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1012 } }
+			}
+		}
+		else = {
+			
+			# Proposed new character is alive and playable - continue
+			
+			# Warn the player that this is irrevocable and not 100% guaranteed to succeed
+			custom_tooltip = { text = edmp_cs_1001_evtopt_accept_warning_tt }
+			
+			# Transfer artifacts
+			if = {
+				limit = { event_target:edmp_interference_aiplayer_player = { num_of_artifacts >= 1 } }
+				custom_tooltip = {
+					text = edmp_cs_1001_evtopt_accept_transfer_all_artifacts_to_ai_tt
+					event_target:edmp_interference_aiplayer_player = {
+						any_artifact = {
+							transfer_artifact = {
+								from  = event_target:edmp_interference_aiplayer_player
+								to    = event_target:edmp_interference_aiplayer_ai
+							}
+						}
+					}
+				}
+			}
+			else = {
+				custom_tooltip = { text = edmp_cs_1001_evtopt_accept_no_artifacts_to_transfer_tt }
+			}
+			
+			# Transfer wealth
+			if = {
+				limit = { event_target:edmp_interference_aiplayer_player = { wealth > 1000 } }
+				custom_tooltip = {
+					text = edmp_cs_1001_evtopt_accept_transfer_all_wealth_over_100_to_ai_tt
+					event_target:edmp_interference_aiplayer_player = {
+						transfer_scaled_wealth = {
+							to    = event_target:edmp_interference_aiplayer_ai
+							value = all
+						}
+					}
+					if = {
+						limit = { event_target:edmp_interference_aiplayer_ai = { wealth > 100 } }
+						event_target:edmp_interference_aiplayer_ai     = { wealth = -100 }
+						event_target:edmp_interference_aiplayer_player = { wealth =  100 }
+					}
+				}
+			}
+			else_if = {
+				limit = { event_target:edmp_interference_aiplayer_player = { wealth > 0 } }
+				custom_tooltip = {
+					text = edmp_cs_1001_evtopt_accept_transfer_90pc_of_wealth_to_ai_tt
+					# Store {90% of sender's wealth} & {-90% of sender's wealth} on the sender
+					event_target:edmp_interference_aiplayer_player = {
+						export_to_variable = { which = edmp_cs_1001_wealth_to_transfer_neg value = wealth }
+						multiply_variable  = { which = edmp_cs_1001_wealth_to_transfer_neg value = -0.9   }
+					}
+					# Store {90% of sender's wealth} on the recipient
+					event_target:edmp_interference_aiplayer_ai = {
+						export_to_variable = { which = edmp_cs_1001_wealth_to_transfer     value = wealth who = event_target:edmp_interference_aiplayer_player }
+						multiply_variable  = { which = edmp_cs_1001_wealth_to_transfer     value = 0.9                                                         }
+					}
+					# Remove {90% of sender's wealth} from the sender
+					event_target:edmp_interference_aiplayer_player = {
+						wealth = edmp_cs_1001_wealth_to_transfer_neg
+					}
+					# Add {90% of sender's wealth} to the recipient
+					event_target:edmp_interference_aiplayer_ai = {
+						wealth = edmp_cs_1001_wealth_to_transfer
+					}
+					# Clean up variables on sender & recipient
+					event_target:edmp_interference_aiplayer_player = {
+						set_variable       = { which = edmp_cs_1001_wealth_to_transfer_neg value = 0 }
+					}
+					event_target:edmp_interference_aiplayer_ai = {
+						set_variable       = { which = edmp_cs_1001_wealth_to_transfer     value = 0 }
+					}
+				}
+			}
+			else = {
+				# Zero or negative wealth: do nothing
+				custom_tooltip = { text = edmp_cs_1001_evtopt_accept_no_wealth_to_transfer_tt }
+			}
+			
+			# (Keep this last part in sync with the "no transfer" option below)
+			
+			# Finally, change the character being played
+			event_target:edmp_interference_aiplayer_player = { set_player_character = event_target:edmp_interference_aiplayer_ai }
+			
+			# Hidden: Move player & admin helper flags
+			hidden_tooltip = {
+				event_target:edmp_interference_aiplayer_player = { edmp_playerflag_remove_flag_from_this_character = yes }
+				event_target:edmp_interference_aiplayer_ai     = { edmp_playerflag_add_flag_to_this_character      = yes }
+				if = {
+					limit = { event_target:edmp_interference_aiplayer_player = { edmp_this_character_has_admin_helper_modifier = yes } }
+					event_target:edmp_interference_aiplayer_player = { edmp_playerflag_remove_adminhelper_flag_from_this_character = yes }
+					event_target:edmp_interference_aiplayer_ai     = { edmp_playerflag_add_adminhelper_flag_to_this_character      = yes }
+				}
+				if = {
+					limit = { event_target:edmp_interference_aiplayer_player = { edmp_this_character_has_admin_modifier = yes } }
+					event_target:edmp_interference_aiplayer_player = { edmp_playerflag_remove_admin_flag_from_this_character = yes }
+					event_target:edmp_interference_aiplayer_ai     = { edmp_playerflag_add_admin_flag_to_this_character = yes }
+				}
+			}
+			
+			# Hidden: Notify all players about the switch, and send a separate notification to the decision-taker
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_aiplayer_character_switch
+				edmp_interference_notify_players_aiplayer = yes
+				clr_global_flag = edmp_interference_aiplayer_character_switch
+				event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1011 } }
+			}
+			
+		}
+	}
+	
+	option = {
+		name = edmp_cs_1001_evtopt_accept_without_wealth_and_artifact_transfer
+		ai_chance = { factor = 0 }
+		
+		# Final check: Only do the switch if the proposed new character is still alive and playable
+		if = {
+			limit = { NOT = { event_target:edmp_interference_aiplayer_ai = { is_alive = yes edmp_this_character_is_potentially_playable = yes } } }
+			# Proposed new character is dead or unplayable - do nothing & notify decision-taker
+			custom_tooltip = {
+				text = edmp_cs_1001_evtopt_invalid_tt
+				event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1012 } }
+			}
+		}
+		else = {
+			
+			# Proposed new character is alive and playable - continue
+			
+			# (Keep this in sync with the last part of the "with transfer" option above)
+			
+			# Finally, change the character being played
+			event_target:edmp_interference_aiplayer_player = { set_player_character = event_target:edmp_interference_aiplayer_ai }
+			
+			# Hidden: Move player & admin helper flags
+			hidden_tooltip = {
+				event_target:edmp_interference_aiplayer_player = { edmp_playerflag_remove_flag_from_this_character = yes }
+				event_target:edmp_interference_aiplayer_ai     = { edmp_playerflag_add_flag_to_this_character      = yes }
+				if = {
+					limit = { event_target:edmp_interference_aiplayer_player = { edmp_this_character_has_admin_helper_modifier = yes } }
+					event_target:edmp_interference_aiplayer_player = { edmp_playerflag_remove_adminhelper_flag_from_this_character = yes }
+					event_target:edmp_interference_aiplayer_ai     = { edmp_playerflag_add_adminhelper_flag_to_this_character      = yes }
+				}
+				if = {
+					limit = { event_target:edmp_interference_aiplayer_player = { edmp_this_character_has_admin_modifier = yes } }
+					event_target:edmp_interference_aiplayer_player = { edmp_playerflag_remove_admin_flag_from_this_character = yes }
+					event_target:edmp_interference_aiplayer_ai     = { edmp_playerflag_add_admin_flag_to_this_character = yes }
+				}
+			}
+			
+			# Hidden: Notify all players about the switch, and send a separate notification to the decision-taker
+			hidden_tooltip = {
+				set_global_flag = edmp_interference_aiplayer_character_switch
+				edmp_interference_notify_players_aiplayer = yes
+				clr_global_flag = edmp_interference_aiplayer_character_switch
+				event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1011 } }
+			}
+			
+		}
+	}
+	
+	option = {
+		name = edmp_cs_1001_evtopt_refuse_and_report
+		ai_chance = { factor = 0 }
+		trigger = {
+			OR = {
+				edmp_this_is_a_single_player_game_in_multiplayer_simulation_mode = yes      # Always show report option in MP sim mode, so it can be checked
+				event_target:edmp_interference_decision_taker = {
+					edmp_this_character_can_take_admin_actions = no                     # Decision taker is not SP human or MP host (no point in reporting abuse to the admin is the admin is the one doing the abuse...)
+					NOT = { character = ROOT }                                          # Decision taker is not the character being asked to make the choice (if you're sending a bad request to yourself, you only have yourself to blame...)
+				}
+			}
+		}
+		custom_tooltip = {
+			text = edmp_cs_1001_evtopt_refuse_tt
+			event_target:edmp_interference_decision_taker = { character_event = { id = edmp_cs.1021 } }
+		}
+		custom_tooltip = {
+			text = edmp_cs_1001_evtopt_report_tt
+			any_player = {
+				limit = { edmp_this_character_can_take_admin_actions = yes }
+				character_event = { id = edmp_cs.1031 }
+			}
+		}
+	}
+	
+	after = {
+		# We ALWAYS want to clear the tracking flags from the player and decision-taker on exiting this event
+		hidden_tooltip = {
+			event_target:edmp_interference_decision_taker  = { clr_character_flag = edmp_interference_character_switch_offer_sent }
+			event_target:edmp_interference_aiplayer_player = { clr_character_flag = edmp_interference_character_switch_offer_considering }
+		}
+	}
+	
+}
+
+# Event 1011: Switch offer recipient accepted proposed switch, and the switch was still valid, so it occurred
+# ROOT = decision-taker
+character_event = {
+	
+	id       = edmp_cs.1011
+	title    = edmp_cs_1011_title
+	desc     = edmp_cs_1011_desc
+	picture  = GFX_evt_recieve_letter
+	border   = GFX_event_normal_frame_economy # Green
+	portrait = event_target:edmp_interference_aiplayer_ai
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = edmp_cs_evtopt_ok
+		show_portrait = event_target:edmp_interference_aiplayer_player
+		show_portrait = event_target:edmp_interference_aiplayer_ai
+	}
+	
+}
+
+# Event 1012: Switch offer recipient accepted proposed switch, but the switch was invalid, so nothing happened
+# ROOT = decision-taker
+character_event = {
+	
+	id       = edmp_cs.1012
+	title    = edmp_cs_1012_title
+	desc     = edmp_cs_1012_desc
+	picture  = GFX_evt_recieve_letter
+	border   = GFX_event_normal_frame_intrigue # Purple
+	portrait = event_target:edmp_interference_aiplayer_player
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = edmp_cs_evtopt_ok
+		show_portrait = event_target:edmp_interference_aiplayer_player
+		show_portrait = event_target:edmp_interference_aiplayer_ai
+	}
+	
+}
+
+# Event 1021: Switch offer recipient refused proposed switch, so nothing happened
+# ROOT = decision-taker
+character_event = {
+	
+	id       = edmp_cs.1021
+	title    = edmp_cs_1021_title
+	desc     = edmp_cs_1021_desc
+	picture  = GFX_evt_recieve_letter
+	border   = GFX_event_normal_frame_war # Red
+	portrait = event_target:edmp_interference_aiplayer_player
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = edmp_cs_evtopt_ok
+		show_portrait = event_target:edmp_interference_aiplayer_player
+		show_portrait = event_target:edmp_interference_aiplayer_ai
+	}
+	
+}
+
+# Event 1031: Switch offer recipient refused, so nothing happened, and they ALSO reported the admin helper for abuse
+# ROOT = admin
+character_event = {
+	
+	id       = edmp_cs.1031
+	title    = edmp_cs_1031_title
+	desc     = edmp_cs_1031_desc
+	picture  = GFX_evt_recieve_letter
+	border   = GFX_event_normal_frame_intrigue # Purple
+	portrait = event_target:edmp_interference_aiplayer_player
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = edmp_cs_1031_revoke_admin_helper_status
+		show_portrait = event_target:edmp_interference_aiplayer_ai
+		show_portrait = event_target:edmp_interference_aiplayer_player
+		show_portrait = event_target:edmp_interference_decision_taker
+		event_target:edmp_interference_decision_taker = { edmp_playerflag_remove_adminhelper_flag_from_this_character = yes }
+	}
+	
+	option = {
+		name = edmp_cs_1031_do_nothing
+	}
+	
+}
+
+# Event 1041: Switch offer was never sent because it failed the final invisible validation
+# ROOT = decision-taker
+character_event = {
+	
+	id       = edmp_cs.1041
+	title    = edmp_cs_1041_title
+	desc     = edmp_cs_1041_desc
+	picture  = GFX_evt_recieve_letter
+	border   = GFX_event_normal_frame_intrigue # Purple
+	portrait = event_target:edmp_interference_aiplayer_player
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = edmp_cs_evtopt_ok
+		show_portrait = event_target:edmp_interference_aiplayer_player
+		show_portrait = event_target:edmp_interference_aiplayer_ai
+	}
+	
+}

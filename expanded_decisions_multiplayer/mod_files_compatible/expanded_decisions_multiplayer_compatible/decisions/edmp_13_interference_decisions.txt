@@ -35,6 +35,91 @@ targetted_decisions = {
 		}
 	}
 	
+	edmp_interference_character_switch = {
+		filter = all
+		third_party_filter = all
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			edmp_this_character_is_potentially_playable = yes
+		}
+		allow = {
+			trigger_if = {
+				limit = { ROOT_FROM = { edmp_this_character_can_take_admin_actions = yes } }
+				# Admins can switch anyone anywhere anytime (except "on top of" another current player)
+				ROOT      = { ai = yes }
+				ROOT_FROM = { edmp_this_character_can_take_admin_actions = yes }
+			}
+			trigger_else = {
+				# Admin helpers can only switch players to characters who are NOT AI and NOT flagged as absent players.
+				# Further, admin helpers can only have 1 offer under consideration at once.
+				ROOT      = { edmp_this_character_is_not_a_current_or_absent_human_player = yes }
+				ROOT_FROM = {
+					edmp_this_character_can_take_admin_helper_actions = yes
+					custom_tooltip = {
+						text = edmp_interference_character_switch_this_character_has_no_sent_offer_still_under_consideration_tt
+						OR = {
+							NOT = { has_character_flag  = edmp_interference_character_switch_offer_sent }
+							had_character_flag = { flag = edmp_interference_character_switch_offer_sent months >= 6 }
+						}
+					}
+				}
+			}
+		}
+		third_party_potential = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+		third_party_allow = {
+			# Must not already be considering another character switch offer (even from admin - otherwise this could get VERY confusing for the recipient)
+			custom_tooltip = {
+				text = edmp_interference_character_switch_fromfrom_is_not_considering_another_offer_tt
+				ROOT_FROMFROM = {
+					OR = {
+						NOT = { has_character_flag = edmp_interference_character_switch_offer_considering }
+						had_character_flag = { flag = edmp_interference_character_switch_offer_considering months >= 6 }
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = { ROOT_FROM = { has_character_flag  = edmp_interference_character_switch_offer_sent } }
+				custom_tooltip = { text = edmp_interference_character_switch_offer_outstanding_warning_tt }
+			}
+			custom_tooltip = {
+				text = edmp_interference_character_switch_selected_player_receives_an_event_asking_for_confirmation_tt
+				ROOT = {
+					save_event_target_as = edmp_interference_aiplayer_ai
+				}
+				ROOT_FROM = {
+					save_event_target_as = edmp_interference_decision_taker
+					set_character_flag   = edmp_interference_character_switch_offer_sent
+				}
+				ROOT_FROMFROM = {
+					save_event_target_as = edmp_interference_aiplayer_player
+					set_character_flag   = edmp_interference_character_switch_offer_considering
+					character_event      = { id = edmp_cs.1000 }
+				}
+			}
+			if = {
+				limit = { ROOT_FROMFROM = { ai = yes } }
+				custom_tooltip = { text = edmp_interference_character_switch_ai_will_always_accept_tt }
+				edmp_interference_notify_players_tooltip_only = yes
+			}
+			else = {
+				if = {
+					limit = { edmp_this_is_a_multiplayer_game = yes }
+					custom_tooltip = { text = edmp_interference_character_switch_other_players_notified_if_player_accepts_tt }
+				}
+				else = {
+					# Not AI, not multiplayer... I guess you're doing this to yourself?!
+					# Anyway, no need for additional text.
+				}
+			}
+		}
+	}
+	
 	edmp_interference_force_end_war_white_peace = {
 		filter = all_including_me
 		third_party_filter = all_including_me
@@ -986,6 +1071,7 @@ targetted_decisions = {
 		allow = {
 			age >= 16
 			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT      = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Potentially-negative for the character being made older, because this could kill them if it was repeated multiple times quickly
 		}
 		effect = {
 			hidden_tooltip = {
@@ -1003,7 +1089,7 @@ targetted_decisions = {
 		}
 	}
 	
-	edmp_interference_change_this_characters_sex = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+	edmp_interference_change_this_characters_sex = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
@@ -1016,6 +1102,7 @@ targetted_decisions = {
 			is_consort = no
 			is_senior_consort_party = no
 			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT      = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Potentially-negative because players may not want to have their sex changed, and continually switching it back might be rather annoying
 		}
 		effect = {
 			hidden_tooltip = {
@@ -1042,7 +1129,6 @@ targetted_decisions = {
 		potential = {
 			trait = bastard
 			is_alive = yes
-			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
 		}
 		allow = {
 			custom_tooltip = {
@@ -1052,6 +1138,7 @@ targetted_decisions = {
 					mother_even_if_dead = { dynasty = ROOT }
 				}
 			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
 		}
 		effect = {
 			hidden_tooltip = {
@@ -1191,6 +1278,123 @@ targetted_decisions = {
 			else = {
 				custom_tooltip = { text = edmp_interference_error_no_supported_total_conversion_mod_tt }
 			}
+		}
+	}
+	
+	edmp_interference_artifact_transfer_all_to_player = {
+		filter = all
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			num_of_artifacts >= 1
+		}
+		allow = {
+			custom_tooltip = {
+				text = edmp_interference_artifact_transfer_root_owns_at_least_one_artifact_that_can_be_gifted_to_a_player_tt
+				any_character = {
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					ROOT = { any_artifact = { artifact_can_be_gifted_to = PREVPREV } }
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT      = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Obviously potentially-negative for ROOT
+		}
+		third_party_potential = {
+			ROOT_FROMFROM = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+		}
+		third_party_allow = {
+			custom_tooltip = {
+				text = edmp_interference_artifact_transfer_root_owns_at_least_one_artifact_that_can_be_gifted_to_fromfrom_tt
+				ROOT = { any_artifact = { artifact_can_be_gifted_to = ROOT_FROMFROM } }
+				# NB: Unstackable and destroy-on-death artifacts cannot be detected consistently in code!
+			}
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_aiplayer_ai }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_aiplayer_player }
+				set_global_flag = edmp_interference_aiplayer_transfer_all_artifacts
+			}
+			# Warn about notifications at the top, since the list of actions could be VERY long
+			edmp_interference_notify_players_tooltip_only = yes
+			# List transferred artifacts in descending order, from highest to lowest quality (since you probably care most about the highest-quality artifacts)
+			ROOT = {
+				show_scope_change = no
+				any_artifact = { show_scope_change = no limit = { quality >  9 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 9 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 8 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 7 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 6 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 5 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 4 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 3 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 2 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 1 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+			}
+			# Perform the actual notification
+			hidden_tooltip = { edmp_interference_notify_players_aiplayer = yes }
+			hidden_tooltip = { clr_global_flag = edmp_interference_aiplayer_transfer_all_artifacts }
+		}
+	}
+	
+	edmp_interference_artifact_transfer_single_to_me = {
+		filter = all
+		third_party_filter = artifacts
+		third_party = ROOT # Look for artifacts in ROOT's inventory
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			num_of_artifacts >= 1
+		}
+		allow = {
+			custom_tooltip = {
+				text = edmp_interference_artifact_transfer_root_owns_at_least_one_artifact_that_can_be_gifted_to_from_tt
+				ROOT = { any_artifact = { artifact_can_be_gifted_to = ROOT_FROM } }
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT      = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Obviously potentially-negative for ROOT
+		}
+		third_party_potential = { always = yes } # Show all of ROOT's artifacts, including ungiftable
+		third_party_allow = {
+			ROOT_FROMFROM = {
+				show_scope_change = no
+				artifact_can_be_gifted_to = ROOT_FROM
+			}
+		}
+		third_party_score = {
+			# Score 1-9 for artifacts of quality 1-9 that CAN be gifted to FROM
+			# Score 0 for all artifacts that CANNOT be gifted to FROM
+			factor = 0
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 1 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 2 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 3 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 4 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 5 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 6 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 7 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 8 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 9 } }
+			modifier = { factor = 0 ROOT_FROMFROM = { NOT = { artifact_can_be_gifted_to = ROOT_FROM } } }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_singlechar_artifact }
+				set_global_flag = edmp_interference_singlechar_artifact_transfer_single_to_decision_taker
+				set_global_flag = edmp_interference_singlechar_bad
+			}
+			ROOT_FROMFROM = { transfer_artifact = { from = ROOT to = ROOT_FROM } }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_artifact_transfer_single_to_decision_taker }
 		}
 	}
 	
