@@ -1,0 +1,142 @@
+# Audax Validator EnableCommentMetadata
+# The Validator can't read WTWSMS (because it's zipped), so individually ignore every line that mentions a WTWSMS-specific building
+
+tpauto_rebuild_trade_post_buildings_wtwsms = {
+	if = {
+		limit = { tpauto_allow_tracking_and_rebuild_wtwsms = yes }
+		tpauto_rebuild_trade_post_buildings_wtwsms_lighthouse = yes
+		tpauto_rebuild_trade_post_buildings_wtwsms_generic_road = yes
+	}
+}
+
+tpauto_rebuild_trade_post_buildings_wtwsms_lighthouse = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_lighthouse
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_lighthouse_1
+				has_province_flag = tpauto_tracking_lighthouse_2
+				has_province_flag = tpauto_tracking_lighthouse_3
+				has_province_flag = tpauto_tracking_lighthouse_4
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_lighthouse
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_lighthouse_2
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_lighthouse_2
+				has_province_flag = tpauto_tracking_lighthouse_3
+				has_province_flag = tpauto_tracking_lighthouse_4
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_lighthouse_2
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_lighthouse_3
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_lighthouse_3
+				has_province_flag = tpauto_tracking_lighthouse_4
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_lighthouse_3
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_lighthouse_4
+			}
+			has_province_flag = tpauto_tracking_lighthouse_4
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_lighthouse_4
+		}
+	}
+	
+}
+
+tpauto_rebuild_trade_post_buildings_wtwsms_generic_road = {
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_generic_road_1
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_generic_road_1
+				has_province_flag = tpauto_tracking_generic_road_2
+				has_province_flag = tpauto_tracking_generic_road_3
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_generic_road_1
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_generic_road_2
+			}
+			OR = {
+				has_province_flag = tpauto_tracking_generic_road_2
+				has_province_flag = tpauto_tracking_generic_road_3
+			}
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_generic_road_2
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_generic_road_3
+			}
+			has_province_flag = tpauto_tracking_generic_road_3
+		}
+		add_to_extra_holding = {
+			type = trade_post
+			# Audax Validator "." Ignore_NEXT
+			building = tr_generic_road_3
+		}
+	}
+	
+}

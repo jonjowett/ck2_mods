@@ -954,5 +954,73 @@ tpauto_rebuild_delete_single_random_building_flag = {
 			clr_province_flag = tpauto_tracking_pdxrptg_tr_smugglers_0
 		}
 		
+		
+		
+		
+		
+		##########
+		# WTWSMS #
+		##########
+		
+		
+		
+		
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_lighthouse_4 }
+			}
+			clr_province_flag = tpauto_tracking_lighthouse_4
+			set_province_flag = tpauto_tracking_lighthouse_3
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_lighthouse_3 }
+			}
+			clr_province_flag = tpauto_tracking_lighthouse_3
+			set_province_flag = tpauto_tracking_lighthouse_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_lighthouse_2 }
+			}
+			clr_province_flag = tpauto_tracking_lighthouse_2
+			set_province_flag = tpauto_tracking_lighthouse_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_lighthouse_1 }
+			}
+			clr_province_flag = tpauto_tracking_lighthouse_1
+		}
+		
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_generic_road_3 }
+			}
+			clr_province_flag = tpauto_tracking_generic_road_3
+			set_province_flag = tpauto_tracking_generic_road_2
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_generic_road_2 }
+			}
+			clr_province_flag = tpauto_tracking_generic_road_2
+			set_province_flag = tpauto_tracking_generic_road_1
+		}
+		10 = {
+			mult_modifier = {
+				factor = 0
+				NOT = { has_province_flag = tpauto_tracking_generic_road_1 }
+			}
+			clr_province_flag = tpauto_tracking_generic_road_1
+		}
+		
 	}
 }
