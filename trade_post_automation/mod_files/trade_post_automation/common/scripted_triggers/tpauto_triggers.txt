@@ -93,8 +93,12 @@ tpauto_owner_can_build_trade_post_in_this_province = {
 
 tpauto_allow_tracking_and_rebuild_vanilla = { # Should return true iff trade posts use vanilla buildings
 	tpauto_pdxrptg_mod_is_active = no
-	# ATEFF : uses vanilla TP buildings, so it's fine
-	# MTR   : ditto
+	# Mods which use vanilla trade post buildings, so it's fine to track & rebuild vanilla for them:
+	#  --- ATEFF
+	#  --- Faerun
+	#  --- MTR
+	#  --- WTWSMS
+	#  --- W:GOA
 }
 
 tpauto_use_vanilla_education_traits = { # Returns true iff rebuild logic (ie. discounts) can use vanilla education traits (eg. midas touched)
@@ -104,10 +108,12 @@ tpauto_use_vanilla_education_traits = { # Returns true iff rebuild logic (ie. di
 # We can only detect vanilla by a process of exclusion
 tpauto_block_vanilla_trade_post_triggers_due_to_conflicting_mod = {
 	OR = {
-		tpauto_pdxrptg_mod_is_active = yes
 		tpauto_ateff_mod_is_active   = yes
-		tpauto_wgoa_mod_is_active    = yes
 		tpauto_faerun_mod_is_active  = yes
+		# NB: MTR retains the vanilla trade posts
+		tpauto_pdxrptg_mod_is_active = yes
+		tpauto_wgoa_mod_is_active    = yes
+		tpauto_wtwsms_mod_is_active  = yes
 	}
 }
 
