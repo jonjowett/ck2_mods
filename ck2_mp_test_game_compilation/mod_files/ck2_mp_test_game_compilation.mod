@@ -27,4 +27,7 @@ dependencies = {
 	# Faerun
 	"\"Faerun - Forgotten Realms Total Conversion\""
 	
+	# WTWSMS
+	"\"When the World Stopped Making Sense\""
+	
 }
