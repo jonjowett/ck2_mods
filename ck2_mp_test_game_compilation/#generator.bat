@@ -56,7 +56,8 @@ xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_tributaries%
 
 :: Git mods
 :: TP automation should probably come after everything else trade (although it might not be strictly necessary)
-xcopy /R /Y /Q /S /E /I %git_mod_folder_location%trade_post_automation%git_mod_subfolder%trade_post_automation\ %this_mod_folder_location%
+:: Remove TP automation, because upgrading it every time for all of these mods is too much work
+:: xcopy /R /Y /Q /S /E /I %git_mod_folder_location%trade_post_automation%git_mod_subfolder%trade_post_automation\ %this_mod_folder_location%
 
 :: Final changes specific to this game
 xcopy /R /Y /Q /S /E /I .\z_final_changes\ %this_mod_folder_location%
