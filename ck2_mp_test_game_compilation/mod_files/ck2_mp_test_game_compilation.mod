@@ -30,4 +30,12 @@ dependencies = {
 	# WTWSMS
 	"\"When the World Stopped Making Sense\""
 	
+	# Avatar
+	#  --- One line works for local versions, prior to workshop upload.
+	#  --- The other line works for workshop upload, and subsequent downloads by subscribers.
+	#  --- Why doesn't the "workshop upload" format work for local versions, unlike every other mod? No clue!
+	#  --- Thankfully, the "local version" line can coexist (since it'll just render itself useless, instead of breaking the whole .mod file).
+	"Avatar - Four Nations Restored"
+	"/"Avatar - Four Nations Restored/""
+	
 }
