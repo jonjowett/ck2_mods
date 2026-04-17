@@ -312,6 +312,8 @@ targetted_decisions = {
 					ROOT_FROM = { had_character_flag = { flag = edmp_ft_event_open months >= 6 } }
 				}
 			}
+			# Only admin helpers can do this
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
 			# Always considered negative for the tributary, because they are losing their independence
 			ROOT = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
 		}
@@ -358,6 +360,8 @@ targetted_decisions = {
 			# These are technically superfluous, but restated anyway so it's obvious to the decision-taker why this decision may sometimes be suppressed.
 			independent = yes
 			lower_tier_than = EMPEROR
+			# Only admin helpers can do this
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
 			# Always considered negative for the tributary, because they are losing their independence
 			ROOT = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
 		}
