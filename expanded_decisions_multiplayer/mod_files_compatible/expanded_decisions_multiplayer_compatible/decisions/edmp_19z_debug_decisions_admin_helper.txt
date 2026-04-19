@@ -1,0 +1,108 @@
+# Audax Validator "!" Ignore_NEXT
+
+decisions = {
+	edmp_debug_enable_admin_helpers_01_hiddenevt_screff = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can take debugging decisions
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = { any_player = { character_event = { id = edmp_debug_ah.1001 } } }
+	}
+	edmp_debug_enable_admin_helpers_02_hiddenevt_2screff = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can take debugging decisions
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = { any_player = { character_event = { id = edmp_debug_ah.1002 } } }
+	}
+	edmp_debug_enable_admin_helpers_03_visevt_screff = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can take debugging decisions
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = { any_player = { character_event = { id = edmp_debug_ah.1003 } } }
+	}
+	edmp_debug_enable_admin_helpers_04_visevt_2screff = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can take debugging decisions
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = { any_player = { character_event = { id = edmp_debug_ah.1004 } } }
+	}
+	edmp_debug_enable_admin_helpers_05_visevt_cmd = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can take debugging decisions
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = { any_player = { character_event = { id = edmp_debug_ah.1005 } } }
+	}
+	edmp_debug_enable_admin_helpers_06_visevt_2cmd = {
+		ai = no
+		potential = {
+			edmp_this_character_can_take_admin_actions = yes # Only the top admin (ie. the host) can take debugging decisions
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = { any_player = { character_event = { id = edmp_debug_ah.1006 } } }
+	}
+	edmp_debug_enable_admin_helpers_07_self_unflag_screff = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes # Visible to all admin helpers
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = { edmp_playerflag_adminhelpers_unpause_effect = yes }
+	}
+	edmp_debug_enable_admin_helpers_08_self_unflag_2screff = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes # Visible to all admin helpers
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = {
+			edmp_playerflag_adminhelpers_pause_effect = yes
+			edmp_playerflag_adminhelpers_unpause_effect = yes
+		}
+	}
+	edmp_debug_enable_admin_helpers_09_self_unflag_cmd = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes # Visible to all admin helpers
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = { 1 = { remove_province_modifier = edmp_admin_helpers_are_paused } }
+	}
+	edmp_debug_enable_admin_helpers_10_self_unflag_2cmd = {
+		ai = no
+		potential = {
+			edmp_this_character_can_see_admin_helper_actions = yes # Visible to all admin helpers
+			has_character_flag = edmp_admin_submenu_is_open
+		}
+		allow = { always = yes }
+		effect = {
+			1 = {
+				add_province_modifier = {
+					name = edmp_admin_helpers_are_paused
+					duration = -1
+					# Temporarily visible to help with debugging
+					#hidden = yes
+					stacking = no
+				}
+			}
+			1 = { remove_province_modifier = edmp_admin_helpers_are_paused }
+		}
+	}
+}

@@ -19,3 +19,70 @@ edmp_interference_grant_tp_building_destruction_countdown = { icon = 101 } # Gre
 
 
 edmp_interference_win_defensive_wars = { icon = 105 } # Green torch
+
+
+
+edmp_interference_boost_stats_temp = {
+	# Intended as a runtime replacement for generous save edits
+	# Genius + strong + attractive + a couple of nice traits + a few base stats
+	
+	icon = 81 # Green eye
+	
+	diplomacy          = 10
+	martial            = 10
+	stewardship        = 10
+	intrigue           = 10
+	learning           = 10
+	
+	fertility          = 0.25
+	health             = 1
+	
+	combat_rating      = 30
+	
+	vassal_opinion     = 10
+	general_opinion    = 10
+	sex_appeal_opinion = 10
+	
+}
+
+edmp_interference_boost_stats_perm = {
+	# Duplicate of previous modifier (exists so that the code can tell the difference)
+	
+	icon = 81 # Green eye
+	
+	diplomacy          = 10
+	martial            = 10
+	stewardship        = 10
+	intrigue           = 10
+	learning           = 10
+	
+	fertility          = 0.25
+	health             = 1
+	
+	combat_rating      = 30
+	
+	vassal_opinion     = 10
+	general_opinion    = 10
+	sex_appeal_opinion = 10
+	
+}
+
+#edmp_interference_boost_opinion = {
+#	# Intended to grant temporary high opinion with pretty much everyone
+#	icon = 39 # Green heart
+#	general_opinion = 500
+#}
+#
+#edmp_interference_boost_build_speed = {
+#	# Intended to grant a temporary large boost to build speed (but not automatic 1 day for everything)
+#	icon = 56 # Green horseshoe
+#	wonder_build_time_modifier = -0.5
+#	build_time_modifier = -0.5
+#}
+#
+#edmp_interference_boost_build_cost = {
+#	# Intended to grant a temporary large boost to build speed (but not automatic 1 day for everything)
+#	icon = 11 # Green hammer
+#	wonder_build_cost_modifier = -0.5
+#	build_cost_modifier = -0.5
+#}

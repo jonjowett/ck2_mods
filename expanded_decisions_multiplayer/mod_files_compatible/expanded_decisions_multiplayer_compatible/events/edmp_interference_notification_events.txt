@@ -393,6 +393,22 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_artifact_transfer_single_to_decision_taker
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_boost_stats_grant_temp }
+		text                        = edmp_ifn_5001_desc_singlechar_boost_stats_grant_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_boost_stats_grant_perm }
+		text                        = edmp_ifn_5001_desc_singlechar_boost_stats_grant_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_boost_stats_prolong }
+		text                        = edmp_ifn_5001_desc_singlechar_boost_stats_prolong
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_boost_stats_revoke }
+		text                        = edmp_ifn_5001_desc_singlechar_boost_stats_revoke
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_demesne_grant }
 		text                        = edmp_ifn_5001_desc_singlechar_demesne_grant
 	}
