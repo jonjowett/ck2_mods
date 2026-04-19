@@ -69,7 +69,7 @@ edmp_this_character_can_be_flagged_by_rootfrom_as_admin_helper = {
 		NOT = { character = ROOT_FROM }
 	}
 	trigger_else = {
-		always = yes
+		edmp_this_character_is_a_current_or_absent_human_player = yes
 	}
 }
 
