@@ -63,38 +63,25 @@ edmp_interference_win_defensive_wars_is_available_to_this_character = {
 	
 	war = yes
 	
-	trigger_if = {
-		limit = {
-			OR = {
+	OR = {
+		# Anyone (human or AI) specifically designated by the host can use this feature
+		has_character_modifier = edmp_interference_win_defensive_wars
+		has_character_modifier = edmp_interference_win_defensive_wars_perm
+		# Global rule affects current players, or absent players, or both
+		AND = {
+			custom_tooltip = {
+				text = edmp_interference_win_defensive_wars_global_human_is_active_tt
 				has_global_flag = edmp_interference_win_defensive_wars_global_human
+			}
+			edmp_this_character_is_a_current_human_player = yes
+		}
+		AND = {
+			custom_tooltip = {
+				text = edmp_interference_win_defensive_wars_global_absent_player_is_active_tt
 				has_global_flag = edmp_interference_win_defensive_wars_global_absent_player
 			}
+			edmp_this_character_is_an_absent_human_player = yes
 		}
-		# If EITHER of the global rules are active, show the logic for BOTH.
-		# (Because people might be confused about why they (or an AI) can't use the feature, and seeing all the criteria should help to explain.)
-		OR = {
-			# Anyone (human or AI) specifically designated by the host can use this feature
-			has_character_modifier = edmp_interference_win_defensive_wars
-			# Global rule affects current players, or absent players, or both
-			AND = {
-				custom_tooltip = {
-					text = edmp_interference_win_defensive_wars_global_human_is_active_tt
-					has_global_flag = edmp_interference_win_defensive_wars_global_human
-				}
-				edmp_this_character_is_a_current_human_player = yes
-			}
-			AND = {
-				custom_tooltip = {
-					text = edmp_interference_win_defensive_wars_global_absent_player_is_active_tt
-					has_global_flag = edmp_interference_win_defensive_wars_global_absent_player
-				}
-				edmp_this_character_is_an_absent_human_player = yes
-			}
-		}
-	}
-	trigger_else = {
-		# If none of the global rules are active, hide the complicated-looking logic
-		has_character_modifier = edmp_interference_win_defensive_wars
 	}
 	
 }
