@@ -851,20 +851,34 @@ targetted_decisions = {
 		}
 		potential = {
 			NOT = { has_character_modifier = edmp_interference_win_defensive_wars }
+			NOT = { has_character_modifier = edmp_interference_win_defensive_wars_perm }
 			is_ruler = yes
 		}
 		allow = { # Keep in sync with the allow clause below
 			trigger_if = {
-				limit = { has_global_flag = edmp_interference_win_defensive_wars_global }
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_human }
 				OR = {
 					AND = {
-						edmp_this_character_is_a_current_or_absent_human_player = yes
+						edmp_this_character_is_a_current_human_player = yes
 						custom_tooltip = {
-							text = edmp_interference_win_defensive_wars_global_is_not_active_tt
+							text = edmp_interference_win_defensive_wars_global_human_is_not_active_tt
 							always = no
 						}
 					}
-					edmp_this_character_is_not_a_current_or_absent_human_player = yes
+					edmp_this_character_is_not_a_current_human_player = yes
+				}
+			}
+			trigger_if = {
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
+				OR = {
+					AND = {
+						edmp_this_character_is_an_absent_human_player = yes
+						custom_tooltip = {
+							text = edmp_interference_win_defensive_wars_global_absent_player_is_not_active_tt
+							always = no
+						}
+					}
+					edmp_this_character_is_not_an_absent_human_player = yes
 				}
 			}
 			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
@@ -881,7 +895,10 @@ targetted_decisions = {
 					name     = edmp_interference_win_defensive_wars
 					years    = 3
 					stacking = no
-					inherit  = yes # Since this is only a temporary buff, we're not going to try super-hard to cover all possible future situations where modifier inheritance might break (eg. abdication).
+					# NB: We're not going to try super-hard to cover all possible future situations
+					#     where modifier inheritance might break (eg. abdication),
+					#     because this is only a temporary modifier, so the added complexity isn't really worthwhile.
+					inherit  = yes
 				}
 				if = {
 					limit = {
@@ -899,6 +916,81 @@ targetted_decisions = {
 		}
 	}
 	
+	edmp_interference_grant_win_defensive_wars_to_this_character_perm = { # Admin only
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			NOT = { has_character_modifier = edmp_interference_win_defensive_wars_perm }
+			is_ruler = yes
+		}
+		allow = { # Keep in sync with the allow clause below
+			trigger_if = {
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_human }
+				OR = {
+					AND = {
+						edmp_this_character_is_a_current_human_player = yes
+						custom_tooltip = {
+							text = edmp_interference_win_defensive_wars_global_human_is_not_active_tt
+							always = no
+						}
+					}
+					edmp_this_character_is_not_a_current_human_player = yes
+				}
+			}
+			trigger_if = {
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
+				OR = {
+					AND = {
+						edmp_this_character_is_an_absent_human_player = yes
+						custom_tooltip = {
+							text = edmp_interference_win_defensive_wars_global_absent_player_is_not_active_tt
+							always = no
+						}
+					}
+					edmp_this_character_is_not_an_absent_human_player = yes
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_actions = yes }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_win_defensive_wars_grant_perm
+			}
+			ROOT = {
+				show_scope_change = no
+				hidden_tooltip = { remove_character_modifier = edmp_interference_win_defensive_wars }
+				add_character_modifier = {
+					name     = edmp_interference_win_defensive_wars_perm
+					duration = -1
+					stacking = no
+					# NB: We're not going to try super-hard to cover all possible future situations
+					#     where modifier inheritance might break (eg. abdication),
+					#     because this feature should prevent most/all of those possibilities for AI,
+					#     and humans can complain to the host if they lose it for themselves.
+					inherit  = yes
+				}
+				if = {
+					limit = {
+						ai = yes
+						any_war = { any_defender = { character = ROOT } }
+					}
+					custom_tooltip = {
+						text = edmp_interference_win_defensive_wars_ai_will_act_now_tt
+						character_event = { id = edmp_wdw.2000 }
+					}
+				}
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_win_defensive_wars_grant_perm }
+		}
+	}
+	
 	edmp_interference_prolong_win_defensive_wars_to_this_character = { # Not potentially-negative
 		filter = all_including_me
 		ai = no
@@ -912,16 +1004,29 @@ targetted_decisions = {
 		}
 		allow = { # Keep in sync with the allow clause above
 			trigger_if = {
-				limit = { has_global_flag = edmp_interference_win_defensive_wars_global }
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_human }
 				OR = {
 					AND = {
-						edmp_this_character_is_a_current_or_absent_human_player = yes
+						edmp_this_character_is_a_current_human_player = yes
 						custom_tooltip = {
-							text = edmp_interference_win_defensive_wars_global_is_not_active_tt
+							text = edmp_interference_win_defensive_wars_global_human_is_not_active_tt
 							always = no
 						}
 					}
-					edmp_this_character_is_not_a_current_or_absent_human_player = yes
+					edmp_this_character_is_not_a_current_human_player = yes
+				}
+			}
+			trigger_if = {
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
+				OR = {
+					AND = {
+						edmp_this_character_is_an_absent_human_player = yes
+						custom_tooltip = {
+							text = edmp_interference_win_defensive_wars_global_absent_player_is_not_active_tt
+							always = no
+						}
+					}
+					edmp_this_character_is_not_an_absent_human_player = yes
 				}
 			}
 			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
@@ -934,12 +1039,13 @@ targetted_decisions = {
 			}
 			ROOT = {
 				show_scope_change = no
+				# Remove the modifier, then follow the same logic as when granting the modifier (above).
 				hidden_tooltip = { remove_character_modifier = edmp_interference_win_defensive_wars }
 				add_character_modifier = {
 					name     = edmp_interference_win_defensive_wars
 					years    = 3
 					stacking = no
-					inherit  = yes # Since this is only a temporary buff, we're not going to try super-hard to cover all possible future situations where modifier inheritance might break (eg. abdication).
+					inherit  = yes
 				}
 				if = {
 					limit = {
@@ -964,7 +1070,12 @@ targetted_decisions = {
 			has_character_flag = edmp_interference_show
 			edmp_this_character_can_see_admin_helper_actions = yes
 		}
-		potential = { has_character_modifier = edmp_interference_win_defensive_wars }
+		potential = {
+			OR = {
+				has_character_modifier = edmp_interference_win_defensive_wars
+				has_character_modifier = edmp_interference_win_defensive_wars_perm
+			}
+		}
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
@@ -975,7 +1086,14 @@ targetted_decisions = {
 			}
 			ROOT = {
 				show_scope_change = no
-				remove_character_modifier = edmp_interference_win_defensive_wars
+				if = {
+					limit = { has_character_modifier = edmp_interference_win_defensive_wars }
+					remove_character_modifier = edmp_interference_win_defensive_wars
+				}
+				if = {
+					limit = { has_character_modifier = edmp_interference_win_defensive_wars_perm }
+					remove_character_modifier = edmp_interference_win_defensive_wars_perm
+				}
 			}
 			edmp_interference_notify_players_singlechar = yes
 			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_win_defensive_wars_revoke }
