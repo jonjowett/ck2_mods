@@ -107,6 +107,16 @@ edmp_interference_prolong_health_to_this_character;§P(ED:MP:Intf)§! Prolong Heal
 edmp_interference_prolong_health_to_this_character_desc;[Root.GetTitledFirstName]'s §YTemporary Vitality§! (§G+20 Health§!) will be §Gprolonged§! for §Y3 years§!.;;;;;;;;;;;;;x
 edmp_interference_revoke_health_from_this_character;§P(ED:MP:Intf)§! Revoke Health;;;;;;;;;;;;;x
 edmp_interference_revoke_health_from_this_character_desc;[Root.GetTitledFirstName]'s §YTemporary Vitality§! (§G+20 Health§!) will be §Rrevoked§!.;;;;;;;;;;;;;x
+edmp_interference_heal_disease;§P(ED:MP:Intf)§! Heal Disease;;;;;;;;;;;;;x
+edmp_interference_heal_disease_desc;All of [Root.GetTitledFirstName]'s §Ysymptoms and diseases§! will be §Gremoved§!.;;;;;;;;;;;;;x
+edmp_interference_heal_mental;§P(ED:MP:Intf)§! Heal Mental;;;;;;;;;;;;;x
+edmp_interference_heal_mental_desc;All of [Root.GetTitledFirstName]'s §Ynegative mental conditions§! will be §Gremoved§!.;;;;;;;;;;;;;x
+edmp_interference_heal_congenital;§P(ED:MP:Intf)§! Heal Congenital;;;;;;;;;;;;;x
+edmp_interference_heal_congenital_desc;All of [Root.GetTitledFirstName]'s §Ynegative congenital conditions§! will be §Gremoved§!.;;;;;;;;;;;;;x
+edmp_interference_heal_maiming;§P(ED:MP:Intf)§! Heal Maiming;;;;;;;;;;;;;x
+edmp_interference_heal_maiming_desc;All of [Root.GetTitledFirstName]'s §Ypermanent injuries§! will be §Gremoved§!.;;;;;;;;;;;;;x
+edmp_interference_heal_wounds;§P(ED:MP:Intf)§! Heal Wounds;;;;;;;;;;;;;x
+edmp_interference_heal_wounds_desc;All of [Root.GetTitledFirstName]'s §Ywounds and bruises§! will be §Gremoved§!.;;;;;;;;;;;;;x
 edmp_interference_make_this_character_younger;§P(ED:MP:Intf)§! Younger (§l-10yr§!);;;;;;;;;;;;;x
 edmp_interference_make_this_character_younger_desc;[Root.GetTitledFirstName] becomes §G10 years younger§!.;;;;;;;;;;;;;x
 edmp_interference_make_this_character_older;§P(ED:MP:Intf)§! Older (§M+10yr§!);;;;;;;;;;;;;x
@@ -245,8 +255,10 @@ edmp_interference_win_defensive_wars_global_absent_player_is_active_tt;The globa
 edmp_interference_win_defensive_wars_global_absent_player_is_not_active_tt;The global §M(ED:MP)§Y Absent Players Win Defensive Wars§! game rule is NOT enabled;;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_ai_will_act_now_tt;[Root.GetBestName] immediately wins all defensive wars;;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_prev_wins_all_defensive_wars_against_this_character_tt;[This.GetBestName] immediately §Rloses§! all wars where [This.GetSheHe] is the §Yprimary attacker§! and [Prev.GetBestName] is §Ya defender§!;;;;;;;;;;;;;x
+edmp_interference_heal_disease_no_immunity_gained_tt;§RWARNING!§! Unlike natural recovery, [This.GetTitledFirstName] §Ywill NOT gain immunity§! to any of the removed diseases!;;;;;;;;;;;;;x
+edmp_interference_heal_mental_clear_demon_child_flags_tt;All §Ydemon child§! character flags will be §Yremoved§!!\n§RWARNING!§! This may be §Rhighly undesirable§! in some situations!;;;;;;;;;;;;;x
 #
-edmp_interference_line_break_tt;§g.§!\n;;;;;;;;;;;;;x
+edmp_interference_line_break_tt;§b.§!\n;;;;;;;;;;;;;x
 #
 # Opinion Modifiers
 edmp_forcibly_added_non_aggression_pact;§M(ED:MP)§! Non-aggression pact forced by host;;;;;;;;;;;;;x
