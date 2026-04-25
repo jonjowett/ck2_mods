@@ -6,28 +6,39 @@ defined_text = {
 			        has_global_flag = edmp_interference_win_defensive_wars_global_human
 			        has_global_flag = edmp_interference_win_defensive_wars_global_absent_player
 		}
-		localisation_key =  edmp_global_win_defensive_wars_global_all_rules_short_status_both_enabled
+		localisation_key = edmp_global_win_defensive_wars_global_all_rules_short_status_both_enabled
 	}
 	text = {
 		trigger = {
 			        has_global_flag = edmp_interference_win_defensive_wars_global_human
 			NOT = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
 		}
-		localisation_key =  edmp_global_win_defensive_wars_global_all_rules_short_status_human_only
+		localisation_key = edmp_global_win_defensive_wars_global_all_rules_short_status_human_only
 	}
 	text = {
 		trigger = {
 			NOT = { has_global_flag = edmp_interference_win_defensive_wars_global_human }
 			        has_global_flag = edmp_interference_win_defensive_wars_global_absent_player
 		}
-		localisation_key =  edmp_global_win_defensive_wars_global_all_rules_short_status_absent_player_only
+		localisation_key = edmp_global_win_defensive_wars_global_all_rules_short_status_absent_player_only
 	}
 	text = {
 		trigger = {
 			NOT = { has_global_flag = edmp_interference_win_defensive_wars_global_human }
 			NOT = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
 		}
-		localisation_key =  edmp_global_win_defensive_wars_global_all_rules_short_status_both_disabled
+		localisation_key = edmp_global_win_defensive_wars_global_all_rules_short_status_both_disabled
+	}
+}
+
+defined_text = {
+	name = edmp_global_win_defensive_wars_global_easy_warning
+	use_first_valid = yes
+	text = {
+		trigger = {
+			        has_global_flag = edmp_interference_win_defensive_wars_global_human
+		}
+		localisation_key = edmp_global_win_defensive_wars_global_easy_warning_actual
 	}
 }
 
@@ -36,11 +47,11 @@ defined_text = {
 	use_first_valid = yes
 	text = {
 		trigger = { has_global_flag = edmp_interference_win_defensive_wars_global_human }
-		localisation_key =  edmp_global_win_defensive_wars_global_status_enabled
+		localisation_key = edmp_global_win_defensive_wars_global_status_enabled
 	}
 	text = {
 		trigger = { NOT = { has_global_flag = edmp_interference_win_defensive_wars_global_human } }
-		localisation_key =  edmp_global_win_defensive_wars_global_status_disabled
+		localisation_key = edmp_global_win_defensive_wars_global_status_disabled
 	}
 }
 defined_text = {
@@ -48,10 +59,10 @@ defined_text = {
 	use_first_valid = yes
 	text = {
 		trigger = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
-		localisation_key =  edmp_global_win_defensive_wars_global_status_enabled
+		localisation_key = edmp_global_win_defensive_wars_global_status_enabled
 	}
 	text = {
 		trigger = { NOT = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player } }
-		localisation_key =  edmp_global_win_defensive_wars_global_status_disabled
+		localisation_key = edmp_global_win_defensive_wars_global_status_disabled
 	}
 }

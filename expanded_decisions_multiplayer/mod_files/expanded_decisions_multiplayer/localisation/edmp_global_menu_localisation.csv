@@ -141,21 +141,22 @@ edmp_global_4000_evtopt_win_defensive_wars_global;Players Win Defensive Wars (cu
 #
 # Miscellaneous Menu - Players Win Defensive Wars
 edmp_global_4100_title;(ED:MP) Misc - Players Win Defensive Wars;;;;;;;;;;;;;x
-edmp_global_4100_desc;If this rule is enabled then ALL current/absent players will be able to instantly win ALL of their defensive wars.\n- "All current players" means: All human-controlled characters\n- "All absent players" means: All AI-controlled characters with the "Absent Player" modifier.\n- "All defensive wars" means all wars where:\n.....(1) The character is the main or a secondary defender, and\n.....(2) The primary attacker is NOT a current or absent player.\nWARNING: This rule will make the game a LOT EASIER for players!\nCurrent rule: [edmp_global_win_defensive_wars_global_all_rules_short_status].;;;;;;;;;;;;;x
+edmp_global_4100_desc;If this rule is enabled then ALL current/absent players will be able to instantly win ALL of their defensive wars.\n- "Current player" = human-controlled\n- "Absent player" = AI-controlled with "Absent Player" modifier\n- "Defensive war" = Any war where:\n(1) The character is the main or a secondary defender, and\n(2) The primary attacker is NOT a current or absent player\n\nCurrent rule: [edmp_global_win_defensive_wars_global_all_rules_short_status][edmp_global_win_defensive_wars_global_easy_warning];;;;;;;;;;;;;x
 edmp_global_4100_evtopt_win_defensive_wars_global_human_enable;Current players --- Currently: DISABLED --- Change to: ENABLED;;;;;;;;;;;;;x
 edmp_global_4100_evtopt_win_defensive_wars_global_human_disable;Current players --- Currently: ENABLED --- Change to: DISABLED;;;;;;;;;;;;;x
-edmp_global_4100_evtopt_win_defensive_wars_global_human_enable_tt;§YCurrent human players§! §Gwill§! be able to §Yinstantly win their defensive wars§!.\n\n§RWARNING!§! This rule change will take effect §Yimmediately§!!\n;;;;;;;;;;;;;x
-edmp_global_4100_evtopt_win_defensive_wars_global_human_disable_tt;§YCurrent human players§! §Rwill NOT§! be able to §Yinstantly win their defensive wars§!.\n\n§RWARNING!§! This rule change will take effect §Yimmediately§!!\n;;;;;;;;;;;;;x
+edmp_global_4100_evtopt_win_defensive_wars_global_human_enable_tt;§YCurrent human players§! §Gwill§! be able to §Yinstantly win their defensive wars§!.\n\n§RWARNING!§! This rule change will take effect §Yimmediately§!!\n\n§RWARNING!§! This rule change would make the game §Ysignificantly easier§!!\n§b....................§!(Players will NOT experience any meaningful challenge, apart from PVP.)\n§b.§!;;;;;;;;;;;;;x
+edmp_global_4100_evtopt_win_defensive_wars_global_human_disable_tt;§YCurrent human players§! §Rwill NOT§! be able to §Yinstantly win their defensive wars§!.\n\n§RWARNING!§! This rule change will take effect §Yimmediately§!!\n§b.§!;;;;;;;;;;;;;x
 edmp_global_4100_evtopt_win_defensive_wars_global_absent_player_enable;Absent players --- Currently: DISABLED --- Change to: ENABLED;;;;;;;;;;;;;x
 edmp_global_4100_evtopt_win_defensive_wars_global_absent_player_disable;Absent players --- Currently: ENABLED --- Change to: DISABLED;;;;;;;;;;;;;x
-edmp_global_4100_evtopt_win_defensive_wars_global_absent_player_enable_tt;§YAbsent human players§! §Gwill§! be able to §Yinstantly win their defensive wars§!.\n\n§RWARNING!§! This rule change will take effect §Yimmediately§!!\n;;;;;;;;;;;;;x
-edmp_global_4100_evtopt_win_defensive_wars_global_absent_player_disable_tt;§YAbsent human players§! §Rwill NOT§! be able to §Yinstantly win their defensive wars§!.\n\n§RWARNING!§! This rule change will take effect §Yimmediately§!!\n;;;;;;;;;;;;;x
-edmp_interference_win_defensive_wars_all_ai_will_act_now_tt;\nAll §YAbsent Players§! immediately win all of their defensive wars\n;;;;;;;;;;;;;x
+edmp_global_4100_evtopt_win_defensive_wars_global_absent_player_enable_tt;§YAbsent human players§! §Gwill§! be able to §Yinstantly win their defensive wars§!.\n\n§RWARNING!§! This rule change will take effect §Yimmediately§!!\n§b.§!;;;;;;;;;;;;;x
+edmp_global_4100_evtopt_win_defensive_wars_global_absent_player_disable_tt;§YAbsent human players§! §Rwill NOT§! be able to §Yinstantly win their defensive wars§!.\n\n§RWARNING!§! This rule change will take effect §Yimmediately§!!\n§b.§!;;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_all_ai_will_act_now_tt;§b.§!\nAll §YAbsent Players§! immediately win all of their defensive wars\n;;;;;;;;;;;;;x
 #
 # Custom Loc - Players Win Defensive Wars
 edmp_global_win_defensive_wars_global_all_rules_short_status_both_enabled;ENABLED for Current & Absent Players;;;;;;;;;;;;;x
 edmp_global_win_defensive_wars_global_all_rules_short_status_human_only;ENABLED for Current Players only;;;;;;;;;;;;;x
 edmp_global_win_defensive_wars_global_all_rules_short_status_absent_player_only;ENABLED for Absent Players only;;;;;;;;;;;;;x
 edmp_global_win_defensive_wars_global_all_rules_short_status_both_disabled;DISABLED;;;;;;;;;;;;;x
+edmp_global_win_defensive_wars_global_easy_warning_actual;§b.§!\nWARNING: This makes the game A LOT EASIER!;;;;;;;;;;;;;x
 edmp_global_win_defensive_wars_global_status_enabled;ENABLED;;;;;;;;;;;;;x
 edmp_global_win_defensive_wars_global_status_disabled;DISABLED;;;;;;;;;;;;;x
