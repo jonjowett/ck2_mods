@@ -766,8 +766,8 @@ character_event = {
 
 
 
-# Gateway event for the CB menu.
-# This should be the ONLY entrance and ONLY exit from the CB menu.
+# Gateway event for the Misc menu.
+# This should be the ONLY entrance and ONLY exit from the Misc menu.
 character_event = {
 	
 	id      = edmp_global.4000
@@ -810,15 +810,16 @@ character_event = {
 	is_triggered_only = yes
 	ai = no
 	
-	# Click to change the current rule
+	# Click to change the current rule - Current Players
 	# Only one of these two options is visible
 	option = {
-		name = edmp_global_4100_evtopt_win_defensive_wars_global_enable
-		trigger = { NOT = { has_global_flag = edmp_interference_win_defensive_wars_global } }
+		name = edmp_global_4100_evtopt_win_defensive_wars_global_human_enable
+		trigger = { NOT = { has_global_flag = edmp_interference_win_defensive_wars_global_human } }
 		# Change the rule
 		custom_tooltip = {
-			text = edmp_global_4100_evtopt_win_defensive_wars_global_enable_tt
-			set_global_flag = edmp_interference_win_defensive_wars_global
+			text = edmp_global_4100_evtopt_win_defensive_wars_global_human_enable_tt
+			set_global_flag = edmp_interference_win_defensive_wars_global_human
+			any_player = { character_event = { id = edmp_global.4111 } }
 		}
 		# Notify players
 		if = {
@@ -831,16 +832,17 @@ character_event = {
 				}
 			}
 		}
-		# Back to previous menu
-		hidden_tooltip = { character_event = { id = edmp_global.4000 } }
+		# Reload this event
+		hidden_tooltip = { character_event = { id = edmp_global.4100 } }
 	}
 	option = {
-		name = edmp_global_4100_evtopt_win_defensive_wars_global_disable
-		trigger = { has_global_flag = edmp_interference_win_defensive_wars_global }
+		name = edmp_global_4100_evtopt_win_defensive_wars_global_human_disable
+		trigger = { has_global_flag = edmp_interference_win_defensive_wars_global_human }
 		# Change the rule
 		custom_tooltip = {
-			text = edmp_global_4100_evtopt_win_defensive_wars_global_disable_tt
-			clr_global_flag = edmp_interference_win_defensive_wars_global
+			text = edmp_global_4100_evtopt_win_defensive_wars_global_human_disable_tt
+			clr_global_flag = edmp_interference_win_defensive_wars_global_human
+			any_player = { character_event = { id = edmp_global.4110 } }
 		}
 		# Notify players
 		if = {
@@ -853,8 +855,65 @@ character_event = {
 				}
 			}
 		}
-		# Back to previous menu
-		hidden_tooltip = { character_event = { id = edmp_global.4000 } }
+		# Reload this event
+		hidden_tooltip = { character_event = { id = edmp_global.4100 } }
+	}
+	
+	# Click to change the current rule - Absent Players
+	# Only one of these two options is visible
+	option = {
+		name = edmp_global_4100_evtopt_win_defensive_wars_global_absent_player_enable
+		trigger = { NOT = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player } }
+		# Change the rule
+		custom_tooltip = {
+			text = edmp_global_4100_evtopt_win_defensive_wars_global_absent_player_enable_tt
+			set_global_flag = edmp_interference_win_defensive_wars_global_absent_player
+			any_player = { character_event = { id = edmp_global.4121 } }
+		}
+		# Absent players win all of their wars
+		custom_tooltip = {
+			text = edmp_interference_win_defensive_wars_all_ai_will_act_now_tt
+			any_character = {
+				limit = { edmp_this_character_is_an_absent_human_player = yes }
+				character_event = { id = edmp_wdw.2000 }
+			}
+		}
+		# Notify players
+		if = {
+			limit = { edmp_this_is_a_multiplayer_game = yes }
+			custom_tooltip = {
+				text = edmp_gmn_player_notification_sent_tt
+				any_player = {
+					limit = { NOT = { character = PREV } }
+					character_event = { id = edmp_gmn.4101 }
+				}
+			}
+		}
+		# Reload this event
+		hidden_tooltip = { character_event = { id = edmp_global.4100 } }
+	}
+	option = {
+		name = edmp_global_4100_evtopt_win_defensive_wars_global_absent_player_disable
+		trigger = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
+		# Change the rule
+		custom_tooltip = {
+			text = edmp_global_4100_evtopt_win_defensive_wars_global_absent_player_disable_tt
+			clr_global_flag = edmp_interference_win_defensive_wars_global_absent_player
+			any_player = { character_event = { id = edmp_global.4120 } }
+		}
+		# Notify players
+		if = {
+			limit = { edmp_this_is_a_multiplayer_game = yes }
+			custom_tooltip = {
+				text = edmp_gmn_player_notification_sent_tt
+				any_player = {
+					limit = { NOT = { character = PREV } }
+					character_event = { id = edmp_gmn.4101 }
+				}
+			}
+		}
+		# Reload this event
+		hidden_tooltip = { character_event = { id = edmp_global.4100 } }
 	}
 	
 	# Exit without changing anything
@@ -864,4 +923,30 @@ character_event = {
 		hidden_tooltip = { character_event = { id = edmp_global.4000 } }
 	}
 	
+}
+
+# Global flag changes moved to hidden events (triggered on every player), to avoid MP sync issues.
+character_event = {
+	id = edmp_global.4110
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { clr_global_flag = edmp_interference_win_defensive_wars_global_human }
+}
+character_event = {
+	id = edmp_global.4111
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { set_global_flag = edmp_interference_win_defensive_wars_global_human }
+}
+character_event = {
+	id = edmp_global.4120
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { clr_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
+}
+character_event = {
+	id = edmp_global.4121
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { set_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
 }

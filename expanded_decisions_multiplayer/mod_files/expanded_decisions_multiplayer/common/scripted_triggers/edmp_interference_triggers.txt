@@ -60,44 +60,56 @@ edmp_interference_this_is_not_some_kind_of_temporary_title = {
 }
 
 edmp_interference_win_defensive_wars_is_available_to_this_character = {
-	OR = {
-		# Anyone (human or AI) specifically designated by the host can use this feature
-		has_character_modifier = edmp_interference_win_defensive_wars
-		# Only players may benefit from the global rule
-		AND = {
-			has_global_flag = edmp_interference_win_defensive_wars_global
-			edmp_this_character_is_a_current_or_absent_human_player = yes
+	
+	war = yes
+	
+	trigger_if = {
+		limit = {
+			OR = {
+				has_global_flag = edmp_interference_win_defensive_wars_global_human
+				has_global_flag = edmp_interference_win_defensive_wars_global_absent_player
+			}
+		}
+		# If EITHER of the global rules are active, show the logic for BOTH.
+		# (Because people might be confused about why they (or an AI) can't use the feature, and seeing all the criteria should help to explain.)
+		OR = {
+			# Anyone (human or AI) specifically designated by the host can use this feature
+			has_character_modifier = edmp_interference_win_defensive_wars
+			# Global rule affects current players, or absent players, or both
+			AND = {
+				custom_tooltip = {
+					text = edmp_interference_win_defensive_wars_global_human_is_active_tt
+					has_global_flag = edmp_interference_win_defensive_wars_global_human
+				}
+				edmp_this_character_is_a_current_human_player = yes
+			}
+			AND = {
+				custom_tooltip = {
+					text = edmp_interference_win_defensive_wars_global_absent_player_is_active_tt
+					has_global_flag = edmp_interference_win_defensive_wars_global_absent_player
+				}
+				edmp_this_character_is_an_absent_human_player = yes
+			}
 		}
 	}
-	war = yes
+	trigger_else = {
+		# If none of the global rules are active, hide the complicated-looking logic
+		has_character_modifier = edmp_interference_win_defensive_wars
+	}
+	
 }
 
 edmp_interference_win_defensive_wars_root_character_is_a_valid_target_for_from_to_win_war = {
 	
-	# Only AI can be imprisoned
+	# ROOT must not be current/absent human (because only AI attackers can be forced to lose a war)
 	ROOT = {
 		show_scope_change = no
 		edmp_this_character_is_not_a_current_or_absent_human_player = yes
 	}
 	
-	# Global rule is active and FROM is a player; or FROM has been specially designated by an admin
-	trigger_if = {
-		limit = { has_global_flag = edmp_interference_win_defensive_wars_global }
-		ROOT_FROM = {
-			OR = {
-				has_character_modifier = edmp_interference_win_defensive_wars
-				AND = {
-					custom_tooltip = {
-						text = edmp_interference_win_defensive_wars_global_is_active_tt
-						always = yes
-					}
-					edmp_this_character_is_a_current_or_absent_human_player = yes
-				}
-			}
-		}
-	}
-	trigger_else = {
-		ROOT_FROM = { has_character_modifier = edmp_interference_win_defensive_wars }
+	# FROM has win defensive wars due to global rule; or FROM has been specially designated by an admin
+	ROOT_FROM = {
+		edmp_interference_win_defensive_wars_is_available_to_this_character = yes
 	}
 	
 	# ROOT is **primary** attacker in a war where FROM is a **primary/secondary** defender
