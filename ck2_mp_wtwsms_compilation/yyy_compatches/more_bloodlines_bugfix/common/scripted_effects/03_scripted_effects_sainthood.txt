@@ -275,23 +275,6 @@ deciding_upon_saint_effect = {
                 }
             }
         }
-
-		modifier = {
-            factor = 2
-            event_target:saint_person = {
-                religion_head = {
-					dynasty = PREV
-				}
-            }
-        }
-		modifier = {
-            factor = 2
-            event_target:saint_person = {
-                religion_head = {
-					dynasty = PREV
-				}
-            }
-        }
         #Extra high piety increases your chance of becoming a Saint
         modifier = {
             factor = 1.2
@@ -430,7 +413,7 @@ deciding_upon_saint_effect = {
             }
         }
         random_realm_province = {
-            province_event = { id = HF.40010 }
+            owner = { character_event = { id = HF.40010 } }
         }
         change_variable = { which = global_saint_number value = 1 }
         trigger_switch = {
