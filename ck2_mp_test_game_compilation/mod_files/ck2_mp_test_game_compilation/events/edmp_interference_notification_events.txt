@@ -365,6 +365,26 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_health_revoke
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_heal_disease }
+		text                        = edmp_ifn_5001_desc_singlechar_heal_disease
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_heal_mental }
+		text                        = edmp_ifn_5001_desc_singlechar_heal_mental
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_heal_congenital }
+		text                        = edmp_ifn_5001_desc_singlechar_heal_congenital
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_heal_maiming }
+		text                        = edmp_ifn_5001_desc_singlechar_heal_maiming
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_heal_wounds }
+		text                        = edmp_ifn_5001_desc_singlechar_heal_wounds
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_younger }
 		text                        = edmp_ifn_5001_desc_singlechar_younger
 	}
@@ -521,6 +541,10 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_win_defensive_wars_grant
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_win_defensive_wars_grant_perm }
+		text                        = edmp_ifn_5001_desc_singlechar_win_defensive_wars_grant_perm
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_win_defensive_wars_prolong }
 		text                        = edmp_ifn_5001_desc_singlechar_win_defensive_wars_prolong
 	}
@@ -614,6 +638,11 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_health_grant
 			clr_global_flag    = edmp_interference_singlechar_health_prolong
 			clr_global_flag    = edmp_interference_singlechar_health_revoke
+			clr_global_flag    = edmp_interference_singlechar_heal_disease
+			clr_global_flag    = edmp_interference_singlechar_heal_congenital
+			clr_global_flag    = edmp_interference_singlechar_heal_mental
+			clr_global_flag    = edmp_interference_singlechar_heal_maiming
+			clr_global_flag    = edmp_interference_singlechar_heal_wounds
 			clr_global_flag    = edmp_interference_singlechar_younger
 			clr_global_flag    = edmp_interference_singlechar_older
 			clr_global_flag    = edmp_interference_singlechar_sexchange
@@ -621,6 +650,10 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_artifact_flag_as_unique
 			clr_global_flag    = edmp_interference_singlechar_artifact_unflag_as_unique
 			clr_global_flag    = edmp_interference_singlechar_artifact_transfer_single_to_decision_taker
+			clr_global_flag    = edmp_interference_singlechar_boost_stats_grant_temp
+			clr_global_flag    = edmp_interference_singlechar_boost_stats_grant_perm
+			clr_global_flag    = edmp_interference_singlechar_boost_stats_prolong
+			clr_global_flag    = edmp_interference_singlechar_boost_stats_revoke
 			clr_global_flag    = edmp_interference_singlechar_demesne_grant
 			clr_global_flag    = edmp_interference_singlechar_demesne_prolong
 			clr_global_flag    = edmp_interference_singlechar_demesne_revoke
@@ -648,6 +681,10 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_realm_size_grant_100_temp
 			clr_global_flag    = edmp_interference_singlechar_realm_size_prolong_temp
 			clr_global_flag    = edmp_interference_singlechar_realm_size_revoke_all
+			clr_global_flag    = edmp_interference_singlechar_win_defensive_wars_grant
+			clr_global_flag    = edmp_interference_singlechar_win_defensive_wars_grant_perm
+			clr_global_flag    = edmp_interference_singlechar_win_defensive_wars_prolong
+			clr_global_flag    = edmp_interference_singlechar_win_defensive_wars_revoke
 			
 			clr_global_flag    = edmp_interference_singlechar_bad
 			

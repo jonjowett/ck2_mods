@@ -94,17 +94,29 @@ edmp_interference_move_this_ai_to_third_party_player_desc;[Root.GetTitledFirstNa
 edmp_interference_kill_this_character;§P(ED:MP:Intf)§! Kill;;;;;;;;;;;;;x
 edmp_interference_kill_this_character_desc;[Root.GetTitledFirstName] will die.;;;;;;;;;;;;;x
 edmp_interference_grant_win_defensive_wars_to_this_character;§P(ED:MP:Intf)§! Grant Win Def Wars;;;;;;;;;;;;;x
-edmp_interference_grant_win_defensive_wars_to_this_character_desc;[Root.GetTitledFirstName] will be granted §YWin Defensive Wars§! (can freely imprison non-player attackers) for §Y3 years§!.;;;;;;;;;;;;;x
+edmp_interference_grant_win_defensive_wars_to_this_character_desc;[Root.GetTitledFirstName] will be granted §YWin Defensive Wars (Temporary)§! (can freely take a decision to win defensive wars) for §Y3 years§!.;;;;;;;;;;;;;x
+edmp_interference_grant_win_defensive_wars_to_this_character_perm;§P(ED:MP:Intf)§! Grant Perm Win Def Wars;;;;;;;;;;;;;x
+edmp_interference_grant_win_defensive_wars_to_this_character_perm_desc;[Root.GetTitledFirstName] will be granted §YWin Defensive Wars (Permanent & Inheritable)§! (can freely take a decision to win defensive wars).;;;;;;;;;;;;;x
 edmp_interference_prolong_win_defensive_wars_to_this_character;§P(ED:MP:Intf)§! Prolong Win Def Wars;;;;;;;;;;;;;x
-edmp_interference_prolong_win_defensive_wars_to_this_character_desc;[Root.GetTitledFirstName]'s §YWin Defensive Wars§! (ability to freely imprison non-player attackers) will be §Gprolonged§! for §Y3 years§!.;;;;;;;;;;;;;x
+edmp_interference_prolong_win_defensive_wars_to_this_character_desc;[Root.GetTitledFirstName]'s §YWin Defensive Wars (Temporary)§! (ability to instantly win defensive wars) will be §Gprolonged§! for §Y3 years§!.;;;;;;;;;;;;;x
 edmp_interference_revoke_win_defensive_wars_to_this_character;§P(ED:MP:Intf)§! Revoke Win Def Wars;;;;;;;;;;;;;x
-edmp_interference_revoke_win_defensive_wars_to_this_character_desc;[Root.GetTitledFirstName]'s §YWin Defensive Wars§! (ability to freely imprison non-player attackers) will be §Rrevoked§!.;;;;;;;;;;;;;x
+edmp_interference_revoke_win_defensive_wars_to_this_character_desc;[Root.GetTitledFirstName]'s §YWin Defensive Wars§! modifier(s) (ability to instantly win defensive wars) will be §Rrevoked§!.;;;;;;;;;;;;;x
 edmp_interference_grant_health_to_this_character;§P(ED:MP:Intf)§! Grant Health;;;;;;;;;;;;;x
 edmp_interference_grant_health_to_this_character_desc;[Root.GetTitledFirstName] will be granted §YTemporary Vitality§! (§G+20 Health§!) for §Y3 years§!.;;;;;;;;;;;;;x
 edmp_interference_prolong_health_to_this_character;§P(ED:MP:Intf)§! Prolong Health;;;;;;;;;;;;;x
 edmp_interference_prolong_health_to_this_character_desc;[Root.GetTitledFirstName]'s §YTemporary Vitality§! (§G+20 Health§!) will be §Gprolonged§! for §Y3 years§!.;;;;;;;;;;;;;x
 edmp_interference_revoke_health_from_this_character;§P(ED:MP:Intf)§! Revoke Health;;;;;;;;;;;;;x
 edmp_interference_revoke_health_from_this_character_desc;[Root.GetTitledFirstName]'s §YTemporary Vitality§! (§G+20 Health§!) will be §Rrevoked§!.;;;;;;;;;;;;;x
+edmp_interference_heal_disease;§P(ED:MP:Intf)§! Heal Disease;;;;;;;;;;;;;x
+edmp_interference_heal_disease_desc;All of [Root.GetTitledFirstName]'s §Ysymptoms and diseases§! will be §Gremoved§!.;;;;;;;;;;;;;x
+edmp_interference_heal_mental;§P(ED:MP:Intf)§! Heal Mental;;;;;;;;;;;;;x
+edmp_interference_heal_mental_desc;All of [Root.GetTitledFirstName]'s §Ynegative mental conditions§! will be §Gremoved§!.;;;;;;;;;;;;;x
+edmp_interference_heal_congenital;§P(ED:MP:Intf)§! Heal Congenital;;;;;;;;;;;;;x
+edmp_interference_heal_congenital_desc;All of [Root.GetTitledFirstName]'s §Ynegative congenital conditions§! will be §Gremoved§!.;;;;;;;;;;;;;x
+edmp_interference_heal_maiming;§P(ED:MP:Intf)§! Heal Maiming;;;;;;;;;;;;;x
+edmp_interference_heal_maiming_desc;All of [Root.GetTitledFirstName]'s §Ypermanent injuries§! will be §Gremoved§!.;;;;;;;;;;;;;x
+edmp_interference_heal_wounds;§P(ED:MP:Intf)§! Heal Wounds;;;;;;;;;;;;;x
+edmp_interference_heal_wounds_desc;All of [Root.GetTitledFirstName]'s §Ywounds and bruises§! will be §Gremoved§!.;;;;;;;;;;;;;x
 edmp_interference_make_this_character_younger;§P(ED:MP:Intf)§! Younger (§l-10yr§!);;;;;;;;;;;;;x
 edmp_interference_make_this_character_younger_desc;[Root.GetTitledFirstName] becomes §G10 years younger§!.;;;;;;;;;;;;;x
 edmp_interference_make_this_character_older;§P(ED:MP:Intf)§! Older (§M+10yr§!);;;;;;;;;;;;;x
@@ -237,12 +249,16 @@ edmp_interference_this_province_has_a_negative_modifier_ek_mod_not_active_tt;[Th
 edmp_interference_imprison_this_ai_by_third_party_player_tt;[This.GetBestName] is imprisoned by [Root_FromFrom.GetBestName];;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_root_is_primary_attacker_and_from_is_a_defender_tt;[Root.GetBestName] is the §Yprimary attacker§! in a war where [From.GetBestName] is either the §Yprimary defender§! or a §Ysecondary defender§!;;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_root_is_not_imprisoned_by_from_tt;[Root.GetBestName] is NOT already imprisoned by [From.GetBestName];;;;;;;;;;;;;x
-edmp_interference_win_defensive_wars_global_is_active_tt;The global §M(ED:MP)§Y Players Win Defensive Wars§! game rule is enabled;;;;;;;;;;;;;x
-edmp_interference_win_defensive_wars_global_is_not_active_tt;The global §M(ED:MP)§Y Players Win Defensive Wars§! game rule is NOT enabled;;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_global_human_is_active_tt;The global §M(ED:MP)§Y Players Win Defensive Wars§! game rule is enabled;;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_global_human_is_not_active_tt;The global §M(ED:MP)§Y Players Win Defensive Wars§! game rule is NOT enabled;;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_global_absent_player_is_active_tt;The global §M(ED:MP)§Y Absent Players Win Defensive Wars§! game rule is enabled;;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_global_absent_player_is_not_active_tt;The global §M(ED:MP)§Y Absent Players Win Defensive Wars§! game rule is NOT enabled;;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_ai_will_act_now_tt;[Root.GetBestName] immediately wins all defensive wars;;;;;;;;;;;;;x
 edmp_interference_win_defensive_wars_prev_wins_all_defensive_wars_against_this_character_tt;[This.GetBestName] immediately §Rloses§! all wars where [This.GetSheHe] is the §Yprimary attacker§! and [Prev.GetBestName] is §Ya defender§!;;;;;;;;;;;;;x
+edmp_interference_heal_disease_no_immunity_gained_tt;§RWARNING!§! Unlike natural recovery, [This.GetTitledFirstName] §Ywill NOT gain immunity§! to any of the removed diseases!;;;;;;;;;;;;;x
+edmp_interference_heal_mental_clear_demon_child_flags_tt;All §Ydemon child§! character flags will be §Yremoved§!!\n§RWARNING!§! This may be §Rhighly undesirable§! in some situations!;;;;;;;;;;;;;x
 #
-edmp_interference_line_break_tt;§g.§!\n;;;;;;;;;;;;;x
+edmp_interference_line_break_tt;§b.§!\n;;;;;;;;;;;;;x
 #
 # Opinion Modifiers
 edmp_forcibly_added_non_aggression_pact;§M(ED:MP)§! Non-aggression pact forced by host;;;;;;;;;;;;;x
@@ -259,11 +275,13 @@ edmp_interference_wealth_record_granted;§M(ED:MP)§! Wealth Granted;;;;;;;;;;;;;x
 edmp_interference_wealth_record_granted_desc;§M(ED:MP)§! [Root.GetTitledFirstName] (or [Root.GetHerHis] predecessor) has been granted 1,000¤ by a power beyond [Root.GetHerHis] understanding.\n§g.§!\n§gINFO: This modifier (or stack of modifiers) exists solely for external record-keeping - it has no in-game function, and it is safe to remove via console command.§!;;;;;;;;;;;;;x
 edmp_interference_wealth_record_removed;§M(ED:MP)§! Wealth Removed;;;;;;;;;;;;;x
 edmp_interference_wealth_record_removed_desc;§M(ED:MP)§! [Root.GetTitledFirstName] (or [Root.GetHerHis] predecessor) has had 100¤ removed by a power beyond [Root.GetHerHis] understanding.\n§g.§!\n§gINFO: This modifier (or stack of modifiers) exists solely for external record-keeping - it has no in-game function, and it is safe to remove via console command.§!;;;;;;;;;;;;;x
-edmp_interference_win_defensive_wars;§M(ED:MP)§! Win Defensive Wars;;;;;;;;;;;;;x
-edmp_interference_win_defensive_wars_desc;§M(ED:MP)§! [Root.GetTitledFirstName] has been granted the ability to imprison §Yany non-player§! who attacks [Root.GetHerHim] (or [Root.GetHerHis] allies), by a power beyond [Root.GetHerHis] understanding. For as long as this ability lasts, [Root.GetSheHe] will almost certainly win all of [Root.GetHerHis] §Ydefensive wars§!.;;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars;§M(ED:MP)§! Win Defensive Wars (Temporary);;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_desc;§M(ED:MP)§! [Root.GetTitledFirstName] has been §Ytemporarily§! granted the ability to instantly win all of [Root.GetHerHis] defensive wars, by a power beyond [Root.GetHerHis] understanding.;;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_perm;§M(ED:MP)§! Win Defensive Wars (Permanent & Inheritable);;;;;;;;;;;;;x
+edmp_interference_win_defensive_wars_perm_desc;§M(ED:MP)§! [Root.GetTitledFirstName] and [Root.GetHerHis] successors have been granted the ability to instantly win all of their defensive wars, by a power beyond aonyone's understanding.;;;;;;;;;;;;;x
 edmp_interference_boost_stats_temp;§M(ED:MP)§! Massive Stat Boost (Temporary);;;;;;;;;;;;;x
 edmp_interference_boost_stats_temp_desc;§M(ED:MP)§! [Root.GetTitledFirstName] has been granted a major blessing by a power beyond [Root.GetHerHis] understanding. For as long as this blessing lasts, [Root.GetSheHe] will quite simply be §Ybetter at everything§! in life.;;;;;;;;;;;;;x
-edmp_interference_boost_stats_perm;§M(ED:MP)§! Massive Stat Boost (Permanent, Inheritable);;;;;;;;;;;;;x
+edmp_interference_boost_stats_perm;§M(ED:MP)§! Massive Stat Boost (Permanent & Inheritable);;;;;;;;;;;;;x
 edmp_interference_boost_stats_perm_desc;§M(ED:MP)§! [Root.GetTitledFirstName] has been granted a major blessing by a power beyond [Root.GetHerHis] understanding. For the forseeable future, [Root.GetSheHe] and [Root.GetHerHis] successors will quite simply be §Ybetter at everything§! in life.;;;;;;;;;;;;;x
 #
 # Death Reason

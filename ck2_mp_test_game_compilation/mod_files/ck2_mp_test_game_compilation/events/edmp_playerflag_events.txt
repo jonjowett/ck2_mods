@@ -600,3 +600,34 @@ character_event = {
 	after = { clr_character_flag = edmp_admin_helper_startup_event_visible } # Note that, if we're looping back and showing the same event again, this flag will be recreated via the immediate block.
 	
 }
+
+
+
+
+
+
+
+
+
+
+# Admin helper pause/unpause workaround
+#
+# The relevant hidden event MUST be fired on ALL human players, 
+#      so that "add/remove province modifier" effect is silently broadcast to every player,
+#      otherwise CK2's buggy MP code might not synchronise it for some players until a few months/years later.
+character_event = {
+	id = EDMPPlayerFlag.3100
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		edmp_playerflag_adminhelpers_pause_effect_actual = yes
+	}
+}
+character_event = {
+	id = EDMPPlayerFlag.3101
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		edmp_playerflag_adminhelpers_unpause_effect_actual = yes
+	}
+}

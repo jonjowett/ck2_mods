@@ -851,20 +851,34 @@ targetted_decisions = {
 		}
 		potential = {
 			NOT = { has_character_modifier = edmp_interference_win_defensive_wars }
+			NOT = { has_character_modifier = edmp_interference_win_defensive_wars_perm }
 			is_ruler = yes
 		}
 		allow = { # Keep in sync with the allow clause below
 			trigger_if = {
-				limit = { has_global_flag = edmp_interference_win_defensive_wars_global }
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_human }
 				OR = {
 					AND = {
-						edmp_this_character_is_a_current_or_absent_human_player = yes
+						edmp_this_character_is_a_current_human_player = yes
 						custom_tooltip = {
-							text = edmp_interference_win_defensive_wars_global_is_not_active_tt
+							text = edmp_interference_win_defensive_wars_global_human_is_not_active_tt
 							always = no
 						}
 					}
-					edmp_this_character_is_not_a_current_or_absent_human_player = yes
+					edmp_this_character_is_not_a_current_human_player = yes
+				}
+			}
+			trigger_if = {
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
+				OR = {
+					AND = {
+						edmp_this_character_is_an_absent_human_player = yes
+						custom_tooltip = {
+							text = edmp_interference_win_defensive_wars_global_absent_player_is_not_active_tt
+							always = no
+						}
+					}
+					edmp_this_character_is_not_an_absent_human_player = yes
 				}
 			}
 			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
@@ -881,7 +895,10 @@ targetted_decisions = {
 					name     = edmp_interference_win_defensive_wars
 					years    = 3
 					stacking = no
-					inherit  = yes # Since this is only a temporary buff, we're not going to try super-hard to cover all possible future situations where modifier inheritance might break (eg. abdication).
+					# NB: We're not going to try super-hard to cover all possible future situations
+					#     where modifier inheritance might break (eg. abdication),
+					#     because this is only a temporary modifier, so the added complexity isn't really worthwhile.
+					inherit  = yes
 				}
 				if = {
 					limit = {
@@ -899,6 +916,81 @@ targetted_decisions = {
 		}
 	}
 	
+	edmp_interference_grant_win_defensive_wars_to_this_character_perm = { # Admin only
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			NOT = { has_character_modifier = edmp_interference_win_defensive_wars_perm }
+			is_ruler = yes
+		}
+		allow = { # Keep in sync with the allow clause below
+			trigger_if = {
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_human }
+				OR = {
+					AND = {
+						edmp_this_character_is_a_current_human_player = yes
+						custom_tooltip = {
+							text = edmp_interference_win_defensive_wars_global_human_is_not_active_tt
+							always = no
+						}
+					}
+					edmp_this_character_is_not_a_current_human_player = yes
+				}
+			}
+			trigger_if = {
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
+				OR = {
+					AND = {
+						edmp_this_character_is_an_absent_human_player = yes
+						custom_tooltip = {
+							text = edmp_interference_win_defensive_wars_global_absent_player_is_not_active_tt
+							always = no
+						}
+					}
+					edmp_this_character_is_not_an_absent_human_player = yes
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_actions = yes }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_win_defensive_wars_grant_perm
+			}
+			ROOT = {
+				show_scope_change = no
+				hidden_tooltip = { remove_character_modifier = edmp_interference_win_defensive_wars }
+				add_character_modifier = {
+					name     = edmp_interference_win_defensive_wars_perm
+					duration = -1
+					stacking = no
+					# NB: We're not going to try super-hard to cover all possible future situations
+					#     where modifier inheritance might break (eg. abdication),
+					#     because this feature should prevent most/all of those possibilities for AI,
+					#     and humans can complain to the host if they lose it for themselves.
+					inherit  = yes
+				}
+				if = {
+					limit = {
+						ai = yes
+						any_war = { any_defender = { character = ROOT } }
+					}
+					custom_tooltip = {
+						text = edmp_interference_win_defensive_wars_ai_will_act_now_tt
+						character_event = { id = edmp_wdw.2000 }
+					}
+				}
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_win_defensive_wars_grant_perm }
+		}
+	}
+	
 	edmp_interference_prolong_win_defensive_wars_to_this_character = { # Not potentially-negative
 		filter = all_including_me
 		ai = no
@@ -912,16 +1004,29 @@ targetted_decisions = {
 		}
 		allow = { # Keep in sync with the allow clause above
 			trigger_if = {
-				limit = { has_global_flag = edmp_interference_win_defensive_wars_global }
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_human }
 				OR = {
 					AND = {
-						edmp_this_character_is_a_current_or_absent_human_player = yes
+						edmp_this_character_is_a_current_human_player = yes
 						custom_tooltip = {
-							text = edmp_interference_win_defensive_wars_global_is_not_active_tt
+							text = edmp_interference_win_defensive_wars_global_human_is_not_active_tt
 							always = no
 						}
 					}
-					edmp_this_character_is_not_a_current_or_absent_human_player = yes
+					edmp_this_character_is_not_a_current_human_player = yes
+				}
+			}
+			trigger_if = {
+				limit = { has_global_flag = edmp_interference_win_defensive_wars_global_absent_player }
+				OR = {
+					AND = {
+						edmp_this_character_is_an_absent_human_player = yes
+						custom_tooltip = {
+							text = edmp_interference_win_defensive_wars_global_absent_player_is_not_active_tt
+							always = no
+						}
+					}
+					edmp_this_character_is_not_an_absent_human_player = yes
 				}
 			}
 			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
@@ -934,12 +1039,13 @@ targetted_decisions = {
 			}
 			ROOT = {
 				show_scope_change = no
+				# Remove the modifier, then follow the same logic as when granting the modifier (above).
 				hidden_tooltip = { remove_character_modifier = edmp_interference_win_defensive_wars }
 				add_character_modifier = {
 					name     = edmp_interference_win_defensive_wars
 					years    = 3
 					stacking = no
-					inherit  = yes # Since this is only a temporary buff, we're not going to try super-hard to cover all possible future situations where modifier inheritance might break (eg. abdication).
+					inherit  = yes
 				}
 				if = {
 					limit = {
@@ -964,7 +1070,12 @@ targetted_decisions = {
 			has_character_flag = edmp_interference_show
 			edmp_this_character_can_see_admin_helper_actions = yes
 		}
-		potential = { has_character_modifier = edmp_interference_win_defensive_wars }
+		potential = {
+			OR = {
+				has_character_modifier = edmp_interference_win_defensive_wars
+				has_character_modifier = edmp_interference_win_defensive_wars_perm
+			}
+		}
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
@@ -975,7 +1086,14 @@ targetted_decisions = {
 			}
 			ROOT = {
 				show_scope_change = no
-				remove_character_modifier = edmp_interference_win_defensive_wars
+				if = {
+					limit = { has_character_modifier = edmp_interference_win_defensive_wars }
+					remove_character_modifier = edmp_interference_win_defensive_wars
+				}
+				if = {
+					limit = { has_character_modifier = edmp_interference_win_defensive_wars_perm }
+					remove_character_modifier = edmp_interference_win_defensive_wars_perm
+				}
 			}
 			edmp_interference_notify_players_singlechar = yes
 			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_win_defensive_wars_revoke }
@@ -1064,6 +1182,246 @@ targetted_decisions = {
 			}
 			edmp_interference_notify_players_singlechar = yes
 			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_health_revoke }
+		}
+	}
+	
+	edmp_interference_heal_disease = { # Not potentially-negative
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			# Hopefully, if a mod changes these triggers, then it will change the equivalent effects (below) in the same way.
+			OR = {
+				always = no # If everything below is broken (eg. due to a total conversion mod), ensure that this decision is not visible.
+				has_disease_trigger = yes
+				has_symptom_trigger = yes
+			}
+		}
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_heal_disease
+			}
+			ROOT = {
+				show_scope_change = no
+				# Warn the admin that immunity will NOT be granted
+				custom_tooltip = { text = edmp_interference_heal_disease_no_immunity_gained_tt }
+				# Hopefully, if a mod changes these effects, then it will change the equivalent triggers (above) in the same way.
+				remove_disease_trait_effect = yes
+				remove_symptoms_effect = yes
+				hidden_tooltip = {
+					remove_disease_flags_effect = yes
+					remove_treatment_modifiers_effect = yes
+				}
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_heal_disease }
+		}
+	}
+	
+	edmp_interference_heal_mental = { # Not potentially-negative
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			OR = {
+				
+				always = no # If everything below is broken (eg. due to a total conversion mod), ensure that this decision is not visible.
+				
+				trait = stressed
+				trait = depressed
+				trait = lunatic
+				trait = possessed
+				trait = drunkard
+				
+				has_character_modifier = voice_of_satan
+				has_character_modifier = voice_of_jesus
+				has_character_modifier = holy_comet
+				has_character_modifier = lycanthropy
+				
+				has_character_flag = demon_child
+				has_character_flag = demon_child_fake
+				has_character_flag = child_exorcism
+				
+			}
+		}
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_heal_mental
+			}
+			ROOT = {
+				show_scope_change = no
+				
+				# Show the removal of demon child flags first, in case this is a dealbreaker, because we want to ensure it doesn't fall off the bottom of the tiny dialog window.
+				if = {
+					limit = {
+						OR = {
+							has_character_flag = demon_child
+							has_character_flag = demon_child_fake
+							has_character_flag = child_exorcism
+						}
+					}
+					custom_tooltip = {
+						text = edmp_interference_heal_mental_clear_demon_child_flags_tt
+						clr_character_flag = demon_child
+						clr_character_flag = demon_child_fake
+						clr_character_flag = child_exorcism
+					}
+				}
+				
+				if = { limit = { trait = stressed  } remove_trait = stressed  }
+				if = { limit = { trait = depressed } remove_trait = depressed }
+				if = { limit = { trait = lunatic   } remove_trait = lunatic   }
+				if = { limit = { trait = drunkard  } remove_trait = drunkard  }
+				if = { limit = { trait = possessed } remove_trait = possessed }
+				
+				if = { limit = { has_character_modifier = voice_of_satan } remove_character_modifier = voice_of_satan }
+				if = { limit = { has_character_modifier = voice_of_jesus } remove_character_modifier = voice_of_jesus }
+				if = { limit = { has_character_modifier = holy_comet     } remove_character_modifier = holy_comet     }
+				if = { limit = { has_character_modifier = lycanthropy    } remove_character_modifier = lycanthropy    }
+				
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_heal_mental }
+		}
+	}
+	
+	edmp_interference_heal_congenital = { # Not potentially-negative
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			OR = {
+				always = no # If everything below is broken (eg. due to a total conversion mod), ensure that this decision is not visible.
+				# Hopefully, if a mod changes this trigger, then it will change the equivalent effect (below) in the same way.
+				has_negative_congenital_trigger = yes
+			}
+		}
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_heal_congenital
+			}
+			ROOT = {
+				show_scope_change = no
+				# Hopefully, if a mod changes this effect, then it will change the equivalent trigger (above) in the same way.
+				remove_all_negative_congenital_traits_effect = yes
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_heal_congenital }
+		}
+	}
+	
+	edmp_interference_heal_maiming = { # Not potentially-negative
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			OR = {
+				always = no # If everything below is broken (eg. due to a total conversion mod), ensure that this decision is not visible.
+				trait = maimed
+				trait = one_eyed
+				trait = one_handed 
+				trait = one_legged 
+				trait = disfigured 
+				trait = mangled
+				trait = blinded
+				trait = eunuch
+			}
+		}
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_heal_maiming
+			}
+			ROOT = {
+				show_scope_change = no
+				if = { limit = { trait = maimed     } remove_trait = maimed     }
+				if = { limit = { trait = one_eyed   } remove_trait = one_eyed   }
+				if = { limit = { trait = blinded    } remove_trait = blinded    }
+				if = { limit = { trait = one_handed } remove_trait = one_handed }
+				if = { limit = { trait = one_legged } remove_trait = one_legged }
+				if = { limit = { trait = disfigured } remove_trait = disfigured }
+				if = { limit = { trait = mangled    } remove_trait = mangled    }
+				if = { limit = { trait = eunuch     } remove_trait = eunuch     }
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_heal_maiming }
+		}
+	}
+	
+	edmp_interference_heal_wounds = { # Not potentially-negative
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			OR = {
+				
+				always = no # If everything below is broken (eg. due to a total conversion mod), ensure that this decision is not visible.
+				
+				trait = wounded
+				trait = severely_injured
+				trait = infection
+				
+				has_character_modifier = black_eye
+				has_character_modifier = swollen_wrist
+				has_character_modifier = swollen_ankle
+				has_character_modifier = concussion
+				has_character_modifier = cracked_ribs
+				has_character_modifier = badly_bruised
+				has_character_modifier = sore_muscles
+				
+			}
+		}
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_heal_wounds
+			}
+			ROOT = {
+				show_scope_change = no
+				
+				if = { limit = { trait = wounded          } remove_trait = wounded          }
+				if = { limit = { trait = severely_injured } remove_trait = severely_injured }
+				if = { limit = { trait = infection        } remove_trait = infection        }
+				
+				if = { limit = { has_character_modifier = black_eye     } remove_character_modifier = black_eye     }
+				if = { limit = { has_character_modifier = swollen_wrist } remove_character_modifier = swollen_wrist }
+				if = { limit = { has_character_modifier = swollen_ankle } remove_character_modifier = swollen_ankle }
+				if = { limit = { has_character_modifier = concussion    } remove_character_modifier = concussion    }
+				if = { limit = { has_character_modifier = cracked_ribs  } remove_character_modifier = cracked_ribs  }
+				if = { limit = { has_character_modifier = badly_bruised } remove_character_modifier = badly_bruised }
+				if = { limit = { has_character_modifier = sore_muscles  } remove_character_modifier = sore_muscles  }
+				
+			}
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_heal_wounds }
 		}
 	}
 	
@@ -2085,6 +2443,53 @@ targetted_decisions = {
 			}
 			edmp_interference_notify_players_singlechar = yes
 			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_offmap_currency_remove_1k }
+		}
+	}
+	
+	edmp_interference_society_currency_grant_1k = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { ROOT = { is_in_society = yes } }
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_society_currency_grant_1k
+			}
+			ROOT = { change_society_currency = 1000 }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_society_currency_grant_1k }
+		}
+	}
+	
+	edmp_interference_society_currency_remove_1k = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		third_party_filter = independent_rulers
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { ROOT = { is_in_society = yes } }
+		allow = {
+			ROOT = { society_currency > 0 } # Disable the decision if ROOT has exactly 0 society currency
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_society_currency_remove_1k
+				set_global_flag = edmp_interference_singlechar_bad
+			}
+			ROOT = { change_society_currency = -1000 }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_society_currency_remove_1k }
 		}
 	}
 	
