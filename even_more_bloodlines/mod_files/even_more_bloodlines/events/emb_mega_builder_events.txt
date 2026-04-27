@@ -77,6 +77,7 @@ character_event = {
 		# Check for bloodline eligibility
 		if = {
 			limit = {
+				emb_enable_bloodline_mega_builder = yes
 				check_variable = { which = emb_mega_builder_count value >= 100 }
 				NOT = { any_owned_bloodline = { has_bloodline_flag = emb_mega_builder } }
 			}

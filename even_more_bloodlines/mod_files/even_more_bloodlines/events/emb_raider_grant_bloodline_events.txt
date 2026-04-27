@@ -41,6 +41,7 @@ character_event = {
 		# Check whether they deserve a bloodline and, if so, give it
 		if = {
 			limit = {
+				emb_enable_bloodline_raider = yes
 				check_variable = { which = emb_raider_loot_count value >= 195 } # Trigger ever-so-slightly BEFORE the vanilla bloodline (200 raids), because we want to override the vanilla (not-so-great) bloodline with these modded bloodlines for all characters
 				NOT = {
 					any_owned_bloodline = {
