@@ -1,0 +1,56 @@
+# Audax Validator "!" Ignore_NEXT
+
+e_mexikha = { # !OVERRIDE! it can be buggy
+	color = { 255 127 0 }
+	color2={ 220 220 0 }
+	graphical_culture = aztecholygfx
+	
+	short_name = yes
+	
+	capital = 924 # Western Sahara
+	
+	title = "emperor_nahuatl"
+	title_female = "emperor_female_nahuatl"
+	#foa = "HEAD_PRIEST_FOA"
+	
+	assimilate = no
+	
+	# Always exists
+	landless = yes
+	
+	holy_order = yes
+	
+	# Cannot be vassalized
+	independent = yes
+
+	# Cannot be held as a secondary title
+	primary = yes
+	
+	#Extra income due to donations, etc
+	monthly_income = 12 # (Must be an integer between 1 and 512)	
+	
+	dynasty_title_names = no 	# Will not be named "Seljuk", etc.
+	
+#	tribe = yes
+	
+	culture = nahuatl
+	religion = aztec
+	
+	#pagan_coa = {
+	#	template = 0
+	#	layer = {
+	#		texture = 1
+	#		texture_internal = 10
+	#		emblem = 0
+	#		color = 0
+	#		color = 0
+	#		color = 0
+	#	}
+	#	religion = "aztec"
+	#}
+			
+	can_be_claimed = no
+	can_be_usurped = no
+	
+	extra_ai_eval_troops = 7500
+}
