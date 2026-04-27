@@ -2446,6 +2446,53 @@ targetted_decisions = {
 		}
 	}
 	
+	edmp_interference_society_currency_grant_1k = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { ROOT = { is_in_society = yes } }
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_society_currency_grant_1k
+			}
+			ROOT = { change_society_currency = 1000 }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_society_currency_grant_1k }
+		}
+	}
+	
+	edmp_interference_society_currency_remove_1k = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		third_party_filter = independent_rulers
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { ROOT = { is_in_society = yes } }
+		allow = {
+			ROOT = { society_currency > 0 } # Disable the decision if ROOT has exactly 0 society currency
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				set_global_flag = edmp_interference_singlechar_society_currency_remove_1k
+				set_global_flag = edmp_interference_singlechar_bad
+			}
+			ROOT = { change_society_currency = -1000 }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_society_currency_remove_1k }
+		}
+	}
+	
 	edmp_interference_techpoints_grant_1k_mil = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
 		ai = no
