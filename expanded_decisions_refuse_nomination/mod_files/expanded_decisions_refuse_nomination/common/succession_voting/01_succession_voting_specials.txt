@@ -1450,7 +1450,7 @@ byzantine_elective = {
 					character = PREVPREV
 				}
 				NOT = {
-					is_rival = FROM #Unless is rival.
+					is_rival = ROOT_FROM #Unless is rival.
 				}
 			}
 		}
@@ -4796,7 +4796,6 @@ byzantine_elective = {
 				trait = eunuch
 				trait = disfigured
 				trait = blinded
-				trait = eunuch
 				trait = dwarf
 				trait = clubfooted
 				trait = harelip
@@ -5168,7 +5167,7 @@ hre_feudal_elective = {
 					character = PREVPREV
 				}
 				NOT = {
-					is_rival = FROM #Unless is rival.
+					is_rival = ROOT_FROM #Unless is rival.
 				}
 			}
 		}
@@ -8278,7 +8277,7 @@ hre_feudal_elective = {
 					} 
 				}
 				FROM = { 
-				 	any_dejure_liege = { title = ROOT } #Only dejure vassals.
+				 	any_dejure_liege = { character = ROOT } #Only dejure vassals.
 				}
 			}
 		}
