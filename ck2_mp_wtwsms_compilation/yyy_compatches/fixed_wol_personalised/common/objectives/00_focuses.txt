@@ -251,8 +251,6 @@ focus_seduction = {
         NOT = { trait = monk }
         NOT = { trait = nun }
 		NOT = { is_ascetic_trigger = yes }
-		NOT = { trait = eunuch }
-		NOT = { trait = chaste }
 		NOT = { religion = montanist }
 		NOT = { religion = donatism }
 		NOT = { religion = priscillianism }
@@ -266,7 +264,7 @@ focus_seduction = {
         NOT = { trait = depressed }
             OR = {
                     AND = {
-                        Not = { age = 40 }
+                        NOT = { age = 40 }
                         is_female = yes
                     }
 
@@ -450,31 +448,30 @@ focus_seduction = {
 	}
 	
 	abort = {
-		OR = {		
+		OR = {
 			trait = incapable
-            trait = chaste
-            trait = content
-            trait = blinded
-            trait = maimed
-            trait = eunuch
-            trait = drunkard
-            trait = leper
-            trait = depressed
-         
-            AND = { age = 50
-            is_female = no }
-                 
-            AND = { age = 40
-            is_female = yes }
-			
-			is_playable = no
+			trait = chaste
+			trait = content
+			trait = blinded
+			trait = maimed
 			trait = eunuch
+			trait = drunkard
+			trait = leper
+			trait = depressed
+			AND = {
+				age = 50
+				is_female = no
+			}
+			AND = {
+				age = 40
+				is_female = yes
+			}
+			is_playable = no
 			trait = celibate
 			is_ascetic_trigger = yes
 			religion = montanist
 			religion = donatism
 			religion = priscillianism
-			trait = chaste
 		}
 	}
 	
@@ -1113,7 +1110,7 @@ focus_family = {
 	# MODIFIERS
 	diplomacy = 2
 	health = 1
-	same_dynasty_opinion = 5
+	dynasty_opinion = 5
 	fertility = 0.25
 }
 
