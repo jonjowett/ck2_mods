@@ -21,12 +21,7 @@ obj_aggression_zero = { # Using fake localisation string
 	success = {
 		custom_tooltip = {
 			text = obj_become_chancellor_fake_tip
-			hidden_tooltip = {
-				AND = {
-					is_alive = yes
-					is_alive = no
-				}
-			}
+			always = no
 		}
 	}
 	

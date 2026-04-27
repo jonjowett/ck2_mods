@@ -1,3 +1,5 @@
+# Audax Validator "!" Ignore_NEXT
+
 ###########################################
 #                                         #
 # Way of Life war events                  #
@@ -62,7 +64,7 @@ character_event = {
 		}
 	}
 	
-	option = { #Challenge accepted
+	option = {
 		name = EVTOPTA_WOL_11000
 		ai_chance = {
 			factor = 20
@@ -119,7 +121,7 @@ character_event = {
 		}
 		clr_character_flag = punish_declining
 	}
-	option = { #No, that sounds dangerous
+	option = {
 		name = EVTOPTB_WOL_11000
 		ai_chance = {
 			factor = 1
@@ -160,7 +162,7 @@ character_event = {
 		hidden_tooltip = {
 			remove_character_modifier = recent_duel_timer
 		}
-		FROMFROM = { #attacker
+		FROMFROM = {
 			hidden_tooltip = {
 				remove_character_modifier = recent_duel_timer
 				opinion = {
@@ -271,8 +273,7 @@ character_event = {
 }
 
 
-### NO LONGER IN USE (hence why numbers are off) ###
-# Duel (hidden) 
+# Duel (hidden)
 character_event = {
 	id = WoL.11005
 	is_triggered_only = yes
@@ -3316,7 +3317,6 @@ character_event = {
 	border = GFX_event_normal_frame_war
 
 	hide_from = yes
-	
 	trigger = {
 		has_character_modifier = wol_great_warrior
 		NOT = { lifestyle_traits = 1 }
@@ -3415,7 +3415,7 @@ character_event = {
 	border = GFX_event_normal_frame_war
 
 	hide_from = yes
-
+	
 	desc = {
 		text = EVTDESCA_WOL_11206
 		trigger = {

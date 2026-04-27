@@ -50,50 +50,8 @@ expd_sj_character_can_join_warrior_lodge_trigger = {
 
 expd_sj_character_has_bloodline_ties_to_warrior_lodge_trigger = {
 	OR = {
-		expd_sj_character_has_historic_bloodline_ties_to_warrior_lodge_trigger = yes
 		expd_sj_character_has_respected_bloodline_ties_to_warrior_lodge_trigger = yes
 		expd_sj_character_has_legendary_bloodline_ties_to_warrior_lodge_trigger = yes
-	}
-}
-
-expd_sj_character_has_historic_bloodline_ties_to_warrior_lodge_trigger = {
-	custom_tooltip = {
-		text = expd_sj_character_has_historic_bloodline_ties_to_warrior_lodge_tt
-		hidden_trigger = {
-			any_owned_bloodline = {
-				has_bloodline_flag = historical_bloodline
-				bloodline_is_active_for = PREV
-				OR = {
-					AND = {
-						FROM = { is_society = warrior_lodge_norse }
-						OR = {
-							founder = { character = 163109 } # Ragnarr Lothbrok
-							founder = { character = 144000 } # Harald
-						}
-					}
-					AND = {
-						FROM = { is_society = warrior_lodge_tengri }
-						OR = {
-							founder = { character = 159136 } # Arpad
-							founder = { character = 159117 } # Kubrat (Attila bloodline)
-							founder = { character = 74000  } # Muhan Ashina
-							founder = { character = 125501 } # Genghis Khan
-						}
-					}
-					AND = {
-						FROM = { is_society = warrior_lodge_west_african }
-						founder = { character = 251187 } # Magajiva
-					}
-					AND = {
-						FROM = { is_society = warrior_lodge_slavic }
-						OR = {
-							founder = { character = 40605 } # Rurik
-							founder = { character = 6811  } # Dyre
-						}
-					}
-				}
-			}
-		}
 	}
 }
 

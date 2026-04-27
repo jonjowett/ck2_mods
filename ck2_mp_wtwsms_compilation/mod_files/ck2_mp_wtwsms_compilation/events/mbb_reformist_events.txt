@@ -30,17 +30,6 @@ long_character_event = {
 		trigger = { 
 			ROOT = { 
 				OR = { 
-					religion = hellenic_pagan
-					religion = hellenic_pagan_reformed
-				}
-			}
-		} 
-		picture = GFX_evt_hellenic_temple
-	}
-	picture = { 
-		trigger = { 
-			ROOT = { 
-				OR = { 
 					religion = west_african_pagan
 					religion = west_african_pagan_reformed
 				}
@@ -51,9 +40,7 @@ long_character_event = {
 	picture = { 
 		trigger = { 
 			ROOT = { 
-				NOR = { 
-					religion = hellenic_pagan
-					religion = hellenic_pagan_reformed
+				NOR = {
 					religion = west_african_pagan
 					religion = west_african_pagan_reformed
 				}

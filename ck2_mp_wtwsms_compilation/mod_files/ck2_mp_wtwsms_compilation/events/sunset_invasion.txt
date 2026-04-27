@@ -1,3 +1,5 @@
+# Audax Validator "!" Ignore_NEXT
+
 ###################################
 #
 # SUNSET INVASION
@@ -1171,37 +1173,4 @@ character_event = {
 		#else_if others...
 		add_trait = dead_crown_aztec_fylkir
     }
-}
-
-# OVERRIDE
-# The Demon Child travels to the New World and
-# the stupid kid just wakes up Sunset Invasion, Waaaaagh!
-character_event = {
-	id = SoA.3080
-
-	hide_window = yes
-	
-	is_triggered_only = yes
-	
-	immediate = {
-		random_province = {
-			limit = {
-				duchy = {
-					OR = {
-						title = d_galicia
-						title = d_porto
-						title = d_balata
-						title = d_beja
-						title = d_sevilla
-						title = d_tangiers
-						title = d_fes	
-						title = d_marrakech
-						title = d_sous
-					}
-				}
-				port = yes
-			}
-			province_event = { id = SSI.1 }
-		}
-	}
 }

@@ -367,7 +367,7 @@ feudal_elective = {
 					character = PREVPREV
 				}
 				NOT = {
-					is_rival = FROM #Unless is rival.
+					is_rival = ROOT_FROM #Unless is rival.
 				}
 			}
 		}
@@ -3479,7 +3479,7 @@ feudal_elective = {
 					OR = { #Either defacto direct vassal, or independent ruler who is dejure vassal.
 						vassal_of = ROOT 
 						AND = { 
-						 	any_dejure_liege = { title = ROOT } 
+						 	any_dejure_liege = { character = ROOT } 
 							independent = yes
 						}
 					}
@@ -3672,7 +3672,7 @@ tanistry = {
 					character = PREVPREV
 				}
 				NOT = {
-					is_rival = FROM #Unless is rival.
+					is_rival = ROOT_FROM #Unless is rival.
 				}
 			}
 		}
@@ -6965,7 +6965,7 @@ elective_gavelkind = {
 					character = PREVPREV
 				}
 				NOT = {
-					is_rival = FROM #Unless is rival.
+					is_rival = ROOT_FROM #Unless is rival.
 				}
 			}
 		}

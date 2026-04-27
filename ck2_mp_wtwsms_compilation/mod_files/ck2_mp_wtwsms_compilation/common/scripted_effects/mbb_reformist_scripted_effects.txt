@@ -66,22 +66,6 @@ mbb_create_reformist_bloodline = {
 			}
 		}
 		else_if = {
-			limit = { religion = hellenic_pagan_reformed }
-			if = {
-				limit = { mbb_this_religion_is_godking = yes }
-				ROOT = {
-					show_scope_change = no
-					create_bloodline = { type = IB_reformist_godking_bloodline_hellenic }
-				}
-			}
-			else = {
-				ROOT = {
-					show_scope_change = no
-					create_bloodline = { type = IB_reformist_bloodline_hellenic }
-				}
-			}
-		}
-		else_if = {
 			limit = { religion = norse_pagan_reformed }
 			if = {
 				limit = { mbb_this_religion_is_godking = yes }
@@ -253,10 +237,6 @@ mbb_grant_reformist_nickname_nature = { # Nature-specific nickname
 			else_if = {
 				limit = { religion = tengri_pagan_reformed }
 				ROOT = { show_scope_change = no give_nickname = nick_the_sky_rider }
-			}
-			else_if = {
-				limit = { religion = hellenic_pagan_reformed }
-				ROOT = { show_scope_change = no give_nickname = nick_the_educator }
 			}
 			else = {
 				ROOT = { show_scope_change = no give_nickname = nick_the_missionary }
