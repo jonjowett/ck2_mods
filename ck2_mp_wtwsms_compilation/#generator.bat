@@ -93,9 +93,6 @@ xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_character_se
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_commander_training%git_mod_subfolder%expanded_decisions_commander_training\ %this_mod_folder_location%
 
 :: Not checked because fully compatible
-xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_custom_empire_formation%git_mod_subfolder%expanded_decisions_custom_empire_formation\ %this_mod_folder_location%
-
-:: Not checked because fully compatible
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_gifts%git_mod_subfolder%expanded_decisions_gifts\ %this_mod_folder_location%
 
 :: Not checked because fully compatible
@@ -167,17 +164,11 @@ echo.
 :: Hunting Dog Bloodline Fix overrides 1 event, should be fine
 xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%hunting_dog_bloodline_fix\ %this_mod_folder_location%
 
-:: Overrides a single loc string, should be fine
-xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%last_legendary_gathering_time\ %this_mod_folder_location%
-
 :: NAPFriends adds a couple of extra decisions, should be fine
 xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%nap_friends\ %this_mod_folder_location%
 
 :: No artifact losing overrides 2 defines which are not specified anywhere in wtwsms
 xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%no_artifact_losing\ %this_mod_folder_location%
-
-:: !!!3 doctrines reform needs testing in-game!!!
-xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%three_doctrines_reform\ %this_mod_folder_location%
 
 :: Overwrites a single file, which is not touched by WTWSMS, should be fine
 xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%trait_softcap_exterminated\ %this_mod_folder_location%
@@ -241,6 +232,9 @@ xcopy /R /Y /Q /S /E /I %compatch_subfolder%more_bloodlines_bugfix\ %this_mod_fo
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%even_more_bloodlines%git_mod_subfolder%even_more_bloodlines\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %compatch_subfolder%even_more_bloodlines\ %this_mod_folder_location%
 
+xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_custom_empire_formation%git_mod_subfolder%expanded_decisions_custom_empire_formation\ %this_mod_folder_location%
+xcopy /R /Y /Q /S /E /I %compatch_subfolder%expanded_decisions_custom_empire_formation\ %this_mod_folder_location%
+
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_grand_hunt%git_mod_subfolder%expanded_decisions_grand_hunt\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %compatch_subfolder%expanded_decisions_grand_hunt\ %this_mod_folder_location%
 
@@ -255,6 +249,13 @@ xcopy /R /Y /Q /S /E /I %compatch_subfolder%fixed_wol_personalised\ %this_mod_fo
 
 xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%jade_serpent\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %compatch_subfolder%jade_serpent\ %this_mod_folder_location%
+
+xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%last_legendary_gathering_time\ %this_mod_folder_location%
+xcopy /R /Y /Q /S /E /I %compatch_subfolder%last_legendary_gathering_time\ %this_mod_folder_location%
+
+:: !!!3 doctrines reform needs testing in-game!!!
+xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%three_doctrines_reform\ %this_mod_folder_location%
+xcopy /R /Y /Q /S /E /I %compatch_subfolder%three_doctrines_reform\ %this_mod_folder_location%
 
 :: TP automation should probably come after everything else (ie. after everything else that might potentially affect trade) (although it might not be strictly necessary in this case)
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%trade_post_automation%git_mod_subfolder%trade_post_automation\ %this_mod_folder_location%
@@ -359,4 +360,4 @@ echo.
 echo.
 @echo ON
 
-pause
+::pause
