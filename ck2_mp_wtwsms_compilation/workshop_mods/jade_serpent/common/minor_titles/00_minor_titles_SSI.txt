@@ -1,0 +1,67 @@
+###SUNSET INVASION MINOR TITLES###
+
+title_mexikha_emperor = {		# this title is not granted by a character to another, it is automatically obtained
+								# when one character becomes emperor of mexikha. It is used solely to identify them as such
+	is_offmap_holder = yes
+	offmap_power = offmap_mexikha
+	show_as_title = yes
+	dignity = 1000 				# this should always be higher than 0, or it won't be applied in all cases
+}
+
+title_master_mason = {
+	is_high_prio = no
+    dignity = 0.9
+    realm_in_name = no
+	grant_limit = 1
+	opinion_effect = 10
+	monthly_salary = 0.1
+	monthly_prestige = 0.1
+	
+	allowed_to_grant = {
+		has_dlc = "Sunset Invasion"
+		any_courtier = { has_character_modifier = ssi_master_mason }
+	}
+	
+	allowed_to_hold = {
+		custom_tooltip = {
+			text = title_master_mason_modifier_tt
+			has_character_modifier = ssi_master_mason
+		}
+		NOT = { trait = in_hiding }
+		NOT = { trait = incapable }
+		prisoner = no
+	}
+
+	revoke_trigger = {
+		always = yes
+	}
+	
+	gain_effect = {
+		if = {
+			limit = { has_character_flag = master_mason_just_spawned }
+            character_event = { id = SSI.20033 days = 10 } 
+            clr_character_flag = master_mason_just_spawned
+            break = yes
+		}
+        if = {
+            limit = {
+                has_character_flag = mexikha_master_mason_golden_age
+            }
+            character_event = { id = SSI.20033 days = 1460 random = 542 } 
+        }
+		else = {
+            character_event = { id = SSI.20033 days = 2920 random = 1095 }
+        }
+	}
+	lose_effect = {
+		clear_delayed_event = { id = SSI.20033 }
+	}
+	retire_effect = {
+		clear_delayed_event = { id = SSI.20033 }	
+	}
+	death_effect = {
+		clear_delayed_event = { id = SSI.20033 }
+	}
+
+	message = yes
+}

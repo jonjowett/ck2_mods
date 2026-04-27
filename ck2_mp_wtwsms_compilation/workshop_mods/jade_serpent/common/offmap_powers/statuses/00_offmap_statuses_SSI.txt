@@ -1,0 +1,38 @@
+### Statuses are modifiers so they can contain the same things are other modifiers
+# however they are not applied to a character but to the offmap_power
+# they can also have flags that can be tested from the offmap_power scope
+
+mexikha_stable = {
+	frame = 1
+}
+
+mexikha_unrest = {
+	frame = 2
+}
+
+mexikha_civil_war = {
+	#Note: If the Mexikha is currently in conflict (i.e. Civil War or Being Invaded by Inca) the power of the Mexikha Governorate is significantly lowered (they can call upon fewer regiments from Mexikha to aid them), making it easier to open Mexikha by force.
+	frame = 3
+}
+
+mexikha_norse_invasion = {
+	frame = 4
+}
+
+mexikha_inca_invasion = {
+	frame = 5
+}
+
+mexikha_famine = {
+	flags = { disallow_interactions disallow_troops }
+	frame = 6
+}
+
+mexikha_plague = {
+	flags = { disallow_interactions disallow_troops }
+	frame = 7
+}
+
+mexikha_golden_age = {
+	frame = 8
+}

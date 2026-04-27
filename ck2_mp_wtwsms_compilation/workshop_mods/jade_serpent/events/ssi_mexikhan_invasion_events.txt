@@ -1,0 +1,3359 @@
+###########################################
+#                                         #
+# Mexikhan Invasions    	              #
+#                                         #
+# ID SSI.10100-SSI.10200    	          #
+#                                         #
+###########################################
+
+namespace = SSI
+
+#Written by: 
+#Milla Isaksson
+
+####Mexikha launches an invasion... [Hidden, picks an invasion type - Tributary OR Major OR nothing happens]
+character_event = {
+    id = SSI.10100
+    has_dlc = "Sunset Invasion"
+	has_global_flag = aztec_explorers
+    is_triggered_only = yes
+
+    hide_window = yes
+    
+    trigger = {
+		FROM = { is_offmap_tag = offmap_mexikha }
+    	war = no
+		NOT = { has_offmap_tmp_flag = launching_invasion_of_the_east }
+		mexikha_is_fine_trigger = yes
+    }
+
+    immediate = {
+		set_offmap_tmp_flag = launching_invasion_of_the_east
+		
+		save_event_target_as = the_protector_general
+	
+    	if = { #If the NM currently holds land on map
+			limit = { event_target:the_protector_general = { is_landed = yes } }
+			set_offmap_tmp_flag = NM_is_on_map
+		}
+		if = { #If the NM is NOT on map
+			limit = { event_target:the_protector_general = { is_landed = no } }
+			set_offmap_tmp_flag = NM_is_not_on_map
+		}
+
+		random_list = {
+			100 = { #Tributary Invasion [Medium]...
+    			trigger = {
+    				NOR = { 
+						has_offmap_tmp_flag = tributary_invasion_fired
+						has_offmap_tmp_flag = NM_is_not_on_map # Go invasion first
+					}
+    				OR = {
+    					AND = {
+	    					NOT = { has_policy = mexikha_expansionist }
+		    				any_independent_ruler = {
+		    					valid_offmap_mexikha_target_location = yes
+								valid_offmap_mexikha_target = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+				    		}
+    					}
+    					AND = {
+    						has_policy = mexikha_expansionist
+    						any_independent_ruler = {
+								valid_offmap_mexikha_target_location = yes
+				    			num_of_count_titles_in_realm = 15
+								valid_offmap_mexikha_target = yes
+				    		}
+    					}
+    				}
+    			}   			
+    			modifier = {
+    				factor = 10 #strongly encouraged if Mexikha does not have some tributaries already (and not expansionist - if so, they'll opt for taking land instead)
+    				OR = {
+    					AND = {
+    						mexikha_is_stable_open_trigger = yes
+		    				NOT = {
+		    					any_playable_ruler = {
+		    						count = 4
+									is_tributary = {
+										suzerain = ROOT
+									}
+		    					}
+		    				}
+    					}
+    					AND = {
+    						mexikha_is_golden_age_open_trigger = yes
+		    				NOT = {
+		    					any_playable_ruler = {
+		    						count = 9
+									is_tributary = {
+										suzerain = ROOT
+									}
+		    					}
+		    				}
+    					}
+    				}
+    			}
+
+    			random_list = { # Selects big or small target...
+
+    				10 = { #Going after small tributary...!
+    					trigger = {
+							OR = {
+								NOT = { has_policy = mexikha_expansionist }
+								AND = {
+									has_policy = mexikha_expansionist
+									NOT = {
+										any_independent_ruler = {
+											valid_offmap_mexikha_target_location = yes
+											num_of_count_titles_in_realm = 15
+											valid_offmap_mexikha_target = yes
+										}
+									}
+								}
+							}
+		    			}
+						
+						#1. Selects an appropriate target... (worst case), prefer not attacking someone who supplies horses
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location = yes
+								valid_offmap_mexikha_target = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+
+    					#2. Selects an appropriate target... (worst case)
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location = yes
+								valid_offmap_mexikha_target = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								NOT = { has_character_modifier = mexikha_supply_horses }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+						
+						#3. Selects an appropriate target... (worst case), pick someone who raids mexikha if possible
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location = yes
+								valid_offmap_mexikha_target = yes
+								NOT = { has_character_modifier = mexikha_supply_horses }
+								has_character_modifier = mexikha_raid_active
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+						
+						#4. Finds someone within the appropriate geographical sphere... (better), prefer not attacking someone who supplies horses
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+
+		    			#5. Finds someone within the appropriate geographical sphere... (better)
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								NOT = { has_character_modifier = mexikha_supply_horses }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#6. Finds someone within the appropriate geographical sphere... (better), pick someone who raids mexikha if possible
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								NOT = { has_character_modifier = mexikha_supply_horses }
+								has_character_modifier = mexikha_raid_active
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#7. Finds someone liked by the emperor... (best), prefer not attacking someone who supplies horses
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								liked_by_offmap = { type = offmap_mexikha }
+								NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+
+						#8. Finds someone liked by the emperor... (best)
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								liked_by_offmap = { type = offmap_mexikha }
+								NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+								NOT = { has_character_modifier = mexikha_supply_horses }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#9. Finds someone liked by the emperor... (best), pick someone who raids mexikha if possible
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								liked_by_offmap = { type = offmap_mexikha }
+								NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+								NOT = { has_character_modifier = mexikha_supply_horses }
+								has_character_modifier = mexikha_raid_active
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#10. Selects an appropriate target... (worst case for border gore), prefer not attacking someone who supplies horses
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+								valid_offmap_mexikha_target = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+						
+						#11. Selects an appropriate target... (worst case for border gore)
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+								valid_offmap_mexikha_target = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								NOT = { has_character_modifier = mexikha_supply_horses }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+						
+						#12. Selects an appropriate target... (worst case for border gore), pick someone who raids mexikha if possible
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+								valid_offmap_mexikha_target = yes
+								NOT = { has_character_modifier = mexikha_supply_horses }
+								has_character_modifier = mexikha_raid_active
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+						
+						#13. Finds someone within the appropriate geographical sphere... (better, also good for border gore), prefer not attacking someone who supplies horses
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+
+		    			#14. Finds someone within the appropriate geographical sphere... (better, also good for border gore)
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								NOT = { has_character_modifier = mexikha_supply_horses }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#15. Finds someone within the appropriate geographical sphere... (better, also good for border gore), pick someone who raids mexikha if possible
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								NOT = { has_character_modifier = mexikha_supply_horses }
+								has_character_modifier = mexikha_raid_active
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#16. Finds someone liked by the emperor... (best, also good for border gore), prefer not attacking someone who supplies horses
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								liked_by_offmap = { type = offmap_mexikha }
+								NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+
+						#17. Finds someone liked by the emperor... (best, also good for border gore)
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								liked_by_offmap = { type = offmap_mexikha }
+								NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+								NOT = { has_character_modifier = mexikha_supply_horses }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#18. Finds someone liked by the emperor... (best, also good for border gore), pick someone who raids mexikha if possible
+		    			random_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target = yes
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+								NOT = { num_of_count_titles_in_realm = 20 }
+								num_of_count_titles_in_realm > 0
+								liked_by_offmap = { type = offmap_mexikha }
+								NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+								NOT = { has_character_modifier = mexikha_supply_horses }
+								has_character_modifier = mexikha_raid_active
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+    				}
+
+    				10 = {  # Going after bigger tributary...! (only if expansionist)
+    					trigger = {
+				    		has_policy = mexikha_expansionist
+				    		any_independent_ruler = {
+								valid_offmap_mexikha_target_location = yes
+				    			num_of_count_titles_in_realm = 15
+								valid_offmap_mexikha_target = yes
+				    		}
+		    			}
+		    			modifier = {
+		    				factor = 10
+		    				mexikha_is_golden_age_expansionist_trigger = yes
+		    			}
+						
+						#1. Finds an appropriate target... (worst case), prefer not attacking someone who supplies horses
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location = yes
+				    			num_of_count_titles_in_realm = 15
+								valid_offmap_mexikha_target = yes
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+						
+    					#2. Finds an appropriate target... (worst case)
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location = yes
+				    			num_of_count_titles_in_realm = 15
+								valid_offmap_mexikha_target = yes
+								NOT = { has_character_modifier = mexikha_supply_horses }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+						
+						#3. Finds an appropriate target... (worst case), pick someone who raids mexikha if possible
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location = yes
+				    			num_of_count_titles_in_realm = 15
+								valid_offmap_mexikha_target = yes
+								NOT = { has_character_modifier = mexikha_supply_horses }
+								has_character_modifier = mexikha_raid_active
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+						
+						#4. Finds someone with more counties... (better), prefer not attacking someone who supplies horses
+		    			random_independent_ruler = {
+				    		limit = {
+								valid_offmap_mexikha_target_location = yes
+				    			num_of_count_titles_in_realm = 20
+								valid_offmap_mexikha_target = yes
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+
+		    			#5. Finds someone with more counties... (better)
+		    			random_independent_ruler = {
+				    		limit = {
+								valid_offmap_mexikha_target_location = yes
+				    			num_of_count_titles_in_realm = 20
+								valid_offmap_mexikha_target = yes
+								NOT = { has_character_modifier = mexikha_supply_horses }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#6. Finds someone with more counties... (better), pick someone who raids mexikha if possible
+		    			random_independent_ruler = {
+				    		limit = {
+								valid_offmap_mexikha_target_location = yes
+				    			num_of_count_titles_in_realm = 20
+								valid_offmap_mexikha_target = yes
+								NOT = { has_character_modifier = mexikha_supply_horses }
+								has_character_modifier = mexikha_raid_active
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#7. Finds someone who is liked by the Emperor (best), prefer not attacking someone who supplies horses
+						if = { limit = { has_policy = mexikha_expansionist }
+			    			random_independent_ruler = {
+					    		limit = {
+					    			valid_offmap_mexikha_target = yes
+									valid_offmap_mexikha_target_location = yes
+									num_of_count_titles_in_realm = 20
+									liked_by_offmap = { type = offmap_mexikha }
+									NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+					    		}
+					    		save_event_target_as = mexikhan_invasion_target
+							}
+						}
+						
+						#8. Finds someone who is liked by the Emperor (best)
+						if = { limit = { has_policy = mexikha_expansionist }
+			    			random_independent_ruler = {
+					    		limit = {
+					    			valid_offmap_mexikha_target = yes
+									valid_offmap_mexikha_target_location = yes
+									num_of_count_titles_in_realm = 20
+									liked_by_offmap = { type = offmap_mexikha }
+									NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+									NOT = { has_character_modifier = mexikha_supply_horses }
+					    		}
+					    		save_event_target_as = mexikhan_invasion_target
+							}
+						}
+						
+						#9. Finds someone who is liked by the Emperor (best), pick someone who raids mexikha if possible
+						if = { limit = { has_policy = mexikha_expansionist }
+			    			random_independent_ruler = {
+					    		limit = {
+					    			valid_offmap_mexikha_target = yes
+									valid_offmap_mexikha_target_location = yes
+									num_of_count_titles_in_realm = 20
+									liked_by_offmap = { type = offmap_mexikha }
+									NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+									NOT = { has_character_modifier = mexikha_supply_horses }
+									has_character_modifier = mexikha_raid_active
+					    		}
+					    		save_event_target_as = mexikhan_invasion_target
+							}
+						}
+						
+						#10. Finds an appropriate target neighboring them... (worst case for border gore), prefer not attacking someone who supplies horses
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+				    			num_of_count_titles_in_realm = 15
+								valid_offmap_mexikha_target = yes
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+						
+						#11. Finds an appropriate target neighboring them... (worst case for border gore)
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+				    			num_of_count_titles_in_realm = 15
+								valid_offmap_mexikha_target = yes
+								NOT = { has_character_modifier = mexikha_supply_horses }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+						
+						#12. Finds an appropriate target neighboring them... (worst case for border gore), pick someone who raids mexikha if possible
+		    			random_independent_ruler = {
+		    				limit = {
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+				    			num_of_count_titles_in_realm = 15
+								valid_offmap_mexikha_target = yes
+								NOT = { has_character_modifier = mexikha_supply_horses }
+								has_character_modifier = mexikha_raid_active
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+		    			}
+						
+						#13. Finds someone with more counties that also neighbours them... (better, also good for border gore), prefer not attacking someone who supplies horses
+		    			random_independent_ruler = {
+				    		limit = {
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+				    			num_of_count_titles_in_realm = 20
+								valid_offmap_mexikha_target = yes
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#14. Finds someone with more counties that also neighbours them... (better, also good for border gore)
+		    			random_independent_ruler = {
+				    		limit = {
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+				    			num_of_count_titles_in_realm = 20
+								valid_offmap_mexikha_target = yes
+								NOT = { has_character_modifier = mexikha_supply_horses }
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#15. Finds someone with more counties that also neighbours them... (better, also good for border gore), pick someone who raids mexikha if possible
+		    			random_independent_ruler = {
+				    		limit = {
+								valid_offmap_mexikha_target_location_tributary_chain = yes
+				    			num_of_count_titles_in_realm = 20
+								valid_offmap_mexikha_target = yes
+								NOT = { has_character_modifier = mexikha_supply_horses }
+								has_character_modifier = mexikha_raid_active
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						
+						#16. Finds someone who is liked by the Emperor that also neighbours them (best, also good for border gore), prefer not attacking someone who supplies horses
+						if = { limit = { has_policy = mexikha_expansionist }
+			    			random_independent_ruler = {
+					    		limit = {
+					    			valid_offmap_mexikha_target = yes
+									valid_offmap_mexikha_target_location_tributary_chain = yes
+									num_of_count_titles_in_realm = 20
+									liked_by_offmap = { type = offmap_mexikha }
+									NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+					    		}
+					    		save_event_target_as = mexikhan_invasion_target
+							}
+						}
+						
+						#17. Finds someone who is liked by the Emperor that also neighbours them (best, also good for border gore)
+						if = { limit = { has_policy = mexikha_expansionist }
+			    			random_independent_ruler = {
+					    		limit = {
+					    			valid_offmap_mexikha_target = yes
+									valid_offmap_mexikha_target_location_tributary_chain = yes
+									num_of_count_titles_in_realm = 20
+									liked_by_offmap = { type = offmap_mexikha }
+									NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+									NOT = { has_character_modifier = mexikha_supply_horses }
+					    		}
+					    		save_event_target_as = mexikhan_invasion_target
+							}
+						}
+						
+						#18. Finds someone who is liked by the Emperor that also neighbours them (best, also good for border gore), pick someone who raids mexikha if possible
+						if = { limit = { has_policy = mexikha_expansionist }
+			    			random_independent_ruler = {
+					    		limit = {
+					    			valid_offmap_mexikha_target = yes
+									valid_offmap_mexikha_target_location_tributary_chain = yes
+									num_of_count_titles_in_realm = 20
+									liked_by_offmap = { type = offmap_mexikha }
+									NOT = { disliked_by_offmap = { type = offmap_mexikha } }
+									NOT = { has_character_modifier = mexikha_supply_horses }
+									has_character_modifier = mexikha_raid_active
+					    		}
+					    		save_event_target_as = mexikhan_invasion_target
+							}
+						}
+    				}
+    			}
+
+				event_target:mexikhan_invasion_target = { character_event = { id = SSI.10130 } } #Send a demand - "Become tributary or prepare to be defeated"...
+				#change_variable = { which = global_tributary_invasions_launched value = 1 } #for logging purposes
+			}
+
+			100 = { # Major Invasion [Major, OR small, as it turns out]...
+				trigger = {
+    				NOT = { has_offmap_tmp_flag = major_invasion_fired }
+    				NOT = { has_offmap_tmp_flag = attacked_small_neighbor }
+    				
+    				OR = {
+    					#Can do a BIG land grab
+						AND = { # must either be an eligble realm around within the target area...
+							has_offmap_tmp_flag = NM_is_on_map
+							any_independent_ruler = {
+								valid_offmap_mexikha_target_location = yes #within the right area...
+								is_nomadic = no # Don't subjugate nomads
+								#num_of_count_titles_in_realm = 20
+								valid_offmap_mexikha_target = yes
+								any_realm_province = {
+									any_neighbor_province = {
+										holder_scope = {
+											top_liege = { has_landed_title = e_mexikha }
+										}
+									}
+									kingdom = { 
+										PREVPREV = { num_of_realm_counties = { value = 3 title = THIS } }
+									}
+								}
+							}
+						}
+						
+						AND = { # or, if NM is unlanded, an eligble realm by the western border of the map...
+							has_offmap_tmp_flag = NM_is_not_on_map
+							any_independent_ruler = {
+								capital_scope = { 
+									duchy = {
+										OR = {
+											title = d_galicia
+											title = d_porto
+											title = d_balata
+											title = d_beja
+											title = d_sevilla
+											title = d_tangiers
+											title = d_fes	
+											title = d_marrakech
+											title = d_sous
+										}
+									}
+								}
+								is_nomadic = no # Don't subjugate nomads
+								#num_of_count_titles_in_realm = 20
+								num_of_count_titles_in_realm = 2
+								valid_offmap_mexikha_target = yes
+							}
+						}
+
+    					#Can trigger the failsafe (potentially SMALL land grab)
+    					AND = {
+    						has_offmap_tmp_flag = NM_is_on_map
+		    				any_neighbor_independent_ruler = {
+								valid_offmap_mexikha_target_location = yes
+				    			valid_offmap_mexikha_target = yes
+								higher_real_tier_than = BARON
+								is_nomadic = no # Don't subjugate nomads
+							}
+    					}
+    				}
+    			}
+
+				modifier = {
+					factor = 1.5
+					has_status = mexikha_golden_age
+				}
+				modifier = {
+					factor = 3
+					has_policy = mexikha_expansionist
+				}
+				modifier = {
+					factor = 4
+					mexikha_is_golden_age_expansionist_trigger = yes
+				}
+				modifier = {
+    				factor = 1.5
+    				OR = {
+	    				mexikha_is_stable_expansionist_trigger = yes
+						mexikha_is_stable_open_trigger = yes
+    					mexikha_is_golden_age_open_trigger = yes
+    				}
+    			}
+				modifier = {
+					factor = 2 #More likely to happen if Mexikha is NOT on the map ... (they want land!)
+					has_offmap_tmp_flag = NM_is_not_on_map 
+					OR = {
+						has_status = mexikha_golden_age
+						has_policy = mexikha_expansionist
+						has_policy = mexikha_open
+					}
+				}
+				modifier = {
+					factor = 0
+					realm_size = 300
+				}
+				modifier = {
+					factor = 0.5
+					infamy = 25
+				}
+				modifier = {
+					factor = 0.1
+					infamy = 35
+				}
+				modifier = {
+					factor = 0
+					infamy = 45
+				}
+
+				#log = "-------------------------------------"
+				#log = "Mexikha Logging:"
+				#log = "Prev: [Prev.GetBestName] PrevPrev: [PrevPrev.GetBestName]"
+				#log = "-------------------------------------"
+				random_list = {
+					100 = { # Go for something big (BIG land grab - if expansionist)
+						trigger = {
+	    					#has_policy = mexikha_expansionist
+							OR = {
+								AND = { # must either be an eligble realm around within the target area...
+									has_offmap_tmp_flag = NM_is_on_map
+			    					any_independent_ruler = {
+				    					valid_offmap_mexikha_target_location = yes #within the right area...
+										is_nomadic = no # Don't subjugate nomads
+										#num_of_count_titles_in_realm = 20
+										num_of_count_titles_in_realm = 2
+						    			valid_offmap_mexikha_target = yes
+										#any_realm_province = {
+										#	any_neighbor_province = {
+										#		holder_scope = {
+										#			top_liege = { has_landed_title = e_mexikha }
+										#		}
+										#	}
+										#	kingdom = { 
+										#		PREVPREV = { num_of_realm_counties = { value = 3 title = THIS } }
+										#	}
+										#}
+									}
+								}
+								AND = { # or, if NM is unlanded, an eligble realm by the western border of the map...
+									has_offmap_tmp_flag = NM_is_not_on_map
+				    				any_independent_ruler = {
+										any_realm_province = {
+											duchy = {
+												#PREVPREV = { num_of_realm_counties = { value = 3 title = THIS } }
+												OR = {
+													title = d_galicia
+													title = d_porto
+													title = d_balata
+													title = d_beja
+													title = d_sevilla
+													title = d_tangiers
+													title = d_fes	
+													title = d_marrakech
+													title = d_sous
+												}
+											}
+										}
+										is_nomadic = no # Don't subjugate nomads
+										num_of_count_titles_in_realm = 2
+						    			valid_offmap_mexikha_target = yes
+									}	
+								}
+							}
+		    			}
+		    			modifier = {
+							factor = 2
+							has_status = mexikha_golden_age
+						}
+
+						# If NM is landed, find target (good)
+						if = { limit = { has_offmap_tmp_flag = NM_is_on_map }
+							random_independent_ruler = {
+					    		limit = {
+					    			valid_offmap_mexikha_target_location = yes #within the right area...
+									is_nomadic = no # Don't subjugate nomads
+									#num_of_count_titles_in_realm = 20
+									num_of_count_titles_in_realm = 2
+					    			valid_offmap_mexikha_target = yes
+									#any_realm_province = {
+									#	any_neighbor_province = {
+									#		holder_scope = {
+									#			top_liege = { has_landed_title = e_mexikha }
+									#		}
+									#	}
+										#kingdom = { 
+										#	PREVPREV = { num_of_realm_counties = { value = 3 title = THIS } }
+										#}
+									#}
+					    		}
+					    		preferred_limit = {
+									capital_scope = {
+										region = world_europe_west_iberia
+									}
+					    		}
+					    		save_event_target_as = mexikhan_invasion_target
+								random_realm_province = {
+									limit = {
+										owner = {
+											same_realm = event_target:mexikhan_invasion_target
+										}
+										any_neighbor_province = {
+											holder_scope = {
+												top_liege = { has_landed_title = e_mexikha }
+											}
+										}
+									}
+									kingdom = { save_event_target_as = mexikhan_invasion_kingdom }
+									save_event_target_as = mexikhan_invasion_province_debug
+								}
+							}
+						}
+
+						# Although, if someone is available that the Emperor also DISLIKES... (better)
+						if = { limit = { has_offmap_tmp_flag = NM_is_on_map }
+							random_independent_ruler = {
+					    		limit = {
+					    			valid_offmap_mexikha_target_location = yes #within the right area...
+									is_nomadic = no # Don't subjugate nomads
+									#num_of_count_titles_in_realm = 20
+									num_of_count_titles_in_realm = 2
+					    			valid_offmap_mexikha_target = yes
+					    			disliked_by_offmap = { type = offmap_mexikha }
+									NOT = { liked_by_offmap = { type = offmap_mexikha } }
+									#any_realm_province = {
+									#	any_neighbor_province = {
+									#		holder_scope = {
+									#			top_liege = { has_landed_title = e_mexikha }
+									#		}
+									#	}
+										#kingdom = { 
+										#	PREVPREV = { num_of_realm_counties = { value = 3 title = THIS } }
+										#}
+									#}
+					    		}
+								preferred_limit = {
+									capital_scope = {
+										region = world_europe_west_iberia
+									}
+					    		}
+					    		save_event_target_as = mexikhan_invasion_target
+								random_realm_province = {
+									limit = {
+										owner = {
+											same_realm = event_target:mexikhan_invasion_target
+										}
+										any_neighbor_province = {
+											holder_scope = {
+												top_liege = { has_landed_title = e_mexikha }
+											}
+										}
+									}
+									kingdom = { save_event_target_as = mexikhan_invasion_kingdom }
+									save_event_target_as = mexikhan_invasion_province_debug
+								}
+							}
+						}
+
+						#Exception: if NM is unlanded (then go Western Edge of map)
+						if = { limit = { has_offmap_tmp_flag = NM_is_not_on_map }
+							random_independent_ruler = {
+					    		limit = {
+					    			any_realm_province = {
+										duchy = {
+											OR = {
+												title = d_galicia
+												title = d_porto
+												title = d_balata
+												title = d_beja
+												title = d_sevilla
+												title = d_tangiers
+												title = d_fes	
+												title = d_marrakech
+												title = d_sous
+											}
+										}
+									}
+									is_nomadic = no # Don't subjugate nomads
+									#num_of_count_titles_in_realm = 20
+									num_of_count_titles_in_realm = 2
+					    			valid_offmap_mexikha_target = yes
+					    		}
+								preferred_limit = {
+									ai = yes
+								}
+					    		save_event_target_as = mexikhan_invasion_target
+								random_realm_province = {
+									limit = {
+										duchy = {
+											OR = {
+												title = d_galicia
+												title = d_porto
+												title = d_balata
+												title = d_beja
+												title = d_sevilla
+												title = d_tangiers
+												title = d_fes	
+												title = d_marrakech
+												title = d_sous
+											}
+										}
+										#kingdom = { 
+										#	event_target:mexikhan_invasion_target = { num_of_realm_counties = { value = 3 title = PREV } }
+										#}
+										port = yes
+									}
+									kingdom = { save_event_target_as = mexikhan_invasion_kingdom }
+									save_event_target_as = mexikha_invasion_spawn_point_province
+								}
+							}
+						}
+						set_offmap_tmp_flag = start_invasion_war
+						#change_variable = { which = global_major_invasions_launched value = 1 } # For logging purposes
+					}
+
+					10 = { # FAILSAFE: Go for something nearby and possibly small sized (SMALL (?) land grab - only if on map and with appropriate NEIGHBORS (to prevent bordergore))
+						trigger = {
+							# there must be an eligble neighbor realm around, within the target area...
+							has_offmap_tmp_flag = NM_is_on_map
+		    				any_neighbor_independent_ruler = {
+								valid_offmap_mexikha_target_location = yes
+								NOT = { num_of_count_titles_in_realm = 20 } # FAILSAFE: In case the Aztec pick HRE/France after 10 year game started
+				    			valid_offmap_mexikha_target = yes
+								is_nomadic = no # Don't subjugate nomads
+							}
+						}
+
+						#Picks any random neighboring ruler...
+						random_neighbor_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target_location = yes #within the right area...
+								NOT = { num_of_count_titles_in_realm = 20 }
+								is_nomadic = no # Don't subjugate nomads
+				    			valid_offmap_mexikha_target = yes
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						# Try to find a small target
+						random_neighbor_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target_location = yes #within the right area...
+								NOT = { num_of_count_titles_in_realm = 15 }
+								is_nomadic = no # Don't subjugate nomads
+				    			valid_offmap_mexikha_target = yes
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						# Try to find a smaller target
+						random_neighbor_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target_location = yes #within the right area...
+								NOT = { num_of_count_titles_in_realm = 10 }
+								is_nomadic = no # Don't subjugate nomads
+				    			valid_offmap_mexikha_target = yes
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+						# Best case - Try to find an even smaller target
+						random_neighbor_independent_ruler = {
+				    		limit = {
+				    			valid_offmap_mexikha_target_location = yes #within the right area...
+								NOT = { num_of_count_titles_in_realm = 5 }
+								is_nomadic = no # Don't subjugate nomads
+				    			valid_offmap_mexikha_target = yes
+				    		}
+				    		save_event_target_as = mexikhan_invasion_target
+						}
+
+						set_offmap_tmp_flag = start_submission_war
+
+						if = { 
+							limit = { 
+								event_target:mexikhan_invasion_target = { 
+									NOT = { num_of_count_titles_in_realm = 5 }
+								} 
+							} #tracks whether this should actually count as a "major" invasion or not
+							set_offmap_tmp_flag = attacked_small_neighbor
+						}
+						else_if = {
+							limit = {
+								NOT = { has_policy = mexikha_expansionist }
+							}
+							#Target to big for non-expansionist Mexikha, Abort!
+							
+							### Logging
+							log = "-------------------------------------"
+							log = "Mexikha Logging:"
+							log = "Non-expansionist Mexikha didn't find a suitable submission target"
+							log = "No invasions happened this year - clearing all flags. Better luck next year!"
+							log = "Current status: [From.Offmap.GetStatus]. Current policy: [From.Offmap.GetPolicy]."
+							log = "-------------------------------------"
+							####
+
+							offmap_mexikha = {
+								clr_offmap_tmp_flag = NM_is_on_map
+								clr_offmap_tmp_flag = NM_is_not_on_map
+								clr_offmap_tmp_flag = launching_invasion_of_the_east
+								clr_offmap_tmp_flag = tributary_invasion_fired
+								clr_offmap_tmp_flag = major_invasion_fired
+								clr_offmap_tmp_flag = sent_major_invasion_cleanup
+								clr_offmap_tmp_flag = start_submission_war
+							}
+							break = yes # Careless, I know...
+						}
+						else = {
+							#change_variable = { which = global_major_invasions_launched value = 1 } # For logging purposes
+						}
+					}
+				}
+				character_event = { id = SSI.10103 } # Checks for which type of war to be declared, declares war on mexikhan_invasion_target + send news event to players...
+				#change_variable = { which = global_major_invasions_launched value = 1 } # For logging purposes
+			}
+
+			100 = {
+				#Nothing happens
+				modifier = {
+					factor = 0
+					mexikha_is_suffering_trigger = no
+				}
+				### Logging
+				log = "-------------------------------------"
+				log = "Mexikha Logging:"
+				log = "No invasions happened this year - clearing all flags. Better luck next year!"
+				log = "Current status: [From.Offmap.GetStatus]. Current policy: [From.Offmap.GetPolicy]."
+				log = "-------------------------------------"
+				####
+
+				offmap_mexikha = {
+					clr_offmap_tmp_flag = NM_is_on_map
+					clr_offmap_tmp_flag = NM_is_not_on_map
+					clr_offmap_tmp_flag = launching_invasion_of_the_east
+					clr_offmap_tmp_flag = tributary_invasion_fired
+					clr_offmap_tmp_flag = major_invasion_fired
+		    		clr_offmap_tmp_flag = sent_major_invasion_cleanup
+		    	}
+			}
+		}
+    }
+}
+
+##Visible event for player: "Become tributary of Mexikha, or prepare to be conquered"
+character_event = {
+    id = SSI.10130
+    is_triggered_only = yes
+    picture = GFX_evt_battle_mesoamerican
+    desc = EVTDESC_SSI_10130_A
+    has_dlc = "Sunset Invasion"
+
+    immediate = {
+    	set_character_flag = asked_to_become_mexikhan_tributary
+    }
+
+    option = {	
+		name = {
+        	text = EVTOPTA_SSI_10130 #We would be humbled to serve the Emperor...
+        	trigger = {
+				NOT = { has_character_modifier = mexikha_raid_active }
+        	}
+        }
+		
+		name = {
+        	text = EVTOPTA_SSI_10130_B # We raid Mexikha
+        	trigger = {
+				has_character_modifier = mexikha_raid_active
+        	}
+        }
+    	
+		prestige = -100
+		add_mexikhan_grace_minor_effect = yes
+
+		if = {
+			limit = { is_tributary = yes }
+			custom_tooltip = {
+				text = "REMOVE_PREVIOUS_SUZERAIN"
+				hidden_tooltip = {
+					any_suzerain = {
+						ROOT = {
+							remove_tributary = PREV
+						}
+					}
+				}
+			}
+		}
+
+		if = { # Remove Raid Mexikha if active
+			limit = {
+				has_character_modifier = mexikha_raid_active
+			}
+			remove_character_modifier = mexikha_raid_active
+			hidden_effect = {
+				add_character_modifier = {
+					name = mexikha_raid_grace_cd
+					hidden = yes
+					years = 5
+				}
+			}
+		}
+
+		FROM = {
+			prestige = 200
+			make_tributary = { who = ROOT tributary_type = offmap }
+		}
+
+		#Send news of you becoming tributary, to interested player parties...
+		any_player = {
+			limit = {
+				has_offmap_news_enabled = offmap_mexikha
+				is_within_diplo_range = ROOT
+				NOT = { character = ROOT }
+			}
+    		narrative_event = { id = SSI.10105 } #News: "Mexikha has gained <target> as their tributary"
+		}
+
+		clr_character_flag = asked_to_become_mexikhan_tributary
+
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 1.5
+				trait = craven
+			}
+			modifier = {
+				factor = 1.1
+				offmap_mexikha = {
+					has_policy = mexikha_expansionist
+				}
+			}
+		}
+    }
+    option = {
+    	name = EVTOPTB_SSI_10130 #Never!
+    	detract_mexikhan_grace_super_huge_effect = yes
+    	custom_tooltip = {
+    		text = EVTOPTB_SSI_10130_TT
+    	}
+    	FROM = {
+    		character_event = { id = SSI.10101 } #NM declares tributary war on you...
+    	}
+
+    	clr_character_flag = asked_to_become_mexikhan_tributary
+
+    	ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 1.1
+				trait = brave
+			}
+			modifier = {
+				factor = 1.1
+				trait = ambitious
+			}
+			modifier = {
+				factor = 1.1
+				trait = greedy
+			}
+			modifier = { #The bigger the realm, the more likely they are to oppose the offer...
+				factor = 1.5
+				num_of_count_titles_in_realm = 10
+			}
+			modifier = {
+				factor = 1.5
+				num_of_count_titles_in_realm = 15
+			}
+			modifier = {
+				factor = 1.5
+				num_of_count_titles_in_realm = 20
+			}
+		}
+    }
+}
+
+##### Tributary Invasion [where the CB is set and troops are spawned] #####
+character_event = {
+    id = SSI.10101
+    desc = EVTDESC_SSI_10101
+
+    has_dlc = "Sunset Invasion"
+
+    picture = GFX_evt_battle_mesoamerican
+    border = GFX_event_normal_frame_war
+    is_triggered_only = yes
+
+	hide_window = yes
+    
+    immediate = {
+    	set_offmap_tmp_flag = tributary_invasion_fired
+
+    	### Depending on type of invasion, where the troops spawn will be different... Example below:
+    	if = { #If the NM currently holds land on map, spawn Mexikhan Troops from their capital
+			limit = { has_offmap_tmp_flag = NM_is_on_map }
+			
+			random_realm_province = {
+				limit = { is_capital = yes }
+				save_event_target_as = mexikha_invasion_spawn_point_province
+			}
+
+		}
+		if = { #If NOT on map, find random good place to spawn the Mexikhan Troops (in this example, Silves or Anti-Atlas)
+			limit = { has_offmap_tmp_flag = NM_is_not_on_map }
+
+			random_list = {
+				10 = { #Silves
+					162 = { save_event_target_as = mexikha_invasion_spawn_point_province }
+				}
+				10 = { #Anti-Atlas
+					845 = { save_event_target_as = mexikha_invasion_spawn_point_province }
+				}
+			}
+		}
+
+		war = {
+			casus_belli = tributary_offmap_cb
+			target = event_target:mexikhan_invasion_target
+		}
+		
+		### Logging....
+		if = {
+			limit = {
+				event_target:mexikhan_invasion_target = {
+					NOT = { num_of_count_titles_in_realm = 20 }
+				}
+			}
+			log = "-------------------------------------"
+			log = "Mexikha Logging:"
+			log = "Mexikha declared MINOR tributary war on [mexikhan_invasion_target.GetBestName]"
+			log = "Current status: [FromFrom.Offmap.GetStatus]. Current policy: [FromFrom.Offmap.GetPolicy]."
+			log = "-------------------------------------"
+		}
+		else = {
+			log = "-------------------------------------"
+			log = "Mexikha Logging:"
+			log = "Mexikha declared MEDIUM tributary war on [mexikhan_invasion_target.GetBestName]"
+			log = "Current status: [FromFrom.Offmap.GetStatus]. Current policy: [FromFrom.Offmap.GetPolicy]."
+			log = "-------------------------------------"
+		}
+
+
+		#offmap_mexikha = {
+		#	if = {
+		#		limit = {
+		#			has_policy = mexikha_open
+		#		}
+		#		change_variable = {
+		#			which = global_mexikha_amount_of_tributary_wars_during_open
+		#			value = 1
+		#		}
+		#	}
+		#	if = {
+		#		limit = {
+		#			has_policy = mexikha_expansionist
+		#		}
+		#		change_variable = {
+		#			which = global_mexikha_amount_of_tributary_wars_during_expansionist
+		#			value = 1
+		#		}
+		#	}
+		#}
+		###
+
+    	#Send news of invasion to interested player parties...
+		any_player = {
+			limit = {
+				has_offmap_news_enabled = offmap_mexikha
+				is_within_diplo_range = ROOT
+			}
+    		narrative_event = { id = SSI.10102 } #News: "Mexikha has launched an attack on <target> to make them their tributary"
+		}
+    }
+}
+
+narrative_event = { #NEWS: visible event for player (someone PEACEFULLY became a tributary to Mexikha, from accepting the demand) 
+    id = SSI.10105
+	has_dlc = "Sunset Invasion"
+    title = NEWS_FROM_MEXIKHA
+    has_global_flag = aztec_explorers
+	picture = GFX_evt_battle_mesoamerican
+	portrait = offmap_mexikha
+	window = EventWindowOffmap
+	background = GFX_event_window_news_from_mexikha
+    is_triggered_only = yes
+    
+	desc = {
+		text = EVTDESC_SSI_10105_A
+		trigger = {
+			event_target:mexikhan_invasion_target = { #if a small place
+				NOT = { num_of_count_titles_in_realm = 20 }
+			}
+		}
+	}
+	desc = {
+		text = EVTDESC_SSI_10105_B
+		trigger = {
+			event_target:mexikhan_invasion_target = { #if a bigger realm
+				num_of_count_titles_in_realm = 20
+			}
+		}
+	}
+
+    
+    option = {      
+        name = EVTOPTA_SSI_10105
+        show_portrait = event_target:mexikhan_invasion_target
+        custom_tooltip = { text = EVTOPTA_SSI_10105_TT }
+    }
+}
+
+narrative_event = { # NEWS: visible event for player (tributary invasion)
+    id = SSI.10102
+	has_dlc = "Sunset Invasion"
+    title = NEWS_FROM_MEXIKHA
+    has_global_flag = aztec_explorers
+	picture = GFX_evt_battle_mesoamerican
+	portrait = offmap_mexikha
+	window = EventWindowOffmap
+	background = GFX_event_window_news_from_mexikha
+
+	desc = {
+		text = EVTDESC_SSI_10102_A
+		trigger = {
+			event_target:mexikhan_invasion_target = { character = ROOT }
+		}
+	}
+	desc = {
+		text = EVTDESC_SSI_10102_B
+		trigger = {
+			NOT = { event_target:mexikhan_invasion_target = { character = ROOT } }
+		}
+	}
+
+	has_dlc = "Sunset Invasion"
+
+    is_triggered_only = yes
+
+    option = {
+        name = {
+        	text = EVTOPTA_SSI_10102_A_brave
+        	trigger = {
+				trait = brave
+        	}
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_A_craven
+        	trigger = {
+				trait = craven
+        	}
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_A_pious
+        	trigger = {
+				is_pious_trigger = yes
+        	}
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_A_neutral
+        	trigger = {
+				NOT = { trait = craven }
+				NOT = { trait = brave }
+				NOT = { is_pious_trigger = yes }
+        	}
+        }
+        trigger = {
+         	event_target:mexikhan_invasion_target = { character = ROOT }
+        }
+    }
+
+    option = {
+        name = {
+        	text = EVTOPTA_SSI_10102_B_same_religion #May [HighGod] protect them
+        	trigger = {	event_target:mexikhan_invasion_target = { religion_group = ROOT } }
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_B_other_religion #May their gods protect them
+        	trigger = {	NOT = { event_target:mexikhan_invasion_target = { religion_group = ROOT } } }
+        }
+
+        event_target:mexikhan_invasion_target = { show_portrait = yes }
+        
+        trigger = {
+         	NOT = { event_target:mexikhan_invasion_target = { character = ROOT } }
+        }
+    }
+}
+
+
+##### Major Invasion [where the CB is set and troops are spawned] ##### WIP
+character_event = {
+    id = SSI.10103
+
+    has_dlc = "Sunset Invasion"
+
+    is_triggered_only = yes
+
+	hide_window = yes
+    
+    immediate = {
+    	#if = { limit = { NOT = { has_offmap_tmp_flag = attacked_small_neighbor } } #only mark as "major" if it was actually that
+    	#	set_offmap_tmp_flag = major_invasion_fired #used for cooldown (cleared from other yearly pulse clean-up events)
+    	#}
+		
+		#if = { #If the NM currently holds land on map, spawn Mexikhan Troops from their capital
+		#	limit = { has_offmap_tmp_flag = NM_is_on_map }
+		#	
+		#	random_realm_province = {
+		#		limit = { is_capital = yes }
+		#		save_event_target_as = mexikhan_invasion_spawn_point_province
+		#	}
+
+		#}
+		if = {
+			limit = { has_offmap_tmp_flag = NM_is_not_on_map }
+			set_offmap_tmp_flag = mexikha_war_variables_set
+			set_variable = {
+				which = mexikha_war_troop_quantity
+				value = 15
+				# 15 regiments of ~500 units
+			}
+			set_variable = {
+				which = mexikha_war_target_match_mult
+				value = 2
+			}
+			set_variable = {
+				which = mexikha_war_troop_quality
+				value = 1
+				# Value between 1-7
+			}
+			set_variable = {
+				which = mexikha_war_minimum_commander_martial
+				value = 14
+			}
+			set_variable = { #Minimum 80k
+				which = mexikha_war_troop_quantity_override
+				value = 160
+			}
+			event_target:mexikhan_invasion_kingdom = {
+				random_province = {
+					limit = { 
+						port = yes
+						owner = {
+							same_realm = event_target:mexikhan_invasion_target
+						}
+					}
+					ROOT = {
+						save_persistent_event_target = {
+							name = spawn_province_override
+							scope = PREV
+						}
+					}
+				}
+			}
+			# mexikha_invasion_spawn_point_province already set
+			#random_list = {
+			#	10 = { #Coruna
+			#		156 = { save_event_target_as = mexikha_invasion_spawn_point_province }
+			#	}
+			#	10 = { #Silves
+			#		162 = { save_event_target_as = mexikha_invasion_spawn_point_province }
+			#	}
+			#	10 = { #Faro
+			#		163 = { save_event_target_as = mexikha_invasion_spawn_point_province } 
+			#	}
+			#	10 = { #Tangier
+			#		841 = { save_event_target_as = mexikha_invasion_spawn_point_province } 
+			#	}
+			#	10 = { #Anti-Atlas
+			#		845 = { save_event_target_as = mexikha_invasion_spawn_point_province } 
+			#	}
+			#	10 = { #Canarias
+			#		849 = { save_event_target_as = mexikha_invasion_spawn_point_province } 
+			#	}
+			#}
+		}
+
+		#Declare war on target...
+		if = {
+			limit = { has_offmap_tmp_flag = start_submission_war }
+			war = {
+				casus_belli = offmap_submission
+				target = event_target:mexikhan_invasion_target
+			}
+		}
+		if = {
+			limit = { has_offmap_tmp_flag = start_invasion_war }
+			set_character_flag = horde_invader
+			prestige = 500 # compensation
+			unsafe_war = {
+				casus_belli = tribal_invasion
+				target = event_target:mexikhan_invasion_target
+				thirdparty_title = event_target:mexikhan_invasion_kingdom
+			}
+		}
+		
+		### Logging
+		log = "-------------------------------------"
+		log = "Mexikha Logging:"
+		log = "Mexikha declared submission/invasion war on [mexikhan_invasion_target.GetBestName] at [mexikha_invasion_spawn_point_province.GetName]"
+		log = "Current status: [From.Offmap.GetStatus]. Current policy: [From.Offmap.GetPolicy]."
+		log = "-------------------------------------"
+
+		### Logging....
+		if = {
+			limit = { has_offmap_tmp_flag = start_submission_war }
+			if = {
+				limit = {
+					event_target:mexikhan_invasion_target = {
+						NOT = { num_of_count_titles_in_realm = 20 }
+					}
+				}
+				log = "-------------------------------------"
+				log = "Mexikha War Logging:"
+				log = "Mexikha declared MINOR submission war on [mexikhan_invasion_target.GetBestName]"
+				log = "Current status: [FromFrom.Offmap.GetStatus]. Current policy: [FromFrom.Offmap.GetPolicy]."
+				log = "-------------------------------------"
+			}
+			else = {
+				log = "-------------------------------------"
+				log = "Mexikha War Logging:"
+				log = "Mexikha declared MAJOR submission war on [mexikhan_invasion_target.GetBestName]"
+				log = "Current status: [FromFrom.Offmap.GetStatus]. Current policy: [FromFrom.Offmap.GetPolicy]."
+				log = "-------------------------------------"
+			}
+		}
+		else_if = {
+			limit = { has_offmap_tmp_flag = start_invasion_war }
+			log = "-------------------------------------"
+			log = "Mexikha War Logging:"
+			log = "Mexikha declared MAJOR invasion war on [mexikhan_invasion_target.GetBestName] for [mexikhan_invasion_kingdom.GetFullName]"
+			log = "Current status: [FromFrom.Offmap.GetStatus]. Current policy: [FromFrom.Offmap.GetPolicy]."
+			log = "-------------------------------------"
+		}
+
+		#offmap_mexikha = {
+		#	if = {
+		#		limit = {
+		#			has_policy = mexikha_open
+		#		}
+		#		change_variable = {
+		#			which = global_mexikha_amount_of_submission_during_open
+		#			value = 1
+		#		}
+		#	}
+		#	if = {
+		#		limit = {
+		#			has_policy = mexikha_expansionist
+		#		}
+		#		change_variable = {
+		#			which = global_mexikha_amount_of_submission_during_expansionist
+		#			value = 1
+		#		}
+		#	}
+		#}
+		
+		###
+		clr_offmap_tmp_flag = start_submission_war
+		clr_offmap_tmp_flag = should_claim_all_titles_war
+		clr_offmap_tmp_flag = start_invasion_war
+
+    	#Send news of invasion to interested player parties...
+    	any_player = {
+			limit = {
+				has_offmap_news_enabled = offmap_mexikha
+				is_within_diplo_range = ROOT
+			}
+    		narrative_event = { id = SSI.10104 days = 1 } #News: "Mexikha has launched a major attack on <target>"
+		}
+    }
+}
+
+narrative_event = { # NEWS: Major invasion declared on <target>! (Visible event for players + player target, fired from SSI.10103)
+    id = SSI.10104
+    title = NEWS_FROM_MEXIKHA
+    has_global_flag = aztec_explorers
+	picture = GFX_evt_battle_mesoamerican
+	portrait = offmap_mexikha
+	window = EventWindowOffmap
+	background = GFX_event_window_news_from_mexikha
+
+	has_dlc = "Sunset Invasion"
+
+	desc = {
+		text = EVTDESC_SSI_10104_A
+		trigger = {
+			event_target:mexikhan_invasion_target = { character = ROOT }
+		}
+	}
+	desc = {
+		text = EVTDESC_SSI_10104_B
+		trigger = {
+			NOT = { event_target:mexikhan_invasion_target = { character = ROOT } }
+		}
+	}
+
+    is_triggered_only = yes
+
+    option = {
+        name = {
+        	text = EVTOPTA_SSI_10102_A_brave
+        	trigger = {
+				trait = brave
+        	}
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_A_craven
+        	trigger = {
+				trait = craven
+        	}
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_A_pious
+        	trigger = {
+				is_pious_trigger = yes
+        	}
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_A_neutral
+        	trigger = {
+				NOT = { trait = craven }
+				NOT = { trait = brave }
+				NOT = { is_pious_trigger = yes }
+        	}
+        }
+        trigger = {
+         	event_target:mexikhan_invasion_target = { character = ROOT }
+        }
+    }
+
+    option = {
+        name = {
+        	text = EVTOPTA_SSI_10104_B_brave
+        	trigger = {
+				trait = brave
+        	}
+        }
+        name = {
+        	text = EVTOPTA_SSI_10104_B_pious
+        	trigger = {
+				is_pious_trigger = yes
+        	}
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_A_neutral
+        	trigger = {
+				NOT = { trait = craven }
+				NOT = { is_pious_trigger = yes }
+        	}
+        }
+
+        event_target:mexikhan_invasion_target = { show_portrait = yes }
+
+        trigger = {
+         	NOT = { event_target:mexikhan_invasion_target = { character = ROOT } }
+        }
+    }
+}
+
+
+#Cleanup event REGULAR [sent from yearly pulse]
+character_event = {
+    id = SSI.10200
+
+    has_dlc = "Sunset Invasion"
+
+    is_triggered_only = yes
+    
+    hide_window = yes
+
+    trigger = {
+    	FROM = { is_offmap_tag = offmap_mexikha }
+    	OR = {
+	    	offmap_mexikha = {
+	    		had_offmap_tmp_flag = {
+	    			flag = tributary_invasion_fired
+	    			#years = 5
+					years = 0
+	    		}
+	    	}
+	    	offmap_mexikha = {
+	    		had_offmap_tmp_flag = {
+	    			flag = launching_invasion_of_the_east
+	    			#years = 5
+					years = 0
+	    		}
+	    	}
+	    	offmap_mexikha = { #To make sure smaller wars can be waged more often...
+	    		had_offmap_tmp_flag = {
+	    			flag = attacked_small_neighbor
+	    			#years = 3
+					years = 0
+	    		}
+	    	}	    	
+    	}
+    }
+
+    immediate = {
+    	offmap_mexikha = {
+			clr_offmap_tmp_flag = NM_is_on_map
+			clr_offmap_tmp_flag = NM_is_not_on_map
+			clr_offmap_tmp_flag = launching_invasion_of_the_east
+			clr_offmap_tmp_flag = tributary_invasion_fired
+			clr_offmap_tmp_flag = attacked_small_neighbor
+    	}
+    }
+}
+
+#Cleanup event for MAJOR invasion [sent from yearly pulse] 
+character_event = {
+    id = SSI.10201
+
+    has_dlc = "Sunset Invasion"
+
+    is_triggered_only = yes
+    
+    hide_window = yes
+
+    trigger = {
+    	FROM = { is_offmap_tag = offmap_mexikha }
+    	offmap_mexikha = {
+    		OR = {
+	    		had_offmap_tmp_flag = {
+					flag = major_invasion_fired
+					years = 20
+				}
+				had_offmap_tmp_flag = {
+					flag = sent_major_invasion_cleanup
+					years = 5
+				}
+			}
+    	}
+    }
+
+    immediate = {
+    	offmap_mexikha = {
+    		clr_offmap_tmp_flag = major_invasion_fired
+    		clr_offmap_tmp_flag = sent_major_invasion_cleanup
+    	}
+    }
+}
+
+#Sets exception flag for new rulers - makes sure Mexikha's new Emperor can be a belligerent as they please [fired from on_offmap_ruler_changed]
+character_event = {
+    id = SSI.10202
+
+    has_dlc = "Sunset Invasion"
+
+    is_triggered_only = yes
+    
+    hide_window = yes
+
+    trigger = {
+    	is_offmap_tag = offmap_mexikha
+    	offmap_mexikha = {
+    		NOT = { has_policy = mexikha_isolationist }
+    		OR = {
+    			has_offmap_tmp_flag = NM_is_on_map
+				has_offmap_tmp_flag = NM_is_not_on_map
+    			has_offmap_tmp_flag = major_invasion_fired
+				has_offmap_tmp_flag = launching_invasion_of_the_east
+				has_offmap_tmp_flag = tributary_invasion_fired
+				has_offmap_tmp_flag = attacked_small_neighbor
+    		}
+    	}
+    }
+
+    immediate = {
+    	set_offmap_tmp_flag = sent_major_invasion_cleanup
+    }
+}
+
+###### Fallback gating event (to handle Displaced Princes, Inca Invacers, and Rebel Generals)			#########
+###### ... in case the old Mexikha Cuauhtlatoani left some paper-work behind when they abandoned office #########
+###### (Fires for the current governor, from offmap_monthly_pulse) 										#########
+character_event = {
+    id = SSI.10121
+    has_dlc = "Sunset Invasion"
+
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        FROM = { 
+			is_offmap_tag = offmap_mexikha 
+			OR = {
+				has_offmap_flag = waiting_to_spawn_a_displaced_royal
+				has_offmap_flag = waiting_to_spawn_a_inca_invader
+				has_offmap_flag = waiting_to_spawn_a_rebel_general
+			}
+		}
+    }
+
+    immediate = {
+		FROM = {
+			trigger_switch = {
+				on_trigger = has_offmap_flag
+				waiting_to_spawn_a_displaced_royal = {
+					governor = {
+						character_event = { id = SSI.10113 days = 15 } #Spawns a Displaced Prince adventurer...
+					}
+					log = "Mexikha Logging:"
+					log = "Attempting to spawn a Displaced Royal, via monthly pulse fallback event (since the old governor left office). Character should spawn in 15 days."
+				}
+				waiting_to_spawn_a_inca_invader = {
+					governor = {
+						character_event = { id =  SSI.10109 days = 15 } #Spawns a Inca tribe leader...
+					}
+					log = "Mexikha Logging:"
+					log = "Attempting to spawn a Inca Invader, via monthly pulse fallback event (since the old governor left office). Character should spawn in 15 days."
+				}
+				waiting_to_spawn_a_rebel_general = {
+					governor = {
+						character_event = { id = SSI.60200 days = 15 } #Spawns a Rebel General
+					}
+					log = "Mexikha Logging:"
+					log = "Attempting to spawn a Rebel General, via monthly pulse fallback event (since the old governor left office). Character should spawn in 15 days."
+				}
+			}
+			clr_offmap_flag = waiting_to_spawn_a_displaced_royal
+			clr_offmap_flag = waiting_to_spawn_a_inca_invader
+			clr_offmap_flag = waiting_to_spawn_a_rebel_general
+		}
+    }
+}
+
+############################################################################################################################
+#News event for Inca tribe/Displaced prince invasion/adventurer (stand-alone, fired further down, from SSI.10109)
+############################################################################################################################
+narrative_event = {
+    id = SSI.10108
+	has_dlc = "Sunset Invasion"
+    title = NEWS_FROM_MEXIKHA
+    has_global_flag = aztec_explorers
+	picture = GFX_evt_bishop_aztec
+	portrait = offmap_mexikha
+	window = EventWindowOffmap
+	background = GFX_event_window_news_from_mexikha
+    is_triggered_only = yes
+
+    desc = {
+    	text = EVTDESC_SSI_10108_INCA
+    	trigger = {
+			event_target:the_mexikhan_invader = { has_character_flag = is_inca_invader }
+    	}
+    }
+    desc = {
+    	text = EVTDESC_SSI_10108_DISPLACED_PRINCE
+    	trigger = {
+			event_target:the_mexikhan_invader = { has_character_flag = is_displaced_prince }
+    	}
+    }
+    desc = {
+    	text = EVTDESC_SSI_10108_REBEL_GENERAL
+    	trigger = {
+			event_target:the_mexikhan_invader = { has_character_flag = is_rebel_general }
+    	}
+    }
+
+    trigger = {
+    	event_target:the_mexikhan_invader = { is_alive = yes }
+    }
+
+    option = {
+        name = EVTOPTA_SSI_10108
+    }
+}
+
+
+#########################################################################################################
+### Spawning Displaced Prince - Only in case of dynasty change...  (fires for the governor, from SSI.50300, ssi_mexikhan_status_and_policy_events file )
+#########################################################################################################
+character_event = {
+    id = SSI.10113 #Sorry about the wrong ID order. Don't let it get to you!
+
+    has_dlc = "Sunset Invasion"
+
+    hide_window = yes
+    is_triggered_only = yes
+    
+    trigger = {
+        #is_offmap_tag = offmap_mexikha
+    	#NOT = { dynasty = FROM } #for the prince only
+    }
+
+    immediate = {
+    	clr_character_flag = spawning_a_displaced_royal
+    	clr_character_flag = spawning_a_inca_invader
+    	clr_character_flag = spawning_a_rebel_general
+
+    	save_event_target_as = the_protector_general
+
+    	offmap_mexikha = {
+    		offmap_prev_ruler = {
+    			save_event_target_as = previousEmperor
+    		}
+    	}
+
+    	create_character = {
+			random_traits = yes
+			religion = aztec
+			culture = event_target:previousEmperor 
+			dynasty = event_target:previousEmperor
+			female = no
+			age = 20
+			trait = tough_soldier
+			historical = yes
+		}
+		new_character = {
+			save_event_target_as = displaced_prince
+			if = {
+				limit = {
+					event_target:previousEmperor = {
+						could_be_parent_of = event_target:displaced_prince
+					}
+				}
+				set_father = event_target:previousEmperor
+			}
+			else_if = {
+				limit = {
+					event_target:previousEmperor = {
+						father_even_if_dead = {
+							could_be_parent_of = event_target:displaced_prince
+						}
+					}
+				}
+				event_target:previousEmperor = {
+					father_even_if_dead = {
+						event_target:displaced_prince = {
+							set_father = PREV
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					event_target:previousEmperor = {
+						any_dynasty_member_even_if_dead  = {
+							is_or_was_offmap_power_ruler = yes
+							is_female = no
+							could_be_parent_of = event_target:displaced_prince
+						}
+					}
+				}
+				
+				event_target:previousEmperor = {
+					random_dynasty_member_even_if_dead = {
+						limit = {
+							is_or_was_offmap_power_ruler = yes
+							is_female = no
+							could_be_parent_of = event_target:displaced_prince
+						}
+						event_target:displaced_prince = {
+							set_father = PREV
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					event_target:previousEmperor = {
+						any_dynasty_member_even_if_dead  = {
+							is_or_was_offmap_power_ruler = yes
+							is_female = yes
+							could_be_parent_of = event_target:displaced_prince
+						}
+					}
+				}
+				
+				event_target:previousEmperor = {
+					random_dynasty_member_even_if_dead = {
+						limit = {
+							is_or_was_offmap_power_ruler = yes
+							is_female = yes
+							could_be_parent_of = event_target:displaced_prince
+						}
+						event_target:displaced_prince = {
+							set_mother = PREV
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					event_target:previousEmperor = {
+						any_dynasty_member_even_if_dead = {
+							is_female = no
+							could_be_parent_of = event_target:displaced_prince
+						}
+					}
+				}
+				
+				event_target:previousEmperor = {
+					random_dynasty_member_even_if_dead = {
+						limit = {
+							is_female = no
+							could_be_parent_of = event_target:displaced_prince
+						}
+						event_target:displaced_prince = {
+							set_father = PREV
+						}
+					}
+				}
+			}
+			add_trait = ambitious
+			remove_trait = content
+			remove_trait = craven
+			set_character_flag = is_displaced_prince
+			add_character_modifier = {
+                name = ssi_prince
+                duration = -1
+            }
+			save_event_target_as = the_mexikhan_invader #loc based on what flag this target has
+			wealth = 1000
+			character_event = { id = SSI.10110 }
+			log = "Mexikha Logging:"
+			log = "[This.GetFullName] ID [This.GetID] is the Displaced Prince"
+		}
+		any_player = {
+			limit = {
+				has_offmap_news_enabled = offmap_mexikha
+				is_within_diplo_range = ROOT
+			}
+			narrative_event = { id = SSI.10108 days = 1 } #News: "A wild adventurer appears" (uses triggered desc to mention it's a prince)
+		}
+    }
+}
+
+#########################################################################################################
+# An ambitious Displaced Prince begins to plan an adventure for a foreign title
+#########################################################################################################
+#Adventurers instead of Pretender Empire
+character_event = {
+	id = SSI.10110
+	hide_window = yes
+
+	has_dlc = "Sunset Invasion"
+
+	is_triggered_only = yes
+	capable_only = yes
+	prisoner = no
+	
+	trigger = {
+		NOT = {
+			has_game_rule = {
+				name = adventurers
+				value = none
+			}
+		}
+	}	
+	
+	immediate = {
+		add_trait = adventurer
+
+		set_defacto_liege = ROOT
+
+		create_title = {
+			tier = DUKE
+			landless = yes
+			adventurer = yes
+			culture = ROOT
+			name = "CLAIMANT_ADVENTURE"
+			holder = ROOT
+			base_title = THIS
+		}
+		
+		set_character_flag = raiding_adventurer
+		change_variable = { which = global_raiding_adventurer_spawn_by_inca_invasion value = 1 }
+
+		if = {
+			limit = { has_character_flag = is_inca_invader }
+			31 = { #Cornwall
+				save_event_target_as = target_province
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = is_displaced_prince }
+			9 = { #Connacht
+				save_event_target_as = target_province
+			}
+		}
+		
+		#Spawn troops... (depending on some stuff)
+		if = { limit = { has_character_flag = is_displaced_prince } 
+			random_list = {
+				30 = {
+					spawn_unit = {
+						province = event_target:target_province
+						home = event_target:target_province
+						owner = ROOT
+						attrition = 0
+						reinforces = yes
+						is_looter = yes
+						can_toggle_looting = no
+						cannot_inherit = yes
+						merge = yes
+						troops = {
+							archers = { 500 500 }
+							light_infantry = { 1200 1200 }
+							heavy_infantry = { 300 300 }
+						}
+					}
+				}
+				30 = {
+					spawn_unit = {
+						province = event_target:target_province
+						home = event_target:target_province
+						owner = ROOT
+						attrition = 0
+						reinforces = yes
+						is_looter = yes
+						can_toggle_looting = no
+						cannot_inherit = yes
+						merge = yes
+						troops = {
+							archers = { 750 750 }
+							light_infantry = { 1800 1800 }
+							heavy_infantry = { 450 450 }
+						}
+					}
+				}
+				30 = {
+					spawn_unit = {
+						province = event_target:target_province
+						home = event_target:target_province
+						owner = ROOT
+						attrition = 0
+						reinforces = yes
+						is_looter = yes
+						can_toggle_looting = no
+						cannot_inherit = yes
+						merge = yes
+						troops = {
+							archers = { 1000 1000 }
+							light_infantry = { 2400 2400 }
+							heavy_infantry = { 600 600 }
+						}
+					}
+				}
+			}
+		}
+
+		if = { limit = { has_character_flag = is_inca_invader } 
+			random_list = {
+				30 = {
+					spawn_unit = {
+						province = event_target:target_province
+						home = event_target:target_province
+						owner = ROOT
+						attrition = 0
+						reinforces = yes
+						is_looter = yes
+						can_toggle_looting = no
+						cannot_inherit = yes
+						merge = yes
+						troops = {
+							light_infantry = { 1000 1000 }
+							archers = { 800 800 }
+						}
+					}
+				}
+				30 = {
+					spawn_unit = {
+						province = event_target:target_province
+						home = event_target:target_province
+						owner = ROOT
+						attrition = 0
+						reinforces = yes
+						is_looter = yes
+						can_toggle_looting = no
+						cannot_inherit = yes
+						merge = yes
+						troops = {
+							light_infantry = { 1500 1500 }
+							archers = { 1200 1200 }
+						}
+					}
+				}
+				30 = {
+					spawn_unit = {
+						province = event_target:target_province
+						home = event_target:target_province
+						owner = ROOT
+						attrition = 0
+						reinforces = yes
+						is_looter = yes
+						can_toggle_looting = no
+						cannot_inherit = yes
+						merge = yes
+						troops = {
+							light_infantry = { 2000 2000 }
+							archers = { 1600 1600 }
+						}
+					}
+				}
+			}
+		}
+
+		#Characters to command the new troops...
+		create_random_soldier = {
+			random_traits = yes
+			dynasty = none
+			religion = ROOT
+			culture = ROOT
+			female = no
+			age = 30
+		}
+		create_random_soldier = {
+			random_traits = yes
+			dynasty = none
+			religion = ROOT
+			culture = ROOT
+			female = no
+			age = 25
+		}
+
+		character_event = { id = SSI.10111 days = 1095 } # Ping to see if he's ready to settle (declare war or negotiate), repeating every 3 years.
+	}
+}
+
+character_event = {  # Checks ready to settle (declare war or negotiate) or continue raiding, repeating every 3 years. [Gating event]
+	id = SSI.10111
+
+	has_dlc = "Sunset Invasion"
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	has_character_flag = raiding_adventurer
+	
+	trigger = {
+		primary_title = {
+			temporary = yes
+		}
+	}
+	
+	immediate = {
+		log = "Event SSI.10111 for raiding mesoamerican adventurer: [Root.GetBestName] - approach someone or continue raiding?"
+		if = {
+			limit = {
+				OR = { #If rich enough or has been adventuring for so long...
+					wealth = 300
+					had_character_flag = { flag = raiding_adventurer days = 1825 }
+				}
+				any_independent_ruler = { #If any landed lord has been looted and is not too large a force for the adventurer to handle...
+					has_opinion_modifier = { who = ROOT modifier = opinion_looted }
+					NOT = { realm_levy_diff = { who = ROOT value = 3000 } }
+					demesne_size = 1
+				}
+			}
+			random_list = { #base values are 50-50 whether they make contact or continue raiding...
+				50 = {
+					modifier = {
+						trait = cruel
+						factor = 2
+					}
+					modifier = {
+						trait = ambitious
+						factor = 2
+					}
+					log = "[Root.GetBestName] prepares to settle." 
+					character_event = { id = SSI.10112 } # They declare war or negotiate
+				}
+				50 = {
+					modifier = {
+						had_character_flag = { flag = raiding_adventurer days = 2555}
+						factor = 0.5
+					}
+					modifier = {
+						had_character_flag = { flag = raiding_adventurer days = 3285}
+						factor = 0.5
+					}
+					modifier = {
+						had_character_flag = { flag = raiding_adventurer days = 4015}
+						factor = 0.5
+					}
+					modifier = {
+						had_character_flag = { flag = raiding_adventurer days = 10950}
+						factor = 0
+					}
+					log = "[Root.GetBestName] continues raiding."
+					repeat_event = { id = SSI.10111 days = 365 } # They continue raiding
+				}
+			}
+		}
+		# Check for stagnant raider
+		else_if = {
+			limit = {
+				had_character_flag = { flag = raiding_adventurer days = 10950 }	
+			}
+			character_event = { id = SSI.10112 } #used to be a separate event for some reason
+			break = yes
+		}
+		# Else continue raiding (send this event again)...
+		else = {
+			log = "[Root.GetBestName] continues raiding."
+			repeat_event = { id = SSI.10111 days = 365 }
+		}
+	}
+}
+
+character_event = { #"[Root.GetBestName] prepares to settle (declare war)"
+	id = SSI.10112
+
+	has_dlc = "Sunset Invasion"
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		any_army = {
+			set_can_toggle_looting = yes
+			set_looting = no
+		}
+		
+		random_independent_ruler = {
+			limit = {
+				has_opinion_modifier = { who = ROOT modifier = opinion_looted }
+				NOT = { realm_levy_diff = { who = ROOT value = 3000 } }
+				demesne_size = 1
+				NOT = { has_character_flag = negotiating_with_adventurer }
+				NOT = { any_realm_province = { has_province_modifier = settled_adventurer } }
+			}
+			save_event_target_as = random_ruler_target
+
+			if = { #Finds a suitable target to negotiate with...
+				limit = { higher_real_tier_than = DUKE }
+
+				#Adventurer negotiation complex
+				set_character_flag = negotiating_with_adventurer
+				character_event = { id = ADV.1 } #Sends negotiation to target, and select a reasonable province from target ruler's realm...
+
+				#Checks if the raider should go back to raiding (presumably in case the negotiation failed)
+				ROOT = {
+					character_event = { id = SSI.10120 days = 65 }
+				}
+
+				break = yes
+			}
+			
+			if = { #Declare unsafe war on random target...
+				limit = { NOT = { higher_real_tier_than = DUKE } }	
+				clr_character_flag = raiding_adventurer
+
+				random_realm_province = {
+					limit = {
+						any_neighbor_province = {
+							NOT = { owner = { same_realm = ROOT } }
+						}
+					}
+					ROOT = {
+						unsafe_war = {
+							target = event_target:random_ruler_target
+							casus_belli = duchy_adventure
+							thirdparty_title = PREV
+							tier = DUKE
+						}
+						event_target:random_ruler_target = {
+							character_event = { id = HL.112 }
+						}
+					}
+					break = yes
+				}
+				
+				random_realm_province = {
+					ROOT = {
+						unsafe_war = {
+							target = event_target:random_ruler_target
+							casus_belli = duchy_adventure
+							thirdparty_title = PREV
+							tier = DUKE
+						}
+						event_target:random_ruler_target = {
+							character_event = { id = HL.112 }
+						}
+					}
+				}
+				if = {
+					limit = { war = yes }
+					break = yes
+				}
+			}
+		}
+
+		#If neither break succeeded, kill it with fire
+		clr_character_flag = raiding_adventurer
+		log = "[SERIOUS] [Root.GetTitledFirstName] failed to find a target after trying to end his raiding adventure."
+		character_event = { id = HL.199 } #Cleanup from other file (Make scripted effect instead? Gotta catch'em all)
+	}
+}
+
+
+character_event = { #returns home in a state of war [NOT USED?]
+	id = SSI.10114 # clone of HL.113
+
+	has_dlc = "Sunset Invasion"
+
+	is_triggered_only = yes
+	hide_window = yes
+	
+	immediate = {
+		any_army = {
+			set_can_toggle_looting = yes
+			set_looting = no
+		}
+		clr_character_flag = raiding_adventurer
+		event_target:target_province = {
+			owner = {
+				character_event = { id = HL.112 }
+				ROOT = {
+					war = {
+						target = PREV
+						casus_belli = duchy_adventure
+						thirdparty_title = PREVPREV
+						tier = DUKE
+					}
+				}
+			}
+		}
+	}
+}
+
+# Clean-up
+character_event = {
+	id = SSI.10115#clone of HL.199
+
+	has_dlc = "Sunset Invasion"
+	
+	is_triggered_only = yes
+	
+	hide_window = yes
+	
+	immediate = {
+#		log = "Cleaning up adventurer: [Root.GetTitledFirstName]."
+		clr_character_flag = raiding_adventurer
+		disband_event_forces = yes
+		clan_title = {
+			activate_title = { title = THIS status = no }
+			destroy_landed_title = THIS
+		}
+		primary_title = {
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							tier = DUKE
+							adventurer = yes
+						}
+						tier = EMPEROR
+					}
+				}
+				activate_title = { title = THIS status = no }
+				destroy_landed_title = THIS
+			}
+		}
+		if = { # Add other clean-up effects before this if-block since this block includes breaks
+			limit = {
+				prisoner = no
+			}
+			if = {
+				limit = {
+					father = {
+						is_alive = yes
+					}
+				}
+				father = {
+					if = {
+						limit = {
+							is_ruler = yes
+						}
+						ROOT = {
+							set_defacto_liege = PREV
+							break = yes
+						}
+					}
+					if = {
+						limit = {
+							is_ruler = no
+						}
+						liege = {
+							ROOT = {
+								set_defacto_liege = PREV
+								break = yes
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#Should adventurer continue to raid?
+character_event = {
+	id = SSI.10120
+
+	has_dlc = "Sunset Invasion"
+	
+	is_triggered_only = yes
+	
+	hide_window = yes
+
+	#If not at war and still holding an adventurer title... 
+	trigger = {
+	 	war = no
+	 	primary_title = { 
+	 		temporary = yes 
+	 		adventurer = yes
+	 	}
+	}
+
+	#...go forth and adventure!
+	immediate = {
+		character_event = { id = SSI.10111 }
+	}
+}
+
+
+##########################################
+### Mexikha dealing with nomad agitation ###
+##########################################
+# Written by Matthew Clohessy
+
+# The Governor seems to get plenty of cash from tributes, so the only time he will have a trouble dealing with nomads
+# is right during the first few trbiutary conquests are established as he has little in the way of income
+# so have it so on his first conquest if he takes land with agigtation have mexikha send relief and autobuild holdings
+
+#Increase counter for number of nomad provinces
+province_event = {
+	id = SSI.60100
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		FROM = { change_variable = { which = "NM_nomad_provinces" value = 1 } }
+	}
+}
+#Calculate amount of gold sent from mexikha to deal with nomad provinces
+character_event = {
+	id = SSI.60101
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "-------------------------------------"
+		log = "Mexikha Logging:"
+		log = "The New Mexikha has gained [Root.NM_nomad_provinces.GetValue] nomad provinces from the war."
+		log = "The amount of gold that shall recieved is 200 per nomad province modified by the current status of Mexikha"
+		set_variable = { which = "NM_nomad_gold_from_mexikha" which = "NM_nomad_provinces" }
+		multiply_variable = { which = "NM_nomad_gold_from_mexikha" value = 200 } #cost is about 400 to build so this slows it down a bit
+		if = {
+			limit = { mexikha_is_suffering_trigger = yes }
+			multiply_variable = { which = "NM_nomad_gold_from_mexikha" value = 0.3 }
+			log = "As Mexikha is currently not doing well, the amount of gold sent will be 0.3 times the normal."
+		}
+		if = {
+			limit = { mexikha_is_fine_trigger = yes }
+			multiply_variable = { which = "NM_nomad_gold_from_mexikha" value = 1.5 }
+			log = "As Mexikha is currently doing well, the amount of gold sent will be 1.5 times the normal."
+		}
+		if = {
+			limit = { check_variable = { which = "NM_nomad_gold_from_mexikha" value = 2500 } }
+			log = "The amount of gold being sent is [Root.NM_nomad_gold_from_mexikha.GetValue], the cap of what can be sent is 2500 so the amount has been set to 2500"
+			set_variable = { which = "NM_nomad_gold_from_mexikha" value = 2500 }
+		}
+		log = "Mexikha has sent [Root.NM_nomad_gold_from_mexikha.GetValue] gold to aid with building holdings."
+		wealth = NM_nomad_gold_from_mexikha
+		log = "-------------------------------------"
+	}
+}
+
+
+#############################
+### Rebel General Invades ###
+#############################
+# by Matthew Clohessy
+
+#A rebel general appears, triggered from Civil War ending in Mexikha
+character_event = {
+	id = SSI.60200
+	hide_window = yes
+	is_triggered_only = yes
+
+    has_dlc = "Sunset Invasion"
+	has_global_flag = aztec_explorers
+
+    immediate = {
+    	clr_character_flag = spawning_a_displaced_royal
+    	clr_character_flag = spawning_a_inca_invader
+    	clr_character_flag = spawning_a_rebel_general
+
+    	save_event_target_as = the_protector_general
+    	
+    	#Random age, older has better martial due to experience
+    	random_list = {
+    		1 = {
+		    	create_character = {
+					age = 27
+					random_traits = yes
+					female = no
+					religion = aztec
+					culture = nahautl
+					dynasty = actually_culture
+					trait = brilliant_strategist
+					martial = 8
+					flag = young_general
+					historical = yes
+				}
+			}
+			2 = {
+		    	create_character = {
+					age = 36
+					random_traits = yes
+					female = no
+					religion = aztec
+					culture = nahautl
+					dynasty = actually_culture
+					trait = brilliant_strategist
+					martial = 10
+					flag = middle_general
+					historical = yes
+				}
+			}
+			1 = {
+		    	create_character = {
+					age = 52
+					random_traits = yes
+					female = no
+					religion = aztec
+					culture = nahautl
+					dynasty = actually_culture
+					trait = brilliant_strategist
+					martial = 12
+					flag = old_general
+					historical = yes
+				}
+			}
+		}
+		new_character = {
+			change_martial = 7
+			add_trait = ambitious
+			add_trait = brave
+			random_list = {
+				30 = {
+					trigger = {
+						can_have_more_leadership_traits = yes
+						NOT = { trait = master_of_flame }
+					}
+					add_trait = master_of_flame
+				}
+				30 = {
+					trigger = {
+						can_have_more_leadership_traits = yes
+						NOT = { trait = logistics_expert }
+					}
+					add_trait = logistics_expert
+				}
+				30 = {
+					trigger = {
+						can_have_more_leadership_traits = yes
+						NOT = { trait = levy_coordinator }
+					}
+					add_trait = levy_coordinator
+				}
+				30 = {
+					trigger = {
+						can_have_more_leadership_traits = yes
+						NOT = { trait = sapper }
+					}
+					add_trait = sapper
+				}
+			}
+			set_character_flag = is_rebel_general
+			save_event_target_as = rebel_general
+			save_event_target_as = the_mexikhan_invader #loc based on what flag this target has
+			wealth = 200
+			log = "Mexikha Logging:"
+			log = "[This.GetFullName] ID [This.GetID] is the Rebel General"
+			character_event = { id = SSI.60201 } #Create title and pick target to notify
+		}
+
+		#News event, Inca and Prince add triggered desc for General
+		any_player = {
+			limit = {
+				has_offmap_news_enabled = offmap_mexikha
+				is_within_diplo_range = ROOT
+			}
+			narrative_event = { id = SSI.10108 days = 1 }
+		}
+    }
+}
+
+#Setup the general's titles and warn target
+character_event = {
+	id = SSI.60201
+
+	hide_window = yes
+
+	has_dlc = "Sunset Invasion"
+
+	is_triggered_only = yes
+	capable_only = yes
+	prisoner = no
+	
+	trigger = {
+		NOT = {
+			has_game_rule = {
+				name = adventurers
+				value = none
+			}
+		}
+	}
+
+	immediate = {
+		###Picks worst and overwrites as better targets are found
+		log = "Mexikha Logging:"
+		#Worst case, pick any ruler in the invasion region
+		random_independent_ruler = {
+			limit = {
+				valid_offmap_mexikha_target_location = yes
+				in_revolt = no
+				is_within_diplo_range = event_target:the_protector_general
+				is_landed = yes
+				is_nomadic = no
+				higher_tier_than = BARON
+			}
+			save_event_target_as = rebel_general_target
+			log = "[rebel_general_target.GetFullName] ID [rebel_general_target.GetID] is the Rebel General's Worst Case Target."
+		}
+		#Avoid NM target, pick a normal Count ruler
+		random_independent_ruler = {
+			limit = {
+				valid_offmap_mexikha_target_location = yes
+				NOT = { event_target:the_protector_general = { character = PREV } }
+				in_revolt = no
+				is_within_diplo_range = event_target:the_protector_general
+				is_landed = yes
+				is_nomadic = no
+				higher_tier_than = BARON
+			}
+			save_event_target_as = rebel_general_target
+			log = "[rebel_general_target.GetFullName] ID [rebel_general_target.GetID] is the Rebel General's Non Mexikha Worst Case Target."
+		}
+		#A a duke with a decent amount of land
+		random_independent_ruler = {
+			limit = {
+				valid_offmap_mexikha_target_location = yes
+				NOT = { event_target:the_protector_general = { character = PREV } }
+				in_revolt = no
+				is_within_diplo_range = event_target:the_protector_general
+				is_landed = yes
+				is_nomadic = no
+    			higher_tier_than = COUNT
+				num_of_count_titles_in_realm = 5
+			}
+			save_event_target_as = rebel_general_target
+			log = "[rebel_general_target.GetFullName] ID [rebel_general_target.GetID] is the Rebel General's Duke Target."
+		}
+		#A king with plenty of land
+		random_independent_ruler = {
+			limit = {
+				valid_offmap_mexikha_target_location = yes
+				NOT = { event_target:the_protector_general = { character = PREV } }
+				in_revolt = no
+				is_within_diplo_range = event_target:the_protector_general
+				is_landed = yes
+				is_nomadic = no
+    			higher_tier_than = DUKE
+				num_of_count_titles_in_realm = 15
+			}
+			save_event_target_as = rebel_general_target
+			log = "[rebel_general_target.GetFullName] ID [rebel_general_target.GetID] is the Rebel General's King Target."
+		}
+		#An emperor with lots of land
+		random_independent_ruler = {
+			limit = {
+				valid_offmap_mexikha_target_location = yes
+				NOT = { event_target:the_protector_general = { character = PREV } }
+				in_revolt = no
+				is_within_diplo_range = event_target:the_protector_general
+				is_landed = yes
+				is_nomadic = no
+    			higher_tier_than = KING
+				num_of_count_titles_in_realm = 30
+			}
+			save_event_target_as = rebel_general_target
+			log = "[rebel_general_target.GetFullName] ID [rebel_general_target.GetID] is the Rebel General's Emperor Target."
+		}
+
+		#!!!If still no target then stop it all!!!
+		if = {
+			limit = { NOT = { event_target:rebel_general_target = { always = yes } } }
+			death = { death_reason = death_went_back_to_mexikha }
+			log = "[This.GetFullName] ID [This.GetID] is the Rebel General and could not find a target therefore he is getting removed."
+			break = yes
+		}
+		
+		log = "[rebel_general_target.GetFullName] ID [rebel_general_target.GetID] is the Rebel General's Final Target."
+
+		#Create title after finding target so if all goes wrong don't need to delete title
+		add_trait = adventurer
+
+		create_title = {
+			tier = DUKE
+			landless = yes
+			temporary = yes
+			adventurer = yes
+			culture = ROOT
+			name = "CLAIMANT_ADVENTURE"
+			holder = ROOT
+			base_title = ROOT
+		}
+ 		new_title = { save_event_target_as = rebel_general_title }
+		set_defacto_liege = ROOT
+		set_special_character_title = TITLE_TLACOCHCALCATL
+
+		trigger_switch = {
+			on_trigger = has_character_flag
+			young_general = {
+				create_character = {
+					age = 24
+					random_traits = yes
+					female = yes
+					religion = aztec
+					culture = nahautl
+					historical = yes
+				}
+				new_character = {
+					add_spouse = ROOT
+					create_character = {
+						age = 6
+						#random_traits = yes
+						female = 50
+						religion = aztec
+						culture = nahautl
+						genetic_father = ROOT
+						genetic_mother = PREV
+						historical = yes
+					}
+					new_character = {
+						dynasty = ROOT
+						set_father = ROOT
+						set_mother = PREV
+					}
+					create_character = {
+						age = 6
+						#random_traits = yes
+						female = 50
+						religion = aztec
+						culture = nahautl
+						genetic_father = ROOT
+						genetic_mother = PREV
+						historical = yes
+					}
+					new_character = {
+						dynasty = ROOT
+						set_father = ROOT
+						set_mother = PREV
+					}
+				}
+			}
+			middle_general = {
+				create_character = {
+					age = 32
+					random_traits = yes
+					female = yes
+					religion = aztec
+					culture = nahautl
+					historical = yes
+				}
+				new_character = {
+					add_spouse = ROOT
+					create_character = {
+						age = 7
+						#random_traits = yes
+						female = 50
+						religion = aztec
+						culture = nahautl
+						genetic_father = ROOT
+						genetic_mother = PREV
+						historical = yes
+					}
+					new_character = {
+						dynasty = ROOT
+						set_father = ROOT
+						set_mother = PREV
+					}
+					create_character = {
+						age = 10
+						#random_traits = yes
+						female = 50
+						religion = aztec
+						culture = nahautl
+						genetic_father = ROOT
+						genetic_mother = PREV
+						historical = yes
+					}
+					new_character = {
+						dynasty = ROOT
+						set_father = ROOT
+						set_mother = PREV
+					}
+					create_character = {
+						age = 13
+						#random_traits = yes
+						female = 50
+						religion = aztec
+						culture = nahautl
+						genetic_father = ROOT
+						genetic_mother = PREV
+						historical = yes
+					}
+					new_character = {
+						dynasty = ROOT
+						set_father = ROOT
+						set_mother = PREV
+					}
+				}
+			}
+			old_general	= {
+				create_character = {
+					age = 48
+					random_traits = yes
+					female = yes
+					religion = aztec
+					culture = nahautl
+					historical = yes
+				}
+				new_character = {
+					add_spouse = ROOT
+					create_character = {
+						age = 4
+						#random_traits = yes
+						female = 50
+						religion = aztec
+						culture = nahautl
+						genetic_father = ROOT
+						genetic_mother = PREV
+						historical = yes
+					}
+					new_character = {
+						dynasty = ROOT
+						set_father = ROOT
+						set_mother = PREV
+					}
+					create_character = {
+						age = 9
+						#random_traits = yes
+						female = 50
+						religion = aztec
+						culture = nahautl
+						genetic_father = ROOT
+						genetic_mother = PREV
+						historical = yes
+					}
+					new_character = {
+						dynasty = ROOT
+						set_father = ROOT
+						set_mother = PREV
+					}
+					create_character = {
+						age = 14
+						#random_traits = yes
+						female = 50
+						religion = aztec
+						culture = nahautl
+						genetic_father = ROOT
+						genetic_mother = PREV
+						historical = yes
+					}
+					new_character = {
+						dynasty = ROOT
+						set_father = ROOT
+						set_mother = PREV
+					}
+					create_character = {
+						age = 18
+						random_traits = yes
+						female = 50
+						religion = aztec
+						culture = nahautl
+						genetic_father = ROOT
+						genetic_mother = PREV
+						historical = yes
+					}
+					new_character = {
+						dynasty = ROOT
+						set_father = ROOT
+						set_mother = PREV
+					}
+					create_character = {
+						age = 21
+						random_traits = yes
+						female = 50
+						religion = aztec
+						culture = nahautl
+						genetic_father = ROOT
+						genetic_mother = PREV
+						historical = yes
+					}
+					new_character = {
+						dynasty = ROOT
+						set_father = ROOT
+						set_mother = PREV
+					}
+				}
+			}
+		}
+		clr_character_flag = young_general
+		clr_character_flag = middle_general
+		clr_character_flag = old_general
+		prestige = 500
+
+		#Warn the target of the incoming invasion
+		event_target:rebel_general_target = { character_event = { id = SSI.60202 days = 5 } }
+	}
+}
+#Informed a Rebel Mexikhan General has picked you as a target
+character_event = {
+	id = SSI.60202
+	desc = EVT_DESC_SSI_60202
+	picture = GFX_evt_bishop_aztec
+	border = GFX_event_normal_frame_war
+
+	is_triggered_only = yes
+	hide_new = yes
+
+    has_dlc = "Sunset Invasion"
+
+	option = {
+		name = EVT_OPTA_SSI_60202
+		custom_tooltip = { text = rebel_general_will_invade_tt }
+		hidden_effect = { character_event = { id = SSI.60203 days = 10 random = 5 } }
+	}
+}
+#Spawn the troops and start the war
+character_event = {
+	id = SSI.60203
+	is_triggered_only = yes
+	hide_window = yes
+
+    has_dlc = "Sunset Invasion"
+
+	trigger = { event_target:rebel_general = { is_alive = yes } }
+
+	fail_trigger_effect = { character_event = { id = SSI.60207 } } #inform target the general died
+
+	immediate = {
+		event_target:rebel_general_target = {
+			capital_scope = {
+				kingdom = {
+					save_event_target_as = rebel_general_target_title
+				}
+			}
+		}
+		event_target:rebel_general = {
+			unsafe_war = {
+				target = event_target:rebel_general_target
+				casus_belli = kingdom_adventure
+				thirdparty_title = event_target:rebel_general_target_title
+				tier = KING
+			}
+
+			####### Spawn troop effects taken from SSI.30040, for the Rebel General he has less troops but better generals based on his martial
+			### To manipulate the troop spawning for specific situations modify the parameter valiables (mexikha_war_troop_quantity, mexikha_war_troop_quality, mexikha_war_target_match_mult, and mexikha_war_minimum_commander_martial) after the following block.
+			set_variable = {
+				which = mexikha_war_troop_quantity
+				value = 10
+				# 10 regiments of ~500 units
+			}
+			set_variable = {
+				which = mexikha_war_target_match_mult
+				value = 1
+			}
+			set_variable = {
+				which = mexikha_war_troop_quality
+				value = 3
+				# Value between 1-7
+			}
+			set_variable = {
+				which = mexikha_war_minimum_commander_martial
+				value = 12
+			}
+			###
+
+			# Increase min martial by 1/4 of the Rebel General's martial
+			export_to_variable = { which = "rebel_general_martial" value = martial }
+			divide_variable = { which = "rebel_general_martial" value = 4 }
+			change_variable = { which = "mexikha_war_minimum_commander_martial" which = "rebel_general_martial" }
+			# Manipulate the parameter variables dependent on the current century.
+			mexikha_war_modify_variables_by_century_effect = yes
+			
+			### Match mult calculation against the opponents troops.
+			export_to_variable = {
+				which = mexikha_temp_troop_calc
+				value = realm_levies_plus_allies
+				who = FROM
+			}
+			
+			divide_variable = {
+				which = mexikha_temp_troop_calc
+				value = 500
+			}
+			
+			multiply_variable = {
+				which = mexikha_temp_troop_calc
+				which = mexikha_war_target_match_mult
+			}
+			
+			change_variable = {
+				which = mexikha_war_troop_quantity
+				which = mexikha_temp_troop_calc
+			}
+			###
+			
+			any_courtier_or_vassal = { # Copy the variable to all courtiers and vassals
+				set_variable = {
+					which = mexikha_war_minimum_commander_martial
+					which = PREV
+				}
+			}
+			
+			if = {
+				limit = {
+					NOT = {
+						any_courtier_or_vassal = {
+							count = 5
+							martial = mexikha_war_minimum_commander_martial
+						}
+					}
+				} # Not enough proficient commanders, create more
+				# Custom effect utilizes mexikha_war_minimum_commander_martial variable
+				mexikha_spawn_commander_effect = yes
+				mexikha_spawn_commander_effect = yes
+				mexikha_spawn_commander_effect = yes
+				mexikha_spawn_commander_effect = yes
+				mexikha_spawn_commander_effect = yes
+			}
+			
+			845 = { # Anti-Atlas
+				save_event_target_as = spawn_province
+			}
+			
+			mexikha_war_spawn_troops_no_disband_effect = yes
+			# Requires the current things to function properly:
+			# event_target:spawn_province
+			# variable: mexikha_war_troop_quality
+			# variable: mexikha_war_troop_quantity
+		}
+	}
+}
+
+#EU4 conversion, prepare on map New Mexikha for conversion - WIP
+character_event = {
+	id = SSI.60205
+	hide_window = yes
+	is_triggered_only = yes
+
+    has_dlc = "Sunset Invasion"
+
+	immediate = {
+	}
+}
+#EU4 conversion, restore on map New Mexikha after conversion - WIP
+character_event = {
+	id = SSI.60206
+	hide_window = yes
+	is_triggered_only = yes
+
+    has_dlc = "Sunset Invasion"
+
+	immediate = {
+	}
+}
+
+#Inform Rebel General died so no invasion
+character_event = {
+	id = SSI.60207
+	desc = EVT_DESC_SSI_60207
+	picture = GFX_evt_bishop_aztec
+	border = GFX_event_normal_frame_war
+
+	is_triggered_only = yes
+
+    has_dlc = "Sunset Invasion"
+
+	immediate = {
+		event_target:rebel_general_title = {
+			holder_scope = { 
+				any_courtier = { death = { death_reason = death_executed_by_mexikhan_emperor } }
+			}
+			activate_title = { title = THIS status = no }
+			destroy_landed_title = THIS
+		}
+	}
+
+	option = {
+		name = EVT_OPTA_SSI_60207
+	}
+}
+
+#News Event: Title invaded by Mexikha destroyed
+narrative_event = {
+	id = SSI.60209
+    title = NEWS_FROM_MEXIKHA
+	has_global_flag = aztec_explorers
+	picture = GFX_evt_battle_mesoamerican
+	portrait = offmap_mexikha
+	window = EventWindowOffmap
+	background = GFX_event_window_news_from_mexikha
+    is_triggered_only = yes
+
+    has_dlc = "Sunset Invasion"
+
+	#desc = { #Pretender Mexikha falls by inheritance event
+	#	text = EVTDESC_JD_60209_A
+	#	trigger = {
+	#		FROM = { has_character_flag = pretender_chinese_empire_destroyed_inheritance }
+	#	}
+	#}
+	desc = { #Title invaded falls by war
+		text = EVTDESC_JD_60209_B
+		trigger = {
+			NOT = { FROM = { has_character_flag = pretender_chinese_empire_destroyed_inheritance } }
+		}
+	}
+
+    option = {
+        name = EVT_OPTA_JD_60209
+    }
+}
+
+#News Event: Inform General won and founded Empire
+narrative_event = {
+	id = SSI.60211
+    title = NEWS_FROM_MEXIKHA
+    has_global_flag = aztec_explorers
+    desc = EVTDESC_SSI_60211
+	picture = GFX_evt_bishop_aztec
+	portrait = offmap_mexikha
+	window = EventWindowOffmap
+	background = GFX_event_window_news_from_mexikha
+    is_triggered_only = yes
+
+    has_dlc = "Sunset Invasion"
+
+    option = {
+        name = EVT_OPTA_SSI_60211
+        trigger = {
+         	FROM = { is_liege_of = ROOT }
+        }
+    }
+
+    option = {
+        name = EVT_OPTB_SSI_60211
+        trigger = {
+         	NOT = { FROM = { is_liege_of = ROOT } }
+        }
+    }
+}
+
+###########################
+### Invasion of Mexikha ###
+###########################
+# by Matthew Clohessy
+
+#News Event: Character declares invasion of Mexikha
+narrative_event = {
+	id = SSI.60400
+	title = NEWS_FROM_MEXIKHA
+    has_global_flag = aztec_explorers
+	picture = GFX_evt_battle_mesoamerican
+	portrait = offmap_mexikha
+	window = EventWindowOffmap
+	background = GFX_event_window_news_from_mexikha
+	is_triggered_only = yes
+
+	desc = {
+		text = EVTDESC_SSI_60400_A
+		trigger = { event_target:invasion_of_mexikha_attacker = { character = ROOT } }
+	}
+	desc = {
+		text = EVTDESC_SSI_60400_B
+		trigger = { NOT = { event_target:invasion_of_mexikha_attacker = { character = ROOT } } }
+	}
+
+	has_dlc = "Sunset Invasion"
+
+	option = {
+		name = {
+			text = EVT_OPTA_SSI_60400
+			trigger = { event_target:invasion_of_mexikha_attacker = { character = ROOT } }
+		}
+		name = {
+			text = EVT_OPTB_SSI_60400
+			trigger = { NOT = { event_target:invasion_of_mexikha_attacker = { character = ROOT } } }
+		}
+		show_portrait = event_target:invasion_of_mexikha_claimant
+	}
+}
+#News Event: Character wins invasion of Mexikha
+narrative_event = {
+	id = SSI.60401
+	title = NEWS_FROM_MEXIKHA
+    has_global_flag = aztec_explorers
+	desc = EVTDESC_SSI_60401
+	picture = GFX_evt_battle_mesoamerican
+	portrait = offmap_mexikha
+	window = EventWindowOffmap
+	background = GFX_event_window_news_from_mexikha
+	is_triggered_only = yes
+
+	has_dlc = "Sunset Invasion"
+
+	immediate = { 
+		offmap_mexikha = {
+			set_offmap_flag = no_policy_news
+			set_policy = mexikha_open
+			log = "-------------------------------------"
+			log = "Mexikha Policy Logging:"
+			log = "Mexikhas new Policy is now OPEN"
+			log = "-------------------------------------"
+			clr_offmap_flag = no_policy_news
+		}
+	}
+
+	option = {
+		name = EVT_OPT_SSI_60401
+	}
+}
+#News Event: Character loses invasion of Mexikha
+narrative_event = {
+	id = SSI.60402
+    title = NEWS_FROM_MEXIKHA
+    has_global_flag = aztec_explorers
+	desc = EVTDESC_SSI_60402
+	picture = GFX_evt_battle_mesoamerican
+	portrait = offmap_mexikha
+	window = EventWindowOffmap
+	background = GFX_event_window_news_from_mexikha
+	is_triggered_only = yes
+
+	has_dlc = "Sunset Invasion"
+
+	option = {
+		name = EVT_OPT_SSI_60402
+		show_portrait = event_target:invasion_of_mexikha_claimant
+	}
+}
+#News Event: Claimant on Mexikha dies, invasion over
+narrative_event = {
+	id = SSI.60403
+    title = NEWS_FROM_MEXIKHA
+    has_global_flag = aztec_explorers
+    desc = EVTDESC_SSI_60403
+	picture = GFX_evt_battle_mesoamerican
+	portrait = offmap_mexikha
+	window = EventWindowOffmap
+	background = GFX_event_window_news_from_mexikha
+	is_triggered_only = yes
+
+	has_dlc = "Sunset Invasion"
+	
+	option = {
+		name = EVT_OPTA_SSI_60403
+		trigger = {
+			NOT = { FROM = { character = ROOT } }
+		}
+		show_portrait = event_target:invasion_of_mexikha_claimant
+	}
+	option = {
+		name = EVT_OPTB_SSI_60403
+		trigger = {
+			FROM = { character = ROOT }
+		}
+		show_portrait = event_target:invasion_of_mexikha_claimant
+	}
+}

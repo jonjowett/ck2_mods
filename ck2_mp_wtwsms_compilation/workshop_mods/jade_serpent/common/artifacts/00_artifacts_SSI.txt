@@ -1,0 +1,119 @@
+##############################################
+## DLC: Sunset Invasion: Mexikhan Artifacts ##
+##############################################
+
+# jade_dragon						turquoise_serpent
+# chinese_dragon_amulet				celestial_necklace_2	# placeholder
+# chinese_artwork					crystal_skull			# placeholder
+# chinese_calligraphy				celestial_necklace		# placeholder
+# chinese_sculpture
+# chinese_ceremonial_robes			jaguar_cloak
+# silk_shroud
+# water_clock						turquoise_mask
+# jian_sword 						
+# chinese_prev_emperor_sculpture 
+# chinese_arm_protector
+# chinese_serpent_spear				obsidian_axe			# placeholder
+# chinese_ji						aztec_macuahuitl
+# chinese_crossbow					aztec_sling
+# chinese_bronze_sculpture
+# chinese_painting_of_glitterhoof
+# chinese_tapestry
+# chinese_tapestry_grand
+
+# curse item						aztec_gold
+#									aztec_sacrifice_heart
+
+aztec_sacrifice_heart = {
+	monthly_character_prestige = 0.05
+	quality = 1
+	intrigue = 1
+	active = {
+		is_adult = yes
+	}
+	allowed_gift = {
+		always = no
+	}
+	stacking = no
+	picture = "GFX_mythological_beast_heart"
+}
+turquoise_serpent = {
+	monthly_character_prestige = 1
+	global_tax_modifier = 0.1
+	diplomacy = 2
+	quality = 5
+	flags = { mexikhan statue rare }
+	picture = "GFX_turquoise_serpent"
+	stacking = no
+}
+turquoise_mask = {
+	quality = 4
+	monthly_character_piety = 0.5
+	intrigue = 2
+	tribal_opinion = 10
+	flags = { mexikhan mask }
+	picture = "GFX_turquoise_mask"
+	stacking = no
+	slot = mask
+}
+jaguar_cloak = {
+	quality = 3
+	monthly_character_prestige = 0.5
+	martial = 1
+	tribal_opinion = 3
+	active = {
+		is_adult = yes
+	}
+	flags = { mexikhan very_rare fantasy }
+	picture = "GFX_leopard_skin_cloak"
+	stacking = no
+	slot = ceremonial_torso
+}
+aztec_macuahuitl = {
+	monthly_character_prestige = 0.65
+	martial = 2
+	combat_rating = 8
+	command_modifier = {
+		light_infantry = 0.1
+		heavy_infantry = 0.075
+		#pikemen = 0.035
+		pikemen = 0.075
+	}
+	quality = 3
+	active = {
+		is_adult = yes
+	}
+	flags = { mexikhan sword combat_weapon }
+	stacking = no
+	picture = "GFX_aztec_macuahuitl"
+	slot = weapon
+}
+aztec_sling = {
+	monthly_character_prestige = 0.5
+	combat_rating = 10
+	tribal_opinion = 2
+	active = {
+		is_adult = yes
+	}
+	quality = 2
+	flags = { mexikhan combat_weapon ranged_weapon }
+	stacking = no
+	picture = "GFX_davids_sling"
+	slot = weapon
+}
+crystal_skull = {
+	monthly_character_piety = 0.15
+	monthly_character_prestige = 0.25
+	same_religion_opinion = 5
+	quality = 3
+	flags = { mexikhan skull }
+	stacking = no
+	picture = "GFX_crystal_skull"
+}
+mexikhan_prev_emperor_sculpture = {
+	monthly_character_prestige = 0.15
+	quality = 1
+	flags = { mexikhan sculpture decor }
+	picture = "GFX_small_chinese_figurine"
+	#stacking = no
+}

@@ -1,0 +1,72 @@
+###SSI Decisions###
+
+#Written by:
+#Drikus Kuiper
+#Matthew Clohessy
+
+
+decisions = {
+	
+	tributary_independence_mexikha = {
+		only_playable = yes
+		is_high_prio = yes
+		ai_check_interval = 24
+
+		potential = {
+			offmap_mexikha = {
+				ROOT = {
+					is_tributary = {
+						suzerain = PREV
+						type = offmap
+					}
+				}
+			}
+		}
+		allow = {
+			offmap_mexikha = {
+				OR = {
+					has_status = mexikha_civil_war
+					has_status = mexikha_norse_invasion
+					has_status = mexikha_inca_invasion
+				}
+			}
+		}
+		effect = {
+			any_suzerain = {
+				remove_tributary = ROOT
+			}
+			if = {
+				limit = { 
+				    offmap_mexikha = { offmap_has_like = likes_tributaries }
+				}
+				detract_mexikhan_grace_massive_effect = yes
+			}
+			else = { detract_mexikhan_grace_major_effect = yes }
+			custom_tooltip = {
+				text = tributary_independence_mexikha_tt
+				add_character_modifier = {
+					hidden = yes
+					name = mexikhan_grace_tributary_timer
+					years = 30
+				}
+			}
+			hidden_effect = { offmap_mexikha = { governor = { character_event = { id = SSI.60010 } } } }
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5 # Slow down
+				NOT = {
+					trait = ambitious
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					trait = content
+					trait = craven
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,343 @@
+###MEXIKHA TRIGGERS###
+
+#Grace triggers
+has_mexikhan_grace_trivial_trigger = {
+	has_offmap_currency = { offmap = offmap_mexikha value = 10 }
+}
+has_mexikhan_grace_minor_trigger = {
+	has_offmap_currency = { offmap = offmap_mexikha value = 50 }
+}
+has_mexikhan_grace_medium_trigger = {
+	has_offmap_currency = { offmap = offmap_mexikha value = 150 }
+}
+has_mexikhan_grace_major_trigger = {
+	has_offmap_currency = { offmap = offmap_mexikha value = 500 }
+}
+has_mexikhan_grace_massive_trigger = { 
+	has_offmap_currency = { offmap = offmap_mexikha value = 1000 }
+}
+
+
+#Always put this at the end of your triggers!
+mexikha_diplo_interaction_trigger = { 
+	offmap_mexikha = {
+		governor = { 
+			NOT = { war_with = PREVPREV } 
+			is_within_diplo_range = PREVPREV
+		}
+		NOT = { has_policy = mexikha_isolationist }
+	}
+	hidden_tooltip = {
+		has_global_flag = aztec_explorers
+	}
+}
+
+mexikha_is_suffering_trigger = {
+	offmap_mexikha = {
+		OR = {
+			has_status = mexikha_unrest
+			has_status = mexikha_civil_war
+			has_status = mexikha_famine
+			has_status = mexikha_plague
+			has_status = mexikha_norse_invasion
+			has_status = mexikha_inca_invasion
+		}
+	}
+}
+
+mexikha_is_fine_trigger = { #"fine", read like "fiii-iine", i.e. U.S.A is currently treating the world as their oyster
+	offmap_mexikha = {
+		OR = {
+			has_status = mexikha_golden_age
+			has_status = mexikha_stable
+		}
+		OR = {
+			has_policy = mexikha_open
+			has_policy = mexikha_expansionist
+		}
+	}
+}
+
+mexikha_is_stable_open_trigger = {
+	offmap_mexikha = {
+		has_status = mexikha_stable
+		has_policy = mexikha_open
+	}
+}
+mexikha_is_stable_expansionist_trigger = {
+	offmap_mexikha = {
+		has_status = mexikha_stable
+		has_policy = mexikha_expansionist
+	}
+}
+mexikha_is_golden_age_open_trigger = {
+	offmap_mexikha = {
+		has_status = mexikha_golden_age
+		has_policy = mexikha_open
+	}
+}
+mexikha_is_golden_age_expansionist_trigger = {
+	offmap_mexikha = {
+		has_status = mexikha_golden_age
+		has_policy = mexikha_expansionist
+	}
+}
+
+
+#Found in the 00_offmap_powers file... and the conditions for the decisions
+mexikha_offmap_boon_decisions_enabled_trigger = {
+	mexikha_offmap_decisions_enabled_trigger = yes
+	custom_tooltip = {
+		text = mexikha_offmap_boon_decisions_enabled_trigger_cd_tt #From is player character
+		FROM = { NOT = { has_character_modifier = ssi_mexikha_boon_cd } } #boon cooldown, which is set in each decision (one year!)...
+	}
+}
+
+#Found in the 00_offmap_powers file... and the conditions for the decisions, use custom tooltip for that decisions cooldown modifier
+mexikha_offmap_tribute_decisions_enabled_trigger = {
+	mexikha_offmap_decisions_enabled_trigger = yes
+}
+
+#What goes into the two triggers above...
+mexikha_offmap_decisions_enabled_trigger = { 
+	offmap_mexikha = {
+		NOT = { has_policy = mexikha_isolationist }
+		custom_tooltip = {
+			text = mexikha_offmap_decisions_enabled_trigger_war_tt #"Is at peace with �Y[From.GetTitledFirstName]�!"
+			NOT = { governor = { war_with = FROM } }
+		}
+		governor = {
+			show_scope_change = no
+			is_within_diplo_range = FROM
+			hidden_trigger  = { NOT = { character = FROM } } #Governor cannot use boon/tributes decisions
+		}
+	}
+	custom_tooltip = {
+		text = mexikha_offmap_boon_decisions_enabled_trigger_raiding_tt
+		FROM = {
+			NOR = {
+				has_character_modifier = mexikha_raid_active
+				has_character_modifier = mexikha_raid_grace_cd
+			}
+		}
+	}
+	hidden_trigger = { has_dlc = "Sunset Invasion" }
+	conditional_tooltip = { 
+		trigger = { FROM = { primary_title = { has_title_flag = rebel_general_title } } }
+		custom_tooltip = { 
+			text = mexikha_offmap_decisions_pretender_emperor_tt
+			always = no
+		}
+	}
+	conditional_tooltip = { 
+		trigger = { FROM = { has_character_modifier = failed_invasion_of_mexikha } }
+		custom_tooltip = { 
+			text = mexikha_offmap_decisions_failed_invasion_tt
+			always = no
+		}
+	}
+}
+
+#Found in the 00_offmap_powers file... and the conditions for the force open mexikha decision
+mexikha_offmap_hostile_decisions_enabled_trigger = {
+	offmap_mexikha = {
+		custom_tooltip = {
+			text = mexikha_offmap_decisions_enabled_trigger_war_tt #"Is at peace with §Y[From.GetTitledFirstName]§!"
+			NOT = { governor = { war_with = FROM } }
+		}
+		governor = {
+			show_scope_change = no
+			is_within_diplo_range = FROM
+			hidden_trigger  = { NOT = { character = FROM } } #Governor cannot use boon/tributes decisions
+		}
+		offmap_ruler = {
+			NOT = { dynasty = FROM }
+		}
+	}
+	hidden_trigger = { has_dlc = "Sunset Invasion" }
+}
+
+# For checking the Mexikhan Emperor's likes & dislikes
+is_liked_by_Mexikha_trigger = {
+	liked_by_offmap = {
+		type = offmap_mexikha
+	}
+	NOT = {
+		disliked_by_offmap = {
+			type = offmap_mexikha
+		}
+	}
+	offmap_mexikha = {
+		show_scope_change = no
+		custom_tooltip = { text = emperor_likes_THIS_tt }
+	}
+}
+
+is_disliked_by_Mexikha_trigger = {
+	disliked_by_offmap = {
+		type = offmap_mexikha
+	}
+	NOT = {
+		liked_by_offmap = {
+			type = offmap_mexikha
+		}
+	}
+	offmap_mexikha = {
+		show_scope_change = no
+		custom_tooltip = { text = emperor_dislikes_THIS_tt }
+	}
+}
+
+is_liked_and_disliked_by_Mexikha = {
+	disliked_by_offmap = {
+		type = offmap_mexikha
+	}
+	liked_by_offmap = {
+		type = offmap_mexikha
+	}
+	offmap_mexikha = {
+		show_scope_change = no
+		custom_tooltip = { text = emperor_has_ambiguous_feelings_of_THIS_tt }
+	}
+}
+
+#Used in the invasion script...
+valid_offmap_mexikha_target = {
+	NOT = { character = ROOT }
+	#NOT = { has_character_modifier = peace_deal_with_mexikha }
+	NOT = { reverse_has_truce = ROOT }
+	#NOT = { has_character_flag = defeated_mexikha }
+	NOT = { is_tributary = { suzerain = ROOT } }
+	in_revolt = no
+	is_within_diplo_range = ROOT
+	is_landed = yes
+	higher_tier_than = BARON
+	#NOT = { primary_title = { has_title_flag = rebel_general_title } } #uses special cb to target
+	#NOT = { offmap_mexikha = { offmap_ruler = { dynasty = PREVPREV } } }
+}
+
+valid_offmap_mexikha_target_location = {
+	#OR = {
+		#any_realm_province = { region = custom_mexikhan_invasion_target_region }
+		#capital_scope = { 
+		any_realm_province = {
+			OR = {
+				region = world_europe_west
+				region = world_europe_south_italy
+				region = world_africa_north
+			}
+		}
+		any_neighbor_independent_ruler = {
+			has_landed_title = e_mexikha
+		}
+	#}
+}
+
+valid_offmap_mexikha_target_location_tributary_chain = {
+	OR = {
+		#any_realm_province = { region = custom_mexikhan_invasion_target_region }
+		any_neighbor_independent_ruler = {
+			has_landed_title = e_mexikha
+		}
+		any_neighbor_independent_ruler = {
+			is_tributary = yes
+			suzerain = {
+				has_landed_title = e_mexikha
+			}
+		}
+	}
+}
+
+# SUNSET INVASION
+# EMPEROR LIKES & DISLIKES
+likes_concubines = {
+	context = concubine # Not a trigger, but used by the 'liked_by_offmap' & 'disliked_by_offmap' triggers
+}
+likes_wealth = {
+	context = wealth # Not a trigger, but used by the 'liked_by_offmap' & 'disliked_by_offmap' triggers
+}
+likes_tributaries = {
+	context = tributary # Not a trigger, but used by the 'liked_by_offmap' & 'disliked_by_offmap' triggers
+}
+likes_germanics = {
+	OR = {
+		culture_group = north_germanic
+		culture_group = central_germanic
+		culture_group = west_germanic
+	}
+}
+likes_latino_iberians = {
+	OR = {
+		culture_group = latin
+		culture_group = iberian
+	}
+}
+likes_celts = {
+	culture_group = celtic
+}
+likes_arabs = {
+	culture_group = arabic
+}
+likes_africans = {
+	OR = {
+		culture_group = west_african
+		culture_group = east_african
+	}
+}
+likes_chinese = {
+	culture_group = chinese_group
+}
+likes_muslims = {
+	religion_group = muslim
+}
+likes_christians = {
+	religion_group = christian
+}
+likes_jews = {
+	religion_group = jewish_group
+}
+likes_mazdans = {
+	religion_group = zoroastrian_group
+}
+likes_zunists = {
+	OR = {
+		religion = zun_pagan
+		religion = zun_pagan_reformed
+	}
+}
+# MOD
+likes_horse = { 
+	OR = {
+		race = horse
+		trait = horse
+	}
+}
+likes_norses = {
+	OR = {
+		religion = norse_pagan
+		religion = norse_pagan_reformed
+	}
+}
+likes_voodoos = { 
+	OR = {
+		religion = west_african_pagan
+		religion = west_african_pagan_reformed
+	}
+}
+###
+
+courtier_from_mexikha_trigger = {
+	custom_tooltip = {
+		text = courtier_from_mexikha_trigger_tt
+		has_character_flag = originated_from_mexikhan_court
+	}
+}
+
+death_in_mexikha_trigger = {
+	OR = {
+		death_reason = death_went_to_mexikha
+		death_reason = death_offmap
+		death_reason = death_went_back_to_mexikha
+		death_reason = death_in_mexikha_historic
+	}
+}

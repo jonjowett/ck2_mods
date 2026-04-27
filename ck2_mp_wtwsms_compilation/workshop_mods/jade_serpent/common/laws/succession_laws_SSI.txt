@@ -1,0 +1,24 @@
+# DO NOT ALTER THE NAME OR NUMBER OF THESE!
+
+succession_laws = { # !OVERRIDE! it can be buggy
+	succ_offmap_succession = {
+		potential = {
+			holder_scope = {
+				top_liege = { is_offmap_governor = yes }
+				OR = { # To use this with future offmap powers, use an OR clause here with the new government types
+					government = confucian_bureaucracy
+					government = order_government
+				}
+			}
+		}
+		effect = {
+			succession = offmap_succession
+			# This succession type generates a character of China's culture and religion
+			# They have decent (4-10) stats, and good (7-11) stewardship, and will always have a Stewardship education
+			# The offmap power defined in the top liege's government is used to determine the culture and religion. Will not function if this isn't defined
+		}
+		revoke_allowed = {
+			always = no
+		}			
+	}
+}

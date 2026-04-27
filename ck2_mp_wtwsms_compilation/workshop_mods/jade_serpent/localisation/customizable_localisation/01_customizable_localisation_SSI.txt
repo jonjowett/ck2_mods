@@ -1,0 +1,596 @@
+#MEXIKHA
+defined_text = {
+	name = GetTlatoaniCihuatlatoani
+
+	text = {
+		trigger = { is_female = yes }
+		localisation_key = String_cihuatlatoani
+	}
+	text = {
+		trigger = { is_female = no }
+		localisation_key = String_tlatoani
+	}	
+}
+
+defined_text = {
+	name = GetTlatoaniCihuatlatoaniCap
+
+	text = {
+		trigger = { is_female = yes }
+		localisation_key = String_Cihuatlatoani
+	}
+	text = {
+		trigger = { is_female = no }
+		localisation_key = String_Tlatoani
+	}	
+}
+
+defined_text = {
+	name = GetMediumMexikhanHuetlatoaniName
+	text = {
+		trigger = { always = yes }
+		localisation_key = GetMediumMexikhanTlatoaniName_string
+	}
+}
+
+defined_text = {
+	name = GetShortMexikhanHuetlatoaniName
+	text = {
+		trigger = { always = yes }
+		localisation_key = GetShortMexikhanTlatoaniName_string
+	}
+}
+
+### Mexikha flavor
+defined_text = {
+	name = GetMexikhanConvoTopic
+	text = {
+		localisation_key = String_Mexikhan_such_a_wealthy_realm
+		trigger = { mexikha_is_fine_trigger = yes }
+	}
+	text = {
+		localisation_key = String_Mexikhan_so_full_of_life
+	}
+	text = {
+		localisation_key = String_crowded_Mexikhan_water_routes
+	}
+	text = {
+		localisation_key = String_the_magnificent_architecture
+	}
+	text = {
+		localisation_key = String_a_pleasure_trip_on_a_capital_lake
+	}
+	text = {
+		localisation_key = String_the_construction_of_Mexikhan_warships
+	}
+	text = {
+		localisation_key = String_the_Mexikhan_food
+	}
+}
+
+defined_text = {
+	name = GetNegativeMexikhanConvoTopic
+	text = {
+		localisation_key = String_too_much_people
+	}
+	text = {
+		localisation_key = String_bad_weather_and_language_barrier
+	}
+}
+
+# Description of Mexikhan activity when Isolationist
+defined_text = {
+	name = GetMexikhaIsolationPastime
+
+	text = {
+		localisation_key = String_Iso_Tomato_Gardens
+	}
+	text = {
+		localisation_key = String_Iso_Giant_Mausoleum
+	}
+	text = {
+		localisation_key = String_Iso_Painting
+	}
+	text = {
+		localisation_key = String_Iso_Monroe
+	}
+	text = {
+		localisation_key = String_Iso_Codex_Tonalpohualli
+	}
+}
+
+# Description of the end of a Mexikhan Status
+defined_text = {
+	name = GetMexikhaPreviousStatusEnd
+
+	text = {
+		localisation_key = String_End_Stable_mexikha
+		trigger = {
+			prev_status = mexikha_stable
+		}
+	}
+	text = {
+		localisation_key = String_End_Unrest_mexikha
+		trigger = {
+			prev_status = mexikha_unrest
+			mexikha_is_suffering_trigger = no
+		}
+	}
+	text = {
+		localisation_key = String_End_Unrest_Worsened_mexikha
+		trigger = {
+			prev_status = mexikha_unrest
+			mexikha_is_suffering_trigger = yes
+		}
+	}
+	text = {
+		localisation_key = String_End_Famine_mexikha
+		trigger = {
+			prev_status = mexikha_famine
+		}
+	}
+	text = {
+		localisation_key = String_End_Plague_mexikha
+		trigger = {
+			prev_status = mexikha_plague
+		}
+	}
+	text = {
+		localisation_key = String_End_Invasion_mexikha
+		trigger = {
+			OR = {
+				prev_status = mexikha_norse_invasion
+				prev_status = mexikha_inca_invasion
+			}
+		}
+	}
+	text = {
+		localisation_key = String_End_Civil_War_mexikha
+		trigger = {
+			prev_status = mexikha_civil_war
+			NOR = {
+				has_status = mexikha_norse_invasion
+				has_status = mexikha_inca_invasion
+			}
+		}
+	}
+	text = {
+		localisation_key = String_End_Civil_War_to_Invasion_mexikha
+		trigger = {
+			prev_status = mexikha_civil_war
+			OR = {
+				has_status = mexikha_norse_invasion
+				has_status = mexikha_inca_invasion
+			}
+		}
+	}
+	text = {
+		localisation_key = String_End_Golden_Age_mexikha
+		trigger = {
+			prev_status = mexikha_golden_age
+		}
+	}
+}
+
+defined_text = {
+	name = GetMexikhanInvader
+	text = {
+		localisation_key = norse
+		trigger = {
+			OR = {
+				has_status = mexikha_norse_invasion
+				prev_status = mexikha_norse_invasion
+			}
+		}
+	}
+	#text = {
+	#	localisation_key = inca
+	#	trigger = {
+	#		OR = {
+	#			has_status = mexikha_inca_invasion
+	#			prev_status = mexikha_inca_invasion
+	#		}
+	#	}
+	#}
+}
+
+# Names of important Mexikhan regions off-map
+defined_text = {
+	name = GetRandomMexikhanRegion
+
+	text = {
+		localisation_key = String_Tenochtitlan
+	}
+	text = {
+		localisation_key = String_Texcoco
+	}
+	text = {
+		localisation_key = String_Tlacopan
+	}
+	text = {
+		localisation_key = String_Azcapotzalco
+	}
+	text = {
+		localisation_key = String_Chalco
+	}
+	text = {
+		localisation_key = String_Tollan
+	}
+}
+
+# Names of typical Mexikhan troublemakers
+defined_text = {
+	name = GetRandomMexikhanFaction
+
+	text = {
+		localisation_key = String_Arbitrary_Tributary
+	}
+	text = {
+		localisation_key = String_Ambitious_Archpriest
+	}
+	text = {
+		localisation_key = String_Disgruntled_Nobles
+	}
+}
+
+# Mexikhan focus
+defined_text = { #Read like: we are busy focusing on the [GetRandomMexikhanFocus] so can not open the Triangular Trade Route.
+	name = GetRandomMexikhanFocus
+	text = {
+		localisation_key = String_random_region_mexikha
+		trigger = {		
+			OR = {
+				has_status = mexikha_stable
+				has_status = mexikha_golden_age
+			}
+		}
+	}
+	text = {
+		localisation_key = String_random_faction_mexikha
+		trigger = { has_status = mexikha_unrest }
+	}
+	text = {
+		localisation_key = String_current_invasion
+		trigger = {
+			has_status = mexikha_norse_invasion
+		}
+	}
+	text = {
+		localisation_key = String_current_status
+		trigger = {
+			OR = {
+				has_status = mexikha_civil_war
+				has_status = mexikha_famine
+				has_status = mexikha_plague
+			}
+		}
+	}
+}
+
+# Gets the name of the Mexikhan refugee's specialty
+defined_text = {
+	name = GetMexikhanProfession
+	
+	text = {
+		trigger = {
+			has_character_flag = is_mexikhan_master_mason
+		}
+		localisation_key = String_mason
+	}
+	text = {
+		trigger = {
+			has_character_flag = is_mexikhan_doctor
+		}
+		localisation_key = String_physician
+	}
+	fallback_text = {
+		localisation_key = String_mexikhan_profession_fallback #Mexikhan refugee
+	}
+}
+
+# Gets the name of the Mexikhan courtier's invite reason (for when they die, mostly? Could be used elsewhere though.)
+defined_text = {
+	name = GetMexikhanCharacterRole
+	
+	text = {
+		trigger = {
+			has_character_flag = is_mexikhan_master_mason
+		}
+		localisation_key = String_mason
+	}
+	text = {
+		trigger = {
+			has_character_flag = is_mexikhan_doctor
+		}
+		localisation_key = String_physician
+	}
+	fallback_text = {
+		localisation_key = String_mexikhan_character_role_fallback #courtier
+	}
+}
+
+defined_text = {
+	name = GetMexikhanLetterBlessing
+	text = {
+		trigger = { FROM = { has_job_title = job_chancellor } }
+		localisation_key = String_peace_and_unity
+	}
+	text = {
+		trigger = { FROM = { has_job_title = job_marshal } }
+		localisation_key = String_strength_and_vigor
+	}
+	text = {
+		trigger = { FROM = { has_job_title = job_treasurer } }
+		localisation_key = String_prospering_lands
+	}
+	text = {
+		trigger = { FROM = { has_job_title = job_spiritual } }
+		localisation_key = String_divine_guidance
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key = String_good_health
+	}
+}
+
+defined_text = {
+	name = GetMexikhanComplimentAdjective
+	text = {
+		localisation_key = String_honored
+	}
+	text = {
+		trigger = { 
+			OR = {
+				trait = chaste
+				trait = celibate
+				AND = {
+					NOT = { num_of_lovers = 1 }
+					is_married = no
+					NOR = {
+						trait = seducer
+						trait = seductress
+						trait = lustful
+						has_focus = focus_seduction
+					}
+				}
+			}
+		}
+		localisation_key = String_chaste
+	}
+	text = {
+		trigger = {
+			OR = {
+				is_strong_trigger = yes
+				trait = fair
+			}
+		}
+		localisation_key = String_radiant
+	}
+	text = {
+		trigger = {
+			OR = {
+				is_learned_trigger = yes
+				tier = EMPEROR
+			}
+		}
+		localisation_key = String_illustrious
+	}
+	text = {
+		trigger = {
+			OR = {
+				trait = brave
+				trait = charitable
+				trait = honest
+				trait = diligent
+				trait = patient
+				trait = kind
+				trait = humble
+				trait = just
+			}
+			NOR = {
+				trait = drunkard
+				trait = deceitful
+				trait = cruel
+				trait = gluttonous
+				trait = slothful
+				trait = schemer
+				trait = wroth
+				is_any_kinslayer_trigger = yes
+				trait = cannibal_trait
+			}
+		}
+		localisation_key = String_honorable
+	}
+	text = {
+		trigger = {
+			OR = {
+				is_smart_trigger = yes
+				is_learned_trigger = yes
+				learning = 15
+			}
+		}
+		localisation_key = String_wise
+	}
+	text = {
+		trigger = {
+			OR = {
+				is_smart_trigger = yes
+				is_learned_trigger = yes
+				learning = 15
+			}
+		}
+		localisation_key = String_sage
+	}
+	text = {
+		trigger = {
+			OR = {
+				piety = 1000
+				trait = zealous
+				trait = content
+			}
+			NOT = { trait = cynical }
+		}
+		localisation_key = String_pious
+	}
+	text = {
+		trigger = {
+			OR = {
+				trait = just
+				AND = {
+					OR = {
+						trait = kind
+						trait = charitable
+					}
+					NOR = {
+						trait = arbitrary
+						trait = craven
+						trait = slothful
+						trait = content
+					}
+				}
+			}	
+		}
+		localisation_key = String_righteous
+	}
+	text = {
+		trigger = {
+			OR = {
+				trait = just
+				trait = kind
+				trait = charitable
+			}	
+			NOR = {
+				trait = wroth
+				trait = cruel
+				trait = impaler
+			}
+		}
+		localisation_key = String_benevolent
+	}
+	text = {
+		trigger = { trait = brave }
+		localisation_key = String_brave
+	}
+	text = {
+		trigger = { trait = honest }
+		localisation_key = String_sincere
+	}
+	text = {
+		trigger = {
+			is_female = yes
+			is_attractive_trigger = yes
+		}
+		localisation_key = String_lovely
+	}
+	text = {
+		trigger = {
+			OR = {
+				trait = fair
+				trait = gregarious
+				trait = socializer
+			}
+			has_unpleasant_trait_trigger = no
+			NOR = {
+				trait = ugly
+				trait = drunkard
+				trait = hedonist
+				trait = lustful
+			}
+		}
+		localisation_key = String_graceful
+	}
+	text = {
+		trigger = {
+			higher_tier_than = DUKE
+		}
+		localisation_key = String_great
+	}
+	text = {
+		trigger = {
+			higher_tier_than = DUKE
+		}
+		localisation_key = String_eminent
+	}
+	text = {
+		trigger = {
+			tier = EMPEROR
+		}
+		localisation_key = String_exalted
+	}
+	text = {
+		trigger = {
+			tier = EMPEROR
+		}
+		localisation_key = String_magnificent
+	}
+	text = {
+		trigger = {
+			is_offmap_ruler = yes
+		}
+		localisation_key = String_heavenly
+	}
+}
+
+defined_text = { #being ordered context
+	name = GetMexikhanForceOpenDemand
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_tribute }
+		localisation_key = String_force_open_mexikha_demands_tribute
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_trade_post }
+		localisation_key = String_force_open_mexikha_demands_trade_post
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_wealth }
+		localisation_key = String_force_open_mexikha_demands_wealth
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_eunuch }
+		localisation_key = String_force_open_mexikha_demands_eunuch
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_concubine }
+		localisation_key = String_force_open_mexikha_demands_concubine
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_return_mexikhan }
+		localisation_key = String_force_open_mexikha_demands_mexikhan
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_backup }
+		localisation_key = String_force_open_mexikha_demands_wealth #backup does reduced wealth
+	}
+}
+
+defined_text = { #third person context
+	name = GetMexikhanForceOpenDemandMexikha
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_tribute }
+		localisation_key = String_force_open_mexikha_demands_tribute_mexikha
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_trade_post }
+		localisation_key = String_force_open_mexikha_demands_trade_post_mexikha
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_wealth }
+		localisation_key = String_force_open_mexikha_demands_wealth_mexikha
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_eunuch }
+		localisation_key = String_force_open_mexikha_demands_eunuch_mexikha
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_concubine }
+		localisation_key = String_force_open_mexikha_demands_concubine_mexikha
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_return_mexikhan }
+		localisation_key = String_force_open_mexikha_demands_mexikhan_mexikha
+	}
+	text = { 
+		trigger = { has_character_flag = force_open_mexikha_demands_backup }
+		localisation_key = String_force_open_mexikha_demands_wealth_mexikha #backup does reduced wealth
+	}
+}

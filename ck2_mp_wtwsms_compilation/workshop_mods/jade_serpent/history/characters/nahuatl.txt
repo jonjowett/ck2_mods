@@ -1,0 +1,729 @@
+#171000-171999
+#All the dynasty is NOT correct, I don't want to create lots dynasties so using vanilla dynasties as placeholder.
+### Toltec
+171030 = {
+	name="Nacaxoc"
+	dynasty=1035029 #Tepetl, hill
+	religion="aztec"
+	culture="nahuatl"
+	707.1.1={
+		birth = yes
+		add_trait = dead_crown_aztec_fylkir
+	}
+	771.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171031 = {
+	name="Huetzin"
+	dynasty=1035029 #Tepetl, hill
+	religion="aztec"
+	culture="nahuatl"
+	father=171030
+	749.1.1={
+		birth = yes
+	}
+	771.1.1={
+		add_trait = dead_crown_aztec_fylkir
+	}
+	823.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171040 = {
+	name="Xihuiquenitzin" # Xihuiquenitzin Ziuhcaltzin, mother of Tecpancaltzin Iztaccaltzin
+	dynasty=1035030 #Tetl, Small rock
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	786.1.1={
+		birth = yes
+		add_trait = dead_crown_aztec_fylkir
+	}
+	803.1.1={
+		add_spouse=171041
+	}
+	833.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171041 = {
+	name="Tlacomihua" # father of Tecpancaltzin Iztaccaltzin
+	dynasty=1035028 #Tecuhtli, "Lord". He shuold be Iztaccaltzin "Snow-White".
+	religion="aztec"
+	culture="nahuatl"
+	780.1.1={
+		birth = yes
+	}
+	828.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171042 = {
+	name="Tecpancaltzin" # Tecpancaltzin Iztaccaltzin, circa. 833-877
+	dynasty=1035028 #Tecuhtli, "Lord". It shuold be Iztaccaltzin "Snow-White".
+	religion="aztec"
+	culture="nahuatl"
+	father=171041
+	mother=171040
+	809.1.1={
+		birth = yes
+		add_trait = dead_crown_aztec_fylkir
+	}
+	828.1.1={
+		add_spouse=171043
+	}
+	885.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171043 = {
+	name="Maxio" # wife of Tecpancaltzin Iztaccaltzin
+	dynasty=1035013 #Malinalli, a bundle of grass growing from a human jaw
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	801.1.1={
+		birth = yes
+	}
+	846.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171044 = {
+	name="Cozamalotl" # daughter of Tecpancaltzin Iztaccaltzin with fictional name
+	dynasty=1035028 #Tecuhtli, "Lord". It shuold be Iztaccaltzin "Snow-White".
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	father=171042
+	mother=171043
+	830.1.1={
+		birth = yes
+	}
+	887.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171045 = {
+	name="Papantzin" # father of Xochitl
+	religion="aztec"
+	culture="nahuatl"
+	798.1.1={
+		birth = yes
+	}
+	845.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171046 = {
+	name="Xochitl" # lover and successor of Tecpancaltzin Iztaccaltzin circa. 877-916
+	dynasty=1035034 #Xochitl
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	father=171045
+	829.1.1={
+		birth = yes
+	}
+	847.1.1 = {
+		add_spouse=171042
+	}
+	877.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	916.1.1={
+		death = { death_reason = death_offmap } #death_battle
+	}
+}
+171047 = {
+	name="Meconetzin" # aka Topiltzin-Meconetzin, bastard-son of Tecpancaltzin Iztaccaltzin and Xochitl circa. 916-923
+	#dynasty=1035034 #Xochitl
+	dynasty=1035000 #Acatl, Reed
+	religion="aztec"
+	culture="nahuatl"
+	father=171042
+	mother=171046
+	trait="legit_bastard"
+	846.1.1={
+		birth = yes
+	}
+	916.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	923.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171048 = {
+	name="Chimalman" # mother of Topiltzin
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	852.1.1={
+		birth = yes
+	}
+	895.1.1={ # died in childbirth
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171049 = {
+	name="Topiltzin" # 9 Winds "Stone Skull", mixup with Cē Ācatl Topiltzin Quetzalcoatl
+	dynasty=1035000 #Acatl, Reed
+	religion="aztec"
+	culture="nahuatl"
+	father=171047 # ambiguous
+	mother=171048
+	895.1.1={
+		birth = yes
+		add_trait = dead_crown_aztec_fylkir
+	}
+	948.1.1={
+		death = { death_reason = death_missing }
+	}
+}
+171050 = { # House White Flowers
+	name="Chicuyeiehecatl" # 8 Winds "Twenty Eagles"
+	dynasty=1035031 #Tlantli, Tooth
+	religion="aztec"
+	culture="nahuatl"
+	896.1.1={
+		birth = yes
+	}
+	921.1.1 = {
+		add_spouse = 171051
+	}
+	950.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171051 = {
+	name="Matlacmazatl" # 10 Deers
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	898.1.1={
+		birth = yes
+	}
+	952.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171052 = { # House White Flowers
+	name="Quetzalcoatl" # 2 Serpent "Quetzalcoatl"
+	dynasty=1035031 #Tlantli, Tooth
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	father = 171050
+	mother = 171051
+	923.1.1={
+		birth = yes
+	}
+	981.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171053 = { # House White Flowers
+	name="Quechquenitl" # 9 Wind "Flint Quechquenitl"
+	dynasty=1035031 #Tlantli, Tooth
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	father = 171050
+	mother = 171051
+	937.1.1={
+		birth = yes
+	}
+	976.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171054 = {
+	name="Cuauhtli" # 10 Eagle "Stone Tiger"
+	dynasty=1035025 #Quauitl, Eagle
+	religion="aztec"
+	culture="nahuatl"
+	935.1.1={
+		birth = yes
+	}
+	956.1.1={
+		add_spouse = 171053
+	}
+	988.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171055 = {
+	name="Tlachitl" # 1 Reed "Tlachitl Astronomical Apparatus"
+	dynasty=1035025 #Quauitl, Eagle
+	religion="aztec"
+	culture="nahuatl"
+	father=171054
+	mother=171053
+	969.1.1={
+		birth = yes
+	}
+	986.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171056 = {
+	name="Nahuimiquiztli" # 4 Death "Head Wall"
+	dynasty=1035025 #Quauitl, Eagle
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	father=171054
+	mother=171053
+	974.1.1={
+		birth = yes
+	}
+	1028.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+###Interregnum after Topiltzin Quetzalcoatl
+171060 = { # r.947–983
+	name="Matlacxochitl" #10 Flowers "Tiger Night"
+	dynasty=1035000 #Acatl, Reed
+	religion="aztec"
+	culture="nahuatl"
+	father=171049
+	917.1.1={
+		birth = yes
+	}
+	948.1.1={
+		add_spouse = 171052
+		add_trait = dead_crown_aztec_fylkir
+	}
+	983.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171061 = {
+	name="Matlactlihuanceocelotl" #12 Tiger "Jade Jewel", Matlactlihuan-ce-Ocelotl
+	dynasty=1035000 #Acatl, Reed
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	father=171060
+	mother=171052
+	950.1.1={
+		birth = yes
+	}
+	1002.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171062 = {
+	name="Matlacacatl" #10 Reeds "Venus Staff"
+	dynasty=1035001 #Atl, Water
+	religion="aztec"
+	culture="nahuatl"
+	949.1.1={
+		birth = yes
+	}
+	966.1.1={
+		add_spouse=171061
+	}
+	997.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171063 = { # r.983–997
+	name="Nauhyotzin" #12 Lizard "Arrow Legs"
+	dynasty=1035000 #Acatl, Reed
+	religion="aztec"
+	culture="nahuatl"
+	father=171060
+	mother=171052
+	952.1.1={
+		birth = yes
+	}
+	983.1.1={
+		add_trait = dead_crown_aztec_fylkir
+	}
+	985.1.1={
+		add_spouse=171064
+	}
+	997.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171064 = {
+	name="Nahuitecpatl" #4 Flint "Uprooted eye"
+	dynasty=1035001 #Atl, Water
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	father=171062
+	mother=171061
+	968.1.1={
+		birth = yes
+	}
+	1013.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171065 = { # r.997-1025
+	name="Matlaccoatzin" #5 Movement "Smoke which descends from the Sky"
+	dynasty=1035000 #Acatl, Reed
+	religion="aztec"
+	culture="nahuatl"
+	father=171063
+	mother=171064
+	972.1.1={
+		birth = yes
+	}
+	992.1.1={
+		add_trait = dead_crown_aztec_fylkir
+		add_spouse=171056
+	}
+	1025.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171066 = {
+	name="Omemalinalli" #2 Grass "Quetzal-jewel"
+	#dynasty=1035000 #Acatl, Reed
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	974.1.1={
+		birth = yes
+	}
+	1021.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171067 = { # r.1025-1046
+	name="Tlicehuatzin" #20 Tiger "Tlicehuatzin", probably the same ruler with Tlilcoatzin
+	dynasty=1035000 #Acatl, Reed
+	religion="aztec"
+	culture="nahuatl"
+	father=171065
+	mother=171066
+	1001.1.1={
+		birth = yes
+	}
+	1025.1.1={
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1046.1.1={
+		death = { death_reason = death_suicide }
+	}
+}
+### Mixtec-Toltec Allience
+#Huemac is probably compilation of various rulers.
+171070 = {
+	name="Mitl" # 13 Dog "White Eagle"
+	dynasty=1035024 # Quauhtli, the Eagle
+	religion="aztec"
+	culture="nahuatl"
+	994.1.1={
+		birth = yes
+		add_spouse=171071
+	}
+	1052.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171071 = {
+	name="Xiuhzaltzin" # 1 Buzzard "Tlatoc Skirt", Princess of Toltec
+	dynasty=1035001 #Atl, Water
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	father=171062
+	mother=171061
+	986.1.1={
+		birth = yes
+	}
+	1048.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171072 = {
+	name="Tecpancatzin" # 5 Alligator "Tlachitl Tonatiuh", Huemac-Tecpancatzin, High-Priest of Tilantongo
+	dynasty=1035024 # Quauhtli, the Eagle
+	religion="aztec"
+	culture="nahuatl"
+	father=171070
+	mother=171071
+	1022.1.1={
+		birth = yes
+	}
+	1046.1.1={
+		add_trait = dead_crown_aztec_fylkir
+		add_spouse=171073
+	}
+	1090.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171073 = {
+	name="Xochitl" # 9 Eagle "Garland of Cacao Flowers", queen of Tecamachalco
+	dynasty=1035027 # Tecpatl, the Flint knife
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	1029.1.1={
+		birth = yes
+	}
+	1083.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171074 = {
+	name="Topiltzin" # 8 Deer "Tiger's Claw", Iya Nacuaa Teyusi Ñaña
+	dynasty=1035024 # Quauhtli, the Eagle
+	religion="aztec"
+	culture="nahuatl"
+	father=171072
+	mother=171073
+	1063.1.1={
+		birth = yes
+	}
+	1090.1.1={
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1122.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171075 = {
+	name="Nauhyotzin" # Or Nauhyotl, Rebellious leader
+	dynasty=1035022 # Pipiltin, the Noble
+	religion="aztec"
+	culture="nahuatl"
+	1102.1.1={
+		birth = yes
+	}
+	1122.1.1={
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1186.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+### Chichimeca's dynasty
+#dynasty=1035012 # Macehualli, the People
+171080 = {
+	name="Mallatzin"
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	religion="aztec"
+	culture="nahuatl"
+	1130.1.1={
+		birth = yes
+	}
+	1186.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1200.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171081 = {
+	name="Cuauhtlahtolloc"
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	religion="aztec"
+	culture="nahuatl"
+	father=171080
+	1151.1.1={
+		birth = yes
+	}
+	1200.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1235.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171082 = {
+	name="Cuauhtlahtolloc" # Chalchiuhtlatonac II
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	religion="aztec"
+	culture="nahuatl"
+	father=171081
+	1172.1.1={
+		birth = yes
+	}
+	1235.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1245.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171083 = {
+	name="Cuauhtlix"
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	religion="aztec"
+	culture="nahuatl"
+	father=171082
+	1186.1.1={
+		birth = yes
+	}
+	1245.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1252.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171084 = {
+	name="Yohuallatonac" # Yohuallatonac Telpochtli
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	religion="aztec"
+	culture="nahuatl"
+	father=171083
+	1200.1.1={
+		birth = yes
+	}
+	1252.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1259.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171085 = {
+	name="Tziuhtecatl"
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	religion="aztec"
+	culture="nahuatl"
+	father=171084
+	1235.1.1={
+		birth = yes
+	}
+	1260.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1269.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171086 = {
+	name="Xihuitltemoc"
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	religion="aztec"
+	culture="nahuatl"
+	father=171085
+	1245.1.1={
+		birth = yes
+	}
+	1269.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1281.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171087 = {
+	name="Coxcoxtli"
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	religion="aztec"
+	culture="nahuatl"
+	father=171086
+	1252.1.1={
+		birth = yes
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1281.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1307.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171088 = {
+	name="Cuauhtlahtolloc"
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	religion="aztec"
+	culture="nahuatl"
+	father=171087
+	1269.1.1={
+		birth = yes
+	}
+	1307.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1323.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171089 = {
+	name="Acamapichtli"
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	religion="aztec"
+	culture="nahuatl"
+	father=171087
+	1281.1.1={
+		birth = yes
+	}
+	1323.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1336.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+171090 = {
+	name="Achitomecatl" # Achitomecatl Teomecatl II
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	religion="aztec"
+	culture="nahuatl"
+	father=171088
+	1307.1.1={
+		birth = yes
+	}
+	1336.1.1 = {
+		add_trait = dead_crown_aztec_fylkir
+	}
+	1347.1.1={
+		death = { death_reason = death_offmap }
+	}
+}
+# Nauhyotzin III 1347-1413
+### Aztecs
+171091 = {
+	name="Atotoztli" # Daughter of Coxcoxtli
+	dynasty=1035033 # Toltecatl, "of Tollan"
+	female=yes
+	religion="aztec"
+	culture="nahuatl"
+	father=171087
+	1293.1.1={
+		birth = yes
+	}
+	1334.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171092 = {
+	name="Opochtli" # Opochtli Iztahuatzin
+	dynasty=1035017 # Nochtli, Cactus fruit
+	religion="aztec"
+	culture="nahuatl"
+	1287.1.1={
+		birth = yes
+	}
+	1336.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
+171093 = {
+	name="Acamapichtli" # First tlatoani of the Aztecs and grandfather of Moctezuma I
+	dynasty=1035017 # Nochtli, Cactus fruit
+	religion="aztec"
+	culture="nahuatl"
+	mother=171091
+	father=171092
+	1321.1.1={
+		birth = yes
+	}
+	1395.1.1={
+		death = { death_reason = death_in_mexikha_historic }
+	}
+}
