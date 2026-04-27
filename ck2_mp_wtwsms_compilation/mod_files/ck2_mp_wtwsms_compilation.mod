@@ -1,3 +1,4 @@
 name="CK2 MP: WTWSMS Compilation"
 path="mod/ck2_mp_wtwsms_compilation"
 dependencies = { "\"When the World Stopped Making Sense\"" }
+#dependencies = { "\"WTWSMS (DO NOT USE) (Extracted for Validator)\"" }
