@@ -1,0 +1,308 @@
+# Audax Validator EnableCommentMetadata
+
+# Ignore all warnings about unnecessary AND clauses (there are lots in this auto-stargaze logic, but they make the code clearer to me)
+# Audax Validator "!" Ignore_1001
+
+decisions = {
+	
+	# Automatically locates a compatible fellow Hermetic to go stargazing with.
+	# Potentially useful for players who don't want to go hunting through the list of members for appropriate traits/relationship/etc.
+	expd_herm_auto_stargazing = {
+		
+		is_high_prio = yes
+		
+		is_in_society = yes
+		only_playable = yes
+		
+		ai = no
+		
+		potential = {
+			is_playable = yes
+			society_member_of = hermetics
+			ai = no
+		}
+		
+		allow = {
+			
+			expd_herm_this_character_can_stargaze = yes
+			
+			custom_tooltip = {
+				text = expd_herm_invitations_only_between_feb_and_aug_to_ensure_good_weather_tt
+				# The month condition is zero-based, so Feb = 1 & Aug = 7
+				month >= 1
+				month <= 7
+			}
+				
+			custom_tooltip = {
+				text = expd_herm_there_is_at_least_one_candidate_for_stargazing_tt
+				society = { # Hermetics
+					any_society_member = {
+						expd_herm_this_character_can_be_invited_to_stargaze_by_root = yes
+					}
+				}
+			}
+			
+		}
+		
+		effect = {
+			
+			# Set required modifiers on the decision taker (so that the same decision can't be taken multiple times)
+			hidden_tooltip = {
+				if = {
+					limit = { NOT = { has_character_modifier = inviting_to_stargazing } }
+					add_character_modifier = {
+						modifier = inviting_to_stargazing
+						duration = 182
+						hidden = yes
+					}
+					set_character_flag = inviting_guests_to_stargazing_timer
+				}
+				set_character_flag = do_not_disturb
+			}
+			
+			custom_tooltip = {
+				text = expd_herm_an_invitation_to_stargazing_will_be_sent_to_a_fellow_member_tt
+				society = {
+					any_society_member = {
+						limit = { expd_herm_this_character_can_be_invited_to_stargaze_by_root = yes }
+						score_value = {
+							value = 1 # Must start with a non-zero value
+							
+							# Strongly deprioritise anyone who recently refused
+							additive_modifier = {
+								# Audax Validator "." Ignore_1001
+								AND = {
+									has_character_flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+									ROOT = {
+										has_opinion_modifier = {
+											who = PREV
+											name = opinion_disappointed
+										}
+									}
+								}
+								value = -5000
+							}
+							
+							# If observatory is available, prioritise guests who will appreciate it (and deprioritise those who won't)
+							additive_modifier = {
+								AND = {
+									expd_herm_root_can_use_prep_activity_observatory = yes
+									expd_herm_this_character_likes_prep_activity_observatory = yes
+								}
+								value = 2000
+							}
+							additive_modifier = {
+								AND = {
+									expd_herm_root_can_use_prep_activity_observatory = yes
+									expd_herm_this_character_hates_prep_activity_observatory = yes
+								}
+								value = -2000
+							}
+							
+							# In case there's no observatory, or no guests who like it, prioritise guests who will appreciate one of the other activities (and deprioritise those who won't)
+							additive_modifier = {
+								expd_herm_this_character_likes_prep_activity_non_observatory = yes
+								value = 1000
+							}
+							additive_modifier = {
+								expd_herm_this_character_hates_prep_activity_non_observatory = yes
+								value = -1000
+							}
+							
+							# Deprioritise anyone who was invited recently
+							additive_modifier = {
+								has_character_flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+								value = -100
+							}
+							additive_modifier = {
+								AND = {
+									has_character_flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+									had_character_flag = {
+										flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+										years >= 5
+									}
+								}
+								value = -100
+							}
+							additive_modifier = {
+								AND = {
+									has_character_flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+									had_character_flag = {
+										flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+										years >= 10
+									}
+								}
+								value = -100
+							}
+							additive_modifier = {
+								AND = {
+									has_character_flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+									had_character_flag = {
+										flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+										years >= 15
+									}
+								}
+								value = -100
+							}
+							additive_modifier = {
+								AND = {
+									has_character_flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+									had_character_flag = {
+										flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+										years >= 20
+									}
+								}
+								value = -100
+							}
+							
+							# Prioritise guests who will probably accept the invitation
+							additive_modifier = {
+								OR = {
+									trait = scholar
+									trait = mystic
+									trait = theologian
+								}
+								value = 20
+							}
+							additive_modifier = {
+								trait = gregarious
+								value = 20
+							}
+							additive_modifier = {
+								trait = trusting
+								value = 20
+							}
+							additive_modifier = {
+								OR = {
+									trait = genius
+									trait = quick
+								}
+								value = 15
+							}
+							additive_modifier = {
+								trait = shrewd
+								value = 15
+							}
+							additive_modifier = {
+								AND = {
+									opinion = { who = ROOT value = 30 }
+									NOT = { is_friend = ROOT }
+								}
+								value = 20
+							}
+							additive_modifier = {
+								AND = {
+									opinion = { who = ROOT value = 60 }
+									NOT = { is_friend = ROOT }
+								}
+								value = 30
+							}
+							additive_modifier = { # People who have a high opinion of you but aren't friends are prioritised over friends, even though friends are 10x more likely to accept, because making new friends is better!
+								is_friend = ROOT
+								value = 20
+							}
+							additive_modifier = {
+								trait = content
+								value = -20
+							}
+							additive_modifier = {
+								trait = shy
+								value = -20
+							}
+							additive_modifier = {
+								trait = paranoid
+								value = -20
+							}
+							additive_modifier = {
+								trait = slothful
+								value = -20
+							}
+							additive_modifier = {
+								trait = envious
+								value = -15
+							}
+							additive_modifier = {
+								OR = {
+									trait = imbecile
+									trait = slow
+								}
+								value = -20
+							}
+							additive_modifier = {
+								trait = dull
+								value = -20
+							}
+							
+							# Finally, some random fuzzing, so that people with similar scores have similar chances of being picked
+							additive_modifier = {
+								random < 50
+								value = -40
+							}
+							additive_modifier = {
+								random < 50
+								value = -20
+							}
+							additive_modifier = {
+								random < 50
+								value = -10
+							}
+							additive_modifier = {
+								random < 50
+								value = -5
+							}
+							additive_modifier = {
+								random < 50
+								value = -3
+							}
+							additive_modifier = {
+								random < 50
+								value = -1
+							}
+							additive_modifier = {
+								random < 50
+								value = 1
+							}
+							additive_modifier = {
+								random < 50
+								value = 3
+							}
+							additive_modifier = {
+								random < 50
+								value = 5
+							}
+							additive_modifier = {
+								random < 50
+								value = 10
+							}
+							additive_modifier = {
+								random < 50
+								value = 20
+							}
+							additive_modifier = {
+								random < 50
+								value = 40
+							}
+							
+						}
+						
+						# We only want ONE random person who best fits the above criteria
+						count = 1
+						
+						# Renew the auto-invitation tracking flag
+						if = {
+							limit = { has_character_flag = expd_herm_received_auto_stargazing_invite_from_@ROOT }
+							clr_character_flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+						}
+						set_character_flag = expd_herm_received_auto_stargazing_invite_from_@ROOT
+						
+						# Send the invitation
+						letter_event = { id = MNM.1920 days = 7 }
+						
+					}
+				}
+			}
+			
+		}
+		
+	}
+}

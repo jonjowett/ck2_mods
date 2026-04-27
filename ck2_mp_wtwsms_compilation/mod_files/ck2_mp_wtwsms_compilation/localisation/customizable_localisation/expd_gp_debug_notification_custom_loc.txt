@@ -1,0 +1,32 @@
+defined_text = {
+	name = expd_gp_debug_notification_action_detail
+	use_first_valid = yes
+	text = {
+		trigger = { has_global_flag = expd_gp_debug_notification_destroy_gp }
+		localisation_key =     expd_gp_debug_notification_action_destroy_gp
+	}
+	text = {
+		trigger = { has_global_flag = expd_gp_debug_notification_destroy_improvement }
+		localisation_key =     expd_gp_debug_notification_action_destroy_improvement
+	}
+	text = {
+		trigger = { has_global_flag = expd_gp_debug_notification_add_improvement_slot }
+		localisation_key =     expd_gp_debug_notification_action_add_improvement_slot
+	}
+	text = {
+		trigger = { has_global_flag = expd_gp_debug_notification_remove_improvement_slot }
+		localisation_key =     expd_gp_debug_notification_action_remove_improvement_slot
+	}
+	text = {
+		trigger = { has_global_flag = expd_gp_debug_notification_increase_expansion_cost }
+		localisation_key =     expd_gp_debug_notification_action_increase_expansion_cost
+	}
+	text = {
+		trigger = { has_global_flag = expd_gp_debug_notification_decrease_expansion_cost }
+		localisation_key =     expd_gp_debug_notification_action_decrease_expansion_cost
+	}
+	text = {
+		trigger = { always = yes }
+		localisation_key =     expd_gp_debug_notification_action_unknown
+	}
+}

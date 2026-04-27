@@ -1,0 +1,83 @@
+# 4 mutually-exclusive options:
+#  --- Subjugations of duke+   characters are disabled for all players (without explicit permission)
+#  --- Subjugations of king+   characters are disabled for all players (without explicit permission)
+#  --- Subjugations of emperor characters are disabled for all players (without explicit permission)
+#  --- Subjugations                       are enabled  for everyone
+
+edmp_global_subjugations_of_duke_plus_are_disabled_without_explicit_permission = {
+	custom_tooltip = {
+		text = edmp_global_subjugations_of_duke_plus_are_disabled_without_explicit_permission_tt
+		edmp_global_subjugations_rule_is_not_inconsistent = yes
+		has_global_flag = edmp_global_subjugations_of_duke_plus_disabled_without_explicit_permission
+	}
+}
+
+edmp_global_subjugations_of_king_plus_are_disabled_without_explicit_permission = {
+	custom_tooltip = {
+		text = edmp_global_subjugations_of_king_plus_are_disabled_without_explicit_permission_tt
+		edmp_global_subjugations_rule_is_not_inconsistent = yes
+		has_global_flag = edmp_global_subjugations_of_king_plus_disabled_without_explicit_permission
+	}
+}
+
+edmp_global_subjugations_of_emperor_plus_are_disabled_without_explicit_permission = {
+	custom_tooltip = {
+		text = edmp_global_subjugations_of_emperor_plus_are_disabled_without_explicit_permission_tt
+		edmp_global_subjugations_rule_is_not_inconsistent = yes
+		has_global_flag = edmp_global_subjugations_of_emperor_plus_disabled_without_explicit_permission
+	}
+}
+
+edmp_global_subjugations_are_enabled = {
+	custom_tooltip = {
+		text = edmp_global_subjugations_are_enabled_tt
+		edmp_global_subjugations_rule_is_not_inconsistent = yes
+		NOR = {
+			has_global_flag = edmp_global_subjugations_of_duke_plus_disabled_without_explicit_permission
+			has_global_flag = edmp_global_subjugations_of_king_plus_disabled_without_explicit_permission
+			has_global_flag = edmp_global_subjugations_of_emperor_plus_disabled_without_explicit_permission
+		}
+	}
+}
+
+edmp_global_subjugations_are_not_enabled = {
+	custom_tooltip = {
+		text = edmp_global_subjugations_are_not_enabled_tt
+		edmp_global_subjugations_rule_is_not_inconsistent = yes
+		edmp_global_subjugations_are_enabled = no
+	}
+}
+
+edmp_global_subjugations_rule_inconsistent = {
+	# The rule is inconsistent if and only if more than one of the global flags is set.
+	# Since there are only 3 flags in total, we can check all possible combinations of 2 & 3 flags very easily.
+	custom_tooltip = {
+		text = edmp_global_subjugations_rule_inconsistent_tt
+		OR = {
+			AND = {
+				has_global_flag = edmp_global_subjugations_of_duke_plus_disabled_without_explicit_permission
+				has_global_flag = edmp_global_subjugations_of_king_plus_disabled_without_explicit_permission
+			}
+			AND = {
+				has_global_flag = edmp_global_subjugations_of_duke_plus_disabled_without_explicit_permission
+				has_global_flag = edmp_global_subjugations_of_emperor_plus_disabled_without_explicit_permission
+			}
+			AND = {
+				has_global_flag = edmp_global_subjugations_of_king_plus_disabled_without_explicit_permission
+				has_global_flag = edmp_global_subjugations_of_emperor_plus_disabled_without_explicit_permission
+			}
+			AND = {
+				has_global_flag = edmp_global_subjugations_of_duke_plus_disabled_without_explicit_permission
+				has_global_flag = edmp_global_subjugations_of_king_plus_disabled_without_explicit_permission
+				has_global_flag = edmp_global_subjugations_of_emperor_plus_disabled_without_explicit_permission
+			}
+		}
+	}
+}
+
+edmp_global_subjugations_rule_is_not_inconsistent = {
+	custom_tooltip = {
+		text = edmp_global_subjugations_rule_is_not_inconsistent_tt
+		edmp_global_subjugations_rule_inconsistent = no
+	}
+}

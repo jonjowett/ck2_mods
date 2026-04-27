@@ -1,0 +1,95 @@
+# "zzz_" prefix is after "HF_bloodline_events" alphabetically, so any events redefined here should override those in vanilla
+
+namespace = HF
+
+#on_war_ended_victory: check for war variable.
+# From = Attacker, Root = Defender
+character_event = {
+	id = HF.24018
+	hide_window = yes
+	trigger = { 
+		has_dlc = "Holy Fury"
+		FROM = { 
+			this_character_is_not_an_unlanded_heresiarch_peasant_or_adventurer = yes
+			NOT = { has_character_flag = flag_about_to_war_bloodline }
+		}
+		ROOT = { 
+			NOR = {
+				trait = heresiarch
+				trait = peasant_leader
+				trait = adventurer
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+
+	immediate = { 
+		FROM = { 
+			hidden_tooltip = { change_variable = { which = bloodline_won_wars value = 1 } }
+			if = { #Pure War Bloodline.
+				limit = { 
+					check_variable = { which = bloodline_won_wars value = 15 } 
+					has_ambition = obj_forge_bloodline
+				}
+				set_character_flag = flag_about_to_war_bloodline
+				character_event = { id = HF.24031 days = 25 random = 25 }
+			}
+			else_if = { # Murder War Hybrid.
+				limit = { 
+					check_variable = { which = bloodline_murdered_people value = 20 } 
+					check_variable = { which = bloodline_won_wars value = 10 }
+					has_ambition = obj_forge_bloodline
+				}
+				set_character_flag = flag_about_to_war_bloodline
+				narrative_event = { id = HF.24045 days = 25 random = 25 }
+			}
+		}
+	}
+}
+
+#on_war_ended_defeat: check for war variable.
+# From = Attacker, Root = Defender
+character_event = {
+	id = HF.24019
+	hide_window = yes
+	trigger = {
+		has_dlc = "Holy Fury"
+		FROM = { 
+			NOR = {
+				trait = heresiarch
+				trait = peasant_leader
+				trait = adventurer
+			}
+		}
+		ROOT = {
+			this_character_is_not_an_unlanded_heresiarch_peasant_or_adventurer = yes
+			NOT = { has_character_flag = flag_about_to_war_bloodline }
+		}
+	}
+	
+	is_triggered_only = yes
+
+	immediate = { 
+		ROOT = { 
+			hidden_tooltip = { change_variable = { which = bloodline_won_wars value = 1 } }
+			if = { #Pure War Bloodline.
+				limit = { 
+					check_variable = { which = bloodline_won_wars value = 15 } 
+					has_ambition = obj_forge_bloodline
+				}
+				set_character_flag = flag_about_to_war_bloodline
+				character_event = { id = HF.24031 days = 25 random = 25 }
+			}
+			else_if = { # Murder War Hybrid.
+				limit = { 
+					check_variable = { which = bloodline_murdered_people value = 20 } 
+					check_variable = { which = bloodline_won_wars value = 10 }
+					has_ambition = obj_forge_bloodline
+				}
+				set_character_flag = flag_about_to_war_bloodline
+				narrative_event = { id = HF.24045 days = 25 random = 25 }
+			}
+		}
+	}
+}

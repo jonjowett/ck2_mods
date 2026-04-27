@@ -1,0 +1,54 @@
+edmp_this_character_is_a_current_or_absent_human_player = {
+	custom_tooltip = {
+		text = edmp_this_character_is_a_current_or_absent_human_player_tt
+		OR = {
+			edmp_this_character_is_a_current_human_player = yes
+			edmp_this_character_is_an_absent_human_player = yes
+		}
+	}
+}
+
+edmp_this_character_is_a_current_human_player = {
+	custom_tooltip = {
+		text = edmp_this_character_is_a_current_human_player_tt
+		ai = no
+	}
+}
+
+edmp_this_character_is_an_absent_human_player = {
+	custom_tooltip = {
+		text = edmp_this_character_is_an_absent_human_player_tt
+		ai = yes
+		has_character_modifier = edmp_playerflag
+	}
+}
+
+edmp_this_character_is_not_a_current_or_absent_human_player = {
+	custom_tooltip = {
+		text = edmp_this_character_is_not_a_current_or_absent_human_player_tt
+		edmp_this_character_is_a_current_or_absent_human_player = no
+	}
+}
+
+edmp_this_character_is_not_a_current_human_player = {
+	custom_tooltip = {
+		text = edmp_this_character_is_not_a_current_human_player_tt
+		edmp_this_character_is_a_current_human_player = no
+	}
+}
+
+edmp_this_character_is_not_an_absent_human_player = {
+	custom_tooltip = {
+		text = edmp_this_character_is_not_an_absent_human_player_tt
+		edmp_this_character_is_an_absent_human_player = no
+	}
+}
+
+edmp_this_character_is_a_potential_absent_human_player = {
+	custom_tooltip = {
+		text = edmp_this_character_is_a_potential_absent_human_player_tt
+		ai = yes
+		edmp_this_character_is_potentially_playable = yes
+		NOT = { has_character_modifier = edmp_playerflag }
+	}
+}

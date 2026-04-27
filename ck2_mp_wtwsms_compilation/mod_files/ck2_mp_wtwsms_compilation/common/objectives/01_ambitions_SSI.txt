@@ -1,0 +1,53 @@
+# Aggression lock
+obj_aggression_zero = { # Using fake localisation string
+	type = character
+	
+	can_cancel = no
+	
+	aggression = 0
+	
+	potential = {
+		has_landed_title = e_mexikha
+	}
+	
+	allow = {
+		has_dlc = "Sunset Invasion"
+	}
+	
+	chance = {
+		factor = 100
+	}
+	
+	success = {
+		custom_tooltip = {
+			text = obj_become_chancellor_fake_tip
+			hidden_tooltip = {
+				AND = {
+					is_alive = yes
+					is_alive = no
+				}
+			}
+		}
+	}
+	
+	abort = {
+	}
+	
+	abort_effect = {
+	}
+	
+	effect = {
+		if = {
+			limit = {
+				NOT = { has_character_flag = successful_council_ambition }
+			}
+			change_diplomacy = 1
+		}
+		opinion = {
+			who = liege
+			modifier = opinion_ambition_fulfilled
+			years = 5
+		}
+		set_character_flag = successful_council_ambition
+	}
+}

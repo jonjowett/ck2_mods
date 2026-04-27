@@ -1,0 +1,131 @@
+decisions = {
+	expd_herm_call_gathering = {
+		is_high_prio = yes
+		is_in_society = yes
+		ai_check_interval = 12
+		
+		
+		
+		potential = {
+			society_member_of = hermetics
+			society_rank = 4     # Magus
+		}
+		
+		
+		
+		allow = {
+			
+			trigger_if = {
+				limit = { ai = no }
+				# Default event requires learning 10 and martial/stewardship 8. Make it harder for the player.
+				learning = 20
+				OR = {
+					martial = 12
+					stewardship = 12
+				}
+			}
+			trigger_else = {
+				# Use default event criteria for AI.
+				learning = 10
+				OR = {
+					martial = 8
+					stewardship = 8
+				}
+			}
+			
+			war = no
+			
+			custom_tooltip = {
+				text = expd_herm_this_character_is_not_inaccessible_incapable_or_prisoner_tt
+				block_general_event_trigger = no
+			}
+			
+			custom_tooltip = {
+				text = expd_herm_this_character_has_built_a_laboratory_tt
+				has_character_flag = built_laboratory
+			}
+			
+			custom_tooltip = {
+				text = expd_herm_this_character_is_not_already_participating_in_a_gathering_tt
+				NOT = { has_character_flag = gathering_of_the_minds }
+			}
+			
+			custom_tooltip = {
+				text = expd_herm_at_least_4_people_in_the_society_have_mutual_opinion_15_with_this_character_tt
+				any_society_member = {
+					count = 4
+					opinion = { who = ROOT value = 15 }
+					reverse_opinion = { who = ROOT value = 15 }
+				}
+			}
+			
+			trigger_if = {
+				# Fixed price of 3000 currency for the player
+				limit = { ai = no}
+				society_currency >= 3000
+			}
+			trigger_else = {
+				# Allow AI to theoretically take this decision at 2000 currency
+				# (But they probably won't take it with this little currency, due to the weights in ai_will_do.)
+				society_currency >= 2000
+			}
+			
+			trigger_if = {
+				limit = { has_character_modifier = expd_herm_recently_called_a_gathering_modifier }
+				custom_tooltip = {
+					text = expd_herm_has_not_recently_used_this_decision_to_call_a_gathering_blocked_tt
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = expd_herm_has_not_recently_used_this_decision_to_call_a_gathering_allowed_tt
+					always = yes
+				}
+			}
+			
+			# Prevent exploits via race conditions
+			trigger_if = {
+				limit = { had_character_flag = { flag = expd_herm_deciding_whether_to_call_a_gathering years <= 1 } }
+				custom_tooltip = {
+					text = expd_herm_deciding_whether_to_call_a_gathering_tt
+					always = no
+				}
+			}
+			
+		}
+		
+		effect = {
+			hidden_tooltip = {
+				clr_character_flag = expd_herm_deciding_whether_to_call_a_gathering
+				set_character_flag = expd_herm_deciding_whether_to_call_a_gathering
+			}
+			character_event = {
+				id = ExpdHerm.1000
+				tooltip = expd_herm_this_character_will_call_a_gathering_tt
+			}
+		}
+		
+		# Small chance that the AI will take this decision at 2000 currency.
+		# Exponentially increasing chance at each increment of 500, up to 100% chance at 4000 currency.
+		ai_will_do = {
+			factor = 0.1
+			modifier = {
+				factor = 2
+				society_currency >= 2500
+			}
+			modifier = {
+				factor = 2
+				society_currency >= 3000
+			}
+			modifier = {
+				factor = 2
+				society_currency >= 3500
+			}
+			modifier = {
+				factor = 2
+				society_currency >= 4000
+			}
+		}
+	}
+}

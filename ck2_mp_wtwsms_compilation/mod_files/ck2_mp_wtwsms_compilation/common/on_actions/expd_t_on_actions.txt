@@ -1,0 +1,52 @@
+# Character
+on_yearly_pulse = {
+	events = {
+		EDTSuzerainBuff.1000
+	}
+}
+
+# ROOT is the character, FROM is the title, FROMFROM is the old holder
+on_new_holder_inheritance = {
+	events = {
+		EDTSuzerainBuff.1000
+	}
+}
+
+# From = Attacker, Root = Defender
+on_war_started = {
+	events = {
+		EDTSuzerainBuff.1002
+	}
+}
+
+# From = Attacker, Root = Defender
+on_war_ended_victory = {
+	events = {
+		EDTSuzerainBuff.1000
+		EDTSuzerainBuff.1001
+	}
+}
+
+# From = Attacker, Root = Defender
+on_war_ended_whitepeace = {
+	events = {
+		EDTSuzerainBuff.1000
+		EDTSuzerainBuff.1001
+	}
+}
+
+# From = Attacker, Root = Defender
+on_war_ended_defeat = {
+	events = {
+		EDTSuzerainBuff.1000
+		EDTSuzerainBuff.1001
+	}
+}
+
+# From = Attacker, Root = Defender
+on_war_ended_invalid = {
+	events = {
+		EDTSuzerainBuff.1000
+		EDTSuzerainBuff.1001
+	}
+}

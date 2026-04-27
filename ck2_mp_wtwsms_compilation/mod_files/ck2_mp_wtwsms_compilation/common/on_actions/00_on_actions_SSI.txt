@@ -1,0 +1,174 @@
+#character
+on_startup = {
+	events = {
+		SSI.81 # init mexikha governor
+		#SSI.30504 # Clean up living mexikhan
+		SSI.10006 # setting the name of the Mexikhan empire
+	}
+}
+
+#character
+on_yearly_pulse = {
+	events = {
+	}
+
+	random_events = {
+		#150 = SSI.30000 # Traders acting dishonest
+		#150 = SSI.10009 # Courtier offers to visit the New Mexikha
+		#200 = SSI.30010 # Courtier from Mexikhan court compliments/berates
+		#25 = SSI.60000 # Envoy from Mexikha offers trade for artifacts
+		150 = SSI.70000 # Escaped Mexikhan Noble
+		1000 = 0
+ 	}
+}
+
+on_death = {
+	events = {
+		SSI.60310 # Courtier from Mexikha dies
+	}
+}
+
+# ROOT is the character, FROM is the title, FROMFROM is the old holder
+on_new_holder_inheritance = {
+	events = {
+		SSI.80 # setup mexikha governor
+	}
+}
+
+# From = Attacker, Root = Defender
+on_war_started = {
+	events = {
+		SSI.30020 # Mexikhan protectorate receives reinforcements from Mexikha
+		SSI.30030 # Mexikhan protectorate receives reinforcements from Mexikha
+		#SSI.30015 # Clean up trade contracts
+	}
+}
+
+# From = Attacker, Root = Defender
+on_war_ended_victory = {
+	events = {
+		SSI.30051 # Offmap Mexikha end of war clean-up
+	}
+}
+
+# From = Attacker, Root = Defender
+on_war_ended_whitepeace = {
+	events = {
+		SSI.30050 # Offmap Mexikha end of war clean-up
+	}
+}
+
+# From = Attacker, Root = Defender
+on_war_ended_defeat = {
+	events = {
+		SSI.30052 # Offmap Mexikha end of war clean-up
+	}
+}
+
+# From = Attacker, Root = Defender
+on_war_ended_invalid = {
+	events = {
+		SSI.30050
+	}
+}
+
+# ROOT = Builder, FROM = Title
+on_settlement_construction_start = {
+	events = {
+		#SSI.40002 # Start constructing a city on the Triangular Trade Route for trade competition
+	}
+}
+
+# ROOT = Builder, FROM = Title
+on_settlement_construction_completed = {
+	events = {
+		#SSI.40003 # Finish constructing a city on the Triangular Trade Route for trade competition
+	}
+}
+
+# An offmap power changes its policy. Triggers for the governor
+# Root = Governor
+# From = Offmap
+on_offmap_policy_changed = {
+	events = {
+		SSI.30501 # Print policy update to logs
+		SSI.50020 # News from Mexikha about Policy Change
+	}
+}
+
+# An offmap power changes its status. Triggers for the governor
+# Root = Governor
+# From = Offmap
+on_offmap_status_changed = {
+	events = {
+		SSI.30502 # Print status update to logs
+		SSI.50030 # News from Mexikha about Status Change
+	}
+}
+
+# An offmap power changes its ruler. Triggers for the new ruler
+# Root = New ruler
+# From = Old ruler
+# FromFrom = Offmap
+on_offmap_ruler_changed = {
+	events = {
+		SSI.82	  # graphical_culture and Warpaint for huetlatoani
+		SSI.30503 # Logging new ruler data
+		SSI.10005 # In case of dynasty change...
+		SSI.10202 # Delayed cleanup event. Makes sure the new administration may also launch Mexikhan invasions.
+		SSI.50000 # Select a new Policy and send News Event
+		SSI.31000 # Logging for huetlatoani statistics
+	}
+}
+
+# Happens once a month on a random day. Triggers for the governor
+# Root = Governor
+# From = Offmap
+on_offmap_monthly_pulse = {
+	events = {
+		#SSI.10121 #Fallback event to make sure that Displaced Royals, Inca Invaders, and Rebel Generals actually appear (regardless of new administration in Mexikha or not)
+	}
+}
+
+# Happens once a year during a random monthly update. Triggers for the governor (once for each offmap governor, if there's more than one)
+# Root = Governor
+# From = Offmap
+on_offmap_yearly_pulse = {
+	events = {
+		SSI.10100 # Mexikhan Invasion tombola
+		#SSI.40000 # Mexikhan Trade Competition
+		SSI.30500 # Mexikha logging variable increment
+		SSI.10200 # Mexikhan Invasion clean-up event - REGULAR (tributary invasion + other flags)
+		SSI.10201 # Mexikhan Invasion clean-up event - MAJOR Invasion (rare)
+	}
+
+	random_events = {
+		300 = SSI.50100 # Status returns to 'Stable'
+		150 = SSI.50120 # Status changes to 'Unrest'
+		50 = SSI.50140 # Status changes to 'Norse Invasion'
+		450 = SSI.50160 # 'Norse Invasion' Resolution
+		50 = SSI.50180 # Status changes to 'Inca Invasion'
+		60450 = SSI.50200 # 'Inca Invasion' Resolution
+		100 = SSI.50220 # Status changes to 'Great Famine'
+		100 = SSI.50240 # Status changes to 'Devastating Plague'
+		100 = SSI.50260 # Status changes to 'Golden Age'
+		350 = SSI.50280 # Status changes to 'Civil War'
+		400 = SSI.50300 # 'Civil War' Resolution
+	}
+}
+
+# Happens just prior to the EU4 converter converting the game
+# Root = Player. Random character if in observe mode
+on_eu4_conversion_start = {
+	events = {
+		SSI.60205 # Prepare on map Mexikha for conversion
+	}
+}
+
+# Happens just after the EU4 converter is done converting the game
+# Root = Player. Random character if in observe mode
+on_eu4_conversion_done = {
+	events = {
+		SSI.60206 # Restore on map Mexikha after conversion
+	}
+}

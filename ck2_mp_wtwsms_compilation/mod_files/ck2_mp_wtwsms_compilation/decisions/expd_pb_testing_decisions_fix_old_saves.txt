@@ -1,0 +1,131 @@
+# Self-targeted decisions to fix old versions of modded bloodlines from my other mods
+# All decisions require debug mode to be activated
+
+targetted_decisions = {
+	
+	expd_pb_test_fix_emb_raider_bloodline = {
+		only_playable = yes
+		filter = self
+		ai = no
+		
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
+		
+		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+			has_global_flag = expd_pb_debug_mode
+			any_owned_bloodline = {
+				has_bloodline_flag = bloodline_viking
+				has_bloodline_flag = bloodline_historical_norse
+				has_bloodline_flag = created_bloodline
+				OR = {
+					NOT = { has_bloodline_flag = emb }
+					NOT = { has_bloodline_flag = emb_raider }
+					NOR = {
+						has_bloodline_flag = emb_m
+						has_bloodline_flag = emb_f
+					}
+				}
+			}
+		}
+		
+		allow = {
+			always = yes
+		}
+		
+		effect = {
+			any_owned_bloodline = {
+				limit = {
+					has_bloodline_flag = bloodline_viking
+					has_bloodline_flag = bloodline_historical_norse
+					has_bloodline_flag = created_bloodline
+				}
+				if = {
+					limit = { NOT = { has_bloodline_flag = emb } }
+					set_bloodline_flag = emb
+				}
+				if = {
+					limit = { NOT = { has_bloodline_flag = emb_raider } }
+					set_bloodline_flag = emb_raider
+				}
+				if = {
+					limit = {
+						NOR = {
+							has_bloodline_flag = emb_m
+							has_bloodline_flag = emb_f
+						}
+					}
+					if = {
+						limit = { founder = { is_female = no } }
+						set_bloodline_flag = emb_m
+					}
+					else = {
+						set_bloodline_flag = emb_f
+					}
+				}
+			}
+		}
+	}
+	
+	expd_pb_test_fix_bsu_bloodlines = {
+		only_playable = yes
+		filter = self
+		ai = no
+		
+		from_potential = { always = yes } # Non-functional in self-targeted decisions
+		
+		potential = {
+			expd_pb_this_character_can_take_admin_actions = yes
+			has_global_flag = expd_pb_debug_mode
+			any_owned_bloodline = {
+				has_bloodline_flag = bsu_lcr
+				OR = {
+					NOT = { has_bloodline_flag = bsu }
+					NOR = {
+						has_bloodline_flag = bsu_m
+						has_bloodline_flag = bsu_f
+						has_bloodline_flag = bsu_ad
+					}
+				}
+			}
+		}
+		
+		allow = {
+			always = yes
+		}
+		
+		effect = {
+			any_owned_bloodline = {
+				limit = {
+					has_bloodline_flag = bsu_lcr
+					NOT = { has_bloodline_flag = bsu }
+				}
+				set_bloodline_flag = bsu
+			}
+			any_owned_bloodline = {
+				limit = {
+					has_bloodline_flag = bsu_lcr
+					NOR = {
+						has_bloodline_flag = bsu_m
+						has_bloodline_flag = bsu_f
+						has_bloodline_flag = bsu_lcr_final
+					}
+				}
+				if = {
+					limit = { founder = { is_female = no } }
+					set_bloodline_flag = bsu_m
+				}
+				else = {
+					set_bloodline_flag = bsu_f
+				}
+			}
+			any_owned_bloodline = {
+				limit = {
+					has_bloodline_flag = bsu_lcr_final
+					NOT = { has_bloodline_flag = bsu_ad }
+				}
+				set_bloodline_flag = bsu_ad
+			}
+		}
+	}
+	
+}

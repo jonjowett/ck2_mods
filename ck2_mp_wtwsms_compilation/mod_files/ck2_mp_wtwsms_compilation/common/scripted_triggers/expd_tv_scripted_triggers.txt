@@ -1,0 +1,34 @@
+expd_tv_this_character_has_a_temporary_illness = {
+	custom_tooltip = {
+		text = EXPD_TV_TOOLTIP_THIS_CHARACTER_HAS_A_TEMPORARY_ILLNESS
+		OR = {
+			has_symptom_trigger = yes
+			trait = has_tuberculosis
+			trait = has_typhoid_fever
+			trait = has_typhus
+			trait = has_bubonic_plague
+			trait = has_measles
+			trait = has_small_pox
+			trait = has_aztec_disease
+			trait = flu
+			trait = dysentery
+			trait = food_poisoning
+			trait = rabies
+			trait = pneumonic
+			trait = dancing_plague
+			trait = scurvy
+			trait = ill
+		}
+	}
+}
+
+expd_tv_this_character_is_recovering_from_wounds = {
+	custom_tooltip = {
+		text = EXPD_TV_TOOLTIP_THIS_CHARACTER_IS_RECOVERING_FROM_WOUNDS
+		OR = {
+			trait = wounded
+			trait = severely_injured
+			trait = infection
+		}
+	}
+}

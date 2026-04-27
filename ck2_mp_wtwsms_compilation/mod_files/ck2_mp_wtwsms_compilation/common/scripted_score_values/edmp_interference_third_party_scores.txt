@@ -1,0 +1,26 @@
+# Audax Validator EnableCommentMetadata
+
+edmp_interference_third_party_scores_independent_rulers_preferring_player_then_nearby_ai_then_tier = {
+	
+	# First: Player, or nearby AI
+	modifier = { factor = 1000    ROOT_FROMFROM = { show_scope_change = no                    edmp_this_character_is_a_current_or_absent_human_player = yes      } }
+	modifier = { factor =   20    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  100 } hidden_tooltip = { distance_from_realm = { who = ROOT value >    0 } } } }
+	modifier = { factor =   19    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  200 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  100 } } } }
+	modifier = { factor =   18    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  300 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  200 } } } }
+	modifier = { factor =   17    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  400 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  300 } } } }
+	modifier = { factor =   16    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  500 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  400 } } } }
+	modifier = { factor =   15    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  600 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  500 } } } }
+	modifier = { factor =   14    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  700 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  600 } } } }
+	modifier = { factor =   13    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  800 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  700 } } } }
+	modifier = { factor =   12    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  900 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  800 } } } }
+	modifier = { factor =   11    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <= 1000 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  900 } } } }
+	modifier = { factor =   10    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value >  1000 }                                                                        } }
+	
+	# Then: By tier
+	modifier = { factor =    1.05 ROOT_FROMFROM = { show_scope_change = no real_tier = EMPEROR } }
+	modifier = { factor =    1.04 ROOT_FROMFROM = { show_scope_change = no real_tier = KING    } }
+	modifier = { factor =    1.03 ROOT_FROMFROM = { show_scope_change = no real_tier = DUKE    } }
+	modifier = { factor =    1.02 ROOT_FROMFROM = { show_scope_change = no real_tier = COUNT   } }
+	modifier = { factor =    1.01 ROOT_FROMFROM = { show_scope_change = no real_tier = BARON   } }
+	
+}

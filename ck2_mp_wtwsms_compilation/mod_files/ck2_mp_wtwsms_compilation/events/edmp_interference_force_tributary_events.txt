@@ -1,0 +1,360 @@
+namespace = edmp_ft
+
+
+# This event is shown to the decision taker, allowing them to select the exact type of tributary relationship between the selected characters
+
+# Required setup BEFORE this event is called:
+#  --- event_target:edmp_interference_decision_taker                (the character who took the interference decision)
+#  --- event_target:edmp_interference_tributary_action_suzerain     (the character who will become the suzerain of the selected tributary)
+#  --- event_target:edmp_interference_tributary_action_tributary    (the selected tributary)
+#  --- set_variable = { which = edmp_ft_screen_no value = 0 }       (so that the initialisation logic in the immediate block works correctly)
+
+# To add support for other modded tributary types, insert relevant code in the sections labelled "MODSUPPORT"
+
+character_event = {
+	
+	id       = edmp_ft.1000
+	title    = edmp_ft_1000_title
+	desc     = edmp_ft_1000_desc
+	picture  = GFX_evt_state_diplomacy
+	window   = EventWindowEDMPLongCharacter # So there's lots of space for text
+	portrait = event_target:edmp_interference_tributary_action_tributary
+	
+	is_triggered_only = yes
+	ai = no
+	
+	immediate = {
+		
+		# If the event has just been called from the decision, do the setup.
+		if = {
+			limit = { check_variable = { which = edmp_ft_screen_no value == 0 } }
+			
+			# Set a flag on the decision taker showing that the event is currently open (to block the decision from being taken again)
+			set_character_flag = edmp_ft_event_open
+			
+			# Initial screen number = 1 (deliberate hardcoding)
+			set_variable = { which = edmp_ft_screen_no      value = 1 }
+			
+			# Last screen number (After this, we want to only show exit & restart)
+			# MODSUPPORT: You may need to increment this number
+			set_variable = { which = edmp_ft_screen_no_last value = 3 }
+			
+			# Special loop screen number (showing only exit & restart)
+			set_variable = { which = edmp_ft_screen_no_loop value = 999 }
+			
+			# If the decision-taker wants to reload this event (eg. "next" or "restart" option), they set this flag.
+			# By default, we WANT to exit. So, by default, we CLEAR the flag.
+			clr_character_flag = edmp_ft_after_reload_this_event
+			
+			# We will always show the options for base game tributary types, but we want to warn the user if they don't exist in-game anywhere.
+			clr_character_flag = edmp_ft_tributary_type_exists_default
+			clr_character_flag = edmp_ft_tributary_type_exists_permanent
+			clr_character_flag = edmp_ft_tributary_type_exists_offmap
+			clr_character_flag = edmp_ft_tributary_type_exists_nomadic
+			if = {
+				limit = { any_independent_ruler = { is_tributary = { type = default } } }
+				set_character_flag = edmp_ft_tributary_type_exists_default
+			}
+			if = {
+				limit = { any_independent_ruler = { is_tributary = { type = permanent } } }
+				set_character_flag = edmp_ft_tributary_type_exists_permanent
+			}
+			if = {
+				limit = { any_independent_ruler = { is_tributary = { type = offmap } } }
+				set_character_flag = edmp_ft_tributary_type_exists_offmap
+			}
+			if = {
+				limit = { any_independent_ruler = { is_tributary = { type = nomadic } } }
+				set_character_flag = edmp_ft_tributary_type_exists_nomadic
+			}
+			
+			# Modded tributary types
+			
+			# MODSUPPORT:
+			#  --- Detect whether other mods are present and, if so, set relevant character flags for their tributary types.
+			#  --- How exactly you use these flags is up to you, but the bare minimum is to detect that the mod exists (since we don't want to be doing this continuously while the event is on-screen)
+			
+			# ED:T
+			#  --- The specific type of protectorate to be created depends on whether a global flag is set or not
+			clr_character_flag = edmp_ft_tributary_type_exists_edt_p
+			clr_character_flag = edmp_ft_tributary_type_exists_edt_p_no_inf
+			if = {
+				limit = { edmp_ed_t_mod_is_active = yes }
+				if = {
+					limit = { has_global_flag = expd_t_rule_protectorate_no_infighting }
+					set_character_flag = edmp_ft_tributary_type_exists_edt_p_no_inf
+				}
+				else = {
+					set_character_flag = edmp_ft_tributary_type_exists_edt_p
+				}
+			}
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	# In case of weird error, show exit button first
+	
+	option = {
+		name = edmp_ft_1000_evtopt_error_exit
+		trigger = {
+			OR = {
+				check_variable = { which = edmp_ft_screen_no value == 0 }
+				check_variable = { which = edmp_ft_screen_no value <  0 }
+				AND = {
+					check_variable = { which = edmp_ft_screen_no which > edmp_ft_screen_no_last }
+					check_variable = { which = edmp_ft_screen_no which < edmp_ft_screen_no_loop }
+				}
+				check_variable = { which = edmp_ft_screen_no which > edmp_ft_screen_no_loop }
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	# Base game tributary types (always shown)
+	
+	option = {
+		name = edmp_ft_1000_evtopt_p1_default
+		show_portrait = event_target:edmp_interference_tributary_action_suzerain
+		show_portrait = event_target:edmp_interference_tributary_action_tributary
+		trigger = { check_variable = { which = edmp_ft_screen_no value == 1 } }
+		event_target:edmp_interference_tributary_action_suzerain = {
+			make_tributary = {
+				who = event_target:edmp_interference_tributary_action_tributary
+				tributary_type = default
+			}
+		}
+		if = {
+			limit = { NOT = { has_character_flag = edmp_ft_tributary_type_exists_default } }
+			custom_tooltip = { text = edmp_ft_warning_base_game_tributary_type_does_not_exist_tt }
+		}
+		edmp_interference_notify_players_tributary_forced = yes
+	}
+	
+	option = {
+		name = edmp_ft_1000_evtopt_p1_permanent
+		show_portrait = event_target:edmp_interference_tributary_action_suzerain
+		show_portrait = event_target:edmp_interference_tributary_action_tributary
+		trigger = { check_variable = { which = edmp_ft_screen_no value == 1 } }
+		event_target:edmp_interference_tributary_action_suzerain = {
+			make_tributary = {
+				who = event_target:edmp_interference_tributary_action_tributary
+				tributary_type = permanent
+			}
+		}
+		if = {
+			limit = { NOT = { has_character_flag = edmp_ft_tributary_type_exists_permanent } }
+			custom_tooltip = { text = edmp_ft_warning_base_game_tributary_type_does_not_exist_tt }
+		}
+		edmp_interference_notify_players_tributary_forced = yes
+	}
+	
+	option = {
+		name = edmp_ft_1000_evtopt_p2_nomadic
+		show_portrait = event_target:edmp_interference_tributary_action_suzerain
+		show_portrait = event_target:edmp_interference_tributary_action_tributary
+		trigger = { check_variable = { which = edmp_ft_screen_no value == 2 } }
+		event_target:edmp_interference_tributary_action_suzerain = {
+			make_tributary = {
+				who = event_target:edmp_interference_tributary_action_tributary
+				tributary_type = nomadic
+			}
+		}
+		if = {
+			limit = { NOT = { has_character_flag = edmp_ft_tributary_type_exists_nomadic } }
+			custom_tooltip = { text = edmp_ft_warning_base_game_tributary_type_does_not_exist_tt }
+		}
+		edmp_interference_notify_players_tributary_forced = yes
+	}
+	
+	option = {
+		name = edmp_ft_1000_evtopt_p2_offmap
+		show_portrait = event_target:edmp_interference_tributary_action_suzerain
+		show_portrait = event_target:edmp_interference_tributary_action_tributary
+		trigger = { check_variable = { which = edmp_ft_screen_no value == 2 } }
+		event_target:edmp_interference_tributary_action_suzerain = {
+			make_tributary = {
+				who = event_target:edmp_interference_tributary_action_tributary
+				tributary_type = offmap
+			}
+		}
+		if = {
+			limit = { NOT = { has_character_flag = edmp_ft_tributary_type_exists_offmap } }
+			custom_tooltip = { text = edmp_ft_warning_base_game_tributary_type_does_not_exist_tt }
+		}
+		edmp_interference_notify_players_tributary_forced = yes
+	}
+	
+	
+	
+	
+	
+	# Modded tributary types
+	
+	# MODSUPPORT:
+	#  --- Include options for every mod which may be present
+	#  --- Note that there can be at most 3 options per screen (because the "Next" button is required on every screen)
+	#  --- It may be best to add a new screen for each mod you're supporting here (makes the "skip" logic easier later on)
+	#  --- If you add another screen, be sure to update the "_last" variable value, at the top of this event
+	
+	option = {
+		name = edmp_ft_1000_evtopt_p3_ed_t_p
+		show_portrait = event_target:edmp_interference_tributary_action_suzerain
+		show_portrait = event_target:edmp_interference_tributary_action_tributary
+		trigger = {
+			check_variable = { which = edmp_ft_screen_no value == 3 }
+			OR = {
+				has_character_flag = edmp_ft_tributary_type_exists_edt_p
+				has_character_flag = edmp_ft_tributary_type_exists_edt_p_no_inf
+			}
+		}
+		if = {
+			limit = { has_character_flag = edmp_ft_tributary_type_exists_edt_p }
+			event_target:edmp_interference_tributary_action_tributary = {
+				make_tributary = {
+					who = event_target:edmp_interference_tributary_action_suzerain
+					# Audax Validator "." Ignore_NEXT
+					tributary_type = expd_t_protectorate
+				}
+			}
+		}
+		else = {
+			event_target:edmp_interference_tributary_action_tributary = {
+				make_tributary = {
+					who = event_target:edmp_interference_tributary_action_suzerain
+					# Audax Validator "." Ignore_NEXT
+					tributary_type = expd_t_protectorate_without_infighting
+				}
+			}
+		}
+		edmp_interference_notify_players_tributary_forced = yes
+	}
+	
+	
+	
+	
+	# Special buttons (Next / Restart / Exit)
+	
+	option = {
+		
+		name = edmp_ft_1000_evtopt_next
+		
+		trigger = {
+			check_variable = { which = edmp_ft_screen_no value >= 1 }
+			check_variable = { which = edmp_ft_screen_no which <= edmp_ft_screen_no_last }
+		}
+		
+		hidden_tooltip = {
+			
+			
+			
+			# Move to next page
+			change_variable = { which = edmp_ft_screen_no value = 1 }
+			
+			
+			
+			# !!!!! edmp_ft_screen_no is NOW the screen number which will be shown NEXT TIME !!!!!
+			
+			# MODSUPPORT:
+			#  --- In this section, decide whether to skip each mod's screen
+			#  --- If they're not present, skip them! (By incrementing the screen number by 1.)
+			#  --- Make sure the screen numbers below are processed in numerical order.
+			
+			# Screen 2 is base game offmap/nomad. Always show, ie. do nothing here.
+			
+			# Screen 3 is ED:T. Skip this page if ED:T is not active.
+			if = {
+				limit = {
+					check_variable = { which = edmp_ft_screen_no value == 3 }
+					NOR = {
+						has_character_flag = edmp_ft_tributary_type_exists_edt_p
+						has_character_flag = edmp_ft_tributary_type_exists_edt_p_no_inf
+					}
+				}
+				change_variable = { which = edmp_ft_screen_no value = 1 }
+			}
+			
+			
+			
+			# If we have gone beyond the "last" screen, forcibly show the exit/restart options
+			if = {
+				limit = { check_variable = { which = edmp_ft_screen_no which > edmp_ft_screen_no_last } }
+				set_variable = { which = edmp_ft_screen_no which = edmp_ft_screen_no_loop }
+			}
+			
+			
+			
+			# Show the same event again, with the newly-calculated screen number, without cleaning up flags/variables
+			set_character_flag = edmp_ft_after_reload_this_event
+			
+			
+			
+		}
+		
+	}
+	
+	option = {
+		name = edmp_ft_1000_evtopt_loop_restart
+		trigger = { check_variable = { which = edmp_ft_screen_no which == edmp_ft_screen_no_loop } }
+		# Show the same event again, at screen 1, without cleaning up flags/variables
+		hidden_tooltip = {
+			set_character_flag = edmp_ft_after_reload_this_event
+			set_variable = { which = edmp_ft_screen_no value = 1 }
+		}
+	}
+	
+	option = {
+		name = edmp_ft_1000_evtopt_loop_exit
+		trigger = { check_variable = { which = edmp_ft_screen_no which == edmp_ft_screen_no_loop } }
+		custom_tooltip = { text = edmp_ft_1000_evtopt_loop_exit_tt }
+	}
+	
+	
+	
+	
+	
+	# After: Cleanup this event's flags
+	#        BUT only do the cleanup if we're not looping back to show the same event again (eg. next/restart button).
+	
+	after = {
+		
+		hidden_tooltip = {
+			
+			if = {
+				limit = { has_character_flag = edmp_ft_after_reload_this_event }
+				clr_character_flag = edmp_ft_after_reload_this_event
+				character_event = { id = edmp_ft.1000 }
+			}
+			else = {
+				
+				clr_character_flag = edmp_ft_event_open
+				
+				clr_character_flag = edmp_ft_after_reload_this_event
+				
+				clr_character_flag = edmp_ft_tributary_type_exists_default
+				clr_character_flag = edmp_ft_tributary_type_exists_permanent
+				clr_character_flag = edmp_ft_tributary_type_exists_nomadic
+				clr_character_flag = edmp_ft_tributary_type_exists_offmap
+				
+				# MODSUPPORT: In this section, clear all of the character flags for all supported mods
+				clr_character_flag = edmp_ft_tributary_type_exists_edt_p
+				clr_character_flag = edmp_ft_tributary_type_exists_edt_p_no_inf
+				
+				set_variable = { which = edmp_ft_screen_no      value = 0 }
+				set_variable = { which = edmp_ft_screen_no_last value = 0 }
+				set_variable = { which = edmp_ft_screen_no_loop value = 0 }
+				
+			}
+			
+		}
+		
+	}
+	
+}

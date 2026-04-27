@@ -1,0 +1,174 @@
+targetted_decisions = {
+	expd_tv_make_shieldmaiden = {
+		
+		# Allows you to make any close relative or descendant or dynastic warrior lodge member into a shieldmaiden (if they are in your court and of your dynasty).
+		# Expanded version of make_shieldmaiden in norse_minor_decisions.txt . The only changes are in the potential block.
+		
+		only_playable = yes
+		filter = home_court
+		ai_target_filter = home_court
+		ai_check_interval = 24
+
+		from_potential = {
+			is_playable = yes
+			OR = {
+				religion = norse_pagan
+				religion = norse_pagan_reformed
+				is_member_of_any_warrior_lodge_trigger = yes
+			}
+		}
+
+		potential = {
+			
+			#Mod changes: If the vanilla decision is potentially valid then you should take that instead!
+			NOT = {
+				FROM = {
+					is_targeted_decision_potential = {
+						key = make_shieldmaiden
+						character = ROOT
+					}
+				}
+			}
+			
+			#Mod changes: Altered version of the vanilla potential block, allowing the decision to be used on more people
+			is_female = yes
+			NOT = { trait = shieldmaiden }
+			FROM = { is_liege_of = ROOT	}
+			NOT = {	character = FROM }
+			dynasty = FROM
+			OR = {
+				is_descendant_of = FROM
+				is_close_relative = FROM
+				is_member_of_any_warrior_lodge_trigger = yes
+			}
+			
+		}
+
+		allow = {			
+			conditional_tooltip = { #For regular norse...
+				trigger = {
+					FROM = { is_member_of_any_warrior_lodge_trigger = no }
+					FROM = { religion_openly_norse_or_reformed_trigger = yes }
+				}
+				martial = 10
+				custom_tooltip = {
+					text = make_shieldmaiden_custom_tooltip_1
+					hidden_tooltip = {
+						OR = {
+							trait = brave
+							trait = proud
+							trait = ambitious
+							trait = diligent
+							trait = just
+							trait = gregarious
+						}
+					}
+				}
+			}
+
+			conditional_tooltip = { #For a norse who is ALSO a warrior lodge member...
+				trigger = {
+					FROM = { is_member_of_any_warrior_lodge_trigger = yes }
+					FROM = { religion_openly_norse_or_reformed_trigger = yes }
+				}
+				martial = 10
+				custom_tooltip = {
+					text = make_shieldmaiden_custom_tooltip_1
+					hidden_tooltip = {
+						OR = {
+							trait = brave
+							trait = proud
+							trait = ambitious
+							trait = diligent
+							trait = just
+							trait = gregarious
+						}
+					}
+				}
+				OR = {
+					is_descendant_of = FROM
+					is_close_relative = FROM
+				}
+			}
+
+			conditional_tooltip = { #For regular warrior lodge members...
+                trigger = {
+                    FROM = { is_member_of_any_warrior_lodge_trigger = yes }
+                    FROM = { religion_openly_norse_or_reformed_trigger = no }
+                }
+				OR = {
+					is_descendant_of = FROM
+					is_close_relative = FROM
+				}
+            }
+
+            #### For everyone, regardless...
+            is_adult = yes
+            custom_tooltip = {
+				text = is_not_incapable_inbred_or_imbecile_tt
+				NOT = { trait = incapable }
+				NOT = { trait = inbred }
+				NOT = { trait = imbecile }
+			}
+            custom_tooltip = { #must not have refused or been recently relieved of this duty...
+				text = make_shieldmaiden_custom_tooltip_3
+				hidden_tooltip = { NOT = { has_character_modifier = recently_relieved_shieldmaiden_timer } }
+			}
+		}
+
+		effect = {
+			custom_tooltip = { text = make_shieldmaiden_custom_tooltip_4 }
+			hidden_tooltip = {
+				character_event = { id = 79020 }
+			}
+		}
+
+		ai_will_do = {
+			factor = 0.1
+			
+			modifier = {
+				factor = 1.5
+				reverse_opinion = { who = FROM value = 40 }
+			}
+			modifier = {
+				factor = 0.2
+				NOT = { reverse_opinion = { who = FROM value = 5 } }
+			}
+			modifier = {
+				factor = 0
+				FROM = { is_rival = ROOT }
+			}
+			modifier = {
+				factor = 10
+				FROM = {
+					OR = {
+						trait = ambitious
+						trait = just
+						is_friend = ROOT
+						dynasty = ROOT
+					}
+				}
+			}
+			
+			# Deprioritise if there's a valid target for the vanilla decision
+			modifier = {
+				factor = 0.25
+				FROM = {
+					any_courtier = {
+						FROM = {
+							is_targeted_decision_potential = {
+								key = make_shieldmaiden
+								character = PREV
+							}
+							is_targeted_decision_allowed = {
+								key = make_shieldmaiden
+								character = PREV
+							}
+						}
+					}
+				}
+			}
+			
+		}
+	}
+}

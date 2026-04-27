@@ -1,0 +1,124 @@
+# NB: The bloodline MUST be created by event/decision, and this MUST specify BOTH the inheritance rules AND the relevant emb_m/emb_f/emb_ad flag.
+
+emb_mega_builder = {
+	
+	
+	
+	# Modifiers
+	
+	# Game engine moves build cost & time to be first modifiers shown in the bloodline, so we might as well put them at the top here too.
+	build_cost_modifier = -0.1
+	build_time_modifier = -0.1
+	monthly_character_prestige = 0.5
+	emb_bloodline_effect_blank1_for_spacing = 1 # Ensure that there are 4 lines on the left-hand side
+	
+	demesne_size = 1
+	vassal_opinion = 5
+	# Stewardship upgrade normally requires 2 lines, show next
+	# Also, this line is forced to the end by the game engine, so we might as well put it at the end here too
+	emb_bloodline_effect_education_upgrade_stewardship = 1
+	
+	
+	
+	
+	# Properties
+	
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_builder
+	# Inheritance rules deliberately not included here - see note at top
+	
+	
+	
+	# Flags
+	
+	flags = {
+		# Tracking
+		emb
+		emb_mega_builder
+		created_bloodline
+		# Features
+		emb_bloodline_effect_education_upgrade_stewardship
+		emb_bloodline_effect_education_upgrade_even_when_inactive
+		emb_bloodline_effect_gain_architect_administrator
+	}
+	
+	
+	
+	# Active conditions
+	
+	# ROOT is the holder, FROM is the bloodline
+	# Debugging character flags allow forced activation/deactivation, for testing.
+	# Never active for tribals or nomads (except for the founder and in debug mode).
+	# Otherwise, the bloodline is only active for:
+	#  --- The founder
+	#  --- Excellent stewards
+	#  --- Admin/Architect/Scholar
+	#  --- Characters who have constructed 10 holdings
+	
+	active = {
+		conditional_tooltip = {
+			trigger = { ROOT = { has_character_flag = emb_mega_builder_debug_deactivate } }
+			custom_tooltip = {
+				text = emb_mega_builder_active_condition_tt_debug_deactivated
+				always = no
+			}
+		}
+		conditional_tooltip = {
+			trigger = {
+				ROOT = { OR = { is_tribal = yes is_nomadic = yes } }
+				NOT = { FROM = { founder = { character = ROOT } } }
+			}
+			conditional_tooltip = {
+				trigger = { NOT = { ROOT = { has_character_flag = emb_mega_builder_debug_activate } } }
+				custom_tooltip = {
+					text = emb_mega_builder_active_condition_tt_nomadic_tribal
+					always = no
+				}
+			}
+			conditional_tooltip = {
+				trigger = { ROOT = { has_character_flag = emb_mega_builder_debug_activate } }
+				custom_tooltip = {
+					text = emb_mega_builder_active_condition_tt_nomadic_tribal_bypassed_debug
+					always = yes
+				}
+			}
+		}
+		OR = {
+			conditional_tooltip = {
+				trigger = { ROOT = { has_character_flag = emb_mega_builder_debug_activate } }
+				custom_tooltip = {
+					text = emb_mega_builder_active_condition_tt_debug_activated
+					always = yes
+				}
+			}
+			custom_tooltip = {
+				text = emb_mega_builder_active_condition_tt_is_founder
+				FROM = { founder = { character = ROOT } }
+			}
+			custom_tooltip = {
+				text = emb_mega_builder_active_condition_tt_excellent_stewardship
+				ROOT = {
+					OR = {
+						trait = fortune_builder
+						trait = midas_touched
+						stewardship >= 25
+					}
+				}
+			}
+			custom_tooltip = {
+				text = emb_mega_builder_active_condition_tt_relevant_traits
+				ROOT = {
+					OR = {
+						trait = administrator
+						trait = architect
+						trait = scholar
+					}
+				}
+			}
+			custom_tooltip = {
+				text = emb_mega_builder_active_condition_tt_has_constructed_10_new_holdings
+				ROOT = { check_variable = { which = emb_mega_builder_count value >= 10 } }
+			}
+		}
+	}
+}

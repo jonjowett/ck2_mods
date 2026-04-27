@@ -1,0 +1,22 @@
+# Intrigue Menu Decisions
+#
+# Regular open/close decisions - with dividers so they can easily be located
+edmp_admin_submenu_open;(ED:MP:Admin) Show Admin Submenu;;;;;;;;;;;;;x
+edmp_admin_submenu_open_desc; ;;;;;;;;;;;;;x
+edmp_admin_submenu_close;===== Hide (ED:MP) Admin Submenu =====;;;;;;;;;;;;;x
+edmp_admin_submenu_close_desc; ;;;;;;;;;;;;;x
+#
+# High prio close decision (in case someone messes up)
+edmp_admin_submenu_close_high_prio;(ED:MP:Admin) ERROR - Hide Admin Submenu;;;;;;;;;;;;;x
+edmp_admin_submenu_close_high_prio_desc;If you can see this decision, something went wrong while you had the admin submenu open. Take this decision to fix the error.;;;;;;;;;;;;;x
+#
+# Open/close admin submenu when it's isolated
+# No divider for the opener, but include an obvious divider for the closer
+edmp_admin_submenu_open_to_isolated_submenu;(ED:MP:Admin) Show Admin Submenu;;;;;;;;;;;;;x
+edmp_admin_submenu_open_to_isolated_submenu_desc; ;;;;;;;;;;;;;x
+edmp_admin_submenu_close_in_isolated_submenu;===== Close (ED:MP) Admin Submenu =====;;;;;;;;;;;;;x
+edmp_admin_submenu_close_in_isolated_submenu_desc; ;;;;;;;;;;;;;x
+#
+# Divider at bottom of admin submenu, when it's NOT isolated
+edmp_admin_submenu_bottom;===== End of (ED:MP) Admin Submenu =====;;;;;;;;;;;;;x
+edmp_admin_submenu_bottom_desc;This decision does nothing except to act as a visual indicator of the end of the admin submenu.;;;;;;;;;;;;;x

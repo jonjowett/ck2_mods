@@ -1,0 +1,47 @@
+
+decisions = {
+	forge_charismatic_bloodline = {
+		is_high_prio = yes 
+		ai_check_interval = 3
+		potential = {
+			NOT = {
+				any_owned_bloodline = { has_bloodline_flag = IB_charismatic_bloodline }
+			}
+			NAND = {
+				OR = {
+					has_global_flag = IB_ai_less
+					has_global_flag = IB_ai_none
+				}
+				ai = yes
+			}
+		}
+		allow = {  #Conditions for the decision to be enabled
+			num_of_friends = 5
+			num_of_rivals == 0
+			is_ruler = yes
+			realm_size = 15
+			NOT = {
+				any_realm_character = {
+					OR = {
+						real_tier = count
+						real_tier = duke
+						real_tier = king
+					}
+					opinion = { who = ROOT value < 0 }
+				}
+			}
+		}
+	   
+	  
+		effect = {
+			prestige = 300
+			add_trait = gregarious
+			create_bloodline = {
+						type = IB_charismatic_bloodline
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

@@ -1,0 +1,262 @@
+namespace = EDTRules
+
+character_event = {
+	id      = EDTRules.1000
+	title   = EDTRules_1000_Title
+	picture = GFX_evt_camaraderie
+	is_triggered_only = yes
+	
+	desc = {
+		trigger = { expd_t_rules_this_character_can_change_rules = yes }
+		text = EDTRules_1000_Desc_Admin
+	}
+	desc = {
+		trigger = { expd_t_rules_this_character_can_change_rules = no }
+		text = EDTRules_1000_Desc_NotAdmin
+	}
+	
+	option = {
+		name = {
+			text = EDTRules_1000_EvtOpt_AIProtectors_Current_Forbidden
+			trigger = {         has_global_flag = expd_t_rule_no_ai_protectors   }
+		}
+		name = {
+			text = EDTRules_1000_EvtOpt_AIProtectors_Current_Allowed
+			trigger = { NOT = { has_global_flag = expd_t_rule_no_ai_protectors } }
+		}
+		if = {
+			limit = { has_global_flag = expd_t_rule_no_ai_protectors }
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_AIProtectors_Current_Forbidden_Details }
+		}
+		else = {
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_AIProtectors_Current_Allowed_Details }
+		}
+		if = {
+			limit = { expd_t_rules_this_character_can_change_rules = yes }
+			# Administrator: Change the rule and reopen this window
+			if = {
+				limit = { has_global_flag = expd_t_rule_no_ai_protectors }
+				custom_tooltip = {
+					text = EDTRules_1000_EvtAct_AIProtectors_ChangeTo_Allowed
+					clr_global_flag = expd_t_rule_no_ai_protectors
+				}
+			}
+			else = {
+				custom_tooltip = {
+					text = EDTRules_1000_EvtAct_AIProtectors_ChangeTo_Forbidden
+					set_global_flag = expd_t_rule_no_ai_protectors
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = EDTRules_1000_EvtAct_PlayersNotified
+					any_player = {
+						limit = { NOT = { character = PREV } }
+						character_event = { id = EDTRules.2001 }
+					}
+				}
+			}
+			hidden_tooltip = { character_event = { id = EDTRules.1000 } }
+		}
+		else = {
+			# Non-Administrator: Exit
+			hidden_tooltip = { clr_character_flag = expd_t_rules_window_open }
+		}
+	}
+	
+	option = {
+		name = {
+			text = EDTRules_1000_EvtOpt_ChainableCBs_Current_Enabled
+			trigger = { NOT = { has_global_flag = expd_t_rule_no_chainable_cbs } }
+		}
+		name = {
+			text = EDTRules_1000_EvtOpt_ChainableCBs_Current_Disabled
+			trigger = {         has_global_flag = expd_t_rule_no_chainable_cbs   }
+		}
+		if = {
+			limit = { has_global_flag = expd_t_rule_no_chainable_cbs }
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_ChainableCBs_Current_Disabled_Details }
+		}
+		else = {
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_ChainableCBs_Current_Enabled_Details }
+		}
+		if = {
+			limit = { expd_t_rules_this_character_can_change_rules = yes }
+			# Administrator: Change the rule and reopen this window
+			if = {
+				limit = { has_global_flag = expd_t_rule_no_chainable_cbs }
+				custom_tooltip = {
+					text = EDTRules_1000_EvtAct_ChainableCBs_ChangeTo_Enabled
+					clr_global_flag = expd_t_rule_no_chainable_cbs
+				}
+			}
+			else = {
+				custom_tooltip = {
+					text = EDTRules_1000_EvtAct_ChainableCBs_ChangeTo_Disabled
+					set_global_flag = expd_t_rule_no_chainable_cbs
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = EDTRules_1000_EvtAct_PlayersNotified
+					any_player = {
+						limit = { NOT = { character = PREV } }
+						character_event = { id = EDTRules.2002 }
+					}
+				}
+			}
+			hidden_tooltip = { character_event = { id = EDTRules.1000 } }
+		}
+		else = {
+			# Non-Administrator: Exit
+			hidden_tooltip = { clr_character_flag = expd_t_rules_window_open }
+		}
+	}
+	
+	option = {
+		name = {
+			text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Current_Enabled
+			trigger = {         has_global_flag = expd_t_rule_protectorate_no_infighting   }
+		}
+		name = {
+			text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Current_Disabled
+			trigger = { NOT = { has_global_flag = expd_t_rule_protectorate_no_infighting } }
+		}
+		if = {
+			limit = { has_global_flag = expd_t_rule_protectorate_no_infighting }
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Current_Enabled_Details }
+		}
+		else = {
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Current_Disabled_Details }
+		}
+		if = {
+			limit = { expd_t_rules_this_character_can_change_rules = yes }
+			# Administrator: Change the rule and reopen this window
+			if = {
+				limit = { has_global_flag = expd_t_rule_protectorate_no_infighting }
+				custom_tooltip = {
+					text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_ChangeTo_Disabled
+					clr_global_flag = expd_t_rule_protectorate_no_infighting
+				}
+				custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Caveats }
+				custom_tooltip = {
+					text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_ChangeAllProtectorates
+					any_character = {
+						limit = {
+							is_ruler = yes
+							is_tributary = { type = expd_t_protectorate_without_infighting }
+						}
+						suzerain = {
+							remove_tributary = PREV
+							make_tributary = {
+								who = PREV
+								percentage = 0.2
+								tributary_type = expd_t_protectorate
+							}
+						}
+					}
+				}
+			}
+			else = {
+				custom_tooltip = {
+					text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_ChangeTo_Enabled
+					set_global_flag = expd_t_rule_protectorate_no_infighting
+				}
+				custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Caveats }
+				custom_tooltip = {
+					text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_ChangeAllProtectorates
+					any_character = {
+						limit = {
+							is_ruler = yes
+							is_tributary = { type = expd_t_protectorate }
+						}
+						suzerain = {
+							remove_tributary = PREV
+							make_tributary = {
+								who = PREV
+								percentage = 0.2
+								tributary_type = expd_t_protectorate_without_infighting
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = { multiplayer = yes }
+				custom_tooltip = {
+					text = EDTRules_1000_EvtAct_PlayersNotified
+					any_player = {
+						limit = { NOT = { character = PREV } }
+						character_event = { id = EDTRules.2003 }
+					}
+				}
+			}
+			hidden_tooltip = { character_event = { id = EDTRules.1000 } }
+		}
+		else = {
+			# Non-Administrator: Exit
+			custom_tooltip = { text = EDTRules_1000_EvtOpt_ProtectorateNoInfighting_Caveats }
+			hidden_tooltip = { clr_character_flag = expd_t_rules_window_open }
+		}
+	}
+	
+	# Administrator: Special additional exit option (so they can get out of the otherwise-infinite loop without changing rules)
+	option = {
+		name = EDTRules_1000_EvtOpt_Exit
+		trigger = { expd_t_rules_this_character_can_change_rules = yes }
+		hidden_tooltip = { clr_character_flag = expd_t_rules_window_open }
+	}
+	
+}
+
+# Notification events
+
+character_event = {
+	id      = EDTRules.2001
+	title   = EDTRules_2000_Title
+	picture = GFX_evt_camaraderie
+	is_triggered_only = yes
+	desc = {
+		trigger = {         has_global_flag = expd_t_rule_no_ai_protectors   }
+		text = EDTRules_2001_Desc_AIProtectors_Forbidden
+	}
+	desc = {
+		trigger = { NOT = { has_global_flag = expd_t_rule_no_ai_protectors } }
+		text = EDTRules_2001_Desc_AIProtectors_Allowed
+	}
+	option = { name = EDTRules_2000_EvtOpt_Exit }
+}
+
+character_event = {
+	id      = EDTRules.2002
+	title   = EDTRules_2000_Title
+	picture = GFX_evt_camaraderie
+	is_triggered_only = yes
+	desc = {
+		trigger = {         has_global_flag = expd_t_rule_no_chainable_cbs   }
+		text = EDTRules_2002_Desc_ChainableCBs_Disabled
+	}
+	desc = {
+		trigger = { NOT = { has_global_flag = expd_t_rule_no_chainable_cbs } }
+		text = EDTRules_2002_Desc_ChainableCBs_Enabled
+	}
+	option = { name = EDTRules_2000_EvtOpt_Exit }
+}
+
+character_event = {
+	id      = EDTRules.2003
+	title   = EDTRules_2000_Title
+	picture = GFX_evt_camaraderie
+	is_triggered_only = yes
+	desc = {
+		trigger = {         has_global_flag = expd_t_rule_protectorate_no_infighting   }
+		text = EDTRules_2003_Desc_ProtectorateNoInfighting_Enabled
+	}
+	desc = {
+		trigger = { NOT = { has_global_flag = expd_t_rule_protectorate_no_infighting } }
+		text = EDTRules_2003_Desc_ProtectorateNoInfighting_Disabled
+	}
+	option = { name = EDTRules_2000_EvtOpt_Exit }
+}

@@ -1,0 +1,1300 @@
+#Grace effects
+add_mexikhan_grace_trivial_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = 100
+	}
+}
+
+add_mexikhan_grace_minor_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = 200
+	}
+}
+
+add_mexikhan_grace_medium_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = 300
+	}	
+}
+
+add_mexikhan_grace_major_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = 500
+	}
+}
+
+add_mexikhan_grace_massive_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = 1000
+	}
+}
+
+add_mexikhan_grace_super_huge_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = 2000
+	}
+}
+
+detract_mexikhan_grace_trivial_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = -100
+	}
+}
+
+detract_mexikhan_grace_minor_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = -200
+	}
+}
+
+detract_mexikhan_grace_medium_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = -300
+	}
+}
+
+detract_mexikhan_grace_major_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = -500
+	}
+}
+
+detract_mexikhan_grace_massive_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = -1000
+	}
+}
+
+detract_mexikhan_grace_super_huge_effect = {
+	add_offmap_currency = {
+		offmap = offmap_mexikha
+		value = -2000
+	}
+}
+
+set_mexikha_boon_cd_effect = {  #added via tribute to Mexikha decisions... Always one year.
+	add_character_modifier = {
+		hidden = yes
+		name = ssi_mexikha_boon_cd
+		days = 365 #If this is changed, edit  mexikha_offmap_boon_decisions_enabled_trigger_cd_tt
+	}
+}
+
+set_mexikha_tribute_cd_effect = { #added via tribute to Mexikha decisions... Always one year.
+	add_character_modifier = {
+		hidden = yes
+		name = ssi_mexikha_tribute_cd
+		days = 365
+	}
+}
+
+leave_court_for_mexikha_effect = { # NOTE: this does not set a "killer", meaning if you want them to be ORDERED to go to Mexikha, a killer needs to be set (eg: "killer = ROOT")
+	custom_tooltip = {
+		text = will_leave_for_mexikha_tt
+	}
+	set_character_flag = ignore_refund
+	hidden_effect = { death = { death_reason = death_went_to_mexikha } }
+}
+
+return_to_mexikha_effect = { # NOTE: this does not set a "killer", meaning if you want them to be ORDERED to go to Mexikha, a killer needs to be set (eg: "killer = ROOT")
+	custom_tooltip = {
+		text = will_return_to_mexikha_tt
+	}
+	set_character_flag = ignore_refund
+	hidden_effect = { death = { death_reason = death_went_back_to_mexikha } }
+}
+
+# Utilizes mexikha_war_minimum_commander_martial variable on the current scope to spawn characters with at least that amount of martial skill.
+mexikha_spawn_commander_effect = {
+	create_random_soldier = {
+		random_traits = yes
+		religion = liege
+		culture = liege
+		dynasty = none
+		female = no
+		age = 28
+	}
+	new_character = {
+		unsafe_give_minor_title = title_commander
+		
+		set_variable = {
+			which = mexikha_war_minimum_commander_martial
+			which = PREV
+		}
+		if = {
+			limit = {
+				NOT = { trait = brilliant_strategist }
+			}
+			remove_trait = misguided_warrior
+			remove_trait = tough_soldier
+			remove_trait = skilled_tactician
+			add_trait = skilled_tactician
+			# Make sure they have a tier 3 or tier 4 education
+		}
+		random_list = { # Give a chance to get Mexikhan commander traits
+			30 = {
+				trigger = {
+					can_have_more_leadership_traits = yes
+					NOT = { trait = aggressive_leader }
+				}
+				add_trait = aggressive_leader
+			}
+			30 = {
+				trigger = {
+					can_have_more_leadership_traits = yes
+					NOT = { trait = jungle_terrain_leader }
+				}
+				add_trait = jungle_terrain_leader
+			}
+			30 = {
+				trigger = {
+					can_have_more_leadership_traits = yes
+					NOT = { trait = light_foot_leader }
+				}
+				add_trait = light_foot_leader
+			}
+			30 = {
+				trigger = {
+					can_have_more_leadership_traits = yes
+					NOT = { trait = holy_warrior }
+				}
+				add_trait = holy_warrior
+			}
+			90 = {}
+		}
+		while = { # Increase the martial skill with base or martial traits until the minimum is reached
+			limit = {
+				NOT = {
+					martial = mexikha_war_minimum_commander_martial
+				}
+			}
+			random_list = {
+				40 = {
+					change_martial = 1
+				}
+				5 = {
+					trigger = { 
+						NOR = { 
+							trait = strong
+							trait = robust
+							calc_true_if = {
+								amount = 3
+								trait = strong 
+								trait = robust 
+								trait = shrewd 
+								trait = duelist 
+								trait = hunter 
+								trait = strategist 
+								trait = architect 
+								trait = diligent 
+								trait = brave 
+								trait = ambitious
+							}
+						}
+					}
+					add_trait = strong
+				}
+				5 = {
+					trigger = { 
+						NOR = { 
+							trait = strong
+							trait = robust
+							calc_true_if = {
+								amount = 3
+								trait = strong 
+								trait = robust 
+								trait = shrewd 
+								trait = duelist 
+								trait = hunter 
+								trait = strategist 
+								trait = architect 
+								trait = diligent 
+								trait = brave 
+								trait = ambitious
+							}
+						}
+					}
+					add_trait = robust
+				}
+				5 = {
+					trigger = { 
+						NOR = { 
+							trait = shrewd
+							trait = genius
+							calc_true_if = {
+								amount = 3
+								trait = strong 
+								trait = robust 
+								trait = shrewd 
+								trait = duelist 
+								trait = hunter 
+								trait = strategist 
+								trait = architect 
+								trait = diligent 
+								trait = brave 
+								trait = ambitious
+							}
+						}
+					}
+					add_trait = shrewd
+				}
+				5 = {
+					trigger = { 
+						NOR = { 
+							trait = duelist
+							trait = hunter
+							trait = strategist
+							trait = architect
+							calc_true_if = {
+								amount = 3
+								trait = strong 
+								trait = robust 
+								trait = shrewd 
+								trait = duelist 
+								trait = hunter 
+								trait = strategist 
+								trait = architect 
+								trait = diligent 
+								trait = brave 
+								trait = ambitious
+							}
+						}
+					}
+					add_trait = duelist
+				}
+				5 = {
+					trigger = { 
+						NOR = { 
+							trait = duelist
+							trait = hunter
+							trait = strategist
+							trait = architect
+							calc_true_if = {
+								amount = 3
+								trait = strong 
+								trait = robust 
+								trait = shrewd 
+								trait = duelist 
+								trait = hunter 
+								trait = strategist 
+								trait = architect 
+								trait = diligent 
+								trait = brave 
+								trait = ambitious
+							}
+						}
+					}
+					add_trait = hunter
+				}
+				5 = {
+					trigger = { 
+						NOR = { 
+							trait = duelist
+							trait = hunter
+							trait = strategist
+							trait = architect
+							calc_true_if = {
+								amount = 3
+								trait = strong 
+								trait = robust 
+								trait = shrewd 
+								trait = duelist 
+								trait = hunter 
+								trait = strategist 
+								trait = architect 
+								trait = diligent 
+								trait = brave 
+								trait = ambitious
+							}
+						}
+					}
+					add_trait = strategist
+				}
+				5 = {
+					trigger = { 
+						NOR = { 
+							trait = duelist
+							trait = hunter
+							trait = strategist
+							trait = architect
+							calc_true_if = {
+								amount = 3
+								trait = strong 
+								trait = robust 
+								trait = shrewd 
+								trait = duelist 
+								trait = hunter 
+								trait = strategist 
+								trait = architect 
+								trait = diligent 
+								trait = brave 
+								trait = ambitious
+							}
+						}
+					}
+					add_trait = architect
+				}
+				5 = {
+					trigger = { 
+						NOR = { 
+							trait = diligent
+							calc_true_if = {
+								amount = 3
+								trait = strong 
+								trait = robust 
+								trait = shrewd 
+								trait = duelist 
+								trait = hunter 
+								trait = strategist 
+								trait = architect 
+								trait = diligent 
+								trait = brave 
+								trait = ambitious
+							}
+						}
+					}
+					add_trait = diligent
+				}
+				5 = {
+					trigger = { 
+						NOR = { 
+							trait = brave
+							calc_true_if = {
+								amount = 3
+								trait = strong 
+								trait = robust 
+								trait = shrewd 
+								trait = duelist 
+								trait = hunter 
+								trait = strategist 
+								trait = architect 
+								trait = diligent 
+								trait = brave 
+								trait = ambitious
+							}
+						}
+					}
+					add_trait = brave
+				}
+				5 = {
+					trigger = { 
+						NOR = { 
+							trait = ambitious
+							calc_true_if = {
+								amount = 3
+								trait = strong 
+								trait = robust 
+								trait = shrewd 
+								trait = duelist 
+								trait = hunter 
+								trait = strategist 
+								trait = architect 
+								trait = diligent 
+								trait = brave 
+								trait = ambitious
+							}
+						}
+					}
+					add_trait = ambitious
+				}
+			}
+		}
+	}
+}
+
+#This is a Vanilla Aztec composition
+#heavy_infantry = { 2800 2800 }
+#light_infantry = { 1400 1300 }
+#archers = { 1400 1300 }
+
+mexikha_war_spawn_troops_effect = {
+	# Requires the current things to function properly:
+	# event_target:spawn_province
+	# variable: mexikha_war_troop_quality
+	# variable: mexikha_war_troop_quantity
+	while = {
+		limit = {
+			check_variable = {
+				which = mexikha_war_troop_quantity
+				value = 1
+			}
+		}
+		change_variable = {	
+			which = mexikha_war_troop_quantity
+			value = -1
+		}
+		
+		random_list = { # Not really random but decent flow control
+			10 = {
+				trigger = {
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 2
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 188 188 }
+						light_infantry = { 305 305 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 2
+					}
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 3
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 169 169 }
+						light_infantry = { 324 324 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 3
+					}
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 4
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 164 164 }
+						light_infantry = { 280 280 }
+						heavy_infantry = { 49 49 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 4
+					}
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 5
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 164 164 }
+						light_infantry = { 244 244 }
+						heavy_infantry = { 66 66 }
+						pikemen = { 19 19 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 5
+					}
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 6
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 156 156 }
+						light_infantry = { 194 194 }
+						heavy_infantry = { 102 102 }
+						pikemen = { 41 41 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 6
+					}
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 7
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 122 122 }
+						light_infantry = { 122 122 }
+						heavy_infantry = { 171 171 }
+						pikemen = { 78 78 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 7
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 107 107 }
+						light_infantry = { 107 107 }
+						heavy_infantry = { 183 183 }
+						pikemen = { 96 96 }
+
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+		}
+	}
+}
+
+mexikha_war_spawn_troops_no_disband_effect = {
+	# Requires the current things to function properly:
+	# event_target:spawn_province
+	# variable: mexikha_war_troop_quality
+	# variable: mexikha_war_troop_quantity
+	while = {
+		limit = {
+			check_variable = {
+				which = mexikha_war_troop_quantity
+				value = 1
+			}
+		}
+		change_variable = {	
+			which = mexikha_war_troop_quantity
+			value = -1
+		}
+		
+		random_list = { # Not really random but decent flow control
+			10 = {
+				trigger = {
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 2
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 188 188 }
+						light_infantry = { 305 305 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 2
+					}
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 3
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 169 169 }
+						light_infantry = { 324 324 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 3
+					}
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 4
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 164 164 }
+						light_infantry = { 280 280 }
+						heavy_infantry = { 49 49 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 4
+					}
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 5
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 164 164 }
+						light_infantry = { 244 244 }
+						heavy_infantry = { 66 66 }
+						pikemen = { 19 19 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 5
+					}
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 6
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 156 156 }
+						light_infantry = { 194 194 }
+						heavy_infantry = { 102 102 }
+						pikemen = { 41 41 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 6
+					}
+					NOT = {
+						check_variable = {
+							which = mexikha_war_troop_quality
+							value = 7
+						}
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 122 122 }
+						light_infantry = { 122 122 }
+						heavy_infantry = { 171 171 }
+						pikemen = { 78 78 }
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+			10 = {
+				trigger = {
+					check_variable = {
+						which = mexikha_war_troop_quality
+						value = 7
+					}
+				}
+				spawn_unit = {
+					owner = THIS
+					province = event_target:spawn_province
+					home = event_target:spawn_province
+					troops = {
+						archers = { 107 107 }
+						light_infantry = { 107 107 }
+						heavy_infantry = { 183 183 }
+						pikemen = { 96 96 }
+
+					}
+					#attrition = 1
+					disband_on_peace = yes
+					merge = yes
+				}
+			}
+		}
+	}
+}
+
+mexikha_war_modify_variables_by_being_defensive = {
+	# variable: mexikha_war_troop_quantity
+	# variable: mexikha_war_target_match_mult
+	
+	random_list = {
+		1 =	{ # General revolt, Liberation...etc
+			trigger = {
+				offmap_mexikha = { 
+					governor = { 
+						is_primary_war_defender = yes
+					}
+				}
+				event_target:mexikha_war_opponent = {
+					primary_title = {
+						temporary = yes
+					}
+					rebel = yes
+				}
+			}
+			change_variable = { which = mexikha_war_target_match_mult value = -0.15 }
+			log = "----------------"
+			log = "Mexikha Logging:"
+			log = "Mexikha mexikha_war_modify_variables_by_being_defensive applies: mexikha_war_target_match_mult-0.15"
+			log = "----------------"
+		}
+		1 =	{ # faction or Overthrow ruler
+			trigger = {
+				offmap_mexikha = { 
+					governor = { 
+						is_primary_war_defender = yes
+					}
+				}
+				event_target:mexikha_war_opponent = {
+					primary_title = {
+						temporary = yes
+					}
+					in_revolt = yes
+				}
+			}
+			change_variable = { which = mexikha_war_target_match_mult value = 0.65 }
+			change_variable = { which = mexikha_war_troop_quantity value = 9 }
+			log = "----------------"
+			log = "Mexikha Logging:"
+			log = "Mexikha mexikha_war_modify_variables_by_being_defensive applies: mexikha_war_target_match_mult+0.65 mexikha_war_troop_quantity+9"
+			log = "----------------"
+		}
+		1 =	{ # N/A
+			trigger = {
+				offmap_mexikha = { 
+					governor = { 
+						is_primary_war_defender = yes
+					}
+				}
+				event_target:mexikha_war_opponent = {
+					primary_title = {
+						temporary = no
+					}
+				}
+				log = "----------------"
+				log = "Mexikha Logging:"
+				log = "Mexikha mexikha_war_modify_variables_by_being_defensive applies: "
+				log = "----------------"
+			}
+		}
+	}
+}
+
+mexikha_war_modify_variables_by_realm_size = {
+	# variable: mexikha_war_troop_quantity
+	# variable: mexikha_war_target_match_mult
+	
+	random_list = {
+		10 = {
+			trigger = {
+				offmap_mexikha = { 
+					governor = { 
+						realm_size = 80
+					}
+				}
+			}
+		}
+		10 = {
+			trigger = {
+				offmap_mexikha = { 
+					governor = { 
+						NOT = { realm_size = 80 }
+						realm_size = 40
+					}
+				}
+			}
+			change_variable = {
+				which = mexikha_war_troop_quantity
+				value = 5
+			}
+			log = "----------------"
+			log = "Mexikha Logging:"
+			log = "Mexikha mexikha_war_modify_variables_by_realm_size applies: mexikha_war_troop_quantity+5"
+			log = "----------------"
+		}
+		10 = {
+			trigger = {
+				offmap_mexikha = { 
+					governor = { 
+						NOT = { realm_size = 40 }
+					}
+				}
+			}
+			change_variable = {
+				which = mexikha_war_troop_quantity
+				value = 7
+			}
+			log = "----------------"
+			log = "Mexikha Logging:"
+			log = "Mexikha mexikha_war_modify_variables_by_realm_size applies: mexikha_war_troop_quantity+7"
+			log = "----------------"
+		}
+	}
+}
+
+mexikha_war_modify_variables_by_status_effect = {
+	# variable: mexikha_war_troop_quality
+	# variable: mexikha_war_troop_quantity
+	# variable: mexikha_war_minimum_commander_martial
+	# variable: mexikha_war_target_match_mult
+	
+	random_list = {
+		1 = {
+			trigger = {
+				offmap_mexikha = { has_status = mexikha_stable }
+			}
+			#change_variable = { which = mexikha_war_troop_quality value = 1 }
+			change_variable = { which = mexikha_war_minimum_commander_martial value = 3 }
+		}
+		1 = {
+			trigger = {
+				offmap_mexikha = { has_status = mexikha_unrest }
+			}
+			change_variable = { which = mexikha_war_troop_quantity value = -6 }
+			change_variable = { which = mexikha_war_target_match_mult value = -0.15 }
+		}
+		1 = {
+			trigger = {
+				offmap_mexikha = { has_status = mexikha_civil_war }
+			}
+			change_variable = { which = mexikha_war_troop_quantity value = -6 }
+			change_variable = { which = mexikha_war_target_match_mult value = -0.25 }
+			change_variable = { which = mexikha_war_troop_quality value = -1 }
+			change_variable = { which = mexikha_war_minimum_commander_martial value = -6 }
+		}
+		1 = {
+			trigger = {
+				OR = {
+					offmap_mexikha = { has_status = mexikha_inca_invasion }
+					offmap_mexikha = { has_status = mexikha_norse_invasion }
+				}
+			}
+			change_variable = { which = mexikha_war_troop_quantity value = -7 }
+			change_variable = { which = mexikha_war_target_match_mult value = -0.4 }
+			change_variable = { which = mexikha_war_troop_quality value = -1 }
+			change_variable = { which = mexikha_war_minimum_commander_martial value = -2 }
+		}
+		1 = {
+			trigger = {
+				offmap_mexikha = { has_status = mexikha_famine }
+			}
+			change_variable = { which = mexikha_war_troop_quantity value = -4 }
+			change_variable = { which = mexikha_war_target_match_mult value = -0.30 }
+			change_variable = { which = mexikha_war_troop_quality value = -2 }
+			change_variable = { which = mexikha_war_minimum_commander_martial value = -2 }
+		}
+		1 = {
+			trigger = {
+				offmap_mexikha = { has_status = mexikha_plague }
+			}
+			change_variable = { which = mexikha_war_troop_quantity value = -6 }
+			change_variable = { which = mexikha_war_target_match_mult value = -0.35 }
+			change_variable = { which = mexikha_war_troop_quality value = -1 }
+			change_variable = { which = mexikha_war_minimum_commander_martial value = -4 }
+		}
+		1 = {
+			trigger = {
+				offmap_mexikha = { has_status = mexikha_golden_age }
+			}
+			change_variable = { which = mexikha_war_target_match_mult value = 0.65 }
+			change_variable = { which = mexikha_war_troop_quality value = 1 }
+			change_variable = { which = mexikha_war_minimum_commander_martial value = 5 }
+		}
+	}
+}
+
+
+#Checks whether the Emperor likes target and shows tooltips (used in event SSI.10010)
+check_mexikhan_likes_or_dislikes_THIS_effect = {
+ 	if = {  #If the current Emperor LIKES target
+        limit = {
+            is_liked_by_Mexikha_trigger = yes
+        }
+        offmap_mexikha = {
+			show_scope_change = no
+            custom_tooltip = { text = emperor_likes_THIS_tt }
+        }
+    }
+
+    if = { #If the current Emperor DISLIKES target
+        limit = {
+           is_disliked_by_Mexikha_trigger = yes
+        }
+        offmap_mexikha = {
+			show_scope_change = no
+			custom_tooltip = { text = emperor_dislikes_THIS_tt }
+        }
+    }
+
+    if = { #If the current Emperor LIKES *and* DISLIKES target
+        limit = {
+            is_liked_and_disliked_by_Mexikha = yes
+        }
+        offmap_mexikha = {
+			show_scope_change = no
+            custom_tooltip = { text = emperor_has_ambiguous_feelings_of_THIS_tt }
+        }
+    }
+}
+
+print_mexikha_status_update_effect = {
+	log = "----------------"
+	log = "Mexikha Logging:"
+	log = "Mexikha's status of [This.GetPrevStatus] ended after [global_temp_status_years.GetValue] years."
+	log = "Mexikha's new status is [This.GetStatus]."
+	log = "----------------"
+	set_variable = {
+		which = global_temp_status_years
+		value = 0
+	}
+	random_list = {
+		10 = {
+			trigger = {
+				has_status = mexikha_stable
+			}
+			change_variable = {
+				which = global_amount_of_times_mexikha_stable
+				value = 1
+			}
+		}
+		10 = {
+			trigger = {
+				has_status = mexikha_unrest
+			}
+			change_variable = {
+				which = global_amount_of_times_mexikha_unrest
+				value = 1
+			}
+		}
+		10 = {
+			trigger = {
+				has_status = mexikha_civil_war
+			}
+			change_variable = {
+				which = global_amount_of_times_mexikha_civil_war
+				value = 1
+			}
+		}
+		10 = {
+			trigger = {
+				has_status = mexikha_muslim_invasion
+			}
+			change_variable = {
+				which = global_amount_of_times_mexikha_muslim_invasion
+				value = 1
+			}
+		}
+		10 = {
+			trigger = {
+				has_status = mexikha_famine
+			}
+			change_variable = {
+				which = global_amount_of_times_mexikha_famine
+				value = 1
+			}
+		}
+		10 = {
+			trigger = {
+				has_status = mexikha_plague
+			}
+			change_variable = {
+				which = global_amount_of_times_mexikha_plague
+				value = 1
+			}
+		}
+		10 = {
+			trigger = {
+				has_status = mexikha_golden_age
+				NOT = { has_policy = mexikha_expansionist }
+			}
+			change_variable = {
+				which = global_amount_of_times_mexikha_golden_age
+				value = 1
+			}
+		}
+		10 = {
+			trigger = {
+				has_status = mexikha_golden_age
+				has_policy = mexikha_expansionist
+			}
+			change_variable = {
+				which = global_amount_of_times_mexikha_golden_age_expansionist
+				value = 1
+			}
+		}
+	}
+}
+
+print_mexikha_policy_update_effect = {
+	log = "----------------"
+	log = "Mexikha Logging:"
+	log = "Mexikha's policy of [This.GetPrevPolicy] ended after [global_temp_policy_years.GetValue] years."
+	log = "Mexikha's new policy is [This.GetPolicy]."
+	log = "----------------"
+	set_variable = {
+		which = global_temp_policy_years
+		value = 0
+	}
+	random_list = {
+		10 = {
+			trigger = {
+				has_policy = mexikha_open
+			}
+		}
+		10 = {
+			trigger = {
+				has_policy = mexikha_isolationist
+			}
+			change_variable = {
+				which = global_amount_of_times_mexikha_isolationist_policy
+				value = 1
+			}
+		}
+		10 = {
+			trigger = {
+				has_policy = mexikha_expansionist
+			}
+			change_variable = {
+				which = global_amount_of_times_mexikha_expansionist_policy
+				value = 1
+			}
+		}
+	}
+}
+
+
+mexikha_war_modify_variables_by_century_effect = {
+	random_list = {
+		10 = {
+			trigger = {
+				year = 700
+				NOT = { year = 800 }
+			}
+		}
+		10 = {
+			trigger = {
+				year = 800
+				NOT = { year = 900 }
+			}
+			change_variable = {
+				which = mexikha_war_troop_quantity
+				value = 2
+			}
+			change_variable = {
+				which = mexikha_war_troop_quality
+				value = -1
+			}
+		}
+		10 = {
+			trigger = {
+				year = 900
+				NOT = { year = 1000 }
+			}
+			change_variable = {
+				which = mexikha_war_troop_quantity
+				value = 3
+			}
+			change_variable = {
+				which = mexikha_war_troop_quality
+				value = -1
+			}
+		}
+		10 = {
+			trigger = {
+				year = 1000
+				NOT = { year = 1100 }
+			}
+			change_variable = {
+				which = mexikha_war_troop_quantity
+				value = 4
+			}
+		}
+		10 = {
+			trigger = {
+				year = 1100
+				NOT = { year = 1200 }
+			}
+			change_variable = {
+				which = mexikha_war_troop_quantity
+				value = 5
+			}
+			change_variable = {
+				which = mexikha_war_target_match_mult
+				value = 0.05
+			}
+		}
+		10 = {
+			trigger = {
+				year = 1200
+				NOT = { year = 1300 }
+			}
+			change_variable = {
+				which = mexikha_war_troop_quantity
+				value = 7
+			}
+			change_variable = {
+				which = mexikha_war_target_match_mult
+				value = 0.05
+			}
+			change_variable = {
+				which = mexikha_war_troop_quality
+				value = 1
+			}
+		}
+		10 = {
+			trigger = {
+				year = 1300
+				NOT = { year = 1400 }
+			}
+			change_variable = {
+				which = mexikha_war_troop_quantity
+				value = 8
+			}
+			change_variable = {
+				which = mexikha_war_target_match_mult
+				value = 0.05
+			}
+			change_variable = {
+				which = mexikha_war_troop_quality
+				value = 1
+			}
+		}
+		10 = {
+			trigger = {
+				year = 1400
+			}
+			change_variable = {
+				which = mexikha_war_troop_quantity
+				value = 9
+			}
+			change_variable = {
+				which = mexikha_war_target_match_mult
+				value = 0.05
+			}
+			change_variable = {
+				which = mexikha_war_troop_quality
+				value = 2
+			}
+		}
+	}
+}
+
+print_mexikha_ruler_update_effect = {
+	log = "----------------"
+	log = "Ruler of Mexikha died at the age of [From.GetAgeYears]."
+	log = "New Ruler of Mexikha is [Root.GetBestName] ([From.GetCulture], From.GetReligion])."
+	log = "----------------"
+}

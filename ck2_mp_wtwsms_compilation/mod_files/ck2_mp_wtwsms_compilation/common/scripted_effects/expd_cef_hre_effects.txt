@@ -1,0 +1,211 @@
+expd_cef_hre_update_character_of_emperor = {
+	
+	# Nickname
+	if = {
+		limit = { can_apply_average_nickname_trigger = yes }
+		give_nickname = nick_the_great
+	}
+	
+	# Bloodline
+	if = {
+		limit = { has_character_flag = is_otto }
+		narrative_event = { id = LT.40015 }
+		any_playable_ruler = {
+			limit = { is_within_diplo_range = ROOT }
+			narrative_event = { id = LT.40015 }
+		}
+		create_bloodline = { type = otto }
+		new_bloodline = {
+			set_bloodline_flag = expd_cef_otto
+			set_bloodline_flag = expd_cef_otto_m
+		}
+	}
+	else = {
+		if = {
+			limit = { is_female = no }
+			create_bloodline = {
+				type = otto
+				inheritance = patrilineal
+			}
+			new_bloodline = {
+				set_name = expd_cef_hre_otto_bloodline_name
+				set_description = expd_cef_hre_otto_bloodline_desc
+				set_bloodline_flag = expd_cef_otto
+				set_bloodline_flag = expd_cef_otto_m
+			}
+		}
+		else = {
+			create_bloodline = {
+				type = otto
+				inheritance = matrilineal
+			}
+			new_bloodline = {
+				set_name = expd_cef_hre_otto_bloodline_name
+				set_description = expd_cef_hre_otto_bloodline_desc
+				set_bloodline_flag = expd_cef_otto
+				set_bloodline_flag = expd_cef_otto_f
+			}
+		}
+	}
+	
+}
+
+expd_cef_hre_give_crown = {
+	if = {
+		limit = { has_character_flag = is_charlemagne }
+		if = { 
+			limit = { NOT = { has_character_flag = charlemagne_coronation } }
+			hidden_tooltip = { narrative_event = { id = CM.1500 } } # Charlemagne coronation
+		}
+		else = {
+			add_artifact = crown_hre
+			hidden_tooltip = { narrative_event = { id = CM.510 } } # Spread the news
+		}
+	}
+	else = {
+		add_artifact = crown_hre
+		if = {
+			limit = {
+				NOR = {
+					trait = crowned_by_pope
+					trait = crowned_by_myself
+					trait = crowned_by_pope_rd
+				}
+			}
+			custom_tooltip = {
+				text = expd_cef_hre_root_is_crowned_by_his_religious_head_tt
+				religion_head = {
+					ROOT = {
+						save_persistent_event_target = {
+							name = coronation_priest_per
+							scope = PREV
+						}
+					}
+				}
+				if = { # Special treatment of RD traits is needed to avoid duplicate coronation traits
+					limit = {
+						OR = {
+							trait = crowned_by_priest_rd
+							trait = crowned_by_bishop_rd
+						}
+					}
+					add_trait = crowned_by_pope_rd
+				}
+				else = {
+					add_trait = crowned_by_pope
+				}
+			}
+		}
+		hidden_tooltip = { narrative_event = { id = CM.510 } } # Spread the news
+	}
+}
+
+expd_cef_hre_migrate_kingdoms = {
+	
+	
+	# Kingdoms that are held by the decision-taker or his vassals,
+	#    but aren't de jure part of any of the decision-taker's empires,
+	#    become part of the HRE and are destroyed if owned by the decision-taker
+	custom_tooltip = { text = expd_cef_hre_info_all_held_kingdoms_in_the_realm_become_part_of_the_hre_tt }
+	any_title_under = { # Must use this instead of any_realm_title in effects!
+		limit = {
+			tier = KING
+			has_holder = yes
+		}
+		if = {
+			limit = { holder_scope = { character = ROOT } }
+			custom_tooltip = {
+				text = expd_cef_hre_this_held_kingdom_becomes_part_of_the_hre_and_is_destroyed_tt
+				de_jure_liege = e_hre
+				destroy_landed_title = THIS
+			}
+		}
+		else = {
+			custom_tooltip = {
+				text = expd_cef_hre_this_held_kingdom_becomes_part_of_the_hre_tt
+				de_jure_liege = e_hre
+			}
+		}
+	}
+	
+	# All kingdoms that do not have a holder and whose de jure liege title is held by root become part of the HRE
+	if = {
+		limit = {
+			any_demesne_title = {
+				tier = EMPEROR
+				NOT = { title = e_hre }
+			}
+		}
+		custom_tooltip = { text = expd_cef_hre_info_all_unheld_de_jure_vassal_kingdoms_become_part_of_the_hre_tt }
+		any_landed_title = {
+			limit = {
+				tier = KING
+				is_titular = no
+				has_holder = no
+				dejure_liege_title = {
+					holder_scope = { character = ROOT }
+					NOT = { title = e_hre }
+				}
+			}
+			custom_tooltip = {
+				text = expd_cef_hre_this_unheld_kingdom_becomes_part_of_the_hre_tt
+				de_jure_liege = e_hre
+			}
+		}
+	}
+	
+	# All kingdoms that do not have a holder and are completely controlled by root become part of the HRE
+	custom_tooltip = { text = expd_cef_hre_info_all_unheld_completely_controlled_kingdoms_become_part_of_the_hre_tt }
+	any_landed_title = {
+		limit = {
+			tier = KING
+			is_titular = no
+			has_holder = no
+			expd_cef_root_controls_this_kingdom = yes
+			NOT = { dejure_liege_title = { holder_scope = { character = ROOT } } }
+			NOT = { dejure_liege_title = { title = e_hre } }
+		}
+		custom_tooltip = {
+			text = expd_cef_hre_this_unheld_kingdom_becomes_part_of_the_hre_tt
+			de_jure_liege = e_hre
+		}
+	}
+	
+	# Every empire title held by the decision-taker is destroyed and cannot be recreated.
+	# (Its kingdoms should have already been shifted into the HRE by the actions above.)
+	if = {
+		limit = {
+			any_demesne_title = {
+				tier = EMPEROR
+				NOT = { title = e_hre }
+			}
+		}
+		custom_tooltip = { text = expd_cef_hre_info_all_empires_are_destroyed_and_cannot_be_recreated_tt }
+		any_demesne_title = {
+			limit = {
+				tier = EMPEROR
+				NOT = { title = e_hre } # Required because HRE will be granted to the decision-taker earlier in the effect, and we don't want to act on it!
+			}
+			custom_tooltip = {
+				text = expd_cef_hre_this_empire_is_destroyed_and_cannot_be_recreated_tt
+				destroy_landed_title = THIS
+				activate_title = { title = THIS status = no }
+			}
+		}
+	}
+	
+}
+
+expd_cef_hre_root_tries_to_grant_this_county_to_his_religious_head = {
+	if = {
+		limit = { expd_cef_hre_root_can_grant_this_county_to_his_religious_head = yes }
+		custom_tooltip = {
+			text = expd_cef_hre_root_grants_this_county_to_his_religous_head_tt
+			ROOT = { religion_head = { grant_title = PREVPREV } }
+			any_direct_de_jure_vassal_title = {
+				limit = { holding_type = temple }
+				ROOT = { religion_head = { grant_title = PREVPREV } }
+			}
+		}
+	}
+}

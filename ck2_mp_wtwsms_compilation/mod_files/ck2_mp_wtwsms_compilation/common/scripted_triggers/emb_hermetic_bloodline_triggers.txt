@@ -1,0 +1,198 @@
+# Audax Validator EnableCommentMetadata
+
+
+
+emb_hermetic_this_character_owns_a_lot_of_high_quality_magnum_opuses = {
+	OR = {
+		
+		# ED: Hermetics integration
+		emb_hermetic_this_character_personally_wrote_3_quality_4_magnum_opuses = yes
+		emb_hermetic_this_character_personally_wrote_4_quality_3plus_magnum_opuses = yes
+		
+		# Family history of great hermetics
+		emb_hermetic_this_character_owns_4_quality_4_magnum_opuses = yes
+		emb_hermetic_this_character_owns_5_quality_3plus_magnum_opuses = yes
+		
+		# Hidden easier option via the necronomicon. I'm sure there are no consequences at all...
+		trigger_if = {
+			limit = { emb_hermetic_this_character_owns_and_has_activated_a_necronomicon = yes }
+			# Audax Validator "." Ignore_1001
+			AND = {
+				emb_hermetic_this_character_owns_and_has_activated_a_necronomicon = yes
+				OR = {
+					
+					# ED: Hermetics integration
+					emb_hermetic_this_character_personally_wrote_2_quality_4_magnum_opuses = yes
+					emb_hermetic_this_character_personally_wrote_3_quality_3plus_magnum_opuses = yes
+					
+					# Family history of great hermetics
+					emb_hermetic_this_character_owns_3_quality_4_magnum_opuses = yes
+					emb_hermetic_this_character_owns_4_quality_3plus_magnum_opuses = yes
+					
+				}
+			}
+		}
+		trigger_else = {
+			hidden_tooltip = { always = no }
+		}
+		
+	}
+}
+
+emb_hermetic_this_character_personally_wrote_2_quality_4_magnum_opuses = {
+	custom_tooltip = {
+		text = emb_hermetic_this_character_personally_wrote_2_quality_4_magnum_opuses_tt
+		any_artifact = {
+			emb_hermetic_this_artifact_is_a_quality_4_magnum_opus = yes
+			original_artifact_owner = { character = PREVPREV }
+			count >= 2
+		}
+	}
+}
+
+emb_hermetic_this_character_personally_wrote_3_quality_4_magnum_opuses = {
+	custom_tooltip = {
+		text = emb_hermetic_this_character_personally_wrote_3_quality_4_magnum_opuses_tt
+		any_artifact = {
+			emb_hermetic_this_artifact_is_a_quality_4_magnum_opus = yes
+			original_artifact_owner = { character = PREVPREV }
+			count >= 3
+		}
+	}
+}
+
+emb_hermetic_this_character_personally_wrote_3_quality_3plus_magnum_opuses = {
+	custom_tooltip = {
+		text = emb_hermetic_this_character_personally_wrote_3_quality_3plus_magnum_opuses_tt
+		any_artifact = {
+			OR = {
+				emb_hermetic_this_artifact_is_a_quality_3_magnum_opus = yes
+				emb_hermetic_this_artifact_is_a_quality_4_magnum_opus = yes
+			}
+			original_artifact_owner = { character = PREVPREV }
+			count >= 3
+		}
+	}
+}
+
+emb_hermetic_this_character_personally_wrote_4_quality_3plus_magnum_opuses = {
+	custom_tooltip = {
+		text = emb_hermetic_this_character_personally_wrote_4_quality_3plus_magnum_opuses_tt
+		any_artifact = {
+			OR = {
+				emb_hermetic_this_artifact_is_a_quality_3_magnum_opus = yes
+				emb_hermetic_this_artifact_is_a_quality_4_magnum_opus = yes
+			}
+			original_artifact_owner = { character = PREVPREV }
+			count >= 4
+		}
+	}
+}
+
+emb_hermetic_this_character_owns_3_quality_4_magnum_opuses = {
+	custom_tooltip = {
+		text = emb_hermetic_this_character_owns_3_quality_4_magnum_opuses_tt
+		any_artifact = {
+			emb_hermetic_this_artifact_is_a_quality_4_magnum_opus = yes
+			count >= 3
+		}
+	}
+}
+
+emb_hermetic_this_character_owns_4_quality_4_magnum_opuses = {
+	custom_tooltip = {
+		text = emb_hermetic_this_character_owns_4_quality_4_magnum_opuses_tt
+		any_artifact = {
+			emb_hermetic_this_artifact_is_a_quality_4_magnum_opus = yes
+			count >= 4
+		}
+	}
+}
+
+emb_hermetic_this_character_owns_4_quality_3plus_magnum_opuses = {
+	custom_tooltip = {
+		text = emb_hermetic_this_character_owns_4_quality_3plus_magnum_opuses_tt
+		any_artifact = {
+			emb_hermetic_this_artifact_is_a_quality_4_magnum_opus = yes
+			OR = {
+				emb_hermetic_this_artifact_is_a_quality_3_magnum_opus = yes
+				emb_hermetic_this_artifact_is_a_quality_4_magnum_opus = yes
+			}
+			count >= 4
+		}
+	}
+}
+
+emb_hermetic_this_character_owns_5_quality_3plus_magnum_opuses = {
+	custom_tooltip = {
+		text = emb_hermetic_this_character_owns_5_quality_3plus_magnum_opuses_tt
+		any_artifact = {
+			emb_hermetic_this_artifact_is_a_quality_4_magnum_opus = yes
+			OR = {
+				emb_hermetic_this_artifact_is_a_quality_3_magnum_opus = yes
+				emb_hermetic_this_artifact_is_a_quality_4_magnum_opus = yes
+			}
+			count >= 5
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+emb_hermetic_this_character_owns_and_has_activated_a_necronomicon = {
+	custom_tooltip = {
+		text = emb_hermetic_this_character_owns_and_has_activated_a_necronomicon_tt
+		any_artifact = {
+			artifact_type = necronomicon
+			is_artifact_active = yes
+		}
+	}
+}
+
+emb_hermetic_this_character_owns_and_has_activated_an_emerald_tablet = {
+	custom_tooltip = {
+		text = emb_hermetic_this_character_owns_and_has_activated_an_emerald_tablet_tt
+		any_artifact = {
+			artifact_type = emerald_tablet
+			is_artifact_active = yes
+		}
+	}
+}
+
+emb_hermetic_this_artifact_is_a_quality_3_magnum_opus = {
+	OR = {
+		artifact_type = magnum_opus_theurgy_ritual_3
+		artifact_type = magnum_opus_theurgy_contemplation_3
+		artifact_type = magnum_opus_astrology_stars_3
+		artifact_type = magnum_opus_astrology_planets_3
+		artifact_type = magnum_opus_alchemy_panacea_3
+		artifact_type = magnum_opus_alchemy_transmutation_3
+	}
+}
+
+emb_hermetic_this_artifact_is_a_quality_4_magnum_opus = {
+	OR = {
+		artifact_type = magnum_opus_theurgy_ritual_4
+		artifact_type = magnum_opus_theurgy_contemplation_4
+		artifact_type = magnum_opus_astrology_stars_4
+		artifact_type = magnum_opus_astrology_planets_4
+		artifact_type = magnum_opus_alchemy_panacea_4
+		artifact_type = magnum_opus_alchemy_transmutation_4
+	}
+}

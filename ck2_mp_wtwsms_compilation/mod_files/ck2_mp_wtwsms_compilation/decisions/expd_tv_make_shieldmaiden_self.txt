@@ -1,0 +1,243 @@
+targetted_decisions = {	
+	expd_tv_make_shieldmaiden_self = {
+		
+		# Female members of warrior lodges (including unlanded!) can declare themselves to be shieldmaidens
+		# Intended, mostly, to ensure that AI warriors declare themselves to be shieldmaidens
+		#			(because they have the ability to make other people shieldmaidens)
+		#			but this may be useful for the player too, occasionally.
+		
+		is_in_society = yes
+		
+		filter = self
+		ai_target_filter = self
+		ai_check_interval = 24
+
+		# from_potential is not valid for self-targeted decisions
+
+		potential = {
+			is_female = yes
+			is_adult = yes
+			NOT = { trait = shieldmaiden }
+			is_member_of_any_warrior_lodge_trigger = yes
+		}
+
+		allow = {
+			
+			# Otherwise, use the same criteria as for a ruler making a courtier a shieldmaiden
+            custom_tooltip = {
+				text = is_not_incapable_inbred_or_imbecile_tt
+				NOT = { trait = incapable }
+				NOT = { trait = inbred }
+				NOT = { trait = imbecile }
+			}
+			NOR = {
+				trait = craven
+				trait = mangled
+				expd_tv_this_character_has_a_temporary_illness = yes
+				expd_tv_this_character_is_recovering_from_wounds = yes
+			}
+			custom_tooltip = { #must not have refused or been recently relieved of this duty...
+				text = make_shieldmaiden_custom_tooltip_3
+				hidden_tooltip = { NOT = { has_character_modifier = recently_relieved_shieldmaiden_timer } }
+			}
+			conditional_tooltip = {
+				trigger = { is_ruler = yes }
+				wealth >= 50
+			}
+			
+		}
+
+		effect = {
+			add_trait = shieldmaiden
+			if = {
+				limit = { is_ruler = yes }
+				wealth = -50
+			}
+		}
+
+		ai_will_do = {
+			factor = 0.1
+			
+			# Higher society rank => more likely
+			# Female heroes should ALWAYS want to be shieldmaidens
+			modifier = {
+				factor = 2
+				society_rank >= 2
+			}
+			modifier = {
+				factor = 2
+				society_rank >= 3
+			}
+			modifier = { 
+				factor = 1000
+				society_rank >= 4
+			}
+			
+			# Norse pagan => significantly more likely (traditions/myths/sagas/etc)
+			modifier = {
+				factor = 2
+				OR = {
+					religion = norse_pagan
+					religion = norse_pagan_reformed
+				}
+			}
+			
+			# Good traits (from Norse shieldmaiden conditions) => slightly more likely
+			# Opposite of good traits => much less likely
+			modifier = {
+				factor = 2
+				trait = brave
+			}
+			modifier = {
+				factor = 1.5
+				trait = proud
+			}
+			modifier = {
+				factor = 1.5
+				trait = ambitious
+			}
+			modifier = {
+				factor = 1.5
+				trait = diligent
+			}
+			modifier = {
+				factor = 1.5
+				trait = just
+			}
+			modifier = {
+				factor = 1.5
+				trait = gregarious
+			}
+			modifier = { # Craven actually blocks the decision, so isn't needed here, but is included for completeness
+				factor = 0
+				trait = craven
+			}
+			modifier = {
+				factor = 0.2
+				trait = humble
+			}
+			modifier = {
+				factor = 0.2
+				trait = content
+			}
+			modifier = {
+				factor = 0.2
+				trait = slothful
+			}
+			modifier = {
+				factor = 0.2
+				trait = arbitrary
+			}
+			modifier = {
+				factor = 0.2
+				trait = shy
+			}
+			
+			# Physicality
+			#  - Significantly less likely if known to be weak
+			#  - Slightly more likely if strong
+			modifier = {
+				factor = 0.1
+				trait = weak
+			}
+			modifier = {
+				factor = 0.1
+				trait = feeble
+			}
+			modifier = {
+				factor = 1.5
+				trait = strong
+			}
+			modifier = {
+				factor = 1.5
+				trait = robust
+			}
+			modifier = {
+				factor = 1.5
+				trait = sturdy
+			}
+			modifier = {
+				factor = 1.5
+				trait = giant
+			}
+			
+			# Martial stat
+			#  - Low martial => significantly less likely
+			#  - High martial => slightly more likely
+			modifier = {
+				factor = 0.1
+				martial < 2
+			}
+			modifier = {
+				factor = 0.1
+				martial < 4
+			}
+			modifier = {
+				factor = 0.1
+				martial < 6
+			}
+			modifier = {
+				factor = 0.2
+				martial < 8
+			}
+			modifier = {
+				factor = 0.5
+				martial < 10
+			}
+			modifier = {
+				factor = 1.5
+				martial >= 15
+			}
+			modifier = {
+				factor = 1.5
+				martial >= 20
+			}
+			modifier = {
+				factor = 1.5
+				martial >= 25
+			}
+			modifier = {
+				factor = 1.5
+				martial >= 30
+			}
+			
+			# Personal combat skill
+			#  - Low => significantly less likely
+			#  - High => slightly more likely
+			modifier = {
+				factor = 0.1
+				combat_rating < 0
+			}
+			modifier = {
+				factor = 0.5
+				combat_rating < 10
+			}
+			modifier = {
+				factor = 1.5
+				combat_rating >= 30
+			}
+			modifier = {
+				factor = 1.5
+				combat_rating >= 50
+			}
+			
+			# Wealth (for rulers)
+			#  - Low wealth => less likely
+			modifier = {
+				factor = 0.1
+				is_ruler = yes
+				wealth < 60
+			}
+			modifier = {
+				factor = 0.2
+				is_ruler = yes
+				wealth < 100
+			}
+			modifier = {
+				factor = 0.5
+				is_ruler = yes
+				wealth < 200
+			}
+		}
+	}
+}

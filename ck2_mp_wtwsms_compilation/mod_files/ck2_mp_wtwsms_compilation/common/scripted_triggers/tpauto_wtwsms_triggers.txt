@@ -1,0 +1,35 @@
+# Audax Validator EnableCommentMetadata
+# The Validator can't read workshop mods (because they're zipped), so split them into an isolated file and ignore every error.
+# Audax Validator "!" Ignore_NEXT
+
+tpauto_wtwsms_mod_is_active = {
+	# For WTWSMS, there is no global flag that will always be set on startup.
+	#  --- beta_okay seems temporary (what if the beta ends?!), and also notably will NOT be set if a game is only ever launched into multiplayer
+	# Instead, rely on the fact that several specific provinces have province modifiers added by on_startup event.
+	693 = {
+		has_province_modifier = ctesiphon_library
+		has_province_modifier = great_library_province
+	}
+	690 = { has_province_modifier = nahrawan_canal }
+	693 = { has_province_modifier = nahrawan_canal }
+	695 = { has_province_modifier = nahrawan_canal }
+	696 = { has_province_modifier = nahrawan_canal }
+}
+
+tpauto_this_province_can_have_trade_route_trade_post_wtwsms = {
+	tpauto_wtwsms_mod_is_active = yes
+	OR = {
+		AND = {
+			trade_route = silk_road
+			silk_road_trade_post_trigger = yes
+		}
+		AND = {
+			trade_route = amber_route
+			amber_route_trade_post_trigger = yes
+		}
+	}
+}
+
+tpauto_allow_tracking_and_rebuild_wtwsms = { # Should return true iff trade posts use WTWSMS buildings
+	tpauto_wtwsms_mod_is_active = yes
+}

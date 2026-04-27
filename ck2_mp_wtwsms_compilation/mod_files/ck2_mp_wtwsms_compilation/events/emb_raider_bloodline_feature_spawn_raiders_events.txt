@@ -1,0 +1,751 @@
+##########################################
+#                                        #
+# Spawned raiders from bloodline feature #
+#                                        #
+# Event IDs: EMBRaider.5000-5099         #
+#                                        #
+##########################################
+
+# Raiders spawn at the capital
+# Inspired by the marshal action for tribals, events 20222-20224 in job_marshal.txt
+# NB: There's no way to detect the event-spawned troops other than by earmark, so we use unique earmarks for each spawning
+#      --- This design choice has numerous fortuitous side-effects, eg. no need to do anything special if the spawned raiders are manually disbanded or wiped-out.
+
+namespace = EMBRaider
+
+
+
+
+
+#####################
+# Spawn the raiders #
+#####################
+
+# Triggered by sacking a settlement (ie. the on_loot_settlement on_action)
+# Random chance to spawn raiders at capital
+character_event = {
+	
+	id = EMBRaider.5000
+	is_triggered_only = yes
+	hide_window = yes
+	
+	trigger = { emb_raider_this_character_can_spawn_raiders = yes }
+	
+	immediate = {
+		
+		random_list = {
+			10 = {
+				
+				# Significantly decreased likelihood of triggering multiple times per year
+				mult_modifier = {
+					factor = 0.2
+					had_character_flag = {
+						flag = emb_raider_spawn_occurred
+						days <= 120
+					}
+				}
+				mult_modifier = {
+					factor = 0.2
+					had_character_flag = {
+						flag = emb_raider_spawn_occurred
+						days <= 180
+					}
+				}
+				mult_modifier = {
+					factor = 0.2
+					had_character_flag = {
+						flag = emb_raider_spawn_occurred
+						days <= 360
+					}
+				}
+				
+				# Significantly decreased likelihood of occurring if you recently rejected a spawn
+				# NB: Rejecting a spawn blocks new ones completely for 3 years
+				mult_modifier = {
+					factor = 0.2
+					had_character_flag = {
+						flag = emb_raider_spawn_rejected
+						years <= 4
+					}
+				}
+				mult_modifier = {
+					factor = 0.2
+					had_character_flag = {
+						flag = emb_raider_spawn_rejected
+						years <= 5
+					}
+				}
+				mult_modifier = {
+					factor = 0.5
+					had_character_flag = {
+						flag = emb_raider_spawn_rejected
+						years <= 10
+					}
+				}
+				
+				# Decreased likelihood if you have lots of regiments active already
+				mult_modifier = {
+					factor = 0.5
+					has_earmarked_regiments = emb_spawned_raiders_1
+				}
+				mult_modifier = {
+					factor = 0.5
+					has_earmarked_regiments = emb_spawned_raiders_2
+				}
+				mult_modifier = {
+					factor = 0.5
+					has_earmarked_regiments = emb_spawned_raiders_3
+				}
+				mult_modifier = {
+					factor = 0.5
+					has_earmarked_regiments = emb_spawned_raiders_4
+				}
+				mult_modifier = {
+					factor = 0.5
+					has_earmarked_regiments = emb_spawned_raiders_5
+				}
+				
+				# Increased likelihood if you're currently raiding
+				# Currently, this can only be detected if you're raiding overseas (there doesn't seem to be any condition to detect whether an army is flagged as a looter)
+				mult_modifier = {
+					factor = 2
+					any_fleet = { loot > 0 }
+				}
+				mult_modifier = {
+					factor = 2
+					any_fleet = { loot > 500 }
+				}
+				mult_modifier = {
+					factor = 2
+					any_fleet = { loot > 1000 }
+				}
+				mult_modifier = {
+					factor = 2
+					any_fleet = { loot > 2000 }
+				}
+				
+				# Increased likelihood if you have high martial/diplomacy
+				# Significantly decreased likelihood if you have low martial/diplomacy
+				mult_modifier = {
+					factor = 0.5
+					diplomacy < 2
+				}
+				mult_modifier = {
+					factor = 0.5
+					diplomacy < 4
+				}
+				mult_modifier = {
+					factor = 0.5
+					diplomacy < 6
+				}
+				mult_modifier = {
+					factor = 0.5
+					diplomacy < 8
+				}
+				mult_modifier = {
+					factor = 0.5
+					diplomacy < 10
+				}
+				mult_modifier = {
+					factor = 1.5
+					diplomacy >= 15
+				}
+				mult_modifier = {
+					factor = 1.5
+					diplomacy >= 20
+				}
+				mult_modifier = {
+					factor = 1.5
+					diplomacy >= 30
+				}
+				mult_modifier = {
+					factor = 1.5
+					diplomacy >= 40
+				}
+				mult_modifier = {
+					factor = 1.5
+					diplomacy >= 50
+				}
+				mult_modifier = {
+					factor = 0.5
+					martial < 2
+				}
+				mult_modifier = {
+					factor = 0.5
+					martial < 4
+				}
+				mult_modifier = {
+					factor = 0.5
+					martial < 6
+				}
+				mult_modifier = {
+					factor = 0.5
+					martial < 8
+				}
+				mult_modifier = {
+					factor = 0.5
+					martial < 10
+				}
+				mult_modifier = {
+					factor = 1.5
+					martial >= 15
+				}
+				mult_modifier = {
+					factor = 1.5
+					martial >= 20
+				}
+				mult_modifier = {
+					factor = 1.5
+					martial >= 30
+				}
+				mult_modifier = {
+					factor = 1.5
+					martial >= 40
+				}
+				mult_modifier = {
+					factor = 1.5
+					martial >= 50
+				}
+				
+				# Increased/Decreased likelihood from traits
+				mult_modifier = {
+					factor = 2
+					trait = brave
+				}
+				mult_modifier = {
+					factor = 2
+					trait = proud
+				}
+				mult_modifier = { # Charitable => reputation for distributing money => more likely to share the loot
+					factor = 4
+					trait = charitable
+				}
+				mult_modifier = {
+					factor = 0.5
+					trait = craven
+				}
+				mult_modifier = {
+					factor = 0.5
+					trait = humble
+				}
+				mult_modifier = {
+					factor = 0.25
+					trait = greedy
+				}
+				
+				# Increased likelihood if you have "more raiders" bloodline(s)
+				mult_modifier = {
+					factor = 2
+					emb_raider_this_character_can_spawn_more_raiders_than_normal = yes
+				}
+				mult_modifier = {
+					factor = 2
+					emb_raider_this_character_can_spawn_many_more_raiders_than_normal = yes
+				}
+				
+				character_event = {
+					id = EMBRaider.5001
+					days = 30
+					random = 30
+				}
+				
+			}
+			90 = {
+				# Do nothing
+			}
+		}
+	}
+}
+
+# Spawn the raiders
+character_event = {
+	
+	id = EMBRaider.5001
+	is_triggered_only = yes
+	
+	hide_from = yes
+	desc = EMBRaider_5001_EVTDESC
+	picture = GFX_evt_battle
+	border = GFX_event_normal_frame_war
+	
+	trigger = {
+		emb_raider_this_character_can_spawn_raiders = yes
+	}
+	
+	# Keep them
+	option = {
+		name = EMBRaider_5001_EVTOPT_A_ACCEPT
+		
+		# Spawn the raiders
+		emb_raider_spawn_raiders_in_this_characters_capital = yes
+		
+		# Set up the regular checkup
+		custom_tooltip = {
+			text = EMB_RAIDER_TOOLTIP_SPAWNED_RAIDERS_WANT_TO_RAID
+			clr_character_flag = emb_spawned_raiders_checkup
+			set_character_flag = emb_spawned_raiders_checkup
+			character_event = {
+				id = EMBRaider.5010
+				days = 90
+				random = 20
+			}
+		}
+		ai_chance = {
+			factor = 90
+		}
+	}
+	
+	# Send them away (Bribe)
+	option = {
+		name = EMBRaider_5001_EVTOPT_B_REJECT
+		trigger = {
+			OR = {
+				ai = no
+				diplomacy < 20
+			}
+		}
+		
+		# Costs prestige and wealth, depending on tier
+		# NB: AI cost for dismissal is fixed at 10, to simplify the ai_chance logic
+		emb_raider_deduct_prestige_and_wealth_for_dismissing_spawned_raiders = yes
+		
+		ai_chance = { # AI should normally keep them, especially if they can't afford to send them away
+			factor = 10
+			mult_modifier = {
+				factor = 0.1
+				wealth <= 10
+			}
+			mult_modifier = {
+				factor = 0.2
+				wealth <= 20
+			}
+			mult_modifier = {
+				factor = 0.2
+				wealth <= 100
+			}
+		}
+	}
+	
+	# Send them away (Persuasion)
+	option = {
+		name = EMBRaider_5001_EVTOPT_C_REJECT
+		tooltip_info = diplomacy
+		trigger = { diplomacy >= 20 }
+		
+		ai_chance = { # AI should normally keep them, especially if they can't afford to send them away
+			factor = 10
+		}
+	}
+	
+}
+
+
+
+
+
+###############################
+# Check up on spawned raiders #
+###############################
+
+character_event = {
+	
+	id = EMBRaider.5010
+	hide_window = yes
+	
+	is_triggered_only = yes
+	trigger = {
+		# The only purpose of this trigger is to ensure that there is a maximum of one checkup per 60 days
+		# (Because, even after the 2nd/3rd/etc raiders spawn, we still only want one regular checkup.)
+		OR = {
+			NOT = { has_character_flag = emb_spawned_raiders_checkup }
+			had_character_flag = {
+				flag = emb_spawned_raiders_checkup
+				days >= 60
+			}
+		}
+	}
+	
+	immediate = {
+		
+		if = {
+			limit = { emb_raider_this_character_has_spawned_raiders = yes }
+			
+			# Reset the checkup timer
+			clr_character_flag = emb_spawned_raiders_checkup
+			set_character_flag = emb_spawned_raiders_checkup
+			
+			# Schedule another checkup
+			# NB: Must always be more than 60 days in the future, or the trigger will fail
+			character_event = {
+				id = EMBRaider.5010
+				days = 90
+				random = 20
+			}
+			
+			if = {
+				limit = { emb_raider_this_character_has_spawned_raiders_not_raiding = yes }
+				# Some earmarked regiments are not raiding => Give the character the choice to persuade them to stay, or let them leave
+				character_event = { id = EMBRaider.5011 }
+			}
+			else = {
+				# Earmarked regiments exist, and they are all raiding => Remove any negative modifiers from promises
+				if = {
+					limit = { emb_raider_this_character_has_any_spawned_raider_persuasion_modifier = yes }
+					character_event = { id = EMBRaider.5012 }
+				}
+			}
+		}
+		else = {
+			# This character has no spawned raiders => End the constant checkups, but don't remove any modifiers from promises
+			clr_character_flag = emb_spawned_raiders_checkup
+		}
+	}
+	
+}
+
+
+
+
+
+#######################################################
+# Persuade non-raiding spawned raiders to sick around #
+#######################################################
+
+character_event = {
+	
+	id = EMBRaider.5011
+	is_triggered_only = yes
+	
+	hide_from = yes
+	desc = EMBRaider_5011_EVTDESC
+	picture = GFX_evt_council_quarrelling
+	border = GFX_event_normal_frame_war
+	
+	# You should only ever see either zero or one of the 3 viking options
+	# If available, these should always be shown, because they have the smallest negative consequences
+	
+	option = {
+		name = EMBRaider_5011_EVTOPT_A_VIKING
+		tooltip_info = viking
+		trigger = {
+			emb_raider_this_character_can_persuade_spawned_raiders_viking = yes
+		}
+		custom_tooltip = { text = EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_PLACATED_FOR_NOW }
+		add_character_modifier = {
+			name = emb_persuaded_spawned_raiders_viking
+			years = 5
+		}
+		ai_chance = {
+			factor = 1000
+		}
+	}
+	
+	option = {
+		name = EMBRaider_5011_EVTOPT_B_RAVAGER
+		tooltip_info = ravager
+		trigger = {
+			emb_raider_this_character_can_persuade_spawned_raiders_ravager = yes
+		}
+		custom_tooltip = { text = EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_PLACATED_FOR_NOW }
+		add_character_modifier = {
+			name = emb_persuaded_spawned_raiders_ravager
+			years = 5
+		}
+		ai_chance = {
+			factor = 1000
+		}
+	}
+	
+	option = {
+		name = EMBRaider_5011_EVTOPT_C_SEAKING
+		tooltip_info = seaking
+		trigger = {
+			emb_raider_this_character_can_persuade_spawned_raiders_seaking = yes
+		}
+		custom_tooltip = { text = EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_PLACATED_FOR_NOW }
+		add_character_modifier = {
+			name = emb_persuaded_spawned_raiders_seaking
+			years = 5
+		}
+		ai_chance = {
+			factor = 1000
+		}
+	}
+	
+	# If a viking option is available: Always suppress martial; prioritise diplo then intrigue
+	# If no viking option is available: Show at most two of: martial, then diplo, then intrigue
+	
+	option = {
+		name = EMBRaider_5011_EVTOPT_D_MARTIAL
+		tooltip_info = martial
+		trigger = {
+			emb_raider_this_character_can_persuade_spawned_raiders_martial = yes
+			# If a viking option is available then it replaces this one, so we only show this if there are no viking options
+			emb_raider_this_character_can_persuade_spawned_raiders_viking = no
+			emb_raider_this_character_can_persuade_spawned_raiders_ravager = no
+			emb_raider_this_character_can_persuade_spawned_raiders_seaking = no
+		}
+		custom_tooltip = { text = EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_PLACATED_FOR_NOW }
+		add_character_modifier = {
+			name = emb_persuaded_spawned_raiders_martial
+			years = 3
+		}
+		ai_chance = { # Wealthy AI should prefer to pay instead of take a stat penalty
+			factor = 100
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 200
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 500
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 1000
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 2000
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 5000
+			}
+		}
+	}
+	
+	option = {
+		name = EMBRaider_5011_EVTOPT_E_DIPLOMACY
+		tooltip_info = diplomacy
+		trigger = {
+			emb_raider_this_character_can_persuade_spawned_raiders_diplomacy = yes
+			# This will always be shown if available, no matter whether a viking option is available or not
+			# (Effectively, the viking option replaces the martial option.)
+		}
+		custom_tooltip = { text = EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_PLACATED_FOR_NOW }
+		add_character_modifier = {
+			name = emb_persuaded_spawned_raiders_diplomacy
+			years = 3
+		}
+		ai_chance = { # Wealthy AI should prefer to pay instead of take a stat penalty
+			factor = 100
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 200
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 500
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 1000
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 2000
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 5000
+			}
+		}
+	}
+	
+	option = {
+		name = EMBRaider_5011_EVTOPT_F_INTRIGUE
+		tooltip_info = intrigue
+		trigger = {
+			emb_raider_this_character_can_persuade_spawned_raiders_intrigue = yes
+			OR = {
+				AND = {
+					OR = {
+						emb_raider_this_character_can_persuade_spawned_raiders_viking = yes
+						emb_raider_this_character_can_persuade_spawned_raiders_ravager = yes
+						emb_raider_this_character_can_persuade_spawned_raiders_seaking = yes
+					}
+					emb_raider_this_character_can_persuade_spawned_raiders_diplomacy = no
+				}
+				AND = {
+					emb_raider_this_character_can_persuade_spawned_raiders_viking = no
+					emb_raider_this_character_can_persuade_spawned_raiders_ravager = no
+					emb_raider_this_character_can_persuade_spawned_raiders_seaking = no
+					OR = {
+						emb_raider_this_character_can_persuade_spawned_raiders_martial = no
+						emb_raider_this_character_can_persuade_spawned_raiders_diplomacy = no
+					}
+				}
+			}
+		}
+		custom_tooltip = { text = EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_PLACATED_FOR_NOW }
+		add_character_modifier = {
+			name = emb_persuaded_spawned_raiders_intrigue
+			years = 3
+		}
+		ai_chance = { # Wealthy AI should prefer to pay instead of take a stat penalty
+			factor = 100
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 200
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 500
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 1000
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 2000
+			}
+			mult_modifier = {
+				factor = 0.5
+				wealth >= 5000
+			}
+		}
+	}
+	
+	# Final fallback to keep the troops, if no special options are possible: Prestige sacrifice & bribe (up to three times)
+	
+	option = {
+		name = EMBRaider_5011_EVTOPT_G_BRIBE
+		trigger = {
+			emb_raider_this_character_can_persuade_spawned_raiders_bribe = yes
+			emb_raider_this_character_has_better_persuasion_options_available = no
+		}
+		custom_tooltip = { text = EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_PLACATED_FOR_NOW }
+		emb_raider_deduct_prestige_and_wealth_to_bribe_spawned_raiders = yes
+		add_character_modifier = {
+			name = emb_persuaded_spawned_raiders_bribe
+			years = 3
+		}
+		ai_chance = {
+			# Poor AI should try to keep them around, in the hope of becoming richer
+			factor = 50
+			mult_modifier = {
+				factor = 2
+				wealth <= 10
+			}
+			mult_modifier = {
+				factor = 2
+				wealth <= 20
+			}
+			mult_modifier = {
+				factor = 2
+				wealth <= 100
+			}
+		}
+	}
+	
+	option = {
+		name = EMBRaider_5011_EVTOPT_H_SECOND_BRIBE
+		trigger = {
+			emb_raider_this_character_can_persuade_spawned_raiders_second_bribe = yes
+			emb_raider_this_character_has_better_persuasion_options_available = no
+		}
+		custom_tooltip = { text = EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_PLACATED_FOR_NOW }
+		emb_raider_deduct_prestige_and_wealth_to_bribe_spawned_raiders = yes
+		add_character_modifier = {
+			name = emb_persuaded_spawned_raiders_second_bribe
+			years = 3
+		}
+		ai_chance = { # Poor AI should try to keep them around, in the hope of becoming richer
+			factor = 50
+			mult_modifier = {
+				factor = 2
+				wealth <= 10
+			}
+			mult_modifier = {
+				factor = 2
+				wealth <= 20
+			}
+			mult_modifier = {
+				factor = 2
+				wealth <= 100
+			}
+		}
+	}
+	
+	option = {
+		name = EMBRaider_5011_EVTOPT_I_THIRD_BRIBE
+		trigger = {
+			emb_raider_this_character_can_persuade_spawned_raiders_third_bribe = yes
+			emb_raider_this_character_has_better_persuasion_options_available = no
+		}
+		custom_tooltip = { text = EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_PLACATED_FOR_NOW }
+		custom_tooltip = { text = EMB_RAIDER_TOOLTIP_NONRAIDING_SPAWNED_RAIDERS_WILL_NOT_ACCEPT_MORE_BRIBES }
+		emb_raider_deduct_prestige_and_wealth_to_bribe_spawned_raiders = yes
+		add_character_modifier = {
+			name = emb_persuaded_spawned_raiders_third_bribe
+			years = 3
+		}
+		ai_chance = { # Poor AI should try to keep them around, in the hope of becoming richer
+			factor = 50
+			mult_modifier = {
+				factor = 2
+				wealth <= 10
+			}
+			mult_modifier = {
+				factor = 2
+				wealth <= 20
+			}
+			mult_modifier = {
+				factor = 2
+				wealth <= 100
+			}
+		}
+	}
+	
+	# Accept dismissal
+	# Blocked for AI if they can take a near-free option
+	option = {
+		name = EMBRaider_5011_EVTOPT_J_DISBAND
+		trigger = {
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					emb_raider_this_character_can_persuade_spawned_raiders_viking = no
+					emb_raider_this_character_can_persuade_spawned_raiders_ravager = no
+					emb_raider_this_character_can_persuade_spawned_raiders_seaking = no
+				}
+			}
+		}
+		emb_raider_disband_this_characters_nonraiding_spawned_raiders = yes
+		emb_raider_deduct_prestige_and_wealth_for_dismissing_spawned_raiders = yes
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+
+
+
+
+################################################################
+# Notiy the character that all spawned raiders are now raiding #
+################################################################
+
+character_event = {
+	
+	id = EMBRaider.5012
+	is_triggered_only = yes
+	
+	hide_from = yes
+	desc = EMBRaider_5012_EVTDESC
+	picture = GFX_evt_council_agreement
+	border = GFX_event_normal_frame_war
+	
+	trigger = {
+		emb_raider_this_character_has_any_spawned_raider_persuasion_modifier = yes
+	}
+	
+	option = {
+		name = EMBRaider_5012_EVTOPT_A_GOOD_TO_HEAR
+		emb_raider_cleanup_this_characters_spawned_raider_persuasion_modifiers = yes
+	}
+}

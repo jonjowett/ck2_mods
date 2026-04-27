@@ -1,0 +1,26 @@
+# Audax Validator EnableCommentMetadata
+# Audax Validator "!" Ignore_1001
+
+mbb_religion_that_was_reformed_is_godking = {
+	event_target:mbb_religion_that_was_reformed = {
+		mbb_this_religion_is_godking = yes
+	}
+}
+
+mbb_this_religion_is_godking = {
+	AND = {
+		has_religion_feature = religion_dogmatic
+		has_religion_feature = religion_temporal_head
+		has_religion_feature = religion_holy_family
+	}
+}
+
+mbb_religion_that_was_reformed_is_temporal = {
+	event_target:mbb_religion_that_was_reformed = {
+		mbb_this_religion_is_temporal = yes
+	}
+}
+
+mbb_this_religion_is_temporal = {
+	has_religion_feature = religion_temporal_head
+}

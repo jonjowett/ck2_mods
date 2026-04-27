@@ -1,0 +1,151 @@
+# bloodline_historical_norse is included on all bloodlines so the vanilla sea king/queen bloodline is blocked
+
+
+
+
+# Reward for character who achieves 200 raids without sea king trait: sea king trait + Ragnarr bloodline
+
+emb_raider_viking_bloodline_m = {
+	combat_rating = 5
+	norse_opinion = 5
+	viking_opinion = 5
+	pirate_opinion = 5
+	ravager_opinion = 5
+	seaking_opinion = 5
+	sea_queen_opinion = 5
+	bloodline_effect_always_viking = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_longship
+	flags = { emb emb_m emb_raider emb_raider_viking bloodline_viking bloodline_historical_norse created_bloodline }
+}
+
+emb_raider_viking_bloodline_f = {
+	combat_rating = 5
+	norse_opinion = 5
+	viking_opinion = 5
+	pirate_opinion = 5
+	ravager_opinion = 5
+	seaking_opinion = 5
+	sea_queen_opinion = 5
+	bloodline_effect_always_viking = 1
+	inheritance = matrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_longship
+	flags = { emb emb_f emb_raider emb_raider_viking bloodline_viking bloodline_historical_norse created_bloodline }
+}
+
+
+
+
+
+# Reward for character who achieves 200 raids with Viking bloodline or sea king trait - Get a bloodline with another raiding feature
+#  --- Vanilla bloodline_reaver gives increased chance of looting artifacts/captives
+#  --- Vanilla more_raiders_bloodline gives more raiders to tribals
+# Unimplemented ideas
+#  --- Chance of raiders spawning in your capital
+#  --- Can send away children as raiders + unlanded characters are more likely to become raiding adventurers
+
+emb_raider_reaver_bloodline_m = {
+	monthly_character_prestige = 0.2
+	combat_rating = 5
+	bloodline_effect_reaver = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_longship
+	flags = { emb emb_m emb_raider emb_raider_reaver bloodline_reaver bloodline_historical_norse created_bloodline }
+}
+
+emb_raider_reaver_bloodline_f = {
+	monthly_character_prestige = 0.2
+	combat_rating = 5
+	bloodline_effect_reaver = 1
+	inheritance = matrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_longship
+	flags = { emb emb_f emb_raider emb_raider_reaver bloodline_reaver bloodline_historical_norse created_bloodline }
+}
+
+emb_raider_more_bloodline_m = {
+	monthly_character_prestige = 0.2
+	combat_rating = 5
+	bloodline_effect_more_raiders = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_war
+	flags = { emb emb_m emb_raider emb_raider_more more_raiders_bloodline bloodline_historical_norse created_bloodline }
+}
+
+emb_raider_more_bloodline_f = {
+	monthly_character_prestige = 0.2
+	combat_rating = 5
+	bloodline_effect_more_raiders = 1
+	inheritance = matrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_war
+	flags = { emb emb_f emb_raider emb_raider_more more_raiders_bloodline bloodline_historical_norse created_bloodline }
+}
+
+emb_raider_spawn_bloodline_m = {
+	monthly_character_prestige = 0.2
+	combat_rating = 5
+	emb_raider_bloodline_effect_spawn_raiders = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_war
+	flags = { emb emb_m emb_raider emb_raider_spawn emb_effect_spawn_raiders bloodline_historical_norse created_bloodline }
+}
+
+emb_raider_spawn_bloodline_f = {
+	monthly_character_prestige = 0.2
+	combat_rating = 5
+	emb_raider_bloodline_effect_spawn_raiders = 1
+	inheritance = matrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_war
+	flags = { emb emb_f emb_raider emb_raider_spawn emb_effect_spawn_raiders bloodline_historical_norse created_bloodline }
+}
+
+emb_raider_adventurer_bloodline_m = {
+	monthly_character_prestige = 0.2
+	combat_rating = 5
+	bloodline_effect_ambition = 1
+	emb_raider_bloodline_effect_adventurer_independent = 1
+	emb_raider_bloodline_effect_adventurer_targeted = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_war
+	flags = { emb emb_m emb_raider emb_raider_adventurer emb_effect_adventurer bloodline_ambition bloodline_historical_norse created_bloodline }
+}
+
+emb_raider_adventurer_bloodline_f = {
+	monthly_character_prestige = 0.2
+	combat_rating = 5
+	bloodline_effect_ambition = 1
+	emb_raider_bloodline_effect_adventurer_independent = 1
+	emb_raider_bloodline_effect_adventurer_targeted = 1
+	inheritance = matrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_war
+	flags = { emb emb_f emb_raider emb_raider_adventurer emb_effect_adventurer bloodline_ambition bloodline_historical_norse created_bloodline }
+}
+
+emb_raider_ultimate_bloodline_m = {
+	combat_rating = 5
+	bloodline_effect_ambition = 1
+	emb_raider_bloodline_effect_seaking_coastal_county_conquest = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_war
+	flags = { emb emb_m emb_raider emb_raider_ultimate emb_effect_seaking_coastal_county_conquest bloodline_ambition bloodline_historical_norse created_bloodline }
+}
+
+emb_raider_ultimate_bloodline_f = {
+	combat_rating = 5
+	bloodline_effect_ambition = 1
+	emb_raider_bloodline_effect_seaking_coastal_county_conquest = 1
+	inheritance = matrilineal
+	allow_bastards = yes
+	picture = GFX_bloodlines_symbol_war
+	flags = { emb emb_f emb_raider emb_raider_ultimate emb_effect_seaking_coastal_county_conquest bloodline_ambition bloodline_historical_norse created_bloodline }
+}

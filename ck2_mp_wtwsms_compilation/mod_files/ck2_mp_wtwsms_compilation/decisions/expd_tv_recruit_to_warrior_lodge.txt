@@ -1,0 +1,112 @@
+targetted_decisions = {
+	
+	# Derived from recruit_child_decision in ...\decisions\hf_warrior_lodge_decisions.txt
+	expd_tv_recruit_to_warrior_lodge_decision = {
+		only_playable = yes
+		diplomacy_icon = GFX_duel_decision
+		filter = all
+		ai_target_filter = home_court
+		ai_check_interval = 36
+		
+		from_potential = {
+			has_dlc = "Holy Fury"
+			is_playable = yes
+			is_adult = yes
+			prisoner = no
+			is_member_of_any_warrior_lodge_trigger = yes
+			has_regent = no
+			is_inaccessible_trigger = no
+		}
+		
+		potential = {
+			
+			NOT = { character = FROM }
+			prisoner = no
+			OR = {
+				FROM = { ai = no }
+				is_primary_heir = FROM
+			}
+			NOT = { has_character_flag = flag_child_abandoned_lodge }
+			
+			# Mod changes: 
+			#  --- Disallow the decision in situations where the recruiter should use the vanilla decision
+			#	   --- IE: Recruit must either not be a child of the recruiter, or must be a child who is disqualified from being recruited for some reason that's not a blocker in this decision
+			#  --- Allow the decision for {dynastic descendants}, {dynastic close relatives} and {dynastic legendary bloodline owners} who are NOT children of the recruiter
+			OR = {
+				AND = {
+					is_child_of = FROM
+					expd_tv_this_character_passes_the_basic_vanilla_requirements_to_be_recruited_to_a_warrior_lodge_by_from = yes
+					expd_tv_this_character_passes_the_additional_vanilla_requirements_to_be_recruited_to_a_warrior_lodge_by_from = no
+				}
+				AND = {
+					NOT = { is_child_of = FROM }
+					dynasty = FROM
+					OR = {
+						is_descendant_of = FROM
+						is_close_relative = FROM
+						any_owned_bloodline = { has_bloodline_flag = bloodline_legendary_warrior }
+					}
+				}
+			}
+			
+		}
+		
+		allow = {
+			
+			# Mod changes: Only the "basic" requirements are needed (ie. recruit doesn't need to be unlanded or landed+tribal/nomadic)
+			expd_tv_this_character_passes_the_basic_vanilla_requirements_to_be_recruited_to_a_warrior_lodge_by_from = yes
+			
+			# Mod changes: Ensure the recruited character won't be kicked out immediately due to religious mismatch
+			OR = {
+				NOT = { trait = zealous }
+				expd_tv_this_character_has_a_religion_that_is_accepted_by_froms_warrior_lodge = yes
+			}
+			
+		}
+		
+		effect = {
+			FROM = { save_event_target_as = recruiting_parent }
+			
+			if = {
+				limit = {
+					NOR = { #If no one has a bloodline that matters...
+							FROM = {
+								any_owned_bloodline = {
+									has_bloodline_flag = bloodline_legendary_warrior
+								}
+							}
+							any_owned_bloodline = {
+								has_bloodline_flag = bloodline_legendary_warrior
+							}
+						}
+						NOT = {
+							custom_tooltip = {
+								text = has_mission_to_recruit_tt
+							FROM = {
+									has_quest = quest_warrior_lodge_recruit
+								quest_target = { character = ROOT }
+								}
+							}
+						}
+				}
+				FROM = { show_scope_change = no detract_society_currency_tiny_effect = yes } #It will cost currency...
+			}
+			
+			
+			save_event_target_as = new_recruit
+			set_character_flag = society_join_block
+			set_character_flag = awaiting_initiation_trial
+			set_character_flag = is_being_recruited_to_warrior_lodge_by_parent
+			#used later for joining correct society:
+			FROM = { society = { save_event_target_as = warrior_lodge_to_join } }
+			
+			hidden_tooltip = {
+				character_event = { id = HF.10016 }
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

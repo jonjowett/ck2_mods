@@ -1,0 +1,134 @@
+
+
+
+
+
+# Passthroughs, allowing large amounts of TPAuto mod detection info to be added to loc text with a single bracket command
+
+defined_text = {
+	name = TPAuto_ModDetection
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key = TPAuto_ModDetection_Actual
+	}
+}
+defined_text = {
+	name = TPAuto_ModDetection_TradeRoutes
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key = TPAuto_ModDetection_TradeRoutes_Actual
+	}
+}
+defined_text = {
+	name = TPAuto_ModDetection_Buildings
+	use_first_valid = yes
+	text = {
+		trigger = { always = yes }
+		localisation_key = TPAuto_ModDetection_Buildings_Actual
+	}
+}
+
+
+
+
+
+# Trade routes
+#  --- NB: any_province is expensive, but these scripts are only ever calculated for user-visible tooltips, so it's fine.
+
+defined_text = {
+	name = TPAuto_ModDetection_TradeRoutes_Vanilla
+	use_first_valid = yes
+	text = {
+		trigger = { any_province = { tpauto_this_province_can_have_trade_route_trade_post_vanilla = yes } }
+		localisation_key = TPAuto_ModDetection_TradeRoutes_Vanilla_Actual
+	}
+}
+defined_text = {
+	name = TPAuto_ModDetection_TradeRoutes_ATEFF
+	use_first_valid = yes
+	text = {
+		trigger = { any_province = { tpauto_this_province_can_have_trade_route_trade_post_ateff = yes } }
+		localisation_key = TPAuto_ModDetection_TradeRoutes_ATEFF_Actual
+	}
+}
+defined_text = {
+	name = TPAuto_ModDetection_TradeRoutes_Faerun
+	use_first_valid = yes
+	text = {
+		trigger = { any_province = { tpauto_this_province_can_have_trade_route_trade_post_faerun = yes } }
+		localisation_key = TPAuto_ModDetection_TradeRoutes_Faerun_Actual
+	}
+}
+defined_text = {
+	name = TPAuto_ModDetection_TradeRoutes_MTR
+	use_first_valid = yes
+	text = {
+		trigger = { any_province = { tpauto_this_province_can_have_trade_route_trade_post_mtr = yes } }
+		localisation_key = TPAuto_ModDetection_TradeRoutes_MTR_Actual
+	}
+}
+defined_text = {
+	name = TPAuto_ModDetection_TradeRoutes_PDXRPTG
+	use_first_valid = yes
+	text = {
+		trigger = { any_province = { tpauto_this_province_can_have_trade_route_trade_post_pdxrptg = yes } }
+		localisation_key = TPAuto_ModDetection_TradeRoutes_PDXRPTG_Actual
+	}
+}
+defined_text = {
+	name = TPAuto_ModDetection_TradeRoutes_WGOA
+	use_first_valid = yes
+	text = {
+		trigger = { any_province = { tpauto_this_province_can_have_trade_route_trade_post_wgoa = yes } }
+		localisation_key = TPAuto_ModDetection_TradeRoutes_WGOA_Actual
+	}
+}
+defined_text = {
+	name = TPAuto_ModDetection_TradeRoutes_WTWSMS
+	use_first_valid = yes
+	text = {
+		trigger = { any_province = { tpauto_this_province_can_have_trade_route_trade_post_wtwsms = yes } }
+		localisation_key = TPAuto_ModDetection_TradeRoutes_WTWSMS_Actual
+	}
+}
+
+
+
+
+
+# Buildings
+
+defined_text = {
+	name = TPAuto_ModDetection_Buildings_Vanilla
+	use_first_valid = yes
+	text = {
+		trigger = { tpauto_allow_tracking_and_rebuild_vanilla = yes }
+		localisation_key = TPAuto_ModDetection_Buildings_Vanilla_Actual
+	}
+}
+defined_text = {
+	name = TPAuto_ModDetection_Buildings_MTR
+	use_first_valid = yes
+	text = {
+		trigger = { tpauto_allow_tracking_and_rebuild_mtr = yes }
+		localisation_key = TPAuto_ModDetection_Buildings_MTR_Actual
+	}
+}
+defined_text = {
+	name = TPAuto_ModDetection_Buildings_PDXRPTG
+	use_first_valid = yes
+	text = {
+		trigger = { tpauto_allow_tracking_and_rebuild_pdxrptg = yes }
+		localisation_key = TPAuto_ModDetection_Buildings_PDXRPTG_Actual
+	}
+}
+defined_text = {
+	name = TPAuto_ModDetection_Buildings_WTWSMS
+	use_first_valid = yes
+	text = {
+		trigger = { tpauto_allow_tracking_and_rebuild_wtwsms = yes }
+		localisation_key = TPAuto_ModDetection_Buildings_WTWSMS_Actual
+	}
+}

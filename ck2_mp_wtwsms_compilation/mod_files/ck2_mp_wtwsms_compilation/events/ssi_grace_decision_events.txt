@@ -1,0 +1,1683 @@
+###EVENTS FOR THE MEXIKHAN GRACE DECISIONS###
+
+#Written by:
+#Mathilda Bjarnehed
+#Milla Isaksson
+#Joel Hansson
+#Matthew Clohessy
+# Alexander Oltner
+
+namespace = SSI
+
+#GAINING GRACE
+
+#Sending gift
+character_event = {
+    id = SSI.20023
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = { FROMFROM = { letter_event = { id = SSI.20024 } } }
+}
+
+
+letter_event = {
+    id = SSI.20024
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_20024
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+
+    option = { 
+        name = EVTOPTA_SSI_20024
+		
+		sound_effect = china_grace_gain
+		if = {
+            limit = { NOT = { has_character_flag = ssi_gifting_artifact } }
+    		if = {
+				limit = {
+					OR={
+						liked_by_offmap = {
+						type = offmap_mexikha
+							context= wealth
+						}
+						liked_by_offmap = {
+							type = offmap_mexikha
+						}
+					}
+					NOR={
+						disliked_by_offmap = {
+							type = offmap_mexikha
+						}
+						disliked_by_offmap = {
+							type = offmap_mexikha
+							context= wealth
+						}
+					}
+				}
+				add_offmap_currency = {
+					offmap = offmap_mexikha
+					value = 450
+				}
+			}
+			else_if = {
+				limit = {
+					OR={
+						disliked_by_offmap = {
+							type = offmap_mexikha
+							context = wealth
+						}
+						disliked_by_offmap = {
+							type = offmap_mexikha
+						}
+					}
+					NOR={ 
+						liked_by_offmap = {
+							type = offmap_mexikha
+						}
+						liked_by_offmap ={
+							type = offmap_mexikha
+							context = wealth
+						}
+					}
+				}
+				add_offmap_currency = {
+					offmap = offmap_mexikha
+					value = 150
+				}
+			}
+			else ={
+				add_offmap_currency = {
+					offmap = offmap_mexikha
+					value = 300
+				}
+			}
+        }
+        clr_character_flag = ssi_gifting_artifact
+    }
+}
+
+#Asking to become tributary
+character_event = {
+    id = SSI.20027
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = { FROMFROM = { letter_event = { id = SSI.20028 } } }
+}
+
+letter_event = {
+    id = SSI.20028
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_20028
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+
+    option = { 
+        name = EVTOPTA_SSI_20028
+		
+		sound_effect = china_grace_gain
+		if = {
+			limit = {
+				OR={
+					liked_by_offmap = {
+					type = offmap_mexikha
+						context= tributary
+					}
+					liked_by_offmap = {
+						type = offmap_mexikha
+					}
+				}
+				NOR={
+					disliked_by_offmap = {
+						type = offmap_mexikha
+					}
+					disliked_by_offmap = {
+						type = offmap_mexikha
+						context= tributary
+					}
+				}
+			}
+			add_offmap_currency = {
+				offmap = offmap_mexikha
+				value = 400
+			}
+		}
+		else_if = {
+			limit = {
+				OR={
+					disliked_by_offmap = {
+						type = offmap_mexikha
+						context = tributary
+					}
+					disliked_by_offmap = {
+						type = offmap_mexikha
+					}
+				}
+				NOR={ 
+					liked_by_offmap = {
+						type = offmap_mexikha
+					}
+					liked_by_offmap ={
+						type = offmap_mexikha
+						context = tributary
+					}
+				}
+			}
+			add_offmap_currency = {
+				offmap = offmap_mexikha
+				value = 100
+			}
+		}
+		else ={
+			add_offmap_currency = {
+				offmap = offmap_mexikha
+				value = 200
+			}
+		}
+    }
+}
+
+#SPENDING GRACE
+
+#Mexikhan doctor
+character_event = {
+    id = SSI.20021
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = { 
+        FROMFROM = { 
+            random_list = {
+                50 = { #Female
+                    modifier = {
+                        NOT = {
+                            has_game_rule = {
+                                name = gender
+                                value = all
+                            }
+                        }
+                        factor = 0.05
+                    }
+                    create_character = {
+                        age = 35
+                        dynasty = actually_culture
+                        religion = ROOT
+                        culture = ROOT
+                        female = yes
+                        health = 6
+                        random_traits = no
+                        attributes = {
+                            martial = 2
+                            diplomacy = 5
+                            stewardship = 3
+                            intrigue = 3
+                            learning = 6
+                        }
+                    }
+                }
+                50 = { #Male
+                    create_character = {
+                        age = 35
+                        dynasty = actually_culture
+                        religion = ROOT
+                        culture = ROOT
+                        female = no
+                        health = 6
+                        random_traits = no
+                        attributes = {
+                            martial = 2
+                            diplomacy = 5
+                            stewardship = 3
+                            intrigue = 3
+                            learning = 6
+                        }
+                    }
+                }
+            }
+            new_character = {
+                #Education & other basic stuff
+                save_event_target_as = mexikhan_doctor
+				set_character_flag = ai_flag_refuse_concubinage
+				set_character_flag = ai_flag_refuse_marriage
+				set_character_flag = originated_from_mexikhan_court
+                reverse_opinion = { 
+                    who = PREV
+                    modifier = opinion_my_mexikhan_pet
+                    years = 100
+                }
+				set_character_flag = mexikhan_courtier_original_court_@PREV
+                set_character_flag = no_court_invites
+                set_character_flag = is_mexikhan_physician
+                random_list = {
+                    50 = { add_trait = scholarly_theologian }
+                    25 = { add_trait = mastermind_theologian }
+                }
+                add_trait = physician
+                random_list = {
+                    20 = { } #Nothing
+                    30 = { add_trait = erudite }
+                    30 = { add_trait = shrewd }
+                    15 = { add_trait = quick }
+                    5 = { add_trait = genius }
+                }
+                random_list = {
+                    80 = { } #Nothing
+                    2 = { add_trait = clubfooted }
+                    2 = { add_trait = harelip }
+                    2 = { add_trait = hunchback }
+                    4 = { add_trait = lisp }
+                    4 = { add_trait = stutter }
+                    2 = { add_trait = ugly }
+                    2 = { add_trait = dwarf }
+                    2 = { add_trait = weak }
+                }
+                random_list = {
+                    50 = { } #Nothing
+                    25 = { add_trait = patient }
+                    25 = { add_trait = diligent }
+                }
+                random = {
+                    chance = 10
+                    add_trait = homosexual
+                }
+                opinion = {
+                    who = PREV
+                    modifier = opinion_servant
+                    months = 1200
+                }
+
+                #Add archetype 
+                random_list = {
+                    20 = { #Combat medic
+                        set_character_flag = archetype_decisive
+                        random_list = {
+                            50 = { add_trait = duelist }
+                            50 = { add_trait = scholar }
+                        }
+                        add_scarred_tiered_effect = yes
+                        add_trait = robust
+                        random_list = {
+                            60 = { } #Nothing
+                            20 = { 
+                                trigger = { has_dlc = Reapers }
+                                add_trait = one_legged 
+                            }
+                            20 = { 
+                                trigger = { has_dlc = Reapers }
+                                add_trait = one_eyed 
+                            }
+                        }
+                        add_trait = brave
+                        random_list = {
+                            30 = { } #Nothing
+                            50 = { add_trait = cynical }
+                            10 = {
+                                add_trait = cynical
+                                add_trait = depressed
+                            }
+                            10 = {
+                                add_trait = cynical
+                                add_trait = depressed
+                                add_trait = drunkard
+                            }
+                        }
+                        random_list = {
+                            50 = { } #Nothing
+                            20 = { add_trait = kind }
+                            30 = { add_trait = honest }
+                        }
+                        remove_trait = dwarf
+                        remove_trait = weak
+                    }
+                    #Dr Jerk
+                    15 = { 
+                        set_character_flag = archetype_decisive
+                        add_trait = scholar
+                        add_trait = wroth
+                        remove_trait = patient
+                        random_list = {
+                            30 = { add_trait = proud }
+                            30 = { add_trait = envious }
+                            40 = { } #Nothing
+                        }
+                        add_trait = honest
+                        add_trait = cynical
+                        random = {
+                            chance = 30
+                            add_trait = drunkard
+                        }
+                        random_list = {
+                            60 = { }
+                            20 = { 
+                                add_trait = clubfooted
+                            }
+                            20 = {
+                                trigger = { has_dlc = Reapers }
+                                add_trait = one_legged
+                            }
+                        }
+                    }
+                    10 = { #Mad genius 
+                        set_character_flag = archetype_sociable
+                        random_list = {
+                            50 = { add_trait = impaler }
+                            50 = { add_trait = mystic }
+                        }
+                        random_list = {
+                            33 = { add_trait = drunkard } 
+                            33 = { add_trait = lunatic }
+                            33 = { add_trait = possessed }
+                        }
+                        add_trait = genius
+                        remove_trait = quick
+                        remove_trait = shrewd
+                        add_trait = paranoid
+                        random_list = {
+                            25 = { add_trait = gluttonous } 
+                            25 = { add_trait = wroth }
+                            25 = { add_trait = proud }
+                            25 = { add_trait = greedy }
+                        }   
+                    }
+                    20 = { #Hannibal
+                        set_character_flag = archetype_sociable
+                        add_trait = cannibal_trait
+                        add_trait = diligent
+                        add_trait = humble
+                        random_list = {
+                            50 = { add_trait = content } 
+                            50 = { add_trait = poet }
+                        }
+                        random = {
+                            chance = 50
+                            add_trait = fair
+                        }
+                        remove_trait = weak
+                    }
+                    20 = { #Health nut
+                        set_character_flag = archetype_conservative
+                        add_trait = mystic
+                        add_trait = celibate
+                        add_trait = chaste
+                        add_trait = temperate
+                        random_list = {
+                            50 = { add_trait = craven } 
+                            25 = { add_trait = shy }
+                            25 = { add_trait = content }
+                        }
+                        set_focus = focus_scholarship
+                    }
+                    20 = { #Compassionate doctor
+                        set_character_flag = archetype_supportive
+                        random_list = {
+                            50 = { add_trait = socializer }
+                            50 = { add_trait = scholar }
+                        }
+                        add_trait = kind
+                        add_trait = patient
+                        random_list = {
+                            25 = { add_trait = content } 
+                            25 = { add_trait = humble }
+                            25 = { add_trait = trusting }
+                            25 = { add_trait = charitable }
+                        }
+                        set_focus = focus_family
+                    }
+                    15 = { #McDreamy
+                        set_character_flag = archetype_sociable
+                        if = {
+                            limit = { is_female = yes }
+                            add_trait = seductress
+                        }
+                        if = {
+                            limit = { is_female = no }
+                            add_trait = seducer
+                        }
+                        random_list = {
+                            50 = { } #Nothing
+                            25 = { add_trait = poet }
+                            25 = { add_trait = falconer }
+                        }
+                        random_list = {
+                            30 = { add_trait = fair }
+                            50 = { add_trait = strong }
+                        }
+                        add_trait = lustful
+                        random_list = {
+                            35 = { add_trait = ambitious }
+                            35 = { add_trait = gregarious }
+                            30 = { } #Nothing
+                        }
+                        set_focus = focus_seduction
+                        remove_trait = clubfooted
+                        remove_trait = harelip
+                        remove_trait = hunchback 
+                        remove_trait = lisp
+                        remove_trait = stutter
+                        remove_trait = ugly
+                        remove_trait = dwarf
+                        remove_trait = giant
+                        remove_trait = weak
+                    }
+                }
+				if = {
+					limit = {
+						offmap_mexikha = {
+							has_status = mexikha_golden_age
+						}
+					}
+					change_learning = 5
+				}
+            }
+            letter_event = { id = SSI.20022 } 
+        } 
+    }
+}
+
+#Governor presents doctor
+letter_event = {
+    id = SSI.20022
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_20022
+    border = GFX_event_letter_frame_diplomacy
+
+    hide_new = yes
+
+    is_triggered_only = yes
+
+    option = { 
+        name = EVTOPTA_SSI_20022
+        custom_tooltip = { text = EVTOPTA_SSI_20022_TT }
+        event_target:mexikhan_doctor = {
+            show_scope_change = no
+            give_minor_title = title_court_physician
+        }
+    }
+}
+
+#Peace deal
+character_event = {
+    id = SSI.20025
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = { FROMFROM = { letter_event = { id = SSI.20026 } } }
+}
+
+letter_event = {
+    id = SSI.20026
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_20026
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+    
+    option = { 
+        name = EVTOPTA_SSI_20026
+
+        add_character_modifier = {
+            inherit = yes
+            name = peace_deal_with_mexikha
+            years = 50
+        }
+    }
+}
+
+#Master mason
+
+character_event = {
+    id = SSI.20031
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = { 
+        FROMFROM = { 
+            random_list = {
+                50 = { #Female
+                    modifier = {
+                        NOT = {
+                            has_game_rule = {
+                                name = gender
+                                value = all
+                            }
+                        }
+                        factor = 0.05
+                    }
+                    create_character = {
+                        age = 30
+                        dynasty = actually_culture
+                        religion = ROOT
+                        culture = ROOT
+                        female = yes
+                        health = 6
+                        random_traits = no
+                        attributes = {
+                            martial = 5
+                            diplomacy = 2
+                            stewardship = 6
+                            intrigue = 3
+                            learning = 3
+                        }
+                    }
+                }
+                50 = { #Male
+                    create_character = {
+                        age = 30
+                        dynasty = actually_culture
+                        religion = ROOT
+                        culture = ROOT
+                        female = no
+                        health = 6
+                        random_traits = no
+                        attributes = {
+                            martial = 5
+                            diplomacy = 2
+                            stewardship = 6
+                            intrigue = 3
+                            learning = 3
+                        }
+                    }
+                }
+            }
+            new_character = {
+                #Education & other basic stuff
+                save_event_target_as = mexikhan_master_mason
+                add_character_modifier = {
+                    name = ssi_master_mason
+                    duration = -1
+                }
+				set_character_flag = ai_flag_refuse_concubinage
+				set_character_flag = ai_flag_refuse_marriage
+				set_character_flag = originated_from_mexikhan_court
+                reverse_opinion = { 
+                    who = PREV
+                    modifier = opinion_my_mexikhan_pet
+                    years = 100
+                }
+				set_character_flag = mexikhan_courtier_original_court_@PREV
+                set_character_flag = no_court_invites
+                set_character_flag = is_mexikhan_master_mason
+                random_list = {
+                    30 = { add_trait = thrifty_clerk }
+                    15 = { add_trait = fortune_builder }
+                    5 = { add_trait = midas_touched }
+                    30 = { add_trait = tough_soldier }
+                    15 = { add_trait = skilled_tactician }
+                    5 = { add_trait = brilliant_strategist }
+                }
+                random_list = {
+                    20 = { } #Nothing
+                    20 = { add_trait = erudite }
+                    20 = { add_trait = shrewd }
+                    15 = { add_trait = quick }
+                    5 = { add_trait = genius }
+                    10 = { add_trait = robust }
+                    10 = { add_trait = groomed }
+                    5 = { add_trait = strong }
+                    5 = { add_trait = fair }
+                }
+                random_list = {
+                    85 = { } #Nothing
+                    1 = { add_trait = clubfooted }
+                    2 = { add_trait = harelip }
+                    2 = { add_trait = hunchback }
+                    3 = { add_trait = lisp }
+                    3 = { add_trait = stutter }
+                    2 = { 
+                        add_trait = ugly 
+                        remove_trait = fair 
+                    }
+                    1 = { add_trait = dwarf }
+                    1 = { 
+                        add_trait = weak 
+                        remove_trait = strong 
+                        remove_trait = robust
+                    }
+                }
+                random = {
+                    chance = 10
+                    add_trait = homosexual
+                }
+                opinion = {
+                    who = PREV
+                    modifier = opinion_servant
+                    months = 1200
+                }
+
+                #Add archetype 
+                random_list = {
+                    #Conservative
+                    25 = {
+                        set_character_flag = archetype_conservative
+                        if = {
+                            limit = { has_dlc = "Way of Life" }
+                            random_list = {
+                                75 = { add_trait = architect }
+                                25 = { add_trait = theologian }
+                            }
+                        }
+                        random = {
+                            chance = 50
+                            add_trait = zealous
+                        }
+                        add_trait = stubborn
+                        add_trait = temperate
+                        random_list = {
+                            20 = { add_trait = greedy }
+                            20 = { add_trait = wroth }
+                            20 = { add_trait = deceitful }
+                            20 = { add_trait = shy }
+                            20 = { add_trait = cruel }
+                        }
+                        random_list = {
+                            25 = { add_trait = poet }
+                            25 = { add_trait = chaste }
+                            25 = { 
+                                add_trait = patient
+                                remove_trait = wroth
+                            }
+                            25 = { add_trait = just }
+                        }
+                    }
+                    #Supportive
+                    25 = {
+                        set_character_flag = archetype_supportive
+                        if = {
+                            limit = { has_dlc = "Way of Life" }    
+                            random_list = {
+                                50 = { add_trait = architect }
+                                25 = { add_trait = socializer }
+                                25 = { add_trait = gardener }
+                            }
+                        }
+                        add_trait = humble
+                        add_trait = patient
+                        random_list = {
+                            33 = { add_trait = slothful }
+                            33 = { add_trait = craven }
+                            33 = { add_trait = shy }
+                        }
+                        random_list = {
+                            25 = { add_trait = content }
+                            25 = { add_trait = charitable }
+                            25 = { add_trait = kind }
+                            25 = { add_trait = trusting }
+                        }      
+                    }
+                    #Decisive
+                    25 = {
+                        set_character_flag = archetype_decisive
+                        if = {
+                            limit = { has_dlc = "Way of Life" }
+                            random_list = {
+                                50 = { add_trait = architect }
+                                50 = { add_trait = strategist }
+                            }
+                        }
+                        add_trait = ambitious
+                        add_trait = cynical
+                        random_list = {
+                            20 = { add_trait = cruel }
+                            20 = { add_trait = stubborn }
+                            20 = { add_trait = greedy }
+                            20 = { add_trait = wroth }
+                            20 = { add_trait = proud }
+                        }
+                        random_list = {
+                            20 = { add_trait = falconer }
+                            20 = { add_trait = diligent }
+                            20 = { add_trait = brave }
+                            20 = { add_trait = honest }
+                            20 = { add_trait = gregarious }
+                        }    
+                    }
+                    #Sociable
+                    25 = {
+                        set_character_flag = archetype_sociable
+                        if = {
+                            limit = { has_dlc = "Way of Life" }
+                            random_list = {
+                                25 = { add_trait = architect }
+                                30 = { add_trait = socializer }
+                                25 = { add_trait = hedonist}
+                                20 = {
+                                    trigger = { is_female = yes }
+                                    add_trait = seductress
+                                    add_trait = lustful
+                                }
+                                20 = {
+                                    trigger = { is_female = no }
+                                    add_trait = seducer
+                                    add_trait = lustful
+                                }
+                            }
+                        }
+                        add_trait = gregarious
+                        add_trait = charitable
+                        random_list = {
+                            25 = { add_trait = craven }
+                            25 = { add_trait = envious }
+                            25 = { add_trait = gluttonous }
+                            25 = { add_trait = proud }
+                        }
+                        random_list = {
+                            25 = { add_trait = poet }
+                            25 = { add_trait = kind }
+                            25 = { add_trait = honest }
+                            25 = { add_trait = lustful }
+                        }   
+                    }
+                } 
+            }
+            letter_event = { id = SSI.20032 } 
+        } 
+    }
+}
+
+#Governor presents master mason
+letter_event = {
+    id = SSI.20032
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_20032
+    border = GFX_event_letter_frame_diplomacy
+
+    hide_new = yes
+
+    is_triggered_only = yes
+
+    option = { 
+        name = EVTOPTA_SSI_20022
+        custom_tooltip = { text = EVTOPTA_SSI_20032_TT }
+        event_target:mexikhan_master_mason = { 
+            show_scope_change = no
+            if = {
+                limit = {
+                    offmap_mexikha = {
+                        has_status = mexikha_golden_age
+                    }
+                }
+                set_character_flag = mexikha_master_mason_golden_age #so you can't reappoint in golden age to get better effects
+            }
+            set_character_flag = master_mason_just_spawned
+            give_minor_title = title_master_mason #effects in minor title definition
+        }
+    }
+}
+
+#ssi_paper_mill > ssi_terraced_field if moutain/hill terrain
+#ssi_fireworks_guild > ssi_telpochcalli if fallback
+#ssi_dry_docks > if port
+#ssi_administrative_outpost > ssi_tzompantli_ballcourt if plain
+#ssi_blast_furnace > ssi_reservoir if fallback
+
+#Master mason builds something
+character_event = {
+    id = SSI.20033
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        is_alive = yes
+    }
+
+    immediate = {
+        #Renews the event
+        if = {
+            limit = {
+                has_character_flag = mexikha_master_mason_golden_age
+            }
+            character_event = { id = SSI.20033 days = 1460 random = 542 } 
+        }
+		else = {
+            character_event = { id = SSI.20033 days = 2920 random = 1095 } 
+        }
+ 
+        #Building 
+        liege = {
+            #Saves 3 provinces which are candidates for getting built in
+            capital_scope = { 
+                if = {
+                    limit = {
+                        NAND = {
+                            has_province_modifier = ssi_terraced_field
+                            has_province_modifier = ssi_tzompantli_ballcourt
+                            OR = {
+                                has_province_modifier = ssi_dry_docks
+                                port = no
+                            }
+							has_province_modifier = ssi_reservoir
+                            has_province_modifier = ssi_telpochcalli
+                        }
+                    }
+                    save_event_target_as = ssi_mg_capital
+                }
+            }
+            random_demesne_province = {
+                limit = {
+                    is_capital = no
+                    NOR = {
+                        has_province_modifier = ssi_terraced_field
+                        has_province_modifier = ssi_tzompantli_ballcourt
+                        has_province_modifier = ssi_dry_docks
+                        has_province_modifier = ssi_reservoir
+                        has_province_modifier = ssi_telpochcalli
+                    }
+                }
+                save_event_target_as = ssi_empty_province
+            }
+            random_demesne_province = {
+                limit = {
+                    is_capital = no
+                    OR = {
+                        has_province_modifier = ssi_terraced_field
+                        has_province_modifier = ssi_tzompantli_ballcourt
+                        has_province_modifier = ssi_dry_docks
+                        has_province_modifier = ssi_reservoir
+                        has_province_modifier = ssi_telpochcalli
+                    }
+                    NAND = {
+                        has_province_modifier = ssi_terraced_field
+                        has_province_modifier = ssi_tzompantli_ballcourt
+                        OR = {
+                            has_province_modifier = ssi_dry_docks
+                            port = no
+                        }
+                        has_province_modifier = ssi_reservoir
+                        has_province_modifier = ssi_telpochcalli
+                    }
+                }
+                save_event_target_as = ssi_built_province
+            }
+        }
+        #Decide which place to build in
+        random_list = {
+            35 = { #Build in capital
+                trigger = {  event_target:ssi_mg_capital = { always = yes  } }
+                modifier = { NOT = { event_target:ssi_mg_capital = { has_province_modifier = ssi_terraced_field } } factor = 1.1 }
+                modifier = { NOT = { event_target:ssi_mg_capital = { has_province_modifier = ssi_tzompantli_ballcourt } } factor = 1.1 }
+                modifier = { NOT = { event_target:ssi_mg_capital = { has_province_modifier = ssi_dry_docks } } factor = 1.1 }
+                modifier = { NOT = { event_target:ssi_mg_capital = { has_province_modifier = ssi_reservoir } } factor = 1.1 }
+                modifier = { NOT = { event_target:ssi_mg_capital = { has_province_modifier = ssi_telpochcalli } } factor = 1.1 }
+
+                event_target:ssi_mg_capital = { save_event_target_as = ssi_build_province }
+            }
+            40 = { #Build in empty province
+                trigger = {  event_target:ssi_empty_province = { always = yes  } }
+                modifier = { NOT = { event_target:ssi_built_province = { always = yes } } factor = 1.6 }
+
+                event_target:ssi_empty_province = { save_event_target_as = ssi_build_province }
+            }
+            25 = { #Build in a province which already has some stuff
+                trigger = {  event_target:ssi_built_province = { always = yes  } }
+                modifier = { NOT = { event_target:ssi_built_province = { has_province_modifier = ssi_terraced_field } } factor = 1.1 }
+                modifier = { NOT = { event_target:ssi_built_province = { has_province_modifier = ssi_tzompantli_ballcourt } } factor = 1.1 }
+                modifier = { NOT = { event_target:ssi_built_province = { has_province_modifier = ssi_dry_docks } } factor = 1.1 }
+                modifier = { NOT = { event_target:ssi_built_province = { has_province_modifier = ssi_reservoir } } factor = 1.1 }
+                modifier = { NOT = { event_target:ssi_built_province = { has_province_modifier = ssi_telpochcalli } } factor = 1.1 }
+                modifier = { NOT = { event_target:ssi_empty_province = { always = yes } } factor = 2.6 }
+
+                event_target:ssi_built_province = { save_event_target_as = ssi_build_province }
+            }
+        }
+        event_target:ssi_build_province = {
+            random_list = {
+                20 = {
+                    trigger = {
+						NOT = { has_province_modifier = ssi_terraced_field }
+						OR = {
+							terrain = mountain
+							terrain = hills
+						}
+					}
+                    owner = { character_event = { id = SSI.20034 } }
+                }
+                20 = {
+                    trigger = { 
+						NOT = { has_province_modifier = ssi_tzompantli_ballcourt } 
+						OR = {
+							terrain = farmlands
+							terrain = plains
+						}
+					}
+                    owner = { character_event = { id = SSI.20035 } }
+                }
+                20 = {
+                    trigger = { 
+                        NOT = { has_province_modifier = ssi_dry_docks } 
+                        port = yes
+                    }
+                    owner = { character_event = { id = SSI.20036 } }
+                }
+				20 = {
+                    trigger = { NOT = { has_province_modifier = ssi_reservoir } }
+                    owner = { character_event = { id = SSI.20037 } }
+                }
+                20 = {
+                    trigger = { NOT = { has_province_modifier = ssi_telpochcalli } }
+                    owner = { character_event = { id = SSI.20038 } }
+                }
+            }
+        }
+    }
+}
+
+#Announcement terraced field
+character_event = {
+    id = SSI.20034
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_20034
+    picture = GFX_evt_bandits
+    notification = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+        event_target:ssi_build_province = {
+            add_province_modifier = {
+                name = ssi_terraced_field
+                years = 20
+            }
+			hidden_tooltip = {
+				if = {
+					limit = {
+						has_dlc = "Reapers"
+					}
+					hidden_tooltip = {
+						change_variable = { which = prosperity_value value = 6 }
+					}
+				}
+			}
+        }
+    }
+
+    option = { 
+
+    }
+}   
+
+
+character_event = {
+    id = SSI.20035
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_20035
+    picture = GFX_evt_bandits
+    notification = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+        event_target:ssi_build_province = {
+            add_province_modifier = {
+                name = ssi_tzompantli_ballcourt
+                years = 20
+            }
+			hidden_tooltip = {
+				if = {
+					limit = {
+						has_dlc = "Reapers"
+					}
+					hidden_tooltip = {
+						change_variable = { which = prosperity_value value = 6 }
+					}
+				}
+			}
+        }
+    }
+
+    option = { 
+
+    }
+}   
+
+character_event = {
+    id = SSI.20036
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_20036
+    picture = GFX_evt_bandits
+    notification = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+        event_target:ssi_build_province = {
+            add_province_modifier = {
+                name = ssi_dry_docks
+                years = 20
+            }
+			hidden_tooltip = {
+				if = {
+					limit = {
+						has_dlc = "Reapers"
+					}
+					hidden_tooltip = {
+						change_variable = { which = prosperity_value value = 6 }
+					}
+				}
+			}
+        }
+    }
+
+    option = { 
+
+    }
+}   
+
+character_event = {
+    id = SSI.20037
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_20037
+    picture = GFX_evt_bandits
+    notification = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+        event_target:ssi_build_province = {
+            add_province_modifier = {
+                name = ssi_reservoir
+                years = 20
+            }
+			hidden_tooltip = {
+				if = {
+					limit = {
+						has_dlc = "Reapers"
+					}
+					hidden_tooltip = {
+						change_variable = { which = prosperity_value value = 6 }
+					}
+				}
+			}
+        }
+    }
+
+    option = { 
+
+    }
+}   
+
+character_event = {
+    id = SSI.20038
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_20038
+    picture = GFX_evt_bandits
+    notification = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+        event_target:ssi_build_province = {
+            add_province_modifier = {
+                name = ssi_telpochcalli
+                years = 20
+            }
+			hidden_tooltip = {
+				if = {
+					limit = {
+						has_dlc = "Reapers"
+					}
+					hidden_tooltip = {
+						change_variable = { which = prosperity_value value = 6 }
+					}
+				}
+			}
+        }
+    }
+
+    option = { 
+
+    }
+}
+
+# Relief Expedition
+character_event = {
+    id = SSI.3010
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = { FROMFROM = { letter_event = { id = SSI.3011 } } }
+}
+
+letter_event = {
+    id = SSI.3011
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_3011
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+
+    option = { 
+        name = EVTOPTA_SSI_3011
+    }
+}
+
+# Request Invasion
+character_event = {
+    id = SSI.3020
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = { FROMFROM = { letter_event = { id = SSI.3021 } } }
+}
+
+letter_event = {
+    id = SSI.3021
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_3021
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+
+    option = { 
+        name = EXCELLENT
+    }
+	
+	option = {
+        name = {
+        	text = EVTOPTA_SSI_3021 # Join wars
+        }
+        trigger = {
+         	event_target:mexikhan_invasion_instigator = { character = ROOT }
+			independent = yes
+			war = no
+			NOR = {
+				has_non_aggression_pact_with = event_target:mexikhan_invasion_target
+				is_allied_with = event_target:mexikhan_invasion_target
+				event_target:mexikhan_invasion_target = {
+					is_tributary = { suzerain = ROOT }
+				}
+			}
+        }
+		event_target:mexikhan_invasion_target = {
+			show_portrait = yes
+		}
+		event_target:mexikhan_invasion_instigator = {
+			show_portrait = yes
+		}
+		join_attacker_wars = event_target:invasion_governor
+    }
+}
+
+narrative_event = { # NEWS: visible event for player (shatter realm invasion)
+    id = SSI.3022
+	has_dlc = "Sunset Invasion"
+    title = NEWS_FROM_MEXIKHA
+    has_global_flag = aztec_explorers
+	picture = GFX_evt_aztec_arrival
+    portrait = offmap_mexikha
+	window = EventWindowOffmap
+	background = GFX_event_window_news_from_mexikha
+
+	desc = {
+		text = EVTDESC_SSI_3022_A
+		trigger = {
+			event_target:mexikhan_invasion_target = { character = ROOT }
+		}
+	}
+	desc = {
+		text = EVTDESC_SSI_3022_B
+		trigger = {
+			NOT = { event_target:mexikhan_invasion_target = { character = ROOT } }
+		}
+	}
+
+	has_dlc = "Sunset Invasion"
+
+    is_triggered_only = yes
+
+    option = {
+        name = {
+        	text = EVTOPTA_SSI_10102_A_brave
+        	trigger = {
+				trait = brave
+        	}
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_A_craven
+        	trigger = {
+				trait = craven
+        	}
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_A_pious
+        	trigger = {
+				is_pious_trigger = yes
+        	}
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_A_neutral
+        	trigger = {
+				NOT = { trait = craven }
+				NOT = { trait = brave }
+				NOT = { is_pious_trigger = yes }
+        	}
+        }
+        trigger = {
+         	event_target:mexikhan_invasion_target = { character = ROOT }
+        }
+		event_target:mexikhan_invasion_target = {
+			show_portrait = yes
+		}
+		event_target:mexikhan_invasion_instigator = {
+			show_portrait = yes
+		}
+    }
+
+    option = {
+        name = {
+        	text = EVTOPTA_SSI_10102_B_same_religion #May [HighGod] protect them
+        	trigger = {	event_target:mexikhan_invasion_target = { religion_group = ROOT } }
+        }
+        name = {
+        	text = EVTOPTA_SSI_10102_B_other_religion #May their gods protect them
+        	trigger = {	NOT = { event_target:mexikhan_invasion_target = { religion_group = ROOT } } }
+        }
+        trigger = {
+         	NOR = {
+				event_target:mexikhan_invasion_target = { character = ROOT }
+				event_target:mexikhan_invasion_instigator = { character = ROOT }
+			}
+        }
+		event_target:mexikhan_invasion_target = {
+			show_portrait = yes
+		}
+		event_target:mexikhan_invasion_instigator = {
+			show_portrait = yes
+		}
+    }
+	
+	option = {
+        name = {
+        	text = EVTOPTC_SSI_3022 # Just as planned
+        }
+        trigger = {
+         	event_target:mexikhan_invasion_instigator = { character = ROOT }
+        }
+		event_target:mexikhan_invasion_target = {
+			show_portrait = yes
+		}
+		event_target:mexikhan_invasion_instigator = {
+			show_portrait = yes
+		}
+    }
+}
+
+# Request Artifact
+character_event = {
+    id = SSI.3030
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+		random_list = {
+			10 = {
+				trigger = {
+					FROMFROM = {
+						NOT = {
+							has_artifact = jaguar_cloak
+						}
+					}
+				}
+				add_artifact = jaguar_cloak
+				new_artifact = {
+					transfer_artifact = {
+						from = ROOT
+						to = FROMFROM
+					}
+					save_event_target_as = mexikhan_artifact
+				}
+			}
+			10 = {
+				trigger = {
+					FROMFROM = {
+						NOT = {
+							has_artifact = aztec_macuahuitl
+						}
+					}
+				}
+				add_artifact = aztec_macuahuitl
+				new_artifact = {
+					transfer_artifact = {
+						from = ROOT
+						to = FROMFROM
+					}
+					save_event_target_as = mexikhan_artifact
+				}
+			}
+			15 = {
+				trigger = {
+					FROMFROM = {
+						NOT = {
+							has_artifact = aztec_sling
+						}
+					}
+				}
+				add_artifact = aztec_sling
+				new_artifact = {
+					transfer_artifact = {
+						from = ROOT
+						to = FROMFROM
+					}
+					save_event_target_as = mexikhan_artifact
+				}
+			}
+		}
+		FROMFROM = { letter_event = { id = SSI.3031 } } 
+	}
+}
+
+letter_event = {
+    id = SSI.3031
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_3031
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+
+    option = { 
+        name = EVTOPTA_SSI_3031
+    }
+}
+
+# Supply Horses
+character_event = {
+    id = SSI.3040
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = { FROMFROM = { letter_event = { id = SSI.3041 } } }
+}
+
+letter_event = {
+    id = SSI.3041
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_3041
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+
+    option = { 
+        name = EVTOPTA_SSI_3041
+		
+		sound_effect = china_grace_gain
+		add_character_modifier = {
+			name = mexikha_supply_horses
+			duration = -1
+			inherit = yes
+		}
+		if = {
+			limit = {
+				liked_by_offmap = {
+					type = offmap_mexikha
+					context = tributary
+				}
+			}
+			add_offmap_currency = {
+				offmap = offmap_mexikha
+				value = 150
+			}
+		}
+		if = {
+			limit = {
+				disliked_by_offmap = {
+					type = offmap_mexikha
+					context = tributary
+				}
+			}
+			add_offmap_currency = {
+				offmap = offmap_mexikha
+				value = 50
+			}
+		}
+		if = {
+			limit = {
+				NOR = {
+					liked_by_offmap = {
+						type = offmap_mexikha
+						context = tributary
+					}
+					disliked_by_offmap = {
+						type = offmap_mexikha
+						context = tributary
+					}
+				}
+			}
+			add_offmap_currency = {
+				offmap = offmap_mexikha
+				value = 100
+			}
+		}
+    }
+}
+
+# Raid Mexikha
+character_event = {
+    id = SSI.3050
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = { FROMFROM = { letter_event = { id = SSI.3051 } } }
+}
+
+letter_event = {
+    id = SSI.3051
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_3051
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+
+    option = { 
+        name = EVTOPTA_SSI_3051
+    }
+}
+
+#Response for sending a tribute character to Mexikha...
+letter_event = {
+    id = SSI.10050
+	has_dlc = "Sunset Invasion"
+    desc = EVTDESC_SSI_10050
+    border = GFX_event_letter_frame_diplomacy
+
+    is_triggered_only = yes
+
+    option = { 
+        name = {
+            text = EVTOPTA_SSI_10050_bad
+            trigger = {
+                has_character_flag = sent_bad_tribute
+                NOT = { is_close_relative = event_target:person_sent_as_tribute }
+            }
+        }
+        name = {
+            text = EVTOPTA_SSI_10050_decent
+            trigger = {
+                has_character_flag = sent_decent_tribute
+                NOT = { is_close_relative = event_target:person_sent_as_tribute }
+            }
+        }
+        name = {
+            text = EVTOPTA_SSI_10050_great
+            trigger = {
+                has_character_flag = sent_great_tribute
+                NOT = { is_close_relative = event_target:person_sent_as_tribute }
+            }
+        }
+        name = {
+            text = EVTOPTA_SSI_10050_family
+            trigger = { is_close_relative = event_target:person_sent_as_tribute }
+        }
+
+        event_target:person_sent_as_tribute = { show_portrait = yes }
+
+        clr_character_flag = sent_bad_tribute
+        clr_character_flag = sent_decent_tribute
+        clr_character_flag = sent_great_tribute
+        clr_character_flag = sent_eunuch_tribute
+        clr_character_flag = sent_concubine_tribute
+    }
+}
+
+letter_event = {
+	id = SSI.30014
+	has_dlc = "Sunset Invasion"
+	
+	desc = EVTDESC_SSI_30014
+    border = GFX_event_letter_frame_economy
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = EVTOPTA_SSI_30014
+		tooltip = {
+			add_character_modifier = {
+				modifier = mexikhan_imperial_trade_contract
+				inherit = yes
+				years = 25
+			}
+		}
+	}
+}
+
+#Fired from on-action war started. Cleans up trade contract modifiers if you end up fighting Mexikha.
+character_event = {
+	id = SSI.30015
+	has_dlc = "Sunset Invasion"
+	hide_window = yes
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		offmap_mexikha = {
+			governor = {
+				OR = { 
+					character = ROOT
+					character = FROM
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		remove_character_modifier = mexikhan_imperial_trade_contract
+		any_vassal = {
+			remove_character_modifier = mexikhan_imperial_trade_contract
+		}
+		FROM = {
+			remove_character_modifier = mexikhan_imperial_trade_contract
+			any_vassal = {
+				remove_character_modifier = mexikhan_imperial_trade_contract
+			}
+		}
+		remove_character_modifier = mexikha_supply_horses
+		any_vassal = {
+			remove_character_modifier = mexikha_supply_horses
+		}
+		FROM = {
+			remove_character_modifier = mexikha_supply_horses
+			any_vassal = {
+				remove_character_modifier = mexikha_supply_horses
+			}
+		}
+	}
+}
+
+### Grace courtier dies, inform ###
+character_event = {
+    id = SSI.60310
+    hide_window = yes
+    is_triggered_only = yes
+    has_character_flag = originated_from_mexikhan_court
+    has_dlc = "Sunset Invasion"
+    only_rulers = no
+	
+	trigger = {
+		NOT = {
+			has_character_flag = ignore_refund
+		}
+	}
+
+    immediate = {
+		random_playable_ruler = { #The current liege might not be the one that actually asked for a Mexikhan courtier.
+            limit = { has_opinion_modifier = { who = ROOT modifier = opinion_my_mexikhan_pet } }
+			save_event_target_as = grace_courtier_liege
+		}
+		if = { # If you are the known killer of the character, no refund
+			limit = {
+				killer = { has_opinion_modifier = { who = ROOT modifier = opinion_my_mexikhan_pet } } #Killer is the liege who asked for the courtier, or one of his heirs.
+				OR = {
+					death_murder_known_trigger = yes
+					death_execution_trigger = yes
+					death_sacrificed_trigger = yes
+					death_reason = death_duel
+					death_reason = death_dungeon
+				}
+			}
+			offmap_mexikha = { governor = { character_event = { id = SSI.60313 } } }
+		}
+		else = { # Otherwise refund as normal
+			if = {
+				limit = {
+					NOT = { had_character_flag = { flag = originated_from_mexikhan_court days = 1825 } }
+				}
+				trigger_switch = {
+					on_trigger = has_character_flag
+					is_mexikhan_master_mason = { event_target:grace_courtier_liege = { set_variable = { which = "grace_refund" value = 1000 } } }
+					is_mexikhan_imperial_marriage = { event_target:grace_courtier_liege = {  set_variable = { which = "grace_refund" value = 1000 } } }
+					is_mexikhan_physician = { event_target:grace_courtier_liege = { set_variable = { which = "grace_refund" value = 250 } } }
+				}
+			}
+			else = { event_target:grace_courtier_liege = { set_variable = { which = "grace_refund" value = 0 } } }
+			offmap_mexikha = { governor = { character_event = { id = SSI.60311 } } }
+		}
+    }
+}
+character_event = { #Bounce
+	id = SSI.60311
+	has_dlc = "Sunset Invasion"
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		event_target:grace_courtier_liege = { letter_event = { id = SSI.60312 } }
+	}
+}
+letter_event = {
+    id = SSI.60312
+	has_dlc = "Sunset Invasion"
+    desc = EVT_DESC_SSI_60312
+    is_triggered_only = yes
+
+    option = {
+    	name = EVT_OPTA_SSI_60312
+    	show_portrait = FROMFROM
+    	if = {
+    		limit = { check_variable = { which = "grace_refund" value > 0 } }
+    		add_offmap_currency = { offmap = offmap_mexikha value = grace_refund }
+    		hidden_effect = { set_variable = { which = "grace_refund" value = 0 } }
+    	}
+    }
+}
+character_event = { #Bounce
+	id = SSI.60313
+	has_dlc = "Sunset Invasion"
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		FROM = { killer = {  letter_event = { id = SSI.60314 } } }
+	}
+}
+letter_event = {
+    id = SSI.60314
+	has_dlc = "Sunset Invasion"
+    desc = EVT_DESC_SSI_60314
+    is_triggered_only = yes
+
+    option = {
+    	name = CURSES
+    	show_portrait = FROMFROM
+    	detract_mexikhan_grace_medium_effect = yes
+    }
+}

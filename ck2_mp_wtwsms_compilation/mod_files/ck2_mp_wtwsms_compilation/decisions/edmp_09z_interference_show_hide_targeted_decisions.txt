@@ -1,0 +1,102 @@
+# Audax Validator EnableCommentMetadata
+
+# Moved out of the admin submenu, since this is quite a frequently-used decision
+# To return it to the submenu, remove the block comments below, and rename the file so it's alphabetically after the show/hide submenu decision
+
+decisions = {
+	
+	
+	
+	edmp_interference_show_targetted_decisions = {
+		
+		ai = no
+		
+		potential = {
+			
+			edmp_this_character_can_see_admin_helper_actions = yes
+			NOT = { has_character_flag = edmp_interference_show }
+			
+			# Admin submenu logic - to return this decision to the submenu, uncomment this line
+			#has_character_flag = edmp_admin_submenu_is_open
+			
+			# Admin submenu logic - to return this decision to the submenu, remove (or comment-out) this line
+			edmp_another_mod_wants_to_suppress_this_decision = no
+			
+		}
+		
+		allow = { always = yes }
+		
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_show_targetted_decisions_tt
+				set_character_flag = edmp_interference_show
+			}
+		}
+		
+	}
+	
+	
+	
+	edmp_interference_hide_targetted_decisions_high_prio = {
+		
+		ai = no
+		
+		is_high_prio = yes # Remind the admin to hide the decisions once they're done
+		
+		potential = {
+			
+			edmp_this_character_can_see_admin_helper_actions = yes
+			has_character_flag = edmp_interference_show
+			
+			# Admin submenu logic - to return this decision to the submenu, uncomment this OR clauses
+			#OR = {
+			#	# Forgot to turn this off before exiting the submenu - oops!
+			#	NOT = { has_character_flag = edmp_admin_submenu_is_open }
+			#	# Submenu is open but not isolated
+			#	AND = {
+			#		has_character_flag = edmp_admin_submenu_is_open
+			#		edmp_currently_running_a_mod_which_puts_edmp_decisions_in_an_isolated_submenu = no
+			#	}
+			#}
+			
+		}
+		
+		allow = { always = yes }
+		
+		effect = {
+			custom_tooltip = {
+				text = edmp_interference_hide_targetted_decisions_tt
+				clr_character_flag = edmp_interference_show
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	# Admin submenu logic - to return this decision to the submenu, uncomment this entire block
+	#edmp_interference_hide_targetted_decisions_low_prio = {
+	#	
+	#	ai = no
+	#	
+	#	potential = {
+	#		edmp_this_character_can_see_admin_helper_actions = yes
+	#		has_character_flag = edmp_interference_show
+	#		# Submenu is open and isolated
+	#		has_character_flag = edmp_admin_submenu_is_open
+	#		edmp_currently_running_a_mod_which_puts_edmp_decisions_in_an_isolated_submenu = yes
+	#	}
+	#	
+	#	allow = { always = yes }
+	#	
+	#	effect = {
+	#		custom_tooltip = {
+	#			text = edmp_interference_hide_targetted_decisions_tt
+	#			clr_character_flag = edmp_interference_show
+	#		}
+	#	}
+	#	
+	#}
+	
+}

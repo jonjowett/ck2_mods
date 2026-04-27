@@ -1,0 +1,82 @@
+# Audax Validator EnableCommentMetadata
+# The Validator can't read WTWSMS (because it's zipped), so individually ignore every line that mentions a WTWSMS-specific building
+
+tpauto_tracking_effect_record_trade_post_buildings_wtwsms = {
+	
+	if = {
+		limit = { tpauto_allow_tracking_and_rebuild_wtwsms = yes }
+		
+		
+		
+		
+		
+		# 4-stage buildings
+		
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_lighthouse
+			}
+			set_province_flag = tpauto_tracking_lighthouse_1
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_lighthouse_2
+			}
+			clr_province_flag = tpauto_tracking_lighthouse_1
+			set_province_flag = tpauto_tracking_lighthouse_2
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_lighthouse_3
+			}
+			clr_province_flag = tpauto_tracking_lighthouse_1
+			clr_province_flag = tpauto_tracking_lighthouse_2
+			set_province_flag = tpauto_tracking_lighthouse_3
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_lighthouse_4
+			}
+			clr_province_flag = tpauto_tracking_lighthouse_1
+			clr_province_flag = tpauto_tracking_lighthouse_2
+			clr_province_flag = tpauto_tracking_lighthouse_3
+			set_province_flag = tpauto_tracking_lighthouse_4
+		}
+		
+		
+		
+		
+		
+		# 3-stage buildings
+		
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_generic_road_1
+			}
+			set_province_flag = tpauto_tracking_generic_road_1
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_generic_road_2
+			}
+			clr_province_flag = tpauto_tracking_generic_road_1
+			set_province_flag = tpauto_tracking_generic_road_2
+		}
+		if = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				trade_post_has_building = tr_generic_road_3
+			}
+			clr_province_flag = tpauto_tracking_generic_road_1
+			clr_province_flag = tpauto_tracking_generic_road_2
+			set_province_flag = tpauto_tracking_generic_road_3
+		}
+		
+	}
+}

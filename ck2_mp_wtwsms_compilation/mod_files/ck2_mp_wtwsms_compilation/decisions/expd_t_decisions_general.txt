@@ -1,0 +1,88 @@
+targetted_decisions = {
+	
+	expd_t_transfer_vassal_to_tributary = {
+		
+		# Apologies in advance for the rant (JJ 28/3/26):
+		#
+		# Due to a very weird error where some part of this decision was consistently causing a crash
+		#     (for one particular save, without touching the keyboard or mouse, and even in observer mode),
+		#     all AI-related logic below has been strengthened as much as possible.
+		#
+		# The crash was narrowed down to this decision via binary search,
+		#     but it was not possible to isolate a single line or block below that was causing the crash.
+		#     (There seem to be multiple points of failure, the only way to guarantee no crash was to comment-out everything.)
+		#
+		# You would normally expect ai = no should be enough for the game engine
+		#     to ONLY parse this decision when a player right-clicks on someone,
+		#     but we're being paranoid here due to the sheer illogicality of the error.
+		#
+		# This is however a rather rare error (never encountered previously in thousands of hours of gameplay across multiple people)
+		#     so it was probably caused by a particular rare game state,
+		#     so it's probably OK to keep this decision around (with the added anti-AI protections for safety).
+		
+		filter = independent_rulers
+		ai_target_filter = none
+		third_party_filter = vassals
+		ai_third_party_filter = none
+		
+		ai = no
+		ai_check_interval = 1000
+		
+		from_potential = {
+			ai = no
+		}
+		potential = {
+			independent = yes
+			is_tributary = { suzerain = FROM }
+		}
+		third_party_potential = {
+			FROMFROM = {
+				liege = { character = ROOT_FROM }
+				lower_real_tier_than = ROOT
+			}
+		}
+		third_party_allow = {
+			FROMFROM = {
+				lower_tier_than = ROOT
+				war = no
+			}
+		}
+		third_party_score = {
+			factor = 1
+			
+			# Prioritise de jure vassals of ROOT above all others
+			modifier = {
+				factor = 10
+				FROMFROM = { de_jure_liege_or_above = ROOT }
+			}
+			
+			# Then prioritise higher-ranking characters
+			modifier = {
+				factor = 2
+				FROMFROM = { higher_real_tier_than = DUKE  }
+			}
+			modifier = {
+				factor = 2
+				FROMFROM = { higher_real_tier_than = COUNT }
+			}
+			modifier = {
+				factor = 2
+				FROMFROM = { higher_real_tier_than = BARON }
+			}
+		}
+		allow = {
+			FROM = {
+				war = no
+			}
+		}
+		effect = {
+			FROMFROM = { set_defacto_liege = ROOT }
+			opinion = {
+				modifier = opinion_vassal_transfer
+				who = FROM
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	
+}

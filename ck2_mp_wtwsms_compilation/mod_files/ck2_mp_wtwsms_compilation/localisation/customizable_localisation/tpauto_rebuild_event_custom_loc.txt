@@ -1,0 +1,92 @@
+# Show different text in the event option, depending on whether it was you or your regent that got the discount.
+
+defined_text = {
+	name = TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_Regent_NoRegent
+	use_first_valid = yes
+	text = {
+		trigger = { has_regent = no }
+		localisation_key = TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_NoRegent
+	}
+	text = {
+		trigger = { has_regent = yes }
+		localisation_key = TPAuto_2201_Option_RebuildWithNoDeletion_Pay_Stewardship_Regent
+	}
+}
+
+defined_text = {
+	name = TPAuto_2201_Option_RebuildWithNoDeletion_Trader_Regent_NoRegent
+	use_first_valid = yes
+	text = {
+		trigger = { has_regent = no }
+		localisation_key = TPAuto_2201_Option_RebuildWithNoDeletion_Trader_NoRegent
+	}
+	text = {
+		trigger = { has_regent = yes }
+		localisation_key = TPAuto_2201_Option_RebuildWithNoDeletion_Trader_Regent
+	}
+}
+
+defined_text = {
+	name = TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_Regent_NoRegent
+	use_first_valid = yes
+	text = {
+		trigger = { has_regent = no }
+		localisation_key = TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_NoRegent
+	}
+	text = {
+		trigger = { has_regent = yes }
+		localisation_key = TPAuto_2201_Option_RebuildWithNoDeletion_Lifestyle_Regent
+	}
+}
+
+defined_text = {
+	name = TPAuto_2201_Option_RebuildWithNoDeletion_Education_Regent_NoRegent
+	use_first_valid = yes
+	text = {
+		trigger = { has_regent = no }
+		localisation_key = TPAuto_2201_Option_RebuildWithNoDeletion_Education_NoRegent
+	}
+	text = {
+		trigger = { has_regent = yes }
+		localisation_key = TPAuto_2201_Option_RebuildWithNoDeletion_Education_Regent
+	}
+}
+
+defined_text = {
+	name = TPAuto_2201_OptionTTI_Trader_Regent_NoRegent
+	use_first_valid = yes
+	text = {
+		trigger = { has_regent = no }
+		localisation_key = TPAuto_2201_OptionTTI_Trader_NoRegent
+	}
+	text = {
+		trigger = { has_regent = yes }
+		localisation_key = TPAuto_2201_OptionTTI_Trader_Regent
+	}
+}
+
+defined_text = {
+	name = TPAuto_2201_OptionTTI_Lifestyle_Regent_NoRegent
+	use_first_valid = yes
+	text = {
+		trigger = { has_regent = no }
+		localisation_key = TPAuto_2201_OptionTTI_Lifestyle_NoRegent
+	}
+	text = {
+		trigger = { has_regent = yes }
+		localisation_key = TPAuto_2201_OptionTTI_Lifestyle_Regent
+	}
+}
+
+defined_text = {
+	name = TPAuto_2201_OptionTTI_Education_Regent_NoRegent
+	use_first_valid = yes
+	text = {
+		trigger = { has_regent = no }
+		localisation_key = TPAuto_2201_OptionTTI_Education_NoRegent
+	}
+	text = {
+		trigger = { has_regent = yes }
+		localisation_key = TPAuto_2201_OptionTTI_Education_Regent
+	}
+}

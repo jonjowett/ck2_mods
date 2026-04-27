@@ -1,0 +1,69 @@
+# Main decision
+expd_g_send_gold;§M(ED:G)§! Send Gift (Wealth);;;;;;;;;;;;;x
+expd_g_send_gold_desc;Send §Ya large amount of gold§! to §Y[Root.GetBestName]§!, with §Rno effect on their opinion§!.;;;;;;;;;;;;;x
+expd_g_send_artifact;§M(ED:G)§! Send Gift (Artifact);;;;;;;;;;;;;x
+expd_g_send_artifact_desc;Send §Yan artifact§! to §Y[Root.GetBestName]§!, with §Rno effect on their opinion§!.;;;;;;;;;;;;;x
+expd_g_warning_no_opinion_gain_tt;§g-§!\n§RWARNING! [Root.GetTitledFirstName] 's opinion of you will NOT change!§!;;;;;;;;;;;;;x
+# Ability to send to non-rulers
+expd_g_send_gold_to_non_ruler_enable;§P(ED:G)§! Enable Gifts to Non-Rulers;;;;;;;;;;;;;x
+expd_g_send_gold_to_non_ruler_enable_desc;Allow large gifts (of wealth or artifacts) to be sent to non-rulers;;;;;;;;;;;;;x
+expd_g_send_gold_to_non_ruler_disable;§P(ED:G)§! Disable Large Gifts to Non-Rulers;;;;;;;;;;;;;x
+expd_g_send_gold_to_non_ruler_disable_desc;Prevent large gifts (of wealth or artifacts) from being sent to non-rulers;;;;;;;;;;;;;x
+expd_g_send_gold_to_non_ruler_is_permitted_tt;Sending large gifts (of wealth or artifacts) to non-rulers is permitted. §g(This setting can be toggled via a self-targeted decision.)§!;;;;;;;;;;;;;x
+# Block potential exploits in multiplayer
+expd_g_root_is_not_a_human_currently_processing_another_gift_tt;[Root.GetTitledFirstName] is NOT a human player who is currently processing another gift.;;;;;;;;;;;;;x
+# Change size of large gift
+expd_g_send_gold_increase_size;§M(ED:G)§! Increase Large Gift Size;;;;;;;;;;;;;x
+expd_g_send_gold_increase_size_desc;Increase the size of gifts that are sent using the special "§M(ED:G)§! Send Gift (Wealth)" targeted decision;;;;;;;;;;;;;x
+expd_g_send_gold_decrease_size;§M(ED:G)§! Decrease Large Gift Size;;;;;;;;;;;;;x
+expd_g_send_gold_decrease_size_desc;Decrease the size of gifts that are sent using the special "§M(ED:G)§! Send Gift (Wealth)" targeted decision;;;;;;;;;;;;;x
+expd_g_send_gold_is_not_disabled_tt;Large gifts of wealth have NOT been disabled. §g(They can be re-enabled via a self-targeted decision.)§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_is_not_minimum_tt;Large gifts of wealth are NOT already at the minimum possible value (ie. disabled);;;;;;;;;;;;;x
+expd_g_send_gold_size_is_not_maximum_tt;Large gifts of wealth are NOT already at the maximum possible value (ie. 10,000);;;;;;;;;;;;;x
+expd_g_send_gold_size_currently_0_tt;Large gifts of wealth are currently:\n§Ydisabled§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_currently_1_tt;Large gifts of wealth are currently:\n§Y100 gold§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_currently_2_tt;Large gifts of wealth are currently:\n§Y300 gold§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_currently_3_tt;Large gifts of wealth are currently:\n§Y1,000 gold§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_currently_4_tt;Large gifts of wealth are currently:\n§Y3,000 gold§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_currently_5_tt;Large gifts of wealth are currently:\n§Y10,000 gold§!;;;;;;;;;;;;;x
+expd_g_send_gold_spacer_tt;§g-§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_will_be_0_tt;After taking this decision, large gifts of wealth will be:\n§Ydisabled§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_will_be_1_tt;After taking this decision, large gifts of wealth will be:\n§Y100 gold§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_will_be_2_tt;After taking this decision, large gifts of wealth will be:\n§Y300 gold§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_will_be_3_tt;After taking this decision, large gifts of wealth will be:\n§Y1,000 gold§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_will_be_4_tt;After taking this decision, large gifts of wealth will be:\n§Y3,000 gold§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_will_be_5_tt;After taking this decision, large gifts of wealth will be:\n§Y10,000 gold§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_logic_error_tt;§R!!!LOGIC ERROR!!! This line of code should not be accessible under normal circumstances! Please report this issue so it can be fixed.§!;;;;;;;;;;;;;x
+#
+# Hidden modifiers
+expd_g_send_gold_to_non_ruler_permitted;§M(ED:G)§! Can send large gifts to non-rulers;;;;;;;;;;;;;x
+expd_g_send_gold_size_0;§M(ED:G)§! Large gifts of wealth are §Ydisabled§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_1;§M(ED:G)§! Large gifts of wealth are §Y100¤§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_2;§M(ED:G)§! Large gifts of wealth are §Y300¤§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_3;§M(ED:G)§! Large gifts of wealth are §Y1,000¤§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_4;§M(ED:G)§! Large gifts of wealth are §Y3,000¤§!;;;;;;;;;;;;;x
+expd_g_send_gold_size_5;§M(ED:G)§! Large gifts of wealth are §Y1,0000¤§!;;;;;;;;;;;;;x
+#
+# Notification event on receipt of a large gift
+ExpdGifts_1000_Title;(ED:G) Large Gift Received!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Gold_Small;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us a pouch containing [expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue] gold pieces!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Gold_Medium;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us a large chest containing [expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue] gold pieces!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Gold_Large;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us a wagon containing a truly staggering amount of wealth - [expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue] gold pieces in total!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Artifact_Q1_Q2;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us a delightful box containing a small token of [expd_g_send_gold_sender.GetHerHis] appreciation: a "[expd_g_artifact_sent.GetName]"!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Artifact_Q3_Q4;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us an elegantly-wrapped package containing a magnificent gift: a "[expd_g_artifact_sent.GetName]"!;;;;;;;;;;;;;x
+ExpdGifts_1000_Desc_Artifact_Q5plus;The generous [expd_g_send_gold_sender.GetTitledFirstName] has sent us a beautifully-carved box inlaid with gold leaf. Inside, an extraordinary artifact is revealed: a "[expd_g_artifact_sent.GetName]"!;;;;;;;;;;;;;x
+ExpdGifts_1000_EvtOpt_OK_Small;How unexpected! I graciously accept.;;;;;;;;;;;;;x
+ExpdGifts_1000_EvtOpt_OK_Medium;I am impressed by [expd_g_send_gold_sender.GetHerHis] generosity.;;;;;;;;;;;;;x
+ExpdGifts_1000_EvtOpt_OK_Large;I am overwhelmed with gratitude.;;;;;;;;;;;;;x
+ExpdGifts_1000_EvtOpt_Refuse;I gracefully refuse;;;;;;;;;;;;;x
+expd_g_gifted_gold_has_already_been_added_to_treasury_tt;§YINFO:§! The §Y[expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue]¤§! has already been added to your treasury.;;;;;;;;;;;;;x
+expd_g_gifted_artifact_has_already_been_added_to_treasury_tt;§YINFO:§! The "§Y[expd_g_artifact_sent.GetName]§!" has already been added to your treasury.;;;;;;;;;;;;;x
+expd_g_root_returns_gold_to_from_tt;Lose §R[expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue]¤§!\n[expd_g_send_gold_sender.GetTitledFirstName] gains §G[expd_g_send_gold_recipient.expd_g_send_gold_amount_received.GetValue]¤§!;;;;;;;;;;;;;x
+#
+# Notification event on gift refused & returned
+ExpdGifts_1001_1002_Title;(ED:G) Large Gift Returned!;;;;;;;;;;;;;x
+ExpdGifts_1001_Desc;[expd_g_send_gold_recipient.GetTitledFirstName] has graciously refused my gift of [expd_g_send_gold_sender.expd_g_gold_refund_amount.GetValue] gold.;;;;;;;;;;;;;x
+ExpdGifts_1002_Desc;[expd_g_send_gold_recipient.GetTitledFirstName] has graciously refused my gift of a "[expd_g_artifact_returned.GetName]".;;;;;;;;;;;;;x
+expd_g_returned_gold_already_added_to_treasury_tt;§YINFO:§! The §Y[expd_g_send_gold_sender.expd_g_gold_refund_amount.GetValue]¤§! has already been added to your treasury.;;;;;;;;;;;;;x
+expd_g_returned_artifact_already_added_to_treasury_tt;§YINFO:§! The "§Y[expd_g_artifact_returned.GetName]§!" has already been added to your inventory.;;;;;;;;;;;;;x
+ExpdGifts_1001_1002_EvtOpt_OK;Disappointing, but understandable;;;;;;;;;;;;;x

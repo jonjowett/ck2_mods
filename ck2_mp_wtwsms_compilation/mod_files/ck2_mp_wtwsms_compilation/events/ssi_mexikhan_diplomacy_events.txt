@@ -1,0 +1,707 @@
+###DIPLOMACY EVENTS FOR MEXIKHA OFF-MAP POWER###
+
+#Written by:
+#Milla Isaksson
+#Joel Hansson
+#Mathilda Bjarnehed
+#Drikus Kuiper
+#Daniel Moore
+#Alexander Oltner
+
+#flag traveling_teacher > traveling_mexikhan_teacher
+#event_target:traveling_teacher > (unchanged)
+namespace = SSI
+
+###
+# Courtier from Mexikhan court compliments/berates you after a stay in your court.
+###
+
+character_event = {
+	id = SSI.30010
+	
+	hide_window = yes
+
+    has_dlc = "Sunset Invasion"
+	
+	is_triggered_only = yes
+	
+	only_playable = yes
+	
+	trigger = {
+		is_adult = yes
+        NOT = { offmap_mexikha = { governor = { character = ROOT } } } #makes sure it doesn't fire for the governor themselves
+		NOT = {
+			offmap_mexikha = {
+				has_policy = mexikha_isolationist
+			}
+		}
+		any_courtier = {
+			block_general_event_trigger = no
+			prisoner = no
+			has_character_flag = originated_from_mexikhan_court
+            NOT = { has_character_flag = is_escaped_mexikhan_noble }
+            NOT = { has_character_flag = is_mexikhan_refugee }
+			NOT = { has_character_flag = had_opinions_about_host_court }
+            NOT = { has_character_flag = ignore_refund }
+			has_character_flag = mexikhan_courtier_original_court_@ROOT
+		}
+	}
+	
+	weight_multiplier = {
+		factor = 1
+	}
+	
+	immediate = {
+		random_courtier = {
+			limit = {
+				block_general_event_trigger = no
+				prisoner = no
+				has_character_flag = originated_from_mexikhan_court
+                NOT = { has_character_flag = is_escaped_mexikhan_noble }
+                NOT = { has_character_flag = is_mexikhan_refugee }
+                NOT = { has_character_flag = ignore_refund }
+				NOT = { has_character_flag = had_opinions_about_host_court }
+			}
+			
+			set_character_flag = had_opinions_about_host_court
+			save_event_target_as = mexikhan_courtier
+			random_list = {
+				10 = { # Compliment
+					trigger = {
+						opinion = {
+							who = ROOT
+							value = -30
+						}
+					}
+					modifier = {
+						factor = 2
+						liege = {
+							calc_true_if = {
+								amount = 2
+								trait = honest
+								trait = gregarious
+								trait = trusting
+								trait = affectionate
+								trait = playful
+								trait = socializer
+								trait = charitable
+								trait = patient
+								trait = kind
+							}
+						}
+					}
+					modifier = {
+						factor = 5
+						OR = {
+							AND = {
+								is_benevolent_trigger = yes
+								liege = { is_benevolent_trigger = yes }
+							}
+							AND = {
+								is_evil_trigger = yes
+								liege = { is_evil_trigger = yes }
+							}
+							AND = {
+								is_pious_trigger = yes
+								liege = { is_pious_trigger = yes }
+							}
+							AND = {
+								is_impious_trigger = yes
+								liege = { is_impious_trigger = yes }
+							}
+							AND = {
+								has_pleasant_personality_trigger = yes
+								liege = { has_pleasant_personality_trigger = yes }
+							}
+							AND = {
+								has_unpleasant_personality_trigger = yes
+								liege = { has_unpleasant_personality_trigger = yes }
+							}
+							AND = {
+								is_attractive_trigger = yes
+								liege = { is_attractive_trigger = yes }
+							}
+							AND = {
+								is_unattractive_trigger = yes
+								liege = { is_unattractive_trigger = yes }
+							}
+							AND = {
+								is_smart_trigger = yes
+								liege = { is_smart_trigger = yes }
+							}
+							AND = {
+								is_dumb_trigger = yes
+								liege = { is_dumb_trigger = yes }
+							}
+							AND = {
+								is_strong_trigger = yes
+								liege = { is_strong_trigger = yes }
+							}
+							AND = {
+								is_weak_trigger = yes
+								liege = { is_weak_trigger = yes }
+							}
+							AND = {
+								has_symptom_trigger = yes
+								liege = { has_symptom_trigger = yes }
+							}
+							AND = {
+								has_disease_trigger = yes
+								liege = { has_disease_trigger = yes }
+							}
+							AND = {
+								has_injury_trigger = yes
+								liege = { has_injury_trigger = yes }
+							}
+							AND = {
+								has_medium_disability_trigger = yes
+								liege = { has_medium_disability_trigger = yes }
+							}
+							AND = {
+								OR = {
+									trait = stressed
+									trait = depressed
+								}
+								liege = {
+									OR = {
+										trait = stressed
+										trait = depressed
+									}
+								}
+							}
+							AND = {
+								has_top_tier_education_trait_trigger = yes
+								liege = { has_top_tier_education_trait_trigger = yes }
+							}
+							AND = {
+								trait = gardener
+								liege = { trait = gardener }
+							}
+							AND = {
+								trait = hunter
+								liege = { trait = hunter }
+							}
+							AND = {
+								trait = poet
+								liege = { trait = poet }
+							}
+							AND = {
+								trait = falconer
+								liege = { trait = falconer }
+							}
+							AND = {
+								trait = mystic
+								liege = { trait = mystic }
+							}
+							AND = {
+								is_learned_trigger = yes
+								liege = { is_learned_trigger = yes }
+							}
+						}
+					}
+					
+					liege = {
+						character_event = { id = SSI.30011 }
+					}
+				}
+				5 = { # Berate
+				
+				
+					liege = {
+						character_event = { id = SSI.30012 }
+					}
+				}
+				1 = { # Don't comment on stay
+				}
+			}
+		}
+		
+	}
+}
+
+character_event = {
+	id = SSI.30011
+	has_dlc = "Sunset Invasion"
+	
+	desc = EVTDESC_SSI_30011
+	picture = GFX_evt_aztec_explorers
+	border = GFX_event_normal_frame_diplomacy
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = EVTOPTA_SSI_30011
+		sound_effect = china_grace_gain
+		
+		add_offmap_currency = {
+			offmap = offmap_mexikha
+			value = 150
+		}
+	}
+	
+	option = {
+		name = EVTOPTB_SSI_30011
+		prestige = 50
+		random = {
+			chance = 35
+			add_trait_proud_effect = yes
+		}
+		add_offmap_currency = {
+			offmap = offmap_mexikha
+			value = 100
+		}
+	}
+}
+
+character_event = {
+	id = SSI.30012
+	has_dlc = "Sunset Invasion"
+	
+	desc = EVTDESC_SSI_30012
+	picture = GFX_evt_bad_news
+	border = GFX_event_normal_frame_diplomacy
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			offmap_mexikha = {
+				governor = {
+					save_event_target_as = target_governor
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = EVTOPTA_SSI_30012
+		add_offmap_currency = {
+			offmap = offmap_mexikha
+			value = -100
+		}
+	}
+	
+	option = {
+		name = EVTOPTB_SSI_30012
+		event_target:mexikhan_courtier = {
+			hidden_tooltip = {
+				imprison = ROOT
+				add_character_modifier = { 
+					name = house_arrest
+					duration = -1
+				}
+				remove_character_modifier = the_dungeon
+			}
+			tooltip = {
+				add_character_modifier = { 
+					name = house_arrest
+					duration = -1
+				}
+			}
+		}
+		random_list = {
+			60 = {
+                add_trait = arbitrary
+                hidden_tooltip = { character_event = { id = 38266 } }
+			}
+			40 = {
+                add_trait = cruel
+                hidden_tooltip = { character_event = { id = 38259 } }
+			}
+		}
+	}
+}
+
+### Mexikhan Noble escapes to your court ###
+character_event = {
+	id = SSI.70000
+	hide_window = yes
+	is_triggered_only = yes
+
+    only_capable = yes
+    has_dlc = "Sunset Invasion"
+    prisoner = no
+    min_age = 16
+	only_playable = yes
+	
+	trigger = { 
+        NOT = { offmap_mexikha = { governor = { character = ROOT } } } #makes sure it doesn't fire for the governor themselves
+		NOT = { has_character_flag = escaped_mexikhan_noble }
+        is_inaccessible_trigger = no
+        mexikha_diplo_interaction_trigger = yes
+        offmap_mexikha = {
+            NOR = {
+                has_status = mexikha_civil_war
+                has_status = mexikha_plague
+            }
+        }
+    }
+
+	immediate = {
+        if = { #Quick fix to reduce the amount of time the AI gets the events
+            limit = {
+                ai = yes
+            }
+            random = {
+                chance = 95
+                break = yes
+            }
+        }    
+
+    	offmap_mexikha = {
+			offmap_ruler = {
+				save_event_target_as = mexikhan_emperor
+			}
+    	}
+	
+    	set_character_flag = escaped_mexikhan_noble
+	
+		create_character = {
+			random_traits = yes
+			dynasty = actually_culture
+			religion = aztec
+			culture = nahuatl
+            historical = yes
+		}
+	
+		new_character = {
+			set_character_flag = originated_from_mexikhan_court
+            set_character_flag = no_court_invites
+			set_character_flag = ignore_refund
+            set_character_flag = is_escaped_mexikhan_noble
+			save_event_target_as = escaped_mexikhan_noble
+			character_event = { id = SSI.70001 days = 1 }
+		}
+	}
+}
+
+character_event = {
+	id = SSI.70001
+	has_dlc = "Sunset Invasion"
+	hide_window = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		FROM = {
+			character_event = { id = SSI.70002 days = 1 }
+		}
+	}
+}
+
+character_event = {		#Escaped Mexikhan Noble appears
+	id = SSI.70002
+	has_dlc = "Sunset Invasion"
+	desc = EVTDESC_SSI_70002
+    picture = GFX_evt_aztec_explorers
+    border = GFX_event_normal_frame_diplomacy
+
+	is_triggered_only = yes
+
+	option = {
+		name = EVTOPTA_SSI_70002
+		
+		custom_tooltip = { text = EVTOPTA_SSI_70002_TT }
+		
+		event_target:escaped_mexikhan_noble = {
+			opinion = {
+				modifier = opinion_very_grateful
+				who = ROOT
+				years = 5
+			}
+		}
+		
+		hidden_effect = {
+			random_list = {
+				50 = {
+					offmap_mexikha = { 
+						governor = { character_event = { id = SSI.70007 days = 30 } } 
+					}
+				}
+				50 = {
+					character_event = { id = SSI.70004 days = 100 }
+				}
+			}
+		}
+	}
+		
+	option = {
+		name = EVTOPTC_SSI_70002
+		
+		custom_tooltip = { text = EVTOPTC_SSI_70002_TT }
+		
+		event_target:escaped_mexikhan_noble = {
+			opinion = {
+				modifier = opinion_very_grateful
+				who = ROOT
+				years = 5
+			}
+		}
+			
+		hidden_effect = {
+			random_list = {
+    			50 = { character_event = { id = SSI.70005 days = 60 } }
+    			50 = { character_event = { id = SSI.70008 days = 60 } }
+			}
+		}	
+	}
+	
+	option = {
+		name = EVTOPTB_SSI_70002
+		
+		event_target:escaped_mexikhan_noble = {
+			hidden_effect = {
+				leave_court_and_die_effect = yes
+			}
+		}
+		
+		custom_tooltip = { text = EVTOPTB_SSI_70002_TT }
+		
+		#event_target:escaped_mexikhan_noble = {
+		#	opinion = {
+		#		modifier = opinion_disappointed
+		#		who = ROOT
+		#		years = 5
+		#	}
+		#}
+	}
+}
+	
+character_event = {
+	id = SSI.70007
+	has_dlc = "Sunset Invasion"
+	hide_window = yes
+	is_triggered_only = yes
+	
+	
+	immediate = {
+		FROM = {
+			letter_event = { id = SSI.70003 days = 1 }
+		}
+	}
+}
+
+letter_event = {			#Mexikha finds out
+	id = SSI.70003
+	has_dlc = "Sunset Invasion"
+	desc = EVTDESC_SSI_70003
+    border = GFX_event_letter_frame_diplomacy
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		event_target:escaped_mexikhan_noble = {
+			is_alive = yes
+            is_landed = no
+		}
+	}
+	
+	option = {
+		name = EVTOPTA_SSI_70003
+		
+		custom_tooltip = { text = EVTOPTA_SSI_70003_TT }
+		
+		character_event = { id = SSI.70005 days = 60 }
+	}
+	
+	option = {
+		name = EVTOPTB_SSI_70003
+		
+		custom_tooltip = { text = EVTOPTB_SSI_70003_TT }
+		
+		detract_mexikhan_grace_major_effect = yes
+		
+		hidden_effect = {
+			random_list = {
+    			50 = { character_event = { id = SSI.70009 days = 60 } }
+    			50 = { character_event = { id = SSI.70004 days = 100 } }
+			}
+		}
+	}
+}
+
+character_event = {			#Mexikha does not find out
+	id = SSI.70004
+	has_dlc = "Sunset Invasion"
+	desc = EVTDESC_SSI_70004
+    picture = GFX_evt_aztec_explorers
+    border = GFX_event_normal_frame_diplomacy
+	
+	hide_from = yes
+
+	is_triggered_only = yes
+	
+	trigger = {
+		event_target:escaped_mexikhan_noble = {
+			is_alive = yes
+			prisoner = no # This will effectively break the chain if the courtier is imprisoned... leaving no trace of the end of the chain.
+			is_incapable = no
+            is_landed = no
+		}
+	}
+	
+	option = {
+		name = EVTOPTA_SSI_70004
+		
+		if = {
+			limit = {
+				NOT = {
+					has_artifact = jaguar_cloak
+				}
+			}
+			add_artifact = jaguar_cloak
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					has_artifact = aztec_sling
+				}
+			}
+			add_artifact = aztec_sling
+		}
+		else = {
+			add_artifact = turquoise_mask
+		}
+		
+		event_target:escaped_mexikhan_noble = {
+            show_portrait = yes
+        }
+		
+		custom_tooltip = {
+			text = EVTOPTA_SSI_70004_TT
+			hidden_effect = {
+				event_target:escaped_mexikhan_noble = {
+					leave_court_and_die_effect = yes
+				}
+			}
+		}
+	}	
+}
+
+
+character_event = {			#You let Mexikha know
+	id = SSI.70005
+	has_dlc = "Sunset Invasion"
+	desc = EVTDESC_SSI_70005
+    picture = GFX_evt_aztec_explorers
+    border = GFX_event_normal_frame_diplomacy
+
+	is_triggered_only = yes
+	
+	trigger = {
+		event_target:escaped_mexikhan_noble = {
+			is_alive = yes
+            is_landed = no
+		}
+	}
+	
+	option = {
+		name = EVTOPTA_SSI_70005
+		
+		sound_effect = china_grace_gain
+		add_mexikhan_grace_medium_effect = yes
+	
+		event_target:escaped_mexikhan_noble = {
+			death = {
+				death_reason = death_executed_by_mexikhan_emperor
+			}
+		}
+	}
+}
+
+character_event = {			#You let Mexikha know but the noble escapes
+	id =  SSI.70008
+	has_dlc = "Sunset Invasion"
+	desc = EVTDESC_SSI_70008
+    picture = GFX_evt_aztec_explorers
+    border = GFX_event_normal_frame_diplomacy
+ 
+	is_triggered_only = yes
+	
+	trigger = {
+		event_target:escaped_mexikhan_noble = {
+			is_alive = yes
+            is_landed = no
+		}
+	}
+	
+	immediate = {
+		detract_mexikhan_grace_minor_effect = yes
+	
+		event_target:escaped_mexikhan_noble = {
+			leave_court_and_die_effect = yes
+		}
+	}
+	
+	option = {
+		name = EVTOPTA_SSI_70008
+		tooltip = {
+			detract_mexikhan_grace_minor_effect = yes
+		}
+	}
+}
+
+character_event = {			#Mexikha Assassinates the noble
+	id = SSI.70009
+	has_dlc = "Sunset Invasion"
+	desc = EVTDESC_SSI_70009
+    picture = GFX_evt_shadow
+    border = GFX_event_normal_frame_diplomacy
+	
+	hide_from = yes
+
+	is_triggered_only = yes
+	
+	trigger = {
+		event_target:escaped_mexikhan_noble = {
+			is_alive = yes
+            is_landed = no
+		}
+	}
+	
+	immediate = {
+		event_target:escaped_mexikhan_noble = {
+			death = {
+				death_reason = death_murder_unknown_strangle
+				killer = event_target:mexikhan_emperor
+			}
+		}
+	}
+	
+	option = {
+		name = EVTOPTA_SSI_70009
+		tooltip = {
+			event_target:escaped_mexikhan_noble = {
+				death = {
+					death_reason = death_murder_unknown_strangle
+					killer = event_target:mexikhan_emperor
+				}
+			}
+		}
+	}
+}
+
+#Inform of Mexikha's response to you breaking free via decision, first ping to get Governor's portrait
+character_event = {
+    id = SSI.60010
+	has_dlc = "Sunset Invasion"
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = { FROM = { letter_event = { id = SSI.60011 } } }
+}
+letter_event = {
+    id = SSI.60011
+	has_dlc = "Sunset Invasion"
+    desc = EVT_DESC_SSI_60011
+
+    is_triggered_only = yes
+
+    option = {
+        name = EVT_OPTA_SSI_60011
+    }
+}
+
+######
+# Mexikhan Mini-Flavor Events
+######
+
+# WIP

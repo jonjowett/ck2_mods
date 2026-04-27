@@ -1,0 +1,728 @@
+offmap_mexikha = {
+	name = mexikha_mexikha
+	window_name = domestic_offmaps_mexikha_window
+	button_name = icon_offmaps_mexikha_entry
+	currency_name = TXT_GRACE_MEXIKHA
+	currency_gain = monthly_mexikhan_grace
+	currency_reset_on_dynasty_change = yes
+	holder_title = title_mexikha_emperor			# minor title used to identify a character as holder of this offmap power
+	governor_title = e_mexikha
+	tier = emperor
+	non_aggression_modifier = peace_deal_with_mexikha
+	coa_religion = aztec
+	government = theocracy_government
+	beginning_of_history = 718.1.1
+	sound = land
+	display_trigger = {
+		has_dlc = "Sunset Invasion"
+		has_global_flag = aztec_explorers
+		offmap_mexikha = {
+			NOT = { has_offmap_flag = aztecs_defeated }
+		}
+	}
+	policies = {
+		mexikha_open
+		mexikha_isolationist
+		mexikha_expansionist
+	}
+	statuses = {
+		mexikha_stable
+		mexikha_unrest
+		mexikha_civil_war
+		mexikha_norse_invasion
+		mexikha_inca_invasion
+		mexikha_famine
+		mexikha_plague
+		mexikha_golden_age
+	}
+	buttons = {
+		offmap_gifts = {
+			is_active_trigger = {
+				mexikha_offmap_tribute_decisions_enabled_trigger = yes
+			}
+		}
+		offmap_boons = {
+			is_active_trigger = {
+				mexikha_offmap_boon_decisions_enabled_trigger = yes
+			}
+		}
+		offmap_hostility = {
+			display_trigger = {
+				always = no
+			}
+		}
+		offmap_hostility2 = {
+			is_active_trigger = {
+				mexikha_offmap_hostile_decisions_enabled_trigger = yes
+			}
+			display_trigger = {
+				NOT = { offmap_mexikha = { offmap_ruler = { dynasty = FROM } } }
+			}
+		}
+	}
+	
+	#These conditions only effect the appearance of the button, it does not actually disable them from being clickable. The same triggers are used in all tribute/boon decisions respectively
+	
+	icon_triggers = {
+		mexikha_physician_cd = {
+			frame = 9
+			trigger = {
+				hidden_tooltip = {
+					has_character_flag = mexikhan_grace_physician_sent
+				}
+			}
+		}
+		mexikha_raid_cd = {
+			frame = 8
+			right = yes	
+			trigger = {
+				hidden_tooltip = {
+					has_character_modifier = mexikha_raid_grace_cd
+				}
+			}
+		}
+		mexikha_famine_cd = {
+			frame = 7
+			trigger = {
+				hidden_tooltip = {
+					has_character_modifier = mexikha_send_relief
+				}
+			}
+		}
+		mexikha_tributary_cd = {
+			frame = 6
+			trigger = {
+				hidden_tooltip = {
+					has_character_modifier = mexikhan_grace_tributary_timer
+				}
+			}
+		}
+		mexikha_boon_cd = {
+			frame = 5
+			right = yes	
+			trigger = {
+				hidden_tooltip = {
+					has_character_modifier = ssi_mexikha_boon_cd
+				}
+			}
+		}
+		mexikha_commander_cd = {
+			frame = 4
+			trigger = {
+				hidden_tooltip = {
+					has_character_modifier = mexikhan_grace_send_commander_timer
+				}
+			}
+		}
+		mexikha_eunuch_cd = {
+			frame = 3
+			trigger = {
+				hidden_tooltip = {
+					has_character_modifier = mexikhan_grace_send_eunuch_timer
+				}
+			}
+		}
+		mexikha_concubine_cd = {
+			frame = 2
+			trigger = {
+				hidden_tooltip = {
+					has_character_modifier = mexikhan_grace_send_concubine_timer
+				}
+			}
+		}
+		mexikha_gift_cd = {
+			frame = 1
+			trigger = {
+				hidden_tooltip = {
+					has_character_modifier = mexikhan_grace_send_gift_timer
+				}
+			}
+		}
+	}
+	
+	monthly_currency_gain = {
+		offmap_same_dynasty = {
+			value = 10
+			offmap_mexikha = { offmap_ruler = { dynasty = FROM } }
+		}
+		offmap_war_with_me = {
+			value = -10
+			war_with = FROM
+		}
+		offmap_likes_me = {
+			value = 1
+			FROM = { is_liked_by_Mexikha_trigger = yes }
+			is_within_diplo_range = FROM
+		}
+		tributaries_of_MP = {
+			value = 2
+			FROM = {
+				is_tributary = {
+					suzerain = ROOT
+					type = offmap
+				}
+			}
+		}
+		offmap_likes_tributaries = {
+			value = 2
+			offmap_mexikha = {			
+				offmap_has_like = likes_tributaries
+			}
+			FROM = {
+				is_tributary = {
+					suzerain = ROOT
+					type = offmap
+				}
+			}
+		}
+		vassal_of_MP = {
+			value = 2
+			FROM = {
+				liege = {
+					has_landed_title = e_mexikha
+				}
+			}
+		}
+		offmap_same_culture_and_religion = { # MOD should use [offmap_mexikha.Ruler.GetTlatoaniCihuatlatoani] instead
+			value = 2
+			offmap_ruler = {
+				culture = FROM
+				religion = FROM
+			}
+			is_within_diplo_range = FROM
+		}
+	}
+	
+	temple_names = { # Perhaps I could use translated name here, like "Eight Deer Jaguar Claw" for Iya Nacuaa Teyusi Ñaña
+		{ # Founder names
+		}
+		{ # Successor names
+		}
+	}
+	holder_succession = {
+		is_female = {					# chances of getting a female holder, as a percentage: if the total is >= 100, the new holder will always be female. If the total is <= 0, the new holder will always be male
+			value = 10
+			additive_modifier = {
+				value = 40
+				has_game_rule = {
+					name = gender
+					value = all
+				}
+			}
+		}
+		culture = {
+	
+			nahuatl = { # default culture for new emperor
+				value = 99 # if any other value reaches 100, it will be picked instead
+			}
+			FROM = { # default culture for new emperor
+								# the left side here (and for culture, religion, graphical_culture and dynasty) can be a right hand side value (FROM, ROOT, a culture name, etc). and the right hand side / inside the brackets is a standard MTTH evaluation. Only the one with the highest weight will be used. If there's a tie, one of the tied values is picked at random
+				value = 0
+				additive_modifier = { #the new emperor will keep current culture if things are great
+					value = 100
+					#mexikha_is_fine_trigger = yes
+					FROM = { culture_scope = { always = yes } } # Essentially a check that the previous emperor actually exists
+				}
+			}
+			dragon_culture = {
+				value = 0
+				additive_modifier = {
+					has_alternate_start_parameter = { key = special_culture value = animal_world }
+					value = 100
+				}
+			}
+		}
+
+		graphical_culture = { # This FROM scope is not working, now graphical_culture is handled by SSI.82
+			FROM = {
+				value = 100
+			}
+		}
+
+		religion = {
+			aztec = { # default religion for new emperor
+				value = 99 # if any other value reaches 100, it will be picked instead (unless equal, then it will randomize)
+			}
+			FROM = {
+				value = 0
+				additive_modifier = { # the new emperor will keep current religion if things are great
+					value = 100
+					#mexikha_is_fine_trigger = yes
+					FROM = { religion_scope = { always = yes } } # Essentially a check that the previous emperor actually exists
+				}
+			}
+		}
+
+		dynasty = {
+			FROM = { #default dynasty for new emperor
+				value = 99 #might drop from modifiers -- highest value will be picked instead (unless equal, then it will randomize)
+			}
+			actually_culture = {
+				value = 0
+				additive_modifier = {
+					value = 100
+					NOT = { FROM = { character = yes } }
+				}
+				additive_modifier = { #Fix for simulating Mexikha history on old save boot-up
+					value = 100
+					random < 12
+					has_game_started = no
+				}
+			}
+		}
+		
+		likes = {
+			likes_concubines = {
+				value = 300
+				modifier = {
+					factor = 0.1
+					FROMFROM = { is_female = yes }
+				}
+			}
+			likes_eunuchs = {
+				value = 100 # 100
+			}
+			likes_wealth = {
+				value = 300
+			}
+			likes_tributaries = {
+				value = 300 # 100
+			}
+			likes_germanics = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_germanics = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+			}
+			likes_latino_iberians = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_latino_iberians = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+			}
+			likes_celts = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_celts = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+			}
+			likes_arabs = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_arabs = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+			}
+			likes_africans = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_africans = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+			}
+			likes_horse = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_horse = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+			}
+			likes_muslims = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							religion_group = muslim
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0.5
+					FROMFROM = { religion_group = muslim }
+				}
+			}
+			likes_christians = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							religion_group = christian
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0.5
+					FROMFROM = { religion_group = christian }
+				}
+			}
+			likes_jews = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							religion_group = jewish_group
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0.5
+					FROMFROM = { likes_jews = yes }
+				}
+			}
+			likes_mazdans = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							religion_group = zoroastrian_group
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0.5
+					FROMFROM = { religion_group = zoroastrian_group }
+				}
+			}
+			likes_zunists = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_zunists = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0.5
+					FROMFROM = { likes_zunists = yes }
+				}
+			}
+			likes_norses = {
+				value = 10
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_norses = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0.5
+					FROMFROM = { likes_norses = yes }
+				}
+			}
+			likes_voodoos = {
+				value = 10
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_voodoos = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0.5
+					FROMFROM = { likes_voodoos = yes }
+				}
+			}
+		}
+		
+		dislikes = {
+			likes_concubines = {
+				value = 100
+				modifier = {
+					factor = 5.0
+					FROMFROM = { is_female = yes }
+				}
+			}
+			likes_eunuchs = {
+				value = 100
+			}
+			likes_tributaries = {
+				value = 0 # 100
+			}
+			likes_wealth = {
+				value = 100
+			}
+			likes_germanics = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_germanics = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = {
+						likes_germanics = yes
+					}
+				}
+			}
+			likes_latino_iberians = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_latino_iberians = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = {
+						likes_latino_iberians = yes
+					}
+				}
+			}
+			likes_celts = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_celts = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = {
+						likes_celts = yes
+					}
+				}
+			}
+			likes_arabs = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_arabs = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = {
+						likes_arabs = yes
+					}
+				}
+			}
+			likes_africans = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_africans = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = {
+						likes_africans = yes
+					}
+				}
+			}
+			likes_horse = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_horse = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+			}
+			likes_muslims = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							religion_group = muslim
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = { religion_group = muslim }
+				}
+			}
+			likes_christians = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							religion_group = christian
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = { religion_group = christian }
+				}
+			}
+			likes_jews = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							religion_group = jewish_group
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = { religion_group = jewish_group }
+				}
+			}
+			likes_mazdans = {
+				value = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							religion_group = zoroastrian_group
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = { religion_group = zoroastrian_group }
+				}
+			}
+			likes_zunists = {
+				value = 5
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_zunists = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = { likes_zunists = yes }
+				}
+			}
+			likes_norses = {
+				value = 10
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_norses = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = { likes_norses = yes }
+				}
+			}
+			likes_voodoos = {
+				value = 10
+				modifier = {
+					factor = 0
+					NOT = {
+						any_province = {
+							likes_voodoos = yes
+							is_within_diplo_range = offmap_mexikha
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					FROMFROM = { likes_voodoos = yes }
+				}
+			}
+		}
+	}
+	
+    diplomatic_range = { #Already includes the mexikha governor's "normal" diplo range
+        OR = {
+			top_liege = {
+				suzerain = {
+					has_landed_title = e_mexikha
+				}
+			}
+			any_neighbor_independent_ruler = {
+				OR = {
+					has_landed_title = e_mexikha
+					suzerain = {
+						has_landed_title = e_mexikha
+					}
+				}
+			}
+		}
+    }
+}

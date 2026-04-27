@@ -1,0 +1,33 @@
+# For visibility:
+#  --- FROM = The character with the trait
+#  --- ROOT = The character looking at FROM
+
+csh_merc = {
+	customizer = no
+	random = no
+	is_visible = {
+		ROOT = { csh_this_character_doesnt_want_traits_to_be_hidden_for_themselves_only = yes }
+		FROM = {
+			is_alive = yes
+			any_demesne_title = {
+				mercenary = yes
+				band_creator = { character = ROOT }
+			}
+		}
+	}
+}
+
+csh_merc_trad = {
+	customizer = no
+	random = no
+	is_visible = {
+		ROOT = { csh_this_character_doesnt_want_traits_to_be_hidden_for_themselves_only = yes }
+		FROM = {
+			is_alive = yes
+			any_demesne_title = {
+				mercenary = yes
+				band_creator = { character = ROOT }
+			}
+		}
+	}
+}

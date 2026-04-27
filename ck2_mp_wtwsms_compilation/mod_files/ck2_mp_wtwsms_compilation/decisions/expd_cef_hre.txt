@@ -1,0 +1,165 @@
+decisions = {
+	
+	expd_cef_hre_form_the_hre_late = {
+		only_independent = yes
+		is_high_prio = yes
+		ai = no
+		potential = {
+			expd_cef_hre_root_can_see_decision_to_form_hre_late = yes
+			expd_cef_another_mod_wants_to_suppress_this_decision = no
+		}
+		allow = {
+			expd_cef_hre_root_can_take_decision_to_form_hre_late = yes
+		}
+		effect = {
+			
+			if = {
+				limit = { ai = no }
+				scaled_wealth = -2
+			}
+			
+			# Mod added: Give nickname and bloodline
+			expd_cef_hre_update_character_of_emperor = yes
+			
+			primary_title = {
+				show_scope_change = no
+				e_hre = {
+					show_scope_change = no
+					grant_title = ROOT
+					copy_title_laws = PREV
+					add_law = succ_hre_elective
+				}
+			}
+			
+			custom_tooltip = {
+				text = expd_cef_hre_german_electors_tt
+				princely_elective_german_elector_setup_effect = yes
+			}
+			
+			# All owned kingdoms and empires are migrated into the HRE
+			expd_cef_hre_migrate_kingdoms = yes
+			
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	expd_cef_hre_form_the_hre_early = {
+		only_independent = yes
+		is_high_prio = yes
+		ai_check_interval = 24
+		
+		potential = {
+			expd_cef_hre_root_can_see_decision_to_form_hre_early = yes
+			expd_cef_another_mod_wants_to_suppress_this_decision = no
+		}
+		allow = {
+			expd_cef_hre_root_can_take_decision_to_form_hre_early = yes
+		}
+		effect = {
+			
+			hidden_tooltip = {
+				set_global_flag = charlemagne_hre
+				activate_title = { title = e_hre status = yes }
+			}
+			
+			if = {
+				limit = { ai = no }
+				scaled_wealth = -2
+			}
+			
+			# Mod added: Give nickname and bloodline
+			expd_cef_hre_update_character_of_emperor = yes
+			
+			# Only early formations get the Reichskrone
+			expd_cef_hre_give_crown = yes
+			
+			# Create Electors, depending on capital location
+			custom_tooltip = {
+				text = expd_cef_hre_capital_electors_tt
+				princely_elective_apply_elector_setup_effect = yes
+			}
+			
+			capital_scope = {
+				show_scope_change = no
+				county = {
+					custom_tooltip = {
+						text = expd_cef_hre_this_county_becomes_traditional_capital_of_the_hre_tt
+						save_event_target_as = expd_cef_hre_roots_current_capital
+					}
+				}
+			}
+			
+			primary_title = {
+				show_scope_change = no
+				e_hre = {
+					show_scope_change = no
+					grant_title = ROOT
+					hidden_tooltip = {
+						copy_title_laws = PREV
+						set_coa = PREV
+						set_preferred_capital = event_target:expd_cef_hre_roots_current_capital
+					}
+					add_law = succ_hre_elective
+				}
+			}
+			
+			# All owned kingdoms and empires are migrated into the HRE
+			expd_cef_hre_migrate_kingdoms = yes
+			
+			# Give lands to the Pope
+			custom_tooltip = { text = expd_cef_hre_info_central_italy_is_granted_to_roots_religious_head_tt }
+			c_roma    = { expd_cef_hre_root_tries_to_grant_this_county_to_his_religious_head = yes }
+			c_ravenna = { expd_cef_hre_root_tries_to_grant_this_county_to_his_religious_head = yes }
+			c_ferrara = { expd_cef_hre_root_tries_to_grant_this_county_to_his_religious_head = yes }
+			c_urbino  = { expd_cef_hre_root_tries_to_grant_this_county_to_his_religious_head = yes }
+			c_spoleto = { expd_cef_hre_root_tries_to_grant_this_county_to_his_religious_head = yes }
+			c_perugia = { expd_cef_hre_root_tries_to_grant_this_county_to_his_religious_head = yes }
+			
+			# Byz is unhappy with root and his religious head
+			# Modified to use religious head instead of always being the (Catholic) Pope, in case HRE is formed by Fraticelli
+			if = {
+				limit = { e_byzantium = { has_holder = yes } }
+				custom_tooltip = {
+					text = expd_cef_hre_byz_is_unhappy_about_this_development_tt
+					e_byzantium = {
+						show_scope_change = no
+						holder_scope = {
+							show_scope_change = no
+							opinion = {
+								who = ROOT
+								modifier = opinion_unhappy
+								months = 1200
+							}
+							hidden_tooltip = {
+								ROOT = {
+									religion_head = {
+										reverse_opinion = {
+											who = PREVPREV
+											modifier = opinion_unhappy
+											months = 1200
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			if = {
+				limit = { ai = no }
+				set_character_flag = achievement_holy_and_roman
+			}
+			chronicle = {
+				entry = CHRONICLE_FOUNDED_HRE
+				picture = GFX_evt_coronation
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+}

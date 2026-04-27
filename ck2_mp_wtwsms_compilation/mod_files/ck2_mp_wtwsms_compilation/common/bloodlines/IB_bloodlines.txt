@@ -1,0 +1,1124 @@
+IB_papal_bloodline = {
+	monthly_character_piety = 0.5
+	monthly_character_prestige = 0.5
+	same_religion_opinion = 5
+	bloodline_effect_saint_ib = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_Popely_bloodline }
+	picture = GFX_bloodlines_symbol_blessed_child
+	active = {
+		custom_tooltip = {
+			text = IB_same_dynasty_religion
+			FROM = {
+				founder = {
+					religion = ROOT
+					dynasty = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_papal_bloodline2 = {
+	monthly_character_piety = 0.5
+	monthly_character_prestige = 0.5
+	same_religion_opinion = 2
+	bloodline_effect_saint_ib = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_Popely_bloodline2 }
+	picture = GFX_bloodlines_symbol_blessed_child
+	active = {
+		custom_tooltip = {
+			text = IB_same_dynasty_religion
+			FROM = {
+				founder = {
+					religion = ROOT
+					dynasty = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_papal_bloodline3 = {
+	monthly_character_piety = 0.5
+	monthly_character_prestige = 0.5
+	same_religion_opinion = 2
+	bloodline_effect_saint_ib = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_Popely_bloodline3 }
+	picture = GFX_bloodlines_symbol_blessed_child
+	active = {
+		custom_tooltip = {
+			text = IB_same_dynasty_religion
+			FROM = {
+				founder = {
+					religion = ROOT
+					dynasty = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_papal_bloodline4 = {
+	monthly_character_piety = 0.5
+	monthly_character_prestige = 0.5
+	same_religion_opinion = 2
+	bloodline_effect_saint_ib = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_Popely_bloodline4 }
+	picture = GFX_bloodlines_symbol_blessed_child
+	active = {
+		custom_tooltip = {
+			text = IB_same_dynasty_religion
+			FROM = {
+				founder = {
+					religion = ROOT
+					dynasty = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_papal_bloodline5 = {
+	monthly_character_piety = 0.5
+	monthly_character_prestige = 0.5
+	same_religion_opinion = 2
+	bloodline_effect_saint_ib = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_Popely_bloodline5 }
+	picture = GFX_bloodlines_symbol_blessed_child
+	active = {
+		custom_tooltip = {
+			text = IB_same_dynasty_religion
+			FROM = {
+				founder = {
+					religion = ROOT
+					dynasty = ROOT
+				}
+			}
+		}
+	}
+}
+
+
+IB_wonderly_bloodline = {
+	monthly_character_piety = -0.2
+	monthly_character_prestige = 1
+	vassal_opinion = 15
+	church_opinion = -5
+	greedy_opinion = -5
+	build_cost_modifier = -0.1
+	build_time_modifier = -0.2
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_wonderly_bloodline }
+	picture = GFX_bloodlines_symbol_builder
+}
+
+
+IB_wonderly_bloodline_h = {
+	monthly_character_piety = 0.2
+	monthly_character_prestige = 0.5
+	church_opinion = 10
+	vassal_opinion = 8
+	temple_vassal_tax_modifier = 0.05
+	build_cost_modifier = -0.1
+	build_cost_temple_modifier = -0.05
+	build_time_modifier = -0.2
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_wonderly_bloodline }
+	picture = GFX_bloodlines_symbol_monumental
+	active = {
+		custom_tooltip = {
+			text = saintly_bloodline_same_religion_TT
+			FROM = {
+				founder = {
+					religion = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_reformist_bloodline = {
+
+	monthly_character_piety = 1
+	monthly_character_prestige = 1
+	same_religion_opinion = 15
+	church_opinion = 10
+	bloodline_effect_reformist_ib = 1
+		
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_reformist_bloodline }
+	picture = GFX_bloodlines_symbol_peace
+	active = {
+		custom_tooltip = {
+			text = saintly_bloodline_same_religion_TT
+			FROM = {
+				founder = {
+					religion = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_virginmary_bloodline = {
+
+	monthly_character_piety = 0.75
+	monthly_character_prestige = 0.75
+	
+	same_religion_opinion = 10
+	church_opinion = -15
+	
+	zealous_opinion = 10
+	cynical_opinion = -20
+	
+	bloodline_effect_reformist_ib = 1	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_virginmary_bloodline }
+	picture = GFX_bloodlines_symbol_virgin
+	active = {
+		custom_tooltip = {
+			text = saintly_bloodline_same_religion_TT
+			FROM = {
+				founder = {
+					religion = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_family_bloodline = {
+
+	monthly_character_piety = -0.2
+	monthly_character_prestige = -0.2
+	
+	dynasty_opinion = 15
+	
+	sex_appeal_opinion = -5
+	fertility = 0.05
+	
+	bloodline_effect_family = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_family_bloodline }
+	picture = GFX_bloodlines_symbol_family
+	active = {
+		custom_tooltip = {
+			text = IB_same_dynasty_bloodline
+			FROM = {
+				founder = {
+					dynasty = ROOT
+				}
+			}
+		}
+	}
+}
+
+##rhukali
+IB_china_bloodline = {
+	monthly_character_prestige = 1
+	
+	taoist_opinion = 10
+	han_opinion = -20
+	dynasty_opinion = 5
+	
+	tech_growth_modifier = 0.05
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_china_bloodline }
+	picture = GFX_bloodlines_symbol_taoist
+	active = {
+		custom_tooltip = {
+			text = IB_same_dynasty_bloodline
+			FROM = {
+				founder = {
+					dynasty = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_tyrantly_bloodline = {
+
+	monthly_character_prestige = 1
+	monthly_character_piety = -0.3
+	
+	vassal_opinion = -5
+	general_opinion = -5
+	
+	cruel_opinion = 15
+	kind_opinion = -20
+	
+	global_revolt_risk = -0.01
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_tyrantly_bloodline }
+	picture = GFX_bloodlines_symbol_murder_war
+}
+
+IB_hunter_bloodline = {
+	monthly_character_prestige = 0.5
+	hunter_opinion = 20
+	general_opinion = 5
+	
+	bloodline_effect_hunter = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_hunter_bloodline }
+	picture = GFX_bloodlines_symbol_tengri_eagle
+}
+
+IB_hunterm_bloodline = {
+	monthly_character_prestige = 0.5
+	hunter_opinion = 10
+	kind_opinion = 5
+	general_opinion = 5
+	
+	bloodline_effect_hunter = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_hunter_bloodline }
+	picture = GFX_bloodlines_symbol_tengri_eagle
+}
+
+
+IB_prolific_bloodline = {
+	monthly_character_prestige = 0.5
+	monthly_character_piety = 0.5
+	fertility = 0.05
+	sex_appeal_opinion = 5
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_prolific_bloodline }
+	picture = GFX_bloodlines_symbol_munificent
+}
+
+IB_prolificu_bloodline = {
+	monthly_character_prestige = 0.5
+	monthly_character_piety = -0.5
+	fertility = 0.05
+	sex_appeal_opinion = 10
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_prolific_bloodline }
+	picture = GFX_bloodlines_symbol_munificent
+}
+
+IB_casanova_bloodline = {
+	monthly_character_prestige = 0.5
+	monthly_character_piety = -0.5
+	fertility = 0.05
+	sex_appeal_opinion = 10
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_prolific_bloodline }
+	picture = GFX_bloodlines_symbol_ruthless
+}
+
+IB_godslayer_bloodline = {
+	monthly_character_prestige = 0.1
+	trusting_opinion = 7
+	bloodline_effect_godslayer = 1
+	combat_rating = 10
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_godslayer_bloodline }
+	picture = GFX_bloodlines_symbol_longship
+}
+
+IB_arthur_bloodline = {
+	monthly_character_prestige = 1
+	welsh_opinion = 7
+	combat_rating = 10
+	bloodline_effect_arthur = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_arthur_bloodline }
+	picture = GFX_bloodlines_symbol_lion
+	
+	active = {
+		custom_tooltip = {
+			text = same_rel_same_culture
+			FROM = {
+				founder = {
+					religion = ROOT
+				}
+				founder = {
+					culture = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_triology_uncut_bloodline = {
+	monthly_character_prestige = 1
+	monthly_character_piety = 1
+	zealous_opinion = 10
+	same_religion_opinion = 10
+	muslim_opinion = -20
+	christian_opinion = -20
+	combat_rating = 10
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_triology_bloodline }
+	picture = GFX_bloodlines_symbol_generic_pagan
+	active = {
+		custom_tooltip = {
+			text = saintly_bloodline_same_religion_TT
+			FROM = {
+				founder = {
+					religion = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_triology_bloodline = {
+	monthly_character_prestige = 0.8
+	monthly_character_piety = 0.5
+	zealous_opinion = 8
+	same_religion_opinion = 10
+	muslim_opinion = -20
+	christian_opinion = -20
+	combat_rating = 8
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_triology_bloodline }
+	picture = GFX_bloodlines_symbol_generic_pagan
+	active = {
+		custom_tooltip = {
+			text = saintly_bloodline_same_religion_TT
+			FROM = {
+				founder = {
+					religion = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_sevenly_bloodline = {
+	genius_opinion = 5
+	strong_opinion = 5
+	fair_opinion = 5
+	bloodline_effect_sevenly_ib = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_sevenly_bloodline }
+	picture = GFX_bloodlines_symbol_blessed_child
+}
+
+IB_hannibal_bloodline = {
+	monthly_character_prestige = 0.5
+	monthly_character_piety = -1
+	cannibal_trait_opinion = 25
+	general_opinion = -10
+	vassal_opinion = -10
+	bloodline_effect_hannibal_ib = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_hannibal_bloodline }
+	picture = GFX_bloodlines_symbol_bloodthirsty
+}
+
+
+IB_charismatic_bloodline = {
+	general_opinion = 5
+	global_revolt_risk = -0.02
+	global_tax_modifier = 0.02
+	monthly_character_prestige = 0.3
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_charismatic_bloodline }
+	picture = GFX_bloodlines_symbol_fleur_de_lis
+}
+
+IB_shield_bloodline = {
+	general_opinion = 10
+	combat_rating = 8
+	vassal_opinion = 5
+	land_morale = 0.1
+	monthly_character_prestige = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_shield_bloodline }
+	picture = GFX_bloodlines_symbol_zun_sun
+}
+
+
+IB_mansa_bloodline = {
+	global_tax_modifier = 0.05
+	monthly_character_prestige = 1
+	vassal_opinion = -5
+	bloodline_effect_peace_prosperity = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_mansa_bloodline }
+	picture = GFX_bloodlines_symbol_munificent
+}
+
+IB_reformist_godking_bloodline = {
+	monthly_character_piety = 1
+	monthly_character_prestige = 1
+	same_religion_opinion = 20
+	church_opinion = 20
+	global_revolt_risk = -0.02
+	bloodline_effect_reformist_ib = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_reformist_bloodline }
+	picture = GFX_bloodlines_symbol_ruthless
+	active = {
+		custom_tooltip = {
+			text = IB_same_dynasty_religion
+			FROM = {
+				founder = {
+					religion = ROOT
+					dynasty = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_crusade_repelled_bloodline = {
+	monthly_character_piety = 1
+	monthly_character_prestige = 1
+	same_religion_opinion = 10
+	church_opinion = 10
+	global_revolt_risk = -0.01
+	combat_rating = 10
+	bloodline_effect_reformist_ib = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_crusade_repelled_bloodline }
+	picture = GFX_bloodlines_symbol_cross_wicked
+	active = {
+		custom_tooltip = {
+			text = saintly_bloodline_same_religion_TT
+			FROM = {
+				founder = {
+					religion = ROOT
+				}
+			}
+		}
+	}
+}
+
+IB_dueldeath_bloodline = {
+	monthly_character_prestige = 1
+	combat_rating = 10
+	health = 0.5
+	bloodline_effect_great_heroes_appear = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_chess_bloodline bloodline_heroes }
+	picture = GFX_bloodlines_symbol_war_child
+}
+
+IB_drunkchess_bloodline = {
+	monthly_character_prestige = 1
+	drunkard_opinion = 10
+	health = 0.5
+	
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_chess_bloodline }
+	picture = GFX_bloodlines_symbol_munificent
+}
+
+IB_sacrificechess_bloodline = {
+	monthly_character_prestige = -0.5
+	monthly_character_piety = -0.5
+	general_opinion = -5
+	health = 1
+	bloodline_effect_battle_survivor = 1  #More resistant to battle injury
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_chess_bloodline battle_survivor_bloodline }
+	picture = GFX_bloodlines_symbol_murder_child
+}
+
+IB_grandmaster_bloodline = {
+	monthly_character_prestige = 1
+	general_opinion = 10
+	health = 0.5
+	diplomacy = 2
+	stewardship = 2
+	martial = 2
+	intrigue = 2
+	learning = 2
+	IB_chessmaster_bloodline_effect = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_chess_bloodline IB_chess_magnus }
+	picture = GFX_bloodlines_symbol_technology
+}
+
+IB_femmefatale_bloodline = {
+	monthly_character_prestige = 1
+	general_opinion = 5
+	sex_appeal = 10
+	health = 0.5
+	plot_power_modifier = 0.15
+	bloodline_effect_murder_stalk = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_chess_bloodline bloodline_murder_stalk   }
+	picture = GFX_bloodlines_symbol_murder_rose
+}
+
+IB_bond_bloodline = {
+	monthly_character_prestige = 1
+	monthly_character_piety = 0.07
+	general_opinion = 5
+	sex_appeal = 5
+	plot_power_modifier = 0.10
+	arrest_chance_modifier = 0.10
+	health = 0.5
+	bloodline_effect_murder_stalk = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_chess_bloodline bloodline_murder_stalk   }
+	picture = GFX_bloodlines_symbol_murder
+}
+
+IB_intmaster_bloodline = {
+	monthly_character_prestige = 1
+	general_opinion = 10
+	health = 0.5
+	diplomacy = 1
+	stewardship = 1
+	martial = 1
+	intrigue = 1
+	learning = 1
+	IB_chessmaster_bloodline_effect = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_chess_bloodline IB_chess_internat }
+	picture = GFX_bloodlines_symbol_technology
+}
+
+IB_intimidatedeath_bloodline = {
+	monthly_character_prestige = 1
+	general_opinion = 5
+	cruel_opinion = 5
+	health = 0.5
+	bloodline_effect_loyal_councilors = 1  # Your council tends to lean towards loyalist
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_chess_bloodline bloodline_loyalist }
+	picture = GFX_bloodlines_symbol_war
+}
+
+IB_genchess_bloodline = {
+	monthly_character_prestige = 0.5
+	health = 0.5
+	general_opinion = 5
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_chess_bloodline }
+	picture = GFX_bloodlines_symbol_fleur_de_lis_gold
+
+}
+
+IB_artofwar_bloodline = {
+	monthly_character_prestige = 1
+	martial = 2
+	levy_reinforce_rate = 0.1
+	land_morale = 0.1
+	retinue_maintenence_cost = -0.1
+
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_artofwar_bloodline }
+	picture = GFX_bloodlines_symbol_generic_hero
+}
+
+# norse culture
+IB_valkyrie_bloodline = { 
+	monthly_character_prestige = 1
+	monthly_character_piety = 0.5
+	martial = 2
+	norse_opinion = 5
+	combat_rating = 10
+	land_morale = 0.1
+	same_religion_opinion = 5
+	bloodline_effect_enatic_cognatic = 1
+
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+	active = {
+		FROM = {
+				founder = {
+					religion = ROOT
+				}
+				founder = {
+					culture = ROOT
+				}
+		}	
+	}
+}
+
+#hellenistic 
+IB_cynane_bloodline = { 
+	monthly_character_prestige = 1
+	martial = 2
+	hellenic_pagan_opinion = 5
+	hellenic_pagan_reformed_opinion = 5
+	combat_rating = 10
+	land_morale = 0.1
+	levy_reinforce_rate = 0.1
+	
+	bloodline_effect_enatic_cognatic = 1
+
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+	active = {
+		custom_tooltip = {
+			text = saintly_bloodline_same_religion_TT
+			FROM = {
+				founder = {
+					religion = ROOT
+				}
+			}
+		}
+	}
+}
+
+#greek culture
+IB_amazon_bloodline = { 
+	monthly_character_prestige = 1
+	monthly_character_piety = 0.5
+	martial = 2
+	hellenic_pagan_opinion = 5
+	hellenic_pagan_reformed_opinion = 5
+	combat_rating = 10
+	land_morale = 0.1
+	greek_opinion = 5
+	
+	bloodline_effect_enatic_cognatic = 1
+
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+	active = {
+		culture = greek
+	}
+}
+
+#muslim
+IB_khawlah_bloodline = { 
+	monthly_character_prestige = 1
+	monthly_character_piety = 0.5
+	martial = 2
+	muslim_opinion = 5
+	combat_rating = 10
+	land_morale = 0.1
+	levy_reinforce_rate = 0.1
+	
+	bloodline_effect_enatic_cognatic = 1
+
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+	active = {
+		religion_group = muslim
+	}
+}
+
+#africa
+IB_doramilaje_bloodline = { 
+	monthly_character_prestige = 1
+
+	martial = 2
+	same_religion_opinion = 5
+	vassal_opinion = 5
+	combat_rating = 10
+	land_morale = 0.1
+	
+	bloodline_effect_enatic_cognatic = 1
+
+	inheritance = matrilineal
+	
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	
+	picture = GFX_bloodlines_symbol_generic_hero
+	active = {
+		custom_tooltip = {
+			text = saintly_bloodline_same_religion_TT
+			FROM = {
+				founder = {
+					religion = ROOT
+				}
+			}
+		}
+	}
+}
+
+#persia
+IB_artemisia_bloodline = { 
+	monthly_character_prestige = 1
+	martial = 2
+	
+	persian_opinion = 10
+	greek_opinion = -5
+	combat_rating = 10
+	land_morale = 0.1
+	levy_reinforce_rate = 0.1
+	bloodline_effect_enatic_cognatic = 1
+	
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+	
+}
+
+#celtic
+IB_boudicca_bloodline = { 
+	monthly_character_prestige = 1
+	monthly_character_piety = 0.5
+	martial = 2
+	celtic_opinion = 5
+	vassal_opinion = 5
+	combat_rating = 10
+	land_morale = 0.1
+	bloodline_effect_enatic_cognatic = 1
+
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+	active = {
+		culture_group = celtic
+	}
+}
+
+# syriac
+IB_zenobia_bloodline = { 
+	monthly_character_prestige = 1
+
+	martial = 2
+	jewish_group_opinion = 5
+	arabic_opinion = 5
+	combat_rating = 10
+	land_morale = 0.1
+	bloodline_effect_enatic_cognatic = 1
+	levy_reinforce_rate = 0.1
+	
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+	active = {
+		OR = {
+			culture_group = arabic
+			culture_group = israelite
+		}
+	}
+}
+
+# catholicJeanne d'Arc
+IB_jeannedarc_bloodline = { 
+	monthly_character_prestige = 1
+	monthly_character_piety = 0.5
+	martial = 2
+	catholic_opinion = 5
+	combat_rating = 10
+	land_morale = 0.1
+	
+	bloodline_effect_enatic_cognatic = 1
+
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+}
+
+#chinese/han
+IB_fuhao_bloodline = { 
+	monthly_character_prestige = 1
+	monthly_character_piety = 0.5
+	martial = 2
+	han_opinion = 5
+	combat_rating = 10
+	land_morale = 0.1
+	bloodline_effect_enatic_cognatic = 1
+
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+}
+
+# western steppes -pers opinion
+IB_tomyris_bloodline = { 
+	monthly_character_prestige = 1
+
+	martial = 2
+	iranian_opinion = 5
+	saka_opinion = 5
+	persian_opinion = -5
+
+	combat_rating = 10
+	land_morale = 0.1
+	bloodline_effect_enatic_cognatic = 1
+
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+}
+
+#  steppes
+IB_khutulun_bloodline = { 
+	monthly_character_prestige = 1
+
+	martial = 2
+	tengri_opinion = 5
+	mongol_opinion = 5
+	combat_rating = 10
+	land_morale = 0.1
+	bloodline_effect_enatic_cognatic = 1
+
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+}
+
+# teuta bloodline already exists
+#IB_teuta_bloodline  = { 
+#	monthly_character_prestige = 1
+#	monthly_character_piety = 0.5
+#	martial = 2
+#	norse_opinion = 10
+#	combat_rating = 10
+#	land_morale = 0.1
+#	bloodline_effect_enatic_cognatic = 1
+#
+#	inheritance = matrilineal
+#	allow_bastards = yes
+#	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+#	picture = GFX_bloodlines_symbol_generic_hero
+#}
+
+
+IB_genfemwar_bloodline  = { 
+	monthly_character_prestige = 1
+
+	martial = 2
+	same_culture_opinion = 5
+	combat_rating = 10
+	land_morale = 0.1
+	bloodline_effect_enatic_cognatic = 1
+
+	inheritance = matrilineal
+	allow_bastards = yes
+	flags = { IB_femwar_bloodline bloodline_enatic_cognatic }
+	picture = GFX_bloodlines_symbol_generic_hero
+	active = {
+		FROM = {
+			founder = {
+				culture = ROOT
+			}
+		}
+	}
+}
+
+IB_hannibalbarca_bloodline = { 
+	monthly_character_prestige = 1
+	
+	global_movement_speed = 0.1
+	days_of_supply = 15
+	combat_rating = 5
+	land_morale = 0.1
+	roman_opinion = -5
+	maghreb_arabic_opinion = 10
+
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_hannibalbarca_bloodline  }
+	picture = GFX_bloodlines_symbol_ashoka_lion
+	active = {
+		FROM = {
+			founder = {
+				culture = ROOT
+			}
+		}
+	}
+}
+
+IB_author_bloodline = {
+	monthly_character_prestige = 0.5
+	tech_growth_modifier_culture = 0.1
+	learning = 1
+	poet_opinion = 10
+
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_author_bloodline  }
+	picture = GFX_bloodlines_symbol_ares_helmet
+}
+
+IB_merchant_bloodline = {
+	monthly_character_prestige = 0.5
+	city_vassal_tax_modifier = 0.05
+	town_opinion = 10
+	retinuesize_perc = 0.15
+
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_merchant_bloodline  }
+	picture = GFX_bloodlines_symbol_architect
+}
+
+IB_saxony_bloodline = {
+	monthly_character_prestige = 1
+	combat_rating = 8
+	norse_opinion = 5
+	bloodline_effect_great_heroes_appear = 1
+	inheritance = patrilineal
+	allow_bastards = yes
+	
+
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_saxony_bloodline bloodline_heroes }
+	picture = GFX_bloodlines_symbol_norse_wolf
+}
+
+IB_black_widow_bloodline = {
+	monthly_character_prestige = -1
+	plot_power_modifier = 0.15
+	
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	bloodline_effect_murder_stalk = 1
+
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_black_widow_bloodline bloodline_murder_stalk }
+	picture = GFX_bloodlines_symbol_ashoka_lion
+}
+
+IB_longevity_bloodline = {
+	monthly_character_prestige = 0.5
+	monthly_character_piety = 0.08
+	health = 0.5
+	learning = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_longevity_bloodline }
+	picture = GFX_bloodlines_symbol_munificent
+}
+
+IB_kaiserirum_bloodline = {
+	monthly_character_prestige = 1
+	monthly_character_piety = 1
+	martial = 1
+	siege_speed = 0.15
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_kaiserirum_bloodline }
+	picture = GFX_bloodlines_symbol_roman
+}
+
+IB_cronus_child_bloodline = {
+	monthly_character_prestige = -1
+	monthly_character_piety = 1.23
+	hellenic_pagan_opinion = 5
+	hellenic_pagan_reformed_opinion = 5
+	bloodline_effect_castration = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_cronus_child_bloodline bloodline_castration }
+	picture = GFX_bloodlines_symbol_stoics
+}
+
+IB_melekh_mashiach_bloodline = {
+
+	monthly_character_prestige = 0.5
+    monthly_character_piety = 1
+	jewish_group_opinion = 15
+	saintly_jewish_bloodline = 1
+	
+	inheritance = patrilineal
+	allow_bastards = yes
+	flags = { IB_melekh_mashiach_bloodline jewish_saintly_bloodline }
+	picture = GFX_bloodlines_symbol_jewish
+	
+	active = {
+		custom_tooltip = {
+			text = IB_same_dynasty_religion
+			FROM = {
+				founder = {
+					religion = ROOT
+					dynasty = ROOT
+				}
+			}
+		}
+	}
+}
