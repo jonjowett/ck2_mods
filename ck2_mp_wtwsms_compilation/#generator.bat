@@ -109,6 +109,9 @@ xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_multiplayer\
 :: Exclude ED:Pillaging due to abusability in MP
 
 :: Not checked because fully compatible
+xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_plots%git_mod_subfolder%expanded_decisions_plots\ %this_mod_folder_location%
+
+:: Not checked because fully compatible
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_prisoners%git_mod_subfolder%expanded_decisions_prisoners\ %this_mod_folder_location%
 
 :: Not checked because fully compatible
