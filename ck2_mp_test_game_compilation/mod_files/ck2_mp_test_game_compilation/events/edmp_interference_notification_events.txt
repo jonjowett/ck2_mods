@@ -489,6 +489,14 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_offmap_currency_remove_1k
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_society_currency_grant_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_society_currency_grant_1k
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_society_currency_remove_1k }
+		text                        = edmp_ifn_5001_desc_singlechar_society_currency_remove_1k
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_techpoints_grant_1k_mil }
 		text                        = edmp_ifn_5001_desc_singlechar_techpoints_grant_1k_mil
 	}
@@ -669,6 +677,8 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_piety_remove_1k
 			clr_global_flag    = edmp_interference_singlechar_offmap_currency_grant_1k
 			clr_global_flag    = edmp_interference_singlechar_offmap_currency_remove_1k
+			clr_global_flag    = edmp_interference_singlechar_society_currency_grant_1k
+			clr_global_flag    = edmp_interference_singlechar_society_currency_remove_1k
 			clr_global_flag    = edmp_interference_singlechar_techpoints_grant_1k_mil
 			clr_global_flag    = edmp_interference_singlechar_techpoints_grant_1k_eco
 			clr_global_flag    = edmp_interference_singlechar_techpoints_grant_1k_cul
