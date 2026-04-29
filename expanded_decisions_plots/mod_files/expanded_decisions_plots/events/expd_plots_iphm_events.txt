@@ -5,11 +5,12 @@ namespace = expd_plots_iphm
 #      give them the option to prolong/remove/do-nothing.
 character_event = {
 	
-	id      = expd_plots_iphm.1000
-	title   = expd_plots_iphm_1000_title
-	desc    = expd_plots_iphm_1000_desc
-	border  = GFX_event_normal_frame_intrigue
-	picture = GFX_evt_hooded_figure_hf
+	id       = expd_plots_iphm.1000
+	title    = expd_plots_iphm_1000_title
+	desc     = expd_plots_iphm_1000_desc
+	border   = GFX_event_normal_frame_intrigue
+	picture  = GFX_evt_hooded_figure_hf
+	portrait = none
 	
 	is_triggered_only = yes
 	
@@ -34,6 +35,24 @@ character_event = {
 		name = expd_plots_iphm_1000_evtopt_remove
 		expd_plots_incompetent_plotters_hate_me_remove_modifier_from_this_character = yes
 		ai_chance = { factor = 1 } # AI shouldn't normally see this event but, if they do, they should choose to remove the modifier asap
+	}
+	
+}
+
+# Triggered when taking the decision - simply a warning to wait 1 day so the opinion modifier can take effect
+character_event = {
+	
+	id       = expd_plots_iphm.2000
+	title    = expd_plots_iphm_2000_title
+	desc     = expd_plots_iphm_2000_desc
+	border   = GFX_event_normal_frame_intrigue
+	picture  = GFX_evt_hooded_figure_hf
+	portrait = none
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = expd_plots_iphm_2000_evtopt_OK
 	}
 	
 }

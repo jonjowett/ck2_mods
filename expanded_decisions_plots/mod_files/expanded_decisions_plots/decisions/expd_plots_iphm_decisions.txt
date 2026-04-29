@@ -13,12 +13,12 @@ decisions = {
 		}
 		effect = {
 			expd_plots_incompetent_plotters_hate_me_add_modifier_to_this_character = yes
+			hidden_tooltip = { character_event = { id = expd_plots_iphm.2000 } }
 		}
 		ai_will_do = { factor = 0 }            # Just in case (AI should not take this decision)
 	}
 	
 	expd_plots_incompetent_plotters_hate_me_disable = {
-		is_high_prio = yes
 		ai_check_interval = 12                 # AI can take this decision, but only as an ultimate fallback. 
 		potential = {
 			has_character_modifier = expd_plots_incompetent_plotters_hate_me
