@@ -33,6 +33,7 @@ xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_custom_empir
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_gifts%git_mod_subfolder%expanded_decisions_gifts\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_great_projects%git_mod_subfolder%expanded_decisions_great_projects\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_multiplayer\mod_files_compatible\expanded_decisions_multiplayer_compatible\ %this_mod_folder_location%
+xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_plots%git_mod_subfolder%expanded_decisions_plots\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_prisoners%git_mod_subfolder%expanded_decisions_prisoners\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_propagate_bloodlines%git_mod_subfolder%expanded_decisions_propagate_bloodlines\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_tributaries%git_mod_subfolder%expanded_decisions_tributaries\ %this_mod_folder_location%
