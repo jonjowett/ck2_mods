@@ -1,0 +1,38 @@
+namespace = expd_plots_iphm
+
+# Triggered after a delay, by characters who gain the expd_plots_incompetent_plotters_hate_me modifier
+# If they still have the modifier at this later date (ie. haven't removed it manually),
+#      give them the option to prolong/remove/do-nothing.
+character_event = {
+	
+	id      = expd_plots_iphm.1000
+	title   = expd_plots_iphm_1000_title
+	desc    = expd_plots_iphm_1000_desc
+	picture = GFX_evt_hooded_figure_hf
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		# Only show this event if the character hasn't already manually removed the modifier.
+		# If they have already removed it, this event fizzles.
+		has_character_modifier = expd_plots_incompetent_plotters_hate_me
+	}
+	
+	option = {
+		name = expd_plots_iphm_1000_evtopt_do_nothing
+		ai_chance = { factor = 0 }
+	}
+	
+	option = {
+		name = expd_plots_iphm_1000_evtopt_prolong
+		expd_plots_incompetent_plotters_hate_me_add_modifier_to_this_character = yes
+		ai_chance = { factor = 0 }
+	}
+	
+	option = {
+		name = expd_plots_iphm_1000_evtopt_remove
+		expd_plots_incompetent_plotters_hate_me_remove_modifier_from_this_character = yes
+		ai_chance = { factor = 1 } # AI shouldn't normally see this event but, if they do, they should choose to remove the modifier asap
+	}
+	
+}
