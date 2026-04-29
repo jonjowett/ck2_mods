@@ -1,0 +1,35 @@
+# ============= Show Me Bad Plot Supporters (SMBPS) =============
+#
+#template;§;;;;;;;;;;;;;x
+#
+# Intrigue Menu Decision
+expd_plots_show_me_bad_plot_supporters;(ED:Plots) Show list of undesirable plot backers;;;;;;;;;;;;;x
+expd_plots_show_me_bad_plot_supporters_desc;This decision allows you to view a list of all of the backers of your current plot who may be undesirable in some way, so that you can ask them to stop backing it.;;;;;;;;;;;;;x
+expd_plots_smbps_event_window_is_not_open_tt;The §Y(ED:Plots) Undesirable Plot Backers§! event window is NOT open;;;;;;;;;;;;;x
+expd_plots_smbps_event_window_has_been_open_for_3_months_tt;The §Y(ED:Plots) Undesirable Plot Backers§! event window has been open for at least 3 months;;;;;;;;;;;;;x
+expd_plots_open_the_bad_plot_supporters_event_window_tt;Open the §Y(ED:Plots) Undesirable Plot Backers§! event window;;;;;;;;;;;;;x
+#
+# Scripted_Triggers
+expd_plots_smbps_root_has_at_least_one_plot_backer_contributing_negative_plot_power_tt;Has at least one plot backer §Ycontributing negative plot power§!;;;;;;;;;;;;;x
+expd_plots_smbps_root_has_at_least_one_plot_backer_with_a_bad_plotter_trait_tt;Has at least one plot backer with §Yan undesirable plotter trait§!;;;;;;;;;;;;;x
+expd_plots_smbps_root_has_at_least_one_plot_backer_with_low_intrigue_tt;Has at least one plot backer with §Yless than 5 intrigue§!;;;;;;;;;;;;;x
+expd_plots_smbps_this_character_contributes_negative_plot_power_to_roots_plot_tt;Contributes §Ynegative plot power§! to [Root.GetTitledFirstName]'s plot;;;;;;;;;;;;;x
+expd_plots_smbps_this_character_has_a_bad_plotter_trait_tt;Has §Yan undesirable plotter trait§!;;;;;;;;;;;;;x
+expd_plots_smbps_this_character_has_low_intrigue_tt;Has §Yless than 5 intrigue§!;;;;;;;;;;;;;x
+expd_plots_smbps_this_character_has_vlow_intrigue_tt;Has §Yless than 3 intrigue§!;;;;;;;;;;;;;x
+#
+# Event
+expd_plots_smbps_1000_title;(ED:Plots) Undesirable Plot Backers;;;;;;;;;;;;;x
+expd_plots_smbps_1000_desc;This window shows all of your plot backers who may be undesirable in some way so that, if you wish, you can send them a "Stop Backing Plot" request.\nNB1: Ensure auto-invite is turned OFF before sending the request.\nNB2: If there are more than 9 characters in a category, the option's name will include "(too many!)", and it will have 9 random portraits.;;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_negative_plot_power_1to9;Negative Plot Power;;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_negative_plot_power_gt9;Negative Plot Power (too many!);;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_negative_plot_power_none;Negative Plot Power (none!);;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_bad_plotter_trait_1to9;Undesirable Plotter Trait;;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_bad_plotter_trait_gt9;Undesirable Plotter Trait (too many!);;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_bad_plotter_trait_none;Undesirable Plotter Trait (none!);;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_low_intrigue_1to9;Low Intrigue (3-4);;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_low_intrigue_gt9;Low Intrigue (3-4) (too many!);;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_low_intrigue_none;Low Intrigue (3-4) (none!);;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_vlow_intrigue_1to9;Very Low Intrigue (0-2);;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_vlow_intrigue_gt9;Very Low Intrigue (0-2) (too many!);;;;;;;;;;;;;x
+expd_plots_smbps_1000_evtopt_vlow_intrigue_none;Very Low Intrigue (0-2) (none!);;;;;;;;;;;;;x
