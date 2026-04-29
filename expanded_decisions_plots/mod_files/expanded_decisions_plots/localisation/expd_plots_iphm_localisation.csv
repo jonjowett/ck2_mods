@@ -1,0 +1,30 @@
+# ============= Incompetent Plotters Hate Me (IPHM) =============
+#
+# Intrigue Menu Decision
+expd_plots_incompetent_plotters_hate_me_enable;(ED:Plots) No Incompetent Plotters - DISABLED - Enable?;;;;;;;;;;;;;x
+expd_plots_incompetent_plotters_hate_me_enable_desc;This decision allows you to add a temporary character modifier which makes you hated by everyone who is likely to be an incompetent plotter (gluttonous, drunkard, etc) - which means you can more safely use the "auto-invite" feature.\n\nThe modifier is only active for a few days, and you are free to remove it at any time (via another mod-added decision).;;;;;;;;;;;;;x
+expd_plots_incompetent_plotters_hate_me_disable;(ED:Plots) No Incompetent Plotters - ENABLED - Disable?;;;;;;;;;;;;;x
+expd_plots_incompetent_plotters_hate_me_disable_desc;The §M(ED:Plots)§Y Hated by Incompetent Plotters§! character modifier is currently active on your character. This might cause major opinion swings, so you will probably want to disable it as soon as possible.;;;;;;;;;;;;;x
+#
+# Custom Tooltips
+expd_plots_incompetent_plotters_hate_me_enable_warn_in_30_days_tt;You will be warned about the imminent expiry of this modifier in §Y30 days' time§! (15 days before it expires).;;;;;;;;;;;;;x
+#
+# Character Modifier
+expd_plots_incompetent_plotters_hate_me;§M(ED:Plots)§! Hated by Incompetent Plotters;;;;;;;;;;;;;x
+expd_plots_incompetent_plotters_hate_me_desc;[Root.GetBestName] is currently §Rhated§! by all incompetent plotters, worldwide. They will almost certainly refuse to join [Root.GetHerHis] schemes.\n\n§LUsage notes:\n- This modifier can be toggled temporarily, so that you can use the "auto-invite plotters" feature safely: potential plotters who are likely to reveal your plot (because of their traits) will have much lower opinion of you, so they won't auto-join.\n- Then, a few days later, after everyone has auto-joined, you can untick "auto-invite" and turn off this modifier - and probably no lasting harm has been done.\n- NB: This will NOT prevent characters with negative plot power from joining - you might want to check the list beforehand, note any such characters, and manually remove them afterwards.§!;;;;;;;;;;;;;x
+#
+# New Opinion Modifiers (used in the character modifier)
+gluttonous_opinion;Gluttonous Opinion;;;;;;;;;;;;;x
+hedonist_opinion;Hedonist Opinion;;;;;;;;;;;;;x
+lunatic_opinion;Lunatic Opinion;;;;;;;;;;;;;x
+decadent_opinion;Decadent Opinion;;;;;;;;;;;;;x
+imbecile_opinion;Imbecile Opinion;;;;;;;;;;;;;x
+slow_opinion;Slow Opinion;;;;;;;;;;;;;x
+dull_opinion;Dull Opinion;;;;;;;;;;;;;x
+#
+# Expiry Warning Event
+expd_plots_iphm_1000_title;(ED:Plots) Imminent Modifier Expiry;;;;;;;;;;;;;x
+expd_plots_iphm_1000_desc;The temporary "(ED:Plots) No Incompetent Plotters" character modifier will expire shortly.\n\nBe sure to disable automatic invitations to plots before it expires!;;;;;;;;;;;;;x
+expd_plots_iphm_1000_evtopt_do_nothing;No action (the modifier expires on its own in a few days);;;;;;;;;;;;;x
+expd_plots_iphm_1000_evtopt_prolong;Prolong the modifier;;;;;;;;;;;;;x
+expd_plots_iphm_1000_evtopt_remove;Remove the modifier immediately;;;;;;;;;;;;;x
