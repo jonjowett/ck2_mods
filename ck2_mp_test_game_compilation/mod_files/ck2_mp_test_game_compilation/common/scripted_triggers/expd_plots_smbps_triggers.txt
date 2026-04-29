@@ -1,0 +1,76 @@
+# Decision blockers
+
+expd_plots_smbps_root_has_at_least_one_plot_backer_contributing_negative_plot_power = {
+	custom_tooltip = {
+		text = expd_plots_smbps_root_has_at_least_one_plot_backer_contributing_negative_plot_power_tt
+		ROOT = {
+			any_plot_backer = {
+				expd_plots_smbps_this_character_contributes_negative_plot_power_to_roots_plot = yes
+			}
+		}
+	}
+}
+
+expd_plots_smbps_root_has_at_least_one_plot_backer_with_a_bad_plotter_trait = {
+	custom_tooltip = {
+		text = expd_plots_smbps_root_has_at_least_one_plot_backer_with_a_bad_plotter_trait_tt
+		ROOT = {
+			any_plot_backer = {
+				expd_plots_smbps_this_character_has_a_bad_plotter_trait = yes
+			}
+		}
+	}
+}
+
+expd_plots_smbps_root_has_at_least_one_plot_backer_with_low_intrigue = {
+	custom_tooltip = {
+		text = expd_plots_smbps_root_has_at_least_one_plot_backer_with_low_intrigue_tt
+		ROOT = {
+			any_plot_backer = {
+				expd_plots_smbps_this_character_has_low_intrigue = yes
+			}
+		}
+	}
+}
+
+
+
+
+
+# Single-character triggers
+
+expd_plots_smbps_this_character_contributes_negative_plot_power_to_roots_plot = {
+	custom_tooltip = {
+		text = expd_plots_smbps_this_character_contributes_negative_plot_power_to_roots_plot_tt
+		plot_power_contribution = { plotter = ROOT power < 0 }
+	}
+}
+
+expd_plots_smbps_this_character_has_a_bad_plotter_trait = {
+	custom_tooltip = {
+		text = expd_plots_smbps_this_character_has_a_bad_plotter_trait_tt
+		OR = {
+			trait = gluttonous
+			trait = drunkard
+			trait = hedonist
+			trait = lunatic
+			trait = possessed
+			trait = decadent
+			trait = imbecile
+		}
+	}
+}
+
+expd_plots_smbps_this_character_has_low_intrigue = {
+	custom_tooltip = {
+		text = expd_plots_smbps_this_character_has_low_intrigue_tt
+		intrigue < 5
+	}
+}
+
+expd_plots_smbps_this_character_has_vlow_intrigue = {
+	custom_tooltip = {
+		text = expd_plots_smbps_this_character_has_vlow_intrigue_tt
+		intrigue < 3
+	}
+}

@@ -1,0 +1,220 @@
+namespace = expd_plots_smbps
+
+character_event = {
+	
+	id      = expd_plots_smbps.1000
+	title   = expd_plots_smbps_1000_title
+	desc    = expd_plots_smbps_1000_desc
+	border  = GFX_event_normal_frame_intrigue
+	picture = GFX_evt_hooded_figure_hf
+	
+	is_triggered_only = yes
+	
+	
+	
+	
+	
+	immediate = {
+		
+		# Set a flag on this character, so the intrigue menu decision "knows" the event is open
+		clr_character_flag = expd_plots_smbps_open
+		set_character_flag = expd_plots_smbps_open
+		
+		# Set up all of the event_targets and variables used in the options below
+		expd_plots_smbps_negative_plot_power_setup = yes
+		expd_plots_smbps_bad_plotter_trait_setup = yes
+		expd_plots_smbps_low_intrigue_setup = yes
+		expd_plots_smbps_vlow_intrigue_setup = yes
+		
+	}
+	
+	
+	
+	
+	
+	option = {
+		name = {
+			trigger = {
+				check_variable = { which = expd_plots_smbps_negative_plot_power_count value >= 1 }
+				check_variable = { which = expd_plots_smbps_negative_plot_power_count value <= 9 }
+			}
+			text = expd_plots_smbps_1000_evtopt_negative_plot_power_1to9
+		}
+		name = {
+			trigger = {
+				check_variable = { which = expd_plots_smbps_negative_plot_power_count value >  9 }
+			}
+			text = expd_plots_smbps_1000_evtopt_negative_plot_power_gt9
+		}
+		name = {
+			trigger = {
+				NOR = {
+					AND = {
+						check_variable = { which = expd_plots_smbps_negative_plot_power_count value >= 1 }
+						check_variable = { which = expd_plots_smbps_negative_plot_power_count value <= 9 }
+					}
+					check_variable = { which = expd_plots_smbps_negative_plot_power_count value >  9 }
+				}
+			}
+			text = expd_plots_smbps_1000_evtopt_negative_plot_power_none
+		}
+		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_1
+		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_2
+		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_3
+		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_4
+		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_5
+		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_6
+		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_7
+		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_8
+		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_9
+	}
+	
+	
+	
+	
+	
+	option = {
+		name = {
+			trigger = {
+				check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value >= 1 }
+				check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value <= 9 }
+			}
+			text = expd_plots_smbps_1000_evtopt_bad_plotter_trait_1to9
+		}
+		name = {
+			trigger = {
+				check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value >  9 }
+			}
+			text = expd_plots_smbps_1000_evtopt_bad_plotter_trait_gt9
+		}
+		name = {
+			trigger = {
+				NOR = {
+					AND = {
+						check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value >= 1 }
+						check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value <= 9 }
+					}
+					check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value >  9 }
+				}
+			}
+			text = expd_plots_smbps_1000_evtopt_bad_plotter_trait_none
+		}
+		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_1
+		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_2
+		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_3
+		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_4
+		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_5
+		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_6
+		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_7
+		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_8
+		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_9
+	}
+	
+	
+	
+	
+	
+	option = {
+		name = {
+			trigger = {
+				check_variable = { which = expd_plots_smbps_low_intrigue_count value >= 1 }
+				check_variable = { which = expd_plots_smbps_low_intrigue_count value <= 9 }
+			}
+			text = expd_plots_smbps_1000_evtopt_low_intrigue_1to9
+		}
+		name = {
+			trigger = {
+				check_variable = { which = expd_plots_smbps_low_intrigue_count value >  9 }
+			}
+			text = expd_plots_smbps_1000_evtopt_low_intrigue_gt9
+		}
+		name = {
+			trigger = {
+				NOR = {
+					AND = {
+						check_variable = { which = expd_plots_smbps_low_intrigue_count value >= 1 }
+						check_variable = { which = expd_plots_smbps_low_intrigue_count value <= 9 }
+					}
+					check_variable = { which = expd_plots_smbps_low_intrigue_count value >  9 }
+				}
+			}
+			text = expd_plots_smbps_1000_evtopt_low_intrigue_none
+		}
+		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_1
+		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_2
+		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_3
+		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_4
+		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_5
+		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_6
+		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_7
+		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_8
+		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_9
+	}
+	
+	
+	
+	
+	
+	option = {
+		name = {
+			trigger = {
+				check_variable = { which = expd_plots_smbps_vlow_intrigue_count value >= 1 }
+				check_variable = { which = expd_plots_smbps_vlow_intrigue_count value <= 9 }
+			}
+			text = expd_plots_smbps_1000_evtopt_vlow_intrigue_1to9
+		}
+		name = {
+			trigger = {
+				check_variable = { which = expd_plots_smbps_vlow_intrigue_count value >  9 }
+			}
+			text = expd_plots_smbps_1000_evtopt_vlow_intrigue_gt9
+		}
+		name = {
+			trigger = {
+				NOR = {
+					AND = {
+						check_variable = { which = expd_plots_smbps_vlow_intrigue_count value >= 1 }
+						check_variable = { which = expd_plots_smbps_vlow_intrigue_count value <= 9 }
+					}
+					check_variable = { which = expd_plots_smbps_vlow_intrigue_count value >  9 }
+				}
+			}
+			text = expd_plots_smbps_1000_evtopt_vlow_intrigue_none
+		}
+		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_1
+		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_2
+		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_3
+		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_4
+		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_5
+		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_6
+		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_7
+		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_8
+		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_9
+	}
+	
+	
+	
+	
+	
+	after = {
+		
+		hidden_tooltip = {
+			
+			# Clear the "event window open" flag
+			clr_character_flag = expd_plots_smbps_open
+			
+			# Clear all variables and event_targets used by this event
+			expd_plots_smbps_negative_plot_power_clear = yes
+			expd_plots_smbps_bad_plotter_trait_clear   = yes
+			expd_plots_smbps_low_intrigue_clear        = yes
+			expd_plots_smbps_vlow_intrigue_clear       = yes
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+}

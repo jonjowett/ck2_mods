@@ -1,0 +1,242 @@
+expd_plots_smbps_negative_plot_power_clear = {
+	clear_event_target = expd_plots_smbps_negative_plot_power_char_1
+	clear_event_target = expd_plots_smbps_negative_plot_power_char_2
+	clear_event_target = expd_plots_smbps_negative_plot_power_char_3
+	clear_event_target = expd_plots_smbps_negative_plot_power_char_4
+	clear_event_target = expd_plots_smbps_negative_plot_power_char_5
+	clear_event_target = expd_plots_smbps_negative_plot_power_char_6
+	clear_event_target = expd_plots_smbps_negative_plot_power_char_7
+	clear_event_target = expd_plots_smbps_negative_plot_power_char_8
+	clear_event_target = expd_plots_smbps_negative_plot_power_char_9
+	set_variable = { which = expd_plots_smbps_negative_plot_power_count value = 0 }
+}
+
+expd_plots_smbps_negative_plot_power_setup = {
+	expd_plots_smbps_negative_plot_power_clear = yes
+	any_plot_backer = {
+		limit = { expd_plots_smbps_this_character_contributes_negative_plot_power_to_roots_plot = yes }
+		ROOT = { change_variable = { which = expd_plots_smbps_negative_plot_power_count value = 1 } }
+		if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_negative_plot_power_count value == 1 } } }
+			save_event_target_as = expd_plots_smbps_negative_plot_power_char_1
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_negative_plot_power_count value == 2 } } }
+			save_event_target_as = expd_plots_smbps_negative_plot_power_char_2
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_negative_plot_power_count value == 3 } } }
+			save_event_target_as = expd_plots_smbps_negative_plot_power_char_3
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_negative_plot_power_count value == 4 } } }
+			save_event_target_as = expd_plots_smbps_negative_plot_power_char_4
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_negative_plot_power_count value == 5 } } }
+			save_event_target_as = expd_plots_smbps_negative_plot_power_char_5
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_negative_plot_power_count value == 6 } } }
+			save_event_target_as = expd_plots_smbps_negative_plot_power_char_6
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_negative_plot_power_count value == 7 } } }
+			save_event_target_as = expd_plots_smbps_negative_plot_power_char_7
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_negative_plot_power_count value == 8 } } }
+			save_event_target_as = expd_plots_smbps_negative_plot_power_char_8
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_negative_plot_power_count value == 9 } } }
+			save_event_target_as = expd_plots_smbps_negative_plot_power_char_9
+		}
+	}
+}
+
+
+
+
+
+expd_plots_smbps_bad_plotter_trait_clear = {
+	clear_event_target = expd_plots_smbps_bad_plotter_trait_char_1
+	clear_event_target = expd_plots_smbps_bad_plotter_trait_char_2
+	clear_event_target = expd_plots_smbps_bad_plotter_trait_char_3
+	clear_event_target = expd_plots_smbps_bad_plotter_trait_char_4
+	clear_event_target = expd_plots_smbps_bad_plotter_trait_char_5
+	clear_event_target = expd_plots_smbps_bad_plotter_trait_char_6
+	clear_event_target = expd_plots_smbps_bad_plotter_trait_char_7
+	clear_event_target = expd_plots_smbps_bad_plotter_trait_char_8
+	clear_event_target = expd_plots_smbps_bad_plotter_trait_char_9
+	set_variable = { which = expd_plots_smbps_bad_plotter_trait_count value = 0 }
+}
+
+expd_plots_smbps_bad_plotter_trait_setup = {
+	expd_plots_smbps_bad_plotter_trait_clear = yes
+	any_plot_backer = {
+		limit = { expd_plots_smbps_this_character_has_a_bad_plotter_trait = yes }
+		ROOT = { change_variable = { which = expd_plots_smbps_bad_plotter_trait_count value = 1 } }
+		if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value == 1 } } }
+			save_event_target_as = expd_plots_smbps_bad_plotter_trait_char_1
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value == 2 } } }
+			save_event_target_as = expd_plots_smbps_bad_plotter_trait_char_2
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value == 3 } } }
+			save_event_target_as = expd_plots_smbps_bad_plotter_trait_char_3
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value == 4 } } }
+			save_event_target_as = expd_plots_smbps_bad_plotter_trait_char_4
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value == 5 } } }
+			save_event_target_as = expd_plots_smbps_bad_plotter_trait_char_5
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value == 6 } } }
+			save_event_target_as = expd_plots_smbps_bad_plotter_trait_char_6
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value == 7 } } }
+			save_event_target_as = expd_plots_smbps_bad_plotter_trait_char_7
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value == 8 } } }
+			save_event_target_as = expd_plots_smbps_bad_plotter_trait_char_8
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_bad_plotter_trait_count value == 9 } } }
+			save_event_target_as = expd_plots_smbps_bad_plotter_trait_char_9
+		}
+	}
+}
+
+
+
+
+
+expd_plots_smbps_low_intrigue_clear = {
+	clear_event_target = expd_plots_smbps_low_intrigue_char_1
+	clear_event_target = expd_plots_smbps_low_intrigue_char_2
+	clear_event_target = expd_plots_smbps_low_intrigue_char_3
+	clear_event_target = expd_plots_smbps_low_intrigue_char_4
+	clear_event_target = expd_plots_smbps_low_intrigue_char_5
+	clear_event_target = expd_plots_smbps_low_intrigue_char_6
+	clear_event_target = expd_plots_smbps_low_intrigue_char_7
+	clear_event_target = expd_plots_smbps_low_intrigue_char_8
+	clear_event_target = expd_plots_smbps_low_intrigue_char_9
+	set_variable = { which = expd_plots_smbps_low_intrigue_count value = 0 }
+}
+
+expd_plots_smbps_low_intrigue_setup = {
+	expd_plots_smbps_low_intrigue_clear = yes
+	any_plot_backer = {
+		limit = {
+			expd_plots_smbps_this_character_has_low_intrigue  = yes
+			expd_plots_smbps_this_character_has_vlow_intrigue = no
+		}
+		ROOT = { change_variable = { which = expd_plots_smbps_low_intrigue_count value = 1 } }
+		if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_low_intrigue_count value == 1 } } }
+			save_event_target_as = expd_plots_smbps_low_intrigue_char_1
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_low_intrigue_count value == 2 } } }
+			save_event_target_as = expd_plots_smbps_low_intrigue_char_2
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_low_intrigue_count value == 3 } } }
+			save_event_target_as = expd_plots_smbps_low_intrigue_char_3
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_low_intrigue_count value == 4 } } }
+			save_event_target_as = expd_plots_smbps_low_intrigue_char_4
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_low_intrigue_count value == 5 } } }
+			save_event_target_as = expd_plots_smbps_low_intrigue_char_5
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_low_intrigue_count value == 6 } } }
+			save_event_target_as = expd_plots_smbps_low_intrigue_char_6
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_low_intrigue_count value == 7 } } }
+			save_event_target_as = expd_plots_smbps_low_intrigue_char_7
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_low_intrigue_count value == 8 } } }
+			save_event_target_as = expd_plots_smbps_low_intrigue_char_8
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_low_intrigue_count value == 9 } } }
+			save_event_target_as = expd_plots_smbps_low_intrigue_char_9
+		}
+	}
+}
+
+
+
+
+
+expd_plots_smbps_vlow_intrigue_clear = {
+	clear_event_target = expd_plots_smbps_vlow_intrigue_char_1
+	clear_event_target = expd_plots_smbps_vlow_intrigue_char_2
+	clear_event_target = expd_plots_smbps_vlow_intrigue_char_3
+	clear_event_target = expd_plots_smbps_vlow_intrigue_char_4
+	clear_event_target = expd_plots_smbps_vlow_intrigue_char_5
+	clear_event_target = expd_plots_smbps_vlow_intrigue_char_6
+	clear_event_target = expd_plots_smbps_vlow_intrigue_char_7
+	clear_event_target = expd_plots_smbps_vlow_intrigue_char_8
+	clear_event_target = expd_plots_smbps_vlow_intrigue_char_9
+	set_variable = { which = expd_plots_smbps_vlow_intrigue_count value = 0 }
+}
+
+expd_plots_smbps_vlow_intrigue_setup = {
+	expd_plots_smbps_vlow_intrigue_clear = yes
+	any_plot_backer = {
+		limit = { expd_plots_smbps_this_character_has_vlow_intrigue = yes }
+		ROOT = { change_variable = { which = expd_plots_smbps_vlow_intrigue_count value = 1 } }
+		if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_vlow_intrigue_count value == 1 } } }
+			save_event_target_as = expd_plots_smbps_vlow_intrigue_char_1
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_vlow_intrigue_count value == 2 } } }
+			save_event_target_as = expd_plots_smbps_vlow_intrigue_char_2
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_vlow_intrigue_count value == 3 } } }
+			save_event_target_as = expd_plots_smbps_vlow_intrigue_char_3
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_vlow_intrigue_count value == 4 } } }
+			save_event_target_as = expd_plots_smbps_vlow_intrigue_char_4
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_vlow_intrigue_count value == 5 } } }
+			save_event_target_as = expd_plots_smbps_vlow_intrigue_char_5
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_vlow_intrigue_count value == 6 } } }
+			save_event_target_as = expd_plots_smbps_vlow_intrigue_char_6
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_vlow_intrigue_count value == 7 } } }
+			save_event_target_as = expd_plots_smbps_vlow_intrigue_char_7
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_vlow_intrigue_count value == 8 } } }
+			save_event_target_as = expd_plots_smbps_vlow_intrigue_char_8
+		}
+		else_if = {
+			limit = { ROOT = { check_variable = { which = expd_plots_smbps_vlow_intrigue_count value == 9 } } }
+			save_event_target_as = expd_plots_smbps_vlow_intrigue_char_9
+		}
+	}
+}
