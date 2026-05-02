@@ -117,6 +117,9 @@ xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_prisoners%gi
 :: Not checked because fully compatible
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_propagate_bloodlines%git_mod_subfolder%expanded_decisions_propagate_bloodlines\ %this_mod_folder_location%
 
+:: Not checked because fully compatible
+xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_purchase_claims%git_mod_subfolder%expanded_decisions_purchase_claims\ %this_mod_folder_location%
+
 :: ED:TV checked & should be fully compatible
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_targeted_vanilla%git_mod_subfolder%expanded_decisions_targeted_vanilla\ %this_mod_folder_location%
 
