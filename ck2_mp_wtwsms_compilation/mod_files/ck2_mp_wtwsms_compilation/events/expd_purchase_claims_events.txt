@@ -1,0 +1,17 @@
+namespace = expd_purchase_claims
+
+
+# Notify the host that someone has purchased a claim (so that any abuses can be detected)
+character_event = {
+	id       = expd_purchase_claims.1000
+	title    = expd_purchase_claims_1000_title
+	desc     = expd_purchase_claims_1000_desc
+	picture  = GFX_evt_upsetting_letter
+	border   = GFX_event_normal_frame_intrigue
+	portrait = event_target:expd_purchase_claims_notification_purchaser
+	is_triggered_only = yes
+	option = {
+		name = expd_purchase_claims_1000_evtopt_ok
+		show_portrait = event_target:expd_purchase_claims_notification_holder
+	}
+}

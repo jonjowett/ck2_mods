@@ -1,0 +1,231 @@
+# Audax Validator EnableCommentMetadata
+
+expd_purchase_claims_decision_allow = {
+	trigger_if = {
+		limit = { expd_purchase_claims_this_title_is_not_special = no }
+		expd_purchase_claims_this_title_is_not_special = yes
+	}
+	trigger_else_if = {
+		limit = { higher_tier_than = DUKE }
+		lower_tier_than = KING
+	}
+	trigger_else = {
+		expd_purchase_claims_this_title_is_claimable = yes
+		expd_purchase_claims_from_can_afford_to_purchase_claim_on_this_title = yes
+		expd_purchase_claims_from_is_not_on_cooldown_to_purchase_this_title = yes
+	}
+}
+
+expd_purchase_claims_this_title_is_not_special = {
+	# Exit all of the triggers early if:
+	#  --- No current holder (no point in claiming)
+	#  --- Some kind of "special" title that will cause problems (merc, holy order, religious head, etc)
+	#  --- Current holder is unlanded (probably some kind of special title)
+	trigger_if = {
+		limit = { has_holder = no }
+		has_holder = yes
+	}
+	trigger_else_if = {
+		limit = { holder_scope = { character = ROOT_FROM } }
+		custom_tooltip = {
+			text = expd_purchase_claims_current_holder_is_not_from_tt
+			holder_scope = {
+				NOT = { character = ROOT_FROM }
+			}
+		}
+	}
+	trigger_else = {
+		holy_order = no
+		custom_tooltip = {
+			text = expd_purchase_claims_this_title_is_not_a_mercenary_title_tt
+			mercenary = no
+		}
+		temporary = no
+		custom_tooltip = {
+			text = expd_purchase_claims_this_title_is_not_a_religious_head_title_tt
+			controls_religion = no
+		}
+		custom_tooltip = {
+			text = expd_purchase_claims_this_title_is_not_primary_type_title_tt
+			is_primary_type_title = no
+		}
+		custom_tooltip = {
+			text = expd_purchase_claims_this_titles_holder_is_landed_tt
+			holder_scope = { is_landed = yes }
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#                  AVAILABILITY                  #
+#                                                #
+##################################################
+
+
+
+expd_purchase_claims_this_title_is_claimable = {
+	OR = {
+		custom_tooltip = {
+			text = expd_purchase_claims_this_title_is_a_non_family_palace_barony_tt
+			tier = BARON
+			NOT = {
+				# Audax Validator "." Ignore_NEXT
+				holding_type = family_palace
+			}
+		}
+		custom_tooltip = {
+			text = expd_purchase_claims_this_title_is_a_county_with_at_least_one_holding_slot_tt
+			tier = COUNT
+			location = { num_of_max_settlements >= 1 }
+		}
+		custom_tooltip = {
+			text = expd_purchase_claims_this_title_is_a_non_titular_duchy_tt
+			tier = DUKE
+			is_titular = no
+		}
+		custom_tooltip = {
+			text = expd_purchase_claims_this_title_is_a_titular_duchy_whose_holder_is_duke_with_no_non_titular_duchies_tt
+			tier = DUKE
+			is_titular = yes
+			holder_scope = {
+				tier = DUKE
+				NOT = {
+					any_demesne_title = {
+						tier = DUKE
+						is_titular = no
+						NOT = { title = PREVPREV }
+					}
+				}
+			}
+		}
+	}
+	custom_tooltip = {
+		text = expd_purchase_claims_current_holder_is_not_in_same_realm_as_another_player_tt
+		# Holder's top_liege has no character in their realm who are {players other than FROM}.
+		# NB: Independent characters are their own top_liege.
+		holder_scope = {
+			top_liege = {
+				NOT = {
+					any_realm_character = {
+						expd_purchase_claims_this_character_is_a_current_or_absent_human_player_except_from = yes
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+#################################################
+#                                               #
+#                 AFFORDABILITY                 #
+#                                               #
+#################################################
+
+
+
+expd_purchase_claims_from_can_afford_to_purchase_claim_on_this_title = {
+	# !!!!! If this trigger is changed, be sure to update the equivalent effect !!!!!
+	trigger_if = {
+		limit = { tier = BARON }
+		ROOT_FROM = {
+			# Half the cost of a county
+			scaled_wealth = { value = 1.0 min =  250 max = 1000 }
+			prestige =  250
+		}
+	}
+	trigger_else_if = {
+		limit = { tier = COUNT }
+		ROOT_FROM = {
+			# Half the cost of a duchy
+			# NB: Scaled cost of a chancellor county claim is 1.0
+			scaled_wealth = { value = 2.0 min =  500 max = 2000 }
+			prestige =  500
+		}
+	}
+	trigger_else_if = {
+		limit = { tier = DUKE }
+		ROOT_FROM = {
+			# Double the scaled cost of a chancellor duchy claim (4.0)
+			# Min/max cost set at a reasonable-seeming value
+			# Prestige cost is same as for forced vassalisation of a duke
+			scaled_wealth = { value = 4.0 min = 1000 max = 4000 }
+			prestige = 1000
+		}
+	}
+	trigger_else = {
+		custom_tooltip = { text = expd_purchase_claims_error_cost_tt always = no }
+	}
+}
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#                    COOLDOWN                    #
+#                                                #
+##################################################
+
+
+
+expd_purchase_claims_from_is_not_on_cooldown_to_purchase_this_title = {
+	trigger_if = {
+		limit = {
+			multiplayer = no
+			has_global_flag = expd_purchase_claims_debug
+		}
+		custom_tooltip = {
+			text = expd_purchase_claims_no_cooldown_in_debug_mode_tt
+			always = yes
+		}
+	}
+	trigger_else_if = {
+		limit = { tier = BARON }
+		custom_tooltip = {
+			text = expd_purchase_claims_no_cooldown_for_barony_claims_tt
+			always = yes
+		}
+	}
+	trigger_else_if = {
+		limit = { tier = COUNT }
+		custom_tooltip = {
+			text = expd_purchase_claims_from_is_not_on_cooldown_for_county_claims_tt
+			NOT = { ROOT_FROM = { has_character_modifier = expd_purchase_claims_cooldown_county } }
+		}
+	}
+	trigger_else_if = {
+		limit = { tier = DUKE }
+		custom_tooltip = {
+			text = expd_purchase_claims_from_is_not_on_cooldown_for_duchy_claims_tt
+			NOT = { ROOT_FROM = { has_character_modifier = expd_purchase_claims_cooldown_duchy } }
+		}
+	}
+	trigger_else = {
+		custom_tooltip = { text = expd_purchase_claims_error_cooldown_tt always = no }
+	}
+}

@@ -1,0 +1,33 @@
+# Audax Validator EnableCommentMetadata
+
+expd_purchase_claims_this_character_is_not_a_current_or_absent_human_player_except_from = {
+	custom_tooltip = {
+		text = expd_purchase_claims_this_character_is_not_a_current_or_absent_human_player_except_from_tt
+		OR = {
+			character = ROOT_FROM
+			AND = {
+				ai = yes
+				OR = {
+					always = no
+					# Audax Validator "." Ignore_NEXT
+					edmp_this_character_is_not_a_current_or_absent_human_player = yes
+				}
+			}
+		}
+	}
+}
+
+expd_purchase_claims_this_character_is_a_current_or_absent_human_player_except_from = {
+	custom_tooltip = {
+		text = expd_purchase_claims_this_character_is_a_current_or_absent_human_player_except_from_tt
+		NOT = { character = ROOT_FROM }
+		OR = {
+			ai = no
+			OR = {
+				always = no
+				# Audax Validator "." Ignore_NEXT
+				edmp_this_character_is_a_current_or_absent_human_player = yes
+			}
+		}
+	}
+}
