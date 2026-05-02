@@ -1,0 +1,108 @@
+expd_purchase_claims_decision_effect = {
+	
+	expd_purchase_claims_from_pays_scaled_cost_for_claim_on_this_title = yes
+	
+	ROOT_FROM = {
+		show_scope_change = no
+		add_claim = PREV
+	}
+	
+	expd_purchase_claims_notify_host_that_from_purchased_a_claim_on_this_title = yes
+	
+}
+
+expd_purchase_claims_from_pays_scaled_cost_for_claim_on_this_title = {
+	# !!!!! If the costs in this effect are changed, be sure to update the equivalent trigger !!!!!
+	if = {
+		limit = { tier = BARON }
+		ROOT_FROM = {
+			show_scope_change = no
+			scaled_wealth = { value = -1.0 min =  -250 max = -1000 }
+			prestige =  -250
+		}
+	}
+	else_if = {
+		limit = { tier = COUNT }
+		ROOT_FROM = {
+			show_scope_change = no
+			scaled_wealth = { value = -2.0 min =  -500 max = -2000 }
+			prestige =  -500
+			expd_purchase_claims_add_cooldown_county_3y = yes
+		}
+	}
+	else_if = {
+		limit = { tier = DUKE }
+		ROOT_FROM = {
+			show_scope_change = no
+			scaled_wealth = { value = -4.0 min = -1000 max = -4000 }
+			prestige = -1000
+			expd_purchase_claims_add_cooldown_duchy_10y  = yes
+		}
+	}
+	else = {
+		# Screw you for finding an exploit, and exploiting it
+		ROOT_FROM = {
+			show_scope_change = no
+			scaled_wealth = { value = -40.0 min = -10000 max = -40000 }
+			prestige = -10000
+			expd_purchase_claims_add_cooldown_county_3y = yes
+			expd_purchase_claims_add_cooldown_duchy_10y  = yes
+		}
+	}
+}
+
+expd_purchase_claims_add_cooldown_county_3y = {
+	custom_tooltip = {
+		text = expd_purchase_claims_add_cooldown_county_3y_tt
+		remove_character_modifier       = expd_purchase_claims_cooldown_county
+		add_character_modifier = { name = expd_purchase_claims_cooldown_county years = 3 hidden = yes stacking = no inherit = yes }
+	}
+}
+
+expd_purchase_claims_add_cooldown_duchy_10y = {
+	custom_tooltip = {
+		text = expd_purchase_claims_add_cooldown_duchy_10y_tt
+		remove_character_modifier       = expd_purchase_claims_cooldown_duchy
+		add_character_modifier = { name = expd_purchase_claims_cooldown_duchy  years = 10 hidden = yes stacking = no inherit = yes }
+	}
+}
+
+expd_purchase_claims_notify_host_that_from_purchased_a_claim_on_this_title = {
+	if = {
+		# Only notify host if they either aren't the decision-taker, or if they're in SP with debug mode on
+		limit = {
+			OR = {
+				AND = {
+					multiplayer = yes
+					ROOT_FROM = { is_multiplayer_host_character = no }
+				}
+				AND = {
+					multiplayer = no
+					has_global_flag = expd_purchase_claims_debug
+				}
+			}
+		}
+		custom_tooltip = {
+			text = expd_purchase_claims_notify_host_that_from_purchased_a_claim_on_this_title_tt
+			save_event_target_as = expd_purchase_claims_notification_title
+			ROOT_FROM = { save_event_target_as = expd_purchase_claims_notification_purchaser }
+			holder_scope = { save_event_target_as = expd_purchase_claims_notification_holder }
+			any_player = {
+				limit = {
+					OR = {
+						AND = {
+							multiplayer = yes
+							is_multiplayer_host_character = yes
+						}
+						AND = {
+							multiplayer = no
+							ai = no
+							has_global_flag = expd_purchase_claims_debug
+						}
+					}
+				}
+				character_event = { id = expd_purchase_claims.1000 }
+			}
+		}
+	}
+}
