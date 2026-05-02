@@ -36,6 +36,7 @@ xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_multiplayer\
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_plots%git_mod_subfolder%expanded_decisions_plots\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_prisoners%git_mod_subfolder%expanded_decisions_prisoners\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_propagate_bloodlines%git_mod_subfolder%expanded_decisions_propagate_bloodlines\ %this_mod_folder_location%
+xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_purchase_claims%git_mod_subfolder%expanded_decisions_purchase_claims\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_tributaries%git_mod_subfolder%expanded_decisions_tributaries\ %this_mod_folder_location%
 ::pause
 
