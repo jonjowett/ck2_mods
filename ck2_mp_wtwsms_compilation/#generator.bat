@@ -167,6 +167,9 @@ echo.
 :: Hunting Dog Bloodline Fix overrides 1 event, should be fine
 xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%hunting_dog_bloodline_fix\ %this_mod_folder_location%
 
+:: Invite a local adds 1 extra decision, should be fine
+xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%invitealocal\ %this_mod_folder_location%
+
 :: NAPFriends adds a couple of extra decisions, should be fine
 xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%nap_friends\ %this_mod_folder_location%
 
@@ -175,6 +178,9 @@ xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%no_artifact_losing\ %this_mod_fo
 
 :: Overwrites a single file, which is not touched by WTWSMS, should be fine
 xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%trait_softcap_exterminated\ %this_mod_folder_location%
+
+:: Vassal Culture Spread overrides 2 events, should be fine
+xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%vassalculturespread_compatibility_fixed\ %this_mod_folder_location%
 
 :: Overrides a single loc string, should be fine
 xcopy /R /Y /Q /S /E /I %workshop_mod_subfolder%viking_counter_ironman\ %this_mod_folder_location%
