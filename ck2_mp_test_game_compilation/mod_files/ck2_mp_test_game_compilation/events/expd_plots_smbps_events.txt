@@ -2,29 +2,31 @@ namespace = expd_plots_smbps
 
 character_event = {
 	
-	id      = expd_plots_smbps.1000
-	title   = expd_plots_smbps_1000_title
-	desc    = expd_plots_smbps_1000_desc
-	border  = GFX_event_normal_frame_intrigue
-	picture = GFX_evt_hooded_figure_hf
+	id       = expd_plots_smbps.1000
+	title    = expd_plots_smbps_1000_title
+	desc     = expd_plots_smbps_1000_desc
+	border   = GFX_event_normal_frame_intrigue
+	picture  = GFX_evt_hooded_figure_hf
+	portrait = none
 	
 	is_triggered_only = yes
 	
-	
-	
-	
-	
 	immediate = {
 		
-		# Set a flag on this character, so the intrigue menu decision "knows" the event is open
-		clr_character_flag = expd_plots_smbps_open
-		set_character_flag = expd_plots_smbps_open
-		
-		# Set up all of the event_targets and variables used in the options below
-		expd_plots_smbps_negative_plot_power_setup = yes
-		expd_plots_smbps_bad_plotter_trait_setup = yes
-		expd_plots_smbps_low_intrigue_setup = yes
-		expd_plots_smbps_vlow_intrigue_setup = yes
+		# hidden_tooltip is required here so that this block of code doesn't cause spurious portraits in every event option
+		hidden_tooltip = {
+			
+			# Set a flag on this character, so the intrigue menu decision "knows" the event is open
+			clr_character_flag = expd_plots_smbps_open
+			set_character_flag = expd_plots_smbps_open
+			
+			# Set up all of the event_targets and variables used in the options below
+			expd_plots_smbps_negative_plot_power_setup = yes
+			expd_plots_smbps_bad_plotter_trait_setup = yes
+			expd_plots_smbps_low_intrigue_setup = yes
+			expd_plots_smbps_vlow_intrigue_setup = yes
+			
+		}
 		
 	}
 	
@@ -58,15 +60,15 @@ character_event = {
 			}
 			text = expd_plots_smbps_1000_evtopt_negative_plot_power_none
 		}
-		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_1
-		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_2
-		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_3
-		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_4
-		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_5
-		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_6
-		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_7
-		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_8
-		show_portrait = event_target:expd_plots_smbps_negative_plot_power_char_9
+		event_target:expd_plots_smbps_negative_plot_power_char_1 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_plot_power_tt } }
+		event_target:expd_plots_smbps_negative_plot_power_char_2 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_plot_power_tt } }
+		event_target:expd_plots_smbps_negative_plot_power_char_3 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_plot_power_tt } }
+		event_target:expd_plots_smbps_negative_plot_power_char_4 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_plot_power_tt } }
+		event_target:expd_plots_smbps_negative_plot_power_char_5 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_plot_power_tt } }
+		event_target:expd_plots_smbps_negative_plot_power_char_6 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_plot_power_tt } }
+		event_target:expd_plots_smbps_negative_plot_power_char_7 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_plot_power_tt } }
+		event_target:expd_plots_smbps_negative_plot_power_char_8 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_plot_power_tt } }
+		event_target:expd_plots_smbps_negative_plot_power_char_9 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_plot_power_tt } }
 	}
 	
 	
@@ -99,15 +101,15 @@ character_event = {
 			}
 			text = expd_plots_smbps_1000_evtopt_bad_plotter_trait_none
 		}
-		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_1
-		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_2
-		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_3
-		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_4
-		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_5
-		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_6
-		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_7
-		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_8
-		show_portrait = event_target:expd_plots_smbps_bad_plotter_trait_char_9
+		event_target:expd_plots_smbps_bad_plotter_trait_char_1 = { custom_tooltip = { text = expd_plots_smbps_list_this_characters_bad_plotter_traits_tt } }
+		event_target:expd_plots_smbps_bad_plotter_trait_char_2 = { custom_tooltip = { text = expd_plots_smbps_list_this_characters_bad_plotter_traits_tt } }
+		event_target:expd_plots_smbps_bad_plotter_trait_char_3 = { custom_tooltip = { text = expd_plots_smbps_list_this_characters_bad_plotter_traits_tt } }
+		event_target:expd_plots_smbps_bad_plotter_trait_char_4 = { custom_tooltip = { text = expd_plots_smbps_list_this_characters_bad_plotter_traits_tt } }
+		event_target:expd_plots_smbps_bad_plotter_trait_char_5 = { custom_tooltip = { text = expd_plots_smbps_list_this_characters_bad_plotter_traits_tt } }
+		event_target:expd_plots_smbps_bad_plotter_trait_char_6 = { custom_tooltip = { text = expd_plots_smbps_list_this_characters_bad_plotter_traits_tt } }
+		event_target:expd_plots_smbps_bad_plotter_trait_char_7 = { custom_tooltip = { text = expd_plots_smbps_list_this_characters_bad_plotter_traits_tt } }
+		event_target:expd_plots_smbps_bad_plotter_trait_char_8 = { custom_tooltip = { text = expd_plots_smbps_list_this_characters_bad_plotter_traits_tt } }
+		event_target:expd_plots_smbps_bad_plotter_trait_char_9 = { custom_tooltip = { text = expd_plots_smbps_list_this_characters_bad_plotter_traits_tt } }
 	}
 	
 	
@@ -140,15 +142,15 @@ character_event = {
 			}
 			text = expd_plots_smbps_1000_evtopt_low_intrigue_none
 		}
-		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_1
-		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_2
-		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_3
-		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_4
-		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_5
-		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_6
-		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_7
-		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_8
-		show_portrait = event_target:expd_plots_smbps_low_intrigue_char_9
+		event_target:expd_plots_smbps_low_intrigue_char_1 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_low_intrigue_char_2 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_low_intrigue_char_3 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_low_intrigue_char_4 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_low_intrigue_char_5 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_low_intrigue_char_6 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_low_intrigue_char_7 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_low_intrigue_char_8 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_low_intrigue_char_9 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
 	}
 	
 	
@@ -181,15 +183,15 @@ character_event = {
 			}
 			text = expd_plots_smbps_1000_evtopt_vlow_intrigue_none
 		}
-		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_1
-		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_2
-		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_3
-		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_4
-		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_5
-		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_6
-		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_7
-		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_8
-		show_portrait = event_target:expd_plots_smbps_vlow_intrigue_char_9
+		event_target:expd_plots_smbps_vlow_intrigue_char_1 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_vlow_intrigue_char_2 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_vlow_intrigue_char_3 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_vlow_intrigue_char_4 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_vlow_intrigue_char_5 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_vlow_intrigue_char_6 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_vlow_intrigue_char_7 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_vlow_intrigue_char_8 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
+		event_target:expd_plots_smbps_vlow_intrigue_char_9 = { custom_tooltip = { text = expd_plots_smbps_show_this_characters_intrigue_tt } }
 	}
 	
 	

@@ -1,0 +1,50 @@
+#
+#Template;§;;;;;;;;;;;;;x
+#
+#
+#
+# Intrigue Menu Decision
+expd_purchase_claims_decision;§M(ED:PC)§! Purchase Claim;;;;;;;;;;;;;x
+expd_purchase_claims_decision_desc;§Y[From.GetFirstName]§! purchases a claim on the §Y[Root.GetFullName]§!;;;;;;;;;;;;;x
+#
+# Modifiers
+expd_purchase_claims_cooldown_county;§M(ED:PC)§! Claim Purchase Cooldown (County);;;;;;;;;;;;;x
+expd_purchase_claims_cooldown_county_desc;For as long as [Root.GetBestName] has this modifier, [Root.GetSheHe] will be unable to use the §M(ED:PC)§Y Purchase Claim§! decision on county titles.;;;;;;;;;;;;;x
+expd_purchase_claims_cooldown_duchy;§M(ED:PC)§! Claim Purchase Cooldown (Duchy);;;;;;;;;;;;;x
+expd_purchase_claims_cooldown_duchy_desc;For as long as [Root.GetBestName] has this modifier, [Root.GetSheHe] will be unable to use the §M(ED:PC)§Y Purchase Claim§! decision on duchy titles.;;;;;;;;;;;;;x
+#
+# Scripted Triggers - Title
+expd_purchase_claims_this_title_is_not_a_mercenary_title_tt;Is NOT a Mercenary Band;;;;;;;;;;;;;x
+expd_purchase_claims_this_title_is_not_a_religious_head_title_tt;Is NOT a Religious Head Title;;;;;;;;;;;;;x
+expd_purchase_claims_this_title_is_not_primary_type_title_tt;Is NOT a "Primary-Type Title" §g(IE: A special title, probably needing special care)§!;;;;;;;;;;;;;x
+expd_purchase_claims_this_titles_holder_is_landed_tt;Holder is landed §g(IE: It is possible to gain this title in war)§!;;;;;;;;;;;;;x
+expd_purchase_claims_this_title_is_a_non_family_palace_barony_tt;Is a §Y"Real Barony"§! §g(IE: NOT a §YFamily Palace§!)§!;;;;;;;;;;;;;x
+expd_purchase_claims_this_title_is_a_county_with_at_least_one_holding_slot_tt;Is a §Y"Real County"§! §g(IE: A province with 1+ holding slots)§!;;;;;;;;;;;;;x
+expd_purchase_claims_this_title_is_a_non_titular_duchy_tt;Is a §YNon-Titular Duchy§!;;;;;;;;;;;;;x
+expd_purchase_claims_this_title_is_a_titular_duchy_whose_holder_is_duke_with_no_non_titular_duchies_tt;Is a §YTitular Duchy§!, held by a §YDuke§!, who has §Yno Non-Titular Duchies§!;;;;;;;;;;;;;x
+expd_purchase_claims_current_holder_is_not_from_tt;The §Ydecision-taker§! ([From.GetTitledFirstName]) does NOT already hold this title;;;;;;;;;;;;;x
+expd_purchase_claims_current_holder_is_not_in_same_realm_as_another_player_tt;Holder is NOT in the same §Yindependent realm§! as §Yanother player§!;;;;;;;;;;;;;x
+#
+# Scripted Triggers - Humans
+expd_purchase_claims_this_character_is_not_a_current_or_absent_human_player_except_from_tt;Is §Y[From.GetTitledFirstName]§!, or is NOT a §Ycurrent§! or §Yabsent§! human player;;;;;;;;;;;;;x
+expd_purchase_claims_this_character_is_a_current_or_absent_human_player_except_from_tt;Is a §Ycurrent§! or §Yabsent§! human player, and is NOT §Y[From.GetTitledFirstName]§!;;;;;;;;;;;;;x
+#
+# Scripted Triggers - Cost
+expd_purchase_claims_error_cost_tt;§RERROR! Cost could not be calculated! (Bad title tier?)§!;;;;;;;;;;;;;x
+#
+# Scripted Triggers - Cooldown
+expd_purchase_claims_no_cooldown_in_debug_mode_tt;§R!!!DEBUG MODE!!!§! (no cooldown on claim purchases);;;;;;;;;;;;;x
+expd_purchase_claims_no_cooldown_for_barony_claims_tt;Is a §Ybarony§! title (no cooldown on claim purchases);;;;;;;;;;;;;x
+expd_purchase_claims_from_is_not_on_cooldown_for_county_claims_tt;Has NOT recently purchased a §Ycounty§! claim (expires §Y[From.expd_purchase_claims_cooldown_county.GetExpiryDate]§!);;;;;;;;;;;;;x
+expd_purchase_claims_from_is_not_on_cooldown_for_duchy_claims_tt;Has NOT recently purchased a §Yduchy§! claim (expires §Y[From.expd_purchase_claims_cooldown_duchy.GetExpiryDate]§!);;;;;;;;;;;;;x
+expd_purchase_claims_error_cooldown_tt;§RERROR! Cooldown could not be checked! (Bad title tier?)§!;;;;;;;;;;;;;x
+#
+# Scripted Effects
+expd_purchase_claims_add_cooldown_county_3y_tt;Unable to purchase §Ycounty§! claims for §R3 years§!.;;;;;;;;;;;;;x
+expd_purchase_claims_add_cooldown_duchy_10y_tt;Unable to purchase §Yduchy§! claims for §R10 years§!.;;;;;;;;;;;;;x
+expd_purchase_claims_notify_host_that_from_purchased_a_claim_on_this_title_tt;The §Yhost§! will be §Ynotified§! about this purchase.;;;;;;;;;;;;;x
+#
+# Events - Host Notification
+expd_purchase_claims_1000_title;(ED:PC) Purchase Notification;;;;;;;;;;;;;x
+expd_purchase_claims_1000_desc;Purchaser: [expd_purchase_claims_notification_purchaser.GetBestName]\nPurchaser's Username: [expd_purchase_claims_notification_purchaser.GetHumanName]\nClaim Purchased: [expd_purchase_claims_notification_title.GetFullName] ([expd_purchase_claims_notification_title.GetFullBaseName])\nCurrent Title Holder: [expd_purchase_claims_notification_holder.GetBestName] (portrait in option);;;;;;;;;;;;;x
+expd_purchase_claims_1000_evtopt_ok;OK;;;;;;;;;;;;;x
