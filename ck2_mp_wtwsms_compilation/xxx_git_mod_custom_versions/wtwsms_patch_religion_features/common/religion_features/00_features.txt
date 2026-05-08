@@ -2212,7 +2212,7 @@ religion_leadership = {
 			NOT = {
 				has_selected_religion_feature = religion_dogmatic
 				has_selected_religion_feature = religion_beatification
-                has_selected_religion_feature = religion_feature_egyptian
+				has_selected_religion_feature = religion_feature_egyptian
 			}
 		}
 		effect = {
@@ -2229,11 +2229,8 @@ religion_leadership = {
 			if = {
 				limit = { 
 					FROM = { 
-						character = yes 
-						OR = { 
-							religion = norse_pagan 
-							religion = tengri_pagan 
-						} 
+						character = yes
+						wtwsms_patch_autonomous_martial_boost = yes
 					}
 					has_selected_religion_feature = religion_monastic
 				}
@@ -2246,11 +2243,8 @@ religion_leadership = {
 			else_if = { 
 				limit = { 
 					FROM = { 
-						character = yes 
-						OR = { 
-							religion = norse_pagan 
-							religion = tengri_pagan 
-						} 
+						character = yes
+						wtwsms_patch_autonomous_martial_boost = yes
 					} 
 				}
 				set_character_modifier = {
@@ -2261,11 +2255,8 @@ religion_leadership = {
 			if = { 
 				limit = { 
 					FROM = { 
-						character = yes 
-						OR = { 
-							religion = baltic_pagan 
-							religion = slavic_pagan 
-						} 
+						character = yes
+						wtwsms_patch_autonomous_diplomacy_boost = yes
 					}
 					has_selected_religion_feature = religion_monastic
 				}
@@ -2278,11 +2269,8 @@ religion_leadership = {
 			else_if = { 
 				limit = { 
 					FROM = { 
-						character = yes 
-						OR = { 
-							religion = baltic_pagan 
-							religion = slavic_pagan 
-						} 
+						character = yes
+						wtwsms_patch_autonomous_diplomacy_boost = yes
 					}
 				}
 				set_character_modifier = {
@@ -2293,8 +2281,8 @@ religion_leadership = {
 			if = { 
 				limit = { 
 					FROM = { 
-						character = yes 
-						religion = finnish_pagan
+						character = yes
+						wtwsms_patch_autonomous_intrigue_boost = yes
 					}
 					has_selected_religion_feature = religion_monastic
 				}
@@ -2307,8 +2295,8 @@ religion_leadership = {
 			else_if = { 
 				limit = { 
 					FROM = { 
-						character = yes 
-						religion = finnish_pagan
+						character = yes
+						wtwsms_patch_autonomous_intrigue_boost = yes
 					}
 				}
 				set_character_modifier = {
@@ -2319,11 +2307,8 @@ religion_leadership = {
 			if = { 
 				limit = { 
 					FROM = { 
-						character = yes 
-						OR = { 
-							religion = west_african_pagan
-							religion = zun_pagan
-						}
+						character = yes
+						wtwsms_patch_autonomous_stewardship_boost = yes
 					}
 					has_selected_religion_feature = religion_monastic
 				}
@@ -2336,11 +2321,8 @@ religion_leadership = {
 			else_if = { 
 				limit = { 
 					FROM = { 
-						character = yes 
-						OR = { 
-							religion = west_african_pagan
-							religion = zun_pagan
-						}
+						character = yes
+						wtwsms_patch_autonomous_stewardship_boost = yes
 					}
 				}
 				set_character_modifier = {
@@ -2351,8 +2333,8 @@ religion_leadership = {
 			if = {
 				limit = { 
 					FROM = { 
-						character = yes 
-						religion = bon
+						character = yes
+						wtwsms_patch_autonomous_learning_boost = yes
 					}
 					has_selected_religion_feature = religion_monastic
 				}
@@ -2364,8 +2346,8 @@ religion_leadership = {
 			else_if = {
 				limit = { 
 					FROM = { 
-						character = yes 
-						religion = bon
+						character = yes
+						wtwsms_patch_autonomous_learning_boost = yes
 					}
 				}
 				set_character_modifier = {
