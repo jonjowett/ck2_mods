@@ -1,0 +1,39 @@
+expd_gh_this_character_should_be_able_to_see_base_game_grand_hunt_decision = {
+	
+	# Potential block of base game grand hunt decision, with spurious blockers removed
+	is_playable = yes
+	age = 16
+	prisoner = no
+	# is_female = no # Mod edit: Removed & moved to allow block so players can see the conditions
+	OR = {
+		religion_group = christian
+		religion_group = pagan_group
+		religion_group = zoroastrian_group
+		has_alternate_start_parameter = { key = religion_names value = random }
+		
+		# WTWSMS Compatch
+		religion = tzadikite # Martial prowess and hunting was critical
+		culture_group = altaic
+		is_nomadic = yes # Nomads lived for this kind of thing
+		
+	}
+	NOT = {
+		OR = {
+			has_landed_title = e_mongol_empire
+			has_landed_title = e_golden_horde
+			has_landed_title = e_il-khanate
+			religion = jain
+			AND = {
+				culture = mongol
+				higher_real_tier_than = KING # Mongol Khagans can Nerge instead
+			}
+		}
+	}
+	NOT = { has_character_modifier = holding_grand_hunt }
+	OR = {
+		NOT = { has_dlc = "Way of Life" }
+		has_focus = focus_hunting
+		trait = hunter
+	}
+	
+}
