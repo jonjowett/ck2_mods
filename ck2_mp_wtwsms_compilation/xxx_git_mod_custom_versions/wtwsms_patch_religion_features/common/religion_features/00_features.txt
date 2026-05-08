@@ -2228,7 +2228,7 @@ religion_leadership = {
 			}
 			if = {
 				limit = { 
-					FROM = { 
+					FROM = {
 						character = yes
 						wtwsms_patch_autonomous_martial_boost = yes
 					}
@@ -2242,7 +2242,7 @@ religion_leadership = {
 			}
 			else_if = { 
 				limit = { 
-					FROM = { 
+					FROM = {
 						character = yes
 						wtwsms_patch_autonomous_martial_boost = yes
 					} 
@@ -2252,9 +2252,9 @@ religion_leadership = {
 					key = "AUTONOMOUS_ATTR_RELIGION"
 				}
 			}
-			if = { 
+			else_if = { 
 				limit = { 
-					FROM = { 
+					FROM = {
 						character = yes
 						wtwsms_patch_autonomous_diplomacy_boost = yes
 					}
@@ -2268,7 +2268,7 @@ religion_leadership = {
 			}
 			else_if = { 
 				limit = { 
-					FROM = { 
+					FROM = {
 						character = yes
 						wtwsms_patch_autonomous_diplomacy_boost = yes
 					}
@@ -2278,9 +2278,9 @@ religion_leadership = {
 					key = "AUTONOMOUS_ATTR_RELIGION"
 				}
 			}
-			if = { 
+			else_if = { 
 				limit = { 
-					FROM = { 
+					FROM = {
 						character = yes
 						wtwsms_patch_autonomous_intrigue_boost = yes
 					}
@@ -2294,7 +2294,7 @@ religion_leadership = {
 			}
 			else_if = { 
 				limit = { 
-					FROM = { 
+					FROM = {
 						character = yes
 						wtwsms_patch_autonomous_intrigue_boost = yes
 					}
@@ -2304,9 +2304,9 @@ religion_leadership = {
 					key = "AUTONOMOUS_ATTR_RELIGION"
 				}
 			}
-			if = { 
+			else_if = { 
 				limit = { 
-					FROM = { 
+					FROM = {
 						character = yes
 						wtwsms_patch_autonomous_stewardship_boost = yes
 					}
@@ -2320,7 +2320,7 @@ religion_leadership = {
 			}
 			else_if = { 
 				limit = { 
-					FROM = { 
+					FROM = {
 						character = yes
 						wtwsms_patch_autonomous_stewardship_boost = yes
 					}
@@ -2330,9 +2330,9 @@ religion_leadership = {
 					key = "AUTONOMOUS_ATTR_RELIGION"
 				}
 			}
-			if = {
+			else_if = {
 				limit = { 
-					FROM = { 
+					FROM = {
 						character = yes
 						wtwsms_patch_autonomous_learning_boost = yes
 					}
@@ -2345,13 +2345,29 @@ religion_leadership = {
 			}
 			else_if = {
 				limit = { 
-					FROM = { 
+					FROM = {
 						character = yes
 						wtwsms_patch_autonomous_learning_boost = yes
 					}
 				}
 				set_character_modifier = {
 					learning = 2
+					key = "AUTONOMOUS_ATTR_RELIGION"
+				}
+			}
+			
+			# Fallback: +2 Martial
+			else_if = {
+				limit = { has_selected_religion_feature = religion_monastic }
+				set_character_modifier = {
+					martial = 2
+					learning = 2
+					key = "MONASTIC_AUTONOMOUS_ATTR_RELIGION"
+				}
+			}
+			else = {
+				set_character_modifier = {
+					martial = 2
 					key = "AUTONOMOUS_ATTR_RELIGION"
 				}
 			}
