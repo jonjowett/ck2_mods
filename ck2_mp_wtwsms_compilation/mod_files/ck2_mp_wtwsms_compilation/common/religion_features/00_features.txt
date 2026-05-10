@@ -2212,7 +2212,7 @@ religion_leadership = {
 			NOT = {
 				has_selected_religion_feature = religion_dogmatic
 				has_selected_religion_feature = religion_beatification
-                has_selected_religion_feature = religion_feature_egyptian
+				has_selected_religion_feature = religion_feature_egyptian
 			}
 		}
 		effect = {
@@ -2228,12 +2228,9 @@ religion_leadership = {
 			}
 			if = {
 				limit = { 
-					FROM = { 
-						character = yes 
-						OR = { 
-							religion = norse_pagan 
-							religion = tengri_pagan 
-						} 
+					FROM = {
+						character = yes
+						wtwsms_patch_autonomous_martial_boost = yes
 					}
 					has_selected_religion_feature = religion_monastic
 				}
@@ -2245,12 +2242,9 @@ religion_leadership = {
 			}
 			else_if = { 
 				limit = { 
-					FROM = { 
-						character = yes 
-						OR = { 
-							religion = norse_pagan 
-							religion = tengri_pagan 
-						} 
+					FROM = {
+						character = yes
+						wtwsms_patch_autonomous_martial_boost = yes
 					} 
 				}
 				set_character_modifier = {
@@ -2258,14 +2252,11 @@ religion_leadership = {
 					key = "AUTONOMOUS_ATTR_RELIGION"
 				}
 			}
-			if = { 
+			else_if = { 
 				limit = { 
-					FROM = { 
-						character = yes 
-						OR = { 
-							religion = baltic_pagan 
-							religion = slavic_pagan 
-						} 
+					FROM = {
+						character = yes
+						wtwsms_patch_autonomous_diplomacy_boost = yes
 					}
 					has_selected_religion_feature = religion_monastic
 				}
@@ -2277,12 +2268,9 @@ religion_leadership = {
 			}
 			else_if = { 
 				limit = { 
-					FROM = { 
-						character = yes 
-						OR = { 
-							religion = baltic_pagan 
-							religion = slavic_pagan 
-						} 
+					FROM = {
+						character = yes
+						wtwsms_patch_autonomous_diplomacy_boost = yes
 					}
 				}
 				set_character_modifier = {
@@ -2290,11 +2278,11 @@ religion_leadership = {
 					key = "AUTONOMOUS_ATTR_RELIGION"
 				}
 			}
-			if = { 
+			else_if = { 
 				limit = { 
-					FROM = { 
-						character = yes 
-						religion = finnish_pagan
+					FROM = {
+						character = yes
+						wtwsms_patch_autonomous_intrigue_boost = yes
 					}
 					has_selected_religion_feature = religion_monastic
 				}
@@ -2306,9 +2294,9 @@ religion_leadership = {
 			}
 			else_if = { 
 				limit = { 
-					FROM = { 
-						character = yes 
-						religion = finnish_pagan
+					FROM = {
+						character = yes
+						wtwsms_patch_autonomous_intrigue_boost = yes
 					}
 				}
 				set_character_modifier = {
@@ -2316,14 +2304,11 @@ religion_leadership = {
 					key = "AUTONOMOUS_ATTR_RELIGION"
 				}
 			}
-			if = { 
+			else_if = { 
 				limit = { 
-					FROM = { 
-						character = yes 
-						OR = { 
-							religion = west_african_pagan
-							religion = zun_pagan
-						}
+					FROM = {
+						character = yes
+						wtwsms_patch_autonomous_stewardship_boost = yes
 					}
 					has_selected_religion_feature = religion_monastic
 				}
@@ -2335,12 +2320,9 @@ religion_leadership = {
 			}
 			else_if = { 
 				limit = { 
-					FROM = { 
-						character = yes 
-						OR = { 
-							religion = west_african_pagan
-							religion = zun_pagan
-						}
+					FROM = {
+						character = yes
+						wtwsms_patch_autonomous_stewardship_boost = yes
 					}
 				}
 				set_character_modifier = {
@@ -2348,11 +2330,11 @@ religion_leadership = {
 					key = "AUTONOMOUS_ATTR_RELIGION"
 				}
 			}
-			if = {
+			else_if = {
 				limit = { 
-					FROM = { 
-						character = yes 
-						religion = bon
+					FROM = {
+						character = yes
+						wtwsms_patch_autonomous_learning_boost = yes
 					}
 					has_selected_religion_feature = religion_monastic
 				}
@@ -2363,13 +2345,29 @@ religion_leadership = {
 			}
 			else_if = {
 				limit = { 
-					FROM = { 
-						character = yes 
-						religion = bon
+					FROM = {
+						character = yes
+						wtwsms_patch_autonomous_learning_boost = yes
 					}
 				}
 				set_character_modifier = {
 					learning = 2
+					key = "AUTONOMOUS_ATTR_RELIGION"
+				}
+			}
+			
+			# Fallback: +2 Martial
+			else_if = {
+				limit = { has_selected_religion_feature = religion_monastic }
+				set_character_modifier = {
+					martial = 2
+					learning = 2
+					key = "MONASTIC_AUTONOMOUS_ATTR_RELIGION"
+				}
+			}
+			else = {
+				set_character_modifier = {
+					martial = 2
 					key = "AUTONOMOUS_ATTR_RELIGION"
 				}
 			}

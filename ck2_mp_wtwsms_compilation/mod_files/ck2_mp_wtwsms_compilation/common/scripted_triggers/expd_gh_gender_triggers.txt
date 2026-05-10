@@ -1,0 +1,43 @@
+expd_gh_this_character_fulfils_gender_requirements_for_grand_hunt = {
+	
+	trigger_if = {
+		limit = {
+			OR = {
+				is_female = no
+				has_game_rule = { name = gender value = all }
+			}
+		}
+		hidden_tooltip = { always = yes }
+	}
+	trigger_else = {
+		OR = {
+			trait = hunter
+			trait = shieldmaiden
+			is_member_of_any_warrior_lodge_trigger = yes
+			has_law = status_of_women_4
+			custom_tooltip = {
+				text = expd_gh_tooltip_follows_an_equal_or_feminist_religion
+				OR = {
+					religion = cathar
+					religion = messalian
+					religion = bogomilist
+					religion = mazdaki
+					has_religion_feature = religion_equal
+					has_religion_feature = religion_matriarchal
+				}
+			}
+			custom_tooltip = {
+				text = expd_gh_tooltip_has_an_active_feminist_bloodline
+				any_owned_bloodline = {
+					bloodline_is_active_for = PREV
+					OR = {
+						has_bloodline_flag = bloodline_enatic_cognatic # Any bloodline granting enatic-cognatic succession (base game & hopefully most relevant modded bloodlines)
+						has_bloodline_flag = emb_enatic_cognatic       # Even More Bloodlines - any feminist bloodline
+						has_bloodline_flag = IB_femwar_bloodline       # More Bloodlines - any FemWar bloodline
+					}
+				}
+			}
+		}
+	}
+	
+}
