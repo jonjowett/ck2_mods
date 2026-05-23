@@ -271,7 +271,7 @@ xcopy /R /Y /Q /S /E /I %compatch_subfolder%three_doctrines_reform\ %this_mod_fo
 :: ED:MP and submods
 :: NB: Use the compatible version of ED:MP, since this compilation is for a total conversion
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_multiplayer\mod_files_compatible\expanded_decisions_multiplayer_compatible\ %this_mod_folder_location%
-xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_multiplayer_birthday%git_mod_subfolder%expanded_decisions_multiplayer_birthday\ %this_mod_folder_location%
+xcopy /R /Y /Q /S /E /I %git_mod_folder_location%expanded_decisions_multiplayer_celebrations%git_mod_subfolder%expanded_decisions_multiplayer_celebrations\ %this_mod_folder_location%
 
 :: TP automation should probably come after everything else (ie. after everything else that might potentially affect trade) (although it might not be strictly necessary in this case)
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%trade_post_automation%git_mod_subfolder%trade_post_automation\ %this_mod_folder_location%

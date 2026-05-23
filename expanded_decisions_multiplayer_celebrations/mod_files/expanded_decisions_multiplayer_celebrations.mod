@@ -1,5 +1,5 @@
 name = "Expanded Decisions: MP: Celebrations"
-path = "mod/expanded_decisions_multiplayer_birthday"
+path = "mod/expanded_decisions_multiplayer_celebrations"
 
 # For normal gameplay, use these dependencies:
 dependencies = { "\"Expanded Decisions: Multiplayer\"" "\"Expanded Decisions: Multiplayer (Compatible)\"" }

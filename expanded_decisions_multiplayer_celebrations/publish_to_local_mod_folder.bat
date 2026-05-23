@@ -2,7 +2,7 @@
 
 ::Constants
 set ck_mod_folder=.\..\..\..\Parado~1\Crusad~1\mod\
-set mod_name=expanded_decisions_multiplayer_birthday
+set mod_name=expanded_decisions_multiplayer_celebrations
 set modfiles_folder=.\mod_files\
 
 ::Set locations of files
