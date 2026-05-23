@@ -1,0 +1,31 @@
+edmp_birthday_admin_this_character_is_in_sp_and_is_admin_and_is_in_debug_mode = {
+	multiplayer = no
+	edmp_this_character_can_take_admin_actions = yes
+	has_character_flag = edmp_birthday_admin_debug
+}
+
+edmp_birthday_cake_consume_allow = {
+	custom_tooltip = {
+		text = edmp_birthday_this_character_owns_at_least_one_cake_tt
+		any_artifact = {
+			owner = { character = PREVPREV }
+			has_artifact_flag = edmp_birthday_cake
+		}
+	}
+	NOT = { has_character_modifier = edmp_birthday_cake_consumed }
+}
+
+edmp_birthday_popper_consume_allow = {
+	ai = no
+	NOT = { character = ROOT_FROM }
+	NOT = { has_character_modifier = edmp_birthday_popper_consumed }
+	custom_tooltip = {
+		text = edmp_birthday_from_owns_at_least_one_popper_tt
+		ROOT_FROM = {
+			any_artifact = {
+				owner = { character = PREVPREV }
+				has_artifact_flag = edmp_birthday_popper
+			}
+		}
+	}
+}

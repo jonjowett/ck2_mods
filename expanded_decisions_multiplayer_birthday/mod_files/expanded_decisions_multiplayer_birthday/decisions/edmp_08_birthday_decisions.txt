@@ -1,0 +1,97 @@
+decisions = {
+	edmp_birthday_cake_consume = {
+		ai = no
+		is_high_prio = yes
+		potential = { ai = no }
+		allow = {
+			trigger_if = {
+				limit = { edmp_birthday_admin_this_character_is_in_sp_and_is_admin_and_is_in_debug_mode = yes }
+				OR = {
+					custom_tooltip = {
+						text = edmp_birthday_admin_success_because_of_debug_mode_tt
+						always = yes
+					}
+					edmp_birthday_cake_consume_allow = yes
+				}
+			}
+			trigger_else = {
+				edmp_birthday_cake_consume_allow = yes
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = edmp_birthday_cake_consume_tt
+				ROOT = {
+					random_artifact = {
+						limit = {
+							owner = { character = PREVPREV }
+							has_artifact_flag = edmp_birthday_cake
+						}
+						unsafe_destroy_artifact = yes
+					}
+				}
+				remove_character_modifier = edmp_birthday_cake_consumed
+				add_character_modifier = {
+					name  = edmp_birthday_cake_consumed
+					years = 10
+				}
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+}
+
+targetted_decisions = {
+	edmp_birthday_popper_consume = {
+		filter = all_including_me
+		ai = no
+		from_potential = { ai = no }
+		potential = {
+			OR = {
+				ai = no
+				ROOT_FROM = { edmp_birthday_admin_this_character_is_in_sp_and_is_admin_and_is_in_debug_mode = yes }
+			}
+		}
+		allow = {
+			trigger_if = {
+				limit = { ROOT_FROM = { edmp_birthday_admin_this_character_is_in_sp_and_is_admin_and_is_in_debug_mode = yes } }
+				OR = {
+					custom_tooltip = {
+						text = edmp_birthday_admin_success_because_of_debug_mode_tt
+						always = yes
+					}
+					edmp_birthday_popper_consume_allow = yes
+				}
+			}
+			trigger_else = {
+				edmp_birthday_popper_consume_allow = yes
+			}
+		}
+		effect = {
+			custom_tooltip = {
+				text = edmp_birthday_popper_consume_tt
+				ROOT_FROM = {
+					random_artifact = {
+						limit = {
+							owner = { character = PREVPREV }
+							has_artifact_flag = edmp_birthday_popper
+						}
+						unsafe_destroy_artifact = yes
+					}
+				}
+				remove_character_modifier = edmp_birthday_popper_consumed
+				add_character_modifier = {
+					name  = edmp_birthday_popper_consumed
+					years = 10
+				}
+			}
+			custom_tooltip = { text = edmp_birthday_blank_line_tt }
+			custom_tooltip = {
+				text = edmp_birthday_recipient_notified_tt
+				ROOT_FROM = { save_event_target_as = edmp_birthday_decision_taker }
+				character_event = { id = edmp_birthday.1300 }
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+}

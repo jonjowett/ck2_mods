@@ -1,0 +1,96 @@
+namespace = edmp_birthday
+
+# Player uses popper on another player
+character_event = {
+	id                = edmp_birthday.1300
+	title             = edmp_birthday_event_title
+	desc              = edmp_birthday_1300_desc
+	border            = GFX_event_normal_frame_economy # Green
+	picture           = GFX_evt_jugglers
+	portrait          = event_target:edmp_birthday_decision_taker
+	is_triggered_only = yes
+	option            = {
+		name = edmp_birthday_evtopt_party_starts
+		tooltip = {
+			add_character_modifier = {
+				name  = edmp_birthday_popper_consumed
+				years = 10
+			}
+		}
+		custom_tooltip = {
+			text = edmp_birthday_popper_refill_realm_levies_in_45_days_tt
+			character_event = { id = edmp_birthday.1301 days = 45 }
+		}
+	}
+	after             = { hidden_tooltip = { clear_event_target = edmp_birthday_decision_taker } }
+}
+
+# Player's realm levies are refilled
+character_event = {
+	id                = edmp_birthday.1301
+	title             = edmp_birthday_event_title
+	desc              = edmp_birthday_1301_desc
+	border            = GFX_event_normal_frame_economy # Green
+	picture           = GFX_evt_jugglers
+	portrait          = event_target:edmp_birthday_decision_taker
+	is_triggered_only = yes
+	option            = {
+		name = edmp_birthday_evtopt_party_starts
+		custom_tooltip = {
+			text = edmp_birthday_popper_refill_realm_levies_tt
+			any_demesne_title = {
+				limit = { lower_real_tier_than = DUKE }
+				refill_holding_levy = yes
+			}
+		}
+	}
+	after             = { hidden_tooltip = { clear_event_target = edmp_birthday_decision_taker } }
+}
+
+# Host spawns an item for ROOT
+character_event = {
+	id                = edmp_birthday.9100
+	title             = edmp_birthday_event_title
+	desc              = edmp_birthday_9100_desc
+	border            = GFX_event_normal_frame_diplomacy # Blue
+	picture           = GFX_evt_jugglers
+	portrait          = event_target:edmp_birthday_decision_taker
+	is_triggered_only = yes
+	option            = { name = edmp_birthday_evtopt_party_starts }
+	after             = { hidden_tooltip = { clear_event_target = edmp_birthday_decision_taker } }
+}
+character_event = {
+	id                = edmp_birthday.9200
+	title             = edmp_birthday_event_title
+	desc              = edmp_birthday_9200_desc
+	border            = GFX_event_normal_frame_diplomacy # Blue
+	picture           = GFX_evt_jugglers
+	portrait          = event_target:edmp_birthday_decision_taker
+	is_triggered_only = yes
+	option            = { name = edmp_birthday_evtopt_party_starts }
+	after             = { hidden_tooltip = { clear_event_target = edmp_birthday_decision_taker } }
+}
+character_event = {
+	id                = edmp_birthday.9300
+	title             = edmp_birthday_event_title
+	desc              = edmp_birthday_9300_desc
+	border            = GFX_event_normal_frame_diplomacy # Blue
+	picture           = GFX_evt_jugglers
+	portrait          = event_target:edmp_birthday_decision_taker
+	is_triggered_only = yes
+	option            = { name = edmp_birthday_evtopt_party_starts }
+	after             = { hidden_tooltip = { clear_event_target = edmp_birthday_decision_taker } }
+}
+
+# Host deletes all birthday items from ROOT
+character_event = {
+	id                = edmp_birthday.9900
+	title             = edmp_birthday_event_title
+	desc              = edmp_birthday_9900_desc
+	border            = GFX_event_normal_frame_war # Red
+	picture           = GFX_evt_jugglers
+	portrait          = event_target:edmp_birthday_decision_taker
+	is_triggered_only = yes
+	option            = { name = edmp_birthday_evtopt_party_ends }
+	after             = { hidden_tooltip = { clear_event_target = edmp_birthday_decision_taker } }
+}
