@@ -50,6 +50,7 @@ decisions = {
 			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 			NOT = { has_character_flag = edmp_celeb_admin_debug }
+			multiplayer = no
 		}
 		allow = { always = yes }
 		effect = {
@@ -66,6 +67,7 @@ decisions = {
 			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 			has_character_flag = edmp_celeb_admin_debug
+			# For safety, allow disabling of debug mode in multiplayer, even though the on_startup event ought to have fixed this
 		}
 		allow = { always = yes }
 		effect = {
@@ -75,6 +77,135 @@ decisions = {
 			}
 		}
 		ai_will_do = { factor = 0 }
+	}
+	
+	
+	
+	edmp_celeb_admin_grant_to_all_players_cake = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		allow = { always = yes }
+		effect = {
+			any_character = {
+				limit = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+				add_artifact = edmp_celeb_cake
+				if = {
+					limit = {
+						OR = {
+							AND = {
+								ai = no
+								NOT = { character = ROOT }
+							}
+							AND = {
+								character = ROOT
+								ROOT = { has_character_flag = edmp_celeb_admin_debug }
+							}
+						}
+					}
+					custom_tooltip = {
+						text = edmp_celeb_recipient_notified_tt
+						ROOT = { save_event_target_as = edmp_celeb_decision_taker }
+						character_event = { id = edmp_celeb.9100 }
+					}
+				}
+			}
+		}
+	}
+	
+	
+	
+	edmp_celeb_admin_grant_to_all_players_crown = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		allow = {
+			custom_tooltip = {
+				text = edmp_celeb_at_least_one_current_or_absent_human_player_doesnt_have_a_crown_tt
+				any_character = {
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					NOT = {
+						any_artifact = {
+							has_artifact_flag = edmp_celeb_crown
+							owner = { character = PREVPREV }
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			any_character = {
+				limit = {
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					NOT = {
+						any_artifact = {
+							has_artifact_flag = edmp_celeb_crown
+							owner = { character = PREVPREV }
+						}
+					}
+				}
+				add_artifact = edmp_celeb_crown
+				if = {
+					limit = {
+						OR = {
+							AND = {
+								ai = no
+								NOT = { character = ROOT }
+							}
+							AND = {
+								character = ROOT
+								ROOT = { has_character_flag = edmp_celeb_admin_debug }
+							}
+						}
+					}
+					custom_tooltip = {
+						text = edmp_celeb_recipient_notified_tt
+						ROOT = { save_event_target_as = edmp_celeb_decision_taker }
+						character_event = { id = edmp_celeb.9200 }
+					}
+				}
+			}
+		}
+	}
+	
+	
+	
+	edmp_celeb_admin_grant_to_all_players_popper = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		allow = { always = yes }
+		effect = {
+			any_character = {
+				limit = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+				add_artifact = edmp_celeb_popper
+				if = {
+					limit = {
+						OR = {
+							AND = {
+								ai = no
+								NOT = { character = ROOT }
+							}
+							AND = {
+								character = ROOT
+								ROOT = { has_character_flag = edmp_celeb_admin_debug }
+							}
+						}
+					}
+					custom_tooltip = {
+						text = edmp_celeb_recipient_notified_tt
+						ROOT = { save_event_target_as = edmp_celeb_decision_taker }
+						character_event = { id = edmp_celeb.9300 }
+					}
+				}
+			}
+		}
 	}
 	
 	
@@ -137,11 +268,14 @@ decisions = {
 				}
 				if = {
 					limit = {
-						ai = no
-						ROOT = {
-							OR = {
-								NOT = { character = PREV }
-								has_character_flag = edmp_interference_debug_include_sender_in_notifications
+						OR = {
+							AND = {
+								ai = no
+								NOT = { character = ROOT }
+							}
+							AND = {
+								character = ROOT
+								ROOT = { has_character_flag = edmp_celeb_admin_debug }
 							}
 						}
 					}
@@ -175,11 +309,14 @@ targetted_decisions = {
 			add_artifact = edmp_celeb_cake
 			if = {
 				limit = {
-					ai = no
-					ROOT_FROM = {
-						OR = {
-							NOT = { character = PREV }
-							has_character_flag = edmp_interference_debug_include_sender_in_notifications
+					OR = {
+						AND = {
+							ai = no
+							NOT = { character = ROOT_FROM }
+						}
+						AND = {
+							character = ROOT_FROM
+							ROOT_FROM = { has_character_flag = edmp_celeb_admin_debug }
 						}
 					}
 				}
@@ -209,11 +346,14 @@ targetted_decisions = {
 			add_artifact = edmp_celeb_crown
 			if = {
 				limit = {
-					ai = no
-					ROOT_FROM = {
-						OR = {
-							NOT = { character = PREV }
-							has_character_flag = edmp_interference_debug_include_sender_in_notifications
+					OR = {
+						AND = {
+							ai = no
+							NOT = { character = ROOT_FROM }
+						}
+						AND = {
+							character = ROOT_FROM
+							ROOT_FROM = { has_character_flag = edmp_celeb_admin_debug }
 						}
 					}
 				}
@@ -243,11 +383,14 @@ targetted_decisions = {
 			add_artifact = edmp_celeb_popper
 			if = {
 				limit = {
-					ai = no
-					ROOT_FROM = {
-						OR = {
-							NOT = { character = PREV }
-							has_character_flag = edmp_interference_debug_include_sender_in_notifications
+					OR = {
+						AND = {
+							ai = no
+							NOT = { character = ROOT_FROM }
+						}
+						AND = {
+							character = ROOT_FROM
+							ROOT_FROM = { has_character_flag = edmp_celeb_admin_debug }
 						}
 					}
 				}
@@ -280,15 +423,21 @@ targetted_decisions = {
 					has_artifact_flag = edmp_celeb
 					owner = { character = PREVPREV }
 				}
-				unsafe_destroy_artifact = yes
+				custom_tooltip = {
+					text = edmp_celeb_this_artifact_is_destroyed_tt
+					unsafe_destroy_artifact = yes
+				}
 			}
 			if = {
 				limit = {
-					ai = no
-					ROOT_FROM = {
-						OR = {
-							NOT = { character = PREV }
-							has_character_flag = edmp_interference_debug_include_sender_in_notifications
+					OR = {
+						AND = {
+							ai = no
+							NOT = { character = ROOT_FROM }
+						}
+						AND = {
+							character = ROOT_FROM
+							ROOT_FROM = { has_character_flag = edmp_celeb_admin_debug }
 						}
 					}
 				}
