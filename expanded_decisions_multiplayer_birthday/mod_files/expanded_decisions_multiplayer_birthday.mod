@@ -1,4 +1,4 @@
-name = "Expanded Decisions: Multiplayer (Birthday Submod)"
+name = "Expanded Decisions: MP: Celebrations"
 path = "mod/expanded_decisions_multiplayer_birthday"
 
 # For normal gameplay, use these dependencies:

@@ -6,14 +6,14 @@
 #
 # Artifacts
 #
-edmp_birthday_crown;Birthday Crown;;;;;;;;;;;;;x
-edmp_birthday_crown_desc;This crown may only be made of paper, but its bright colours improve the mood of everyone around you;;;;;;;;;;;;;x
+edmp_celeb_crown;Paper Crown;;;;;;;;;;;;;x
+edmp_celeb_crown_desc;This beautiful crown may only be made of paper, but its bright colours improve the mood of everyone around you;;;;;;;;;;;;;x
 #
-edmp_birthday_cake;Birthday Cake;;;;;;;;;;;;;x
-edmp_birthday_cake_desc;This delicious slice of cake is practically begging to be eaten...;;;;;;;;;;;;;x
+edmp_celeb_cake;Delicious Cake;;;;;;;;;;;;;x
+edmp_celeb_cake_desc;This delicious slice of cake is practically begging to be eaten...;;;;;;;;;;;;;x
 #
-edmp_birthday_popper;Birthday Popper;;;;;;;;;;;;;x
-edmp_birthday_popper_desc;This strange artifact from a distant land is said to produce thunder and colourful projectiles when used. Sounds like a perfect way to bless the troops!;;;;;;;;;;;;;x
+edmp_celeb_popper;Party Popper;;;;;;;;;;;;;x
+edmp_celeb_popper_desc;This strange artifact from a distant land is said to produce thunder and colourful projectiles when used. Sounds like a perfect way to bless the troops!;;;;;;;;;;;;;x
 #
 #
 #
@@ -21,8 +21,8 @@ edmp_birthday_popper_desc;This strange artifact from a distant land is said to p
 #
 # Text Modifiers
 #
-edmp_birthday_cake_text_modifier;§MCan be consumed via a special intrigue menu decision!§!;;;;;;;;;;;;;x
-edmp_birthday_popper_text_modifier;§MCan be used on another player via a special targetted decision!§!;;;;;;;;;;;;;x
+edmp_celeb_cake_text_modifier;§MCan be consumed via a special intrigue menu decision!§!;;;;;;;;;;;;;x
+edmp_celeb_popper_text_modifier;§MCan be used on another player via a special targetted decision!§!;;;;;;;;;;;;;x
 #
 #
 #
@@ -30,25 +30,25 @@ edmp_birthday_popper_text_modifier;§MCan be used on another player via a special
 #
 # Decisions
 #
-edmp_birthday_cake_consume;(ED:MP:Birthday) Eat a slice of cake;;;;;;;;;;;;;x
-edmp_birthday_cake_consume_desc;No-one can resist the cake...;;;;;;;;;;;;;x
-edmp_birthday_this_character_owns_at_least_one_cake_tt;Owns at least one §YBirthday Cake§!;;;;;;;;;;;;;x
-edmp_birthday_cake_consume_tt;§BY U M M Y !§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\nOne slice of §YBirthday Cake§! is §Rremoved§! from your inventory\n§b.§!\nGain the following bonuses for §Y10 years§!:\n- §G+10§! all stats\n- §G+1§! health\n- §G+10%§! fertility\n- §G+10§! personal combat skill;;;;;;;;;;;;;x
+edmp_celeb_cake_consume;(ED:MP:Celeb) Eat a slice of cake;;;;;;;;;;;;;x
+edmp_celeb_cake_consume_desc;No-one can resist the cake...;;;;;;;;;;;;;x
+edmp_celeb_this_character_owns_at_least_one_cake_tt;Owns at least one slice of §YDelicious Cake§!;;;;;;;;;;;;;x
+edmp_celeb_cake_consume_tt;§BY U M M Y !§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\n§b.§!\nOne slice of §YDelicious Cake§! is §Rremoved§! from your inventory\n§b.§!\nGain the following bonuses for §Y10 years§!:\n- §G+10§! all stats\n- §G+1§! health\n- §G+10%§! fertility\n- §G+10§! personal combat skill;;;;;;;;;;;;;x
 #
-edmp_birthday_popper_consume;§M(ED:MP:Birthday) Celebrate!§!;;;;;;;;;;;;;x
-edmp_birthday_popper_consume_desc;Celebrate the occasion with [Root.GetBestName]!;;;;;;;;;;;;;x
-edmp_birthday_from_owns_at_least_one_popper_tt;§Y[From.GetBestName]§! owns at least one §YBirthday Popper§!;;;;;;;;;;;;;x
-edmp_birthday_popper_consume_tt;§BB O O M !§!\n§b.§!\nOne §YBirthday Popper§! is §Rremoved§! from your inventory\n[Root.GetBestName] realm levies are §Grefilled§!, and [Root.GetSheHe] also gains the following bonuses for §Y10 years§!:\n- §G+10%§! levy size & reinforcement rate\n- §G+10%§! land morale & organisation (morale recovery)\n- §G+10§! days of supply\n- §G-10!§! land attrition\n- §G+10%§! siege speed & defence;;;;;;;;;;;;;x
+edmp_celeb_popper_consume;§M(ED:MP:Celeb) Party!§!;;;;;;;;;;;;;x
+edmp_celeb_popper_consume_desc;Use your §YParty Popper§! to celebrate the occasion with [Root.GetBestName]!;;;;;;;;;;;;;x
+edmp_celeb_from_owns_at_least_one_popper_tt;§Y[From.GetBestName]§! owns at least one §YParty Popper§!;;;;;;;;;;;;;x
+edmp_celeb_popper_consume_tt;§BB O O M !§!\n§b.§!\nOne §YParty Popper§! is §Rremoved§! from your inventory\n[Root.GetBestName] realm levies are §Grefilled§!, and [Root.GetSheHe] also gains the following bonuses for §Y10 years§!:\n- §G+10%§! levy size & reinforcement rate\n- §G+10%§! land morale & organisation (morale recovery)\n- §G+10§! days of supply\n- §G-10!§! land attrition\n- §G+10%§! siege speed & defence;;;;;;;;;;;;;x
 #
 #
 #
 #
 #
 # Event Modifiers
-edmp_birthday_cake_consumed;§M(ED:MP:Birthday)§! §BY U M M Y !§!;;;;;;;;;;;;;x
-edmp_birthday_cake_consumed_desc;[Root.GetBestName] has consumed a delicious slice of cake!;;;;;;;;;;;;;x
-edmp_birthday_popper_consumed;§M(ED:MP:Birthday)§! §BB O O M !§!;;;;;;;;;;;;;x
-edmp_birthday_popper_consumed_desc;[Root.GetBestName] has celebrated the start of a military campaign with thunder and magic!;;;;;;;;;;;;;x
+edmp_celeb_cake_consumed;§M(ED:MP:Celeb)§! §BY U M M Y !§!;;;;;;;;;;;;;x
+edmp_celeb_cake_consumed_desc;[Root.GetBestName] has consumed a delicious slice of cake!;;;;;;;;;;;;;x
+edmp_celeb_popper_consumed;§M(ED:MP:Celeb)§! §BB O O M !§!;;;;;;;;;;;;;x
+edmp_celeb_popper_consumed_desc;[Root.GetBestName] has celebrated the start of a military campaign with thunder and magic!;;;;;;;;;;;;;x
 #
 #
 #
@@ -56,25 +56,25 @@ edmp_birthday_popper_consumed_desc;[Root.GetBestName] has celebrated the start o
 #
 # Admin Decisions
 #
-edmp_birthday_admin_decisions_show;(ED:MP:Birthday:Admin) Decisions HIDDEN - Show?;;;;;;;;;;;;;x
-edmp_birthday_admin_decisions_hide;(ED:MP:Birthday:Admin) Decisions VISIBLE - Hide?;;;;;;;;;;;;;x
-edmp_birthday_admin_decisions_now_hidden_tt;All §P(ED:MP:Birthday:Admin)§! decisions will now be §Yhidden§!;;;;;;;;;;;;;x
-edmp_birthday_admin_decisions_now_shown_tt;All §P(ED:MP:Birthday:Admin)§! decisions will now be §Yvisible§!;;;;;;;;;;;;;x
+edmp_celeb_admin_decisions_show;(ED:MP:Celeb:Admin) Decisions HIDDEN - Show?;;;;;;;;;;;;;x
+edmp_celeb_admin_decisions_hide;(ED:MP:Celeb:Admin) Decisions VISIBLE - Hide?;;;;;;;;;;;;;x
+edmp_celeb_admin_decisions_now_hidden_tt;All §P(ED:MP:Celeb:Admin)§! decisions will now be §Yhidden§!;;;;;;;;;;;;;x
+edmp_celeb_admin_decisions_now_shown_tt;All §P(ED:MP:Celeb:Admin)§! decisions will now be §Yvisible§!;;;;;;;;;;;;;x
 #
-edmp_birthday_admin_debug_mode_enable;(ED:MP:Birthday:Admin) Debug mode DISABLED - Enable?;;;;;;;;;;;;;x
-edmp_birthday_admin_debug_mode_disable;(ED:MP:Birthday:Admin) Debug mode ENDABLED - Disable?;;;;;;;;;;;;;x
-edmp_birthday_debug_mode_now_disabled_tt;Debug mode for §M(ED:MP:Birthday)§! and §P(ED:MP:Birthday:Admin)§! decisions is now §Rdisabled§!;;;;;;;;;;;;;x
-edmp_birthday_debug_mode_now_enabled_tt;Debug mode for §M(ED:MP:Birthday)§! and §P(ED:MP:Birthday:Admin)§! decisions is now §Genabled§!;;;;;;;;;;;;;x
+edmp_celeb_admin_debug_mode_enable;(ED:MP:Celeb:Admin) Debug mode DISABLED - Enable?;;;;;;;;;;;;;x
+edmp_celeb_admin_debug_mode_disable;(ED:MP:Celeb:Admin) Debug mode ENDABLED - Disable?;;;;;;;;;;;;;x
+edmp_celeb_debug_mode_now_disabled_tt;Debug mode for §M(ED:MP:Celeb)§! and §P(ED:MP:Celeb:Admin)§! decisions is now §Rdisabled§!;;;;;;;;;;;;;x
+edmp_celeb_debug_mode_now_enabled_tt;Debug mode for §M(ED:MP:Celeb)§! and §P(ED:MP:Celeb:Admin)§! decisions is now §Genabled§!;;;;;;;;;;;;;x
 #
-edmp_birthday_admin_delete_all_from_ai;(ED:MP:Birthday:Admin) Delete all, from AI only;;;;;;;;;;;;;x
-edmp_birthday_admin_delete_all_from_humans;(ED:MP:Birthday:Admin) Delete all, from humans only;;;;;;;;;;;;;x
-edmp_birthday_items_destroyed_tt;All §YBirthday§! artifacts §Rdestroyed§!;;;;;;;;;;;;;x
+edmp_celeb_admin_delete_all_from_ai;(ED:MP:Celeb:Admin) Delete all, from AI only;;;;;;;;;;;;;x
+edmp_celeb_admin_delete_all_from_humans;(ED:MP:Celeb:Admin) Delete all, from humans only;;;;;;;;;;;;;x
+edmp_celeb_items_destroyed_tt;All §Ycelebratory§! artifacts §Rdestroyed§!;;;;;;;;;;;;;x
 #
-edmp_birthday_admin_spawn_cake;§P(ED:MP:B:Admin)§! Grant Cake;;;;;;;;;;;;;x
-edmp_birthday_admin_spawn_crown;§P(ED:MP:B:Admin)§! Grant Crown;;;;;;;;;;;;;x
-edmp_birthday_admin_spawn_popper;§P(ED:MP:B:Admin)§! Grant Popper;;;;;;;;;;;;;x
+edmp_celeb_admin_spawn_cake;§P(ED:MP:C:Admin)§! Grant Cake;;;;;;;;;;;;;x
+edmp_celeb_admin_spawn_crown;§P(ED:MP:C:Admin)§! Grant Crown;;;;;;;;;;;;;x
+edmp_celeb_admin_spawn_popper;§P(ED:MP:C:Admin)§! Grant Popper;;;;;;;;;;;;;x
 #
-edmp_birthday_admin_delete_all;§P(ED:MP:B:Admin)§! Delete All;;;;;;;;;;;;;x
+edmp_celeb_admin_delete_all;§P(ED:MP:C:Admin)§! Delete All;;;;;;;;;;;;;x
 #
 #
 #
@@ -82,20 +82,20 @@ edmp_birthday_admin_delete_all;§P(ED:MP:B:Admin)§! Delete All;;;;;;;;;;;;;x
 #
 # Events
 #
-edmp_birthday_event_title;(ED:MP:Birthday) Notification;;;;;;;;;;;;;x
-edmp_birthday_evtopt_party_starts;Let's get the party started!;;;;;;;;;;;;;x
-edmp_birthday_evtopt_party_ends;I guess the party's over...;;;;;;;;;;;;;x
+edmp_celeb_event_title;(ED:MP:Celeb) Notification;;;;;;;;;;;;;x
+edmp_celeb_evtopt_party_starts;Let's get the party started!;;;;;;;;;;;;;x
+edmp_celeb_evtopt_party_ends;I guess the party's over...;;;;;;;;;;;;;x
 #
-edmp_birthday_1300_desc;During a recent military parade, [edmp_birthday_decision_taker.GetBestName] (username: [edmp_birthday_decision_taker.GetHumanName]) surprised me with a strange artifact, which exploded with a thunderous sound and colourful projectiles.\nMy troops viewed this as a significant blessing, and will be inspired for years to come.;;;;;;;;;;;;;x
-edmp_birthday_popper_refill_realm_levies_in_45_days_tt;My §Yrealm levies§! will be §Grefilled§! via event in §Y45 days' time§!;;;;;;;;;;;;;x
-edmp_birthday_1301_desc;Following the recent parade, warriors throughout my realm have flocked to my banner!;;;;;;;;;;;;;x
-edmp_birthday_popper_refill_realm_levies_tt;My §Yrealm levies§! are §Grefilled§!;;;;;;;;;;;;;x
+edmp_celeb_1300_desc;During a recent military parade, [edmp_celeb_decision_taker.GetBestName] (username: [edmp_celeb_decision_taker.GetHumanName]) surprised me with a strange artifact, which exploded with a thunderous sound and colourful projectiles.\nMy troops viewed this as a significant blessing, and will be inspired for years to come.;;;;;;;;;;;;;x
+edmp_celeb_popper_refill_realm_levies_in_45_days_tt;My §Yrealm levies§! will be §Grefilled§! via event in §Y45 days' time§!;;;;;;;;;;;;;x
+edmp_celeb_1301_desc;Following the recent parade, warriors throughout my realm have flocked to my banner!;;;;;;;;;;;;;x
+edmp_celeb_popper_refill_realm_levies_tt;My §Yrealm levies§! are §Grefilled§!;;;;;;;;;;;;;x
 #
-edmp_birthday_9100_desc;[edmp_birthday_decision_taker.GetBestName] (username: [edmp_birthday_decision_taker.GetHumanName]) has granted me a slice of Birthday Cake!;;;;;;;;;;;;;x
-edmp_birthday_9200_desc;[edmp_birthday_decision_taker.GetBestName] (username: [edmp_birthday_decision_taker.GetHumanName]) has granted me a Birthday Crown!;;;;;;;;;;;;;x
-edmp_birthday_9300_desc;[edmp_birthday_decision_taker.GetBestName] (username: [edmp_birthday_decision_taker.GetHumanName]) has granted me a Birthday Popper!;;;;;;;;;;;;;x
+edmp_celeb_9100_desc;[edmp_celeb_decision_taker.GetBestName] (username: [edmp_celeb_decision_taker.GetHumanName]) has granted me a slice of Delicious Cake!;;;;;;;;;;;;;x
+edmp_celeb_9200_desc;[edmp_celeb_decision_taker.GetBestName] (username: [edmp_celeb_decision_taker.GetHumanName]) has granted me a beautiful Paper Crown!;;;;;;;;;;;;;x
+edmp_celeb_9300_desc;[edmp_celeb_decision_taker.GetBestName] (username: [edmp_celeb_decision_taker.GetHumanName]) has granted me a mysterious Party Popper!;;;;;;;;;;;;;x
 #
-edmp_birthday_9900_desc;[edmp_birthday_decision_taker.GetBestName] (username: [edmp_birthday_decision_taker.GetHumanName]) has removed all of my Birthday items.;;;;;;;;;;;;;x
+edmp_celeb_9900_desc;[edmp_celeb_decision_taker.GetBestName] (username: [edmp_celeb_decision_taker.GetHumanName]) has removed all of my celebratory items.;;;;;;;;;;;;;x
 #
 #
 #
@@ -103,7 +103,7 @@ edmp_birthday_9900_desc;[edmp_birthday_decision_taker.GetBestName] (username: [e
 #
 # Misc
 #
-edmp_birthday_blank_line_tt;§b.§!;;;;;;;;;;;;;x
-edmp_birthday_recipient_notified_tt;§Y[This.GetTitledFirstName]§! will be §Ynotified§!;;;;;;;;;;;;;x
-edmp_birthday_victim_notified_tt;§Y[This.GetTitledFirstName]§! will be §Ynotified§!;;;;;;;;;;;;;x
-edmp_birthday_admin_success_because_of_debug_mode_tt;§R!!! DEBUG MODE !!!§!;;;;;;;;;;;;;x
+edmp_celeb_blank_line_tt;§b.§!;;;;;;;;;;;;;x
+edmp_celeb_recipient_notified_tt;§Y[This.GetTitledFirstName]§! will be §Ynotified§!;;;;;;;;;;;;;x
+edmp_celeb_victim_notified_tt;§Y[This.GetTitledFirstName]§! will be §Ynotified§!;;;;;;;;;;;;;x
+edmp_celeb_admin_success_because_of_debug_mode_tt;§R!!! DEBUG MODE !!!§!;;;;;;;;;;;;;x

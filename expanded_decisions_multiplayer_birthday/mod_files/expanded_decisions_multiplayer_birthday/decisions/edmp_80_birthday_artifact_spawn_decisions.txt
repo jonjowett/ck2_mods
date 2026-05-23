@@ -2,40 +2,40 @@ decisions = {
 	
 	
 	
-	edmp_birthday_admin_decisions_show = {
+	edmp_celeb_admin_decisions_show = {
 		ai = no
 		potential = {
 			has_character_flag = edmp_admin_submenu_is_open
 			edmp_this_character_can_take_admin_actions = yes
-			NOT = { has_character_flag = edmp_birthday_admin }
+			NOT = { has_character_flag = edmp_celeb_admin }
 		}
 		allow = { always = yes }
 		effect = {
 			custom_tooltip = {
-				text = edmp_birthday_admin_decisions_now_shown_tt
-				set_character_flag = edmp_birthday_admin
+				text = edmp_celeb_admin_decisions_now_shown_tt
+				set_character_flag = edmp_celeb_admin
 			}
 		}
 		ai_will_do = { factor = 0 }
 	}
-	edmp_birthday_admin_decisions_hide = {
+	edmp_celeb_admin_decisions_hide = {
 		ai = no
 		potential = {
 			has_character_flag = edmp_admin_submenu_is_open
 			edmp_this_character_can_take_admin_actions = yes
-			has_character_flag = edmp_birthday_admin
+			has_character_flag = edmp_celeb_admin
 		}
 		allow = { always = yes }
 		effect = {
 			custom_tooltip = {
-				text = edmp_birthday_admin_decisions_now_hidden_tt
-				clr_character_flag = edmp_birthday_admin
+				text = edmp_celeb_admin_decisions_now_hidden_tt
+				clr_character_flag = edmp_celeb_admin
 			}
 			if = {
-				limit = { has_character_flag = edmp_birthday_admin_debug }
+				limit = { has_character_flag = edmp_celeb_admin_debug }
 				custom_tooltip = {
-					text = edmp_birthday_debug_mode_now_disabled_tt
-					clr_character_flag = edmp_birthday_admin_debug
+					text = edmp_celeb_debug_mode_now_disabled_tt
+					clr_character_flag = edmp_celeb_admin_debug
 				}
 			}
 		}
@@ -44,34 +44,34 @@ decisions = {
 	
 	
 	
-	edmp_birthday_admin_debug_mode_enable = {
+	edmp_celeb_admin_debug_mode_enable = {
 		ai = no
 		potential = {
-			has_character_flag = edmp_birthday_admin
+			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
-			NOT = { has_character_flag = edmp_birthday_admin_debug }
+			NOT = { has_character_flag = edmp_celeb_admin_debug }
 		}
 		allow = { always = yes }
 		effect = {
 			custom_tooltip = {
-				text = edmp_birthday_debug_mode_now_enabled_tt
-				set_character_flag = edmp_birthday_admin_debug
+				text = edmp_celeb_debug_mode_now_enabled_tt
+				set_character_flag = edmp_celeb_admin_debug
 			}
 		}
 		ai_will_do = { factor = 0 }
 	}
-	edmp_birthday_admin_debug_mode_disable = {
+	edmp_celeb_admin_debug_mode_disable = {
 		ai = no
 		potential = {
-			has_character_flag = edmp_birthday_admin
+			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
-			has_character_flag = edmp_birthday_admin_debug
+			has_character_flag = edmp_celeb_admin_debug
 		}
 		allow = { always = yes }
 		effect = {
 			custom_tooltip = {
-				text = edmp_birthday_debug_mode_now_disabled_tt
-				clr_character_flag = edmp_birthday_admin_debug
+				text = edmp_celeb_debug_mode_now_disabled_tt
+				clr_character_flag = edmp_celeb_admin_debug
 			}
 		}
 		ai_will_do = { factor = 0 }
@@ -79,10 +79,10 @@ decisions = {
 	
 	
 	
-	edmp_birthday_admin_delete_all_from_ai = {
+	edmp_celeb_admin_delete_all_from_ai = {
 		ai = no
 		potential = {
-			has_character_flag = edmp_birthday_admin
+			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 		}
 		allow = { always = yes }
@@ -91,15 +91,15 @@ decisions = {
 				limit = {
 					edmp_this_character_is_not_a_current_or_absent_human_player = yes
 					any_artifact = {
-						has_artifact_flag = edmp_birthday
+						has_artifact_flag = edmp_celeb
 						owner = { character = PREVPREV }
 					}
 				}
 				custom_tooltip = {
-					text = edmp_birthday_items_destroyed_tt
+					text = edmp_celeb_items_destroyed_tt
 					any_artifact = {
 						limit = {
-							has_artifact_flag = edmp_birthday
+							has_artifact_flag = edmp_celeb
 							owner = { character = PREVPREV }
 						}
 						unsafe_destroy_artifact = yes
@@ -109,10 +109,10 @@ decisions = {
 		}
 		ai_will_do = { factor = 0 }
 	}
-	edmp_birthday_admin_delete_all_from_humans = {
+	edmp_celeb_admin_delete_all_from_humans = {
 		ai = no
 		potential = {
-			has_character_flag = edmp_birthday_admin
+			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 		}
 		allow = { always = yes }
@@ -121,15 +121,15 @@ decisions = {
 				limit = {
 					edmp_this_character_is_a_current_or_absent_human_player = yes
 					any_artifact = {
-						has_artifact_flag = edmp_birthday
+						has_artifact_flag = edmp_celeb
 						owner = { character = PREVPREV }
 					}
 				}
 				custom_tooltip = {
-					text = edmp_birthday_items_destroyed_tt
+					text = edmp_celeb_items_destroyed_tt
 					any_artifact = {
 						limit = {
-							has_artifact_flag = edmp_birthday
+							has_artifact_flag = edmp_celeb
 							owner = { character = PREVPREV }
 						}
 						unsafe_destroy_artifact = yes
@@ -146,9 +146,9 @@ decisions = {
 						}
 					}
 					custom_tooltip = {
-						text = edmp_birthday_victim_notified_tt
-						ROOT = { save_event_target_as = edmp_birthday_decision_taker }
-						character_event = { id = edmp_birthday.9100 }
+						text = edmp_celeb_victim_notified_tt
+						ROOT = { save_event_target_as = edmp_celeb_decision_taker }
+						character_event = { id = edmp_celeb.9100 }
 					}
 				}
 			}
@@ -158,11 +158,11 @@ decisions = {
 }
 
 targetted_decisions = {
-	edmp_birthday_admin_spawn_cake = {
+	edmp_celeb_admin_spawn_cake = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			has_character_flag = edmp_birthday_admin
+			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 		}
 		potential = {
@@ -172,7 +172,7 @@ targetted_decisions = {
 			always = yes
 		}
 		effect = {
-			add_artifact = edmp_birthday_cake
+			add_artifact = edmp_celeb_cake
 			if = {
 				limit = {
 					ai = no
@@ -184,19 +184,19 @@ targetted_decisions = {
 					}
 				}
 				custom_tooltip = {
-					text = edmp_birthday_recipient_notified_tt
-					ROOT_FROM = { save_event_target_as = edmp_birthday_decision_taker }
-					character_event = { id = edmp_birthday.9100 }
+					text = edmp_celeb_recipient_notified_tt
+					ROOT_FROM = { save_event_target_as = edmp_celeb_decision_taker }
+					character_event = { id = edmp_celeb.9100 }
 				}
 			}
 		}
 		ai_will_do = { factor = 0 }
 	}
-	edmp_birthday_admin_spawn_crown = {
+	edmp_celeb_admin_spawn_crown = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			has_character_flag = edmp_birthday_admin
+			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 		}
 		potential = {
@@ -206,7 +206,7 @@ targetted_decisions = {
 			always = yes
 		}
 		effect = {
-			add_artifact = edmp_birthday_crown
+			add_artifact = edmp_celeb_crown
 			if = {
 				limit = {
 					ai = no
@@ -218,19 +218,19 @@ targetted_decisions = {
 					}
 				}
 				custom_tooltip = {
-					text = edmp_birthday_recipient_notified_tt
-					ROOT_FROM = { save_event_target_as = edmp_birthday_decision_taker }
-					character_event = { id = edmp_birthday.9200 }
+					text = edmp_celeb_recipient_notified_tt
+					ROOT_FROM = { save_event_target_as = edmp_celeb_decision_taker }
+					character_event = { id = edmp_celeb.9200 }
 				}
 			}
 		}
 		ai_will_do = { factor = 0 }
 	}
-	edmp_birthday_admin_spawn_popper = {
+	edmp_celeb_admin_spawn_popper = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			has_character_flag = edmp_birthday_admin
+			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 		}
 		potential = {
@@ -240,7 +240,7 @@ targetted_decisions = {
 			always = yes
 		}
 		effect = {
-			add_artifact = edmp_birthday_popper
+			add_artifact = edmp_celeb_popper
 			if = {
 				limit = {
 					ai = no
@@ -252,24 +252,24 @@ targetted_decisions = {
 					}
 				}
 				custom_tooltip = {
-					text = edmp_birthday_recipient_notified_tt
-					ROOT_FROM = { save_event_target_as = edmp_birthday_decision_taker }
-					character_event = { id = edmp_birthday.9300 }
+					text = edmp_celeb_recipient_notified_tt
+					ROOT_FROM = { save_event_target_as = edmp_celeb_decision_taker }
+					character_event = { id = edmp_celeb.9300 }
 				}
 			}
 		}
 		ai_will_do = { factor = 0 }
 	}
-	edmp_birthday_admin_delete_all = {
+	edmp_celeb_admin_delete_all = {
 		filter = all_including_me
 		ai = no
 		from_potential = {
-			has_character_flag = edmp_birthday_admin
+			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 		}
 		potential = {
 			any_artifact = {
-				has_artifact_flag = edmp_birthday
+				has_artifact_flag = edmp_celeb
 				owner = { character = PREVPREV }
 			}
 		}
@@ -277,7 +277,7 @@ targetted_decisions = {
 		effect = {
 			any_artifact = {
 				limit = {
-					has_artifact_flag = edmp_birthday
+					has_artifact_flag = edmp_celeb
 					owner = { character = PREVPREV }
 				}
 				unsafe_destroy_artifact = yes
@@ -293,9 +293,9 @@ targetted_decisions = {
 					}
 				}
 				custom_tooltip = {
-					text = edmp_birthday_victim_notified_tt
-					ROOT_FROM = { save_event_target_as = edmp_birthday_decision_taker }
-					character_event = { id = edmp_birthday.9900 }
+					text = edmp_celeb_victim_notified_tt
+					ROOT_FROM = { save_event_target_as = edmp_celeb_decision_taker }
+					character_event = { id = edmp_celeb.9900 }
 				}
 			}
 		}
