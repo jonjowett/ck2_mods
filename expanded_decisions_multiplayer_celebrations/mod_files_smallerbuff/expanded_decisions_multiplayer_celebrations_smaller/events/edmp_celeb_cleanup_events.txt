@@ -1,0 +1,20 @@
+# Cleanup: On new/load game, forcibly remove all admin flags from all count-tier/patrician characters
+
+namespace = edmp_celeb_cleanup
+
+character_event = {
+	id                = edmp_celeb_cleanup.1000
+	hide_window       = yes
+	is_triggered_only = yes
+	only_playable     = yes
+	trigger = {
+		OR = {
+			has_character_flag = edmp_celeb_admin
+			has_character_flag = edmp_celeb_admin_debug
+		}
+	}
+	immediate = {
+		clr_character_flag = edmp_celeb_admin
+		clr_character_flag = edmp_celeb_admin_debug
+	}
+}

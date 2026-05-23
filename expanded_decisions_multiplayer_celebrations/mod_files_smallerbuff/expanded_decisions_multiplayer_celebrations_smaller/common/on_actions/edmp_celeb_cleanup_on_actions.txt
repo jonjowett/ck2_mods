@@ -1,0 +1,13 @@
+# Cleanup: On new/load game, forcibly remove all admin flags from all count-tier/patrician characters
+
+on_startup = {
+	events = {
+		edmp_celeb_cleanup.1000
+	}
+}
+
+on_chronicle_start = {
+	events = {
+		edmp_celeb_cleanup.1000
+	}
+}

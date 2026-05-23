@@ -1,0 +1,117 @@
+decisions = {
+	edmp_celeb_cake_consume = {
+		ai = no
+		is_high_prio = yes
+		potential = {
+			# Only humans can take this decision
+			ai = no
+			# Only visible if someone has a cake (unless in debug mode)
+			OR = {
+				edmp_celeb_at_least_one_current_or_absent_player_has_a_cake = yes
+				edmp_celeb_admin_this_character_is_in_sp_and_is_admin_and_is_in_debug_mode = yes
+			}
+		}
+		allow = {
+			# Debug mode bypasses the usual conditions (but they are still visible for checking purposes)
+			trigger_if = {
+				limit = { edmp_celeb_admin_this_character_is_in_sp_and_is_admin_and_is_in_debug_mode = yes }
+				OR = {
+					custom_tooltip = {
+						text = edmp_celeb_admin_success_because_of_debug_mode_tt
+						always = yes
+					}
+					edmp_celeb_cake_consume_allow = yes
+				}
+			}
+			trigger_else = {
+				edmp_celeb_cake_consume_allow = yes
+			}
+		}
+		effect = {
+			# Decision-taker loses artifact & gains effect
+			custom_tooltip = {
+				text = edmp_celeb_cake_consume_tt
+				random_artifact = {
+					limit = {
+						owner = { character = PREVPREV }
+						has_artifact_flag = edmp_celeb_cake
+					}
+					unsafe_destroy_artifact = yes
+				}
+				remove_character_modifier = edmp_celeb_cake_consumed
+				add_character_modifier = {
+					name  = edmp_celeb_cake_consumed
+					years = 10
+				}
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+}
+
+targetted_decisions = {
+	edmp_celeb_popper_consume = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			# Only humans can take this decision
+			ai = no
+			# Only visible if someone has a popper (unless in debug mode)
+			OR = {
+				edmp_celeb_at_least_one_current_or_absent_player_has_a_popper = yes
+				ROOT_FROM = { edmp_celeb_admin_this_character_is_in_sp_and_is_admin_and_is_in_debug_mode = yes }
+			}
+		}
+		potential = {
+			# Only visible if this is an active human players (unless in debug mode)
+			OR = {
+				ai = no
+				ROOT_FROM = { edmp_celeb_admin_this_character_is_in_sp_and_is_admin_and_is_in_debug_mode = yes }
+			}
+		}
+		allow = {
+			# Debug mode bypasses the usual conditions (but they are still visible for checking purposes)
+			trigger_if = {
+				limit = { ROOT_FROM = { edmp_celeb_admin_this_character_is_in_sp_and_is_admin_and_is_in_debug_mode = yes } }
+				OR = {
+					custom_tooltip = {
+						text = edmp_celeb_admin_success_because_of_debug_mode_tt
+						always = yes
+					}
+					edmp_celeb_popper_consume_allow = yes
+				}
+			}
+			trigger_else = {
+				edmp_celeb_popper_consume_allow = yes
+			}
+		}
+		effect = {
+			# Artifact is removed from decision-taker & effect is added to target
+			custom_tooltip = {
+				text = edmp_celeb_popper_consume_tt
+				ROOT_FROM = {
+					random_artifact = {
+						limit = {
+							owner = { character = PREVPREV }
+							has_artifact_flag = edmp_celeb_popper
+						}
+						unsafe_destroy_artifact = yes
+					}
+				}
+				remove_character_modifier = edmp_celeb_popper_consumed
+				add_character_modifier = {
+					name  = edmp_celeb_popper_consumed
+					years = 10
+				}
+			}
+			# Target is notified
+			custom_tooltip = { text = edmp_celeb_blank_line_tt }
+			custom_tooltip = {
+				text = edmp_celeb_recipient_notified_tt
+				ROOT_FROM = { save_event_target_as = edmp_celeb_decision_taker }
+				character_event = { id = edmp_celeb.1300 }
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+}

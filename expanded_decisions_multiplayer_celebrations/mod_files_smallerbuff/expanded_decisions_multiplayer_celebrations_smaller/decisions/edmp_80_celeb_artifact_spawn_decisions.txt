@@ -1,0 +1,453 @@
+decisions = {
+	
+	
+	
+	edmp_celeb_admin_decisions_show = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_admin_submenu_is_open
+			edmp_this_character_can_take_admin_actions = yes
+			NOT = { has_character_flag = edmp_celeb_admin }
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_celeb_admin_decisions_now_shown_tt
+				set_character_flag = edmp_celeb_admin
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	edmp_celeb_admin_decisions_hide = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_admin_submenu_is_open
+			edmp_this_character_can_take_admin_actions = yes
+			has_character_flag = edmp_celeb_admin
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_celeb_admin_decisions_now_hidden_tt
+				clr_character_flag = edmp_celeb_admin
+			}
+			if = {
+				limit = { has_character_flag = edmp_celeb_admin_debug }
+				custom_tooltip = {
+					text = edmp_celeb_debug_mode_now_disabled_tt
+					clr_character_flag = edmp_celeb_admin_debug
+				}
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	
+	
+	
+	edmp_celeb_admin_debug_mode_enable = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+			NOT = { has_character_flag = edmp_celeb_admin_debug }
+			multiplayer = no
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_celeb_debug_mode_now_enabled_tt
+				set_character_flag = edmp_celeb_admin_debug
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	edmp_celeb_admin_debug_mode_disable = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+			has_character_flag = edmp_celeb_admin_debug
+			# For safety, allow disabling of debug mode in multiplayer, even though the on_startup event ought to have fixed this
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_celeb_debug_mode_now_disabled_tt
+				clr_character_flag = edmp_celeb_admin_debug
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	
+	
+	
+	edmp_celeb_admin_grant_to_all_players_cake = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		allow = { always = yes }
+		effect = {
+			any_character = {
+				limit = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+				add_artifact = edmp_celeb_cake
+				if = {
+					limit = {
+						OR = {
+							AND = {
+								ai = no
+								NOT = { character = ROOT }
+							}
+							AND = {
+								character = ROOT
+								ROOT = { has_character_flag = edmp_celeb_admin_debug }
+							}
+						}
+					}
+					custom_tooltip = {
+						text = edmp_celeb_recipient_notified_tt
+						ROOT = { save_event_target_as = edmp_celeb_decision_taker }
+						character_event = { id = edmp_celeb.9100 }
+					}
+				}
+			}
+		}
+	}
+	
+	
+	
+	edmp_celeb_admin_grant_to_all_players_crown = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		allow = {
+			custom_tooltip = {
+				text = edmp_celeb_at_least_one_current_or_absent_human_player_doesnt_have_a_crown_tt
+				any_character = {
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					NOT = {
+						any_artifact = {
+							has_artifact_flag = edmp_celeb_crown
+							owner = { character = PREVPREV }
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			any_character = {
+				limit = {
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					NOT = {
+						any_artifact = {
+							has_artifact_flag = edmp_celeb_crown
+							owner = { character = PREVPREV }
+						}
+					}
+				}
+				add_artifact = edmp_celeb_crown
+				if = {
+					limit = {
+						OR = {
+							AND = {
+								ai = no
+								NOT = { character = ROOT }
+							}
+							AND = {
+								character = ROOT
+								ROOT = { has_character_flag = edmp_celeb_admin_debug }
+							}
+						}
+					}
+					custom_tooltip = {
+						text = edmp_celeb_recipient_notified_tt
+						ROOT = { save_event_target_as = edmp_celeb_decision_taker }
+						character_event = { id = edmp_celeb.9200 }
+					}
+				}
+			}
+		}
+	}
+	
+	
+	
+	edmp_celeb_admin_grant_to_all_players_popper = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		allow = { always = yes }
+		effect = {
+			any_character = {
+				limit = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+				add_artifact = edmp_celeb_popper
+				if = {
+					limit = {
+						OR = {
+							AND = {
+								ai = no
+								NOT = { character = ROOT }
+							}
+							AND = {
+								character = ROOT
+								ROOT = { has_character_flag = edmp_celeb_admin_debug }
+							}
+						}
+					}
+					custom_tooltip = {
+						text = edmp_celeb_recipient_notified_tt
+						ROOT = { save_event_target_as = edmp_celeb_decision_taker }
+						character_event = { id = edmp_celeb.9300 }
+					}
+				}
+			}
+		}
+	}
+	
+	
+	
+	edmp_celeb_admin_delete_all_from_ai = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		allow = { always = yes }
+		effect = {
+			any_character = {
+				limit = {
+					edmp_this_character_is_not_a_current_or_absent_human_player = yes
+					any_artifact = {
+						has_artifact_flag = edmp_celeb
+						owner = { character = PREVPREV }
+					}
+				}
+				custom_tooltip = {
+					text = edmp_celeb_items_destroyed_tt
+					any_artifact = {
+						limit = {
+							has_artifact_flag = edmp_celeb
+							owner = { character = PREVPREV }
+						}
+						unsafe_destroy_artifact = yes
+					}
+				}
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	edmp_celeb_admin_delete_all_from_humans = {
+		ai = no
+		potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		allow = { always = yes }
+		effect = {
+			any_character = {
+				limit = {
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					any_artifact = {
+						has_artifact_flag = edmp_celeb
+						owner = { character = PREVPREV }
+					}
+				}
+				custom_tooltip = {
+					text = edmp_celeb_items_destroyed_tt
+					any_artifact = {
+						limit = {
+							has_artifact_flag = edmp_celeb
+							owner = { character = PREVPREV }
+						}
+						unsafe_destroy_artifact = yes
+					}
+				}
+				if = {
+					limit = {
+						OR = {
+							AND = {
+								ai = no
+								NOT = { character = ROOT }
+							}
+							AND = {
+								character = ROOT
+								ROOT = { has_character_flag = edmp_celeb_admin_debug }
+							}
+						}
+					}
+					custom_tooltip = {
+						text = edmp_celeb_victim_notified_tt
+						ROOT = { save_event_target_as = edmp_celeb_decision_taker }
+						character_event = { id = edmp_celeb.9100 }
+					}
+				}
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+}
+
+targetted_decisions = {
+	edmp_celeb_admin_spawn_cake = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			add_artifact = edmp_celeb_cake
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ai = no
+							NOT = { character = ROOT_FROM }
+						}
+						AND = {
+							character = ROOT_FROM
+							ROOT_FROM = { has_character_flag = edmp_celeb_admin_debug }
+						}
+					}
+				}
+				custom_tooltip = {
+					text = edmp_celeb_recipient_notified_tt
+					ROOT_FROM = { save_event_target_as = edmp_celeb_decision_taker }
+					character_event = { id = edmp_celeb.9100 }
+				}
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	edmp_celeb_admin_spawn_crown = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			add_artifact = edmp_celeb_crown
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ai = no
+							NOT = { character = ROOT_FROM }
+						}
+						AND = {
+							character = ROOT_FROM
+							ROOT_FROM = { has_character_flag = edmp_celeb_admin_debug }
+						}
+					}
+				}
+				custom_tooltip = {
+					text = edmp_celeb_recipient_notified_tt
+					ROOT_FROM = { save_event_target_as = edmp_celeb_decision_taker }
+					character_event = { id = edmp_celeb.9200 }
+				}
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	edmp_celeb_admin_spawn_popper = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			add_artifact = edmp_celeb_popper
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ai = no
+							NOT = { character = ROOT_FROM }
+						}
+						AND = {
+							character = ROOT_FROM
+							ROOT_FROM = { has_character_flag = edmp_celeb_admin_debug }
+						}
+					}
+				}
+				custom_tooltip = {
+					text = edmp_celeb_recipient_notified_tt
+					ROOT_FROM = { save_event_target_as = edmp_celeb_decision_taker }
+					character_event = { id = edmp_celeb.9300 }
+				}
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	edmp_celeb_admin_delete_all = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_celeb_admin
+			edmp_this_character_can_take_admin_actions = yes
+		}
+		potential = {
+			any_artifact = {
+				has_artifact_flag = edmp_celeb
+				owner = { character = PREVPREV }
+			}
+		}
+		allow = { always = yes }
+		effect = {
+			any_artifact = {
+				limit = {
+					has_artifact_flag = edmp_celeb
+					owner = { character = PREVPREV }
+				}
+				custom_tooltip = {
+					text = edmp_celeb_this_artifact_is_destroyed_tt
+					unsafe_destroy_artifact = yes
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ai = no
+							NOT = { character = ROOT_FROM }
+						}
+						AND = {
+							character = ROOT_FROM
+							ROOT_FROM = { has_character_flag = edmp_celeb_admin_debug }
+						}
+					}
+				}
+				custom_tooltip = {
+					text = edmp_celeb_victim_notified_tt
+					ROOT_FROM = { save_event_target_as = edmp_celeb_decision_taker }
+					character_event = { id = edmp_celeb.9900 }
+				}
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+}
