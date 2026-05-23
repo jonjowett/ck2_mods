@@ -53,6 +53,15 @@ ed:mp
  - cheat for gain MA
  
  X rule summary -> multiple pages (due to text overflow)
+ 
+ - bug: force targeted char to be vassal of 3rd party *actually* forces them to be vassal of decision-taker.
+
+ - game rule to force all players to be truced with each other
+    - re-upped on startup & new holder & yearly pulse
+    - truces can be broken by the host (allowing ~3 months for them to declare war on each other)
+ 
+ - game rule preventing player vassals from raiding other players
+    - on start raiding, if province is owned by a player and raider is player vassal, create truce between raider and raided player
 
 misc other related ideas:
 
@@ -81,3 +90,11 @@ misc other related ideas:
  - on loading a game where a mod-specific "startup" flag has NOT been set, prompt the admin (SP human / MP host) to set each mod's rules (ED:MP, ED:T, BCT, etc)
  
  X ability to toggle a temporary modifier on yourself, which grants gluttonous/hedonist/lunatic/possessed/drunkard opinion -500 (so that autoinvite to plots is less annoying)
+ 
+ - Disable/modify the on-succession courtier pruning process, eg by:
+    - Disabling/modifying the pruning process
+    - on_death: identify characters who are at-risk (what are the criteria?); generate spouses for them (since marriage seems to prevent this pruning); and, a couple of days later (ie. after succession), divorce & delete those spouses.
+    
+ - realm law that forces specified succession laws on vassals:
+    - any / gavelkind (as non-gavelkind liege) / gavelkind (as gavelkind liege) / elective / non-elective
+    - any / ag / ag or ag-cog / ag-cog / ag-cog or abs-cog / abs-cog / ag-cog or abs-cog or en-cog / abs-cog or en-cog / en-cog / en-cog or en / en
