@@ -237,6 +237,20 @@ decisions = {
 					}
 				}
 			}
+			any_character = {
+				limit = {
+					edmp_this_character_is_not_a_current_or_absent_human_player = yes
+					OR = {
+						has_character_modifier = edmp_celeb_cake_consumed
+						has_character_modifier = edmp_celeb_popper_consumed
+					}
+				}
+				custom_tooltip = {
+					text = edmp_celeb_buffs_removed_tt
+					remove_character_modifier = edmp_celeb_cake_consumed
+					remove_character_modifier = edmp_celeb_popper_consumed
+				}
+			}
 		}
 		ai_will_do = { factor = 0 }
 	}
@@ -284,6 +298,20 @@ decisions = {
 						ROOT = { save_event_target_as = edmp_celeb_decision_taker }
 						character_event = { id = edmp_celeb.9100 }
 					}
+				}
+			}
+			any_character = {
+				limit = {
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					OR = {
+						has_character_modifier = edmp_celeb_cake_consumed
+						has_character_modifier = edmp_celeb_popper_consumed
+					}
+				}
+				custom_tooltip = {
+					text = edmp_celeb_buffs_removed_tt
+					remove_character_modifier = edmp_celeb_cake_consumed
+					remove_character_modifier = edmp_celeb_popper_consumed
 				}
 			}
 		}
@@ -445,6 +473,19 @@ targetted_decisions = {
 					text = edmp_celeb_victim_notified_tt
 					ROOT_FROM = { save_event_target_as = edmp_celeb_decision_taker }
 					character_event = { id = edmp_celeb.9900 }
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						has_character_modifier = edmp_celeb_cake_consumed
+						has_character_modifier = edmp_celeb_popper_consumed
+					}
+				}
+				custom_tooltip = {
+					text = edmp_celeb_buffs_removed_tt
+					remove_character_modifier = edmp_celeb_cake_consumed
+					remove_character_modifier = edmp_celeb_popper_consumed
 				}
 			}
 		}
