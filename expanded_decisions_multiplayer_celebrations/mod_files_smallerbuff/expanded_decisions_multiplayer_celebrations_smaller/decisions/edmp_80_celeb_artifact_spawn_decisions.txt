@@ -5,9 +5,9 @@ decisions = {
 	edmp_celeb_admin_decisions_show = {
 		ai = no
 		potential = {
+			NOT = { has_character_flag = edmp_celeb_admin }
 			has_character_flag = edmp_admin_submenu_is_open
 			edmp_this_character_can_take_admin_actions = yes
-			NOT = { has_character_flag = edmp_celeb_admin }
 		}
 		allow = { always = yes }
 		effect = {
@@ -21,9 +21,9 @@ decisions = {
 	edmp_celeb_admin_decisions_hide = {
 		ai = no
 		potential = {
+			has_character_flag = edmp_celeb_admin
 			has_character_flag = edmp_admin_submenu_is_open
 			edmp_this_character_can_take_admin_actions = yes
-			has_character_flag = edmp_celeb_admin
 		}
 		allow = { always = yes }
 		effect = {
@@ -47,9 +47,10 @@ decisions = {
 	edmp_celeb_admin_debug_mode_enable = {
 		ai = no
 		potential = {
+			NOT = { has_character_flag = edmp_celeb_admin_debug }
+			has_character_flag = edmp_admin_submenu_is_open
 			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
-			NOT = { has_character_flag = edmp_celeb_admin_debug }
 			multiplayer = no
 		}
 		allow = { always = yes }
@@ -64,10 +65,27 @@ decisions = {
 	edmp_celeb_admin_debug_mode_disable = {
 		ai = no
 		potential = {
+			has_character_flag = edmp_celeb_admin_debug
+			has_character_flag = edmp_admin_submenu_is_open
 			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
-			has_character_flag = edmp_celeb_admin_debug
 			# For safety, allow disabling of debug mode in multiplayer, even though the on_startup event ought to have fixed this
+		}
+		allow = { always = yes }
+		effect = {
+			custom_tooltip = {
+				text = edmp_celeb_debug_mode_now_disabled_tt
+				clr_character_flag = edmp_celeb_admin_debug
+			}
+		}
+		ai_will_do = { factor = 0 }
+	}
+	edmp_celeb_admin_debug_mode_disable_high_prio = { # If debug mode is enabled while the normal "disable debug mode" decision is hidden, for some reason, show this high-prio decision instead
+		is_high_prio = yes
+		ai = no
+		potential = {
+			has_character_flag = edmp_celeb_admin_debug
+			NOT = { is_decision_potential = edmp_celeb_admin_debug_mode_disable }
 		}
 		allow = { always = yes }
 		effect = {
@@ -84,6 +102,7 @@ decisions = {
 	edmp_celeb_admin_grant_to_all_players_cake = {
 		ai = no
 		potential = {
+			has_character_flag = edmp_admin_submenu_is_open
 			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 		}
@@ -120,6 +139,7 @@ decisions = {
 	edmp_celeb_admin_grant_to_all_players_crown = {
 		ai = no
 		potential = {
+			has_character_flag = edmp_admin_submenu_is_open
 			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 		}
@@ -177,6 +197,7 @@ decisions = {
 	edmp_celeb_admin_grant_to_all_players_popper = {
 		ai = no
 		potential = {
+			has_character_flag = edmp_admin_submenu_is_open
 			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 		}
@@ -213,6 +234,7 @@ decisions = {
 	edmp_celeb_admin_delete_all_from_ai = {
 		ai = no
 		potential = {
+			has_character_flag = edmp_admin_submenu_is_open
 			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 		}
@@ -257,6 +279,7 @@ decisions = {
 	edmp_celeb_admin_delete_all_from_humans = {
 		ai = no
 		potential = {
+			has_character_flag = edmp_admin_submenu_is_open
 			has_character_flag = edmp_celeb_admin
 			edmp_this_character_can_take_admin_actions = yes
 		}
