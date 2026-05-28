@@ -195,3 +195,29 @@ edmp_interference_notify_players_singletitle = {
 		clear_event_target = edmp_interference_decision_taker
 	}
 }
+
+edmp_interference_notify_players_religion = {
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_interference_other_players_notified_tt
+			event_target:edmp_interference_decision_taker = {
+				any_player = {
+					limit = {
+						OR = {
+							NOT = { character = PREV }
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
+						}
+					}
+					character_event = { id = edmp_ifn.8001 }
+				}
+			}
+		}
+	}
+	hidden_tooltip = {
+		clr_global_flag    = edmp_interference_religion_bad
+		clr_global_flag    = edmp_interference_religion_unknown_good_bad
+		clear_event_target = edmp_interference_religion_affected
+		clear_event_target = edmp_interference_decision_taker
+	}
+}

@@ -1117,3 +1117,127 @@ character_event = {
 	}
 	
 }
+
+# Host takes an action relating to a religion
+# Expects:
+#  --- One of the edmp_interference_religion_ global flags to be set BEFORE the event is called.
+#  --- Targeted religion is stored as event_target:edmp_interference_religion_affected
+#  --- Good/bad/unknown status: 
+#       --- If the action is bad for the religion, the global flag edmp_interference_religion_bad should be set.
+#       --- If the action's goodness/badness is unknown, the global flag edmp_interference_religion_unknown_good_bad should be set.
+#       --- If the action is good for the religion, BOTH of these two flags should NOT be set.
+character_event = {
+	
+	id    = edmp_ifn.8001
+	title = edmp_ifn_title
+	is_triggered_only = yes
+	portrait = event_target:edmp_interference_decision_taker
+	picture = GFX_evt_recieve_letter
+	
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_200ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_plus_200ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_50ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_plus_50ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_10ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_plus_10ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_200ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_minus_200ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_50ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_minus_50ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_10ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_minus_10ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_200ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_plus_200ma_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_50ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_plus_50ma_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_10ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_plus_10ma_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_200ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_minus_200ma_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_50ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_minus_50ma_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_10ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_minus_10ma_temp
+	}
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
+	
+	# This is my religion: good/unknown/bad => excellent/OK/curses
+	option = {
+		trigger = { event_target:edmp_interference_religion_affected = { religion = ROOT } }
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_religion_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { has_global_flag = edmp_interference_religion_unknown_good_bad }
+			text = edmp_ifn_evtopt_ok_affected
+		}
+		name = {
+			trigger = {
+				NOR = {
+					has_global_flag = edmp_interference_religion_bad
+					has_global_flag = edmp_interference_religion_unknown_good_bad
+				}
+			}
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# Otherwise: OK
+	option = {
+		trigger = { NOT = { event_target:edmp_interference_religion_affected = { religion = ROOT } } }
+		name = edmp_ifn_evtopt_ok_unaffected
+	}
+	
+	after = {
+		hidden_tooltip = {
+			
+			clear_event_target = edmp_interference_religion_affected
+			clear_event_target = edmp_interference_decision_taker
+			
+			clr_global_flag    = edmp_interference_religion_plus_200ma_perm
+			clr_global_flag    = edmp_interference_religion_plus_50ma_perm
+			clr_global_flag    = edmp_interference_religion_plus_10ma_perm
+			clr_global_flag    = edmp_interference_religion_plus_200ma_temp
+			clr_global_flag    = edmp_interference_religion_plus_50ma_temp
+			clr_global_flag    = edmp_interference_religion_plus_10ma_temp
+			
+			clr_global_flag    = edmp_interference_religion_minus_200ma_perm
+			clr_global_flag    = edmp_interference_religion_minus_50ma_perm
+			clr_global_flag    = edmp_interference_religion_minus_10ma_perm
+			clr_global_flag    = edmp_interference_religion_minus_200ma_temp
+			clr_global_flag    = edmp_interference_religion_minus_50ma_temp
+			clr_global_flag    = edmp_interference_religion_minus_10ma_temp
+			
+			clr_global_flag    = edmp_interference_religion_bad
+			clr_global_flag    = edmp_interference_religion_unknown_good_bad
+			
+		}
+	}
+	
+}
