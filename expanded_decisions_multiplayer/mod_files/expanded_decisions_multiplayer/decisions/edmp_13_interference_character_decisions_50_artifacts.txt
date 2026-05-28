@@ -6,6 +6,7 @@ targetted_decisions = {
 		filter = all_including_me
 		third_party_filter = artifacts
 		third_party = ROOT # Look for artifacts in ROOT's inventory
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -35,13 +36,19 @@ targetted_decisions = {
 		third_party_potential = {
 			trigger_if = {
 				limit = { edmp_ek_mod_is_active = yes }
-				ROOT_FROMFROM = { NOT = { has_artifact_flag = unique } }
+				ROOT_FROMFROM = {
+					custom_tooltip = {
+						text = edmp_interference_artifact_this_artifact_does_not_have_flag_unique_tt
+						NOT = { has_artifact_flag = unique }
+					}
+				}
 			}
 			trigger_else = {
 				always = no
 			}
 		}
 		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_artifacts_preferring_higher_quality = yes }
 		effect = {
 			if = {
 				limit = { edmp_ek_mod_is_active = yes }
@@ -68,6 +75,7 @@ targetted_decisions = {
 		filter = all_including_me
 		third_party_filter = artifacts
 		third_party = ROOT # Look for artifacts in ROOT's inventory
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -97,13 +105,19 @@ targetted_decisions = {
 		third_party_potential = {
 			trigger_if = {
 				limit = { edmp_ek_mod_is_active = yes }
-				ROOT_FROMFROM = { has_artifact_flag = unique }
+				ROOT_FROMFROM = {
+					custom_tooltip = {
+						text = edmp_interference_artifact_this_artifact_has_flag_unique_tt
+						has_artifact_flag = unique
+					}
+				}
 			}
 			trigger_else = {
 				always = no
 			}
 		}
 		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_artifacts_preferring_higher_quality = yes }
 		effect = {
 			if = {
 				limit = { edmp_ek_mod_is_active = yes }
@@ -130,6 +144,7 @@ targetted_decisions = {
 	edmp_interference_artifact_transfer_all_to_player = {
 		filter = all
 		third_party_filter = all_including_me
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -159,6 +174,7 @@ targetted_decisions = {
 				# NB: Unstackable and destroy-on-death artifacts cannot be detected consistently in code!
 			}
 		}
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
@@ -192,6 +208,7 @@ targetted_decisions = {
 		filter = all
 		third_party_filter = artifacts
 		third_party = ROOT # Look for artifacts in ROOT's inventory
+		show_third_party_potential = yes # Technically pointless (since it's always = yes), but there's also no harm in it
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -215,19 +232,9 @@ targetted_decisions = {
 				artifact_can_be_gifted_to = ROOT_FROM
 			}
 		}
-		third_party_score = {
-			# Score 1-9 for artifacts of quality 1-9 that CAN be gifted to FROM
-			# Score 0 for all artifacts that CANNOT be gifted to FROM
-			factor = 0
-			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 1 } }
-			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 2 } }
-			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 3 } }
-			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 4 } }
-			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 5 } }
-			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 6 } }
-			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 7 } }
-			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 8 } }
-			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 9 } }
+		third_party_score = { 
+			factor = 1
+			edmp_interference_third_party_scores_artifacts_preferring_higher_quality = yes
 			modifier = { factor = 0 ROOT_FROMFROM = { NOT = { artifact_can_be_gifted_to = ROOT_FROM } } }
 		}
 		effect = {

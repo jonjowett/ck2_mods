@@ -5,6 +5,7 @@ targetted_decisions = {
 	edmp_interference_add_bilateral_10_year_truce_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
 		third_party_filter = all_including_me
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -14,6 +15,7 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		third_party_potential = { edmp_interference_fromfrom_is_likely_to_interact_with_root = yes }
 		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
@@ -44,6 +46,7 @@ targetted_decisions = {
 	edmp_interference_break_truce_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
 		third_party_filter = all_including_me
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -71,6 +74,7 @@ targetted_decisions = {
 			}
 		}
 		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
@@ -105,6 +109,7 @@ targetted_decisions = {
 	edmp_interference_add_nap_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
 		third_party_filter = all_including_me
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -114,6 +119,7 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		third_party_potential = { edmp_interference_fromfrom_is_likely_to_interact_with_root = yes }
 		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
@@ -148,6 +154,7 @@ targetted_decisions = {
 	edmp_interference_break_nap_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
 		third_party_filter = all_including_me
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -160,6 +167,7 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		third_party_potential = { ROOT_FROMFROM = { has_non_aggression_pact_with = ROOT } }
 		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
@@ -192,6 +200,7 @@ targetted_decisions = {
 	edmp_interference_add_alliance_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
 		third_party_filter = all_including_me
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -204,6 +213,7 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		third_party_potential = { ROOT_FROMFROM = { has_non_aggression_pact_with = ROOT } }
 		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
@@ -226,6 +236,7 @@ targetted_decisions = {
 	edmp_interference_break_alliance_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
 		third_party_filter = all_including_me
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -238,6 +249,7 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		third_party_potential = { ROOT_FROMFROM = { has_non_aggression_pact_with = ROOT } }
 		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }

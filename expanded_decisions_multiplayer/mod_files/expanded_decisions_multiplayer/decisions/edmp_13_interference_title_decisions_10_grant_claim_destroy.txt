@@ -9,6 +9,7 @@ title_decisions = {
 	edmp_interference_grant_this_title_to_player = {
 		filter = all
 		third_party_filter = all_including_me
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -47,6 +48,7 @@ title_decisions = {
 			}
 		}
 		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
@@ -73,6 +75,7 @@ title_decisions = {
 	edmp_interference_add_claim_on_this_title_for_player = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all
 		third_party_filter = all_including_me
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -109,6 +112,7 @@ title_decisions = {
 			}
 		}
 		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
@@ -125,6 +129,7 @@ title_decisions = {
 	edmp_interference_remove_claim_on_this_title_single_char = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all
 		third_party_filter = all_including_me
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -140,6 +145,7 @@ title_decisions = {
 		}
 		third_party_potential = { ROOT_FROMFROM = { has_claim = ROOT } }
 		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }

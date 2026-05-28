@@ -1,20 +1,21 @@
 # Audax Validator EnableCommentMetadata
 
-edmp_interference_third_party_scores_independent_rulers_preferring_player_then_nearby_ai_then_tier = {
+edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = {
 	
-	# First: Player, or nearby AI
-	modifier = { factor = 1000    ROOT_FROMFROM = { show_scope_change = no                    edmp_this_character_is_a_current_or_absent_human_player = yes      } }
-	modifier = { factor =   20    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  100 } hidden_tooltip = { distance_from_realm = { who = ROOT value >    0 } } } }
-	modifier = { factor =   19    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  200 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  100 } } } }
-	modifier = { factor =   18    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  300 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  200 } } } }
-	modifier = { factor =   17    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  400 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  300 } } } }
-	modifier = { factor =   16    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  500 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  400 } } } }
-	modifier = { factor =   15    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  600 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  500 } } } }
-	modifier = { factor =   14    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  700 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  600 } } } }
-	modifier = { factor =   13    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  800 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  700 } } } }
-	modifier = { factor =   12    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  900 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  800 } } } }
-	modifier = { factor =   11    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <= 1000 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  900 } } } }
-	modifier = { factor =   10    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value >  1000 }                                                                        } }
+	# First: FROM, then player, then nearby AI
+	modifier = { factor = 2000    ROOT_FROMFROM = { show_scope_change = no                            character = ROOT_FROM                                                                      } }
+	modifier = { factor = 1000    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM } } edmp_this_character_is_a_current_or_absent_human_player = yes    } }
+	modifier = { factor =   20    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM }   edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  100 } hidden_tooltip = { distance_from_realm = { who = ROOT value >    0 } } } }
+	modifier = { factor =   19    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM }   edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  200 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  100 } } } }
+	modifier = { factor =   18    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM }   edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  300 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  200 } } } }
+	modifier = { factor =   17    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM }   edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  400 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  300 } } } }
+	modifier = { factor =   16    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM }   edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  500 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  400 } } } }
+	modifier = { factor =   15    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM }   edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  600 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  500 } } } }
+	modifier = { factor =   14    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM }   edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  700 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  600 } } } }
+	modifier = { factor =   13    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM }   edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  800 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  700 } } } }
+	modifier = { factor =   12    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM }   edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <=  900 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  800 } } } }
+	modifier = { factor =   11    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM }   edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value <= 1000 } hidden_tooltip = { distance_from_realm = { who = ROOT value >  900 } } } }
+	modifier = { factor =   10    ROOT_FROMFROM = { show_scope_change = no hidden_tooltip = { NOT = { character = ROOT_FROM }   edmp_this_character_is_a_current_or_absent_human_player = no  } distance_from_realm = { who = ROOT value >  1000 }                                                                        } }
 	
 	# Then: By tier
 	modifier = { factor =    1.05 ROOT_FROMFROM = { show_scope_change = no real_tier = EMPEROR } }
@@ -23,4 +24,19 @@ edmp_interference_third_party_scores_independent_rulers_preferring_player_then_n
 	modifier = { factor =    1.02 ROOT_FROMFROM = { show_scope_change = no real_tier = COUNT   } }
 	modifier = { factor =    1.01 ROOT_FROMFROM = { show_scope_change = no real_tier = BARON   } }
 	
+}
+
+edmp_interference_third_party_scores_artifacts_preferring_higher_quality = {
+	modifier = { factor = 10 ROOT_FROMFROM = { show_scope_change = no quality >  9 } }
+	modifier = { factor =  9 ROOT_FROMFROM = { show_scope_change = no quality == 9 } }
+	modifier = { factor =  8 ROOT_FROMFROM = { show_scope_change = no quality == 8 } }
+	modifier = { factor =  7 ROOT_FROMFROM = { show_scope_change = no quality == 7 } }
+	modifier = { factor =  6 ROOT_FROMFROM = { show_scope_change = no quality == 6 } }
+	modifier = { factor =  5 ROOT_FROMFROM = { show_scope_change = no quality == 5 } }
+	modifier = { factor =  4 ROOT_FROMFROM = { show_scope_change = no quality == 4 } }
+	modifier = { factor =  3 ROOT_FROMFROM = { show_scope_change = no quality == 3 } }
+	modifier = { factor =  2 ROOT_FROMFROM = { show_scope_change = no quality == 2 } }
+	# The Validator complains about a "pointless" factor of 1, but in this case it's useful for the generated tooltip.
+	# Audax Validator "." Ignore_NEXT
+	modifier = { factor =  1 ROOT_FROMFROM = { show_scope_change = no quality <= 1 } }
 }

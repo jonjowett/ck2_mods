@@ -270,6 +270,7 @@ targetted_decisions = {
 		#          but unfortunately this seems to be impossible, so we use the governor instead.
 		filter = all_including_me
 		third_party_filter = independent_rulers
+		# show_third_party_potential deliberately omitted because it's duplicative with the potential block
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -279,6 +280,7 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		third_party_potential = { ROOT_FROMFROM = { is_offmap_governor = yes } }
 		third_party_allow = { always = yes }
+		# third_party_score deliberately omitted because there's no obvious universal way to sort offmap governors
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
@@ -310,6 +312,7 @@ targetted_decisions = {
 		#          but unfortunately this seems to be impossible, so we use the governor instead.
 		filter = all_including_me
 		third_party_filter = independent_rulers
+		# show_third_party_potential deliberately omitted because it's duplicative with the potential block
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -319,6 +322,7 @@ targetted_decisions = {
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		third_party_potential = { ROOT_FROMFROM = { is_offmap_governor = yes } }
 		third_party_allow = { always = yes }
+		# third_party_score deliberately omitted because there's no obvious universal way to sort offmap governors
 		effect = {
 			hidden_tooltip = {
 				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
@@ -369,7 +373,6 @@ targetted_decisions = {
 	
 	edmp_interference_society_currency_remove_1k = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
-		third_party_filter = independent_rulers
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show

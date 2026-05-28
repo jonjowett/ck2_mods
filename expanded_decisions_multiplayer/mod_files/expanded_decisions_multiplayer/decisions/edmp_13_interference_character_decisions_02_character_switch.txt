@@ -5,6 +5,7 @@ targetted_decisions = {
 	edmp_interference_character_switch = {
 		filter = all                          # No-one can switch to the decision-taker's character, because they are currently a human
 		third_party_filter = all_including_me # Decision taker can say that they are the one that wants to switch
+		show_third_party_potential = yes
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -73,6 +74,7 @@ targetted_decisions = {
 				}
 			}
 		}
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
 			if = {
 				limit = { ROOT_FROM = { has_character_flag  = edmp_interference_character_switch_offer_sent } }
