@@ -1,0 +1,99 @@
+# Audax Validator EnableCommentMetadata
+
+title_decisions = {
+	
+	# ROOT is the targeted title
+	# FROM is the decision-taker
+	# FROMFROM is the third party
+	
+	edmp_interference_move_owners_capital_here = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { tier = COUNT }
+		allow = {
+			custom_tooltip = {
+				text = edmp_interference_this_county_is_not_already_owners_capital_tt
+				location = { ROOT = { holder_scope = { capital_scope = { NOT = { province = PREVPREVPREV } } } } }
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM             = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT                  = { save_event_target_as = edmp_interference_singletitlechar_title_affected }
+				ROOT = { holder_scope = { save_event_target_as = edmp_interference_singletitlechar_char_affected  } }
+				set_global_flag = edmp_interference_singletitlechar_move_owners_capital
+			}
+			holder_scope = { capital = ROOT }
+			edmp_interference_notify_players_singletitlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singletitlechar_move_owners_capital }
+		}
+	}
+	
+	edmp_interference_move_owners_primary_title_trad_capital_here = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { tier = COUNT }
+		allow = {
+			holder_scope = {
+				higher_real_tier_than = COUNT
+				primary_title = { temporary = no }
+			}
+			custom_tooltip = {
+				text = edmp_interference_this_county_is_not_already_owners_primary_title_trad_capital_tt
+				location = { ROOT = { holder_scope = { primary_title = { capital_scope = { NOT = { province = PREVPREVPREVPREV } } } } } }
+			}
+			trigger_if = {
+				limit = { holder_scope = { OR = { real_tier = DUKE real_tier = KING } } }
+				custom_tooltip = {
+					text = edmp_interference_this_county_is_de_jure_part_of_its_holders_primary_title_tt
+					holder_scope = { primary_title = { de_jure_vassal_or_below = ROOT } }
+				}
+			}
+			trigger_else_if = {
+				limit = { holder_scope = { real_tier = EMPEROR } }
+				OR = {
+					custom_tooltip = {
+						text = edmp_interference_this_county_is_de_jure_part_of_its_holders_primary_title_tt
+						holder_scope = { primary_title = { de_jure_vassal_or_below = ROOT } }
+					}
+					custom_tooltip = {
+						text = edmp_interference_this_county_is_de_jure_part_of_a_kingdom_existing_in_its_holders_realm_tt
+						holder_scope = { any_realm_title = { tier = KING de_jure_vassal_or_below = ROOT } }
+					}
+					# TODO - County's de jure kingdom is de facto completely owned by holder (with at most 4 PREVs...)
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM             = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT                  = { save_event_target_as = edmp_interference_singletitlechar_title_affected }
+				ROOT = { holder_scope = { save_event_target_as = edmp_interference_singletitlechar_char_affected  } }
+				set_global_flag = edmp_interference_singletitlechar_move_owners_primary_title_trad_capital_here 
+			}
+			location = {
+				show_scope_change = no
+				ROOT = {
+					show_scope_change = no
+					holder_scope = {
+						primary_title = { set_preferred_capital = ROOT }
+					}
+				}
+			}
+			custom_tooltip = { text = edmp_interference_line_break_tt }
+			edmp_interference_notify_players_singletitlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singletitlechar_move_owners_primary_title_trad_capital_here }
+		}
+	}
+	
+}

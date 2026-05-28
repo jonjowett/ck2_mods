@@ -1,0 +1,247 @@
+# Audax Validator EnableCommentMetadata
+
+targetted_decisions = {
+	
+	edmp_interference_artifact_flag_as_unique = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		third_party_filter = artifacts
+		third_party = ROOT # Look for artifacts in ROOT's inventory
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+			# Adding an artifact flag to prevent destruction only works for certain total-conversion mods
+			edmp_ek_mod_is_active = yes # EK mod: "unique" flag
+		}
+		potential = {
+			num_of_artifacts >= 1
+		}
+		allow = {
+			trigger_if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				custom_tooltip = {
+					text = edmp_interference_artifact_has_at_least_one_non_unique_tt
+					any_artifact = { NOT = { has_artifact_flag = unique } }
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = edmp_interference_supported_total_conversion_mod_is_active_tt
+					always = no
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		third_party_potential = {
+			trigger_if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				ROOT_FROMFROM = { NOT = { has_artifact_flag = unique } }
+			}
+			trigger_else = {
+				always = no
+			}
+		}
+		third_party_allow = { always = yes }
+		effect = {
+			if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				hidden_tooltip = {
+					ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+					ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+					ROOT_FROMFROM = { save_event_target_as = edmp_interference_singlechar_artifact }
+					set_global_flag = edmp_interference_singlechar_artifact_flag_as_unique
+				}
+				custom_tooltip = {
+					text = edmp_interference_artifact_fromfrom_flagged_as_unique_tt
+					ROOT_FROMFROM = { set_artifact_flag = unique }
+				}
+				edmp_interference_notify_players_singlechar = yes
+				hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_artifact_flag_as_unique }
+			}
+			else = {
+				custom_tooltip = { text = edmp_interference_error_no_supported_total_conversion_mod_tt }
+			}
+		}
+	}
+	
+	edmp_interference_artifact_unflag_as_unique = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		third_party_filter = artifacts
+		third_party = ROOT # Look for artifacts in ROOT's inventory
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+			# Adding an artifact flag to prevent destruction only works for certain total-conversion mods
+			edmp_ek_mod_is_active = yes # EK mod: "unique" flag
+		}
+		potential = {
+			num_of_artifacts >= 1
+		}
+		allow = {
+			trigger_if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				custom_tooltip = {
+					text = edmp_interference_artifact_has_at_least_one_unique_tt
+					any_artifact = { has_artifact_flag = unique }
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = edmp_interference_supported_total_conversion_mod_is_active_tt
+					always = no
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		third_party_potential = {
+			trigger_if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				ROOT_FROMFROM = { has_artifact_flag = unique }
+			}
+			trigger_else = {
+				always = no
+			}
+		}
+		third_party_allow = { always = yes }
+		effect = {
+			if = {
+				limit = { edmp_ek_mod_is_active = yes }
+				hidden_tooltip = {
+					ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+					ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+					ROOT_FROMFROM = { save_event_target_as = edmp_interference_singlechar_artifact }
+					set_global_flag = edmp_interference_singlechar_artifact_unflag_as_unique
+					set_global_flag = edmp_interference_singlechar_bad
+				}
+				custom_tooltip = {
+					text = edmp_interference_artifact_fromfrom_unflagged_as_unique_tt
+					ROOT_FROMFROM = { clr_artifact_flag = unique }
+				}
+				edmp_interference_notify_players_singlechar = yes
+				hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_artifact_unflag_as_unique }
+			}
+			else = {
+				custom_tooltip = { text = edmp_interference_error_no_supported_total_conversion_mod_tt }
+			}
+		}
+	}
+	
+	edmp_interference_artifact_transfer_all_to_player = {
+		filter = all
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			num_of_artifacts >= 1
+		}
+		allow = {
+			custom_tooltip = {
+				text = edmp_interference_artifact_transfer_root_owns_at_least_one_artifact_that_can_be_gifted_to_a_player_tt
+				any_character = {
+					edmp_this_character_is_a_current_or_absent_human_player = yes
+					ROOT = { any_artifact = { artifact_can_be_gifted_to = PREVPREV } }
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT      = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Obviously potentially-negative for ROOT
+		}
+		third_party_potential = {
+			ROOT_FROMFROM = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+		}
+		third_party_allow = {
+			custom_tooltip = {
+				text = edmp_interference_artifact_transfer_root_owns_at_least_one_artifact_that_can_be_gifted_to_fromfrom_tt
+				ROOT = { any_artifact = { artifact_can_be_gifted_to = ROOT_FROMFROM } }
+				# NB: Unstackable and destroy-on-death artifacts cannot be detected consistently in code!
+			}
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_aiplayer_ai }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_aiplayer_player }
+				set_global_flag = edmp_interference_aiplayer_transfer_all_artifacts
+			}
+			# Warn about notifications at the top, since the list of actions could be VERY long
+			edmp_interference_notify_players_tooltip_only = yes
+			# List transferred artifacts in descending order, from highest to lowest quality (since you probably care most about the highest-quality artifacts)
+			ROOT = {
+				show_scope_change = no
+				any_artifact = { show_scope_change = no limit = { quality >  9 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 9 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 8 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 7 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 6 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 5 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 4 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 3 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 2 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+				any_artifact = { show_scope_change = no limit = { quality == 1 artifact_can_be_gifted_to = ROOT_FROMFROM } transfer_artifact = { from = ROOT to = ROOT_FROMFROM } }
+			}
+			# Perform the actual notification
+			hidden_tooltip = { edmp_interference_notify_players_aiplayer = yes }
+			hidden_tooltip = { clr_global_flag = edmp_interference_aiplayer_transfer_all_artifacts }
+		}
+	}
+	
+	edmp_interference_artifact_transfer_single_to_me = {
+		filter = all
+		third_party_filter = artifacts
+		third_party = ROOT # Look for artifacts in ROOT's inventory
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			num_of_artifacts >= 1
+		}
+		allow = {
+			custom_tooltip = {
+				text = edmp_interference_artifact_transfer_root_owns_at_least_one_artifact_that_can_be_gifted_to_from_tt
+				ROOT = { any_artifact = { artifact_can_be_gifted_to = ROOT_FROM } }
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT      = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Obviously potentially-negative for ROOT
+		}
+		third_party_potential = { always = yes } # Show all of ROOT's artifacts, including ungiftable
+		third_party_allow = {
+			ROOT_FROMFROM = {
+				show_scope_change = no
+				artifact_can_be_gifted_to = ROOT_FROM
+			}
+		}
+		third_party_score = {
+			# Score 1-9 for artifacts of quality 1-9 that CAN be gifted to FROM
+			# Score 0 for all artifacts that CANNOT be gifted to FROM
+			factor = 0
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 1 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 2 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 3 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 4 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 5 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 6 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 7 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 8 } }
+			additive_modifier = { value = 1 ROOT_FROMFROM = { quality >= 9 } }
+			modifier = { factor = 0 ROOT_FROMFROM = { NOT = { artifact_can_be_gifted_to = ROOT_FROM } } }
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_singlechar_affected }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_singlechar_artifact }
+				set_global_flag = edmp_interference_singlechar_artifact_transfer_single_to_decision_taker
+				set_global_flag = edmp_interference_singlechar_bad
+			}
+			ROOT_FROMFROM = { transfer_artifact = { from = ROOT to = ROOT_FROM } }
+			edmp_interference_notify_players_singlechar = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_singlechar_artifact_transfer_single_to_decision_taker }
+		}
+	}
+	
+}
