@@ -1,0 +1,69 @@
+# Audax Validator EnableCommentMetadata
+
+title_decisions = {
+	
+	# ROOT is the targeted title
+	# FROM is the decision-taker
+	# FROMFROM is the third party
+	
+	# Show MA breakdown commented-out because I don't currently know how to get this info
+	#
+	#edmp_interference_religion_show_ma_breakdown_for_this_provinces_religion = {
+	#	filter = all
+	#	ai = no
+	#	from_potential = {
+	#		has_character_flag = edmp_interference_show
+	#		edmp_this_character_can_take_admin_actions = yes # Only for the admin
+	#	}
+	#	potential = { tier = COUNT }
+	#	allow = { always = yes }
+	#	effect = {
+	#		hidden_tooltip = {
+	#			ROOT_FROM = { save_event_target_as = edmp_interference_decision_taker }
+	#			ROOT = { location = { religion_scope = { save_event_target_as = edmp_interference_religion_affected } } }
+	#			ROOT_FROM = { character_event = { id = edmp_rma.2000 } }
+	#		}
+	#	}
+	#}
+	
+	edmp_interference_religion_add_ma_modifiers_to_this_provinces_religion_perm = {
+		filter = all
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes # Only for the admin
+		}
+		potential = { tier = COUNT }
+		allow = { edmp_interference_religion_decisions_not_blocked = yes }
+		effect = {
+			edmp_interference_religion_block_decisions_perm = yes
+			custom_tooltip = {
+				text = edmp_interference_religion_show_event_with_options_tt
+				ROOT_FROM = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT = { location = { religion_scope = { save_event_target_as = edmp_interference_religion_affected } } }
+				ROOT_FROM = { character_event = { id = edmp_rma.1000 } }
+			}
+		}
+	}
+	
+	edmp_interference_religion_add_ma_modifiers_to_this_provinces_religion_temp = {
+		filter = all
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_take_admin_actions = yes # Only for the admin
+		}
+		potential = { tier = COUNT }
+		allow = { edmp_interference_religion_decisions_not_blocked = yes }
+		effect = {
+			edmp_interference_religion_block_decisions_temp = yes
+			custom_tooltip = {
+				text = edmp_interference_religion_show_event_with_options_tt
+				ROOT_FROM = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT = { location = { religion_scope = { save_event_target_as = edmp_interference_religion_affected } } }
+				ROOT_FROM = { character_event = { id = edmp_rma.1000 } }
+			}
+		}
+	}
+	
+}

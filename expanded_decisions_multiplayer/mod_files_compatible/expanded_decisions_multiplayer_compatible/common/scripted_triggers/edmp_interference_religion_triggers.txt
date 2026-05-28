@@ -1,0 +1,48 @@
+edmp_interference_religion_decisions_not_blocked = {
+	OR = {
+		custom_tooltip = {
+			text                     = edmp_interference_religion_add_ma_modifier_perm_not_in_progress_tt
+			NOT = { has_global_flag  = edmp_interference_religion_add_ma_modifier_perm }
+		}
+		custom_tooltip = {
+			text                     = edmp_interference_religion_add_ma_modifier_perm_in_progress_1yr_tt
+			had_global_flag = { flag = edmp_interference_religion_add_ma_modifier_perm years >= 1 }
+		}
+	}
+	OR = {
+		custom_tooltip = {
+			text                     = edmp_interference_religion_add_ma_modifier_temp_not_in_progress_tt
+			NOT = { has_global_flag  = edmp_interference_religion_add_ma_modifier_temp }
+		}
+		custom_tooltip = {
+			text                     = edmp_interference_religion_add_ma_modifier_temp_in_progress_1yr_tt
+			had_global_flag = { flag = edmp_interference_religion_add_ma_modifier_temp years >= 1 }
+		}
+	}
+}
+
+
+
+
+
+# You are currently in the process of adding a MA modifier if you have either the temp/perm flag, and haven't had that flag for more than 1 year
+# NB: custom_tooltips not required for these, because these triggers will always be hidden.
+
+edmp_interference_religion_is_adding_ma_modifier = {
+	OR = {
+		edmp_interference_religion_is_adding_ma_modifier_perm = yes
+		edmp_interference_religion_is_adding_ma_modifier_temp = yes
+	}
+}
+
+edmp_interference_religion_is_adding_ma_modifier_perm = {
+	        has_global_flag =          edmp_interference_religion_add_ma_modifier_perm
+	NOT = { had_global_flag = { flag = edmp_interference_religion_add_ma_modifier_perm years >= 1 } }
+	NOT = { has_global_flag =          edmp_interference_religion_add_ma_modifier_temp }
+}
+
+edmp_interference_religion_is_adding_ma_modifier_temp = {
+	        has_global_flag =          edmp_interference_religion_add_ma_modifier_temp
+	NOT = { had_global_flag = { flag = edmp_interference_religion_add_ma_modifier_temp years >= 1 } }
+	NOT = { has_global_flag =          edmp_interference_religion_add_ma_modifier_perm }
+}

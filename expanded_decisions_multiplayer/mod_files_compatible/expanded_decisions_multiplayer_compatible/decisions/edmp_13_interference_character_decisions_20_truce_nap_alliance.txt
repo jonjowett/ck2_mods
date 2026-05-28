@@ -1,0 +1,269 @@
+# Audax Validator EnableCommentMetadata
+
+targetted_decisions = {
+	
+	edmp_interference_add_bilateral_10_year_truce_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		third_party_filter = all_including_me
+		show_third_party_potential = yes
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { edmp_interference_root_is_valid_potential_target = yes }
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		third_party_potential = { edmp_interference_fromfrom_is_likely_to_interact_with_root = yes }
+		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag                        = edmp_interference_bilateral_10_year_truce
+			}
+			custom_tooltip = {
+				text = edmp_interference_create_bilateral_10_year_truce_between_root_and_fromfrom_tt
+				ROOT = {
+					set_truce = {
+						who   = ROOT_FROMFROM
+						years = 10
+					}
+				}
+				ROOT_FROMFROM = {
+					set_truce = {
+						who   = ROOT
+						years = 10
+					}
+				}
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_10_year_truce }
+		}
+	}
+	
+	edmp_interference_break_truce_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		third_party_filter = all_including_me
+		show_third_party_potential = yes
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { edmp_interference_root_is_valid_potential_target = yes }
+		allow = {
+			custom_tooltip = {
+				text = edmp_interference_this_character_has_a_truce_with_someone_tt
+				any_character = {
+					OR = {
+						has_truce = ROOT
+						reverse_has_truce = ROOT
+					}
+				}
+			}
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		third_party_potential = {
+			ROOT_FROMFROM = {
+				OR = {
+					has_truce = ROOT
+					reverse_has_truce = ROOT
+				}
+			}
+		}
+		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag                        = edmp_interference_bilateral_break_truce
+			}
+			custom_tooltip = {
+				text = edmp_interference_break_truce_between_root_and_fromfrom_tt
+				ROOT = {
+					set_truce = {
+						who  = ROOT_FROMFROM
+						# days=0 is actually valid, and is the only known way to clear truces
+						# Audax Validator "." Ignore_NEXT
+						days = 0
+					}
+				}
+				ROOT_FROMFROM = {
+					set_truce = {
+						who  = ROOT
+						# days=0 is actually valid, and is the only known way to clear truces
+						# Audax Validator "." Ignore_NEXT
+						days = 0
+					}
+				}
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_break_truce }
+		}
+	}
+	
+	edmp_interference_add_nap_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		third_party_filter = all_including_me
+		show_third_party_potential = yes
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { edmp_interference_root_is_valid_potential_target = yes }
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		third_party_potential = { edmp_interference_fromfrom_is_likely_to_interact_with_root = yes }
+		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag                        = edmp_interference_bilateral_add_nap
+			}
+			custom_tooltip = {
+				text = edmp_interference_create_bilateral_nap_between_root_and_fromfrom_tt
+				ROOT = {
+					opinion = {
+						name  = edmp_forcibly_added_non_aggression_pact
+						who   = ROOT_FROMFROM
+						years = 100
+						origin_description = edmp_forcibly_added_non_aggression_pact_origin_description
+					}
+				}
+				ROOT_FROMFROM = {
+					opinion = {
+						name  = edmp_forcibly_added_non_aggression_pact
+						who   = ROOT
+						years = 100
+						origin_description = edmp_forcibly_added_non_aggression_pact_origin_description
+					}
+				}
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_add_nap }
+		}
+	}
+	
+	edmp_interference_break_nap_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		third_party_filter = all_including_me
+		show_third_party_potential = yes
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_non_aggression_pact_character = { always = yes }
+		}
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		third_party_potential = { ROOT_FROMFROM = { has_non_aggression_pact_with = ROOT } }
+		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag                        = edmp_interference_bilateral_break_nap
+			}
+			custom_tooltip = {
+				text = edmp_interference_remove_nap_between_root_and_fromfrom_tt
+				ROOT = {
+					opinion = {
+						name  = edmp_forcibly_removed_non_aggression_pact
+						who   = ROOT_FROMFROM
+						origin_description = edmp_forcibly_removed_non_aggression_pact_origin_description
+					}
+				}
+				ROOT_FROMFROM = {
+					opinion = {
+						name  = edmp_forcibly_removed_non_aggression_pact
+						who   = ROOT
+						origin_description = edmp_forcibly_removed_non_aggression_pact_origin_description
+					}
+				}
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_break_nap }
+		}
+	}
+	
+	edmp_interference_add_alliance_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		third_party_filter = all_including_me
+		show_third_party_potential = yes
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_non_aggression_pact_character = { always = yes }
+		}
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		third_party_potential = { ROOT_FROMFROM = { has_non_aggression_pact_with = ROOT } }
+		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag                        = edmp_interference_bilateral_add_alliance
+			}
+			ROOT = {
+				show_scope_change = no
+				add_alliance = {
+					who   = ROOT_FROMFROM
+					years = 100
+				}
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_add_alliance }
+		}
+	}
+	
+	edmp_interference_break_alliance_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
+		filter = all_including_me
+		third_party_filter = all_including_me
+		show_third_party_potential = yes
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_non_aggression_pact_character = { always = yes }
+		}
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		third_party_potential = { ROOT_FROMFROM = { has_non_aggression_pact_with = ROOT } }
+		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag                        = edmp_interference_bilateral_break_alliance
+			}
+			ROOT = {
+				show_scope_change = no
+				break_alliance = ROOT_FROMFROM
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_break_alliance }
+		}
+	}
+	
+}

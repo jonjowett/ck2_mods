@@ -5,7 +5,7 @@ edmp_interference_notify_players_tooltip_only = {
 	}
 }
 
-edmp_interference_notify_players_force_end_war_white_peace = {
+edmp_interference_notify_players_force_end_war = {
 	if = {
 		limit = { edmp_this_is_a_multiplayer_game = yes }
 		custom_tooltip = {
@@ -24,10 +24,14 @@ edmp_interference_notify_players_force_end_war_white_peace = {
 		}
 	}
 	hidden_tooltip = {
-		clear_event_target = edmp_interference_force_end_war_white_peace_war
-		clear_event_target = edmp_interference_force_end_war_white_peace_attacker
-		clear_event_target = edmp_interference_force_end_war_white_peace_defender
 		clear_event_target = edmp_interference_decision_taker
+		clear_event_target = edmp_interference_force_end_war_war
+		clear_event_target = edmp_interference_force_end_war_attacker
+		clear_event_target = edmp_interference_force_end_war_defender
+		clr_global_flag    = edmp_interference_force_end_war_white_peace
+		clr_global_flag    = edmp_interference_force_end_war_invalid
+		clr_global_flag    = edmp_interference_force_end_war_defender_victory
+		clr_global_flag    = edmp_interference_force_end_war_attacker_victory
 	}
 }
 
@@ -188,6 +192,32 @@ edmp_interference_notify_players_singletitle = {
 	hidden_tooltip = {
 		clr_global_flag    = edmp_interference_singletitle_bad
 		clear_event_target = edmp_interference_singletitle_affected
+		clear_event_target = edmp_interference_decision_taker
+	}
+}
+
+edmp_interference_notify_players_religion = {
+	if = {
+		limit = { edmp_this_is_a_multiplayer_game = yes }
+		custom_tooltip = {
+			text = edmp_interference_other_players_notified_tt
+			event_target:edmp_interference_decision_taker = {
+				any_player = {
+					limit = {
+						OR = {
+							NOT = { character = PREV }
+							has_character_flag = edmp_interference_debug_include_sender_in_notifications
+						}
+					}
+					character_event = { id = edmp_ifn.8001 }
+				}
+			}
+		}
+	}
+	hidden_tooltip = {
+		clr_global_flag    = edmp_interference_religion_bad
+		clr_global_flag    = edmp_interference_religion_unknown_good_bad
+		clear_event_target = edmp_interference_religion_affected
 		clear_event_target = edmp_interference_decision_taker
 	}
 }
