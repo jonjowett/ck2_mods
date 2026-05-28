@@ -1,42 +1,166 @@
 namespace = edmp_ifn
 
-# War forced to end by FROM
+# War forced to end by admin
 character_event = {
 	id    = edmp_ifn.1001
-	desc  = edmp_ifn_1001_desc
 	title = edmp_ifn_title
 	is_triggered_only = yes
 	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
-	option = {
-		trigger = { event_target:edmp_interference_force_end_war_white_peace_attacker = { character = ROOT } }
-		show_portrait = event_target:edmp_interference_force_end_war_white_peace_defender
-		tooltip_info = yes
-		name = edmp_ifn_evtopt_ok_affected
+	
+	desc = {
+		trigger = { has_global_flag = edmp_interference_force_end_war_white_peace }
+		text    = edmp_ifn_1001_desc_white_peace
 	}
+	desc = {
+		trigger = { has_global_flag = edmp_interference_force_end_war_invalid }
+		text    = edmp_ifn_1001_desc_invalid
+	}
+	desc = {
+		trigger = { has_global_flag = edmp_interference_force_end_war_defender_victory }
+		text    = edmp_ifn_1001_desc_defender_victory
+	}
+	desc = {
+		trigger = { has_global_flag = edmp_interference_force_end_war_attacker_victory }
+		text    = edmp_ifn_1001_desc_attacker_victory
+	}
+	desc = {
+		trigger = {
+			NOR = {
+				has_global_flag = edmp_interference_force_end_war_white_peace
+				has_global_flag = edmp_interference_force_end_war_invalid
+				has_global_flag = edmp_interference_force_end_war_defender_victory
+				has_global_flag = edmp_interference_force_end_war_attacker_victory
+			}
+		}
+		text    = edmp_ifn_1001_desc_fallback
+	}
+	
+	# ROOT is primary or secondary attacker
+	#  - Attacker victory = excellent
+	#  - White peace or defender victory = curses (NB: white peace usually imposes some costs on the attacker)
+	#  - Anything else = OK/affected
+	# NB: ROOT's portrait can NEVER appear in the event option, so using show_portrait for both attacker and defender should never be confusing
 	option = {
-		trigger = { event_target:edmp_interference_force_end_war_white_peace_defender = { character = ROOT } }
-		show_portrait = event_target:edmp_interference_force_end_war_white_peace_attacker
+		trigger = {
+			event_target:edmp_interference_force_end_war_war = { any_attacker = { character = ROOT } }
+			has_global_flag = edmp_interference_force_end_war_attacker_victory
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
 		tooltip_info = yes
-		name = edmp_ifn_evtopt_ok_affected
+		name = edmp_ifn_evtopt_excellent
 	}
 	option = {
 		trigger = {
-			NOR = {
-				event_target:edmp_interference_force_end_war_white_peace_attacker = { character = ROOT }
-				event_target:edmp_interference_force_end_war_white_peace_defender = { character = ROOT }
+			event_target:edmp_interference_force_end_war_war = { any_attacker = { character = ROOT } }
+			OR = {
+				has_global_flag = edmp_interference_force_end_war_defender_victory
+				has_global_flag = edmp_interference_force_end_war_white_peace
 			}
 		}
-		show_portrait = event_target:edmp_interference_force_end_war_white_peace_attacker
-		show_portrait = event_target:edmp_interference_force_end_war_white_peace_defender
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_curses
+	}
+	option = {
+		trigger = {
+			event_target:edmp_interference_force_end_war_war = { any_attacker = { character = ROOT } }
+			NOR = {
+				has_global_flag = edmp_interference_force_end_war_attacker_victory
+				has_global_flag = edmp_interference_force_end_war_defender_victory
+				has_global_flag = edmp_interference_force_end_war_white_peace
+			}
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_ok_affected
+	}
+	
+	
+	# ROOT is primary or secondary defender
+	#  - Defender victory = excellent
+	#  - Attacker victory = curses
+	#  - Anything else = OK/affected
+	# NB: ROOT's portrait can NEVER appear in the event option, so using show_portrait for both attacker and defender should never be confusing
+	option = {
+		trigger = {
+			event_target:edmp_interference_force_end_war_war = { any_defender = { character = ROOT } }
+			has_global_flag = edmp_interference_force_end_war_defender_victory
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_excellent
+	}
+	option = {
+		trigger = {
+			event_target:edmp_interference_force_end_war_war = { any_defender = { character = ROOT } }
+			has_global_flag = edmp_interference_force_end_war_attacker_victory
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_curses
+	}
+	option = {
+		trigger = {
+			event_target:edmp_interference_force_end_war_war = { any_defender = { character = ROOT } }
+			NOR = {
+				has_global_flag = edmp_interference_force_end_war_defender_victory
+				has_global_flag = edmp_interference_force_end_war_attacker_victory
+			}
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_ok_affected
+	}
+	
+	# ROOT is not involved in the war
+	#  - Always OK/unaffected
+	option = {
+		trigger = {
+			NOR = {
+				event_target:edmp_interference_force_end_war_war = { any_attacker = { character = ROOT } }
+				event_target:edmp_interference_force_end_war_war = { any_defender = { character = ROOT } }
+			}
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
 		name = edmp_ifn_evtopt_ok_unaffected
 	}
+	
+	# Fallback
+	#  - In case there is no other visible option (eg. if one or more event_target scopes have not been set up correctly)
+	option = {
+		trigger = {
+			# scope = { always = yes } returns true if and only if the scope exists
+			# Therefore, NOT = { scope = { always = yes } } returns true if and only if the scope does NOT exist
+			# So, this option will be visible if and only if any of the expected scopes have not been correctly defined
+			OR = {
+				NOT = { event_target:edmp_interference_force_end_war_attacker = { always = yes } }
+				NOT = { event_target:edmp_interference_force_end_war_defender = { always = yes } }
+				NOT = { event_target:edmp_interference_force_end_war_war      = { always = yes } }
+			}
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		name = edmp_ifn_evtopt_ok_unaffected_fallback
+	}
+	
 	after = {
 		hidden_tooltip = {
-			clear_event_target = edmp_interference_force_end_war_white_peace_war
-			clear_event_target = edmp_interference_force_end_war_white_peace_attacker
-			clear_event_target = edmp_interference_force_end_war_white_peace_defender
 			clear_event_target = edmp_interference_decision_taker
+			clear_event_target = edmp_interference_force_end_war_war
+			clear_event_target = edmp_interference_force_end_war_attacker
+			clear_event_target = edmp_interference_force_end_war_defender
+			clr_global_flag    = edmp_interference_force_end_war_white_peace
+			clr_global_flag    = edmp_interference_force_end_war_invalid
+			clr_global_flag    = edmp_interference_force_end_war_defender_victory
+			clr_global_flag    = edmp_interference_force_end_war_attacker_victory
 		}
 	}
 }

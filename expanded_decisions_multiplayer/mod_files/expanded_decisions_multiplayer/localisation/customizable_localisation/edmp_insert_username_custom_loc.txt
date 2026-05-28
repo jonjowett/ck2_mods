@@ -26,7 +26,7 @@ defined_text = {
 	name = edmp_insert_username_decision_taker
 	use_first_valid = yes
 	
-	# decision_taker is human, in a genuine MP game => Show decision_taker's username
+	# decision_taker is human, in a genuine MP game => decision_taker has a username => Show decision_taker's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -53,7 +53,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => decision_taker is AI, or this is a SP game => Show nothing
+	# Any other situation => decision_taker is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -69,80 +69,80 @@ defined_text = {
 
 ##################################################
 #                                                #
-#               FORCED WHITE PEACE               #
+#                 FORCED END WAR                 #
 #                                                #
 ##################################################
 
 
 
 defined_text = {
-	name = edmp_insert_username_force_end_war_white_peace_attacker
+	name = edmp_insert_username_force_end_war_attacker
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
-			event_target:edmp_interference_force_end_war_white_peace_attacker = { ai = no }
+			event_target:edmp_interference_force_end_war_attacker = { ai = no }
 		}
-		localisation_key = edmp_insert_username_force_end_war_white_peace_attacker_actual
+		localisation_key = edmp_insert_username_force_end_war_attacker_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
-			event_target:edmp_interference_force_end_war_white_peace_attacker = { edmp_this_character_is_an_absent_human_player = yes }
+			event_target:edmp_interference_force_end_war_attacker = { edmp_this_character_is_an_absent_human_player = yes }
 		}
 		localisation_key = edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
-			event_target:edmp_interference_force_end_war_white_peace_attacker = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+			event_target:edmp_interference_force_end_war_attacker = { edmp_this_character_is_a_current_or_absent_human_player = yes }
 		}
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
 
 defined_text = {
-	name = edmp_insert_username_force_end_war_white_peace_defender
+	name = edmp_insert_username_force_end_war_defender
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
-			event_target:edmp_interference_force_end_war_white_peace_defender = { ai = no }
+			event_target:edmp_interference_force_end_war_defender = { ai = no }
 		}
-		localisation_key = edmp_insert_username_force_end_war_white_peace_defender_actual
+		localisation_key = edmp_insert_username_force_end_war_defender_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
-			event_target:edmp_interference_force_end_war_white_peace_defender = { edmp_this_character_is_an_absent_human_player = yes }
+			event_target:edmp_interference_force_end_war_defender = { edmp_this_character_is_an_absent_human_player = yes }
 		}
 		localisation_key = edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
-			event_target:edmp_interference_force_end_war_white_peace_defender = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+			event_target:edmp_interference_force_end_war_defender = { edmp_this_character_is_a_current_or_absent_human_player = yes }
 		}
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -168,7 +168,7 @@ defined_text = {
 	name = edmp_insert_username_bilateral_party_1
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -177,7 +177,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_bilateral_party_1_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -186,7 +186,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
@@ -195,7 +195,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -204,7 +204,7 @@ defined_text = {
 	name = edmp_insert_username_bilateral_party_2
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -213,7 +213,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_bilateral_party_2_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -222,7 +222,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
@@ -231,7 +231,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -257,7 +257,7 @@ defined_text = {
 	name = edmp_insert_username_aiplayer_ai
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -266,7 +266,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_aiplayer_ai_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -275,7 +275,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
@@ -284,7 +284,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -293,7 +293,7 @@ defined_text = {
 	name = edmp_insert_username_aiplayer_player
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -302,7 +302,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_aiplayer_player_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -311,7 +311,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
@@ -320,7 +320,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -346,7 +346,7 @@ defined_text = {
 	name = edmp_insert_username_tributary_action_suzerain
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -355,7 +355,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_tributary_action_suzerain_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -364,7 +364,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
@@ -373,7 +373,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -382,7 +382,7 @@ defined_text = {
 	name = edmp_insert_username_tributary_action_tributary
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -391,7 +391,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_tributary_action_tributary_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -400,7 +400,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
@@ -409,7 +409,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -435,7 +435,7 @@ defined_text = {
 	name = edmp_insert_username_singlechar_affected
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -444,7 +444,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_singlechar_affected_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -453,7 +453,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
@@ -462,7 +462,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -488,7 +488,7 @@ defined_text = {
 	name = edmp_insert_username_singletitlechar_char_affected
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -497,7 +497,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_singletitlechar_char_affected_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -506,7 +506,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
@@ -515,7 +515,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -541,7 +541,7 @@ defined_text = {
 	name = edmp_insert_username_ipn
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -550,7 +550,7 @@ defined_text = {
 		localisation_key =  edmp_insert_username_ipn_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -559,7 +559,7 @@ defined_text = {
 		localisation_key =  edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
@@ -568,7 +568,7 @@ defined_text = {
 		localisation_key =  edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -577,7 +577,7 @@ defined_text = {
 	name = edmp_insert_username_spn
 	use_first_valid = yes
 	
-	# Player is human, in a genuine MP game => Show player's username
+	# This character is human, in a genuine MP game => This character has a username => Show this character's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -586,7 +586,7 @@ defined_text = {
 		localisation_key =  edmp_insert_username_spn_actual
 	}
 	
-	# Player is an absent player, in a genuine MP game => Show their "absent player" status
+	# This character is an absent player, in a genuine MP game => Show their "absent player" status
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -595,7 +595,7 @@ defined_text = {
 		localisation_key =  edmp_insert_username_absent_player
 	}
 	
-	# Player is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
+	# This character is human/absent, in SP, but with MP debug mode turned on => Show a debug message (usernames only exist in MP)
 	text = {
 		trigger = {
 			edmp_this_is_a_multiplayer_game = yes
@@ -604,7 +604,7 @@ defined_text = {
 		localisation_key =  edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => Player is AI, or this is a SP game => Show nothing
+	# Any other situation => This character is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
@@ -630,7 +630,7 @@ defined_text = {
 	name = edmp_insert_username_from
 	use_first_valid = yes
 	
-	# FROM is human, in a genuine MP game => Show FROM's username
+	# FROM is human, in a genuine MP game => FROM has a username => Show FROM's username
 	text = {
 		trigger = {
 			multiplayer = yes
@@ -657,7 +657,7 @@ defined_text = {
 		localisation_key = edmp_insert_username_sp_debug
 	}
 	
-	# Any other situation => FROM is AI, or this is a SP game => Show nothing
+	# Any other situation => FROM is AI, and is either NOT an absent player or is an absent player in a SP game => Show nothing
 	# (Since we actively want to show *nothing*, we can simply not write any code here!)
 	
 }
