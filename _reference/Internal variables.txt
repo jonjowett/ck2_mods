@@ -1,0 +1,733 @@
+Sort by size, continue at commented_out_strings.csv and larger
+
+Will appear coloured yellow by placing |Y before closing, like so: $NUM|Y$
+
+|Y - yellow
+|R - red
+|B - blue
+
+You can also use the usual way to colour the resulting text.
+
+
+
+Wonders (see LT.csv for examples)
+$TYPE_NAME$
+$WONDER_TYPE$
+$WONDER_TYPE_NAME$
+$WONDER_UPGRADE_TYPE$
+$NUM$ (used to display percentage repaired, followed by %)
+$NUM_USED$
+$NUM_TOTAL$
+$WONDER_NAME$
+$OLD_OWNER$
+$NEW_OWNER$
+$TICKING_COST$
+$FLAT_COST$
+$UNLOCKED_UPGRADE_SLOTS$
+$COMPLETED_BY$
+$COMPLETED_ON$
+$BUILD_TIME$
+$TIME_TO_BUILD$
+$ESTIMATED_FINISH_DATE$
+$ESTIMATED_TOTAL$ (wealth cost)
+$TIME$
+$WONDER$
+$STAGE$
+$STAGE_NUMBER$
+$STAGE_UPGRADE_COUNT$
+$UPGRADE_COUNT_MAX$
+$UPGRADE_NAME$
+
+
+Bloodlines
+$BLOODLINE$
+$DESCENDANTS$ (number of living members of bloodline)
+
+
+General
+$POT$ (amount of gold/artifacts/prestige/piety in new HolyFury-type Crusade pot, HolyFury.csv)
+$SHARE|+0$ (see above)
+$FRACTION|%Y0$ (see above)
+
+$OWNER$ (owner of wonder, LT.csv; founder of bloodline, HolyFury.csv)
+$PRESTIGE_COST$ (text1.csv)
+$AUTHORITY_LOSS$ (text1.csv)
+$FRIEND$ (text1.csv)
+$TOCHARACTER$ (text1.csv)
+$FROMCHARACTER$ (text1.csv)
+$LIEGENAME$
+$USURPER$
+$REGENT$ (name of character who is regent, text1.csv)
+$MAN$ (used in marriage log, text1.csv)
+$WOMAN$ (used in marriage log, text1.csv)
+$ADJ$ (character's form of address/adjective)
+$ATTRIBUTE$ (v1_10.csv)
+$FIRST$ (nomad clan relations, v2_40.csv; attribute difference v1_10.csv; combat rating difference, v2_30b.csv)
+$SECOND$ (nomad clan relations, v2_40.csv; attribute difference v1_10.csv; combat rating difference, v2_30b.csv)
+$OLD_NAME$ (wonder, dynasty)
+$NEW_NAME$ (wonder, dynasty)
+$AGE$ (character, wonder, also age difference with add_age_effect)
+$COST$ (holding, building, wonder, wonder upgrade, etc.)
+$EXTRACOST$ (text1.csv, unused, holdover from EU3?)
+$TITLE$
+$TITLE_ADJ$
+$OTHER_TITLE$
+$YEAR$ (wonder construction time, LT.csv)
+$MONTH$ (wonder construction time, LT.csv)
+$DAY$ (ordinal number, commented_out_strings.csv)
+$VALUE$ (TRADE_ROUTE_GLOBAL_VALUE_CHANGED;External factors chage the value of this trade route by $VALUE|+0%$, v2_81.csv)
+$VALUE1$ (v2_50b.csv)
+$VALUE2$ (v2_50b.csv)
+$MONARCHNAME$ (text1.csv)
+$CHARACTER$
+$CHARACTER_NAME$
+$CHAR$
+$CHAR1$
+$CHAR2$
+$FIRST_CHAR$
+$SECOND_CHAR$
+$KILLER$
+$EMPLOYER$
+$NAME$ (character, army, disease, etc.) root scope?
+$FLAG$
+$PERCENTAGE|%-$
+$PERCENT$ (v1_10.csv, text1.csv))
+$REQ_PERC$ (minimum percentage required, used in title creation screen)
+$HELD$ (number of de jure counties of title held, used in title creation screen)
+$ALL$ (number of de jure counties of title, used in title creation screen)
+$NICK$
+$NICKNAME$
+$DESC$ (wonder type)
+$MODIFIERS$
+$MOD$ (v2_50b.csv)
+$ACTIVE_TRIGGER_TEXT$
+$COMPARISON$ (bigger than, equal, smaller than, etc.)
+$COMP$
+$THAN$ (Does NOT like $WHO|Y$ better than $THAN|Y$., (ReapersDue.csv))
+$MODIFIER_DESCRIPTION$
+$OWNER_MODIFIER_TEXT$
+$LOCAL_MODIFIER_TEXT$
+$ALLOW_TRIGGER_TEXT$
+$MAX$ (used in Ruler Designer, also number of Nomad clans, max amount of raisable levies, demesne limit (text3.csv, v2_10b.csv), amount of controlled counties by potential target of (Norse) Prepared Invasion, v1_10.csv)
+$MAX_PERC$ (used in grant title to theocracy/republic info, v2_00.csv)
+$MIN$ (amount of controlled counties by potential target of (Norse) Prepared Invasion, v1_10.csv)
+$COST$
+$GOLD$ (amount, used in gifts, bribes, Embargo CB; see v1_09c.csv)
+$CASH$ (text1.csv)
+$WEALTH$ ('can afford to lose this amount of gold', pay gold to pope for piety, v2_00.csv)
+$NEW_LIEGE$
+$OLD_LIEGE$
+$OLDLIEGE$
+$LIEGE$
+$TOP_LIEGE$
+$VASSAL$
+$DISEASE$
+$DIS_NAME$
+$PRONOUN$ (his/her) (rarely used)
+$OPPOSITE_HE_SHE$ (rarely used, text1.csv)
+$OPPOSITE_HIS_HER$ (rarely used, text1.csv)
+$OPPOSITE_HIM_HER$ (rarely used, text1.csv)
+$HONORIFIC$, (rarely used)
+$FROM$ (rarely used)
+$TO$ (character receiving event, text1.csv)
+$PLAYER$
+$playername$ (Playername disconnected, text1.csv)
+$DECADENCE$
+$PIETY$ (see v2_11.csv)
+$CHARNAME$
+$CHARACTERNAME$
+$BUILDING$
+$CAPITAL$
+$PERC$ (see v1_091.csv, v1_102.csv, v2_10b.csv)
+$PERSON$
+$TEXT$ (v2_50_notranslate.csv, MAKE_GREY; used in infamy, v2_50b.csv)
+$CLAIMANT$
+$TARGET$
+$TARGETS$ (used in defensive pacts tooltips, see v2_52.csv)
+$EFFECT$ (opinion modifier (number), event modifier (description); also in text1.csv, see SUPPORTREBREQDESC, bloodline effect, HolyFury.csv)
+$OPINION$
+$OPINION2$ (used in title revocation warning, vassals of other religion get $OPINION2$)
+$NEWHOLDER$ (used in new Cardinal notification, v2_00.csv; new title holder's name, text1.csv)
+$MOTHER$
+$FATHER$
+$PARENT$ (parent religion, v1_07.csv)
+$GRANDPARENT$ (MonksAndMystics.csv)
+$OLD_PARENT$ (former parent religion, v1_07.csv)
+$SEX$ (boy or girl, v2_00.csv)
+$CHILD_GENDER$ (text1.csv)
+$GUARDIAN$
+$FAVOR_EXPIRATION$ (number of months until favor expires. v2_50b.csv)
+$OWES_FAVOR$ (character who owes favor, v2_50b.csv)
+$HAS_FAVOR$ (character who is owed favor, v2_50b.csv)
+$DECAY$ (monthly infamy decay)
+$NUM_SONS$ (number of unlanded sons tooltip, v1_06.csv)
+$DESTROYER$ (character who destroyed title, v1_06.csv)
+$EXPIRY$ (JadeDragon.csv)
+$CONSTRUCTION$ (building being constructed in holding, text1.csv, see CONSTRUCTION_PROGRESS)
+$TRAIT_DEATH$
+
+$RELIGION$
+$RELIGION1$
+$RELIGION2$
+$RELIGIONNAME$ (text1.csv)
+$RELIGION_GROUP$
+$REL_HEAD$
+$RELHEADNAME$
+$HEAD_TITLE$
+$TITLE_NAME$
+$HERESY$
+$REFORMED$ $PARENT$
+$BISHOP$ (text1.csv)
+$REGNAL_NAME$ (pope's chosen name, text1.csv)
+$FEATURE$ (name of religion feature, HolyFury.csv)
+
+$LIST$ (wonders in need of repair, adventurers targeting character, expiring truces, allies who can be called in, etc.)
+$NEEDED_YEARS$ (used in de jure drift progress, v1_10b.csv)
+
+$SETTLEMENT$ (holding)
+$SETT$ (text1.csv)
+$SETTLEMENTTYPE$ (holding type)
+$LOOT$ (from raiding)
+$BLOOD_BROTHER$
+$RAIDER$
+$VICTIM$ (owner of country being raided,v1_10.csv, prisoner being released, text2.csv)
+$END$ (holding destroyed by raiding, v1_10.csv)
+$SEA$ (nearby sea/river tile with ships)
+
+$CROWN_TITLE$ (top/primary title with active crown laws)
+$RULERTITLE$ (name of ruler of title, text1.csv, see NOMINATE_AN_HEIR)
+$RANK$ (count, duke etc., or rank in society)
+$PROV$
+$PROV_NAME$
+$PROVINCE$
+$PROV_OTHER$
+$PROG$ (technology improvement progress)
+$RULER$
+$HEIR$
+$LAW$
+$GENDER_RULE$ (gender succession law (Agnatic, etc.)
+$SUCCESSION_LAW$ (succession law (Primogeniture, Feudal Elective, etc.)
+$PRESTIGE$
+$CULTURE$
+$CULTURENAME$ (text1.csv)
+$GROUP$ (culture group adjective, 'Celtic', see v2_00.csv)
+$RELATION$
+$REL$
+$DYNASTY$
+$ABDICATOR$
+$FEMALE$
+$BUILDER$
+$AMOUNT$ (used in population growth, v2_40f.csv, retinue limit, v1_10.csv)
+$DIST$ (distance)
+$THEM$ (text4.csv)
+$CHARACTERTITLE$ (text1.csv)
+$ROOT_CHARACTERTITLE$
+$OWNERFULLNAME$
+$TOPOWNERFULLNAME$
+$SUCCESSOR$
+$NEW_SUCCESSOR$ ('You have a new successor' notification)
+$PREDECESSOR$
+$STRENGTH$ (Used in 'relative strength to liege'-tooltip in Realm-view)
+$SCORE$ (war contribution, text8.csv), Papal vote score, v2_00.csv)
+$RULER_TITLE$ (used in Papal election, v2_00.csv; republic election, v1_09.csv)
+$ANTIPOPE$
+$HOLDER$ (title holder)
+$OTHER$ (FROM in event?)
+$TRIBUTARY$
+$SUZERAIN$
+$OVERLORD$ (v2_40.csv)
+$LOCATION$
+$FIRST_LOCATION$
+$SECOND_LOCATION$
+$LIMIT$ (example: trade post limit, commander limit)
+$SPOUSE$ (spouse's name)
+$CHILD$ (child's name)
+$TERRAIN$
+$TAX$
+$TAX_LIEGE$ (v1_07.csv)
+$MEMBER$ (of bloodline, defensive pact)
+$MEMBERS$
+$NUM_MEMBERS$ (defensive pact)
+$SOURCE$ (cause of agression/infamy increase)
+$INFAMY$ (number indicates increase or decrease)
+$DECISION$
+$REALM$
+$COUNTRY$ (text1.csv)
+$COUNTRIES$ (text1.csv)
+$COUNTY$ (used in 'Make capital county'-tooltip, see v2_40.csv)
+$TRAIT$ (Tribal view on 'trait' opinion tooltip, v2_20b.csv)
+$TRAITNAME$ (v1_06.csv)
+$TRAIT_DEATH$ (death reason due to held trait, text8.csv)
+$CAUSE$ (death reason, not due to trait, text8.csv)
+$X$ (v2_20b.csv, text1.csv)
+$Y$ (text1.csv, see DONT_HAVE_A_X_INY)
+$GENDER$ (used in 3.01 set_gender_effect)
+$TOTAL$ (v1_10.csv, text2.csv)
+$MUCH$ (raised troops warning, text5.csv; opinion change, v1_10.csv)
+$CURRENT$ (current government, v2_40.csv; currently owned number of holy sites in Reform tooltip, v1_10.csv, text1.csv)
+$NEEDED$ (text1.csv, law change)
+$CUR$ (current number of something, MonksAndMystics.csv)
+$NEW$ (new government,v2_40.csv; new capital location when granting viceroyalty, v2_20.csv)
+$NEED$ (amount of unused manpower required; required amount of holy sites to reform, v1_10.csv; amount of prestige required, text1.csv, ANTIPOPE_NOT_ENOUGH_PRESTIGE)
+$CONSORT$ (concubine, consort)
+$INCOME$
+$TYPE$ (merc band troop type, v2_50b.csv, type of HolyFury-type crusade pot (prestige, gold, piety, artifacts,), HolyFury.csv, see CRUSADE_DISTRIBUTE_POT_WITH_TARGET_TYPED)
+$VAR$ (variable name)
+$CLIMATE$
+$WINTER$ (type of winter)
+$KINGDOMS$ (numbers of kingdom titles, v1_07.csv)
+$DUCHY$ (duchy name, text1.csv, see DE_JURE_DUCHY_DESC)
+$KING$ (King of <title>, commented_out_strings.csv, text1.csv, see DE_JURE_KINGDOM_DESC_HOLDER_1/2)
+$DUKE$ (Duke of <title>, text1.csv, see DE_JURE_DUCHY_DESC_HOLDER_1/2)
+$FOCUS$ (v2_30.csv; old tech system, text1.csv)
+$PRESSER$
+$UNLANDED$ (name of character who just became unlanded)
+$DEAD_CHAR$ (name of character who just died)
+$INHERITOR$ (name of character who just inherited)
+$NEW_TOP_LIEGE$ (name of character who just became new top liege of other character)
+$ALLIES$ (list of alliances)
+$TRIBUTARY_TYPE$
+$NUM_TRIBUTARIES$
+$LEVEL$ (fort level of holding in siege; tech level, text1.csv)
+$FREQ$ ("Losing morale every $FREQ$ days")
+$FORT_PROT$ (part of loot protected by fort level)
+$MAX_LOOT$
+$SYMPTOM$
+$DISEASE$
+$MINOR$ (number of minor outbreaks)
+$MAJOR$ (number of major outbreaks)
+$RULE$ (name of game rule)
+$OPTION$ (name of game rule option)
+$KEY$ (parameter name, HolyFury.csv)
+$PENTARCH_TITLE$
+$COURT_OWNER$ (liege for courtiers, "Secluded with $COURT_OWNER|Y$ in $BARONY|Y$", ReapersDue.csv)
+$BARONY$ (holding name)
+$HOST$ (ReapersDue.csv)
+$COUNT$ (number of prisoners to mass execute/ransom/etc., MonksAndMystics.csv, number of characters on HolyFury kill list, HolyFury.csv, see KILL_LIST_COUNT_PLURAL)
+$TYRANNY$ (amount of tyranny)
+$KEEPER$ (imprisoner, text1.csv)
+$JAILOR$ (imprisoner, text1.csv)
+$PRISONER$ (text1.csv)
+$RANSOM$ (text1.csv)
+$ELECTOR$ (used in new HRE and BE elections, HolyFury.csv)
+$CANDIDATE$ (used in new HRE and BE elections, HolyFury.csv)
+$STANCE$ (used in new HRE and BE elections, HolyFury.csv, see NOT_HAS_ELECTOR_STANCE_TRIGGER)
+$FAVOR_HOLDER$ (HolyFury.csv)
+
+
+Artifacts
+$ARTIFACT$
+$CREATED$
+$OBTAINED$
+$SLOT$
+$FULL_LIST$ (full list of artifacts (lost on succession))
+
+
+Technology
+$TECH$
+$TECHNAME$
+$TECH_NAME$
+$GROWTH$
+$POINTS$
+$POINTTYPE$
+$NEXTLEVEL$
+$HIGHEST$ (text1.csv)
+$AVRG$ (text1.csv)
+$GROUP$ (old tech system, text1.csv, see TECH_SET_FOCUS_DECS)
+$CHANCE$ (old tech system, text1.csv, see TECH_SET_FOCUS_DECS)
+
+
+Time
+$TIME$ (opinion change timer, religion moral authority change, v1_10.csv)
+$TIMEUNIT$ (opinion change timer, religion moral authority change, v1_10.csv)
+$DATE$ (Cannot revoke before $DATE$, The game was started on $DATE$)
+$END_DATE$ (date before which Prepared Invasion must be declared, v1_10.csv)
+$DAYS$
+$DAYS_LEFT$ (used in assault tooltip before siege weapons are ready (text3.csv), days left until new HolyFury-type Crusade launch, HolyFury.csv)
+$MONTHS$
+$YEARS$ (translates time duration to years)
+$NEEDED_YEARS$ (used in de jure drift)
+$FINISHED$ (Holding will be finished on $FINISHED$)
+$ERA$ (used in new game screen, bookmarks, RedKing.csv)
+$LENGTH$ (time game has been going on for, ReapersDue.csv)
+$DURATION$ (text1.csv)
+
+
+Used in raised troops warning (text5.csv, also text1.csv)
+$ACTIVE$
+$PASSIVE$
+
+
+Governments (see v.2_41.csv)
+$GOV$
+$GOVERNMENT$
+$GOVERNMENT_LIST$
+$HOLDINGS_LIST$ (holdings this government type can build/hold)
+$TIER_LIST$
+
+
+$WHO$ (root in events?)
+$WHO1$ (v2_50.csv
+$WHO2$ (v2_50.csv)
+$DIRECTION$ (loses/gains, see PIETY_EFFECT_CHARACTER LT.csv)
+$VALUE$ (amount of wealth, prestige, piety etc.)
+$VAL$
+$PIETYNAME$ (piety/karma etc.)
+
+
+Court size
+$SIZE$ (court size; total real troops, v1_07.csv; currently used retinue cap, v1_07.csv; raisable local levies, v1_07.csv)
+$LIMIT$
+$OVERFLOW$ (amount of courtiers over court limit)
+
+
+Plots (see v1_11.csv)
+$PLOT$
+$PLOTTER$
+$PLOTTERJOB$
+$PLOTNAME$
+$PLOT_NAME$
+$AMBITION_TARGET_NAME$ (name of plot target, text1.csv)
+$AMBITION_HE_SHE$ (text1.csv)
+$AMBITION_HIS_HER$ (text1.csv)
+$AMBITION_HIM_HER$ (text1.csv)
+$POWER$ (plot power)
+$CHANCE$ (used in assassination interaction; random effect, text1.csv)
+$ASSASSIN$ (used in assassination interaction, text1.csv)
+$SUCCESS$ (succeeded/failed, used in assassination interaction, text1.csv)
+
+
+Factions
+$FACTION$
+$BACKER$
+$FACTIONLEADER$
+$OBJECTIVE$ (faction name, ambition name, focus name)
+$THIRDPARTY$ (claimant outside faction, for example, ReapersDue.csv)
+
+
+Favors
+$REQUESTOR$ (character calling in favor)
+$ACTIONS$ (list of possible uses for favors)
+$ACTION$
+
+
+Councilors
+$JOB$ (councilor action) (text3.csv, text2.csv)
+$JOB_TITLE$
+$JOBTITLE$
+$POSITION$ (for/against, v2_50b.csv; number of ranks in society away from a certain position, commented_out_strings.csv)
+$FOR$ (v2_50.csv)
+$AGAINST$ (v2_50.csv)
+$FIRED$
+$COUNCILOR$
+$MARSHAL$
+$SPYMASTER$
+$VOTER_TITLE$ (can vote on liege laws in council, v2_50b.csv)
+$NOMINEE$ (text1.csv)
+$ISSUE$ (something the council can vote on, v2_50b.csv)
+$VOTE$ (for/against, v2_50b.csv)
+$YES$ (number of votes in favor of law)
+$NO$ (number of votes against law)
+$WAITING$ (number of undecided votes)
+$COUNCIL_RESULT$ (v2_50.csv)
+$CHARACTER_RESULT$ (v2_50.csv)
+$INTERACTION$ (v2_50.csv)
+$HOW$ (MonksAndMystics.csv)
+$WHAT$ (proposed law change)
+$ACTION$ (what councilor is currently doing, text1.csv)
+
+$DISCONTENT_DURATION$ (discontent council duration)
+$DISCONTENT_END_DATE$
+$UNTIL$ (discontent until this date)
+$REASON$ (reason for discontent council)
+
+
+Holdings/titles
+$TYPE$ (holding type, Castle, Tribe etc.)
+$FIRST_TYPE$
+$SECOND_TYPE$
+$WHERE$ (province)
+$WHAT$ (modifier name; artifact name, commented_out_strings.csv)
+$SITENAME$ (holy site county name)
+
+
+Wars
+$LEVY$ (levy maintenance cost)
+$WAR$
+$WARNAME$ (text1.csv)
+$ACTOR_WARS$ (text8.csv)
+$VASSAL_WAR$
+$LIEGE_WAR$
+$SIDE$ (in wars)
+$REASON$ (reason was ended, used in notification, log)
+$CRUSADE$
+$CRUSADE_NAME$;
+$POPE$
+$HOLY_WAR$
+$ATTACKER$
+$DEFENDER$
+$ALLY$
+$GIVER$ (v1_06a.csv)
+$REGION$ (v1_06a.csv)
+$TROOP$
+$TROOPS$
+$MEN$ (amount of troops tribal vassal controls when called to war)
+$CALLER$ (used in defensive pacts tooltips, see v2_52.csv; character who calls in ally, text2.csv)
+$GROUP$ (group defensive pact, by religion; technology group, text1.csv)
+$COALITION_INFAMY_LIMIT|%Y0$ (v2_52.csv)
+$OTHER_COALITION_JOIN_INFAMY|%Y0$
+$EVERY_COALITION_EXCEPT_HEADS_JOIN_INFAMY|%Y0$
+$RATIO|Y%0$
+$RATE$ (reinforcement rate of spawned units)
+$RETINUE$ (retinue, nomad troops, tribal retinue)
+$MIN_RET$ (minimum retinue cap for all landed characters, v1_07.csv)
+$GROWTH$ (monthly reinforcement of retinues, HolyFury.csv)
+$MERC$
+$NUM_SHIPS$ (used in 'troops spawn in/near place', v2_20b.csv)
+$NUM_TROOPS$ (used in 'troops spawn in/near place', v2_20b.csv)
+$LEADER$ (unit/flank leader)
+$FOR$ (SUPPLY_LIMIT_LEADER_TRIGGER, v3_01.csv)
+$CB$
+$CASUS_BELLI$
+$CASUSBELLITYPE$ (text1.csv)
+$ENEMY$ (enemy in a war, or when hostile, such as when looting)
+$REVOLTER$
+$OUTSIDER$ (character attacking revolt)
+$OUTCOME$ (outcome of war, white peace, defeat, etc, text2.csv)
+$WARLIST$ (list of wars joined if call to arms is accepted, text2.csv)
+$CAP$ (capped warscore due to some reason)
+$SUPPLY$ (supply limit)
+$DEST$ (destination of army/fleet?, text1.csv)
+$TOWN$ (settlement alternative?, text1.csv, LOST_CONTROL, HAS_CONTROL)
+
+
+Retinue (used in retinue cap tooltip, v1_10b.csv)
+$HOLDINGS$
+$PERHOLDING$
+
+
+Combat (v2_40.csv)
+$COMMANDER$ (text1.csv)
+$LOOSER$ (name of character who lost battle)
+$LOSER$
+$WINNER$ (name of character who won battle)
+$DAMAGE$
+$TOTAL_DAMAGE$
+$MORALE_DAMAGE$
+$MORALEDMG$
+$TOTAL_DEFENCE$
+$DEFENCE$
+$DEF$
+$DEF_SIZE$ (text1.csv)
+$ATT$ (text1.csv)
+$ATT_SIZE$ (text1.csv)
+$MORALE$
+$TOTAL_MORALE$
+$TACTIC$
+$DELTA$ (morale change per week, outside combat)
+$RIVER$
+$FROM$ (one side of portage, v1_10.csv)
+$TO$ (other side of river/strait crossing or portage, v1_10.csv; also HolyFury.csv)
+$TO_EFFECT$ (text1.csv)
+$FROM_EFFECT$ (text1.csv)
+$MAX_TROOPS$ (used in narrow flank tooltip, v2_00.csv)
+$MAXTROOPS$
+$REINFORCE$ (raised troops reinforcement rate)
+$ADJ$ $ARMY$ (MonksAndMystics.csv, UNIT_ARMY_NAME)
+$UNIT$
+$PHASE$
+$AVERAGE$ (average amount of losses per day tooltip, text1.csv)
+$RESULT$ (outcome of battle, text1.csv)
+$BATTLE$ (name of battle, text1.csv)
+$WHICH$ (allowed unit ?,text1.csv; unit flank?, text1.csv)
+$OUR_LOSSES$ (number of losses, text1.csv)
+$THEIR_LOSSES$ (number of losses, text1.csv)
+$US$ (text1.csv, see CH_BATTLE_RESULT_LONG, ANTIPOPE_TOO_LOW_OPINION)
+$THEM$ (text1.csv, see CH_BATTLE_RESULT_LONG)
+$COL$ (text1.csv)
+$HOME$ (unit/mercenary raised from this location, text1.csv, see SU_HOME and SU_MHOME)
+$EFFICIENCY$ (text1.csv, see UNIT_TYPE_VERSUS)
+$S_VAL$ (skirmish attack/defense value, text1.csv)
+$M_VAL$ (melee attack/defense value, text1.csv)
+$P_VAL$ (pursuit attack/defense value, text1.csv)
+
+(see v2_41.csv and many other files), used in CB's
+$ORDER$ (ordinal number, First, Second etc.), or Holy Order name (v2_00.csv)
+$FIRST_ADJ$ (adjective of attacker's primary title)
+$SECOND_ADJ$ (adjective of defender's primary title)
+
+
+Diplomatic interaction
+$ACTOR$ (see v2_51.csv)
+$ACTOR_PERSON$
+$RECIPIENT$ (target of diplomatic interaction)
+$RECIPIENT_PERSON$
+$INTERACTION$ (name of applicable interaction, used in 'Character is currently considering a <interaction> offer from us')
+$MYPARTYTIER$ (used in marriage proposals, 'Relative of a')
+$MYPARTY$ (used in marriage proposals, character in your court)
+$THEIRPARTYTIER$ (used in marriage proposals, 'Relative of a')
+$PRESTIGE2$ (used in marriage proposals)
+$ANSWER_LIKELYNESS$ (tribal vassals' likeliness to accept call to arms, v2_20.csv)
+
+
+Other
+$VAL|Y%$ (v2_51.csv)
+$OTHER|Y$ (v2_51.csv)
+$NUM|Y0%$ (v2_52.csv)
+$LIMIT|%Y0$ (v2_52.csv)
+$BONUS$ (gavelkind demesne bonus tooltip (text3.csv), buildings, see v2_40c.csv)
+$SONG$
+$MESSAGE$ (used in Desync message, v2_20b.csv)
+$ACHIEVEMENT$
+$VERSION$
+$CURRVERSION$
+$SHORTCUT$
+$FACTOR$ (MonksAndMystics.csv)
+$DIVISOR$ (MonksAndMystics.csv)
+$HOUSE$ $DYN$ (MonksAndMystics.csv)
+$DYN$ $NAME$ (MonksAndMystics.csv)
+$HOUSENAME$ (text1.csv)
+$TOTAL$ (total number of dynasty members)
+$LIVING$ (number of living dynasty members)
+$PREFIX$ $NAME$
+$PETTY$ $PREFIX$ $NAME$
+$TRIBAL$ $PREFIX$ $NAME$
+$TITULAR$ $PREFIX$ $NAME$
+$TRIBAL$ $PETTY$ $PREFIX$ $NAME$
+$TITULAR$ $PETTY$ $PREFIX$ $NAME$
+$LOSE$ (text1.csv)
+$NEW$ (text1.csv)
+$EVENT$ (used for log, text1.csv)
+$CHANGE$ (holdover from EU3?, text1.csv)
+$NATION$ (holdover from EU3?, text1.csv)
+$IDEA$ (holdover from EU3?, text1.csv)
+$CHAN$ (text1.csv, see JOINED_CHANNEL)
+$CREATOR$ (hosting player?, text1.csv)
+$FILENAME$ (text1.csv)
+$FOLDERNAME$ (text1.csv)
+$UNITS$ (holdover from EU3?, text1.csv, see HAVE_MORE_THAN_INFANTRY_IN)
+$COUNT$ (stacking multiplier, HolyFury.csv, STACKING_MODIFIER_COUNT)
+$INSERT$ (used in alternate start names/descriptions, HolyFury.csv)
+
+
+Featured Ruler
+$NUM_DAYS$ (remaining duration, used for Featured Ruler in main menu)
+$MINUTES$ (remaining duration, used for Featured Ruler in main menu)
+$FEAT$ (accomplished something with a Featured Ruler, RedKing.csv)
+$LEVEL$ (scored this level with a Featured Ruler, RedKing.csv)
+$HIGH_SCORE$
+$FEAT_PROGRESS$
+$FEAT_PROGRESS_CAPPED$
+$FEAT_LEVEL_VALUE$
+
+
+Download (uninteresting for mods, text4.csv)
+$DLC$
+$DLC_NAME$
+$FILE$ (ordinal number of file)
+$FILE_MAX$ (total number of files)
+$COUNT$ (number of files)
+$ITEM$
+$USERNAME$ (Steam username?)
+
+
+Gameover/endgame screen
+$NUMCHARS$
+$ENDCHAR$
+$FAILED$ (failed/beat house ...)
+
+
+Nomads
+$CLAN$
+$BLOOD_BROTHER$
+$EMPTY_HOLDINGS$ (used in nomad clan relations, v2_40.csv)
+$LIEGE_EMPTY_HOLDINGS$ (used in nomad clan relations, v2_40.csv)
+
+
+Merchant Republics (v2_40.csv)
+$FAMILY$ (patrician family)
+$PATRICIAN$ (head of patrician family, v1_09.csv)
+$REPUBLIC$ (merchant republic title, title of ruling doge)
+$NEW_DOGE$ (newly elected doge)
+$TRADE_POSTS$
+$MAX_TRADE_POSTS$
+$INC$ (v1_10.csv)
+$TPBONUS$ (bonus income percentage to tradeposts)
+$CTBONUS$ (bonus income percentage to cities)
+$DOWRY$
+$TAKER$ (character who seized trade post)
+$ROUTE$ (trade route name)
+$GOODS_FROM$ (text1.csv)
+$GOODS_TO$ (text1.csv)
+$GOODS$ (text1.csv)
+$GOODS_OTHER$ (text1.csv)
+
+
+Dynamic mercs (v2_50b.csv)
+$CREATOR$ (creator of mercenary band)
+$MERCENARY$ (leader of created mercenary band)
+$REPLACEMENT$ (new leader of mercenary band)
+$BAND$ (created mercenary band)
+
+
+Offmap powers
+$OFFMAP$ (commented_out_strings.csv)
+$OFFMAP_SHORT$ (short name)
+$POWER$ (<power> likes culture group, etc.)
+$CURRENCY$ (offmap currency (Grace for China))
+$STATUS$ (civil war, invaded by Jurchens, etc.)
+$LIKE$ (religion/culture (group)
+
+
+Societies
+$SOCIETY$ (commented_out_strings.csv, MonksAndMystics.csv)
+$GAIN|=1+$ (JadeDragon.csv) + colours number green, - colours it red
+$GAINLOSS$ (MonksAndMystics.csv)
+$VALUENAME$
+$DESC$ (society quest description, ReapersDue.csv)
+$SOCIETY_LEADER$
+$COOLDOWN$ (cooldown period after leaving society)
+
+
+Succession screen at ruler death
+$OLD_TITLE$ $OLD_NAME$ $SUCC_RAND_DESC$ $NEW_TITLE$ $NEW_NAME$ (commented_out_strings.csv)
+$HEIR_TITLE$ $HEIR_NAME$ - $HEIR_TRAIT_DESC$. Long live $NEW_TITLE$ $NEW_NAME$ (ReapersDue.csv)
+$DEAD_TITLE$ $DEAD_NAME$ $DEAD_RAND_FLAVOR_DESC$ (ReapersDue.csv)
+
+
+Hospitals (ReapersDue.csv)
+$LEVEL$ (hospital level)
+$DISEASE_RESISTANCE$
+$DEPOPULATION_PROTECTION$
+$SOURCES$ (list of buildings providing disease resistance)
+$UNDEFENDED$ (ReapersDue.csv)
+
+
+Portraits (MonksAndMystics.csv)
+$LAYER$
+$INDEX$
+
+
+Bookmark (text1.csv)
+$TAG$ (name of interesting character?)
+
+
+Store (never realized?
+$DUCATS_DIFF$
+$ITEM$
+$BALANCE$
+$REMAINING$
+$COST$
+
+
+Message settings
+$TRUTH$ (whether or not message is displayed in the log/popup/elsewhere)
+
+
+
+Figure out:
+CALL_ALLY_REL_DESC;$CHAR$'s $REL_1$ $NAME$'s $REL_2$;$REL_1$ de $CHAR$ $REL_2$ de $NAME$;$CHAR$s $REL_1$ $NAME$s $REL_2$;;$REL_1$ de $CHAR$ $REL_2$ de $NAME$;;;;;;;;;x (text1.csv)
+
+
+
+FROM_CHARACTERNAME (text1.csv)
