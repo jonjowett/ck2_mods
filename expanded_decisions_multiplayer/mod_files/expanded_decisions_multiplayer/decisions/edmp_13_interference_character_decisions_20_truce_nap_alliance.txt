@@ -5,7 +5,7 @@ targetted_decisions = {
 	edmp_interference_add_bilateral_10_year_truce_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
 		third_party_filter = all_including_me
-		show_third_party_potential = yes
+		# show_third_party_potential omitted because it KILLS performance for ALL targetted decisions (because the third-party list can be VERY long for this decision)
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -109,7 +109,7 @@ targetted_decisions = {
 	edmp_interference_add_nap_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
 		third_party_filter = all_including_me
-		show_third_party_potential = yes
+		# show_third_party_potential omitted because it KILLS performance for ALL targetted decisions (because the third-party list can be VERY long for this decision)
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
