@@ -230,6 +230,9 @@ echo.
 xcopy /R /Y /Q /S /E /I %custom_git_mod_subfolder%wtwsms_patch_religions\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %custom_git_mod_subfolder%wtwsms_patch_warrior_lodge_decisions\ %this_mod_folder_location%
 
+:: Custom versions of git mods
+xcopy /R /Y /Q /S /E /I %custom_git_mod_subfolder%ed_kingdom_formation\ %this_mod_folder_location%
+
 xcopy /R /Y /Q /S /E /I %git_mod_folder_location%bugfix_tribal_buildings%git_mod_subfolder%bugfix_tribal_buildings\ %this_mod_folder_location%
 xcopy /R /Y /Q /S /E /I %compatch_subfolder%bugfix_tribal_buildings\ %this_mod_folder_location%
 
