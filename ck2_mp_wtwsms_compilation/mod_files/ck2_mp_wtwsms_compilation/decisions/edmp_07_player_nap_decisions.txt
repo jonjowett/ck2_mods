@@ -1,0 +1,106 @@
+targetted_decisions = {
+	
+	edmp_create_nap_with_player = {
+		
+		filter = all_including_me
+		
+		ai = no
+		
+		from_potential = { ai = no }
+		
+		potential = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+		
+		
+		
+		allow = {
+			
+			# For debugging: Admin can send NAP offers to absent humans in SP
+			trigger_if = {
+				limit = { ROOT_FROM = { edmp_player_nap_this_character_can_see_debug_mode_admin_triggers = yes } }
+				OR = {
+					ROOT = { ai = no }
+					AND = {
+						ROOT      = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+						ROOT_FROM = { edmp_player_nap_this_character_is_debug_mode_admin      = yes } # Must be last because it has a LOOOOONG tooltip
+					}
+				}
+			}
+			# Otherwise: Can only be sent to humans
+			trigger_else = {
+				ai = no
+			}
+			
+			NOT = { has_non_aggression_pact_with = ROOT_FROM }
+			
+			# Players cannot create a NAP if they are hostile to each other
+			# (Admins can use the interference decision.)
+			NOT = { war_with = ROOT_FROM }
+			
+			# Cannot flood players with NAP requests
+			custom_tooltip = {
+				text = edmp_root_is_not_currently_considering_a_player_nap_offer_from_from_tt
+				ROOT = {
+					OR = {
+						NOT = { has_character_flag  = edmp_considering_nap_from_@FROM }
+						had_character_flag = { flag = edmp_considering_nap_from_@FROM years >= 1 }
+					}
+				}
+			}
+			custom_tooltip = {
+				text = edmp_from_is_not_currently_considering_a_player_nap_offer_from_root_tt
+				ROOT_FROM = {
+					OR = {
+						NOT = { has_character_flag  = edmp_considering_nap_from_@ROOT }
+						had_character_flag = { flag = edmp_considering_nap_from_@ROOT years >= 1 }
+					}
+				}
+			}
+			
+			# Special case: If both ROOT and FROM have recently rejected each others' offers, the rejections cancel-out.
+			# If ROOT rejects FROM, ROOT can send an offer.
+			# If FROM rejects that offer, and this clause was not here, they would be mutually blocked for 5 years, which is not desirable.
+			trigger_if = {
+				limit = {
+					ROOT = {
+						has_character_flag          = edmp_rejected_nap_from_@FROM
+						had_character_flag = { flag = edmp_rejected_nap_from_@FROM years < 5 }
+					}
+					ROOT_FROM = {
+						has_character_flag          = edmp_rejected_nap_from_@ROOT
+						had_character_flag = { flag = edmp_rejected_nap_from_@ROOT years < 5 }
+					}
+				}
+				custom_tooltip = {
+					text = edmp_this_character_and_from_have_both_recently_rejected_each_others_player_nap_offers_tt
+					always = yes
+				}
+			}
+			# Normal situation: ROOT must not have recently rejected FROM's offer.
+			trigger_else = {
+				custom_tooltip = {
+					text = edmp_this_character_has_not_rejected_a_player_nap_offer_from_from_in_the_last_5_years_tt
+					OR = {
+						NOT = { has_character_flag  = edmp_rejected_nap_from_@FROM }
+						had_character_flag = { flag = edmp_rejected_nap_from_@FROM years >= 5 }
+					}
+				}
+			}
+			
+		}
+		
+		
+		
+		effect = {
+			custom_tooltip = {
+				text = edmp_this_character_receives_a_player_nap_offer_tt
+				ROOT      = { save_event_target_as = edmp_pnap_recipient }
+				ROOT_FROM = { save_event_target_as = edmp_pnap_sender    }
+				ROOT_FROM = { letter_event = { id = edmp_pnap.1000 } } # Pings to ROOT via the saved event_targets above
+			}
+		}
+		
+		
+		
+	}
+	
+}

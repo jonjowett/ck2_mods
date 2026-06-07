@@ -1,0 +1,113 @@
+#############
+# Utilities #
+#############
+
+expd_dm_this_title_is_held_by_root_or_a_vassal = {
+	holder_scope = {
+		OR = {
+			character = ROOT
+			is_vassal_or_below_of = ROOT
+		}
+	}
+}
+
+expd_dm_root_is_not_de_jure_liege_of_this_duchy = {
+	custom_tooltip = {
+		text = expd_dm_root_is_not_de_jure_liege_of_this_duchy_tt
+		NOT = { any_dejure_liege = { expd_dm_this_title_is_held_by_root_or_a_vassal = yes } }
+	}
+}
+
+expd_dm_root_controls_prev_kingdom = {
+	PREV = { is_titular = no }
+	OR = {
+		custom_tooltip = {
+			text = expd_dm_root_holds_prev_kingdom_tt
+			PREV = { expd_dm_this_title_is_held_by_root_or_a_vassal = yes }
+		}
+		custom_tooltip = {
+			text = expd_dm_root_completely_controls_prev_kingdom_tt
+			ROOT = { completely_controls = PREVPREV }
+		}
+		custom_tooltip = {
+			text = expd_dm_every_county_and_duchy_in_prev_kingdom_is_controlled_by_root_tt
+			NOT = {
+				PREV = {
+					any_de_jure_vassal_title = {
+						OR = {
+							tier = COUNT
+							tier = DUKE
+						}
+						has_holder = yes
+						holder_scope = {
+							NOT = { character = ROOT }
+							NOT = { is_vassal_or_below_of = ROOT }
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+########################################
+# Merge duchy into kingdom by decision #
+########################################
+
+expd_dm_root_can_see_decision_to_merge_this_duchy_into_prev_kingdom = {
+	
+	# The duchy is not de jure vassal of the target kingdom (eg. because the decision has already been taken)
+	NOT = {
+		any_dejure_liege = {
+			title = PREVPREV
+		}
+	}
+	
+	# The target kingdom is held by the character or one of his vassals
+	expd_dm_root_controls_prev_kingdom = yes
+	
+	# The duchy is not de jure vassal of any kingdom owned by root or one of his vassals
+	expd_dm_root_is_not_de_jure_liege_of_this_duchy = yes
+	
+	# This duchy, or any of its consituent holdings, is held by the character or one of his vassals
+	OR = {
+		expd_dm_this_title_is_held_by_root_or_a_vassal = yes
+		any_de_jure_vassal_title = {
+			expd_dm_this_title_is_held_by_root_or_a_vassal = yes
+		}
+	}
+	
+}
+
+expd_dm_root_can_take_decision_to_merge_this_duchy_into_prev_kingdom = {
+	
+	ROOT = {
+		show_scope_change = no
+		
+		# Standard vanilla conditions
+		is_adult = yes
+		independent = yes
+		prisoner = no
+		war = no
+		NOT = { trait = incapable }
+		
+		# Must be king or emperor
+		higher_real_tier_than = DUKE
+		
+		# Must completely control the duchy
+		completely_controls = PREV
+	}
+	
+	# Replicate some of the potential conditions, for info
+	expd_dm_root_controls_prev_kingdom = yes
+	expd_dm_root_is_not_de_jure_liege_of_this_duchy = yes
+	
+	# Wealth, prestige & piety (wealth & piety will be lost)
+	ROOT = {
+		show_scope_change = no
+		wealth = 300
+		prestige = 1000
+		piety = 100
+	}
+	
+}

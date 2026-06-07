@@ -1,0 +1,228 @@
+###########
+# Generic #
+###########
+
+expd_kf_create_this_kingdom_from_prev_single_duchy_and_grant_to_root = {
+	# Expected to be called in this format:
+	#		d_cyprus = {
+	#			show_scope_change = no
+	#			k_cyprus = {
+	#				show_scope_change = no
+	#				expd_kf_create_this_kingdom_from_prev_single_duchy_and_grant_to_root = yes
+	#			}
+	#		}
+	# (The "show_scope_change = no" bits are required, otherwise the tooltips will probably be very confusing.)
+	
+	# Set up some event_targets, to avoid spaghetti code
+	hidden_tooltip = {
+		ROOT = { primary_title = { save_event_target_as = expd_kf_roots_primary_title } }
+		save_event_target_as = expd_kf_new_kingdom
+		PREV = { save_event_target_as = expd_kf_source_duchy }
+		event_target:expd_kf_source_duchy = { 
+			if = {
+				limit = { any_dejure_liege = { tier = EMPEROR } }
+				set_title_flag = expd_kf_can_assign_new_kingdom_to_source_empire
+				any_dejure_liege = {
+					limit = { tier = EMPEROR }
+					save_event_target_as = expd_kf_source_duchy_dejure_liege_empire
+				}
+			}
+		}
+	}
+	
+	# Standard cost of 300 gold & 400 piety (IE: kingdom formation @ 500 piety (=300gold+200piety) + 200 piety for the de jure reassignment of an entire duchy)
+	ROOT = {
+		show_scope_change = no
+		wealth = -300
+		piety = -400
+	}
+	
+	# Grant the kingdom to ROOT, and copy all laws from ROOT's primary title
+	custom_tooltip = {
+		text = expd_kf_root_gains_this_kingdom_tt
+		event_target:expd_kf_new_kingdom = {
+			show_scope_change = no
+			grant_title = ROOT
+			copy_title_laws = event_target:expd_kf_roots_primary_title
+		}
+	}
+	
+	# Move the duchy into the kingdom
+	custom_tooltip = {
+		text = expd_kf_prev_duchy_becomes_de_jure_part_of_this_kingdom_tt
+		event_target:expd_kf_source_duchy = {
+			show_scope_change = no
+			de_jure_liege = event_target:expd_kf_new_kingdom
+		}
+	}
+	
+	# If you're an emperor, move the new kingdom into your empire
+	# NB: Use scopes (instead of event targets) for the limit, so that the effect shows up properly in the UI before taking the decision
+	if = {
+		limit = { ROOT = { primary_title = { tier = EMPEROR } } }
+		custom_tooltip = {
+			text = expd_kf_this_kingdom_becomes_de_jure_part_of_roots_primary_empire_tt
+			event_target:expd_kf_new_kingdom = {
+				show_scope_change = no
+				de_jure_liege = event_target:expd_kf_roots_primary_title
+			}
+		}
+	}
+	else = {
+		# Otherwise, try to ensure sure that the new kingdom is de jure part of the same empire as the source duchy
+		hidden_tooltip = {
+			if = {
+				limit = { event_target:expd_kf_source_duchy = { has_title_flag = expd_kf_can_assign_new_kingdom_to_source_empire } }
+				event_target:expd_kf_new_kingdom = {
+					show_scope_change = no
+					de_jure_liege = event_target:expd_kf_source_duchy_dejure_liege_empire
+				}
+			}
+		}
+	}
+	
+	# Cleanup
+	hidden_tooltip = {
+		event_target:expd_kf_source_duchy = { clr_title_flag = expd_kf_can_assign_new_kingdom_to_source_empire }
+	}
+	
+}
+
+##########
+# Saxony #
+##########
+
+expd_kf_create_saxony_and_grant_to_root = {
+	# NB: This code does not use PREV, so it doesn't need any special calling structure
+	
+	# Set up some event_targets, to avoid spaghetti code
+	hidden_tooltip = {
+		ROOT = { primary_title = { save_event_target_as = expd_kf_roots_primary_title } }
+		c_braunschweig = {
+			clr_title_flag = expd_kf_can_assign_k_saxony_to_de_jure_empire
+			clr_title_flag = expd_kf_can_not_assign_k_saxony_to_de_jure_empire
+		}
+		if = {
+			limit = { c_braunschweig = { any_dejure_liege = { tier = EMPEROR } } }
+			c_braunschweig = {
+				set_title_flag = expd_kf_can_assign_k_saxony_to_de_jure_empire
+				any_dejure_liege = {
+					limit = { tier = EMPEROR }
+					save_event_target_as = expd_kf_new_de_jure_empire_for_k_saxony
+				}
+			}
+		}
+		else = {
+			c_braunschweig = {
+				set_title_flag = expd_kf_can_not_assign_k_saxony_to_de_jure_empire
+			}
+		}
+	}
+	
+	# Standard cost of 300 gold & 400 piety (IE: kingdom formation @ 500 piety (=300gold+200piety) + 200 piety for the de jure reassignment of an entire duchy)
+	ROOT = {
+		show_scope_change = no
+		wealth = -300
+		piety = -400
+	}
+	
+	# Grant the kingdom to ROOT, and copy all laws from ROOT's primary title
+	k_saxony = {
+		show_scope_change = no
+		custom_tooltip = {
+			text = expd_kf_root_gains_this_kingdom_tt
+			grant_title = ROOT
+			copy_title_laws = event_target:expd_kf_roots_primary_title
+		}
+	}
+	
+	# Move the source duchies into the kingdom of Saxony
+	d_saxony          = { show_scope_change = no   expd_kf_add_this_duchy_to_k_saxony_if_non_titular = yes }
+	d_brunswick       = { show_scope_change = no   expd_kf_add_this_duchy_to_k_saxony_if_non_titular = yes }
+	d_munster_germany = { show_scope_change = no   expd_kf_add_this_duchy_to_k_saxony_if_non_titular = yes }
+	d_angria          = { show_scope_change = no   expd_kf_add_this_duchy_to_k_saxony_if_non_titular = yes }
+	d_bremen          = { show_scope_change = no   expd_kf_add_this_duchy_to_k_saxony_if_non_titular = yes }
+	
+	# Move the kingdom of Saxony to an appropriate de jure empire
+	# If the player is an emperor, add it to their empire. Otherwise, add it to the empire that contains the duchy of Saxony or the county of Braunschweig/Brunswick.
+	if = {
+		limit = { ROOT = { primary_title = { tier = EMPEROR } } }
+		k_saxony = {
+			show_scope_change = no
+			custom_tooltip = {
+				text = expd_kf_this_kingdom_becomes_de_jure_part_of_roots_primary_empire_tt
+				ROOT = {
+					primary_title = {
+						k_saxony = {
+							de_jure_liege = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		
+		# This section needs to work simultaneously in two separate situations:
+		# 1: When examining tooltips before clicking the decision
+		#     --- c_braunschweig has no title flags set (hopefully!)
+		#     --- If c_braunschweig is in a de jure empire at the start of this script, then k_saxony will be moved into that de jure empire (and the tooltip should reflect this)
+		#     --- Otherwise, this section should be ignored
+		# 2: When executing code after clicking the decision
+		#     --- c_braunschweig has one of the two possible title flags set
+		#     --- If c_braunschweig was in a de jure empire at the start of this script, we need to move k_saxony into the previously-saved target
+		#     --- Otherwise, c_braunschweig is now in e_germania (!), so we need to ignore this section
+		
+		limit = {
+			c_braunschweig = {
+				NOT = { has_title_flag = expd_kf_can_not_assign_k_saxony_to_de_jure_empire } # When executing code: Prevents this section from being used if no de jure empire was saved
+				OR = {
+					any_dejure_liege = { tier = EMPEROR }                                    # When examining tooltips: Ensures that this section is displayed
+					has_title_flag = expd_kf_can_assign_k_saxony_to_de_jure_empire           # When executing code: Ensures this section is used if a de jure empire was saved
+				}
+			}
+		}
+		
+		# When examining tooltips: Say that Saxony will be put in the empire that de jure contains Braunschweig/Brunswick
+		# NB: For some unknown reason, no conventionally-structured set of scopes could produce the proper tooltip text (I tried SO MANY possibilities) - hence the completely-custom tooltip.
+		custom_tooltip = { text = expd_kf_k_saxony_becomes_de_jure_part_of_the_empire_containing_c_braunschweig_tt }
+		
+		# When executing code: Put Saxony in the empire that was saved at the top of this script
+		hidden_tooltip = {
+			k_saxony = {
+				de_jure_liege = event_target:expd_kf_new_de_jure_empire_for_k_saxony
+			}
+		}
+		
+	}
+	else = {
+		custom_tooltip = {
+			text = expd_kf_no_appropriate_de_jure_empire_detected_for_this_kingdom_tt
+			k_saxony = {
+				de_jure_liege = 0
+			}
+		}
+	}
+	
+	# Cleanup
+	hidden_tooltip = {
+		c_braunschweig = {
+			clr_title_flag = expd_kf_can_assign_k_saxony_to_de_jure_empire
+			clr_title_flag = expd_kf_can_not_assign_k_saxony_to_de_jure_empire
+		}
+	}
+	
+}
+
+expd_kf_add_this_duchy_to_k_saxony_if_non_titular = {
+	if = {
+		limit = { is_titular = no }
+		hidden_tooltip = {
+			de_jure_liege = k_saxony
+		}
+		k_saxony = {
+			show_scope_change = no
+			custom_tooltip = { text = expd_kf_prev_duchy_becomes_de_jure_part_of_this_kingdom_tt }
+		}
+	}
+}
