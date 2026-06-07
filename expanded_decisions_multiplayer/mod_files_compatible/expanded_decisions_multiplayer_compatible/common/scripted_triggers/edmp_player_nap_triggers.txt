@@ -1,0 +1,12 @@
+edmp_player_nap_this_character_can_see_debug_mode_admin_triggers = {
+	multiplayer = no
+	edmp_this_character_can_take_admin_actions = yes
+}
+
+edmp_player_nap_this_character_is_debug_mode_admin = {
+	custom_tooltip = {
+		text = edmp_player_nap_this_character_is_debug_mode_admin_tt
+		edmp_player_nap_this_character_can_see_debug_mode_admin_triggers = yes
+		has_global_flag = edmp_player_nap_debug
+	}
+}

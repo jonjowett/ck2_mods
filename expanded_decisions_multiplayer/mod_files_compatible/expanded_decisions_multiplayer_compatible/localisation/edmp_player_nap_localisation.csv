@@ -1,0 +1,56 @@
+# Template;§M(ED:MP)§!;;;;;;;;;;;;;x
+#
+# Targetted decision
+#
+edmp_create_nap_with_player;§M(ED:MP)§! Player NAP;;;;;;;;;;;;;x
+edmp_create_nap_with_player_desc;Offer a non-aggression pact to another human player;;;;;;;;;;;;;x
+#
+edmp_root_is_not_currently_considering_a_player_nap_offer_from_from_tt;§Y[Root.GetTitledFirstName]§! is NOT currently considering a §YPlayer NAP Offer§! from §Y[From.GetTitledFirstName]§!;;;;;;;;;;;;;x
+edmp_from_is_not_currently_considering_a_player_nap_offer_from_root_tt;§Y[From.GetTitledFirstName]§! is NOT currently considering a §YPlayer NAP Offer§! from §Y[Root.GetTitledFirstName]§!;;;;;;;;;;;;;x
+edmp_this_character_has_not_rejected_a_player_nap_offer_from_from_in_the_last_5_years_tt;Has NOT rejected a §YPlayer NAP Offer§! from §Y[From.GetTitledFirstName]§! in the §Yprevious 5 years§!;;;;;;;;;;;;;x
+edmp_this_character_and_from_have_both_recently_rejected_each_others_player_nap_offers_tt;Both §Y[Root.GetTitledFirstName]§! and §Y[From.GetTitledFirstName]§! have recently rejected each others' §YPlayer NAP Offers§!;;;;;;;;;;;;;x
+#
+edmp_player_nap_this_character_is_debug_mode_admin_tt;Is an §YAdministrator§! in §Ysingle-player§! and in §R!!!DEBUG MODE!!!§!\n§gINFO:§!\n§b.....§g- Debug mode options are controlled via global flags (ie. console "set_flag" & "clr_flag")§!\n§b.....§g- "edmp_player_nap_debug" = master flag to enable/disable all debugging§!\n§b.....§g- "edmp_player_nap_debug_force_fail" = force the passthrough event to fail§!\n§b.....§g- "edmp_player_nap_debug_force_delay" = letters will be sent tomorrow or later (not today)§!\n§b.....§g- "edmp_player_nap_debug_force_no_ignore_delay" = AI ignore responses are NOT delayed§!\n§b.....§g- "edmp_player_nap_debug_force_ignore" / "..._accept" / "..._reject"§!\n§b..........§g= AI characters automatically ignore/accept/reject the offer (only use one of these!)§!\n§b.....§g- Don't forget to clear all of these flags before saving!§!\n§b.§!;;;;;;;;;;;;;x
+#
+edmp_this_character_receives_a_player_nap_offer_tt;Receives a §YPlayer NAP Offer§!;;;;;;;;;;;;;x
+#
+#
+#
+# Opinion modifier
+#
+edmp_player_nap;§M(ED:MP)§! Non-aggression pact between players;;;;;;;;;;;;;x
+edmp_player_nap_origin_description;§M(ED:MP)§! Non-aggression pact agreed between players;;;;;;;;;;;;;x
+#
+#
+#
+# Events
+#
+edmp_pnap_1001_title;(ED:MP) Player NAP Offer;;;;;;;;;;;;;x
+edmp_pnap_1001_desc;To the [GetFromRootCompliment] [Root.GetBestName],\n\nI believe our realms have much in common. So, in order to prevent any hurtful hostilities, I suggest we enter into a formal non-aggression pact.\n\nWith my deepest respect,\n[edmp_pnap_sender.GetBestName];;;;;;;;;;;;;x
+edmp_pnap_1001_evtopt_ignore;Ignore;;;;;;;;;;;;;x
+edmp_pnap_1001_evtopt_accept;Accept;;;;;;;;;;;;;x
+edmp_pnap_1001_evtopt_reject;Reject;;;;;;;;;;;;;x
+edmp_pnap_sender_notified_ignore_tt;[edmp_pnap_sender.GetBestName] will eventually be §Ynotified§! of your lack of response;;;;;;;;;;;;;x
+edmp_pnap_sender_notified_accept_tt;Send a letter to [edmp_pnap_sender.GetBestName] informing [edmp_pnap_sender.GetHerHim] that we §Gaccept§! [edmp_pnap_sender.GetHerHis] offer;;;;;;;;;;;;;x
+edmp_pnap_sender_notified_reject_tt;Send a letter to [edmp_pnap_sender.GetBestName] informing [edmp_pnap_sender.GetHerHim] that we §Rreject§! [edmp_pnap_sender.GetHerHis] offer;;;;;;;;;;;;;x
+edmp_pnap_create_nap_between_sender_and_recipient_tt;A §Ynon-aggression pact§! is created between §Y[edmp_pnap_recipient.GetTitledFirstName]§! and §Y[edmp_pnap_sender.GetTitledFirstName]§!;;;;;;;;;;;;;x
+edmp_pnap_sender_blocked_from_sending_nap_offers_to_recipient_for_5_years_tt;§Y[edmp_pnap_sender.GetTitledFirstName]§! will be §Rblocked§! from sending you any §YPlayer NAP offers§! for §Y5 years§!;;;;;;;;;;;;;x
+#
+edmp_pnap_1100_title;(ED:MP) Player NAP Ignored;;;;;;;;;;;;;x
+edmp_pnap_1100_desc;My liege,\n\nSeveral months have passed since we sent our generous non-aggression pact offer to [edmp_pnap_recipient.GetBestName], and we have not received any response. It appears that our generous offer has been lost enroute.\n\nWith my deepest respect,\n[edmp_pnap_ignore_letter_event_sender.GetBestName];;;;;;;;;;;;;x
+edmp_pnap_1100_evtopt_ok;OK;;;;;;;;;;;;;x
+edmp_pnap_no_change_tt;§YNo change§! in the relationship between §Y[edmp_pnap_recipient.GetTitledFirstName]§! and §Y[edmp_pnap_sender.GetTitledFirstName]§!;;;;;;;;;;;;;x
+#
+edmp_pnap_1200_title;(ED:MP) Player NAP Accepted;;;;;;;;;;;;;x
+edmp_pnap_1200_desc;To the [GetFromRootCompliment] [Root.GetBestName],\n\nI graciously accept your generous offer of a non-aggression pact. May our realms prosper in mutual peace and harmony!\n\nWith my deepest respect,\n[edmp_pnap_recipient.GetBestName];;;;;;;;;;;;;x
+edmp_pnap_1200_evtopt_ok;Excellent!;;;;;;;;;;;;;x
+edmp_pnap_nap_has_been_created_between_sender_and_recipient_tt;A §Ynon-aggression pact§! has been created between §Y[edmp_pnap_sender.GetTitledFirstName]§! and §Y[edmp_pnap_recipient.GetTitledFirstName]§!;;;;;;;;;;;;;x
+#
+edmp_pnap_1300_title;(ED:MP) Player NAP Rejected;;;;;;;;;;;;;x
+edmp_pnap_1300_desc;To the [GetFromRootCompliment] [Root.GetBestName],\n\nI reject your offer of a non-aggression pact - there simply is not enough trust between our realms to justify it at this time.\n\nWith my deepest respect,\n[edmp_pnap_recipient.GetBestName];;;;;;;;;;;;;x
+edmp_pnap_1300_evtopt_ok;Curses!;;;;;;;;;;;;;x
+edmp_pnap_sender_blocked_for_5_years_tt;You will be §Rblocked§! from sending §YPlayer NAP offers§! to §Y[edmp_pnap_recipient.GetTitledFirstName]§! for §Y5 years§!;;;;;;;;;;;;;x
+#
+edmp_pnap_1900_title;(ED:MP) !!Player NAP ERROR!!;;;;;;;;;;;;;x
+edmp_pnap_1900_desc;An unexpected error has occurred when trying to set up a Player NAP!\n\nScopes at time of error(for debugging):\n- Root = [edmp_pnap_error_root.GetBestName] ([edmp_pnap_error_root.GetID])\n- Root_From = [edmp_pnap_error_rootfrom.GetBestName] ([edmp_pnap_error_rootfrom.GetID])\n- Root_FromFrom = [edmp_pnap_error_rootfromfrom.GetBestName] ([edmp_pnap_error_rootfromfrom.GetID])\n- Sender = [edmp_pnap_sender.GetBestName] ([edmp_pnap_sender.GetID])\n- Recipient = [edmp_pnap_recipient.GetBestName] ([edmp_pnap_recipient.GetID]);;;;;;;;;;;;;x
+edmp_pnap_1900_evtopt_ok;OK;;;;;;;;;;;;;x

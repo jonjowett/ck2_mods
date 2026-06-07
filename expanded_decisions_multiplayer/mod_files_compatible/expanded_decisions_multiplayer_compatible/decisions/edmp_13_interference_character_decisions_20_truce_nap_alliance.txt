@@ -5,7 +5,7 @@ targetted_decisions = {
 	edmp_interference_add_bilateral_10_year_truce_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
 		third_party_filter = all_including_me
-		show_third_party_potential = yes
+		# show_third_party_potential omitted because it KILLS performance for ALL targetted decisions (because the third-party list can be VERY long for this decision)
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -56,7 +56,7 @@ targetted_decisions = {
 		allow = {
 			custom_tooltip = {
 				text = edmp_interference_this_character_has_a_truce_with_someone_tt
-				any_character = {
+				any_playable_ruler = {
 					OR = {
 						has_truce = ROOT
 						reverse_has_truce = ROOT
@@ -109,7 +109,7 @@ targetted_decisions = {
 	edmp_interference_add_nap_with_third_party = { # Not potentially-negative because not time-sensitive and the opposite decision exists
 		filter = all_including_me
 		third_party_filter = all_including_me
-		show_third_party_potential = yes
+		# show_third_party_potential omitted because it KILLS performance for ALL targetted decisions (because the third-party list can be VERY long for this decision)
 		ai = no
 		from_potential = {
 			has_character_flag = edmp_interference_show
@@ -244,10 +244,10 @@ targetted_decisions = {
 		}
 		potential = {
 			edmp_interference_root_is_valid_potential_target = yes
-			any_non_aggression_pact_character = { always = yes }
+			any_non_aggression_pact_character = { is_allied_with = ROOT }
 		}
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
-		third_party_potential = { ROOT_FROMFROM = { has_non_aggression_pact_with = ROOT } }
+		third_party_potential = { ROOT_FROMFROM = { has_non_aggression_pact_with = ROOT is_allied_with = ROOT } }
 		third_party_allow = { always = yes }
 		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
 		effect = {
