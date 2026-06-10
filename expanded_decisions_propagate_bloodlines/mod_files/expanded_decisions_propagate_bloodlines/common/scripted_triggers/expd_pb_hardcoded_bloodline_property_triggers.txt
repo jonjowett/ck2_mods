@@ -36,6 +36,7 @@ expd_pb_this_bloodline_is_definitely_patrilineal = {
 		AND = {
 			expd_pb_this_bloodline_is_from_more_bloodlines_mod = yes
 			NOT = { has_bloodline_flag = IB_femwar_bloodline }
+			NOT = { has_bloodline_flag = emb_f } # Maybe someone's overridden its default settings?
 		}
 		
 		# Mod: Even More Bloodlines - Anything flagged as "m"
