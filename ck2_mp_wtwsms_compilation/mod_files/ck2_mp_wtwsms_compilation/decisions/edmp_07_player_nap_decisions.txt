@@ -2,13 +2,16 @@ targetted_decisions = {
 	
 	edmp_create_nap_with_player = {
 		
-		filter = all_including_me
+		filter = all
 		
 		ai = no
 		
 		from_potential = { ai = no }
 		
-		potential = { edmp_this_character_is_a_current_or_absent_human_player = yes }
+		potential = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+			NOT = { character = ROOT_FROM }
+		}
 		
 		
 		
