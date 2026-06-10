@@ -489,6 +489,18 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_health_revoke
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_fertility_grant }
+		text                        = edmp_ifn_5001_desc_singlechar_fertility_grant
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_fertility_prolong }
+		text                        = edmp_ifn_5001_desc_singlechar_fertility_prolong
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_fertility_revoke }
+		text                        = edmp_ifn_5001_desc_singlechar_fertility_revoke
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_heal_disease }
 		text                        = edmp_ifn_5001_desc_singlechar_heal_disease
 	}
@@ -523,6 +535,10 @@ character_event = {
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_legitimise }
 		text                        = edmp_ifn_5001_desc_singlechar_legitimise
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_clear_focus }
+		text                        = edmp_ifn_5001_desc_singlechar_clear_focus
 	}
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_artifact_flag_as_unique }
@@ -770,6 +786,9 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_health_grant
 			clr_global_flag    = edmp_interference_singlechar_health_prolong
 			clr_global_flag    = edmp_interference_singlechar_health_revoke
+			clr_global_flag    = edmp_interference_singlechar_fertility_grant
+			clr_global_flag    = edmp_interference_singlechar_fertility_prolong
+			clr_global_flag    = edmp_interference_singlechar_fertility_revoke
 			clr_global_flag    = edmp_interference_singlechar_heal_disease
 			clr_global_flag    = edmp_interference_singlechar_heal_congenital
 			clr_global_flag    = edmp_interference_singlechar_heal_mental
@@ -779,6 +798,7 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_older
 			clr_global_flag    = edmp_interference_singlechar_sexchange
 			clr_global_flag    = edmp_interference_singlechar_legitimise
+			clr_global_flag    = edmp_interference_singlechar_clear_focus
 			clr_global_flag    = edmp_interference_singlechar_artifact_flag_as_unique
 			clr_global_flag    = edmp_interference_singlechar_artifact_unflag_as_unique
 			clr_global_flag    = edmp_interference_singlechar_artifact_transfer_single_to_decision_taker
