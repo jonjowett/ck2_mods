@@ -30,15 +30,18 @@ dependencies = {
 	# WTWSMS
 	"\"When the World Stopped Making Sense\""
 	
+	# Targaryen Invasion
+	"\"Targaryen Invasion of the Old World\""
+	
 	# Avatar
 	#  --- One line works for local versions, prior to workshop upload.
 	#  --- The other line works for workshop upload, and subsequent downloads by subscribers.
 	#  --- Why doesn't the "workshop upload" format work for local versions, unlike every other mod? No clue!
 	#  --- Thankfully, the "local version" line can coexist (since it'll just render itself useless, instead of breaking the whole .mod file).
-	#"Avatar - Four Nations Restored"
+	#  --- Just in case something goes wrong, ensure the "local version" line is ALWAYS the LAST line in the dependencies block.
+	# Workshop upload version
 	"\"Avatar - Four Nations Restored\""
-	
-	# Targaryen Invasion
-	"\"Targaryen Invasion of the Old World\""
+	# Local version
+	"Avatar - Four Nations Restored"
 	
 }
