@@ -1,0 +1,93 @@
+# Template;§M(ED:MP)§!;;;;;;;;;;;;;x
+#
+# Interference Decisions
+edmp_interference_religion_show_ma_breakdown_for_this_characters_religion;§P(ED:MP:Intf)§! Show MA Breakdown;;;;;;;;;;;;;x
+edmp_interference_religion_show_ma_breakdown_for_this_characters_religion_desc;An event will appear, showing all of the sources of the §Y[Root.Religion.GetName]§! faith's §Ymoral authority§!.\n\nNB: No changes will occur as a result of this decision.;;;;;;;;;;;;;x
+edmp_interference_religion_add_ma_modifiers_to_this_characters_religion_perm;§P(ED:MP:Intf)§! Change MA (Perm);;;;;;;;;;;;;x
+edmp_interference_religion_add_ma_modifiers_to_this_characters_religion_perm_desc;§YPermanently§! change the §Ymoral authority§! of the §Y[Root.Religion.GetName]§! faith.;;;;;;;;;;;;;x
+edmp_interference_religion_add_ma_modifiers_to_this_characters_religion_temp;§P(ED:MP:Intf)§! Change MA (Temp);;;;;;;;;;;;;x
+edmp_interference_religion_add_ma_modifiers_to_this_characters_religion_temp_desc;§YTemporarily§! change the §Ymoral authority§! of the §Y[Root.Religion.GetName]§! faith (for §Y3 years§!).;;;;;;;;;;;;;x
+edmp_interference_religion_show_ma_breakdown_for_this_provinces_religion;§P(ED:MP:Intf)§! Show MA Breakdown;;;;;;;;;;;;;x
+edmp_interference_religion_show_ma_breakdown_for_this_provinces_religion_desc;An event will appear, showing all of the sources of the §Y[Root.Religion.GetName]§! faith's §Ymoral authority§!.\n\nNB: No changes will occur as a result of this decision.;;;;;;;;;;;;;x
+edmp_interference_religion_add_ma_modifiers_to_this_provinces_religion_perm;§P(ED:MP:Intf)§! Change MA (Perm);;;;;;;;;;;;;x
+edmp_interference_religion_add_ma_modifiers_to_this_provinces_religion_perm_desc;§YPermanently§! change the §Ymoral authority§! of the §Y[Root.Religion.GetName]§! faith.;;;;;;;;;;;;;x
+edmp_interference_religion_add_ma_modifiers_to_this_provinces_religion_temp;§P(ED:MP:Intf)§! Change MA (Temp);;;;;;;;;;;;;x
+edmp_interference_religion_add_ma_modifiers_to_this_provinces_religion_temp_desc;§YTemporarily§! change the §Ymoral authority§! of the §Y[Root.Religion.GetName]§! faith (for §Y3 years§!).;;;;;;;;;;;;;x
+#
+# Trigger Tooltips
+edmp_interference_religion_add_ma_modifier_perm_not_in_progress_tt;Is NOT currently adding a permanent MA modifier to any religion;;;;;;;;;;;;;x
+edmp_interference_religion_add_ma_modifier_perm_in_progress_1yr_tt;Has been adding a permanent MA modifier to a religion for at least 1 year;;;;;;;;;;;;;x
+edmp_interference_religion_add_ma_modifier_temp_not_in_progress_tt;Is NOT currently adding a temporary MA modifier to any religion;;;;;;;;;;;;;x
+edmp_interference_religion_add_ma_modifier_temp_in_progress_1yr_tt;Has been adding a temporary MA modifier to a religion for at least 1 year;;;;;;;;;;;;;x
+#
+# Effect Tooltips - Misc
+edmp_interference_religion_show_event_with_options_tt;An event will be shown, where you will be able to choose the size of the change in moral authority.;;;;;;;;;;;;;x
+edmp_interference_religion_block_decisions_tt;All §P(ED:MP:Intf)§M Change MA§! decisions are §Rblocked§! (until the process has completed, or a year has elapsed);;;;;;;;;;;;;x
+edmp_interference_religion_unblock_decisions_tt;All §P(ED:MP:Intf)§M Change MA§! decisions are §Gunblocked§!;;;;;;;;;;;;;x
+#
+# Effect Tooltips - Gain/Lose MA
+edmp_interference_religion_this_religion_gains_plus_200ma_perm_tt;§G+200%§! Moral Authority for §Y5000§! years.;;;;;;;;;;;;;x
+edmp_interference_religion_this_religion_gains_plus_200ma_temp_tt;§G+200%§! Moral Authority for §Y3§! years.;;;;;;;;;;;;;x
+edmp_interference_religion_this_religion_gains_minus_200ma_perm_tt;§R-200%§! Moral Authority for §Y5000§! years.;;;;;;;;;;;;;x
+edmp_interference_religion_this_religion_gains_minus_200ma_temp_tt;§R-200%§! Moral Authority for §Y3§! years.;;;;;;;;;;;;;x
+edmp_interference_religion_this_religion_gains_plus_50ma_perm_tt;§G+50%§! Moral Authority for §Y5000§! years.;;;;;;;;;;;;;x
+edmp_interference_religion_this_religion_gains_plus_50ma_temp_tt;§G+50%§! Moral Authority for §Y3§! years.;;;;;;;;;;;;;x
+edmp_interference_religion_this_religion_gains_minus_50ma_perm_tt;§R-50%§! Moral Authority for §Y5000§! years.;;;;;;;;;;;;;x
+edmp_interference_religion_this_religion_gains_minus_50ma_temp_tt;§R-50%§! Moral Authority for §Y3§! years.;;;;;;;;;;;;;x
+edmp_interference_religion_this_religion_gains_plus_10ma_perm_tt;§G+10%§! Moral Authority for §Y5000§! years.;;;;;;;;;;;;;x
+edmp_interference_religion_this_religion_gains_plus_10ma_temp_tt;§G+10%§! Moral Authority for §Y3§! years.;;;;;;;;;;;;;x
+edmp_interference_religion_this_religion_gains_minus_10ma_perm_tt;§R-10%§! Moral Authority for §Y5000§! years.;;;;;;;;;;;;;x
+edmp_interference_religion_this_religion_gains_minus_10ma_temp_tt;§R-10%§! Moral Authority for §Y3§! years.;;;;;;;;;;;;;x
+#
+# Religion modifiers
+edmp_plus_10ma_perm;§M(ED:MP)§! Permanent Bonus;;;;;;;;;;;;;x
+edmp_minus_10ma_perm;§M(ED:MP)§! Permanent Malus;;;;;;;;;;;;;x
+edmp_plus_10ma_temp;§M(ED:MP)§! Temporary (3 year) Bonus;;;;;;;;;;;;;x
+edmp_minus_10ma_temp;§M(ED:MP)§! Temporary (3 year) Malus;;;;;;;;;;;;;x
+#
+#
+#
+#
+#
+# Events
+#
+# Generic loc text
+edmp_rma_1nnn_title_perm;(ED:MP) Permanent MA Change;;;;;;;;;;;;;x
+edmp_rma_1nnn_title_temp;(ED:MP) Temporary MA Change;;;;;;;;;;;;;x
+edmp_rma_1nnn_title_error;(ED:MP) (!!!ERROR!!!) MA Change;;;;;;;;;;;;;x
+edmp_rma_1nnn_desc_error;!!!ERROR!!!\nSomething went wrong!\nPlease exit and try again;;;;;;;;;;;;;x
+edmp_rma_evtopt_back;Back;;;;;;;;;;;;;x
+edmp_rma_evtopt_exit;Exit;;;;;;;;;;;;;x
+#
+# Main menu for changing MA
+edmp_rma_1000_desc_perm;This menu allows you to PERMANENTLY increase or decrease the moral authority of the [edmp_interference_religion_affected.GetName] faith.\nPlease be ESPECIALLY CAREFUL because these changes can NEVER be removed (they can only be offset by adding the same number of modifers, with the opposite effect)!;;;;;;;;;;;;;x
+edmp_rma_1000_desc_temp;This menu allows you to TEMPORARILY increase or decrease the moral authority of the [edmp_interference_religion_affected.GetName] faith (for 3 years).\nPlease note that these changes can NEVER be manually removed (the only way to remove them is to wait until they expire)!;;;;;;;;;;;;;x
+edmp_rma_1000_evtopt_positive_perm;Permanent +200% / +50% / +10% MA;;;;;;;;;;;;;x
+edmp_rma_1000_evtopt_positive_temp;Temporary +200% / +50% / +10% MA (for 3 years);;;;;;;;;;;;;x
+edmp_rma_1000_evtopt_negative_perm;Permanent -200% / -50% / -10% MA;;;;;;;;;;;;;x
+edmp_rma_1000_evtopt_negative_temp;Temporary -200% / -50% / -10% MA (for 3 years);;;;;;;;;;;;;x
+#
+# Add MA
+edmp_rma_1100_desc_perm;This menu allows you to choose the exact size of the PERMANENT increase in the moral authority of the [edmp_interference_religion_affected.GetName] faith.\nPlease be ESPECIALLY CAREFUL because these changes can NEVER be removed (they can only be offset by adding the same number of modifers, with the opposite effect)!;;;;;;;;;;;;;x
+edmp_rma_1100_desc_temp;This menu allows you to choose the exact size of the TEMPORARY increase in the moral authority of the [edmp_interference_religion_affected.GetName] faith (for 3 years).\nPlease note that these changes can NEVER be manually removed (the only way to remove them is to wait until they expire)!;;;;;;;;;;;;;x
+edmp_rma_1100_evtopt_plus_200ma_perm;Permanent +200% MA;;;;;;;;;;;;;x
+edmp_rma_1100_evtopt_plus_50ma_perm;Permanent +50% MA;;;;;;;;;;;;;x
+edmp_rma_1100_evtopt_plus_10ma_perm;Permanent +10% MA;;;;;;;;;;;;;x
+edmp_rma_1100_evtopt_plus_200ma_temp;Temporary +200% MA (for 3 years);;;;;;;;;;;;;x
+edmp_rma_1100_evtopt_plus_50ma_temp;Temporary +50% MA (for 3 years);;;;;;;;;;;;;x
+edmp_rma_1100_evtopt_plus_10ma_temp;Temporary +10% MA (for 3 years);;;;;;;;;;;;;x
+#
+# Remove MA
+edmp_rma_1200_desc_perm;This menu allows you to choose the exact size of the PERMANENT decrease in the moral authority of the [edmp_interference_religion_affected.GetName] faith.\nPlease be ESPECIALLY CAREFUL because these changes can NEVER be removed (they can only be offset by adding the same number of modifers, with the opposite effect)!;;;;;;;;;;;;;x;;;;;;;;;;;;;x
+edmp_rma_1200_desc_temp;This menu allows you to choose the exact size of the TEMPORARY decrease in the moral authority of the [edmp_interference_religion_affected.GetName] faith (for 3 years).\nPlease note that these changes can NEVER be manually removed (the only way to remove them is to wait until they expire)!;;;;;;;;;;;;;x
+edmp_rma_1200_evtopt_minus_200ma_perm;Permanent -200% MA;;;;;;;;;;;;;x
+edmp_rma_1200_evtopt_minus_50ma_perm;Permanent -50% MA;;;;;;;;;;;;;x
+edmp_rma_1200_evtopt_minus_10ma_perm;Permanent -10% MA;;;;;;;;;;;;;x
+edmp_rma_1200_evtopt_minus_200ma_temp;Temporary -200% MA (for 3 years);;;;;;;;;;;;;x
+edmp_rma_1200_evtopt_minus_50ma_temp;Temporary -50% MA (for 3 years);;;;;;;;;;;;;x
+edmp_rma_1200_evtopt_minus_10ma_temp;Temporary -10% MA (for 3 years);;;;;;;;;;;;;x
+#
+# Show MA Breakdown
+edmp_rma_2000_title;(ED:MP) Show MA Breakdown;;;;;;;;;;;;;x
+edmp_rma_2000_desc;The tooltip for the event option below contains the full moral authority breakdown for the [edmp_interference_religion_affected.GetName] faith, as would be shown in the religion screen for a character of that religion.;;;;;;;;;;;;;x
+edmp_rma_2000_evtopt_exit;Exit ([edmp_interference_religion_affected.GetName] MA breakdown in tooltip);;;;;;;;;;;;;x

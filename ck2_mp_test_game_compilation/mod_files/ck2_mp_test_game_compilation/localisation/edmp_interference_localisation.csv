@@ -61,8 +61,14 @@ edmp_cs_1041_title;(ED:MP) Migration Invalid!;;;;;;;;;;;;;x
 edmp_cs_1041_desc;The Player Migration Offer you proposed was found to be invalid before the player even saw it!\nTherefore, nothing happened.\nPlayer: [edmp_interference_aiplayer_player.GetTitledFirstName][edmp_insert_username_aiplayer_player]\nTarget: [edmp_interference_aiplayer_ai.GetTitledFirstName]\nDecision-Taker: [edmp_interference_decision_taker.GetTitledFirstName][edmp_insert_username_decision_taker];;;;;;;;;;;;;x
 #
 # Targetted Decisions - Admin/Adminhelper Interference
-edmp_interference_force_end_war_white_peace;§P(ED:MP:Intf)§! Force White Peace;;;;;;;;;;;;;x
-edmp_interference_force_end_war_white_peace_desc;Force one of [Root.GetTitledFirstName]'s wars to end in a white peace.;;;;;;;;;;;;;x
+edmp_interference_end_war_white_peace;§P(ED:MP:Intf)§! End War: White Peace;;;;;;;;;;;;;x
+edmp_interference_end_war_white_peace_desc;Force one of [Root.GetTitledFirstName]'s wars to end in a §Ywhite peace§!.;;;;;;;;;;;;;x
+edmp_interference_end_war_invalid;§P(ED:MP:Intf)§! End War: Invalid;;;;;;;;;;;;;x
+edmp_interference_end_war_invalid_desc;Forcibly §Yinvalidate§! one of [Root.GetTitledFirstName]'s wars.;;;;;;;;;;;;;x
+edmp_interference_end_war_defender_victory;§P(ED:MP:Intf)§! End War: Def Victory;;;;;;;;;;;;;x
+edmp_interference_end_war_defender_victory_desc;Force one of [Root.GetTitledFirstName]'s §Ydefensive wars§! to end in a §Ydefender victory§!.;;;;;;;;;;;;;x
+edmp_interference_end_war_attacker_victory;§P(ED:MP:Intf)§! End War: Att Victory;;;;;;;;;;;;;x
+edmp_interference_end_war_attacker_victory_desc;Force one of [Root.GetTitledFirstName]'s §Yoffensive wars§! to end in an §Yattacker victory§!.;;;;;;;;;;;;;x
 edmp_interference_cancel_tributary_on_suzerain;§P(ED:MP:Intf)§! Cancel Tributary;;;;;;;;;;;;;x
 edmp_interference_cancel_tributary_on_suzerain_desc;Cancel one of [Root.GetTitledFirstName]'s tributaries.;;;;;;;;;;;;;x
 edmp_interference_cancel_tributary_on_tributary;§P(ED:MP:Intf)§! End Tribute;;;;;;;;;;;;;x
@@ -107,6 +113,12 @@ edmp_interference_prolong_health_to_this_character;§P(ED:MP:Intf)§! Prolong Heal
 edmp_interference_prolong_health_to_this_character_desc;[Root.GetTitledFirstName]'s §YTemporary Vitality§! (§G+20 Health§!) will be §Gprolonged§! for §Y3 years§!.;;;;;;;;;;;;;x
 edmp_interference_revoke_health_from_this_character;§P(ED:MP:Intf)§! Revoke Health;;;;;;;;;;;;;x
 edmp_interference_revoke_health_from_this_character_desc;[Root.GetTitledFirstName]'s §YTemporary Vitality§! (§G+20 Health§!) will be §Rrevoked§!.;;;;;;;;;;;;;x
+edmp_interference_grant_fertility_to_this_character;§P(ED:MP:Intf)§! Grant Fertility;;;;;;;;;;;;;x
+edmp_interference_grant_fertility_to_this_character_desc;[Root.GetTitledFirstName] will be granted §YTemporary Fecundity§! (§G+1000% Fertility§!) for §Y3 years§!.;;;;;;;;;;;;;x
+edmp_interference_prolong_fertility_to_this_character;§P(ED:MP:Intf)§! Prolong Fertility;;;;;;;;;;;;;x
+edmp_interference_prolong_fertility_to_this_character_desc;[Root.GetTitledFirstName]'s §YTemporary Fecundity§! (§G+1000% Fertility§!) will be §Gprolonged§! for §Y3 years§!.;;;;;;;;;;;;;x
+edmp_interference_revoke_fertility_from_this_character;§P(ED:MP:Intf)§! Revoke Fertility;;;;;;;;;;;;;x
+edmp_interference_revoke_fertility_from_this_character_desc;[Root.GetTitledFirstName]'s §YTemporary Fecundity§! (§G+1000% Fertility§!) will be §Rrevoked§!.;;;;;;;;;;;;;x
 edmp_interference_heal_disease;§P(ED:MP:Intf)§! Heal Disease;;;;;;;;;;;;;x
 edmp_interference_heal_disease_desc;All of [Root.GetTitledFirstName]'s §Ysymptoms and diseases§! will be §Gremoved§!.;;;;;;;;;;;;;x
 edmp_interference_heal_mental;§P(ED:MP:Intf)§! Heal Mental;;;;;;;;;;;;;x
@@ -125,6 +137,8 @@ edmp_interference_change_this_characters_sex;§P(ED:MP:Intf)§! Change Sex;;;;;;;;
 edmp_interference_change_this_characters_sex_desc;[Root.GetTitledFirstName]'s §Ygender is changed§!.;;;;;;;;;;;;;x
 edmp_interference_legitimise_this_character;§P(ED:MP:Intf)§! Legitimise;;;;;;;;;;;;;x
 edmp_interference_legitimise_this_character_desc;[Root.GetTitledFirstName] §Yis legitimised§!.;;;;;;;;;;;;;x
+edmp_interference_clear_this_characters_focus;§P(ED:MP:Intf)§! Clear Focus;;;;;;;;;;;;;x
+edmp_interference_clear_this_characters_focus_desc;[Root.GetTitledFirstName]'s focus §Yis cleared§!.;;;;;;;;;;;;;x
 edmp_interference_artifact_flag_as_unique;§P(ED:MP:Intf)§! Artifact: Protect;;;;;;;;;;;;;x
 edmp_interference_artifact_flag_as_unique_desc;Flag one of [Root.GetTitledFirstName]'s artifacts so that it §Ywill not be destroyed§! by most/all events.;;;;;;;;;;;;;x
 edmp_interference_artifact_unflag_as_unique;§P(ED:MP:Intf)§! Artifact: Unprotect;;;;;;;;;;;;;x
@@ -230,6 +244,8 @@ edmp_interference_someone_in_the_world_has_a_claim_on_this_title_tt;There is at 
 edmp_interference_all_other_characters_claims_on_root_title_are_removed_tt;§PSomething went wrong - please inform the mod dev!§!\nAll other characters' claims on the §Y[Root.GetFullBaseName]§! are §Rremoved§!.;;;;;;;;;;;;;x
 edmp_interference_this_is_not_some_kind_of_temporary_title_tt;This is NOT some kind of §Yspecial landless title§! (eg. temporary, rebel, adventurer, mercenary, holy order, adventurer);;;;;;;;;;;;;x
 edmp_interference_legitimise_this_character_hasnt_already_founded_their_own_dynasty_tt;Has NOT already founded [Root.GetHerHis] own dynasty;;;;;;;;;;;;;x
+edmp_interference_artifact_this_artifact_does_not_have_flag_unique_tt;Is NOT a "protected" artifact;;;;;;;;;;;;;x
+edmp_interference_artifact_this_artifact_has_flag_unique_tt;Is a "protected" artifact;;;;;;;;;;;;;x
 edmp_interference_artifact_has_at_least_one_non_unique_tt;Has at least one "unprotected" artifact;;;;;;;;;;;;;x
 edmp_interference_artifact_has_at_least_one_unique_tt;Has at least one "protected" artifact;;;;;;;;;;;;;x
 edmp_interference_artifact_transfer_root_owns_at_least_one_artifact_that_can_be_gifted_to_a_player_tt;§Y[Root.GetTitledFirstName]§! owns at least one artifact that can be gifted to §Ya current or absent player§!;;;;;;;;;;;;;x
@@ -261,6 +277,7 @@ edmp_interference_win_defensive_wars_ai_will_act_now_tt;[Root.GetBestName] immed
 edmp_interference_win_defensive_wars_prev_wins_all_defensive_wars_against_this_character_tt;[This.GetBestName] immediately §Rloses§! all wars where [This.GetSheHe] is the §Yprimary attacker§! and [Prev.GetBestName] is §Ya defender§!;;;;;;;;;;;;;x
 edmp_interference_heal_disease_no_immunity_gained_tt;§RWARNING!§! Unlike natural recovery, [This.GetTitledFirstName] §Ywill NOT gain immunity§! to any of the removed diseases!;;;;;;;;;;;;;x
 edmp_interference_heal_mental_clear_demon_child_flags_tt;All §Ydemon child§! character flags will be §Yremoved§!!\n§RWARNING!§! This may be §Rhighly undesirable§! in some situations!;;;;;;;;;;;;;x
+edmp_interference_this_character_is_decision_taker_tt;Is the §Ydecision-taker§!;;;;;;;;;;;;;x
 #
 edmp_interference_line_break_tt;§b.§!\n;;;;;;;;;;;;;x
 #
@@ -273,6 +290,8 @@ edmp_forcibly_removed_non_aggression_pact_origin_description;§M(ED:MP)§! Non-agg
 # Event Modifiers
 edmp_interference_health;§M(ED:MP)§! Temporary Vitality;;;;;;;;;;;;;x
 edmp_interference_health_desc;§M(ED:MP)§! [Root.GetTitledFirstName] has been granted extreme vitality by a power beyond [Root.GetHerHis] understanding. For as long as this vitality lasts, [Root.GetSheHe] will probably survive any injury or disease that is not immediately fatal.;;;;;;;;;;;;;x
+edmp_interference_fertility;§M(ED:MP)§! Temporary Fecundity;;;;;;;;;;;;;x
+edmp_interference_fertility_desc;§M(ED:MP)§! [Root.GetTitledFirstName] has been granted extreme fecundity by a power beyond [Root.GetHerHis] understanding. For as long as this fecundity lasts, [Root.GetSheHe] will probably have many more children than would normally be expected.;;;;;;;;;;;;;x
 edmp_interference_demesne;§M(ED:MP)§! Temporary Large Demesne;;;;;;;;;;;;;x
 edmp_interference_demesne_desc;§M(ED:MP)§! [Root.GetTitledFirstName] has been granted an extreme boost to [Root.GetHerHis] demesne limit by a power beyond [Root.GetHerHis] understanding. For as long as this lasts, [Root.GetSheHe] will not suffer any negative effects from having an excessively-large quantity of holdings.;;;;;;;;;;;;;x
 edmp_interference_wealth_record_granted;§M(ED:MP)§! Wealth Granted;;;;;;;;;;;;;x

@@ -1,0 +1,418 @@
+namespace = edmp_pnap
+
+
+
+
+
+# Specification for events 1nnn:
+#  --- Sender is asking recipient for a non-aggression pact
+#  --- Sender and recipient should both be players
+#       --- If, somehow, an AI receives this event (eg. still on-screen after save/reload), it should choose "ignore".
+#  --- Recipient can accept/ignore/reject
+#       --- Ignore = default choice on timeout (and only choice for AI - see above)
+#       --- Accept => create NAP between sender and recipient
+#       --- Reject => add flag to recipient which blocks offers from sender for 5 years
+#  --- Expected event_targets (which must be set up before showing this event chain):
+#       --- Sender: edmp_pnap_sender
+#       --- Recipient: edmp_pnap_recipient
+
+
+
+
+
+# Triggered from targetted decision
+
+# For this ping event:
+#  --- ROOT = sender
+#  --- FROM/FROMFROM/etc = unspecified
+
+letter_event = {
+	id = edmp_pnap.1000
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_global_flag = edmp_player_nap_debug_force_fail }
+				event_target:edmp_pnap_sender    = { always = yes }
+				event_target:edmp_pnap_recipient = { always = yes }
+				event_target:edmp_pnap_sender    = { character = ROOT }
+			}
+			# event_targets are set up correctly - continue
+			if = {
+				limit = {
+					event_target:edmp_pnap_sender = { edmp_player_nap_this_character_is_debug_mode_admin = yes }
+					has_global_flag = edmp_player_nap_debug_force_delay
+				}
+				event_target:edmp_pnap_recipient = { letter_event = { id = edmp_pnap.1001 days = 1 } }
+			}
+			else = {
+				event_target:edmp_pnap_recipient = { letter_event = { id = edmp_pnap.1001          } }
+			}
+		}
+		else = {
+			# event_targets are NOT set up correctly - send error msg to all relevant players
+			ROOT          = { save_event_target_as = edmp_pnap_error_root         }
+			ROOT_FROM     = { save_event_target_as = edmp_pnap_error_rootfrom     }
+			ROOT_FROMFROM = { save_event_target_as = edmp_pnap_error_rootfromfrom }
+			any_player = {
+				limit = {
+					OR = {
+						edmp_this_character_can_take_admin_actions = yes
+						character = ROOT
+						character = ROOT_FROM
+						character = ROOT_FROMFROM
+						character = event_target:edmp_pnap_sender
+						character = event_target:edmp_pnap_recipient
+					}
+				}
+				character_event = { id = edmp_pnap.1900 }
+			}
+		}
+	}
+}
+
+
+
+
+
+# Visible event for recipient
+
+# Use the sender/recipient event_targets where possible.
+# However, the pass-through event above should have enforced the following:
+#  --- ROOT = recipient
+#  --- FROM = sender
+
+letter_event = {
+	
+	id       = edmp_pnap.1001
+	title    = edmp_pnap_1001_title
+	desc     = edmp_pnap_1001_desc
+	border   = GFX_event_letter_frame_diplomacy
+	portrait = event_target:edmp_pnap_sender
+	#picture = GFX_evt_state_diplomacy # No picture for letter_events
+	
+	
+	
+	is_triggered_only = yes
+	
+	
+	
+	# Fizzle if ROOT is NOT the expected recipient
+	trigger = {
+		event_target:edmp_pnap_recipient = { character = ROOT }
+	}
+	
+	
+	
+	# Clear ROOT's "rejection" flag (it will be recreated if they actually reject)
+	# Set ROOT's "considering" flag (prevents further offers from sender)
+	immediate = {
+		hidden_tooltip = {
+			clr_character_flag = edmp_rejected_nap_from_@event_target:edmp_pnap_sender
+			set_character_flag = edmp_considering_nap_from_@event_target:edmp_pnap_sender
+		}
+	}
+	
+	
+	
+	option = {
+		
+		name = edmp_pnap_1001_evtopt_ignore
+		
+		trigger = {
+			OR = {
+				# Always visible to players
+				ai = no
+				# Always visible to AI outside debug mode
+				# (Because, if an AI can see this in normal gameplay, they should always choose "ignore".)
+				AND = {
+					ai = yes
+					event_target:edmp_pnap_sender = { edmp_player_nap_this_character_is_debug_mode_admin = no }
+				}
+				# May be visible to AI in debug mode (eg. for forced answer, or 33% if no forcing)
+				AND = {
+					event_target:edmp_pnap_sender = { edmp_player_nap_this_character_is_debug_mode_admin = yes }
+					OR = {
+						has_global_flag = edmp_player_nap_debug_force_ignore
+						AND = {
+							NOT = { has_global_flag = edmp_player_nap_debug_force_accept }
+							NOT = { has_global_flag = edmp_player_nap_debug_force_reject }
+						}
+					}
+				}
+			}
+		}
+		
+		# NB: The first visible option is what's chosen on timeout (eg. due to recipient being afk)
+		
+		custom_tooltip = {
+			text = edmp_pnap_sender_notified_ignore_tt
+			if = {
+				limit = {
+					OR = {
+						event_target:edmp_pnap_sender    = { edmp_player_nap_this_character_is_debug_mode_admin = yes }
+						event_target:edmp_pnap_recipient = { edmp_player_nap_this_character_is_debug_mode_admin = yes }
+					}
+					has_global_flag = edmp_player_nap_debug_force_no_ignore_delay
+				}
+				event_target:edmp_pnap_sender = { letter_event = { id = edmp_pnap.1100 } }
+				character_event = { id = edmp_pnap.1800 }
+			}
+			else = {
+				event_target:edmp_pnap_sender = { letter_event = { id = edmp_pnap.1100 days = 30 random = 30 } }
+				character_event = { id = edmp_pnap.1800 days = 60 }
+			}
+		}
+		
+		custom_tooltip = { text = edmp_pnap_no_change_tt }
+		
+		ai_chance = { factor = 100 }
+		
+	}
+	
+	
+	
+	option = {
+		
+		name = edmp_pnap_1001_evtopt_accept
+		
+		trigger = {
+			OR = {
+				# Always visible to players
+				ai = no
+				# Only visible to AI in debug mode (eg. for forced answer, or 33% if no forcing)
+				AND = {
+					event_target:edmp_pnap_sender    = { edmp_player_nap_this_character_is_debug_mode_admin = yes }
+					OR = {
+						has_global_flag = edmp_player_nap_debug_force_accept
+						AND = {
+							NOT = { has_global_flag = edmp_player_nap_debug_force_ignore }
+							NOT = { has_global_flag = edmp_player_nap_debug_force_reject }
+						}
+					}
+				}
+			}
+		}
+		
+		custom_tooltip = {
+			text = edmp_pnap_sender_notified_accept_tt
+			if = {
+				limit = {
+					OR = {
+						event_target:edmp_pnap_sender    = { edmp_player_nap_this_character_is_debug_mode_admin = yes }
+						event_target:edmp_pnap_recipient = { edmp_player_nap_this_character_is_debug_mode_admin = yes }
+					}
+					has_global_flag = edmp_player_nap_debug_force_delay
+				}
+				event_target:edmp_pnap_sender = { letter_event = { id = edmp_pnap.1200 days = 1 } }
+				character_event                                = { id = edmp_pnap.1800 days = 1 }
+			}
+			else = {
+				event_target:edmp_pnap_sender = { letter_event = { id = edmp_pnap.1200          } }
+				character_event                                = { id = edmp_pnap.1800 }
+			}
+		}
+		
+		custom_tooltip = {
+			text = edmp_pnap_create_nap_between_sender_and_recipient_tt
+			event_target:edmp_pnap_sender = {
+				opinion = {
+					name  = edmp_player_nap
+					who   = event_target:edmp_pnap_recipient
+					origin_description = edmp_player_nap_origin_description
+				}
+			}
+			event_target:edmp_pnap_recipient = {
+				opinion = {
+					name  = edmp_player_nap
+					who   = event_target:edmp_pnap_sender
+					origin_description = edmp_player_nap_origin_description
+				}
+			}
+		}
+		
+		ai_chance = { factor = 100 } # Only matters for debugging - see trigger
+		
+	}
+	
+	
+	
+	option = {
+		
+		name = edmp_pnap_1001_evtopt_reject
+		
+		trigger = {
+			OR = {
+				# Always visible to players
+				ai = no
+				# Only visible to AI in debug mode (eg. for forced answer, or 33% if no forcing)
+				AND = {
+					event_target:edmp_pnap_sender = { edmp_player_nap_this_character_is_debug_mode_admin = yes }
+					OR = {
+						has_global_flag = edmp_player_nap_debug_force_reject
+						AND = {
+							NOT = { has_global_flag = edmp_player_nap_debug_force_ignore }
+							NOT = { has_global_flag = edmp_player_nap_debug_force_accept }
+						}
+					}
+				}
+			}
+		}
+		
+		custom_tooltip = {
+			text = edmp_pnap_sender_notified_reject_tt
+			if = {
+				limit = {
+					OR = {
+						event_target:edmp_pnap_sender    = { edmp_player_nap_this_character_is_debug_mode_admin = yes }
+						event_target:edmp_pnap_recipient = { edmp_player_nap_this_character_is_debug_mode_admin = yes }
+					}
+					has_global_flag = edmp_player_nap_debug_force_delay
+				}
+				event_target:edmp_pnap_sender = { letter_event = { id = edmp_pnap.1300 days = 1 } }
+				character_event                                = { id = edmp_pnap.1800 days = 1 }
+			}
+			else = {
+				event_target:edmp_pnap_sender = { letter_event = { id = edmp_pnap.1300          } }
+				character_event                                = { id = edmp_pnap.1800          }
+			}
+		}
+		
+		custom_tooltip = {
+			text = edmp_pnap_sender_blocked_from_sending_nap_offers_to_recipient_for_5_years_tt
+			set_character_flag = edmp_rejected_nap_from_@event_target:edmp_pnap_sender
+		}
+		
+		ai_chance = { factor = 100 } # Only matters for debugging - see trigger
+		
+	}
+	
+}
+
+
+
+
+
+# Notify sender that their message was ignored
+#  --- Flavour this as a message from an administrator in their court
+
+# Sender locates an Administrator & pings them
+letter_event = {
+	id = edmp_pnap.1100
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		ROOT = { clr_character_flag = edmp_pnap_ignore_letter_event_sent }
+		random_courtier_or_vassal = {
+			preferred_limit = { has_job_title = job_chancellor }
+			preferred_limit = { has_job_title = yes }
+			preferred_limit = { is_close_relative = PREV }
+			save_event_target_as = edmp_pnap_ignore_letter_event_sender
+			letter_event = { id = edmp_pnap.1101 }
+			ROOT = { set_character_flag = edmp_pnap_ignore_letter_event_sent }
+		}
+		if = {
+			limit = { ROOT = { NOT = { has_character_flag = edmp_pnap_ignore_letter_event_sent } } }
+			save_event_target_as = edmp_pnap_ignore_letter_event_sender
+			letter_event = { id = edmp_pnap.1101 }
+		}
+		ROOT = { clr_character_flag = edmp_pnap_ignore_letter_event_sent }
+	}
+}
+
+# Administrator pings back to sender
+letter_event = {
+	id = edmp_pnap.1101
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		FROM = { letter_event = { id = edmp_pnap.1102 } }
+	}
+}
+
+# Visible event for sender
+letter_event = {
+	id       = edmp_pnap.1102
+	title    = edmp_pnap_1100_title
+	desc     = edmp_pnap_1100_desc
+	border   = GFX_event_letter_frame_diplomacy
+	portrait = event_target:edmp_pnap_ignore_letter_event_sender
+	#picture = GFX_evt_state_diplomacy # No picture for letter_events
+	is_triggered_only = yes
+	option = {
+		name = edmp_pnap_1100_evtopt_ok
+		show_portrait = event_target:edmp_pnap_recipient
+		custom_tooltip = { text = edmp_pnap_no_change_tt }
+	}
+}
+
+
+
+
+
+# Notify sender that their message was accepted
+letter_event = {
+	id       = edmp_pnap.1200
+	title    = edmp_pnap_1200_title
+	desc     = edmp_pnap_1200_desc
+	border   = GFX_event_letter_frame_diplomacy
+	portrait = event_target:edmp_pnap_recipient
+	#picture = GFX_evt_state_diplomacy # No picture for letter_events
+	is_triggered_only = yes
+	option = {
+		name = edmp_pnap_1200_evtopt_ok
+		custom_tooltip = { text = edmp_pnap_nap_has_been_created_between_sender_and_recipient_tt }
+	}
+}
+
+
+
+
+
+# Notify sender that their message was rejected
+letter_event = {
+	id       = edmp_pnap.1300
+	title    = edmp_pnap_1300_title
+	desc     = edmp_pnap_1300_desc
+	border   = GFX_event_letter_frame_diplomacy
+	portrait = event_target:edmp_pnap_recipient
+	#picture = GFX_evt_state_diplomacy # No picture for letter_events
+	is_triggered_only = yes
+	option = {
+		name = edmp_pnap_1300_evtopt_ok
+		custom_tooltip = { text = edmp_pnap_sender_blocked_for_5_years_tt }
+	}
+}
+
+
+
+
+
+# Clear the "considering" flag from the recipient
+character_event = {
+	id = edmp_pnap.1800
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		clr_character_flag = edmp_considering_nap_from_@event_target:edmp_pnap_sender
+	}
+}
+
+
+
+
+
+# Notification of a setup error
+character_event = {
+	id       = edmp_pnap.1900
+	title    = edmp_pnap_1900_title
+	desc     = edmp_pnap_1900_desc
+	portrait = event_target:edmp_pnap_recipient
+	picture  = GFX_evt_state_diplomacy
+	window   = EventWindowEDMPLongCharacter # We need lots of space!
+	# Audax Validator "." Ignore_NEXT
+	border   = GFX_event_long_frame_war     # Long frame for long window!
+	is_triggered_only = yes
+	option = { name = edmp_pnap_1900_evtopt_ok }
+}

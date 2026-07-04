@@ -1,0 +1,385 @@
+namespace = edmp_rma
+
+
+
+
+
+
+
+
+
+
+########################################################
+#                                                      #
+#             ADD MORAL AUTHORITY MODIFIER             #
+#                                                      #
+########################################################
+
+
+
+# Choose whether to add a positive or negative modifier
+# If there's an error in setup, only "exit" is visible
+character_event = {
+	
+	id       = edmp_rma.1000
+	border   = GFX_event_normal_frame_religion
+	portrait = none
+	picture  = GFX_evt_religious_exultation
+	
+	is_triggered_only = yes
+	
+	title = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		text = edmp_rma_1nnn_title_perm
+	}
+	title = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		text = edmp_rma_1nnn_title_temp
+	}
+	title = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier = no }
+		text = edmp_rma_1nnn_title_error
+	}
+	
+	desc = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		text = edmp_rma_1000_desc_perm
+	}
+	desc = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		text = edmp_rma_1000_desc_temp
+	}
+	desc = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier = no }
+		text = edmp_rma_1nnn_desc_error
+	}
+	
+	immediate = {
+		hidden_tooltip = {
+			
+			clr_global_flag    = edmp_interference_religion_plus_200ma_perm
+			clr_global_flag    = edmp_interference_religion_plus_50ma_perm
+			clr_global_flag    = edmp_interference_religion_plus_10ma_perm
+			clr_global_flag    = edmp_interference_religion_plus_200ma_temp
+			clr_global_flag    = edmp_interference_religion_plus_50ma_temp
+			clr_global_flag    = edmp_interference_religion_plus_10ma_temp
+			
+			clr_global_flag    = edmp_interference_religion_minus_200ma_perm
+			clr_global_flag    = edmp_interference_religion_minus_50ma_perm
+			clr_global_flag    = edmp_interference_religion_minus_10ma_perm
+			clr_global_flag    = edmp_interference_religion_minus_200ma_temp
+			clr_global_flag    = edmp_interference_religion_minus_50ma_temp
+			clr_global_flag    = edmp_interference_religion_minus_10ma_temp
+			
+			clr_global_flag    = edmp_interference_religion_bad
+			clr_global_flag    = edmp_interference_religion_unknown_good_bad
+			
+		}
+	}
+	
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier = yes }
+		name = {
+			trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+			text = edmp_rma_1000_evtopt_positive_perm
+		}
+		name = {
+			trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+			text = edmp_rma_1000_evtopt_positive_temp
+		}
+		hidden_tooltip = { character_event = { id = edmp_rma.1100 } }
+	}
+	
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier = yes }
+		name = {
+			trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+			text = edmp_rma_1000_evtopt_negative_perm
+		}
+		name = {
+			trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+			text = edmp_rma_1000_evtopt_negative_temp
+		}
+		hidden_tooltip = { character_event = { id = edmp_rma.1200 } }
+	}
+	
+	option = {
+		name = edmp_rma_evtopt_exit
+		edmp_interference_religion_unblock_decisions = yes
+	}
+	
+}
+
+# Add a positive modifier
+character_event = {
+	
+	id       = edmp_rma.1100
+	border   = GFX_event_normal_frame_religion
+	portrait = none
+	picture  = GFX_evt_religious_exultation
+	
+	is_triggered_only = yes
+	
+	title = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		text = edmp_rma_1nnn_title_perm
+	}
+	title = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		text = edmp_rma_1nnn_title_temp
+	}
+	title = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier = no }
+		text = edmp_rma_1nnn_title_error
+	}
+	
+	desc = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		text = edmp_rma_1100_desc_perm
+	}
+	desc = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		text = edmp_rma_1100_desc_temp
+	}
+	desc = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier = no }
+		text = edmp_rma_1nnn_desc_error
+	}
+	
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		name = edmp_rma_1100_evtopt_plus_200ma_perm
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_plus_200ma_perm = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_plus_200ma_perm }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_plus_200ma_perm }
+	}
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		name = edmp_rma_1100_evtopt_plus_50ma_perm
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_plus_50ma_perm = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_plus_50ma_perm }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_plus_50ma_perm }
+	}
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		name = edmp_rma_1100_evtopt_plus_10ma_perm
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_plus_10ma_perm = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_plus_10ma_perm }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_plus_10ma_perm }
+	}
+	
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		name = edmp_rma_1100_evtopt_plus_200ma_temp
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_plus_200ma_temp = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_plus_200ma_temp }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_plus_200ma_temp }
+	}
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		name = edmp_rma_1100_evtopt_plus_50ma_temp
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_plus_50ma_temp = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_plus_50ma_temp }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_plus_50ma_temp }
+	}
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		name = edmp_rma_1100_evtopt_plus_10ma_temp
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_plus_10ma_temp = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_plus_10ma_temp }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_plus_10ma_temp }
+	}
+	
+	option = {
+		name = edmp_rma_evtopt_back
+		hidden_tooltip = { character_event = { id = edmp_rma.1000 } }
+	}
+	
+}
+
+# Add a negative modifier
+character_event = {
+	
+	id       = edmp_rma.1200
+	border   = GFX_event_normal_frame_religion
+	portrait = none
+	picture  = GFX_evt_religious_exultation
+	
+	is_triggered_only = yes
+	
+	title = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		text = edmp_rma_1nnn_title_perm
+	}
+	title = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		text = edmp_rma_1nnn_title_temp
+	}
+	title = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier = no }
+		text = edmp_rma_1nnn_title_error
+	}
+	
+	desc = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		text = edmp_rma_1200_desc_perm
+	}
+	desc = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		text = edmp_rma_1200_desc_temp
+	}
+	desc = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier = no }
+		text = edmp_rma_1nnn_desc_error
+	}
+	
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		name = edmp_rma_1200_evtopt_minus_200ma_perm
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_minus_200ma_perm = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_minus_200ma_perm }
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_bad }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_minus_200ma_perm }
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_bad }
+	}
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		name = edmp_rma_1200_evtopt_minus_50ma_perm
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_minus_50ma_perm = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_minus_50ma_perm }
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_bad }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_minus_50ma_perm }
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_bad }
+	}
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_perm = yes }
+		name = edmp_rma_1200_evtopt_minus_10ma_perm
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_minus_10ma_perm = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_minus_10ma_perm }
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_bad }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_minus_10ma_perm }
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_bad }
+	}
+	
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		name = edmp_rma_1200_evtopt_minus_200ma_temp
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_minus_200ma_temp = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_minus_200ma_temp }
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_bad }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_minus_200ma_temp }
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_bad }
+	}
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		name = edmp_rma_1200_evtopt_minus_50ma_temp
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_minus_50ma_temp = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_minus_50ma_temp }
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_bad }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_minus_50ma_temp }
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_bad }
+	}
+	option = {
+		trigger = { edmp_interference_religion_is_adding_ma_modifier_temp = yes }
+		name = edmp_rma_1200_evtopt_minus_10ma_temp
+		event_target:edmp_interference_religion_affected = {
+			edmp_interference_religion_this_religion_gains_minus_10ma_temp = yes
+		}
+		edmp_interference_religion_unblock_decisions = yes
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_minus_10ma_temp }
+		hidden_tooltip = { set_global_flag = edmp_interference_religion_bad }
+		edmp_interference_notify_players_religion = yes
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_minus_10ma_temp }
+		hidden_tooltip = { clr_global_flag = edmp_interference_religion_bad }
+	}
+	
+	option = {
+		name = edmp_rma_evtopt_back
+		hidden_tooltip = { character_event = { id = edmp_rma.1000 } }
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+########################################################
+#                                                      #
+#            SHOW MORAL AUTHORITY BREAKDOWN            #
+#                                                      #
+########################################################
+
+
+
+# Show all sources of MA for this religion
+# Show MA breakdown commented-out because I don't currently know how to get this info
+#character_event = {
+#	
+#	id       = edmp_rma.2000
+#	title    = edmp_rma_2000_title
+#	desc     = edmp_rma_2000_desc
+#	border   = GFX_event_normal_frame_religion
+#	portrait = none
+#	picture  = GFX_evt_religious_exultation
+#	
+#	is_triggered_only = yes
+#	
+#	option = {
+#		name = edmp_rma_2000_evtopt_exit
+#		event_target:edmp_interference_religion_affected = {
+#			show_scope_change = no
+#			custom_tooltip = { text = MORAL_AUTHORITY } # As used in domestic_religion.gui
+#		}
+#	}
+#	
+#}

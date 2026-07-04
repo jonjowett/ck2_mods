@@ -1,0 +1,278 @@
+# Audax Validator EnableCommentMetadata
+
+targetted_decisions = {
+	
+	edmp_interference_win_defensive_war = { # NB: Visible to non-admins!
+		filter = all
+		ai = no # As a targetted_decision, this can only be used by humans (due to CPU load). If AI need to use this feature, do it via on_action event.
+		is_high_prio = yes
+		from_potential = { edmp_interference_win_defensive_wars_is_available_to_this_character = yes }
+		potential = {
+			# Show the decision for every *other* participant in FROM's wars
+			any_war = {
+				OR = {
+					any_attacker = { character = ROOT }
+					any_defender = { character = ROOT }
+				}
+				OR = {
+					any_attacker = { character = ROOT_FROM }
+					any_defender = { character = ROOT_FROM }
+				}
+			}
+			NOT = { character = ROOT_FROM } # Just in case!
+		}
+		allow = { edmp_interference_win_defensive_wars_root_character_is_a_valid_target_for_from_to_win_war = yes }
+		effect = {
+			ROOT_FROM = {
+				show_scope_change = no
+				ROOT = {
+					show_scope_change = no
+					edmp_interference_win_defensive_wars_prev_wins_all_defensive_wars_against_this_character = yes
+				}
+			}
+		}
+	}
+	
+	edmp_interference_end_war_white_peace = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		show_third_party_potential = yes
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_war = {
+				OR = {
+					any_attacker = { character = ROOT }
+					any_defender = { character = ROOT }
+				}
+			}
+		}
+		allow = {
+			ROOT_FROM     = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		third_party_potential = {
+			FROMFROM = { is_ruler = yes }
+			ROOT = {
+				any_war = {
+					OR = {
+						AND = {
+							attacker = { character = ROOT }
+							defender = { character = ROOT_FROMFROM }
+						}
+						AND = {
+							attacker = { character = ROOT_FROMFROM }
+							defender = { character = ROOT }
+						}
+					}
+				}
+			}
+		}
+		third_party_allow = {
+			# Forcing a white peace could be considered negative for both the attacker and defender
+			ROOT          = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+			ROOT_FROMFROM = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+		}
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = { ROOT_FROM = { save_event_target_as = edmp_interference_decision_taker } }
+			any_war = {
+				limit = { 
+					OR = {
+						AND = {
+							attacker = { character = ROOT }
+							defender = { character = ROOT_FROMFROM }
+						}
+						AND = {
+							attacker = { character = ROOT_FROMFROM }
+							defender = { character = ROOT }
+						}
+					}
+				}
+				hidden_tooltip = {
+					save_event_target_as = edmp_interference_force_end_war_war
+					attacker = { save_event_target_as = edmp_interference_force_end_war_attacker }
+					defender = { save_event_target_as = edmp_interference_force_end_war_defender }
+				}
+				hidden_tooltip = { set_global_flag = edmp_interference_force_end_war_white_peace }
+				# Send the notification event BEFORE ending the war, so we can access the war name in the event text
+				hidden_tooltip = { edmp_interference_notify_players_force_end_war = yes }
+				end_war = whitepeace
+				edmp_interference_notify_players_tooltip_only = yes
+			}
+		}
+	}
+	
+	edmp_interference_end_war_invalid = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		show_third_party_potential = yes
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_war = {
+				OR = {
+					any_attacker = { character = ROOT }
+					any_defender = { character = ROOT }
+				}
+			}
+		}
+		allow = {
+			ROOT_FROM     = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		third_party_potential = {
+			FROMFROM = { is_ruler = yes }
+			ROOT = {
+				any_war = {
+					OR = {
+						AND = {
+							attacker = { character = ROOT }
+							defender = { character = ROOT_FROMFROM }
+						}
+						AND = {
+							attacker = { character = ROOT_FROMFROM }
+							defender = { character = ROOT }
+						}
+					}
+				}
+			}
+		}
+		third_party_allow = {
+			# Forcing a war to be invalidated could be considered negative for both the attacker and defender
+			ROOT          = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+			ROOT_FROMFROM = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+		}
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = { ROOT_FROM = { save_event_target_as = edmp_interference_decision_taker } }
+			any_war = {
+				limit = { 
+					OR = {
+						AND = {
+							attacker = { character = ROOT }
+							defender = { character = ROOT_FROMFROM }
+						}
+						AND = {
+							attacker = { character = ROOT_FROMFROM }
+							defender = { character = ROOT }
+						}
+					}
+				}
+				hidden_tooltip = {
+					save_event_target_as = edmp_interference_force_end_war_war
+					attacker = { save_event_target_as = edmp_interference_force_end_war_attacker }
+					defender = { save_event_target_as = edmp_interference_force_end_war_defender }
+				}
+				hidden_tooltip = { set_global_flag = edmp_interference_force_end_war_invalid }
+				# Send the notification event BEFORE ending the war, so we can access the war name in the event text
+				hidden_tooltip = { edmp_interference_notify_players_force_end_war = yes }
+				end_war = whitepeace
+				edmp_interference_notify_players_tooltip_only = yes
+			}
+		}
+	}
+	
+	edmp_interference_end_war_defender_victory = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		show_third_party_potential = yes
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_war = { any_defender = { character = ROOT } }
+		}
+		allow = {
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		third_party_potential = {
+			FROMFROM = { is_ruler = yes }
+			ROOT = {
+				any_war = {
+					any_defender = { character = ROOT }
+					attacker     = { character = ROOT_FROMFROM }
+				}
+			}
+		}
+		third_party_allow = { ROOT_FROMFROM = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } } # Forcing FROMFROM to lose a war is obviously negative for FROMFROM
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = { ROOT_FROM = { save_event_target_as = edmp_interference_decision_taker } }
+			any_war = {
+				limit = {
+					any_defender = { character = ROOT }
+					attacker     = { character = ROOT_FROMFROM }
+				}
+				hidden_tooltip = {
+					save_event_target_as = edmp_interference_force_end_war_war
+					attacker = { save_event_target_as = edmp_interference_force_end_war_attacker }
+					defender = { save_event_target_as = edmp_interference_force_end_war_defender }
+				}
+				hidden_tooltip = { set_global_flag = edmp_interference_force_end_war_defender_victory }
+				# Send the notification event BEFORE ending the war, so we can access the war name in the event text
+				hidden_tooltip = { edmp_interference_notify_players_force_end_war = yes }
+				end_war = reverse_demand
+				edmp_interference_notify_players_tooltip_only = yes
+			}
+		}
+	}
+	
+	edmp_interference_end_war_attacker_victory = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		show_third_party_potential = yes
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			edmp_interference_root_is_valid_potential_target = yes
+			any_war = { any_attacker = { character = ROOT } }
+		}
+		allow = {
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		third_party_potential = {
+			FROMFROM = { is_ruler = yes }
+			ROOT = {
+				any_war = {
+					any_attacker = { character = ROOT }
+					defender     = { character = ROOT_FROMFROM }
+				}
+			}
+		}
+		third_party_allow = { ROOT_FROMFROM = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } } # Forcing FROMFROM to lose a war is obviously negative for FROMFROM
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = { ROOT_FROM = { save_event_target_as = edmp_interference_decision_taker } }
+			any_war = {
+				limit = {
+					any_attacker = { character = ROOT }
+					defender     = { character = ROOT_FROMFROM }
+				}
+				hidden_tooltip = {
+					save_event_target_as = edmp_interference_force_end_war_war
+					attacker = { save_event_target_as = edmp_interference_force_end_war_attacker }
+					defender = { save_event_target_as = edmp_interference_force_end_war_defender }
+				}
+				hidden_tooltip = { set_global_flag = edmp_interference_force_end_war_attacker_victory }
+				# Send the notification event BEFORE ending the war, so we can access the war name in the event text
+				hidden_tooltip = { edmp_interference_notify_players_force_end_war = yes }
+				end_war = success
+				edmp_interference_notify_players_tooltip_only = yes
+			}
+		}
+	}
+	
+}

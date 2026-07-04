@@ -1,42 +1,166 @@
 namespace = edmp_ifn
 
-# War forced to end by FROM
+# War forced to end by admin
 character_event = {
 	id    = edmp_ifn.1001
-	desc  = edmp_ifn_1001_desc
 	title = edmp_ifn_title
 	is_triggered_only = yes
 	portrait = event_target:edmp_interference_decision_taker
 	picture = GFX_evt_recieve_letter
-	option = {
-		trigger = { event_target:edmp_interference_force_end_war_white_peace_attacker = { character = ROOT } }
-		show_portrait = event_target:edmp_interference_force_end_war_white_peace_defender
-		tooltip_info = yes
-		name = edmp_ifn_evtopt_ok_affected
+	
+	desc = {
+		trigger = { has_global_flag = edmp_interference_force_end_war_white_peace }
+		text    = edmp_ifn_1001_desc_white_peace
 	}
+	desc = {
+		trigger = { has_global_flag = edmp_interference_force_end_war_invalid }
+		text    = edmp_ifn_1001_desc_invalid
+	}
+	desc = {
+		trigger = { has_global_flag = edmp_interference_force_end_war_defender_victory }
+		text    = edmp_ifn_1001_desc_defender_victory
+	}
+	desc = {
+		trigger = { has_global_flag = edmp_interference_force_end_war_attacker_victory }
+		text    = edmp_ifn_1001_desc_attacker_victory
+	}
+	desc = {
+		trigger = {
+			NOR = {
+				has_global_flag = edmp_interference_force_end_war_white_peace
+				has_global_flag = edmp_interference_force_end_war_invalid
+				has_global_flag = edmp_interference_force_end_war_defender_victory
+				has_global_flag = edmp_interference_force_end_war_attacker_victory
+			}
+		}
+		text    = edmp_ifn_1001_desc_fallback
+	}
+	
+	# ROOT is primary or secondary attacker
+	#  - Attacker victory = excellent
+	#  - White peace or defender victory = curses (NB: white peace usually imposes some costs on the attacker)
+	#  - Anything else = OK/affected
+	# NB: ROOT's portrait can NEVER appear in the event option, so using show_portrait for both attacker and defender should never be confusing
 	option = {
-		trigger = { event_target:edmp_interference_force_end_war_white_peace_defender = { character = ROOT } }
-		show_portrait = event_target:edmp_interference_force_end_war_white_peace_attacker
+		trigger = {
+			event_target:edmp_interference_force_end_war_war = { any_attacker = { character = ROOT } }
+			has_global_flag = edmp_interference_force_end_war_attacker_victory
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
 		tooltip_info = yes
-		name = edmp_ifn_evtopt_ok_affected
+		name = edmp_ifn_evtopt_excellent
 	}
 	option = {
 		trigger = {
-			NOR = {
-				event_target:edmp_interference_force_end_war_white_peace_attacker = { character = ROOT }
-				event_target:edmp_interference_force_end_war_white_peace_defender = { character = ROOT }
+			event_target:edmp_interference_force_end_war_war = { any_attacker = { character = ROOT } }
+			OR = {
+				has_global_flag = edmp_interference_force_end_war_defender_victory
+				has_global_flag = edmp_interference_force_end_war_white_peace
 			}
 		}
-		show_portrait = event_target:edmp_interference_force_end_war_white_peace_attacker
-		show_portrait = event_target:edmp_interference_force_end_war_white_peace_defender
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_curses
+	}
+	option = {
+		trigger = {
+			event_target:edmp_interference_force_end_war_war = { any_attacker = { character = ROOT } }
+			NOR = {
+				has_global_flag = edmp_interference_force_end_war_attacker_victory
+				has_global_flag = edmp_interference_force_end_war_defender_victory
+				has_global_flag = edmp_interference_force_end_war_white_peace
+			}
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_ok_affected
+	}
+	
+	
+	# ROOT is primary or secondary defender
+	#  - Defender victory = excellent
+	#  - Attacker victory = curses
+	#  - Anything else = OK/affected
+	# NB: ROOT's portrait can NEVER appear in the event option, so using show_portrait for both attacker and defender should never be confusing
+	option = {
+		trigger = {
+			event_target:edmp_interference_force_end_war_war = { any_defender = { character = ROOT } }
+			has_global_flag = edmp_interference_force_end_war_defender_victory
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_excellent
+	}
+	option = {
+		trigger = {
+			event_target:edmp_interference_force_end_war_war = { any_defender = { character = ROOT } }
+			has_global_flag = edmp_interference_force_end_war_attacker_victory
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_curses
+	}
+	option = {
+		trigger = {
+			event_target:edmp_interference_force_end_war_war = { any_defender = { character = ROOT } }
+			NOR = {
+				has_global_flag = edmp_interference_force_end_war_defender_victory
+				has_global_flag = edmp_interference_force_end_war_attacker_victory
+			}
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		tooltip_info = yes
+		name = edmp_ifn_evtopt_ok_affected
+	}
+	
+	# ROOT is not involved in the war
+	#  - Always OK/unaffected
+	option = {
+		trigger = {
+			NOR = {
+				event_target:edmp_interference_force_end_war_war = { any_attacker = { character = ROOT } }
+				event_target:edmp_interference_force_end_war_war = { any_defender = { character = ROOT } }
+			}
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
 		name = edmp_ifn_evtopt_ok_unaffected
 	}
+	
+	# Fallback
+	#  - In case there is no other visible option (eg. if one or more event_target scopes have not been set up correctly)
+	option = {
+		trigger = {
+			# scope = { always = yes } returns true if and only if the scope exists
+			# Therefore, NOT = { scope = { always = yes } } returns true if and only if the scope does NOT exist
+			# So, this option will be visible if and only if any of the expected scopes have not been correctly defined
+			OR = {
+				NOT = { event_target:edmp_interference_force_end_war_attacker = { always = yes } }
+				NOT = { event_target:edmp_interference_force_end_war_defender = { always = yes } }
+				NOT = { event_target:edmp_interference_force_end_war_war      = { always = yes } }
+			}
+		}
+		show_portrait = event_target:edmp_interference_force_end_war_attacker
+		show_portrait = event_target:edmp_interference_force_end_war_defender
+		name = edmp_ifn_evtopt_ok_unaffected_fallback
+	}
+	
 	after = {
 		hidden_tooltip = {
-			clear_event_target = edmp_interference_force_end_war_white_peace_war
-			clear_event_target = edmp_interference_force_end_war_white_peace_attacker
-			clear_event_target = edmp_interference_force_end_war_white_peace_defender
 			clear_event_target = edmp_interference_decision_taker
+			clear_event_target = edmp_interference_force_end_war_war
+			clear_event_target = edmp_interference_force_end_war_attacker
+			clear_event_target = edmp_interference_force_end_war_defender
+			clr_global_flag    = edmp_interference_force_end_war_white_peace
+			clr_global_flag    = edmp_interference_force_end_war_invalid
+			clr_global_flag    = edmp_interference_force_end_war_defender_victory
+			clr_global_flag    = edmp_interference_force_end_war_attacker_victory
 		}
 	}
 }
@@ -365,6 +489,18 @@ character_event = {
 		text                        = edmp_ifn_5001_desc_singlechar_health_revoke
 	}
 	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_fertility_grant }
+		text                        = edmp_ifn_5001_desc_singlechar_fertility_grant
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_fertility_prolong }
+		text                        = edmp_ifn_5001_desc_singlechar_fertility_prolong
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_fertility_revoke }
+		text                        = edmp_ifn_5001_desc_singlechar_fertility_revoke
+	}
+	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_heal_disease }
 		text                        = edmp_ifn_5001_desc_singlechar_heal_disease
 	}
@@ -399,6 +535,10 @@ character_event = {
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_legitimise }
 		text                        = edmp_ifn_5001_desc_singlechar_legitimise
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_clear_focus }
+		text                        = edmp_ifn_5001_desc_singlechar_clear_focus
 	}
 	desc = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_artifact_flag_as_unique }
@@ -646,6 +786,9 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_health_grant
 			clr_global_flag    = edmp_interference_singlechar_health_prolong
 			clr_global_flag    = edmp_interference_singlechar_health_revoke
+			clr_global_flag    = edmp_interference_singlechar_fertility_grant
+			clr_global_flag    = edmp_interference_singlechar_fertility_prolong
+			clr_global_flag    = edmp_interference_singlechar_fertility_revoke
 			clr_global_flag    = edmp_interference_singlechar_heal_disease
 			clr_global_flag    = edmp_interference_singlechar_heal_congenital
 			clr_global_flag    = edmp_interference_singlechar_heal_mental
@@ -655,6 +798,7 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_older
 			clr_global_flag    = edmp_interference_singlechar_sexchange
 			clr_global_flag    = edmp_interference_singlechar_legitimise
+			clr_global_flag    = edmp_interference_singlechar_clear_focus
 			clr_global_flag    = edmp_interference_singlechar_artifact_flag_as_unique
 			clr_global_flag    = edmp_interference_singlechar_artifact_unflag_as_unique
 			clr_global_flag    = edmp_interference_singlechar_artifact_transfer_single_to_decision_taker
@@ -988,6 +1132,130 @@ character_event = {
 			clr_global_flag    = edmp_interference_singletitle_remove_negative_province_modifiers
 			
 			clr_global_flag    = edmp_interference_singletitle_bad
+			
+		}
+	}
+	
+}
+
+# Host takes an action relating to a religion
+# Expects:
+#  --- One of the edmp_interference_religion_ global flags to be set BEFORE the event is called.
+#  --- Targeted religion is stored as event_target:edmp_interference_religion_affected
+#  --- Good/bad/unknown status: 
+#       --- If the action is bad for the religion, the global flag edmp_interference_religion_bad should be set.
+#       --- If the action's goodness/badness is unknown, the global flag edmp_interference_religion_unknown_good_bad should be set.
+#       --- If the action is good for the religion, BOTH of these two flags should NOT be set.
+character_event = {
+	
+	id    = edmp_ifn.8001
+	title = edmp_ifn_title
+	is_triggered_only = yes
+	portrait = event_target:edmp_interference_decision_taker
+	picture = GFX_evt_recieve_letter
+	
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_200ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_plus_200ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_50ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_plus_50ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_10ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_plus_10ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_200ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_minus_200ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_50ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_minus_50ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_10ma_perm }
+		text                        = edmp_ifn_8001_desc_religion_minus_10ma_perm
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_200ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_plus_200ma_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_50ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_plus_50ma_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_plus_10ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_plus_10ma_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_200ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_minus_200ma_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_50ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_minus_50ma_temp
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_religion_minus_10ma_temp }
+		text                        = edmp_ifn_8001_desc_religion_minus_10ma_temp
+	}
+	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
+	
+	# This is my religion: good/unknown/bad => excellent/OK/curses
+	option = {
+		trigger = { event_target:edmp_interference_religion_affected = { religion = ROOT } }
+		tooltip_info = yes
+		name = {
+			trigger = { has_global_flag = edmp_interference_religion_bad }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { has_global_flag = edmp_interference_religion_unknown_good_bad }
+			text = edmp_ifn_evtopt_ok_affected
+		}
+		name = {
+			trigger = {
+				NOR = {
+					has_global_flag = edmp_interference_religion_bad
+					has_global_flag = edmp_interference_religion_unknown_good_bad
+				}
+			}
+			text = edmp_ifn_evtopt_excellent
+		}
+	}
+	
+	# Otherwise: OK
+	option = {
+		trigger = { NOT = { event_target:edmp_interference_religion_affected = { religion = ROOT } } }
+		name = edmp_ifn_evtopt_ok_unaffected
+	}
+	
+	after = {
+		hidden_tooltip = {
+			
+			clear_event_target = edmp_interference_religion_affected
+			clear_event_target = edmp_interference_decision_taker
+			
+			clr_global_flag    = edmp_interference_religion_plus_200ma_perm
+			clr_global_flag    = edmp_interference_religion_plus_50ma_perm
+			clr_global_flag    = edmp_interference_religion_plus_10ma_perm
+			clr_global_flag    = edmp_interference_religion_plus_200ma_temp
+			clr_global_flag    = edmp_interference_religion_plus_50ma_temp
+			clr_global_flag    = edmp_interference_religion_plus_10ma_temp
+			
+			clr_global_flag    = edmp_interference_religion_minus_200ma_perm
+			clr_global_flag    = edmp_interference_religion_minus_50ma_perm
+			clr_global_flag    = edmp_interference_religion_minus_10ma_perm
+			clr_global_flag    = edmp_interference_religion_minus_200ma_temp
+			clr_global_flag    = edmp_interference_religion_minus_50ma_temp
+			clr_global_flag    = edmp_interference_religion_minus_10ma_temp
+			
+			clr_global_flag    = edmp_interference_religion_bad
+			clr_global_flag    = edmp_interference_religion_unknown_good_bad
 			
 		}
 	}
