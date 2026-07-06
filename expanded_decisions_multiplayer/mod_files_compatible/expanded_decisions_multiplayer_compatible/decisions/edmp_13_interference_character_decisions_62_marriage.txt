@@ -1,0 +1,319 @@
+# Audax Validator EnableCommentMetadata
+
+targetted_decisions = {
+	
+	edmp_interference_break_betrothal = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			is_betrothed = yes
+		}
+		allow = {
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT = {
+				# Potentially-negative for both spouses
+				              edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes
+				betrothed = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+			}
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM = {               save_event_target_as = edmp_interference_decision_taker      }
+				ROOT      = {               save_event_target_as = edmp_interference_bilateral_party_1   }
+				ROOT      = { betrothed = { save_event_target_as = edmp_interference_bilateral_party_2 } }
+				set_global_flag = edmp_interference_bilateral_break_betrothal
+			}
+			ROOT = {
+				show_scope_change = no
+				betrothed = {
+					show_scope_change = no
+					ROOT = {
+						show_scope_change = no
+						break_betrothal = PREV
+					}
+				}
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_break_betrothal }
+		}
+	}
+	
+	edmp_interference_divorce = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			OR = {
+				is_married = yes
+				is_married_matrilineally = yes
+			}
+		}
+		allow = {
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT = {
+				# Can only use the decision if there is exactly one spouse
+				# (It must be obvious exactly who is being divorced!)
+				num_of_spouses == 1
+				# Potentially-negative for both spouses
+				           edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes
+				spouse = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+			}
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM = {               save_event_target_as = edmp_interference_decision_taker      }
+				ROOT      = {               save_event_target_as = edmp_interference_bilateral_party_1   }
+				ROOT      = { spouse    = { save_event_target_as = edmp_interference_bilateral_party_2 } }
+				set_global_flag = edmp_interference_bilateral_divorce
+			}
+			ROOT = {
+				show_scope_change = no
+				spouse = {
+					show_scope_change = no
+					ROOT = {
+						show_scope_change = no
+						remove_spouse = PREV
+					}
+				}
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_divorce }
+		}
+	}
+	
+	edmp_interference_release_consort = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { is_consort = yes }
+		allow = {
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT = {
+				# Potentially-negative for both parties
+				            edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes
+				consort = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+			}
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM = {               save_event_target_as = edmp_interference_decision_taker      }
+				ROOT      = {               save_event_target_as = edmp_interference_bilateral_party_1   }
+				ROOT      = { consort   = { save_event_target_as = edmp_interference_bilateral_party_2 } }
+				set_global_flag = edmp_interference_bilateral_release_consort
+			}
+			ROOT = {
+				show_scope_change = no
+				consort = {
+					show_scope_change = no
+					ROOT = {
+						show_scope_change = no
+						remove_consort = PREV
+					}
+				}
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_release_consort }
+		}
+	}
+	
+	edmp_interference_make_marriage_matrilineal = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			is_married = yes
+			is_married_matrilineally = no
+		}
+		allow = {
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT = {
+				# Can only use the decision if there is exactly one spouse
+				# (It must be obvious exactly who is being divorced!)
+				num_of_spouses == 1
+				# Potentially-negative for both spouses
+				           edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes
+				spouse = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+			}
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM = {            save_event_target_as = edmp_interference_decision_taker      }
+				ROOT      = {            save_event_target_as = edmp_interference_bilateral_party_1   }
+				ROOT      = { spouse = { save_event_target_as = edmp_interference_bilateral_party_2 } }
+				set_global_flag = edmp_interference_bilateral_make_marriage_matrilineal
+			}
+			ROOT = {
+				show_scope_change = no
+				spouse = {
+					show_scope_change = no
+					ROOT = {
+						show_scope_change = no
+						add_spouse_matrilineal = PREV
+					}
+				}
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_make_marriage_matrilineal }
+		}
+	}
+	
+	edmp_interference_make_marriage_patrilineal = {
+		filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			is_married = yes
+			is_married_matrilineally = yes
+		}
+		allow = {
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT = {
+				# Can only use the decision if there is exactly one spouse
+				# (It must be obvious exactly who is being divorced!)
+				num_of_spouses == 1
+				# Potentially-negative for both spouses
+				           edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes
+				spouse = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes }
+			}
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM = {            save_event_target_as = edmp_interference_decision_taker      }
+				ROOT      = {            save_event_target_as = edmp_interference_bilateral_party_1   }
+				ROOT      = { spouse = { save_event_target_as = edmp_interference_bilateral_party_2 } }
+				set_global_flag = edmp_interference_bilateral_make_marriage_patrilineal
+			}
+			ROOT = {
+				show_scope_change = no
+				spouse = {
+					show_scope_change = no
+					ROOT = {
+						show_scope_change = no
+						add_spouse = PREV
+					}
+				}
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_make_marriage_patrilineal }
+		}
+	}
+	
+	# Force marriage/betrothal between two eligible characters with the same home court.
+	# If both characters are of age then they marry. Otherwise, they are betrothed.
+	# Polarity of marriage can be changed afterwards, via one of the decisions above.
+	# Polarity of betrothals CANNOT be set via scripting commands.
+	edmp_interference_marry = {
+		filter = all_including_me
+		third_party_filter = home_court
+		third_party = ROOT
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = {
+			ROOT = {
+				# Keep this list in-sync with the allow clause below
+				prisoner     = no
+				is_married   = no
+				is_betrothed = no
+				OR = {
+					is_consort = no
+					is_senior_consort_party = yes
+				}
+			}
+		}
+		allow = {
+			ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT = {
+				# Repeat ROOT's potential requirements, to help the user figure out the scope of the decision
+				prisoner     = no
+				is_married   = no
+				is_betrothed = no
+				OR = {
+					is_consort = no
+					is_senior_consort_party = yes
+				}
+				# Potentially-negative for both spouses
+				edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes
+			}
+		}
+		third_party_potential = {
+			ROOT_FROMFROM = {
+				# Keep this list in-sync with the third_party_allow clause below
+				prisoner     = no
+				is_betrothed = no
+				is_married   = no
+				OR = {
+					is_consort = no
+					is_senior_consort_party = yes
+				}
+				trigger_if   = { limit = { is_female = yes } ROOT = { is_female = no  } }
+				trigger_else = {                             ROOT = { is_female = yes } }
+			}
+		}
+		third_party_allow = {
+			ROOT_FROMFROM = {
+				# Repeat ROOT_FROMFROM's potential requirements, to help the user figure out the scope of the decision
+				prisoner     = no
+				is_betrothed = no
+				is_married   = no
+				OR = {
+					is_consort = no
+					is_senior_consort_party = yes
+				}
+				trigger_if   = { limit = { is_female = yes } ROOT = { is_female = no  } }
+				trigger_else = {                             ROOT = { is_female = yes } }
+				# Potentially-negative for both spouses
+				edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes
+			}
+		}
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker    }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+			}
+			if = {
+				limit = {
+					ROOT          = { is_marriage_adult = yes }
+					ROOT_FROMFROM = { is_marriage_adult = yes }
+				}
+				ROOT = {
+					show_scope_change = no
+					add_spouse = ROOT_FROMFROM
+					hidden_tooltip = { set_global_flag = edmp_interference_bilateral_marry }
+				}
+			}
+			else = {
+				ROOT = {
+					show_scope_change = no
+					add_betrothal = ROOT_FROMFROM
+					hidden_tooltip = { set_global_flag = edmp_interference_bilateral_betroth }
+				}
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = {
+				clr_global_flag = edmp_interference_bilateral_marry
+				clr_global_flag = edmp_interference_bilateral_betroth
+			}
+		}
+	}
+	
+}

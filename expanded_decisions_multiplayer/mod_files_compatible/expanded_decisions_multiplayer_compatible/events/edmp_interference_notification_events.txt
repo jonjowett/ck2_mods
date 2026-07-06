@@ -299,18 +299,45 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_bilateral_break_alliance }
 		text                        = edmp_ifn_3001_desc_bilateral_break_alliance
 	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_break_betrothal }
+		text                        = edmp_ifn_3001_desc_bilateral_break_betrothal
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_divorce }
+		text                        = edmp_ifn_3001_desc_bilateral_divorce
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_release_consort }
+		text                        = edmp_ifn_3001_desc_bilateral_release_consort
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_make_marriage_matrilineal }
+		text                        = edmp_ifn_3001_desc_bilateral_make_marriage_matrilineal
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_make_marriage_patrilineal }
+		text                        = edmp_ifn_3001_desc_bilateral_make_marriage_patrilineal
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_marry }
+		text                        = edmp_ifn_3001_desc_bilateral_marry
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_betroth }
+		text                        = edmp_ifn_3001_desc_bilateral_betroth
+	}
 	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	
 	option = {
-		trigger = { event_target:edmp_interference_bilateral_party_1 = { character = ROOT } }
-		show_portrait = event_target:edmp_interference_bilateral_party_2
-		tooltip_info = yes
-		name = edmp_ifn_evtopt_ok_affected
-	}
-	
-	option = {
-		trigger = { event_target:edmp_interference_bilateral_party_2 = { character = ROOT } }
+		trigger = {
+			OR = {
+				event_target:edmp_interference_bilateral_party_1 = { edmp_ifn_this_character_is_important_to_root_for_bilateral_notification_flavour = yes }
+				event_target:edmp_interference_bilateral_party_2 = { edmp_ifn_this_character_is_important_to_root_for_bilateral_notification_flavour = yes }
+			}
+		}
 		show_portrait = event_target:edmp_interference_bilateral_party_1
+		show_portrait = event_target:edmp_interference_bilateral_party_2
 		tooltip_info = yes
 		name = edmp_ifn_evtopt_ok_affected
 	}
@@ -318,8 +345,8 @@ character_event = {
 	option = {
 		trigger = {
 			NOR = {
-				event_target:edmp_interference_bilateral_party_1 = { character = ROOT }
-				event_target:edmp_interference_bilateral_party_2 = { character = ROOT }
+				event_target:edmp_interference_bilateral_party_1 = { edmp_ifn_this_character_is_important_to_root_for_bilateral_notification_flavour = yes }
+				event_target:edmp_interference_bilateral_party_2 = { edmp_ifn_this_character_is_important_to_root_for_bilateral_notification_flavour = yes }
 			}
 		}
 		show_portrait = event_target:edmp_interference_bilateral_party_1
@@ -340,6 +367,13 @@ character_event = {
 			clr_global_flag    = edmp_interference_bilateral_break_nap
 			clr_global_flag    = edmp_interference_bilateral_add_alliance
 			clr_global_flag    = edmp_interference_bilateral_break_alliance
+			clr_global_flag    = edmp_interference_bilateral_break_betrothal
+			clr_global_flag    = edmp_interference_bilateral_divorce
+			clr_global_flag    = edmp_interference_bilateral_release_consort
+			clr_global_flag    = edmp_interference_bilateral_make_marriage_matrilineal
+			clr_global_flag    = edmp_interference_bilateral_make_marriage_patrilineal
+			clr_global_flag    = edmp_interference_bilateral_marry
+			clr_global_flag    = edmp_interference_bilateral_betroth
 			
 		}
 	}

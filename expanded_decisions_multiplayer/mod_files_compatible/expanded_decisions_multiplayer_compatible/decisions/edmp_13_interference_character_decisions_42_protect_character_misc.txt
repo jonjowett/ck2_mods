@@ -132,7 +132,11 @@ targetted_decisions = {
 			has_character_flag = edmp_interference_show
 			edmp_this_character_can_see_admin_helper_actions = yes
 		}
-		potential = { has_focus = yes }
+		potential = {
+			# has_focus = yes is valid, but the Validator thinks it isn't
+			# Audax Validator "." Ignore_NEXT
+			has_focus = yes
+		}
 		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
 		effect = {
 			hidden_tooltip = {
