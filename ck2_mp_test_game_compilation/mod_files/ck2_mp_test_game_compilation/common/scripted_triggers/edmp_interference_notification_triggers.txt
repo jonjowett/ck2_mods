@@ -37,6 +37,7 @@ edmp_ifn_this_character_is_roots_friend_for_notification_flavour = {
 		is_friend = ROOT
 		is_lover = ROOT
 		is_allied_with = ROOT
+		is_heir = ROOT
 	}
 }
 
@@ -58,5 +59,20 @@ edmp_ifn_this_is_roots_friends_title_for_notification_flavour = {
 	OR = {
 		holder_scope = { edmp_ifn_this_character_is_roots_friend_for_notification_flavour = yes }
 		holder_scope = { any_liege = { edmp_ifn_this_character_is_roots_friend_for_notification_flavour = yes } }
+	}
+}
+
+edmp_ifn_this_character_is_important_to_root_for_bilateral_notification_flavour = {
+	OR = {
+		
+		# "Friends" includes pretty much everyone ROOT cares about
+		edmp_ifn_this_character_is_roots_friend_for_notification_flavour = yes
+		
+		# Also include unlanded courtiers in ROOT's court
+		AND = {
+			is_ruler = no
+			host = { character = ROOT }
+		}
+		
 	}
 }
