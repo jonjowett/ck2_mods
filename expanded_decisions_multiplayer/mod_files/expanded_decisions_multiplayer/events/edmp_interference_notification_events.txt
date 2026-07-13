@@ -734,6 +734,10 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_singlechar_win_defensive_wars_revoke }
 		text                        = edmp_ifn_5001_desc_singlechar_win_defensive_wars_revoke
 	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_singlechar_release_from_prison }
+		text                        = edmp_ifn_5001_desc_singlechar_release_from_prison
+	}
 	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	
 	# I am the target: good/bad => excellent/curses
@@ -873,6 +877,7 @@ character_event = {
 			clr_global_flag    = edmp_interference_singlechar_win_defensive_wars_grant_perm
 			clr_global_flag    = edmp_interference_singlechar_win_defensive_wars_prolong
 			clr_global_flag    = edmp_interference_singlechar_win_defensive_wars_revoke
+			clr_global_flag    = edmp_interference_singlechar_release_from_prison
 			
 			clr_global_flag    = edmp_interference_singlechar_bad
 			
