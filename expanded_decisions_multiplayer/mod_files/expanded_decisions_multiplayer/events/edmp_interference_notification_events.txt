@@ -327,6 +327,30 @@ character_event = {
 		trigger = { has_global_flag =  edmp_interference_bilateral_betroth }
 		text                        = edmp_ifn_3001_desc_bilateral_betroth
 	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_lover_add }
+		text                        = edmp_ifn_3001_desc_bilateral_lover_add
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_lover_remove }
+		text                        = edmp_ifn_3001_desc_bilateral_lover_remove
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_friend_add }
+		text                        = edmp_ifn_3001_desc_bilateral_friend_add
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_friend_remove }
+		text                        = edmp_ifn_3001_desc_bilateral_friend_remove
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_rival_add }
+		text                        = edmp_ifn_3001_desc_bilateral_rival_add
+	}
+	desc = {
+		trigger = { has_global_flag =  edmp_interference_bilateral_rival_remove }
+		text                        = edmp_ifn_3001_desc_bilateral_rival_remove
+	}
 	# !!!!!!!!!!! WHEN ADDING NEW NOTIFICATION: REMEMBER TO CLEAR THE GLOBAL FLAG AT THE END OF THE EVENT !!!!!!!!!!!!!!!!!!!!!!
 	
 	option = {
@@ -339,7 +363,14 @@ character_event = {
 		show_portrait = event_target:edmp_interference_bilateral_party_1
 		show_portrait = event_target:edmp_interference_bilateral_party_2
 		tooltip_info = yes
-		name = edmp_ifn_evtopt_ok_affected
+		name = {
+			trigger = {         has_global_flag = edmp_interference_bilateral_bad   }
+			text = edmp_ifn_evtopt_curses
+		}
+		name = {
+			trigger = { NOT = { has_global_flag = edmp_interference_bilateral_bad } }
+			text = edmp_ifn_evtopt_ok_affected
+		}
 	}
 	
 	option = {
@@ -374,6 +405,14 @@ character_event = {
 			clr_global_flag    = edmp_interference_bilateral_make_marriage_patrilineal
 			clr_global_flag    = edmp_interference_bilateral_marry
 			clr_global_flag    = edmp_interference_bilateral_betroth
+			clr_global_flag    = edmp_interference_bilateral_lover_add
+			clr_global_flag    = edmp_interference_bilateral_lover_remove
+			clr_global_flag    = edmp_interference_bilateral_friend_add
+			clr_global_flag    = edmp_interference_bilateral_friend_remove
+			clr_global_flag    = edmp_interference_bilateral_rival_add
+			clr_global_flag    = edmp_interference_bilateral_rival_remove
+			
+			clr_global_flag    = edmp_interference_bilateral_bad
 			
 		}
 	}
