@@ -1,0 +1,212 @@
+# Audax Validator EnableCommentMetadata
+
+# NB: To avoid 3rd-party lists with thousands of entries, you may only *add* lovers/rivals/friends if the 3rd party is either a player or in the same court as the targetted character.
+
+targetted_decisions = {
+	
+	edmp_interference_lover_add = { # Not potentially-negative
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { always = yes }
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		third_party_potential = {
+			ROOT_FROMFROM = { NOT = { is_lover = ROOT } }
+			edmp_interference_fromfrom_is_potential_lover_friend_rival_for_root = yes
+		}
+		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker    }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag = edmp_interference_bilateral_lover_add
+			}
+			ROOT = {
+				show_scope_change = no
+				add_lover = ROOT_FROMFOM
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_lover_add }
+		}
+	}
+	
+	edmp_interference_lover_remove = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { any_lover = { always = yes } } # is_lover would be a little simpler, but standardisation of the _remove decisions is more important
+		allow = {
+			ROOT_FROM     = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT          = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Potentially-negative for both characters
+		}
+		third_party_potential = {
+			ROOT_FROMFROM = { is_lover = ROOT }
+		}
+		third_party_allow = {
+			ROOT_FROMFROM = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Potentially-negative for both characters
+		}
+		# No need for third_party_score, since the list should be very limited (having more than 10 friends/lovers/rivals is unlikely)
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker    }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag = edmp_interference_bilateral_lover_remove
+				set_global_flag = edmp_interference_bilateral_bad
+			}
+			ROOT = {
+				show_scope_change = no
+				remove_lover = ROOT_FROMFOM
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_lover_remove }
+		}
+	}
+	
+	edmp_interference_friend_add = { # Not potentially-negative
+		# Copy of edmp_interference_lover_add, with very minor changes
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { always = yes }
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		third_party_potential = {
+			ROOT_FROMFROM = { NOT = { is_friend = ROOT } }
+			edmp_interference_fromfrom_is_potential_lover_friend_rival_for_root = yes
+		}
+		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker    }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag = edmp_interference_bilateral_friend_add
+			}
+			ROOT = {
+				show_scope_change = no
+				add_friend = ROOT_FROMFOM
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_friend_add }
+		}
+	}
+	
+	edmp_interference_friend_remove = {
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { any_friend = { always = yes } }
+		allow = {
+			ROOT_FROM     = { edmp_this_character_can_take_admin_helper_actions = yes }
+			ROOT          = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Potentially-negative for both characters
+		}
+		third_party_potential = {
+			ROOT_FROMFROM = { is_friend = ROOT }
+		}
+		third_party_allow = {
+			ROOT_FROMFROM = { edmp_this_character_is_valid_target_for_negative_actions_by_rootfrom = yes } # Potentially-negative for both characters
+		}
+		# No need for third_party_score, since the list should be very limited (having more than 10 friends/lovers/rivals is unlikely)
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker    }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag = edmp_interference_bilateral_friend_remove
+				set_global_flag = edmp_interference_bilateral_bad
+			}
+			ROOT = {
+				show_scope_change = no
+				remove_friend = ROOT_FROMFOM
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_friend_remove }
+		}
+	}
+	
+	edmp_interference_rival_add = { # Not potentially-negative
+		# Copy of edmp_interference_lover_add, with very minor changes
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { always = yes }
+		allow = { ROOT_FROM = { edmp_this_character_can_take_admin_helper_actions = yes } }
+		third_party_potential = {
+			ROOT_FROMFROM = { NOT = { is_rival = ROOT } }
+			edmp_interference_fromfrom_is_potential_lover_friend_rival_for_root = yes
+		}
+		third_party_allow = { always = yes }
+		third_party_score = { factor = 1 edmp_interference_third_party_scores_rulers_preferring_from_then_player_then_nearby_ai_then_tier = yes }
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker    }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag = edmp_interference_bilateral_rival_add
+			}
+			ROOT = {
+				show_scope_change = no
+				add_rival = ROOT_FROMFOM
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_rival_add }
+		}
+	}
+	
+	edmp_interference_rival_remove = { # Not potentially-negative
+		filter = all_including_me
+		third_party_filter = all_including_me
+		ai = no
+		from_potential = {
+			has_character_flag = edmp_interference_show
+			edmp_this_character_can_see_admin_helper_actions = yes
+		}
+		potential = { any_rival = { always = yes } }
+		allow = {
+			ROOT_FROM     = { edmp_this_character_can_take_admin_helper_actions = yes }
+		}
+		third_party_potential = {
+			ROOT_FROMFROM = { is_rival = ROOT }
+		}
+		third_party_allow = { always = yes }
+		# No need for third_party_score, since the list should be very limited (having more than 10 friends/lovers/rivals is unlikely)
+		effect = {
+			hidden_tooltip = {
+				ROOT_FROM     = { save_event_target_as = edmp_interference_decision_taker    }
+				ROOT          = { save_event_target_as = edmp_interference_bilateral_party_1 }
+				ROOT_FROMFROM = { save_event_target_as = edmp_interference_bilateral_party_2 }
+				set_global_flag = edmp_interference_bilateral_rival_remove
+			}
+			ROOT = {
+				show_scope_change = no
+				remove_rival = ROOT_FROMFOM
+			}
+			edmp_interference_notify_players_bilateral = yes
+			hidden_tooltip = { clr_global_flag = edmp_interference_bilateral_rival_remove }
+		}
+	}
+	
+}
