@@ -119,3 +119,36 @@ edmp_interference_this_character_is_decision_taker = {
 		character = ROOT_FROM
 	}
 }
+
+edmp_interference_fromfrom_is_potential_lover_friend_rival_for_root = {
+	# FROMFROM must NOT be ROOT or a prisoner
+	# FROMFROM must NOT already be lover/friend/rival (NOT HANDLED HERE! MUST BE INCLUDED IN ORIGINAL DECISION!)
+	# FROMFROM must be one of:
+	#  - Player
+	#  - ROOT's courtier or vassal (if ROOT is landed)
+	#  - Have same liege as ROOT
+	#  - ROOT's liege
+	ROOT_FROMFROM = {
+		NOT = { character = ROOT }
+		prisoner = no
+		OR = {
+			edmp_this_character_is_a_current_or_absent_human_player = yes
+			ROOT = {
+				is_ruler = yes
+				any_courtier_or_vassal = { character = ROOT_FROMFROM }
+			}
+			ROOT = {
+				OR = {
+					is_ruler = no
+					independent = no
+				}
+				liege = {
+					OR = {
+						any_courtier_or_vassal = { character = ROOT_FROMFROM }
+						character = ROOT_FROMFROM
+					}
+				}
+			}
+		}
+	}
+}
