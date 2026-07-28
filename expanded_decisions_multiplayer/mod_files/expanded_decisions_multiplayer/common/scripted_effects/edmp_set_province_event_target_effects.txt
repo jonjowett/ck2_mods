@@ -1,0 +1,45 @@
+edmp_set_province_event_target = {
+	# Ensures that event_target:edmp_event_province is set to a single definitive province
+	#          that's applicable to this particular mod.
+	# Eg: If a mod puts all of its wasteland provinces first in the list (for some reason),
+	#          then we always want to pick a later non-wasteland province.
+	# If province 1 is valid, use that.
+	# Otherwise, use a random province that has an owner,
+	#          and flag that province so the same one is always chosen in the future.
+	clear_event_target = edmp_event_province
+	if = {
+		limit = { 1 = { has_owner = yes } }
+		1 = { save_event_target_as = edmp_event_province }
+	}
+	else = {
+		if = {
+			limit = {
+				any_province = {
+					has_province_flag = edmp_event_province_flag
+					has_owner = yes
+				}
+			}
+			random_province = {
+				limit = {
+					has_province_flag = edmp_event_province_flag
+					has_owner = yes
+				}
+				save_event_target_as = edmp_event_province
+			}
+		}
+		else = {
+			random_province = {
+				limit = { has_owner = yes }
+				set_province_flag = edmp_event_province_flag
+				save_event_target_as = edmp_event_province
+			}
+		}
+		any_province = {
+			limit = {
+				has_province_flag = edmp_event_province_flag
+				NOT = { province = event_target:edmp_event_province }
+			}
+			clr_province_flag = edmp_event_province_flag
+		}
+	}
+}

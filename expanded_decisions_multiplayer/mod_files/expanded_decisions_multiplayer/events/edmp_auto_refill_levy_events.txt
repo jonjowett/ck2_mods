@@ -18,14 +18,15 @@ character_event = {
 	}
 	
 	immediate = {
-		1 = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
+		edmp_set_province_event_target = yes
+		event_target:edmp_event_province = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
 		if = {
 			limit = {
 				edmp_this_is_a_multiplayer_game = yes
 				NOT = { has_global_flag = edmp_auto_refill_levy_on_startup_is_disabled }
 			}
 			character_event = { id = edmp_auto_refill_levy.2000 }
-			1 = { province_event = { id = edmp_auto_refill_levy.3000 days = 45 } }
+			event_target:edmp_event_province = { province_event = { id = edmp_auto_refill_levy.3000 days = 45 } }
 		}
 	}
 	
@@ -54,7 +55,7 @@ character_event = {
 		custom_tooltip = {
 			text = edmp_auto_refill_levy_on_startup_disable_tt
 			set_global_flag = edmp_auto_refill_levy_on_startup_is_disabled
-			1 = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
+			event_target:edmp_event_province = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
 		}
 		custom_tooltip = { text = edmp_auto_refill_levy_2000_evtopt_disable_tt }
 	}
@@ -217,7 +218,7 @@ character_event = {
 		custom_tooltip = {
 			text = edmp_auto_refill_levy_on_startup_disable_tt
 			set_global_flag = edmp_auto_refill_levy_on_startup_is_disabled
-			1 = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
+			event_target:edmp_event_province = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
 		}
 	}
 	
