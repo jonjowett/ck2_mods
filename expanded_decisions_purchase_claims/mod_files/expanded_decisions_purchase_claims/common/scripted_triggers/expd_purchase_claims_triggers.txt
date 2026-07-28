@@ -246,3 +246,29 @@ expd_purchase_claims_from_is_not_on_cooldown_to_purchase_this_title = {
 		custom_tooltip = { text = expd_purchase_claims_error_cooldown_tt always = no }
 	}
 }
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#                  NOTIFICATION                  #
+#                                                #
+##################################################
+
+
+
+edmp_purchase_claims_this_character_is_a_notifiable_player = {
+	# Not AI-controlled (ie. is human player)
+	ai = no
+	# Not host character (because they already get a notification)
+	is_multiplayer_host_character = no
+	# Not the purchaser (because they already know!)
+	NOT = { character = ROOT_FROM }
+}

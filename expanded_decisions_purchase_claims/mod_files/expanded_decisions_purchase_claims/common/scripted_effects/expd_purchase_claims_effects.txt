@@ -9,6 +9,8 @@ expd_purchase_claims_decision_effect = {
 	
 	expd_purchase_claims_notify_host_that_from_purchased_a_claim_on_this_title = yes
 	
+	expd_purchase_claims_notify_relevant_players_that_from_purchased_a_claim_on_this_title = yes
+	
 }
 
 expd_purchase_claims_from_pays_scaled_cost_for_claim_on_this_title = {
@@ -101,6 +103,65 @@ expd_purchase_claims_notify_host_that_from_purchased_a_claim_on_this_title = {
 						}
 					}
 				}
+				character_event = { id = expd_purchase_claims.1000 }
+			}
+		}
+	}
+}
+
+expd_purchase_claims_notify_relevant_players_that_from_purchased_a_claim_on_this_title = {
+	# If any of the following are players (who are not the purchaser), they are notified:
+	#  - Current holder
+	#  - Landed ruler in current holder's top liege's realm
+	#  - Any other claimant
+	# This obviously only matters in multiplayer.
+	#  - In SP, the only player is the purchaser, so they wouldn't be notified.
+	if = {
+		limit = { multiplayer = yes }
+		hidden_tooltip = {
+			save_event_target_as = expd_purchase_claims_notification_title
+			ROOT_FROM = { save_event_target_as = expd_purchase_claims_notification_purchaser }
+			holder_scope = { save_event_target_as = expd_purchase_claims_notification_holder }
+		}
+		holder_scope = {
+			if = {
+				limit = { edmp_purchase_claims_this_character_is_a_notifiable_player = yes }
+				custom_tooltip = {
+					text = expd_purchase_claims_this_player_is_notified_tt
+					character_event = { id = expd_purchase_claims.1000 }
+				}
+			}
+			top_liege = {
+				if = {
+					limit = {
+						edmp_purchase_claims_this_character_is_a_notifiable_player = yes
+						NOT = { character = PREV }         # Not the title holder
+					}
+					custom_tooltip = {
+						text = expd_purchase_claims_this_player_is_notified_tt
+						character_event = { id = expd_purchase_claims.1000 }
+					}
+				}
+				any_realm_character = {
+					limit = {
+						edmp_purchase_claims_this_character_is_a_notifiable_player = yes
+						NOT = { character = PREV }         # Not the top liege
+						NOT = { character = PREVPREV }     # Not the title holder
+					}
+					custom_tooltip = {
+						text = expd_purchase_claims_this_player_is_notified_tt
+						character_event = { id = expd_purchase_claims.1000 }
+					}
+				}
+			}
+		}
+		any_claimant = {
+			limit = {
+				edmp_purchase_claims_this_character_is_a_notifiable_player = yes
+				NOT = { top_liege = { any_realm_title = { title = PREVPREVPREV } } }
+			}
+			custom_tooltip = {
+				text = expd_purchase_claims_this_player_is_notified_tt
 				character_event = { id = expd_purchase_claims.1000 }
 			}
 		}
