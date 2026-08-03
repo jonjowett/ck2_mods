@@ -1,0 +1,230 @@
+namespace = expd_purchase_claims_global
+
+
+
+character_event = {
+	
+	id       = expd_purchase_claims_global.1000
+	title    = expd_purchase_claims_global_1000_title
+	picture  = GFX_evt_council
+	window   = EventWindowEDPCLongCharacter
+	portrait = none
+	
+	is_triggered_only = yes
+	
+	desc = {
+		trigger = { expd_purchase_claims_this_character_is_admin = yes }
+		text = expd_purchase_claims_global_1000_desc_admin
+	}
+	desc = {
+		trigger = { expd_purchase_claims_this_character_is_admin = no  }
+		text = expd_purchase_claims_global_1000_desc_nonadmin
+	}
+	
+	
+	
+	immediate = {
+		hidden_tooltip = {
+			clr_character_flag = expd_purchase_claims_global_menu_is_open
+			set_character_flag = expd_purchase_claims_global_menu_is_open
+		}
+	}
+	
+	
+	
+	# Cost: Clickable toggleable option
+	option = {
+		
+		name = {
+			trigger = { expd_purchase_claims_cost_is_standard_actual = yes }
+			text = expd_purchase_claims_global_1000_evtopt_cost_standard_actual
+		}
+		name = {
+			trigger = { expd_purchase_claims_cost_is_half = yes }
+			text = expd_purchase_claims_global_1000_evtopt_cost_half
+		}
+		name = {
+			trigger = { expd_purchase_claims_cost_is_quarter = yes }
+			text = expd_purchase_claims_global_1000_evtopt_cost_quarter
+		}
+		name = {
+			trigger = { expd_purchase_claims_cost_is_tenth = yes }
+			text = expd_purchase_claims_global_1000_evtopt_cost_tenth
+		}
+		name = {
+			trigger = { expd_purchase_claims_cost_is_double = yes }
+			text = expd_purchase_claims_global_1000_evtopt_cost_double
+		}
+		name = {
+			trigger = { expd_purchase_claims_cost_is_inconsistent = yes }
+			text = expd_purchase_claims_global_1000_evtopt_cost_standard_inconsistent
+		}
+		
+		if = {
+			limit = { expd_purchase_claims_this_character_is_admin = yes }
+			expd_purchase_claims_cost_rule_cycle = yes
+		}
+		else = {
+			custom_tooltip = { text = expd_purchase_claims_global_1000_evtopt_cannot_change_because_not_admin_tt }
+		}
+		
+		hidden_tooltip = { character_event = { id = expd_purchase_claims_global.1000 } }
+		
+	}
+	
+	
+	
+	# Cooldown: Clickable toggleable option
+	option = {
+		
+		name = {
+			trigger = { expd_purchase_claims_cooldown_is_standard_actual = yes }
+			text = expd_purchase_claims_global_1000_evtopt_cooldown_standard_actual
+		}
+		name = {
+			trigger = { expd_purchase_claims_cooldown_is_third = yes }
+			text = expd_purchase_claims_global_1000_evtopt_cooldown_third
+		}
+		name = {
+			trigger = { expd_purchase_claims_cooldown_is_zero = yes }
+			text = expd_purchase_claims_global_1000_evtopt_cooldown_zero
+		}
+		name = {
+			trigger = { expd_purchase_claims_cooldown_is_triple = yes }
+			text = expd_purchase_claims_global_1000_evtopt_cooldown_triple
+		}
+		name = {
+			trigger = { expd_purchase_claims_cooldown_is_inconsistent = yes }
+			text = expd_purchase_claims_global_1000_evtopt_cooldown_standard_inconsistent
+		}
+		
+		if = {
+			limit = { expd_purchase_claims_this_character_is_admin = yes }
+			expd_purchase_claims_cooldown_rule_cycle = yes
+		}
+		else = {
+			custom_tooltip = { text = expd_purchase_claims_global_1000_evtopt_cannot_change_because_not_admin_tt }
+		}
+		
+		hidden_tooltip = { character_event = { id = expd_purchase_claims_global.1000 } }
+		
+	}
+	
+	
+	
+	# Exit
+	option = {
+		name = expd_purchase_claims_global_1000_evtopt_exit
+		hidden_tooltip = { clr_character_flag = expd_purchase_claims_global_menu_is_open }
+	}
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#           SAFELY CHANGE GLOBAL FLAGS           #
+#                                                #
+##################################################
+
+
+
+# NB: To avoid multiplayer sync issues, changes in global flags with instant effect must be made by character_event on all players.
+
+character_event = {
+	id = expd_purchase_claims_global.9001
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { set_global_flag = expd_purchase_claims_cost_double }
+}
+
+character_event = {
+	id = expd_purchase_claims_global.9002
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { set_global_flag = expd_purchase_claims_cost_standard }
+}
+
+character_event = {
+	id = expd_purchase_claims_global.9003
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { set_global_flag = expd_purchase_claims_cost_half }
+}
+
+character_event = {
+	id = expd_purchase_claims_global.9004
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { set_global_flag = expd_purchase_claims_cost_quarter }
+}
+
+character_event = {
+	id = expd_purchase_claims_global.9005
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { set_global_flag = expd_purchase_claims_cost_tenth }
+}
+
+character_event = {
+	id = expd_purchase_claims_global.9099
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		clr_global_flag = expd_purchase_claims_cost_double
+		clr_global_flag = expd_purchase_claims_cost_standard
+		clr_global_flag = expd_purchase_claims_cost_half
+		clr_global_flag = expd_purchase_claims_cost_quarter
+		clr_global_flag = expd_purchase_claims_cost_tenth
+	}
+}
+
+character_event = {
+	id = expd_purchase_claims_global.9101
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { set_global_flag = expd_purchase_claims_cooldown_triple }
+}
+
+character_event = {
+	id = expd_purchase_claims_global.9102
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { set_global_flag = expd_purchase_claims_cooldown_standard }
+}
+
+character_event = {
+	id = expd_purchase_claims_global.9103
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { set_global_flag = expd_purchase_claims_cooldown_third }
+}
+
+character_event = {
+	id = expd_purchase_claims_global.9104
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { set_global_flag = expd_purchase_claims_cooldown_zero }
+}
+
+character_event = {
+	id = expd_purchase_claims_global.9199
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		clr_global_flag = expd_purchase_claims_cooldown_triple
+		clr_global_flag = expd_purchase_claims_cooldown_standard
+		clr_global_flag = expd_purchase_claims_cooldown_third
+		clr_global_flag = expd_purchase_claims_cooldown_zero
+	}
+}

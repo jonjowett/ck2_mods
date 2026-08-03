@@ -1,0 +1,38 @@
+targetted_decisions = {
+	expd_purchase_claims_remove_cooldowns_from_this_character = {
+		ai = no
+		filter = all_including_me
+		potential = {
+			OR = {
+				has_character_modifier = expd_purchase_claims_cooldown_county
+				has_character_modifier = expd_purchase_claims_cooldown_duchy
+			}
+		}
+		from_potential = {
+			ai = no
+			expd_purchase_claims_this_character_is_admin = yes
+		}
+		allow = { always = yes }
+		effect = {
+			ROOT = {
+				show_scope_change = no
+				if = {
+					limit = { has_character_modifier = expd_purchase_claims_cooldown_county }
+					remove_character_modifier = expd_purchase_claims_cooldown_county
+				}
+				if = {
+					limit = { has_character_modifier = expd_purchase_claims_cooldown_duchy }
+					remove_character_modifier = expd_purchase_claims_cooldown_duchy
+				}
+				if = {
+					limit = { NOT = { character = ROOT_FROM } }
+					custom_tooltip = {
+						text = expd_purchase_claims_this_character_is_notified_that_their_cooldowns_have_been_removed_tt
+						ROOT_FROM = { save_event_target_as = expd_purchase_claims_cooldown_remover }
+						character_event = { id = expd_purchase_claims_remove_cooldowns.1000 }
+					}
+				}
+			}
+		}
+	}
+}

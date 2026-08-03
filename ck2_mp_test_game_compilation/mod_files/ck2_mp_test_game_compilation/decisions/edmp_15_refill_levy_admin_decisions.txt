@@ -10,6 +10,7 @@ decisions = {
 		effect = {
 			custom_tooltip = {
 				text = edmp_manual_refill_levy_tt
+				edmp_set_province_event_target = yes
 				character_event = { id = edmp_auto_refill_levy.3001 }
 			}
 		}
@@ -43,7 +44,8 @@ decisions = {
 			custom_tooltip = {
 				text = edmp_auto_refill_levy_on_startup_disable_tt
 				set_global_flag = edmp_auto_refill_levy_on_startup_is_disabled
-				1 = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
+				edmp_set_province_event_target = yes
+				event_target:edmp_event_province = { clear_delayed_event = { id = edmp_auto_refill_levy.3000 } }
 			}
 		}
 	}

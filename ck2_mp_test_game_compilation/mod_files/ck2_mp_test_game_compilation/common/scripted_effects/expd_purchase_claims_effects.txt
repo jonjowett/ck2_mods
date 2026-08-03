@@ -1,3 +1,22 @@
+
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#              MAIN PURCHASE EFFECT              #
+#                                                #
+##################################################
+
+
+
 expd_purchase_claims_decision_effect = {
 	
 	expd_purchase_claims_from_pays_scaled_cost_for_claim_on_this_title = yes
@@ -9,45 +28,199 @@ expd_purchase_claims_decision_effect = {
 	
 	expd_purchase_claims_notify_host_that_from_purchased_a_claim_on_this_title = yes
 	
+	expd_purchase_claims_notify_relevant_players_that_from_purchased_a_claim_on_this_title = yes
+	
 }
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#             APPLY COSTS & COOLDOWNS            #
+#                                                #
+##################################################
+
+
 
 expd_purchase_claims_from_pays_scaled_cost_for_claim_on_this_title = {
 	# !!!!! If the costs in this effect are changed, be sure to update the equivalent trigger !!!!!
+	#       ( expd_purchase_claims_from_can_afford_to_purchase_claim_on_this_title )
+	# See that trigger for explanation of costs
 	if = {
 		limit = { tier = BARON }
 		ROOT_FROM = {
 			show_scope_change = no
-			scaled_wealth = { value = -1.0 min =  -250 max = -1000 }
-			prestige =  -250
+			if = {
+				limit = { expd_purchase_claims_cost_is_standard = yes }
+				scaled_wealth = { value = -1.0  min =  -250 max = -1000 }
+				prestige = -250
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_half     = yes }
+				scaled_wealth = { value = -0.5  min =  -125 max =  -500 }
+				prestige = -125
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_quarter  = yes }
+				scaled_wealth = { value = -0.25 min =   -60 max =  -250 }
+				prestige = -60
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_tenth    = yes }
+				scaled_wealth = { value = -0.1  min =   -25 max =  -100 }
+				prestige = -25
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_double   = yes }
+				scaled_wealth = { value = -2.0  min =  -500 max = -2000 }
+				prestige = -500
+			}
+			else = {
+				custom_tooltip = { text = expd_purchase_claims_error_using_standard_cost_tt }
+				scaled_wealth = { value = -1.0  min =  -250 max = -1000 }
+				prestige = -250
+			}
+			custom_tooltip = { text = expd_purchase_claims_no_cooldown_applied_due_to_barony_tt }
 		}
 	}
 	else_if = {
 		limit = { tier = COUNT }
 		ROOT_FROM = {
 			show_scope_change = no
-			scaled_wealth = { value = -2.0 min =  -500 max = -2000 }
-			prestige =  -500
-			expd_purchase_claims_add_cooldown_county_3y = yes
+			if = {
+				limit = { expd_purchase_claims_cost_is_standard = yes }
+				scaled_wealth = { value = -2.0  min =  -500 max = -2000 }
+				prestige = -500
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_half     = yes }
+				scaled_wealth = { value = -1.0  min =  -250 max = -1000 }
+				prestige = -250
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_quarter  = yes }
+				scaled_wealth = { value = -0.5  min =  -125 max =  -500 }
+				prestige = -125
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_tenth    = yes }
+				scaled_wealth = { value = -0.2  min =   -50 max =  -200 }
+				prestige = -50
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_double   = yes }
+				scaled_wealth = { value = -4.0  min = -1000 max = -4000 }
+				prestige = -1000
+			}
+			else = {
+				custom_tooltip = { text = expd_purchase_claims_error_using_standard_cost_tt }
+				scaled_wealth = { value = -2.0  min =  -500 max = -2000 }
+				prestige = -500
+			}
+			if = {
+				limit = { expd_purchase_claims_cooldown_is_standard = yes }
+				expd_purchase_claims_add_cooldown_county_3y = yes
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cooldown_is_third    = yes }
+				expd_purchase_claims_add_cooldown_county_1y = yes
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cooldown_is_zero     = yes }
+				custom_tooltip = { text = expd_purchase_claims_no_cooldown_applied_due_to_rule_tt }
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cooldown_is_triple   = yes }
+				expd_purchase_claims_add_cooldown_county_10y = yes
+			}
+			else = {
+				custom_tooltip = { text = expd_purchase_claims_error_using_standard_cooldown_tt }
+				expd_purchase_claims_add_cooldown_county_3y = yes
+			}
 		}
 	}
 	else_if = {
 		limit = { tier = DUKE }
 		ROOT_FROM = {
 			show_scope_change = no
-			scaled_wealth = { value = -4.0 min = -1000 max = -4000 }
-			prestige = -1000
-			expd_purchase_claims_add_cooldown_duchy_10y  = yes
+			if = {
+				limit = { expd_purchase_claims_cost_is_standard = yes }
+				scaled_wealth = { value = -4.0  min = -1000 max = -4000 }
+				prestige = -1000
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_half     = yes }
+				scaled_wealth = { value = -2.0  min =  -500 max = -2000 }
+				prestige = -500
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_quarter  = yes }
+				scaled_wealth = { value = -1.0  min =  -250 max = -1000 }
+				prestige = -250
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_tenth    = yes }
+				scaled_wealth = { value = -0.4  min =  -100 max =  -400 }
+				prestige = -100
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cost_is_double   = yes }
+				scaled_wealth = { value = -8.0  min = -2000 max = -8000 }
+				prestige = -2000
+			}
+			else = {
+				custom_tooltip = { text = expd_purchase_claims_error_using_standard_cost_tt }
+				scaled_wealth = { value = -4.0  min = -1000 max = -4000 }
+				prestige = -1000
+			}
+			if = {
+				limit = { expd_purchase_claims_cooldown_is_standard = yes }
+				expd_purchase_claims_add_cooldown_duchy_10y = yes
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cooldown_is_third    = yes }
+				expd_purchase_claims_add_cooldown_duchy_3y = yes
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cooldown_is_zero     = yes }
+				custom_tooltip = { text = expd_purchase_claims_no_cooldown_applied_due_to_rule_tt }
+			}
+			else_if = {
+				limit = { expd_purchase_claims_cooldown_is_triple   = yes }
+				expd_purchase_claims_add_cooldown_duchy_30y = yes
+			}
+			else = {
+				custom_tooltip = { text = expd_purchase_claims_error_using_standard_cooldown_tt }
+				expd_purchase_claims_add_cooldown_duchy_10y = yes
+			}
 		}
 	}
 	else = {
 		# Screw you for finding an exploit, and exploiting it
 		ROOT_FROM = {
 			show_scope_change = no
+			custom_tooltip = { text = expd_purchase_claims_warning_costs_massively_increased_due_to_attempted_exploit_tt }
 			scaled_wealth = { value = -40.0 min = -10000 max = -40000 }
 			prestige = -10000
-			expd_purchase_claims_add_cooldown_county_3y = yes
-			expd_purchase_claims_add_cooldown_duchy_10y  = yes
+			expd_purchase_claims_add_cooldown_county_10y = yes
+			expd_purchase_claims_add_cooldown_duchy_30y  = yes
 		}
+	}
+}
+
+
+expd_purchase_claims_add_cooldown_county_10y = {
+	custom_tooltip = {
+		text = expd_purchase_claims_add_cooldown_county_10y_tt
+		remove_character_modifier       = expd_purchase_claims_cooldown_county
+		add_character_modifier = { name = expd_purchase_claims_cooldown_county years = 10 hidden = yes stacking = no inherit = yes }
 	}
 }
 
@@ -55,7 +228,23 @@ expd_purchase_claims_add_cooldown_county_3y = {
 	custom_tooltip = {
 		text = expd_purchase_claims_add_cooldown_county_3y_tt
 		remove_character_modifier       = expd_purchase_claims_cooldown_county
-		add_character_modifier = { name = expd_purchase_claims_cooldown_county years = 3 hidden = yes stacking = no inherit = yes }
+		add_character_modifier = { name = expd_purchase_claims_cooldown_county years =  3 hidden = yes stacking = no inherit = yes }
+	}
+}
+
+expd_purchase_claims_add_cooldown_county_1y = {
+	custom_tooltip = {
+		text = expd_purchase_claims_add_cooldown_county_1y_tt
+		remove_character_modifier       = expd_purchase_claims_cooldown_county
+		add_character_modifier = { name = expd_purchase_claims_cooldown_county years =  1 hidden = yes stacking = no inherit = yes }
+	}
+}
+
+expd_purchase_claims_add_cooldown_duchy_30y = {
+	custom_tooltip = {
+		text = expd_purchase_claims_add_cooldown_duchy_30y_tt
+		remove_character_modifier       = expd_purchase_claims_cooldown_duchy
+		add_character_modifier = { name = expd_purchase_claims_cooldown_duchy  years = 30 hidden = yes stacking = no inherit = yes }
 	}
 }
 
@@ -66,6 +255,31 @@ expd_purchase_claims_add_cooldown_duchy_10y = {
 		add_character_modifier = { name = expd_purchase_claims_cooldown_duchy  years = 10 hidden = yes stacking = no inherit = yes }
 	}
 }
+
+expd_purchase_claims_add_cooldown_duchy_3y = {
+	custom_tooltip = {
+		text = expd_purchase_claims_add_cooldown_duchy_3y_tt
+		remove_character_modifier       = expd_purchase_claims_cooldown_duchy
+		add_character_modifier = { name = expd_purchase_claims_cooldown_duchy  years =  3 hidden = yes stacking = no inherit = yes }
+	}
+}
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#               SEND NOTIFICATIONS               #
+#                                                #
+##################################################
+
+
 
 expd_purchase_claims_notify_host_that_from_purchased_a_claim_on_this_title = {
 	if = {
@@ -105,4 +319,177 @@ expd_purchase_claims_notify_host_that_from_purchased_a_claim_on_this_title = {
 			}
 		}
 	}
+}
+
+expd_purchase_claims_notify_relevant_players_that_from_purchased_a_claim_on_this_title = {
+	# If any of the following are players (who are not the purchaser), they are notified:
+	#  - Current holder
+	#  - Landed ruler in current holder's top liege's realm
+	#  - Any other claimant
+	# This obviously only matters in multiplayer.
+	#  - In SP, the only player is the purchaser, so they wouldn't be notified.
+	if = {
+		limit = { multiplayer = yes }
+		hidden_tooltip = {
+			save_event_target_as = expd_purchase_claims_notification_title
+			ROOT_FROM = { save_event_target_as = expd_purchase_claims_notification_purchaser }
+			holder_scope = { save_event_target_as = expd_purchase_claims_notification_holder }
+		}
+		holder_scope = {
+			if = {
+				limit = { expd_purchase_claims_this_character_is_a_notifiable_player = yes }
+				custom_tooltip = {
+					text = expd_purchase_claims_this_player_is_notified_tt
+					character_event = { id = expd_purchase_claims.1000 }
+				}
+			}
+			top_liege = {
+				if = {
+					limit = {
+						expd_purchase_claims_this_character_is_a_notifiable_player = yes
+						NOT = { character = PREV }         # Not the title holder
+					}
+					custom_tooltip = {
+						text = expd_purchase_claims_this_player_is_notified_tt
+						character_event = { id = expd_purchase_claims.1000 }
+					}
+				}
+				any_realm_character = {
+					limit = {
+						expd_purchase_claims_this_character_is_a_notifiable_player = yes
+						NOT = { character = PREV }         # Not the top liege
+						NOT = { character = PREVPREV }     # Not the title holder
+					}
+					custom_tooltip = {
+						text = expd_purchase_claims_this_player_is_notified_tt
+						character_event = { id = expd_purchase_claims.1000 }
+					}
+				}
+			}
+		}
+		any_claimant = {
+			limit = {
+				expd_purchase_claims_this_character_is_a_notifiable_player = yes
+				NOT = { top_liege = { any_realm_title = { title = PREVPREVPREV } } }
+			}
+			custom_tooltip = {
+				text = expd_purchase_claims_this_player_is_notified_tt
+				character_event = { id = expd_purchase_claims.1000 }
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#                  RULE CHANGES                  #
+#                                                #
+##################################################
+
+
+
+# NB: To avoid multiplayer sync issues, changes in global flags with instant effect must be made by character_event on all players.
+
+expd_purchase_claims_cost_rule_cycle = {
+	if = {
+		limit = { expd_purchase_claims_cost_is_standard_actual = yes }
+		custom_tooltip = {
+			text = expd_purchase_claims_cost_rule_change_to_half_tt
+			expd_purchase_claims_cost_rule_clear = yes
+			                                                      character_event = { id = expd_purchase_claims_global.9003 }
+			any_player = { limit = { NOT = { character = PREV } } character_event = { id = expd_purchase_claims_global.9003 } }
+		}
+	}
+	else_if = {
+		limit = { expd_purchase_claims_cost_is_half = yes }
+		custom_tooltip = {
+			text = expd_purchase_claims_cost_rule_change_to_quarter_tt
+			expd_purchase_claims_cost_rule_clear = yes
+			                                                      character_event = { id = expd_purchase_claims_global.9004 }
+			any_player = { limit = { NOT = { character = PREV } } character_event = { id = expd_purchase_claims_global.9004 } }
+		}
+	}
+	else_if = {
+		limit = { expd_purchase_claims_cost_is_quarter = yes }
+		custom_tooltip = {
+			text = expd_purchase_claims_cost_rule_change_to_tenth_tt
+			expd_purchase_claims_cost_rule_clear = yes
+			                                                      character_event = { id = expd_purchase_claims_global.9005 }
+			any_player = { limit = { NOT = { character = PREV } } character_event = { id = expd_purchase_claims_global.9005 } }
+		}
+	}
+	else_if = {
+		limit = { expd_purchase_claims_cost_is_tenth = yes }
+		custom_tooltip = {
+			text = expd_purchase_claims_cost_rule_change_to_double_tt
+			expd_purchase_claims_cost_rule_clear = yes
+			                                                      character_event = { id = expd_purchase_claims_global.9001 }
+			any_player = { limit = { NOT = { character = PREV } } character_event = { id = expd_purchase_claims_global.9001 } }
+		}
+	}
+	else = { # Double or inconsistent
+		custom_tooltip = {
+			text = expd_purchase_claims_cost_rule_change_to_standard_tt
+			expd_purchase_claims_cost_rule_clear = yes
+			                                                      character_event = { id = expd_purchase_claims_global.9002 }
+			any_player = { limit = { NOT = { character = PREV } } character_event = { id = expd_purchase_claims_global.9002 } }
+		}
+	}
+}
+
+expd_purchase_claims_cost_rule_clear = {
+	                                                      character_event = { id = expd_purchase_claims_global.9099 }
+	any_player = { limit = { NOT = { character = PREV } } character_event = { id = expd_purchase_claims_global.9099 } }
+}
+
+expd_purchase_claims_cooldown_rule_cycle = {
+	if = {
+		limit = { expd_purchase_claims_cooldown_is_standard_actual = yes }
+		custom_tooltip = {
+			text = expd_purchase_claims_cooldown_rule_change_to_third_tt
+			expd_purchase_claims_cooldown_rule_clear = yes
+			                                                      character_event = { id = expd_purchase_claims_global.9103 }
+			any_player = { limit = { NOT = { character = PREV } } character_event = { id = expd_purchase_claims_global.9103 } }
+		}
+	}
+	else_if = {
+		limit = { expd_purchase_claims_cooldown_is_third = yes }
+		custom_tooltip = {
+			text = expd_purchase_claims_cooldown_rule_change_to_zero_tt
+			expd_purchase_claims_cooldown_rule_clear = yes
+			                                                      character_event = { id = expd_purchase_claims_global.9104 }
+			any_player = { limit = { NOT = { character = PREV } } character_event = { id = expd_purchase_claims_global.9104 } }
+		}
+	}
+	else_if = {
+		limit = { expd_purchase_claims_cooldown_is_zero = yes }
+		custom_tooltip = {
+			text = expd_purchase_claims_cooldown_rule_change_to_triple_tt
+			expd_purchase_claims_cooldown_rule_clear = yes
+			                                                      character_event = { id = expd_purchase_claims_global.9101 }
+			any_player = { limit = { NOT = { character = PREV } } character_event = { id = expd_purchase_claims_global.9101 } }
+		}
+	}
+	else = { # Triple or inconsistent
+		custom_tooltip = {
+			text = expd_purchase_claims_cooldown_rule_change_to_standard_tt
+			expd_purchase_claims_cooldown_rule_clear = yes
+			                                                      character_event = { id = expd_purchase_claims_global.9102 }
+			any_player = { limit = { NOT = { character = PREV } } character_event = { id = expd_purchase_claims_global.9102 } }
+		}
+	}
+}
+
+expd_purchase_claims_cooldown_rule_clear = {
+	                                                      character_event = { id = expd_purchase_claims_global.9199 }
+	any_player = { limit = { NOT = { character = PREV } } character_event = { id = expd_purchase_claims_global.9199 } }
 }

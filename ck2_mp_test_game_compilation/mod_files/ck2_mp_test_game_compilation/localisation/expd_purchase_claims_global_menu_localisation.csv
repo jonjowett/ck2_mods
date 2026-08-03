@@ -1,0 +1,50 @@
+#
+#Template;§;;;;;;;;;;;;;x
+#
+#
+#
+# Intrigue Menu Decision
+expd_purchase_claims_show_global_menu;(ED:PC) Show Global Rules for Claim Purchases;;;;;;;;;;;;;x
+expd_purchase_claims_show_global_menu_desc;Shows the current rules associated with purchasing claims via the §M(ED:PC)§! mod.\nIf you are §Ythe Administrator§!, you can also use this menu to change these rules.;;;;;;;;;;;;;x
+expd_purchase_claims_global_menu_is_not_open_tt;The §M(ED:PC)§Y Global Rules§! interface is NOT currently displayed;;;;;;;;;;;;;x
+expd_purchase_claims_global_menu_has_been_open_for_6_months_tt;The §M(ED:PC)§Y Global Rules§! interface has been displayed for §Yat least 6 months§!;;;;;;;;;;;;;x
+expd_purchase_claims_global_menu_is_shown_tt;Open the §M(ED:PC)§Y Global Rules§! interface;;;;;;;;;;;;;x
+#
+#
+#
+# Rules Interface Event - Main
+expd_purchase_claims_global_1000_title;ED: Purchase Claims - Global Rules;;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_desc_admin;This mod supports two global rules: Costs & Cooldowns.\nCosts are calculated as follows:\n- The "Base" cost is a multiple of yearly income.\n- The "Min"/"Max" cost is a fixed floor/ceiling on this "Base" cost.\n- Prestige cost is equal to the "Min" gold cost.\n- Cost display format (below): Base/Min/Max.\nCooldowns between claim purchases:\n- Barony ("B") claim purchases NEVER have a cooldown\n- County ("C") & Duchy ("D") claim cooldowns aree separated.\nYou ARE the Administrator: Click to change a rule.;;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_desc_nonadmin;This mod supports two global rules: Costs & Cooldowns.\nCosts are calculated as follows:\n- The "Base" cost is a multiple of yearly income.\n- The "Min"/"Max" cost is a fixed floor/ceiling on this "Base" cost.\n- Prestige cost is equal to the "Min" gold cost.\n- Cost display format (below): Base/Min/Max.\nCooldowns between claim purchases:\n- Barony ("B") claim purchases NEVER have a cooldown\n- County ("C") & Duchy ("D") claim cooldowns aree separated.\nYou are NOT the Administrator: You may NOT change any rules.;;;;;;;;;;;;;x
+#
+# Rules Interface Event - Misc
+expd_purchase_claims_global_1000_evtopt_cannot_change_because_not_admin_tt;You are NOT the §YAdministrator§!, so you may NOT change this rule;;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_evtopt_exit;Exit;;;;;;;;;;;;;x
+#
+# Rules Interface Event - Cost Option
+expd_purchase_claims_global_1000_evtopt_cost_standard_actual;Standard (B: 1.0/250/1k, C: 2.0/500/2k, D: 4.0/1k/4k);;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_evtopt_cost_standard_inconsistent;Standard (B: 1.0/250/1k, C: 2.0/500/2k, D: 4.0/1k/4k) (LEGACY/ERROR);;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_evtopt_cost_half;Half (B: 0.5/125/500, C: 1.0/250/1k, D: 2.0/500/2k);;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_evtopt_cost_quarter;Quarter (B: 0.25/60/250, C: 0.5/125/500, D: 1.0/250/1k);;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_evtopt_cost_tenth;Tenth (B: 0.1/25/100, C: 0.2/50/200, D: 0.4/100/400);;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_evtopt_cost_double;Double (B: 2.0/500/2k, C: 4.0/1k/4k, D: 8.0/2k/8k);;;;;;;;;;;;;x
+#
+# Rules Interface Event - Cost Change
+expd_purchase_claims_cost_rule_change_to_standard_tt;Cost rule §Yimmediately§! changes to §YStandard§!\n§b.....§!(B: 1.0/250/1k, C: 2.0/500/2k, D: 4.0/1k/4k)\n§b.....§!Possible cost rule settings: Standard, Half, Quarter, Tenth, Double.;;;;;;;;;;;;;x
+expd_purchase_claims_cost_rule_change_to_half_tt;Cost rule §Yimmediately§! changes to §YHalf§!\n§b.....§!(B: 0.5/125/500, C: 1.0/250/1k, D: 2.0/500/2k)\n§b.....§!Possible cost rule settings: Standard, Half, Quarter, Tenth, Double.;;;;;;;;;;;;;x
+expd_purchase_claims_cost_rule_change_to_quarter_tt;Cost rule §Yimmediately§! changes to §YQuarter§!\n§b.....§!(B: 0.25/60/250, C: 0.5/125/500, D: 1.0/250/1k)\n§b.....§!Possible cost rule settings: Standard, Half, Quarter, Tenth, Double.;;;;;;;;;;;;;x
+expd_purchase_claims_cost_rule_change_to_tenth_tt;Cost rule §Yimmediately§! changes to §YTenth§!\n§b.....§!(B: 0.1/25/100, C: 0.2/50/200, D: 0.4/100/400)\n§b.....§!Possible cost rule settings: Standard, Half, Quarter, Tenth, Double.;;;;;;;;;;;;;x
+expd_purchase_claims_cost_rule_change_to_double_tt;Cost rule §Yimmediately§! changes to §YDouble§!\n§b.....§!(B: 2.0/500/2k, C: 4.0/1k/4k, D: 8.0/2k/8k)\n§b.....§!Possible cost rule settings: Standard, Half, Quarter, Tenth, Double.;;;;;;;;;;;;;x
+#
+# Rules Interface Event - Cooldown Option
+expd_purchase_claims_global_1000_evtopt_cooldown_standard_actual;Standard (B: zero, C: 3 years, D: 10 years);;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_evtopt_cooldown_standard_inconsistent;Standard (B: zero, C: 3 years, D: 10 years) (LEGACY/ERROR);;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_evtopt_cooldown_third;Third (B: zero, C: 1 year, D: 2 years);;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_evtopt_cooldown_zero;Zero (B: zero, C: zero, D: zero);;;;;;;;;;;;;x
+expd_purchase_claims_global_1000_evtopt_cooldown_triple;Triple (B: zero, C: 10 years, D: 30 years);;;;;;;;;;;;;x
+#
+# Rules Interface Event - Cooldown Change
+expd_purchase_claims_cooldown_rule_change_to_standard_tt;Cooldown rule §Yimmediately§! changes to §YStandard§!\n§b.....§!(B: zero, C: 3 years, D: 10 years)\n§b.....§!Possible values: Standard, Third, Zero, Triple.;;;;;;;;;;;;;x
+expd_purchase_claims_cooldown_rule_change_to_third_tt;Cooldown rule §Yimmediately§! changes to §YThird§!\n§b.....§!(B: zero, C: 1 year, D: 2 years)\n§b.....§!Possible values: Standard, Third, Zero, Triple.;;;;;;;;;;;;;x
+expd_purchase_claims_cooldown_rule_change_to_zero_tt;Cooldown rule §Yimmediately§! changes to §YZero§!\n§b.....§!(B: zero, C: zero, D: zero)\n§b.....§!Possible values: Standard, Third, Zero, Triple.;;;;;;;;;;;;;x
+expd_purchase_claims_cooldown_rule_change_to_triple_tt;Cooldown rule §Yimmediately§! changes to §YTriple§!\n§b.....§!(B: zero, C: 10 years, D: 30 years)\n§b.....§!Possible values: Standard, Third, Zero, Triple.;;;;;;;;;;;;;x

@@ -1,58 +1,75 @@
 # Audax Validator EnableCommentMetadata
 
 expd_purchase_claims_decision_allow = {
+	
+	# Only Baron/Count/Duke-tier titles can be claimed (as per base game)
+	lower_tier_than = KING
+	
+	# Title must have a holder (there's no point in claiming an unheld title)
+	has_holder = yes
+	
+	# The title holder must NOT be the decision-taker (you can't claim your own titles)
 	trigger_if = {
-		limit = { expd_purchase_claims_this_title_is_not_special = no }
-		expd_purchase_claims_this_title_is_not_special = yes
+		limit = { has_holder = yes }
+		custom_tooltip = {
+			text = expd_purchase_claims_current_holder_is_not_from_tt
+			holder_scope = { NOT = { character = ROOT_FROM } }
+		}
 	}
-	trigger_else_if = {
-		limit = { higher_tier_than = DUKE }
-		lower_tier_than = KING
-	}
-	trigger_else = {
-		expd_purchase_claims_this_title_is_claimable = yes
-		expd_purchase_claims_from_can_afford_to_purchase_claim_on_this_title = yes
-		expd_purchase_claims_from_is_not_on_cooldown_to_purchase_this_title = yes
+	
+	# Suppress all further conditions if any of the above are not met
+	trigger_if = {
+		limit = {
+			lower_tier_than = KING
+			has_holder = yes
+			holder_scope = { NOT = { character = ROOT_FROM } }
+		}
+		
+		# Is NOT some kind of special title (temp, holy order, religious head, etc)
+		# If it IS this kind of special title, don't evaluate any more conditions.
+		trigger_if = {
+			limit = { expd_purchase_claims_this_title_is_not_special = no }
+			expd_purchase_claims_this_title_is_not_special = yes
+		}
+		trigger_else = {
+			
+			# Inform the user that this is NOT a special title
+			custom_tooltip = {
+				text = expd_purchase_claims_this_title_is_not_special_tt
+				always = yes
+			}
+			
+			# Finally, this mod's specific claiming conditions
+			expd_purchase_claims_this_title_is_claimable = yes
+			expd_purchase_claims_from_can_afford_to_purchase_claim_on_this_title = yes
+			expd_purchase_claims_from_is_not_on_cooldown_to_purchase_this_title = yes
+			
+		}
+		
 	}
 }
 
 expd_purchase_claims_this_title_is_not_special = {
-	# Exit all of the triggers early if:
-	#  --- No current holder (no point in claiming)
-	#  --- Some kind of "special" title that will cause problems (merc, holy order, religious head, etc)
-	#  --- Current holder is unlanded (probably some kind of special title)
-	trigger_if = {
-		limit = { has_holder = no }
-		has_holder = yes
+	# Returns true if this title is NOT some kind of "special" title
+	#    that will cause problems if it is claimed
+	#    eg: merc, holy order, religious head
+	holy_order = no
+	custom_tooltip = {
+		text = expd_purchase_claims_this_title_is_not_a_mercenary_title_tt
+		mercenary = no
 	}
-	trigger_else_if = {
-		limit = { holder_scope = { character = ROOT_FROM } }
-		custom_tooltip = {
-			text = expd_purchase_claims_current_holder_is_not_from_tt
-			holder_scope = {
-				NOT = { character = ROOT_FROM }
-			}
-		}
+	temporary = no
+	custom_tooltip = {
+		text = expd_purchase_claims_this_title_is_not_a_religious_head_title_tt
+		controls_religion = no
 	}
-	trigger_else = {
-		holy_order = no
-		custom_tooltip = {
-			text = expd_purchase_claims_this_title_is_not_a_mercenary_title_tt
-			mercenary = no
-		}
-		temporary = no
-		custom_tooltip = {
-			text = expd_purchase_claims_this_title_is_not_a_religious_head_title_tt
-			controls_religion = no
-		}
-		custom_tooltip = {
-			text = expd_purchase_claims_this_title_is_not_primary_type_title_tt
-			is_primary_type_title = no
-		}
-		custom_tooltip = {
-			text = expd_purchase_claims_this_titles_holder_is_landed_tt
-			holder_scope = { is_landed = yes }
-		}
+	custom_tooltip = {
+		text = expd_purchase_claims_this_title_is_not_primary_type_title_tt
+		is_primary_type_title = no
+	}
+	custom_tooltip = {
+		text = expd_purchase_claims_this_titles_holder_is_landed_tt
+		holder_scope = { is_landed = yes }
 	}
 }
 
@@ -144,31 +161,117 @@ expd_purchase_claims_this_title_is_claimable = {
 
 expd_purchase_claims_from_can_afford_to_purchase_claim_on_this_title = {
 	# !!!!! If this trigger is changed, be sure to update the equivalent effect !!!!!
+	#       ( expd_purchase_claims_from_pays_scaled_cost_for_claim_on_this_title )
+	# Reasoning for "standard" costs:
+	#  - Scaled cost of a chancellor county claim is 1.0 -> "standard" purchase cost is double this, ie. 2.0
+	#  - Scaled cost of a chancellor duchy claim is 2.0  -> "standard" purchase cost is double this, ie. 4.0
+	#  - Min/max cost for duchy claim set at a "reasonable-seeming" value (1000/4000)
+	#  - Then double/halve the costs to go up/down a tier
+	#  - Prestige cost is set identical to the "min" gold cost, primarily to simplify documentation.
+	#     - NB: (For reasonableness.) A "standard" duchy claim costs 1000 prestige, which is the same as the force-vassalisation cb cost for a duke.
 	trigger_if = {
 		limit = { tier = BARON }
 		ROOT_FROM = {
-			# Half the cost of a county
-			scaled_wealth = { value = 1.0 min =  250 max = 1000 }
-			prestige =  250
+			trigger_if = {
+				limit = { expd_purchase_claims_cost_is_standard = yes }
+				scaled_wealth = { value = 1.0  min =  250 max = 1000 }
+				prestige = 250
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_half     = yes }
+				scaled_wealth = { value = 0.5  min =  125 max =  500 }
+				prestige = 125
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_quarter  = yes }
+				scaled_wealth = { value = 0.25 min =   60 max =  250 }
+				prestige = 60
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_tenth    = yes }
+				scaled_wealth = { value = 0.1  min =   25 max =  100 }
+				prestige = 25
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_double   = yes }
+				scaled_wealth = { value = 2.0  min =  500 max = 2000 }
+				prestige = 500
+			}
+			trigger_else = {
+				custom_tooltip = { text = expd_purchase_claims_error_using_standard_cost_tt }
+				scaled_wealth = { value = 1.0  min =  250 max = 1000 }
+				prestige = 250
+			}
 		}
 	}
 	trigger_else_if = {
 		limit = { tier = COUNT }
 		ROOT_FROM = {
-			# Half the cost of a duchy
-			# NB: Scaled cost of a chancellor county claim is 1.0
-			scaled_wealth = { value = 2.0 min =  500 max = 2000 }
-			prestige =  500
+			trigger_if = {
+				limit = { expd_purchase_claims_cost_is_standard = yes }
+				scaled_wealth = { value = 2.0  min =  500 max = 2000 }
+				prestige = 500
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_half     = yes }
+				scaled_wealth = { value = 1.0  min =  250 max = 1000 }
+				prestige = 250
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_quarter  = yes }
+				scaled_wealth = { value = 0.5  min =  125 max =  500 }
+				prestige = 125
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_tenth    = yes }
+				scaled_wealth = { value = 0.2  min =   50 max =  200 }
+				prestige = 50
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_double   = yes }
+				scaled_wealth = { value = 4.0  min = 1000 max = 4000 }
+				prestige = 1000
+			}
+			trigger_else = {
+				custom_tooltip = { text = expd_purchase_claims_error_using_standard_cost_tt }
+				scaled_wealth = { value = 2.0  min =  500 max = 2000 }
+				prestige = 500
+			}
 		}
 	}
 	trigger_else_if = {
 		limit = { tier = DUKE }
 		ROOT_FROM = {
-			# Double the scaled cost of a chancellor duchy claim (4.0)
-			# Min/max cost set at a reasonable-seeming value
-			# Prestige cost is same as for forced vassalisation of a duke
-			scaled_wealth = { value = 4.0 min = 1000 max = 4000 }
-			prestige = 1000
+			trigger_if = {
+				limit = { expd_purchase_claims_cost_is_standard = yes }
+				scaled_wealth = { value = 4.0  min = 1000 max = 4000 }
+				prestige = 1000
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_half     = yes }
+				scaled_wealth = { value = 2.0  min =  500 max = 2000 }
+				prestige = 500
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_quarter  = yes }
+				scaled_wealth = { value = 1.0  min =  250 max = 1000 }
+				prestige = 250
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_tenth    = yes }
+				scaled_wealth = { value = 0.4  min =  100 max =  400 }
+				prestige = 100
+			}
+			trigger_else_if = {
+				limit = { expd_purchase_claims_cost_is_double   = yes }
+				scaled_wealth = { value = 8.0  min = 2000 max = 8000 }
+				prestige = 2000
+			}
+			trigger_else = {
+				custom_tooltip = { text = expd_purchase_claims_error_using_standard_cost_tt }
+				scaled_wealth = { value = 4.0  min = 1000 max = 4000 }
+				prestige = 1000
+			}
 		}
 	}
 	trigger_else = {
@@ -194,23 +297,37 @@ expd_purchase_claims_from_can_afford_to_purchase_claim_on_this_title = {
 
 
 expd_purchase_claims_from_is_not_on_cooldown_to_purchase_this_title = {
+	
+	# First, tell the user if there's a reason for there to be no cooldown check
+	#  - Baron-tier titles never have a cooldown
+	#  - Cooldowns can be turned off by global rule
+	#  - No cooldowns in debug mode (ie. single-player)
 	trigger_if = {
+		limit = { tier = BARON }
+		custom_tooltip = {
+			text = expd_purchase_claims_no_cooldown_check_due_to_barony_tt
+			always = yes
+		}
+	}
+	trigger_else_if = {
+		limit = { expd_purchase_claims_cooldown_is_zero = yes }
+		custom_tooltip = {
+			text = expd_purchase_claims_no_cooldown_check_due_to_rule_tt
+			always = yes
+		}
+	}
+	trigger_else_if = {
 		limit = {
 			multiplayer = no
 			has_global_flag = expd_purchase_claims_debug
 		}
 		custom_tooltip = {
-			text = expd_purchase_claims_no_cooldown_in_debug_mode_tt
+			text = expd_purchase_claims_no_cooldown_check_in_debug_mode_tt
 			always = yes
 		}
 	}
-	trigger_else_if = {
-		limit = { tier = BARON }
-		custom_tooltip = {
-			text = expd_purchase_claims_no_cooldown_for_barony_claims_tt
-			always = yes
-		}
-	}
+	
+	# If you reach this point, there SHOULD be a cooldown, so check for it
 	trigger_else_if = {
 		limit = { tier = COUNT }
 		custom_tooltip = {
@@ -225,7 +342,214 @@ expd_purchase_claims_from_is_not_on_cooldown_to_purchase_this_title = {
 			NOT = { ROOT_FROM = { has_character_modifier = expd_purchase_claims_cooldown_duchy } }
 		}
 	}
+	
+	# In case of error, return false
 	trigger_else = {
 		custom_tooltip = { text = expd_purchase_claims_error_cooldown_tt always = no }
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#                  NOTIFICATION                  #
+#                                                #
+##################################################
+
+
+
+expd_purchase_claims_this_character_is_a_notifiable_player = {
+	# Not AI-controlled (ie. is human player)
+	ai = no
+	# Not host character (because they already get a notification)
+	is_multiplayer_host_character = no
+	# Not the purchaser (because they already know!)
+	NOT = { character = ROOT_FROM }
+}
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#          RULE SETTINGS - DETECT ADMIN          #
+#                                                #
+##################################################
+
+
+
+expd_purchase_claims_this_character_is_admin = {
+	ai = no
+	OR = {
+		multiplayer = no
+		is_multiplayer_host_character = yes
+	}
+}
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#              RULE SETTINGS - COST              #
+#                                                #
+##################################################
+
+
+
+expd_purchase_claims_cost_is_standard = {
+	OR = {
+		expd_purchase_claims_cost_is_inconsistent = yes
+		expd_purchase_claims_cost_is_standard_actual = yes
+	}
+}
+
+expd_purchase_claims_cost_is_standard_actual = {
+	has_global_flag = expd_purchase_claims_cost_standard
+	NOR = {
+		has_global_flag = expd_purchase_claims_cost_half
+		has_global_flag = expd_purchase_claims_cost_quarter
+		has_global_flag = expd_purchase_claims_cost_tenth
+		has_global_flag = expd_purchase_claims_cost_double
+	}
+}
+
+expd_purchase_claims_cost_is_half = {
+	has_global_flag = expd_purchase_claims_cost_half
+	NOR = {
+		has_global_flag = expd_purchase_claims_cost_standard
+		has_global_flag = expd_purchase_claims_cost_quarter
+		has_global_flag = expd_purchase_claims_cost_tenth
+		has_global_flag = expd_purchase_claims_cost_double
+	}
+}
+
+expd_purchase_claims_cost_is_quarter = {
+	has_global_flag = expd_purchase_claims_cost_quarter
+	NOR = {
+		has_global_flag = expd_purchase_claims_cost_standard
+		has_global_flag = expd_purchase_claims_cost_half
+		has_global_flag = expd_purchase_claims_cost_tenth
+		has_global_flag = expd_purchase_claims_cost_double
+	}
+}
+
+expd_purchase_claims_cost_is_tenth = {
+	has_global_flag = expd_purchase_claims_cost_tenth
+	NOR = {
+		has_global_flag = expd_purchase_claims_cost_standard
+		has_global_flag = expd_purchase_claims_cost_half
+		has_global_flag = expd_purchase_claims_cost_quarter
+		has_global_flag = expd_purchase_claims_cost_double
+	}
+}
+
+expd_purchase_claims_cost_is_double = {
+	has_global_flag = expd_purchase_claims_cost_double
+	NOR = {
+		has_global_flag = expd_purchase_claims_cost_standard
+		has_global_flag = expd_purchase_claims_cost_half
+		has_global_flag = expd_purchase_claims_cost_quarter
+		has_global_flag = expd_purchase_claims_cost_tenth
+	}
+}
+
+expd_purchase_claims_cost_is_inconsistent = {
+	NOR = {
+		expd_purchase_claims_cost_is_standard_actual = yes
+		expd_purchase_claims_cost_is_half            = yes
+		expd_purchase_claims_cost_is_quarter         = yes
+		expd_purchase_claims_cost_is_tenth           = yes
+		expd_purchase_claims_cost_is_double          = yes
+	}
+}
+
+
+
+
+
+
+
+
+
+
+##################################################
+#                                                #
+#            RULE SETTINGS - COOLDOWN            #
+#                                                #
+##################################################
+
+
+
+expd_purchase_claims_cooldown_is_standard = {
+	OR = {
+		expd_purchase_claims_cooldown_is_standard_actual = yes
+		expd_purchase_claims_cooldown_is_inconsistent    = yes
+	}
+}
+
+expd_purchase_claims_cooldown_is_standard_actual = {
+	has_global_flag = expd_purchase_claims_cooldown_standard
+	NOR = {
+		has_global_flag = expd_purchase_claims_cooldown_third
+		has_global_flag = expd_purchase_claims_cooldown_zero
+		has_global_flag = expd_purchase_claims_cooldown_triple
+	}
+}
+
+expd_purchase_claims_cooldown_is_third = {
+	has_global_flag = expd_purchase_claims_cooldown_third
+	NOR = {
+		has_global_flag = expd_purchase_claims_cooldown_standard
+		has_global_flag = expd_purchase_claims_cooldown_zero
+		has_global_flag = expd_purchase_claims_cooldown_triple
+	}
+}
+
+expd_purchase_claims_cooldown_is_zero = {
+	has_global_flag = expd_purchase_claims_cooldown_zero
+	NOR = {
+		has_global_flag = expd_purchase_claims_cooldown_standard
+		has_global_flag = expd_purchase_claims_cooldown_third
+		has_global_flag = expd_purchase_claims_cooldown_triple
+	}
+}
+
+expd_purchase_claims_cooldown_is_triple = {
+	has_global_flag = expd_purchase_claims_cooldown_triple
+	NOR = {
+		has_global_flag = expd_purchase_claims_cooldown_standard
+		has_global_flag = expd_purchase_claims_cooldown_third
+		has_global_flag = expd_purchase_claims_cooldown_zero
+	}
+}
+
+expd_purchase_claims_cooldown_is_inconsistent = {
+	NOR = {
+		expd_purchase_claims_cooldown_is_standard_actual = yes
+		expd_purchase_claims_cooldown_is_third           = yes
+		expd_purchase_claims_cooldown_is_zero            = yes
+		expd_purchase_claims_cooldown_is_triple          = yes
 	}
 }
