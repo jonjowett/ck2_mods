@@ -34,15 +34,25 @@ expd_purchase_claims_this_character_is_a_current_or_absent_human_player_except_f
 expd_purchase_claims_error_cost_tt;§RERROR! Cost could not be calculated! (Bad title tier?)§!;;;;;;;;;;;;;x
 #
 # Scripted Triggers - Cooldown
-expd_purchase_claims_no_cooldown_in_debug_mode_tt;§R!!!DEBUG MODE!!!§! (no cooldown on claim purchases);;;;;;;;;;;;;x
-expd_purchase_claims_no_cooldown_for_barony_claims_tt;Is a §Ybarony§! title (no cooldown on claim purchases);;;;;;;;;;;;;x
+expd_purchase_claims_no_cooldown_check_due_to_barony_tt;There is §Gno applicable cooldown§! for purchasing this title (it is a §Ybarony§!);;;;;;;;;;;;;x
+expd_purchase_claims_no_cooldown_check_due_to_rule_tt;There is §Gno applicable cooldown§! for purchasing this title (cooldowns disabled by §M(ED:PC)§Y Global Rule§!);;;;;;;;;;;;;x
+expd_purchase_claims_no_cooldown_check_in_debug_mode_tt;There is §Gno applicable cooldown§! for purchasing this title (due to §R!!!DEBUG MODE!!!§!);;;;;;;;;;;;;x
 expd_purchase_claims_from_is_not_on_cooldown_for_county_claims_tt;Has NOT recently purchased a §Ycounty§! claim (expires §Y[From.expd_purchase_claims_cooldown_county.GetExpiryDate]§!);;;;;;;;;;;;;x
 expd_purchase_claims_from_is_not_on_cooldown_for_duchy_claims_tt;Has NOT recently purchased a §Yduchy§! claim (expires §Y[From.expd_purchase_claims_cooldown_duchy.GetExpiryDate]§!);;;;;;;;;;;;;x
 expd_purchase_claims_error_cooldown_tt;§RERROR! Cooldown could not be checked! (Bad title tier?)§!;;;;;;;;;;;;;x
 #
 # Scripted Effects
+expd_purchase_claims_error_using_standard_cost_tt;§RERROR! Standard cost will be deducted!§!\n(The §YAdministrator§! should use the rule interface to refresh the setup.);;;;;;;;;;;;;x
+expd_purchase_claims_error_using_standard_cooldown_tt;§RERROR! Standard cooldown will be applied!§!\n(The §YAdministrator§! should use the rule interface to refresh the setup.);;;;;;;;;;;;;x
+expd_purchase_claims_warning_costs_massively_increased_due_to_attempted_exploit_tt;§RWARNING! Costs MASSIVELY increased because it seems like you are attempting to use an exploit!§!;;;;;;;;;;;;;x
+expd_purchase_claims_no_cooldown_applied_due_to_barony_tt;There is §Gno claim purchase cooldown§! (because barony claims never have cooldowns);;;;;;;;;;;;;x
+expd_purchase_claims_no_cooldown_applied_due_to_rule_tt;There is §Gno claim purchase cooldown§! (because all cooldowns are disabled by §M(ED:PC)§Y Global Rule§!);;;;;;;;;;;;;x
+expd_purchase_claims_add_cooldown_county_10y_tt;Unable to purchase §Ycounty§! claims for §R10 years§!.;;;;;;;;;;;;;x
 expd_purchase_claims_add_cooldown_county_3y_tt;Unable to purchase §Ycounty§! claims for §R3 years§!.;;;;;;;;;;;;;x
+expd_purchase_claims_add_cooldown_county_1y_tt;Unable to purchase §Ycounty§! claims for §R1 years§!.;;;;;;;;;;;;;x
+expd_purchase_claims_add_cooldown_duchy_30y_tt;Unable to purchase §Yduchy§! claims for §R30 years§!.;;;;;;;;;;;;;x
 expd_purchase_claims_add_cooldown_duchy_10y_tt;Unable to purchase §Yduchy§! claims for §R10 years§!.;;;;;;;;;;;;;x
+expd_purchase_claims_add_cooldown_duchy_3y_tt;Unable to purchase §Yduchy§! claims for §R3 years§!.;;;;;;;;;;;;;x
 expd_purchase_claims_notify_host_that_from_purchased_a_claim_on_this_title_tt;The §Yhost§! will be §Ynotified§! about this purchase.;;;;;;;;;;;;;x
 expd_purchase_claims_this_player_is_notified_tt;This §Yplayer§! is §Ynotified§!.;;;;;;;;;;;;;x
 #
